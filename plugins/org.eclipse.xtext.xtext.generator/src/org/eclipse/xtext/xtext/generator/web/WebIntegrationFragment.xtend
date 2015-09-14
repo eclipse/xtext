@@ -599,7 +599,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				def static void main(String[] args) {
 					val server = new «'org.eclipse.jetty.server.Server'.typeRef»(new «'java.net.InetSocketAddress'.typeRef»('localhost', 8080))
 					server.handler = new «'org.eclipse.jetty.webapp.WebAppContext'.typeRef» => [
-						resourceBase = 'src/main/webapp'
+						resourceBase = '«projectConfig.webApp.path.replace(projectConfig.webRoot.path + "/", "")»'
 						welcomeFiles = #["index.html"]
 						contextPath = "/"
 						configurations = #[
@@ -608,7 +608,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 							new «'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef»,
 							new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»
 						]
-						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/org\\.eclipse\\.xtext\\.web.*,.*/org.webjars.*')
+						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*')
 					]
 					val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 					try {

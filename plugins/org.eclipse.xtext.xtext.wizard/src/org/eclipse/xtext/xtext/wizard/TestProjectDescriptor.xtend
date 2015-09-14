@@ -29,4 +29,24 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 	override getUpstreamProjects() {
 		#{testedProject}
 	}
+	
+	override isEclipsePluginProject() {
+		testedProject.isEclipsePluginProject
+	}
+	
+	override pom() {
+		super.pom => [
+			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
+			buildSection = '''
+				<build>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.xtend</groupId>
+							<artifactId>xtend-maven-plugin</artifactId>
+						</plugin>
+					</plugins>
+				</build>
+			'''
+		]
+	}
 }

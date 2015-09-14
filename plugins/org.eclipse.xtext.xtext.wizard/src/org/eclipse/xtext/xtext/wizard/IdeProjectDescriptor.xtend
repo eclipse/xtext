@@ -16,7 +16,15 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override isEclipsePluginProject() {
-		config.buildSystem.isPluginBuild || config.uiProject.enabled
+		config.preferredBuildSystem == BuildSystem.ECLIPSE || config.uiProject.enabled
+	}
+	
+	override isPartOfGradleBuild() {
+		true
+	}
+	
+	override isPartOfMavenBuild() {
+		true
 	}
 	
 	override getExternalDependencies() {
