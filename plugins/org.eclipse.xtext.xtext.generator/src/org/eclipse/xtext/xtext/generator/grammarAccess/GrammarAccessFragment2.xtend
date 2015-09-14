@@ -364,6 +364,10 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	protected def dispatch String gaRuleAccessorLocalVarName(TerminalRule rule) {
 		't' + rule.gaRuleIdentifier
 	}
+	
+	protected def dispatch String gaRuleAccessorLocalVarName(EnumRule rule) {
+		'e' + rule.gaRuleIdentifier
+	}
 
 	protected def StringConcatenationClient loadElementStatement(AbstractElement ele) {
 		'''(«ele.eClass.typeRef(language)»)«ele.loadElementParentStatement».eContents().get(«ele.eContainer.eContents.indexOf(ele)»)'''
