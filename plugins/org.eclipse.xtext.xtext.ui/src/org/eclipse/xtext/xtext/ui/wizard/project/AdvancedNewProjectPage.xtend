@@ -27,7 +27,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createWebProject
 	Button createIdeProject
 	Button createTestProject
-	Combo buildSystem
+	Combo preferredBuildSystem
 	Combo sourceLayout
 
 	new(String pageName) {
@@ -62,10 +62,10 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 			]
 			Group [
-				text = "Build System"
-				buildSystem = DropDown[
+				text = "Preferred Build System"
+				preferredBuildSystem = DropDown[
 					enabled = true
-					items = #["Eclipse", "Maven", "Tycho", "Gradle"]
+					items = #["Eclipse", "Maven", "Gradle"]
 				]
 			]
 			Group [
@@ -113,7 +113,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.selection = false
 		createIdeProject.selection = false
 		createTestProject.selection = false
-		buildSystem.select(0)
+		preferredBuildSystem.select(0)
 		sourceLayout.select(0)
 	}
 
@@ -137,8 +137,8 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.selection
 	}
 	
-	def BuildSystem getBuildSystem() {
-		BuildSystem.values.get(buildSystem.selectionIndex)
+	def BuildSystem getPreferredBuildSystem() {
+		BuildSystem.values.get(preferredBuildSystem.selectionIndex)
 	}
 	
 	def SourceLayout getSourceLayout() {

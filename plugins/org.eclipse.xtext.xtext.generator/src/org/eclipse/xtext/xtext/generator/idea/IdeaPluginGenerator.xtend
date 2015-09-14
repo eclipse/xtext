@@ -145,16 +145,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			writeTo(projectConfig.ideaPluginSrcGen)
 		]
 
-//		TODO META-INF FSA
-//		var output = new OutputImpl();
-//		output.addOutlet(PLUGIN, false, ideaProjectPath);
-//		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
-//		output.addOutlet(META_INF_PLUGIN_GEN, true, ideaProjectPath + "/META-INF");
-//		
-//		if (deployable) {
-//			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
-//			output.writeFile(META_INF_PLUGIN_GEN, "plugin_gen.xml", grammar.compilePluginGenXml)
-//		}
+		if (deployable) {
+			grammar.compilePluginXml.writeTo(projectConfig.ideaPluginMetaInf)
+			grammar.compilePluginGenXml.writeTo(projectConfig.ideaPluginMetaInf)
+		}
 	}
 	
 	def iml() {
@@ -274,9 +268,9 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 		file
 	}
 	
-	def compilePluginGenXml(Grammar grammar, String fileExtension){
+	def compilePluginGenXml(Grammar grammar){
 		val file = fileAccessFactory.createTextFile
-		file.path = "plugin.xml"
+		file.path = "plugin_gen.xml"
 		file.content = '''
 			<idea-plugin version="2">
 				<extensions defaultExtensionNs="org.eclipse.xtext.idea">
@@ -287,12 +281,12 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 						/>
 				    «ENDFOR»
 					<resourceFactory 
-						type="«fileExtension»"
+						type="«language.fileExtensions.head»"
 						class="org.eclipse.xtext.resource.IResourceFactory"
 						factoryClass="«grammar.extensionFactory»"
 					/>
 					<resourceServiceProvider
-						uriExtension="«fileExtension»"
+						uriExtension="«language.fileExtensions.head»"
 						class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
 						factoryClass="«grammar.extensionFactory»"
 					/>
@@ -442,10 +436,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	def compileStandaloneSetup(Grammar grammar) {
 		val file = fileAccessFactory.createJavaFile(grammar.ideaStandaloneSetup)
 		file.javaContent = '''
-			public class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeSetup» {
+			public class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeGenSetup» {
 				@Override
 				public «Injector» createInjector() {
-					«Module» runtimeModule = new «grammar.runtimeGenModule»();
+					«Module» runtimeModule = new «grammar.runtimeModule»();
 					«Module» ideaModule = new «grammar.ideaModule»();
 					«Module» mergedModule = «Modules2».mixin(runtimeModule, ideaModule);
 					return «Guice».createInjector(mergedModule);

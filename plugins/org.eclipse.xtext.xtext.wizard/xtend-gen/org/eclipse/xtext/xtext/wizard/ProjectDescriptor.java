@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
@@ -87,20 +86,36 @@ public abstract class ProjectDescriptor {
       PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
       files.add(_file_1);
     }
-    BuildSystem _buildSystem = this.config.getBuildSystem();
-    boolean _isGradleBuild = _buildSystem.isGradleBuild();
-    if (_isGradleBuild) {
+    boolean _and = false;
+    boolean _needsGradleBuild = this.config.needsGradleBuild();
+    if (!_needsGradleBuild) {
+      _and = false;
+    } else {
+      boolean _isPartOfGradleBuild = this.isPartOfGradleBuild();
+      _and = _isPartOfGradleBuild;
+    }
+    if (_and) {
       GradleBuildFile _buildGradle = this.buildGradle();
       files.add(_buildGradle);
     }
-    BuildSystem _buildSystem_1 = this.config.getBuildSystem();
-    boolean _isMavenBuild = _buildSystem_1.isMavenBuild();
-    if (_isMavenBuild) {
+    boolean _and_1 = false;
+    boolean _needsMavenBuild = this.config.needsMavenBuild();
+    if (!_needsMavenBuild) {
+      _and_1 = false;
+    } else {
+      boolean _isPartOfMavenBuild = this.isPartOfMavenBuild();
+      _and_1 = _isPartOfMavenBuild;
+    }
+    if (_and_1) {
       PomFile _pom = this.pom();
       files.add(_pom);
     }
     return files;
   }
+  
+  public abstract boolean isPartOfGradleBuild();
+  
+  public abstract boolean isPartOfMavenBuild();
   
   public abstract boolean isEclipsePluginProject();
   

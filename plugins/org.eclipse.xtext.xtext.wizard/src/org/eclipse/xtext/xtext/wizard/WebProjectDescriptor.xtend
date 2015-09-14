@@ -26,8 +26,12 @@ class WebProjectDescriptor extends ProjectDescriptor {
 		false
 	}
 	
-	override getFiles() {
-		emptyList
+	override isPartOfGradleBuild() {
+		config.preferredBuildSystem == BuildSystem.GRADLE
+	}
+	
+	override isPartOfMavenBuild() {
+		config.preferredBuildSystem == BuildSystem.MAVEN
 	}
 	
 	override getExternalDependencies() {
@@ -35,15 +39,14 @@ class WebProjectDescriptor extends ProjectDescriptor {
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.web.servlet")
 		deps += createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}")
-		deps += createMavenDependency("org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}")
 		deps += createMavenDependency("org.webjars:requirejs:" + REQUIREJS_VERSION)
 		// RequireJS-Text is only needed for Orion
 //		deps += createMavenDependency("org.webjars:requirejs-text:" + REQUIREJS_TEXT_VERSION)
 		deps += createMavenDependency("org.webjars:jquery:" + JQUERY_VERSION)
 		deps += createMavenDependency("org.webjars:ace:" + ACE_VERSION)
 		deps += createMavenDependency("org.eclipse.jetty:jetty-annotations:" + JETTY_VERSION) => [maven.scope = Scope.PROVIDED]
-		deps += createMavenDependency("org.slf4j:slf4j-api:" + SLF4J_VERSION + "@jar") => [maven.scope = Scope.PROVIDED]
-		deps += createMavenDependency("org.slf4j:slf4j-log4j12:" + SLF4J_VERSION + "@jar") => [maven.scope = Scope.PROVIDED]
+		deps += createMavenDependency("org.slf4j:slf4j-api:" + SLF4J_VERSION) => [maven.scope = Scope.PROVIDED]
+		deps += createMavenDependency("org.slf4j:slf4j-log4j12:" + SLF4J_VERSION) => [maven.scope = Scope.PROVIDED]
 		return deps
 	}
 	

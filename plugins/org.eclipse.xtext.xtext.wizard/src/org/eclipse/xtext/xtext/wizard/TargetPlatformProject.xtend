@@ -12,6 +12,14 @@ class TargetPlatformProject extends ProjectDescriptor {
 	override isEclipsePluginProject() {
 		false
 	}
+	
+	override isPartOfGradleBuild() {
+		false
+	}
+	
+	override isPartOfMavenBuild() {
+		true
+	}
 
 	override getFiles() {
 		val files = newArrayList

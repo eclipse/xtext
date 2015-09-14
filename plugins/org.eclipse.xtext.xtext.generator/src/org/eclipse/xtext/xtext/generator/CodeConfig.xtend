@@ -49,7 +49,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	boolean preferXtendStubs = true
 	
 	@Accessors(PUBLIC_GETTER)
-	String xtextVersion
+	XtextVersion xtextVersion
 	
 	/**
 	 * Configure a template for file headers. The template can contain variables:
@@ -75,7 +75,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
 		
-		xtextVersion = readVersionFromManifest()
+		xtextVersion = XtextVersion.current
 		if (lineDelimiter === null)
 			lineDelimiter = '\n'
 		
@@ -103,45 +103,12 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 				}
 			}
 			if (fileHeader.contains(FILE_HEADER_VAR_VERSION)) {
-				if (xtextVersion != null) {
-					fileHeader = fileHeader.replace(FILE_HEADER_VAR_VERSION, xtextVersion)
-				}
+				fileHeader = fileHeader.replace(FILE_HEADER_VAR_VERSION, xtextVersion.toString)
 			}
 		}
 		this.fileHeader = fileHeader
 	}
 
-	/**
-	 * Read the exact version from the Manifest of the plugin.
-	 */
-	private def readVersionFromManifest() {
-		var InputStream is
-		try {
-			val url = new URL(Plugin.INSTANCE.baseURL + 'META-INF/MANIFEST.MF')
-			is = url.openStream()
-			val manifest = new Manifest(is)
-			return manifest.getMainAttributes().getValue('Bundle-Version')
-		} catch (Exception e) {
-			return null;
-		} finally {
-			if (is != null) {
-				try { is.close() }
-				catch (IOException e) {}
-			}
-		}
-	}
-
-	/**
-	 * Only needed to determine the Manifest file and its version of this plugin in standalone mode.
-	 */
-	private static class Plugin extends EMFPlugin {
-		public static final Plugin INSTANCE = new Plugin
-		private new() {
-			super(#[]);
-		}
-		override getPluginResourceLocator() {
-		}
-	}
 
 	def String getClassAnnotationsAsString() {
 		if (classAnnotations.isEmpty) {

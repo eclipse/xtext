@@ -280,83 +280,92 @@ public class WizardConfig extends XtextProjectConfig {
         String _plus_31 = (_plus_30 + srcGen);
         this.setIdeaPluginSrcGen(_plus_31);
       }
+      IXtextGeneratorFileSystemAccess _ideaPluginMetaInf = this.getIdeaPluginMetaInf();
+      boolean _tripleEquals_23 = (_ideaPluginMetaInf == null);
+      if (_tripleEquals_23) {
+        IXtextGeneratorFileSystemAccess _ideaPluginRoot_3 = this.getIdeaPluginRoot();
+        String _path_18 = _ideaPluginRoot_3.getPath();
+        String _plus_32 = (_path_18 + "/");
+        String _plus_33 = (_plus_32 + metaInf);
+        this.setIdeaPluginMetaInf(_plus_33);
+      }
     }
     if (this.webSupport) {
       IXtextGeneratorFileSystemAccess _webRoot = this.getWebRoot();
-      boolean _tripleEquals_23 = (_webRoot == null);
-      if (_tripleEquals_23) {
+      boolean _tripleEquals_24 = (_webRoot == null);
+      if (_tripleEquals_24) {
         IXtextGeneratorFileSystemAccess _runtimeRoot_7 = this.getRuntimeRoot();
-        String _path_18 = _runtimeRoot_7.getPath();
-        String _plus_32 = (_path_18 + ".web");
-        this.setWebRoot(_plus_32);
+        String _path_19 = _runtimeRoot_7.getPath();
+        String _plus_34 = (_path_19 + ".web");
+        this.setWebRoot(_plus_34);
       }
       IXtextGeneratorFileSystemAccess _webSrc = this.getWebSrc();
-      boolean _tripleEquals_24 = (_webSrc == null);
-      if (_tripleEquals_24) {
+      boolean _tripleEquals_25 = (_webSrc == null);
+      if (_tripleEquals_25) {
         IXtextGeneratorFileSystemAccess _webRoot_1 = this.getWebRoot();
-        String _path_19 = _webRoot_1.getPath();
-        String _plus_33 = (_path_19 + "/");
-        String _plus_34 = (_plus_33 + src);
-        this.setWebSrc(_plus_34);
+        String _path_20 = _webRoot_1.getPath();
+        String _plus_35 = (_path_20 + "/");
+        String _plus_36 = (_plus_35 + src);
+        this.setWebSrc(_plus_36);
       }
       IXtextGeneratorFileSystemAccess _webSrcGen = this.getWebSrcGen();
-      boolean _tripleEquals_25 = (_webSrcGen == null);
-      if (_tripleEquals_25) {
+      boolean _tripleEquals_26 = (_webSrcGen == null);
+      if (_tripleEquals_26) {
         IXtextGeneratorFileSystemAccess _webRoot_2 = this.getWebRoot();
-        String _path_20 = _webRoot_2.getPath();
-        String _plus_35 = (_path_20 + "/");
-        String _plus_36 = (_plus_35 + srcGen);
-        this.setWebSrcGen(_plus_36);
+        String _path_21 = _webRoot_2.getPath();
+        String _plus_37 = (_path_21 + "/");
+        String _plus_38 = (_plus_37 + srcGen);
+        this.setWebSrcGen(_plus_38);
       }
       IXtextGeneratorFileSystemAccess _webApp = this.getWebApp();
-      boolean _tripleEquals_26 = (_webApp == null);
-      if (_tripleEquals_26) {
+      boolean _tripleEquals_27 = (_webApp == null);
+      if (_tripleEquals_27) {
         IXtextGeneratorFileSystemAccess _webRoot_3 = this.getWebRoot();
-        String _path_21 = _webRoot_3.getPath();
-        String _plus_37 = (_path_21 + "/");
-        String _plus_38 = (_plus_37 + srcWeb);
-        this.setWebApp(_plus_38);
+        String _path_22 = _webRoot_3.getPath();
+        String _plus_39 = (_path_22 + "/");
+        String _plus_40 = (_plus_39 + srcWeb);
+        this.setWebApp(_plus_40);
       }
     }
     if (this.genericIdeSupport) {
       IXtextGeneratorFileSystemAccess _genericIdeRoot = this.getGenericIdeRoot();
-      boolean _tripleEquals_27 = (_genericIdeRoot == null);
-      if (_tripleEquals_27) {
+      boolean _tripleEquals_28 = (_genericIdeRoot == null);
+      if (_tripleEquals_28) {
         IXtextGeneratorFileSystemAccess _runtimeRoot_8 = this.getRuntimeRoot();
-        String _path_22 = _runtimeRoot_8.getPath();
-        String _plus_39 = (_path_22 + ".ide");
-        this.setGenericIdeRoot(_plus_39);
+        String _path_23 = _runtimeRoot_8.getPath();
+        String _plus_41 = (_path_23 + ".ide");
+        this.setGenericIdeRoot(_plus_41);
       }
       IXtextGeneratorFileSystemAccess _genericIdeMetaInf = this.getGenericIdeMetaInf();
-      boolean _tripleEquals_28 = (_genericIdeMetaInf == null);
-      if (_tripleEquals_28) {
+      boolean _tripleEquals_29 = (_genericIdeMetaInf == null);
+      if (_tripleEquals_29) {
         IXtextGeneratorFileSystemAccess _genericIdeRoot_1 = this.getGenericIdeRoot();
-        String _path_23 = _genericIdeRoot_1.getPath();
-        String _plus_40 = (_path_23 + "/");
-        String _plus_41 = (_plus_40 + metaInf);
-        this.setGenericIdeMetaInf(_plus_41);
+        String _path_24 = _genericIdeRoot_1.getPath();
+        String _plus_42 = (_path_24 + "/");
+        String _plus_43 = (_plus_42 + metaInf);
+        this.setGenericIdeMetaInf(_plus_43);
       }
       IXtextGeneratorFileSystemAccess _genericIdeSrc = this.getGenericIdeSrc();
-      boolean _tripleEquals_29 = (_genericIdeSrc == null);
-      if (_tripleEquals_29) {
+      boolean _tripleEquals_30 = (_genericIdeSrc == null);
+      if (_tripleEquals_30) {
         IXtextGeneratorFileSystemAccess _genericIdeRoot_2 = this.getGenericIdeRoot();
-        String _path_24 = _genericIdeRoot_2.getPath();
-        String _plus_42 = (_path_24 + "/");
-        String _plus_43 = (_plus_42 + src);
-        this.setGenericIdeSrc(_plus_43);
+        String _path_25 = _genericIdeRoot_2.getPath();
+        String _plus_44 = (_path_25 + "/");
+        String _plus_45 = (_plus_44 + src);
+        this.setGenericIdeSrc(_plus_45);
       }
       IXtextGeneratorFileSystemAccess _genericIdeSrcGen = this.getGenericIdeSrcGen();
-      boolean _tripleEquals_30 = (_genericIdeSrcGen == null);
-      if (_tripleEquals_30) {
+      boolean _tripleEquals_31 = (_genericIdeSrcGen == null);
+      if (_tripleEquals_31) {
         IXtextGeneratorFileSystemAccess _genericIdeRoot_3 = this.getGenericIdeRoot();
-        String _path_25 = _genericIdeRoot_3.getPath();
-        String _plus_44 = (_path_25 + "/");
-        String _plus_45 = (_plus_44 + srcGen);
-        this.setGenericIdeSrcGen(_plus_45);
+        String _path_26 = _genericIdeRoot_3.getPath();
+        String _plus_46 = (_path_26 + "/");
+        String _plus_47 = (_plus_46 + srcGen);
+        this.setGenericIdeSrcGen(_plus_47);
       }
       ManifestAccess _genericIdeManifest = this.getGenericIdeManifest();
-      boolean _tripleEquals_31 = (_genericIdeManifest == null);
-      if (_tripleEquals_31) {
+      boolean _tripleEquals_32 = (_genericIdeManifest == null);
+      if (_tripleEquals_32) {
         ManifestAccess _manifestAccess_4 = new ManifestAccess();
         this.setGenericIdeManifest(_manifestAccess_4);
       }
