@@ -208,4 +208,14 @@ public class StringsTest extends Assert {
 			// expected
 		}
 	}
+	
+	@Test public void testCountLineBreaks() throws Exception {
+		assertEquals(0, Strings.countLineBreaks("abc", 0, 3));
+		assertEquals(1, Strings.countLineBreaks("a\nc", 0, 3));
+		assertEquals(2, Strings.countLineBreaks("a\n\n", 0, 3));
+		assertEquals(1, Strings.countLineBreaks("a\rc", 0, 3));
+		assertEquals(1, Strings.countLineBreaks("a\r\n", 0, 3));
+		assertEquals(2, Strings.countLineBreaks("\r\n\n", 0, 3));
+	}
+	
 }
