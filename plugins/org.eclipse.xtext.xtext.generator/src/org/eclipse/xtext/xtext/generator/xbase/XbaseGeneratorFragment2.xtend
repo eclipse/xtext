@@ -215,7 +215,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			 */
 		'''
 		val firstRuleType = language.grammar.rules.head.type.classifier.getJavaTypeName(language.grammar.eResource.resourceSet).typeRef
-		xtendFile.javaContent = '''
+		xtendFile.content = '''
 			class «jvmModelInferrer.simpleName» extends «'org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer'.typeRef» {
 			
 			    /**

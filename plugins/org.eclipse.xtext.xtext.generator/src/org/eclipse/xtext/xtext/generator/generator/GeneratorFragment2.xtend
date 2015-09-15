@@ -138,7 +138,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
 			 */
 		'''
-		xtendFile.javaContent = '''
+		xtendFile.content = '''
 			class «language.grammar.generatorStub.simpleName» implements «IGenerator» {
 			
 				override void doGenerate(«Resource» resource, «IFileSystemAccess» fsa) {
@@ -156,7 +156,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 
 	protected def doGenerateJavaMain() {
 		val javaFile = fileAccessFactory.createJavaFile(grammar.javaMain)
-		javaFile.javaContent = '''
+		javaFile.content = '''
 			public class Main {
 			
 				public static void main(String[] args) {
@@ -208,7 +208,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 
 	protected def doGenerateXtendMain() {
 		val xtendFile = fileAccessFactory.createXtendFile(grammar.javaMain)
-		xtendFile.javaContent = '''
+		xtendFile.content = '''
 			class Main {
 			
 				def static main(String[] args) {

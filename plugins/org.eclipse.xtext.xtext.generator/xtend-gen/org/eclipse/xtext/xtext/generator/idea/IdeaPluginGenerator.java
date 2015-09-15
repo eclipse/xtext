@@ -13,8 +13,6 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import java.io.InputStream;
@@ -226,7 +224,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     ILanguageConfig _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();
     bindFactory.contributeTo(_ideaGenModule);
-    JavaFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
+    XtendFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
     XtendFileAccess _compileIdeaSetup = this.compileIdeaSetup(grammar);
     JavaFileAccess _compileCompletionContributor = this.compileCompletionContributor(grammar);
     XtendFileAccess _compileFileType = this.compileFileType(grammar);
@@ -356,7 +354,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -422,7 +420,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -466,7 +464,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -606,7 +604,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -654,7 +652,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -665,53 +663,57 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     {
       final TextFileAccess file = this.fileAccessFactory.createTextFile();
       file.setPath("plugin.xml");
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("<idea-plugin version=\"2\" xmlns:xi=\"http://www.w3.org/2001/XInclude\">");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<id>");
-      String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(grammar);
-      _builder.append(_ideaBasePackage, "\t");
-      _builder.append("</id>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("<name>");
-      String _simpleName = this._ideaPluginExtension.getSimpleName(grammar);
-      _builder.append(_simpleName, "\t");
-      _builder.append(" Support</name>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("<description>");
-      _builder.newLine();
-      _builder.append("      ");
-      _builder.append("This plugin enables smart editing of ");
-      String _simpleName_1 = this._ideaPluginExtension.getSimpleName(grammar);
-      _builder.append(_simpleName_1, "      ");
-      _builder.append(" files.");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("</description>");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<version>1.0.0</version>");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<vendor>My Company</vendor>");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<idea-version since-build=\"131\"/>");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<depends>org.eclipse.xtext.idea</depends>");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<xi:include href=\"plugin_gen.xml\" xpointer=\"xpointer(/idea-plugin/*)\"/>");
-      _builder.newLine();
-      _builder.append("</idea-plugin>");
-      _builder.newLine();
-      file.setContent(_builder);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("<idea-plugin version=\"2\" xmlns:xi=\"http://www.w3.org/2001/XInclude\">");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<id>");
+          String _ideaBasePackage = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaBasePackage(grammar);
+          _builder.append(_ideaBasePackage, "\t");
+          _builder.append("</id>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("<name>");
+          String _simpleName = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
+          _builder.append(_simpleName, "\t");
+          _builder.append(" Support</name>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("<description>");
+          _builder.newLine();
+          _builder.append("      ");
+          _builder.append("This plugin enables smart editing of ");
+          String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
+          _builder.append(_simpleName_1, "      ");
+          _builder.append(" files.");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("</description>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<version>1.0.0</version>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<vendor>My Company</vendor>");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<idea-version since-build=\"131\"/>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<depends>org.eclipse.xtext.idea</depends>");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<xi:include href=\"plugin_gen.xml\" xpointer=\"xpointer(/idea-plugin/*)\"/>");
+          _builder.newLine();
+          _builder.append("</idea-plugin>");
+          _builder.newLine();
+        }
+      };
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -722,237 +724,241 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     {
       final TextFileAccess file = this.fileAccessFactory.createTextFile();
       file.setPath("plugin_gen.xml");
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("<idea-plugin version=\"2\">");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<extensions defaultExtensionNs=\"org.eclipse.xtext.idea\">");
-      _builder.newLine();
-      {
-        EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
-        Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
-        for(final GeneratedMetamodel generatedMetamodel : _filter) {
-          _builder.append("\t\t");
-          _builder.append("<package");
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("<idea-plugin version=\"2\">");
           _builder.newLine();
-          _builder.append("\t\t");
           _builder.append("\t");
-          _builder.append("uri=\"");
-          EPackage _ePackage = generatedMetamodel.getEPackage();
-          String _nsURI = _ePackage.getNsURI();
-          _builder.append(_nsURI, "\t\t\t");
+          _builder.append("<extensions defaultExtensionNs=\"org.eclipse.xtext.idea\">");
+          _builder.newLine();
+          {
+            EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
+            Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
+            for(final GeneratedMetamodel generatedMetamodel : _filter) {
+              _builder.append("\t\t");
+              _builder.append("<package");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("uri=\"");
+              EPackage _ePackage = generatedMetamodel.getEPackage();
+              String _nsURI = _ePackage.getNsURI();
+              _builder.append(_nsURI, "\t\t\t");
+              _builder.append("\"");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("class=\"");
+              String _namespace = GrammarUtil.getNamespace(grammar);
+              _builder.append(_namespace, "\t\t\t");
+              _builder.append(".");
+              String _name = generatedMetamodel.getName();
+              _builder.append(_name, "\t\t\t");
+              _builder.append(".");
+              String _name_1 = generatedMetamodel.getName();
+              String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+              _builder.append(_firstUpper, "\t\t\t");
+              _builder.append("Package\"");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("/>");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("<resourceFactory ");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("type=\"");
+          ILanguageConfig _language = IdeaPluginGenerator.this.getLanguage();
+          List<String> _fileExtensions = _language.getFileExtensions();
+          String _head = IterableExtensions.<String>head(_fileExtensions);
+          _builder.append(_head, "\t\t\t");
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("class=\"");
-          String _namespace = GrammarUtil.getNamespace(grammar);
-          _builder.append(_namespace, "\t\t\t");
-          _builder.append(".");
-          String _name = generatedMetamodel.getName();
-          _builder.append(_name, "\t\t\t");
-          _builder.append(".");
-          String _name_1 = generatedMetamodel.getName();
-          String _firstUpper = StringExtensions.toFirstUpper(_name_1);
-          _builder.append(_firstUpper, "\t\t\t");
-          _builder.append("Package\"");
+          _builder.append("\t\t\t");
+          _builder.append("class=\"org.eclipse.xtext.resource.IResourceFactory\"");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("factoryClass=\"");
+          TypeReference _extensionFactory = IdeaPluginGenerator.this._ideaPluginClassNames.getExtensionFactory(grammar);
+          _builder.append(_extensionFactory, "\t\t\t");
+          _builder.append("\"");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("/>");
           _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("<resourceServiceProvider");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("uriExtension=\"");
+          ILanguageConfig _language_1 = IdeaPluginGenerator.this.getLanguage();
+          List<String> _fileExtensions_1 = _language_1.getFileExtensions();
+          String _head_1 = IterableExtensions.<String>head(_fileExtensions_1);
+          _builder.append(_head_1, "\t\t\t");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("class=\"org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider\"");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("factoryClass=\"");
+          TypeReference _extensionFactory_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getExtensionFactory(grammar);
+          _builder.append(_extensionFactory_1, "\t\t\t");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("/>");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("<lang.setup");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("language=\"");
+          String _languageID = IdeaPluginGenerator.this._ideaPluginExtension.getLanguageID(grammar);
+          _builder.append(_languageID, "\t\t\t");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("implementationClass=\"");
+          TypeReference _ideaSetup = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar);
+          _builder.append(_ideaSetup, "\t\t\t");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("/>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("</extensions>");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<extensions defaultExtensionNs=\"com.intellij\">");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("<psi.treeChangePreprocessor implementation=\"");
+          TypeReference _codeBlockModificationListener = IdeaPluginGenerator.this._ideaPluginClassNames.getCodeBlockModificationListener(grammar);
+          _builder.append(_codeBlockModificationListener, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("<fileTypeFactory implementation=\"");
+          TypeReference _fileTypeFactory = IdeaPluginGenerator.this._ideaPluginClassNames.getFileTypeFactory(grammar);
+          _builder.append(_fileTypeFactory, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<stubElementTypeHolder class=\"");
+          TypeReference _elementTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar);
+          _builder.append(_elementTypeProvider, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
+          CharSequence _compileExtension = IdeaPluginGenerator.this.compileExtension(grammar, "lang.ast.factory", _typeRef);
+          _builder.append(_compileExtension, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _parserDefinition = IdeaPluginGenerator.this._ideaPluginClassNames.getParserDefinition(grammar);
+          CharSequence _compileExtension_1 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.parserDefinition", _parserDefinition);
+          _builder.append(_compileExtension_1, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
+          CharSequence _compileExtension_2 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.findUsagesProvider", _typeRef_1);
+          _builder.append(_compileExtension_2, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
+          CharSequence _compileExtension_3 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.refactoringSupport", _typeRef_2);
+          _builder.append(_compileExtension_3, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.refactoring.NamesValidator");
+          CharSequence _compileExtension_4 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.namesValidator", _typeRef_3);
+          _builder.append(_compileExtension_4, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<lang.syntaxHighlighterFactory key=\"");
+          String _languageID_1 = IdeaPluginGenerator.this._ideaPluginExtension.getLanguageID(grammar);
+          _builder.append(_languageID_1, "\t\t");
+          _builder.append("\" implementationClass=\"");
+          TypeReference _syntaxHighlighterFactory = IdeaPluginGenerator.this._ideaPluginClassNames.getSyntaxHighlighterFactory(grammar);
+          _builder.append(_syntaxHighlighterFactory, "\t\t");
+          _builder.append("\" />");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.lang.PairedBraceMatcher");
+          CharSequence _compileExtension_5 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.braceMatcher", _typeRef_4);
+          _builder.append(_compileExtension_5, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.idea.annotation.IssueAnnotator");
+          CharSequence _compileExtension_6 = IdeaPluginGenerator.this.compileExtension(grammar, "annotator", _typeRef_5);
+          _builder.append(_compileExtension_6, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<completion.contributor language=\"");
+          String _languageID_2 = IdeaPluginGenerator.this._ideaPluginExtension.getLanguageID(grammar);
+          _builder.append(_languageID_2, "\t\t");
+          _builder.append("\" implementationClass=\"");
+          TypeReference _completionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
+          _builder.append(_completionContributor, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<pom.declarationSearcher implementation=\"");
+          TypeReference _pomDeclarationSearcher = IdeaPluginGenerator.this._ideaPluginClassNames.getPomDeclarationSearcher(grammar);
+          _builder.append(_pomDeclarationSearcher, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("\t\t");
+          TypeReference _typeRef_6 = TypeReference.typeRef("com.intellij.lang.PsiStructureViewFactory");
+          CharSequence _compileExtension_7 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.psiStructureViewFactory", _typeRef_6);
+          _builder.append(_compileExtension_7, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<facetType implementation=\"");
+          TypeReference _facetType = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetType(grammar);
+          _builder.append(_facetType, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<colorSettingsPage implementation=\"");
+          TypeReference _colorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar);
+          _builder.append(_colorSettingsPage, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("<highlightVisitor implementation=\"");
+          TypeReference _semanticHighlightVisitor = IdeaPluginGenerator.this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar);
+          _builder.append(_semanticHighlightVisitor, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("\t\t");
+          TypeReference _typeRef_7 = TypeReference.typeRef("com.intellij.formatting.FormattingModelBuilder");
+          CharSequence _compileExtension_8 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.formatter", _typeRef_7);
+          _builder.append(_compileExtension_8, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef_8 = TypeReference.typeRef("com.intellij.lang.CodeDocumentationAwareCommenter");
+          CharSequence _compileExtension_9 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.commenter", _typeRef_8);
+          _builder.append(_compileExtension_9, "\t\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("</extensions>");
+          _builder.newLine();
+          _builder.append("</idea-plugin>");
+          _builder.newLine();
         }
-      }
-      _builder.append("\t\t");
-      _builder.append("<resourceFactory ");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("type=\"");
-      ILanguageConfig _language = this.getLanguage();
-      List<String> _fileExtensions = _language.getFileExtensions();
-      String _head = IterableExtensions.<String>head(_fileExtensions);
-      _builder.append(_head, "\t\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t\t");
-      _builder.append("class=\"org.eclipse.xtext.resource.IResourceFactory\"");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("factoryClass=\"");
-      TypeReference _extensionFactory = this._ideaPluginClassNames.getExtensionFactory(grammar);
-      _builder.append(_extensionFactory, "\t\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("/>");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("<resourceServiceProvider");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("uriExtension=\"");
-      ILanguageConfig _language_1 = this.getLanguage();
-      List<String> _fileExtensions_1 = _language_1.getFileExtensions();
-      String _head_1 = IterableExtensions.<String>head(_fileExtensions_1);
-      _builder.append(_head_1, "\t\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t\t");
-      _builder.append("class=\"org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider\"");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("factoryClass=\"");
-      TypeReference _extensionFactory_1 = this._ideaPluginClassNames.getExtensionFactory(grammar);
-      _builder.append(_extensionFactory_1, "\t\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("/>");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("<lang.setup");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("language=\"");
-      String _languageID = this._ideaPluginExtension.getLanguageID(grammar);
-      _builder.append(_languageID, "\t\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t\t");
-      _builder.append("implementationClass=\"");
-      TypeReference _ideaSetup = this._ideaPluginClassNames.getIdeaSetup(grammar);
-      _builder.append(_ideaSetup, "\t\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("/>");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("</extensions>");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<extensions defaultExtensionNs=\"com.intellij\">");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("<psi.treeChangePreprocessor implementation=\"");
-      TypeReference _codeBlockModificationListener = this._ideaPluginClassNames.getCodeBlockModificationListener(grammar);
-      _builder.append(_codeBlockModificationListener, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("<fileTypeFactory implementation=\"");
-      TypeReference _fileTypeFactory = this._ideaPluginClassNames.getFileTypeFactory(grammar);
-      _builder.append(_fileTypeFactory, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<stubElementTypeHolder class=\"");
-      TypeReference _elementTypeProvider = this._ideaPluginClassNames.getElementTypeProvider(grammar);
-      _builder.append(_elementTypeProvider, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
-      CharSequence _compileExtension = this.compileExtension(grammar, "lang.ast.factory", _typeRef);
-      _builder.append(_compileExtension, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
-      CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.parserDefinition", _parserDefinition);
-      _builder.append(_compileExtension_1, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
-      CharSequence _compileExtension_2 = this.compileExtension(grammar, "lang.findUsagesProvider", _typeRef_1);
-      _builder.append(_compileExtension_2, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
-      CharSequence _compileExtension_3 = this.compileExtension(grammar, "lang.refactoringSupport", _typeRef_2);
-      _builder.append(_compileExtension_3, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.refactoring.NamesValidator");
-      CharSequence _compileExtension_4 = this.compileExtension(grammar, "lang.namesValidator", _typeRef_3);
-      _builder.append(_compileExtension_4, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<lang.syntaxHighlighterFactory key=\"");
-      String _languageID_1 = this._ideaPluginExtension.getLanguageID(grammar);
-      _builder.append(_languageID_1, "\t\t");
-      _builder.append("\" implementationClass=\"");
-      TypeReference _syntaxHighlighterFactory = this._ideaPluginClassNames.getSyntaxHighlighterFactory(grammar);
-      _builder.append(_syntaxHighlighterFactory, "\t\t");
-      _builder.append("\" />");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.lang.PairedBraceMatcher");
-      CharSequence _compileExtension_5 = this.compileExtension(grammar, "lang.braceMatcher", _typeRef_4);
-      _builder.append(_compileExtension_5, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.idea.annotation.IssueAnnotator");
-      CharSequence _compileExtension_6 = this.compileExtension(grammar, "annotator", _typeRef_5);
-      _builder.append(_compileExtension_6, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<completion.contributor language=\"");
-      String _languageID_2 = this._ideaPluginExtension.getLanguageID(grammar);
-      _builder.append(_languageID_2, "\t\t");
-      _builder.append("\" implementationClass=\"");
-      TypeReference _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
-      _builder.append(_completionContributor, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<pom.declarationSearcher implementation=\"");
-      TypeReference _pomDeclarationSearcher = this._ideaPluginClassNames.getPomDeclarationSearcher(grammar);
-      _builder.append(_pomDeclarationSearcher, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("\t\t");
-      TypeReference _typeRef_6 = TypeReference.typeRef("com.intellij.lang.PsiStructureViewFactory");
-      CharSequence _compileExtension_7 = this.compileExtension(grammar, "lang.psiStructureViewFactory", _typeRef_6);
-      _builder.append(_compileExtension_7, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<facetType implementation=\"");
-      TypeReference _facetType = this._ideaPluginClassNames.getFacetType(grammar);
-      _builder.append(_facetType, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<colorSettingsPage implementation=\"");
-      TypeReference _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
-      _builder.append(_colorSettingsPage, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<highlightVisitor implementation=\"");
-      TypeReference _semanticHighlightVisitor = this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar);
-      _builder.append(_semanticHighlightVisitor, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("\t\t");
-      TypeReference _typeRef_7 = TypeReference.typeRef("com.intellij.formatting.FormattingModelBuilder");
-      CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.formatter", _typeRef_7);
-      _builder.append(_compileExtension_8, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      TypeReference _typeRef_8 = TypeReference.typeRef("com.intellij.lang.CodeDocumentationAwareCommenter");
-      CharSequence _compileExtension_9 = this.compileExtension(grammar, "lang.commenter", _typeRef_8);
-      _builder.append(_compileExtension_9, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("</extensions>");
-      _builder.newLine();
-      _builder.append("</idea-plugin>");
-      _builder.newLine();
-      file.setContent(_builder);
+      };
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -1046,7 +1052,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -1099,7 +1105,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -1220,7 +1226,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -1272,7 +1278,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -1329,19 +1335,19 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
   }
   
-  public JavaFileAccess compileStandaloneSetup(final Grammar grammar) {
+  public XtendFileAccess compileStandaloneSetup(final Grammar grammar) {
     TypeReference _ideaStandaloneSetup = this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-    final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_ideaStandaloneSetup);
+    final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_ideaStandaloneSetup);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("public class ");
+        _builder.append("class ");
         TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
         String _simpleName = _ideaStandaloneSetup.getSimpleName();
         _builder.append(_simpleName, "");
@@ -1351,37 +1357,29 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("@Override");
+        _builder.append("override createInjector() {");
         _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public ");
-        _builder.append(Injector.class, "\t");
-        _builder.append(" createInjector() {");
-        _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append(Module.class, "\t\t");
-        _builder.append(" runtimeModule = new ");
+        _builder.append("val runtimeModule = new ");
         TypeReference _runtimeModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeModule(grammar);
         _builder.append(_runtimeModule, "\t\t");
-        _builder.append("();");
+        _builder.append("()");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append(Module.class, "\t\t");
-        _builder.append(" ideaModule = new ");
+        _builder.append("val ideaModule = new ");
         TypeReference _ideaModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaModule(grammar);
         _builder.append(_ideaModule, "\t\t");
-        _builder.append("();");
+        _builder.append("()");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append(Module.class, "\t\t");
-        _builder.append(" mergedModule = ");
+        _builder.append("val mergedModule = ");
         _builder.append(Modules2.class, "\t\t");
-        _builder.append(".mixin(runtimeModule, ideaModule);");
+        _builder.append(".mixin(runtimeModule, ideaModule)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
         _builder.append(Guice.class, "\t\t");
-        _builder.append(".createInjector(mergedModule);");
+        _builder.append(".createInjector(mergedModule)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
@@ -1390,7 +1388,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    file.setJavaContent(_client);
+    file.setContent(_client);
     return file;
   }
   
@@ -1433,7 +1431,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -1699,7 +1697,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2010,7 +2008,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2064,7 +2062,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2106,7 +2104,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2258,7 +2256,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2420,7 +2418,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2476,7 +2474,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2491,21 +2489,25 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       String _name = ISetup.class.getName();
       _builder.append(_name, "");
       file.setPath(_builder.toString());
-      StringConcatenation _builder_1 = new StringConcatenation();
-      TypeReference _runtimeSetup = this._xtextGeneratorNaming.getRuntimeSetup(grammar);
-      _builder_1.append(_runtimeSetup, "");
-      _builder_1.newLineIfNotEmpty();
-      file.setContent(_builder_1);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          TypeReference _runtimeSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeSetup(grammar);
+          _builder.append(_runtimeSetup, "");
+          _builder.newLineIfNotEmpty();
+        }
+      };
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
   }
   
   public JavaFileAccess compileFacetConfiguration(final Grammar grammar) {
-    JavaFileAccess _xblockexpression = null;
+    XtendFileAccess _xblockexpression = null;
     {
       TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_facetConfiguration);
+      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_facetConfiguration);
       TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.components.PersistentStateComponent");
       file.importType(_typeRef);
       TypeReference _typeRef_1 = TypeReference.typeRef("com.intellij.openapi.components.State");
@@ -2534,7 +2536,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.append("@State(name = \"");
           String _name = grammar.getName();
           _builder.append(_name, "");
-          _builder.append("Generator\", storages = {");
+          _builder.append("Generator\", storages = #[");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("@Storage(id = \"default\", file = StoragePathMacros.PROJECT_FILE),");
@@ -2546,9 +2548,9 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.append("+ \"/");
           String _simpleName = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
           _builder.append(_simpleName, "\t\t\t\t");
-          _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)})");
+          _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)])");
           _builder.newLineIfNotEmpty();
-          _builder.append("public class ");
+          _builder.append("class ");
           TypeReference _facetConfiguration = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetConfiguration(grammar);
           String _simpleName_1 = _facetConfiguration.getSimpleName();
           _builder.append(_simpleName_1, "");
@@ -2568,7 +2570,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2635,7 +2637,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2695,7 +2697,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -2722,7 +2724,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;

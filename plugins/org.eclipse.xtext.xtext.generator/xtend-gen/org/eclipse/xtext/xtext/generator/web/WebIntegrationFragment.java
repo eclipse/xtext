@@ -423,275 +423,287 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       switch (framework) {
         case ORION:
           final Collection<String> patterns = this.createOrionPatterns(langId, keywords, filteredKeywords);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("define(\"");
-          _builder.append(this.highlightingModuleName, "");
-          _builder.append("\", function() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("var keywords = \"");
-          {
-            List<String> _sort = IterableExtensions.<String>sort(filteredKeywords);
-            boolean _hasElements = false;
-            for(final String keyword : _sort) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate("|", "\t");
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("define(\"");
+              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+              _builder.append("\", function() {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("var keywords = \"");
+              {
+                List<String> _sort = IterableExtensions.<String>sort(filteredKeywords);
+                boolean _hasElements = false;
+                for(final String keyword : _sort) {
+                  if (!_hasElements) {
+                    _hasElements = true;
+                  } else {
+                    _builder.appendImmediate("|", "\t");
+                  }
+                  _builder.append(keyword, "\t");
+                }
               }
-              _builder.append(keyword, "\t");
-            }
-          }
-          _builder.append("\";");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("return {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("id: \"xtext.");
-          _builder.append(langId, "\t\t");
-          _builder.append("\",");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("contentTypes: [\"xtext/");
-          _builder.append(langId, "\t\t");
-          _builder.append("\"],");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("patterns: [");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          {
-            boolean _hasElements_1 = false;
-            for(final String pattern : patterns) {
-              if (!_hasElements_1) {
-                _hasElements_1 = true;
-              } else {
-                _builder.appendImmediate(",\n", "\t\t\t");
+              _builder.append("\";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("return {");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("id: \"xtext.");
+              _builder.append(langId, "\t\t");
+              _builder.append("\",");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("contentTypes: [\"xtext/");
+              _builder.append(langId, "\t\t");
+              _builder.append("\"],");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("patterns: [");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              {
+                boolean _hasElements_1 = false;
+                for(final String pattern : patterns) {
+                  if (!_hasElements_1) {
+                    _hasElements_1 = true;
+                  } else {
+                    _builder.appendImmediate(",\n", "\t\t\t");
+                  }
+                  _builder.append(pattern, "\t\t\t");
+                }
               }
-              _builder.append(pattern, "\t\t\t");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("]");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("};");
+              _builder.newLine();
+              _builder.append("});");
+              _builder.newLine();
             }
-          }
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("]");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("};");
-          _builder.newLine();
-          _builder.append("});");
-          _builder.newLine();
-          jsFile.setContent(_builder);
+          };
+          jsFile.setContent(_client);
           break;
         case ACE:
           final Multimap<String, String> patterns_1 = this.createCodeMirrorPatterns(langId, keywords, filteredKeywords);
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("define(\"");
-          _builder_1.append(this.highlightingModuleName, "");
-          _builder_1.append("\", [\"ace/lib/oop\", \"ace/mode/text\", \"ace/mode/text_highlight_rules\"], function(oop, mText, mTextHighlightRules) {");
-          _builder_1.newLineIfNotEmpty();
-          _builder_1.append("\t");
-          _builder_1.append("var HighlightRules = function() {");
-          _builder_1.newLine();
-          {
-            boolean _isEmpty = filteredKeywords.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              _builder_1.append("\t\t");
-              _builder_1.append("var keywords = \"");
+          StringConcatenationClient _client_1 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("define(\"");
+              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+              _builder.append("\", [\"ace/lib/oop\", \"ace/mode/text\", \"ace/mode/text_highlight_rules\"], function(oop, mText, mTextHighlightRules) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("var HighlightRules = function() {");
+              _builder.newLine();
               {
-                List<String> _sort_1 = IterableExtensions.<String>sort(filteredKeywords);
-                boolean _hasElements_2 = false;
-                for(final String keyword_1 : _sort_1) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
-                  } else {
-                    _builder_1.appendImmediate("|", "\t\t");
+                boolean _isEmpty = filteredKeywords.isEmpty();
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  _builder.append("\t\t");
+                  _builder.append("var keywords = \"");
+                  {
+                    List<String> _sort = IterableExtensions.<String>sort(filteredKeywords);
+                    boolean _hasElements = false;
+                    for(final String keyword : _sort) {
+                      if (!_hasElements) {
+                        _hasElements = true;
+                      } else {
+                        _builder.appendImmediate("|", "\t\t");
+                      }
+                      _builder.append(keyword, "\t\t");
+                    }
                   }
-                  _builder_1.append(keyword_1, "\t\t");
+                  _builder.append("\";");
+                  _builder.newLineIfNotEmpty();
                 }
               }
-              _builder_1.append("\";");
-              _builder_1.newLineIfNotEmpty();
-            }
-          }
-          _builder_1.append("\t\t");
-          _builder_1.append("this.$rules = {");
-          _builder_1.newLine();
-          {
-            Set<String> _keySet = patterns_1.keySet();
-            boolean _hasElements_3 = false;
-            for(final String state : _keySet) {
-              if (!_hasElements_3) {
-                _hasElements_3 = true;
-              } else {
-                _builder_1.appendImmediate(",", "\t\t\t");
-              }
-              _builder_1.append("\t\t\t");
-              _builder_1.append("\"");
-              _builder_1.append(state, "\t\t\t");
-              _builder_1.append("\": [");
-              _builder_1.newLineIfNotEmpty();
-              _builder_1.append("\t\t\t");
-              _builder_1.append("\t");
+              _builder.append("\t\t");
+              _builder.append("this.$rules = {");
+              _builder.newLine();
               {
-                Collection<String> _get = patterns_1.get(state);
-                boolean _hasElements_4 = false;
-                for(final String rule : _get) {
-                  if (!_hasElements_4) {
-                    _hasElements_4 = true;
+                Set<String> _keySet = patterns_1.keySet();
+                boolean _hasElements_1 = false;
+                for(final String state : _keySet) {
+                  if (!_hasElements_1) {
+                    _hasElements_1 = true;
                   } else {
-                    _builder_1.appendImmediate(",\n", "\t\t\t\t");
+                    _builder.appendImmediate(",", "\t\t\t");
                   }
-                  _builder_1.append(rule, "\t\t\t\t");
+                  _builder.append("\t\t\t");
+                  _builder.append("\"");
+                  _builder.append(state, "\t\t\t");
+                  _builder.append("\": [");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t\t");
+                  _builder.append("\t");
+                  {
+                    Collection<String> _get = patterns_1.get(state);
+                    boolean _hasElements_2 = false;
+                    for(final String rule : _get) {
+                      if (!_hasElements_2) {
+                        _hasElements_2 = true;
+                      } else {
+                        _builder.appendImmediate(",\n", "\t\t\t\t");
+                      }
+                      _builder.append(rule, "\t\t\t\t");
+                    }
+                  }
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t\t");
+                  _builder.append("]");
+                  _builder.newLine();
                 }
               }
-              _builder_1.newLineIfNotEmpty();
-              _builder_1.append("\t\t\t");
-              _builder_1.append("]");
-              _builder_1.newLine();
+              _builder.append("\t\t");
+              _builder.append("};");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("};");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("oop.inherits(HighlightRules, mTextHighlightRules.TextHighlightRules);");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("var Mode = function() {");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("this.HighlightRules = HighlightRules;");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("};");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("oop.inherits(Mode, mText.Mode);");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("Mode.prototype.$id = \"xtext/");
+              _builder.append(langId, "\t");
+              _builder.append("\";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("Mode.prototype.getCompletions = function(state, session, pos, prefix) {");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("return [];");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("return {");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("Mode: Mode");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("};");
+              _builder.newLine();
+              _builder.append("});");
+              _builder.newLine();
             }
-          }
-          _builder_1.append("\t\t");
-          _builder_1.append("};");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("};");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("oop.inherits(HighlightRules, mTextHighlightRules.TextHighlightRules);");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("var Mode = function() {");
-          _builder_1.newLine();
-          _builder_1.append("\t\t");
-          _builder_1.append("this.HighlightRules = HighlightRules;");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("};");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("oop.inherits(Mode, mText.Mode);");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("Mode.prototype.$id = \"xtext/");
-          _builder_1.append(langId, "\t");
-          _builder_1.append("\";");
-          _builder_1.newLineIfNotEmpty();
-          _builder_1.append("\t");
-          _builder_1.append("Mode.prototype.getCompletions = function(state, session, pos, prefix) {");
-          _builder_1.newLine();
-          _builder_1.append("\t\t");
-          _builder_1.append("return [];");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("}");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("return {");
-          _builder_1.newLine();
-          _builder_1.append("\t\t");
-          _builder_1.append("Mode: Mode");
-          _builder_1.newLine();
-          _builder_1.append("\t");
-          _builder_1.append("};");
-          _builder_1.newLine();
-          _builder_1.append("});");
-          _builder_1.newLine();
-          jsFile.setContent(_builder_1);
+          };
+          jsFile.setContent(_client_1);
           break;
         case CODEMIRROR:
           final Multimap<String, String> patterns_2 = this.createCodeMirrorPatterns(langId, keywords, filteredKeywords);
-          StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append("define(\"");
-          _builder_2.append(this.highlightingModuleName, "");
-          _builder_2.append("\", [\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
-          _builder_2.newLineIfNotEmpty();
-          {
-            boolean _isEmpty_1 = filteredKeywords.isEmpty();
-            boolean _not_1 = (!_isEmpty_1);
-            if (_not_1) {
-              _builder_2.append("\t");
-              _builder_2.append("var keywords = \"");
+          StringConcatenationClient _client_2 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("define(\"");
+              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+              _builder.append("\", [\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
+              _builder.newLineIfNotEmpty();
               {
-                List<String> _sort_2 = IterableExtensions.<String>sort(filteredKeywords);
-                boolean _hasElements_5 = false;
-                for(final String keyword_2 : _sort_2) {
-                  if (!_hasElements_5) {
-                    _hasElements_5 = true;
-                  } else {
-                    _builder_2.appendImmediate("|", "\t");
+                boolean _isEmpty = filteredKeywords.isEmpty();
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  _builder.append("\t");
+                  _builder.append("var keywords = \"");
+                  {
+                    List<String> _sort = IterableExtensions.<String>sort(filteredKeywords);
+                    boolean _hasElements = false;
+                    for(final String keyword : _sort) {
+                      if (!_hasElements) {
+                        _hasElements = true;
+                      } else {
+                        _builder.appendImmediate("|", "\t");
+                      }
+                      _builder.append(keyword, "\t");
+                    }
                   }
-                  _builder_2.append(keyword_2, "\t");
+                  _builder.append("\";");
+                  _builder.newLineIfNotEmpty();
                 }
               }
-              _builder_2.append("\";");
-              _builder_2.newLineIfNotEmpty();
-            }
-          }
-          _builder_2.append("\t");
-          _builder_2.append("CodeMirror.defineSimpleMode(\"xtext/");
-          _builder_2.append(langId, "\t");
-          _builder_2.append("\", {");
-          _builder_2.newLineIfNotEmpty();
-          {
-            Set<String> _keySet_1 = patterns_2.keySet();
-            boolean _hasElements_6 = false;
-            for(final String state_1 : _keySet_1) {
-              if (!_hasElements_6) {
-                _hasElements_6 = true;
-              } else {
-                _builder_2.appendImmediate(",", "\t\t");
-              }
-              _builder_2.append("\t\t");
-              _builder_2.append(state_1, "\t\t");
-              _builder_2.append(": ");
+              _builder.append("\t");
+              _builder.append("CodeMirror.defineSimpleMode(\"xtext/");
+              _builder.append(langId, "\t");
+              _builder.append("\", {");
+              _builder.newLineIfNotEmpty();
               {
-                boolean _equals = Objects.equal(state_1, "meta");
-                if (_equals) {
-                  _builder_2.append("{");
-                } else {
-                  _builder_2.append("[");
-                }
-              }
-              _builder_2.newLineIfNotEmpty();
-              _builder_2.append("\t\t");
-              _builder_2.append("\t");
-              {
-                Collection<String> _get_1 = patterns_2.get(state_1);
-                boolean _hasElements_7 = false;
-                for(final String rule_1 : _get_1) {
-                  if (!_hasElements_7) {
-                    _hasElements_7 = true;
+                Set<String> _keySet = patterns_2.keySet();
+                boolean _hasElements_1 = false;
+                for(final String state : _keySet) {
+                  if (!_hasElements_1) {
+                    _hasElements_1 = true;
                   } else {
-                    _builder_2.appendImmediate(",\n", "\t\t\t");
+                    _builder.appendImmediate(",", "\t\t");
                   }
-                  _builder_2.append(rule_1, "\t\t\t");
+                  _builder.append("\t\t");
+                  _builder.append(state, "\t\t");
+                  _builder.append(": ");
+                  {
+                    boolean _equals = Objects.equal(state, "meta");
+                    if (_equals) {
+                      _builder.append("{");
+                    } else {
+                      _builder.append("[");
+                    }
+                  }
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  {
+                    Collection<String> _get = patterns_2.get(state);
+                    boolean _hasElements_2 = false;
+                    for(final String rule : _get) {
+                      if (!_hasElements_2) {
+                        _hasElements_2 = true;
+                      } else {
+                        _builder.appendImmediate(",\n", "\t\t\t");
+                      }
+                      _builder.append(rule, "\t\t\t");
+                    }
+                  }
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t");
+                  {
+                    boolean _equals_1 = Objects.equal(state, "meta");
+                    if (_equals_1) {
+                      _builder.append("}");
+                    } else {
+                      _builder.append("]");
+                    }
+                  }
+                  _builder.newLineIfNotEmpty();
                 }
               }
-              _builder_2.newLineIfNotEmpty();
-              _builder_2.append("\t\t");
-              {
-                boolean _equals_1 = Objects.equal(state_1, "meta");
-                if (_equals_1) {
-                  _builder_2.append("}");
-                } else {
-                  _builder_2.append("]");
-                }
-              }
-              _builder_2.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("});");
+              _builder.newLine();
+              _builder.append("});");
+              _builder.newLine();
             }
-          }
-          _builder_2.append("\t");
-          _builder_2.append("});");
-          _builder_2.newLine();
-          _builder_2.append("});");
-          _builder_2.newLine();
-          jsFile.setContent(_builder_2);
+          };
+          jsFile.setContent(_client_2);
           break;
         default:
           break;
@@ -1273,206 +1285,82 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   protected void generateIndexDoc() {
     final TextFileAccess indexFile = this.fileAccessFactory.createTextFile();
     indexFile.setPath("index.html");
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
-    _builder.newLine();
-    _builder.append("<html>");
-    _builder.newLine();
-    _builder.append("<head>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<meta http-equiv=\"Content-Language\" content=\"en-us\">");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<title>Example Web Editor</title>");
-    _builder.newLine();
-    {
-      boolean _equals = Objects.equal(this.framework, WebIntegrationFragment.Framework.ORION);
-      if (_equals) {
-        _builder.append("\t");
-        _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"orion/code_edit/built-codeEdit.css\"/>");
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
+        _builder.newLine();
+        _builder.append("<html>");
+        _builder.newLine();
+        _builder.append("<head>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
-        XtextVersion _xtextVersion = this.codeConfig.getXtextVersion();
-        _builder.append(_xtextVersion, "\t");
-        _builder.append("/xtext-orion.css\"/>");
-        _builder.newLineIfNotEmpty();
-      } else {
-        boolean _equals_1 = Objects.equal(this.framework, WebIntegrationFragment.Framework.ACE);
-        if (_equals_1) {
-          _builder.append("\t");
-          _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
-          XtextVersion _xtextVersion_1 = this.codeConfig.getXtextVersion();
-          _builder.append(_xtextVersion_1, "\t");
-          _builder.append("/xtext-ace.css\"/>");
-          _builder.newLineIfNotEmpty();
-        } else {
-          boolean _equals_2 = Objects.equal(this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
-          if (_equals_2) {
+        _builder.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<meta http-equiv=\"Content-Language\" content=\"en-us\">");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<title>Example Web Editor</title>");
+        _builder.newLine();
+        {
+          boolean _equals = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
+          if (_equals) {
             _builder.append("\t");
-            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
-            _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
-            _builder.append("/lib/codemirror.css\"/>");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
-            _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
-            _builder.append("/addon/hint/show-hint.css\"/>");
-            _builder.newLineIfNotEmpty();
+            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"orion/code_edit/built-codeEdit.css\"/>");
+            _builder.newLine();
             _builder.append("\t");
             _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
-            XtextVersion _xtextVersion_2 = this.codeConfig.getXtextVersion();
-            _builder.append(_xtextVersion_2, "\t");
-            _builder.append("/xtext-codemirror.css\"/>");
+            XtextVersion _xtextVersion = WebIntegrationFragment.this.codeConfig.getXtextVersion();
+            _builder.append(_xtextVersion, "\t");
+            _builder.append("/xtext-orion.css\"/>");
             _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    _builder.append("\t");
-    _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<script src=\"webjars/requirejs/");
-    _builder.append(WebIntegrationFragment.REQUIREJS_VERSION, "\t");
-    _builder.append("/require.min.js\"></script>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("<script type=\"text/javascript\">");
-    _builder.newLine();
-    {
-      boolean _equals_3 = Objects.equal(this.framework, WebIntegrationFragment.Framework.ORION);
-      if (_equals_3) {
-        _builder.append("\t\t");
-        _builder.append("require.config({");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("paths: {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("\"text\": \"webjars/requirejs-text/");
-        _builder.append(WebIntegrationFragment.REQUIREJS_TEXT_VERSION, "\t\t\t\t");
-        _builder.append("/text\",");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("\"jquery\": \"webjars/jquery/");
-        _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
-        _builder.append("/jquery.min\",");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("\"xtext/xtext-orion\": \"xtext/");
-        XtextVersion _xtextVersion_3 = this.codeConfig.getXtextVersion();
-        _builder.append(_xtextVersion_3, "\t\t\t\t");
-        _builder.append("/xtext-orion\"");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("});");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("require([\"orion/code_edit/built-codeEdit-amd\"], function() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("require([\"xtext/xtext-orion\"], function(xtext) {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("xtext.createEditor({syntaxDefinition: \"");
-        String _xifexpression = null;
-        if (this.generateJsHighlighting) {
-          _xifexpression = this.highlightingModuleName;
-        } else {
-          _xifexpression = "none";
-        }
-        _builder.append(_xifexpression, "\t\t\t\t");
-        _builder.append("\"});");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("});");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("});");
-        _builder.newLine();
-      } else {
-        boolean _equals_4 = Objects.equal(this.framework, WebIntegrationFragment.Framework.ACE);
-        if (_equals_4) {
-          _builder.append("\t\t");
-          _builder.append("require.config({");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("paths: {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t");
-          _builder.append("\"jquery\": \"webjars/jquery/");
-          _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
-          _builder.append("/jquery.min\",");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t\t");
-          _builder.append("\"ace/ext/language_tools\": \"webjars/ace/");
-          _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t\t\t");
-          _builder.append("/src/ext-language_tools\",");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t\t");
-          _builder.append("\"xtext/xtext-ace\": \"xtext/");
-          XtextVersion _xtextVersion_4 = this.codeConfig.getXtextVersion();
-          _builder.append(_xtextVersion_4, "\t\t\t\t");
-          _builder.append("/xtext-ace\"");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("});");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("require([\"webjars/ace/");
-          _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t");
-          _builder.append("/src/ace\"], function() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("require([\"xtext/xtext-ace\"], function(xtext) {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t");
-          _builder.append("xtext.createEditor({syntaxDefinition: \"");
-          String _xifexpression_1 = null;
-          if (this.generateJsHighlighting) {
-            _xifexpression_1 = this.highlightingModuleName;
           } else {
-            _xifexpression_1 = "none";
+            boolean _equals_1 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ACE);
+            if (_equals_1) {
+              _builder.append("\t");
+              _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
+              XtextVersion _xtextVersion_1 = WebIntegrationFragment.this.codeConfig.getXtextVersion();
+              _builder.append(_xtextVersion_1, "\t");
+              _builder.append("/xtext-ace.css\"/>");
+              _builder.newLineIfNotEmpty();
+            } else {
+              boolean _equals_2 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
+              if (_equals_2) {
+                _builder.append("\t");
+                _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
+                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+                _builder.append("/lib/codemirror.css\"/>");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
+                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+                _builder.append("/addon/hint/show-hint.css\"/>");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
+                XtextVersion _xtextVersion_2 = WebIntegrationFragment.this.codeConfig.getXtextVersion();
+                _builder.append(_xtextVersion_2, "\t");
+                _builder.append("/xtext-codemirror.css\"/>");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
-          _builder.append(_xifexpression_1, "\t\t\t\t");
-          _builder.append("\"});");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("});");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("});");
-          _builder.newLine();
-        } else {
-          boolean _equals_5 = Objects.equal(this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
-          if (_equals_5) {
+        }
+        _builder.append("\t");
+        _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<script src=\"webjars/requirejs/");
+        _builder.append(WebIntegrationFragment.REQUIREJS_VERSION, "\t");
+        _builder.append("/require.min.js\"></script>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("<script type=\"text/javascript\">");
+        _builder.newLine();
+        {
+          boolean _equals_3 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
+          if (_equals_3) {
             _builder.append("\t\t");
             _builder.append("require.config({");
             _builder.newLine();
@@ -1482,125 +1370,253 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t\t");
+            _builder.append("\"text\": \"webjars/requirejs-text/");
+            _builder.append(WebIntegrationFragment.REQUIREJS_TEXT_VERSION, "\t\t\t\t");
+            _builder.append("/text\",");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
             _builder.append("\"jquery\": \"webjars/jquery/");
             _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
             _builder.append("/jquery.min\",");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t\t");
-            _builder.append("\"xtext/xtext-codemirror\": \"xtext/");
-            XtextVersion _xtextVersion_5 = this.codeConfig.getXtextVersion();
-            _builder.append(_xtextVersion_5, "\t\t\t\t");
-            _builder.append("/xtext-codemirror\"");
+            _builder.append("\"xtext/xtext-orion\": \"xtext/");
+            XtextVersion _xtextVersion_3 = WebIntegrationFragment.this.codeConfig.getXtextVersion();
+            _builder.append(_xtextVersion_3, "\t\t\t\t");
+            _builder.append("/xtext-orion\"");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("},");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("packages: [{");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t\t");
-            _builder.append("name: \"codemirror\",");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t\t");
-            _builder.append("location: \"webjars/codemirror/");
-            _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t\t\t\t");
-            _builder.append("\",");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("\t\t");
-            _builder.append("main: \"lib/codemirror\"");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("}]");
+            _builder.append("}");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("});");
             _builder.newLine();
             _builder.append("\t\t");
-            _builder.append("require([");
-            {
-              if (this.generateJsHighlighting) {
-                _builder.append("\"");
-                _builder.append(this.highlightingModuleName, "\t\t");
-                _builder.append("\", ");
-              }
+            _builder.append("require([\"orion/code_edit/built-codeEdit-amd\"], function() {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("require([\"xtext/xtext-orion\"], function(xtext) {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("xtext.createEditor({syntaxDefinition: \"");
+            String _xifexpression = null;
+            if (WebIntegrationFragment.this.generateJsHighlighting) {
+              _xifexpression = WebIntegrationFragment.this.highlightingModuleName;
+            } else {
+              _xifexpression = "none";
             }
-            _builder.append("\"xtext/xtext-codemirror\"], function(");
-            {
-              if (this.generateJsHighlighting) {
-                _builder.append("mode, ");
-              }
-            }
-            _builder.append("xtext) {");
+            _builder.append(_xifexpression, "\t\t\t\t");
+            _builder.append("\"});");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("xtext.createEditor(");
-            {
-              if ((!this.generateJsHighlighting)) {
-                _builder.append("{syntaxDefinition: \"none\"}");
-              }
-            }
-            _builder.append(");");
-            _builder.newLineIfNotEmpty();
+            _builder.append("});");
+            _builder.newLine();
             _builder.append("\t\t");
             _builder.append("});");
             _builder.newLine();
+          } else {
+            boolean _equals_4 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ACE);
+            if (_equals_4) {
+              _builder.append("\t\t");
+              _builder.append("require.config({");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("paths: {");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("\"jquery\": \"webjars/jquery/");
+              _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+              _builder.append("/jquery.min\",");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("\"ace/ext/language_tools\": \"webjars/ace/");
+              _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t\t\t");
+              _builder.append("/src/ext-language_tools\",");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("\"xtext/xtext-ace\": \"xtext/");
+              XtextVersion _xtextVersion_4 = WebIntegrationFragment.this.codeConfig.getXtextVersion();
+              _builder.append(_xtextVersion_4, "\t\t\t\t");
+              _builder.append("/xtext-ace\"");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("});");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("require([\"webjars/ace/");
+              _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t");
+              _builder.append("/src/ace\"], function() {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("require([\"xtext/xtext-ace\"], function(xtext) {");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("xtext.createEditor({syntaxDefinition: \"");
+              String _xifexpression_1 = null;
+              if (WebIntegrationFragment.this.generateJsHighlighting) {
+                _xifexpression_1 = WebIntegrationFragment.this.highlightingModuleName;
+              } else {
+                _xifexpression_1 = "none";
+              }
+              _builder.append(_xifexpression_1, "\t\t\t\t");
+              _builder.append("\"});");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("});");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("});");
+              _builder.newLine();
+            } else {
+              boolean _equals_5 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
+              if (_equals_5) {
+                _builder.append("\t\t");
+                _builder.append("require.config({");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("paths: {");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\"jquery\": \"webjars/jquery/");
+                _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+                _builder.append("/jquery.min\",");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\"xtext/xtext-codemirror\": \"xtext/");
+                XtextVersion _xtextVersion_5 = WebIntegrationFragment.this.codeConfig.getXtextVersion();
+                _builder.append(_xtextVersion_5, "\t\t\t\t");
+                _builder.append("/xtext-codemirror\"");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("},");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("packages: [{");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("name: \"codemirror\",");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("location: \"webjars/codemirror/");
+                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t\t\t\t");
+                _builder.append("\",");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("main: \"lib/codemirror\"");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("}]");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("});");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("require([");
+                {
+                  if (WebIntegrationFragment.this.generateJsHighlighting) {
+                    _builder.append("\"");
+                    _builder.append(WebIntegrationFragment.this.highlightingModuleName, "\t\t");
+                    _builder.append("\", ");
+                  }
+                }
+                _builder.append("\"xtext/xtext-codemirror\"], function(");
+                {
+                  if (WebIntegrationFragment.this.generateJsHighlighting) {
+                    _builder.append("mode, ");
+                  }
+                }
+                _builder.append("xtext) {");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("xtext.createEditor(");
+                {
+                  if ((!WebIntegrationFragment.this.generateJsHighlighting)) {
+                    _builder.append("{syntaxDefinition: \"none\"}");
+                  }
+                }
+                _builder.append(");");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("});");
+                _builder.newLine();
+              }
+            }
           }
         }
+        _builder.append("\t");
+        _builder.append("</script>");
+        _builder.newLine();
+        _builder.append("</head>");
+        _builder.newLine();
+        _builder.append("<body>");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("<div class=\"container\">");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<div class=\"header\">");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<h1>Example ");
+        Grammar _grammar = WebIntegrationFragment.this.getGrammar();
+        String _simpleName = GrammarUtil.getSimpleName(_grammar);
+        _builder.append(_simpleName, "\t\t");
+        _builder.append(" Web Editor</h1>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("</div>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<div class=\"content\">");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
+        ILanguageConfig _language = WebIntegrationFragment.this.getLanguage();
+        List<String> _fileExtensions = _language.getFileExtensions();
+        String _head = IterableExtensions.<String>head(_fileExtensions);
+        _builder.append(_head, "\t\t");
+        _builder.append("\"></div>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("</div>");
+        _builder.newLine();
+        _builder.append("</div>");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("</body>");
+        _builder.newLine();
+        _builder.append("</html>");
+        _builder.newLine();
       }
-    }
-    _builder.append("\t");
-    _builder.append("</script>");
-    _builder.newLine();
-    _builder.append("</head>");
-    _builder.newLine();
-    _builder.append("<body>");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("<div class=\"container\">");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<div class=\"header\">");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<h1>Example ");
-    Grammar _grammar = this.getGrammar();
-    String _simpleName = GrammarUtil.getSimpleName(_grammar);
-    _builder.append(_simpleName, "\t\t");
-    _builder.append(" Web Editor</h1>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("</div>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<div class=\"content\">");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
-    ILanguageConfig _language = this.getLanguage();
-    List<String> _fileExtensions = _language.getFileExtensions();
-    String _head = IterableExtensions.<String>head(_fileExtensions);
-    _builder.append(_head, "\t\t");
-    _builder.append("\"></div>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("</div>");
-    _builder.newLine();
-    _builder.append("</div>");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("</body>");
-    _builder.newLine();
-    _builder.append("</html>");
-    _builder.newLine();
-    indexFile.setContent(_builder);
+    };
+    indexFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
     indexFile.writeTo(_webApp);
@@ -1609,192 +1625,196 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   protected void generateStyleSheet() {
     final TextFileAccess styleFile = this.fileAccessFactory.createTextFile();
     styleFile.setPath("style.css");
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("body {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("width: 100%;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("height: 100%;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("overflow: hidden;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("font: 16px Helvetica,sans-serif;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("a {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("color: #22a;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("text-decoration: none;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("a:hover {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("text-decoration: underline;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append(".container {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("display: block;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("position: absolute;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("top: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("bottom: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("left: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("right: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("margin: 20px;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append(".header {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("display: block;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("position: absolute;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("background-color: #e8e8e8;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("top: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("left: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("right: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("height: 60px;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("padding: 10px;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append(".content {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("display: block;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("position: absolute;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("top: 90px;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("bottom: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("left: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("width: 640px;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("#xtext-editor {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("display: block;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("position: absolute;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("top: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("bottom: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("left: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("right: 0;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("padding: 4px;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("border: 1px solid #aaa;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    {
-      boolean _equals = Objects.equal(this.framework, WebIntegrationFragment.Framework.ORION);
-      if (_equals) {
-        _builder.newLine();
-        _builder.append("/************* Examples for custom icons *************/");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("/* For all elements of type Greeting or its subtypes */ ");
-        _builder.newLine();
-        _builder.append("/*");
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("body {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append(".Greeting-icon {");
-        _builder.newLine();
-        _builder.append("  \t\t");
-        _builder.append("background-image: url(\'images/Greeting.gif\');");
-        _builder.newLine();
-        _builder.append("  \t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("*/");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("/* Only in hovers */ ");
-        _builder.newLine();
-        _builder.append("/*");
+        _builder.append("width: 100%;");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append(".xtext-hover .Greeting-icon {");
+        _builder.append("height: 100%;");
         _builder.newLine();
-        _builder.append("  \t\t");
-        _builder.append("background-image: url(\'images/Greeting.gif\');");
+        _builder.append("\t");
+        _builder.append("overflow: hidden;");
         _builder.newLine();
-        _builder.append("  \t");
+        _builder.append("\t");
+        _builder.append("font: 16px Helvetica,sans-serif;");
+        _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        _builder.append(" ");
-        _builder.append("*/");
         _builder.newLine();
+        _builder.append("a {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("color: #22a;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("text-decoration: none;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("a:hover {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("text-decoration: underline;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append(".container {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("display: block;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("position: absolute;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("top: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("bottom: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("left: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("right: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("margin: 20px;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append(".header {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("display: block;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("position: absolute;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("background-color: #e8e8e8;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("top: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("left: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("right: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("height: 60px;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("padding: 10px;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append(".content {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("display: block;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("position: absolute;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("top: 90px;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("bottom: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("left: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("width: 640px;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("#xtext-editor {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("display: block;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("position: absolute;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("top: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("bottom: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("left: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("right: 0;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("padding: 4px;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("border: 1px solid #aaa;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        {
+          boolean _equals = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
+          if (_equals) {
+            _builder.newLine();
+            _builder.append("/************* Examples for custom icons *************/");
+            _builder.newLine();
+            _builder.newLine();
+            _builder.append("/* For all elements of type Greeting or its subtypes */ ");
+            _builder.newLine();
+            _builder.append("/*");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(".Greeting-icon {");
+            _builder.newLine();
+            _builder.append("  \t\t");
+            _builder.append("background-image: url(\'images/Greeting.gif\');");
+            _builder.newLine();
+            _builder.append("  \t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("*/");
+            _builder.newLine();
+            _builder.newLine();
+            _builder.append("/* Only in hovers */ ");
+            _builder.newLine();
+            _builder.append("/*");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(".xtext-hover .Greeting-icon {");
+            _builder.newLine();
+            _builder.append("  \t\t");
+            _builder.append("background-image: url(\'images/Greeting.gif\');");
+            _builder.newLine();
+            _builder.append("  \t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("*/");
+            _builder.newLine();
+          }
+        }
       }
-    }
-    styleFile.setContent(_builder);
+    };
+    styleFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
     styleFile.writeTo(_webApp);
@@ -1962,7 +1982,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setJavaContent(_client);
+    xtendFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webSrc = _projectConfig.getWebSrc();
     xtendFile.writeTo(_webSrc);
@@ -2067,7 +2087,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setJavaContent(_client);
+    xtendFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webSrc = _projectConfig.getWebSrc();
     xtendFile.writeTo(_webSrc);
