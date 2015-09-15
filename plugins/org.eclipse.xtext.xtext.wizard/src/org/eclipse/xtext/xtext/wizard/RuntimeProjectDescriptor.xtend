@@ -259,10 +259,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							fragment = formatting.Formatter2Fragment2 {}
 						«ENDIF»
 						
-						«IF testProject.enabled»
-							fragment = adapter.FragmentAdapter {
-								fragment = junit.Junit4Fragment auto-inject {}
-							}
+						«IF config.enabledProjects.exists[it instanceof TestProjectDescriptor]»
+							fragment = junit.Junit4Fragment2 auto-inject {}
 						«ENDIF»
 						
 						«IF config.uiProject.enabled»
