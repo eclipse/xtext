@@ -11,4 +11,5 @@ Export-Package: org.eclipse.xtext.xtext.wizard;x-friends:="org.eclipse.xtext.xte
 Require-Bundle: org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.10.2"
+ org.eclipse.emf.ecore;bundle-version="2.10.2",
+ org.eclipse.xtext.xtext.generator

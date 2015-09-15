@@ -1,10 +1,10 @@
 package org.eclipse.xtext.xtext.wizard
 
 import com.google.common.base.Strings
+import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import java.util.List
 
 @FinalFieldsConstructor
 @Accessors
@@ -40,14 +40,18 @@ abstract class ProjectDescriptor {
 			files += file(Outlet.META_INF, "MANIFEST.MF", manifest)
 			files += file(Outlet.ROOT, "build.properties", buildProperties)
 		}
-		if (config.buildSystem.isGradleBuild) {
+		if (config.needsGradleBuild && isPartOfGradleBuild) {
 			files += buildGradle
 		}
-		if (config.buildSystem.isMavenBuild) {
+		if (config.needsMavenBuild && isPartOfMavenBuild) {
 			files += pom
 		}
 		return files
 	}
+	
+	def boolean isPartOfGradleBuild()
+	
+	def boolean isPartOfMavenBuild()
 	
 	def boolean isEclipsePluginProject()
 	

@@ -117,6 +117,8 @@ class WizardConfig extends XtextProjectConfig {
 				ideaPluginSrc = ideaPluginRoot.path + '/' + src
 			if (ideaPluginSrcGen === null)
 				ideaPluginSrcGen = ideaPluginRoot.path  + '/' + srcGen
+			if (ideaPluginMetaInf === null)
+				ideaPluginMetaInf = ideaPluginRoot.path  + '/' + metaInf
 		}
 		
 		if (webSupport) {
