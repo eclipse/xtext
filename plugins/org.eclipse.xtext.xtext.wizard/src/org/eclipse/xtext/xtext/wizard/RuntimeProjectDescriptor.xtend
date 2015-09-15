@@ -369,7 +369,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					outputs.dir "«Outlet.MAIN_SRC_GEN.sourceFolder»"
 					args += "«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»"
 					args += "-p"
-					args += "runtimeProject=/${projectDir}"
+					args += "projectPath=/${projectDir}"
 				}
 				
 				compileXtend.dependsOn(generateXtextLanguage)

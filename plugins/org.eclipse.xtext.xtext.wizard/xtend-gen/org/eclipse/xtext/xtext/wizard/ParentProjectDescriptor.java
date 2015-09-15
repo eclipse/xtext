@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.XtextVersion;
-import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
@@ -36,9 +35,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
+    boolean _or = false;
     WizardConfiguration _config = this.getConfig();
-    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
-    return (!Objects.equal(_preferredBuildSystem, BuildSystem.ECLIPSE));
+    boolean _needsGradleBuild = _config.needsGradleBuild();
+    if (_needsGradleBuild) {
+      _or = true;
+    } else {
+      WizardConfiguration _config_1 = this.getConfig();
+      boolean _needsMavenBuild = _config_1.needsMavenBuild();
+      _or = _needsMavenBuild;
+    }
+    return _or;
   }
   
   @Override
@@ -48,25 +55,11 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public String getLocation() {
-    String _xifexpression = null;
     WizardConfiguration _config = this.getConfig();
-    ProjectLayout _projectLayout = _config.getProjectLayout();
-    boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
-    if (_equals) {
-      WizardConfiguration _config_1 = this.getConfig();
-      String _rootLocation = _config_1.getRootLocation();
-      String _plus = (_rootLocation + "/");
-      String _name = this.getName();
-      _xifexpression = (_plus + _name);
-    } else {
-      WizardConfiguration _config_2 = this.getConfig();
-      String _rootLocation_1 = _config_2.getRootLocation();
-      String _plus_1 = (_rootLocation_1 + "/");
-      WizardConfiguration _config_3 = this.getConfig();
-      String _baseName = _config_3.getBaseName();
-      _xifexpression = (_plus_1 + _baseName);
-    }
-    return _xifexpression;
+    String _rootLocation = _config.getRootLocation();
+    String _plus = (_rootLocation + "/");
+    String _name = this.getName();
+    return (_plus + _name);
   }
   
   @Override

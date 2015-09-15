@@ -10,7 +10,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override isEnabled() {
-		config.preferredBuildSystem != BuildSystem.ECLIPSE
+		config.needsGradleBuild || config.needsMavenBuild
 	}
 	
 	override setEnabled(boolean enabled) {
@@ -18,11 +18,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 
 	override getLocation() {
-		if (config.projectLayout == ProjectLayout.FLAT) {
-			config.rootLocation + "/" + name
-		} else {
-			config.rootLocation + "/" + config.baseName
-		}
+		config.rootLocation + "/" + name
 	}
 
 	override isEclipsePluginProject() {
