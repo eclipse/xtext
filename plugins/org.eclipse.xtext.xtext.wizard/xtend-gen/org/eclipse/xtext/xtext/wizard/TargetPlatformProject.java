@@ -2,6 +2,8 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -54,6 +56,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
       _xblockexpression = files;
     }
     return _xblockexpression;
+  }
+  
+  @Override
+  public Set<String> getSourceFolders() {
+    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
   }
   
   public CharSequence target() {

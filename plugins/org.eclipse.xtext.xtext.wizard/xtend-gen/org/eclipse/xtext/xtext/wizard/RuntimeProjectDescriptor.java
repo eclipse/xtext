@@ -434,7 +434,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     {
       WizardConfiguration _config_7 = this.getConfig();
       Set<ProjectDescriptor> _enabledProjects_1 = _config_7.getEnabledProjects();
-      for(final ProjectDescriptor p_1 : _enabledProjects_1) {
+      final Function1<ProjectDescriptor, Boolean> _function_5 = new Function1<ProjectDescriptor, Boolean>() {
+        @Override
+        public Boolean apply(final ProjectDescriptor it) {
+          Set<String> _sourceFolders = it.getSourceFolders();
+          String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+          return Boolean.valueOf(_sourceFolders.contains(_sourceFolder));
+        }
+      };
+      Iterable<ProjectDescriptor> _filter_3 = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects_1, _function_5);
+      for(final ProjectDescriptor p_1 : _filter_3) {
         _builder.append("\t");
         _builder.append("component = DirectoryCleaner {");
         _builder.newLine();
@@ -561,7 +570,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       WizardConfiguration _config_13 = this.getConfig();
       Ecore2XtextConfiguration _ecore2Xtext_2 = _config_13.getEcore2Xtext();
       Set<EPackageInfo> _ePackageInfos_2 = _ecore2Xtext_2.getEPackageInfos();
-      final Function1<EPackageInfo, Boolean> _function_5 = new Function1<EPackageInfo, Boolean>() {
+      final Function1<EPackageInfo, Boolean> _function_6 = new Function1<EPackageInfo, Boolean>() {
         @Override
         public Boolean apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
@@ -569,15 +578,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           return Boolean.valueOf(Objects.equal(_fileExtension, "xcore"));
         }
       };
-      Iterable<EPackageInfo> _filter_3 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_5);
-      final Function1<EPackageInfo, String> _function_6 = new Function1<EPackageInfo, String>() {
+      Iterable<EPackageInfo> _filter_4 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_6);
+      final Function1<EPackageInfo, String> _function_7 = new Function1<EPackageInfo, String>() {
         @Override
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();
         }
       };
-      Iterable<String> _map_2 = IterableExtensions.<EPackageInfo, String>map(_filter_3, _function_6);
+      Iterable<String> _map_2 = IterableExtensions.<EPackageInfo, String>map(_filter_4, _function_7);
       Set<String> _set_1 = IterableExtensions.<String>toSet(_map_2);
       for(final String genmodelURI_1 : _set_1) {
         _builder.append("\t\t\t");
