@@ -31,12 +31,12 @@ class WizardConfiguration {
 
 	def Set<ProjectDescriptor> getEnabledProjects() {
 		val productionProjects = #[
+			parentProject,
 			runtimeProject,
 			ideProject,
 			uiProject,
 			intellijProject,
 			webProject,
-			parentProject,
 			targetPlatformProject
 		].filter[enabled]
 		
