@@ -46,6 +46,10 @@ class XtextGeneratorNaming {
 		return runtimeBasePackage
 	}
 	
+	def getRuntimeTestBasePackage(Grammar grammar) {
+		grammar.runtimeBasePackage + ".tests"
+	}
+	
 	def getRuntimeModule(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage, getSimpleName(grammar) + 'RuntimeModule')
 	}
@@ -70,6 +74,10 @@ class XtextGeneratorNaming {
 		if (grammar != myGrammar || eclipsePluginBasePackage === null)
 			return getNamespace(grammar) + '.ui'
 		return eclipsePluginBasePackage
+	}
+	
+	def getEclipsePluginTestBasePackage(Grammar grammar) {
+		grammar.eclipsePluginBasePackage + ".tests"
 	}
 	
 	def getEclipsePluginModule(Grammar grammar) {

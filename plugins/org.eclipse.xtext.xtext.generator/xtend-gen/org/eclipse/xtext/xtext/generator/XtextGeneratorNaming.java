@@ -54,6 +54,11 @@ public class XtextGeneratorNaming {
     return this.runtimeBasePackage;
   }
   
+  public String getRuntimeTestBasePackage(final Grammar grammar) {
+    String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    return (_runtimeBasePackage + ".tests");
+  }
+  
   public TypeReference getRuntimeModule(final Grammar grammar) {
     String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
     String _simpleName = GrammarUtil.getSimpleName(grammar);
@@ -100,6 +105,11 @@ public class XtextGeneratorNaming {
       return (_namespace + ".ui");
     }
     return this.eclipsePluginBasePackage;
+  }
+  
+  public String getEclipsePluginTestBasePackage(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    return (_eclipsePluginBasePackage + ".tests");
   }
   
   public TypeReference getEclipsePluginModule(final Grammar grammar) {

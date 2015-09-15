@@ -764,27 +764,28 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      boolean _isEnabled_5 = this.testProject.isEnabled();
-      if (_isEnabled_5) {
+      WizardConfiguration _config_14 = this.getConfig();
+      Set<ProjectDescriptor> _enabledProjects_2 = _config_14.getEnabledProjects();
+      final Function1<ProjectDescriptor, Boolean> _function_8 = new Function1<ProjectDescriptor, Boolean>() {
+        @Override
+        public Boolean apply(final ProjectDescriptor it) {
+          return Boolean.valueOf((it instanceof TestProjectDescriptor));
+        }
+      };
+      boolean _exists = IterableExtensions.<ProjectDescriptor>exists(_enabledProjects_2, _function_8);
+      if (_exists) {
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = junit.Junit4Fragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
+        _builder.append("fragment = junit.Junit4Fragment2 auto-inject {}");
         _builder.newLine();
       }
     }
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_14 = this.getConfig();
-      UiProjectDescriptor _uiProject_1 = _config_14.getUiProject();
-      boolean _isEnabled_6 = _uiProject_1.isEnabled();
-      if (_isEnabled_6) {
+      WizardConfiguration _config_15 = this.getConfig();
+      UiProjectDescriptor _uiProject_1 = _config_15.getUiProject();
+      boolean _isEnabled_5 = _uiProject_1.isEnabled();
+      if (_isEnabled_5) {
         _builder.append("\t\t\t");
         _builder.append("fragment = builder.BuilderIntegrationFragment2 auto-inject {}");
         _builder.newLine();
@@ -905,16 +906,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     {
       boolean _or = false;
-      WizardConfiguration _config_15 = this.getConfig();
-      UiProjectDescriptor _uiProject_2 = _config_15.getUiProject();
-      boolean _isEnabled_7 = _uiProject_2.isEnabled();
-      if (_isEnabled_7) {
+      WizardConfiguration _config_16 = this.getConfig();
+      UiProjectDescriptor _uiProject_2 = _config_16.getUiProject();
+      boolean _isEnabled_6 = _uiProject_2.isEnabled();
+      if (_isEnabled_6) {
         _or = true;
       } else {
-        WizardConfiguration _config_16 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_16.getIdeProject();
-        boolean _isEnabled_8 = _ideProject_1.isEnabled();
-        _or = _isEnabled_8;
+        WizardConfiguration _config_17 = this.getConfig();
+        IdeProjectDescriptor _ideProject_1 = _config_17.getIdeProject();
+        boolean _isEnabled_7 = _ideProject_1.isEnabled();
+        _or = _isEnabled_7;
       }
       if (_or) {
         _builder.append("\t\t\t");
@@ -960,10 +961,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.newLine();
     {
-      WizardConfiguration _config_17 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject_1 = _config_17.getIntellijProject();
-      boolean _isEnabled_9 = _intellijProject_1.isEnabled();
-      if (_isEnabled_9) {
+      WizardConfiguration _config_18 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject_1 = _config_18.getIntellijProject();
+      boolean _isEnabled_8 = _intellijProject_1.isEnabled();
+      if (_isEnabled_8) {
         _builder.append("\t\t\t");
         _builder.append("// Intellij IDEA integration");
         _builder.newLine();
@@ -978,10 +979,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_18 = this.getConfig();
-      WebProjectDescriptor _webProject_1 = _config_18.getWebProject();
-      boolean _isEnabled_10 = _webProject_1.isEnabled();
-      if (_isEnabled_10) {
+      WizardConfiguration _config_19 = this.getConfig();
+      WebProjectDescriptor _webProject_1 = _config_19.getWebProject();
+      boolean _isEnabled_9 = _webProject_1.isEnabled();
+      if (_isEnabled_9) {
         _builder.append("\t\t\t");
         _builder.append("// web integration");
         _builder.newLine();

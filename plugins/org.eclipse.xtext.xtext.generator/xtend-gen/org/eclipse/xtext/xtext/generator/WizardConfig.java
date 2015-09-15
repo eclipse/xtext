@@ -213,8 +213,8 @@ public class WizardConfig extends XtextProjectConfig {
         IXtextGeneratorFileSystemAccess _eclipsePluginTestRoot = this.getEclipsePluginTestRoot();
         boolean _tripleEquals_15 = (_eclipsePluginTestRoot == null);
         if (_tripleEquals_15) {
-          IXtextGeneratorFileSystemAccess _runtimeRoot_5 = this.getRuntimeRoot();
-          String _path_11 = _runtimeRoot_5.getPath();
+          IXtextGeneratorFileSystemAccess _eclipsePluginRoot_4 = this.getEclipsePluginRoot();
+          String _path_11 = _eclipsePluginRoot_4.getPath();
           String _plus_20 = (_path_11 + ".tests");
           this.setEclipsePluginTestRoot(_plus_20);
         }
@@ -257,8 +257,8 @@ public class WizardConfig extends XtextProjectConfig {
       IXtextGeneratorFileSystemAccess _ideaPluginRoot = this.getIdeaPluginRoot();
       boolean _tripleEquals_20 = (_ideaPluginRoot == null);
       if (_tripleEquals_20) {
-        IXtextGeneratorFileSystemAccess _runtimeRoot_6 = this.getRuntimeRoot();
-        String _path_15 = _runtimeRoot_6.getPath();
+        IXtextGeneratorFileSystemAccess _runtimeRoot_5 = this.getRuntimeRoot();
+        String _path_15 = _runtimeRoot_5.getPath();
         String _plus_27 = (_path_15 + ".idea");
         this.setIdeaPluginRoot(_plus_27);
       }
@@ -294,8 +294,8 @@ public class WizardConfig extends XtextProjectConfig {
       IXtextGeneratorFileSystemAccess _webRoot = this.getWebRoot();
       boolean _tripleEquals_24 = (_webRoot == null);
       if (_tripleEquals_24) {
-        IXtextGeneratorFileSystemAccess _runtimeRoot_7 = this.getRuntimeRoot();
-        String _path_19 = _runtimeRoot_7.getPath();
+        IXtextGeneratorFileSystemAccess _runtimeRoot_6 = this.getRuntimeRoot();
+        String _path_19 = _runtimeRoot_6.getPath();
         String _plus_34 = (_path_19 + ".web");
         this.setWebRoot(_plus_34);
       }
@@ -331,8 +331,8 @@ public class WizardConfig extends XtextProjectConfig {
       IXtextGeneratorFileSystemAccess _genericIdeRoot = this.getGenericIdeRoot();
       boolean _tripleEquals_28 = (_genericIdeRoot == null);
       if (_tripleEquals_28) {
-        IXtextGeneratorFileSystemAccess _runtimeRoot_8 = this.getRuntimeRoot();
-        String _path_23 = _runtimeRoot_8.getPath();
+        IXtextGeneratorFileSystemAccess _runtimeRoot_7 = this.getRuntimeRoot();
+        String _path_23 = _runtimeRoot_7.getPath();
         String _plus_41 = (_path_23 + ".ide");
         this.setGenericIdeRoot(_plus_41);
       }

@@ -1,11 +1,12 @@
 package org.eclipse.xtext.xtext.wizard
 
+import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
 @FinalFieldsConstructor
-class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
-
+class UiTestProjectDescriptor extends TestProjectDescriptor {
+	
 	override getExternalDependencies() {
 		val deps = newHashSet
 		deps += super.externalDependencies
@@ -15,10 +16,11 @@ class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
 	}
 	
 	override isPartOfGradleBuild() {
-		config.preferredBuildSystem == BuildSystem.GRADLE
+		false
 	}
-
+	
 	override isPartOfMavenBuild() {
-		config.preferredBuildSystem == BuildSystem.MAVEN
+		true
 	}
+	
 }

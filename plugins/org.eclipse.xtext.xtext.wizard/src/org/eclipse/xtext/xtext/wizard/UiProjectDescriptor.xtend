@@ -1,11 +1,18 @@
 package org.eclipse.xtext.xtext.wizard
 
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
-@FinalFieldsConstructor
-class UiProjectDescriptor extends ProjectDescriptor {
+class UiProjectDescriptor extends TestedProjectDescriptor {
+	UiTestProjectDescriptor testProject
+	
+	new(WizardConfiguration config) {
+		super(config)
+		this.testProject = new UiTestProjectDescriptor(this)
+	}
+	
+	override getTestProject() {
+		testProject
+	}
 	
 	override getUpstreamProjects() {
 		#{config.runtimeProject, config.ideProject}.filter[enabled].toSet
