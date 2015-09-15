@@ -4,10 +4,15 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collections;
 import java.util.Set;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -22,6 +27,7 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @SuppressWarnings("all")
 public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
@@ -67,6 +73,12 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       }
     };
     ObjectExtensions.<ManifestAccess>operator_doubleArrow(_eclipsePluginTestManifest, _function_1);
+    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+    Set<String> _exportedPackages = _eclipsePluginManifest.getExportedPackages();
+    Grammar _grammar = this.getGrammar();
+    TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+    String _packageName = _eclipsePluginActivator.getPackageName();
+    _exportedPackages.add(_packageName);
     ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
     ManifestAccess _eclipsePluginTestManifest_1 = this.projectConfig.getEclipsePluginTestManifest();
     final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
@@ -74,6 +86,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       public void apply(final ManifestAccess it) {
         Set<String> _importedPackages = it.getImportedPackages();
         CollectionExtensions.<String>addAll(_importedPackages, 
+          "org.junit;version=\"4.5.0\"", 
           "org.junit.runner;version=\"4.5.0\"", 
           "org.junit.runner.manipulation;version=\"4.5.0\"", 
           "org.junit.runner.notification;version=\"4.5.0\"", 
@@ -95,76 +108,97 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
   }
   
   public JavaFileAccess generateExampleRuntimeTest() {
-    JavaFileAccess _xblockexpression = null;
-    {
-      TypeReference _injectorProvider = this.injectorProvider();
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_injectorProvider);
-      final TypeReference xtextRunner = new TypeReference("org.eclipse.xtext.junit4.XtextRunner");
-      final TypeReference runWith = new TypeReference("org.junit.runner.RunWith");
-      final TypeReference injectWith = new TypeReference("org.eclipse.xtext.junit4.InjectWith");
-      final TypeReference parseHelper = new TypeReference("org.eclipse.xtext.junit4.util.ParseHelper");
-      final TypeReference test = new TypeReference("org.junit.Test");
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("@");
-          _builder.append(runWith, "");
-          _builder.append("(");
-          _builder.append(xtextRunner, "");
-          _builder.append(".class)");
-          _builder.newLineIfNotEmpty();
-          _builder.append("@");
-          _builder.append(injectWith, "");
-          _builder.append("(");
-          TypeReference _injectorProvider = Junit4Fragment2.this.injectorProvider();
-          _builder.append(_injectorProvider, "");
-          _builder.append(".class)");
-          _builder.newLineIfNotEmpty();
-          _builder.append("public class ");
-          Grammar _grammar = Junit4Fragment2.this.getGrammar();
-          String _simpleName = GrammarUtil.getSimpleName(_grammar);
-          _builder.append(_simpleName, "");
-          _builder.append("ParsingTest {");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@");
-          _builder.append(Inject.class, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("private ");
-          _builder.append(parseHelper, "\t");
-          _builder.append("<");
-          _builder.append(EObject.class, "\t");
-          _builder.append("> parseHelper;");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@");
-          _builder.append(test, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("public void loadModel() throws Exception {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append(EObject.class, "\t\t");
-          _builder.append(" result = parseHelper.parse(\"Hello Xtext!\");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("assertNotNull(result);");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-        }
-      };
-      file.setContent(_client);
-      _xblockexpression = file;
-    }
-    return _xblockexpression;
+    final TypeReference xtextRunner = new TypeReference("org.eclipse.xtext.junit4.XtextRunner");
+    final TypeReference runWith = new TypeReference("org.junit.runner.RunWith");
+    final TypeReference injectWith = new TypeReference("org.eclipse.xtext.junit4.InjectWith");
+    final TypeReference parseHelper = new TypeReference("org.eclipse.xtext.junit4.util.ParseHelper");
+    final TypeReference test = new TypeReference("org.junit.Test");
+    final TypeReference assert_ = new TypeReference("org.junit.Assert");
+    Grammar _grammar = this.getGrammar();
+    EList<AbstractRule> _rules = _grammar.getRules();
+    AbstractRule _head = IterableExtensions.<AbstractRule>head(_rules);
+    TypeRef _type = _head.getType();
+    EClassifier _classifier = _type.getClassifier();
+    Grammar _grammar_1 = this.getGrammar();
+    Resource _eResource = _grammar_1.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    String _javaTypeName = GenModelUtil2.getJavaTypeName(_classifier, _resourceSet);
+    final TypeReference rootType = new TypeReference(_javaTypeName);
+    TypeReference _exampleRuntimeTest = this.exampleRuntimeTest();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("@");
+        _builder.append(runWith, "");
+        _builder.append("(");
+        _builder.append(xtextRunner, "");
+        _builder.append(")");
+        _builder.newLineIfNotEmpty();
+        _builder.append("@");
+        _builder.append(injectWith, "");
+        _builder.append("(");
+        TypeReference _injectorProvider = Junit4Fragment2.this.injectorProvider();
+        _builder.append(_injectorProvider, "");
+        _builder.append(")");
+        _builder.newLineIfNotEmpty();
+        _builder.append("class ");
+        TypeReference _exampleRuntimeTest = Junit4Fragment2.this.exampleRuntimeTest();
+        _builder.append(_exampleRuntimeTest, "");
+        _builder.append("{");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@");
+        _builder.append(Inject.class, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(parseHelper, "\t");
+        _builder.append("<");
+        _builder.append(rootType, "\t");
+        _builder.append("> parseHelper;");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@");
+        _builder.append(test, "\t");
+        _builder.append(" ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("def void loadModel() {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("val result = parseHelper.parse(\'\'");
+        _builder.append("\'");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("Hello Xtext!");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\'\'");
+        _builder.append("\')");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append(assert_, "\t\t");
+        _builder.append(".assertNotNull(result)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    return this.fileAccessFactory.createXtendFile(_exampleRuntimeTest, _client);
+  }
+  
+  public TypeReference exampleRuntimeTest() {
+    Grammar _grammar = this.getGrammar();
+    String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(_grammar);
+    Grammar _grammar_1 = this.getGrammar();
+    String _simpleName = GrammarUtil.getSimpleName(_grammar_1);
+    String _plus = (_simpleName + "ParsingTest");
+    return new TypeReference(_runtimeTestBasePackage, _plus);
   }
   
   public JavaFileAccess generateInjectorProvider() {
