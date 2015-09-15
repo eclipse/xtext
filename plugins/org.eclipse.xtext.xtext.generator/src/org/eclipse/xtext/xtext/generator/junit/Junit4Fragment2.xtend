@@ -25,7 +25,7 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 			exportedPackages.add(grammar.runtimeTestBasePackage)
 		]
 
-		projectConfig.eclipsePluginManifest => [
+		projectConfig.eclipsePluginTestManifest => [
 			requiredBundles.addAll(
 				"org.eclipse.core.runtime",
 				"org.eclipse.ui.workbench;resolution:=optional"
@@ -34,7 +34,7 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 		]
 		#[
 			projectConfig.runtimeTestManifest,
-			projectConfig.eclipsePluginManifest
+			projectConfig.eclipsePluginTestManifest
 		].forEach [
 			importedPackages.addAll(
 				"org.junit.runner;version=\"4.5.0\"",
@@ -46,8 +46,8 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 			)
 		]
 		generateInjectorProvider.writeTo(projectConfig.runtimeTestSrcGen)
-		generateExampleRuntimeTest.writeTo(projectConfig.eclipsePluginSrc)
-		generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginSrcGen)
+		generateExampleRuntimeTest.writeTo(projectConfig.runtimeTestSrc)
+		generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTestSrcGen)
 	}
 	
 	def JavaFileAccess generateExampleRuntimeTest() {
