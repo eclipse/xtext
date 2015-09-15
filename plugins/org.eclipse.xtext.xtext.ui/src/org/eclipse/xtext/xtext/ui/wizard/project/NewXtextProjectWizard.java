@@ -22,7 +22,9 @@ import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions;
+import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 
 import com.google.inject.Inject;
 
@@ -80,10 +82,16 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 			projectInfo.setProjectLayout(ProjectLayout.HIERARCHICAL);
 			projectInfo.getTargetPlatformProject().setEnabled(advancedPage.isCreateUiProject());
 		}
-		projectInfo.getRuntimeProject().getTestProject().setEnabled(advancedPage.isCreateTestProject());
 		projectInfo.getIdeProject().setEnabled(advancedPage.isCreateIdeProject());
 		projectInfo.getIntellijProject().setEnabled(advancedPage.isCreateIntellijProject());
 		projectInfo.getWebProject().setEnabled(advancedPage.isCreateWebProject());
+		if (advancedPage.isCreateTestProject()) {
+			for (ProjectDescriptor project : projectInfo.getEnabledProjects()) {
+				if (project instanceof TestedProjectDescriptor) {
+					((TestedProjectDescriptor) project).getTestProject().setEnabled(true);
+				}
+			}
+		}
 		return projectInfo;
 	}
 
