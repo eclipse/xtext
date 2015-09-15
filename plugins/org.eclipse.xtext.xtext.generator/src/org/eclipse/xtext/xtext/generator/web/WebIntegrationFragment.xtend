@@ -594,7 +594,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			 * Just execute it and point a web browser to http://localhost:8080/
 			 */
 		'''
-		xtendFile.javaContent = '''
+		xtendFile.content = '''
 			class «grammar.serverLauncherClass.simpleName» {
 				def static void main(String[] args) {
 					val server = new «'org.eclipse.jetty.server.Server'.typeRef»(new «'java.net.InetSocketAddress'.typeRef»('localhost', 8080))
@@ -644,7 +644,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		 * Deploy this class into a servlet container to enable DSL-specific services.
 		 */
 		'''
-		xtendFile.javaContent = '''
+		xtendFile.content = '''
 			class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 				
 				val «List»<«ExecutorService»> executorServices = newArrayList
