@@ -491,9 +491,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       WizardConfiguration _config_8 = this.getConfig();
       UiProjectDescriptor _uiProject = _config_8.getUiProject();
       boolean _isEnabled = _uiProject.isEnabled();
-      if (_isEnabled) {
+      boolean _not = (!_isEnabled);
+      if (_not) {
         _builder.append("\t\t\t\t");
-        _builder.append("eclipseEditor = true");
+        _builder.append("eclipseEditor = false");
         _builder.newLine();
       }
     }
@@ -1140,6 +1141,48 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<build>");
         _builder.newLine();
+        {
+          boolean _and = false;
+          boolean _isEclipsePluginProject_1 = RuntimeProjectDescriptor.this.isEclipsePluginProject();
+          boolean _not = (!_isEclipsePluginProject_1);
+          if (!_not) {
+            _and = false;
+          } else {
+            WizardConfiguration _config = RuntimeProjectDescriptor.this.getConfig();
+            SourceLayout _sourceLayout = _config.getSourceLayout();
+            boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
+            _and = _equals;
+          }
+          if (_and) {
+            _builder.append("\t");
+            _builder.append("<sourceDirectory>");
+            String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_JAVA);
+            _builder.append(_sourceFolder, "\t");
+            _builder.append("</sourceDirectory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("<resources>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<resource>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("<directory>");
+            String _sourceFolder_1 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+            _builder.append(_sourceFolder_1, "\t\t\t");
+            _builder.append("</directory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("</resource>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</resources>");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t");
         _builder.append("<plugins>");
         _builder.newLine();
@@ -1193,8 +1236,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
         _builder.append("<argument>/${project.basedir}/");
-        String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
-        _builder.append(_sourceFolder, "\t\t\t\t\t");
+        String _sourceFolder_2 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder_2, "\t\t\t\t\t");
         _builder.append("/");
         String _workflowFilePath = RuntimeProjectDescriptor.this.getWorkflowFilePath();
         _builder.append(_workflowFilePath, "\t\t\t\t\t");
@@ -1305,8 +1348,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t");
         _builder.append("<directory>${basedir}/");
-        String _sourceFolder_1 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
-        _builder.append(_sourceFolder_1, "\t\t\t\t\t\t");
+        String _sourceFolder_3 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_3, "\t\t\t\t\t\t");
         _builder.append("/</directory>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t\t");
@@ -1322,8 +1365,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("</fileset>");
         _builder.newLine();
         {
-          WizardConfiguration _config = RuntimeProjectDescriptor.this.getConfig();
-          IdeProjectDescriptor _ideProject = _config.getIdeProject();
+          WizardConfiguration _config_1 = RuntimeProjectDescriptor.this.getConfig();
+          IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
           boolean _isEnabled = _ideProject.isEnabled();
           if (_isEnabled) {
             _builder.append("\t\t\t\t\t");
@@ -1332,28 +1375,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("\t\t\t\t\t");
             _builder.append("\t");
             _builder.append("<directory>${basedir}/../${project.artifactId}.ide/");
-            String _sourceFolder_2 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
-            _builder.append(_sourceFolder_2, "\t\t\t\t\t\t");
-            _builder.append("/</directory>");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t\t\t\t");
-            _builder.append("</fileset>");
-            _builder.newLine();
-          }
-        }
-        {
-          WizardConfiguration _config_1 = RuntimeProjectDescriptor.this.getConfig();
-          UiProjectDescriptor _uiProject = _config_1.getUiProject();
-          boolean _isEnabled_1 = _uiProject.isEnabled();
-          if (_isEnabled_1) {
-            _builder.append("\t\t\t\t\t");
-            _builder.append("<fileset>");
-            _builder.newLine();
-            _builder.append("\t\t\t\t\t");
-            _builder.append("\t");
-            _builder.append("<directory>${basedir}/../${project.artifactId}.ui/");
-            String _sourceFolder_3 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
-            _builder.append(_sourceFolder_3, "\t\t\t\t\t\t");
+            String _sourceFolder_4 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_4, "\t\t\t\t\t\t");
             _builder.append("/</directory>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t\t\t");
@@ -1363,7 +1386,27 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         }
         {
           WizardConfiguration _config_2 = RuntimeProjectDescriptor.this.getConfig();
-          WebProjectDescriptor _webProject = _config_2.getWebProject();
+          UiProjectDescriptor _uiProject = _config_2.getUiProject();
+          boolean _isEnabled_1 = _uiProject.isEnabled();
+          if (_isEnabled_1) {
+            _builder.append("\t\t\t\t\t");
+            _builder.append("<fileset>");
+            _builder.newLine();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("\t");
+            _builder.append("<directory>${basedir}/../${project.artifactId}.ui/");
+            String _sourceFolder_5 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_5, "\t\t\t\t\t\t");
+            _builder.append("/</directory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("</fileset>");
+            _builder.newLine();
+          }
+        }
+        {
+          WizardConfiguration _config_3 = RuntimeProjectDescriptor.this.getConfig();
+          WebProjectDescriptor _webProject = _config_3.getWebProject();
           boolean _isEnabled_2 = _webProject.isEnabled();
           if (_isEnabled_2) {
             _builder.append("\t\t\t\t\t");
@@ -1372,8 +1415,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("\t\t\t\t\t");
             _builder.append("\t");
             _builder.append("<directory>${basedir}/../${project.artifactId}.web/");
-            String _sourceFolder_4 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
-            _builder.append(_sourceFolder_4, "\t\t\t\t\t\t");
+            String _sourceFolder_6 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_6, "\t\t\t\t\t\t");
             _builder.append("/</directory>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t\t\t");
@@ -1390,6 +1433,125 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("\t\t");
         _builder.append("</plugin>");
         _builder.newLine();
+        {
+          boolean _and_1 = false;
+          boolean _isEclipsePluginProject_2 = RuntimeProjectDescriptor.this.isEclipsePluginProject();
+          boolean _not_1 = (!_isEclipsePluginProject_2);
+          if (!_not_1) {
+            _and_1 = false;
+          } else {
+            WizardConfiguration _config_4 = RuntimeProjectDescriptor.this.getConfig();
+            SourceLayout _sourceLayout_1 = _config_4.getSourceLayout();
+            boolean _equals_1 = Objects.equal(_sourceLayout_1, SourceLayout.PLAIN);
+            _and_1 = _equals_1;
+          }
+          if (_and_1) {
+            _builder.append("\t\t");
+            _builder.append("<plugin>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<groupId>org.codehaus.mojo</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<artifactId>build-helper-maven-plugin</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<version>1.9.1</version>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<executions>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("<execution>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("<id>add-source</id>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("<phase>initialize</phase>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("<goals>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t");
+            _builder.append("<goal>add-source</goal>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t");
+            _builder.append("<goal>add-resource</goal>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("</goals>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("<configuration>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t");
+            _builder.append("<sources>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t");
+            _builder.append("<source>");
+            String _sourceFolder_7 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_7, "\t\t\t\t\t\t\t");
+            _builder.append("</source>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t");
+            _builder.append("</sources>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t");
+            _builder.append("<resources>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t");
+            _builder.append("<resource>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t");
+            _builder.append("<directory>");
+            String _sourceFolder_8 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_8, "\t\t\t\t\t\t\t\t");
+            _builder.append("</directory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t");
+            _builder.append("</resource>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t");
+            _builder.append("</resources>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("</configuration>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("</execution>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("</executions>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("</plugin>");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t");
         _builder.append("</plugins>");
         _builder.newLine();

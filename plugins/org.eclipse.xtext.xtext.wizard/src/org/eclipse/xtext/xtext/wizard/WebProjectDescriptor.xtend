@@ -73,6 +73,14 @@ class WebProjectDescriptor extends ProjectDescriptor {
 			packaging = "war"
 			buildSection = '''
 				<build>
+					«IF config.sourceLayout == SourceLayout.PLAIN»
+						<sourceDirectory>«Outlet.MAIN_JAVA.sourceFolder»</sourceDirectory>
+						<resources>
+							<resource>
+								<directory>«Outlet.MAIN_RESOURCES.sourceFolder»</directory>
+							</resource>
+						</resources>
+					«ENDIF»
 					<plugins>
 						<plugin>
 							<groupId>org.eclipse.xtend</groupId>
@@ -83,8 +91,44 @@ class WebProjectDescriptor extends ProjectDescriptor {
 							<version>2.6</version>
 							<configuration>
 								<warSourceDirectory>«Outlet.WEBAPP.sourceFolder»</warSourceDirectory>
+								<failOnMissingWebXml>false</failOnMissingWebXml>
 							</configuration>
 						</plugin>
+						<plugin>
+							<groupId>org.eclipse.jetty</groupId>
+							<artifactId>jetty-maven-plugin</artifactId>
+							<version>9.2.13.v20150730</version>
+							<configuration>
+								<webAppSourceDirectory>«Outlet.WEBAPP.sourceFolder»</webAppSourceDirectory>
+							</configuration>
+						</plugin>
+						«IF config.sourceLayout == SourceLayout.PLAIN»
+							<plugin>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>build-helper-maven-plugin</artifactId>
+								<version>1.9.1</version>
+								<executions>
+									<execution>
+										<id>add-source</id>
+										<phase>initialize</phase>
+										<goals>
+											<goal>add-source</goal>
+											<goal>add-resource</goal>
+										</goals>
+										<configuration>
+											<sources>
+												<source>«Outlet.MAIN_SRC_GEN.sourceFolder»</source>
+											</sources>
+											<resources>
+												<resource>
+													<directory>«Outlet.MAIN_SRC_GEN.sourceFolder»</directory>
+												</resource>
+											</resources>
+										</configuration>
+									</execution>
+								</executions>
+							</plugin>
+						«ENDIF»
 					</plugins>
 				</build>
 			'''

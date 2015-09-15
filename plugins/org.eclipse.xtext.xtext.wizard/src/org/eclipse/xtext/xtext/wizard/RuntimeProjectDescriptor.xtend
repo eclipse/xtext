@@ -170,8 +170,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					configuration = {
 						project = WizardConfig {
 							runtimeRoot = projectPath
-							«IF config.uiProject.enabled»
-								eclipseEditor = true
+							«IF !config.uiProject.enabled»
+								eclipseEditor = false
 							«ENDIF»
 							«IF config.intellijProject.enabled»
 								ideaEditor = true
@@ -382,6 +382,14 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			packaging = if (isEclipsePluginProject) "eclipse-plugin" else "jar"
 			buildSection = '''
 				<build>
+					«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
+						<sourceDirectory>«Outlet.MAIN_JAVA.sourceFolder»</sourceDirectory>
+						<resources>
+							<resource>
+								<directory>«Outlet.MAIN_RESOURCES.sourceFolder»</directory>
+							</resource>
+						</resources>
+					«ENDIF»
 					<plugins>
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
@@ -458,6 +466,33 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								</filesets>
 							</configuration>
 						</plugin>
+						«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
+							<plugin>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>build-helper-maven-plugin</artifactId>
+								<version>1.9.1</version>
+								<executions>
+									<execution>
+										<id>add-source</id>
+										<phase>initialize</phase>
+										<goals>
+											<goal>add-source</goal>
+											<goal>add-resource</goal>
+										</goals>
+										<configuration>
+											<sources>
+												<source>«Outlet.MAIN_SRC_GEN.sourceFolder»</source>
+											</sources>
+											<resources>
+												<resource>
+													<directory>«Outlet.MAIN_SRC_GEN.sourceFolder»</directory>
+												</resource>
+											</resources>
+										</configuration>
+									</execution>
+								</executions>
+							</plugin>
+						«ENDIF»
 					</plugins>
 				</build>
 			'''
