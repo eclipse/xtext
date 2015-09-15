@@ -69,7 +69,7 @@ public class AbstractPureXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultI
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.idea.findusages.IReferenceSearcher> bindIReferenceSearcher() {
-		return org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher.class;
+		return org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher.class;
 	}
 	
 	

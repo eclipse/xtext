@@ -13,6 +13,7 @@ import org.eclipse.xtext.psi.PsiNamedEObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.google.inject.Inject;
 import com.intellij.lang.HelpID;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
@@ -20,11 +21,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 
 public class BaseXtextFindUsageProvider implements FindUsagesProvider {
+	
+	@Inject
+	private WordsScannerProvider wordsScannerProvider;
 
 	@Override
 	@Nullable
 	public WordsScanner getWordsScanner() {
-		return null;
+		return wordsScannerProvider.get();
 	}
 
 	@Override

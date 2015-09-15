@@ -27,7 +27,7 @@ import org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociation
 import org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.findusages.IReferenceSearcher;
-import org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher;
+import org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher;
 import org.eclipse.xtext.idea.formatting.BlockFactory;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -113,6 +113,7 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	@Override
 	public void configureLanguageSpecificPsiModelAssociations(Binder binder) {
 		binder.bind(IPsiModelAssociations.class)
 			.annotatedWith(LanguageSpecific.class)
@@ -120,6 +121,7 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	@Override
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return XbaseHighlightingConfiguration.class;
 	}
@@ -135,6 +137,7 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	@Override
 	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
 		return XbaseBracePairProvider.class;
 	}
