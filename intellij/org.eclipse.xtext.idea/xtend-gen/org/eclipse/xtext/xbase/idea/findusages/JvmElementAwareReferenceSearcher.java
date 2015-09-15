@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.idea.findusages;
+package org.eclipse.xtext.xbase.idea.findusages;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;

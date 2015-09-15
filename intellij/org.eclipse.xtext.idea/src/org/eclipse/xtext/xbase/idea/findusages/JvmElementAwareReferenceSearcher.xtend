@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.findusages
+package org.eclipse.xtext.xbase.idea.findusages
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -17,6 +17,7 @@ import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmFeature
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.idea.findusages.IReferenceSearcher
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
