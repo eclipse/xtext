@@ -44,7 +44,7 @@ public class AntlrLexerSplitter {
 	private StringBuilder stringBuilder;
 	private final Scanner scanner;
 	
-	private boolean allowDFAStaticClasses;
+	private boolean allowDFAStaticClasses = true;
 	
 	public AntlrLexerSplitter(String content) {
 		scanner = new Scanner(content);
