@@ -156,7 +156,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					«ENDIF»
 				}
 				
-				«FOR p : config.enabledProjects»
+				«FOR p : config.enabledProjects.filter[it.sourceFolders.contains(Outlet.MAIN_SRC_GEN.sourceFolder)]»
 					component = DirectoryCleaner {
 						directory = "${projectPath}«p.nameQualifier»/«Outlet.MAIN_SRC_GEN.sourceFolder»"
 					}

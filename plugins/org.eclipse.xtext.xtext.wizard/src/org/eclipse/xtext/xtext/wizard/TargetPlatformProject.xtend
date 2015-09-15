@@ -27,6 +27,10 @@ class TargetPlatformProject extends ProjectDescriptor {
 		files += file(Outlet.ROOT, name + ".target", target)
 		files
 	}
+	
+	override getSourceFolders() {
+		#{}
+	}
 
 	def target() '''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
