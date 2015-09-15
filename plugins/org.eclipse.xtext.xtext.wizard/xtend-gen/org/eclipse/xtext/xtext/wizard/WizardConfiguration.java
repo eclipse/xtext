@@ -109,8 +109,8 @@ public class WizardConfiguration {
       _or = true;
     } else {
       boolean _and = false;
-      boolean _needsGradleBuild = this.needsGradleBuild();
-      if (!_needsGradleBuild) {
+      boolean _equals_1 = Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE);
+      if (!_equals_1) {
         _and = false;
       } else {
         boolean _isEnabled = this.uiProject.isEnabled();
