@@ -98,7 +98,7 @@ class WizardConfig extends XtextProjectConfig {
 				
 			if (testingSupport) {
 				if (eclipsePluginTestRoot === null)
-					eclipsePluginTestRoot = runtimeRoot.path + '.tests'
+					eclipsePluginTestRoot = eclipsePluginRoot.path + '.tests'
 				if (eclipsePluginTestMetaInf === null)
 					eclipsePluginTestMetaInf = eclipsePluginTestRoot.path + '/' + metaInf
 				if (eclipsePluginTestSrc === null)
