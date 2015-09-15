@@ -146,7 +146,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 		]
 
 		if (deployable) {
-			grammar.compilePluginXml.writeTo(projectConfig.ideaPluginMetaInf)
+			val pluginXml = grammar.compilePluginXml
+			if (!projectConfig.ideaPluginMetaInf.isFile(pluginXml.path)) {
+				pluginXml.writeTo(projectConfig.ideaPluginMetaInf)
+			}
 			grammar.compilePluginGenXml.writeTo(projectConfig.ideaPluginMetaInf)
 		}
 	}
