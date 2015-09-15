@@ -36,6 +36,9 @@ import com.intellij.openapi.editor.event.EditorEventMulticaster;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.ModuleAdapter;
 import com.intellij.openapi.project.ModuleListener;
@@ -78,6 +81,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
@@ -119,16 +123,34 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Log
 @SuppressWarnings("all")
 public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
+  @FinalFieldsConstructor
   public static class MutableCancelIndicator implements CancelIndicator {
+    private final ProgressIndicator indicator;
+    
     private volatile boolean canceled;
     
     @Override
     public boolean isCanceled() {
-      return this.canceled;
+      boolean _or = false;
+      if (this.canceled) {
+        _or = true;
+      } else {
+        boolean _isCanceled = false;
+        if (this.indicator!=null) {
+          _isCanceled=this.indicator.isCanceled();
+        }
+        _or = _isCanceled;
+      }
+      return _or;
     }
     
     public boolean setCanceled(final boolean canceled) {
       return this.canceled = canceled;
+    }
+    
+    public MutableCancelIndicator(final ProgressIndicator indicator) {
+      super();
+      this.indicator = indicator;
     }
   }
   
@@ -203,7 +225,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
     this.chunkedResourceDescriptions = _get;
     this.project = project;
-    Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this);
+    Alarm _alarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this);
     this.alarm = _alarm;
     this.disposed = false;
     Disposer.register(project, this);
@@ -753,8 +775,19 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       this.alarm.addRequest(_function, 500);
     } else {
       final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
-      this.queue.drainTo(allEvents);
-      this.internalBuild(allEvents);
+      if (XtextAutoBuilderComponent.TEST_MODE) {
+        this.queue.drainTo(allEvents);
+        this.internalBuild(allEvents, null);
+      } else {
+        ProgressManager _instance = ProgressManager.getInstance();
+        _instance.run(new Task.Backgroundable(this.project, "Auto-building Xtext resources") {
+          @Override
+          public void run(final ProgressIndicator indicator) {
+            XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
+            XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
+          }
+        });
+      }
     }
   }
   
@@ -778,11 +811,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     return _or;
   }
   
-  protected void internalBuild(final List<BuildEvent> allEvents) {
+  protected void internalBuild(final List<BuildEvent> allEvents, final ProgressIndicator indicator) {
     final ArrayList<BuildEvent> unProcessedEvents = CollectionLiterals.<BuildEvent>newArrayList();
     Iterables.<BuildEvent>addAll(unProcessedEvents, allEvents);
     final Application app = ApplicationManager.getApplication();
-    final XtextAutoBuilderComponent.MutableCancelIndicator cancelIndicator = new XtextAutoBuilderComponent.MutableCancelIndicator();
+    final XtextAutoBuilderComponent.MutableCancelIndicator cancelIndicator = new XtextAutoBuilderComponent.MutableCancelIndicator(indicator);
     this.cancelIndicators.add(cancelIndicator);
     Project _project = this.getProject();
     final ModuleManager moduleManager = ModuleManager.getInstance(_project);
