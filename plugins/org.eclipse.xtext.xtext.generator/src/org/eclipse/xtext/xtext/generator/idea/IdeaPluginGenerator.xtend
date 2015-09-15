@@ -105,8 +105,9 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.BlockFactory'.typeRef, 'org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.ChildAttributesProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider'.typeRef)
-			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher'.typeRef, 'org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider'.typeRef)
 		}
 
 		bindFactory.contributeTo(language.ideaGenModule)
