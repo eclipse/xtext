@@ -52,7 +52,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       }
     };
     ObjectExtensions.<ManifestAccess>operator_doubleArrow(_runtimeTestManifest, _function);
-    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+    ManifestAccess _eclipsePluginTestManifest = this.projectConfig.getEclipsePluginTestManifest();
     final Procedure1<ManifestAccess> _function_1 = new Procedure1<ManifestAccess>() {
       @Override
       public void apply(final ManifestAccess it) {
@@ -66,9 +66,9 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
         _exportedPackages.add(_eclipsePluginTestBasePackage);
       }
     };
-    ObjectExtensions.<ManifestAccess>operator_doubleArrow(_eclipsePluginManifest, _function_1);
+    ObjectExtensions.<ManifestAccess>operator_doubleArrow(_eclipsePluginTestManifest, _function_1);
     ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
-    ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
+    ManifestAccess _eclipsePluginTestManifest_1 = this.projectConfig.getEclipsePluginTestManifest();
     final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
       @Override
       public void apply(final ManifestAccess it) {
@@ -82,16 +82,16 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           "org.hamcrest.core");
       }
     };
-    IterableExtensions.<ManifestAccess>forEach(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_runtimeTestManifest_1, _eclipsePluginManifest_1)), _function_2);
+    IterableExtensions.<ManifestAccess>forEach(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_runtimeTestManifest_1, _eclipsePluginTestManifest_1)), _function_2);
     JavaFileAccess _generateInjectorProvider = this.generateInjectorProvider();
     IXtextGeneratorFileSystemAccess _runtimeTestSrcGen = this.projectConfig.getRuntimeTestSrcGen();
     _generateInjectorProvider.writeTo(_runtimeTestSrcGen);
     JavaFileAccess _generateExampleRuntimeTest = this.generateExampleRuntimeTest();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
-    _generateExampleRuntimeTest.writeTo(_eclipsePluginSrc);
+    IXtextGeneratorFileSystemAccess _runtimeTestSrc = this.projectConfig.getRuntimeTestSrc();
+    _generateExampleRuntimeTest.writeTo(_runtimeTestSrc);
     JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
-    _generateUiInjectorProvider.writeTo(_eclipsePluginSrcGen);
+    IXtextGeneratorFileSystemAccess _eclipsePluginTestSrcGen = this.projectConfig.getEclipsePluginTestSrcGen();
+    _generateUiInjectorProvider.writeTo(_eclipsePluginTestSrcGen);
   }
   
   public JavaFileAccess generateExampleRuntimeTest() {
