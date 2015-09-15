@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextVersion;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -1296,7 +1297,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
-        String _xtextVersion = this.codeConfig.getXtextVersion();
+        XtextVersion _xtextVersion = this.codeConfig.getXtextVersion();
         _builder.append(_xtextVersion, "\t");
         _builder.append("/xtext-orion.css\"/>");
         _builder.newLineIfNotEmpty();
@@ -1305,7 +1306,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         if (_equals_1) {
           _builder.append("\t");
           _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
-          String _xtextVersion_1 = this.codeConfig.getXtextVersion();
+          XtextVersion _xtextVersion_1 = this.codeConfig.getXtextVersion();
           _builder.append(_xtextVersion_1, "\t");
           _builder.append("/xtext-ace.css\"/>");
           _builder.newLineIfNotEmpty();
@@ -1324,7 +1325,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
-            String _xtextVersion_2 = this.codeConfig.getXtextVersion();
+            XtextVersion _xtextVersion_2 = this.codeConfig.getXtextVersion();
             _builder.append(_xtextVersion_2, "\t");
             _builder.append("/xtext-codemirror.css\"/>");
             _builder.newLineIfNotEmpty();
@@ -1368,7 +1369,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("\t\t");
         _builder.append("\t\t");
         _builder.append("\"xtext/xtext-orion\": \"xtext/");
-        String _xtextVersion_3 = this.codeConfig.getXtextVersion();
+        XtextVersion _xtextVersion_3 = this.codeConfig.getXtextVersion();
         _builder.append(_xtextVersion_3, "\t\t\t\t");
         _builder.append("/xtext-orion\"");
         _builder.newLineIfNotEmpty();
@@ -1430,7 +1431,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           _builder.append("\t\t");
           _builder.append("\t\t");
           _builder.append("\"xtext/xtext-ace\": \"xtext/");
-          String _xtextVersion_4 = this.codeConfig.getXtextVersion();
+          XtextVersion _xtextVersion_4 = this.codeConfig.getXtextVersion();
           _builder.append(_xtextVersion_4, "\t\t\t\t");
           _builder.append("/xtext-ace\"");
           _builder.newLineIfNotEmpty();
@@ -1488,7 +1489,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("\"xtext/xtext-codemirror\": \"xtext/");
-            String _xtextVersion_5 = this.codeConfig.getXtextVersion();
+            XtextVersion _xtextVersion_5 = this.codeConfig.getXtextVersion();
             _builder.append(_xtextVersion_5, "\t\t\t\t");
             _builder.append("/xtext-codemirror\"");
             _builder.newLineIfNotEmpty();
@@ -1845,8 +1846,18 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append(" => [");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append("resourceBase = \'src/main/webapp\'");
-        _builder.newLine();
+        _builder.append("resourceBase = \'");
+        IXtextProjectConfig _projectConfig = WebIntegrationFragment.this.getProjectConfig();
+        IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+        String _path = _webApp.getPath();
+        IXtextProjectConfig _projectConfig_1 = WebIntegrationFragment.this.getProjectConfig();
+        IXtextGeneratorFileSystemAccess _webRoot = _projectConfig_1.getWebRoot();
+        String _path_1 = _webRoot.getPath();
+        String _plus = (_path_1 + "/");
+        String _replace = _path.replace(_plus, "");
+        _builder.append(_replace, "\t\t\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("welcomeFiles = #[\"index.html\"]");
         _builder.newLine();
@@ -1886,7 +1897,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("setAttribute(");
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.jetty.webapp.WebInfConfiguration");
         _builder.append(_typeRef_7, "\t\t\t");
-        _builder.append(".CONTAINER_JAR_PATTERN, \'.*/org\\\\.eclipse\\\\.xtext\\\\.web.*,.*/org.webjars.*\')");
+        _builder.append(".CONTAINER_JAR_PATTERN, \'.*\')");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("]");

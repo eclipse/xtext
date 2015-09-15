@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
@@ -10,6 +11,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.XtextVersion;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
@@ -25,7 +27,6 @@ import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @Accessors
 @SuppressWarnings("all")
@@ -34,13 +35,13 @@ public class WizardConfiguration {
   
   private String baseName;
   
-  private XtextVersion xtextVersion = new XtextVersion("2.9.0-SNAPSHOT");
+  private XtextVersion xtextVersion = XtextVersion.getCurrent();
   
   private Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration();
   
   private Charset encoding = Charset.defaultCharset();
   
-  private BuildSystem buildSystem = BuildSystem.ECLIPSE;
+  private BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE;
   
   private SourceLayout sourceLayout = SourceLayout.PLAIN;
   
@@ -101,6 +102,56 @@ public class WizardConfiguration {
     return _xblockexpression;
   }
   
+  public boolean needsMavenBuild() {
+    boolean _or = false;
+    boolean _equals = Objects.equal(this.preferredBuildSystem, BuildSystem.MAVEN);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _and = false;
+      boolean _needsGradleBuild = this.needsGradleBuild();
+      if (!_needsGradleBuild) {
+        _and = false;
+      } else {
+        boolean _isEnabled = this.uiProject.isEnabled();
+        _and = _isEnabled;
+      }
+      _or = _and;
+    }
+    return _or;
+  }
+  
+  public boolean needsTychoBuild() {
+    boolean _and = false;
+    boolean _needsMavenBuild = this.needsMavenBuild();
+    if (!_needsMavenBuild) {
+      _and = false;
+    } else {
+      Set<ProjectDescriptor> _enabledProjects = this.getEnabledProjects();
+      final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
+        @Override
+        public Boolean apply(final ProjectDescriptor it) {
+          return Boolean.valueOf(it.isEclipsePluginProject());
+        }
+      };
+      boolean _exists = IterableExtensions.<ProjectDescriptor>exists(_enabledProjects, _function);
+      _and = _exists;
+    }
+    return _and;
+  }
+  
+  public boolean needsGradleBuild() {
+    boolean _or = false;
+    boolean _equals = Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _isEnabled = this.intellijProject.isEnabled();
+      _or = _isEnabled;
+    }
+    return _or;
+  }
+  
   @Pure
   public String getRootLocation() {
     return this.rootLocation;
@@ -147,12 +198,12 @@ public class WizardConfiguration {
   }
   
   @Pure
-  public BuildSystem getBuildSystem() {
-    return this.buildSystem;
+  public BuildSystem getPreferredBuildSystem() {
+    return this.preferredBuildSystem;
   }
   
-  public void setBuildSystem(final BuildSystem buildSystem) {
-    this.buildSystem = buildSystem;
+  public void setPreferredBuildSystem(final BuildSystem preferredBuildSystem) {
+    this.preferredBuildSystem = preferredBuildSystem;
   }
   
   @Pure

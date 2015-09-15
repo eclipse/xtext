@@ -7,13 +7,13 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.generator.XtextVersion;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
-import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -25,6 +25,16 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isEclipsePluginProject() {
+    return false;
+  }
+  
+  @Override
+  public boolean isPartOfGradleBuild() {
+    return true;
+  }
+  
+  @Override
+  public boolean isPartOfMavenBuild() {
     return false;
   }
   

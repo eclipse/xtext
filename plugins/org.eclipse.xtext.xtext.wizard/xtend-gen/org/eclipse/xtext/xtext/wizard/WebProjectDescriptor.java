@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.HashSet;
@@ -9,8 +10,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
@@ -54,8 +55,17 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends GeneratedFile> getFiles() {
-    return CollectionLiterals.<GeneratedFile>emptyList();
+  public boolean isPartOfGradleBuild() {
+    WizardConfiguration _config = this.getConfig();
+    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    return Objects.equal(_preferredBuildSystem, BuildSystem.GRADLE);
+  }
+  
+  @Override
+  public boolean isPartOfMavenBuild() {
+    WizardConfiguration _config = this.getConfig();
+    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    return Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
   }
   
   @Override
@@ -67,15 +77,13 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     deps.add(_createXtextDependency);
     ExternalDependency _createMavenDependency = ExternalDependency.createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}");
     deps.add(_createMavenDependency);
-    ExternalDependency _createMavenDependency_1 = ExternalDependency.createMavenDependency("org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}");
+    ExternalDependency _createMavenDependency_1 = ExternalDependency.createMavenDependency(("org.webjars:requirejs:" + WebProjectDescriptor.REQUIREJS_VERSION));
     deps.add(_createMavenDependency_1);
-    ExternalDependency _createMavenDependency_2 = ExternalDependency.createMavenDependency(("org.webjars:requirejs:" + WebProjectDescriptor.REQUIREJS_VERSION));
+    ExternalDependency _createMavenDependency_2 = ExternalDependency.createMavenDependency(("org.webjars:jquery:" + WebProjectDescriptor.JQUERY_VERSION));
     deps.add(_createMavenDependency_2);
-    ExternalDependency _createMavenDependency_3 = ExternalDependency.createMavenDependency(("org.webjars:jquery:" + WebProjectDescriptor.JQUERY_VERSION));
+    ExternalDependency _createMavenDependency_3 = ExternalDependency.createMavenDependency(("org.webjars:ace:" + WebProjectDescriptor.ACE_VERSION));
     deps.add(_createMavenDependency_3);
-    ExternalDependency _createMavenDependency_4 = ExternalDependency.createMavenDependency(("org.webjars:ace:" + WebProjectDescriptor.ACE_VERSION));
-    deps.add(_createMavenDependency_4);
-    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.eclipse.jetty:jetty-annotations:" + WebProjectDescriptor.JETTY_VERSION));
+    ExternalDependency _createMavenDependency_4 = ExternalDependency.createMavenDependency(("org.eclipse.jetty:jetty-annotations:" + WebProjectDescriptor.JETTY_VERSION));
     final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
       @Override
       public void apply(final ExternalDependency it) {
@@ -83,9 +91,9 @@ public class WebProjectDescriptor extends ProjectDescriptor {
         _maven.setScope(Scope.PROVIDED);
       }
     };
-    ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function);
+    ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_4, _function);
     deps.add(_doubleArrow);
-    ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency((("org.slf4j:slf4j-api:" + WebProjectDescriptor.SLF4J_VERSION) + "@jar"));
+    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-api:" + WebProjectDescriptor.SLF4J_VERSION));
     final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
       @Override
       public void apply(final ExternalDependency it) {
@@ -93,9 +101,9 @@ public class WebProjectDescriptor extends ProjectDescriptor {
         _maven.setScope(Scope.PROVIDED);
       }
     };
-    ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_6, _function_1);
+    ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function_1);
     deps.add(_doubleArrow_1);
-    ExternalDependency _createMavenDependency_7 = ExternalDependency.createMavenDependency((("org.slf4j:slf4j-log4j12:" + WebProjectDescriptor.SLF4J_VERSION) + "@jar"));
+    ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-log4j12:" + WebProjectDescriptor.SLF4J_VERSION));
     final Procedure1<ExternalDependency> _function_2 = new Procedure1<ExternalDependency>() {
       @Override
       public void apply(final ExternalDependency it) {
@@ -103,7 +111,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
         _maven.setScope(Scope.PROVIDED);
       }
     };
-    ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_7, _function_2);
+    ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_6, _function_2);
     deps.add(_doubleArrow_2);
     return deps;
   }

@@ -51,6 +51,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   @Override
+  public boolean isEnabled() {
+    return true;
+  }
+  
+  @Override
+  public void setEnabled(final boolean enabled) {
+    throw new UnsupportedOperationException("The runtime project is always enabled");
+  }
+  
+  @Override
   public String getNameQualifier() {
     return "";
   }
@@ -59,9 +69,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   public boolean isEclipsePluginProject() {
     boolean _or = false;
     WizardConfiguration _config = this.getConfig();
-    BuildSystem _buildSystem = _config.getBuildSystem();
-    boolean _isPluginBuild = _buildSystem.isPluginBuild();
-    if (_isPluginBuild) {
+    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.ECLIPSE);
+    if (_equals) {
       _or = true;
     } else {
       WizardConfiguration _config_1 = this.getConfig();
@@ -70,6 +80,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _or = _isEnabled;
     }
     return _or;
+  }
+  
+  @Override
+  public boolean isPartOfGradleBuild() {
+    return true;
+  }
+  
+  @Override
+  public boolean isPartOfMavenBuild() {
+    return true;
   }
   
   @Override
@@ -610,10 +630,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("updateBuildProperties = ");
-    WizardConfiguration _config_14 = this.getConfig();
-    BuildSystem _buildSystem = _config_14.getBuildSystem();
-    boolean _isPluginBuild = _buildSystem.isPluginBuild();
-    _builder.append(_isPluginBuild, "\t\t\t\t\t");
+    boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+    _builder.append(_isEclipsePluginProject, "\t\t\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("}");
@@ -754,8 +772,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_15 = this.getConfig();
-      UiProjectDescriptor _uiProject_1 = _config_15.getUiProject();
+      WizardConfiguration _config_14 = this.getConfig();
+      UiProjectDescriptor _uiProject_1 = _config_14.getUiProject();
       boolean _isEnabled_6 = _uiProject_1.isEnabled();
       if (_isEnabled_6) {
         _builder.append("\t\t\t");
@@ -878,14 +896,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     {
       boolean _or = false;
-      WizardConfiguration _config_16 = this.getConfig();
-      UiProjectDescriptor _uiProject_2 = _config_16.getUiProject();
+      WizardConfiguration _config_15 = this.getConfig();
+      UiProjectDescriptor _uiProject_2 = _config_15.getUiProject();
       boolean _isEnabled_7 = _uiProject_2.isEnabled();
       if (_isEnabled_7) {
         _or = true;
       } else {
-        WizardConfiguration _config_17 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_17.getIdeProject();
+        WizardConfiguration _config_16 = this.getConfig();
+        IdeProjectDescriptor _ideProject_1 = _config_16.getIdeProject();
         boolean _isEnabled_8 = _ideProject_1.isEnabled();
         _or = _isEnabled_8;
       }
@@ -933,8 +951,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.newLine();
     {
-      WizardConfiguration _config_18 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject_1 = _config_18.getIntellijProject();
+      WizardConfiguration _config_17 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject_1 = _config_17.getIntellijProject();
       boolean _isEnabled_9 = _intellijProject_1.isEnabled();
       if (_isEnabled_9) {
         _builder.append("\t\t\t");
@@ -951,8 +969,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_19 = this.getConfig();
-      WebProjectDescriptor _webProject_1 = _config_19.getWebProject();
+      WizardConfiguration _config_18 = this.getConfig();
+      WebProjectDescriptor _webProject_1 = _config_18.getWebProject();
       boolean _isEnabled_10 = _webProject_1.isEnabled();
       if (_isEnabled_10) {
         _builder.append("\t\t\t");

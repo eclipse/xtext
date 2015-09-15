@@ -265,6 +265,16 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       }
     };
     IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
+    if (this.deployable) {
+      TextFileAccess _compilePluginXml = this.compilePluginXml(grammar);
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _ideaPluginMetaInf = _projectConfig.getIdeaPluginMetaInf();
+      _compilePluginXml.writeTo(_ideaPluginMetaInf);
+      TextFileAccess _compilePluginGenXml = this.compilePluginGenXml(grammar);
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _ideaPluginMetaInf_1 = _projectConfig_1.getIdeaPluginMetaInf();
+      _compilePluginGenXml.writeTo(_ideaPluginMetaInf_1);
+    }
   }
   
   public String iml() {
@@ -697,11 +707,11 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     return _xblockexpression;
   }
   
-  public TextFileAccess compilePluginGenXml(final Grammar grammar, final String fileExtension) {
+  public TextFileAccess compilePluginGenXml(final Grammar grammar) {
     TextFileAccess _xblockexpression = null;
     {
       final TextFileAccess file = this.fileAccessFactory.createTextFile();
-      file.setPath("plugin.xml");
+      file.setPath("plugin_gen.xml");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<idea-plugin version=\"2\">");
       _builder.newLine();
@@ -747,7 +757,10 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("type=\"");
-      _builder.append(fileExtension, "\t\t\t");
+      ILanguageConfig _language = this.getLanguage();
+      List<String> _fileExtensions = _language.getFileExtensions();
+      String _head = IterableExtensions.<String>head(_fileExtensions);
+      _builder.append(_head, "\t\t\t");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
@@ -767,7 +780,10 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("uriExtension=\"");
-      _builder.append(fileExtension, "\t\t\t");
+      ILanguageConfig _language_1 = this.getLanguage();
+      List<String> _fileExtensions_1 = _language_1.getFileExtensions();
+      String _head_1 = IterableExtensions.<String>head(_fileExtensions_1);
+      _builder.append(_head_1, "\t\t\t");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
@@ -1320,8 +1336,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         String _simpleName = _ideaStandaloneSetup.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
-        TypeReference _runtimeSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeSetup(grammar);
-        _builder.append(_runtimeSetup, "");
+        TypeReference _runtimeGenSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenSetup(grammar);
+        _builder.append(_runtimeGenSetup, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1335,8 +1351,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.append("\t\t");
         _builder.append(Module.class, "\t\t");
         _builder.append(" runtimeModule = new ");
-        TypeReference _runtimeGenModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenModule(grammar);
-        _builder.append(_runtimeGenModule, "\t\t");
+        TypeReference _runtimeModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeModule(grammar);
+        _builder.append(_runtimeModule, "\t\t");
         _builder.append("();");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");

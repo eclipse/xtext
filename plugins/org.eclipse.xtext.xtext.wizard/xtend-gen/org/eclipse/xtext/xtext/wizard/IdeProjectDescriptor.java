@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,9 +37,9 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
   public boolean isEclipsePluginProject() {
     boolean _or = false;
     WizardConfiguration _config = this.getConfig();
-    BuildSystem _buildSystem = _config.getBuildSystem();
-    boolean _isPluginBuild = _buildSystem.isPluginBuild();
-    if (_isPluginBuild) {
+    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.ECLIPSE);
+    if (_equals) {
       _or = true;
     } else {
       WizardConfiguration _config_1 = this.getConfig();
@@ -47,6 +48,16 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
       _or = _isEnabled;
     }
     return _or;
+  }
+  
+  @Override
+  public boolean isPartOfGradleBuild() {
+    return true;
+  }
+  
+  @Override
+  public boolean isPartOfMavenBuild() {
+    return true;
   }
   
   @Override

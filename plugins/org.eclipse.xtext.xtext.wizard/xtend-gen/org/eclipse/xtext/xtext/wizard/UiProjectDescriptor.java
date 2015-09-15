@@ -48,6 +48,16 @@ public class UiProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
+  public boolean isPartOfGradleBuild() {
+    return false;
+  }
+  
+  @Override
+  public boolean isPartOfMavenBuild() {
+    return true;
+  }
+  
+  @Override
   public Set<ExternalDependency> getExternalDependencies() {
     HashSet<ExternalDependency> _xblockexpression = null;
     {

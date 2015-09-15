@@ -19,6 +19,14 @@ class UiProjectDescriptor extends ProjectDescriptor {
 		true
 	}
 	
+	override isPartOfGradleBuild() {
+		false
+	}
+	
+	override isPartOfMavenBuild() {
+		true
+	}
+	
 	override getExternalDependencies() {
 		val deps = newHashSet
 		deps += super.externalDependencies

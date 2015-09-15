@@ -14,23 +14,12 @@ class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
 		deps
 	}
 	
-	override isEclipsePluginProject() {
-		config.buildSystem.isPluginBuild
+	override isPartOfGradleBuild() {
+		config.preferredBuildSystem == BuildSystem.GRADLE
 	}
 
-	override pom() {
-		super.pom => [
-			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
-			buildSection = '''
-				<build>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.xtend</groupId>
-							<artifactId>xtend-maven-plugin</artifactId>
-						</plugin>
-					</plugins>
-				</build>
-			'''
-		]
+	override isPartOfMavenBuild() {
+		config.preferredBuildSystem == BuildSystem.MAVEN
 	}
+		
 }

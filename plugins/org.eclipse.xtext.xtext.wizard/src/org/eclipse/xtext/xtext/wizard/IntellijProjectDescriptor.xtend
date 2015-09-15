@@ -12,6 +12,14 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 	override isEclipsePluginProject() {
 		false
 	}
+	
+	override isPartOfGradleBuild() {
+		true
+	}
+	
+	override isPartOfMavenBuild() {
+		false
+	}
 
 	override getUpstreamProjects() {
 		#{config.runtimeProject, config.ideProject}

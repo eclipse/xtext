@@ -70,22 +70,16 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		}
 		projectInfo.setEncoding(encoding);
 		projectInfo.setWorkbench(getWorkbench());
-		BuildSystem buildSystem = advancedPage.getBuildSystem();
-		projectInfo.setBuildSystem(buildSystem);
+		BuildSystem buildSystem = advancedPage.getPreferredBuildSystem();
+		projectInfo.setPreferredBuildSystem(buildSystem);
 		projectInfo.setSourceLayout(advancedPage.getSourceLayout());
 		
-		projectInfo.getRuntimeProject().setEnabled(true);
 		projectInfo.getUiProject().setEnabled(advancedPage.isCreateUiProject());
+		projectInfo.getTargetPlatformProject().setEnabled(advancedPage.isCreateUiProject() && buildSystem != BuildSystem.ECLIPSE);
 		projectInfo.getRuntimeProject().getTestProject().setEnabled(advancedPage.isCreateTestProject());
 		projectInfo.getIdeProject().setEnabled(advancedPage.isCreateIdeProject());
 		projectInfo.getIntellijProject().setEnabled(advancedPage.isCreateIntellijProject());
 		projectInfo.getWebProject().setEnabled(advancedPage.isCreateWebProject());
-		if (buildSystem.isMavenBuild() || buildSystem.isGradleBuild()) {
-			projectInfo.getParentProject().setEnabled(true);
-		}
-		if (buildSystem.isPluginBuild() && buildSystem.isMavenBuild()) {
-			projectInfo.getTargetPlatformProject().setEnabled(true);
-		}
 		return projectInfo;
 	}
 

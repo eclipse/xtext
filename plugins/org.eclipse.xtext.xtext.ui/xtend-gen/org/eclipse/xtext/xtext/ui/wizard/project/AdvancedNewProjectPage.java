@@ -36,7 +36,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Button createTestProject;
   
-  private Combo buildSystem;
+  private Combo preferredBuildSystem;
   
   private Combo sourceLayout;
   
@@ -109,16 +109,16 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Group> _function_1 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
-            it.setText("Build System");
+            it.setText("Preferred Build System");
             final Procedure1<Combo> _function = new Procedure1<Combo>() {
               @Override
               public void apply(final Combo it) {
                 it.setEnabled(true);
-                it.setItems(new String[] { "Eclipse", "Maven", "Tycho", "Gradle" });
+                it.setItems(new String[] { "Eclipse", "Maven", "Gradle" });
               }
             };
             Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
-            AdvancedNewProjectPage.this.buildSystem = _DropDown;
+            AdvancedNewProjectPage.this.preferredBuildSystem = _DropDown;
           }
         };
         AdvancedNewProjectPage.this.Group(it, _function_1);
@@ -201,7 +201,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createWebProject.setSelection(false);
     this.createIdeProject.setSelection(false);
     this.createTestProject.setSelection(false);
-    this.buildSystem.select(0);
+    this.preferredBuildSystem.select(0);
     this.sourceLayout.select(0);
   }
   
@@ -225,9 +225,9 @@ public class AdvancedNewProjectPage extends WizardPage {
     return this.createWebProject.getSelection();
   }
   
-  public BuildSystem getBuildSystem() {
+  public BuildSystem getPreferredBuildSystem() {
     BuildSystem[] _values = BuildSystem.values();
-    int _selectionIndex = this.buildSystem.getSelectionIndex();
+    int _selectionIndex = this.preferredBuildSystem.getSelectionIndex();
     return _values[_selectionIndex];
   }
   

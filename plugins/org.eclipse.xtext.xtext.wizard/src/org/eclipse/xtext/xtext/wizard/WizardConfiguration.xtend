@@ -4,16 +4,18 @@ import java.nio.charset.Charset
 import org.eclipse.xtend.lib.annotations.Accessors
 import com.google.common.collect.ImmutableSet
 import java.util.Set
+import org.eclipse.xtext.xtext.generator.XtextVersion
 
 @Accessors
 class WizardConfiguration {
 	String rootLocation
 	String baseName
-	XtextVersion xtextVersion = new XtextVersion('2.9.0-SNAPSHOT')
+	XtextVersion xtextVersion = XtextVersion.current
 	Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
-	BuildSystem buildSystem = BuildSystem.ECLIPSE
+	BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE
+	
 	SourceLayout sourceLayout = SourceLayout.PLAIN
 	ProjectLayout projectLayout = ProjectLayout.FLAT
 
@@ -43,5 +45,17 @@ class WizardConfiguration {
 			.map[testProject]
 			.filter[enabled && separate]
 		ImmutableSet.copyOf(productionProjects + testProjects)
+	}
+	
+	def needsMavenBuild() {
+		preferredBuildSystem == BuildSystem.MAVEN || needsGradleBuild && uiProject.enabled
+	}
+	
+	def needsTychoBuild() {
+		needsMavenBuild && enabledProjects.exists[isEclipsePluginProject]
+	}
+	
+	def needsGradleBuild() {
+		preferredBuildSystem == BuildSystem.GRADLE || intellijProject.isEnabled
 	}
 }

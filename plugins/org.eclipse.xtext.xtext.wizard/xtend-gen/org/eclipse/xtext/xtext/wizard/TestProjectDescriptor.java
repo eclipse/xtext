@@ -4,11 +4,15 @@ import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.Outlet;
+import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
@@ -73,6 +77,54 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     return Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(this.testedProject));
+  }
+  
+  @Override
+  public boolean isEclipsePluginProject() {
+    return this.testedProject.isEclipsePluginProject();
+  }
+  
+  @Override
+  public PomFile pom() {
+    PomFile _pom = super.pom();
+    final Procedure1<PomFile> _function = new Procedure1<PomFile>() {
+      @Override
+      public void apply(final PomFile it) {
+        String _xifexpression = null;
+        boolean _isEclipsePluginProject = TestProjectDescriptor.this.isEclipsePluginProject();
+        if (_isEclipsePluginProject) {
+          _xifexpression = "eclipse-test-plugin";
+        } else {
+          _xifexpression = "jar";
+        }
+        it.setPackaging(_xifexpression);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("<build>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<plugins>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<plugin>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<groupId>org.eclipse.xtend</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<artifactId>xtend-maven-plugin</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</plugin>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("</plugins>");
+        _builder.newLine();
+        _builder.append("</build>");
+        _builder.newLine();
+        it.setBuildSection(_builder.toString());
+      }
+    };
+    return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
   
   @Pure
