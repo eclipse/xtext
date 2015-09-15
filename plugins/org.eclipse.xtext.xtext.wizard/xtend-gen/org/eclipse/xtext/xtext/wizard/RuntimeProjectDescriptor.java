@@ -1105,7 +1105,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("args += \"-p\"");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("args += \"runtimeProject=/${projectDir}\"");
+        _builder.append("args += \"projectPath=/${projectDir}\"");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();

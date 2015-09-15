@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions;
 
 import com.google.inject.Inject;
@@ -75,7 +76,10 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setSourceLayout(advancedPage.getSourceLayout());
 		
 		projectInfo.getUiProject().setEnabled(advancedPage.isCreateUiProject());
-		projectInfo.getTargetPlatformProject().setEnabled(advancedPage.isCreateUiProject() && buildSystem != BuildSystem.ECLIPSE);
+		if (buildSystem != BuildSystem.ECLIPSE) {
+			projectInfo.setProjectLayout(ProjectLayout.HIERARCHICAL);
+			projectInfo.getTargetPlatformProject().setEnabled(advancedPage.isCreateUiProject());
+		}
 		projectInfo.getRuntimeProject().getTestProject().setEnabled(advancedPage.isCreateTestProject());
 		projectInfo.getIdeProject().setEnabled(advancedPage.isCreateIdeProject());
 		projectInfo.getIntellijProject().setEnabled(advancedPage.isCreateIntellijProject());

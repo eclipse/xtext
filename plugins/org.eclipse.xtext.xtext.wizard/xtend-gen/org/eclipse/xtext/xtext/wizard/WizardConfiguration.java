@@ -72,7 +72,7 @@ public class WizardConfiguration {
           return Boolean.valueOf(it.isEnabled());
         }
       };
-      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.parentProject, this.targetPlatformProject)), _function);
+      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject)), _function);
       Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(productionProjects, TestedProjectDescriptor.class);
       final Function1<TestedProjectDescriptor, TestProjectDescriptor> _function_1 = new Function1<TestedProjectDescriptor, TestProjectDescriptor>() {
         @Override
