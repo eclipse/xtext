@@ -42,7 +42,6 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider;
-import org.eclipse.xtext.idea.findusages.WordsScannerProvider;
 import org.eclipse.xtext.idea.formatting.BlockFactory;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -53,7 +52,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -168,10 +166,6 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@SingletonBinding
 	public Class<? extends BaseXtextFindUsageProvider> bindBaseXtextFindUsageProvider() {
 		return XtendFindUsageProvider.class;
-	}
-	
-	public Class<? extends WordsScannerProvider> bindWordsScannerProvider() {
-		return XbaseWordsScannerProvider.class;
 	}
 	
 }
