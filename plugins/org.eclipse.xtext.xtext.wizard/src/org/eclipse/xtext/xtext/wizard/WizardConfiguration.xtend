@@ -48,7 +48,7 @@ class WizardConfiguration {
 	}
 	
 	def needsMavenBuild() {
-		preferredBuildSystem == BuildSystem.MAVEN || needsGradleBuild && uiProject.enabled
+		preferredBuildSystem == BuildSystem.MAVEN || preferredBuildSystem == BuildSystem.GRADLE && uiProject.enabled
 	}
 	
 	def needsTychoBuild() {
