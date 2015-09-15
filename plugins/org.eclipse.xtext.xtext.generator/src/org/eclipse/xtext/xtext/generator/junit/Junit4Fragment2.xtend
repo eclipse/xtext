@@ -10,6 +10,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import com.google.inject.Injector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 	@Inject IXtextProjectConfig projectConfig
@@ -32,11 +33,14 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 			)
 			exportedPackages.add(grammar.eclipsePluginTestBasePackage)
 		]
+		projectConfig.eclipsePluginManifest.exportedPackages.add(grammar.eclipsePluginActivator.packageName)
+		
 		#[
 			projectConfig.runtimeTestManifest,
 			projectConfig.eclipsePluginTestManifest
 		].forEach [
 			importedPackages.addAll(
+				"org.junit;version=\"4.5.0\"",
 				"org.junit.runner;version=\"4.5.0\"",
 				"org.junit.runner.manipulation;version=\"4.5.0\"",
 				"org.junit.runner.notification;version=\"4.5.0\"",
@@ -51,29 +55,35 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	def JavaFileAccess generateExampleRuntimeTest() {
-		val file = fileAccessFactory.createJavaFile(injectorProvider)
 		val xtextRunner = new TypeReference("org.eclipse.xtext.junit4.XtextRunner")
 		val runWith = new TypeReference("org.junit.runner.RunWith")
 		val injectWith = new TypeReference("org.eclipse.xtext.junit4.InjectWith")
 		val parseHelper = new TypeReference("org.eclipse.xtext.junit4.util.ParseHelper")
 		val test = new TypeReference("org.junit.Test")
-		file.content =  '''
-			@«runWith»(«xtextRunner».class)
-			@«injectWith»(«injectorProvider».class)
-			public class «grammar.simpleName»ParsingTest {
+		val assert = new TypeReference("org.junit.Assert")
+		val rootType = new TypeReference(GenModelUtil2.getJavaTypeName(grammar.rules.head.type.classifier, grammar.eResource.resourceSet))
+		return fileAccessFactory.createXtendFile(exampleRuntimeTest, '''
+			@«runWith»(«xtextRunner»)
+			@«injectWith»(«injectorProvider»)
+			class «exampleRuntimeTest»{
 			
 				@«Inject»
-				private «parseHelper»<«EObject»> parseHelper;
+				«parseHelper»<«rootType»> parseHelper;
 			
-				@«test»
-				public void loadModel() throws Exception {
-					«EObject» result = parseHelper.parse("Hello Xtext!");
-					assertNotNull(result);
+				@«test» 
+				def void loadModel() {
+					val result = parseHelper.parse(''«»'
+						Hello Xtext!
+					''«»')
+					«assert».assertNotNull(result)
 				}
 			
 			}
-		'''
-		file
+		''')
+	}
+	
+	def exampleRuntimeTest() {
+		new TypeReference(grammar.runtimeTestBasePackage, grammar.simpleName + "ParsingTest")
 	}
 
 	def JavaFileAccess generateInjectorProvider() {
