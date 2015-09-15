@@ -269,14 +269,21 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     };
     IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
     if (this.deployable) {
-      TextFileAccess _compilePluginXml = this.compilePluginXml(grammar);
+      final TextFileAccess pluginXml = this.compilePluginXml(grammar);
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IXtextGeneratorFileSystemAccess _ideaPluginMetaInf = _projectConfig.getIdeaPluginMetaInf();
-      _compilePluginXml.writeTo(_ideaPluginMetaInf);
+      String _path = pluginXml.getPath();
+      boolean _isFile = _ideaPluginMetaInf.isFile(_path);
+      boolean _not = (!_isFile);
+      if (_not) {
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        IXtextGeneratorFileSystemAccess _ideaPluginMetaInf_1 = _projectConfig_1.getIdeaPluginMetaInf();
+        pluginXml.writeTo(_ideaPluginMetaInf_1);
+      }
       TextFileAccess _compilePluginGenXml = this.compilePluginGenXml(grammar);
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _ideaPluginMetaInf_1 = _projectConfig_1.getIdeaPluginMetaInf();
-      _compilePluginGenXml.writeTo(_ideaPluginMetaInf_1);
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _ideaPluginMetaInf_2 = _projectConfig_2.getIdeaPluginMetaInf();
+      _compilePluginGenXml.writeTo(_ideaPluginMetaInf_2);
     }
   }
   

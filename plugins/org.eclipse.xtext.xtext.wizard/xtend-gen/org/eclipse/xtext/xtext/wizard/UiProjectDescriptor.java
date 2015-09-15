@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -16,11 +15,26 @@ import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.UiTestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
-@FinalFieldsConstructor
 @SuppressWarnings("all")
-public class UiProjectDescriptor extends ProjectDescriptor {
+public class UiProjectDescriptor extends TestedProjectDescriptor {
+  private UiTestProjectDescriptor testProject;
+  
+  public UiProjectDescriptor(final WizardConfiguration config) {
+    super(config);
+    UiTestProjectDescriptor _uiTestProjectDescriptor = new UiTestProjectDescriptor(this);
+    this.testProject = _uiTestProjectDescriptor;
+  }
+  
+  @Override
+  public TestProjectDescriptor getTestProject() {
+    return this.testProject;
+  }
+  
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     WizardConfiguration _config = this.getConfig();
@@ -160,9 +174,5 @@ public class UiProjectDescriptor extends ProjectDescriptor {
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
-  }
-  
-  public UiProjectDescriptor(final WizardConfiguration config) {
-    super(config);
   }
 }
