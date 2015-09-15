@@ -71,6 +71,14 @@ public class AbstractPureXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultI
 	public Class<? extends org.eclipse.xtext.idea.findusages.IReferenceSearcher> bindIReferenceSearcher() {
 		return org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
+		return org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.findusages.WordsScannerProvider> bindWordsScannerProvider() {
+		return org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider.class;
+	}
 	
 	
 }

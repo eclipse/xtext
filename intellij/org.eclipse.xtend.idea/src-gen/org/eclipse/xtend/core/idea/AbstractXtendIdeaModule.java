@@ -27,7 +27,7 @@ import org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociation
 import org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.findusages.IReferenceSearcher;
-import org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher;
+import org.eclipse.xtext.idea.findusages.WordsScannerProvider;
 import org.eclipse.xtext.idea.formatting.BlockFactory;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -42,6 +42,8 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider;
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher;
+import org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner;
 import org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory;
 import org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider;
 import org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration;
@@ -113,7 +115,6 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
-	@Override
 	public void configureLanguageSpecificPsiModelAssociations(Binder binder) {
 		binder.bind(IPsiModelAssociations.class)
 			.annotatedWith(LanguageSpecific.class)
@@ -121,7 +122,6 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
-	@Override
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return XbaseHighlightingConfiguration.class;
 	}
@@ -137,7 +137,6 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
-	@Override
 	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
 		return XbaseBracePairProvider.class;
 	}
@@ -146,10 +145,15 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	public Class<? extends IReferenceSearcher> bindIReferenceSearcher() {
 		return JvmElementAwareReferenceSearcher.class;
 	}
-
-    // contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
-    public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
 		return XbaseGeneratorConfigProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends WordsScannerProvider> bindWordsScannerProvider() {
+		return XbaseWordsScanner.XbaseWordsScannerProvider.class;
 	}
 	
 }
