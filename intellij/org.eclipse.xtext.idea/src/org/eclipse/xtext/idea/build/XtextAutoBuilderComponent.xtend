@@ -39,6 +39,7 @@ import com.intellij.openapi.roots.ModuleRootEvent
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.openapi.util.Disposer
+import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileAdapter
 import com.intellij.openapi.vfs.VirtualFileEvent
@@ -485,7 +486,6 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		buildProgressReporter.project = project
 		buildProgressReporter.events = allEvents
 		try {
-			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
 			val moduleGraph = app.<Graph<Module>>runReadAction[moduleManager.moduleGraph]
 			// deltas are added over the whole build
 			val deltas = <IResourceDescription.Delta>newArrayList
@@ -497,8 +497,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
 				val contentRoots = ModuleRootManager.getInstance(module).contentRoots
-				val events = allEvents.filter[event| event.findModule(fileIndex) == module].toSet
-				if (contentRoots.empty 
+				val events = unProcessedEvents.getEventsForModule(module)
+				if (contentRoots.empty
 					|| events.isEmpty && deltas.isEmpty) {
 					LOG.info("Skipping module '"+module.name+"'. Nothing to do here.")		
 				} else {
@@ -549,6 +549,29 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			buildProgressReporter.clearProgress
 			cancelIndicators.remove(cancelIndicator)
 		}
+	}
+	
+	protected def getEventsForModule(List<BuildEvent> events, Module module) {
+		val moduleRootManager = ModuleRootManager.getInstance(module)
+		val excludeRootUrls = moduleRootManager.excludeRootUrls
+		val sourceRootUrls = moduleRootManager.sourceRootUrls
+		events.filter [ event |
+			val url = event.filesByURI.keySet.head.toString
+			for (excludeRootUrl : excludeRootUrls)
+				if (url.isUrlUnderRoot(excludeRootUrl))
+					return false
+			for (sourceRootUrl : sourceRootUrls)
+				if (url.isUrlUnderRoot(sourceRootUrl))
+					return true
+			return false
+		].toSet
+	}
+	
+	static val char SEGMENT_SEPARATOR = '/'
+
+	protected def isUrlUnderRoot(String url, String rootUrl) {
+		url.length > rootUrl.length && url.charAt(rootUrl.length) == SEGMENT_SEPARATOR &&
+			FileUtil.startsWith(url, rootUrl)
 	}
 	
 	def getServiceProviderProvider(Module module) {

@@ -19,7 +19,12 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.events.VFileDeleteEvent;
@@ -1074,6 +1079,72 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_2.runOperation(_function);
     VirtualFile _virtualFile_2 = xtendFile.getVirtualFile();
     this.myFixture.testHighlighting(true, true, true, _virtualFile_2);
+  }
+  
+  public void testNonSourceFile() {
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        Module _module = IdeaIntegrationTest.this.myFixture.getModule();
+        ModuleRootManager _instance = ModuleRootManager.getInstance(_module);
+        final ModifiableRootModel model = _instance.getModifiableModel();
+        ContentEntry[] _contentEntries = model.getContentEntries();
+        final ContentEntry contentEntry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+        SourceFolder[] _sourceFolders = contentEntry.getSourceFolders();
+        final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>head(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)));
+        contentEntry.removeSourceFolder(sourceFolder);
+        model.commit();
+      }
+    };
+    _application.runWriteAction(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    ChunkedResourceDescriptions _index = this.getIndex();
+    URI _createURI = URI.createURI("temp:///src/otherPackage/Foo.xtend");
+    IResourceDescription _resourceDescription = _index.getResourceDescription(_createURI);
+    TestCase.assertNull(_resourceDescription);
+  }
+  
+  public void testExcludedFile() {
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Module _module = IdeaIntegrationTest.this.myFixture.getModule();
+          ModuleRootManager _instance = ModuleRootManager.getInstance(_module);
+          final ModifiableRootModel model = _instance.getModifiableModel();
+          ContentEntry[] _contentEntries = model.getContentEntries();
+          final ContentEntry contentEntry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+          VirtualFile _file = contentEntry.getFile();
+          final VirtualFile excludedDir = _file.createChildDirectory(null, "excluded");
+          contentEntry.addExcludeFolder(excludedDir);
+          model.commit();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package excluded");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("excluded/Foo.xtend", _builder.toString());
+    ChunkedResourceDescriptions _index = this.getIndex();
+    URI _createURI = URI.createURI("temp:///src/excluded/Foo.xtend");
+    IResourceDescription _resourceDescription = _index.getResourceDescription(_createURI);
+    TestCase.assertNull(_resourceDescription);
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {
