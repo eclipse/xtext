@@ -155,7 +155,7 @@ import org.eclipse.xtend.core.services.XtendGrammarAccess;
     
     @Override
     protected String getFirstRuleName() {
-    	return "File";	
+    	return "ruleFile";	
    	}
    	
    	@Override

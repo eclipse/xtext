@@ -187,7 +187,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         
         @Override
         protected String getFirstRuleName() {
-        	return "File";	
+        	return "ruleFile";	
        	}
        	
        	@Override
@@ -36735,11 +36735,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred28_InternalXtend() {
+    public final boolean synpred13_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred28_InternalXtend_fragment(); // can never throw exception
+            synpred13_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -36749,11 +36749,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred13_InternalXtend() {
+    public final boolean synpred28_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred13_InternalXtend_fragment(); // can never throw exception
+            synpred28_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
