@@ -84,6 +84,7 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import java.io.IOException
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -691,8 +692,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	override loadState(XtextAutoBuilderComponentState state) {
-		chunkedResourceDescriptions = codec.decodeIndex(state)
-		moduleName2GeneratedMapping = codec.decodeModuleToGenerated(state) 
+		try {
+			chunkedResourceDescriptions = codec.decodeIndex(state)
+			moduleName2GeneratedMapping = codec.decodeModuleToGenerated(state) 
+		} catch(IOException exc) {
+			LOG.error('Error loading XtextAutoBuildComponentState ', exc)
+			chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
+			moduleName2GeneratedMapping.clear
+		}
 	}
 	
 }

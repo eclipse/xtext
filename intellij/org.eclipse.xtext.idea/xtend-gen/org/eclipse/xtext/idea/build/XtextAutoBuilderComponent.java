@@ -70,6 +70,7 @@ import com.intellij.util.Processor;
 import com.intellij.util.graph.Graph;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -1208,10 +1209,22 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   @Override
   public void loadState(final XtextAutoBuilderComponentState state) {
-    ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
-    this.chunkedResourceDescriptions = _decodeIndex;
-    Map<String, Source2GeneratedMapping> _decodeModuleToGenerated = this.codec.decodeModuleToGenerated(state);
-    this.moduleName2GeneratedMapping = _decodeModuleToGenerated;
+    try {
+      ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
+      this.chunkedResourceDescriptions = _decodeIndex;
+      Map<String, Source2GeneratedMapping> _decodeModuleToGenerated = this.codec.decodeModuleToGenerated(state);
+      this.moduleName2GeneratedMapping = _decodeModuleToGenerated;
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException exc = (IOException)_t;
+        XtextAutoBuilderComponent.LOG.error("Error loading XtextAutoBuildComponentState ", exc);
+        ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
+        this.chunkedResourceDescriptions = _get;
+        this.moduleName2GeneratedMapping.clear();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);
