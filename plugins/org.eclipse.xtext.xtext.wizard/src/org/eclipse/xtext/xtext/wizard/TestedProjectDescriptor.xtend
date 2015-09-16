@@ -27,7 +27,7 @@ abstract class TestedProjectDescriptor extends ProjectDescriptor {
 		val files = newArrayList
 		files += super.files
 		if (testProject.isInlined)
-			files += testProject.files
+			files += testProject.files.filter[fileFromTestProject| !files.exists[relativePath == fileFromTestProject.relativePath]]
 		files
 	}
 }

@@ -1,11 +1,14 @@
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -67,7 +70,23 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
       if (_isInlined) {
         TestProjectDescriptor _testProject_1 = this.getTestProject();
         Iterable<? extends GeneratedFile> _files_1 = _testProject_1.getFiles();
-        Iterables.<GeneratedFile>addAll(files, _files_1);
+        final Function1<GeneratedFile, Boolean> _function = new Function1<GeneratedFile, Boolean>() {
+          @Override
+          public Boolean apply(final GeneratedFile fileFromTestProject) {
+            final Function1<GeneratedFile, Boolean> _function = new Function1<GeneratedFile, Boolean>() {
+              @Override
+              public Boolean apply(final GeneratedFile it) {
+                String _relativePath = it.getRelativePath();
+                String _relativePath_1 = fileFromTestProject.getRelativePath();
+                return Boolean.valueOf(Objects.equal(_relativePath, _relativePath_1));
+              }
+            };
+            boolean _exists = IterableExtensions.<GeneratedFile>exists(files, _function);
+            return Boolean.valueOf((!_exists));
+          }
+        };
+        Iterable<? extends GeneratedFile> _filter = IterableExtensions.filter(_files_1, _function);
+        Iterables.<GeneratedFile>addAll(files, _filter);
       }
       _xblockexpression = files;
     }
