@@ -28,6 +28,9 @@ import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
+import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.ModuleAdapter
 import com.intellij.openapi.project.Project
@@ -56,6 +59,7 @@ import java.util.Set
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IndexState
@@ -139,7 +143,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
 		this.chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 		this.project = project
-		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
+		// We need the swing thread here to access the ProgressManager.
+		// No worries: The actual work is performed in a background thread.
+		alarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this)
 		disposed = false
 		Disposer.register(project, this)
 	
@@ -449,8 +455,17 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			alarm.addRequest([build], 500)
 		} else {
 			val allEvents = newArrayList
-			queue.drainTo(allEvents)
-			internalBuild(allEvents)
+			if(TEST_MODE) {
+					queue.drainTo(allEvents)
+					internalBuild(allEvents, null)
+			} else {
+				ProgressManager.instance.run(new Task.Backgroundable(project, 'Auto-building Xtext resources') {
+					override run(ProgressIndicator indicator) {
+						queue.drainTo(allEvents)
+						internalBuild(allEvents, indicator)
+					}
+				})
+			}
 		}
 	}
 	
@@ -458,11 +473,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return TEST_MODE || (project.isInitialized && !DumbService.getInstance(project).isDumb)
 	}
 	
-	protected def void internalBuild(List<BuildEvent> allEvents) {
+	protected def void internalBuild(List<BuildEvent> allEvents, ProgressIndicator indicator) {
 		val unProcessedEvents = newArrayList
 		unProcessedEvents += allEvents
 		val app = ApplicationManager.application
-		val cancelIndicator = new MutableCancelIndicator
+		val cancelIndicator = new MutableCancelIndicator(indicator)
 		cancelIndicators.add(cancelIndicator)
 		val moduleManager = ModuleManager.getInstance(getProject)
 		val buildProgressReporter = buildProgressReporterProvider.get
@@ -652,10 +667,15 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return chunkedResourceDescriptions
 	}
 	
+	@FinalFieldsConstructor
 	static class MutableCancelIndicator implements CancelIndicator {
+		
+		val ProgressIndicator indicator
+
 		volatile boolean canceled
+		
 		override isCanceled() {
-			canceled
+			canceled || indicator?.canceled
 		}
 		
 		def setCanceled(boolean canceled) {
