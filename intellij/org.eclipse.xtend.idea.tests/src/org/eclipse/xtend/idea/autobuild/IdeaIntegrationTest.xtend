@@ -26,6 +26,7 @@ import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.junit.ComparisonFailure
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.intellij.openapi.roots.ModuleRootManager
 
 /**
  */
@@ -570,6 +571,38 @@ class IdeaIntegrationTest extends LightXtendTest {
 			myFixture.renameElementAtCaret('Zonk')
 		]
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+	}
+	
+	def void testNonSourceFile() {
+		ApplicationManager.application.runWriteAction[
+			val model = ModuleRootManager.getInstance(myFixture.module).modifiableModel
+			val contentEntry = model.contentEntries.head
+			val sourceFolder = contentEntry.sourceFolders.head
+			contentEntry.removeSourceFolder(sourceFolder)
+			model.commit
+		]
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			class Foo {
+			}
+		''')
+		assertNull(index.getResourceDescription(URI.createURI("temp:///src/otherPackage/Foo.xtend")))
+	}
+	
+	def void testExcludedFile() {
+		ApplicationManager.application.runWriteAction[
+			val model = ModuleRootManager.getInstance(myFixture.module).modifiableModel
+			val contentEntry = model.contentEntries.head
+			val excludedDir = contentEntry.file.createChildDirectory(null, 'excluded')
+			contentEntry.addExcludeFolder(excludedDir)
+			model.commit
+		]
+		myFixture.addFileToProject('excluded/Foo.xtend', '''
+			package excluded
+			class Foo {
+			}
+		''')
+		assertNull(index.getResourceDescription(URI.createURI("temp:///src/excluded/Foo.xtend")))
 	}
 
 	def void assertFileContents(String path, CharSequence sequence) {
