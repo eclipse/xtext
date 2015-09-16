@@ -28,7 +28,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.ide")
 		deps += createXtextDependency("org.eclipse.xtext.xbase.ide")

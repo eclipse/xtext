@@ -35,7 +35,7 @@ class UiProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.ui")
 		deps += new ExternalDependency => [
@@ -57,7 +57,7 @@ class UiProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getBinIncludes() {
-		val includes = newHashSet
+		val includes = newLinkedHashSet
 		includes += super.binIncludes
 		includes += "plugin.xml"
 		includes
