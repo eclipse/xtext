@@ -172,11 +172,13 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 										<phase>generate-sources</phase>
 										<goals>
 											<goal>compile</goal>
+											<goal>testCompile</goal>
 										</goals>
 									</execution>
 								</executions>
 								<configuration>
 									<outputDirectory>${basedir}/«Outlet.MAIN_XTEND_GEN.sourceFolder»</outputDirectory>
+									<testOutputDirectory>${basedir}/«Outlet.TEST_XTEND_GEN.sourceFolder»</testOutputDirectory>
 								</configuration>
 							</plugin>
 							<plugin>
@@ -186,7 +188,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<configuration>
 									<filesets>
 										<fileset>
-											<directory>${basedir}/«Outlet.MAIN_XTEND_GEN.sourceFolder»</directory>
+											«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].toSet.map[sourceFolder]»
+												<directory>${basedir}/«dir»</directory>
+											«ENDFOR»
 										</fileset>
 									</filesets>
 								</configuration>

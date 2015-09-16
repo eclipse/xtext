@@ -561,6 +561,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t\t\t\t\t\t\t");
         _builder.append("<goal>compile</goal>");
         _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t");
+        _builder.append("<goal>testCompile</goal>");
+        _builder.newLine();
         _builder.append("\t\t\t\t\t\t");
         _builder.append("</goals>");
         _builder.newLine();
@@ -578,6 +581,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         String _sourceFolder = ParentProjectDescriptor.this.sourceFolder(Outlet.MAIN_XTEND_GEN);
         _builder.append(_sourceFolder, "\t\t\t\t\t");
         _builder.append("</outputDirectory>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<testOutputDirectory>${basedir}/");
+        String _sourceFolder_1 = ParentProjectDescriptor.this.sourceFolder(Outlet.TEST_XTEND_GEN);
+        _builder.append(_sourceFolder_1, "\t\t\t\t\t");
+        _builder.append("</testOutputDirectory>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         _builder.append("</configuration>");
@@ -606,12 +615,23 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t\t\t\t\t\t");
         _builder.append("<fileset>");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t\t\t");
-        _builder.append("<directory>${basedir}/");
-        String _sourceFolder_1 = ParentProjectDescriptor.this.sourceFolder(Outlet.MAIN_XTEND_GEN);
-        _builder.append(_sourceFolder_1, "\t\t\t\t\t\t\t");
-        _builder.append("</directory>");
-        _builder.newLineIfNotEmpty();
+        {
+          Set<Outlet> _set = IterableExtensions.<Outlet>toSet(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN)));
+          final Function1<Outlet, String> _function_1 = new Function1<Outlet, String>() {
+            @Override
+            public String apply(final Outlet it) {
+              return ParentProjectDescriptor.this.sourceFolder(it);
+            }
+          };
+          Iterable<String> _map = IterableExtensions.<Outlet, String>map(_set, _function_1);
+          for(final String dir : _map) {
+            _builder.append("\t\t\t\t\t\t\t");
+            _builder.append("<directory>${basedir}/");
+            _builder.append(dir, "\t\t\t\t\t\t\t");
+            _builder.append("</directory>");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t\t\t\t\t\t");
         _builder.append("</fileset>");
         _builder.newLine();
