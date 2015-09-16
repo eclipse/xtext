@@ -28,4 +28,7 @@ class SingletonClassAnnotation implements IClassAnnotation {
 		return new TypeReference(Singleton)
 	}
 	
+	override toString() {
+		generate.toString
+	}
 }

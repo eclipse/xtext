@@ -10,12 +10,11 @@ package org.eclipse.xtext.xtext.generator.model
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 @Log
 @Accessors
-class ManifestAccess {
-	
-	String path = 'MANIFEST.MF'
+class ManifestAccess extends TextFileAccess {
 	
 	String bundleName
 	
@@ -30,6 +29,12 @@ class ManifestAccess {
 	val Set<String> requiredBundles = newHashSet
 	
 	val Set<String> importedPackages = newHashSet
+	
+	TypeReference activator
+	
+	new() {
+		path = 'MANIFEST.MF'
+	}
 	
 	/**
 	 * Merge the contents of the given manifest into this one.
@@ -50,6 +55,12 @@ class ManifestAccess {
 			else if (other.symbolicName !== null)
 				LOG.warn('Merging manifest files with different symbolic names: ' + this.symbolicName + ', ' + other.symbolicName)
 		}
+		if (this.activator != other.activator) {
+			if (this.activator === null)
+				this.activator = other.activator
+			else if (other.activator !== null)
+				LOG.warn('Merging manifest files with different activators: ' + this.activator + ', ' + other.activator)
+		}
 		if (this.version != other.version) {
 			LOG.warn('Merging manifest files with different versions: ' + this.version + ', ' + other.version)
 		}
@@ -60,5 +71,33 @@ class ManifestAccess {
 		this.requiredBundles.addAll(other.requiredBundles)
 		this.importedPackages.addAll(other.importedPackages)
 	}
+	
+	override setContent(StringConcatenationClient content) {
+		throw new UnsupportedOperationException("cannot directly set 'content' on a manifest.mf. Use the individual properties instead.")
+	}
+	
+	override getContent() '''
+		Manifest-Version: 1.0
+		Bundle-ManifestVersion: 2
+		Bundle-Name: «bundleName»
+		Bundle-SymbolicName: «symbolicName ?: bundleName»; singleton:=true
+		«IF !version.nullOrEmpty»
+			Bundle-Version: «version»
+		«ENDIF»
+		Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+		Bundle-ActivationPolicy: lazy
+		«IF !exportedPackages.empty»
+			Export-Package: «FOR pack : exportedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
+		«ENDIF»
+		«IF !requiredBundles.empty»
+			Require-Bundle: «FOR bundle : requiredBundles.sort SEPARATOR ',\n '»«bundle»«ENDFOR»
+		«ENDIF»
+		«IF !importedPackages.empty»
+			Import-Package: «FOR pack : importedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
+		«ENDIF»
+		«IF activator !== null»
+			Bundle-Activator: «activator»
+		«ENDIF»
+	'''
 	
 }

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.model
 
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class FileAccessFactory {
 	
@@ -18,12 +19,41 @@ class FileAccessFactory {
 		new TextFileAccess()
 	}
 	
+	def TextFileAccess createTextFile(String path) {
+		val result = createTextFile()
+		result.path = path
+		return result
+	}
+	
+	def TextFileAccess createTextFile(String path, StringConcatenationClient content) {
+		val result = createTextFile(path)
+		result.content = content
+		return result
+	}
+	
 	def JavaFileAccess createJavaFile(TypeReference typeRef) {
-		new JavaFileAccess(typeRef, codeConfig)
+		val result = new JavaFileAccess(typeRef, codeConfig)
+		return result
+	}
+	
+	def JavaFileAccess createJavaFile(TypeReference typeRef, StringConcatenationClient content) {
+		val result = createJavaFile(typeRef)
+		result.content = content
+		return result
 	}
 	
 	def XtendFileAccess createXtendFile(TypeReference typeRef) {
 		new XtendFileAccess(typeRef, codeConfig)
 	}
 	
+	def XtendFileAccess createXtendFile(TypeReference typeRef, StringConcatenationClient content) {
+		val result = createXtendFile(typeRef)
+		result.content = content
+		return result
+	}
+	
+	def GeneratedJavaFileAccess createGeneratedJavaFile(TypeReference typeRef) {
+		val result = new GeneratedJavaFileAccess(typeRef, codeConfig)
+		return result
+	}
 }

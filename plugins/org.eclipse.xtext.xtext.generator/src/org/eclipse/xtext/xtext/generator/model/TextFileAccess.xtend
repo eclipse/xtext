@@ -25,13 +25,13 @@ class TextFileAccess {
 		]
 	}
 
-	def CharSequence generate() {
+	def CharSequence getContent() {
 		return internalContents.toString
 	}
 
 	def void writeTo(IFileSystemAccess2 fileSystemAccess) {
 		if (fileSystemAccess != null) {
-			fileSystemAccess.generateFile(path, generate())
+			fileSystemAccess.generateFile(path, content)
 		}
 	}
 	

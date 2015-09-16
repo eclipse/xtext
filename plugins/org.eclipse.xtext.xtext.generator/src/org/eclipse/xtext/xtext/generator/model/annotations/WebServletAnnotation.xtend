@@ -51,4 +51,8 @@ class WebServletAnnotation implements IClassAnnotation {
 		stringBuilder.append(s)
 	}
 	
+	override toString() {
+		return generate.toString
+	}
+	
 }
