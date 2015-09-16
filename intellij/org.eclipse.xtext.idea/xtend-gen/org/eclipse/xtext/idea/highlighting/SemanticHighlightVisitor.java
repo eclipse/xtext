@@ -23,6 +23,8 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.idea.highlighting.IdeaHighlightingAttributesProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -46,6 +48,9 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   @Inject
   @Extension
   private IdeaHighlightingAttributesProvider _ideaHighlightingAttributesProvider;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   private IHighlightedPositionAcceptor acceptor;
   
@@ -100,9 +105,18 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Override
   public void visit(final PsiElement element) {
-    if ((element instanceof BaseXtextFile)) {
-      XtextResource _resource = ((BaseXtextFile)element).getResource();
-      this.highlightCalculator.provideHighlightingFor(_resource, this.acceptor, CancelIndicator.NullImpl);
+    try {
+      if ((element instanceof BaseXtextFile)) {
+        XtextResource _resource = ((BaseXtextFile)element).getResource();
+        this.highlightCalculator.provideHighlightingFor(_resource, this.acceptor, CancelIndicator.NullImpl);
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof OperationCanceledError) {
+        final OperationCanceledError error = (OperationCanceledError)_t;
+        this.operationCanceledManager.propagateIfCancelException(error);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
