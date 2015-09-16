@@ -57,7 +57,7 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 		val injectWith = new TypeReference("org.eclipse.xtext.junit4.InjectWith")
 		val parseHelper = new TypeReference("org.eclipse.xtext.junit4.util.ParseHelper")
 		val test = new TypeReference("org.junit.Test")
-		file.javaContent =  '''
+		file.content =  '''
 			@«runWith»(«xtextRunner».class)
 			@«injectWith»(«injectorProvider».class)
 			public class «grammar.simpleName»ParsingTest {
@@ -81,7 +81,7 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 		val globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries")
 		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento")
 		val iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator")
-		file.javaContent = '''
+		file.content = '''
 			public class «injectorProvider.simpleName» implements «iInjectorProvider», «iRegistryConfigurator» {
 			
 				protected «globalStateMemento» stateBeforeInjectorCreation;
@@ -131,7 +131,7 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 
 	def JavaFileAccess generateUiInjectorProvider() {
 		val file = fileAccessFactory.createJavaFile(uiInjectorProvider)
-		file.javaContent = '''
+		file.content = '''
 			public class «uiInjectorProvider.simpleName» implements «iInjectorProvider» {
 			
 				@Override
