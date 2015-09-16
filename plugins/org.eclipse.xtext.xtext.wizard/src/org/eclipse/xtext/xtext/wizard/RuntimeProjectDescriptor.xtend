@@ -466,7 +466,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								</filesets>
 							</configuration>
 						</plugin>
-						«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
+						«IF !isEclipsePluginProject»
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>build-helper-maven-plugin</artifactId>
