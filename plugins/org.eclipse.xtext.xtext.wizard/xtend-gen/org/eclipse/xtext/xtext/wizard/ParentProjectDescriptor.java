@@ -284,6 +284,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
     _builder.append("plugins.withId(\'war\') {");
     _builder.newLine();
     _builder.append("\t");
@@ -291,6 +292,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     String _sourceFolder_10 = this.sourceFolder(Outlet.WEBAPP);
     _builder.append(_sourceFolder_10, "\t");
     _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("plugins.withId(\'org.xtext.idea-plugin\') {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("assembleSandbox.metaInf.from(\'");
+    String _sourceFolder_11 = this.sourceFolder(Outlet.META_INF);
+    _builder.append(_sourceFolder_11, "\t");
+    _builder.append("\')");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
