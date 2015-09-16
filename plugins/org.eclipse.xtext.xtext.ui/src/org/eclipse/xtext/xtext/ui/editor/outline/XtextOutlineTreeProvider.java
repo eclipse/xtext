@@ -111,12 +111,12 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		}
 		Image image = imageDispatcher.invoke(rule);
 		RuleNode ruleNode = new RuleNode(rule, parentNode, image, text, isLeafDispatcher.invoke(rule));
+		ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
 		if (isLocalRule) {
 			ICompositeNode parserNode = NodeModelUtils.getNode(rule);
 			if (parserNode != null)
 				ruleNode.setTextRegion(parserNode.getTextRegion());
 			ruleNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(rule));
-			ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
 		}
 	}
 
