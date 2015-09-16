@@ -8,19 +8,24 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @Log
 @Accessors
 @SuppressWarnings("all")
-public class ManifestAccess {
-  private String path = "MANIFEST.MF";
-  
+public class ManifestAccess extends TextFileAccess {
   private String bundleName;
   
   private String symbolicName;
@@ -35,15 +40,28 @@ public class ManifestAccess {
   
   private final Set<String> importedPackages = CollectionLiterals.<String>newHashSet();
   
+  private TypeReference activator;
+  
+  public ManifestAccess() {
+    this.setPath("MANIFEST.MF");
+  }
+  
   /**
    * Merge the contents of the given manifest into this one.
    */
   public boolean merge(final ManifestAccess other) {
     boolean _xblockexpression = false;
     {
-      boolean _notEquals = (!Objects.equal(this.path, other.path));
+      String _path = this.getPath();
+      String _path_1 = other.getPath();
+      boolean _notEquals = (!Objects.equal(_path, _path_1));
       if (_notEquals) {
-        ManifestAccess.LOG.warn(((("Merging manifest files with different paths: " + this.path) + ", ") + other.path));
+        String _path_2 = this.getPath();
+        String _plus = ("Merging manifest files with different paths: " + _path_2);
+        String _plus_1 = (_plus + ", ");
+        String _path_3 = other.getPath();
+        String _plus_2 = (_plus_1 + _path_3);
+        ManifestAccess.LOG.warn(_plus_2);
       }
       boolean _notEquals_1 = (!Objects.equal(this.bundleName, other.bundleName));
       if (_notEquals_1) {
@@ -65,8 +83,18 @@ public class ManifestAccess {
           }
         }
       }
-      boolean _notEquals_3 = (!Objects.equal(this.version, other.version));
+      boolean _notEquals_3 = (!Objects.equal(this.activator, other.activator));
       if (_notEquals_3) {
+        if ((this.activator == null)) {
+          this.activator = other.activator;
+        } else {
+          if ((other.activator != null)) {
+            ManifestAccess.LOG.warn(((("Merging manifest files with different activators: " + this.activator) + ", ") + other.activator));
+          }
+        }
+      }
+      boolean _notEquals_4 = (!Objects.equal(this.version, other.version));
+      if (_notEquals_4) {
         ManifestAccess.LOG.warn(((("Merging manifest files with different versions: " + this.version) + ", ") + other.version));
       }
       if ((this.merge != other.merge)) {
@@ -79,16 +107,115 @@ public class ManifestAccess {
     return _xblockexpression;
   }
   
+  @Override
+  public CharSequence setContent(final StringConcatenationClient content) {
+    throw new UnsupportedOperationException("cannot directly set \'content\' on a manifest.mf. Use the individual properties instead.");
+  }
+  
+  @Override
+  public CharSequence getContent() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Manifest-Version: 1.0");
+    _builder.newLine();
+    _builder.append("Bundle-ManifestVersion: 2");
+    _builder.newLine();
+    _builder.append("Bundle-Name: ");
+    _builder.append(this.bundleName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("Bundle-SymbolicName: ");
+    String _elvis = null;
+    if (this.symbolicName != null) {
+      _elvis = this.symbolicName;
+    } else {
+      _elvis = this.bundleName;
+    }
+    _builder.append(_elvis, "");
+    _builder.append("; singleton:=true");
+    _builder.newLineIfNotEmpty();
+    {
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.version);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append("Bundle-Version: ");
+        _builder.append(this.version, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+    _builder.newLine();
+    _builder.append("Bundle-ActivationPolicy: lazy");
+    _builder.newLine();
+    {
+      boolean _isEmpty = this.exportedPackages.isEmpty();
+      boolean _not_1 = (!_isEmpty);
+      if (_not_1) {
+        _builder.append("Export-Package: ");
+        {
+          List<String> _sort = IterableExtensions.<String>sort(this.exportedPackages);
+          boolean _hasElements = false;
+          for(final String pack : _sort) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",\n ", "");
+            }
+            _builder.append(pack, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_1 = this.requiredBundles.isEmpty();
+      boolean _not_2 = (!_isEmpty_1);
+      if (_not_2) {
+        _builder.append("Require-Bundle: ");
+        {
+          List<String> _sort_1 = IterableExtensions.<String>sort(this.requiredBundles);
+          boolean _hasElements_1 = false;
+          for(final String bundle : _sort_1) {
+            if (!_hasElements_1) {
+              _hasElements_1 = true;
+            } else {
+              _builder.appendImmediate(",\n ", "");
+            }
+            _builder.append(bundle, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_2 = this.importedPackages.isEmpty();
+      boolean _not_3 = (!_isEmpty_2);
+      if (_not_3) {
+        _builder.append("Import-Package: ");
+        {
+          List<String> _sort_2 = IterableExtensions.<String>sort(this.importedPackages);
+          boolean _hasElements_2 = false;
+          for(final String pack_1 : _sort_2) {
+            if (!_hasElements_2) {
+              _hasElements_2 = true;
+            } else {
+              _builder.appendImmediate(",\n ", "");
+            }
+            _builder.append(pack_1, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((this.activator != null)) {
+        _builder.append("Bundle-Activator: ");
+        _builder.append(this.activator, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
   private final static Logger LOG = Logger.getLogger(ManifestAccess.class);
-  
-  @Pure
-  public String getPath() {
-    return this.path;
-  }
-  
-  public void setPath(final String path) {
-    this.path = path;
-  }
   
   @Pure
   public String getBundleName() {
@@ -139,5 +266,14 @@ public class ManifestAccess {
   @Pure
   public Set<String> getImportedPackages() {
     return this.importedPackages;
+  }
+  
+  @Pure
+  public TypeReference getActivator() {
+    return this.activator;
+  }
+  
+  public void setActivator(final TypeReference activator) {
+    this.activator = activator;
   }
 }

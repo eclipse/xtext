@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator.model
 
 import com.google.common.collect.Lists
 import java.util.Collections
-import java.util.List
 import java.util.Map
 import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.emf.ecore.EClass
@@ -18,7 +17,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
 class JavaFileAccess extends TextFileAccess {
 	
@@ -39,23 +37,17 @@ class JavaFileAccess extends TextFileAccess {
 	 */
 	public static val DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE
 	
-	val Map<String, String> imports = newHashMap
+	protected val Map<String, String> imports = newHashMap
 	
-	val TypeReference javaType
+	protected val TypeReference javaType
 	
-	val CodeConfig codeConfig
-	
-	@Accessors
-	CharSequence typeComment
+	protected val CodeConfig codeConfig
 	
 	@Accessors
 	int importNestedTypeThreshold = 8
 	
 	@Accessors
 	boolean markedAsGenerated
-	
-	@Accessors
-	val List<IClassAnnotation> annotations = newArrayList
 	
 	@Accessors(PROTECTED_SETTER)
 	ResourceSet resourceSet
@@ -113,9 +105,7 @@ class JavaFileAccess extends TextFileAccess {
 		true
 	}
 	
-	override generate() {
-		val classAnnotations = annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
-		classAnnotations.forEach[importType(annotationImport)]
+	override getContent() {
 		val sortedImports = Lists.newArrayList(imports.values)
 		Collections.sort(sortedImports)
 		return '''
@@ -126,10 +116,6 @@ class JavaFileAccess extends TextFileAccess {
 				import «importName»«IF appendSemicolons»;«ENDIF»
 			«ENDFOR»
 			
-			«typeComment»
-			«FOR annot : classAnnotations»
-				«annot.generate()»
-			«ENDFOR»
 			«internalContents»
 		'''
 	}

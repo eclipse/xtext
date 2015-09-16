@@ -45,7 +45,6 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.WebServletAnnotation;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
@@ -1823,23 +1822,20 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   protected void generateServerLauncher() {
     Grammar _grammar = this.getGrammar();
     TypeReference _serverLauncherClass = this.getServerLauncherClass(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_serverLauncherClass);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* This program starts an HTTP server for testing the web integration of your DSL.");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Just execute it and point a web browser to http://localhost:8080/");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    xtendFile.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* This program starts an HTTP server for testing the web integration of your DSL.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Just execute it and point a web browser to http://localhost:8080/");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
         _builder.append("class ");
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
         TypeReference _serverLauncherClass = WebIntegrationFragment.this.getServerLauncherClass(_grammar);
@@ -1982,42 +1978,41 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_serverLauncherClass, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webSrc = _projectConfig.getWebSrc();
-    xtendFile.writeTo(_webSrc);
+    _createXtendFile.writeTo(_webSrc);
   }
   
   protected void generateServlet() {
     Grammar _grammar = this.getGrammar();
     TypeReference _servletClass = this.getServletClass(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_servletClass);
-    if (this.useServlet3Api) {
-      List<IClassAnnotation> _annotations = xtendFile.getAnnotations();
-      WebServletAnnotation _webServletAnnotation = new WebServletAnnotation();
-      final Procedure1<WebServletAnnotation> _function = new Procedure1<WebServletAnnotation>() {
-        @Override
-        public void apply(final WebServletAnnotation it) {
-          it.setName("XtextServices");
-          it.setUrlPatterns("/xtext-service/*");
-        }
-      };
-      WebServletAnnotation _doubleArrow = ObjectExtensions.<WebServletAnnotation>operator_doubleArrow(_webServletAnnotation, _function);
-      _annotations.add(_doubleArrow);
-    }
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Deploy this class into a servlet container to enable DSL-specific services.");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    xtendFile.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Deploy this class into a servlet container to enable DSL-specific services.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+        {
+          if (WebIntegrationFragment.this.useServlet3Api) {
+            WebServletAnnotation _webServletAnnotation = new WebServletAnnotation();
+            final Procedure1<WebServletAnnotation> _function = new Procedure1<WebServletAnnotation>() {
+              @Override
+              public void apply(final WebServletAnnotation it) {
+                it.setName("XtextServices");
+                it.setUrlPatterns("/xtext-service/*");
+              }
+            };
+            WebServletAnnotation _doubleArrow = ObjectExtensions.<WebServletAnnotation>operator_doubleArrow(_webServletAnnotation, _function);
+            _builder.append(_doubleArrow, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
         _builder.append("class ");
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
         TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(_grammar);
@@ -2087,9 +2082,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_servletClass, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webSrc = _projectConfig.getWebSrc();
-    xtendFile.writeTo(_webSrc);
+    _createXtendFile.writeTo(_webSrc);
   }
 }

@@ -60,6 +60,12 @@ public class SuppressWarningsAnnotation implements IClassAnnotation {
     return new TypeReference(SuppressWarnings.class);
   }
   
+  @Override
+  public String toString() {
+    CharSequence _generate = this.generate();
+    return _generate.toString();
+  }
+  
   @Pure
   public String getSuppress() {
     return this.suppress;

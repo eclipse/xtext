@@ -271,26 +271,23 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
   protected void doGenerateStubFile() {
     Grammar _grammar = this.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_generatorStub);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Generates code from your model files on save.");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    xtendFile.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Generates code from your model files on save.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
         _builder.append("class ");
         ILanguageConfig _language = GeneratorFragment2.this.getLanguage();
         Grammar _grammar = _language.getGrammar();
@@ -327,16 +324,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_generatorStub, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    xtendFile.writeTo(_runtimeSrc);
+    _createXtendFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateJavaMain() {
     Grammar _grammar = this.getGrammar();
     TypeReference _javaMain = this.getJavaMain(_grammar);
-    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_javaMain);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -490,16 +486,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    javaFile.setContent(_client);
+    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_javaMain, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    javaFile.writeTo(_runtimeSrc);
+    _createJavaFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateXtendMain() {
     Grammar _grammar = this.getGrammar();
     TypeReference _javaMain = this.getJavaMain(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_javaMain);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -629,20 +624,18 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_javaMain, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    xtendFile.writeTo(_runtimeSrc);
+    _createXtendFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateMweFile() {
-    final TextFileAccess mweFile = this.fileAccessFactory.createTextFile();
     ILanguageConfig _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
     String _path = _generatorStub.getPath();
     String _plus = (_path + "MWE.mwe2");
-    mweFile.setPath(_plus);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -747,10 +740,10 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    mweFile.setContent(_client);
+    TextFileAccess _createTextFile = this.fileAccessFactory.createTextFile(_plus, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    mweFile.writeTo(_runtimeSrc);
+    _createTextFile.writeTo(_runtimeSrc);
   }
   
   protected boolean contributeEclipsePluginExtensions() {

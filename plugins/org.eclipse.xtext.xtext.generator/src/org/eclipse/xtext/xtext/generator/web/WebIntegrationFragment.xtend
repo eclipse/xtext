@@ -587,14 +587,11 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void generateServerLauncher() {
-		val xtendFile = fileAccessFactory.createXtendFile(grammar.serverLauncherClass)
-		xtendFile.typeComment = '''
+		fileAccessFactory.createXtendFile(grammar.serverLauncherClass, '''
 			/**
 			 * This program starts an HTTP server for testing the web integration of your DSL.
 			 * Just execute it and point a web browser to http://localhost:8080/
 			 */
-		'''
-		xtendFile.content = '''
 			class «grammar.serverLauncherClass.simpleName» {
 				def static void main(String[] args) {
 					val server = new «'org.eclipse.jetty.server.Server'.typeRef»(new «'java.net.InetSocketAddress'.typeRef»('localhost', 8080))
@@ -627,24 +624,18 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 					}
 				}
 			}
-		'''
-		xtendFile.writeTo(projectConfig.webSrc)
+		''').writeTo(projectConfig.webSrc)
 	}
 	
 	protected def void generateServlet() {
-		val xtendFile = fileAccessFactory.createXtendFile(grammar.servletClass)
-		if (useServlet3Api) {
-			xtendFile.annotations += new WebServletAnnotation => [
+		fileAccessFactory.createXtendFile(grammar.servletClass,'''
+			/**
+			 * Deploy this class into a servlet container to enable DSL-specific services.
+			 */
+			«IF useServlet3Api»«new WebServletAnnotation => [
 				name = 'XtextServices'
 				urlPatterns = '/xtext-service/*'
-			]
-		}
-		xtendFile.typeComment = '''
-		/**
-		 * Deploy this class into a servlet container to enable DSL-specific services.
-		 */
-		'''
-		xtendFile.content = '''
+			]»«ENDIF»
 			class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 				
 				val «List»<«ExecutorService»> executorServices = newArrayList
@@ -662,8 +653,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				}
 				
 			}
-		'''
-		xtendFile.writeTo(projectConfig.webSrc)
+		''').writeTo(projectConfig.webSrc)
 	}
 	
 }
