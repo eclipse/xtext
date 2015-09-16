@@ -631,7 +631,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 							new «'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef»,
 							new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»
 						]
-						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*')
+						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/«grammar.webBasePackage».*,.*/org\\.eclipse\\.xtext\\.web.*,.*/org.webjars.*')
 					]
 					val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 					try {

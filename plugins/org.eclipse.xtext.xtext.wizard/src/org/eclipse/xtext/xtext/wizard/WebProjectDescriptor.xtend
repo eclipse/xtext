@@ -35,7 +35,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.web.servlet")
 		deps += createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}")
@@ -45,8 +45,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 		deps += createMavenDependency("org.webjars:jquery:" + JQUERY_VERSION)
 		deps += createMavenDependency("org.webjars:ace:" + ACE_VERSION)
 		deps += createMavenDependency("org.eclipse.jetty:jetty-annotations:" + JETTY_VERSION) => [maven.scope = Scope.PROVIDED]
-		deps += createMavenDependency("org.slf4j:slf4j-api:" + SLF4J_VERSION) => [maven.scope = Scope.PROVIDED]
-		deps += createMavenDependency("org.slf4j:slf4j-log4j12:" + SLF4J_VERSION) => [maven.scope = Scope.PROVIDED]
+		deps += createMavenDependency("org.slf4j:slf4j-simple:" + SLF4J_VERSION) => [maven.scope = Scope.PROVIDED]
 		return deps
 	}
 	

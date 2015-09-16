@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -73,9 +73,9 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    HashSet<ExternalDependency> _xblockexpression = null;
+    LinkedHashSet<ExternalDependency> _xblockexpression = null;
     {
-      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+      final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.ui");
@@ -129,9 +129,9 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public Set<String> getBinIncludes() {
-    HashSet<String> _xblockexpression = null;
+    LinkedHashSet<String> _xblockexpression = null;
     {
-      final HashSet<String> includes = CollectionLiterals.<String>newHashSet();
+      final LinkedHashSet<String> includes = CollectionLiterals.<String>newLinkedHashSet();
       Set<String> _binIncludes = super.getBinIncludes();
       Iterables.<String>addAll(includes, _binIncludes);
       includes.add("plugin.xml");

@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -228,9 +228,9 @@ public abstract class ProjectDescriptor {
   }
   
   public Set<String> getRequiredBundles() {
-    HashSet<String> _xblockexpression = null;
+    LinkedHashSet<String> _xblockexpression = null;
     {
-      final HashSet<String> bundles = CollectionLiterals.<String>newHashSet();
+      final LinkedHashSet<String> bundles = CollectionLiterals.<String>newLinkedHashSet();
       Set<? extends ProjectDescriptor> _upstreamProjects = this.getUpstreamProjects();
       final Function1<ProjectDescriptor, String> _function = new Function1<ProjectDescriptor, String>() {
         @Override

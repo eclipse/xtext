@@ -3,7 +3,7 @@ package org.eclipse.xtext.xtext.wizard;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -71,7 +71,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+    final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
     Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
     Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
     ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.web.servlet");
@@ -94,7 +94,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     };
     ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_4, _function);
     deps.add(_doubleArrow);
-    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-api:" + WebProjectDescriptor.SLF4J_VERSION));
+    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-simple:" + WebProjectDescriptor.SLF4J_VERSION));
     final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
       @Override
       public void apply(final ExternalDependency it) {
@@ -104,16 +104,6 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     };
     ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function_1);
     deps.add(_doubleArrow_1);
-    ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-log4j12:" + WebProjectDescriptor.SLF4J_VERSION));
-    final Procedure1<ExternalDependency> _function_2 = new Procedure1<ExternalDependency>() {
-      @Override
-      public void apply(final ExternalDependency it) {
-        ExternalDependency.MavenCoordinates _maven = it.getMaven();
-        _maven.setScope(Scope.PROVIDED);
-      }
-    };
-    ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_6, _function_2);
-    deps.add(_doubleArrow_2);
     return deps;
   }
   

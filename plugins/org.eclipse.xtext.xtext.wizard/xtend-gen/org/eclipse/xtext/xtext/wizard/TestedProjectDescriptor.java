@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -19,9 +19,9 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    HashSet<ExternalDependency> _xblockexpression = null;
+    LinkedHashSet<ExternalDependency> _xblockexpression = null;
     {
-      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+      final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       TestProjectDescriptor _testProject = this.getTestProject();
@@ -38,9 +38,9 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<String> getSourceFolders() {
-    HashSet<String> _xblockexpression = null;
+    LinkedHashSet<String> _xblockexpression = null;
     {
-      final HashSet<String> sourceFolders = CollectionLiterals.<String>newHashSet();
+      final LinkedHashSet<String> sourceFolders = CollectionLiterals.<String>newLinkedHashSet();
       Set<String> _sourceFolders = super.getSourceFolders();
       Iterables.<String>addAll(sourceFolders, _sourceFolders);
       TestProjectDescriptor _testProject = this.getTestProject();
