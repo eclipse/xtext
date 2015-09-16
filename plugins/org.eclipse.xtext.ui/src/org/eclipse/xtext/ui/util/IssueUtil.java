@@ -79,6 +79,13 @@ public class IssueUtil {
 		}
 		return issue;
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected MarkerTypeProvider getMarkerTypeProvider() {
+		return markerTypeProvider;
+	}
 
 	/**
 	 * @deprecated As we are using IMarker.getAttributes() in {@link #createIssue(IMarker)}, we do not call this method any more
