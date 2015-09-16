@@ -64,6 +64,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 
 @SuppressWarnings("all")
 public class XtendIdeaModule extends AbstractXtendIdeaModule {
+  @Override
   public Class<? extends IContentAssistParser> bindIContentAssistParser() {
     return FlexerBasedContentAssistParser.class;
   }
@@ -77,6 +78,7 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
     _bind_1.toProvider(_create_1);
   }
   
+  @Override
   public void configureContentAssistLexer(final Binder binder) {
     AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
     Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);

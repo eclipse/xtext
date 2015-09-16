@@ -59,8 +59,8 @@ import com.intellij.openapi.util.Key
 import com.intellij.psi.util.PsiModificationTracker
 
 class XtendIdeaModule extends AbstractXtendIdeaModule {
-
-	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
+	
+	override Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		return FlexerBasedContentAssistParser
 	}
 
@@ -69,7 +69,7 @@ class XtendIdeaModule extends AbstractXtendIdeaModule {
 		binder.bind(DisabledInternalLexer).toProvider(LexerProvider.create(DisabledInternalLexer))
 	}
 
-	def void configureContentAssistLexer(Binder binder) {
+	override void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer)
 	}
 
