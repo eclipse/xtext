@@ -67,6 +67,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	String highlightingPath
 	String keywordsFilter = '\\w*'
 	boolean generateServlet = false
+	boolean generateWebXml = false
 	boolean useServlet3Api = true
 	boolean generateJettyLauncher = false
 	boolean generateHtmlExample = false
@@ -114,6 +115,13 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	 */
 	def void setGenerateServlet(boolean generateServlet) {
 		this.generateServlet = generateServlet
+	}
+	
+	/**
+	 * Whether a web.xml file should be generated. The default is {@code false} (not necessary for Servlet 3 compatible containers).
+	 */
+	def void setGenerateWebXml(boolean generateWebXml) {
+		this.generateWebXml = generateWebXml
 	}
 	
 	/**
@@ -206,6 +214,9 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		if (generateHtmlExample && projectConfig.webApp !== null) {
 			generateIndexDoc()
 			generateStyleSheet()
+		}
+		if (generateWebXml && projectConfig.webApp !== null) {
+			generateWebXml()
 		}
 		
 		// TODO move this configuration to an IDE module?
@@ -422,7 +433,6 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		indexFile.path = 'index.html'
 		
 		indexFile.content = '''
-			<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
 			<html>
 			<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -441,8 +451,13 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				<link rel="stylesheet" type="text/css" href="style.css"/>
 				<script src="webjars/requirejs/«REQUIREJS_VERSION»/require.min.js"></script>
 				<script type="text/javascript">
+					var baseUrl = window.location.pathname;
+					var fileIndex = baseUrl.indexOf("index.html");
+					if (fileIndex > 0)
+						baseUrl = baseUrl.slice(0, fileIndex);
 					«IF framework == Framework.ORION»
 						require.config({
+							baseUrl: baseUrl,
 							paths: {
 								"text": "webjars/requirejs-text/«REQUIREJS_TEXT_VERSION»/text",
 								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
@@ -451,11 +466,15 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 						});
 						require(["orion/code_edit/built-codeEdit-amd"], function() {
 							require(["xtext/xtext-orion"], function(xtext) {
-								xtext.createEditor({syntaxDefinition: "«if (generateJsHighlighting) highlightingModuleName else 'none'»"});
+								xtext.createEditor({
+									baseUrl: baseUrl,
+									syntaxDefinition: "«if (generateJsHighlighting) highlightingModuleName else 'none'»"
+								});
 							});
 						});
 					«ELSEIF framework == Framework.ACE»
 						require.config({
+							baseUrl: baseUrl,
 							paths: {
 								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
 								"ace/ext/language_tools": "webjars/ace/«ACE_VERSION»/src/ext-language_tools",
@@ -464,11 +483,15 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 						});
 						require(["webjars/ace/«ACE_VERSION»/src/ace"], function() {
 							require(["xtext/xtext-ace"], function(xtext) {
-								xtext.createEditor({syntaxDefinition: "«if (generateJsHighlighting) highlightingModuleName else 'none'»"});
+								xtext.createEditor({
+									baseUrl: baseUrl,
+									syntaxDefinition: "«if (generateJsHighlighting) highlightingModuleName else 'none'»"
+								});
 							});
 						});
 					«ELSEIF framework == Framework.CODEMIRROR»
 						require.config({
+							baseUrl: baseUrl,
 							paths: {
 								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
 								"xtext/xtext-codemirror": "xtext/«codeConfig.xtextVersion»/xtext-codemirror"
@@ -480,7 +503,11 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 							}]
 						});
 						require([«IF generateJsHighlighting»"«highlightingModuleName»", «ENDIF»"xtext/xtext-codemirror"], function(«IF generateJsHighlighting»mode, «ENDIF»xtext) {
-							xtext.createEditor(«IF !generateJsHighlighting»{syntaxDefinition: "none"}«ENDIF»);
+							xtext.createEditor({
+								baseUrl: baseUrl«IF !generateJsHighlighting»,
+								syntaxDefinition: "none"
+								«ENDIF»
+							});
 						});
 					«ENDIF»
 				</script>
@@ -627,7 +654,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void generateServlet() {
-		fileAccessFactory.createXtendFile(grammar.servletClass,'''
+		fileAccessFactory.createXtendFile(grammar.servletClass, '''
 			/**
 			 * Deploy this class into a servlet container to enable DSL-specific services.
 			 */
@@ -652,6 +679,69 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				
 			}
 		''').writeTo(projectConfig.webSrc)
+	}
+	
+	protected def void generateWebXml() {
+		val xmlFile = fileAccessFactory.createTextFile
+		xmlFile.path = 'WEB-INF/web.xml'
+		
+		xmlFile.content = '''
+			<?xml version="1.0" encoding="ISO-8859-1"?>
+			<web-app version="«IF useServlet3Api»3.0«ELSE»2.3«ENDIF»">
+				<display-name>Xtext Example Application</display-name>
+				<description>
+					This Example demonstrates the usage of Xtext with a servlet container.
+				</description>
+				«IF generateServlet»
+					
+					<servlet>
+						<servlet-name>XtextServices</servlet-name>
+						<description>
+							Back-end for the DSL-specific services of Xtext.
+						</description>
+						<servlet-class>«grammar.servletClass»</servlet-class>
+					</servlet>
+					
+					<servlet-mapping>
+						<servlet-name>XtextServices</servlet-name>
+						<url-pattern>/xtext-service/*</url-pattern>
+					</servlet-mapping>
+				«ENDIF»
+				«IF !useServlet3Api»
+					
+					<servlet>
+						<servlet-name>StaticContentServlet</servlet-name>
+						<servlet-class>org.eclipse.xtext.web.servlet.StaticContentServlet</servlet-class>
+					</servlet>
+					
+					<servlet-mapping>
+						<servlet-name>StaticContentServlet</servlet-name>
+						<url-pattern>/xtext/*</url-pattern>
+					</servlet-mapping>
+					
+					<servlet>
+						<servlet-name>WebjarsServlet</servlet-name>
+						<servlet-class>org.webjars.servlet.WebjarsServlet</servlet-class>
+					</servlet>
+					
+					<servlet-mapping>
+						<servlet-name>WebjarsServlet</servlet-name>
+						<url-pattern>/webjars/*</url-pattern>
+					</servlet-mapping>
+				«ENDIF»
+				«IF generateHtmlExample»
+					
+					<welcome-file-list>
+						<welcome-file>index.html</welcome-file>
+					</welcome-file-list>
+				«ENDIF»
+				
+				<session-config>
+					<session-timeout>30</session-timeout>
+				</session-config>
+			</web-app>
+		'''
+		xmlFile.writeTo(projectConfig.webApp)
 	}
 	
 }

@@ -41,7 +41,7 @@ define([
 				options.baseUrl = '/';
 			else if (options.baseUrl.charAt(0) != '/')
 				options.baseUrl = '/' + options.baseUrl;
-			options.serviceUrl = location.protocol + '//' + location.host + options.baseUrl + 'xtext-service';
+			options.serviceUrl = window.location.protocol + '//' + window.location.host + options.baseUrl + 'xtext-service';
 		}
 		if (options.resourceId) {
 			if (!options.xtextLang)

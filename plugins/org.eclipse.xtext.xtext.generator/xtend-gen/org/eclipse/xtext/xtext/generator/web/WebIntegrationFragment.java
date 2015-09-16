@@ -104,6 +104,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   
   private boolean generateServlet = false;
   
+  private boolean generateWebXml = false;
+  
   private boolean useServlet3Api = true;
   
   private boolean generateJettyLauncher = false;
@@ -155,6 +157,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
    */
   public void setGenerateServlet(final boolean generateServlet) {
     this.generateServlet = generateServlet;
+  }
+  
+  /**
+   * Whether a web.xml file should be generated. The default is {@code false} (not necessary for Servlet 3 compatible containers).
+   */
+  public void setGenerateWebXml(final boolean generateWebXml) {
+    this.generateWebXml = generateWebXml;
   }
   
   /**
@@ -363,6 +372,18 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (_and_3) {
       this.generateIndexDoc();
       this.generateStyleSheet();
+    }
+    boolean _and_4 = false;
+    if (!this.generateWebXml) {
+      _and_4 = false;
+    } else {
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webApp_2 = _projectConfig_4.getWebApp();
+      boolean _tripleNotEquals_4 = (_webApp_2 != null);
+      _and_4 = _tripleNotEquals_4;
+    }
+    if (_and_4) {
+      this.generateWebXml();
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -1284,8 +1305,6 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Strict//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
-        _builder.newLine();
         _builder.append("<html>");
         _builder.newLine();
         _builder.append("<head>");
@@ -1354,11 +1373,27 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("\t");
         _builder.append("<script type=\"text/javascript\">");
         _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("var baseUrl = window.location.pathname;");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("var fileIndex = baseUrl.indexOf(\"index.html\");");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("if (fileIndex > 0)");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("baseUrl = baseUrl.slice(0, fileIndex);");
+        _builder.newLine();
         {
           boolean _equals_3 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
           if (_equals_3) {
             _builder.append("\t\t");
             _builder.append("require.config({");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("baseUrl: baseUrl,");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
@@ -1399,16 +1434,28 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t\t");
-            _builder.append("xtext.createEditor({syntaxDefinition: \"");
+            _builder.append("xtext.createEditor({");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("baseUrl: baseUrl,");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t");
+            _builder.append("syntaxDefinition: \"");
             String _xifexpression = null;
             if (WebIntegrationFragment.this.generateJsHighlighting) {
               _xifexpression = WebIntegrationFragment.this.highlightingModuleName;
             } else {
               _xifexpression = "none";
             }
-            _builder.append(_xifexpression, "\t\t\t\t");
-            _builder.append("\"});");
+            _builder.append(_xifexpression, "\t\t\t\t\t");
+            _builder.append("\"");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("});");
+            _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("});");
@@ -1421,6 +1468,10 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             if (_equals_4) {
               _builder.append("\t\t");
               _builder.append("require.config({");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t");
+              _builder.append("baseUrl: baseUrl,");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
@@ -1463,16 +1514,28 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t");
-              _builder.append("xtext.createEditor({syntaxDefinition: \"");
+              _builder.append("xtext.createEditor({");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t");
+              _builder.append("baseUrl: baseUrl,");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t");
+              _builder.append("syntaxDefinition: \"");
               String _xifexpression_1 = null;
               if (WebIntegrationFragment.this.generateJsHighlighting) {
                 _xifexpression_1 = WebIntegrationFragment.this.highlightingModuleName;
               } else {
                 _xifexpression_1 = "none";
               }
-              _builder.append(_xifexpression_1, "\t\t\t\t");
-              _builder.append("\"});");
+              _builder.append(_xifexpression_1, "\t\t\t\t\t");
+              _builder.append("\"");
               _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("});");
+              _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
               _builder.append("});");
@@ -1485,6 +1548,10 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               if (_equals_5) {
                 _builder.append("\t\t");
                 _builder.append("require.config({");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("baseUrl: baseUrl,");
                 _builder.newLine();
                 _builder.append("\t\t");
                 _builder.append("\t");
@@ -1551,14 +1618,25 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
                 _builder.append("\t");
-                _builder.append("xtext.createEditor(");
+                _builder.append("xtext.createEditor({");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("baseUrl: baseUrl");
                 {
                   if ((!WebIntegrationFragment.this.generateJsHighlighting)) {
-                    _builder.append("{syntaxDefinition: \"none\"}");
+                    _builder.append(",");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t");
+                    _builder.append("\t\t");
+                    _builder.append("syntaxDefinition: \"none\"");
+                    _builder.newLine();
                   }
                 }
-                _builder.append(");");
-                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("});");
+                _builder.newLine();
                 _builder.append("\t\t");
                 _builder.append("});");
                 _builder.newLine();
@@ -2077,5 +2155,192 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webSrc = _projectConfig.getWebSrc();
     _createXtendFile.writeTo(_webSrc);
+  }
+  
+  protected void generateWebXml() {
+    final TextFileAccess xmlFile = this.fileAccessFactory.createTextFile();
+    xmlFile.setPath("WEB-INF/web.xml");
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
+        _builder.newLine();
+        _builder.append("<web-app version=\"");
+        {
+          if (WebIntegrationFragment.this.useServlet3Api) {
+            _builder.append("3.0");
+          } else {
+            _builder.append("2.3");
+          }
+        }
+        _builder.append("\">");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("<display-name>Xtext Example Application</display-name>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<description>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("This Example demonstrates the usage of Xtext with a servlet container.");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("</description>");
+        _builder.newLine();
+        {
+          if (WebIntegrationFragment.this.generateServlet) {
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<servlet>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-name>XtextServices</servlet-name>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<description>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("Back-end for the DSL-specific services of Xtext.");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("</description>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-class>");
+            Grammar _grammar = WebIntegrationFragment.this.getGrammar();
+            TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(_grammar);
+            _builder.append(_servletClass, "\t\t");
+            _builder.append("</servlet-class>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("</servlet>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<servlet-mapping>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-name>XtextServices</servlet-name>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<url-pattern>/xtext-service/*</url-pattern>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</servlet-mapping>");
+            _builder.newLine();
+          }
+        }
+        {
+          if ((!WebIntegrationFragment.this.useServlet3Api)) {
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<servlet>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-name>StaticContentServlet</servlet-name>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-class>org.eclipse.xtext.web.servlet.StaticContentServlet</servlet-class>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</servlet>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<servlet-mapping>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-name>StaticContentServlet</servlet-name>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<url-pattern>/xtext/*</url-pattern>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</servlet-mapping>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<servlet>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-name>WebjarsServlet</servlet-name>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-class>org.webjars.servlet.WebjarsServlet</servlet-class>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</servlet>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<servlet-mapping>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<servlet-name>WebjarsServlet</servlet-name>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<url-pattern>/webjars/*</url-pattern>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</servlet-mapping>");
+            _builder.newLine();
+          }
+        }
+        {
+          if (WebIntegrationFragment.this.generateHtmlExample) {
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<welcome-file-list>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("<welcome-file>index.html</welcome-file>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</welcome-file-list>");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<session-config>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<session-timeout>30</session-timeout>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("</session-config>");
+        _builder.newLine();
+        _builder.append("</web-app>");
+        _builder.newLine();
+      }
+    };
+    xmlFile.setContent(_client);
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    xmlFile.writeTo(_webApp);
   }
 }
