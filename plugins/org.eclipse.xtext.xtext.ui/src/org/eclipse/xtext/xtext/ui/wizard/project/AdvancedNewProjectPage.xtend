@@ -79,6 +79,7 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		createIdeaProject.require(createIdeProject)
 		createWebProject.require(createIdeProject)
+		makeUiProjectRequirePlainLayout
 		setDefaults
 	}
 
@@ -157,5 +158,20 @@ class AdvancedNewProjectPage extends WizardPage {
 		}
 		project.addSelectionListener(selectionControl)
 		requirement.addSelectionListener(selectionControl)
+	}
+	
+	
+	def void makeUiProjectRequirePlainLayout() {
+		val selectionControl = new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if (e.widget == createUiProject && createUiProject.selection) {
+					sourceLayout.select(0)
+				} else if (e.widget == sourceLayout && sourceLayout.selectionIndex != 0) {
+					createUiProject.selection = false
+				}
+			}
+		}
+		createUiProject.addSelectionListener(selectionControl)
+		sourceLayout.addSelectionListener(selectionControl)
 	}
 }
