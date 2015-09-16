@@ -26,6 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.CommonProcessors;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
@@ -1264,13 +1265,13 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(219,226)");
+    _builder_1.append("(136,140)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1282,13 +1283,13 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0_ELEMENT_TYPE)");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(136,140)");
+    _builder_1.append("(219,226)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1342,13 +1343,13 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(239,246)");
+    _builder_1.append("(156,160)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1360,13 +1361,13 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0_ELEMENT_TYPE)");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(156,160)");
+    _builder_1.append("(239,246)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1426,7 +1427,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(181,188)");
+    _builder_1.append("(116,120)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1444,7 +1445,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(116,120)");
+    _builder_1.append("(181,188)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1504,7 +1505,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(199,206)");
+    _builder_1.append("(134,138)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1522,7 +1523,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(134,138)");
+    _builder_1.append("(199,206)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1582,7 +1583,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(183,189)");
+    _builder_1.append("(117,121)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1600,7 +1601,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(117,121)");
+    _builder_1.append("(183,189)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1660,7 +1661,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(201,207)");
+    _builder_1.append("(135,139)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1678,7 +1679,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(135,139)");
+    _builder_1.append("(201,207)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1747,6 +1748,24 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("rangesToHighlight {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("(144,145)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("XtextPsiReferenceImpl {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
     _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
@@ -1772,24 +1791,6 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("(295,297)");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("XtextPsiReferenceImpl {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("rangesToHighlight {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t\t");
-    _builder_1.append("(144,145)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1862,13 +1863,13 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(266,283)");
+    _builder_1.append("(205,206)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -1880,13 +1881,13 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("XtextPsiReferenceImpl {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)");
+    _builder_1.append("element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("rangesToHighlight {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("(205,206)");
+    _builder_1.append("(266,283)");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -2046,18 +2047,6 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("*= (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t\t");
-    _builder_1.append("virtualFile : temp:///src/mypackage/MyClass.xtend");
-    _builder_1.newLine();
-    _builder_1.append("\t\t\t");
-    _builder_1.append("navigationOffset : 295");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
     _builder_1.append("operator_multiply (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
@@ -2065,6 +2054,18 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("navigationOffset : 205");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("*= (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("virtualFile : temp:///src/mypackage/MyClass.xtend");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("navigationOffset : 295");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
@@ -2371,7 +2372,18 @@ public class XtendFindUsagesTest extends LightXtendTest {
     {
       PsiFile _containingFile = element.getContainingFile();
       final LocalSearchScope scope = new LocalSearchScope(_containingFile);
-      final Collection<PsiReference> references = findUsagesHandler.findReferencesToHighlight(element, scope);
+      Collection<PsiReference> _findReferencesToHighlight = findUsagesHandler.findReferencesToHighlight(element, scope);
+      final Comparator<PsiReference> _function = new Comparator<PsiReference>() {
+        @Override
+        public int compare(final PsiReference $0, final PsiReference $1) {
+          PsiElement _element = $0.getElement();
+          int _textOffset = _element.getTextOffset();
+          PsiElement _element_1 = $1.getElement();
+          int _textOffset_1 = _element_1.getTextOffset();
+          return Integer.valueOf(_textOffset).compareTo(Integer.valueOf(_textOffset_1));
+        }
+      };
+      final List<PsiReference> references = IterableExtensions.<PsiReference>sortWith(_findReferencesToHighlight, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("references {");
       _builder.newLine();
@@ -2454,7 +2466,16 @@ public class XtendFindUsagesTest extends LightXtendTest {
     {
       for(final PsiElement element : elements) {
         _builder.append(element, "");
-        final Collection<UsageInfo> usages = this.findUsages(findUsagesHandler, element);
+        Collection<UsageInfo> _findUsages = this.findUsages(findUsagesHandler, element);
+        final Comparator<UsageInfo> _function = new Comparator<UsageInfo>() {
+          @Override
+          public int compare(final UsageInfo $0, final UsageInfo $1) {
+            int _navigationOffset = $0.getNavigationOffset();
+            int _navigationOffset_1 = $1.getNavigationOffset();
+            return Integer.valueOf(_navigationOffset).compareTo(Integer.valueOf(_navigationOffset_1));
+          }
+        };
+        final List<UsageInfo> usages = IterableExtensions.<UsageInfo>sortWith(_findUsages, _function);
         {
           boolean _isEmpty = usages.isEmpty();
           boolean _not = (!_isEmpty);

@@ -572,15 +572,15 @@ class XtendFindUsagesTest extends LightXtendTest {
 		namedElement.testHighlightUsages('''
 			references {
 				XtextPsiReferenceImpl {
-					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
-					rangesToHighlight {
-						(219,226)
-					}
-				}
-				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
 						(136,140)
+					}
+				}
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(219,226)
 					}
 				}
 			}
@@ -608,15 +608,15 @@ class XtendFindUsagesTest extends LightXtendTest {
 		namedElement.testHighlightUsages('''
 			references {
 				XtextPsiReferenceImpl {
-					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
-					rangesToHighlight {
-						(239,246)
-					}
-				}
-				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
 						(156,160)
+					}
+				}
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(239,246)
 					}
 				}
 			}
@@ -646,13 +646,13 @@ class XtendFindUsagesTest extends LightXtendTest {
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(181,188)
+						(116,120)
 					}
 				}
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(116,120)
+						(181,188)
 					}
 				}
 			}
@@ -682,13 +682,13 @@ class XtendFindUsagesTest extends LightXtendTest {
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(199,206)
+						(134,138)
 					}
 				}
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(134,138)
+						(199,206)
 					}
 				}
 			}
@@ -718,13 +718,13 @@ class XtendFindUsagesTest extends LightXtendTest {
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(183,189)
+						(117,121)
 					}
 				}
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(117,121)
+						(183,189)
 					}
 				}
 			}
@@ -754,13 +754,13 @@ class XtendFindUsagesTest extends LightXtendTest {
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(201,207)
+						(135,139)
 					}
 				}
 				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
-						(135,139)
+						(201,207)
 					}
 				}
 			}
@@ -795,6 +795,12 @@ class XtendFindUsagesTest extends LightXtendTest {
 		namedElement.testHighlightUsages('''
 			references {
 				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(144,145)
+					}
+				}
+				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
 					rangesToHighlight {
 						(205,222)
@@ -804,12 +810,6 @@ class XtendFindUsagesTest extends LightXtendTest {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0_ELEMENT_TYPE)
 					rangesToHighlight {
 						(295,297)
-					}
-				}
-				XtextPsiReferenceImpl {
-					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)
-					rangesToHighlight {
-						(144,145)
 					}
 				}
 			}
@@ -846,15 +846,15 @@ class XtendFindUsagesTest extends LightXtendTest {
 		namedElement.testHighlightUsages('''
 			references {
 				XtextPsiReferenceImpl {
-					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
-					rangesToHighlight {
-						(266,283)
-					}
-				}
-				XtextPsiReferenceImpl {
 					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0_ELEMENT_TYPE)
 					rangesToHighlight {
 						(205,206)
+					}
+				}
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(266,283)
 					}
 				}
 			}
@@ -932,13 +932,13 @@ class XtendFindUsagesTest extends LightXtendTest {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 144
 					}
-					*= (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
-						virtualFile : temp:///src/mypackage/MyClass.xtend
-						navigationOffset : 295
-					}
 					operator_multiply (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 205
+					}
+					*= (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
+						virtualFile : temp:///src/mypackage/MyClass.xtend
+						navigationOffset : 295
 					}
 				}
 			}
@@ -1074,7 +1074,9 @@ class XtendFindUsagesTest extends LightXtendTest {
 
 	protected def String printHighlightUsages(FindUsagesHandler findUsagesHandler, PsiElement element) {
 		val scope = new LocalSearchScope(element.containingFile)
-		val references = findUsagesHandler.findReferencesToHighlight(element, scope)
+		val references = findUsagesHandler.findReferencesToHighlight(element, scope).sortWith [
+			$0.element.textOffset.compareTo($1.element.textOffset)
+		]
 		'''
 			references {
 				«FOR reference : references»
@@ -1110,7 +1112,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 
 	protected def String printUsages(FindUsagesHandler findUsagesHandler, PsiElement ... elements) '''
 		«FOR element : elements»
-			«element»«val usages = findUsagesHandler.findUsages(element)»«IF !usages.empty» {
+			«element»«val usages = findUsagesHandler.findUsages(element).sortWith[$0.navigationOffset.compareTo($1.navigationOffset)]»«IF !usages.empty» {
 				«FOR usage : usages»
 					«usage» {
 						virtualFile : «usage.virtualFile»
