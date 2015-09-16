@@ -51,6 +51,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	def generate(Grammar it, AntlrOptions options, IXtextGeneratorFileSystemAccess fsa) {
 		val RuleFilter filter = new RuleFilter();
+		filter.discardUnreachableRules = options.skipUnusedRules
 		val RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
 		val Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
 		fsa.generateFile(grammarClass.path + '.g', flattened.compile(options))

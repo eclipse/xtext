@@ -65,6 +65,8 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
     final RuleFilter filter = new RuleFilter();
+    boolean _isSkipUnusedRules = options.isSkipUnusedRules();
+    filter.setDiscardUnreachableRules(_isSkipUnusedRules);
     Grammar _grammar = GrammarUtil.getGrammar(it);
     final RuleNames ruleNames = RuleNames.getRuleNames(_grammar, true);
     FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
