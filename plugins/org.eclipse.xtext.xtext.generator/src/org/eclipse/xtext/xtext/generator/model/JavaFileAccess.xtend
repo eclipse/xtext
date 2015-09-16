@@ -103,10 +103,10 @@ class JavaFileAccess extends TextFileAccess {
 		return usableName + typeRef.typeArguments.join('<', ', ', '>', [importType])
 	}
 	
-	def void setJavaContent(StringConcatenationClient javaContent) {
-		val javaStringConcat = new JavaStringConcatenation(this)
+	override setContent(StringConcatenationClient javaContent) {
+		val javaStringConcat = new JavaTypeAwareStringConcatenation(this)
 		javaStringConcat.append(javaContent)
-		setContent(javaStringConcat)
+		this.internalContents = javaStringConcat
 	}
 	
 	protected def boolean appendSemicolons() {
@@ -130,11 +130,11 @@ class JavaFileAccess extends TextFileAccess {
 			«FOR annot : classAnnotations»
 				«annot.generate()»
 			«ENDFOR»
-			«content»
+			«internalContents»
 		'''
 	}
 	
-	private static class JavaStringConcatenation extends StringConcatenation {
+	private static class JavaTypeAwareStringConcatenation extends StringConcatenation {
 		
 		val JavaFileAccess access
 		

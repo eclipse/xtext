@@ -452,7 +452,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
       Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
       _requiredBundles.addAll(
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util")));
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util", "org.eclipse.xtend.lib")));
       ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
       Set<String> _importedPackages = _runtimeManifest_2.getImportedPackages();
       _importedPackages.add("org.apache.log4j");
@@ -463,7 +463,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
       Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
       _requiredBundles_1.addAll(
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui")));
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui", "org.eclipse.xtend.lib")));
     }
     PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
     boolean _tripleNotEquals_2 = (_eclipsePluginPluginXml != null);

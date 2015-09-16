@@ -36,10 +36,10 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 @SuppressWarnings("all")
 public class JavaFileAccess extends TextFileAccess {
-  private static class JavaStringConcatenation extends StringConcatenation {
+  private static class JavaTypeAwareStringConcatenation extends StringConcatenation {
     private final JavaFileAccess access;
     
-    public JavaStringConcatenation(final JavaFileAccess access) {
+    public JavaTypeAwareStringConcatenation(final JavaFileAccess access) {
       super(access.codeConfig.getLineDelimiter());
       this.access = access;
     }
@@ -206,10 +206,15 @@ public class JavaFileAccess extends TextFileAccess {
     return (usableName + _join_1);
   }
   
-  public void setJavaContent(final StringConcatenationClient javaContent) {
-    final JavaFileAccess.JavaStringConcatenation javaStringConcat = new JavaFileAccess.JavaStringConcatenation(this);
-    javaStringConcat.append(javaContent);
-    this.setContent(javaStringConcat);
+  @Override
+  public CharSequence setContent(final StringConcatenationClient javaContent) {
+    CharSequence _xblockexpression = null;
+    {
+      final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
+      javaStringConcat.append(javaContent);
+      _xblockexpression = this.internalContents = javaStringConcat;
+    }
+    return _xblockexpression;
   }
   
   protected boolean appendSemicolons() {
@@ -276,8 +281,7 @@ public class JavaFileAccess extends TextFileAccess {
         _builder.newLineIfNotEmpty();
       }
     }
-    CharSequence _content = this.getContent();
-    _builder.append(_content, "");
+    _builder.append(this.internalContents, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }

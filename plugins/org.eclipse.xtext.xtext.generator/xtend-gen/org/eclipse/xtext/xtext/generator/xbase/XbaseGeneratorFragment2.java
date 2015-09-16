@@ -532,7 +532,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setJavaContent(_client);
+    xtendFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
     xtendFile.writeTo(_runtimeSrc);

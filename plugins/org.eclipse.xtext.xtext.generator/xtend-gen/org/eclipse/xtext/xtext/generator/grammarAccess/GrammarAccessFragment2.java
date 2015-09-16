@@ -591,7 +591,7 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    javaFile.setJavaContent(_client);
+    javaFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrcGen = _projectConfig.getRuntimeSrcGen();
     javaFile.writeTo(_runtimeSrcGen);

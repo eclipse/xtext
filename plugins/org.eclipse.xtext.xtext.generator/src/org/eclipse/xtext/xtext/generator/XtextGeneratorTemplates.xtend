@@ -23,6 +23,7 @@ import java.util.Map
 import java.util.Properties
 import java.util.concurrent.ExecutorService
 import org.apache.log4j.Logger
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ISetup
@@ -68,35 +69,35 @@ class XtextGeneratorTemplates {
 	def JavaFileAccess createRuntimeSetup(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(runtimeSetup)
+		val file = fileAccessFactory.createXtendFile(runtimeSetup)
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * Initialization support for running Xtext languages without Equinox extension registry.
 			 */
 		 '''
-		 javaFile.javaContent = '''
-			 public class «runtimeSetup.simpleName» extends «runtimeGenSetup» {
+		 file.content = '''
+			 class «runtimeSetup.simpleName» extends «runtimeGenSetup» {
 			 
-			 	public static void doSetup() {
-			 		new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration();
+			 	def static void doSetup() {
+			 		new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration()
 			 	}
 			 
 			 }
 		 '''
-		 return javaFile
+		 return file
 	}
 	
 	def JavaFileAccess createRuntimeGenSetup(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(runtimeGenSetup)
+		val file = fileAccessFactory.createJavaFile(runtimeGenSetup)
 		for (type : langConfig.runtimeGenSetup.imports) {
-			javaFile.importType(type)
+			file.importType(type)
 		}
 		
-		javaFile.annotations += new SuppressWarningsAnnotation
-		javaFile.javaContent = '''
+		file.annotations += new SuppressWarningsAnnotation
+		file.content = '''
 			public class «runtimeGenSetup.simpleName» implements «ISetup» {
 			
 				@Override
@@ -135,8 +136,8 @@ class XtextGeneratorTemplates {
 				}
 			}
 		 '''
-		 javaFile.markedAsGenerated = true
-		 return javaFile
+		 file.markedAsGenerated = true
+		 return file
 	}
 	
 	private def getBindMethodName(GuiceModuleAccess.Binding it) {
@@ -181,34 +182,34 @@ class XtextGeneratorTemplates {
 	def JavaFileAccess createRuntimeModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(runtimeModule)
-		javaFile.typeComment = '''
+		val file = fileAccessFactory.createXtendFile(runtimeModule)
+		file.typeComment = '''
 			/**
 			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
 			 */
 		'''
-		javaFile.javaContent = '''
-			public class «runtimeModule.simpleName» extends «runtimeGenModule» {
+		file.content = '''
+			class «runtimeModule.simpleName» extends «runtimeGenModule» {
 			
 			}
 		'''
-		return javaFile
+		return file
 	}
 	
 	def JavaFileAccess createRuntimeGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(runtimeGenModule)
-		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		val file = fileAccessFactory.createJavaFile(runtimeGenModule)
+		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * Manual modifications go to {@link «runtimeModule.simpleName»}.
 			 */
 		'''
-		javaFile.annotations += new SuppressWarningsAnnotation
-		javaFile.javaContent = '''
+		file.annotations += new SuppressWarningsAnnotation
+		file.content = '''
 			public abstract class «runtimeGenModule.simpleName» extends «superClass» {
 			
 				protected «Properties» properties = null;
@@ -234,45 +235,41 @@ class XtextGeneratorTemplates {
 				«ENDFOR»
 			}
 		'''
-		javaFile.markedAsGenerated = true
-		return javaFile
+		file.markedAsGenerated = true
+		return file
 	}
 	
 	def JavaFileAccess createEclipsePluginModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginModule)
-		javaFile.typeComment = '''
+		val file = fileAccessFactory.createXtendFile(eclipsePluginModule)
+		file.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the Eclipse IDE.
 			 */
 		'''
-		javaFile.javaContent = '''
-			public class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
-				
-				public «eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
-					super(plugin);
-				}
+		file.content = '''
+			@«FinalFieldsConstructor» class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
 				
 			}
 		'''
-		return javaFile
+		return file
 	}
 	
 	def JavaFileAccess createEclipsePluginGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginGenModule)
-		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		val file = fileAccessFactory.createJavaFile(eclipsePluginGenModule)
+		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * Manual modifications go to {@link «eclipsePluginModule.simpleName»}.
 			 */
 		'''
-		javaFile.annotations += new SuppressWarningsAnnotation
-		javaFile.javaContent = '''
+		file.annotations += new SuppressWarningsAnnotation
+		file.content = '''
 			public abstract class «eclipsePluginGenModule.simpleName» extends «superClass» {
 			
 				public «eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
@@ -285,40 +282,40 @@ class XtextGeneratorTemplates {
 				«ENDFOR»
 			}
 		'''
-		javaFile.markedAsGenerated = true
-		return javaFile
+		file.markedAsGenerated = true
+		return file
 	}
 	
 	def JavaFileAccess createIdeaModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(ideaModule)
-		javaFile.typeComment = '''
+		val file = fileAccessFactory.createXtendFile(ideaModule)
+		file.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the IntelliJ IDEA.
 			 */
 		'''
-		javaFile.javaContent = '''
-			public class «ideaModule.simpleName» extends «ideaGenModule» {
+		file.content = '''
+			class «ideaModule.simpleName» extends «ideaGenModule» {
 			}
 		'''
-		return javaFile
+		return file
 	}
 	
 	def JavaFileAccess createIdeaGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.ideaGenModule.superClass ?: ideaDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(ideaGenModule)
-		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		val file = fileAccessFactory.createJavaFile(ideaGenModule)
+		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * Manual modifications go to {@link «ideaModule.simpleName»}.
 			 */
 		'''
-		javaFile.annotations += new SuppressWarningsAnnotation
-		javaFile.javaContent = '''
+		file.annotations += new SuppressWarningsAnnotation
+		file.content = '''
 			public abstract class «ideaGenModule.simpleName» extends «superClass» {
 				
 				«FOR binding : langConfig.ideaGenModule.bindings»
@@ -327,45 +324,40 @@ class XtextGeneratorTemplates {
 				«ENDFOR»
 			}
 		'''
-		javaFile.markedAsGenerated = true
-		return javaFile
+		file.markedAsGenerated = true
+		return file
 	}
 	
 	def JavaFileAccess createWebModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(webModule)
-		javaFile.typeComment = '''
+		val file = fileAccessFactory.createXtendFile(webModule)
+		file.typeComment = '''
 			/**
-			 * Use this class to register components to be used within the web application.
+			 * Use this class to register additional components to be used within the web application.
 			 */
 		'''
-		javaFile.javaContent = '''
-			public class «webModule.simpleName» extends «webGenModule» {
-				
-				public «webModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-					super(executorServiceProvider);
-				}
-				
+		file.content = '''
+			@«FinalFieldsConstructor» class «webModule.simpleName» extends «webGenModule» {
 			}
 		'''
-		return javaFile
+		return file
 	}
 	
 	def JavaFileAccess createWebGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.webGenModule.superClass ?: webDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(webGenModule)
-		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		val file = fileAccessFactory.createJavaFile(webGenModule)
+		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * Manual modifications go to {@link «webModule.simpleName»}.
 			 */
 		'''
-		javaFile.annotations += new SuppressWarningsAnnotation
-		javaFile.javaContent = '''
+		file.annotations += new SuppressWarningsAnnotation
+		file.content = '''
 			public abstract class «webGenModule.simpleName» extends «superClass» {
 			
 				public «webGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
@@ -378,39 +370,34 @@ class XtextGeneratorTemplates {
 				«ENDFOR»
 			}
 		'''
-		javaFile.markedAsGenerated = true
-		return javaFile
+		file.markedAsGenerated = true
+		return file
 	}
 	
 	def JavaFileAccess createWebSetup(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(webSetup)
+		val file = fileAccessFactory.createXtendFile(webSetup)
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * Initialization support for running Xtext languages in web applications.
 			 */
 		 '''
-		 javaFile.javaContent = '''
-			public class «webSetup.simpleName» extends «runtimeSetup» {
+		 file.content = '''
+			@«FinalFieldsConstructor» class «webSetup.simpleName» extends «runtimeSetup» {
 				
-				private final «Provider»<«ExecutorService»> executorServiceProvider;
+				val «Provider»<«ExecutorService»> executorServiceProvider;
 				
-				public «webSetup.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-					this.executorServiceProvider = executorServiceProvider;
-				}
-				
-				@Override
-				public «Injector» createInjector() {
-					«Module» runtimeModule = new «runtimeModule»();
-					«Module» webModule = new «webModule»(executorServiceProvider);
-					return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule));
+				override «Injector» createInjector() {
+					val runtimeModule = new «runtimeModule»()
+					val webModule = new «webModule»(executorServiceProvider)
+					return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule))
 				}
 				
 			}
 		 '''
-		 return javaFile
+		 return file
 	}
 	
 	def TextFileAccess createManifest(ManifestAccess manifest, TypeReference activator) {
@@ -446,15 +433,15 @@ class XtextGeneratorTemplates {
 		val grammar = langConfig.grammar
 		val activatorGrammar = activatorLanguage.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(grammar.eclipsePluginExecutableExtensionFactory)
+		val file = fileAccessFactory.createJavaFile(grammar.eclipsePluginExecutableExtensionFactory)
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * This class was generated. Customizations should only happen in a newly
 			 * introduced subclass. 
 			 */
 		'''
-		javaFile.javaContent = '''
+		file.content = '''
 			public class «grammar.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
@@ -469,21 +456,21 @@ class XtextGeneratorTemplates {
 				
 			}
 		'''
-		javaFile.markedAsGenerated = true
-		return javaFile
+		file.markedAsGenerated = true
+		return file
 	}
 	
 	def JavaFileAccess createEclipsePluginActivator(List<? extends ILanguageConfig> langConfigs) {
 		val activator = langConfigs.head.naming.getEclipsePluginActivator(langConfigs.head.grammar)
-		val javaFile = fileAccessFactory.createJavaFile(activator)
+		val file = fileAccessFactory.createJavaFile(activator)
 		
-		javaFile.typeComment = '''
+		file.typeComment = '''
 			/**
 			 * This class was generated. Customizations should only happen in a newly
 			 * introduced subclass. 
 			 */
 		'''
-		javaFile.javaContent = '''
+		file.content = '''
 			public class «activator.simpleName» extends «'org.eclipse.ui.plugin.AbstractUIPlugin'» {
 			
 				«FOR lang : langConfigs»
@@ -561,8 +548,8 @@ class XtextGeneratorTemplates {
 				
 			}
 		'''
-		javaFile.markedAsGenerated = true
-		return javaFile
+		file.markedAsGenerated = true
+		return file
 	}
 	
 }
