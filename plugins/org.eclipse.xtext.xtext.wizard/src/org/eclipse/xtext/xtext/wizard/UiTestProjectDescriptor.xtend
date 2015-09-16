@@ -8,7 +8,7 @@ import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 class UiTestProjectDescriptor extends TestProjectDescriptor {
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.junit4") => [maven.scope = Scope.TESTCOMPILE]
 		deps += createXtextDependency("org.eclipse.xtext.xbase.junit") => [maven.scope = Scope.TESTCOMPILE]

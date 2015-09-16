@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -99,9 +100,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    HashSet<ExternalDependency> _xblockexpression = null;
+    LinkedHashSet<ExternalDependency> _xblockexpression = null;
     {
-      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+      final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext");

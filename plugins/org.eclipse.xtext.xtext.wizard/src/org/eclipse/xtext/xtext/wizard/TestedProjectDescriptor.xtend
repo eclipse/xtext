@@ -8,7 +8,7 @@ abstract class TestedProjectDescriptor extends ProjectDescriptor {
 	def TestProjectDescriptor getTestProject()
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		if (testProject.isInlined)
 			deps += testProject.externalDependencies
@@ -16,7 +16,7 @@ abstract class TestedProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override getSourceFolders() {
-		val sourceFolders = newHashSet
+		val sourceFolders = newLinkedHashSet
 		sourceFolders += super.sourceFolders
 		if (testProject.isInlined)
 			sourceFolders += testProject.sourceFolders

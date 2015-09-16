@@ -3,7 +3,7 @@ package org.eclipse.xtext.xtext.wizard;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -71,7 +71,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+    final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
     Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
     Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
     ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.web.servlet");

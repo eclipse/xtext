@@ -40,7 +40,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext")
 		deps += createXtextDependency("org.eclipse.xtext.xbase")

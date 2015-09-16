@@ -99,7 +99,7 @@ abstract class ProjectDescriptor {
 	}
 
 	def Set<String> getRequiredBundles() {
-		val bundles = newHashSet
+		val bundles = newLinkedHashSet
 		bundles += upstreamProjects.map[name]
 		bundles += externalDependencies.map[p2].filter[bundleId != null]
 			.map[bundleId + if (version == null) "" else ';bundle-version="' +version+ '"']

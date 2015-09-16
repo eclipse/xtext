@@ -35,7 +35,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.web.servlet")
 		deps += createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}")

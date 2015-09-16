@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -20,9 +20,9 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    HashSet<ExternalDependency> _xblockexpression = null;
+    LinkedHashSet<ExternalDependency> _xblockexpression = null;
     {
-      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+      final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
