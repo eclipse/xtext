@@ -310,7 +310,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     connection.<ModuleListener>subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
       @Override
       public void moduleAdded(final Project project, final Module module) {
-        XtextAutoBuilderComponent.this.doCleanBuild(module);
+        boolean _isInitialized = project.isInitialized();
+        if (_isInitialized) {
+          XtextAutoBuilderComponent.this.doCleanBuild(module);
+        }
       }
       
       @Override
@@ -338,9 +341,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     _instance_2.registerListener(new ProjectWideFacetAdapter<Facet>() {
       @Override
       public void facetAdded(final Facet facet) {
+        boolean _or = false;
         boolean _isXtextFacet = XtextAutoBuilderComponent.this.isXtextFacet(facet);
         boolean _not = (!_isXtextFacet);
         if (_not) {
+          _or = true;
+        } else {
+          boolean _isInitialized = project.isInitialized();
+          boolean _not_1 = (!_isInitialized);
+          _or = _not_1;
+        }
+        if (_or) {
           return;
         }
         Module _module = facet.getModule();

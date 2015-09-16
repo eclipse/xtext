@@ -207,7 +207,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
          connection.subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
 			
 			override moduleAdded(Project project, Module module) {
-				doCleanBuild(module)
+				if(project.initialized)
+					doCleanBuild(module)
 			}
 			
 			override moduleRemoved(Project project, Module module) {
@@ -228,7 +229,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		ProjectWideFacetListenersRegistry.getInstance(project).registerListener(new ProjectWideFacetAdapter<Facet>() {
 			
 			override facetAdded(Facet facet) {
-				if (!isXtextFacet(facet)) 
+				if (!isXtextFacet(facet) || !project.initialized) 
 					return;
 				doCleanBuild(facet.module)
 			}
