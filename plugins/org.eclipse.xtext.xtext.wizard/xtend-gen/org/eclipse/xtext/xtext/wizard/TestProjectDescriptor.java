@@ -159,18 +159,9 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.append("</plugin>");
         _builder.newLine();
         {
-          boolean _and_1 = false;
           boolean _isEclipsePluginProject_2 = TestProjectDescriptor.this.isEclipsePluginProject();
           boolean _not_1 = (!_isEclipsePluginProject_2);
-          if (!_not_1) {
-            _and_1 = false;
-          } else {
-            WizardConfiguration _config_1 = TestProjectDescriptor.this.getConfig();
-            SourceLayout _sourceLayout_1 = _config_1.getSourceLayout();
-            boolean _equals_1 = Objects.equal(_sourceLayout_1, SourceLayout.PLAIN);
-            _and_1 = _equals_1;
-          }
-          if (_and_1) {
+          if (_not_1) {
             _builder.append("\t\t");
             _builder.append("<plugin>");
             _builder.newLine();
