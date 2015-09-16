@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,12 +26,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 @SuppressWarnings("all")
 public class JavaFileAccess extends TextFileAccess {
@@ -86,23 +83,17 @@ public class JavaFileAccess extends TextFileAccess {
    */
   public final static int DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE;
   
-  private final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
+  protected final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
   
-  private final TypeReference javaType;
+  protected final TypeReference javaType;
   
-  private final CodeConfig codeConfig;
-  
-  @Accessors
-  private CharSequence typeComment;
+  protected final CodeConfig codeConfig;
   
   @Accessors
   private int importNestedTypeThreshold = 8;
   
   @Accessors
   private boolean markedAsGenerated;
-  
-  @Accessors
-  private final List<IClassAnnotation> annotations = CollectionLiterals.<IClassAnnotation>newArrayList();
   
   @Accessors(AccessorType.PROTECTED_SETTER)
   private ResourceSet resourceSet;
@@ -222,24 +213,7 @@ public class JavaFileAccess extends TextFileAccess {
   }
   
   @Override
-  public CharSequence generate() {
-    List<IClassAnnotation> _classAnnotations = this.codeConfig.getClassAnnotations();
-    final Function1<IClassAnnotation, Boolean> _function = new Function1<IClassAnnotation, Boolean>() {
-      @Override
-      public Boolean apply(final IClassAnnotation it) {
-        return Boolean.valueOf(it.appliesTo(JavaFileAccess.this));
-      }
-    };
-    Iterable<IClassAnnotation> _filter = IterableExtensions.<IClassAnnotation>filter(_classAnnotations, _function);
-    final Iterable<IClassAnnotation> classAnnotations = Iterables.<IClassAnnotation>concat(this.annotations, _filter);
-    final Procedure1<IClassAnnotation> _function_1 = new Procedure1<IClassAnnotation>() {
-      @Override
-      public void apply(final IClassAnnotation it) {
-        TypeReference _annotationImport = it.getAnnotationImport();
-        JavaFileAccess.this.importType(_annotationImport);
-      }
-    };
-    IterableExtensions.<IClassAnnotation>forEach(classAnnotations, _function_1);
+  public CharSequence getContent() {
     Collection<String> _values = this.imports.values();
     final ArrayList<String> sortedImports = Lists.<String>newArrayList(_values);
     Collections.<String>sort(sortedImports);
@@ -272,27 +246,9 @@ public class JavaFileAccess extends TextFileAccess {
       }
     }
     _builder.newLine();
-    _builder.append(this.typeComment, "");
-    _builder.newLineIfNotEmpty();
-    {
-      for(final IClassAnnotation annot : classAnnotations) {
-        CharSequence _generate = annot.generate();
-        _builder.append(_generate, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
     _builder.append(this.internalContents, "");
     _builder.newLineIfNotEmpty();
     return _builder;
-  }
-  
-  @Pure
-  public CharSequence getTypeComment() {
-    return this.typeComment;
-  }
-  
-  public void setTypeComment(final CharSequence typeComment) {
-    this.typeComment = typeComment;
   }
   
   @Pure
@@ -311,11 +267,6 @@ public class JavaFileAccess extends TextFileAccess {
   
   public void setMarkedAsGenerated(final boolean markedAsGenerated) {
     this.markedAsGenerated = markedAsGenerated;
-  }
-  
-  @Pure
-  public List<IClassAnnotation> getAnnotations() {
-    return this.annotations;
   }
   
   protected void setResourceSet(final ResourceSet resourceSet) {

@@ -129,16 +129,13 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			.contributeTo(language.eclipsePluginGenModule)
 	}
 
-	protected def doGenerateStubFile() {
-		val xtendFile = fileAccessFactory.createXtendFile(grammar.generatorStub)
-		xtendFile.typeComment = '''
+	protected def void doGenerateStubFile() {
+		fileAccessFactory.createXtendFile(grammar.generatorStub, '''
 			/**
 			 * Generates code from your model files on save.
 			 * 
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
 			 */
-		'''
-		xtendFile.content = '''
 			class «language.grammar.generatorStub.simpleName» implements «IGenerator» {
 			
 				override void doGenerate(«Resource» resource, «IFileSystemAccess» fsa) {
@@ -150,13 +147,11 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		'''
-		xtendFile.writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtimeSrc)
 	}
 
-	protected def doGenerateJavaMain() {
-		val javaFile = fileAccessFactory.createJavaFile(grammar.javaMain)
-		javaFile.content = '''
+	protected def void doGenerateJavaMain() {
+		fileAccessFactory.createJavaFile(grammar.javaMain, '''
 			public class Main {
 			
 				public static void main(String[] args) {
@@ -202,13 +197,11 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					System.out.println("Code generation finished.");
 				}
 			}
-		'''
-		javaFile.writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtimeSrc)
 	}
 
-	protected def doGenerateXtendMain() {
-		val xtendFile = fileAccessFactory.createXtendFile(grammar.javaMain)
-		xtendFile.content = '''
+	protected def void doGenerateXtendMain() {
+		fileAccessFactory.createXtendFile(grammar.javaMain, '''
 			class Main {
 			
 				def static main(String[] args) {
@@ -247,14 +240,11 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					System.out.println('Code generation finished.')
 				}
 			}
-		'''
-		xtendFile.writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def doGenerateMweFile() {
-		val mweFile = fileAccessFactory.createTextFile()
-		mweFile.path = language.grammar.generatorStub.path + 'MWE.mwe2'
-		mweFile.content = '''
+	protected def void doGenerateMweFile() {
+		fileAccessFactory.createTextFile(language.grammar.generatorStub.path + 'MWE.mwe2', '''
 			«codeConfig.fileHeader»
 			module «language.grammar.generatorStub.name»MWE
 			
@@ -288,8 +278,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					}
 				}
 			}
-		'''
-		mweFile.writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtimeSrc)
 	}
 	
 	protected def contributeEclipsePluginExtensions() {

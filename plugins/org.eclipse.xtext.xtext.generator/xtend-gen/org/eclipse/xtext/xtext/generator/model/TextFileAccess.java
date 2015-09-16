@@ -35,15 +35,15 @@ public class TextFileAccess {
     return this.internalContents = _doubleArrow;
   }
   
-  public CharSequence generate() {
+  public CharSequence getContent() {
     return this.internalContents.toString();
   }
   
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     boolean _notEquals = (!Objects.equal(fileSystemAccess, null));
     if (_notEquals) {
-      CharSequence _generate = this.generate();
-      fileSystemAccess.generateFile(this.path, _generate);
+      CharSequence _content = this.getContent();
+      fileSystemAccess.generateFile(this.path, _content);
     }
   }
   

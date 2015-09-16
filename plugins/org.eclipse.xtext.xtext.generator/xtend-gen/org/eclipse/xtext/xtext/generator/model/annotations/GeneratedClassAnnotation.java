@@ -83,6 +83,12 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
     stringBuilder.append(s);
   }
   
+  @Override
+  public String toString() {
+    CharSequence _generate = this.generate();
+    return _generate.toString();
+  }
+  
   @Pure
   public boolean isIncludeDate() {
     return this.includeDate;

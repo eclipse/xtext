@@ -10,14 +10,32 @@ package org.eclipse.xtext.xtext.generator.model
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 @Log
 @Accessors
-class PluginXmlAccess {
+class PluginXmlAccess extends TextFileAccess {
 	
-	String path = 'plugin.xml'
+	new() {
+		this.path = 'plugin.xml'
+	}
 	
 	val List<CharSequence> entries = newArrayList
+	
+	override setContent(StringConcatenationClient content) {
+		throw new UnsupportedOperationException("cannot directly set contents on a plugin.xml. Use entries property instead");
+	}
+	
+	override getContent() '''
+		<?xml version="1.0" encoding="UTF-8"?>
+		<?eclipse version="3.0"?>
+		
+		<plugin>
+			«FOR entry : entries»
+				«entry»
+			«ENDFOR»
+		</plugin>
+	'''
 	
 	/**
 	 * Merge the contents of the given plugin.xml into this one.

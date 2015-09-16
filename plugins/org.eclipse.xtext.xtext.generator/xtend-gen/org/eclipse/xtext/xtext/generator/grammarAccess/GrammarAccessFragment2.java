@@ -59,9 +59,9 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.FragmentFakingEcoreResource;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
+import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
@@ -315,7 +315,7 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
   protected void doGenerateGrammarAccess() {
     Grammar _grammar = this.getGrammar();
     TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar);
-    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_grammarAccess);
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(_grammarAccess);
     List<IClassAnnotation> _annotations = javaFile.getAnnotations();
     SingletonClassAnnotation _singletonClassAnnotation = new SingletonClassAnnotation();
     _annotations.add(_singletonClassAnnotation);

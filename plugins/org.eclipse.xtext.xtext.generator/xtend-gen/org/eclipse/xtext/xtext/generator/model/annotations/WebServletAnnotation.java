@@ -64,6 +64,12 @@ public class WebServletAnnotation implements IClassAnnotation {
     stringBuilder.append(s);
   }
   
+  @Override
+  public String toString() {
+    CharSequence _generate = this.generate();
+    return _generate.toString();
+  }
+  
   @Pure
   public String getName() {
     return this.name;
