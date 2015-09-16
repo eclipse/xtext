@@ -302,6 +302,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 
 					«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory'.typeRef)»
 					<facetType implementation="«grammar.facetType»"/>
+			      	«grammar.compileExtension('lang.documentationProvider', 'org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider'.typeRef)»
 					<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
 					<highlightVisitor implementation="«grammar.semanticHighlightVisitor»"/>
 
