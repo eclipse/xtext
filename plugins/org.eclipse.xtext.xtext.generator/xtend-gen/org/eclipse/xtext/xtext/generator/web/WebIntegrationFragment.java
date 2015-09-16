@@ -29,8 +29,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -45,7 +43,6 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.model.annotations.WebServletAnnotation;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
@@ -2000,19 +1997,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         {
           if (WebIntegrationFragment.this.useServlet3Api) {
-            WebServletAnnotation _webServletAnnotation = new WebServletAnnotation();
-            final Procedure1<WebServletAnnotation> _function = new Procedure1<WebServletAnnotation>() {
-              @Override
-              public void apply(final WebServletAnnotation it) {
-                it.setName("XtextServices");
-                it.setUrlPatterns("/xtext-service/*");
-              }
-            };
-            WebServletAnnotation _doubleArrow = ObjectExtensions.<WebServletAnnotation>operator_doubleArrow(_webServletAnnotation, _function);
-            _builder.append(_doubleArrow, "");
+            _builder.append("@");
+            TypeReference _typeReference = new TypeReference("javax.servlet.annotation.WebServlet");
+            _builder.append(_typeReference, "");
+            _builder.append("(name = \'XtextServices\', urlPatterns = \'/xtext-service/*\')");
+            _builder.newLineIfNotEmpty();
           }
         }
-        _builder.newLineIfNotEmpty();
         _builder.append("class ");
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
         TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(_grammar);

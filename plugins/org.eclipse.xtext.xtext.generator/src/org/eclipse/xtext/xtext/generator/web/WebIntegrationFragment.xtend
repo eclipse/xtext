@@ -29,7 +29,6 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.model.annotations.WebServletAnnotation
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
@@ -632,10 +631,9 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			/**
 			 * Deploy this class into a servlet container to enable DSL-specific services.
 			 */
-			«IF useServlet3Api»«new WebServletAnnotation => [
-				name = 'XtextServices'
-				urlPatterns = '/xtext-service/*'
-			]»«ENDIF»
+			«IF useServlet3Api»
+				@«new TypeReference("javax.servlet.annotation.WebServlet")»(name = 'XtextServices', urlPatterns = '/xtext-service/*')
+			«ENDIF»
 			class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 				
 				val «List»<«ExecutorService»> executorServices = newArrayList
