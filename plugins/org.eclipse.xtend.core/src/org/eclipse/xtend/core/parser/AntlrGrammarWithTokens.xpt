@@ -77,7 +77,7 @@ import «gaFQName()»;
     
     @Override
     protected String getFirstRuleName() {
-    	return "«allParserRules().first().name»";	
+    	return "«allParserRules().first().originalElement().name»";	
    	}
    	
    	@Override
