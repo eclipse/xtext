@@ -94,7 +94,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     };
     ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_4, _function);
     deps.add(_doubleArrow);
-    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-api:" + WebProjectDescriptor.SLF4J_VERSION));
+    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-simple:" + WebProjectDescriptor.SLF4J_VERSION));
     final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
       @Override
       public void apply(final ExternalDependency it) {
@@ -104,16 +104,6 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     };
     ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function_1);
     deps.add(_doubleArrow_1);
-    ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency(("org.slf4j:slf4j-log4j12:" + WebProjectDescriptor.SLF4J_VERSION));
-    final Procedure1<ExternalDependency> _function_2 = new Procedure1<ExternalDependency>() {
-      @Override
-      public void apply(final ExternalDependency it) {
-        ExternalDependency.MavenCoordinates _maven = it.getMaven();
-        _maven.setScope(Scope.PROVIDED);
-      }
-    };
-    ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_6, _function_2);
-    deps.add(_doubleArrow_2);
     return deps;
   }
   
