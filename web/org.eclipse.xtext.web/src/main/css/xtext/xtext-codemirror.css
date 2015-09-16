@@ -1,3 +1,7 @@
+.CodeMirror {
+	height: 100%;
+}
+
 .annotations-gutter {
 	width: 12px;
 	background: #f0f0f0;

@@ -89,9 +89,9 @@ public class XtextServiceDispatcher {
   @ToString
   public static class ServiceDescriptor {
     /**
-     * The service type according to the 'serviceType' parameter.
+     * The request for which the service was built.
      */
-    private String type;
+    private IRequestData request;
     
     /**
      * The function for invoking the service.
@@ -116,12 +116,12 @@ public class XtextServiceDispatcher {
     private boolean hasConflict;
     
     @Pure
-    public String getType() {
-      return this.type;
+    public IRequestData getRequest() {
+      return this.request;
     }
     
-    public void setType(final String type) {
-      this.type = type;
+    public void setRequest(final IRequestData request) {
+      this.request = request;
     }
     
     @Pure
@@ -164,7 +164,7 @@ public class XtextServiceDispatcher {
     @Pure
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
-      b.add("type", this.type);
+      b.add("request", this.request);
       b.add("service", this.service);
       b.add("hasSideEffects", this.hasSideEffects);
       b.add("hasTextInput", this.hasTextInput);
@@ -276,7 +276,7 @@ public class XtextServiceDispatcher {
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_1 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
         public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
-          it.type = serviceType;
+          it.request = request;
         }
       };
       return ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_createServiceDescriptor, _function_1);
@@ -288,7 +288,7 @@ public class XtextServiceDispatcher {
         final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_2 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
           @Override
           public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
-            it.type = serviceType;
+            it.request = request;
             final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
               @Override
               public IServiceResult apply() {
@@ -1055,7 +1055,10 @@ public class XtextServiceDispatcher {
     try {
       boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(throwable);
       if (_isOperationCanceledException) {
-        XtextServiceDispatcher.LOG.trace((("Service canceled (" + service.type) + ")"));
+        String _parameter = service.request.getParameter(IRequestData.SERVICE_TYPE);
+        String _plus = ("Service canceled (" + _parameter);
+        String _plus_1 = (_plus + ")");
+        XtextServiceDispatcher.LOG.trace(_plus_1);
         return new ServiceConflictResult("canceled");
       }
       throw throwable;
@@ -1065,7 +1068,10 @@ public class XtextServiceDispatcher {
   }
   
   protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final InvalidRequestException.InvalidDocumentStateException exception) {
-    XtextServiceDispatcher.LOG.trace((("Invalid document state (" + service.type) + ")"));
+    String _parameter = service.request.getParameter(IRequestData.SERVICE_TYPE);
+    String _plus = ("Invalid document state (" + _parameter);
+    String _plus_1 = (_plus + ")");
+    XtextServiceDispatcher.LOG.trace(_plus_1);
     return new ServiceConflictResult("invalidStateId");
   }
   
