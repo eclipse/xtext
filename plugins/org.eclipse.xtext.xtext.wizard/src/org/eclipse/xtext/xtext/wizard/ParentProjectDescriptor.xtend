@@ -92,8 +92,13 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			sourceSets.test.java.srcDirs = []
 			sourceSets.test.resources.srcDirs = []
 		}
+		
 		plugins.withId('war') {
 			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
+		}
+		
+		plugins.withId('org.xtext.idea-plugin') {
+			assembleSandbox.metaInf.from('«Outlet.META_INF.sourceFolder»')
 		}
 	'''
 
