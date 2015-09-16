@@ -1204,7 +1204,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<argument>-p</argument>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
-        _builder.append("<argument>runtimeProject=/${project.basedir}</argument>");
+        _builder.append("<argument>projectPath=/${project.basedir}</argument>");
         _builder.newLine();
         _builder.append("\t\t\t\t");
         _builder.append("</arguments>");

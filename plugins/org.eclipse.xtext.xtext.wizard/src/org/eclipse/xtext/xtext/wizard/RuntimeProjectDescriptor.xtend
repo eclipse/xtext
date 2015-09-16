@@ -401,7 +401,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								<arguments>
 									<argument>/${project.basedir}/«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»</argument>
 									<argument>-p</argument>
-									<argument>runtimeProject=/${project.basedir}</argument>
+									<argument>projectPath=/${project.basedir}</argument>
 								</arguments>
 								<includePluginDependencies>true</includePluginDependencies>
 							</configuration>
