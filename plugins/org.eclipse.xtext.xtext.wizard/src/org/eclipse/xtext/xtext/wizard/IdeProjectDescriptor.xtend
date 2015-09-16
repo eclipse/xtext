@@ -52,7 +52,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							<groupId>org.eclipse.xtend</groupId>
 							<artifactId>xtend-maven-plugin</artifactId>
 						</plugin>
-						«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
+						«IF !isEclipsePluginProject»
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>build-helper-maven-plugin</artifactId>

@@ -21,7 +21,6 @@ import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
-import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -88,14 +87,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       CharSequence _settingsGradle = this.settingsGradle();
       PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
       files.add(_file);
-      WizardConfiguration _config_1 = this.getConfig();
-      SourceLayout _sourceLayout = _config_1.getSourceLayout();
-      boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-      if (_equals) {
-        CharSequence _plainLayout = this.plainLayout();
-        PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/plain-layout.gradle", _plainLayout);
-        files.add(_file_1);
-      }
+      CharSequence _sourceLayoutGradle = this.sourceLayoutGradle();
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/source-layout.gradle", _sourceLayoutGradle);
+      files.add(_file_1);
     }
     return files;
   }
@@ -170,16 +164,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("apply plugin: \'org.xtend.xtend\'");
         _builder.newLine();
-        {
-          WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
-          SourceLayout _sourceLayout = _config_2.getSourceLayout();
-          boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-          if (_equals) {
-            _builder.append("\t");
-            _builder.append("apply from: \"${rootDir}/gradle/plain-layout.gradle\"");
-            _builder.newLine();
-          }
-        }
+        _builder.append("\t");
+        _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");
+        _builder.newLine();
         _builder.append("}");
         _builder.newLine();
         it.setAdditionalContent(_builder.toString());
@@ -229,19 +216,34 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     return _builder;
   }
   
-  public CharSequence plainLayout() {
+  public CharSequence sourceLayoutGradle() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (name.endsWith(\".tests\")) {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("sourceSets.test.java.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
+    _builder.append("sourceSets.test.java.srcDirs = [\'");
+    String _sourceFolder = this.sourceFolder(Outlet.TEST_JAVA);
+    _builder.append(_sourceFolder, "\t");
+    _builder.append("\', \'");
+    String _sourceFolder_1 = this.sourceFolder(Outlet.TEST_SRC_GEN);
+    _builder.append(_sourceFolder_1, "\t");
+    _builder.append("\']");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("sourceSets.test.resources.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
+    _builder.append("sourceSets.test.resources.srcDirs = [\'");
+    String _sourceFolder_2 = this.sourceFolder(Outlet.TEST_RESOURCES);
+    _builder.append(_sourceFolder_2, "\t");
+    _builder.append("\', \'");
+    String _sourceFolder_3 = this.sourceFolder(Outlet.TEST_SRC_GEN);
+    _builder.append(_sourceFolder_3, "\t");
+    _builder.append("\']");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("sourceSets.test.xtendOutputDir = \'xtend-gen\'");
-    _builder.newLine();
+    _builder.append("sourceSets.test.xtendOutputDir = \'");
+    String _sourceFolder_4 = this.sourceFolder(Outlet.TEST_XTEND_GEN);
+    _builder.append(_sourceFolder_4, "\t");
+    _builder.append("\'");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("sourceSets.main.java.srcDirs = []");
     _builder.newLine();
@@ -251,14 +253,29 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.append("} else {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("sourceSets.main.java.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
+    _builder.append("sourceSets.main.java.srcDirs = [\'");
+    String _sourceFolder_5 = this.sourceFolder(Outlet.MAIN_JAVA);
+    _builder.append(_sourceFolder_5, "\t");
+    _builder.append("\', \'");
+    String _sourceFolder_6 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+    _builder.append(_sourceFolder_6, "\t");
+    _builder.append("\']");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("sourceSets.main.resources.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
+    _builder.append("sourceSets.main.resources.srcDirs = [\'");
+    String _sourceFolder_7 = this.sourceFolder(Outlet.MAIN_RESOURCES);
+    _builder.append(_sourceFolder_7, "\t");
+    _builder.append("\', \'");
+    String _sourceFolder_8 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+    _builder.append(_sourceFolder_8, "\t");
+    _builder.append("\']");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("sourceSets.main.xtendOutputDir = \'xtend-gen\'");
-    _builder.newLine();
+    _builder.append("sourceSets.main.xtendOutputDir = \'");
+    String _sourceFolder_9 = this.sourceFolder(Outlet.MAIN_XTEND_GEN);
+    _builder.append(_sourceFolder_9, "\t");
+    _builder.append("\'");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("sourceSets.test.java.srcDirs = []");
     _builder.newLine();
@@ -267,11 +284,26 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
     _builder.append("plugins.withId(\'war\') {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("webAppDirName = \"WebRoot\"");
+    _builder.append("webAppDirName = \"");
+    String _sourceFolder_10 = this.sourceFolder(Outlet.WEBAPP);
+    _builder.append(_sourceFolder_10, "\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("plugins.withId(\'org.xtext.idea-plugin\') {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("assembleSandbox.metaInf.from(\'");
+    String _sourceFolder_11 = this.sourceFolder(Outlet.META_INF);
+    _builder.append(_sourceFolder_11, "\t");
+    _builder.append("\')");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     return _builder;

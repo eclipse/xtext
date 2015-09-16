@@ -71,7 +71,11 @@ class WizardConfig extends XtextProjectConfig {
 			
 		if (testingSupport) {
 			if (runtimeTestRoot === null)
-				runtimeTestRoot = runtimeRoot.path + ".tests"
+				if(mavenLayout) {
+					runtimeTestRoot = runtimeRoot.path
+				} else {
+					runtimeTestRoot = runtimeRoot.path + ".tests"
+				}
 			if (runtimeTestMetaInf == null)
 				runtimeTestMetaInf = runtimeTestRoot.path + '/' + metaInf
 			if (runtimeTestSrc === null)

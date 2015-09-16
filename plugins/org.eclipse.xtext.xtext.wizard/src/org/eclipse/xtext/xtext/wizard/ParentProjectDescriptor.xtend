@@ -38,9 +38,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		files += super.files
 		if (config.needsGradleBuild) {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
-			if (config.sourceLayout == SourceLayout.PLAIN) {
-				files += file(Outlet.ROOT, 'gradle/plain-layout.gradle', plainLayout)
-			}
+			files += file(Outlet.ROOT, 'gradle/source-layout.gradle', sourceLayoutGradle)
 		}
 		return files
 	}
@@ -68,9 +66,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 					apply plugin: 'java'
 					apply plugin: 'org.xtend.xtend'
-					«IF config.sourceLayout == SourceLayout.PLAIN»
-						apply from: "${rootDir}/gradle/plain-layout.gradle"
-					«ENDIF»
+					apply from: "${rootDir}/gradle/source-layout.gradle"
 				}
 			'''
 		]
@@ -82,22 +78,27 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		«ENDFOR»
 	'''
 	
-	def plainLayout() '''
+	def sourceLayoutGradle() '''
 		if (name.endsWith(".tests")) {
-			sourceSets.test.java.srcDirs = ['src', 'src-gen']
-			sourceSets.test.resources.srcDirs = ['src', 'src-gen']
-			sourceSets.test.xtendOutputDir = 'xtend-gen'
+			sourceSets.test.java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+			sourceSets.test.resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+			sourceSets.test.xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
 			sourceSets.main.java.srcDirs = []
 			sourceSets.main.resources.srcDirs = []
 		} else {
-			sourceSets.main.java.srcDirs = ['src', 'src-gen']
-			sourceSets.main.resources.srcDirs = ['src', 'src-gen']
-			sourceSets.main.xtendOutputDir = 'xtend-gen'
+			sourceSets.main.java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+			sourceSets.main.resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+			sourceSets.main.xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
 			sourceSets.test.java.srcDirs = []
 			sourceSets.test.resources.srcDirs = []
 		}
+		
 		plugins.withId('war') {
-			webAppDirName = "WebRoot"
+			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
+		}
+		
+		plugins.withId('org.xtext.idea-plugin') {
+			assembleSandbox.metaInf.from('«Outlet.META_INF.sourceFolder»')
 		}
 	'''
 
