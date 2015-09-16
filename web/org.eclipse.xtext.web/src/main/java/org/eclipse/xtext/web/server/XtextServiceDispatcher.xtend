@@ -69,9 +69,9 @@ class XtextServiceDispatcher {
 	static class ServiceDescriptor {
 		
 		/**
-		 * The service type according to the 'serviceType' parameter.
+		 * The request for which the service was built.
 		 */
-		String type
+		IRequestData request
 		
 		/**
 		 * The function for invoking the service.
@@ -143,12 +143,12 @@ class XtextServiceDispatcher {
 		
 		try {
 			return createServiceDescriptor(serviceType, request, sessionStore) => [
-				type = serviceType
+				it.request = request
 			]
 		} catch (InvalidDocumentStateException ire) {
 			LOG.trace('Invalid document state (' + serviceType + ')')
 			return new ServiceDescriptor => [
-				type = serviceType
+				it.request = request
 				service = [new ServiceConflictResult('invalidStateId')]
 				hasConflict = true
 			]
@@ -526,14 +526,14 @@ class XtextServiceDispatcher {
 	protected def dispatch handleError(ServiceDescriptor service, Throwable throwable) {
 		// The caller is responsible for sending an 'Internal Server Error' message to the client
 		if (operationCanceledManager.isOperationCanceledException(throwable)) {
-			LOG.trace('Service canceled (' + service.type + ')')
+			LOG.trace('Service canceled (' + service.request.getParameter(IRequestData.SERVICE_TYPE) + ')')
 			return new ServiceConflictResult('canceled')
 		}
 		throw throwable
 	}
 	
 	protected def dispatch handleError(ServiceDescriptor service, InvalidDocumentStateException exception) {
-		LOG.trace('Invalid document state (' + service.type + ')')
+		LOG.trace('Invalid document state (' + service.request.getParameter(IRequestData.SERVICE_TYPE) + ')')
 		return new ServiceConflictResult('invalidStateId')
 	}
 	
