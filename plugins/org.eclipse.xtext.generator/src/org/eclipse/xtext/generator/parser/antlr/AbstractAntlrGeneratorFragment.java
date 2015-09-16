@@ -126,6 +126,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		checkGrammar(grammar);
 		
 		RuleFilter filter = new RuleFilter();
+		filter.setDiscardUnreachableRules(getOptions().isSkipUnusedRules());
 		RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
 		Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
 		super.generate(flattened, ctx);
