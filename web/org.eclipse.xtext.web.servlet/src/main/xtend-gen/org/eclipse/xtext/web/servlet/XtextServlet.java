@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * a subclass that executes the standalone setups of your languages in its {@link #init()} method:
  * 
  * <pre>
- * &#64;WebServlet(name = 'Xtext Services', urlPatterns = '/xtext-service/*')
+ * &#64;WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
  * class MyXtextServlet extends XtextServlet {
  *     override init() {
  *         super.init();
@@ -48,7 +48,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * </pre>
  * 
  * Use the {@code WebServlet} annotation to register your servlet. The default URL pattern for
- * Xtext services is {@code '/xtext-service/*'}.
+ * Xtext services is {@code "/xtext-service/*"}.
  */
 @SuppressWarnings("all")
 public class XtextServlet extends HttpServlet {

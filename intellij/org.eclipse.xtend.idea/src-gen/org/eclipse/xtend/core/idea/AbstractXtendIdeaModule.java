@@ -20,8 +20,12 @@ import org.eclipse.xtend.core.idea.lang.parser.XtendPsiParser;
 import org.eclipse.xtend.core.idea.lang.parser.XtendTokenTypeProvider;
 import org.eclipse.xtend.core.idea.lang.parser.antlr.XtendAntlrTokenFileProvider;
 import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendLexer;
+import org.eclipse.xtend.ide.common.contentassist.antlr.XtendParser;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.idea.DefaultIdeaModule;
 import org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations;
 import org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider;
@@ -102,6 +106,16 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
 	public FacetTypeId bindFacetTypeIdToInstance() {
 		return XtendFacetType.TYPEID;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IContentAssistParser> bindIContentAssistParser() {
+		return XtendParser.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public void configureContentAssistLexer(Binder binder) {
+		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalXtendLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
