@@ -25,6 +25,10 @@ class GradleBuildFile extends TextFile {
 				}
 			«ENDIF»
 			«additionalContent»
+			«IF project.isEclipsePluginProject»
+				//this is an eclipse plugin project
+				eclipseClasspath.enabled=false
+			«ENDIF»
 		'''
 	}
 	
