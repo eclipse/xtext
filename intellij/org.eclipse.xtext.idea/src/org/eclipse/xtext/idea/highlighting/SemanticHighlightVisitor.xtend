@@ -19,6 +19,8 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.service.OperationCanceledError
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -30,6 +32,8 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
  	@Inject ISemanticHighlightingCalculator highlightCalculator
  	
  	@Inject extension IdeaHighlightingAttributesProvider 
+ 	
+ 	@Inject OperationCanceledManager operationCanceledManager
  	
 	IHighlightedPositionAcceptor acceptor
  	
@@ -65,8 +69,12 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 	}
 	
 	override visit(PsiElement element) {
-		if (element instanceof BaseXtextFile) 
-			highlightCalculator.provideHighlightingFor(element.resource, acceptor, CancelIndicator.NullImpl)
+		try {
+			if (element instanceof BaseXtextFile) 
+				highlightCalculator.provideHighlightingFor(element.resource, acceptor, CancelIndicator.NullImpl)			
+		} catch (OperationCanceledError error) {
+			operationCanceledManager.propagateIfCancelException(error)
+		}
 	}
 	
 	override clone() {
