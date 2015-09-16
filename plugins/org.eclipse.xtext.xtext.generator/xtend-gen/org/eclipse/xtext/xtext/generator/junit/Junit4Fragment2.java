@@ -161,7 +161,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -299,7 +299,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
@@ -363,7 +363,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _builder.newLine();
         }
       };
-      file.setJavaContent(_client);
+      file.setContent(_client);
       _xblockexpression = file;
     }
     return _xblockexpression;
