@@ -29,7 +29,7 @@ public class PomFile extends TextFile {
   }
   
   @Override
-  public CharSequence getContent() {
+  public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
     _builder.newLine();
@@ -239,7 +239,7 @@ public class PomFile extends TextFile {
     }
     _builder.append("</project>");
     _builder.newLine();
-    return _builder;
+    return _builder.toString();
   }
   
   @Pure

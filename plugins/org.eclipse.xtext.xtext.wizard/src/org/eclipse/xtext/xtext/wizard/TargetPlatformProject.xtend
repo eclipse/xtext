@@ -20,6 +20,14 @@ class TargetPlatformProject extends ProjectDescriptor {
 	override isPartOfMavenBuild() {
 		true
 	}
+	
+	override isEnabled() {
+		config.needsTychoBuild
+	}
+	
+	override setEnabled(boolean enabled) {
+		throw new UnsupportedOperationException("The target platform project is activated automatically for Tycho builds")
+	}
 
 	override getFiles() {
 		val files = newArrayList

@@ -20,7 +20,6 @@ import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.xtext.wizard.RuntimeTestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -58,7 +58,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public void setEnabled(final boolean enabled) {
-    throw new UnsupportedOperationException("The runtime project is always enabled");
+    if ((!enabled)) {
+      throw new IllegalArgumentException("The runtime project is always enabled");
+    }
   }
   
   @Override
@@ -166,10 +168,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends GeneratedFile> getFiles() {
-    final ArrayList<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-    Iterable<? extends GeneratedFile> _files = super.getFiles();
-    Iterables.<GeneratedFile>addAll(files, _files);
+  public Iterable<? extends TextFile> getFiles() {
+    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
+    Iterable<? extends TextFile> _files = super.getFiles();
+    Iterables.<TextFile>addAll(files, _files);
     String _grammarFilePath = this.getGrammarFilePath();
     CharSequence _grammar = this.grammar();
     PlainTextFile _file = this.file(Outlet.MAIN_RESOURCES, _grammarFilePath, _grammar);

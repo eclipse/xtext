@@ -37,7 +37,7 @@ public class WizardConfiguration {
   
   private XtextVersion xtextVersion = XtextVersion.getCurrent();
   
-  private Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration();
+  private final Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration();
   
   private Charset encoding = Charset.defaultCharset();
   
@@ -127,15 +127,8 @@ public class WizardConfiguration {
     if (!_needsMavenBuild) {
       _and = false;
     } else {
-      Set<ProjectDescriptor> _enabledProjects = this.getEnabledProjects();
-      final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
-        @Override
-        public Boolean apply(final ProjectDescriptor it) {
-          return Boolean.valueOf(it.isEclipsePluginProject());
-        }
-      };
-      boolean _exists = IterableExtensions.<ProjectDescriptor>exists(_enabledProjects, _function);
-      _and = _exists;
+      boolean _isEclipsePluginProject = this.runtimeProject.isEclipsePluginProject();
+      _and = _isEclipsePluginProject;
     }
     return _and;
   }
@@ -182,10 +175,6 @@ public class WizardConfiguration {
   @Pure
   public Ecore2XtextConfiguration getEcore2Xtext() {
     return this.ecore2Xtext;
-  }
-  
-  public void setEcore2Xtext(final Ecore2XtextConfiguration ecore2Xtext) {
-    this.ecore2Xtext = ecore2Xtext;
   }
   
   @Pure

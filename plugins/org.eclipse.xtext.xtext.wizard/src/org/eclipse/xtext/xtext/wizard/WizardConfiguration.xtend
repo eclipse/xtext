@@ -11,7 +11,7 @@ class WizardConfiguration {
 	String rootLocation
 	String baseName
 	XtextVersion xtextVersion = XtextVersion.current
-	Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
+	val Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
 	BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE
@@ -52,7 +52,7 @@ class WizardConfiguration {
 	}
 	
 	def needsTychoBuild() {
-		needsMavenBuild && enabledProjects.exists[isEclipsePluginProject]
+		needsMavenBuild && runtimeProject.isEclipsePluginProject
 	}
 	
 	def needsGradleBuild() {

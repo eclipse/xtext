@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -75,8 +75,8 @@ public abstract class ProjectDescriptor {
     return IterableExtensions.<String>toSet(_map);
   }
   
-  public Iterable<? extends GeneratedFile> getFiles() {
-    final List<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
+  public Iterable<? extends TextFile> getFiles() {
+    final List<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
     boolean _isEclipsePluginProject = this.isEclipsePluginProject();
     if (_isEclipsePluginProject) {
       CharSequence _manifest = this.manifest();

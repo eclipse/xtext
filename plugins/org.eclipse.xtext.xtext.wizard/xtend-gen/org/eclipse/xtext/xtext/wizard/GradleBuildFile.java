@@ -27,7 +27,7 @@ public class GradleBuildFile extends TextFile {
   }
   
   @Override
-  public CharSequence getContent() {
+  public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(this.pluginsSection, "");
     _builder.newLineIfNotEmpty();
@@ -86,7 +86,7 @@ public class GradleBuildFile extends TextFile {
         _builder.newLine();
       }
     }
-    return _builder;
+    return _builder.toString();
   }
   
   private Iterable<ExternalDependency.MavenCoordinates> getMavenDependencies() {

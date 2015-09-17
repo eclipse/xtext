@@ -21,7 +21,7 @@ class CliProjectsCreator implements ProjectsCreator {
 			val projectRelativePath = project.config.sourceLayout.getPathFor(outlet) + "/" + relativePath
 			val file = new File(projectRoot, projectRelativePath)
 			file.parentFile.mkdirs
-			Files.write(bytes, file)
+			Files.write(content, file, project.config.encoding)
 		]
 		project.sourceFolders.forEach [
 			new File(projectRoot, it).mkdirs

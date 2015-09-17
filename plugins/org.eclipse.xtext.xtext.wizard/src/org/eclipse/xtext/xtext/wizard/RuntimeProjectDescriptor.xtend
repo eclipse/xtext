@@ -16,7 +16,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override setEnabled(boolean enabled) {
-		throw new UnsupportedOperationException("The runtime project is always enabled")
+		if (!enabled)
+			throw new IllegalArgumentException("The runtime project is always enabled")
 	}
 	
 	override getNameQualifier() {

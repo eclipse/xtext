@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.XtextVersion;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -36,14 +36,23 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   @Override
   public boolean isEnabled() {
     boolean _or = false;
+    boolean _or_1 = false;
     WizardConfiguration _config = this.getConfig();
     boolean _needsGradleBuild = _config.needsGradleBuild();
     if (_needsGradleBuild) {
-      _or = true;
+      _or_1 = true;
     } else {
       WizardConfiguration _config_1 = this.getConfig();
       boolean _needsMavenBuild = _config_1.needsMavenBuild();
-      _or = _needsMavenBuild;
+      _or_1 = _needsMavenBuild;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      WizardConfiguration _config_2 = this.getConfig();
+      ProjectLayout _projectLayout = _config_2.getProjectLayout();
+      boolean _equals = Objects.equal(_projectLayout, ProjectLayout.HIERARCHICAL);
+      _or = _equals;
     }
     return _or;
   }
@@ -78,10 +87,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends GeneratedFile> getFiles() {
-    final ArrayList<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-    Iterable<? extends GeneratedFile> _files = super.getFiles();
-    Iterables.<GeneratedFile>addAll(files, _files);
+  public Iterable<? extends TextFile> getFiles() {
+    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
+    Iterable<? extends TextFile> _files = super.getFiles();
+    Iterables.<TextFile>addAll(files, _files);
     WizardConfiguration _config = this.getConfig();
     boolean _needsGradleBuild = _config.needsGradleBuild();
     if (_needsGradleBuild) {
@@ -149,7 +158,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
+            _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots\"");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("}");
