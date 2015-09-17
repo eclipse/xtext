@@ -47,6 +47,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
@@ -166,7 +167,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
         
         PsiToEcoreTransformator psiToEcoreTransformator = psiToEcoreTransformatorProvider.get();
         psiToEcoreTransformator.setXtextFile(this);
-        Module module = ModuleUtilCore.findModuleForFile(findVirtualFile(this), getProject());
+        Module module = ProjectFileIndex.SERVICE.getInstance(getProject()).getModuleForFile(findVirtualFile(this), false);
         if (module == null) {
         	module = ModuleUtilCore.findModuleForPsiElement(this);
         	if (module == null)
