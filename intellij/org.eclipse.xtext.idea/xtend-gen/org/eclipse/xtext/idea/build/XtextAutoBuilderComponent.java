@@ -1221,6 +1221,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
         this.chunkedResourceDescriptions = _get;
         this.moduleName2GeneratedMapping.clear();
+        this.doCleanBuild();
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
