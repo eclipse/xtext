@@ -45,21 +45,18 @@ class ContentAssistTest extends AbstractWebServerTest {
 			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "input"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "output"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "state"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -75,7 +72,6 @@ class ContentAssistTest extends AbstractWebServerTest {
 			    ContentAssistEntry [
 			      prefix = "sta"
 			      proposal = "state"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -92,7 +88,6 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      prefix = ""
 			      proposal = "name"
 			      description = "ID"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList (
 			        [6:4]
@@ -110,14 +105,12 @@ class ContentAssistTest extends AbstractWebServerTest {
 			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "false"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "true"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -134,7 +127,6 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      prefix = ""
 			      proposal = "x"
 			      description = "input signal"
-			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
