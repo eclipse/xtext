@@ -22,6 +22,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.psi.XtextPsiUtils
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -39,7 +40,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 	IHighlightedPositionAcceptor acceptor
  	
 	override analyze(PsiFile file, boolean updateWholeFile, HighlightInfoHolder holder, Runnable action) {
-		val virtualFile = file.getContainingFile().getVirtualFile();
+		val virtualFile = XtextPsiUtils.findVirtualFile(file);
 		if(!FileEditorManager.getInstance(file.project).isFileOpen(virtualFile)) 
 			return true
 		acceptor = [
@@ -72,10 +73,15 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 		return file instanceof BaseXtextFile && languageId == file.language.ID
 	}
 	
+	volatile long lastRun
+	
 	override visit(PsiElement element) {
-		try {
+ 		try {
 			if (element instanceof BaseXtextFile)  {
-				highlightCalculator.provideHighlightingFor(element.resource, acceptor, CancelIndicator.NullImpl)			
+				val resource = element.resource
+					lastRun = resource.modificationStamp
+					highlightCalculator.provideHighlightingFor(resource, acceptor, CancelIndicator.NullImpl)			
+				
 			}
 		} catch (OperationCanceledError error) {
 			operationCanceledManager.propagateIfCancelException(error)

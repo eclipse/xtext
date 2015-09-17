@@ -24,6 +24,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.highlighting.IdeaHighlightingAttributesProvider;
+import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -59,8 +60,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Override
   public boolean analyze(final PsiFile file, final boolean updateWholeFile, final HighlightInfoHolder holder, final Runnable action) {
-    PsiFile _containingFile = file.getContainingFile();
-    final VirtualFile virtualFile = _containingFile.getVirtualFile();
+    final VirtualFile virtualFile = XtextPsiUtils.findVirtualFile(file);
     Project _project = file.getProject();
     FileEditorManager _instance = FileEditorManager.getInstance(_project);
     boolean _isFileOpen = _instance.isFileOpen(virtualFile);
@@ -115,12 +115,16 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
     return _and;
   }
   
+  private volatile long lastRun;
+  
   @Override
   public void visit(final PsiElement element) {
     try {
       if ((element instanceof BaseXtextFile)) {
-        XtextResource _resource = ((BaseXtextFile)element).getResource();
-        this.highlightCalculator.provideHighlightingFor(_resource, this.acceptor, CancelIndicator.NullImpl);
+        final XtextResource resource = ((BaseXtextFile)element).getResource();
+        long _modificationStamp = resource.getModificationStamp();
+        this.lastRun = _modificationStamp;
+        this.highlightCalculator.provideHighlightingFor(resource, this.acceptor, CancelIndicator.NullImpl);
       }
     } catch (final Throwable _t) {
       if (_t instanceof OperationCanceledError) {
