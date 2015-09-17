@@ -79,19 +79,46 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	'''
 	
 	def sourceLayoutGradle() '''
-		if (name.endsWith(".tests")) {
-			sourceSets.test.java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
-			sourceSets.test.resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
-			sourceSets.test.xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
-			sourceSets.main.java.srcDirs = []
-			sourceSets.main.resources.srcDirs = []
-		} else {
-			sourceSets.main.java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
-			sourceSets.main.resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
-			sourceSets.main.xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
-			sourceSets.test.java.srcDirs = []
-			sourceSets.test.resources.srcDirs = []
-		}
+		«IF config.sourceLayout == SourceLayout.PLAIN»
+			if (name.endsWith(".tests")) {
+				sourceSets {
+					main {
+						java.srcDirs = []
+						resources.srcDirs = []
+					}
+					test {
+						java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+						resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+						xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
+					}
+				}
+			} else {
+				sourceSets {
+					main {
+						java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+						resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+						xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
+					}
+					test {
+						java.srcDirs = []
+						resources.srcDirs = []
+					}
+				}
+			}
+		«ELSE»
+			sourceSets {
+				main {
+					java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+					resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+					xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
+				}
+				test {
+					java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+					resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+					xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
+				}
+			}
+		«ENDIF»
 		
 		plugins.withId('war') {
 			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
