@@ -766,7 +766,9 @@ public class JvmTypesBuilder {
 			return false;
 		}
 		
-		return typeRef.getType() != null && !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier());
+		return typeRef != null && typeRef.getType() != null &&
+				!typeRef.getType().eIsProxy() &&
+				"boolean".equals(typeRef.getType().getIdentifier());
 	}
 
 	/**
