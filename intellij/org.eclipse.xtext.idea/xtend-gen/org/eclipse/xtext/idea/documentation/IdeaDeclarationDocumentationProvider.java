@@ -87,16 +87,21 @@ public class IdeaDeclarationDocumentationProvider {
     IdeaWorkspaceConfig _workspaceConfig = this.workspaceCfgProvider.getWorkspaceConfig(_resourceSet);
     URI _uRI = resource.getURI();
     final IdeaModuleConfig module = _workspaceConfig.findProjectContaining(_uRI);
-    URI _uRI_1 = resource.getURI();
-    URI _path = module.getPath();
-    final URI uri = _uRI_1.deresolve(_path);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("[");
-    String _name = module.getName();
-    _builder.append(_name, "");
-    _builder.append("] ");
-    _builder.append(uri, "");
-    return _builder.toString();
+    if ((module != null)) {
+      URI _uRI_1 = resource.getURI();
+      URI _path = module.getPath();
+      final URI uri = _uRI_1.deresolve(_path);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("[");
+      String _name = module.getName();
+      _builder.append(_name, "");
+      _builder.append("] ");
+      _builder.append(uri, "");
+      return _builder.toString();
+    } else {
+      URI _uRI_2 = resource.getURI();
+      return _uRI_2.lastSegment();
+    }
   }
   
   public String getQuickNavigateInfo(final PsiEObject element) {

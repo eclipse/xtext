@@ -38,8 +38,13 @@ class IdeaDeclarationDocumentationProvider {
 	def protected getFileInfo(PsiEObject element) {
 		val resource = element.EObject.eResource
 		val module = workspaceCfgProvider.getWorkspaceConfig(resource.resourceSet).findProjectContaining(resource.URI)
-		val uri = resource.URI.deresolve(module.path)
-		return '''[«module.name»] «uri»'''
+		if (module !== null) {
+			val uri = resource.URI.deresolve(module.path) 
+			return '''[«module.name»] «uri»'''
+		} else {
+			// object resolved through importURI (or similar), might not live in a module
+			return resource.URI.lastSegment
+		}
 	}
 
 	def String getQuickNavigateInfo(PsiEObject element) '''
