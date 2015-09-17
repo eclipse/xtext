@@ -41,7 +41,6 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueue"
 			      description = "java.util.AbstractQueue"
-			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
 			        import java.util.AbstractQueue'
@@ -52,7 +51,6 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedLongSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedLongSynchronizer"
-			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
 			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
@@ -63,7 +61,6 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedSynchronizer"
-			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
 			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
@@ -83,7 +80,6 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueue"
 			      description = "java.util.AbstractQueue"
-			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
 			        import java.util.AbstractQueue'
@@ -94,7 +90,6 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedLongSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedLongSynchronizer"
-			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
 			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
@@ -105,7 +100,6 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedSynchronizer"
-			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
 			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'

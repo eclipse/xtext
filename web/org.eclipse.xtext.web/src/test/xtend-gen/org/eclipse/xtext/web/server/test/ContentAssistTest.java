@@ -80,9 +80,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("proposal = \"input\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
     _builder.newLine();
     _builder.append("      ");
@@ -101,9 +98,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("proposal = \"output\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
     _builder.newLine();
     _builder.append("      ");
@@ -120,9 +114,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("proposal = \"state\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -159,9 +150,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("proposal = \"state\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -201,9 +189,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"ID\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -248,9 +233,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("proposal = \"false\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
     _builder.newLine();
     _builder.append("      ");
@@ -267,9 +249,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("proposal = \"true\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -309,9 +288,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"input signal\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
