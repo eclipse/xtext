@@ -15,6 +15,7 @@ import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.psi.PsiEObject;
+import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -46,7 +47,7 @@ public class IssueAnnotator implements Annotator {
 		if (!psiEObject.isRoot()) {
 			return;
 		}
-		VirtualFile file = element.getContainingFile().getVirtualFile();
+		VirtualFile file = XtextPsiUtils.findVirtualFile(element);
 		if(!FileEditorManager.getInstance(element.getProject()).isFileOpen(file)) {
 			return;
 		}
