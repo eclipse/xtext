@@ -18,27 +18,32 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 	@Inject FileAccessFactory fileAccessFactory
 
 	override generate() {
-		projectConfig.runtimeTestManifest => [
-			requiredBundles.addAll(
-				"org.eclipse.xtext.junit4",
-				"org.eclipse.xtext.xbase.lib"
-			)
-			exportedPackages.add(grammar.runtimeTestBasePackage)
-		]
-
-		projectConfig.eclipsePluginTestManifest => [
-			requiredBundles.addAll(
-				"org.eclipse.core.runtime",
-				"org.eclipse.ui.workbench;resolution:=optional"
-			)
-			exportedPackages.add(grammar.eclipsePluginTestBasePackage)
-		]
-		projectConfig.eclipsePluginManifest.exportedPackages.add(grammar.eclipsePluginActivator.packageName)
+		if (projectConfig.runtimeTestManifest != null) {
+			projectConfig.runtimeTestManifest => [
+				requiredBundles.addAll(
+					"org.eclipse.xtext.junit4",
+					"org.eclipse.xtext.xbase.lib"
+				)
+				exportedPackages.add(grammar.runtimeTestBasePackage)
+			]
+		}
+		if (projectConfig.eclipsePluginTestManifest != null) {
+			projectConfig.eclipsePluginTestManifest => [
+				requiredBundles.addAll(
+					"org.eclipse.core.runtime",
+					"org.eclipse.ui.workbench;resolution:=optional"
+				)
+				exportedPackages.add(grammar.eclipsePluginTestBasePackage)
+			]
+		}
+		if (projectConfig.eclipsePluginManifest != null) {
+			projectConfig.eclipsePluginManifest.exportedPackages.add(grammar.eclipsePluginActivator.packageName)
+		}
 		
 		#[
 			projectConfig.runtimeTestManifest,
 			projectConfig.eclipsePluginTestManifest
-		].forEach [
+		].filterNull.forEach [
 			importedPackages.addAll(
 				"org.junit;version=\"4.5.0\"",
 				"org.junit.runner;version=\"4.5.0\"",

@@ -48,13 +48,17 @@ class WizardConfig extends XtextProjectConfig {
 	
 	override initialize(Injector injector) {
 		var src = 'src'
+		var testSrc = src
 		var srcGen = 'src-gen'
+		var testSrcGen = srcGen
 		var srcWeb = 'WebRoot'
 		var metaInf = 'META-INF'
 		if (mavenLayout) {
 			src = 'src/main/java'
+			testSrc = 'src/test/java'
 			metaInf = 'src/main/resources/META-INF'
 			srcGen = 'src/main/xtext-gen'
+			testSrcGen = 'src/test/xtext-gen'
 			srcWeb = 'src/main/webapp'
 		}
 		
@@ -79,9 +83,9 @@ class WizardConfig extends XtextProjectConfig {
 			if (runtimeTestMetaInf == null)
 				runtimeTestMetaInf = runtimeTestRoot.path + '/' + metaInf
 			if (runtimeTestSrc === null)
-				runtimeTestSrc = runtimeTestRoot.path + '/' + src
+				runtimeTestSrc = runtimeTestRoot.path + '/' + testSrc
 			if (runtimeTestSrcGen === null)
-				runtimeTestSrcGen = runtimeTestRoot.path + '/' + srcGen
+				runtimeTestSrcGen = runtimeTestRoot.path + '/' + testSrcGen
 			if (runtimeTestManifest === null)
 				runtimeTestManifest = new ManifestAccess
 		}
@@ -106,9 +110,9 @@ class WizardConfig extends XtextProjectConfig {
 				if (eclipsePluginTestMetaInf === null)
 					eclipsePluginTestMetaInf = eclipsePluginTestRoot.path + '/' + metaInf
 				if (eclipsePluginTestSrc === null)
-					eclipsePluginTestSrc = eclipsePluginTestRoot.path + '/' + src
+					eclipsePluginTestSrc = eclipsePluginTestRoot.path + '/' + testSrc
 				if (eclipsePluginTestSrcGen === null)
-					eclipsePluginTestSrcGen = eclipsePluginTestRoot.path + '/' + srcGen
+					eclipsePluginTestSrcGen = eclipsePluginTestRoot.path + '/' + testSrcGen
 				if (eclipsePluginTestManifest === null)
 					eclipsePluginTestManifest = new ManifestAccess
 			}
