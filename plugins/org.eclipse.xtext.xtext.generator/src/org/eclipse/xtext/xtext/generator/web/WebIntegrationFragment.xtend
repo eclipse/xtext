@@ -460,6 +460,10 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void generateIndexDoc() {
+		if (projectConfig.webApp.isFile('index.html')) {
+			// Don't overwrite an existing index document
+			return
+		}
 		val indexFile = fileAccessFactory.createTextFile
 		indexFile.path = 'index.html'
 		
@@ -561,6 +565,10 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void generateStyleSheet() {
+		if (projectConfig.webApp.isFile('style.css')) {
+			// Don't overwrite an existing style sheet
+			return
+		}
 		val styleFile = fileAccessFactory.createTextFile
 		styleFile.path = 'style.css'
 		
@@ -713,6 +721,10 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void generateWebXml() {
+		if (projectConfig.webApp.isFile('WEB-INF/web.xml')) {
+			// Don't overwrite an existing web.xml
+			return
+		}
 		val xmlFile = fileAccessFactory.createTextFile
 		xmlFile.path = 'WEB-INF/web.xml'
 		
