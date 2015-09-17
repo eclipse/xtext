@@ -51,6 +51,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileAdapter;
@@ -835,7 +836,6 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     buildProgressReporter.setProject(this.project);
     buildProgressReporter.setEvents(allEvents);
     try {
-      final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
       final Computable<Graph<Module>> _function = new Computable<Graph<Module>>() {
         @Override
         public Graph<Module> compute() {
@@ -874,15 +874,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();
           ModuleRootManager _instance = ModuleRootManager.getInstance(module);
           final VirtualFile[] contentRoots = _instance.getContentRoots();
-          final Function1<BuildEvent, Boolean> _function_1 = new Function1<BuildEvent, Boolean>() {
-            @Override
-            public Boolean apply(final BuildEvent event) {
-              Module _findModule = XtextAutoBuilderComponent.this.findModule(event, fileIndex);
-              return Boolean.valueOf(Objects.equal(_findModule, module));
-            }
-          };
-          Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(allEvents, _function_1);
-          final Set<BuildEvent> events = IterableExtensions.<BuildEvent>toSet(_filter);
+          final Set<BuildEvent> events = this.getEventsForModule(unProcessedEvents, module);
           boolean _or = false;
           boolean _isEmpty = ((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty();
           if (_isEmpty) {
@@ -907,7 +899,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             this.collectChanges(events, module, changedUris, deletedUris, deltas);
             final ResourceDescriptionsData newIndex = moduleDescriptions.copy();
             BuildRequest _buildRequest = new BuildRequest();
-            final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
+            final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
               @Override
               public void apply(final BuildRequest it) {
                 XtextResourceSet _createResourceSet = XtextAutoBuilderComponent.this.createResourceSet(module, newIndex);
@@ -935,11 +927,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 it.setCancelIndicator(cancelIndicator);
               }
             };
-            final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
+            final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
             IncrementalBuilder _get_1 = this.builderProvider.get();
             Function1<URI, IResourceServiceProvider> _serviceProviderProvider = this.getServiceProviderProvider(module);
             final IncrementalBuilder.Result result = _get_1.build(request, _serviceProviderProvider);
-            final Runnable _function_3 = new Runnable() {
+            final Runnable _function_2 = new Runnable() {
               @Override
               public void run() {
                 try {
@@ -954,7 +946,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               }
             };
             ModalityState _defaultModalityState = app.getDefaultModalityState();
-            app.invokeAndWait(_function_3, _defaultModalityState);
+            app.invokeAndWait(_function_2, _defaultModalityState);
             String _name_3 = module.getName();
             IndexState _indexState = result.getIndexState();
             ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
@@ -989,6 +981,65 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       buildProgressReporter.clearProgress();
       this.cancelIndicators.remove(cancelIndicator);
     }
+  }
+  
+  protected Set<BuildEvent> getEventsForModule(final List<BuildEvent> events, final Module module) {
+    Set<BuildEvent> _xblockexpression = null;
+    {
+      final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+      final String[] excludeRootUrls = moduleRootManager.getExcludeRootUrls();
+      final String[] sourceRootUrls = moduleRootManager.getSourceRootUrls();
+      final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
+        @Override
+        public Boolean apply(final BuildEvent event) {
+          Map<URI, VirtualFile> _filesByURI = event.getFilesByURI();
+          Set<URI> _keySet = _filesByURI.keySet();
+          URI _head = IterableExtensions.<URI>head(_keySet);
+          final String url = _head.toString();
+          for (final String excludeRootUrl : excludeRootUrls) {
+            boolean _isUrlUnderRoot = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, excludeRootUrl);
+            if (_isUrlUnderRoot) {
+              return Boolean.valueOf(false);
+            }
+          }
+          for (final String sourceRootUrl : sourceRootUrls) {
+            boolean _isUrlUnderRoot_1 = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, sourceRootUrl);
+            if (_isUrlUnderRoot_1) {
+              return Boolean.valueOf(true);
+            }
+          }
+          return Boolean.valueOf(false);
+        }
+      };
+      Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(events, _function);
+      _xblockexpression = IterableExtensions.<BuildEvent>toSet(_filter);
+    }
+    return _xblockexpression;
+  }
+  
+  private final static char SEGMENT_SEPARATOR = '/';
+  
+  protected boolean isUrlUnderRoot(final String url, final String rootUrl) {
+    boolean _and = false;
+    boolean _and_1 = false;
+    int _length = url.length();
+    int _length_1 = rootUrl.length();
+    boolean _greaterThan = (_length > _length_1);
+    if (!_greaterThan) {
+      _and_1 = false;
+    } else {
+      int _length_2 = rootUrl.length();
+      char _charAt = url.charAt(_length_2);
+      boolean _equals = (_charAt == XtextAutoBuilderComponent.SEGMENT_SEPARATOR);
+      _and_1 = _equals;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      boolean _startsWith = FileUtil.startsWith(url, rootUrl);
+      _and = _startsWith;
+    }
+    return _and;
   }
   
   public Function1<URI, IResourceServiceProvider> getServiceProviderProvider(final Module module) {
