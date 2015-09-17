@@ -768,13 +768,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     {
       WizardConfiguration _config_14 = this.getConfig();
       Set<ProjectDescriptor> _enabledProjects_2 = _config_14.getEnabledProjects();
-      final Function1<ProjectDescriptor, Boolean> _function_8 = new Function1<ProjectDescriptor, Boolean>() {
+      Iterable<TestedProjectDescriptor> _filter_5 = Iterables.<TestedProjectDescriptor>filter(_enabledProjects_2, TestedProjectDescriptor.class);
+      final Function1<TestedProjectDescriptor, Boolean> _function_8 = new Function1<TestedProjectDescriptor, Boolean>() {
         @Override
-        public Boolean apply(final ProjectDescriptor it) {
-          return Boolean.valueOf((it instanceof TestProjectDescriptor));
+        public Boolean apply(final TestedProjectDescriptor it) {
+          return Boolean.valueOf(RuntimeProjectDescriptor.this.testProject.isEnabled());
         }
       };
-      boolean _exists = IterableExtensions.<ProjectDescriptor>exists(_enabledProjects_2, _function_8);
+      boolean _exists = IterableExtensions.<TestedProjectDescriptor>exists(_filter_5, _function_8);
       if (_exists) {
         _builder.append("\t\t\t");
         _builder.append("fragment = junit.Junit4Fragment2 auto-inject {}");
@@ -1535,6 +1536,105 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("\t\t");
             _builder.append("</execution>");
             _builder.newLine();
+            {
+              boolean _isInlined = RuntimeProjectDescriptor.this.testProject.isInlined();
+              if (_isInlined) {
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<execution>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<id>add-test-source</id>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<phase>initialize</phase>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<goals>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<goal>add-test-source</goal>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<goal>add-test-resource</goal>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("</goals>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<configuration>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<sources>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<source>");
+                String _sourceFolder_9 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.TEST_SRC_GEN);
+                _builder.append(_sourceFolder_9, "\t\t\t\t\t\t\t");
+                _builder.append("</source>");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("</sources>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<resources>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<resource>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<directory>");
+                String _sourceFolder_10 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.TEST_SRC_GEN);
+                _builder.append(_sourceFolder_10, "\t\t\t\t\t\t\t\t");
+                _builder.append("</directory>");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("</resource>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("</resources>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("</configuration>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("</execution>");
+                _builder.newLine();
+              }
+            }
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("</executions>");

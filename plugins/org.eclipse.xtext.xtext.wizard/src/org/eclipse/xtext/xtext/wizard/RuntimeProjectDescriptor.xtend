@@ -259,7 +259,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							fragment = formatting.Formatter2Fragment2 {}
 						«ENDIF»
 						
-						«IF config.enabledProjects.exists[it instanceof TestProjectDescriptor]»
+						«IF config.enabledProjects.filter(TestedProjectDescriptor).exists[testProject.enabled]»
 							fragment = junit.Junit4Fragment2 auto-inject {}
 						«ENDIF»
 						
@@ -490,6 +490,26 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 											</resources>
 										</configuration>
 									</execution>
+									«IF testProject.isInlined»
+										<execution>
+											<id>add-test-source</id>
+											<phase>initialize</phase>
+											<goals>
+												<goal>add-test-source</goal>
+												<goal>add-test-resource</goal>
+											</goals>
+											<configuration>
+												<sources>
+													<source>«Outlet.TEST_SRC_GEN.sourceFolder»</source>
+												</sources>
+												<resources>
+													<resource>
+														<directory>«Outlet.TEST_SRC_GEN.sourceFolder»</directory>
+													</resource>
+												</resources>
+											</configuration>
+										</execution>
+									«ENDIF»	
 								</executions>
 							</plugin>
 						«ENDIF»
