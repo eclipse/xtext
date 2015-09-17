@@ -585,9 +585,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("<execution>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t");
-        _builder.append("<phase>generate-sources</phase>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t\t");
         _builder.append("<goals>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t\t");

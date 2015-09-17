@@ -70,13 +70,17 @@ public class WizardConfig extends XtextProjectConfig {
   @Override
   public void initialize(final Injector injector) {
     String src = "src";
+    String testSrc = src;
     String srcGen = "src-gen";
+    String testSrcGen = srcGen;
     String srcWeb = "WebRoot";
     String metaInf = "META-INF";
     if (this.mavenLayout) {
       src = "src/main/java";
+      testSrc = "src/test/java";
       metaInf = "src/main/resources/META-INF";
       srcGen = "src/main/xtext-gen";
+      testSrcGen = "src/test/xtext-gen";
       srcWeb = "src/main/webapp";
     }
     IXtextGeneratorFileSystemAccess _runtimeMetaInf = this.getRuntimeMetaInf();
@@ -148,7 +152,7 @@ public class WizardConfig extends XtextProjectConfig {
         IXtextGeneratorFileSystemAccess _runtimeTestRoot_2 = this.getRuntimeTestRoot();
         String _path_6 = _runtimeTestRoot_2.getPath();
         String _plus_9 = (_path_6 + "/");
-        String _plus_10 = (_plus_9 + src);
+        String _plus_10 = (_plus_9 + testSrc);
         this.setRuntimeTestSrc(_plus_10);
       }
       IXtextGeneratorFileSystemAccess _runtimeTestSrcGen = this.getRuntimeTestSrcGen();
@@ -157,7 +161,7 @@ public class WizardConfig extends XtextProjectConfig {
         IXtextGeneratorFileSystemAccess _runtimeTestRoot_3 = this.getRuntimeTestRoot();
         String _path_7 = _runtimeTestRoot_3.getPath();
         String _plus_11 = (_path_7 + "/");
-        String _plus_12 = (_plus_11 + srcGen);
+        String _plus_12 = (_plus_11 + testSrcGen);
         this.setRuntimeTestSrcGen(_plus_12);
       }
       ManifestAccess _runtimeTestManifest = this.getRuntimeTestManifest();
@@ -239,7 +243,7 @@ public class WizardConfig extends XtextProjectConfig {
           IXtextGeneratorFileSystemAccess _eclipsePluginTestRoot_2 = this.getEclipsePluginTestRoot();
           String _path_14 = _eclipsePluginTestRoot_2.getPath();
           String _plus_23 = (_path_14 + "/");
-          String _plus_24 = (_plus_23 + src);
+          String _plus_24 = (_plus_23 + testSrc);
           this.setEclipsePluginTestSrc(_plus_24);
         }
         IXtextGeneratorFileSystemAccess _eclipsePluginTestSrcGen = this.getEclipsePluginTestSrcGen();
@@ -248,7 +252,7 @@ public class WizardConfig extends XtextProjectConfig {
           IXtextGeneratorFileSystemAccess _eclipsePluginTestRoot_3 = this.getEclipsePluginTestRoot();
           String _path_15 = _eclipsePluginTestRoot_3.getPath();
           String _plus_25 = (_path_15 + "/");
-          String _plus_26 = (_plus_25 + srcGen);
+          String _plus_26 = (_plus_25 + testSrcGen);
           this.setEclipsePluginTestSrcGen(_plus_26);
         }
         ManifestAccess _eclipsePluginTestManifest = this.getEclipsePluginTestManifest();

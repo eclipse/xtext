@@ -170,7 +170,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<version>${xtextVersion}</version>
 								<executions>
 									<execution>
-										<phase>generate-sources</phase>
 										<goals>
 											<goal>compile</goal>
 											<goal>testCompile</goal>
