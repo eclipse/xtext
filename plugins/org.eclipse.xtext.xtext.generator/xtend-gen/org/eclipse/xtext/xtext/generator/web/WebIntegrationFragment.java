@@ -1434,6 +1434,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   }
   
   protected void generateIndexDoc() {
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    boolean _isFile = _webApp.isFile("index.html");
+    if (_isFile) {
+      return;
+    }
     final TextFileAccess indexFile = this.fileAccessFactory.createTextFile();
     indexFile.setPath("index.html");
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -1825,12 +1831,18 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     indexFile.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
-    indexFile.writeTo(_webApp);
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_1.getWebApp();
+    indexFile.writeTo(_webApp_1);
   }
   
   protected void generateStyleSheet() {
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    boolean _isFile = _webApp.isFile("style.css");
+    if (_isFile) {
+      return;
+    }
     final TextFileAccess styleFile = this.fileAccessFactory.createTextFile();
     styleFile.setPath("style.css");
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -2023,9 +2035,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     styleFile.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
-    styleFile.writeTo(_webApp);
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_1.getWebApp();
+    styleFile.writeTo(_webApp_1);
   }
   
   protected void generateServerLauncher() {
@@ -2297,6 +2309,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   }
   
   protected void generateWebXml() {
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    boolean _isFile = _webApp.isFile("WEB-INF/web.xml");
+    if (_isFile) {
+      return;
+    }
     final TextFileAccess xmlFile = this.fileAccessFactory.createTextFile();
     xmlFile.setPath("WEB-INF/web.xml");
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -2478,8 +2496,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     xmlFile.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
-    xmlFile.writeTo(_webApp);
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_1.getWebApp();
+    xmlFile.writeTo(_webApp_1);
   }
 }
