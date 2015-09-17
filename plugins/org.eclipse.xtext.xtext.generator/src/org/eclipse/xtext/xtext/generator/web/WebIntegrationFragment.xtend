@@ -14,10 +14,13 @@ import com.google.inject.Provider
 import com.google.inject.name.Names
 import java.util.ArrayList
 import java.util.Collection
+import java.util.Collections
 import java.util.HashSet
 import java.util.List
+import java.util.Set
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.regex.Pattern
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
@@ -33,9 +36,9 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.util.Strings.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import static extension org.eclipse.xtext.xtext.generator.web.RegexpExtensions.*
 
 /**
  * Main generator fragment for web integration.
@@ -65,7 +68,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	boolean generateJsHighlighting = true
 	String highlightingModuleName
 	String highlightingPath
-	String keywordsFilter = '\\w*'
+	String keywordsFilter = '\\w+'
 	boolean generateServlet = false
 	boolean generateWebXml = false
 	boolean useServlet3Api = true
@@ -104,7 +107,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	
 	/**
 	 * Regular expression for filtering those language keywords that should be highlighted. The default
-	 * is {@code \w*}, i.e. keywords consisting only of letters and digits.
+	 * is {@code \w+}, i.e. keywords consisting only of letters and digits.
 	 */
 	def void setKeywordsFilter(String keywordsFilter) {
 		this.keywordsFilter = keywordsFilter
@@ -202,7 +205,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			if (highlightingPath.nullOrEmpty)
 				highlightingPath = highlightingModuleName + '.js'
 			
-			generateJavaScript(langId)
+			generateJsHighlighting(langId)
 		}
 		
 		if (generateServlet && projectConfig.webSrc !== null) {
@@ -229,18 +232,40 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			.contributeTo(language.webGenModule)
 	}
 	
-	protected def void generateJavaScript(String langId) {
-		val keywords = grammar.allKeywords
-		val filteredKeywords = keywords.filter[matches(keywordsFilter)].map[convertToJavaString].toList
+	static val DELIMITERS_PATTERN = '''[\\s.:;,!?+\\-*/&|<>()[\\]{}]'''
+	
+	protected def void generateJsHighlighting(String langId) {
+		val allKeywords = grammar.allKeywords
+		val wordKeywords = newArrayList
+		val nonWordKeywords = newArrayList
+		val keywordsFilterPattern = Pattern.compile(keywordsFilter)
+		val wordKeywordPattern = Pattern.compile('\\w(.*\\w)?')
+		allKeywords.filter[keywordsFilterPattern.matcher(it).matches].forEach[
+			if (wordKeywordPattern.matcher(it).matches)
+				wordKeywords += it
+			else
+				nonWordKeywords += it
+		]
+		Collections.sort(wordKeywords)
+		Collections.sort(nonWordKeywords)
 		val jsFile = fileAccessFactory.createTextFile()
 		jsFile.path = highlightingPath
 		switch framework {
 			
 			case ORION: {
-				val patterns = createOrionPatterns(langId, keywords, filteredKeywords)
+				val patterns = createOrionPatterns(langId, allKeywords)
+				if (!wordKeywords.empty)
+					patterns += '''{name: "keyword.«langId»", match: "\\b(?:" + keywords + ")\\b"}'''
+				if (!nonWordKeywords.empty)
+					patterns += '''{name: "keyword.extra.«langId»", match: "(?:^|\\s)(?:" + extraKeywords + ")(?=«DELIMITERS_PATTERN»|$)"}'''
 				jsFile.content = '''
 					define("«highlightingModuleName»", function() {
-						var keywords = "«FOR keyword : filteredKeywords.sort SEPARATOR '|'»«keyword»«ENDFOR»";
+						«IF !wordKeywords.empty»
+							var keywords = "«FOR kw : wordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
+						«ENDIF»
+						«IF !nonWordKeywords.empty»
+							var extraKeywords = "«FOR kw : nonWordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
+						«ENDIF»
 						return {
 							id: "xtext.«langId»",
 							contentTypes: ["xtext/«langId»"],
@@ -253,12 +278,19 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			}
 			
 			case ACE: {
-				val patterns = createCodeMirrorPatterns(langId, keywords, filteredKeywords)
+				val patterns = createCodeMirrorPatterns(langId, allKeywords)
+				if (!wordKeywords.empty)
+					patterns.put('start', '''{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}''')
+				if (!nonWordKeywords.empty)
+					patterns.put('start', '''{token: "keyword", regex: "(?:^|\\s)(?:" + extraKeywords + ")(?=«DELIMITERS_PATTERN»|$)"}''')
 				jsFile.content = '''
 					define("«highlightingModuleName»", ["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
 						var HighlightRules = function() {
-							«IF !filteredKeywords.empty»
-								var keywords = "«FOR keyword : filteredKeywords.sort SEPARATOR '|'»«keyword»«ENDFOR»";
+							«IF !wordKeywords.empty»
+								var keywords = "«FOR kw : wordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
+							«ENDIF»
+							«IF !nonWordKeywords.empty»
+								var extraKeywords = "«FOR kw : nonWordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
 							«ENDIF»
 							this.$rules = {
 								«FOR state : patterns.keySet SEPARATOR ','»
@@ -287,11 +319,18 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			}
 			
 			case CODEMIRROR: {
-				val patterns = createCodeMirrorPatterns(langId, keywords, filteredKeywords)
+				val patterns = createCodeMirrorPatterns(langId, allKeywords)
+				if (!wordKeywords.empty)
+					patterns.put('start', '''{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}''')
+				if (!nonWordKeywords.empty)
+					patterns.put('start', '''{token: "keyword", regex: "(?:^|\\s)(?:" + extraKeywords + ")(?=«DELIMITERS_PATTERN»|$)"}''')
 				jsFile.content = '''
 					define("«highlightingModuleName»", ["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
-						«IF !filteredKeywords.empty»
-							var keywords = "«FOR keyword : filteredKeywords.sort SEPARATOR '|'»«keyword»«ENDFOR»";
+						«IF !wordKeywords.empty»
+							var keywords = "«FOR kw : wordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
+						«ENDIF»
+						«IF !nonWordKeywords.empty»
+							var extraKeywords = "«FOR kw : nonWordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
 						«ENDIF»
 						CodeMirror.defineSimpleMode("xtext/«langId»", {
 							«FOR state : patterns.keySet SEPARATOR ','»
@@ -308,8 +347,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		jsFile.writeTo(projectConfig.webApp)
 	}
 	
-	protected def Collection<String> createOrionPatterns(String langId, Collection<String> keywords,
-			Collection<String> filteredKeywords) {
+	protected def Collection<String> createOrionPatterns(String langId, Set<String> keywords) {
 		val inheritsTerminals = grammar.inherits(TERMINALS)
 		val inheritsXbase = grammar.inheritsXbase
 		val patterns = new ArrayList<String>
@@ -365,14 +403,10 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		if (enabledPatterns.contains('doc_block'))
 			patterns += '{include: "orion.lib#doc_block"}'
 		
-		if (!filteredKeywords.empty)
-			patterns += '''{match: "\\b(?:" + keywords + ")\\b", name: "keyword.«langId»"}'''
-		
 		return patterns
 	}
 	
-	protected def Multimap<String, String> createCodeMirrorPatterns(String langId, Collection<String> keywords,
-			Collection<String> filteredKeywords) {
+	protected def Multimap<String, String> createCodeMirrorPatterns(String langId, Set<String> keywords) {
 		val inheritsTerminals = grammar.inherits(TERMINALS)
 		val inheritsXbase = grammar.inheritsXbase
 		val patterns = LinkedHashMultimap.<String, String>create
@@ -416,9 +450,6 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		val braceClose = enabledPatterns.contains('brace_close') || keywords.contains('}') && !suppressedPatterns.contains('brace_close')
 		if (bracketClose || parenClose || braceClose)
 			patterns.put('start', '''{token: "rparen", regex: "[«IF bracketClose»\\]«ENDIF»«IF parenClose»)«ENDIF»«IF braceClose»}«ENDIF»]"}''')
-		
-		if (!filteredKeywords.empty)
-			patterns.put('start', '''{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}''')
 		
 		if (framework == Framework.CODEMIRROR && patterns.containsKey('comment'))
 			patterns.put('meta', '''dontIndentStates: ["comment"]''')
