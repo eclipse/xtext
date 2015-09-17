@@ -44,6 +44,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
+import org.eclipse.xtext.idea.resource.IdeaClasspathURIResolver;
 import org.eclipse.xtext.idea.resource.ProjectDescriptionProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -455,9 +456,14 @@ public class IdeaResourceSetProvider {
   @Inject
   private ProjectDescriptionProvider projectDescriptionProvider;
   
+  @Inject
+  private Provider<IdeaClasspathURIResolver> classpathURIResolverProvider;
+  
   public XtextResourceSet get(final Module module) {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     resourceSet.setClasspathURIContext(module);
+    IdeaClasspathURIResolver _get = this.classpathURIResolverProvider.get();
+    resourceSet.setClasspathUriResolver(_get);
     URIConverter _uRIConverter = resourceSet.getURIConverter();
     EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
     _uRIHandlers.clear();

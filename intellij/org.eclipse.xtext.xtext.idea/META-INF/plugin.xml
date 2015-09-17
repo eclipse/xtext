@@ -1,6 +1,6 @@
 <idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<id>org.eclipse.xtext.xtext.idea</id>
-	<name>Xtext Support</name>
+	<name>Xtext</name>
 	<description>
       This plugin enables smart editing of Xtext files.
 	</description>
