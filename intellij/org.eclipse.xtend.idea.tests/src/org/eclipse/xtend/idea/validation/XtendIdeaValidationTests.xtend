@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.validation
 
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.roots.ModuleRootManager
 import org.eclipse.xtend.idea.LightXtendTest
 
 /**
@@ -21,6 +23,22 @@ class XtendIdeaValidationTests extends LightXtendTest {
 			}
 		''')
 		myFixture.checkHighlighting
+	}
+	
+	def void testExcludedFile() {
+		ApplicationManager.application.runWriteAction[
+			val model = ModuleRootManager.getInstance(myFixture.module).modifiableModel
+			val contentEntry = model.contentEntries.head
+			val excludedDir = contentEntry.file.createChildDirectory(null, 'excluded')
+			contentEntry.addExcludeFolder(excludedDir)
+			model.commit
+		]
+		val file = myFixture.addFileToProject('excluded/Foo.xtend', '''
+			package mypackage
+			class Foo extends <error descr="Bar cannot be resolved to a type."><error descr="Superclass must be a class">Bar</error></error> {
+			}
+		''').virtualFile
+		myFixture.testHighlighting(true, true, true, file)
 	}
 
 }

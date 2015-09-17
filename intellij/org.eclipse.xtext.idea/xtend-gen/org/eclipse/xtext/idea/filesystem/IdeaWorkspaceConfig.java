@@ -101,12 +101,12 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
     }
     ProjectRootManager _instance_1 = ProjectRootManager.getInstance(this.project);
     final ProjectFileIndex fileIndex = _instance_1.getFileIndex();
-    final Module module = fileIndex.getModuleForFile(file);
+    final Module module = fileIndex.getModuleForFile(file, false);
     boolean _equals_1 = Objects.equal(module, null);
     if (_equals_1) {
       return null;
     }
-    final VirtualFile contentRoot = fileIndex.getContentRootForFile(file);
+    final VirtualFile contentRoot = fileIndex.getContentRootForFile(file, false);
     boolean _equals_2 = Objects.equal(contentRoot, null);
     if (_equals_2) {
       return null;

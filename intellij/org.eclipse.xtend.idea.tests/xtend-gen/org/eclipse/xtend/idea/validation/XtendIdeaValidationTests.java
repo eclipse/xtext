@@ -7,8 +7,19 @@
  */
 package org.eclipse.xtend.idea.validation;
 
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -25,5 +36,38 @@ public class XtendIdeaValidationTests extends LightXtendTest {
     _builder.newLine();
     this.configureByText(_builder.toString());
     this.myFixture.checkHighlighting();
+  }
+  
+  public void testExcludedFile() {
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Module _module = XtendIdeaValidationTests.this.myFixture.getModule();
+          ModuleRootManager _instance = ModuleRootManager.getInstance(_module);
+          final ModifiableRootModel model = _instance.getModifiableModel();
+          ContentEntry[] _contentEntries = model.getContentEntries();
+          final ContentEntry contentEntry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+          VirtualFile _file = contentEntry.getFile();
+          final VirtualFile excludedDir = _file.createChildDirectory(null, "excluded");
+          contentEntry.addExcludeFolder(excludedDir);
+          model.commit();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage");
+    _builder.newLine();
+    _builder.append("class Foo extends <error descr=\"Bar cannot be resolved to a type.\"><error descr=\"Superclass must be a class\">Bar</error></error> {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    PsiFile _addFileToProject = this.myFixture.addFileToProject("excluded/Foo.xtend", _builder.toString());
+    final VirtualFile file = _addFileToProject.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, file);
   }
 }

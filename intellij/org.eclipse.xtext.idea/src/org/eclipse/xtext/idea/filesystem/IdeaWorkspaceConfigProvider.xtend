@@ -85,10 +85,10 @@ class IdeaWorkspaceConfig implements IWorkspaceConfig {
 		if (file == null) return null
 			
 		val fileIndex = ProjectRootManager.getInstance(project).fileIndex
-		val module = fileIndex.getModuleForFile(file)
+		val module = fileIndex.getModuleForFile(file, false)
 		if (module == null) return null
 		
-		val contentRoot = fileIndex.getContentRootForFile(file)
+		val contentRoot = fileIndex.getContentRootForFile(file, false)
 		if (contentRoot == null) return null
 		
 		val defaultContentRoot = module.defaultContentRoot
