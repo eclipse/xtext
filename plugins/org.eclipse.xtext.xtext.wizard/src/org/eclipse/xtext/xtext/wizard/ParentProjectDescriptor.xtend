@@ -10,7 +10,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override isEnabled() {
-		config.needsGradleBuild || config.needsMavenBuild
+		config.needsGradleBuild || config.needsMavenBuild || config.projectLayout == ProjectLayout.HIERARCHICAL
 	}
 	
 	override setEnabled(boolean enabled) {
@@ -60,7 +60,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						jcenter()
 						«IF config.xtextVersion.isSnapshot»
 							maven {
-								url "https://oss.sonatype.org/content/repositories/snapshots/"
+								url "https://oss.sonatype.org/content/repositories/snapshots"
 							}
 						«ENDIF»
 					}

@@ -34,8 +34,8 @@ abstract class ProjectDescriptor {
 		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
 	}
 
-	def Iterable<? extends GeneratedFile> getFiles() {
-		val List<GeneratedFile> files = newArrayList
+	def Iterable<? extends TextFile> getFiles() {
+		val List<TextFile> files = newArrayList
 		if (eclipsePluginProject) {
 			files += file(Outlet.META_INF, "MANIFEST.MF", manifest)
 			files += file(Outlet.ROOT, "build.properties", buildProperties)

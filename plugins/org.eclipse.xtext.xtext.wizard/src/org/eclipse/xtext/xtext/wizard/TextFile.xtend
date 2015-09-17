@@ -4,12 +4,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
-abstract class TextFile extends GeneratedFile {
+abstract class TextFile {
+	@Accessors val Outlet outlet
+	@Accessors val String relativePath
 	@Accessors val ProjectDescriptor project
 
-	override getBytes() {
-		content.toString.getBytes(project.config.encoding)
-	}
-	
-	abstract def CharSequence getContent()
+	abstract def String getContent()
 }
