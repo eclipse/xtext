@@ -699,6 +699,7 @@ import java.io.IOException
 			LOG.error('Error loading XtextAutoBuildComponentState ', exc)
 			chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 			moduleName2GeneratedMapping.clear
+			doCleanBuild
 		}
 	}
 	
