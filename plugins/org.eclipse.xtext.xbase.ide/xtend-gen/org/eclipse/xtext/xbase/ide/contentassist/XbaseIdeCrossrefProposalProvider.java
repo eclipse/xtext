@@ -121,7 +121,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       int _minus = (_offset - _length);
       int _length_1 = proposalString.length();
       int offset = (_minus + _length_1);
-      result.setEscapePosition((offset + bracketInfo.caretOffset));
+      result.setEscapePosition(Integer.valueOf((offset + bracketInfo.caretOffset)));
       if ((bracketInfo.selectionOffset != 0)) {
         int _offset_1 = offset;
         offset = (_offset_1 + bracketInfo.selectionOffset);

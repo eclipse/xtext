@@ -19,18 +19,46 @@ import org.eclipse.xtext.util.TextRegion
 @EqualsHashCode
 class ContentAssistEntry {
 	
+	/**
+	 * The prefix that should be replaced with this proposal.
+	 */
 	String prefix
 	
+	/**
+	 * The proposed text to be inserted.
+	 */
 	String proposal
 	
+	/**
+	 * The text seen by the user in the list of proposals.
+	 */
 	String label
 	
+	/**
+	 * Additional description to include in the list of proposals.
+	 * <p>This property may not be supported by all editor frameworks.</p>
+	 */
 	String description
 	
-	int escapePosition
+	/**
+	 * The absolute cursor position to apply after the proposal has been inserted.
+	 * If omitted, the cursor it set to the end of the inserted proposal.
+	 * <p>This property may not be supported by all editor frameworks.</p>
+	 */
+	Integer escapePosition
 	
+	/**
+	 * Additional text replacements to apply when this proposal is selected.
+	 * <p>This property may not be supported by all editor frameworks.</p>
+	 */
 	val textReplacements = new ArrayList<ReplaceRegion>
 	
+	/**
+	 * Regions to be edited by the user after the proposal has been inserted.
+	 * Usually the <em>tab</em> key navigates through the edit positions, and <em>enter</em>
+	 * jumps to the {@code escapePosition}.
+	 * <p>This property may not be supported by all editor frameworks.</p>
+	 */
 	val editPositions = new ArrayList<TextRegion>
 	
 }

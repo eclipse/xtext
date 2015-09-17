@@ -278,7 +278,6 @@ define([
 						overwrite: true,
 						name: (entry.label ? entry.label: entry.proposal),
 						description: entry.description,
-						style: entry.style,
 						additionalEdits: entry.textReplacements,
 						positions: entry.editPositions,
 						escapePosition: entry.escapePosition
