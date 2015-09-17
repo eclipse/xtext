@@ -9,7 +9,7 @@ define("xtext/statemachine-syntax", function() {
 			{include: "orion.lib#string_doubleQuote"},
 			{include: "orion.lib#string_singleQuote"},
 			{include: "orion.lib#number_decimal"},
-			{match: "\\b(?:" + keywords + ")\\b", name: "keyword.statemachine"}
+			{name: "keyword.statemachine", match: "\\b(?:" + keywords + ")\\b"}
 		]
 	};
 });
