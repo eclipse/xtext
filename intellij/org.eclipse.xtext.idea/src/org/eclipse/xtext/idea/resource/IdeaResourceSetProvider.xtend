@@ -46,10 +46,13 @@ class IdeaResourceSetProvider {
 	@Inject StubTypeProviderFactory stubTypeProviderFactory
 
 	@Inject ProjectDescriptionProvider projectDescriptionProvider
+	
+	@Inject Provider<IdeaClasspathURIResolver> classpathURIResolverProvider
 
 	def get(Module module) {
 		val resourceSet = resourceSetProvider.get
 		resourceSet.classpathURIContext = module
+		resourceSet.classpathUriResolver = classpathURIResolverProvider.get
 		resourceSet.URIConverter.URIHandlers.clear
 		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler)
 
