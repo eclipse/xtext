@@ -25,8 +25,10 @@ import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 
 public class IssueAnnotator implements Annotator {
@@ -42,6 +44,10 @@ public class IssueAnnotator implements Annotator {
 		}
 		PsiEObject psiEObject = (PsiEObject) element;
 		if (!psiEObject.isRoot()) {
+			return;
+		}
+		VirtualFile file = element.getContainingFile().getVirtualFile();
+		if(!FileEditorManager.getInstance(element.getProject()).isFileOpen(file)) {
 			return;
 		}
 		Resource resource = psiEObject.getResource();

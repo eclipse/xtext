@@ -15,6 +15,9 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.lang.Language;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.eclipse.xtext.Constants;
@@ -56,6 +59,15 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Override
   public boolean analyze(final PsiFile file, final boolean updateWholeFile, final HighlightInfoHolder holder, final Runnable action) {
+    PsiFile _containingFile = file.getContainingFile();
+    final VirtualFile virtualFile = _containingFile.getVirtualFile();
+    Project _project = file.getProject();
+    FileEditorManager _instance = FileEditorManager.getInstance(_project);
+    boolean _isFileOpen = _instance.isFileOpen(virtualFile);
+    boolean _not = (!_isFileOpen);
+    if (_not) {
+      return true;
+    }
     final IHighlightedPositionAcceptor _function = new IHighlightedPositionAcceptor() {
       @Override
       public void addPosition(final int offset, final int length, final String[] styles) {

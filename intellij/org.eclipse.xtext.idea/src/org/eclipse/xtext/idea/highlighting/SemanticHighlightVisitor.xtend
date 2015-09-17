@@ -12,15 +12,16 @@ import com.google.inject.name.Named
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
+import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.psi.impl.BaseXtextFile
-import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -38,6 +39,9 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 	IHighlightedPositionAcceptor acceptor
  	
 	override analyze(PsiFile file, boolean updateWholeFile, HighlightInfoHolder holder, Runnable action) {
+		val virtualFile = file.getContainingFile().getVirtualFile();
+		if(!FileEditorManager.getInstance(file.project).isFileOpen(virtualFile)) 
+			return true
 		acceptor = [
 			offset, length, styles |
 			styles.forEach [
@@ -70,8 +74,9 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 	
 	override visit(PsiElement element) {
 		try {
-			if (element instanceof BaseXtextFile) 
+			if (element instanceof BaseXtextFile)  {
 				highlightCalculator.provideHighlightingFor(element.resource, acceptor, CancelIndicator.NullImpl)			
+			}
 		} catch (OperationCanceledError error) {
 			operationCanceledManager.propagateIfCancelException(error)
 		}
