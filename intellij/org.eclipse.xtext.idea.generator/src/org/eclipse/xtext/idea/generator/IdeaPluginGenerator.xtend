@@ -125,6 +125,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.BlockFactory', 'org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory')
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.ChildAttributesProvider', 'org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider')
 			bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider', 'org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider')
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher', 'org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher')
+			bindFactory.addTypeToType('org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider', 'org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider')
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider', 'org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider')
 		}
 		val bindings = bindFactory.bindings
 
@@ -147,7 +150,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.abstractIdeaModuleName.toJavaPath, grammar.compileGuiceModuleIdeaGenerated(bindings))
 		ctx.writeFile(outlet_src_gen, grammar.extensionFactoryName.toJavaPath, grammar.compileExtensionFactory)
 		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toJavaPath, grammar.compileCodeBlockModificationListener)
-		ctx.writeFile(outlet_src_gen, grammar.elementDescriptionProviderName.toJavaPath, grammar.compileElementDescriptionProvider)
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
 		ctx.writeFile(outlet_src_gen, grammar.antlrTokenFileProvider.toJavaPath, grammar.compileAntlrTokenFileProvider)
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
@@ -263,21 +265,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				return true;
 			}
 			«ENDIF»
-		
-		}
-	'''
-	
-	def compileElementDescriptionProvider(Grammar grammar) '''
-		package «grammar.elementDescriptionProviderName.toPackageName»;
-		
-		import org.eclipse.xtext.psi.BaseXtextElementDescriptionProvider;
-		import «grammar.languageName»;
-		
-		public class «grammar.elementDescriptionProviderName.toSimpleName» extends BaseXtextElementDescriptionProvider {
-		
-			public «grammar.elementDescriptionProviderName.toSimpleName»() {
-				super(«grammar.languageName.toSimpleName».INSTANCE);
-			}
 		
 		}
 	'''
@@ -442,7 +429,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«grammar.compileExtension('lang.braceMatcher', 'com.intellij.lang.PairedBraceMatcher')»
 		      	«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator')»
 		      	<completion.contributor language="«grammar.languageID»" implementationClass="«grammar.completionContributor»"/>
-		      	<elementDescriptionProvider implementation="«grammar.elementDescriptionProviderName»" order="first"/>
 		      	<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcherName»"/>
 
 		      	«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory')»

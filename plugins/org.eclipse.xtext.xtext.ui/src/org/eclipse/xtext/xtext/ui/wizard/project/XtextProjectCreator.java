@@ -30,9 +30,9 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 import com.google.common.collect.Lists;
@@ -126,16 +126,16 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 
 		@Override
 		public void contributeFiles(IProject project, IFileCreator fileWriter) {
-			for (GeneratedFile file : descriptor.getFiles()) {
+			for (TextFile file : descriptor.getFiles()) {
 				if (!isFiltered(file)) {
 					WizardConfiguration config = descriptor.getConfig();
 					String path = config.getSourceLayout().getPathFor(file.getOutlet()) + "/" + file.getRelativePath();
-					fileWriter.writeToFile(new String(file.getBytes(), config.getEncoding()), path);
+					fileWriter.writeToFile(file.getContent(), path);
 				}
 			}
 		}
 		
-		private boolean isFiltered(GeneratedFile file) {
+		private boolean isFiltered(TextFile file) {
 			if (isPluginProject(descriptor)) {
 				return newHashSet("plugin.xml", "MANIFEST.MF").contains(file.getRelativePath());
 			}

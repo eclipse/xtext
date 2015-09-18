@@ -7,14 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.refactoring;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
+import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.CompletionDataAcceptor;
+import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -26,7 +34,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -43,10 +50,14 @@ public class NewFeatureNameUtil {
 
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;
+
+	@Inject 
+	private JdtVariableCompletions jdtVariableCompletions;
 	
 	private Set<String> allKeywords;
 	
 	private IScope featureCallScope;
+	
 
 	@Inject
 	public NewFeatureNameUtil(IGrammarAccess grammarAccess) {
@@ -87,7 +98,6 @@ public class NewFeatureNameUtil {
 			status.addFatalError("'" + newFeatureName + "' is reserved.");
 		if (isLookupInScope && featureCallScope != null && isAlreadyDefined(newFeatureName)) 
 			status.addError("The name '" + newFeatureName + "' is already defined in this scope.");
-		
 	}
 
 	protected boolean isKeyword(String newFeatureName) {
@@ -100,47 +110,38 @@ public class NewFeatureNameUtil {
 	}
 
 	public String getDefaultName(XExpression expression) {
-		String defaultName = getFancyDefaultName(expression);
-		String currentName = defaultName;
-		int count = 0;
-		for (;;) {
-			if (!isKeyword(currentName) && !isAlreadyDefined(currentName))
-				return currentName;
-			currentName = defaultName + ++count;
+		String baseName = getBaseName(expression);
+		final List<String> candidates = newArrayList();
+		Set<String> excludedNames = new HashSet<String>(allKeywords); 
+		for(IEObjectDescription featureDescription: featureCallScope.getAllElements()) {
+			QualifiedName featureQName = featureDescription.getQualifiedName();
+			if(featureQName.getSegmentCount() == 1)
+				excludedNames.add(featureQName.getLastSegment());
 		}
+		jdtVariableCompletions.getVariableProposals(baseName, expression, VariableType.LOCAL_VAR, excludedNames, new CompletionDataAcceptor() {
+			@Override
+			public void accept(String replaceText, StyledString label, Image img) {
+				candidates.add(replaceText);
+			}
+		});
+		return candidates.isEmpty() ? "dingenskirchen" : candidates.get(0);
 	}
-
-	protected String getFancyDefaultName(XExpression expression) {
+	
+	protected String getBaseName(XExpression expression) {
 		if (expression instanceof XMemberFeatureCall || expression instanceof XFeatureCall) {
 			String featureName = ((XAbstractFeatureCall) expression).getFeature().getSimpleName();
 			if (featureName.startsWith("get"))
-				return toVariableName(featureName.substring(3));
+				return featureName.substring(3);
+			else if (featureName.startsWith("is"))
+				return featureName.substring(2);
 			else
-				return toVariableName(featureName);
+				return featureName;
 		}
 		if(expression instanceof XClosure)
 			return "function";
 		LightweightTypeReference type = batchTypeResolver.resolveTypes(expression).getActualType(expression);
-		if (type != null) {
-			if (type.isPrimitive())
-				return type.getSimpleName().substring(0, 1);
-			else
-				return toVariableName(type.getSimpleName());
-		}
+		if (type != null) 
+			return type.getSimpleName();
 		return "";
 	}
-
-	protected String toVariableName(String name) {
-		if (name.toUpperCase().equals(name)) {
-			StringBuilder camelCaseBuilder = new StringBuilder();
-			boolean isFirst = true;
-			for (String fragment : name.toLowerCase().split("_")) {
-				camelCaseBuilder.append(isFirst ? fragment : StringExtensions.toFirstUpper(fragment));
-				isFirst = false;
-			}
-			return camelCaseBuilder.toString();
-		}
-		return StringExtensions.toFirstLower(name);
-	}
-
 }

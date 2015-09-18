@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -53,13 +54,17 @@ public class MultiImportOrganizer {
 	/**
 	 * @param files
 	 *            ordered by corresponding {@link IProject}
+	 * @param mon
 	 * @return Creates {@link Change}s for each {@link IFile} using {@link ImportOrganizer}
+	 * @throws InterruptedException
 	 */
-	public List<Change> organizeImports(Multimap<IProject, IFile> files) {
+	public List<Change> organizeImports(Multimap<IProject, IFile> files, IProgressMonitor mon)
+			throws InterruptedException {
 		List<Change> result = Lists.newArrayList();
 		for (IProject project : files.keySet()) {
 			ResourceSet resSet = resSetProvider.get(project);
 			for (IFile file : files.get(project)) {
+				mon.subTask("Calculating imports in - " + file.getName());
 				URI uri = storageMapper.getUri(file);
 				if (uri != null) {
 					XtextResource resource = (XtextResource) resSet.getResource(uri, true);
@@ -77,6 +82,10 @@ public class MultiImportOrganizer {
 						}
 					}
 					result.add(change);
+				}
+				mon.worked(1);
+				if (mon.isCanceled()) {
+					throw new InterruptedException();
 				}
 			}
 		}

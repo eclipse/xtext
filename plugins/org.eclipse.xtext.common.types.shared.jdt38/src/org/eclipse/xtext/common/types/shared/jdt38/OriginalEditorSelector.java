@@ -1,5 +1,7 @@
 package org.eclipse.xtext.common.types.shared.jdt38;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -97,9 +99,6 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		return editorDescriptor;
 	}
 
-	// we get invoked when:
-	// - somebody doubleclicks on a .class file in a JAR in the JDT Package Explorer
-	// - somebody clicks on a stack frame hyperlink in the console 
 	protected IEditorDescriptor findXbaseEditor(String fileName, boolean ignorePreference) {
 		if (decisions.isJDI()) {
 			String file = debugPluginListener.findXtextSourceFileNameForClassFile(fileName);
@@ -181,33 +180,80 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		String ext = name.substring(index + 1).toLowerCase();
 		if (!ext.equals("class") && !ext.equals("java"))
 			return null;
-		final IType[] foundLocalType = new IType[1];
-		final IType[] foundLibraryType = new IType[1];
+		final boolean searchForSources = ext.equals("java");
+		final SearchResult result = findTypesBySimpleName(typeName, searchForSources);
+		switch (result.foundTypes.size()) {
+			case 1 : {
+				return result.getExactMatch();
+			}
+			case 0 : {
+				// check for nested types
+				final String[] splitedName = typeName.split("\\$");
+				if (splitedName.length > 1) {
+					final SearchResult containerResult = findTypesBySimpleName(splitedName[0], searchForSources);
+					IType candidate = null;
+					for (IType currentType : containerResult.foundTypes) {
+						for (int i = 1; i < splitedName.length; i++) {
+							currentType = currentType.getType(splitedName[i]);
+							if (currentType == null || !currentType.exists()) {
+								break;
+							} else if (i == splitedName.length-1) {
+								if (candidate != null) {
+									// multiple matches
+									return null;
+								}
+								candidate = currentType;
+							}
+						}
+					}
+					return candidate;
+				}
+			}
+			default : {
+				return null;
+			}
+		}
+	}
+	
+	static class SearchResult {
+		public List<IType> foundTypes = newArrayList();
+		public IType getExactMatch() {
+			if (hasExactMatch()) {
+				return foundTypes.get(0);
+			}
+			return null;
+		}
+		
+		public boolean hasExactMatch() {
+			return foundTypes.size()==1;
+		}
+	}
+	
+	
+	private SearchResult findTypesBySimpleName(String simpleTypeName, final boolean searchForSources) {
+		final SearchResult result = new SearchResult();
 		try {
 			new SearchEngine().searchAllTypeNames(null, 0, // match all package names
-					typeName.toCharArray(), SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, // and all type names,
-					IJavaSearchConstants.TYPE, // search for types
-					SearchEngine.createWorkspaceScope(), // in the scope of the current project
-					new TypeNameMatchRequestor() {
-						@Override
-						public void acceptTypeNameMatch(TypeNameMatch match) {
-							IPackageFragmentRoot fragmentRoot = match.getPackageFragmentRoot();
-							if (fragmentRoot.isArchive() || fragmentRoot.isExternal())
-								foundLibraryType[0] = match.getType();
-							else
-								foundLocalType[0] = match.getType();
-						}
-					}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, // wait for the jdt index to be ready
-					new NullProgressMonitor());
+					simpleTypeName.toCharArray(), SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE,
+						IJavaSearchConstants.TYPE,
+						SearchEngine.createWorkspaceScope(),
+						new TypeNameMatchRequestor() {
+							@Override
+							public void acceptTypeNameMatch(TypeNameMatch match) {
+								IPackageFragmentRoot fragmentRoot = match.getPackageFragmentRoot();
+								boolean externalLib = fragmentRoot.isArchive() || fragmentRoot.isExternal();
+								if (externalLib ^ searchForSources) {
+									result.foundTypes.add(match.getType());
+								}
+							}
+						}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, // wait for the jdt index to be ready
+						new NullProgressMonitor());
 		} catch (JavaModelException e) {
 			logger.error(e.getMessage(), e);
 		}
-		if (decisions.isJavaStackTraceHyperlink())
-			return foundLocalType[0] != null ? foundLocalType[0] : foundLibraryType[0];
-		else
-			return foundLibraryType[0] != null ? foundLibraryType[0] : foundLocalType[0];
+		return result;
 	}
-
+	
 	protected IEditorDescriptor getXtextEditor(URI uri) {
 		IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
 		if (serviceProvider != null) {

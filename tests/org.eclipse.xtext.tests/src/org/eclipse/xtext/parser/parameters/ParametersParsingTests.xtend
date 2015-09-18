@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.parameters
 
-import org.junit.Test
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -47,20 +45,4 @@ class NoParametersParsingTest extends AbstractParametersParsingTest {
 		super.setUp();
 		with(new NoParametersTestLanguageStandaloneSetup);
 	}
-	
-	@Test
-	override testScenario4_keyword() {
-		val instance = '#4 keyword'.modelWithErrors
-		assertEquals(null, instance.scenario.first)
-		assertEquals(1, instance.eResource.errors.size)
-		assertEquals("mismatched input 'keyword' expecting RULE_ID", instance.eResource.errors.head.message)
-	}
-	
-	@Test
-	override testScenario10_keyword() {
-		val instance = '#10 keyword'.modelWithErrors
-		assertEquals('keyword', instance.scenario.second)
-		assertEquals("mismatched input '<EOF>' expecting 'keyword'", instance.eResource.errors.head.message)
-	}
-	
 }

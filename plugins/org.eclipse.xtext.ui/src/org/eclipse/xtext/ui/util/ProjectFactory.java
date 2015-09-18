@@ -169,7 +169,7 @@ public class ProjectFactory {
 			for (final String folderName : folders) {
 				final IFolder folder = project.getFolder(folderName);
 				if (!folder.exists()) {
-					folder.create(false, true, subMonitor.newChild(1));
+					createRecursive(folder);
 				}
 			}
 		}

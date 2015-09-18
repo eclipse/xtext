@@ -544,10 +544,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (!getResourceServiceProvider().canHandle(delta.getUri()))
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
+		registerCurrentSourceFolder(context, delta, fileSystemAccess);
 		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
-				registerCurrentSourceFolder(context, delta, fileSystemAccess);
 				generatorDelegate.generate(resource, fileSystemAccess);
 			} catch (OperationCanceledException e) {
 				// don't look into the cause for OCE

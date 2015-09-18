@@ -178,7 +178,7 @@ class JavaBuilderState {
 	}
 
 	private def getTypeLocator(ICompilationUnit it) {
-		resource.projectRelativePath.toString
+		resource?.projectRelativePath?.toString
 	}
 
 	private def getPackageName(ICompilationUnit it) {

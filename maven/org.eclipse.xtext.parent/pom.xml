@@ -32,7 +32,7 @@
 
 	<properties>
 		<mavenVersion>3.2.1</mavenVersion>
-		<tycho-version>0.23.0</tycho-version>
+		<tycho-version>0.23.1</tycho-version>
 		<emf.version>(2.8,3.0)</emf.version>
 		<mwe2-version>(2.7,3.0)</mwe2-version>
 		<mwe-version>(1.2,2.0)</mwe-version>

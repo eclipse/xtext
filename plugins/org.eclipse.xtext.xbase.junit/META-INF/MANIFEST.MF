@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.junit4,
- org.eclipse.xtext.common.types.ui
+ org.eclipse.xtext.common.types.ui;resolution:=optional;x-installation:=greedy
 Export-Package: org.eclipse.xtext.xbase.compiler,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.xbase.junit.evaluation;x-internal:=true,

@@ -59,7 +59,7 @@ import com.google.inject.Singleton;
 public class MultiOrganizeImportsHandler extends AbstractHandler {
 	@Inject
 	private FileExtensionProvider fileExtensions;
-	
+
 	/**
 	 * Provider to lazy load injected fields in MultiImportOrganizer (~2 sec in context menu is to slow)
 	 */
@@ -79,28 +79,30 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 					javaDelegate.run(structuredSelection);
 				}
 			}
-			Multimap<IProject, IFile> files = collectFiles(structuredSelection);
-			final List<Change> organizeImports = importOrganizerProvider.get().organizeImports(files);
+			final Multimap<IProject, IFile> files = collectFiles(structuredSelection);
 			Shell shell = activeSite.getShell();
 
 			IRunnableWithProgress op = new IRunnableWithProgress() {
 
 				@Override
 				public void run(IProgressMonitor mon) throws InvocationTargetException, InterruptedException {
-					int totalWork = organizeImports.size();
-					mon.beginTask(Messages.OrganizeImports, totalWork);
+					mon.beginTask(Messages.OrganizeImports, files.size() * 2);
+					mon.setTaskName(Messages.OrganizeImports + " - Calculating Import optimisations for " + files.size()
+							+ " Xtend files");
+					final List<Change> organizeImports = importOrganizerProvider.get().organizeImports(files, mon);
 					for (int i = 0; !mon.isCanceled() && i < organizeImports.size(); i++) {
 						Change change = organizeImports.get(i);
-						mon.setTaskName(Messages.OrganizeImports + " - Xtend (" + (i + 1) + " of " + totalWork + ")");
+						mon.setTaskName(
+								"Performing changes - Xtend " + (i + 1) + " of " + files.size() + "");
 						try {
 							mon.subTask(change.getName());
 							change.perform(new SubProgressMonitor(mon, 1));
 						} catch (CoreException e) {
 							throw new InvocationTargetException(e);
 						}
-					}
-					if (mon.isCanceled()) {
-						throw new InterruptedException();
+						if (mon.isCanceled()) {
+							throw new InterruptedException();
+						}
 					}
 				}
 			};
