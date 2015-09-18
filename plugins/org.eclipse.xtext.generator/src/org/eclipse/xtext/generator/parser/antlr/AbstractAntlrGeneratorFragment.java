@@ -74,6 +74,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	}
 
 	private List<String> antlrParams = Lists.newArrayList();
+	
 
 	public void addAntlrParam(String param) {
 		antlrParams.add(param);
@@ -91,6 +92,22 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		}
 		String[] result = params.toArray(new String[params.size()]);
 		return result;
+	}
+	
+	private AntlrCodeQualityHelper codeQualityHelper = new AntlrCodeQualityHelper();
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setCodeQualityHelper(AntlrCodeQualityHelper codeQualityHelper) {
+		this.codeQualityHelper = codeQualityHelper;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public AntlrCodeQualityHelper getCodeQualityHelper() {
+		return codeQualityHelper;
 	}
 
 	/**
@@ -347,15 +364,14 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 * @since 2.9
 	 */
 	protected void improveCodeQuality(String lexerJavaFile, String parserJavaFile, final Charset encoding) {
-		AntlrCodeQualityHelper codeQualityHelper = new AntlrCodeQualityHelper();
 		String lexerContent = readFileIntoString(lexerJavaFile, encoding);
-		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, getOptions().delegate);
+		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, getOptions());
 		writeStringIntoFile(lexerJavaFile, lexerContent, encoding);
 
 		String parserContent = readFileIntoString(parserJavaFile, encoding);
-		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, getOptions().delegate);
-		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, getOptions().delegate);
-		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, getOptions().delegate);
+		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, getOptions());
+		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, getOptions());
+		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, getOptions());
 		writeStringIntoFile(parserJavaFile, parserContent, encoding);
 
 	}

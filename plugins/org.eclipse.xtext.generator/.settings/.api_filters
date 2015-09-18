@@ -726,6 +726,22 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/generator/parser/antlr/AbstractAntlrGeneratorFragment.java" type="org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="AntlrCodeQualityHelper"/>
+                <message_argument value="AbstractAntlrGeneratorFragment"/>
+                <message_argument value="getCodeQualityHelper()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="AntlrCodeQualityHelper"/>
+                <message_argument value="AbstractAntlrGeneratorFragment"/>
+                <message_argument value="setCodeQualityHelper(AntlrCodeQualityHelper)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/generator/parser/antlr/debug/SimpleAntlrRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrRuntimeModule">
         <filter id="305365105">
             <message_arguments>
