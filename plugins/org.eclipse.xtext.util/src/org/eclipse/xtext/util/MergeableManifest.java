@@ -206,7 +206,13 @@ public class MergeableManifest extends Manifest {
 		// TODO manage transitive dependencies
 		// don't require self
 		Set<String> bundlesToMerge;
-		String bundleName = (String) getMainAttributes().get(BUNDLE_NAME);
+		String bundleName = (String) getMainAttributes().get(BUNDLE_SYMBOLIC_NAME);
+		if (bundleName != null) {
+			int idx = bundleName.indexOf(';');
+			if (idx >= 0) {
+				bundleName = bundleName.substring(0, idx);
+			}
+		}
 		if (bundleName != null && bundles.contains(bundleName) || projectName != null && bundles.contains(projectName)) {
 			bundlesToMerge = new LinkedHashSet<String>(bundles);
 			bundlesToMerge.remove(bundleName);

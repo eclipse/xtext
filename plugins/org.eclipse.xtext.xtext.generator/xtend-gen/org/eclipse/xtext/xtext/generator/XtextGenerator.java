@@ -137,7 +137,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       Injector _createInjector = this.createInjector();
       this.injector = _createInjector;
       this.injector.injectMembers(this);
-      this.projectConfig.initialize(this.injector);
       CodeConfig _instance = this.injector.<CodeConfig>getInstance(CodeConfig.class);
       final Procedure1<CodeConfig> _function = new Procedure1<CodeConfig>() {
         @Override
@@ -146,6 +145,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         }
       };
       ObjectExtensions.<CodeConfig>operator_doubleArrow(_instance, _function);
+      this.projectConfig.initialize(this.injector);
       for (final LanguageConfig2 language : this.languageConfigs) {
         {
           final Injector languageInjector = this.createLanguageInjector(this.injector, language);

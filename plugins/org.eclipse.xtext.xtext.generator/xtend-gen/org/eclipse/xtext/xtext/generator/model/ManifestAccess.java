@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -107,9 +108,25 @@ public class ManifestAccess extends TextFileAccess {
       }
       this.exportedPackages.addAll(other.exportedPackages);
       this.requiredBundles.addAll(other.requiredBundles);
+      boolean _notEquals_5 = (!Objects.equal(this.symbolicName, null));
+      if (_notEquals_5) {
+        String _effectiveSymbolicName = this.getEffectiveSymbolicName();
+        this.requiredBundles.remove(_effectiveSymbolicName);
+      }
       _xblockexpression = this.importedPackages.addAll(other.importedPackages);
     }
     return _xblockexpression;
+  }
+  
+  public String getEffectiveSymbolicName() {
+    if ((this.symbolicName == null)) {
+      return null;
+    }
+    final int idx = this.symbolicName.indexOf(";");
+    if ((idx < 0)) {
+      return this.symbolicName;
+    }
+    return this.symbolicName.substring(0, idx);
   }
   
   @Override
@@ -135,7 +152,7 @@ public class ManifestAccess extends TextFileAccess {
       _elvis = this.bundleName;
     }
     _builder.append(_elvis, "");
-    _builder.append("; singleton:=true");
+    _builder.append(";singleton:=true");
     _builder.newLineIfNotEmpty();
     {
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.version);
@@ -177,8 +194,16 @@ public class ManifestAccess extends TextFileAccess {
         _builder.append("Require-Bundle: ");
         {
           List<String> _sort_1 = IterableExtensions.<String>sort(this.requiredBundles);
+          final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+            @Override
+            public Boolean apply(final String it) {
+              String _effectiveSymbolicName = ManifestAccess.this.getEffectiveSymbolicName();
+              return Boolean.valueOf((!Objects.equal(it, _effectiveSymbolicName)));
+            }
+          };
+          Iterable<String> _filter = IterableExtensions.<String>filter(_sort_1, _function);
           boolean _hasElements_1 = false;
-          for(final String bundle : _sort_1) {
+          for(final String bundle : _filter) {
             if (!_hasElements_1) {
               _hasElements_1 = true;
             } else {

@@ -73,7 +73,21 @@ class ManifestAccess extends TextFileAccess {
 		}
 		this.exportedPackages.addAll(other.exportedPackages)
 		this.requiredBundles.addAll(other.requiredBundles)
+		if (symbolicName != null) {
+			this.requiredBundles.remove(effectiveSymbolicName)
+		}
 		this.importedPackages.addAll(other.importedPackages)
+	}
+	
+	def getEffectiveSymbolicName() {
+		if (symbolicName === null) {
+			return null
+		}
+		val idx = symbolicName.indexOf(';')
+		if (idx < 0) {
+			return symbolicName
+		}
+		return symbolicName.substring(0, idx)
 	}
 	
 	override setContent(StringConcatenationClient content) {
@@ -84,7 +98,7 @@ class ManifestAccess extends TextFileAccess {
 		Manifest-Version: 1.0
 		Bundle-ManifestVersion: 2
 		Bundle-Name: «bundleName»
-		Bundle-SymbolicName: «symbolicName ?: bundleName»; singleton:=true
+		Bundle-SymbolicName: «symbolicName ?: bundleName»;singleton:=true
 		«IF !version.nullOrEmpty»
 			Bundle-Version: «version»
 		«ENDIF»
@@ -94,7 +108,7 @@ class ManifestAccess extends TextFileAccess {
 			Export-Package: «FOR pack : exportedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
 		«ENDIF»
 		«IF !requiredBundles.empty»
-			Require-Bundle: «FOR bundle : requiredBundles.sort SEPARATOR ',\n '»«bundle»«ENDFOR»
+			Require-Bundle: «FOR bundle : requiredBundles.sort.filter[it != effectiveSymbolicName] SEPARATOR ',\n '»«bundle»«ENDFOR»
 		«ENDIF»
 		«IF !importedPackages.empty»
 			Import-Package: «FOR pack : importedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
