@@ -5,5 +5,7 @@ import org.eclipse.xtext.testlanguages.fragments.*
 var grammarURI = "classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext"
 var backtrack = true
 var memoize = true
+var classSplitting = false
 
-@SimpleTestLanguageFragments auto-inject {}
+@SimpleTestLanguageFragments auto-inject {
+}
