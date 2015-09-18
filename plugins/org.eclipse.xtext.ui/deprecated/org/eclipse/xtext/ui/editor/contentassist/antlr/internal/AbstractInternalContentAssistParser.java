@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.antlr.runtime.BitSet;
+import org.antlr.runtime.DFA;
 import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
@@ -708,5 +709,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public void setStrict(boolean strict) {
 		this.strict = strict;
 	}
-
+	
+	/**
+	 * @since 2.9
+	 */
+	protected static short[][] unpackEncodedStringArray(String[] arr) {
+		int numStates = arr.length;
+		short[][] result = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			result[i] = DFA.unpackEncodedString(arr[i]);
+		}
+		return result;
+	}
 }
