@@ -55,7 +55,10 @@ public class MergeableManifest extends Manifest {
 	/*
 	 * java.util.Manifest throws an exception if line exceeds 512 chars
 	 */
-    static String make512Safe(StringBuffer lines) {
+	/**
+	 * @since 2.9
+	 */
+    public static String make512Safe(StringBuffer lines) {
         if (lines.length() > 512) {
         	StringBuilder result = new StringBuilder(lines.length());
         	String[] splitted = lines.toString().split("\\r\\n");

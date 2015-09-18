@@ -8,14 +8,19 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -213,6 +218,29 @@ public class ManifestAccess extends TextFileAccess {
       }
     }
     return _builder;
+  }
+  
+  @Override
+  public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
+    try {
+      boolean _notEquals = (!Objects.equal(fileSystemAccess, null));
+      if (_notEquals) {
+        CharSequence _content = this.getContent();
+        StringBuffer _stringBuffer = new StringBuffer(_content);
+        final String contentToWrite = MergeableManifest.make512Safe(_stringBuffer);
+        byte[] _bytes = contentToWrite.getBytes("UTF-8");
+        ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
+        final MergeableManifest mergableManifest = new MergeableManifest(_byteArrayInputStream);
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        mergableManifest.write(bout);
+        String _path = this.getPath();
+        byte[] _byteArray = bout.toByteArray();
+        ByteArrayInputStream _byteArrayInputStream_1 = new ByteArrayInputStream(_byteArray);
+        fileSystemAccess.generateFile(_path, _byteArrayInputStream_1);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private final static Logger LOG = Logger.getLogger(ManifestAccess.class);
