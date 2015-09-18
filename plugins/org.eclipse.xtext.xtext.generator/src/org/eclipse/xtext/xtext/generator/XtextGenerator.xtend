@@ -30,7 +30,6 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment}
@@ -90,8 +89,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			LOG.info('Initializing Xtext generator')
 			injector = createInjector
 			injector.injectMembers(this)
-			projectConfig.initialize(injector)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
+			projectConfig.initialize(injector)
 			for (language : languageConfigs) {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)
@@ -112,7 +111,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		for (language : languageConfigs) {
 			LOG.info('Generating ' + language.grammar.name)
 			language.generate
-			language.generateRuntimeSetup
+			language.generateSetups
 			language.generateModules
 			language.generateExecutableExtensionFactory
 		}
@@ -122,9 +121,10 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		generateActivator
 	}
 	
-	protected def generateRuntimeSetup(ILanguageConfig language) {
+	protected def generateSetups(ILanguageConfig language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
 		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
+		templates.createWebSetup(language).writeTo(projectConfig.webSrc)
 	}
 	
 	protected def generateModules(ILanguageConfig language) {
@@ -134,6 +134,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
 		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPluginSrcGen)
 		templates.createIdeaModule(language).writeTo(projectConfig.ideaPluginSrc)
+		templates.createWebGenModule(language).writeTo(projectConfig.webSrcGen)
+		templates.createWebModule(language).writeTo(projectConfig.webSrc)
 	}
 	
 	protected def generateExecutableExtensionFactory(ILanguageConfig language) {
@@ -182,25 +184,24 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
 					manifest.bundleName = segments.get(segments.length - 3)*/
 			}
-			var TypeReference activator
 			if (manifest === projectConfig.eclipsePluginManifest) {
 				val firstLanguage = languageConfigs.head
-				activator = firstLanguage?.naming?.getEclipsePluginActivator(firstLanguage.grammar)
+				manifest.activator = firstLanguage?.naming?.getEclipsePluginActivator(firstLanguage.grammar)
 			}
 			if (metaInf.isFile(manifest.path)) {
 				if (manifest.merge) {
-					mergeManifest(manifest, metaInf, activator)
+					mergeManifest(manifest, metaInf)
 				} else if (manifest.path.endsWith('.MF')) {
 					manifest.path = manifest.path + '_gen'
-					templates.createManifest(manifest, activator).writeTo(metaInf)
+					manifest.writeTo(metaInf)
 				}
 			} else {
-				templates.createManifest(manifest, activator).writeTo(metaInf)
+				manifest.writeTo(metaInf)
 			}
 		}
 	}
 
-	protected def mergeManifest(ManifestAccess manifest, IXtextGeneratorFileSystemAccess metaInf, TypeReference activator) throws IOException {
+	protected def mergeManifest(ManifestAccess manifest, IXtextGeneratorFileSystemAccess metaInf) throws IOException {
 		var InputStream in
 		try {
 			in = metaInf.readBinaryFile(manifest.path)
@@ -208,8 +209,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			merge.addExportedPackages(manifest.exportedPackages)
 			merge.addRequiredBundles(manifest.requiredBundles)
 			merge.addImportedPackages(manifest.importedPackages)
-			if (activator !== null && !merge.mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
-				merge.mainAttributes.put(MergeableManifest.BUNDLE_ACTIVATOR, activator.name)
+			if (manifest.activator !== null && !merge.mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
+				merge.mainAttributes.put(MergeableManifest.BUNDLE_ACTIVATOR, manifest.activator.name)
 			}
 			if (merge.isModified) {
 				val out = new ByteArrayOutputStream
@@ -259,13 +260,16 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		for (entry : pluginXmls) {
 			val pluginXml = entry.key
 			val root = entry.value
-			if (root.isFile(pluginXml.path)) {
-				if (pluginXml.path.endsWith('.xml')) {
-					pluginXml.path = pluginXml.path + '_gen'
-					templates.createPluginXml(pluginXml)?.writeTo(root)
+			if (root.isFile(pluginXml.path)) { 
+				// only write plugin.xml_gen if entries exist and content differs
+				if (!pluginXml.entries.isEmpty
+					&& root.readTextFile(pluginXml.path) != pluginXml.getContent 
+					&& pluginXml.path.endsWith('.xml')) {
+						pluginXml.path = pluginXml.path + '_gen'
+						pluginXml.writeTo(root)
 				}
 			} else {
-				templates.createPluginXml(pluginXml)?.writeTo(root)
+				pluginXml.writeTo(root)
 			}
 		}
 	}

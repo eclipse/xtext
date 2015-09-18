@@ -48,6 +48,10 @@ public class UriUtil {
 	 */
 	public static URI createFolderURI(File file) {
 		URI uri = URI.createFileURI(file.getAbsolutePath());
+		return toFolderURI(uri);
+	}
+	
+	public static URI toFolderURI(URI uri) {
 		if (uri.hasTrailingPathSeparator()) {
 			return uri;
 		} else {

@@ -12,6 +12,8 @@
  * option name with camelCase converted to hyphen-separated.
  * The following options are available:
  *
+ * baseUrl = "/" {String}
+ *     The path segment where the Xtext service is found; see serviceUrl option.
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
@@ -47,13 +49,15 @@
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
- * serverUrl {String}
- *     The URL of the Xtext server.
+ * serviceUrl {String}
+ *     The URL of the Xtext servlet; if no value is given, it is constructed using the baseUrl option in the form
+ *     {location.protocol}//{location.host}{baseUrl}xtext-service
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}
  *     A path to a JS file defining an Ace syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext/mode-<xtextLang>'.
+ *     the 'xtextLang' option in the form 'xtext-resources/mode-{xtextLang}'. Set this option to 'none' to
+ *     disable syntax highlighting.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * theme {String}
@@ -153,10 +157,10 @@ define([
 	AceServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var options = this.services.options;
 		var session = this.editor.getSession();
-		if (options.syntaxDefinition || options.xtextLang) {
+		if (options.syntaxDefinition != 'none' && (options.syntaxDefinition || options.xtextLang)) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
-				syntaxDefinition = 'xtext/mode-' + options.xtextLang;
+				syntaxDefinition = 'xtext-resources/mode-' + options.xtextLang;
 			if (typeof(syntaxDefinition) === 'string') {
 				require([syntaxDefinition], function(mode) {
 					session.setMode(new mode.Mode);
@@ -178,10 +182,9 @@ define([
 			textUpdateDelay = 500;
 		function modelChangeListener(event) {
 			if (!event._xtext_init)
-				editorContext.markClean(false);
-			if (editorContext._modelChangeTimeout){
+				editorContext.setDirty(true);
+			if (editorContext._modelChangeTimeout)
 				clearTimeout(editorContext._modelChangeTimeout);
-			}
 			editorContext._modelChangeTimeout = setTimeout(function() {
 				if (services.options.sendFullText)
 					refreshDocument();
@@ -345,16 +348,6 @@ define([
 				}
 			});
 		}
-	}
-	
-	AceServiceBuilder.prototype.setupDirtyListener = function(dirtyElement, dirtyStatusClass) {
-		var editorContext = this.services.editorContext;
-		editorContext.addDirtyStateListener(function(clean) {
-			if (clean)
-				dirtyElement.removeClass(dirtyStatusClass);
-			else
-				dirtyElement.addClass(dirtyStatusClass);
-		});
 	}
 	
 	return exports;

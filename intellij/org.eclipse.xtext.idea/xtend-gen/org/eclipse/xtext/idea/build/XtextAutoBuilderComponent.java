@@ -23,6 +23,11 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.components.StoragePathMacros;
+import com.intellij.openapi.components.StorageScheme;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.event.DocumentAdapter;
@@ -31,6 +36,9 @@ import com.intellij.openapi.editor.event.EditorEventMulticaster;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.ModuleAdapter;
 import com.intellij.openapi.project.ModuleListener;
@@ -43,6 +51,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileAdapter;
@@ -62,6 +71,7 @@ import com.intellij.util.Processor;
 import com.intellij.util.graph.Graph;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -73,6 +83,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
@@ -80,6 +91,7 @@ import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription;
 import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.build.BuildProgressReporter;
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponentState;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 import org.eclipse.xtext.idea.facet.FacetProvider;
@@ -109,19 +121,38 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@State(name = "XtextAutoBuilderState", storages = { @Storage(id = "other", file = StoragePathMacros.PROJECT_FILE), @Storage(id = "dir", file = (StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml"), scheme = StorageScheme.DIRECTORY_BASED) })
 @Log
 @SuppressWarnings("all")
-public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
+public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
+  @FinalFieldsConstructor
   public static class MutableCancelIndicator implements CancelIndicator {
+    private final ProgressIndicator indicator;
+    
     private volatile boolean canceled;
     
     @Override
     public boolean isCanceled() {
-      return this.canceled;
+      boolean _or = false;
+      if (this.canceled) {
+        _or = true;
+      } else {
+        boolean _isCanceled = false;
+        if (this.indicator!=null) {
+          _isCanceled=this.indicator.isCanceled();
+        }
+        _or = _isCanceled;
+      }
+      return _or;
     }
     
     public boolean setCanceled(final boolean canceled) {
       return this.canceled = canceled;
+    }
+    
+    public MutableCancelIndicator(final ProgressIndicator indicator) {
+      super();
+      this.indicator = indicator;
     }
   }
   
@@ -158,10 +189,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   private ChunkedResourceDescriptions chunkedResourceDescriptions;
   
-  private Map<Module, Source2GeneratedMapping> module2GeneratedMapping = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap();
+  private Map<String, Source2GeneratedMapping> moduleName2GeneratedMapping = CollectionLiterals.<String, Source2GeneratedMapping>newHashMap();
   
   public Iterable<URI> getGeneratedSources(final URI source) {
-    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    Collection<Source2GeneratedMapping> _values = this.moduleName2GeneratedMapping.values();
     final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
       public List<URI> apply(final Source2GeneratedMapping it) {
@@ -174,7 +205,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public Iterable<URI> getSource4GeneratedSource(final URI generated) {
-    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    Collection<Source2GeneratedMapping> _values = this.moduleName2GeneratedMapping.values();
     final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
       public List<URI> apply(final Source2GeneratedMapping it) {
@@ -196,7 +227,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
     this.chunkedResourceDescriptions = _get;
     this.project = project;
-    Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this);
+    Alarm _alarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this);
     this.alarm = _alarm;
     this.disposed = false;
     Disposer.register(project, this);
@@ -281,14 +312,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     connection.<ModuleListener>subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
       @Override
       public void moduleAdded(final Project project, final Module module) {
-        XtextAutoBuilderComponent.this.doCleanBuild(module);
+        boolean _isInitialized = project.isInitialized();
+        if (_isInitialized) {
+          XtextAutoBuilderComponent.this.doCleanBuild(module);
+        }
       }
       
       @Override
       public void moduleRemoved(final Project project, final Module module) {
         String _name = module.getName();
         XtextAutoBuilderComponent.this.chunkedResourceDescriptions.removeContainer(_name);
-        XtextAutoBuilderComponent.this.module2GeneratedMapping.remove(module);
+        String _name_1 = module.getName();
+        XtextAutoBuilderComponent.this.moduleName2GeneratedMapping.remove(_name_1);
       }
       
       @Override
@@ -297,7 +332,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           {
             String _fun = oldNameProvider.fun(module);
             XtextAutoBuilderComponent.this.chunkedResourceDescriptions.removeContainer(_fun);
-            XtextAutoBuilderComponent.this.module2GeneratedMapping.remove(module);
+            String _name = module.getName();
+            XtextAutoBuilderComponent.this.moduleName2GeneratedMapping.remove(_name);
             XtextAutoBuilderComponent.this.doCleanBuild(module);
           }
         }
@@ -307,9 +343,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     _instance_2.registerListener(new ProjectWideFacetAdapter<Facet>() {
       @Override
       public void facetAdded(final Facet facet) {
+        boolean _or = false;
         boolean _isXtextFacet = XtextAutoBuilderComponent.this.isXtextFacet(facet);
         boolean _not = (!_isXtextFacet);
         if (_not) {
+          _or = true;
+        } else {
+          boolean _isInitialized = project.isInitialized();
+          boolean _not_1 = (!_isInitialized);
+          _or = _not_1;
+        }
+        if (_or) {
           return;
         }
         Module _module = facet.getModule();
@@ -363,6 +407,12 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void fileDeleted(final VirtualFile root) {
+    ProjectFileIndex _instance = ProjectFileIndex.SERVICE.getInstance(this.project);
+    Module _findModule = this.findModule(root, _instance);
+    boolean _tripleEquals = (_findModule == null);
+    if (_tripleEquals) {
+      return;
+    }
     final ArrayList<VirtualFile> files = CollectionLiterals.<VirtualFile>newArrayList();
     final Processor<VirtualFile> _function = new Processor<VirtualFile>() {
       @Override
@@ -471,7 +521,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.alarm.cancelAllRequests();
     ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
     this.chunkedResourceDescriptions = _get;
-    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    Collection<Source2GeneratedMapping> _values = this.moduleName2GeneratedMapping.values();
     final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
       public List<URI> apply(final Source2GeneratedMapping it) {
@@ -482,7 +532,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     Iterable<URI> _flatten = Iterables.<URI>concat(_map);
     List<URI> _list = IterableExtensions.<URI>toList(_flatten);
     this.safeDeleteUris(_list);
-    this.module2GeneratedMapping.clear();
+    this.moduleName2GeneratedMapping.clear();
     this.queueAllResources();
     this.doRunBuild();
   }
@@ -494,7 +544,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.alarm.cancelAllRequests();
     String _name = module.getName();
     this.chunkedResourceDescriptions.removeContainer(_name);
-    final Source2GeneratedMapping before = this.module2GeneratedMapping.remove(module);
+    String _name_1 = module.getName();
+    final Source2GeneratedMapping before = this.moduleName2GeneratedMapping.remove(_name_1);
     boolean _notEquals = (!Objects.equal(before, null));
     if (_notEquals) {
       List<URI> _allGenerated = before.getAllGenerated();
@@ -737,8 +788,19 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       this.alarm.addRequest(_function, 500);
     } else {
       final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
-      this.queue.drainTo(allEvents);
-      this.internalBuild(allEvents);
+      if (XtextAutoBuilderComponent.TEST_MODE) {
+        this.queue.drainTo(allEvents);
+        this.internalBuild(allEvents, null);
+      } else {
+        ProgressManager _instance = ProgressManager.getInstance();
+        _instance.run(new Task.Backgroundable(this.project, "Auto-building Xtext resources") {
+          @Override
+          public void run(final ProgressIndicator indicator) {
+            XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
+            XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
+          }
+        });
+      }
     }
   }
   
@@ -762,18 +824,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     return _or;
   }
   
-  protected void internalBuild(final List<BuildEvent> allEvents) {
+  protected void internalBuild(final List<BuildEvent> allEvents, final ProgressIndicator indicator) {
     final ArrayList<BuildEvent> unProcessedEvents = CollectionLiterals.<BuildEvent>newArrayList();
     Iterables.<BuildEvent>addAll(unProcessedEvents, allEvents);
     final Application app = ApplicationManager.getApplication();
-    final XtextAutoBuilderComponent.MutableCancelIndicator cancelIndicator = new XtextAutoBuilderComponent.MutableCancelIndicator();
+    final XtextAutoBuilderComponent.MutableCancelIndicator cancelIndicator = new XtextAutoBuilderComponent.MutableCancelIndicator(indicator);
     this.cancelIndicators.add(cancelIndicator);
     Project _project = this.getProject();
     final ModuleManager moduleManager = ModuleManager.getInstance(_project);
     final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
     buildProgressReporter.setProject(this.project);
+    buildProgressReporter.setEvents(allEvents);
     try {
-      final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
       final Computable<Graph<Module>> _function = new Computable<Graph<Module>>() {
         @Override
         public Graph<Module> compute() {
@@ -788,7 +850,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       for (final Module module : sortedModules) {
         {
           Source2GeneratedMapping _elvis = null;
-          Source2GeneratedMapping _get = this.module2GeneratedMapping.get(module);
+          String _name = module.getName();
+          Source2GeneratedMapping _get = this.moduleName2GeneratedMapping.get(_name);
           if (_get != null) {
             _elvis = _get;
           } else {
@@ -797,8 +860,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           }
           final Source2GeneratedMapping fileMappings = _elvis;
           ResourceDescriptionsData _elvis_1 = null;
-          String _name = module.getName();
-          ResourceDescriptionsData _container = this.chunkedResourceDescriptions.getContainer(_name);
+          String _name_1 = module.getName();
+          ResourceDescriptionsData _container = this.chunkedResourceDescriptions.getContainer(_name_1);
           if (_container != null) {
             _elvis_1 = _container;
           } else {
@@ -811,15 +874,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();
           ModuleRootManager _instance = ModuleRootManager.getInstance(module);
           final VirtualFile[] contentRoots = _instance.getContentRoots();
-          final Function1<BuildEvent, Boolean> _function_1 = new Function1<BuildEvent, Boolean>() {
-            @Override
-            public Boolean apply(final BuildEvent event) {
-              Module _findModule = XtextAutoBuilderComponent.this.findModule(event, fileIndex);
-              return Boolean.valueOf(Objects.equal(_findModule, module));
-            }
-          };
-          Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(allEvents, _function_1);
-          final Set<BuildEvent> events = IterableExtensions.<BuildEvent>toSet(_filter);
+          final Set<BuildEvent> events = this.getEventsForModule(unProcessedEvents, module);
           boolean _or = false;
           boolean _isEmpty = ((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty();
           if (_isEmpty) {
@@ -836,15 +891,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             _or = _and;
           }
           if (_or) {
-            String _name_1 = module.getName();
-            String _plus = ("Skipping module \'" + _name_1);
+            String _name_2 = module.getName();
+            String _plus = ("Skipping module \'" + _name_2);
             String _plus_1 = (_plus + "\'. Nothing to do here.");
             XtextAutoBuilderComponent.LOG.info(_plus_1);
           } else {
             this.collectChanges(events, module, changedUris, deletedUris, deltas);
             final ResourceDescriptionsData newIndex = moduleDescriptions.copy();
             BuildRequest _buildRequest = new BuildRequest();
-            final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
+            final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
               @Override
               public void apply(final BuildRequest it) {
                 XtextResourceSet _createResourceSet = XtextAutoBuilderComponent.this.createResourceSet(module, newIndex);
@@ -872,11 +927,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 it.setCancelIndicator(cancelIndicator);
               }
             };
-            final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
+            final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
             IncrementalBuilder _get_1 = this.builderProvider.get();
             Function1<URI, IResourceServiceProvider> _serviceProviderProvider = this.getServiceProviderProvider(module);
             final IncrementalBuilder.Result result = _get_1.build(request, _serviceProviderProvider);
-            final Runnable _function_3 = new Runnable() {
+            final Runnable _function_2 = new Runnable() {
               @Override
               public void run() {
                 try {
@@ -886,18 +941,20 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   handler.flushToDisk();
                 } finally {
                   XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
+                  buildProgressReporter.rehighlight();
                 }
               }
             };
             ModalityState _defaultModalityState = app.getDefaultModalityState();
-            app.invokeAndWait(_function_3, _defaultModalityState);
-            String _name_2 = module.getName();
+            app.invokeAndWait(_function_2, _defaultModalityState);
+            String _name_3 = module.getName();
             IndexState _indexState = result.getIndexState();
             ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
-            this.chunkedResourceDescriptions.setContainer(_name_2, _resourceDescriptions);
+            this.chunkedResourceDescriptions.setContainer(_name_3, _resourceDescriptions);
+            String _name_4 = module.getName();
             IndexState _indexState_1 = result.getIndexState();
             Source2GeneratedMapping _fileMappings = _indexState_1.getFileMappings();
-            this.module2GeneratedMapping.put(module, _fileMappings);
+            this.moduleName2GeneratedMapping.put(_name_4, _fileMappings);
             List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
             deltas.addAll(_affectedResources);
             Iterables.removeAll(unProcessedEvents, events);
@@ -924,6 +981,65 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       buildProgressReporter.clearProgress();
       this.cancelIndicators.remove(cancelIndicator);
     }
+  }
+  
+  protected Set<BuildEvent> getEventsForModule(final List<BuildEvent> events, final Module module) {
+    Set<BuildEvent> _xblockexpression = null;
+    {
+      final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+      final String[] excludeRootUrls = moduleRootManager.getExcludeRootUrls();
+      final String[] sourceRootUrls = moduleRootManager.getSourceRootUrls();
+      final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
+        @Override
+        public Boolean apply(final BuildEvent event) {
+          Map<URI, VirtualFile> _filesByURI = event.getFilesByURI();
+          Set<URI> _keySet = _filesByURI.keySet();
+          URI _head = IterableExtensions.<URI>head(_keySet);
+          final String url = _head.toString();
+          for (final String excludeRootUrl : excludeRootUrls) {
+            boolean _isUrlUnderRoot = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, excludeRootUrl);
+            if (_isUrlUnderRoot) {
+              return Boolean.valueOf(false);
+            }
+          }
+          for (final String sourceRootUrl : sourceRootUrls) {
+            boolean _isUrlUnderRoot_1 = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, sourceRootUrl);
+            if (_isUrlUnderRoot_1) {
+              return Boolean.valueOf(true);
+            }
+          }
+          return Boolean.valueOf(false);
+        }
+      };
+      Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(events, _function);
+      _xblockexpression = IterableExtensions.<BuildEvent>toSet(_filter);
+    }
+    return _xblockexpression;
+  }
+  
+  private final static char SEGMENT_SEPARATOR = '/';
+  
+  protected boolean isUrlUnderRoot(final String url, final String rootUrl) {
+    boolean _and = false;
+    boolean _and_1 = false;
+    int _length = url.length();
+    int _length_1 = rootUrl.length();
+    boolean _greaterThan = (_length > _length_1);
+    if (!_greaterThan) {
+      _and_1 = false;
+    } else {
+      int _length_2 = rootUrl.length();
+      char _charAt = url.charAt(_length_2);
+      boolean _equals = (_charAt == XtextAutoBuilderComponent.SEGMENT_SEPARATOR);
+      _and_1 = _equals;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      boolean _startsWith = FileUtil.startsWith(url, rootUrl);
+      _and = _startsWith;
+    }
+    return _and;
   }
   
   public Function1<URI, IResourceServiceProvider> getServiceProviderProvider(final Module module) {
@@ -963,7 +1079,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   protected void collectChanges(final Set<BuildEvent> events, final Module module, final HashSet<URI> changedUris, final HashSet<URI> deletedUris, final ArrayList<IResourceDescription.Delta> deltas) {
     final Application app = ApplicationManager.getApplication();
-    final Source2GeneratedMapping fileMappings = this.module2GeneratedMapping.get(module);
+    String _name = module.getName();
+    final Source2GeneratedMapping fileMappings = this.moduleName2GeneratedMapping.get(_name);
     for (final BuildEvent event : events) {
       BuildEvent.Type _type = event.getType();
       if (_type != null) {
@@ -1131,6 +1248,35 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   public ChunkedResourceDescriptions getIndexState() {
     return this.chunkedResourceDescriptions;
+  }
+  
+  @Inject
+  private XtextAutoBuilderComponentState.Codec codec;
+  
+  @Override
+  public XtextAutoBuilderComponentState getState() {
+    return this.codec.encode(this.chunkedResourceDescriptions, this.moduleName2GeneratedMapping);
+  }
+  
+  @Override
+  public void loadState(final XtextAutoBuilderComponentState state) {
+    try {
+      ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
+      this.chunkedResourceDescriptions = _decodeIndex;
+      Map<String, Source2GeneratedMapping> _decodeModuleToGenerated = this.codec.decodeModuleToGenerated(state);
+      this.moduleName2GeneratedMapping = _decodeModuleToGenerated;
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException exc = (IOException)_t;
+        XtextAutoBuilderComponent.LOG.error("Error loading XtextAutoBuildComponentState ", exc);
+        ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
+        this.chunkedResourceDescriptions = _get;
+        this.moduleName2GeneratedMapping.clear();
+        this.doCleanBuild();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);

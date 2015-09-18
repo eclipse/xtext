@@ -13,9 +13,9 @@ import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
+import java.util.List
 import java.util.Map
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.junit4.AbstractXtextTests
@@ -25,6 +25,7 @@ import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
+import java.util.concurrent.Executors
 
 @Accessors(PROTECTED_GETTER)
 class AbstractWebServerTest extends AbstractXtextTests {
@@ -37,7 +38,7 @@ class AbstractWebServerTest extends AbstractXtextTests {
 		}
 	}
 	
-	ExecutorService executorService
+	val List<ExecutorService> executorServices = newArrayList
 	
 	TestResourceBaseProvider resourceBaseProvider
 	
@@ -49,11 +50,10 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	
 	override void setUp() {
 		super.setUp()
-		executorService = Executors.newCachedThreadPool
 		resourceBaseProvider = new TestResourceBaseProvider
 		with(new StatemachineStandaloneSetup {
 			override createInjector() {
-				val webModule = new StatemachineWebModule(executorService)
+				val webModule = new StatemachineWebModule[Executors.newCachedThreadPool => [executorServices += it]]
 				webModule.resourceBaseProvider = resourceBaseProvider
 				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 			}
@@ -62,7 +62,8 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	}
 	
 	override tearDown() {
-		executorService.shutdown()
+		executorServices.forEach[shutdown()]
+		executorServices.clear()
 		super.tearDown()
 	}
 	

@@ -16,7 +16,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 		val content = resourceContent.toString
 		val offset = content.indexOf('#')
 		val occurrences = getService(#{
-				'requestType' -> 'occurrences',
+				'serviceType' -> 'occurrences',
 				'fullText' -> content.replace('#', ''),
 				'caretOffset' -> offset.toString
 			})

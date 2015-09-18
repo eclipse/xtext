@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -12,8 +13,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.wizard.BuildSystem;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
+import org.eclipse.xtext.xtext.generator.XtextVersion;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
@@ -22,8 +22,8 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
-import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -34,26 +34,41 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public String getLocation() {
-    String _xifexpression = null;
+  public boolean isEnabled() {
+    boolean _or = false;
+    boolean _or_1 = false;
     WizardConfiguration _config = this.getConfig();
-    ProjectLayout _projectLayout = _config.getProjectLayout();
-    boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
-    if (_equals) {
+    boolean _needsGradleBuild = _config.needsGradleBuild();
+    if (_needsGradleBuild) {
+      _or_1 = true;
+    } else {
       WizardConfiguration _config_1 = this.getConfig();
-      String _rootLocation = _config_1.getRootLocation();
-      String _plus = (_rootLocation + "/");
-      String _name = this.getName();
-      _xifexpression = (_plus + _name);
+      boolean _needsMavenBuild = _config_1.needsMavenBuild();
+      _or_1 = _needsMavenBuild;
+    }
+    if (_or_1) {
+      _or = true;
     } else {
       WizardConfiguration _config_2 = this.getConfig();
-      String _rootLocation_1 = _config_2.getRootLocation();
-      String _plus_1 = (_rootLocation_1 + "/");
-      WizardConfiguration _config_3 = this.getConfig();
-      String _baseName = _config_3.getBaseName();
-      _xifexpression = (_plus_1 + _baseName);
+      ProjectLayout _projectLayout = _config_2.getProjectLayout();
+      boolean _equals = Objects.equal(_projectLayout, ProjectLayout.HIERARCHICAL);
+      _or = _equals;
     }
-    return _xifexpression;
+    return _or;
+  }
+  
+  @Override
+  public void setEnabled(final boolean enabled) {
+    throw new UnsupportedOperationException("The parent project is automatically enabled depending on the build system");
+  }
+  
+  @Override
+  public String getLocation() {
+    WizardConfiguration _config = this.getConfig();
+    String _rootLocation = _config.getRootLocation();
+    String _plus = (_rootLocation + "/");
+    String _name = this.getName();
+    return (_plus + _name);
   }
   
   @Override
@@ -62,31 +77,31 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends GeneratedFile> getFiles() {
-    ArrayList<GeneratedFile> _xblockexpression = null;
-    {
-      final ArrayList<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-      Iterable<? extends GeneratedFile> _files = super.getFiles();
-      Iterables.<GeneratedFile>addAll(files, _files);
-      WizardConfiguration _config = this.getConfig();
-      BuildSystem _buildSystem = _config.getBuildSystem();
-      boolean _isGradleBuild = _buildSystem.isGradleBuild();
-      if (_isGradleBuild) {
-        CharSequence _settingsGradle = this.settingsGradle();
-        PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
-        files.add(_file);
-        WizardConfiguration _config_1 = this.getConfig();
-        SourceLayout _sourceLayout = _config_1.getSourceLayout();
-        boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-        if (_equals) {
-          CharSequence _plainLayout = this.plainLayout();
-          PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/plain-layout.gradle", _plainLayout);
-          files.add(_file_1);
-        }
-      }
-      _xblockexpression = files;
+  public boolean isPartOfGradleBuild() {
+    return true;
+  }
+  
+  @Override
+  public boolean isPartOfMavenBuild() {
+    return true;
+  }
+  
+  @Override
+  public Iterable<? extends TextFile> getFiles() {
+    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
+    Iterable<? extends TextFile> _files = super.getFiles();
+    Iterables.<TextFile>addAll(files, _files);
+    WizardConfiguration _config = this.getConfig();
+    boolean _needsGradleBuild = _config.needsGradleBuild();
+    if (_needsGradleBuild) {
+      CharSequence _settingsGradle = this.settingsGradle();
+      PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
+      files.add(_file);
+      CharSequence _sourceLayoutGradle = this.sourceLayoutGradle();
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/source-layout.gradle", _sourceLayoutGradle);
+      files.add(_file_1);
     }
-    return _xblockexpression;
+    return files;
   }
   
   @Override
@@ -143,7 +158,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
+            _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots\"");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("}");
@@ -159,16 +174,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("apply plugin: \'org.xtend.xtend\'");
         _builder.newLine();
-        {
-          WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
-          SourceLayout _sourceLayout = _config_2.getSourceLayout();
-          boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-          if (_equals) {
-            _builder.append("\t");
-            _builder.append("apply from: \"${rootDir}/gradle/plain-layout.gradle\"");
-            _builder.newLine();
-          }
-        }
+        _builder.append("\t");
+        _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");
+        _builder.newLine();
         _builder.append("}");
         _builder.newLine();
         it.setAdditionalContent(_builder.toString());
@@ -185,7 +193,15 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final ProjectDescriptor it) {
-          return Boolean.valueOf((!Objects.equal(it, ParentProjectDescriptor.this)));
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(it, ParentProjectDescriptor.this));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            boolean _isPartOfGradleBuild = it.isPartOfGradleBuild();
+            _and = _isPartOfGradleBuild;
+          }
+          return Boolean.valueOf(_and);
         }
       };
       Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
@@ -210,49 +226,202 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     return _builder;
   }
   
-  public CharSequence plainLayout() {
+  public CharSequence sourceLayoutGradle() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if (name.endsWith(\".tests\")) {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.test.java.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.test.resources.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.test.xtendOutputDir = \'xtend-gen\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.main.java.srcDirs = []");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.main.resources.srcDirs = []");
-    _builder.newLine();
-    _builder.append("} else {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.main.java.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.main.resources.srcDirs = [\'src\', \'src-gen\']");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.main.xtendOutputDir = \'xtend-gen\'");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.test.java.srcDirs = []");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("sourceSets.test.resources.srcDirs = []");
-    _builder.newLine();
-    _builder.append("}");
+    {
+      WizardConfiguration _config = this.getConfig();
+      SourceLayout _sourceLayout = _config.getSourceLayout();
+      boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
+      if (_equals) {
+        _builder.append("if (name.endsWith(\".tests\")) {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("sourceSets {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("main {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("java.srcDirs = []");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("resources.srcDirs = []");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("test {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("java.srcDirs = [\'");
+        String _sourceFolder = this.sourceFolder(Outlet.TEST_JAVA);
+        _builder.append(_sourceFolder, "\t\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_1 = this.sourceFolder(Outlet.TEST_SRC_GEN);
+        _builder.append(_sourceFolder_1, "\t\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("resources.srcDirs = [\'");
+        String _sourceFolder_2 = this.sourceFolder(Outlet.TEST_RESOURCES);
+        _builder.append(_sourceFolder_2, "\t\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_3 = this.sourceFolder(Outlet.TEST_SRC_GEN);
+        _builder.append(_sourceFolder_3, "\t\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("xtendOutputDir = \'");
+        String _sourceFolder_4 = this.sourceFolder(Outlet.TEST_XTEND_GEN);
+        _builder.append(_sourceFolder_4, "\t\t\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("} else {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("sourceSets {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("main {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("java.srcDirs = [\'");
+        String _sourceFolder_5 = this.sourceFolder(Outlet.MAIN_JAVA);
+        _builder.append(_sourceFolder_5, "\t\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_6 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_6, "\t\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("resources.srcDirs = [\'");
+        String _sourceFolder_7 = this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder_7, "\t\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_8 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_8, "\t\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("xtendOutputDir = \'");
+        String _sourceFolder_9 = this.sourceFolder(Outlet.MAIN_XTEND_GEN);
+        _builder.append(_sourceFolder_9, "\t\t\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("test {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("java.srcDirs = []");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("resources.srcDirs = []");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      } else {
+        _builder.append("sourceSets {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("main {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("java.srcDirs = [\'");
+        String _sourceFolder_10 = this.sourceFolder(Outlet.MAIN_JAVA);
+        _builder.append(_sourceFolder_10, "\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_11 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_11, "\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("resources.srcDirs = [\'");
+        String _sourceFolder_12 = this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder_12, "\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_13 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_13, "\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("xtendOutputDir = \'");
+        String _sourceFolder_14 = this.sourceFolder(Outlet.MAIN_XTEND_GEN);
+        _builder.append(_sourceFolder_14, "\t\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("test {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("java.srcDirs = [\'");
+        String _sourceFolder_15 = this.sourceFolder(Outlet.TEST_JAVA);
+        _builder.append(_sourceFolder_15, "\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_16 = this.sourceFolder(Outlet.TEST_SRC_GEN);
+        _builder.append(_sourceFolder_16, "\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("resources.srcDirs = [\'");
+        String _sourceFolder_17 = this.sourceFolder(Outlet.TEST_RESOURCES);
+        _builder.append(_sourceFolder_17, "\t\t");
+        _builder.append("\', \'");
+        String _sourceFolder_18 = this.sourceFolder(Outlet.TEST_SRC_GEN);
+        _builder.append(_sourceFolder_18, "\t\t");
+        _builder.append("\']");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("xtendOutputDir = \'");
+        String _sourceFolder_19 = this.sourceFolder(Outlet.TEST_XTEND_GEN);
+        _builder.append(_sourceFolder_19, "\t\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("plugins.withId(\'war\') {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("webAppDirName = \"WebRoot\"");
+    _builder.append("webAppDirName = \"");
+    String _sourceFolder_20 = this.sourceFolder(Outlet.WEBAPP);
+    _builder.append(_sourceFolder_20, "\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("plugins.withId(\'org.xtext.idea-plugin\') {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("assembleSandbox.metaInf.from(\'");
+    String _sourceFolder_21 = this.sourceFolder(Outlet.META_INF);
+    _builder.append(_sourceFolder_21, "\t");
+    _builder.append("\')");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     return _builder;
@@ -270,9 +439,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         {
           WizardConfiguration _config = ParentProjectDescriptor.this.getConfig();
-          BuildSystem _buildSystem = _config.getBuildSystem();
-          boolean _equals = Objects.equal(_buildSystem, BuildSystem.TYCHO);
-          if (_equals) {
+          boolean _needsTychoBuild = _config.needsTychoBuild();
+          if (_needsTychoBuild) {
             _builder.append("\t");
             _builder.append("<tycho-version>0.23.1</tycho-version>");
             _builder.newLine();
@@ -308,7 +476,15 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
             @Override
             public Boolean apply(final ProjectDescriptor it) {
-              return Boolean.valueOf((!Objects.equal(it, ParentProjectDescriptor.this)));
+              boolean _and = false;
+              boolean _notEquals = (!Objects.equal(it, ParentProjectDescriptor.this));
+              if (!_notEquals) {
+                _and = false;
+              } else {
+                boolean _isPartOfMavenBuild = it.isPartOfMavenBuild();
+                _and = _isPartOfMavenBuild;
+              }
+              return Boolean.valueOf(_and);
             }
           };
           Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
@@ -318,8 +494,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             {
               WizardConfiguration _config_4 = ParentProjectDescriptor.this.getConfig();
               ProjectLayout _projectLayout = _config_4.getProjectLayout();
-              boolean _equals_1 = Objects.equal(_projectLayout, ProjectLayout.FLAT);
-              if (_equals_1) {
+              boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
+              if (_equals) {
                 _builder.append("../");
               }
             }
@@ -335,9 +511,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         {
           WizardConfiguration _config_5 = ParentProjectDescriptor.this.getConfig();
-          BuildSystem _buildSystem_1 = _config_5.getBuildSystem();
-          boolean _equals_2 = Objects.equal(_buildSystem_1, BuildSystem.TYCHO);
-          if (_equals_2) {
+          boolean _needsTychoBuild_1 = _config_5.needsTychoBuild();
+          if (_needsTychoBuild_1) {
             _builder.append("\t");
             _builder.append("<plugins>");
             _builder.newLine();
@@ -528,13 +703,13 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("<execution>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t");
-        _builder.append("<phase>generate-sources</phase>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t\t");
         _builder.append("<goals>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t\t");
         _builder.append("<goal>compile</goal>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t");
+        _builder.append("<goal>testCompile</goal>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t");
         _builder.append("</goals>");
@@ -553,6 +728,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         String _sourceFolder = ParentProjectDescriptor.this.sourceFolder(Outlet.MAIN_XTEND_GEN);
         _builder.append(_sourceFolder, "\t\t\t\t\t");
         _builder.append("</outputDirectory>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<testOutputDirectory>${basedir}/");
+        String _sourceFolder_1 = ParentProjectDescriptor.this.sourceFolder(Outlet.TEST_XTEND_GEN);
+        _builder.append(_sourceFolder_1, "\t\t\t\t\t");
+        _builder.append("</testOutputDirectory>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         _builder.append("</configuration>");
@@ -581,12 +762,23 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t\t\t\t\t\t");
         _builder.append("<fileset>");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t\t\t");
-        _builder.append("<directory>${basedir}/");
-        String _sourceFolder_1 = ParentProjectDescriptor.this.sourceFolder(Outlet.MAIN_XTEND_GEN);
-        _builder.append(_sourceFolder_1, "\t\t\t\t\t\t\t");
-        _builder.append("</directory>");
-        _builder.newLineIfNotEmpty();
+        {
+          Set<Outlet> _set = IterableExtensions.<Outlet>toSet(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN)));
+          final Function1<Outlet, String> _function_1 = new Function1<Outlet, String>() {
+            @Override
+            public String apply(final Outlet it) {
+              return ParentProjectDescriptor.this.sourceFolder(it);
+            }
+          };
+          Iterable<String> _map = IterableExtensions.<Outlet, String>map(_set, _function_1);
+          for(final String dir : _map) {
+            _builder.append("\t\t\t\t\t\t\t");
+            _builder.append("<directory>${basedir}/");
+            _builder.append(dir, "\t\t\t\t\t\t\t");
+            _builder.append("</directory>");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t\t\t\t\t\t");
         _builder.append("</fileset>");
         _builder.newLine();
@@ -640,6 +832,11 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  }
+  
+  @Override
+  public Set<String> getSourceFolders() {
+    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
   }
   
   public ParentProjectDescriptor(final WizardConfiguration config) {

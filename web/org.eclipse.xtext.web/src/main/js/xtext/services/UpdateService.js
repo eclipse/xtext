@@ -14,8 +14,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	 * after each modification. This can greatly improve response times compared to the
 	 * stateless alternative, where the full text content is sent with each service request.
 	 */
-	function UpdateService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'update', this);
+	function UpdateService(serviceUrl, resourceId) {
+		this.initialize(serviceUrl, 'update', resourceId, this);
 		this._completionCallbacks = [];
 	};
 	

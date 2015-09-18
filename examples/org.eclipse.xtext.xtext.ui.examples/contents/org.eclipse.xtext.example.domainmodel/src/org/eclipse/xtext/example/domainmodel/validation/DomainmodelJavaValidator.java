@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.validation;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
@@ -17,9 +14,8 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
-public class DomainmodelJavaValidator extends XbaseJavaValidator {
+public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
 
     @Check
     public void checkTypeNameStartsWithCapital(Entity entity) {
@@ -53,11 +49,5 @@ public class DomainmodelJavaValidator extends XbaseJavaValidator {
             		DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
         }
     }
-    
-	@Override
-	protected List<EPackage> getEPackages() {
-		List<EPackage> ePackages = super.getEPackages();
-		ePackages.add(DomainmodelPackage.eINSTANCE);
-		return ePackages;
-	}
+
 }

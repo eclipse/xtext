@@ -13,7 +13,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

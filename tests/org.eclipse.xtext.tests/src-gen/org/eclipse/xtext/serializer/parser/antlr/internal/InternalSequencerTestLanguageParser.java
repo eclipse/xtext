@@ -9844,19 +9844,13 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
 
 
     protected DFA32 dfa32 = new DFA32(this);
-    static final String DFA32_eotS =
-        "\5\uffff";
-    static final String DFA32_eofS =
-        "\2\uffff\1\4\2\uffff";
-    static final String DFA32_minS =
-        "\3\4\2\uffff";
-    static final String DFA32_maxS =
-        "\1\4\2\20\2\uffff";
-    static final String DFA32_acceptS =
-        "\3\uffff\1\2\1\1";
-    static final String DFA32_specialS =
-        "\5\uffff}>";
-    static final String[] DFA32_transitionS = {
+    static final String dfa_1s = "\5\uffff";
+    static final String dfa_2s = "\2\uffff\1\4\2\uffff";
+    static final String dfa_3s = "\3\4\2\uffff";
+    static final String dfa_4s = "\1\4\2\20\2\uffff";
+    static final String dfa_5s = "\3\uffff\1\2\1\1";
+    static final String dfa_6s = "\5\uffff}>";
+    static final String[] dfa_7s = {
             "\1\1",
             "\1\2\13\uffff\1\3",
             "\1\2\13\uffff\1\3",
@@ -9864,34 +9858,26 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             ""
     };
 
-    static final short[] DFA32_eot = DFA.unpackEncodedString(DFA32_eotS);
-    static final short[] DFA32_eof = DFA.unpackEncodedString(DFA32_eofS);
-    static final char[] DFA32_min = DFA.unpackEncodedStringToUnsignedChars(DFA32_minS);
-    static final char[] DFA32_max = DFA.unpackEncodedStringToUnsignedChars(DFA32_maxS);
-    static final short[] DFA32_accept = DFA.unpackEncodedString(DFA32_acceptS);
-    static final short[] DFA32_special = DFA.unpackEncodedString(DFA32_specialS);
-    static final short[][] DFA32_transition;
-
-    static {
-        int numStates = DFA32_transitionS.length;
-        DFA32_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA32_transition[i] = DFA.unpackEncodedString(DFA32_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
+    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
 
     class DFA32 extends DFA {
 
         public DFA32(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 32;
-            this.eot = DFA32_eot;
-            this.eof = DFA32_eof;
-            this.min = DFA32_min;
-            this.max = DFA32_max;
-            this.accept = DFA32_accept;
-            this.special = DFA32_special;
-            this.transition = DFA32_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_2;
+            this.min = dfa_3;
+            this.max = dfa_4;
+            this.accept = dfa_5;
+            this.special = dfa_6;
+            this.transition = dfa_7;
         }
         public String getDescription() {
             return "2549:1: ( ( ( (lv_val_1_0= RULE_ID ) ) ( (lv_val_2_0= RULE_ID ) )+ ) | ( ( (lv_val_3_0= RULE_ID ) )+ ( (lv_flag_4_0= 'kw1' ) ) ) )";

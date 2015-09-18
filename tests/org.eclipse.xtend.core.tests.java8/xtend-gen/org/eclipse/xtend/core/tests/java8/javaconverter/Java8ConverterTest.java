@@ -87,19 +87,25 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("}try (var FileInputStream in=new FileInputStream(\"java7.txt\") ){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("System.out.println(in.read()) throw new IllegalAccessException()");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("} catch (IOException ) {");
+    _builder.append("try (var FileInputStream in=new FileInputStream(\"java7.txt\")){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("System.out.println(in.read()) ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("throw new IllegalAccessException()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} catch (IOException e) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("e.printStackTrace() ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("} catch (IllegalAccessException ) {");
+    _builder.append("} catch (IllegalAccessException e) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("e.printStackTrace() ");
@@ -227,7 +233,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    final XtendClass clazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(clazz);
   }
   
@@ -237,9 +243,10 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("def void javaLambda() {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("EventQueue.invokeLater([System.out.println(\"invoked later\")]) var Callable<Runnable> callable=[[System.out.println(\"callable says hello\")]] ");
+    _builder.append("EventQueue.invokeLater([System.out.println(\"invoked later\")]) ");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("var Callable<Runnable> callable=[[System.out.println(\"callable says hello\")]] ");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

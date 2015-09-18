@@ -308,8 +308,15 @@ public class JavaBuilderState {
   
   private String getTypeLocator(final ICompilationUnit it) {
     IResource _resource = it.getResource();
-    IPath _projectRelativePath = _resource.getProjectRelativePath();
-    return _projectRelativePath.toString();
+    IPath _projectRelativePath = null;
+    if (_resource!=null) {
+      _projectRelativePath=_resource.getProjectRelativePath();
+    }
+    String _string = null;
+    if (_projectRelativePath!=null) {
+      _string=_projectRelativePath.toString();
+    }
+    return _string;
   }
   
   private String getPackageName(final ICompilationUnit it) {

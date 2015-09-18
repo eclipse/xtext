@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build
 
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
 import com.intellij.compiler.CompilerMessageImpl
 import com.intellij.compiler.ProblemsView
 import com.intellij.openapi.application.ApplicationManager
@@ -17,6 +18,8 @@ import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Key
+import com.intellij.problems.WolfTheProblemSolver
+import java.util.List
 import java.util.UUID
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -34,21 +37,40 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 
 	val affectedScope = new AffectedScope
 
+	@Accessors(PUBLIC_SETTER)
 	Project project
-	
-	def void setProject(Project project) {
-		this.project = project
-	}
-	
+
+	@Accessors(PUBLIC_SETTER)
+	List<BuildEvent> events
+
 	protected def getProblemsView() {
-		ProblemsView.SERVICE.getInstance(project)		
+		ProblemsView.SERVICE.getInstance(project)
 	}
 
 	def void clearProgress() {
 		if (unitTestMode || project.isDisposed)
 			return;
+
 		problemsView.clearProgress
 		problemsView.clearOldMessages(affectedScope, sessionId)
+	}
+	
+	def void rehighlight() {
+		val filesToRehighlight = affectedScope.affectedFiles.filter[shouldRehighlight]
+		if (filesToRehighlight.empty)
+			return;
+			
+		val wolfTheProblemSolver = WolfTheProblemSolver.getInstance(project)
+		for (fileToRehighlight : filesToRehighlight) {
+			wolfTheProblemSolver.queue(fileToRehighlight.virtualFile)
+		}
+		DaemonCodeAnalyzer.getInstance(project).restart
+	}
+
+	protected def shouldRehighlight(URI fileURI) {
+		events.filter [
+			type == BuildEvent.Type.MODIFIED || type == BuildEvent.Type.DELETED
+		].exists[URIs.contains(fileURI)] == false
 	}
 
 	def void markAsAffected(URI uri) {
@@ -100,7 +122,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 				CompilerMessageCategory.INFORMATION
 		}
 	}
-	
+
 }
 
 class AffectedScope implements CompileScope {

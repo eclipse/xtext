@@ -7,30 +7,18 @@ import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
 
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.junit4") => [maven.scope = Scope.TESTCOMPILE]
 		deps += createXtextDependency("org.eclipse.xtext.xbase.junit") => [maven.scope = Scope.TESTCOMPILE]
 		deps
 	}
 	
-	override isEclipsePluginProject() {
-		config.buildSystem.isPluginBuild
+	override isPartOfGradleBuild() {
+		config.preferredBuildSystem == BuildSystem.GRADLE
 	}
 
-	override pom() {
-		super.pom => [
-			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
-			buildSection = '''
-				<build>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.xtend</groupId>
-							<artifactId>xtend-maven-plugin</artifactId>
-						</plugin>
-					</plugins>
-				</build>
-			'''
-		]
+	override isPartOfMavenBuild() {
+		config.preferredBuildSystem == BuildSystem.MAVEN
 	}
 }

@@ -4,7 +4,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
-class XtendFileFormatter extends AbstractXtendFormatterTest {
+class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 	
 	@Test def formatClass11() {
 		assertFormatted([

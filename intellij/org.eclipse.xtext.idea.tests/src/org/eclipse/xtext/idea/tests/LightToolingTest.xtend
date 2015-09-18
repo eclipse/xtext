@@ -42,7 +42,6 @@ import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
-import static org.eclipse.xtext.idea.tests.LightToolingTest.*
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*

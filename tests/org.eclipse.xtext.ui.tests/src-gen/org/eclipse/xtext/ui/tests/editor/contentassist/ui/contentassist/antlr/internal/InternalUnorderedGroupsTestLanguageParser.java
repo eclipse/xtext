@@ -12748,19 +12748,12 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
     protected DFA36 dfa36 = new DFA36(this);
     protected DFA37 dfa37 = new DFA37(this);
     protected DFA38 dfa38 = new DFA38(this);
-    static final String DFA36_eotS =
-        "\12\uffff";
-    static final String DFA36_eofS =
-        "\12\uffff";
-    static final String DFA36_minS =
-        "\1\13\7\0\2\uffff";
-    static final String DFA36_maxS =
-        "\1\42\7\0\2\uffff";
-    static final String DFA36_acceptS =
-        "\10\uffff\1\2\1\1";
-    static final String DFA36_specialS =
-        "\1\1\1\5\1\2\1\4\1\0\1\6\1\7\1\3\2\uffff}>";
-    static final String[] DFA36_transitionS = {
+    static final String dfa_1s = "\12\uffff";
+    static final String dfa_2s = "\1\13\7\0\2\uffff";
+    static final String dfa_3s = "\1\42\7\0\2\uffff";
+    static final String dfa_4s = "\10\uffff\1\2\1\1";
+    static final String dfa_5s = "\1\1\1\5\1\2\1\4\1\0\1\6\1\7\1\3\2\uffff}>";
+    static final String[] dfa_6s = {
             "\1\1\1\2\1\3\6\uffff\1\10\12\uffff\1\4\1\5\1\6\1\7",
             "\1\uffff",
             "\1\uffff",
@@ -12773,34 +12766,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             ""
     };
 
-    static final short[] DFA36_eot = DFA.unpackEncodedString(DFA36_eotS);
-    static final short[] DFA36_eof = DFA.unpackEncodedString(DFA36_eofS);
-    static final char[] DFA36_min = DFA.unpackEncodedStringToUnsignedChars(DFA36_minS);
-    static final char[] DFA36_max = DFA.unpackEncodedStringToUnsignedChars(DFA36_maxS);
-    static final short[] DFA36_accept = DFA.unpackEncodedString(DFA36_acceptS);
-    static final short[] DFA36_special = DFA.unpackEncodedString(DFA36_specialS);
-    static final short[][] DFA36_transition;
-
-    static {
-        int numStates = DFA36_transitionS.length;
-        DFA36_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA36_transition[i] = DFA.unpackEncodedString(DFA36_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
 
     class DFA36 extends DFA {
 
         public DFA36(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 36;
-            this.eot = DFA36_eot;
-            this.eof = DFA36_eof;
-            this.min = DFA36_min;
-            this.max = DFA36_max;
-            this.accept = DFA36_accept;
-            this.special = DFA36_special;
-            this.transition = DFA36_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "3255:2: ( rule__GroupLoopedModel__UnorderedGroup_0__1 )?";
@@ -12949,59 +12933,21 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             throw nvae;
         }
     }
-    static final String DFA37_eotS =
-        "\12\uffff";
-    static final String DFA37_eofS =
-        "\12\uffff";
-    static final String DFA37_minS =
-        "\1\13\7\0\2\uffff";
-    static final String DFA37_maxS =
-        "\1\42\7\0\2\uffff";
-    static final String DFA37_acceptS =
-        "\10\uffff\1\2\1\1";
-    static final String DFA37_specialS =
-        "\1\6\1\1\1\7\1\3\1\2\1\5\1\0\1\4\2\uffff}>";
-    static final String[] DFA37_transitionS = {
-            "\1\1\1\2\1\3\6\uffff\1\10\12\uffff\1\4\1\5\1\6\1\7",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "",
-            ""
-    };
-
-    static final short[] DFA37_eot = DFA.unpackEncodedString(DFA37_eotS);
-    static final short[] DFA37_eof = DFA.unpackEncodedString(DFA37_eofS);
-    static final char[] DFA37_min = DFA.unpackEncodedStringToUnsignedChars(DFA37_minS);
-    static final char[] DFA37_max = DFA.unpackEncodedStringToUnsignedChars(DFA37_maxS);
-    static final short[] DFA37_accept = DFA.unpackEncodedString(DFA37_acceptS);
-    static final short[] DFA37_special = DFA.unpackEncodedString(DFA37_specialS);
-    static final short[][] DFA37_transition;
-
-    static {
-        int numStates = DFA37_transitionS.length;
-        DFA37_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA37_transition[i] = DFA.unpackEncodedString(DFA37_transitionS[i]);
-        }
-    }
+    static final String dfa_7s = "\1\6\1\1\1\7\1\3\1\2\1\5\1\0\1\4\2\uffff}>";
+    static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
 
     class DFA37 extends DFA {
 
         public DFA37(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 37;
-            this.eot = DFA37_eot;
-            this.eof = DFA37_eof;
-            this.min = DFA37_min;
-            this.max = DFA37_max;
-            this.accept = DFA37_accept;
-            this.special = DFA37_special;
-            this.transition = DFA37_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_7;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "3268:2: ( rule__GroupLoopedModel__UnorderedGroup_0__2 )?";
@@ -13150,59 +13096,21 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             throw nvae;
         }
     }
-    static final String DFA38_eotS =
-        "\12\uffff";
-    static final String DFA38_eofS =
-        "\12\uffff";
-    static final String DFA38_minS =
-        "\1\13\7\0\2\uffff";
-    static final String DFA38_maxS =
-        "\1\42\7\0\2\uffff";
-    static final String DFA38_acceptS =
-        "\10\uffff\1\2\1\1";
-    static final String DFA38_specialS =
-        "\1\1\1\2\1\5\1\3\1\7\1\4\1\0\1\6\2\uffff}>";
-    static final String[] DFA38_transitionS = {
-            "\1\1\1\2\1\3\6\uffff\1\10\12\uffff\1\4\1\5\1\6\1\7",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
-            "",
-            ""
-    };
-
-    static final short[] DFA38_eot = DFA.unpackEncodedString(DFA38_eotS);
-    static final short[] DFA38_eof = DFA.unpackEncodedString(DFA38_eofS);
-    static final char[] DFA38_min = DFA.unpackEncodedStringToUnsignedChars(DFA38_minS);
-    static final char[] DFA38_max = DFA.unpackEncodedStringToUnsignedChars(DFA38_maxS);
-    static final short[] DFA38_accept = DFA.unpackEncodedString(DFA38_acceptS);
-    static final short[] DFA38_special = DFA.unpackEncodedString(DFA38_specialS);
-    static final short[][] DFA38_transition;
-
-    static {
-        int numStates = DFA38_transitionS.length;
-        DFA38_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA38_transition[i] = DFA.unpackEncodedString(DFA38_transitionS[i]);
-        }
-    }
+    static final String dfa_8s = "\1\1\1\2\1\5\1\3\1\7\1\4\1\0\1\6\2\uffff}>";
+    static final short[] dfa_8 = DFA.unpackEncodedString(dfa_8s);
 
     class DFA38 extends DFA {
 
         public DFA38(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 38;
-            this.eot = DFA38_eot;
-            this.eof = DFA38_eof;
-            this.min = DFA38_min;
-            this.max = DFA38_max;
-            this.accept = DFA38_accept;
-            this.special = DFA38_special;
-            this.transition = DFA38_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_8;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "3281:2: ( rule__GroupLoopedModel__UnorderedGroup_0__3 )?";

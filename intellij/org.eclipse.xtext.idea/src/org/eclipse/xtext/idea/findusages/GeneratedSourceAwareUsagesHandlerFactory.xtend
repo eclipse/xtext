@@ -15,18 +15,17 @@ import com.intellij.openapi.extensions.Extensions
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiNameIdentifierOwner
+import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.util.PsiTreeUtil
+import java.util.Collections
 import java.util.List
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
-import com.intellij.psi.PsiNameIdentifierOwner
-import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.PsiNamedElement
-import java.util.Collections
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * 
- * TODO decorate all find usage requests and use a custom Processor<UsageInfo> in the FindUsagesHandler to redirect navigation requests
+ * @author Anton Kosyakov - Refactoring and testing
  */
 class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory {
 	
@@ -39,12 +38,50 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	}
 	
 	override canFindUsages(PsiElement element) {
-		return delegateFindFactory(element) !== null || 
-			element.generatedElements.exists [
-				delegateFindFactory !== null
-			] || element.originalElements.exists [
-				delegateFindFactory !== null
-			]
+		var delegates = Extensions.getExtensions(FindUsagesHandlerFactory.EP_NAME, element.project);
+		for(delegate: delegates) {
+			if (delegate !== this) {
+				try {
+					if (delegate.canFindUsages(element)) {
+						return true
+					}
+				} catch (IndexNotReadyException e) {
+					throw e;
+				} catch (ProcessCanceledException e) {
+					throw e;
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+			}
+		}
+		return false
+	}
+	
+	override createFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
+		if (forHighlightUsages)
+			return null
+
+		val primaryHandler = element.delegateFindUsagesHandler
+		if (primaryHandler.nullHandler)
+			return null
+		
+		val secondaryHandlers = element.secondaryHandlers
+		if (secondaryHandlers.empty)
+			return primaryHandler
+
+		return new GeneratedSourceAwareFindUsagesHandler(primaryHandler, secondaryHandlers)
+	}
+	
+	protected def getSecondaryHandlers(PsiElement element) {
+		element.secondaryElements.map[delegateFindUsagesHandler].filter[!nullHandler]
+	}
+	
+	protected def getSecondaryElements(PsiElement element) {
+		val generatedElements = element.generatedElements
+		if (!generatedElements.empty)
+			return generatedElements
+		
+		return element.originalElements
 	}
 	
 	protected def List<? extends PsiElement> getOriginalElements(PsiElement element) {
@@ -73,13 +110,19 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 		return result
 	}
 	
-	protected def delegateFindFactory(PsiElement element) {
+	protected def isNullHandler(FindUsagesHandler handler) {
+		handler === null || handler === FindUsagesHandler.NULL_HANDLER
+	}
+	
+	protected def delegateFindUsagesHandler(PsiElement element) {
 		var delegates = Extensions.getExtensions(FindUsagesHandlerFactory.EP_NAME, element.project);
 		for(delegate: delegates) {
 			if (delegate !== this) {
 				try {
 					if (delegate.canFindUsages(element)) {
-						return delegate;
+						val handler = delegate.createFindUsagesHandler(element, false)
+						if (handler !== null)
+							return handler;
 					}
 				} catch (IndexNotReadyException e) {
 					throw e;
@@ -91,48 +134,6 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 			}
 		}
 		return null
-	}
-	
-	override createFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
-		// highlighting is only done with the real element under the cursor or with its derived elements
-		// not vice versa
-		val primaryDelegate = delegateFindFactory(element).createFindUsagesHandler(element, forHighlightUsages)
-		if (forHighlightUsages) {
-			val generatedElements = getGeneratedElements(element)
-			return if (generatedElements.isEmpty)
-					primaryDelegate
-				else new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true) => [
-					addDelegates(generatedElements, forHighlightUsages)
-				]
-				
-		}
-		// check if this is a generated artifact - use the original element as the primary and search for the primary element and visualize the 
-		// primary element but only search for references to this element
-		val originalElements = element.originalElements
-		if (originalElements.isEmpty) {
-			val generatedElements = element.generatedElements
-			return if (generatedElements.isEmpty)
-					primaryDelegate	
-				else
-					new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true) => [
-						addDelegates(generatedElements, forHighlightUsages)
-					]
-		} else {
-			return new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true) => [
-				addDelegates(originalElements, forHighlightUsages)
-			]
-		}
-	}
-	
-	def addDelegates(GeneratedSourceAwareFindUsagesHandler result, List<? extends PsiElement> elements, boolean forHighlightUsages) {
-		elements.forEach [
-			val delegateFactory = delegateFindFactory
-			if (delegateFactory !== null) {
-				val delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages)
-				if (delegateHandler !== null && delegateHandler !== FindUsagesHandler.NULL_HANDLER)
-					result.addDelegate(delegateHandler)
-			}
-		]
 	}
 	
 }

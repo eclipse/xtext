@@ -2927,8 +2927,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleJvmTypeReference
 entryRuleJvmTypeReference 
 :
@@ -31968,7 +31966,6 @@ rule__Number__Group_1_1__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
-
 
 
 

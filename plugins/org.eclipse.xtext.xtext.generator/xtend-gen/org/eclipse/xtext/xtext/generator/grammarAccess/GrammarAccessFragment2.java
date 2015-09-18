@@ -59,9 +59,9 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.FragmentFakingEcoreResource;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
+import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
@@ -315,7 +315,7 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
   protected void doGenerateGrammarAccess() {
     Grammar _grammar = this.getGrammar();
     TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar);
-    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_grammarAccess);
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(_grammarAccess);
     List<IClassAnnotation> _annotations = javaFile.getAnnotations();
     SingletonClassAnnotation _singletonClassAnnotation = new SingletonClassAnnotation();
     _annotations.add(_singletonClassAnnotation);
@@ -591,7 +591,7 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    javaFile.setJavaContent(_client);
+    javaFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrcGen = _projectConfig.getRuntimeSrcGen();
     javaFile.writeTo(_runtimeSrcGen);
@@ -1082,6 +1082,11 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
     return ("t" + _gaRuleIdentifier);
   }
   
+  protected String _gaRuleAccessorLocalVarName(final EnumRule rule) {
+    String _gaRuleIdentifier = this._grammarAccessExtensions.gaRuleIdentifier(rule);
+    return ("e" + _gaRuleIdentifier);
+  }
+  
   protected StringConcatenationClient loadElementStatement(final AbstractElement ele) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -1169,7 +1174,9 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
   }
   
   protected String gaRuleAccessorLocalVarName(final AbstractRule rule) {
-    if (rule instanceof ParserRule) {
+    if (rule instanceof EnumRule) {
+      return _gaRuleAccessorLocalVarName((EnumRule)rule);
+    } else if (rule instanceof ParserRule) {
       return _gaRuleAccessorLocalVarName((ParserRule)rule);
     } else if (rule instanceof TerminalRule) {
       return _gaRuleAccessorLocalVarName((TerminalRule)rule);

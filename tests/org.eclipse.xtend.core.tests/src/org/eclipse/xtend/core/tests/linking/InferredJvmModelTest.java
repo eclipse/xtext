@@ -23,11 +23,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -923,6 +926,19 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		getInferredType(file);
     }
+	
+	@Test
+	public void test_bug475337() throws Exception {
+		Resource content = file("enum Foo {  bar, ,baz }", false, false).eResource();
+		XtendEnum xtendEnumType = (XtendEnum) ((XtendFile)content.getContents().get(0)).getXtendTypes().get(0);
+		assertEquals(3, xtendEnumType.getMembers().size());
+		assertNull(((XtendEnumLiteral)xtendEnumType.getMembers().get(1)).getName());
+		// check jvm model
+		JvmEnumerationType enumType = (JvmEnumerationType) content.getContents().get(1);
+		assertEquals(2, enumType.getLiterals().size());
+		assertEquals("bar", enumType.getLiterals().get(0).getSimpleName());
+		assertEquals("baz", enumType.getLiterals().get(1).getSimpleName());
+	}
 
 	protected JvmGenericType getInferredType(XtendFile xtendFile) {
 		assertEquals(2, xtendFile.eResource().getContents().size());

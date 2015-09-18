@@ -12,9 +12,9 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.junit.Test
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.validation.IssueCodes
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -165,7 +165,7 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 					}
 				}
 			}
-		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_SUPER_CALL, 'Cannot call super of an anonymous class from a lambda expression')
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_SUPER_CALL, 'Cannot call super of an anonymous class from a lambda expression')
 	}
 	
 	@Test

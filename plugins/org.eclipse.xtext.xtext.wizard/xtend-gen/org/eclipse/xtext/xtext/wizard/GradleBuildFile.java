@@ -27,7 +27,7 @@ public class GradleBuildFile extends TextFile {
   }
   
   @Override
-  public CharSequence getContent() {
+  public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(this.pluginsSection, "");
     _builder.newLineIfNotEmpty();
@@ -76,7 +76,17 @@ public class GradleBuildFile extends TextFile {
     }
     _builder.append(this.additionalContent, "");
     _builder.newLineIfNotEmpty();
-    return _builder;
+    {
+      ProjectDescriptor _project_1 = this.getProject();
+      boolean _isEclipsePluginProject = _project_1.isEclipsePluginProject();
+      if (_isEclipsePluginProject) {
+        _builder.append("//this is an eclipse plugin project");
+        _builder.newLine();
+        _builder.append("eclipseClasspath.enabled=false");
+        _builder.newLine();
+      }
+    }
+    return _builder.toString();
   }
   
   private Iterable<ExternalDependency.MavenCoordinates> getMavenDependencies() {

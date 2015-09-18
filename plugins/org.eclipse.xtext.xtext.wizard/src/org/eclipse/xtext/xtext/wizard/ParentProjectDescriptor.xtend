@@ -8,29 +8,39 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	override getNameQualifier() {
 		".parent"
 	}
+	
+	override isEnabled() {
+		config.needsGradleBuild || config.needsMavenBuild || config.projectLayout == ProjectLayout.HIERARCHICAL
+	}
+	
+	override setEnabled(boolean enabled) {
+		throw new UnsupportedOperationException("The parent project is automatically enabled depending on the build system")
+	}
 
 	override getLocation() {
-		if (config.projectLayout == ProjectLayout.FLAT) {
-			config.rootLocation + "/" + name
-		} else {
-			config.rootLocation + "/" + config.baseName
-		}
+		config.rootLocation + "/" + name
 	}
 
 	override isEclipsePluginProject() {
 		false
 	}
+	
+	override isPartOfGradleBuild() {
+		true
+	}
+	
+	override isPartOfMavenBuild() {
+		true
+	}
 
 	override getFiles() {
 		val files = newArrayList
 		files += super.files
-		if (config.buildSystem.isGradleBuild) {
+		if (config.needsGradleBuild) {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
-			if (config.sourceLayout == SourceLayout.PLAIN) {
-				files += file(Outlet.ROOT, 'gradle/plain-layout.gradle', plainLayout)
-			}
+			files += file(Outlet.ROOT, 'gradle/source-layout.gradle', sourceLayoutGradle)
 		}
-		files
+		return files
 	}
 
 	override buildGradle() {
@@ -50,42 +60,72 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						jcenter()
 						«IF config.xtextVersion.isSnapshot»
 							maven {
-								url "https://oss.sonatype.org/content/repositories/snapshots/"
+								url "https://oss.sonatype.org/content/repositories/snapshots"
 							}
 						«ENDIF»
 					}
 					apply plugin: 'java'
 					apply plugin: 'org.xtend.xtend'
-					«IF config.sourceLayout == SourceLayout.PLAIN»
-						apply from: "${rootDir}/gradle/plain-layout.gradle"
-					«ENDIF»
+					apply from: "${rootDir}/gradle/source-layout.gradle"
 				}
 			'''
 		]
 	}
 
 	def settingsGradle() '''
-		«FOR p : config.enabledProjects.filter[it != this]»
+		«FOR p : config.enabledProjects.filter[it != this && partOfGradleBuild]»
 			«IF config.projectLayout == ProjectLayout.FLAT»includeFlat«ELSE»include«ENDIF» '«p.name»'
 		«ENDFOR»
 	'''
 	
-	def plainLayout() '''
-		if (name.endsWith(".tests")) {
-			sourceSets.test.java.srcDirs = ['src', 'src-gen']
-			sourceSets.test.resources.srcDirs = ['src', 'src-gen']
-			sourceSets.test.xtendOutputDir = 'xtend-gen'
-			sourceSets.main.java.srcDirs = []
-			sourceSets.main.resources.srcDirs = []
-		} else {
-			sourceSets.main.java.srcDirs = ['src', 'src-gen']
-			sourceSets.main.resources.srcDirs = ['src', 'src-gen']
-			sourceSets.main.xtendOutputDir = 'xtend-gen'
-			sourceSets.test.java.srcDirs = []
-			sourceSets.test.resources.srcDirs = []
-		}
+	def sourceLayoutGradle() '''
+		«IF config.sourceLayout == SourceLayout.PLAIN»
+			if (name.endsWith(".tests")) {
+				sourceSets {
+					main {
+						java.srcDirs = []
+						resources.srcDirs = []
+					}
+					test {
+						java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+						resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+						xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
+					}
+				}
+			} else {
+				sourceSets {
+					main {
+						java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+						resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+						xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
+					}
+					test {
+						java.srcDirs = []
+						resources.srcDirs = []
+					}
+				}
+			}
+		«ELSE»
+			sourceSets {
+				main {
+					java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+					resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+					xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
+				}
+				test {
+					java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+					resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+					xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
+				}
+			}
+		«ENDIF»
+		
 		plugins.withId('war') {
-			webAppDirName = "WebRoot"
+			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
+		}
+		
+		plugins.withId('org.xtext.idea-plugin') {
+			assembleSandbox.metaInf.from('«Outlet.META_INF.sourceFolder»')
 		}
 	'''
 
@@ -94,7 +134,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			packaging = "pom"
 			buildSection = '''
 				<properties>
-					«IF config.buildSystem == BuildSystem.TYCHO»
+					«IF config.needsTychoBuild»
 						<tycho-version>0.23.1</tycho-version>
 					«ENDIF»
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
@@ -103,12 +143,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>1.6</maven.compiler.target>
 				</properties>
 				<modules>
-					«FOR p : config.enabledProjects.filter[it != this]»
+					«FOR p : config.enabledProjects.filter[it != this && partOfMavenBuild]»
 						<module>«IF config.projectLayout == ProjectLayout.FLAT»../«ENDIF»«p.name»</module>
 					«ENDFOR»
 				</modules>
 				<build>
-					«IF config.buildSystem == BuildSystem.TYCHO»
+					«IF config.needsTychoBuild»
 						<plugins>
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
@@ -157,14 +197,15 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<version>${xtextVersion}</version>
 								<executions>
 									<execution>
-										<phase>generate-sources</phase>
 										<goals>
 											<goal>compile</goal>
+											<goal>testCompile</goal>
 										</goals>
 									</execution>
 								</executions>
 								<configuration>
 									<outputDirectory>${basedir}/«Outlet.MAIN_XTEND_GEN.sourceFolder»</outputDirectory>
+									<testOutputDirectory>${basedir}/«Outlet.TEST_XTEND_GEN.sourceFolder»</testOutputDirectory>
 								</configuration>
 							</plugin>
 							<plugin>
@@ -174,7 +215,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<configuration>
 									<filesets>
 										<fileset>
-											<directory>${basedir}/«Outlet.MAIN_XTEND_GEN.sourceFolder»</directory>
+											«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].toSet.map[sourceFolder]»
+												<directory>${basedir}/«dir»</directory>
+											«ENDFOR»
 										</fileset>
 									</filesets>
 								</configuration>
@@ -195,4 +238,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			'''
 		]
 	}
+	
+	override getSourceFolders() {
+		#{}
+	}
+	
 }

@@ -528,7 +528,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	private final DatatypeBug286557Elements pDatatypeBug286557;
 	private final FQNElements pFQN;
 	private final EnumBugElements pEnumBug;
-	private final EnumBugEnumElements unknownRuleEnumBugEnum;
+	private final EnumBugEnumElements eEnumBugEnum;
 	private final CommentableElements pCommentable;
 	private final CommentableItemElements pCommentableItem;
 	private final ValueListElements pValueList;
@@ -554,7 +554,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		this.pDatatypeBug286557 = new DatatypeBug286557Elements();
 		this.pFQN = new FQNElements();
 		this.pEnumBug = new EnumBugElements();
-		this.unknownRuleEnumBugEnum = new EnumBugEnumElements();
+		this.eEnumBugEnum = new EnumBugEnumElements();
 		this.pCommentable = new CommentableElements();
 		this.pCommentableItem = new CommentableItemElements();
 		this.pValueList = new ValueListElements();
@@ -638,7 +638,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	//enum EnumBugEnum:
 	//	array | object | resultSet | iterator;
 	public EnumBugEnumElements getEnumBugEnumAccess() {
-		return unknownRuleEnumBugEnum;
+		return eEnumBugEnum;
 	}
 	
 	public EnumRule getEnumBugEnumRule() {

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import com.google.common.base.Objects;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -36,7 +37,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Button createTestProject;
   
-  private Combo buildSystem;
+  private Combo preferredBuildSystem;
   
   private Combo sourceLayout;
   
@@ -109,16 +110,16 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Group> _function_1 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
-            it.setText("Build System");
+            it.setText("Preferred Build System");
             final Procedure1<Combo> _function = new Procedure1<Combo>() {
               @Override
               public void apply(final Combo it) {
                 it.setEnabled(true);
-                it.setItems(new String[] { "Eclipse", "Maven", "Tycho", "Gradle" });
+                it.setItems(new String[] { "Eclipse", "Maven", "Gradle" });
               }
             };
             Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
-            AdvancedNewProjectPage.this.buildSystem = _DropDown;
+            AdvancedNewProjectPage.this.preferredBuildSystem = _DropDown;
           }
         };
         AdvancedNewProjectPage.this.Group(it, _function_1);
@@ -144,6 +145,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.setControl(_doubleArrow);
     this.require(this.createIdeaProject, this.createIdeProject);
     this.require(this.createWebProject, this.createIdeProject);
+    this.makeUiProjectRequirePlainLayout();
     this.setDefaults();
   }
   
@@ -201,7 +203,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createWebProject.setSelection(false);
     this.createIdeProject.setSelection(false);
     this.createTestProject.setSelection(false);
-    this.buildSystem.select(0);
+    this.preferredBuildSystem.select(0);
     this.sourceLayout.select(0);
   }
   
@@ -225,9 +227,9 @@ public class AdvancedNewProjectPage extends WizardPage {
     return this.createWebProject.getSelection();
   }
   
-  public BuildSystem getBuildSystem() {
+  public BuildSystem getPreferredBuildSystem() {
     BuildSystem[] _values = BuildSystem.values();
-    int _selectionIndex = this.buildSystem.getSelectionIndex();
+    int _selectionIndex = this.preferredBuildSystem.getSelectionIndex();
     return _values[_selectionIndex];
   }
   
@@ -269,5 +271,39 @@ public class AdvancedNewProjectPage extends WizardPage {
     };
     project.addSelectionListener(selectionControl);
     requirement.addSelectionListener(selectionControl);
+  }
+  
+  public void makeUiProjectRequirePlainLayout() {
+    final SelectionAdapter selectionControl = new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        boolean _and = false;
+        boolean _equals = Objects.equal(e.widget, AdvancedNewProjectPage.this.createUiProject);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _selection = AdvancedNewProjectPage.this.createUiProject.getSelection();
+          _and = _selection;
+        }
+        if (_and) {
+          AdvancedNewProjectPage.this.sourceLayout.select(0);
+        } else {
+          boolean _and_1 = false;
+          boolean _equals_1 = Objects.equal(e.widget, AdvancedNewProjectPage.this.sourceLayout);
+          if (!_equals_1) {
+            _and_1 = false;
+          } else {
+            int _selectionIndex = AdvancedNewProjectPage.this.sourceLayout.getSelectionIndex();
+            boolean _notEquals = (_selectionIndex != 0);
+            _and_1 = _notEquals;
+          }
+          if (_and_1) {
+            AdvancedNewProjectPage.this.createUiProject.setSelection(false);
+          }
+        }
+      }
+    };
+    this.createUiProject.addSelectionListener(selectionControl);
+    this.sourceLayout.addSelectionListener(selectionControl);
   }
 }

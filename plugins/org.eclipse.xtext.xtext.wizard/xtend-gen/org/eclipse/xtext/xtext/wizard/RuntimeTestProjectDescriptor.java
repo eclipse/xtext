@@ -1,16 +1,15 @@
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.Scope;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
@@ -21,9 +20,9 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    HashSet<ExternalDependency> _xblockexpression = null;
+    LinkedHashSet<ExternalDependency> _xblockexpression = null;
     {
-      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+      final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
@@ -52,53 +51,17 @@ public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
   }
   
   @Override
-  public boolean isEclipsePluginProject() {
+  public boolean isPartOfGradleBuild() {
     WizardConfiguration _config = this.getConfig();
-    BuildSystem _buildSystem = _config.getBuildSystem();
-    return _buildSystem.isPluginBuild();
+    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    return Objects.equal(_preferredBuildSystem, BuildSystem.GRADLE);
   }
   
   @Override
-  public PomFile pom() {
-    PomFile _pom = super.pom();
-    final Procedure1<PomFile> _function = new Procedure1<PomFile>() {
-      @Override
-      public void apply(final PomFile it) {
-        String _xifexpression = null;
-        boolean _isEclipsePluginProject = RuntimeTestProjectDescriptor.this.isEclipsePluginProject();
-        if (_isEclipsePluginProject) {
-          _xifexpression = "eclipse-test-plugin";
-        } else {
-          _xifexpression = "jar";
-        }
-        it.setPackaging(_xifexpression);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("<build>");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("<plugins>");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("<plugin>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<groupId>org.eclipse.xtend</groupId>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<artifactId>xtend-maven-plugin</artifactId>");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("</plugin>");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("</plugins>");
-        _builder.newLine();
-        _builder.append("</build>");
-        _builder.newLine();
-        it.setBuildSection(_builder.toString());
-      }
-    };
-    return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  public boolean isPartOfMavenBuild() {
+    WizardConfiguration _config = this.getConfig();
+    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
+    return Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
   }
   
   public RuntimeTestProjectDescriptor(final TestedProjectDescriptor testedProject) {

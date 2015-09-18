@@ -1,14 +1,20 @@
 <idea-plugin version="2">
 	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
-		<resourceFactory type="xtend"
-						 class="org.eclipse.xtext.resource.IResourceFactory"
-						 factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"/>
-		<resourceServiceProvider uriExtension="xtend"
-								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
-								 factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"/>
+		<resourceFactory 
+			type="xtend"
+			class="org.eclipse.xtext.resource.IResourceFactory"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+		/>
+		<resourceServiceProvider
+			uriExtension="xtend"
+			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+		/>
 
-		<lang.setup language="org.eclipse.xtend.core.Xtend"
-					implementationClass="org.eclipse.xtend.core.idea.XtendIdeaSetup"/>
+		<lang.setup
+			language="org.eclipse.xtend.core.Xtend"
+			implementationClass="org.eclipse.xtend.core.idea.XtendIdeaSetup"
+		/>
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
@@ -16,47 +22,68 @@
 
 		<fileTypeFactory implementation="org.eclipse.xtend.core.idea.lang.XtendFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider"/>
-		<lang.ast.factory language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
-		<lang.parserDefinition language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtend.core.idea.lang.parser.XtendParserDefinition"/>
-		<lang.findUsagesProvider language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
-		<lang.refactoringSupport language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-		<lang.namesValidator language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.highlighting.XtendSyntaxHighlighterFactory" />
-		<lang.braceMatcher language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
-      	<annotator language="org.eclipse.xtend.core.Xtend"
-      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
-      	<completion.contributor language="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.completion.XtendCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtend.core.idea.lang.psi.XtendElementDescriptionProvider" order="first"/>
-      	<pom.declarationSearcher implementation="org.eclipse.xtend.core.idea.lang.pom.XtendPomDeclarationSearcher"/>
+		<lang.ast.factory 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
+		/>
+		<lang.parserDefinition 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="org.eclipse.xtend.core.idea.lang.parser.XtendParserDefinition"
+		/>
+		<lang.findUsagesProvider 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
+		/>
+		<lang.refactoringSupport 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
+		/>
+		<lang.namesValidator 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="com.intellij.lang.refactoring.NamesValidator"
+		/>
+		<lang.syntaxHighlighterFactory key="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.highlighting.XtendSyntaxHighlighterFactory" />
+		<lang.braceMatcher 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="com.intellij.lang.PairedBraceMatcher"
+		/>
+		<annotator 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
+		/>
+		<completion.contributor language="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.completion.XtendCompletionContributor"/>
+		<pom.declarationSearcher implementation="org.eclipse.xtend.core.idea.lang.pom.XtendPomDeclarationSearcher"/>
 
-      	<lang.psiStructureViewFactory language="org.eclipse.xtend.core.Xtend"
-      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-      	<lang.documentationProvider language="org.eclipse.xtend.core.Xtend"
-      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
+		<lang.psiStructureViewFactory 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="com.intellij.lang.PsiStructureViewFactory"
+		/>
 		<facetType implementation="org.eclipse.xtend.core.idea.facet.XtendFacetType"/>
+      	<lang.documentationProvider 
+      		language="org.eclipse.xtend.core.Xtend"
+      		factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+      	/>
 		<colorSettingsPage implementation="org.eclipse.xtend.core.idea.highlighting.XtendColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtend.core.idea.highlighting.XtendSemanticHighlightVisitor"/>
 
-		<lang.formatter language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
-		<lang.commenter language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
+		<lang.formatter 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="com.intellij.formatting.FormattingModelBuilder"
+		/>
+		<lang.commenter 
+			language="org.eclipse.xtend.core.Xtend"
+			factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
+		/>
 	</extensions>
 </idea-plugin>

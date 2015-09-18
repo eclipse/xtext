@@ -31,6 +31,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.GrammarAwareErrorElementType;
 import org.eclipse.xtext.idea.parser.CompositeMarker;
+import org.eclipse.xtext.idea.parser.DFAUtil;
 import org.eclipse.xtext.idea.parser.PsiTokenStream;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
@@ -268,6 +269,10 @@ public abstract class AbstractPsiAntlrParser extends Parser {
         this.readableTokenNames.set(i, _get_1);
       }
     }
+  }
+  
+  protected static short[][] unpackEncodedStringArray(final String[] arr) {
+    return DFAUtil.unpackEncodedStringArray(arr);
   }
   
   @Pure

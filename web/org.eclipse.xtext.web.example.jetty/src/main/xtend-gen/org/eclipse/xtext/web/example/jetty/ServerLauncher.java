@@ -61,7 +61,7 @@ public class ServerLauncher {
             MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
             it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
             it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, 
-              ".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*|.*codemirror.*");
+              ".*/org\\.eclipse\\.xtext\\.web.*,.*/org.webjars.*");
           }
         };
         WebAppContext _doubleArrow_2 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_2);

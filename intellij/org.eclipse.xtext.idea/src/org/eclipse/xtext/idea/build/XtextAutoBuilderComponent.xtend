@@ -17,12 +17,20 @@ import com.intellij.facet.ProjectWideFacetListenersRegistry
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.AbstractProjectComponent
+import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.State
+import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.StoragePathMacros
+import com.intellij.openapi.components.StorageScheme
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.editor.event.DocumentAdapter
 import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
+import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.ModuleAdapter
 import com.intellij.openapi.project.Project
@@ -31,6 +39,7 @@ import com.intellij.openapi.roots.ModuleRootEvent
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.openapi.util.Disposer
+import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileAdapter
 import com.intellij.openapi.vfs.VirtualFileEvent
@@ -51,6 +60,7 @@ import java.util.Set
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IndexState
@@ -75,11 +85,24 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import java.io.IOException
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
+@State(
+	name='XtextAutoBuilderState', 
+	storages = #[
+		@Storage(
+			id="other", 
+			file = StoragePathMacros.PROJECT_FILE
+		),
+		@Storage(
+			id = "dir", 
+			file = StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml", 
+			scheme = StorageScheme.DIRECTORY_BASED
+		)])
+@Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
 	
 	volatile boolean disposed
 	
@@ -106,14 +129,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	ChunkedResourceDescriptions chunkedResourceDescriptions
 	
-	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap()
+	Map<String, Source2GeneratedMapping> moduleName2GeneratedMapping = newHashMap()
 	
 	def Iterable<URI> getGeneratedSources(URI source) {
-		return module2GeneratedMapping.values.map[getGenerated(source)].flatten.toList
+		return moduleName2GeneratedMapping.values.map[getGenerated(source)].flatten.toList
 	}
 	
 	def Iterable<URI> getSource4GeneratedSource(URI generated) {
-		return module2GeneratedMapping.values.map[getSource(generated)].flatten.toList
+		return moduleName2GeneratedMapping.values.map[getSource(generated)].flatten.toList
 	}
 	
 	new(Project project) {
@@ -122,7 +145,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
 		this.chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 		this.project = project
-		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
+		// We need the swing thread here to access the ProgressManager.
+		// No worries: The actual work is performed in a background thread.
+		alarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this)
 		disposed = false
 		Disposer.register(project, this)
 	
@@ -184,18 +209,19 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
          connection.subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
 			
 			override moduleAdded(Project project, Module module) {
-				doCleanBuild(module)
+				if(project.initialized)
+					doCleanBuild(module)
 			}
 			
 			override moduleRemoved(Project project, Module module) {
 				chunkedResourceDescriptions.removeContainer(module.name)
-				module2GeneratedMapping.remove(module)
+				moduleName2GeneratedMapping.remove(module.name)
 			}
 			
 			override modulesRenamed(Project project, List<Module> modules, Function<Module, String> oldNameProvider) {
 				for (module : modules) {
 					chunkedResourceDescriptions.removeContainer(oldNameProvider.fun(module))
-					module2GeneratedMapping.remove(module)
+					moduleName2GeneratedMapping.remove(module.name)
 					doCleanBuild(module)
 				}
 			}
@@ -205,7 +231,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		ProjectWideFacetListenersRegistry.getInstance(project).registerListener(new ProjectWideFacetAdapter<Facet>() {
 			
 			override facetAdded(Facet facet) {
-				if (!isXtextFacet(facet)) 
+				if (!isXtextFacet(facet) || !project.initialized) 
 					return;
 				doCleanBuild(facet.module)
 			}
@@ -246,9 +272,12 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	def void fileDeleted(VirtualFile root) {
+		if (root.findModule(ProjectFileIndex.SERVICE.getInstance(project)) === null) {
+			return
+		}
 		val files = newArrayList
 		root.processFilesRecursively [ file |
-			if (!file.directory) files += file
+			if(!file.directory) files += file
 			true
 		]
 		enqueue(DELETED, files)
@@ -296,8 +325,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 		alarm.cancelAllRequests
 		chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
-		safeDeleteUris(module2GeneratedMapping.values.map[allGenerated].flatten.toList)
-		module2GeneratedMapping.clear
+		safeDeleteUris(moduleName2GeneratedMapping.values.map[allGenerated].flatten.toList)
+		moduleName2GeneratedMapping.clear
 		queueAllResources
 		doRunBuild
 	}
@@ -308,7 +337,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 		alarm.cancelAllRequests
 		chunkedResourceDescriptions.removeContainer(module.name)
-		val before = module2GeneratedMapping.remove(module)
+		val before = moduleName2GeneratedMapping.remove(module.name)
 		if (before != null) {
 			safeDeleteUris(before.allGenerated)
 		}
@@ -429,8 +458,17 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			alarm.addRequest([build], 500)
 		} else {
 			val allEvents = newArrayList
-			queue.drainTo(allEvents)
-			internalBuild(allEvents)
+			if(TEST_MODE) {
+					queue.drainTo(allEvents)
+					internalBuild(allEvents, null)
+			} else {
+				ProgressManager.instance.run(new Task.Backgroundable(project, 'Auto-building Xtext resources') {
+					override run(ProgressIndicator indicator) {
+						queue.drainTo(allEvents)
+						internalBuild(allEvents, indicator)
+					}
+				})
+			}
 		}
 	}
 	
@@ -438,30 +476,30 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return TEST_MODE || (project.isInitialized && !DumbService.getInstance(project).isDumb)
 	}
 	
-	protected def void internalBuild(List<BuildEvent> allEvents) {
+	protected def void internalBuild(List<BuildEvent> allEvents, ProgressIndicator indicator) {
 		val unProcessedEvents = newArrayList
 		unProcessedEvents += allEvents
 		val app = ApplicationManager.application
-		val cancelIndicator = new MutableCancelIndicator
+		val cancelIndicator = new MutableCancelIndicator(indicator)
 		cancelIndicators.add(cancelIndicator)
 		val moduleManager = ModuleManager.getInstance(getProject)
-		val buildProgressReporter = buildProgressReporterProvider.get 
+		val buildProgressReporter = buildProgressReporterProvider.get
 		buildProgressReporter.project = project
+		buildProgressReporter.events = allEvents
 		try {
-			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
 			val moduleGraph = app.<Graph<Module>>runReadAction[moduleManager.moduleGraph]
 			// deltas are added over the whole build
 			val deltas = <IResourceDescription.Delta>newArrayList
 			val sortedModules = new ArrayList(moduleGraph.nodes)
 			ModuleCompilerUtil.sortModules(project, sortedModules)
 			for (module: sortedModules) {
-				val fileMappings = module2GeneratedMapping.get(module) ?: new Source2GeneratedMapping
+				val fileMappings = moduleName2GeneratedMapping.get(module.name) ?: new Source2GeneratedMapping
 				val moduleDescriptions = chunkedResourceDescriptions.getContainer(module.name) ?: new ResourceDescriptionsData(emptyList)
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
 				val contentRoots = ModuleRootManager.getInstance(module).contentRoots
-				val events = allEvents.filter[event| event.findModule(fileIndex) == module].toSet
-				if (contentRoots.empty 
+				val events = unProcessedEvents.getEventsForModule(module)
+				if (contentRoots.empty
 					|| events.isEmpty && deltas.isEmpty) {
 					LOG.info("Skipping module '"+module.name+"'. Nothing to do here.")		
 				} else {
@@ -491,10 +529,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 							handler.flushToDisk
 						} finally {
 							ignoreIncomingEvents = false
+							buildProgressReporter.rehighlight
 						}
 					], app.defaultModalityState)
 					chunkedResourceDescriptions.setContainer(module.name, result.indexState.resourceDescriptions)
-					module2GeneratedMapping.put(module, result.indexState.fileMappings)
+					moduleName2GeneratedMapping.put(module.name, result.indexState.fileMappings)
 					deltas.addAll(result.affectedResources)
 					unProcessedEvents -= events
 				}
@@ -511,6 +550,29 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			buildProgressReporter.clearProgress
 			cancelIndicators.remove(cancelIndicator)
 		}
+	}
+	
+	protected def getEventsForModule(List<BuildEvent> events, Module module) {
+		val moduleRootManager = ModuleRootManager.getInstance(module)
+		val excludeRootUrls = moduleRootManager.excludeRootUrls
+		val sourceRootUrls = moduleRootManager.sourceRootUrls
+		events.filter [ event |
+			val url = event.filesByURI.keySet.head.toString
+			for (excludeRootUrl : excludeRootUrls)
+				if (url.isUrlUnderRoot(excludeRootUrl))
+					return false
+			for (sourceRootUrl : sourceRootUrls)
+				if (url.isUrlUnderRoot(sourceRootUrl))
+					return true
+			return false
+		].toSet
+	}
+	
+	static val char SEGMENT_SEPARATOR = '/'
+
+	protected def isUrlUnderRoot(String url, String rootUrl) {
+		url.length > rootUrl.length && url.charAt(rootUrl.length) == SEGMENT_SEPARATOR &&
+			FileUtil.startsWith(url, rootUrl)
 	}
 	
 	def getServiceProviderProvider(Module module) {
@@ -542,7 +604,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	protected def collectChanges(Set<BuildEvent> events, Module module, HashSet<URI> changedUris, HashSet<URI> deletedUris, ArrayList<Delta> deltas) {
 		val app = ApplicationManager.application
-		val fileMappings = module2GeneratedMapping.get(module)
+		val fileMappings = moduleName2GeneratedMapping.get(module.name)
 		for (event : events) {
 			switch event.type {
 				case MODIFIED,
@@ -630,15 +692,38 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return chunkedResourceDescriptions
 	}
 	
+	@FinalFieldsConstructor
 	static class MutableCancelIndicator implements CancelIndicator {
+		
+		val ProgressIndicator indicator
+
 		volatile boolean canceled
+		
 		override isCanceled() {
-			canceled
+			canceled || indicator?.canceled
 		}
 		
 		def setCanceled(boolean canceled) {
 			this.canceled = canceled
 		}
-		
 	}
+	
+	@Inject XtextAutoBuilderComponentState.Codec codec
+	
+	override getState() {
+		codec.encode(chunkedResourceDescriptions, moduleName2GeneratedMapping)
+	}
+	
+	override loadState(XtextAutoBuilderComponentState state) {
+		try {
+			chunkedResourceDescriptions = codec.decodeIndex(state)
+			moduleName2GeneratedMapping = codec.decodeModuleToGenerated(state) 
+		} catch(IOException exc) {
+			LOG.error('Error loading XtextAutoBuildComponentState ', exc)
+			chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
+			moduleName2GeneratedMapping.clear
+			doCleanBuild
+		}
+	}
+	
 }

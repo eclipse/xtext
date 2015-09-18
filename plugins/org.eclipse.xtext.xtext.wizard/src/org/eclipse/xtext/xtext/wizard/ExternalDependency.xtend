@@ -38,7 +38,7 @@ class ExternalDependency {
 	def p2((P2Coordinates)=>void config) {
 		config.apply(p2)
 	}
-
+	
 	@Accessors
 	static class MavenCoordinates {
 		String groupId

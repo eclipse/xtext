@@ -1,8 +1,8 @@
 package org.eclipse.xtend.core.tests.debug
 
-import org.eclipse.xtext.generator.IFileSystemAccessExtension2
-import org.eclipse.xtext.generator.IFileSystemAccessExtension
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IFileSystemAccessExtension
+import org.eclipse.xtext.generator.IFileSystemAccessExtension2
 
 class AbstractTraceRegionFSA implements IFileSystemAccessExtension2, IFileSystemAccessExtension, IFileSystemAccess {
 

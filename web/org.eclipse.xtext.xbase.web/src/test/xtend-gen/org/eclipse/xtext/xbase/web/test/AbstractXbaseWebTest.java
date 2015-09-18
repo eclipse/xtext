@@ -10,9 +10,11 @@ package org.eclipse.xtext.xbase.web.test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Provider;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,7 +29,11 @@ import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.test.HashMapSessionStore;
 import org.eclipse.xtext.xbase.web.test.MockRequestData;
@@ -45,7 +51,7 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
     }
   }
   
-  private ExecutorService executorService;
+  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
   
   private AbstractXbaseWebTest.TestResourceBaseProvider resourceBaseProvider;
   
@@ -59,15 +65,26 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
   public void setUp() {
     try {
       super.setUp();
-      ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
-      this.executorService = _newCachedThreadPool;
       AbstractXbaseWebTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractXbaseWebTest.TestResourceBaseProvider();
       this.resourceBaseProvider = _testResourceBaseProvider;
       this.with(new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
           final DefaultXbaseIdeModule ideModule = new DefaultXbaseIdeModule();
-          final EntitiesWebModule webModule = new EntitiesWebModule(AbstractXbaseWebTest.this.executorService);
+          final Provider<ExecutorService> _function = new Provider<ExecutorService>() {
+            @Override
+            public ExecutorService get() {
+              ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
+              final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
+                @Override
+                public void apply(final ExecutorService it) {
+                  AbstractXbaseWebTest.this.executorServices.add(it);
+                }
+              };
+              return ObjectExtensions.<ExecutorService>operator_doubleArrow(_newCachedThreadPool, _function);
+            }
+          };
+          final EntitiesWebModule webModule = new EntitiesWebModule(_function);
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
           EntitiesRuntimeModule _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
           Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
@@ -85,7 +102,14 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
   @Override
   public void tearDown() {
     try {
-      this.executorService.shutdown();
+      final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
+        @Override
+        public void apply(final ExecutorService it) {
+          it.shutdown();
+        }
+      };
+      IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
+      this.executorServices.clear();
       super.tearDown();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -124,8 +148,8 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
   }
   
   @Pure
-  protected ExecutorService getExecutorService() {
-    return this.executorService;
+  protected List<ExecutorService> getExecutorServices() {
+    return this.executorServices;
   }
   
   @Pure

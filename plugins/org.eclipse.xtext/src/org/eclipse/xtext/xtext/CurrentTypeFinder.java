@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,6 +57,8 @@ public class CurrentTypeFinder {
 
 		private AbstractElement stopElement;
 		
+		private Set<AbstractRule> visiting = Sets.newHashSet();
+		
 		public EClassifier getResult() {
 			return currentType;
 		}
@@ -79,8 +83,14 @@ public class CurrentTypeFinder {
 		
 		@Override
 		public Boolean caseParserRule(ParserRule object) {
-			if (object.getAlternatives() != null)
-				return doSwitch(object.getAlternatives());
+			if (visiting.add(object)) {
+				try {
+					if (object.getAlternatives() != null)
+						return doSwitch(object.getAlternatives());
+				} finally {
+					visiting.remove(object);
+				}
+			}
 			return true;
 		}
 		
@@ -133,7 +143,7 @@ public class CurrentTypeFinder {
 						if (context.getType() != null)
 							currentType = context.getType().getClassifier();
 						if (!parserRule.isWildcard()) {
-							doSwitch(parserRule.getAlternatives());
+							doSwitch(parserRule);
 						}
 					} else {
 						TypeRef returnType = calledRule.getType();
@@ -143,7 +153,7 @@ public class CurrentTypeFinder {
 					}
 				}
 			} else if (isFragmentButNotWildcard(calledRule)) {
-				doSwitch(calledRule.getAlternatives());
+				doSwitch(calledRule);
 			}
 			if (object == stopElement)
 				return true;

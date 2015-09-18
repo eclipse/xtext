@@ -46,6 +46,10 @@ Workflow {
 		directory = "${runtimeProject}.ide/src-gen"
 	}
 	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}.web/src/main/xtext-gen"
+	}
+	
 	component = XtextGenerator auto-inject {
 		configuration = {
 			project = WizardConfig {
@@ -53,12 +57,18 @@ Workflow {
 				genericIdeSupport = true
 				eclipseEditor = false
 				webSupport = true
-				webApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp/"
+				webRoot = "../org.eclipse.xtext.web.example.jetty"
+				webSrc = "../org.eclipse.xtext.web.example.jetty/src/main/java"
+				webSrcGen = "../org.eclipse.xtext.web.example.jetty/src/main/xtext-gen"
+				webApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp"
 			}
 			code = auto-inject {}
 		}
 		language = auto-inject {
 			uri = grammarURI
+			naming = {
+				webBasePackage = "org.eclipse.xtext.web.example.jetty"
+			}
 
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
@@ -114,11 +124,17 @@ Workflow {
 			}
 			
 			// JavaScript-based syntax highlighting
-			fragment = web.AceHighlightingFragment auto-inject {
-				moduleName = 'xtext/ace-mode-statemachine'
+			fragment = web.WebIntegrationFragment auto-inject {
+				framework = "Orion"
+				highlightingModuleName = "xtext/statemachine-syntax"
 			}
-			fragment = web.OrionHighlightingFragment auto-inject {
-				moduleName = 'xtext/statemachine-syntax'
+			fragment = web.WebIntegrationFragment auto-inject {
+				framework = "Ace"
+				highlightingModuleName = "xtext/ace-mode-statemachine"
+			}
+			fragment = web.WebIntegrationFragment auto-inject {
+				framework = "CodeMirror"
+				highlightingModuleName = "xtext/cm-mode-statemachine"
 			}
 		}
 	}

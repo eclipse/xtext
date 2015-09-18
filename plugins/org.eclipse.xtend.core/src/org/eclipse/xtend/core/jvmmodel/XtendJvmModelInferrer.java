@@ -452,10 +452,12 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 	
 	protected void copyTypeParameters(List<JvmTypeParameter> typeParameters, JvmTypeParameterDeclarator target) {
 		for (JvmTypeParameter typeParameter : typeParameters) {
-			final JvmTypeParameter clonedTypeParameter = jvmTypesBuilder.cloneWithProxies(typeParameter);
-			if (clonedTypeParameter != null) {
-				target.getTypeParameters().add(clonedTypeParameter);
-				associator.associate(typeParameter, clonedTypeParameter);
+			if (!Strings.isEmpty(typeParameter.getName())) {
+				final JvmTypeParameter clonedTypeParameter = jvmTypesBuilder.cloneWithProxies(typeParameter);
+				if (clonedTypeParameter != null) {
+					target.getTypeParameters().add(clonedTypeParameter);
+					associator.associate(typeParameter, clonedTypeParameter);
+				}
 			}
 		}
 	}
@@ -760,6 +762,8 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	protected void transform(XtendEnumLiteral literal, JvmEnumerationType container) {
+		if (literal.getName() == null)
+			return;
 		JvmEnumerationLiteral jvmLiteral = typesFactory.createJvmEnumerationLiteral();
 		associator.associatePrimary(literal, jvmLiteral);
 		jvmLiteral.setSimpleName(literal.getName());

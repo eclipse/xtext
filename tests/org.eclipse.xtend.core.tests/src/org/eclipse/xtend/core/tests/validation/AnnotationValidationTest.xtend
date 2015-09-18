@@ -15,7 +15,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API

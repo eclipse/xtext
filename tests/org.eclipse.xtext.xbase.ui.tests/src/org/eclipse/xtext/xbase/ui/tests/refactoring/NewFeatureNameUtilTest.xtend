@@ -45,7 +45,6 @@ class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
 
 	@Test
 	def testDefaultNameFeatureCall() {
-		assertDefaultName('{val CAMEL_CASE_NAME = 1 $CAMEL_CASE_NAME}', 'camelCaseName')
 		assertDefaultName('{"".$getBytes}', 'bytes')
 		assertDefaultName('{"".$length}', 'length')
 	}
@@ -58,10 +57,10 @@ class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
 
 	@Test
 	def testDefaultNameAlternate() {
-		assertDefaultName('{val i=1 2+$3}', 'i1')
-		assertDefaultName('{val j=2+$3 val i=1}', 'i1')
-		assertDefaultName('{val i=1 {val j=2+$3}}', 'i1')
-		assertDefaultName('{val i=1 {val i1=1 val j=2+$3}}', 'i2')
+		assertDefaultName('{val i=1 2+$3}', 'j')
+		assertDefaultName('{val j=2+$3 val i=1}', 'k')
+		assertDefaultName('{val i=1 {val j=2+$3}}', 'k')
+		assertDefaultName('{val j=1 {val i=2+$3}}', 'k')
 		assertDefaultName('{{val j=2+$3} val i=1 }', 'i')
 	}
 

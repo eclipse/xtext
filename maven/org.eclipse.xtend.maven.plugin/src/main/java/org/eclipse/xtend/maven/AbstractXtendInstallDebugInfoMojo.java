@@ -138,7 +138,9 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 			for (File classFile : classFiles) {
 				if (getLog().isDebugEnabled())
 					getLog().debug("  " + classFile);
-				Files.write(traceToBytecodeInstaller.installTrace(Files.toByteArray(classFile)), classFile);
+				byte[] bytecodeWithTraces = traceToBytecodeInstaller.installTrace(Files.toByteArray(classFile));
+				if (bytecodeWithTraces != null)
+					Files.write(bytecodeWithTraces, classFile);
 			}
 		} finally {
 			in.close();

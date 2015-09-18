@@ -176,7 +176,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	private final TerminalRule tYc;
 	private final TerminalRule tCharY;
 	private final TerminalRule tCharC;
-	private final EnumNameElements unknownRuleEnumName;
+	private final EnumNameElements eEnumName;
 	private final TerminalRule tWS;
 	private final TerminalRule tSL_COMMENT;
 	
@@ -194,7 +194,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		this.tYc = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Yc");
 		this.tCharY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharY");
 		this.tCharC = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharC");
-		this.unknownRuleEnumName = new EnumNameElements();
+		this.eEnumName = new EnumNameElements();
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.WS");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.SL_COMMENT");
 	}
@@ -296,7 +296,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//enum EnumName:
 	//	abc='Abc' | efg="Efg";
 	public EnumNameElements getEnumNameAccess() {
-		return unknownRuleEnumName;
+		return eEnumName;
 	}
 	
 	public EnumRule getEnumNameRule() {

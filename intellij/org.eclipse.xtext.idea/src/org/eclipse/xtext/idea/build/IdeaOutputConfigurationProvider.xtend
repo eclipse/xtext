@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.build
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import com.intellij.openapi.module.Module
-import com.intellij.openapi.vfs.VfsUtil
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
@@ -18,9 +17,10 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.OutputConfiguration
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping
-import org.eclipse.xtext.idea.extensions.RootModelExtensions
 import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.resource.XtextResourceSet
+
+import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -48,9 +48,9 @@ class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationP
 			defOut.canClearOutputDirectory = generatorConf.deleteGenerated
 			defOut.overrideExistingResources = generatorConf.overwriteExisting
 			defOut.useOutputPerSourceFolder = true
-			val allSrcFolders = RootModelExtensions.getExistingSourceFolders(module)
+			val allSrcFolders = module.existingSourceFolders
 			for (srcFolder : allSrcFolders) {
-				val mapping = new SourceMapping(VfsUtil.getPath(srcFolder.contentEntry.file, srcFolder.file, '/'))
+				val mapping = new SourceMapping(srcFolder.relativePath)
 				if (srcFolder.testSource) {
 					mapping.outputDirectory = generatorConf.testOutputDirectory
 				} else {

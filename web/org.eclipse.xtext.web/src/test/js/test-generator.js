@@ -123,8 +123,8 @@ suite('Generator', function() {
 					})
 					.respond({conflict: 'invalidStateId'});
 			}
-			tester.checkError(function(requestType, severity, message, requestData) {
-					assert.equal('generate', requestType);
+			tester.checkError(function(serviceType, severity, message, requestData) {
+					assert.equal('generate', serviceType);
 					assert.equal('warning', severity);
 				}).done();
 		});

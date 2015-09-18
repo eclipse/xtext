@@ -16,6 +16,7 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -30,6 +31,8 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.util.PsiUtil;
 import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.util.SequentialModalProgressTask;
 import com.intellij.util.SequentialTask;
@@ -95,7 +98,25 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
                     String _xtendCode_1 = result.getXtendCode();
                     byte[] _bytes = _xtendCode_1.getBytes();
                     xtendFile.setBinaryContent(_bytes);
+                    PsiFile _key_1 = resultEntry.getKey();
+                    final Project project = _key_1.getProject();
+                    final CodeStyleManager formatter = CodeStyleManager.getInstance(project);
+                    final PsiFile xtendPsiFile = PsiUtil.getPsiFile(project, xtendFile);
+                    formatter.reformat(xtendPsiFile);
                     jvf.delete(this);
+                    int _size = runnables.size();
+                    boolean _tripleEquals_1 = (_size == 1);
+                    if (_tripleEquals_1) {
+                      Application _application = ApplicationManager.getApplication();
+                      final Runnable _function = new Runnable() {
+                        @Override
+                        public void run() {
+                          FileEditorManager _instance = FileEditorManager.getInstance(project);
+                          _instance.openFile(xtendFile, true);
+                        }
+                      };
+                      _application.invokeLater(_function);
+                    }
                   }
                 }
               } catch (Throwable _e) {

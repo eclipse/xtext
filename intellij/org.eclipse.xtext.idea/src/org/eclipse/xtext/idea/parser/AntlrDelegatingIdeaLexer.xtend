@@ -37,6 +37,7 @@ class AntlrDelegatingIdeaLexer extends LexerBase {
 
 		val text = buffer.subSequence(startOffset, endOffset)
 		tokenSource = tokenSourceProvider.createTokenSource(text)
+		token = null
 	}
 
 	override int getState() {

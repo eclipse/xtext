@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.tests.formatting
 import org.junit.Test
 
 import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
+import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
 class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
 	

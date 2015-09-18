@@ -183,17 +183,13 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_CHARC"
     public final void mRULE_CHARC() throws RecognitionException {
         try {
-            int _type = RULE_CHARC;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:239:12: ( 'c' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:239:14: 'c'
+            // PsiInternalBacktrackingLexerTestLanguage.g:239:21: ( 'c' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:239:23: 'c'
             {
             match('c'); 
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
         }
         finally {
         }
@@ -348,8 +344,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_SL_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // PsiInternalBacktrackingLexerTestLanguage.g:1:8: ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_CHARC | RULE_WS | RULE_SL_COMMENT )
-        int alt5=10;
+        // PsiInternalBacktrackingLexerTestLanguage.g:1:8: ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_WS | RULE_SL_COMMENT )
+        int alt5=9;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
@@ -402,21 +398,14 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:74: RULE_CHARC
-                {
-                mRULE_CHARC(); 
-
-                }
-                break;
-            case 9 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:85: RULE_WS
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:74: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 10 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:93: RULE_SL_COMMENT
+            case 9 :
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:82: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
@@ -430,25 +419,24 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     protected DFA5 dfa5 = new DFA5(this);
     static final String DFA5_eotS =
-        "\1\uffff\1\12\3\uffff\1\13\7\uffff";
+        "\1\uffff\1\11\3\uffff\1\12\6\uffff";
     static final String DFA5_eofS =
-        "\15\uffff";
+        "\14\uffff";
     static final String DFA5_minS =
-        "\1\11\1\142\3\uffff\1\143\7\uffff";
+        "\1\11\1\142\3\uffff\1\143\6\uffff";
     static final String DFA5_maxS =
-        "\1\143\1\142\3\uffff\1\143\7\uffff";
+        "\2\142\3\uffff\1\143\6\uffff";
     static final String DFA5_acceptS =
-        "\2\uffff\1\2\1\4\1\5\1\uffff\1\10\1\11\1\12\1\1\1\3\1\7\1\6";
+        "\2\uffff\1\2\1\4\1\5\1\uffff\1\10\1\11\1\1\1\3\1\7\1\6";
     static final String DFA5_specialS =
-        "\15\uffff}>";
+        "\14\uffff}>";
     static final String[] DFA5_transitionS = {
-            "\2\7\2\uffff\1\7\22\uffff\1\7\16\uffff\1\10\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3\1\6",
-            "\1\11",
+            "\2\6\2\uffff\1\6\22\uffff\1\6\16\uffff\1\7\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3",
+            "\1\10",
             "",
             "",
             "",
-            "\1\14",
-            "",
+            "\1\13",
             "",
             "",
             "",
@@ -487,7 +475,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_CHARC | RULE_WS | RULE_SL_COMMENT );";
+            return "1:1: Tokens : ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_WS | RULE_SL_COMMENT );";
         }
     }
  

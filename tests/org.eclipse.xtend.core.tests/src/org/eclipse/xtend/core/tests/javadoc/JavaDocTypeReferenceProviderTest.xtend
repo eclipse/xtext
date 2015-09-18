@@ -1,10 +1,10 @@
 package org.eclipse.xtend.core.tests.javadoc
 
+import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Test
-import com.google.inject.Inject
 
 class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 	

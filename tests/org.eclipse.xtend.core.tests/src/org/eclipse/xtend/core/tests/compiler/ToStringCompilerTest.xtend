@@ -10,8 +10,9 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
-import static org.eclipse.xtext.junit4.internal.LineDelimiters.*
 import org.junit.Test
+
+import static org.eclipse.xtext.junit4.internal.LineDelimiters.*
 
 class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Inject

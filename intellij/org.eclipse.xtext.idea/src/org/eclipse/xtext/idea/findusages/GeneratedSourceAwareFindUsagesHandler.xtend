@@ -10,77 +10,72 @@ package org.eclipse.xtext.idea.findusages
 import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesOptions
 import com.intellij.openapi.actionSystem.DataContext
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.psi.PsiElement
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.SearchScope
 import com.intellij.usageView.UsageInfo
 import com.intellij.util.Processor
-import java.util.List
+import java.util.Collection
+import java.util.Map
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Anton Kosyakov - Refactoring and testing
  */
 class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
-	
-	val List<FindUsagesHandler> delegates = newArrayList
-	val boolean includeAll
-	
-	new(FindUsagesHandler primaryDelegate, boolean includeAll) {
-		super(primaryDelegate.psiElement)
-		this.includeAll = includeAll
-		addDelegate(primaryDelegate)
+
+	static val LOG = Logger.getInstance("#org.eclipse.xtext.idea.findusages.GeneratedSourceAwareFindUsagesHandler")
+
+	val FindUsagesHandler primaryHandler
+	val Map<PsiElement, FindUsagesHandler> secondaryHandlers
+
+	Collection<PsiElement> primaryElements = newArrayList
+	Collection<PsiElement> secondaryElements = newArrayList
+
+	new(FindUsagesHandler primaryHandler, Iterable<FindUsagesHandler> secondaryHandlers) {
+		super(primaryHandler.psiElement)
+		this.primaryHandler = primaryHandler
+
+		LOG.assertTrue(!secondaryHandlers.empty)
+		this.secondaryHandlers = secondaryHandlers.toMap[psiElement]
 	}
-	
-	def void addDelegate(FindUsagesHandler next) {
-		delegates += next
-	}
-	
-	override findReferencesToHighlight(PsiElement target, SearchScope searchScope) {
-		primaryDelegate.findReferencesToHighlight(target, searchScope)
-	}
-	
-	protected def getPrimaryDelegate() {
-		delegates.head
-	}
-	
-	override getFindUsagesDialog(boolean isSingleFile, boolean toShowInNewTab, boolean mustOpenInNewTab) {
-		primaryDelegate.getFindUsagesDialog(isSingleFile, toShowInNewTab, mustOpenInNewTab)
-	}
-	
-	override getFindUsagesOptions() {
-		primaryDelegate.findUsagesOptions
-	}
-	
-	override getFindUsagesOptions(DataContext dataContext) {
-		primaryDelegate.getFindUsagesOptions(dataContext)
-	}
-	
+
 	override getPrimaryElements() {
-		return delegates.map[primaryElements.toList].flatten
+		primaryElements = primaryHandler.primaryElements.toList
+		primaryElements
 	}
-	
+
 	override getSecondaryElements() {
-		return delegates.map[secondaryElements.toList].flatten
+		secondaryElements = primaryHandler.secondaryElements.toList
+		secondaryElements + secondaryHandlers.keySet
 	}
-	
+
+	override getFindUsagesDialog(boolean isSingleFile, boolean toShowInNewTab, boolean mustOpenInNewTab) {
+		primaryHandler.getFindUsagesDialog(isSingleFile, toShowInNewTab, mustOpenInNewTab)
+	}
+
+	override getFindUsagesOptions(DataContext dataContext) {
+		primaryHandler.getFindUsagesOptions(dataContext)
+	}
+
 	override processElementUsages(PsiElement element, Processor<UsageInfo> processor, FindUsagesOptions options) {
-		getRelevantDelegates().findFirst[ handles(element) ]?.processElementUsages(element, processor, options)
+		element.findUsagesHandler?.processElementUsages(element, processor, options)
 	}
-	
-	def getRelevantDelegates() {
-		if (includeAll) {
-			delegates
-		} else {
-			delegates.subList(0, 1)
-		}
-	}
-	
-	def protected handles(FindUsagesHandler handler, PsiElement element) {
-		handler.primaryElements.contains(element) || handler.secondaryElements.contains(element)
-	}
-	
+
 	override processUsagesInText(PsiElement element, Processor<UsageInfo> processor, GlobalSearchScope searchScope) {
-		getRelevantDelegates().findFirst[ handles(element) ]?.processUsagesInText(element, processor, searchScope)
+		element.findUsagesHandler?.processUsagesInText(element, processor, searchScope)
 	}
-	
+
+	protected def getFindUsagesHandler(PsiElement element) {
+		if (primaryElements.contains(element) || secondaryElements.contains(element))
+			return primaryHandler
+
+		return secondaryHandlers.get(element)
+	}
+
+	override findReferencesToHighlight(PsiElement target, SearchScope searchScope) {
+		throw new UnsupportedOperationException('GeneratedSourceAwareFindUsagesHandler should not be used to find references to highlight.')
+	}
+
 }

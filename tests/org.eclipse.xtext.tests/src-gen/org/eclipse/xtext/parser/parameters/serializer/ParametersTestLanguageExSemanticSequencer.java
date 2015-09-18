@@ -31,7 +31,8 @@ public class ParametersTestLanguageExSemanticSequencer extends ParametersTestLan
 				sequence_ParserRuleParameters(context, (ParserRuleParameters) semanticObject); 
 				return; 
 			case ParametersTestLanguagePackage.SCENARIO:
-				if(context == grammarAccess.getScenario1Rule()) {
+				if(context == grammarAccess.getParametersTestLanguageScenario1Rule() ||
+				   context == grammarAccess.getScenario1Rule()) {
 					sequence_Scenario1(context, (Scenario) semanticObject); 
 					return; 
 				}

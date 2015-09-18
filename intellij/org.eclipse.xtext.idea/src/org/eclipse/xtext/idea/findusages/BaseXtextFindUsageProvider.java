@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.findusages;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.PsiNamedEObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.google.inject.Inject;
 import com.intellij.lang.HelpID;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
@@ -18,11 +21,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 
 public class BaseXtextFindUsageProvider implements FindUsagesProvider {
+	
+	@Inject
+	private WordsScannerProvider wordsScannerProvider;
 
 	@Override
 	@Nullable
 	public WordsScanner getWordsScanner() {
-		return null;
+		return wordsScannerProvider.get();
 	}
 
 	@Override
@@ -39,7 +45,21 @@ public class BaseXtextFindUsageProvider implements FindUsagesProvider {
 	@Override
 	@NotNull
 	public String getType(@NotNull PsiElement element) {
+		if (element instanceof PsiEObject) {
+			return getType((PsiEObject) element);
+		}
 		return "";
+	}
+	
+	protected String getType(PsiEObject element) {
+		EObject object = element.getEObject();
+		if (object == null)
+			return "";
+		return getType(object);
+	}
+	
+	protected String getType(EObject object) {
+		return object.eClass().getName();
 	}
 
 	@Override

@@ -653,9 +653,9 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	private final TerminalRule tTerminal1;
 	private final TerminalRule tTerminal2;
 	private final EnumValElements pEnumVal;
-	private final Enum1Elements unknownRuleEnum1;
-	private final Enum2Elements unknownRuleEnum2;
-	private final Enum3Elements unknownRuleEnum3;
+	private final Enum1Elements eEnum1;
+	private final Enum2Elements eEnum2;
+	private final Enum3Elements eEnum3;
 	private final KeywordBoolElements pKeywordBool;
 	private final TerminalBoolElements pTerminalBool;
 	private final EnumBoolElements pEnumBool;
@@ -683,9 +683,9 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		this.tTerminal1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
 		this.tTerminal2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
 		this.pEnumVal = new EnumValElements();
-		this.unknownRuleEnum1 = new Enum1Elements();
-		this.unknownRuleEnum2 = new Enum2Elements();
-		this.unknownRuleEnum3 = new Enum3Elements();
+		this.eEnum1 = new Enum1Elements();
+		this.eEnum2 = new Enum2Elements();
+		this.eEnum3 = new Enum3Elements();
 		this.pKeywordBool = new KeywordBoolElements();
 		this.pTerminalBool = new TerminalBoolElements();
 		this.pEnumBool = new EnumBoolElements();
@@ -783,7 +783,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum Enum1 returns TestEnum:
 	//	lit1;
 	public Enum1Elements getEnum1Access() {
-		return unknownRuleEnum1;
+		return eEnum1;
 	}
 	
 	public EnumRule getEnum1Rule() {
@@ -793,7 +793,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum Enum2 returns TestEnum:
 	//	lit2;
 	public Enum2Elements getEnum2Access() {
-		return unknownRuleEnum2;
+		return eEnum2;
 	}
 	
 	public EnumRule getEnum2Rule() {
@@ -803,7 +803,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum Enum3 returns TestEnum:
 	//	lit3;
 	public Enum3Elements getEnum3Access() {
-		return unknownRuleEnum3;
+		return eEnum3;
 	}
 	
 	public EnumRule getEnum3Rule() {

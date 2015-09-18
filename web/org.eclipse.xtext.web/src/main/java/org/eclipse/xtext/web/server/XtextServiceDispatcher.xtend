@@ -69,9 +69,9 @@ class XtextServiceDispatcher {
 	static class ServiceDescriptor {
 		
 		/**
-		 * The service type according to the 'requestType' parameter.
+		 * The request for which the service was built.
 		 */
-		String type
+		IRequestData request
 		
 		/**
 		 * The function for invoking the service.
@@ -124,9 +124,9 @@ class XtextServiceDispatcher {
 	 */
 	def ServiceDescriptor getService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val requestType = request.getParameter(IRequestData.REQUEST_TYPE)
-		if (requestType === null)
-			throw new InvalidParametersException('The parameter \'requestType\' is required.')
+		val serviceType = request.getParameter(IRequestData.SERVICE_TYPE)
+		if (serviceType === null)
+			throw new InvalidParametersException('The parameter \'serviceType\' is required.')
 		
 		if (LOG.traceEnabled) {
 			val stringParams = request.parameterKeys.sort.join(': ', ', ', '', [ key |
@@ -138,17 +138,17 @@ class XtextServiceDispatcher {
 				else
 					key + '=' + value
 			]).replaceAll('(\\n|\\f|\\r)+', ' ')
-			LOG.trace('xtext-service/' + requestType + stringParams)
+			LOG.trace('xtext-service/' + serviceType + stringParams)
 		}
 		
 		try {
-			return createServiceDescriptor(requestType, request, sessionStore) => [
-				type = requestType
+			return createServiceDescriptor(serviceType, request, sessionStore) => [
+				it.request = request
 			]
 		} catch (InvalidDocumentStateException ire) {
-			LOG.trace('Invalid document state (' + requestType + ')')
+			LOG.trace('Invalid document state (' + serviceType + ')')
 			return new ServiceDescriptor => [
-				type = requestType
+				it.request = request
 				service = [new ServiceConflictResult('invalidStateId')]
 				hasConflict = true
 			]
@@ -156,11 +156,11 @@ class XtextServiceDispatcher {
 	}
 	
 	/**
-	 * Do the actual dispatching by delegating to a service descriptor creation method depending on the request type.
+	 * Do the actual dispatching by delegating to a service descriptor creation method depending on the service type.
 	 * Override this method if you want to add more services to the dispatcher.
 	 */
-	protected def ServiceDescriptor createServiceDescriptor(String requestType, IRequestData request, ISessionStore sessionStore) {
-		switch requestType {
+	protected def ServiceDescriptor createServiceDescriptor(String serviceType, IRequestData request, ISessionStore sessionStore) {
+		switch serviceType {
 			case 'load':
 				getLoadResourceService(false, request, sessionStore)
 			case 'revert':
@@ -184,7 +184,7 @@ class XtextServiceDispatcher {
 			case 'generate':
 				getGeneratorService(request, sessionStore)
 			default:
-				throw new InvalidParametersException('The request type \'' + requestType + '\' is not supported.')
+				throw new InvalidParametersException('The service type \'' + serviceType + '\' is not supported.')
 		}
 	}
 	
@@ -526,14 +526,14 @@ class XtextServiceDispatcher {
 	protected def dispatch handleError(ServiceDescriptor service, Throwable throwable) {
 		// The caller is responsible for sending an 'Internal Server Error' message to the client
 		if (operationCanceledManager.isOperationCanceledException(throwable)) {
-			LOG.trace('Service canceled (' + service.type + ')')
+			LOG.trace('Service canceled (' + service.request.getParameter(IRequestData.SERVICE_TYPE) + ')')
 			return new ServiceConflictResult('canceled')
 		}
 		throw throwable
 	}
 	
 	protected def dispatch handleError(ServiceDescriptor service, InvalidDocumentStateException exception) {
-		LOG.trace('Invalid document state (' + service.type + ')')
+		LOG.trace('Invalid document state (' + service.request.getParameter(IRequestData.SERVICE_TYPE) + ')')
 		return new ServiceConflictResult('invalidStateId')
 	}
 	

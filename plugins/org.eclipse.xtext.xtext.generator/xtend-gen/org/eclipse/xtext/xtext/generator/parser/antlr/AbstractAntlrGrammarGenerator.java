@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -37,6 +39,8 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess;
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
@@ -60,10 +64,17 @@ public abstract class AbstractAntlrGrammarGenerator {
   private CodeConfig codeConfig;
   
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
+    final RuleFilter filter = new RuleFilter();
+    boolean _isSkipUnusedRules = options.isSkipUnusedRules();
+    filter.setDiscardUnreachableRules(_isSkipUnusedRules);
+    Grammar _grammar = GrammarUtil.getGrammar(it);
+    final RuleNames ruleNames = RuleNames.getRuleNames(_grammar, true);
+    FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
+    final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
     TypeReference _grammarClass = this.getGrammarClass(it);
     String _path = _grammarClass.getPath();
     String _plus = (_path + ".g");
-    CharSequence _compile = this.compile(it, options);
+    CharSequence _compile = this.compile(flattened, options);
     fsa.generateFile(_plus, _compile);
   }
   
@@ -260,7 +271,8 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// Rule ");
-    String _name = it.getName();
+    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    String _name = ((AbstractRule) _originalElement).getName();
     _builder.append(_name, "");
     _builder.newLineIfNotEmpty();
     String _ruleName = this._grammarAccessExtensions.ruleName(it);
@@ -274,7 +286,8 @@ public abstract class AbstractAntlrGrammarGenerator {
       if (!(it instanceof ParserRule)) {
         _and = false;
       } else {
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(it);
+        EObject _originalElement_1 = AntlrGrammarGenUtil.getOriginalElement(it);
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((AbstractRule) _originalElement_1));
         _and = _isDatatypeRule;
       }
       if (_and) {
@@ -645,7 +658,8 @@ public abstract class AbstractAntlrGrammarGenerator {
     {
       final AbstractRule rule = it.getRule();
       if ((rule instanceof ParserRule)) {
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((ParserRule)rule));
+        EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(rule);
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((AbstractRule) _originalElement));
         boolean _not = (!_isDatatypeRule);
         if (_not) {
           throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule");

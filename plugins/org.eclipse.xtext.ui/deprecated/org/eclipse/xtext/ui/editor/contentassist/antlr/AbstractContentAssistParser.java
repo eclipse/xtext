@@ -25,11 +25,9 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.RequiredRuleNameComputer;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
@@ -53,6 +51,9 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	@Inject
 	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
 	
+	@Inject
+	private RequiredRuleNameComputer requiredRuleNameComputer;
+	
 	/**
 	 * @since 2.7
 	 */
@@ -73,7 +74,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		Collection<FollowElement> result = new ArrayList<FollowElement>();
 		for(AbstractElement elementToParse: getElementsToParse(element)) {
 			String ruleName = getRuleName(elementToParse);
-			String[][] allRuleNames = getRequiredRuleNames(ruleName, elementToParse);
+			String[][] allRuleNames = getRequiredRuleNames(ruleName, element.getParamStack(), elementToParse);
 			for (String[] ruleNames: allRuleNames) {
 				for(int i = 0; i < ruleNames.length; i++) {
 					AbstractInternalContentAssistParser parser = createParser();
@@ -100,6 +101,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					parser.getGrammarElements().add(elementToParse);
 					parser.getLocalTrace().addAll(element.getLocalTrace());
 					parser.getLocalTrace().add(elementToParse);
+					parser.getParamStack().addAll(element.getParamStack());
 					if (elementToParse instanceof UnorderedGroup && element.getGrammarElement() == elementToParse) {
 						UnorderedGroup group = (UnorderedGroup) elementToParse;
 						final IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
@@ -171,7 +173,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	
 	private Collection<FollowElement> getFollowElements(
 			final AbstractInternalContentAssistParser parser,
-			final AbstractElement elementToParse, 
+			final AbstractElement elementToParse,
 			String[] ruleNames, int startIndex) {
 		try {
 			final boolean[] wasEof = new boolean[] { false };
@@ -267,30 +269,14 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			throw new RuntimeException(e);
 		}
 	}
-
-	private String[][] getRequiredRuleNames(String ruleName, AbstractElement elementToParse) {
-		if (ruleName == null) {
-			if (elementToParse instanceof RuleCall) {
-				RuleCall call = (RuleCall) elementToParse;
-				if (call.getRule() instanceof ParserRule)
-					return new String[][] {{ "rule" + call.getRule().getName() }};
+	
+	private String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
+		return requiredRuleNameComputer.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
+			@Override
+			protected String getBaseRuleName(AbstractElement element) {
+				return getRuleName(element);
 			}
-			return new String[0][];
-		}
-		if (!(GrammarUtil.isOptionalCardinality(elementToParse) || GrammarUtil.isOneOrMoreCardinality(elementToParse)))
-			return new String[][] {{ ruleName }};
-		if ((elementToParse.eContainer() instanceof Group)) {
-			List<AbstractElement> tokens = ((Group) elementToParse.eContainer()).getElements();
-			int idx = tokens.indexOf(elementToParse) + 1;
-			if (idx != tokens.size()) {
-				String secondRule = getRuleName((AbstractElement) elementToParse.eContainer());
-  				secondRule = secondRule.substring(0, secondRule.lastIndexOf('_') + 1) + idx;
-				if (GrammarUtil.isMultipleCardinality(elementToParse))
-					return new String[][] {{ ruleName }, {ruleName, secondRule}};
-				return new String[][] { {ruleName, secondRule} };
-			}
-		}
-		return new String[][] {{ ruleName }};
+		});
 	}
 
 	private Collection<AbstractElement> getElementsToParse(FollowElement element) {

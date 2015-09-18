@@ -13,6 +13,8 @@
  * In addition to the options supported by CodeMirror (https://codemirror.net/doc/manual.html#config),
  * the following options are available:
  *
+ * baseUrl = "/" {String}
+ *     The path segment where the Xtext service is found; see serviceUrl option.
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
@@ -53,10 +55,14 @@
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
- * serverUrl {String}
- *     The URL of the Xtext server.
+ * serviceUrl {String}
+ *     The URL of the Xtext servlet; if no value is given, it is constructed using the baseUrl option in the form
+ *     {location.protocol}//{location.host}{baseUrl}xtext-service
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
+ * syntaxDefinition {String}
+ *     If the 'mode' option is not set, the default mode 'xtext/{xtextLang}' is used. Set this option to
+ *     'none' to suppress this behavior and disable syntax highlighting.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * xtextLang {String}
@@ -157,8 +163,8 @@ define([
 	CodeMirrorServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var options = this.services.options;
 		// If the mode option is set, syntax highlighting has already been configured by CM
-		if (!options.mode && options.xtextLang) {
-			this.editor.setOption('mode', options.xtextLang);
+		if (!options.mode && options.syntaxDefinition != 'none' && options.xtextLang) {
+			this.editor.setOption('mode', 'xtext/' + options.xtextLang);
 		}
 	}
 		
@@ -173,10 +179,9 @@ define([
 			textUpdateDelay = 500;
 		function modelChangeListener(event) {
 			if (!event._xtext_init)
-				editorContext.markClean(false);
-			if (editorContext._modelChangeTimeout){
+				editorContext.setDirty(true);
+			if (editorContext._modelChangeTimeout)
 				clearTimeout(editorContext._modelChangeTimeout);
-			}
 			editorContext._modelChangeTimeout = setTimeout(function() {
 				if (services.options.sendFullText)
 					refreshDocument();
@@ -361,16 +366,6 @@ define([
 			};
 			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction});
 		}
-	}
-	
-	CodeMirrorServiceBuilder.prototype.setupDirtyListener = function(dirtyElement, dirtyStatusClass) {
-		var editorContext = this.services.editorContext;
-		editorContext.addDirtyStateListener(function(clean) {
-			if (clean)
-				dirtyElement.removeClass(dirtyStatusClass);
-			else
-				dirtyElement.addClass(dirtyStatusClass);
-		});
 	}
 	
 	return exports;

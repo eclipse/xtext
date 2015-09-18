@@ -138,14 +138,15 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+    IRequestData _request = service.getRequest();
+    final String type = _request.getParameter(IRequestData.SERVICE_TYPE);
     boolean _and = false;
     boolean _isHasConflict = service.isHasConflict();
     boolean _not = (!_isHasConflict);
     if (!_not) {
       _and = false;
     } else {
-      String _type = service.getType();
-      boolean _notEquals = (!Objects.equal(_type, "update"));
+      boolean _notEquals = (!Objects.equal(type, "update"));
       _and = _notEquals;
     }
     if (_and) {
@@ -158,6 +159,8 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+    IRequestData _request = service.getRequest();
+    final String type = _request.getParameter(IRequestData.SERVICE_TYPE);
     boolean _and = false;
     boolean _isHasConflict = service.isHasConflict();
     boolean _not = (!_isHasConflict);
@@ -178,8 +181,7 @@ public class XtextServlet extends HttpServlet {
       if (_and_1) {
         _or = true;
       } else {
-        String _type = service.getType();
-        boolean _equals = Objects.equal(_type, "update");
+        boolean _equals = Objects.equal(type, "update");
         _or = _equals;
       }
       _and = _or;
@@ -217,37 +219,47 @@ public class XtextServlet extends HttpServlet {
     try {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
-      if ((result instanceof GeneratorResult)) {
-        List<GeneratorResult.GeneratedDocument> _documents = ((GeneratorResult)result).getDocuments();
-        final GeneratorResult.GeneratedDocument document = IterableExtensions.<GeneratorResult.GeneratedDocument>head(_documents);
-        boolean _and = false;
-        if (!(document != null)) {
-          _and = false;
-        } else {
-          String _contentType = document.getContentType();
-          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_contentType);
-          boolean _not = (!_isNullOrEmpty);
-          _and = _not;
-        }
-        if (_and) {
-          response.setStatus(HttpServletResponse.SC_OK);
+      response.setStatus(HttpServletResponse.SC_OK);
+      String _encoding = this.getEncoding(service);
+      response.setCharacterEncoding(_encoding);
+      response.setHeader("Cache-Control", "no-cache");
+      boolean _and = false;
+      if (!(result instanceof GeneratorResult)) {
+        _and = false;
+      } else {
+        List<GeneratorResult.GeneratedDocument> _documents = ((GeneratorResult) result).getDocuments();
+        int _size = _documents.size();
+        boolean _equals = (_size == 1);
+        _and = _equals;
+      }
+      if (_and) {
+        List<GeneratorResult.GeneratedDocument> _documents_1 = ((GeneratorResult) result).getDocuments();
+        final GeneratorResult.GeneratedDocument document = IterableExtensions.<GeneratorResult.GeneratedDocument>head(_documents_1);
+        String _contentType = document.getContentType();
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_contentType);
+        boolean _not = (!_isNullOrEmpty);
+        if (_not) {
           String _contentType_1 = document.getContentType();
           response.setContentType(_contentType_1);
-          response.setHeader("Cache-Control", "no-cache");
           PrintWriter _writer = response.getWriter();
           String _content = document.getContent();
           _writer.write(_content);
           return;
         }
       }
-      response.setStatus(HttpServletResponse.SC_OK);
-      response.setContentType("text/x-json;charset=UTF-8");
-      response.setHeader("Cache-Control", "no-cache");
+      response.setContentType("text/x-json");
       PrintWriter _writer_1 = response.getWriter();
       this.gson.toJson(result, _writer_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  /**
+   * Determine the encoding to apply to servlet responses. The default is UTF-8.
+   */
+  protected String getEncoding(final XtextServiceDispatcher.ServiceDescriptor service) {
+    return "UTF-8";
   }
   
   /**

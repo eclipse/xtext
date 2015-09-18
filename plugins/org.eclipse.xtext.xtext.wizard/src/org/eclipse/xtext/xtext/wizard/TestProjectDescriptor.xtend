@@ -29,4 +29,59 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 	override getUpstreamProjects() {
 		#{testedProject}
 	}
+	
+	override isEclipsePluginProject() {
+		testedProject.isEclipsePluginProject
+	}
+	
+	override pom() {
+		super.pom => [
+			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
+			buildSection = '''
+				<build>
+					«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
+						<sourceDirectory>«Outlet.TEST_JAVA.sourceFolder»</sourceDirectory>
+						<resources>
+							<resource>
+								<directory>«Outlet.TEST_RESOURCES.sourceFolder»</directory>
+							</resource>
+						</resources>
+					«ENDIF»
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.xtend</groupId>
+							<artifactId>xtend-maven-plugin</artifactId>
+						</plugin>
+						«IF !isEclipsePluginProject»
+							<plugin>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>build-helper-maven-plugin</artifactId>
+								<version>1.9.1</version>
+								<executions>
+									<execution>
+										<id>add-test-source</id>
+										<phase>initialize</phase>
+										<goals>
+											<goal>add-test-source</goal>
+											<goal>add-test-resource</goal>
+										</goals>
+										<configuration>
+											<sources>
+												<source>«Outlet.TEST_SRC_GEN.sourceFolder»</source>
+											</sources>
+											<resources>
+												<resource>
+													<directory>«Outlet.TEST_SRC_GEN.sourceFolder»</directory>
+												</resource>
+											</resources>
+										</configuration>
+									</execution>
+								</executions>
+							</plugin>
+						«ENDIF»
+					</plugins>
+				</build>
+			'''
+		]
+	}
 }

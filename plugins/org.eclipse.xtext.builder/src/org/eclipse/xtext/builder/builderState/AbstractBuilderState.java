@@ -65,8 +65,9 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	}
 
 	protected void ensureLoaded() {
-		if (!isLoaded)
+		if (!isLoaded) {
 			load();
+		}
 	}
 
 	protected Set<URI> ensureNotNull(Set<URI> uris) {

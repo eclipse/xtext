@@ -117,6 +117,9 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Accessors
   private final GuiceModuleAccess ideaGenModule = new GuiceModuleAccess();
   
+  @Accessors
+  private final GuiceModuleAccess webGenModule = new GuiceModuleAccess();
+  
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
   
@@ -449,7 +452,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
       Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
       _requiredBundles.addAll(
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util")));
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util", "org.eclipse.xtend.lib")));
       ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
       Set<String> _importedPackages = _runtimeManifest_2.getImportedPackages();
       _importedPackages.add("org.apache.log4j");
@@ -460,7 +463,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
       Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
       _requiredBundles_1.addAll(
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui")));
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui", "org.eclipse.xtend.lib")));
     }
     PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
     boolean _tripleNotEquals_2 = (_eclipsePluginPluginXml != null);
@@ -544,8 +547,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     }
     _builder.append("\t\t");
     _builder.append("name=\"");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "\t\t");
     _builder.append(" Editor\">");
-    _builder.newLine();
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</editor>");
     _builder.newLine();
@@ -797,16 +802,16 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("name=\"");
-    String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "\t\t");
+    String _simpleName_1 = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName_1, "\t\t");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("<keywordReference id=\"");
     String _namespace = GrammarUtil.getNamespace(it);
     String _plus = (_namespace + ".ui.keyword_");
-    String _simpleName_1 = GrammarUtil.getSimpleName(it);
-    String _plus_1 = (_plus + _simpleName_1);
+    String _simpleName_2 = GrammarUtil.getSimpleName(it);
+    String _plus_1 = (_plus + _simpleName_2);
     _builder.append(_plus_1, "\t\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
@@ -841,8 +846,8 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     _builder.append("<keywordReference id=\"");
     String _namespace_1 = GrammarUtil.getNamespace(it);
     String _plus_2 = (_namespace_1 + ".ui.keyword_");
-    String _simpleName_2 = GrammarUtil.getSimpleName(it);
-    String _plus_3 = (_plus_2 + _simpleName_2);
+    String _simpleName_3 = GrammarUtil.getSimpleName(it);
+    String _plus_3 = (_plus_2 + _simpleName_3);
     _builder.append(_plus_3, "\t\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
@@ -877,8 +882,8 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     _builder.append("<keywordReference id=\"");
     String _namespace_2 = GrammarUtil.getNamespace(it);
     String _plus_4 = (_namespace_2 + ".ui.keyword_");
-    String _simpleName_3 = GrammarUtil.getSimpleName(it);
-    String _plus_5 = (_plus_4 + _simpleName_3);
+    String _simpleName_4 = GrammarUtil.getSimpleName(it);
+    String _plus_5 = (_plus_4 + _simpleName_4);
     _builder.append(_plus_5, "\t\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
@@ -909,16 +914,16 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("name=\"");
-    String _simpleName_4 = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName_4, "\t\t");
+    String _simpleName_5 = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName_5, "\t\t");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("<keywordReference id=\"");
     String _namespace_3 = GrammarUtil.getNamespace(it);
     String _plus_6 = (_namespace_3 + ".ui.keyword_");
-    String _simpleName_5 = GrammarUtil.getSimpleName(it);
-    String _plus_7 = (_plus_6 + _simpleName_5);
+    String _simpleName_6 = GrammarUtil.getSimpleName(it);
+    String _plus_7 = (_plus_6 + _simpleName_6);
     _builder.append(_plus_7, "\t\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
@@ -951,15 +956,15 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     _builder.append("id=\"");
     String _namespace_4 = GrammarUtil.getNamespace(it);
     String _plus_8 = (_namespace_4 + ".ui.keyword_");
-    String _simpleName_6 = GrammarUtil.getSimpleName(it);
-    String _plus_9 = (_plus_8 + _simpleName_6);
+    String _simpleName_7 = GrammarUtil.getSimpleName(it);
+    String _plus_9 = (_plus_8 + _simpleName_7);
     _builder.append(_plus_9, "\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("label=\"");
-    String _simpleName_7 = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName_7, "\t\t");
+    String _simpleName_8 = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName_8, "\t\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("</extension>");
@@ -1307,5 +1312,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Pure
   public GuiceModuleAccess getIdeaGenModule() {
     return this.ideaGenModule;
+  }
+  
+  @Pure
+  public GuiceModuleAccess getWebGenModule() {
+    return this.webGenModule;
   }
 }

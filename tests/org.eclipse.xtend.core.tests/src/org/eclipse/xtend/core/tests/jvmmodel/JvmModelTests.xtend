@@ -3,18 +3,19 @@ package org.eclipse.xtend.core.tests.jvmmodel
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
-import org.eclipse.xtext.common.types.JvmGenericType
 
 class JvmModelTests extends AbstractXtendTestCase {
 	
@@ -317,6 +318,91 @@ class JvmModelTests extends AbstractXtendTestCase {
 		val nested3 = nested1.members.last as JvmEnumerationType
 		assertEquals('Nested3', nested3.simpleName)
 		assertTrue(nested3.static)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_01() {
+		val clazz = ('''
+			class Foo< {
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		assertTrue('' + clazz.typeParameters, clazz.typeParameters.empty)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_02() {
+		val clazz = ('''
+			class Foo<T> {
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		assertEquals('' + clazz.typeParameters, 1, clazz.typeParameters.size)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_03() {
+		val clazz = ('''
+			class Foo {
+				new <() {
+				}
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		val member = clazz.members.filter(JvmConstructor).head
+		assertTrue('' + member.typeParameters, member.typeParameters.empty)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_04() {
+		val clazz = ('''
+			class Foo {
+				new <T>() {
+				}
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		val member = clazz.members.filter(JvmConstructor).head
+		assertEquals('' + member.typeParameters, 1, member.typeParameters.size)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_05() {
+		val clazz = ('''
+			class Foo {
+				def < foo() {
+				}
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		val member = clazz.members.filter(JvmOperation).head
+		assertNull(member)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_06() {
+		val clazz = ('''
+			class Foo {
+				def <> foo() {
+				}
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		val member = clazz.members.filter(JvmOperation).head
+		assertTrue('' + member.typeParameters, member.typeParameters.empty)
+	}
+	
+	@Test
+	def void testJvmTypeParameter_07() {
+		val clazz = ('''
+			class Foo {
+				def <T> String foo() {
+				}
+			}
+		'''.toString.file(false, false).xtendTypes.head as XtendClass).inferredType
+		
+		val member = clazz.members.filter(JvmOperation).head
+		assertEquals('' + member.typeParameters, 1, member.typeParameters.size)
 	}
 	
 }

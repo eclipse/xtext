@@ -84,6 +84,9 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	@Accessors
 	val ideaGenModule = new GuiceModuleAccess
 	
+	@Accessors
+	val webGenModule = new GuiceModuleAccess
+	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Inject IXtextProjectConfig projectConfig
@@ -275,13 +278,13 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 		//TODO move this logic into its own class
 		if (projectConfig.runtimeManifest !== null) {
 			projectConfig.runtimeManifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext', 'org.eclipse.xtext.util'
+				'org.eclipse.xtext', 'org.eclipse.xtext.util', 'org.eclipse.xtend.lib'
 			])
 			projectConfig.runtimeManifest.importedPackages.add('org.apache.log4j')
 		}
 		if (projectConfig.eclipsePluginManifest !== null) {
 			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui'
+				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui', 'org.eclipse.xtend.lib'
 			])
 		}
 		if (projectConfig.eclipsePluginPluginXml !== null) {
@@ -314,7 +317,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 				«IF grammar.inheritsXbase»
 					matchingStrategy="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
 				«ENDIF»
-				name="«» Editor">
+				name="«it.simpleName» Editor">
 			</editor>
 		</extension>
 		<extension

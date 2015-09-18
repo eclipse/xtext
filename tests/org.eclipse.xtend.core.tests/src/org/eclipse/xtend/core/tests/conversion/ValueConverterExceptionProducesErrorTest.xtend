@@ -8,16 +8,16 @@
 package org.eclipse.xtend.core.tests.conversion
 
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.util.StringInputStream
-import org.junit.Test
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.RichString
 import org.eclipse.xtend.core.xtend.RichStringLiteral
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.XStringLiteral
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

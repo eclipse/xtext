@@ -9,11 +9,14 @@ package org.eclipse.xtext.idea.tests.parsing
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.intellij.lang.Language
 import com.intellij.lang.LanguageASTFactory
+import com.intellij.lang.LanguageParserDefinitions
 import com.intellij.lang.ParserDefinition
 import com.intellij.mock.MockEditorFactory
 import com.intellij.mock.MockFileDocumentManagerImpl
 import com.intellij.openapi.editor.EditorFactory
+import com.intellij.openapi.editor.impl.DocumentImpl
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl
 import com.intellij.openapi.fileTypes.LanguageFileType
@@ -26,18 +29,15 @@ import java.io.IOException
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.lang.IXtextLanguage
+import org.eclipse.xtext.idea.lang.LanguageSetup
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
-import com.intellij.openapi.editor.impl.DocumentImpl
-import com.intellij.lang.LanguageParserDefinitions
-import org.eclipse.xtext.idea.lang.LanguageSetup
-import com.intellij.lang.Language
-import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 

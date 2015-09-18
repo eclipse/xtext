@@ -22,7 +22,7 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
  */
 class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
 
-	val static XTEND_GRADLE_PLUGIN_VERSION = '0.4.7'
+	@Inject GradleBuildFileUtility gradleUtility
 	@Inject Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider
 
 	new() {
@@ -35,27 +35,37 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 
 	override addSupport(Module module, ModifiableRootModel rootModel, ModifiableModelsProvider modifiableModelsProvider,
 		BuildScriptDataBuilder script) {
+		// TODO extract this to use in XtendSupportConfigurable
+		val snapshot = XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")
 		script.addOther('''
 			buildscript {
-			    repositories {
-			        mavenCentral()
-			    }
+				repositories {
+					«IF snapshot»
+						maven {
+							url 'http://oss.sonatype.org/content/repositories/snapshots'
+						}
+				    «ENDIF»
+				    jcenter()
+				}
 			    dependencies {
-			        classpath 'org.xtend:xtend-gradle-plugin:«XTEND_GRADLE_PLUGIN_VERSION»'
+			        classpath 'org.xtend:xtend-gradle-plugin:«gradleUtility.xtendGradlePluginVersion»'
 			    }
 			}
 		''')
 		script.addPluginDefinition("apply plugin: 'java'").addPluginDefinition("apply plugin: 'org.xtend.xtend'").
-			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("mavenCentral()").
+			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("jcenter()").
 			addDependencyNotation('''compile '«XtendLibraryManager.xtendLibMavenId.key»' ''')
 
-		if (XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")) {
+		if (snapshot) {
 			script.addRepositoriesDefinition('''
 			maven {
 				url 'http://oss.sonatype.org/content/repositories/snapshots'
 			}''')
 		}
-		xtendSupportConfigurableProvider.get.addSupport(module, rootModel, modifiableModelsProvider)
+		val xtendSupport = xtendSupportConfigurableProvider.get
+		val conf = xtendSupport.createOrGetXtendFacetConf(rootModel.module)
+		xtendSupport.presetGradleOutputDirectories(conf.state, rootModel)
+		xtendSupport.createOutputFolders(rootModel, conf.state)
 	}
 
 }

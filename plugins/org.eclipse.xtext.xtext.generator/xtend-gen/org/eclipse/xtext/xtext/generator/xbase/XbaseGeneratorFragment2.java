@@ -340,30 +340,13 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_35 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
       _eclipsePluginGenModule_2.setSuperClass(_typeRef_35);
     }
+    ILanguageConfig _language_5 = this.getLanguage();
+    GuiceModuleAccess _webGenModule = _language_5.getWebGenModule();
+    TypeReference _typeRef_36 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
+    _webGenModule.setSuperClass(_typeRef_36);
   }
   
   protected void doGenerateXtendInferrer() {
-    TypeReference _jvmModelInferrer = this.getJvmModelInferrer();
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_jvmModelInferrer);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* <p>Infers a JVM model from the source model.</p> ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* <p>The JVM model should contain all elements that would appear in the Java code ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    xtendFile.setTypeComment(_builder);
     ILanguageConfig _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     EList<AbstractRule> _rules = _grammar.getRules();
@@ -376,9 +359,27 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     ResourceSet _resourceSet = _eResource.getResourceSet();
     String _javaTypeName = GenModelUtil2.getJavaTypeName(_classifier, _resourceSet);
     final TypeReference firstRuleType = TypeReference.typeRef(_javaTypeName);
+    TypeReference _jvmModelInferrer = this.getJvmModelInferrer();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* <p>Infers a JVM model from the source model.</p> ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* <p>The JVM model should contain all elements that would appear in the Java code ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
         _builder.append("class ");
         TypeReference _jvmModelInferrer = XbaseGeneratorFragment2.this.getJvmModelInferrer();
         String _simpleName = _jvmModelInferrer.getSimpleName();
@@ -528,10 +529,10 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setJavaContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_jvmModelInferrer, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    xtendFile.writeTo(_runtimeSrc);
+    _createXtendFile.writeTo(_runtimeSrc);
   }
   
   protected boolean contributeEclipsePluginExtensions() {

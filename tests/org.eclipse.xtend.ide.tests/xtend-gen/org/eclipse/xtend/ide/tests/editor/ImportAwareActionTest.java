@@ -60,60 +60,60 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
   @Test
   public void testShouldAddImportsComment() {
     boolean _wouldAddImport = this.wouldAddImport(
-      "|/*\n\t\t\t *\n\t\t\t */\n\t\t\tclass Simple {\n\t\t\t}");
+      "|/*\r\n\t\t\t *\r\n\t\t\t */\r\n\t\t\tclass Simple {\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport);
     boolean _wouldAddImport_1 = this.wouldAddImport(
-      "/*|\n\t\t\t *\n\t\t\t */\n\t\t\tclass Simple {\n\t\t\t}");
+      "/*|\r\n\t\t\t *\r\n\t\t\t */\r\n\t\t\tclass Simple {\r\n\t\t\t}");
     Assert.assertFalse(_wouldAddImport_1);
     boolean _wouldAddImport_2 = this.wouldAddImport(
-      "/*\n\t\t\t *\n\t\t\t */|\n\t\t\tclass Simple {\n\t\t\t}");
+      "/*\r\n\t\t\t *\r\n\t\t\t */|\r\n\t\t\tclass Simple {\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_2);
     boolean _wouldAddImport_3 = this.wouldAddImport(
-      "/**|\n\t\t\t * \n\t\t\t */\n\t\t\tclass Simple {\n\t\t\t}");
+      "/**|\r\n\t\t\t * \r\n\t\t\t */\r\n\t\t\tclass Simple {\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_3);
     boolean _wouldAddImport_4 = this.wouldAddImport(
-      "\n\t\t\t/**\n\t\t\t * \n\t\t\t */|\n\t\t\tclass Simple {\n\t\t\t}");
+      "\r\n\t\t\t/**\r\n\t\t\t * \r\n\t\t\t */|\r\n\t\t\tclass Simple {\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_4);
     boolean _wouldAddImport_5 = this.wouldAddImport(
-      "class Simple {\n\t\t\t\t// sl comment|\n\t\t\t\tString s2 = \'d\'\n\t\t\t}");
+      "class Simple {\r\n\t\t\t\t// sl comment|\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t}");
     Assert.assertFalse(_wouldAddImport_5);
     boolean _wouldAddImport_6 = this.wouldAddImport(
-      "class Simple {\n\t\t\t\t// sl comment\n\t\t\t\tString s2 = \'d\'\n\t\t\t}|");
+      "class Simple {\r\n\t\t\t\t// sl comment\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t}|");
     Assert.assertTrue(_wouldAddImport_6);
     boolean _wouldAddImport_7 = this.wouldAddImport(
-      "class Simple {\n\t\t\t\t// sl comment\n\t\t\t\tString s2 = \'d\'\n\t\t\t}\n\t\t\t//sl comment|");
+      "class Simple {\r\n\t\t\t\t// sl comment\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t}\r\n\t\t\t//sl comment|");
     Assert.assertFalse(_wouldAddImport_7);
   }
   
   @Test
   public void testShouldAddImportsString() {
     boolean _wouldAddImport = this.wouldAddImport(
-      "class Simple {\n\t\t\t\tString s2 = \'|d\'\n\t\t\t}");
+      "class Simple {\r\n\t\t\t\tString s2 = \'|d\'\r\n\t\t\t}");
     Assert.assertFalse(_wouldAddImport);
     boolean _wouldAddImport_1 = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\t// sl comment\n\t\t\t\tString s2 = |\'d\'\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\t// sl comment\r\n\t\t\t\tString s2 = |\'d\'\r\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_1);
     boolean _wouldAddImport_2 = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'|\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\tString s2 = \'d\'|\r\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_2);
   }
   
   @Test
   public void testShouldAddImportsRichString() {
     boolean _wouldAddImport = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'\n\t\t\t\tString s3 = \'\'\'|«s2» «s2»\'\'\'\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t\tString s3 = \'\'\'|«s2» «s2»\'\'\'\r\n\t\t\t}");
     Assert.assertFalse(_wouldAddImport);
     boolean _wouldAddImport_1 = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'\n\t\t\t\tString s3 = \'\'\'|«s2» «s2»\'\'\'\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t\tString s3 = \'\'\'|«s2» «s2»\'\'\'\r\n\t\t\t}");
     Assert.assertFalse(_wouldAddImport_1);
     boolean _wouldAddImport_2 = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'\n\t\t\t\tString s3 = \'\'\'«|s2» «s2»\'\'\'\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t\tString s3 = \'\'\'«|s2» «s2»\'\'\'\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_2);
     boolean _wouldAddImport_3 = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'|\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'|\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_3);
     boolean _wouldAddImport_4 = this.wouldAddImport(
-      "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'\n\t\t\t\tString s3 = |\'\'\'«s2» «s2»\'\'\'\n\t\t\t}");
+      "\r\n\t\t\tclass Simple {\r\n\t\t\t\tString s2 = \'d\'\r\n\t\t\t\tString s3 = |\'\'\'«s2» «s2»\'\'\'\r\n\t\t\t}");
     Assert.assertTrue(_wouldAddImport_4);
   }
   

@@ -9,23 +9,16 @@ package org.eclipse.xtext.xtext.generator;
 
 import com.google.common.base.Objects;
 import com.google.inject.Injector;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
-import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.XtextVersion;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
@@ -34,22 +27,6 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
  */
 @SuppressWarnings("all")
 public class CodeConfig implements IGuiceAwareGeneratorComponent {
-  /**
-   * Only needed to determine the Manifest file and its version of this plugin in standalone mode.
-   */
-  private static class Plugin extends EMFPlugin {
-    public final static CodeConfig.Plugin INSTANCE = new CodeConfig.Plugin();
-    
-    private Plugin() {
-      super(new ResourceLocator[] {});
-    }
-    
-    @Override
-    public ResourceLocator getPluginResourceLocator() {
-      return null;
-    }
-  }
-  
   private final static String FILE_HEADER_VAR_TIME = "${time}";
   
   private final static String FILE_HEADER_VAR_DATE = "${date}";
@@ -77,6 +54,9 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Accessors
   private boolean preferXtendStubs = true;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private XtextVersion xtextVersion;
+  
   /**
    * Configure a template for file headers. The template can contain variables:
    * <ul>
@@ -101,6 +81,8 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
+    XtextVersion _current = XtextVersion.getCurrent();
+    this.xtextVersion = _current;
     if ((this.lineDelimiter == null)) {
       this.lineDelimiter = "\n";
     }
@@ -142,52 +124,12 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
       }
       boolean _contains_4 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_VERSION);
       if (_contains_4) {
-        final String version = this.getVersion();
-        boolean _notEquals_2 = (!Objects.equal(version, null));
-        if (_notEquals_2) {
-          String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, version);
-          fileHeader = _replace_4;
-        }
+        String _string = this.xtextVersion.toString();
+        String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, _string);
+        fileHeader = _replace_4;
       }
     }
     this.fileHeader = fileHeader;
-  }
-  
-  /**
-   * Read the exact version from the Manifest of the plugin.
-   */
-  private String getVersion() {
-    InputStream is = null;
-    try {
-      URL _baseURL = CodeConfig.Plugin.INSTANCE.getBaseURL();
-      String _plus = (_baseURL + "META-INF/MANIFEST.MF");
-      final URL url = new URL(_plus);
-      InputStream _openStream = url.openStream();
-      is = _openStream;
-      final Manifest manifest = new Manifest(is);
-      Attributes _mainAttributes = manifest.getMainAttributes();
-      return _mainAttributes.getValue("Bundle-Version");
-    } catch (final Throwable _t) {
-      if (_t instanceof Exception) {
-        final Exception e = (Exception)_t;
-        return null;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    } finally {
-      boolean _notEquals = (!Objects.equal(is, null));
-      if (_notEquals) {
-        try {
-          is.close();
-        } catch (final Throwable _t_1) {
-          if (_t_1 instanceof IOException) {
-            final IOException e_1 = (IOException)_t_1;
-          } else {
-            throw Exceptions.sneakyThrow(_t_1);
-          }
-        }
-      }
-    }
   }
   
   public String getClassAnnotationsAsString() {
@@ -261,5 +203,10 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   
   public void setPreferXtendStubs(final boolean preferXtendStubs) {
     this.preferXtendStubs = preferXtendStubs;
+  }
+  
+  @Pure
+  public XtextVersion getXtextVersion() {
+    return this.xtextVersion;
   }
 }

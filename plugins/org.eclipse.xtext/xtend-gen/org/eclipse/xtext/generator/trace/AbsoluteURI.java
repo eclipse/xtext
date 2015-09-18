@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * An absolute URI that allows to obtain a resource in a {@link IWorkspaceConfig workspace}.
@@ -24,8 +25,16 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
 public class AbsoluteURI extends AbstractURIWrapper {
   public AbsoluteURI(final URI absoluteURI) {
     super(absoluteURI);
+    boolean _or = false;
     boolean _isRelative = absoluteURI.isRelative();
     if (_isRelative) {
+      _or = true;
+    } else {
+      boolean _isHierarchical = absoluteURI.isHierarchical();
+      boolean _not = (!_isHierarchical);
+      _or = _not;
+    }
+    if (_or) {
       String _valueOf = String.valueOf(absoluteURI);
       throw new IllegalArgumentException(_valueOf);
     }
@@ -36,9 +45,20 @@ public class AbsoluteURI extends AbstractURIWrapper {
   }
   
   public SourceRelativeURI deresolve(final URI sourceFolderURI) {
-    URI _uRI = this.getURI();
-    URI _deresolve = _uRI.deresolve(sourceFolderURI);
-    return new SourceRelativeURI(_deresolve);
+    try {
+      URI _uRI = this.getURI();
+      URI _deresolve = _uRI.deresolve(sourceFolderURI);
+      return new SourceRelativeURI(_deresolve);
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalArgumentException) {
+        final IllegalArgumentException e = (IllegalArgumentException)_t;
+        URI _uRI_1 = this.getURI();
+        String _plus = ("Base URI was " + _uRI_1);
+        throw new IllegalArgumentException(_plus, e);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   public SourceRelativeURI deresolve(final ISourceFolder sourceFolder) {

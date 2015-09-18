@@ -1,13 +1,13 @@
 package org.eclipse.xtend.core.tests.macro
 
+import java.math.BigDecimal
+import java.util.ArrayList
+import java.util.List
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.junit.Test
-import java.util.List
-import java.util.ArrayList
-import java.math.BigDecimal
 
 class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 	

@@ -72,7 +72,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 		val inheritedTypes = LinkedHashMultimap.<EClass, EReference>create
 		getInheritedContainmentReferences(language.grammar, inheritedTypes, newHashSet)
 		
-		xtendFile.javaContent = '''
+		xtendFile.content = '''
 			class «grammar.formatter2Stub.simpleName» extends «stubSuperClass» {
 				
 				@«Inject» extension «grammar.grammarAccess»

@@ -13,9 +13,9 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfig;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -59,8 +59,8 @@ public class EclipseWorkspaceConfigurationTest {
         }
       };
       final EclipseWorkspaceConfigProvider provider = ObjectExtensions.<EclipseWorkspaceConfigProvider>operator_doubleArrow(_eclipseWorkspaceConfigProvider, _function);
-      IWorkspaceConfig _workspaceConfig = provider.getWorkspaceConfig(null);
-      final IProjectConfig project = _workspaceConfig.findProjectByName("projectA");
+      EclipseWorkspaceConfig _workspaceConfig = provider.getWorkspaceConfig(null);
+      final EclipseProjectConfig project = _workspaceConfig.findProjectByName("projectA");
       Assert.assertNotNull(project);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

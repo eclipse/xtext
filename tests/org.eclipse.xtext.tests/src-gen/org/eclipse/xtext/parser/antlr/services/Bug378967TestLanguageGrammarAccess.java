@@ -316,8 +316,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final Rule2Elements pRule2;
 	private final Rule3Elements pRule3;
 	private final Rule4Elements pRule4;
-	private final FirstEnumElements unknownRuleFirstEnum;
-	private final SecondEnumElements unknownRuleSecondEnum;
+	private final FirstEnumElements eFirstEnum;
+	private final SecondEnumElements eSecondEnum;
 	private final AfterObjElements pAfterObj;
 	private final SObjElements pSObj;
 	private final AfterElements pAfter;
@@ -337,8 +337,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pRule2 = new Rule2Elements();
 		this.pRule3 = new Rule3Elements();
 		this.pRule4 = new Rule4Elements();
-		this.unknownRuleFirstEnum = new FirstEnumElements();
-		this.unknownRuleSecondEnum = new SecondEnumElements();
+		this.eFirstEnum = new FirstEnumElements();
+		this.eSecondEnum = new SecondEnumElements();
 		this.pAfterObj = new AfterObjElements();
 		this.pSObj = new SObjElements();
 		this.pAfter = new AfterElements();
@@ -425,7 +425,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum FirstEnum:
 	//	value='after';
 	public FirstEnumElements getFirstEnumAccess() {
-		return unknownRuleFirstEnum;
+		return eFirstEnum;
 	}
 	
 	public EnumRule getFirstEnumRule() {
@@ -435,7 +435,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum SecondEnum:
 	//	value='s';
 	public SecondEnumElements getSecondEnumAccess() {
-		return unknownRuleSecondEnum;
+		return eSecondEnum;
 	}
 	
 	public EnumRule getSecondEnumRule() {

@@ -8,14 +8,19 @@
 package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
+import com.google.common.io.CharStreams;
+import java.io.BufferedReader;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.web.server.IRequestData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -25,46 +30,112 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class HttpServletRequestData implements IRequestData {
   private final HttpServletRequest request;
   
-  @Accessors
-  private final Set<String> parameterKeys;
+  private final Map<String, String> parameters = CollectionLiterals.<String, String>newHashMap();
   
   @Accessors
-  private final Set<String> metadataKeys;
+  private final Set<String> metadataKeys = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
   
   public HttpServletRequestData(final HttpServletRequest request) {
     this.request = request;
-    final Enumeration<String> paramNames = request.getParameterNames();
-    final HashSet<String> set = CollectionLiterals.<String>newHashSet();
-    while (paramNames.hasMoreElements()) {
-      String _nextElement = paramNames.nextElement();
-      set.add(_nextElement);
+    this.initializeParameters();
+  }
+  
+  private String initializeParameters() {
+    try {
+      String _xblockexpression = null;
+      {
+        String _contentType = this.request.getContentType();
+        String[] _split = null;
+        if (_contentType!=null) {
+          _split=_contentType.split(";(\\s*)");
+        }
+        final String[] contentType = _split;
+        boolean _and = false;
+        if (!(contentType != null)) {
+          _and = false;
+        } else {
+          String _get = contentType[0];
+          boolean _equals = Objects.equal(_get, "application/x-www-form-urlencoded");
+          _and = _equals;
+        }
+        if (_and) {
+          String _xifexpression = null;
+          boolean _and_1 = false;
+          boolean _and_2 = false;
+          if (!(contentType != null)) {
+            _and_2 = false;
+          } else {
+            int _length = contentType.length;
+            boolean _greaterEqualsThan = (_length >= 2);
+            _and_2 = _greaterEqualsThan;
+          }
+          if (!_and_2) {
+            _and_1 = false;
+          } else {
+            String _get_1 = contentType[1];
+            boolean _startsWith = _get_1.startsWith("charset=");
+            _and_1 = _startsWith;
+          }
+          if (_and_1) {
+            String _get_2 = contentType[1];
+            int _length_1 = "charset=".length();
+            _xifexpression = _get_2.substring(_length_1);
+          } else {
+            Charset _defaultCharset = Charset.defaultCharset();
+            _xifexpression = _defaultCharset.toString();
+          }
+          String charset = _xifexpression;
+          BufferedReader _reader = this.request.getReader();
+          String _string = CharStreams.toString(_reader);
+          final String[] encodedParams = _string.split("&");
+          for (final String param : encodedParams) {
+            {
+              final int nameEnd = param.indexOf("=");
+              if ((nameEnd > 0)) {
+                final String key = param.substring(0, nameEnd);
+                String _substring = param.substring((nameEnd + 1));
+                final String value = URLDecoder.decode(_substring, charset);
+                this.parameters.put(key, value);
+              }
+            }
+          }
+        }
+        final Enumeration<String> paramNames = this.request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+          {
+            final String name = paramNames.nextElement();
+            String _parameter = this.request.getParameter(name);
+            this.parameters.put(name, _parameter);
+          }
+        }
+        String _xifexpression_1 = null;
+        boolean _containsKey = this.parameters.containsKey(IRequestData.SERVICE_TYPE);
+        boolean _not = (!_containsKey);
+        if (_not) {
+          String _pathInfo = this.request.getPathInfo();
+          String _substring = null;
+          if (_pathInfo!=null) {
+            _substring=_pathInfo.substring(1);
+          }
+          _xifexpression_1 = this.parameters.put(IRequestData.SERVICE_TYPE, _substring);
+        }
+        _xblockexpression = _xifexpression_1;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    set.add(IRequestData.REQUEST_TYPE);
-    Set<String> _unmodifiableSet = Collections.<String>unmodifiableSet(set);
-    this.parameterKeys = _unmodifiableSet;
-    this.metadataKeys = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
+  }
+  
+  @Override
+  public Set<String> getParameterKeys() {
+    Set<String> _keySet = this.parameters.keySet();
+    return Collections.<String>unmodifiableSet(_keySet);
   }
   
   @Override
   public String getParameter(final String key) {
-    final String value = this.request.getParameter(key);
-    boolean _and = false;
-    if (!(value == null)) {
-      _and = false;
-    } else {
-      boolean _equals = Objects.equal(key, IRequestData.REQUEST_TYPE);
-      _and = _equals;
-    }
-    if (_and) {
-      String _pathInfo = this.request.getPathInfo();
-      String _substring = null;
-      if (_pathInfo!=null) {
-        _substring=_pathInfo.substring(1);
-      }
-      return _substring;
-    } else {
-      return value;
-    }
+    return this.parameters.get(key);
   }
   
   @Override
@@ -207,11 +278,6 @@ public class HttpServletRequestData implements IRequestData {
       }
     }
     return _switchResult;
-  }
-  
-  @Pure
-  public Set<String> getParameterKeys() {
-    return this.parameterKeys;
   }
   
   @Pure

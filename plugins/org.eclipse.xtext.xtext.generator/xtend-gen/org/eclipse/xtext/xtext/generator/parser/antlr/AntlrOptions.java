@@ -31,7 +31,11 @@ public class AntlrOptions {
   
   private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
   
+  private boolean skipUnusedRules = false;
+  
   private boolean optimizeCodeQuality = true;
+  
+  private boolean stripAllComments = false;
   
   private String keptBitSetsPattern;
   
@@ -125,12 +129,30 @@ public class AntlrOptions {
   }
   
   @Pure
+  public boolean isSkipUnusedRules() {
+    return this.skipUnusedRules;
+  }
+  
+  public void setSkipUnusedRules(final boolean skipUnusedRules) {
+    this.skipUnusedRules = skipUnusedRules;
+  }
+  
+  @Pure
   public boolean isOptimizeCodeQuality() {
     return this.optimizeCodeQuality;
   }
   
   public void setOptimizeCodeQuality(final boolean optimizeCodeQuality) {
     this.optimizeCodeQuality = optimizeCodeQuality;
+  }
+  
+  @Pure
+  public boolean isStripAllComments() {
+    return this.stripAllComments;
+  }
+  
+  public void setStripAllComments(final boolean stripAllComments) {
+    this.stripAllComments = stripAllComments;
   }
   
   @Pure

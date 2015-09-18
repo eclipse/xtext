@@ -2282,17 +2282,17 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleIdOrKeyword"
-    // PsiInternalNoParametersTestLanguage.g:735:1: entryRuleIdOrKeyword : ruleIdOrKeyword[false] EOF ;
+    // PsiInternalNoParametersTestLanguage.g:735:1: entryRuleIdOrKeyword : ruleIdOrKeyword EOF ;
     public final void entryRuleIdOrKeyword() throws RecognitionException {
         try {
-            // PsiInternalNoParametersTestLanguage.g:735:21: ( ruleIdOrKeyword[false] EOF )
-            // PsiInternalNoParametersTestLanguage.g:736:2: ruleIdOrKeyword[false] EOF
+            // PsiInternalNoParametersTestLanguage.g:735:21: ( ruleIdOrKeyword EOF )
+            // PsiInternalNoParametersTestLanguage.g:736:2: ruleIdOrKeyword EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getIdOrKeywordElementType()); 
             }
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleIdOrKeyword(false);
+            ruleIdOrKeyword();
 
             state._fsp--;
             if (state.failed) return ;
@@ -2313,20 +2313,55 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleIdOrKeyword"
-    // PsiInternalNoParametersTestLanguage.g:741:1: ruleIdOrKeyword[boolean p_Keyword] : ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) ;
-    public final void ruleIdOrKeyword(boolean p_Keyword) throws RecognitionException {
+    // PsiInternalNoParametersTestLanguage.g:741:1: ruleIdOrKeyword : this_ID_0= RULE_ID ;
+    public final void ruleIdOrKeyword() throws RecognitionException {
+        Token this_ID_0=null;
+
+        try {
+            // PsiInternalNoParametersTestLanguage.g:741:16: (this_ID_0= RULE_ID )
+            // PsiInternalNoParametersTestLanguage.g:742:2: this_ID_0= RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+
+              		markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());
+              	
+            }
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              		doneLeaf(this_ID_0);
+              	
+            }
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "ruleIdOrKeyword"
+
+
+    // $ANTLR start "norm1_IdOrKeyword"
+    // PsiInternalNoParametersTestLanguage.g:753:1: norm1_IdOrKeyword : (kw= 'keyword' | this_ID_1= RULE_ID ) ;
+    public final void norm1_IdOrKeyword() throws RecognitionException {
         Token kw=null;
         Token this_ID_1=null;
 
         try {
-            // PsiInternalNoParametersTestLanguage.g:742:1: ( ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) )
-            // PsiInternalNoParametersTestLanguage.g:743:2: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // PsiInternalNoParametersTestLanguage.g:753:18: ( (kw= 'keyword' | this_ID_1= RULE_ID ) )
+            // PsiInternalNoParametersTestLanguage.g:754:2: (kw= 'keyword' | this_ID_1= RULE_ID )
             {
-            // PsiInternalNoParametersTestLanguage.g:743:2: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // PsiInternalNoParametersTestLanguage.g:754:2: (kw= 'keyword' | this_ID_1= RULE_ID )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( LA13_0 == 20 && p_Keyword ) {
+            if ( (LA13_0==20) ) {
                 alt13=1;
             }
             else if ( (LA13_0==RULE_ID) ) {
@@ -2341,40 +2376,24 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt13) {
                 case 1 :
-                    // PsiInternalNoParametersTestLanguage.g:744:3: ({...}? => (kw= 'keyword' ) )
-                    {
-                    // PsiInternalNoParametersTestLanguage.g:744:3: ({...}? => (kw= 'keyword' ) )
-                    // PsiInternalNoParametersTestLanguage.g:745:4: {...}? => (kw= 'keyword' )
-                    {
-                    if ( ! p_Keyword ) {
-                        if (state.backtracking>0) {state.failed=true; return ;}
-                        throw new FailedPredicateException(input, "ruleIdOrKeyword", "p_Keyword");
-                    }
-                    // PsiInternalNoParametersTestLanguage.g:745:18: (kw= 'keyword' )
-                    // PsiInternalNoParametersTestLanguage.g:745:19: kw= 'keyword'
+                    // PsiInternalNoParametersTestLanguage.g:755:3: kw= 'keyword'
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
-                      			
+                      			markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
+                      		
                     }
                     kw=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneLeaf(kw);
-                      			
+                      			doneLeaf(kw);
+                      		
                     }
-
-                    }
-
-
-                    }
-
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalNoParametersTestLanguage.g:755:3: this_ID_1= RULE_ID
+                    // PsiInternalNoParametersTestLanguage.g:763:3: this_ID_1= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2405,7 +2424,7 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
         }
         return ;
     }
-    // $ANTLR end "ruleIdOrKeyword"
+    // $ANTLR end "norm1_IdOrKeyword"
 
     // $ANTLR start synpred1_PsiInternalNoParametersTestLanguage
     public final void synpred1_PsiInternalNoParametersTestLanguage_fragment() throws RecognitionException {   
@@ -2718,19 +2737,12 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
 
 
     protected DFA9 dfa9 = new DFA9(this);
-    static final String DFA9_eotS =
-        "\15\uffff";
-    static final String DFA9_eofS =
-        "\15\uffff";
-    static final String DFA9_minS =
-        "\1\13\14\uffff";
-    static final String DFA9_maxS =
-        "\1\27\14\uffff";
-    static final String DFA9_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14";
-    static final String DFA9_specialS =
-        "\1\0\14\uffff}>";
-    static final String[] DFA9_transitionS = {
+    static final String dfa_1s = "\15\uffff";
+    static final String dfa_2s = "\1\13\14\uffff";
+    static final String dfa_3s = "\1\27\14\uffff";
+    static final String dfa_4s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14";
+    static final String dfa_5s = "\1\0\14\uffff}>";
+    static final String[] dfa_6s = {
             "\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\uffff\1\12\1\13\1\14",
             "",
             "",
@@ -2746,34 +2758,25 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
             ""
     };
 
-    static final short[] DFA9_eot = DFA.unpackEncodedString(DFA9_eotS);
-    static final short[] DFA9_eof = DFA.unpackEncodedString(DFA9_eofS);
-    static final char[] DFA9_min = DFA.unpackEncodedStringToUnsignedChars(DFA9_minS);
-    static final char[] DFA9_max = DFA.unpackEncodedStringToUnsignedChars(DFA9_maxS);
-    static final short[] DFA9_accept = DFA.unpackEncodedString(DFA9_acceptS);
-    static final short[] DFA9_special = DFA.unpackEncodedString(DFA9_specialS);
-    static final short[][] DFA9_transition;
-
-    static {
-        int numStates = DFA9_transitionS.length;
-        DFA9_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA9_transition[i] = DFA.unpackEncodedString(DFA9_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
 
     class DFA9 extends DFA {
 
         public DFA9(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 9;
-            this.eot = DFA9_eot;
-            this.eof = DFA9_eof;
-            this.min = DFA9_min;
-            this.max = DFA9_max;
-            this.accept = DFA9_accept;
-            this.special = DFA9_special;
-            this.transition = DFA9_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "66:3: ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1_True ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1_False ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2_True ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2_False ) ) ) | ( ( ( '#5' ( ( ruleScenario2_True ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2_True ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2_False ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2_False ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3_True ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3_False ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword_True ) )=> (lv_scenario_18_0= ruleScenario4_True ) ) | ( ( (lv_scenario_19_0= ruleScenario2_True ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword_True ) )=> (lv_scenario_22_0= ruleScenario4_True ) ) | ( ( (lv_scenario_23_0= ruleScenario2_False ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword_False ) )=> (lv_scenario_26_0= ruleScenario4_False ) ) | ( ( (lv_scenario_27_0= ruleScenario2_True ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword_False ) )=> (lv_scenario_30_0= ruleScenario4_False ) ) | ( ( (lv_scenario_31_0= ruleScenario2_False ) ) (otherlv_32= 'keyword' )? ) ) ) )";

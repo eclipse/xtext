@@ -179,7 +179,9 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 					fragment.addToPluginXmlRt(config1.grammar, ctx)
 				}
 				val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-				projectConfig.runtimePluginXml.entries += result.toString.decreaseIndentation(1)
+				val entry = result.toString.decreaseIndentation(1)
+				if (!entry.toString.trim.isEmpty)
+					projectConfig.runtimePluginXml.entries += entry 
 			} finally {
 				ctx.output.closeFile()
 			}
@@ -196,7 +198,9 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 					fragment.addToPluginXmlUi(config1.grammar, ctx)
 				}
 				val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-				projectConfig.eclipsePluginPluginXml.entries += result.toString.decreaseIndentation(1)
+				val entry = result.toString.decreaseIndentation(1)
+				if (!entry.toString.trim.isEmpty)
+					projectConfig.eclipsePluginPluginXml.entries += entry
 			} finally {
 				ctx.output.closeFile()
 			}

@@ -94,6 +94,44 @@ class GrammarUtilTest extends AbstractXtextTests {
 		assertEquals('Rule', currentType.name)
 	}
 	
+	@Test def void testFindCurrentType_05() throws Exception {
+		with(XtextStandaloneSetup)
+		var String model = '''
+			grammar myLang with org.eclipse.xtext.common.Terminals
+			generate g 'http://1'
+			Rule:
+				Fragment;
+			fragment Fragment returns Rule:
+			    name=ID Fragment?
+			;
+		'''
+		val r = getResourceFromString(model)
+		val grammar = r.getContents().get(0) as Grammar
+		val rule = grammar.rules.head
+		val fragmentCall = rule.alternatives
+		val currentType = GrammarUtil.findCurrentType(fragmentCall)
+		assertEquals('Rule', currentType.name)
+	}
+	
+	@Test def void testFindCurrentType_06() throws Exception {
+		with(XtextStandaloneSetup)
+		var String model = '''
+			grammar myLang with org.eclipse.xtext.common.Terminals
+			generate g 'http://1'
+			Rule:
+				Fragment;
+			fragment Fragment returns Rule:
+			    name=ID Fragment?
+			;
+		'''
+		val r = getResourceFromString(model)
+		val grammar = r.getContents().get(0) as Grammar
+		val rule = grammar.rules.last
+		val fragmentCall = (rule.alternatives as Group).elements.last
+		val currentType = GrammarUtil.findCurrentType(fragmentCall)
+		assertEquals('Rule', currentType.name)
+	}
+	
 	@Test def void testAllRules() throws Exception {
 		with(XtextStandaloneSetup)
 		var String model = '''

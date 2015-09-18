@@ -161,12 +161,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_INT"
     public final void mRULE_INT() throws RecognitionException {
         try {
-            int _type = RULE_INT;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:145:10: ( ( '0' .. '9' )+ )
-            // PsiInternalAbstractTestLanguage.g:145:12: ( '0' .. '9' )+
+            // PsiInternalAbstractTestLanguage.g:145:19: ( ( '0' .. '9' )+ )
+            // PsiInternalAbstractTestLanguage.g:145:21: ( '0' .. '9' )+
             {
-            // PsiInternalAbstractTestLanguage.g:145:12: ( '0' .. '9' )+
+            // PsiInternalAbstractTestLanguage.g:145:21: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -180,7 +178,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalAbstractTestLanguage.g:145:13: '0' .. '9'
+            	    // PsiInternalAbstractTestLanguage.g:145:22: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -199,8 +197,6 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
         }
         finally {
         }
@@ -578,8 +574,8 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // PsiInternalAbstractTestLanguage.g:1:8: ( T__12 | RULE_REAL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=9;
+        // PsiInternalAbstractTestLanguage.g:1:8: ( T__12 | RULE_REAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=8;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -604,42 +600,35 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // PsiInternalAbstractTestLanguage.g:1:34: RULE_INT
-                {
-                mRULE_INT(); 
-
-                }
-                break;
-            case 5 :
-                // PsiInternalAbstractTestLanguage.g:1:43: RULE_STRING
+                // PsiInternalAbstractTestLanguage.g:1:34: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 6 :
-                // PsiInternalAbstractTestLanguage.g:1:55: RULE_ML_COMMENT
+            case 5 :
+                // PsiInternalAbstractTestLanguage.g:1:46: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 7 :
-                // PsiInternalAbstractTestLanguage.g:1:71: RULE_SL_COMMENT
+            case 6 :
+                // PsiInternalAbstractTestLanguage.g:1:62: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 8 :
-                // PsiInternalAbstractTestLanguage.g:1:87: RULE_WS
+            case 7 :
+                // PsiInternalAbstractTestLanguage.g:1:78: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 9 :
-                // PsiInternalAbstractTestLanguage.g:1:95: RULE_ANY_OTHER
+            case 8 :
+                // PsiInternalAbstractTestLanguage.g:1:86: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -653,41 +642,39 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\13\1\14\1\11\1\uffff\3\11\2\uffff\1\13\2\uffff\1\14\5\uffff\4\13\1\30\1\uffff";
+        "\1\uffff\1\13\2\11\1\uffff\3\11\2\uffff\1\13\6\uffff\4\13\1\26\1\uffff";
     static final String DFA12_eofS =
-        "\31\uffff";
+        "\27\uffff";
     static final String DFA12_minS =
-        "\1\0\1\154\1\56\1\101\1\uffff\2\0\1\52\2\uffff\1\145\2\uffff\1\56\5\uffff\1\155\1\145\1\156\1\164\1\60\1\uffff";
+        "\1\0\1\154\1\56\1\101\1\uffff\2\0\1\52\2\uffff\1\145\6\uffff\1\155\1\145\1\156\1\164\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\154\1\71\1\u00fc\1\uffff\2\uffff\1\57\2\uffff\1\145\2\uffff\1\71\5\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
+        "\1\uffff\1\154\1\71\1\u00fc\1\uffff\2\uffff\1\57\2\uffff\1\145\6\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\3\3\uffff\1\10\1\11\1\uffff\1\3\1\4\1\uffff\1\2\1\5\1\6\1\7\1\10\5\uffff\1\1";
+        "\4\uffff\1\3\3\uffff\1\7\1\10\1\uffff\1\3\1\2\1\4\1\5\1\6\1\7\5\uffff\1\1";
     static final String DFA12_specialS =
-        "\1\2\4\uffff\1\1\1\0\22\uffff}>";
+        "\1\0\4\uffff\1\2\1\1\20\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\2\7\11\32\4\3\11\1\3\1\4\1\11\4\4\1\1\25\4\151\11\1\4\21\11\1\4\5\11\1\4\uff03\11",
             "\1\12",
-            "\1\16\1\uffff\12\15",
+            "\1\14\1\uffff\12\14",
             "\32\13\4\uffff\1\13\1\uffff\32\13\151\uffff\1\13\21\uffff\1\13\5\uffff\1\13",
             "",
-            "\0\17",
-            "\0\17",
-            "\1\20\4\uffff\1\21",
+            "\0\15",
+            "\0\15",
+            "\1\16\4\uffff\1\17",
             "",
             "",
+            "\1\21",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\22",
             "\1\23",
-            "",
-            "",
-            "\1\16\1\uffff\12\15",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\24",
             "\1\25",
-            "\1\26",
-            "\1\27",
             "\12\13\7\uffff\32\13\4\uffff\1\13\1\uffff\32\13",
             ""
     };
@@ -722,33 +709,13 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__12 | RULE_REAL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__12 | RULE_REAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_6 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_6>='\u0000' && LA12_6<='\uFFFF')) ) {s = 15;}
-
-                        else s = 9;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_5 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFF')) ) {s = 15;}
-
-                        else s = 9;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -769,6 +736,26 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 8;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\u00E3')||(LA12_0>='\u00E5' && LA12_0<='\u00F5')||(LA12_0>='\u00F7' && LA12_0<='\u00FB')||(LA12_0>='\u00FD' && LA12_0<='\uFFFF')) ) {s = 9;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_6 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_6>='\u0000' && LA12_6<='\uFFFF')) ) {s = 13;}
+
+                        else s = 9;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_5 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFF')) ) {s = 13;}
+
+                        else s = 9;
 
                         if ( s>=0 ) return s;
                         break;

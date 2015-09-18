@@ -15,6 +15,7 @@ import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.psi.PsiEObject;
+import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -25,8 +26,10 @@ import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 
 public class IssueAnnotator implements Annotator {
@@ -42,6 +45,10 @@ public class IssueAnnotator implements Annotator {
 		}
 		PsiEObject psiEObject = (PsiEObject) element;
 		if (!psiEObject.isRoot()) {
+			return;
+		}
+		VirtualFile file = XtextPsiUtils.findVirtualFile(element);
+		if(!FileEditorManager.getInstance(element.getProject()).isFileOpen(file)) {
 			return;
 		}
 		Resource resource = psiEObject.getResource();

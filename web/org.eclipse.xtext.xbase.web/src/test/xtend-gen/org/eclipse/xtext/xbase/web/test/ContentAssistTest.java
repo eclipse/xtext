@@ -36,7 +36,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
   }
   
   protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "assist");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "assist");
     String _string = resourceContent.toString();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _string);
     String _string_1 = Integer.valueOf(offset).toString();
@@ -75,9 +75,6 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("description = \"java.util.AbstractQueue\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList (");
     _builder.newLine();
     _builder.append("        ");
@@ -108,9 +105,6 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("description = \"java.util.concurrent.locks.AbstractQueuedLongSynchronizer\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList (");
     _builder.newLine();
     _builder.append("        ");
@@ -139,9 +133,6 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"java.util.concurrent.locks.AbstractQueuedSynchronizer\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList (");
@@ -192,9 +183,6 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("description = \"java.util.AbstractQueue\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList (");
     _builder.newLine();
     _builder.append("        ");
@@ -225,9 +213,6 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("description = \"java.util.concurrent.locks.AbstractQueuedLongSynchronizer\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("escapePosition = 0");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("textReplacements = ArrayList (");
     _builder.newLine();
     _builder.append("        ");
@@ -256,9 +241,6 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"java.util.concurrent.locks.AbstractQueuedSynchronizer\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList (");

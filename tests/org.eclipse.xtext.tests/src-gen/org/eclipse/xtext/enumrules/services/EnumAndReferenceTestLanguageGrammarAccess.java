@@ -92,7 +92,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	private final EntityWithEnumAndReferenceElements pEntityWithEnumAndReference;
-	private final KindOfKeywordElements unknownRuleKindOfKeyword;
+	private final KindOfKeywordElements eKindOfKeyword;
 	
 	private final Grammar grammar;
 
@@ -104,7 +104,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pEntityWithEnumAndReference = new EntityWithEnumAndReferenceElements();
-		this.unknownRuleKindOfKeyword = new KindOfKeywordElements();
+		this.eKindOfKeyword = new KindOfKeywordElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -147,7 +147,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	//enum KindOfKeyword:
 	//	kindOfKeyword | anotherEnumLiteral;
 	public KindOfKeywordElements getKindOfKeywordAccess() {
-		return unknownRuleKindOfKeyword;
+		return eKindOfKeyword;
 	}
 	
 	public EnumRule getKindOfKeywordRule() {

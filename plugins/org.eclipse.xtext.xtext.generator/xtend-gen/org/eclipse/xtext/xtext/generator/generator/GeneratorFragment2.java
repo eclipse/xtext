@@ -271,26 +271,23 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
   protected void doGenerateStubFile() {
     Grammar _grammar = this.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_generatorStub);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Generates code from your model files on save.");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    xtendFile.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Generates code from your model files on save.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
         _builder.append("class ");
         ILanguageConfig _language = GeneratorFragment2.this.getLanguage();
         Grammar _grammar = _language.getGrammar();
@@ -327,16 +324,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setJavaContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_generatorStub, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    xtendFile.writeTo(_runtimeSrc);
+    _createXtendFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateJavaMain() {
     Grammar _grammar = this.getGrammar();
     TypeReference _javaMain = this.getJavaMain(_grammar);
-    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_javaMain);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -490,16 +486,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    javaFile.setJavaContent(_client);
+    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_javaMain, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    javaFile.writeTo(_runtimeSrc);
+    _createJavaFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateXtendMain() {
     Grammar _grammar = this.getGrammar();
     TypeReference _javaMain = this.getJavaMain(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_javaMain);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -629,124 +624,126 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
       }
     };
-    xtendFile.setJavaContent(_client);
+    XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_javaMain, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    xtendFile.writeTo(_runtimeSrc);
+    _createXtendFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateMweFile() {
-    final TextFileAccess mweFile = this.fileAccessFactory.createTextFile();
     ILanguageConfig _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
     String _path = _generatorStub.getPath();
     String _plus = (_path + "MWE.mwe2");
-    mweFile.setPath(_plus);
-    StringConcatenation _builder = new StringConcatenation();
-    String _fileHeader = this.codeConfig.getFileHeader();
-    _builder.append(_fileHeader, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("module ");
-    ILanguageConfig _language_1 = this.getLanguage();
-    Grammar _grammar_1 = _language_1.getGrammar();
-    TypeReference _generatorStub_1 = this.getGeneratorStub(_grammar_1);
-    String _name = _generatorStub_1.getName();
-    _builder.append(_name, "");
-    _builder.append("MWE");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("import org.eclipse.emf.mwe.utils.*");
-    _builder.newLine();
-    _builder.append("import ");
-    Grammar _grammar_2 = this.getGrammar();
-    TypeReference _runtimeSetup = this._xtextGeneratorNaming.getRuntimeSetup(_grammar_2);
-    String _packageName = _runtimeSetup.getPackageName();
-    _builder.append(_packageName, "");
-    _builder.append(".*");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("var targetDir");
-    _builder.newLine();
-    _builder.append("var modelPath");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("Workflow {");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("component = org.eclipse.xtext.mwe.Reader {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// lookup all resources on the classpath");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// useJavaClassPath = true");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// or define search scope explicitly");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("path = modelPath");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// this class will be generated by the xtext generator ");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("register = ");
-    Grammar _grammar_3 = this.getGrammar();
-    TypeReference _runtimeSetup_1 = this._xtextGeneratorNaming.getRuntimeSetup(_grammar_3);
-    String _simpleName = _runtimeSetup_1.getSimpleName();
-    _builder.append(_simpleName, "\t\t");
-    _builder.append(" {}");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("loadResource = {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("slot = \"model\"");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("component = org.eclipse.xtext.generator.GeneratorComponent {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("register = ");
-    Grammar _grammar_4 = this.getGrammar();
-    TypeReference _runtimeSetup_2 = this._xtextGeneratorNaming.getRuntimeSetup(_grammar_4);
-    String _simpleName_1 = _runtimeSetup_2.getSimpleName();
-    _builder.append(_simpleName_1, "\t\t");
-    _builder.append(" {}");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("slot = \'model\'");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("outlet = {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("path = targetDir");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    mweFile.setContent(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        String _fileHeader = GeneratorFragment2.this.codeConfig.getFileHeader();
+        _builder.append(_fileHeader, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("module ");
+        ILanguageConfig _language = GeneratorFragment2.this.getLanguage();
+        Grammar _grammar = _language.getGrammar();
+        TypeReference _generatorStub = GeneratorFragment2.this.getGeneratorStub(_grammar);
+        String _name = _generatorStub.getName();
+        _builder.append(_name, "");
+        _builder.append("MWE");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("import org.eclipse.emf.mwe.utils.*");
+        _builder.newLine();
+        _builder.append("import ");
+        Grammar _grammar_1 = GeneratorFragment2.this.getGrammar();
+        TypeReference _runtimeSetup = GeneratorFragment2.this._xtextGeneratorNaming.getRuntimeSetup(_grammar_1);
+        String _packageName = _runtimeSetup.getPackageName();
+        _builder.append(_packageName, "");
+        _builder.append(".*");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("var targetDir");
+        _builder.newLine();
+        _builder.append("var modelPath");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("Workflow {");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("component = org.eclipse.xtext.mwe.Reader {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// lookup all resources on the classpath");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// useJavaClassPath = true");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// or define search scope explicitly");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("path = modelPath");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// this class will be generated by the xtext generator ");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("register = ");
+        Grammar _grammar_2 = GeneratorFragment2.this.getGrammar();
+        TypeReference _runtimeSetup_1 = GeneratorFragment2.this._xtextGeneratorNaming.getRuntimeSetup(_grammar_2);
+        String _simpleName = _runtimeSetup_1.getSimpleName();
+        _builder.append(_simpleName, "\t\t");
+        _builder.append(" {}");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("loadResource = {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("slot = \"model\"");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("component = org.eclipse.xtext.generator.GeneratorComponent {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("register = ");
+        Grammar _grammar_3 = GeneratorFragment2.this.getGrammar();
+        TypeReference _runtimeSetup_2 = GeneratorFragment2.this._xtextGeneratorNaming.getRuntimeSetup(_grammar_3);
+        String _simpleName_1 = _runtimeSetup_2.getSimpleName();
+        _builder.append(_simpleName_1, "\t\t");
+        _builder.append(" {}");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("slot = \'model\'");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("outlet = {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("path = targetDir");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    TextFileAccess _createTextFile = this.fileAccessFactory.createTextFile(_plus, _client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    mweFile.writeTo(_runtimeSrc);
+    _createTextFile.writeTo(_runtimeSrc);
   }
   
   protected boolean contributeEclipsePluginExtensions() {

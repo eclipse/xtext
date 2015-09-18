@@ -1,71 +1,57 @@
-/*******************************************************************************
+/** 
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+ */
 package org.eclipse.xtext.web.example.jetty
 
-import com.google.inject.Binder
-import com.google.inject.name.Names
 import java.util.concurrent.ExecutorService
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
-import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
 import org.eclipse.xtext.web.example.jetty.contentassist.StatemachineWebContentProposalProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator
-import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser
-import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer
-import org.eclipse.xtext.web.server.DefaultWebModule
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
+import com.google.inject.Binder
+import com.google.inject.Provider
 
-@Accessors
-@FinalFieldsConstructor
-class StatemachineWebModule extends DefaultWebModule {
-	
-	val ExecutorService executorService
-	
+/** 
+ * Use this class to register components to be used within the web application.
+ */
+class StatemachineWebModule extends AbstractStatemachineWebModule {
+
 	IResourceBaseProvider resourceBaseProvider
-	
-	def configureExecutorService(Binder binder) {
-		binder.bind(ExecutorService).toInstance(executorService)
+
+	new(Provider<ExecutorService> executorServiceProvider) {
+		super(executorServiceProvider)
 	}
-	
-	def configureContentAssistLexer(Binder binder) {
-		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalStatemachineLexer)
+
+	def void setResourceBaseProvider(IResourceBaseProvider resourceBaseProvider) {
+		this.resourceBaseProvider = resourceBaseProvider
 	}
-	
-	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
-		StatemachineParser
+
+	def void configureResourceBaseProvider(Binder binder) {
+		if (resourceBaseProvider !== null) binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
 	}
-	
-	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
-		StatemachineWebContentProposalProvider
-	}
-	
+
 	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
-		FileResourceHandler
+		return FileResourceHandler
 	}
-	
-	def configureResourceBaseProvider(Binder binder) {
-		if (resourceBaseProvider !== null)
-			binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
+
+	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+		return StatemachineWebContentProposalProvider
 	}
 
 	def Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
-		StatemachineImageDescriptionProvider
+		return StatemachineImageDescriptionProvider
 	}
-	
+
 	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-		StatemachineSemanticHighlightingCalculator
+		return StatemachineSemanticHighlightingCalculator
 	}
 }

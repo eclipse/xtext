@@ -10,13 +10,13 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments
 import org.junit.Test
-import org.eclipse.xtext.xbase.XBooleanLiteral
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

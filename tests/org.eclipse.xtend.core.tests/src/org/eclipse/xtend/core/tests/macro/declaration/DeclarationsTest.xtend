@@ -10,7 +10,9 @@ package org.eclipse.xtend.core.tests.macro.declaration
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.lang.reflect.AccessibleObject
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
@@ -21,8 +23,6 @@ import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
-import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
-import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl
 
 /**
  * @author Sven Efftinge

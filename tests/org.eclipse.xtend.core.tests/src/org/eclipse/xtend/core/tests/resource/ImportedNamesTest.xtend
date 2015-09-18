@@ -1,13 +1,13 @@
 package org.eclipse.xtend.core.tests.resource
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.junit.Test
-import org.eclipse.xtext.resource.IResourceDescription
 import com.google.inject.Inject
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.resource.IResourceDescription
+import org.junit.Test
 
 class ImportedNamesTest extends AbstractXtendTestCase {
 	@Inject
-	IResourceDescription$Manager resourceDescriptionManager
+	IResourceDescription.Manager resourceDescriptionManager
 	
 	val primitives = #["boolean", "int", "char", "byte", "short", "long", "float", "double", "void"]
 		

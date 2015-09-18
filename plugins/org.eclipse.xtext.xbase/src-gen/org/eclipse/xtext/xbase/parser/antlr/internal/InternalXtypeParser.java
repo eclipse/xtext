@@ -3122,19 +3122,13 @@ public class InternalXtypeParser extends AbstractInternalAntlrParser {
 
 
     protected DFA18 dfa18 = new DFA18(this);
-    static final String DFA18_eotS =
-        "\7\uffff";
-    static final String DFA18_eofS =
-        "\2\uffff\1\4\2\uffff\1\4\1\uffff";
-    static final String DFA18_minS =
-        "\1\4\1\uffff\1\22\1\4\1\uffff\1\22\1\uffff";
-    static final String DFA18_maxS =
-        "\1\31\1\uffff\1\33\1\27\1\uffff\1\33\1\uffff";
-    static final String DFA18_acceptS =
-        "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
-    static final String DFA18_specialS =
-        "\7\uffff}>";
-    static final String[] DFA18_transitionS = {
+    static final String dfa_1s = "\7\uffff";
+    static final String dfa_2s = "\2\uffff\1\4\2\uffff\1\4\1\uffff";
+    static final String dfa_3s = "\1\4\1\uffff\1\22\1\4\1\uffff\1\22\1\uffff";
+    static final String dfa_4s = "\1\31\1\uffff\1\33\1\27\1\uffff\1\33\1\uffff";
+    static final String dfa_5s = "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
+    static final String dfa_6s = "\7\uffff}>";
+    static final String[] dfa_7s = {
             "\1\2\24\uffff\1\1",
             "",
             "\1\3\10\uffff\1\4",
@@ -3144,34 +3138,26 @@ public class InternalXtypeParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA18_eot = DFA.unpackEncodedString(DFA18_eotS);
-    static final short[] DFA18_eof = DFA.unpackEncodedString(DFA18_eofS);
-    static final char[] DFA18_min = DFA.unpackEncodedStringToUnsignedChars(DFA18_minS);
-    static final char[] DFA18_max = DFA.unpackEncodedStringToUnsignedChars(DFA18_maxS);
-    static final short[] DFA18_accept = DFA.unpackEncodedString(DFA18_acceptS);
-    static final short[] DFA18_special = DFA.unpackEncodedString(DFA18_specialS);
-    static final short[][] DFA18_transition;
-
-    static {
-        int numStates = DFA18_transitionS.length;
-        DFA18_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA18_transition[i] = DFA.unpackEncodedString(DFA18_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
+    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
 
     class DFA18 extends DFA {
 
         public DFA18(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 18;
-            this.eot = DFA18_eot;
-            this.eof = DFA18_eof;
-            this.min = DFA18_min;
-            this.max = DFA18_max;
-            this.accept = DFA18_accept;
-            this.special = DFA18_special;
-            this.transition = DFA18_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_2;
+            this.min = dfa_3;
+            this.max = dfa_4;
+            this.accept = dfa_5;
+            this.special = dfa_6;
+            this.transition = dfa_7;
         }
         public String getDescription() {
             return "869:1: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";

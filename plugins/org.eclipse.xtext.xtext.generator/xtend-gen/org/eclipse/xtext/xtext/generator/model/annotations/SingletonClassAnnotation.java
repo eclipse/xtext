@@ -31,4 +31,10 @@ public class SingletonClassAnnotation implements IClassAnnotation {
   public TypeReference getAnnotationImport() {
     return new TypeReference(Singleton.class);
   }
+  
+  @Override
+  public String toString() {
+    CharSequence _generate = this.generate();
+    return _generate.toString();
+  }
 }

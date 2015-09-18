@@ -16,7 +16,7 @@ import static org.hamcrest.core.IsInstanceOf.*
 class ValidationTest extends AbstractWebServerTest {
 	
 	protected def assertValidationResult(String resourceContent, String expectedResult) {
-		val validate = getService(#{'requestType' -> 'validate', 'fullText' -> resourceContent})
+		val validate = getService(#{'serviceType' -> 'validate', 'fullText' -> resourceContent})
 		assertFalse(validate.hasSideEffects)
 		assertTrue(validate.hasTextInput)
 		val result = validate.service.apply() as ValidationResult
@@ -70,7 +70,7 @@ class ValidationTest extends AbstractWebServerTest {
 	
 	@Test def testValidateFile() {
 		val file = createFile('stat foo end')
-		val validate = getService(#{'requestType' -> 'validate', 'resource' -> file.name})
+		val validate = getService(#{'serviceType' -> 'validate', 'resource' -> file.name})
 		assertFalse(validate.hasSideEffects)
 		assertFalse(validate.hasTextInput)
 		val result = validate.service.apply() as ValidationResult
@@ -92,7 +92,7 @@ class ValidationTest extends AbstractWebServerTest {
 	@Test def testIncorrectStateId() {
 		val file = createFile('state foo end')
 		val validate = getService(#{
-				'requestType' -> 'validate', 
+				'serviceType' -> 'validate', 
 				'resource' -> file.name,
 				'requiredStateId' -> 'totalerquatsch'
 			})

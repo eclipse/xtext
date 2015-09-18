@@ -26,7 +26,7 @@ public class HoverTest extends AbstractWebServerTest {
     {
       final String content = resourceContent.toString();
       final int offset = content.indexOf("#");
-      Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "hover");
+      Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "hover");
       String _replace = content.replace("#", "");
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
       String _string = Integer.valueOf(offset).toString();
@@ -76,13 +76,13 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("<div class=\"hover\">");
+    _builder_1.append("<div class=\"xtext-hover\">");
     _builder_1.newLine();
     _builder_1.append("</div>");
     _builder_1.newLine();
     HoverResult _assertContent = this.assertContent(_hover, _builder_1.toString());
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("<div class=\"hover\">");
+    _builder_2.append("<div class=\"xtext-hover\">");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("<div class=\"State-icon default-icon\">");
@@ -119,7 +119,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("<div class=\"hover\">");
+    _builder_1.append("<div class=\"xtext-hover\">");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("This is foo!");
@@ -128,7 +128,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder_1.newLine();
     HoverResult _assertContent = this.assertContent(_hover, _builder_1.toString());
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("<div class=\"hover\">");
+    _builder_2.append("<div class=\"xtext-hover\">");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("<div class=\"State-icon default-icon\">");
@@ -175,7 +175,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("<div class=\"hover\">");
+    _builder_1.append("<div class=\"xtext-hover\">");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("<div class=\"InputSignal-icon Signal-icon default-icon\">");
@@ -204,7 +204,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("<div class=\"hover\">");
+    _builder_1.append("<div class=\"xtext-hover\">");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("<div class=\"OutputSignal-icon Signal-icon default-icon\">");

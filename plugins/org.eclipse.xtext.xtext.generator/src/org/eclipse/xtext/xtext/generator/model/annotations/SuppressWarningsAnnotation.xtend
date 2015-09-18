@@ -38,5 +38,8 @@ class SuppressWarningsAnnotation implements IClassAnnotation {
 	override getAnnotationImport() {
 		return new TypeReference(SuppressWarnings)
 	}
-	
+
+	override toString() {
+		generate.toString
+	}	
 }

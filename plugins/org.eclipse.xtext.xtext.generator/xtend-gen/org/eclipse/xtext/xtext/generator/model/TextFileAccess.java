@@ -9,7 +9,11 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -17,18 +21,29 @@ public class TextFileAccess {
   @Accessors
   private String path;
   
-  @Accessors
-  private CharSequence content;
+  protected CharSequence internalContents;
   
-  public CharSequence generate() {
-    return this.content;
+  public CharSequence setContent(final StringConcatenationClient content) {
+    StringConcatenation _stringConcatenation = new StringConcatenation();
+    final Procedure1<StringConcatenation> _function = new Procedure1<StringConcatenation>() {
+      @Override
+      public void apply(final StringConcatenation it) {
+        it.append(content);
+      }
+    };
+    StringConcatenation _doubleArrow = ObjectExtensions.<StringConcatenation>operator_doubleArrow(_stringConcatenation, _function);
+    return this.internalContents = _doubleArrow;
+  }
+  
+  public CharSequence getContent() {
+    return this.internalContents.toString();
   }
   
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     boolean _notEquals = (!Objects.equal(fileSystemAccess, null));
     if (_notEquals) {
-      CharSequence _generate = this.generate();
-      fileSystemAccess.generateFile(this.path, _generate);
+      CharSequence _content = this.getContent();
+      fileSystemAccess.generateFile(this.path, _content);
     }
   }
   
@@ -39,14 +54,5 @@ public class TextFileAccess {
   
   public void setPath(final String path) {
     this.path = path;
-  }
-  
-  @Pure
-  public CharSequence getContent() {
-    return this.content;
-  }
-  
-  public void setContent(final CharSequence content) {
-    this.content = content;
   }
 }

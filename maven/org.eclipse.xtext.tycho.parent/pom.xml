@@ -30,6 +30,7 @@
 		<module>../../intellij/org.eclipse.xtext.idea.generator</module>
 		<module>../../plugins/org.eclipse.xtext.generator</module>
 		<module>../../plugins/org.eclipse.xtext.xtext.generator</module>
+		<module>../../plugins/org.eclipse.xtext.xtext.wizard</module>
 		<module>../../plugins/org.eclipse.xtext.xbase</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.ide</module>
 		<module>../../plugins/org.eclipse.xtext.junit4</module>

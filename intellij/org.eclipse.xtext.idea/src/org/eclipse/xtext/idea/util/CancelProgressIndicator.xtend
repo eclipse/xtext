@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.util
 
+import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.progress.ProgressIndicatorProvider
 import org.eclipse.xtext.util.CancelIndicator
 
@@ -16,8 +17,12 @@ import org.eclipse.xtext.util.CancelIndicator
 class CancelProgressIndicator implements CancelIndicator {
 
 	override isCanceled() {
-		ProgressIndicatorProvider.checkCanceled
-		false
+		try {
+			ProgressIndicatorProvider.checkCanceled
+			return false
+		} catch (ProcessCanceledException exception) {
+			return true
+		}
 	}
 
 }

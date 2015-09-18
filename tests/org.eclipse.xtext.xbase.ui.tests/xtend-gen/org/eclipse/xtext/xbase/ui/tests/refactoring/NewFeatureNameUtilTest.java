@@ -51,7 +51,6 @@ public class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDefaultNameFeatureCall() {
-    this.assertDefaultName("{val CAMEL_CASE_NAME = 1 $CAMEL_CASE_NAME}", "camelCaseName");
     this.assertDefaultName("{\"\".$getBytes}", "bytes");
     this.assertDefaultName("{\"\".$length}", "length");
   }
@@ -64,10 +63,10 @@ public class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDefaultNameAlternate() {
-    this.assertDefaultName("{val i=1 2+$3}", "i1");
-    this.assertDefaultName("{val j=2+$3 val i=1}", "i1");
-    this.assertDefaultName("{val i=1 {val j=2+$3}}", "i1");
-    this.assertDefaultName("{val i=1 {val i1=1 val j=2+$3}}", "i2");
+    this.assertDefaultName("{val i=1 2+$3}", "j");
+    this.assertDefaultName("{val j=2+$3 val i=1}", "k");
+    this.assertDefaultName("{val i=1 {val j=2+$3}}", "k");
+    this.assertDefaultName("{val j=1 {val i=2+$3}}", "k");
     this.assertDefaultName("{{val j=2+$3} val i=1 }", "i");
   }
   

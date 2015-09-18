@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
@@ -57,7 +58,6 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
@@ -137,7 +137,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       Injector _createInjector = this.createInjector();
       this.injector = _createInjector;
       this.injector.injectMembers(this);
-      this.projectConfig.initialize(this.injector);
       CodeConfig _instance = this.injector.<CodeConfig>getInstance(CodeConfig.class);
       final Procedure1<CodeConfig> _function = new Procedure1<CodeConfig>() {
         @Override
@@ -146,6 +145,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         }
       };
       ObjectExtensions.<CodeConfig>operator_doubleArrow(_instance, _function);
+      this.projectConfig.initialize(this.injector);
       for (final LanguageConfig2 language : this.languageConfigs) {
         {
           final Injector languageInjector = this.createLanguageInjector(this.injector, language);
@@ -174,7 +174,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         String _plus = ("Generating " + _name);
         XtextGenerator.LOG.info(_plus);
         language.generate();
-        this.generateRuntimeSetup(language);
+        this.generateSetups(language);
         this.generateModules(language);
         this.generateExecutableExtensionFactory(language);
       }
@@ -185,13 +185,16 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     this.generateActivator();
   }
   
-  protected void generateRuntimeSetup(final ILanguageConfig language) {
+  protected void generateSetups(final ILanguageConfig language) {
     JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
     IXtextGeneratorFileSystemAccess _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
     _createRuntimeGenSetup.writeTo(_runtimeSrcGen);
     JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
     IXtextGeneratorFileSystemAccess _runtimeSrc = this.projectConfig.getRuntimeSrc();
     _createRuntimeSetup.writeTo(_runtimeSrc);
+    JavaFileAccess _createWebSetup = this.templates.createWebSetup(language);
+    IXtextGeneratorFileSystemAccess _webSrc = this.projectConfig.getWebSrc();
+    _createWebSetup.writeTo(_webSrc);
   }
   
   protected void generateModules(final ILanguageConfig language) {
@@ -213,6 +216,12 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     JavaFileAccess _createIdeaModule = this.templates.createIdeaModule(language);
     IXtextGeneratorFileSystemAccess _ideaPluginSrc = this.projectConfig.getIdeaPluginSrc();
     _createIdeaModule.writeTo(_ideaPluginSrc);
+    JavaFileAccess _createWebGenModule = this.templates.createWebGenModule(language);
+    IXtextGeneratorFileSystemAccess _webSrcGen = this.projectConfig.getWebSrcGen();
+    _createWebGenModule.writeTo(_webSrcGen);
+    JavaFileAccess _createWebModule = this.templates.createWebModule(language);
+    IXtextGeneratorFileSystemAccess _webSrc = this.projectConfig.getWebSrc();
+    _createWebModule.writeTo(_webSrc);
   }
   
   protected void generateExecutableExtensionFactory(final ILanguageConfig language) {
@@ -291,7 +300,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           boolean _tripleEquals = (_bundleName == null);
           if (_tripleEquals) {
           }
-          TypeReference activator = null;
           ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
           boolean _tripleEquals_1 = (manifest == _eclipsePluginManifest_1);
           if (_tripleEquals_1) {
@@ -305,14 +313,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
               Grammar _grammar = firstLanguage.getGrammar();
               _eclipsePluginActivator=_naming.getEclipsePluginActivator(_grammar);
             }
-            activator = _eclipsePluginActivator;
+            manifest.setActivator(_eclipsePluginActivator);
           }
           String _path = manifest.getPath();
           boolean _isFile = metaInf.isFile(_path);
           if (_isFile) {
             boolean _isMerge = manifest.isMerge();
             if (_isMerge) {
-              this.mergeManifest(manifest, metaInf, activator);
+              this.mergeManifest(manifest, metaInf);
             } else {
               String _path_1 = manifest.getPath();
               boolean _endsWith = _path_1.endsWith(".MF");
@@ -320,13 +328,11 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
                 String _path_2 = manifest.getPath();
                 String _plus = (_path_2 + "_gen");
                 manifest.setPath(_plus);
-                TextFileAccess _createManifest = this.templates.createManifest(manifest, activator);
-                _createManifest.writeTo(metaInf);
+                manifest.writeTo(metaInf);
               }
             }
           } else {
-            TextFileAccess _createManifest_1 = this.templates.createManifest(manifest, activator);
-            _createManifest_1.writeTo(metaInf);
+            manifest.writeTo(metaInf);
           }
         }
       }
@@ -335,7 +341,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     }
   }
   
-  protected void mergeManifest(final ManifestAccess manifest, final IXtextGeneratorFileSystemAccess metaInf, final TypeReference activator) throws IOException {
+  protected void mergeManifest(final ManifestAccess manifest, final IXtextGeneratorFileSystemAccess metaInf) throws IOException {
     InputStream in = null;
     try {
       String _path = manifest.getPath();
@@ -350,7 +356,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       Set<String> _importedPackages = manifest.getImportedPackages();
       merge.addImportedPackages(_importedPackages);
       boolean _and = false;
-      if (!(activator != null)) {
+      TypeReference _activator = manifest.getActivator();
+      boolean _tripleNotEquals = (_activator != null);
+      if (!_tripleNotEquals) {
         _and = false;
       } else {
         Attributes _mainAttributes = merge.getMainAttributes();
@@ -360,7 +368,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       }
       if (_and) {
         Attributes _mainAttributes_1 = merge.getMainAttributes();
-        String _name = activator.getName();
+        TypeReference _activator_1 = manifest.getActivator();
+        String _name = _activator_1.getName();
         _mainAttributes_1.put(MergeableManifest.BUNDLE_ACTIVATOR, _name);
       }
       boolean _isModified = merge.isModified();
@@ -448,22 +457,35 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         String _path = pluginXml.getPath();
         boolean _isFile = root.isFile(_path);
         if (_isFile) {
-          String _path_1 = pluginXml.getPath();
-          boolean _endsWith = _path_1.endsWith(".xml");
-          if (_endsWith) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          List<CharSequence> _entries = pluginXml.getEntries();
+          boolean _isEmpty = _entries.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (!_not) {
+            _and_1 = false;
+          } else {
+            String _path_1 = pluginXml.getPath();
+            CharSequence _readTextFile = root.readTextFile(_path_1);
+            CharSequence _content = pluginXml.getContent();
+            boolean _notEquals = (!Objects.equal(_readTextFile, _content));
+            _and_1 = _notEquals;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
             String _path_2 = pluginXml.getPath();
-            String _plus = (_path_2 + "_gen");
+            boolean _endsWith = _path_2.endsWith(".xml");
+            _and = _endsWith;
+          }
+          if (_and) {
+            String _path_3 = pluginXml.getPath();
+            String _plus = (_path_3 + "_gen");
             pluginXml.setPath(_plus);
-            TextFileAccess _createPluginXml = this.templates.createPluginXml(pluginXml);
-            if (_createPluginXml!=null) {
-              _createPluginXml.writeTo(root);
-            }
+            pluginXml.writeTo(root);
           }
         } else {
-          TextFileAccess _createPluginXml_1 = this.templates.createPluginXml(pluginXml);
-          if (_createPluginXml_1!=null) {
-            _createPluginXml_1.writeTo(root);
-          }
+          pluginXml.writeTo(root);
         }
       }
     }

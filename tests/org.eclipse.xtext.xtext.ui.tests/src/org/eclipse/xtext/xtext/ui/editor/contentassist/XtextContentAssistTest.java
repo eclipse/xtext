@@ -1067,6 +1067,73 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     				"EOF");
     }
     
+    @Test public void testCompleteRuleCall_03() throws Exception {
+    	newBuilder()
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	    	.appendNl("generate test 'http://test'")
+	    	.appendNl("Model: name=super::STRING;")
+	    	.assertTextAtCursorPosition("STRING", 
+	    			"super::ANY_OTHER",
+	    			"super::ID",
+	    			"super::INT",
+	    			"super::ML_COMMENT",
+	    			"super::SL_COMMENT",
+	    			"super::STRING",
+	    			"super::WS");
+    }
+    
+    @Test public void testCompleteRuleCall_04() throws Exception {
+    	newBuilder()
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	    	.appendNl("generate test 'http://test'")
+	    	.appendNl("terminal SUPERX: super::STRING;")
+	    	.assertTextAtCursorPosition("super", 2, 
+	    			"SUPERX",
+	    			"super::ANY_OTHER",
+	    			"super::ID",
+	    			"super::INT",
+	    			"super::ML_COMMENT",
+	    			"super::SL_COMMENT",
+	    			"super::STRING",
+	    			"super::WS",
+	    			"!",
+	    			"\"Value\"",
+	    			"(",
+	    			"*",
+	    			"+",
+	    			"->",
+	    			".",
+	    			";",
+	    			"?",
+	    			"|");
+    }
+    
+    @Test public void testCompleteRuleCall_05() throws Exception {
+    	newBuilder()
+	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	    	.appendNl("generate test 'http://test'")
+	    	.appendNl("terminal STRING: super::STRING;")
+	    	.assertTextAtCursorPosition("super", 2, 
+	    			"super",
+	    			"super::ANY_OTHER",
+	    			"super::ID",
+	    			"super::INT",
+	    			"super::ML_COMMENT",
+	    			"super::SL_COMMENT",
+//	    			"super::STRING", // already covered by 'super'
+	    			"super::WS",
+	    			"!",
+	    			"\"Value\"",
+	    			"(",
+	    			"*",
+	    			"+",
+	    			"->",
+	    			".",
+	    			";",
+	    			"?",
+	    			"|");
+    }
+    
 	@Override
 	protected URI getTestModelURI() {
 		return URI.createURI("platform:/resource/" + TEST_PROJECT + "/src/"+ MODEL_FILE_NAME + "."+getCurrentFileExtension());

@@ -142,15 +142,6 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "CodeBlockModificationListener");
   }
   
-  public String getElementDescriptionProviderName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.psi.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "ElementDescriptionProvider");
-  }
-  
   public String getPsiParserName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.parser.");

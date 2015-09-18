@@ -7,7 +7,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
@@ -30,7 +29,7 @@ public class PomFile extends TextFile {
   }
   
   @Override
-  public CharSequence getContent() {
+  public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
     _builder.newLine();
@@ -127,10 +126,9 @@ public class PomFile extends TextFile {
     _builder.newLine();
     {
       ProjectDescriptor _project_8 = this.getProject();
-      WizardConfiguration _config_6 = _project_8.getConfig();
-      BuildSystem _buildSystem = _config_6.getBuildSystem();
-      boolean _equals_1 = Objects.equal(_buildSystem, BuildSystem.MAVEN);
-      if (_equals_1) {
+      boolean _isEclipsePluginProject = _project_8.isEclipsePluginProject();
+      boolean _not = (!_isEclipsePluginProject);
+      if (_not) {
         _builder.append("\t");
         _builder.append("<dependencies>");
         _builder.newLine();
@@ -213,15 +211,21 @@ public class PomFile extends TextFile {
             _builder.append(_version, "\t\t\t");
             _builder.append("</version>");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("<scope>");
-            Scope _scope = dep.getScope();
-            String _mavenNotation = _scope.getMavenNotation();
-            _builder.append(_mavenNotation, "\t\t\t");
-            _builder.append("</scope>");
-            _builder.newLineIfNotEmpty();
+            {
+              Scope _scope = dep.getScope();
+              boolean _notEquals_1 = (!Objects.equal(_scope, Scope.COMPILE));
+              if (_notEquals_1) {
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<scope>");
+                Scope _scope_1 = dep.getScope();
+                String _mavenNotation = _scope_1.getMavenNotation();
+                _builder.append(_mavenNotation, "\t\t\t");
+                _builder.append("</scope>");
+                _builder.newLineIfNotEmpty();
+              }
+            }
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("</dependency>");
@@ -235,7 +239,7 @@ public class PomFile extends TextFile {
     }
     _builder.append("</project>");
     _builder.newLine();
-    return _builder;
+    return _builder.toString();
   }
   
   @Pure

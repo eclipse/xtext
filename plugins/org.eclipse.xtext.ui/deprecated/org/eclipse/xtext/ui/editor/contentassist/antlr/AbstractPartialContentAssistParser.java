@@ -14,6 +14,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -36,6 +37,9 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 	
 	@Inject
 	private EntryPointFinder entryPointFinder;
+	
+	@Inject
+	private RuleNames ruleNames;
 
 	@Override
 	public Collection<FollowElement> getFollowElements(IParseResult parseResult, int offset, boolean strict) {
@@ -141,7 +145,7 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 				RuleCall call = (RuleCall) entryPoint;
 				AbstractRule rule = call.getRule();
 				if (rule instanceof ParserRule) {
-					ruleName = "rule" + rule.getName();
+					ruleName = ruleNames.getAntlrRuleName(rule);
 				}
 			}
 		}

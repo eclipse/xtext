@@ -27,7 +27,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createWebProject
 	Button createIdeProject
 	Button createTestProject
-	Combo buildSystem
+	Combo preferredBuildSystem
 	Combo sourceLayout
 
 	new(String pageName) {
@@ -62,10 +62,10 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 			]
 			Group [
-				text = "Build System"
-				buildSystem = DropDown[
+				text = "Preferred Build System"
+				preferredBuildSystem = DropDown[
 					enabled = true
-					items = #["Eclipse", "Maven", "Tycho", "Gradle"]
+					items = #["Eclipse", "Maven", "Gradle"]
 				]
 			]
 			Group [
@@ -79,6 +79,7 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		createIdeaProject.require(createIdeProject)
 		createWebProject.require(createIdeProject)
+		makeUiProjectRequirePlainLayout
 		setDefaults
 	}
 
@@ -113,7 +114,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.selection = false
 		createIdeProject.selection = false
 		createTestProject.selection = false
-		buildSystem.select(0)
+		preferredBuildSystem.select(0)
 		sourceLayout.select(0)
 	}
 
@@ -137,8 +138,8 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.selection
 	}
 	
-	def BuildSystem getBuildSystem() {
-		BuildSystem.values.get(buildSystem.selectionIndex)
+	def BuildSystem getPreferredBuildSystem() {
+		BuildSystem.values.get(preferredBuildSystem.selectionIndex)
 	}
 	
 	def SourceLayout getSourceLayout() {
@@ -157,5 +158,20 @@ class AdvancedNewProjectPage extends WizardPage {
 		}
 		project.addSelectionListener(selectionControl)
 		requirement.addSelectionListener(selectionControl)
+	}
+	
+	
+	def void makeUiProjectRequirePlainLayout() {
+		val selectionControl = new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if (e.widget == createUiProject && createUiProject.selection) {
+					sourceLayout.select(0)
+				} else if (e.widget == sourceLayout && sourceLayout.selectionIndex != 0) {
+					createUiProject.selection = false
+				}
+			}
+		}
+		createUiProject.addSelectionListener(selectionControl)
+		sourceLayout.addSelectionListener(selectionControl)
 	}
 }

@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -14,9 +14,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
@@ -24,6 +22,7 @@ import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -76,35 +75,47 @@ public abstract class ProjectDescriptor {
     return IterableExtensions.<String>toSet(_map);
   }
   
-  public Iterable<? extends GeneratedFile> getFiles() {
-    List<GeneratedFile> _xblockexpression = null;
-    {
-      final List<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-      boolean _isEclipsePluginProject = this.isEclipsePluginProject();
-      if (_isEclipsePluginProject) {
-        CharSequence _manifest = this.manifest();
-        PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
-        files.add(_file);
-        CharSequence _buildProperties = this.buildProperties();
-        PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
-        files.add(_file_1);
-      }
-      BuildSystem _buildSystem = this.config.getBuildSystem();
-      boolean _isGradleBuild = _buildSystem.isGradleBuild();
-      if (_isGradleBuild) {
-        GradleBuildFile _buildGradle = this.buildGradle();
-        files.add(_buildGradle);
-      }
-      BuildSystem _buildSystem_1 = this.config.getBuildSystem();
-      boolean _isMavenBuild = _buildSystem_1.isMavenBuild();
-      if (_isMavenBuild) {
-        PomFile _pom = this.pom();
-        files.add(_pom);
-      }
-      _xblockexpression = files;
+  public Iterable<? extends TextFile> getFiles() {
+    final List<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
+    boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+    if (_isEclipsePluginProject) {
+      CharSequence _manifest = this.manifest();
+      PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
+      files.add(_file);
+      CharSequence _buildProperties = this.buildProperties();
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
+      files.add(_file_1);
     }
-    return _xblockexpression;
+    boolean _and = false;
+    boolean _needsGradleBuild = this.config.needsGradleBuild();
+    if (!_needsGradleBuild) {
+      _and = false;
+    } else {
+      boolean _isPartOfGradleBuild = this.isPartOfGradleBuild();
+      _and = _isPartOfGradleBuild;
+    }
+    if (_and) {
+      GradleBuildFile _buildGradle = this.buildGradle();
+      files.add(_buildGradle);
+    }
+    boolean _and_1 = false;
+    boolean _needsMavenBuild = this.config.needsMavenBuild();
+    if (!_needsMavenBuild) {
+      _and_1 = false;
+    } else {
+      boolean _isPartOfMavenBuild = this.isPartOfMavenBuild();
+      _and_1 = _isPartOfMavenBuild;
+    }
+    if (_and_1) {
+      PomFile _pom = this.pom();
+      files.add(_pom);
+    }
+    return files;
   }
+  
+  public abstract boolean isPartOfGradleBuild();
+  
+  public abstract boolean isPartOfMavenBuild();
   
   public abstract boolean isEclipsePluginProject();
   
@@ -217,9 +228,9 @@ public abstract class ProjectDescriptor {
   }
   
   public Set<String> getRequiredBundles() {
-    HashSet<String> _xblockexpression = null;
+    LinkedHashSet<String> _xblockexpression = null;
     {
-      final HashSet<String> bundles = CollectionLiterals.<String>newHashSet();
+      final LinkedHashSet<String> bundles = CollectionLiterals.<String>newLinkedHashSet();
       Set<? extends ProjectDescriptor> _upstreamProjects = this.getUpstreamProjects();
       final Function1<ProjectDescriptor, String> _function = new Function1<ProjectDescriptor, String>() {
         @Override

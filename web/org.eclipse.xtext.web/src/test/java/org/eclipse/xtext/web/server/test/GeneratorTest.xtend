@@ -47,7 +47,7 @@ class GeneratorTest extends AbstractWebServerTest {
 	
 	@Test def testGenerateText() {
 		val file = createFile('state foo end state bar end')
-		val generate = getService(#{'requestType' -> 'generate', 'resource' -> file.name})
+		val generate = getService(#{'serviceType' -> 'generate', 'resource' -> file.name})
 		assertFalse(generate.hasSideEffects)
 		assertFalse(generate.hasTextInput)
 		val result = generate.service.apply() as GeneratorResult
@@ -68,7 +68,7 @@ class GeneratorTest extends AbstractWebServerTest {
 		if (generatorInstance !== null)
 			generatorInstance.invocationCount = 0
 		val file = createFile('state foo end state bar end')
-		val generate = getService(#{'requestType' -> 'generate', 'resource' -> file.name})
+		val generate = getService(#{'serviceType' -> 'generate', 'resource' -> file.name})
 		generate.service.apply()
 		assertEquals(1, generatorInstance.invocationCount)
 		generate.service.apply()

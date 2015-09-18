@@ -9,6 +9,7 @@ package org.eclipse.xtend.idea.autobuild;
 
 import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
+import com.google.common.io.Files;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetTypeId;
@@ -18,13 +19,24 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.SourceFolder;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.newvfs.events.VFileDeleteEvent;
+import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
+import com.intellij.openapi.vfs.newvfs.persistent.PersistentFS;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Collections;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.idea.facet.XtendFacetType;
@@ -35,8 +47,8 @@ import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -571,6 +583,48 @@ public class IdeaIntegrationTest extends LightXtendTest {
     this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_3);
   }
   
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=476412
+   */
+  public void testDeleteNonProjectFolderFromDisk() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    final File tmpDir = Files.createTempDir();
+    final File f = new File(tmpDir, "dirToDelete");
+    f.mkdirs();
+    final VirtualFile vFile = VfsUtil.findFileByIoFile(f, false);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          PersistentFS _instance = PersistentFS.getInstance();
+          VirtualFile _parent = vFile.getParent();
+          VFileDeleteEvent _vFileDeleteEvent = new VFileDeleteEvent(IdeaIntegrationTest.this, _parent, true);
+          _instance.processEvents(Collections.<VFileEvent>unmodifiableList(CollectionLiterals.<VFileEvent>newArrayList(_vFileDeleteEvent)));
+          File _parentFile = f.getParentFile();
+          boolean _sweepFolder = org.eclipse.xtext.util.Files.sweepFolder(_parentFile);
+          TestCase.assertTrue(_sweepFolder);
+          File _parentFile_1 = f.getParentFile();
+          boolean _delete = _parentFile_1.delete();
+          TestCase.assertTrue(_delete);
+          return;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(_function);
+    boolean _exists = vFile.exists();
+    TestCase.assertFalse(_exists);
+  }
+  
   public void testAffectedUpdated() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package otherPackage");
@@ -1027,17 +1081,70 @@ public class IdeaIntegrationTest extends LightXtendTest {
     this.myFixture.testHighlighting(true, true, true, _virtualFile_2);
   }
   
-  public ChunkedResourceDescriptions getIndex() {
-    final XtextResourceSet rs = new XtextResourceSet();
-    XtextAutoBuilderComponent _builder = this.getBuilder();
-    _builder.installCopyOfResourceDescriptions(rs);
-    final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(rs);
-    return index;
+  public void testNonSourceFile() {
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        Module _module = IdeaIntegrationTest.this.myFixture.getModule();
+        ModuleRootManager _instance = ModuleRootManager.getInstance(_module);
+        final ModifiableRootModel model = _instance.getModifiableModel();
+        ContentEntry[] _contentEntries = model.getContentEntries();
+        final ContentEntry contentEntry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+        SourceFolder[] _sourceFolders = contentEntry.getSourceFolders();
+        final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>head(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)));
+        contentEntry.removeSourceFolder(sourceFolder);
+        model.commit();
+      }
+    };
+    _application.runWriteAction(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    ChunkedResourceDescriptions _index = this.getIndex();
+    URI _createURI = URI.createURI("temp:///src/otherPackage/Foo.xtend");
+    IResourceDescription _resourceDescription = _index.getResourceDescription(_createURI);
+    TestCase.assertNull(_resourceDescription);
   }
   
-  public XtextAutoBuilderComponent getBuilder() {
-    Project _project = this.getProject();
-    return _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+  public void testExcludedFile() {
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Module _module = IdeaIntegrationTest.this.myFixture.getModule();
+          ModuleRootManager _instance = ModuleRootManager.getInstance(_module);
+          final ModifiableRootModel model = _instance.getModifiableModel();
+          ContentEntry[] _contentEntries = model.getContentEntries();
+          final ContentEntry contentEntry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+          VirtualFile _file = contentEntry.getFile();
+          final VirtualFile excludedDir = _file.createChildDirectory(null, "excluded");
+          contentEntry.addExcludeFolder(excludedDir);
+          model.commit();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(_function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package excluded");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("excluded/Foo.xtend", _builder.toString());
+    ChunkedResourceDescriptions _index = this.getIndex();
+    URI _createURI = URI.createURI("temp:///src/excluded/Foo.xtend");
+    IResourceDescription _resourceDescription = _index.getResourceDescription(_createURI);
+    TestCase.assertNull(_resourceDescription);
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {

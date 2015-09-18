@@ -18,20 +18,33 @@ import org.eclipse.xtext.parser.parameters.services.ParametersTestLanguageGramma
 public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ParserRuleFragmentsExElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.ParserRuleFragmentsEx");
+	public class ParserRuleParametersElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.ParserRuleParameters");
 		private final RuleCall cParserRuleParametersParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//ParserRuleFragmentsEx ParserRuleParameters:
-		//	ParserRuleParameters
+		//ParserRuleParameters:
+		//	super::ParserRuleParameters;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ParserRuleParameters
+		//super::ParserRuleParameters
 		public RuleCall getParserRuleParametersParserRuleCall() { return cParserRuleParametersParserRuleCall; }
+	}
+
+	public class Scenario1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.Scenario1");
+		private final RuleCall cScenario1ParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Scenario1 <Param Scenario:
+		//	super::Scenario1<Param>
+		@Override public ParserRule getRule() { return rule; }
+
+		//super::Scenario1<Param>
+		public RuleCall getScenario1ParserRuleCall() { return cScenario1ParserRuleCall; }
 	}
 	
 	
-	private final ParserRuleFragmentsExElements pParserRuleFragmentsEx;
+	private final ParserRuleParametersElements pParserRuleParameters;
+	private final Scenario1Elements pScenario1;
 	
 	private final Grammar grammar;
 
@@ -42,7 +55,8 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		ParametersTestLanguageGrammarAccess gaParametersTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaParametersTestLanguage = gaParametersTestLanguage;
-		this.pParserRuleFragmentsEx = new ParserRuleFragmentsExElements();
+		this.pParserRuleParameters = new ParserRuleParametersElements();
+		this.pScenario1 = new Scenario1Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -72,25 +86,10 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 
 	
-	//ParserRuleFragmentsEx ParserRuleParameters:
-	//	ParserRuleParameters
-	public ParserRuleFragmentsExElements getParserRuleFragmentsExAccess() {
-		return pParserRuleFragmentsEx;
-	}
-	
-	public ParserRule getParserRuleFragmentsExRule() {
-		return getParserRuleFragmentsExAccess().getRule();
-	}
-
 	//ParserRuleParameters:
-	//	{ParserRuleParameters} ('#1' scenario=Scenario1<true> | '#2' scenario=Scenario1<Param=false> | '#3'
-	//	scenario=Scenario2<true> | '#4' scenario=Scenario2<false> | => ('#5' scenario=Scenario2<true>) | => ('#6'
-	//	scenario=Scenario2<false>) | '#7' scenario=Scenario3<true> | '#8' scenario=Scenario3<false> | '#9'
-	//	(scenario=Scenario4<true> | scenario=Scenario2<true> 'keyword'?) | '#10' (scenario=Scenario4<true> |
-	//	scenario=Scenario2<false> 'keyword'?) | '#11' (scenario=Scenario4<false> | scenario=Scenario2<true> 'keyword'?) |
-	//	'#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'keyword'?));
-	public ParametersTestLanguageGrammarAccess.ParserRuleParametersElements getParserRuleParametersAccess() {
-		return gaParametersTestLanguage.getParserRuleParametersAccess();
+	//	super::ParserRuleParameters;
+	public ParserRuleParametersElements getParserRuleParametersAccess() {
+		return pParserRuleParameters;
 	}
 	
 	public ParserRule getParserRuleParametersRule() {
@@ -98,14 +97,39 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//Scenario1 <Param Scenario:
-	//	<Param> first=ID
-	//	| <!Param> second=ID
-	public ParametersTestLanguageGrammarAccess.Scenario1Elements getScenario1Access() {
-		return gaParametersTestLanguage.getScenario1Access();
+	//	super::Scenario1<Param>
+	public Scenario1Elements getScenario1Access() {
+		return pScenario1;
 	}
 	
 	public ParserRule getScenario1Rule() {
 		return getScenario1Access().getRule();
+	}
+
+	//ParserRuleParameters:
+	//	{ParserRuleParameters} ('#1' scenario=super::Scenario1<true> | '#2' scenario=super::Scenario1<Param=false> | '#3'
+	//	scenario=Scenario2<true> | '#4' scenario=Scenario2<false> | => ('#5' scenario=Scenario2<true>) | => ('#6'
+	//	scenario=Scenario2<false>) | '#7' scenario=Scenario3<true> | '#8' scenario=Scenario3<false> | '#9'
+	//	(scenario=Scenario4<true> | scenario=Scenario2<true> 'keyword'?) | '#10' (scenario=Scenario4<true> |
+	//	scenario=Scenario2<false> 'keyword'?) | '#11' (scenario=Scenario4<false> | scenario=Scenario2<true> 'keyword'?) |
+	//	'#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'keyword'?));
+	public ParametersTestLanguageGrammarAccess.ParserRuleParametersElements getParametersTestLanguageParserRuleParametersAccess() {
+		return gaParametersTestLanguage.getParserRuleParametersAccess();
+	}
+	
+	public ParserRule getParametersTestLanguageParserRuleParametersRule() {
+		return getParametersTestLanguageParserRuleParametersAccess().getRule();
+	}
+
+	//Scenario1 <Param Scenario:
+	//	<Param> first=ID
+	//	| <!Param> second=ID
+	public ParametersTestLanguageGrammarAccess.Scenario1Elements getParametersTestLanguageScenario1Access() {
+		return gaParametersTestLanguage.getScenario1Access();
+	}
+	
+	public ParserRule getParametersTestLanguageScenario1Rule() {
+		return getParametersTestLanguageScenario1Access().getRule();
 	}
 
 	//Scenario2 <AllowKeyword Scenario:

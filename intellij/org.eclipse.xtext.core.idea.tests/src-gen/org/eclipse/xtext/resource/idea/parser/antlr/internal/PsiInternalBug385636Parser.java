@@ -1043,19 +1043,13 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
 
 
     protected DFA3 dfa3 = new DFA3(this);
-    static final String DFA3_eotS =
-        "\12\uffff";
-    static final String DFA3_eofS =
-        "\1\1\11\uffff";
-    static final String DFA3_minS =
-        "\1\4\6\uffff\1\25\2\uffff";
-    static final String DFA3_maxS =
-        "\1\24\6\uffff\1\26\2\uffff";
-    static final String DFA3_acceptS =
-        "\1\uffff\1\10\1\1\1\2\1\3\1\4\1\5\1\uffff\1\7\1\6";
-    static final String DFA3_specialS =
-        "\12\uffff}>";
-    static final String[] DFA3_transitionS = {
+    static final String dfa_1s = "\12\uffff";
+    static final String dfa_2s = "\1\1\11\uffff";
+    static final String dfa_3s = "\1\4\6\uffff\1\25\2\uffff";
+    static final String dfa_4s = "\1\24\6\uffff\1\26\2\uffff";
+    static final String dfa_5s = "\1\uffff\1\10\1\1\1\2\1\3\1\4\1\5\1\uffff\1\7\1\6";
+    static final String dfa_6s = "\12\uffff}>";
+    static final String[] dfa_7s = {
             "\1\1\6\uffff\1\1\3\uffff\1\2\1\3\1\4\1\5\1\6\1\7",
             "",
             "",
@@ -1068,34 +1062,26 @@ public class PsiInternalBug385636Parser extends AbstractPsiAntlrParser {
             ""
     };
 
-    static final short[] DFA3_eot = DFA.unpackEncodedString(DFA3_eotS);
-    static final short[] DFA3_eof = DFA.unpackEncodedString(DFA3_eofS);
-    static final char[] DFA3_min = DFA.unpackEncodedStringToUnsignedChars(DFA3_minS);
-    static final char[] DFA3_max = DFA.unpackEncodedStringToUnsignedChars(DFA3_maxS);
-    static final short[] DFA3_accept = DFA.unpackEncodedString(DFA3_acceptS);
-    static final short[] DFA3_special = DFA.unpackEncodedString(DFA3_specialS);
-    static final short[][] DFA3_transition;
-
-    static {
-        int numStates = DFA3_transitionS.length;
-        DFA3_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA3_transition[i] = DFA.unpackEncodedString(DFA3_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
+    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
 
     class DFA3 extends DFA {
 
         public DFA3(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 3;
-            this.eot = DFA3_eot;
-            this.eof = DFA3_eof;
-            this.min = DFA3_min;
-            this.max = DFA3_max;
-            this.accept = DFA3_accept;
-            this.special = DFA3_special;
-            this.transition = DFA3_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_2;
+            this.min = dfa_3;
+            this.max = dfa_4;
+            this.accept = dfa_5;
+            this.special = dfa_6;
+            this.transition = dfa_7;
         }
         public String getDescription() {
             return "()* loopback of 196:3: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*";

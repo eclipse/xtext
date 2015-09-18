@@ -96,7 +96,7 @@ suite('Persistence', function() {
 	test('[save] should set the editor to clean', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({resourceId: 'test.mydsl', doneCallback: done})
-				.markClean(false)
+				.setDirty(true)
 				.invokeService('save')
 				.checkRequest(function(url, settings) {
 					assert.equal('test://xtext-service/save?resource=test.mydsl', url);
@@ -172,8 +172,8 @@ suite('Persistence', function() {
 					})
 					.respond({conflict: 'invalidStateId'});
 			}
-			tester.checkError(function(requestType, severity, message, requestData) {
-					assert.equal('save', requestType);
+			tester.checkError(function(serviceType, severity, message, requestData) {
+					assert.equal('save', serviceType);
 					assert.equal('warning', severity);
 				}).done();
 		});

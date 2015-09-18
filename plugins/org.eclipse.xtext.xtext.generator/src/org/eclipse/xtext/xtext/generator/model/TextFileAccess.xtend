@@ -9,23 +9,30 @@ package org.eclipse.xtext.xtext.generator.model
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtend2.lib.StringConcatenation
 
 class TextFileAccess {
 
 	@Accessors
 	String path
 
-	@Accessors
-	CharSequence content
-
-	def CharSequence generate() {
-		return content
+	protected CharSequence internalContents
+	
+	def setContent(StringConcatenationClient content) {
+		internalContents = new StringConcatenation() => [
+			append(content)
+		]
 	}
 
-	def writeTo(IFileSystemAccess2 fileSystemAccess) {
+	def CharSequence getContent() {
+		return internalContents.toString
+	}
+
+	def void writeTo(IFileSystemAccess2 fileSystemAccess) {
 		if (fileSystemAccess != null) {
-			fileSystemAccess.generateFile(path, generate())
+			fileSystemAccess.generateFile(path, content)
 		}
 	}
-
+	
 }

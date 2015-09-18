@@ -18,7 +18,7 @@ ext.branches = [
 				jdk: jdks['1.6']
 			],
 			latest: [
-				target: 'Latest',
+				target: 'Mars',
 				jdk: jdks['1.7']
 			],
 		]

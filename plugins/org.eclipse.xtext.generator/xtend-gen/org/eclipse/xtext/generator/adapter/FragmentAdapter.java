@@ -332,12 +332,18 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
         }
         Output _output_1 = ctx.getOutput();
         final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        PluginXmlAccess _runtimePluginXml_1 = _projectConfig_1.getRuntimePluginXml();
-        List<CharSequence> _entries = _runtimePluginXml_1.getEntries();
         String _string = result.toString();
-        StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 1);
-        _entries.add(_decreaseIndentation);
+        final StringBuilder entry = this.decreaseIndentation(_string, 1);
+        String _string_1 = entry.toString();
+        String _trim = _string_1.trim();
+        boolean _isEmpty = _trim.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+          PluginXmlAccess _runtimePluginXml_1 = _projectConfig_1.getRuntimePluginXml();
+          List<CharSequence> _entries = _runtimePluginXml_1.getEntries();
+          _entries.add(entry);
+        }
       } finally {
         Output _output_2 = ctx.getOutput();
         _output_2.closeFile();
@@ -361,12 +367,18 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
         }
         Output _output_1 = ctx.getOutput();
         final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        PluginXmlAccess _eclipsePluginPluginXml_1 = _projectConfig_1.getEclipsePluginPluginXml();
-        List<CharSequence> _entries = _eclipsePluginPluginXml_1.getEntries();
         String _string = result.toString();
-        StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 1);
-        _entries.add(_decreaseIndentation);
+        final StringBuilder entry = this.decreaseIndentation(_string, 1);
+        String _string_1 = entry.toString();
+        String _trim = _string_1.trim();
+        boolean _isEmpty = _trim.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+          PluginXmlAccess _eclipsePluginPluginXml_1 = _projectConfig_1.getEclipsePluginPluginXml();
+          List<CharSequence> _entries = _eclipsePluginPluginXml_1.getEntries();
+          _entries.add(entry);
+        }
       } finally {
         Output _output_2 = ctx.getOutput();
         _output_2.closeFile();

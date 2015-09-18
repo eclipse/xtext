@@ -1,5 +1,5 @@
 define("xtext/statemachine-syntax", function() {
-	var keywords = ["and", "end", "goto", "if", "input", "output", "set", "signal", "state"];
+	var keywords = "and|end|goto|if|input|output|set|signal|state";
 	return {
 		id: "xtext.statemachine",
 		contentTypes: ["xtext/statemachine"],
@@ -9,7 +9,7 @@ define("xtext/statemachine-syntax", function() {
 			{include: "orion.lib#string_doubleQuote"},
 			{include: "orion.lib#string_singleQuote"},
 			{include: "orion.lib#number_decimal"},
-			{match: "\\b(?:" + keywords.join("|") + ")\\b", name: "keyword.operator.statemachine"}
+			{name: "keyword.statemachine", match: "\\b(?:" + keywords + ")\\b"}
 		]
 	};
 });

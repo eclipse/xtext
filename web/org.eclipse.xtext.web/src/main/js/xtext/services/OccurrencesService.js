@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for marking occurrences.
 	 */
-	function OccurrencesService(serverUrl, resourceId, updateService) {
-		this.initialize(serverUrl, resourceId, 'occurrences', updateService);
+	function OccurrencesService(serviceUrl, resourceId, updateService) {
+		this.initialize(serviceUrl, 'occurrences', resourceId, updateService);
 	};
 
 	OccurrencesService.prototype = new XtextService();

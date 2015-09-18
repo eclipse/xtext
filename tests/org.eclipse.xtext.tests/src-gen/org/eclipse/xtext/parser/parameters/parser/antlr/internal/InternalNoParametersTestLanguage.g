@@ -922,28 +922,55 @@ ruleIdOrKeyword_False returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 
 
 
+
+
+
+
+
+
+
+
 // Entry rule entryRuleIdOrKeyword
 entryRuleIdOrKeyword returns [String current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getIdOrKeywordRule()); } 
-	 iv_ruleIdOrKeyword=ruleIdOrKeyword[false] 
+	 iv_ruleIdOrKeyword=ruleIdOrKeyword 
 	 { $current=$iv_ruleIdOrKeyword.current.getText(); }  
 	 EOF 
 ;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword [boolean p_Keyword] returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+ruleIdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(({p_Keyword}?=>(
+    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getIdOrKeywordAccess().getIDTerminalRuleCall_1()); 
+    }
+
+    ;
+
+
+
+
+
+
+// Rule IdOrKeyword
+norm1_IdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
 	kw='keyword' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getIdOrKeywordAccess().getKeywordKeyword_0_0()); 
     }
-)
-)
+
     |    this_ID_1=RULE_ID    {
 		$current.merge(this_ID_1);
     }

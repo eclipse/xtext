@@ -12,10 +12,7 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.SourceFolder;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -69,11 +66,8 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
       final Iterable<SourceFolder> allSrcFolders = RootModelExtensions.getExistingSourceFolders(module);
       for (final SourceFolder srcFolder : allSrcFolders) {
         {
-          ContentEntry _contentEntry = srcFolder.getContentEntry();
-          VirtualFile _file = _contentEntry.getFile();
-          VirtualFile _file_1 = srcFolder.getFile();
-          String _path = VfsUtil.getPath(_file, _file_1, '/');
-          final OutputConfiguration.SourceMapping mapping = new OutputConfiguration.SourceMapping(_path);
+          String _relativePath = RootModelExtensions.getRelativePath(srcFolder);
+          final OutputConfiguration.SourceMapping mapping = new OutputConfiguration.SourceMapping(_relativePath);
           boolean _isTestSource = srcFolder.isTestSource();
           if (_isTestSource) {
             String _testOutputDirectory = generatorConf.getTestOutputDirectory();

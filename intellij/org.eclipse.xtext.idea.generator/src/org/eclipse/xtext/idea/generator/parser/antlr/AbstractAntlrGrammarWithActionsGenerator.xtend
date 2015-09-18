@@ -1,17 +1,17 @@
 package org.eclipse.xtext.idea.generator.parser.antlr
 
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.Group
 import org.eclipse.xtext.ParserRule
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.CrossReference
-import org.eclipse.xtext.Assignment
-import org.eclipse.xtext.Group
 
 class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenerator {
 	
@@ -45,7 +45,7 @@ class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenera
 	protected def dispatch compileInitUnorderedGroups(ParserRule it, AntlrOptions options) '''«IF definesUnorderedGroups(options)»
 		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
 		«FOR group:eAllContentsAsList.filter(UnorderedGroup) SEPARATOR ', '»
-			grammarAccess.«group.gaRuleElementAccessor»
+			grammarAccess.«group.originalElement.gaRuleElementAccessor»
 		«ENDFOR»
 		);«ENDIF»'''
 		
@@ -92,30 +92,30 @@ class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenera
 			'''
 				(
 					{ 
-					  getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor»);
+					  getUnorderedGroupHelper().enter(grammarAccess.«originalElement.gaRuleElementAccessor»);
 					}
 					(
 						(
 				«FOR element:elements.indexed SEPARATOR '|'»
 							(
-								{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor», «element.key»)}?=>(
+								{getUnorderedGroupHelper().canSelect(grammarAccess.«originalElement.gaRuleElementAccessor», «element.key»)}?=>(
 									{
-										getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor», «element.key»);
+										getUnorderedGroupHelper().select(grammarAccess.«originalElement.gaRuleElementAccessor», «element.key»);
 									}
 			«««	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
 									({true}?=>(«element.value.dataTypeEbnf2(supportActions)»))«IF element.value.multipleCardinality»+«ENDIF»
 									{ 
-										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor»);
+										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement.gaRuleElementAccessor»);
 									}
 								)
 							)
 				«ENDFOR»
 						)«IF mandatoryContent != 0»+
-						{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
+						{getUnorderedGroupHelper().canLeave(grammarAccess.«originalElement.gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
 					)
 				)
 					{ 
-					  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor»);
+					  getUnorderedGroupHelper().leave(grammarAccess.«originalElement.gaRuleElementAccessor»);
 					}
 			'''
 		} else {
@@ -136,30 +136,30 @@ class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenera
 			'''
 				(
 					{ 
-					  getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor»);
+					  getUnorderedGroupHelper().enter(grammarAccess.«originalElement.gaRuleElementAccessor»);
 					}
 					(
 						(
 				«FOR element:elements.indexed SEPARATOR '|'»
 							(
-								{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor», «element.key»)}?=>(
+								{getUnorderedGroupHelper().canSelect(grammarAccess.«originalElement.gaRuleElementAccessor», «element.key»)}?=>(
 									{
-										getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor», «element.key»);
+										getUnorderedGroupHelper().select(grammarAccess.«originalElement.gaRuleElementAccessor», «element.key»);
 									}
 			«««	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
 									({true}?=>(«element.value.ebnf2(options, supportActions)»))«IF element.value.multipleCardinality»+«ENDIF»
 									{ 
-										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor»);
+										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement.gaRuleElementAccessor»);
 									}
 								)
 							)
 				«ENDFOR»
 						)«IF mandatoryContent != 0»+
-						{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
+						{getUnorderedGroupHelper().canLeave(grammarAccess.«originalElement.gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
 					)
 				)
 					{ 
-					  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor»);
+					  getUnorderedGroupHelper().leave(grammarAccess.«originalElement.gaRuleElementAccessor»);
 					}
 				'''
 		} else {

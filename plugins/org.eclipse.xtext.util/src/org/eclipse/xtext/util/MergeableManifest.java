@@ -55,7 +55,10 @@ public class MergeableManifest extends Manifest {
 	/*
 	 * java.util.Manifest throws an exception if line exceeds 512 chars
 	 */
-    static String make512Safe(StringBuffer lines) {
+	/**
+	 * @since 2.9
+	 */
+    public static String make512Safe(StringBuffer lines) {
         if (lines.length() > 512) {
         	StringBuilder result = new StringBuilder(lines.length());
         	String[] splitted = lines.toString().split("\\r\\n");
@@ -65,7 +68,7 @@ public class MergeableManifest extends Manifest {
         			StringBuilder temp = new StringBuilder(string);
         			int length = temp.length();
         			while (idx < length - 2) {
-                        temp.insert(idx, "\r\n ");
+                        temp.insert(idx, LINEBREAK+" ");
                         idx += 512;
                         length += 3;
                     }
@@ -203,7 +206,13 @@ public class MergeableManifest extends Manifest {
 		// TODO manage transitive dependencies
 		// don't require self
 		Set<String> bundlesToMerge;
-		String bundleName = (String) getMainAttributes().get(BUNDLE_NAME);
+		String bundleName = (String) getMainAttributes().get(BUNDLE_SYMBOLIC_NAME);
+		if (bundleName != null) {
+			int idx = bundleName.indexOf(';');
+			if (idx >= 0) {
+				bundleName = bundleName.substring(0, idx);
+			}
+		}
 		if (bundleName != null && bundles.contains(bundleName) || projectName != null && bundles.contains(projectName)) {
 			bundlesToMerge = new LinkedHashSet<String>(bundles);
 			bundlesToMerge.remove(bundleName);
@@ -261,7 +270,7 @@ public class MergeableManifest extends Manifest {
 				value = new String(vb, 0, 0, vb.length);
 			}
 			buffer.append(value);
-			buffer.append("\r\n");
+			buffer.append(LINEBREAK);
 			dos.writeBytes(make512Safe(buffer));
 			((OrderAwareAttributes) e.getValue()).myWrite(dos);
 		}
@@ -361,7 +370,7 @@ public class MergeableManifest extends Manifest {
 				buff.append(";").append(entry.getValue());
 			}
 			if (iterator.hasNext())
-				buff.append(",\r\n ");
+				buff.append(","+LINEBREAK+" ");
 		}
 		String result = buff.toString();
 		return result;

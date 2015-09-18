@@ -2233,9 +2233,9 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final TerminalRule tID2;
 	private final TerminalRule tID3;
 	private final SingleEnumElements pSingleEnum;
-	private final DefEnum1Elements unknownRuleDefEnum1;
-	private final DefEnum2Elements unknownRuleDefEnum2;
-	private final DefEnum3Elements unknownRuleDefEnum3;
+	private final DefEnum1Elements eDefEnum1;
+	private final DefEnum2Elements eDefEnum2;
+	private final DefEnum3Elements eDefEnum3;
 	private final SingleCrossReferenceElements pSingleCrossReference;
 	private final SingleContainmentReferenceElements pSingleContainmentReference;
 	private final SingleContainmentReferenceChild1Elements pSingleContainmentReferenceChild1;
@@ -2293,9 +2293,9 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
 		this.tID3 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.ID3");
 		this.pSingleEnum = new SingleEnumElements();
-		this.unknownRuleDefEnum1 = new DefEnum1Elements();
-		this.unknownRuleDefEnum2 = new DefEnum2Elements();
-		this.unknownRuleDefEnum3 = new DefEnum3Elements();
+		this.eDefEnum1 = new DefEnum1Elements();
+		this.eDefEnum2 = new DefEnum2Elements();
+		this.eDefEnum3 = new DefEnum3Elements();
 		this.pSingleCrossReference = new SingleCrossReferenceElements();
 		this.pSingleContainmentReference = new SingleContainmentReferenceElements();
 		this.pSingleContainmentReferenceChild1 = new SingleContainmentReferenceChild1Elements();
@@ -2522,7 +2522,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum DefEnum1 returns DefEnum:
 	//	kw1;
 	public DefEnum1Elements getDefEnum1Access() {
-		return unknownRuleDefEnum1;
+		return eDefEnum1;
 	}
 	
 	public EnumRule getDefEnum1Rule() {
@@ -2532,7 +2532,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum DefEnum2 returns DefEnum:
 	//	kw2;
 	public DefEnum2Elements getDefEnum2Access() {
-		return unknownRuleDefEnum2;
+		return eDefEnum2;
 	}
 	
 	public EnumRule getDefEnum2Rule() {
@@ -2542,7 +2542,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum DefEnum3 returns DefEnum:
 	//	kw3;
 	public DefEnum3Elements getDefEnum3Access() {
-		return unknownRuleDefEnum3;
+		return eDefEnum3;
 	}
 	
 	public EnumRule getDefEnum3Rule() {

@@ -18,6 +18,27 @@ ruleName(AbstractRule this) :
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getRuleName(org.eclipse.xtext.AbstractRule)
 ;
 
+// the name as it will be generated into the content assist parser
+caRuleName(AbstractRule rule):
+	rule.ruleName().patched()
+;
+
+// for backwards compatibility reasons we insert the __ here
+// also it ensures that we do not have a clash between a real parser rule of the form
+// MyRule__grammarElement_0_1
+// and a grammar element in the rule MyRule which is rare at best
+private String patched(String ruleName):
+	ruleName.startsWith("rule") ? "rule__" + ruleName.subString(4, ruleName.length).toFirstUpper() : ruleName
+;
+
+originalElement(EObject this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getOriginalElement(org.eclipse.emf.ecore.EObject)
+;
+
+parameterConfig(ParserRule this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterConfig(org.eclipse.xtext.ParserRule)
+;
+
 parameterList(ParserRule this, boolean debug) : 
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterList(org.eclipse.xtext.ParserRule, java.lang.Boolean)
 ;
@@ -54,7 +75,13 @@ predicatedElement(AbstractElement this):
   JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getPredicatedElement(org.eclipse.xtext.AbstractElement)
 ;
 
-entryRuleName(ParserRule this) : 'entry' + this.ruleName().toFirstUpper();
+entryRuleName(ParserRule this) :
+  JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getEntryRuleName(org.eclipse.xtext.ParserRule)
+;
+
+isValidEntryRule(ParserRule this) :
+  JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.isValidEntryRule(org.eclipse.xtext.ParserRule)
+;
 
 setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
 
@@ -67,9 +94,9 @@ isCalled(Grammar grammar, AbstractRule this) :
 		x.allContents().flatten().typeSelect(RuleCall).select(call|call.rule!=null).rule.contains(this);
 
 localVar(Assignment this, AbstractElement terminal) : 
-	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + this.allContents().indexOf(terminal);
+	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + allContents().indexOf(terminal);
 	
-localVar(RuleCall this) : 'this_'+rule.name + '_' + containingParserRule().contentsAsList().indexOf(this);
+localVar(RuleCall this) : 'this_'+originalElement(this.rule).name + '_' + containingParserRule().contentsAsList().indexOf(this);
 localVar(AbstractElement this) : 'otherlv_' + containingParserRule().contentsAsList().indexOf(this);
 localVar(EnumLiteralDeclaration this) : 'enumLiteral_' + containingEnumRule().alternatives.contentsAsList().indexOf(this);
 

@@ -15,9 +15,9 @@ import java.util.Set
 interface IRequestData {
 	
 	/**
-	 * Key for the request type parameter, which determines the actual service to be invoked.
+	 * Key for the service type parameter, which determines the actual service to be invoked.
 	 */
-	val REQUEST_TYPE = 'requestType'
+	val SERVICE_TYPE = 'serviceType'
 	
 	/**
 	 * The available keys that can be used as arguments to {@link #getParameter(String)}.

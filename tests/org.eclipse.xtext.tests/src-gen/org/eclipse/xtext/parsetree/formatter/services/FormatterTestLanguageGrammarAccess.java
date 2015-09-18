@@ -853,7 +853,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final FQNElements pFQN;
 	private final FqnRefElements pFqnRef;
 	private final EnumerationElements pEnumeration;
-	private final Enum1Elements unknownRuleEnum1;
+	private final Enum1Elements eEnum1;
 	private final SuppressedHiddenElements pSuppressedHidden;
 	private final SuppressedHiddenSubElements pSuppressedHiddenSub;
 	private final SuppressedHiddenSubSubElements pSuppressedHiddenSubSub;
@@ -888,7 +888,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pFQN = new FQNElements();
 		this.pFqnRef = new FqnRefElements();
 		this.pEnumeration = new EnumerationElements();
-		this.unknownRuleEnum1 = new Enum1Elements();
+		this.eEnum1 = new Enum1Elements();
 		this.pSuppressedHidden = new SuppressedHiddenElements();
 		this.pSuppressedHiddenSub = new SuppressedHiddenSubElements();
 		this.pSuppressedHiddenSubSub = new SuppressedHiddenSubSubElements();
@@ -1071,7 +1071,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum Enum1:
 	//	lit1 | lit2 | lit3;
 	public Enum1Elements getEnum1Access() {
-		return unknownRuleEnum1;
+		return eEnum1;
 	}
 	
 	public EnumRule getEnum1Rule() {

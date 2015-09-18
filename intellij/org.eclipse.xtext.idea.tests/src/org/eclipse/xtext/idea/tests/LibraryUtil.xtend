@@ -13,6 +13,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.OrderRootType
 import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess
 import java.io.File
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.macro.Active
@@ -21,7 +22,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 import static extension com.intellij.openapi.roots.ModuleRootModificationUtil.*
 import static extension com.intellij.openapi.vfs.VfsUtil.*
 import static extension com.intellij.util.PathUtil.*
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess
 
 class LibraryUtil {
 

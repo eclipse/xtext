@@ -9,12 +9,12 @@ package org.eclipse.xtext.ui.editor.contentassist.antlr.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.antlr.runtime.BitSet;
+import org.antlr.runtime.DFA;
 import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
@@ -30,14 +30,17 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.LinkedHashSetWithoutNull;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
+import org.eclipse.xtext.parser.antlr.TokenTool;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminal;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminalRuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookaheadKeyword;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -83,6 +86,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			result.setGrammarElement(current);
 			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
 			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
+			result.setParamStack(ImmutableList.copyOf(paramStack));
 			if (current instanceof UnorderedGroup) {
 				if (indexToHandledElements != null) {
 					int index = grammarElements.lastIndexOf(current);
@@ -111,6 +115,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	
 	protected final List<EObject> grammarElements;
 	protected final List<EObject> localTrace;
+	/**
+	 * @since 2.9
+	 */
+	protected final List<Integer> paramStack;
 	protected int stackSize;
 	protected final Set<FollowElement> followElements;
 	protected ObservableXtextTokenStream.StreamListener delegate;
@@ -135,23 +143,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		super(input, state);
 		this.grammarElements = new ArrayList<EObject>();
 		this.localTrace = new ArrayList<EObject>();
-		this.followElements = new LinkedHashSet<FollowElement>() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean add(FollowElement e) {
-				if (e == null)
-					return false;
-				return super.add(e);
-			}
-		};
+		this.paramStack = new ArrayList<Integer>();
+		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
 	}
 	
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
 		this.grammarElements = new ArrayList<EObject>();
 		this.localTrace = new ArrayList<EObject>();
-		this.followElements = new LinkedHashSet<FollowElement>();
+		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
+		this.paramStack = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -182,6 +183,25 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 		grammarElements.add(grammarElement);
 		localTrace.add(grammarElement);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void before(EObject grammarElement, int paramConfig) {
+		before(grammarElement);
+		paramStack.add(paramConfig);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void after(EObject grammarElement, int paramConfig) {
+		int old = paramStack.remove(paramStack.size() - 1);
+		if (old != paramConfig) {
+			throw new IllegalStateException(paramConfig + "!=" + old);
+		}
+		after(grammarElement);
 	}
 
 	public void after(EObject grammarElement) {
@@ -521,7 +541,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 		LookAheadTerminalRuleCall result = new LookAheadTerminalRuleCall();
 		result.setToken(token);
-		String ruleName = tokenName.substring(5);
+		String ruleName = TokenTool.getLexerRuleName(tokenName);
 		if (terminalRules == null)
 			terminalRules = GrammarUtil.allTerminalRules(grammar);
 		for (TerminalRule rule : terminalRules) {
@@ -546,6 +566,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			logger.debug("  firstMarker: " + firstMarker);
 			logger.debug("  currentMarker: " + currentMarker);
 			logger.debug("  lookAheadAddOn: " + lookAheadAddOn);
+			logger.debug("  params: " + paramStack);
 			logger.debug("  predictionLevel: " + predictionLevel);
 			logger.debug("  stackSize: " + stackSize);
 			logger.debug("  backtracking: " + state.backtracking);
@@ -662,6 +683,13 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return localTrace;
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	public List<Integer> getParamStack() {
+		return paramStack;
+	}
+	
 	public RecoveryListener getRecoveryListener() {
 		return recoveryListener;
 	}
@@ -681,5 +709,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public void setStrict(boolean strict) {
 		this.strict = strict;
 	}
-
+	
+	/**
+	 * @since 2.9
+	 */
+	protected static short[][] unpackEncodedStringArray(String[] arr) {
+		int numStates = arr.length;
+		short[][] result = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			result[i] = DFA.unpackEncodedString(arr[i]);
+		}
+		return result;
+	}
 }

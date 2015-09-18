@@ -8,14 +8,9 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
-import java.io.IOException
-import java.io.InputStream
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.List
-import java.util.jar.Manifest
-import org.eclipse.emf.common.EMFPlugin
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
@@ -48,6 +43,9 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	@Accessors
 	boolean preferXtendStubs = true
 	
+	@Accessors(PUBLIC_GETTER)
+	XtextVersion xtextVersion
+	
 	/**
 	 * Configure a template for file headers. The template can contain variables:
 	 * <ul>
@@ -72,6 +70,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
 		
+		xtextVersion = XtextVersion.current
 		if (lineDelimiter === null)
 			lineDelimiter = '\n'
 		
@@ -99,46 +98,12 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 				}
 			}
 			if (fileHeader.contains(FILE_HEADER_VAR_VERSION)) {
-				val version = getVersion()
-				if (version != null) {
-					fileHeader = fileHeader.replace(FILE_HEADER_VAR_VERSION, version)
-				}
+				fileHeader = fileHeader.replace(FILE_HEADER_VAR_VERSION, xtextVersion.toString)
 			}
 		}
 		this.fileHeader = fileHeader
 	}
 
-	/**
-	 * Read the exact version from the Manifest of the plugin.
-	 */
-	private def getVersion() {
-		var InputStream is
-		try {
-			val url = new URL(Plugin.INSTANCE.baseURL + 'META-INF/MANIFEST.MF')
-			is = url.openStream()
-			val manifest = new Manifest(is)
-			return manifest.getMainAttributes().getValue('Bundle-Version')
-		} catch (Exception e) {
-			return null;
-		} finally {
-			if (is != null) {
-				try { is.close() }
-				catch (IOException e) {}
-			}
-		}
-	}
-
-	/**
-	 * Only needed to determine the Manifest file and its version of this plugin in standalone mode.
-	 */
-	private static class Plugin extends EMFPlugin {
-		public static final Plugin INSTANCE = new Plugin
-		private new() {
-			super(#[]);
-		}
-		override getPluginResourceLocator() {
-		}
-	}
 
 	def String getClassAnnotationsAsString() {
 		if (classAnnotations.isEmpty) {

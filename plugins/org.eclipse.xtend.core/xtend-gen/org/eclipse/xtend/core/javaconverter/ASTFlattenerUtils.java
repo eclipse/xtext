@@ -37,6 +37,9 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.NumberLiteral;
+import org.eclipse.jdt.core.dom.PostfixExpression;
+import org.eclipse.jdt.core.dom.PrefixExpression;
+import org.eclipse.jdt.core.dom.PrimitiveType;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
@@ -497,7 +500,7 @@ public class ASTFlattenerUtils {
   }
   
   public Type findDeclaredType(final SimpleName simpleName) {
-    Block scope = this.<Block>findParentOfType(simpleName, Block.class);
+    ASTNode scope = this.findDeclarationBlocks(simpleName);
     while ((!Objects.equal(scope, null))) {
       {
         final Type type = this.findDeclaredType(scope, simpleName);
@@ -505,14 +508,27 @@ public class ASTFlattenerUtils {
         if (_notEquals) {
           return type;
         }
-        Block _findParentOfType = this.<Block>findParentOfType(scope, Block.class);
-        scope = _findParentOfType;
+        ASTNode _findDeclarationBlocks = this.findDeclarationBlocks(scope);
+        scope = _findDeclarationBlocks;
       }
     }
     return null;
   }
   
-  private Type findDeclaredType(final Block scope, final SimpleName simpleName) {
+  private ASTNode findDeclarationBlocks(final ASTNode simpleName) {
+    ASTNode block = this.<Block>findParentOfType(simpleName, Block.class);
+    if ((block == null)) {
+      MethodDeclaration _findParentOfType = this.<MethodDeclaration>findParentOfType(simpleName, MethodDeclaration.class);
+      block = _findParentOfType;
+    }
+    if ((block == null)) {
+      TypeDeclaration _findParentOfType_1 = this.<TypeDeclaration>findParentOfType(simpleName, TypeDeclaration.class);
+      block = _findParentOfType_1;
+    }
+    return block;
+  }
+  
+  private Type findDeclaredType(final ASTNode scope, final SimpleName simpleName) {
     final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
     scope.accept(new ASTVisitor() {
       @Override
@@ -557,7 +573,9 @@ public class ASTFlattenerUtils {
       @Override
       public boolean visit(final SingleVariableDeclaration node) {
         SimpleName _name = node.getName();
-        boolean _equals = _name.equals(simpleName);
+        String _identifier = _name.getIdentifier();
+        String _identifier_1 = simpleName.getIdentifier();
+        boolean _equals = _identifier.equals(_identifier_1);
         if (_equals) {
           Type _type = node.getType();
           matchesFound.add(_type);
@@ -568,13 +586,31 @@ public class ASTFlattenerUtils {
     return IterableExtensions.<Type>head(matchesFound);
   }
   
-  private Iterable<Assignment> findAssigmentsInBlock(final Block scope, final Function1<? super Assignment, ? extends Boolean> constraint) {
-    final HashSet<Assignment> assigments = CollectionLiterals.<Assignment>newHashSet();
+  private Iterable<Expression> findAssigmentsInBlock(final Block scope, final Function1<? super Expression, ? extends Boolean> constraint) {
+    final HashSet<Expression> assigments = CollectionLiterals.<Expression>newHashSet();
     boolean _notEquals = (!Objects.equal(scope, null));
     if (_notEquals) {
       scope.accept(new ASTVisitor() {
         @Override
         public boolean visit(final Assignment node) {
+          Boolean _apply = constraint.apply(node);
+          if ((_apply).booleanValue()) {
+            assigments.add(node);
+          }
+          return true;
+        }
+        
+        @Override
+        public boolean visit(final PrefixExpression node) {
+          Boolean _apply = constraint.apply(node);
+          if ((_apply).booleanValue()) {
+            assigments.add(node);
+          }
+          return true;
+        }
+        
+        @Override
+        public boolean visit(final PostfixExpression node) {
           Boolean _apply = constraint.apply(node);
           if ((_apply).booleanValue()) {
             assigments.add(node);
@@ -587,14 +623,34 @@ public class ASTFlattenerUtils {
   }
   
   public Boolean isAssignedInBody(final Block scope, final VariableDeclarationFragment fieldDeclFragment) {
-    final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+    final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
       @Override
-      public Boolean apply(final Assignment it) {
-        Expression _leftHandSide = it.getLeftHandSide();
-        if ((_leftHandSide instanceof Name)) {
-          Expression _leftHandSide_1 = it.getLeftHandSide();
-          final Name simpleName = ((Name) _leftHandSide_1);
-          final IBinding binding = simpleName.resolveBinding();
+      public Boolean apply(final Expression it) {
+        Expression name = null;
+        boolean _matched = false;
+        if (!_matched) {
+          if (it instanceof Assignment) {
+            _matched=true;
+            Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
+            name = _leftHandSide;
+          }
+        }
+        if (!_matched) {
+          if (it instanceof PrefixExpression) {
+            _matched=true;
+            Expression _operand = ((PrefixExpression)it).getOperand();
+            name = _operand;
+          }
+        }
+        if (!_matched) {
+          if (it instanceof PostfixExpression) {
+            _matched=true;
+            Expression _operand = ((PostfixExpression)it).getOperand();
+            name = _operand;
+          }
+        }
+        if ((name instanceof Name)) {
+          final IBinding binding = ((Name)name).resolveBinding();
           if ((binding instanceof IVariableBinding)) {
             boolean _and = false;
             boolean _isField = ((IVariableBinding)binding).isField();
@@ -603,7 +659,7 @@ public class ASTFlattenerUtils {
             } else {
               SimpleName _name = fieldDeclFragment.getName();
               String _identifier = _name.getIdentifier();
-              String _simpleName = ASTFlattenerUtils.this.toSimpleName(simpleName);
+              String _simpleName = ASTFlattenerUtils.this.toSimpleName(((Name)name));
               boolean _equals = _identifier.equals(_simpleName);
               _and = _equals;
             }
@@ -613,26 +669,55 @@ public class ASTFlattenerUtils {
         return Boolean.valueOf(false);
       }
     };
-    Iterable<Assignment> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
+    Iterable<Expression> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
     boolean _isEmpty = IterableExtensions.isEmpty(_findAssigmentsInBlock);
     return Boolean.valueOf((!_isEmpty));
   }
   
   public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
-    final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+    final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
       @Override
-      public Boolean apply(final Assignment it) {
-        Expression _leftHandSide = it.getLeftHandSide();
-        if ((_leftHandSide instanceof SimpleName)) {
-          String _identifier = nameToLookFor.getIdentifier();
-          Expression _leftHandSide_1 = it.getLeftHandSide();
-          String _identifier_1 = ((SimpleName) _leftHandSide_1).getIdentifier();
-          return Boolean.valueOf(_identifier.equals(_identifier_1));
+      public Boolean apply(final Expression it) {
+        Expression simpleName = null;
+        boolean _matched = false;
+        if (!_matched) {
+          if (it instanceof Assignment) {
+            _matched=true;
+            Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
+            simpleName = _leftHandSide;
+          }
+        }
+        if (!_matched) {
+          if (it instanceof PrefixExpression) {
+            _matched=true;
+            Expression _operand = ((PrefixExpression)it).getOperand();
+            simpleName = _operand;
+          }
+        }
+        if (!_matched) {
+          if (it instanceof PostfixExpression) {
+            _matched=true;
+            Expression _operand = ((PostfixExpression)it).getOperand();
+            simpleName = _operand;
+          }
+        }
+        if ((simpleName instanceof SimpleName)) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(simpleName, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _identifier = nameToLookFor.getIdentifier();
+            String _identifier_1 = ((SimpleName)simpleName).getIdentifier();
+            boolean _equals = _identifier.equals(_identifier_1);
+            _and = _equals;
+          }
+          return Boolean.valueOf(_and);
         }
         return Boolean.valueOf(false);
       }
     };
-    Iterable<Assignment> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
+    Iterable<Expression> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
     boolean _isEmpty = IterableExtensions.isEmpty(_findAssigmentsInBlock);
     return Boolean.valueOf((!_isEmpty));
   }
@@ -664,6 +749,31 @@ public class ASTFlattenerUtils {
       return ((List<ASTNode>) _structuralProperty);
     }
     return null;
+  }
+  
+  public boolean needPrimitiveCast(final Type type) {
+    if ((type instanceof PrimitiveType)) {
+      boolean _or = false;
+      boolean _or_1 = false;
+      PrimitiveType.Code _primitiveTypeCode = ((PrimitiveType)type).getPrimitiveTypeCode();
+      boolean _equals = Objects.equal(_primitiveTypeCode, PrimitiveType.CHAR);
+      if (_equals) {
+        _or_1 = true;
+      } else {
+        PrimitiveType.Code _primitiveTypeCode_1 = ((PrimitiveType)type).getPrimitiveTypeCode();
+        boolean _equals_1 = Objects.equal(_primitiveTypeCode_1, PrimitiveType.BYTE);
+        _or_1 = _equals_1;
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        PrimitiveType.Code _primitiveTypeCode_2 = ((PrimitiveType)type).getPrimitiveTypeCode();
+        boolean _equals_2 = Objects.equal(_primitiveTypeCode_2, PrimitiveType.SHORT);
+        _or = _equals_2;
+      }
+      return _or;
+    }
+    return false;
   }
   
   public ASTNode genericChildProperty(final ASTNode node, final String propertyName) {

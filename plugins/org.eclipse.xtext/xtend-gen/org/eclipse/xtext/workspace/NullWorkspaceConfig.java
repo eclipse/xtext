@@ -7,12 +7,19 @@
  */
 package org.eclipse.xtext.workspace;
 
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class NullWorkspaceConfig implements IWorkspaceConfig {
+  @Override
+  public Set<? extends IProjectConfig> getProjects() {
+    return CollectionLiterals.<IProjectConfig>emptySet();
+  }
+  
   @Override
   public IProjectConfig findProjectByName(final String name) {
     return null;

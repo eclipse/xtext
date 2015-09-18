@@ -65,5 +65,9 @@ class GeneratedClassAnnotation implements IClassAnnotation {
 	private def void +=(StringBuilder stringBuilder, String s) {
 		stringBuilder.append(s)
 	}
+	
+	override toString() {
+		generate.toString
+	}
 
 }

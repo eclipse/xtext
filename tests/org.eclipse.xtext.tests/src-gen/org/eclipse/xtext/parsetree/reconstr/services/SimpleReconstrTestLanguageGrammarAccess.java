@@ -1762,8 +1762,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	private final Bug305171Elements pBug305171;
 	private final Bug310435EnumElements pBug310435Enum;
 	private final Bug310435ValElements pBug310435Val;
-	private final EnumBug310435Lit1Elements unknownRuleEnumBug310435Lit1;
-	private final EnumBug310435Lit2Elements unknownRuleEnumBug310435Lit2;
+	private final EnumBug310435Lit1Elements eEnumBug310435Lit1;
+	private final EnumBug310435Lit2Elements eEnumBug310435Lit2;
 	private final CrossRefNameTestElements pCrossRefNameTest;
 	private final CrossRefNamedElements pCrossRefNamed;
 	private final TerminalRule tID1;
@@ -1817,8 +1817,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		this.pBug305171 = new Bug305171Elements();
 		this.pBug310435Enum = new Bug310435EnumElements();
 		this.pBug310435Val = new Bug310435ValElements();
-		this.unknownRuleEnumBug310435Lit1 = new EnumBug310435Lit1Elements();
-		this.unknownRuleEnumBug310435Lit2 = new EnumBug310435Lit2Elements();
+		this.eEnumBug310435Lit1 = new EnumBug310435Lit1Elements();
+		this.eEnumBug310435Lit2 = new EnumBug310435Lit2Elements();
 		this.pCrossRefNameTest = new CrossRefNameTestElements();
 		this.pCrossRefNamed = new CrossRefNamedElements();
 		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID1");
@@ -2247,7 +2247,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//enum EnumBug310435Lit1 returns EnumBug310435Enum:
 	//	lit1;
 	public EnumBug310435Lit1Elements getEnumBug310435Lit1Access() {
-		return unknownRuleEnumBug310435Lit1;
+		return eEnumBug310435Lit1;
 	}
 	
 	public EnumRule getEnumBug310435Lit1Rule() {
@@ -2257,7 +2257,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//enum EnumBug310435Lit2 returns EnumBug310435Enum:
 	//	lit2;
 	public EnumBug310435Lit2Elements getEnumBug310435Lit2Access() {
-		return unknownRuleEnumBug310435Lit2;
+		return eEnumBug310435Lit2;
 	}
 	
 	public EnumRule getEnumBug310435Lit2Rule() {

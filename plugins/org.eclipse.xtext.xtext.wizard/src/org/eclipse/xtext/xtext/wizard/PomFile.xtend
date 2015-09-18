@@ -32,7 +32,7 @@ class PomFile extends TextFile {
 		
 			«buildSection»
 		
-			«IF project.config.buildSystem == BuildSystem.MAVEN»
+			«IF !project.isEclipsePluginProject»
 			<dependencies>
 				«FOR p: project.upstreamProjects»
 					<dependency>
@@ -46,7 +46,9 @@ class PomFile extends TextFile {
 						<groupId>«dep.groupId»</groupId>
 						<artifactId>«dep.artifactId»</artifactId>
 						<version>«dep.version»</version>
-						<scope>«dep.scope.mavenNotation»</scope>
+						«IF dep.scope != Scope.COMPILE»
+							<scope>«dep.scope.mavenNotation»</scope>
+						«ENDIF»
 					</dependency>
 				«ENDFOR»
 			</dependencies>

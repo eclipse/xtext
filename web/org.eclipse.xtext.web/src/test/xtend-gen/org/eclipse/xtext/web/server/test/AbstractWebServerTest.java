@@ -10,10 +10,12 @@ package org.eclipse.xtext.web.server.test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Provider;
 import com.google.inject.util.Modules;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,7 +31,11 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.test.HashMapSessionStore;
 import org.eclipse.xtext.web.server.test.MockRequestData;
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors(AccessorType.PROTECTED_GETTER)
@@ -44,7 +50,7 @@ public class AbstractWebServerTest extends AbstractXtextTests {
     }
   }
   
-  private ExecutorService executorService;
+  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
   
   private AbstractWebServerTest.TestResourceBaseProvider resourceBaseProvider;
   
@@ -58,14 +64,25 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   public void setUp() {
     try {
       super.setUp();
-      ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
-      this.executorService = _newCachedThreadPool;
       AbstractWebServerTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractWebServerTest.TestResourceBaseProvider();
       this.resourceBaseProvider = _testResourceBaseProvider;
       this.with(new StatemachineStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final StatemachineWebModule webModule = new StatemachineWebModule(AbstractWebServerTest.this.executorService);
+          final Provider<ExecutorService> _function = new Provider<ExecutorService>() {
+            @Override
+            public ExecutorService get() {
+              ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
+              final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
+                @Override
+                public void apply(final ExecutorService it) {
+                  AbstractWebServerTest.this.executorServices.add(it);
+                }
+              };
+              return ObjectExtensions.<ExecutorService>operator_doubleArrow(_newCachedThreadPool, _function);
+            }
+          };
+          final StatemachineWebModule webModule = new StatemachineWebModule(_function);
           webModule.setResourceBaseProvider(AbstractWebServerTest.this.resourceBaseProvider);
           Module _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
           Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
@@ -84,7 +101,14 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   @Override
   public void tearDown() {
     try {
-      this.executorService.shutdown();
+      final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
+        @Override
+        public void apply(final ExecutorService it) {
+          it.shutdown();
+        }
+      };
+      IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
+      this.executorServices.clear();
       super.tearDown();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -123,8 +147,8 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   }
   
   @Pure
-  protected ExecutorService getExecutorService() {
-    return this.executorService;
+  protected List<ExecutorService> getExecutorServices() {
+    return this.executorServices;
   }
   
   @Pure

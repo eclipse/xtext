@@ -107,8 +107,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     boolean _hasProductionRules = this.hasProductionRules(_grammar);
     boolean _not = (!_hasProductionRules);
     if (_not) {
-      throw new IllegalArgumentException(
-        "You may not generate an ANTLR parser for a grammar without production rules.");
+      throw new IllegalArgumentException("You may not generate an ANTLR parser for a grammar without production rules.");
     }
   }
   
@@ -293,6 +292,8 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     parserContent = _stripUnnecessaryComments_1;
     String _removeDuplicateBitsets = this.codeQualityHelper.removeDuplicateBitsets(parserContent, this.options);
     parserContent = _removeDuplicateBitsets;
+    String _removeDuplicateDFAs = this.codeQualityHelper.removeDuplicateDFAs(parserContent, this.options);
+    parserContent = _removeDuplicateDFAs;
     fsa.generateFile(parserJavaFile, parserContent);
   }
   

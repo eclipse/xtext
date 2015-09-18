@@ -17,15 +17,15 @@
 		});
 		require(["orion/code_edit/built-codeEdit-amd"], function() {
 			require(['xtext/xtext-orion'], function(xtext) {
-				xtext.createEditor().done(function(editorViewer) {
+				xtext.createEditor({syntaxDefinition: "xtext/statemachine-syntax"}).done(function(editorViewer) {
 					$('#save-button').click(function() {
 						editorViewer.xtextServices.saveResource();
 					});
 					$('#revert-button').click(function() {
 						editorViewer.xtextServices.revertResource();
 					});
-					editorViewer.xtextServices.successListeners.push(function(requestType, result) {
-						if (requestType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
+					editorViewer.xtextServices.successListeners.push(function(serviceType, result) {
+						if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
 							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example.statemachine"></iframe>');
 						}
 					});

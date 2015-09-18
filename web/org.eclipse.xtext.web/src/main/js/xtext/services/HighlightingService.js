@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for semantic highlighting.
 	 */
-	function HighlightingService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'highlight');
+	function HighlightingService(serviceUrl, resourceId) {
+		this.initialize(serviceUrl, 'highlight', resourceId);
 	};
 
 	HighlightingService.prototype = new XtextService();

@@ -23,8 +23,6 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
-import static org.junit.Assert.*
-
 /**
  * @author dhuebner - Initial contribution and API
  */

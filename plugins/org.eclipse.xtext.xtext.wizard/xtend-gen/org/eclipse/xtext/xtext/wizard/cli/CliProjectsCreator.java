@@ -2,15 +2,16 @@ package org.eclipse.xtext.xtext.wizard.cli;
 
 import com.google.common.io.Files;
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.Set;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.wizard.GeneratedFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
+import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
@@ -31,10 +32,10 @@ public class CliProjectsCreator implements ProjectsCreator {
     String _location = project.getLocation();
     final File projectRoot = new File(_location);
     projectRoot.mkdirs();
-    Iterable<? extends GeneratedFile> _files = project.getFiles();
-    final Procedure1<GeneratedFile> _function = new Procedure1<GeneratedFile>() {
+    Iterable<? extends TextFile> _files = project.getFiles();
+    final Procedure1<TextFile> _function = new Procedure1<TextFile>() {
       @Override
-      public void apply(final GeneratedFile it) {
+      public void apply(final TextFile it) {
         try {
           WizardConfiguration _config = project.getConfig();
           SourceLayout _sourceLayout = _config.getSourceLayout();
@@ -46,8 +47,10 @@ public class CliProjectsCreator implements ProjectsCreator {
           final File file = new File(projectRoot, projectRelativePath);
           File _parentFile = file.getParentFile();
           _parentFile.mkdirs();
-          byte[] _bytes = it.getBytes();
-          Files.write(_bytes, file);
+          String _content = it.getContent();
+          WizardConfiguration _config_1 = project.getConfig();
+          Charset _encoding = _config_1.getEncoding();
+          Files.write(_content, file, _encoding);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

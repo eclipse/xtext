@@ -21,18 +21,46 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @EqualsHashCode
 @SuppressWarnings("all")
 public class ContentAssistEntry {
+  /**
+   * The prefix that should be replaced with this proposal.
+   */
   private String prefix;
   
+  /**
+   * The proposed text to be inserted.
+   */
   private String proposal;
   
+  /**
+   * The text seen by the user in the list of proposals.
+   */
   private String label;
   
+  /**
+   * Additional description to include in the list of proposals.
+   * <p>This property may not be supported by all editor frameworks.</p>
+   */
   private String description;
   
-  private int escapePosition;
+  /**
+   * The absolute cursor position to apply after the proposal has been inserted.
+   * If omitted, the cursor it set to the end of the inserted proposal.
+   * <p>This property may not be supported by all editor frameworks.</p>
+   */
+  private Integer escapePosition;
   
+  /**
+   * Additional text replacements to apply when this proposal is selected.
+   * <p>This property may not be supported by all editor frameworks.</p>
+   */
   private final ArrayList<ReplaceRegion> textReplacements = new ArrayList<ReplaceRegion>();
   
+  /**
+   * Regions to be edited by the user after the proposal has been inserted.
+   * Usually the <em>tab</em> key navigates through the edit positions, and <em>enter</em>
+   * jumps to the {@code escapePosition}.
+   * <p>This property may not be supported by all editor frameworks.</p>
+   */
   private final ArrayList<TextRegion> editPositions = new ArrayList<TextRegion>();
   
   @Pure
@@ -72,11 +100,11 @@ public class ContentAssistEntry {
   }
   
   @Pure
-  public int getEscapePosition() {
+  public Integer getEscapePosition() {
     return this.escapePosition;
   }
   
-  public void setEscapePosition(final int escapePosition) {
+  public void setEscapePosition(final Integer escapePosition) {
     this.escapePosition = escapePosition;
   }
   
@@ -135,7 +163,10 @@ public class ContentAssistEntry {
         return false;
     } else if (!this.description.equals(other.description))
       return false;
-    if (other.escapePosition != this.escapePosition)
+    if (this.escapePosition == null) {
+      if (other.escapePosition != null)
+        return false;
+    } else if (!this.escapePosition.equals(other.escapePosition))
       return false;
     if (this.textReplacements == null) {
       if (other.textReplacements != null)
@@ -159,7 +190,7 @@ public class ContentAssistEntry {
     result = prime * result + ((this.proposal== null) ? 0 : this.proposal.hashCode());
     result = prime * result + ((this.label== null) ? 0 : this.label.hashCode());
     result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
-    result = prime * result + this.escapePosition;
+    result = prime * result + ((this.escapePosition== null) ? 0 : this.escapePosition.hashCode());
     result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
     result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());
     return result;

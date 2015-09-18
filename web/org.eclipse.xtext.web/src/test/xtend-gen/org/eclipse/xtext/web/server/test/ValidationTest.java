@@ -26,7 +26,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ValidationTest extends AbstractWebServerTest {
   protected void assertValidationResult(final String resourceContent, final String expectedResult) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validate");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "validate");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", resourceContent);
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     boolean _isHasSideEffects = validate.isHasSideEffects();
@@ -151,7 +151,7 @@ public class ValidationTest extends AbstractWebServerTest {
   @Test
   public void testValidateFile() {
     final File file = this.createFile("stat foo end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validate");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "validate");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
@@ -201,7 +201,7 @@ public class ValidationTest extends AbstractWebServerTest {
   @Test
   public void testIncorrectStateId() {
     final File file = this.createFile("state foo end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validate");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "validate");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requiredStateId", "totalerquatsch");

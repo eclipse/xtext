@@ -266,7 +266,7 @@ RULE_ML_COMMENT : '<!--' ( options {greedy=false;} : . )*'-->';
 
 RULE_START_TAG : RULE_LT RULE_ID;
 
-RULE_LT : '<';
+fragment RULE_LT : '<';
 
 RULE_GT : '>';
 
@@ -274,7 +274,7 @@ RULE_EQ : '=';
 
 RULE_END_TAG_SHORT : '/>';
 
-RULE_END_TAG_START : '</';
+fragment RULE_END_TAG_START : '</';
 
 RULE_END_TAG : RULE_END_TAG_START RULE_ID RULE_GT;
 
