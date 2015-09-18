@@ -351,6 +351,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		if (codeQualityHelper != null) {
 			codeQualityHelper.stripUnnecessaryComments(lexerJavaFile, parserJavaFile, encoding);
 			codeQualityHelper.removeDuplicateBitsets(parserJavaFile, encoding);
+			codeQualityHelper.removeDuplicateDFAs(parserJavaFile, encoding);
 		}
 		if (getOptions().isClassSplitting()) {
 			try {
