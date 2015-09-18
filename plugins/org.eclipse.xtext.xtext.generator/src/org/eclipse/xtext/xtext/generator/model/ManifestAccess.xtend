@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.internal.Log
 
 @Log
 @Accessors
@@ -99,5 +103,16 @@ class ManifestAccess extends TextFileAccess {
 			Bundle-Activator: «activator»
 		«ENDIF»
 	'''
+	
+	override void writeTo(IFileSystemAccess2 fileSystemAccess) {
+		if (fileSystemAccess != null) {
+			val contentToWrite = MergeableManifest.make512Safe(new StringBuffer(content))
+			// make sure all the constraints for the manifest are respected
+			val mergableManifest = new MergeableManifest(new ByteArrayInputStream(contentToWrite.getBytes("UTF-8")))
+			var bout = new ByteArrayOutputStream()
+			mergableManifest.write(bout)
+			fileSystemAccess.generateFile(path, new ByteArrayInputStream(bout.toByteArray))
+		}
+	}
 	
 }
