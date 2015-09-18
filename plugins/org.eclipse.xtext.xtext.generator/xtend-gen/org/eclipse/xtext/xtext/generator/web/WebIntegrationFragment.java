@@ -2137,7 +2137,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append(".CONTAINER_JAR_PATTERN, \'.*/");
         Grammar _grammar_1 = WebIntegrationFragment.this.getGrammar();
         String _webBasePackage = WebIntegrationFragment.this._xtextGeneratorNaming.getWebBasePackage(_grammar_1);
-        String _replace_1 = _webBasePackage.replace(".", "\\.");
+        String _replace_1 = _webBasePackage.replace(".", "\\\\.");
         _builder.append(_replace_1, "\t\t\t");
         _builder.append(".*,.*/org\\\\.eclipse\\\\.xtext\\\\.web.*,.*/org\\\\.webjars.*\')");
         _builder.newLineIfNotEmpty();
