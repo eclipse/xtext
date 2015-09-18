@@ -532,6 +532,16 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testToGetterWithNullTypeRef() {
+    try {
+      final XExpression e = this.expression("\'\'");
+      this._jvmTypesBuilder.toGetter(e, "foo", null);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testInitializeSafely_0() {
     final Runnable _function = new Runnable() {
       @Override
