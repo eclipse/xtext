@@ -28,6 +28,7 @@ import org.eclipse.xtext.generator.NamingAware;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
+import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.util.Strings;
 
@@ -47,6 +48,8 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	private boolean runtime;
 
 	private boolean contentAssist;
+	
+	private boolean classSplitting = false;
 
 	private List<String> antlrParams = Lists.newArrayList();
 	
@@ -113,10 +116,23 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 		addAntlrParam(generateTo);
 		final String encoding = getEncoding(ctx, srcGen);
 		getAntlrTool().runWithEncodingAndParams(grammarFile, encoding, getAntlrParams());
-
+		Charset charset = Charset.forName(encoding);
 		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
-		suppressWarningsImpl(javaFile, Charset.forName(encoding));
-		normalizeTokens(javaFile, Charset.forName(encoding));
+		splitLexerIfEnabled(javaFile, charset);
+		suppressWarningsImpl(javaFile, charset);
+		normalizeTokens(javaFile, charset);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected void splitLexerIfEnabled(String lexerJavaFile, Charset encoding) {
+		if (isClassSplitting()) {
+			String content = readFileIntoString(lexerJavaFile, encoding);
+			AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
+			splitter.setAllowDFAStaticClasses(false);
+			writeStringIntoFile(lexerJavaFile, splitter.transform(), encoding);
+		}
 	}
 	
 	private void normalizeTokens(String grammarFileName, Charset encoding) {
@@ -249,6 +265,21 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	public boolean isContentAssist() {
 		return contentAssist;
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public boolean isClassSplitting() {
+		return classSplitting;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setClassSplitting(boolean value) {
+		this.classSplitting = value;
+	}
+
 	
 	private String readFileIntoString(String filename, Charset encoding) {
 		try {
