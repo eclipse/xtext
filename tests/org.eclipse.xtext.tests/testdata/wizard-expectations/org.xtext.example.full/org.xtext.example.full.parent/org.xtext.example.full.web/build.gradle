@@ -1,0 +1,20 @@
+plugins {
+	id 'war'
+}
+dependencies {
+	compile project(':org.xtext.example.full')
+	compile project(':org.xtext.example.full.ide')
+	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
+	compile "org.webjars:requirejs:2.1.17"
+	compile "org.webjars:jquery:2.1.4"
+	compile "org.webjars:ace:1.1.9"
+	providedCompile "org.eclipse.jetty:jetty-annotations:9.2.11.v20150529"
+	providedCompile "org.slf4j:slf4j-simple:1.7.12"
+}
+task jettyRun(type:JavaExec) {
+	dependsOn(sourceSets.main.runtimeClasspath)
+	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
+	main = "org.xtext.example.mydsl.web.ServerLauncher"
+	standardInput = System.in
+}
