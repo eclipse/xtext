@@ -33,6 +33,8 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuar
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
+import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess;
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -90,7 +92,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		String[] result = params.toArray(new String[params.size()]);
 		return result;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -106,8 +108,12 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		checkGrammar(grammar);
-		RuleNames.ensureAdapterInstalled(grammar);
-		super.generate(grammar, ctx);
+
+		RuleFilter filter = new RuleFilter();
+		filter.setDiscardUnreachableRules(getOptions().isSkipUnusedRules());
+		RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
+		Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+		super.generate(flattened, ctx);
 	}
 
 	/**
@@ -135,7 +141,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 		writeStringIntoFile(filename, splitter.transform(), encoding);
 	}
-	
+
 	/**
 	 * @deprecated use {@link #splitLexerClassFile(String, Charset)} instead.
 	 */
@@ -153,7 +159,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		PartialClassExtractor extractor = new PartialClassExtractor(splitter.transform(), getOptions().getMethodsPerClass());
 		writeStringIntoFile(filename, extractor.transform(), encoding);
 	}
-	
+
 	/**
 	 * @deprecated use {@link #splitParserClassFile(String, Charset)} instead.
 	 */
@@ -175,7 +181,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
@@ -187,7 +193,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @deprecated use {@link #simplifyUnorderedGroupPredicatesIfRequired(Grammar, String, Charset)} instead.
 	 */
@@ -213,7 +219,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		String newContent = remover.transform();
 		writeStringIntoFile(javaFile, newContent, encoding);
 	}
-	
+
 	/**
 	 * @deprecated use {@link #simplifyUnorderedGroupPredicates(String, Charset)} instead.
 	 */
@@ -242,7 +248,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		suppressWarningsImpl(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()), encoding);
 		suppressWarningsImpl(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()), encoding);
 	}
-	
+
 	/**
 	 * @deprecated use {@link #suppressWarnings(String, Charset)} instead.
 	 */
@@ -258,7 +264,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void suppressWarnings(String absoluteLexerGrammarFileName, String absoluteParserGrammarFileName) {
 		suppressWarnings(absoluteLexerGrammarFileName, absoluteParserGrammarFileName, Charset.defaultCharset());
 	}
-	
+
 	private void normalizeLineDelimitersImpl(String textFile, Charset encoding) {
 		String content = readFileIntoString(textFile, encoding);
 		content = new NewlineNormalizer(getLineDelimiter()) {
@@ -282,7 +288,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected String getLineDelimiter() {
 		return getNaming().getLineDelimiter();
 	}
-	
+
 	/**
 	 * @since 2.7
 	 */
@@ -302,11 +308,11 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		content = Strings.concat(getLineDelimiter(), splitted) + getLineDelimiter();
 		writeStringIntoFile(tokenFile, content, encoding);
 	}
-	
+
 	private String toTokenFileName(String grammarFileName) {
 		return grammarFileName.replaceAll("\\.g$", ".tokens");
 	}
-	
+
 	/**
 	 * @since 2.7
 	 */
@@ -345,12 +351,13 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		String lexerContent = readFileIntoString(lexerJavaFile, encoding);
 		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, getOptions().delegate);
 		writeStringIntoFile(lexerJavaFile, lexerContent, encoding);
-		
+
 		String parserContent = readFileIntoString(parserJavaFile, encoding);
 		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, getOptions().delegate);
 		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, getOptions().delegate);
+		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, getOptions().delegate);
 		writeStringIntoFile(parserJavaFile, parserContent, encoding);
-		
+
 	}
 
 	/**
@@ -359,7 +366,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void splitParserAndLexerIfEnabled(String absoluteGrammarFileName, Charset encoding) {
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName, absoluteGrammarFileName, encoding);
 	}
-	
+
 	/**
 	 * @deprecated use {@link #splitParserAndLexerIfEnabled(String, String, Charset)} instead.
 	 */

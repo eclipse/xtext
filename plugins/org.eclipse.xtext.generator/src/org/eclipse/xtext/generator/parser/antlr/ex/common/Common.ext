@@ -17,7 +17,7 @@ extension org::eclipse::xtext::generator::parser::antlr::AntlrGrammar;
 // These are candidates for genParameters of the parser's GenService 
 
 String getKeywordRuleName(EObject ctx, String keyword):
-	getHelper(ctx).getRuleName(keyword);
+	getHelper(originalElement(ctx)).getRuleName(keyword);
 	
 KeywordHelper getHelper(EObject ctx):
 	JAVA org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper.getHelper(org.eclipse.emf.ecore.EObject);
@@ -32,4 +32,4 @@ String toAntlrKeywordRule(String this, org::eclipse::xtext::generator::parser::a
 	options.ignoreCase? toAntlrTerminalIgnoreCase() : toAntlrTerminalCaseSenstive();
 
 allKeywords(Grammar this):
-	getHelper().allKeywords;
+	originalElement().getHelper().allKeywords;

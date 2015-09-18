@@ -37,6 +37,34 @@ public class AntlrGrammarGenUtil {
 	/**
 	 * @since 2.9
 	 */
+	public static String getEntryRuleName(ParserRule rule) {
+		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getEntryRuleName(rule);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static boolean isValidEntryRule(ParserRule rule) {
+		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.isValidEntryRule(rule);
+	}
+	/**
+	 * @since 2.9
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> T getOriginalElement(T obj) {
+		return (T) org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getOriginalElement(obj);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public static int getParameterConfig(ParserRule rule) {
+		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterConfig(rule);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
 	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
 		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterList(rule, skipCurrent);
 	}
@@ -82,7 +110,7 @@ public class AntlrGrammarGenUtil {
 	public static String getQualifiedNameAsString(RuleCall ruleCall) {
 		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getQualifiedNameAsString(ruleCall);
 	}
-
+	
 	public static String toAntlrString(String string) {
 		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.toAntlrString(string);
 	}

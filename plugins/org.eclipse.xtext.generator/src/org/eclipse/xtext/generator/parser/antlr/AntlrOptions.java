@@ -9,7 +9,6 @@
 package org.eclipse.xtext.generator.parser.antlr;
 
 public class AntlrOptions {
-
 	org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions delegate = new org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions();
 
 	public boolean isBacktrack() {
@@ -98,13 +97,26 @@ public class AntlrOptions {
 	/**
 	 * @since 2.9
 	 */
+	public boolean isSkipUnusedRules() {
+		return delegate.isSkipUnusedRules();
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public void setStripAllComments(boolean stripAllComments) {
+		delegate.setStripAllComments(stripAllComments);
+	}
+
+	/**
+	 * @since 2.9
+	 */
 	public boolean isOptimizeCodeQuality() {
 		return delegate.isOptimizeCodeQuality();
 	}
 
 	/**
-	 * @since 2.9
-	 * Whether to strip unnecessary comments and remove duplicate bitsets
+	 * @since 2.9 Whether to strip unnecessary comments and remove duplicate bitsets
 	 */
 	public void setOptimizeCodeQuality(boolean optimizeCodeQuality) {
 		delegate.setOptimizeCodeQuality(optimizeCodeQuality);
@@ -118,8 +130,7 @@ public class AntlrOptions {
 	}
 
 	/**
-	 * @since 2.9
-	 * When removing bitsets, the ones matching this pattern will be kept
+	 * @since 2.9 When removing bitsets, the ones matching this pattern will be kept
 	 */
 	public void setKeptBitSetsPattern(String keptBitSetsPattern) {
 		delegate.setKeptBitSetsPattern(keptBitSetsPattern);
@@ -133,11 +144,24 @@ public class AntlrOptions {
 	}
 
 	/**
-	 * @since 2.9
-	 * Allows to rename bitsets kept by {@link #setKeptBitSetsPattern(String)}
+	 * @since 2.9 Allows to rename bitsets kept by {@link #setKeptBitSetsPattern(String)}
 	 */
 	public void setKeptBitSetName(String keptBitSetName) {
 		delegate.setKeptBitSetName(keptBitSetName);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public void setSkipUnusedRules(boolean skipUnusedRules) {
+		delegate.setSkipUnusedRules(skipUnusedRules);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public boolean isStripAllComments() {
+		return delegate.isStripAllComments();
 	}
 
 }

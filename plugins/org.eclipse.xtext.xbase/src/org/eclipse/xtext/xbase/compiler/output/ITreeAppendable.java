@@ -58,6 +58,12 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	@Override
 	ITreeAppendable append(LightweightTypeReference typeRef);
 	
+	/**
+	 * Appends the specified character sequence to this <tt>ITreeAppendable</tt>.
+	 * 
+	 * @param content - not <code>null</code>
+	 * @param a reference to an ITreeAppendable where the given content got appended
+	 */
 	@Override
 	ITreeAppendable append(CharSequence content);
 	

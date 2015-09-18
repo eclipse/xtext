@@ -17,5 +17,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(GeneratorConfigProvider.class)
 public interface IGeneratorConfigProvider {
 
-	public GeneratorConfig get(EObject context);
+	/**
+	 * @return {@link GeneratorConfig} never <code>null</code>
+	 */
+	public /*@NonNull*/ GeneratorConfig get(EObject context);
 }
