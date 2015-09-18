@@ -317,7 +317,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 				«IF grammar.inheritsXbase»
 					matchingStrategy="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
 				«ENDIF»
-				name="«» Editor">
+				name="«it.simpleName» Editor">
 			</editor>
 		</extension>
 		<extension

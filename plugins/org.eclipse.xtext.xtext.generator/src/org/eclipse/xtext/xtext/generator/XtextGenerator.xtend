@@ -89,8 +89,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			LOG.info('Initializing Xtext generator')
 			injector = createInjector
 			injector.injectMembers(this)
-			projectConfig.initialize(injector)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
+			projectConfig.initialize(injector)
 			for (language : languageConfigs) {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)

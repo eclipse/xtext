@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.internal.Log
 
 @Log
 @Accessors
@@ -69,7 +73,21 @@ class ManifestAccess extends TextFileAccess {
 		}
 		this.exportedPackages.addAll(other.exportedPackages)
 		this.requiredBundles.addAll(other.requiredBundles)
+		if (symbolicName != null) {
+			this.requiredBundles.remove(effectiveSymbolicName)
+		}
 		this.importedPackages.addAll(other.importedPackages)
+	}
+	
+	def getEffectiveSymbolicName() {
+		if (symbolicName === null) {
+			return null
+		}
+		val idx = symbolicName.indexOf(';')
+		if (idx < 0) {
+			return symbolicName
+		}
+		return symbolicName.substring(0, idx)
 	}
 	
 	override setContent(StringConcatenationClient content) {
@@ -80,7 +98,7 @@ class ManifestAccess extends TextFileAccess {
 		Manifest-Version: 1.0
 		Bundle-ManifestVersion: 2
 		Bundle-Name: «bundleName»
-		Bundle-SymbolicName: «symbolicName ?: bundleName»; singleton:=true
+		Bundle-SymbolicName: «symbolicName ?: bundleName»;singleton:=true
 		«IF !version.nullOrEmpty»
 			Bundle-Version: «version»
 		«ENDIF»
@@ -90,7 +108,7 @@ class ManifestAccess extends TextFileAccess {
 			Export-Package: «FOR pack : exportedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
 		«ENDIF»
 		«IF !requiredBundles.empty»
-			Require-Bundle: «FOR bundle : requiredBundles.sort SEPARATOR ',\n '»«bundle»«ENDFOR»
+			Require-Bundle: «FOR bundle : requiredBundles.sort.filter[it != effectiveSymbolicName] SEPARATOR ',\n '»«bundle»«ENDFOR»
 		«ENDIF»
 		«IF !importedPackages.empty»
 			Import-Package: «FOR pack : importedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
@@ -99,5 +117,16 @@ class ManifestAccess extends TextFileAccess {
 			Bundle-Activator: «activator»
 		«ENDIF»
 	'''
+	
+	override void writeTo(IFileSystemAccess2 fileSystemAccess) {
+		if (fileSystemAccess != null) {
+			val contentToWrite = MergeableManifest.make512Safe(new StringBuffer(content))
+			// make sure all the constraints for the manifest are respected
+			val mergableManifest = new MergeableManifest(new ByteArrayInputStream(contentToWrite.getBytes("UTF-8")))
+			var bout = new ByteArrayOutputStream()
+			mergableManifest.write(bout)
+			fileSystemAccess.generateFile(path, new ByteArrayInputStream(bout.toByteArray))
+		}
+	}
 	
 }

@@ -69,9 +69,9 @@ class WizardConfig extends XtextProjectConfig {
 		if (runtimeSrcGen === null)
 			runtimeSrcGen = runtimeRoot.path  + '/' + srcGen
 		if (runtimeManifest === null)
-			runtimeManifest = new ManifestAccess
+			runtimeManifest = injector.getInstance(ManifestAccess)
 		if (runtimePluginXml === null)
-			runtimePluginXml = new PluginXmlAccess
+			runtimePluginXml = injector.getInstance(PluginXmlAccess)
 			
 		if (testingSupport) {
 			if (runtimeTestRoot === null)
@@ -87,7 +87,7 @@ class WizardConfig extends XtextProjectConfig {
 			if (runtimeTestSrcGen === null)
 				runtimeTestSrcGen = runtimeTestRoot.path + '/' + testSrcGen
 			if (runtimeTestManifest === null)
-				runtimeTestManifest = new ManifestAccess
+				runtimeTestManifest = injector.getInstance(ManifestAccess)
 		}
 		
 		if (eclipseEditor) {
@@ -100,9 +100,9 @@ class WizardConfig extends XtextProjectConfig {
 			if (eclipsePluginSrcGen === null)
 				eclipsePluginSrcGen = eclipsePluginRoot.path + '/' + srcGen
 			if (eclipsePluginManifest === null)
-				eclipsePluginManifest = new ManifestAccess
+				eclipsePluginManifest = injector.getInstance(ManifestAccess)
 			if (eclipsePluginPluginXml === null)
-				eclipsePluginPluginXml = new PluginXmlAccess
+				eclipsePluginPluginXml = injector.getInstance(PluginXmlAccess)
 				
 			if (testingSupport) {
 				if (eclipsePluginTestRoot === null)
@@ -114,7 +114,7 @@ class WizardConfig extends XtextProjectConfig {
 				if (eclipsePluginTestSrcGen === null)
 					eclipsePluginTestSrcGen = eclipsePluginTestRoot.path + '/' + testSrcGen
 				if (eclipsePluginTestManifest === null)
-					eclipsePluginTestManifest = new ManifestAccess
+					eclipsePluginTestManifest = injector.getInstance(ManifestAccess)
 			}
 		}
 		
@@ -150,7 +150,7 @@ class WizardConfig extends XtextProjectConfig {
 			if (genericIdeSrcGen === null)
 				genericIdeSrcGen = genericIdeRoot.path + '/' + srcGen
 			if (genericIdeManifest === null)
-				genericIdeManifest = new ManifestAccess
+				genericIdeManifest = injector.getInstance(ManifestAccess)
 		}
 		
 		super.initialize(injector)
