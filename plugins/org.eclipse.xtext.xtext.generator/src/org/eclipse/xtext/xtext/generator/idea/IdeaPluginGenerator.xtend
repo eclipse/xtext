@@ -10,8 +10,6 @@ package org.eclipse.xtext.xtext.generator.idea
 import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
-import com.google.inject.Injector
-import com.google.inject.Module
 import com.google.inject.Singleton
 import com.google.inject.name.Names
 import java.io.InputStream
@@ -48,10 +46,12 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 
 class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector
+	@Inject extension GrammarNaming
 	
 	@Inject
 	extension IdeaPluginExtension
@@ -92,7 +92,9 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider'.typeRef, grammar.elementTypeProvider)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration'.typeRef, grammar.facetConfiguration)
 		bindFactory.addTypeToInstance('com.intellij.facet.FacetTypeId'.typeRef, '''«grammar.facetType».TYPEID''')
-		
+		bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, grammar.contentAssistParserClass)
+		bindFactory.addConfiguredBinding('ContentAssistLexer',
+			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«grammar.internalContentAssistLexerClass».class);''')
 		if (grammar.inheritsXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider'.typeRef, 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider'.typeRef, 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider'.typeRef)
@@ -105,6 +107,9 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.BlockFactory'.typeRef, 'org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.ChildAttributesProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider'.typeRef)
 		}
 
 		bindFactory.contributeTo(language.ideaGenModule)
@@ -134,7 +139,6 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			grammar.compileSemanticHighlightVisitor,
 			grammar.compileExtensionFactory,
 			grammar.compileCodeBlockModificationListener,
-			grammar.compileElementDescriptionProvider,
 			grammar.compilePsiParser,
 			grammar.compileAntlrTokenFileProvider,
 			grammar.compilePomDeclarationSearcher,
@@ -144,16 +148,13 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			writeTo(projectConfig.ideaPluginSrcGen)
 		]
 
-//		TODO META-INF FSA
-//		var output = new OutputImpl();
-//		output.addOutlet(PLUGIN, false, ideaProjectPath);
-//		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
-//		output.addOutlet(META_INF_PLUGIN_GEN, true, ideaProjectPath + "/META-INF");
-//		
-//		if (deployable) {
-//			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
-//			output.writeFile(META_INF_PLUGIN_GEN, "plugin_gen.xml", grammar.compilePluginGenXml)
-//		}
+		if (deployable) {
+			val pluginXml = grammar.compilePluginXml
+			if (!projectConfig.ideaPluginMetaInf.isFile(pluginXml.path)) {
+				pluginXml.writeTo(projectConfig.ideaPluginMetaInf)
+			}
+			grammar.compilePluginGenXml.writeTo(projectConfig.ideaPluginMetaInf)
+		}
 	}
 	
 	def iml() {
@@ -161,8 +162,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	}
 	
 	def compileExtensionFactory(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.extensionFactory)
-		file. javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.extensionFactory, '''
 			public class «grammar.extensionFactory.simpleName» implements «"com.intellij.openapi.extensions.ExtensionFactory".typeRef» {
 				@Override
 				public Object createInstance(«String» factoryArgument, «String» implementationClass) {
@@ -175,12 +175,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					return «grammar.ideaLanguage».INSTANCE.<Object> getInstance(clazz);
 				}
 			}
-		'''
-		file
+		''')
 	}
 	def compileCodeBlockModificationListener(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.codeBlockModificationListener)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.codeBlockModificationListener, '''
 			public class «grammar.codeBlockModificationListener.simpleName» extends «"org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener".typeRef» {
 			
 				public «grammar.codeBlockModificationListener.simpleName»(«"com.intellij.psi.util.PsiModificationTracker".typeRef» psiModificationTracker) {
@@ -193,37 +191,21 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				«ENDIF»
 			
 			}
-		'''
-		file
-	}
-	
-	def compileElementDescriptionProvider(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.elementDescriptionProvider)
-		file.javaContent = '''
-			public class «grammar.elementDescriptionProvider.simpleName» extends «"org.eclipse.xtext.psi.BaseXtextElementDescriptionProvider".typeRef» {
-				public «grammar.elementDescriptionProvider.simpleName»() {
-					super(«grammar.ideaLanguage».INSTANCE);
-				}
-			}
-		'''
-		file
+		''')
 	}
 	
 	def compilePomDeclarationSearcher(Grammar it) {
-		val file = fileAccessFactory.createJavaFile(pomDeclarationSearcher)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(pomDeclarationSearcher, '''
 			public class «pomDeclarationSearcher.simpleName» extends «"org.eclipse.xtext.idea.pom.AbstractXtextPomDeclarationSearcher".typeRef» {
 				public «pomDeclarationSearcher.simpleName»() {
 					super(«grammar.ideaLanguage».INSTANCE);
 				}
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compilePsiParser(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.psiParser)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.psiParser, '''
 			public class «grammar.psiParser.simpleName» extends «"org.eclipse.xtext.idea.parser.AbstractXtextPsiParser".typeRef» {
 				«IF !grammar.initialHiddenTokens.empty»
 				private static final «Set»<«String»> INITIAL_HIDDEN_TOKENS = new «HashSet»<«String»>(«Arrays».asList(«FOR hidden:grammar.initialHiddenTokens SEPARATOR ', '»"«hidden»"«ENDFOR»));
@@ -246,13 +228,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					return INITIAL_HIDDEN_TOKENS;
 				}
 			}
-		'''
-		file
+		''')
 	}
 		
 	def compileAntlrTokenFileProvider(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.antlrTokenFileProvider)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.antlrTokenFileProvider, '''
 			public class «grammar.antlrTokenFileProvider.simpleName» implements «IAntlrTokenFileProvider» {
 				@«Override»
 				public «InputStream» getAntlrTokenFile() {
@@ -260,13 +240,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			    	return classLoader.getResourceAsStream("«grammar.tokens»");
 				}
 			}
-		'''
-		file
+		''')
 	}
 	def compilePluginXml(Grammar grammar) {
-		val file = fileAccessFactory.createTextFile
-		file.path = "plugin.xml"
-		file.content = '''
+		fileAccessFactory.createTextFile("plugin.xml", '''
 			<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 				<id>«grammar.ideaBasePackage»</id>
 				<name>«grammar.simpleName» Support</name>
@@ -281,14 +258,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			
 				<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 			</idea-plugin>
-		'''
-		file
+		''')
 	}
 	
-	def compilePluginGenXml(Grammar grammar, String fileExtension){
-		val file = fileAccessFactory.createTextFile
-		file.path = "plugin.xml"
-		file.content = '''
+	def compilePluginGenXml(Grammar grammar){
+		fileAccessFactory.createTextFile("plugin_gen.xml", '''
 			<idea-plugin version="2">
 				<extensions defaultExtensionNs="org.eclipse.xtext.idea">
 					«FOR generatedMetamodel:grammar.metamodelDeclarations.filter(GeneratedMetamodel)»
@@ -298,12 +272,12 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 						/>
 				    «ENDFOR»
 					<resourceFactory 
-						type="«fileExtension»"
+						type="«language.fileExtensions.head»"
 						class="org.eclipse.xtext.resource.IResourceFactory"
 						factoryClass="«grammar.extensionFactory»"
 					/>
 					<resourceServiceProvider
-						uriExtension="«fileExtension»"
+						uriExtension="«language.fileExtensions.head»"
 						class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
 						factoryClass="«grammar.extensionFactory»"
 					/>
@@ -328,11 +302,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					«grammar.compileExtension('lang.braceMatcher', 'com.intellij.lang.PairedBraceMatcher'.typeRef)»
 					«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator'.typeRef)»
 					<completion.contributor language="«grammar.languageID»" implementationClass="«grammar.completionContributor»"/>
-					<elementDescriptionProvider implementation="«grammar.elementDescriptionProvider»" order="first"/>
 					<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcher»"/>
 
 					«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory'.typeRef)»
 					<facetType implementation="«grammar.facetType»"/>
+			      	«grammar.compileExtension('lang.documentationProvider', 'org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider'.typeRef)»
 					<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
 					<highlightVisitor implementation="«grammar.semanticHighlightVisitor»"/>
 
@@ -340,8 +314,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					«grammar.compileExtension('lang.commenter', 'com.intellij.lang.CodeDocumentationAwareCommenter'.typeRef)»
 				</extensions>
 			</idea-plugin>
-		'''
-		file
+		''')
 	}
 	
 	def compileExtension(Grammar grammar, String extensionPointId, TypeReference implementationClass) '''
@@ -353,8 +326,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	'''
 	
 	def compileFileImpl(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.fileImpl)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.fileImpl, '''
 			public final class «grammar.fileImpl.simpleName» extends «"org.eclipse.xtext.psi.impl.BaseXtextFile".typeRef» {
 			
 				public «grammar.fileImpl.simpleName»(«"com.intellij.psi.FileViewProvider".typeRef» viewProvider) {
@@ -366,12 +338,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					return «grammar.fileType».INSTANCE;
 				}
 			}
-		'''
-		file
+		''')
 	}
 	def compileFileTypeFactory(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.fileTypeFactory)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.fileTypeFactory, '''
 			public class «grammar.fileTypeFactory.simpleName» extends «"com.intellij.openapi.fileTypes.FileTypeFactory".typeRef» {
 			
 				@Override
@@ -380,13 +350,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileAbstractFileType(Grammar grammar, String fileExtension) {
-		val file = fileAccessFactory.createJavaFile(grammar.abstractFileType)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.abstractFileType, '''
 			public class «grammar.abstractFileType.simpleName» extends «"com.intellij.openapi.fileTypes.LanguageFileType".typeRef» {
 			
 				@«"org.jetbrains.annotations.NonNls".typeRef» 
@@ -417,13 +385,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileFileType(Grammar grammar) {
-		val file = fileAccessFactory.createXtendFile(grammar.fileType)
-		file.javaContent = '''
+		fileAccessFactory.createXtendFile(grammar.fileType, '''
 			class «grammar.fileType.simpleName» extends «grammar.abstractFileType» {
 				public static final «grammar.fileType.simpleName» INSTANCE = new «grammar.fileType.simpleName»()
 				
@@ -431,13 +397,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					super(«grammar.ideaLanguage».INSTANCE)
 				}
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileLanguage(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.ideaLanguage)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.ideaLanguage, '''
 			public final class «grammar.ideaLanguage.simpleName» extends «"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef»{
 			
 				public static final «grammar.ideaLanguage.simpleName» INSTANCE = new «grammar.ideaLanguage.simpleName»();
@@ -447,29 +411,24 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				}
 
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileStandaloneSetup(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.ideaStandaloneSetup)
-		file.javaContent = '''
-			public class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeSetup» {
-				@Override
-				public «Injector» createInjector() {
-					«Module» runtimeModule = new «grammar.runtimeGenModule»();
-					«Module» ideaModule = new «grammar.ideaModule»();
-					«Module» mergedModule = «Modules2».mixin(runtimeModule, ideaModule);
-					return «Guice».createInjector(mergedModule);
+		fileAccessFactory.createXtendFile(grammar.ideaStandaloneSetup, '''
+			class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeGenSetup» {
+				override createInjector() {
+					val runtimeModule = new «grammar.runtimeModule»()
+					val ideaModule = new «grammar.ideaModule»()
+					val mergedModule = «Modules2».mixin(runtimeModule, ideaModule)
+					return «Guice».createInjector(mergedModule)
 				}
 			}
-		'''
-		return file
+		''')
 	}
 		
 	def compileIdeaSetup(Grammar grammar) {
-		val file = fileAccessFactory.createXtendFile(grammar.ideaSetup)
-		file.javaContent = '''
+		fileAccessFactory.createXtendFile(grammar.ideaSetup, '''
 			class «grammar.ideaSetup.simpleName» implements «ISetup» {
 			
 				override createInjectorAndDoEMFRegistration() {
@@ -478,8 +437,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileElementTypeProvider(Grammar grammar) {
@@ -490,7 +448,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 		file.importType("org.eclipse.xtext.psi.tree.IGrammarAwareElementType".typeRef)
 		file.importType("com.intellij.psi.tree.IFileElementType".typeRef)
 		
-		file.javaContent = '''
+		file.content = '''
 			public class «grammar.elementTypeProvider.simpleName» implements IElementTypeProvider {
 
 				public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<«grammar.fileImpl»>>(«grammar.ideaLanguage».INSTANCE);
@@ -547,15 +505,14 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			
 			}
 		'''
-		file
+		return file
 	}
 	
 	def compileTokenTypeProvider(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.tokenTypeProvider)
 		val tokenSet = "com.intellij.psi.tree.TokenSet".typeRef
 		val iElementType = "com.intellij.psi.tree.IElementType".typeRef
 		val indexedElementType = "org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType".typeRef
-		file.javaContent = '''
+		return fileAccessFactory.createJavaFile(grammar.tokenTypeProvider, '''
 			@«Singleton» public class «grammar.tokenTypeProvider.simpleName» implements «"org.eclipse.xtext.idea.parser.TokenTypeProvider".typeRef» {
 			
 				private static final String[] TOKEN_NAMES = new «grammar.psiInternalParser»(null).getTokenNames();
@@ -615,15 +572,13 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileSyntaxHighlighterFactory(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.syntaxHighlighterFactory)
 		val syntaxHighlighter = "com.intellij.openapi.fileTypes.SyntaxHighlighter".typeRef
 		val lazySyntaxHighlighter = "com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory".typeRef
-		file.javaContent = '''
+		return fileAccessFactory.createJavaFile(grammar.syntaxHighlighterFactory, '''
 			public class «grammar.syntaxHighlighterFactory.simpleName» extends «lazySyntaxHighlighter» {
 				
 				@Override
@@ -632,27 +587,23 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			        return «grammar.ideaLanguage».INSTANCE.getInstance(«syntaxHighlighter».class);
 			    }
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileSemanticHighlightVisitor(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.semanticHighlightVisitor)
-		file.javaContent = '''
+		return fileAccessFactory.createJavaFile(grammar.semanticHighlightVisitor, '''
 			public class «grammar.semanticHighlightVisitor.simpleName» extends «"org.eclipse.xtext.idea.highlighting.SemanticHighlightVisitor".typeRef» {
 				public «grammar.semanticHighlightVisitor.simpleName»() {
 					«grammar.ideaLanguage».INSTANCE.injectMembers(this);
 				}
 			}
-		'''
-		file
+		''')
 	}
 	
 	def compileParserDefinition(Grammar grammar) {
 		val crossReferences = grammar.crossReferences
 		val namedGrammarElement = grammar.namedGrammarElements
-		val file = fileAccessFactory.createJavaFile(grammar.parserDefinition)
-		file.javaContent = '''
+		return fileAccessFactory.createJavaFile(grammar.parserDefinition, '''
 			public class «grammar.parserDefinition.simpleName» extends «grammar.superParserDefinition» {
 			
 				@«Inject» 
@@ -685,8 +636,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		'''
-		file
+		''')
 	}
 	
 	protected def getCrossReferences(Grammar grammar) {
@@ -730,20 +680,17 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.abstractCompletionContributor)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.abstractCompletionContributor, '''
 			public class «grammar.abstractCompletionContributor.simpleName» extends «grammar.completionContributorSuperClass» {
 				public «grammar.abstractCompletionContributor.simpleName»(«"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef» lang) {
 					super(lang);
 				}
 			}
-		'''
-		file
+		''')
 	}
 	
 	def JavaFileAccess compileCompletionContributor(Grammar grammar) {
-		val file = fileAccessFactory.createXtendFile(grammar.completionContributor)
-		file.javaContent = '''
+		fileAccessFactory.createXtendFile(grammar.completionContributor, '''
 			class «grammar.completionContributor.simpleName» extends «grammar.abstractCompletionContributor» {
 				new() {
 					this(«grammar.ideaLanguage».INSTANCE)
@@ -754,20 +701,17 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					//custom rules here
 				}
 			}
-		'''
-		file
+		''')
 	}
 	def TextFileAccess compileServicesISetup(Grammar grammar) {
-		val file = fileAccessFactory.createTextFile
-		file.path = '''META-INF/services/«ISetup.name»'''
-		file.content = '''
+		fileAccessFactory.createTextFile(
+		'''META-INF/services/«ISetup.name»''', '''
 			«grammar.runtimeSetup»
-		'''
-		file
+		''')
 	}
 	
 	def JavaFileAccess compileFacetConfiguration(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.facetConfiguration)
+		val file = fileAccessFactory.createXtendFile(grammar.facetConfiguration)
 		file.importType("com.intellij.openapi.components.PersistentStateComponent".typeRef)
 		file.importType("com.intellij.openapi.components.State".typeRef)
 		file.importType("com.intellij.openapi.components.Storage".typeRef)
@@ -780,22 +724,21 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			file.importType("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration".typeRef)	
 			file.importType("org.eclipse.xtext.idea.facet.GeneratorConfigurationState".typeRef)
 		}
-		file.javaContent = '''
-			@State(name = "«grammar.name»Generator", storages = {
+		file.content = '''
+			@State(name = "«grammar.name»Generator", storages = #[
 					@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 					@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-							+ "/«grammar.simpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-			public class «grammar.facetConfiguration.simpleName» extends «IF grammar.inheritsXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
+							+ "/«grammar.simpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)])
+			class «grammar.facetConfiguration.simpleName» extends «IF grammar.inheritsXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
 			
 			}
 		'''
-		file
+		return file
 	}
 	
 	def JavaFileAccess compileFacetType(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.facetType)
 		val faceTypeId = "com.intellij.facet.FacetTypeId".typeRef("com.intellij.facet.Facet".typeRef(grammar.facetConfiguration))
-		file.javaContent = '''
+		return fileAccessFactory.createJavaFile(grammar.facetType, '''
 			public class «grammar.facetType.simpleName» extends «"org.eclipse.xtext.idea.facet.AbstractFacetType".typeRef(grammar.facetConfiguration)» {
 			
 				public static final «faceTypeId» TYPEID = new «faceTypeId»("«grammar.name»");
@@ -805,13 +748,11 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					«grammar.ideaLanguage».INSTANCE.injectMembers(this);
 				}
 			}
-		'''
-		file
+		''')
 	}
 	
 	def JavaFileAccess compileBaseColorSettingsPage(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.baseColorSettingsPage)
-		file.javaContent = '''
+		fileAccessFactory.createJavaFile(grammar.baseColorSettingsPage, '''
 			public class «grammar.baseColorSettingsPage.simpleName» extends «"org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage".typeRef» {
 				
 				public «grammar.baseColorSettingsPage.simpleName»() {
@@ -823,16 +764,13 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					return «grammar.ideaLanguage».INSTANCE.getDisplayName();
 				}
 			}
-		'''
-		file
+		''')
 	}
 	
 	def JavaFileAccess compileColorSettingsPage(Grammar grammar) {
-		val file = fileAccessFactory.createXtendFile(grammar.colorSettingsPage)
-		file. javaContent = '''
+		fileAccessFactory.createXtendFile(grammar.colorSettingsPage, '''
 			class «grammar.colorSettingsPage.simpleName» extends «grammar.baseColorSettingsPage» {
 			}
-		'''
-		file
+		''')
 	}
 }

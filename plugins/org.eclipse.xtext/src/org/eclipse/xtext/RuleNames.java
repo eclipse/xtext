@@ -99,6 +99,14 @@ public class RuleNames {
 		return adapter.getRuleNames();
 	}
 	
+	public static RuleNames tryGetRuleNames(AbstractRule rule) {
+		Adapter adapter = (Adapter) EcoreUtil.getAdapter(rule.eAdapters(), RuleNames.class);
+		if (adapter == null) {
+			return null;
+		}
+		return adapter.getRuleNames();
+	}
+	
 	public static void ensureAdapterInstalled(Grammar grammar) {
 		getRuleNames(grammar, true);
 	}
@@ -200,7 +208,9 @@ public class RuleNames {
 		} else {
 			throw new IllegalArgumentException(result);
 		}
-		result = "norm" + paramConfig + "_" + result.substring(idx);
+		if (paramConfig != 0) {
+			result = (idx == 4 ? "norm" : "normSuper") + paramConfig + "_" + result.substring(idx);
+		}
 		return result;
 	}
 	

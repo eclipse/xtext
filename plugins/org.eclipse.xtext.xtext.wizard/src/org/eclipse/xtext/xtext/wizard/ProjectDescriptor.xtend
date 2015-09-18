@@ -1,10 +1,10 @@
 package org.eclipse.xtext.xtext.wizard
 
 import com.google.common.base.Strings
+import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import java.util.List
 
 @FinalFieldsConstructor
 @Accessors
@@ -34,20 +34,24 @@ abstract class ProjectDescriptor {
 		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
 	}
 
-	def Iterable<? extends GeneratedFile> getFiles() {
-		val List<GeneratedFile> files = newArrayList
+	def Iterable<? extends TextFile> getFiles() {
+		val List<TextFile> files = newArrayList
 		if (eclipsePluginProject) {
 			files += file(Outlet.META_INF, "MANIFEST.MF", manifest)
 			files += file(Outlet.ROOT, "build.properties", buildProperties)
 		}
-		if (config.buildSystem.isGradleBuild) {
+		if (config.needsGradleBuild && isPartOfGradleBuild) {
 			files += buildGradle
 		}
-		if (config.buildSystem.isMavenBuild) {
+		if (config.needsMavenBuild && isPartOfMavenBuild) {
 			files += pom
 		}
-		files
+		return files
 	}
+	
+	def boolean isPartOfGradleBuild()
+	
+	def boolean isPartOfMavenBuild()
 	
 	def boolean isEclipsePluginProject()
 	
@@ -95,7 +99,7 @@ abstract class ProjectDescriptor {
 	}
 
 	def Set<String> getRequiredBundles() {
-		val bundles = newHashSet
+		val bundles = newLinkedHashSet
 		bundles += upstreamProjects.map[name]
 		bundles += externalDependencies.map[p2].filter[bundleId != null]
 			.map[bundleId + if (version == null) "" else ';bundle-version="' +version+ '"']

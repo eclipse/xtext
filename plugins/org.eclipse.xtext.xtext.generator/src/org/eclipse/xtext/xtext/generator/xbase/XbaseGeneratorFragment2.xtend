@@ -200,21 +200,18 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule'.typeRef
 		else
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule'.typeRef
+		language.webGenModule.superClass = 'org.eclipse.xtext.xbase.web.DefaultXbaseWebModule'.typeRef
 	}
 	
 	protected def doGenerateXtendInferrer() {
-		val xtendFile = fileAccessFactory.createXtendFile(jvmModelInferrer)
-		
-		xtendFile.typeComment = '''
+		val firstRuleType = language.grammar.rules.head.type.classifier.getJavaTypeName(language.grammar.eResource.resourceSet).typeRef
+		fileAccessFactory.createXtendFile(jvmModelInferrer, '''
 			/**
 			 * <p>Infers a JVM model from the source model.</p> 
 			 *
 			 * <p>The JVM model should contain all elements that would appear in the Java code 
 			 * which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     
 			 */
-		'''
-		val firstRuleType = language.grammar.rules.head.type.classifier.getJavaTypeName(language.grammar.eResource.resourceSet).typeRef
-		xtendFile.javaContent = '''
 			class «jvmModelInferrer.simpleName» extends «'org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer'.typeRef» {
 			
 			    /**
@@ -262,8 +259,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			//   		]
 				}
 			}
-		'''
-		xtendFile.writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtimeSrc)
 	}
 	
 	protected def contributeEclipsePluginExtensions() {

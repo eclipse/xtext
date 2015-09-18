@@ -12,6 +12,10 @@ import org.eclipse.emf.common.util.URI
 
 class NullWorkspaceConfig implements IWorkspaceConfig {
 	
+	override getProjects() {
+		emptySet
+	}
+	
 	override findProjectByName(String name) {
 		null
 	}
@@ -19,4 +23,5 @@ class NullWorkspaceConfig implements IWorkspaceConfig {
 	override findProjectContaining(URI member) {
 		null
 	}
+	
 }

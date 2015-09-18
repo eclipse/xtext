@@ -9,15 +9,37 @@ package org.eclipse.xtext.xtext.generator.model
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.CodeConfig
+import com.google.inject.Inject
 
 @Log
 @Accessors
-class PluginXmlAccess {
+class PluginXmlAccess extends TextFileAccess {
 	
-	String path = 'plugin.xml'
+	@Inject CodeConfig codeConfig
+	
+	new() {
+		this.path = 'plugin.xml'
+	}
 	
 	val List<CharSequence> entries = newArrayList
+	
+	override setContent(StringConcatenationClient content) {
+		throw new UnsupportedOperationException("cannot directly set contents on a plugin.xml. Use entries property instead");
+	}
+	
+	override getContent() '''
+		<?xml version="1.0" encoding="«codeConfig.encoding?:'UTF-8'»"?>
+		<?eclipse version="3.0"?>
+		<plugin>
+			«FOR entry : entries»
+				«entry»
+			«ENDFOR»
+		</plugin>
+	'''
 	
 	/**
 	 * Merge the contents of the given plugin.xml into this one.
@@ -27,6 +49,12 @@ class PluginXmlAccess {
 			LOG.warn('Merging plugin.xml files with different paths: ' + this.path + ', ' + other.path)
 		}
 		this.entries.addAll(other.entries)
+	}
+	
+	override writeTo(IFileSystemAccess2 fileSystemAccess) {
+		if (!entries.isEmpty) {
+			super.writeTo(fileSystemAccess)
+		}
 	}
 	
 }

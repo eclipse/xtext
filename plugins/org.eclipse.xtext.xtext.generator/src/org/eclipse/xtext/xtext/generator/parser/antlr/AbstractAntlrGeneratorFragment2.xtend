@@ -37,7 +37,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 	@Inject @Accessors(PROTECTED_GETTER) AntlrCodeQualityHelper codeQualityHelper
 	@Inject @Accessors(PROTECTED_GETTER) LineSeparatorHarmonizer newLineNormalizer
 	@Inject @Accessors(PROTECTED_GETTER) CodeConfig codeConfig
-	
+
 	@Accessors AntlrOptions options = new AntlrOptions
 	val antlrParams = <String>newArrayList
 
@@ -73,8 +73,8 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 	def protected abstract void doGenerate()
 
 	def protected void checkGrammar() {
-		if(!hasProductionRules(getGrammar())) throw new IllegalArgumentException(
-			"You may not generate an ANTLR parser for a grammar without production rules.")
+		if(!hasProductionRules(getGrammar()))
+			throw new IllegalArgumentException("You may not generate an ANTLR parser for a grammar without production rules.")
 	}
 
 	def protected boolean hasProductionRules(Grammar grammar) {
@@ -128,7 +128,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 	}
 
 	def private void suppressWarningsImpl(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		val content = fsa.readTextFile(javaFile).toString 
+		val content = fsa.readTextFile(javaFile).toString
 		val newContent = new SuppressWarningsProcessor().process(content)
 		fsa.generateFile(javaFile, newContent)
 	}
@@ -189,15 +189,16 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 			splitParserClassFile(fsa, parserJavaFile)
 		}
 	}
-	
+
 	def protected improveCodeQuality(IXtextGeneratorFileSystemAccess fsa, String lexerJavaFile, String parserJavaFile) {
 		var lexerContent = fsa.readTextFile(lexerJavaFile).toString
 		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, options)
 		fsa.generateFile(lexerJavaFile, lexerContent)
-		
+
 		var parserContent = fsa.readTextFile(parserJavaFile).toString
 		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, options)
+		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, options)
 		fsa.generateFile(parserJavaFile, parserContent)
 	}
 
@@ -207,10 +208,9 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 
 	def protected boolean containsUnorderedGroup(Grammar grammar) {
 		for (ParserRule rule : GrammarUtil::allParserRules(grammar)) {
-			if (Iterators::filter(rule.eAllContents(), typeof(UnorderedGroup)).hasNext()) {
+			if (Iterators::filter(rule.eAllContents(), UnorderedGroup).hasNext()) {
 				return true
 			}
-
 		}
 		return false
 	}

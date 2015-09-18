@@ -406,13 +406,12 @@ class GrammarAccessExtensions {
 	}
 
 	def ruleName(AbstractRule rule) {
-		val result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
-		return result;
+		val ruleNames = RuleNames.tryGetRuleNames(rule)
+		return ruleNames?.getAntlrRuleName(rule)?:AntlrGrammarGenUtil.getRuleName(rule)
 	}
 
 	def entryRuleName(ParserRule rule) {
-		val result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
-		return 'entry' + result.toFirstUpper;
+		return AntlrGrammarGenUtil.getEntryRuleName(rule)
 	}
 
 	def isCalled(AbstractRule rule, Grammar grammar) {
@@ -461,7 +460,7 @@ class GrammarAccessExtensions {
 	}
 
 	dispatch def localVar(RuleCall it) {
-		'this_' + rule.name + '_' + containingParserRule.contentsAsList.indexOf(it)
+		'this_' + (rule.originalElement as AbstractRule).name + '_' + containingParserRule.contentsAsList.indexOf(it)
 	}
 
 	dispatch def localVar(AbstractElement it) {

@@ -11,12 +11,29 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		testProject = new RuntimeTestProjectDescriptor(this)
 	}
 	
+	override isEnabled() {
+		true
+	}
+	
+	override setEnabled(boolean enabled) {
+		if (!enabled)
+			throw new IllegalArgumentException("The runtime project is always enabled")
+	}
+	
 	override getNameQualifier() {
 		""
 	}
 	
 	override isEclipsePluginProject() {
-		config.buildSystem.isPluginBuild
+		config.preferredBuildSystem == BuildSystem.ECLIPSE || config.uiProject.enabled
+	}
+	
+	override isPartOfGradleBuild() {
+		true
+	}
+	
+	override isPartOfMavenBuild() {
+		true
 	}
 	
 	override getTestProject() {
@@ -24,7 +41,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext")
 		deps += createXtextDependency("org.eclipse.xtext.xbase")
@@ -70,7 +87,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		files += super.files
 		files += file(Outlet.MAIN_RESOURCES, grammarFilePath, grammar)
 		files += file(Outlet.MAIN_RESOURCES, workflowFilePath, workflow)
-		files
+		return files
 	}
 	
 	def String getGrammarFilePath() {
@@ -140,7 +157,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					«ENDIF»
 				}
 				
-				«FOR p : config.enabledProjects»
+				«FOR p : config.enabledProjects.filter[it.sourceFolders.contains(Outlet.MAIN_SRC_GEN.sourceFolder)]»
 					component = DirectoryCleaner {
 						directory = "${projectPath}«p.nameQualifier»/«Outlet.MAIN_SRC_GEN.sourceFolder»"
 					}
@@ -154,8 +171,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					configuration = {
 						project = WizardConfig {
 							runtimeRoot = projectPath
-							«IF config.uiProject.enabled»
-								eclipseEditor = true
+							«IF !config.uiProject.enabled»
+								eclipseEditor = false
 							«ENDIF»
 							«IF config.intellijProject.enabled»
 								ideaEditor = true
@@ -196,7 +213,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						fragment = adapter.FragmentAdapter { 
 							fragment = ecore.EMFGeneratorFragment auto-inject {
 								javaModelDirectory = "/${projectName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
-								updateBuildProperties = «config.buildSystem.isPluginBuild»
+								updateBuildProperties = «isEclipsePluginProject»
 							}
 						}
 			
@@ -243,10 +260,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							fragment = formatting.Formatter2Fragment2 {}
 						«ENDIF»
 						
-						«IF testProject.enabled»
-							fragment = adapter.FragmentAdapter {
-								fragment = junit.Junit4Fragment auto-inject {}
-							}
+						«IF config.enabledProjects.filter(TestedProjectDescriptor).exists[testProject.enabled]»
+							fragment = junit.Junit4Fragment2 auto-inject {}
 						«ENDIF»
 						
 						«IF config.uiProject.enabled»
@@ -306,9 +321,20 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						// generates the required bindings only if the grammar inherits from Xtype
 						fragment = xbase.XtypeGeneratorFragment2 auto-inject {}
 
-						«IF config.getIntellijProject.enabled»
+						«IF config.intellijProject.enabled»
+							// Intellij IDEA integration
 							fragment = idea.IdeaPluginGenerator auto-inject {}
 							fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+						«ENDIF»
+						
+						«IF config.webProject.enabled»
+							// web integration
+							fragment = web.WebIntegrationFragment auto-inject {
+								framework = "Ace"
+								generateServlet = true
+								generateJettyLauncher = true
+								generateHtmlExample = true
+							}
 						«ENDIF»
 					}
 				}
@@ -342,7 +368,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					outputs.dir "«Outlet.MAIN_SRC_GEN.sourceFolder»"
 					args += "«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»"
 					args += "-p"
-					args += "runtimeProject=/${projectDir}"
+					args += "projectPath=/${projectDir}"
 				}
 				
 				compileXtend.dependsOn(generateXtextLanguage)
@@ -357,6 +383,14 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			packaging = if (isEclipsePluginProject) "eclipse-plugin" else "jar"
 			buildSection = '''
 				<build>
+					«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
+						<sourceDirectory>«Outlet.MAIN_JAVA.sourceFolder»</sourceDirectory>
+						<resources>
+							<resource>
+								<directory>«Outlet.MAIN_RESOURCES.sourceFolder»</directory>
+							</resource>
+						</resources>
+					«ENDIF»
 					<plugins>
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
@@ -376,7 +410,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								<arguments>
 									<argument>/${project.basedir}/«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»</argument>
 									<argument>-p</argument>
-									<argument>runtimeProject=/${project.basedir}</argument>
+									<argument>projectPath=/${project.basedir}</argument>
 								</arguments>
 								<includePluginDependencies>true</includePluginDependencies>
 							</configuration>
@@ -433,6 +467,53 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								</filesets>
 							</configuration>
 						</plugin>
+						«IF !isEclipsePluginProject»
+							<plugin>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>build-helper-maven-plugin</artifactId>
+								<version>1.9.1</version>
+								<executions>
+									<execution>
+										<id>add-source</id>
+										<phase>initialize</phase>
+										<goals>
+											<goal>add-source</goal>
+											<goal>add-resource</goal>
+										</goals>
+										<configuration>
+											<sources>
+												<source>«Outlet.MAIN_SRC_GEN.sourceFolder»</source>
+											</sources>
+											<resources>
+												<resource>
+													<directory>«Outlet.MAIN_SRC_GEN.sourceFolder»</directory>
+												</resource>
+											</resources>
+										</configuration>
+									</execution>
+									«IF testProject.isInlined»
+										<execution>
+											<id>add-test-source</id>
+											<phase>initialize</phase>
+											<goals>
+												<goal>add-test-source</goal>
+												<goal>add-test-resource</goal>
+											</goals>
+											<configuration>
+												<sources>
+													<source>«Outlet.TEST_SRC_GEN.sourceFolder»</source>
+												</sources>
+												<resources>
+													<resource>
+														<directory>«Outlet.TEST_SRC_GEN.sourceFolder»</directory>
+													</resource>
+												</resources>
+											</configuration>
+										</execution>
+									«ENDIF»	
+								</executions>
+							</plugin>
+						«ENDIF»
 					</plugins>
 				</build>
 			'''

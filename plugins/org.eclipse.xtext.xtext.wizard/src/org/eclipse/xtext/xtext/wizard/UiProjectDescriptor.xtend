@@ -1,11 +1,18 @@
 package org.eclipse.xtext.xtext.wizard
 
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
-@FinalFieldsConstructor
-class UiProjectDescriptor extends ProjectDescriptor {
+class UiProjectDescriptor extends TestedProjectDescriptor {
+	UiTestProjectDescriptor testProject
+	
+	new(WizardConfiguration config) {
+		super(config)
+		this.testProject = new UiTestProjectDescriptor(this)
+	}
+	
+	override getTestProject() {
+		testProject
+	}
 	
 	override getUpstreamProjects() {
 		#{config.runtimeProject, config.ideProject}.filter[enabled].toSet
@@ -19,8 +26,16 @@ class UiProjectDescriptor extends ProjectDescriptor {
 		true
 	}
 	
+	override isPartOfGradleBuild() {
+		false
+	}
+	
+	override isPartOfMavenBuild() {
+		true
+	}
+	
 	override getExternalDependencies() {
-		val deps = newHashSet
+		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.ui")
 		deps += new ExternalDependency => [
@@ -42,14 +57,10 @@ class UiProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override getBinIncludes() {
-		val includes = newHashSet
+		val includes = newLinkedHashSet
 		includes += super.binIncludes
 		includes += "plugin.xml"
 		includes
-	}
-	
-	override buildGradle() {
-		throw new UnsupportedOperationException("UI projects cannot be built with Gradle yet")
 	}
 	
 	override pom() {

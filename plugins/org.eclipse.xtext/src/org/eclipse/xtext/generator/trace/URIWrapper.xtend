@@ -61,18 +61,24 @@ class SourceRelativeURI extends AbstractURIWrapper {
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class AbsoluteURI extends AbstractURIWrapper {
+	
 	new(URI absoluteURI) {
 		super(absoluteURI)
-		if (absoluteURI.isRelative) {
+		if (absoluteURI.isRelative || !absoluteURI.isHierarchical) {
 			throw new IllegalArgumentException(String.valueOf(absoluteURI))
 		}
 	}
+	
 	new(String absoluteURI) {
 		this(URI::createURI(absoluteURI));
 	}
 	
 	def deresolve(URI sourceFolderURI) {
-		return new SourceRelativeURI(URI.deresolve(sourceFolderURI));
+		try {
+			return new SourceRelativeURI(URI.deresolve(sourceFolderURI))
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("Base URI was "+URI, e)
+		}
 	}
 	
 	def deresolve(ISourceFolder sourceFolder) {

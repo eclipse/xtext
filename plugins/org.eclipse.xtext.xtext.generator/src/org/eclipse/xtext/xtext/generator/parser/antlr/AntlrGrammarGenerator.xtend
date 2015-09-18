@@ -87,7 +87,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		«ENDIF»
 		 	private «grammarAccess.simpleName» grammarAccess;
 
-		    public «internalParserClassName.simpleName»(TokenStream input, «grammarAccess.simpleName» grammarAccess) {
+		    public «internalParserClass.simpleName»(TokenStream input, «grammarAccess.simpleName» grammarAccess) {
 		        this(input);
 		        this.grammarAccess = grammarAccess;
 		        registerRules(grammarAccess.getGrammar());

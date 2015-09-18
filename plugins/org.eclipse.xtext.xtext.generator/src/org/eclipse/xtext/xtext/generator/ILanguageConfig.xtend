@@ -29,6 +29,8 @@ interface ILanguageConfig {
 	
 	def GuiceModuleAccess getIdeaGenModule()
 	
+	def GuiceModuleAccess getWebGenModule()
+	
 	def ResourceSet getResourceSet()
 	
 }
