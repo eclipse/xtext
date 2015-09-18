@@ -17,6 +17,7 @@ import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
@@ -71,7 +72,8 @@ public class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterSta
 					return true;
 				if (ele instanceof RuleCall) {
 					AbstractRule rule = ((RuleCall) ele).getRule();
-					if (!(rule.getType().getClassifier() instanceof EClass))
+					TypeRef ruleType = rule.getType();
+					if (!(ruleType == null || ruleType.getClassifier() instanceof EClass))
 						return true;
 				}
 			}

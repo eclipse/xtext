@@ -16,6 +16,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -126,7 +127,8 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 					if (previous.type == null) {
 						Assignment ass = GrammarUtil.containingAssignment(state.getGrammarElement());
 						if (ass != null) {
-							EClassifier cls = GrammarUtil.containingRule(ass).getType().getClassifier();
+							TypeRef returnType = GrammarUtil.containingRule(ass).getType();
+							EClassifier cls = returnType != null ? returnType.getClassifier() : null;
 							if (cls == type)
 								return new FilterState(previous, type, previous.stack, state);
 							return null;
