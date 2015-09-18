@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -321,7 +322,8 @@ public class SequenceFeeder {
 				sequenceAcceptor.acceptAssignedCrossRefEnum(rc, token, (EObject) value, index, getCompositeNode(node));
 		} else {
 			if (rc.getRule() instanceof ParserRule) {
-				if (rc.getRule().getType().getClassifier() instanceof EClass)
+				AbstractRule rule = rc.getRule();
+				if (rule.getType() != null && rule.getType().getClassifier() instanceof EClass)
 					acceptEObjectRuleCall(rc, (EObject) value, getCompositeNode(node));
 				else
 					sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, getCompositeNode(node));
