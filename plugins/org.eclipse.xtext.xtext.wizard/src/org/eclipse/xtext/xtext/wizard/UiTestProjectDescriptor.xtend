@@ -23,4 +23,8 @@ class UiTestProjectDescriptor extends TestProjectDescriptor {
 		true
 	}
 	
+	override needsUiHarness() {
+		true
+	}
+	
 }

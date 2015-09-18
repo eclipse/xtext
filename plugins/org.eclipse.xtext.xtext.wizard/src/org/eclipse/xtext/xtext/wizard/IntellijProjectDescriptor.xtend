@@ -49,9 +49,4 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 			'''
 		]
 	}
-
-	override pom() {
-		throw new UnsupportedOperationException("IntelliJ projects cannot be built with Maven")
-	}
-
 }

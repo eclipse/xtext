@@ -52,6 +52,19 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 							<groupId>org.eclipse.xtend</groupId>
 							<artifactId>xtend-maven-plugin</artifactId>
 						</plugin>
+						«IF isEclipsePluginProject»
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-surefire-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<configuration>
+									<failIfNoTests>false</failIfNoTests>
+									«IF needsUiHarness»
+										<useUIHarness>true</useUIHarness>
+									«ENDIF»
+								</configuration>
+							</plugin>
+						«ENDIF»
 						«IF !isEclipsePluginProject»
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
@@ -83,5 +96,9 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 				</build>
 			'''
 		]
+	}
+	
+	def needsUiHarness() {
+		false
 	}
 }
