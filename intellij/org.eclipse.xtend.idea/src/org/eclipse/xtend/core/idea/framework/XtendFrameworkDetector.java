@@ -58,7 +58,7 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Xt
 		LibrariesContainer librariesContainer = LibrariesContainerFactory.createContainer(module.getProject());
 		FrameworkSupportModelBase frameworkModel = new FrameworkSupportModelImpl(module.getProject(), baseDirectoryForLibraries, librariesContainer);
 		final FrameworkSupportInModuleConfigurable configurable = frameworkSupport.createConfigurable(frameworkModel);
-		projectUtil.executeWhenProjectReady(module.getProject(), new Runnable() {
+		projectUtil.executeWritableWhenProjectReady(module.getProject(), new Runnable() {
 			@Override
 			public void run() {
 				IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider();

@@ -21,6 +21,8 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
+import org.jetbrains.jps.model.module.JpsModuleSourceRoot
+import org.jetbrains.jps.model.java.JavaSourceRootProperties
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -56,10 +58,10 @@ class XtendProjectConfigurator {
 		if (existingXtendGen !== null || existingXtendTestGen !== null) {
 			state.outputDirectory = {
 				existingXtendGen ?: existingXtendTestGen
-			}.toString
+			}.path
 			state.testOutputDirectory = {
 				existingXtendTestGen ?: existingXtendGen
-			}.toString
+			}.path
 			return
 		}
 		val parentPath = rootModel.contentRoots.head.path
@@ -149,7 +151,15 @@ class XtendProjectConfigurator {
 				contentRoot.removeExcludeFolder(excludedParent)
 			}
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true)
-			contentRoot.addSourceFolder(xtendGenMain, type, properties)
+			val existingSrc = contentRoot.sourceFolders.findFirst[VfsUtil.isEqualOrAncestor(it.url, xtendGenMain.url)]
+			if (existingSrc !== null) {
+				val props = existingSrc.jpsElement.properties
+				if (props instanceof JavaSourceRootProperties)
+					props.applyChanges(properties)
+			} else {
+				contentRoot.addSourceFolder(xtendGenMain, type, properties)
+			}
+
 		}
 	}
 

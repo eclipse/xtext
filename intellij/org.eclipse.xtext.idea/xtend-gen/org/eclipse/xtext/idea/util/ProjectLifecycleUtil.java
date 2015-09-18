@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.idea.util;
 
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
@@ -35,5 +37,20 @@ public class ProjectLifecycleUtil {
       StartupManager _instance_2 = StartupManager.getInstance(project);
       _instance_2.registerPostStartupActivity(fun);
     }
+  }
+  
+  /**
+   * Executes Runnable with write access, when project is fully initialized and the Index is ready (SmartMode).<br>
+   * Runnable will be executed immediately when project in in initialized smart mode.
+   */
+  public void executeWritableWhenProjectReady(final Project project, final Runnable runnable) {
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        Application _application = ApplicationManager.getApplication();
+        _application.runWriteAction(runnable);
+      }
+    };
+    this.executeWhenProjectReady(project, _function);
   }
 }

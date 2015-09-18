@@ -38,9 +38,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.jetbrains.jps.model.JpsElement;
 import org.jetbrains.jps.model.java.JavaSourceRootProperties;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
 import org.jetbrains.jps.model.java.JpsJavaExtensionService;
+import org.jetbrains.jps.model.module.JpsModuleSourceRoot;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
 
 /**
@@ -137,16 +139,16 @@ public class XtendProjectConfigurator {
       } else {
         _elvis = existingXtendTestGen;
       }
-      String _string = _elvis.toString();
-      state.setOutputDirectory(_string);
+      String _path = _elvis.getPath();
+      state.setOutputDirectory(_path);
       VirtualFile _elvis_1 = null;
       if (existingXtendTestGen != null) {
         _elvis_1 = existingXtendTestGen;
       } else {
         _elvis_1 = existingXtendGen;
       }
-      String _string_1 = _elvis_1.toString();
-      state.setTestOutputDirectory(_string_1);
+      String _path_1 = _elvis_1.getPath();
+      state.setTestOutputDirectory(_path_1);
       return;
     }
     VirtualFile[] _contentRoots = rootModel.getContentRoots();
@@ -364,7 +366,25 @@ public class XtendProjectConfigurator {
       }
       JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
       final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", true);
-      contentRoot.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, type, properties);
+      SourceFolder[] _sourceFolders = contentRoot.getSourceFolders();
+      final Function1<SourceFolder, Boolean> _function_2 = new Function1<SourceFolder, Boolean>() {
+        @Override
+        public Boolean apply(final SourceFolder it) {
+          String _url = it.getUrl();
+          String _url_1 = xtendGenMain.getUrl();
+          return Boolean.valueOf(VfsUtil.isEqualOrAncestor(_url, _url_1));
+        }
+      };
+      final SourceFolder existingSrc = IterableExtensions.<SourceFolder>findFirst(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function_2);
+      if ((existingSrc != null)) {
+        JpsModuleSourceRoot _jpsElement = existingSrc.getJpsElement();
+        final JpsElement props = _jpsElement.getProperties();
+        if ((props instanceof JavaSourceRootProperties)) {
+          ((JavaSourceRootProperties)props).applyChanges(properties);
+        }
+      } else {
+        contentRoot.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, type, properties);
+      }
     }
   }
   

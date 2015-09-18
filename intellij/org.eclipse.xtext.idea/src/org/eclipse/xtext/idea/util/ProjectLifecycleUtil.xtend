@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.util
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.StartupManager
@@ -30,5 +31,13 @@ class ProjectLifecycleUtil {
 		} else {
 			StartupManager.getInstance(project).registerPostStartupActivity(fun)
 		}
+	}
+
+	/**
+	 * Executes Runnable with write access, when project is fully initialized and the Index is ready (SmartMode).<br>
+	 * Runnable will be executed immediately when project in in initialized smart mode.
+	 */
+	def void executeWritableWhenProjectReady(Project project, Runnable runnable) {
+		project.executeWhenProjectReady[ApplicationManager.getApplication().runWriteAction(runnable)]
 	}
 }
