@@ -77,13 +77,14 @@ abstract class ProjectDescriptor {
 		assignment + value.join(",\\\n" + indent)
 	}
 
-	def CharSequence manifest() '''
+	def String manifest() '''
 		Manifest-Version: 1.0
 		Bundle-ManifestVersion: 2
 		Bundle-Name: «name»
 		Bundle-Vendor: My Company
 		Bundle-Version: 1.0.0.qualifier
 		Bundle-SymbolicName: «name»; singleton:=true
+		Bundle-RequiredExecutionEnvironment: «bree»
 		«IF activatorClassName != null»
 			Bundle-Activator: «activatorClassName»
 		«ENDIF»
@@ -91,6 +92,10 @@ abstract class ProjectDescriptor {
 		«manifestEntry("Require-Bundle", requiredBundles)»
 		«manifestEntry("Import-Package", importedPackages)»
 	'''
+	
+	def getBree() {
+		"JavaSE-1.6"
+	}
 	
 	private def manifestEntry(String key, Iterable<String> value) {
 		if (value.isEmpty)

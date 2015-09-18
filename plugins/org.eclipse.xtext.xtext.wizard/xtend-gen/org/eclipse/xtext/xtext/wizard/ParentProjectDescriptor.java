@@ -177,6 +177,14 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("sourceCompatibility = \'1.6\'");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("targetCompatibility = \'1.6\'");
+        _builder.newLine();
         _builder.append("}");
         _builder.newLine();
         it.setAdditionalContent(_builder.toString());

@@ -79,7 +79,7 @@ public abstract class ProjectDescriptor {
     final List<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
     boolean _isEclipsePluginProject = this.isEclipsePluginProject();
     if (_isEclipsePluginProject) {
-      CharSequence _manifest = this.manifest();
+      String _manifest = this.manifest();
       PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
       files.add(_file);
       CharSequence _buildProperties = this.buildProperties();
@@ -171,7 +171,7 @@ public abstract class ProjectDescriptor {
     return _xblockexpression;
   }
   
-  public CharSequence manifest() {
+  public String manifest() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Manifest-Version: 1.0");
     _builder.newLine();
@@ -189,6 +189,10 @@ public abstract class ProjectDescriptor {
     String _name_1 = this.getName();
     _builder.append(_name_1, "");
     _builder.append("; singleton:=true");
+    _builder.newLineIfNotEmpty();
+    _builder.append("Bundle-RequiredExecutionEnvironment: ");
+    String _bree = this.getBree();
+    _builder.append(_bree, "");
     _builder.newLineIfNotEmpty();
     {
       Object _activatorClassName = this.getActivatorClassName();
@@ -210,7 +214,11 @@ public abstract class ProjectDescriptor {
     String _manifestEntry_1 = this.manifestEntry("Import-Package", _importedPackages);
     _builder.append(_manifestEntry_1, "");
     _builder.newLineIfNotEmpty();
-    return _builder;
+    return _builder.toString();
+  }
+  
+  public String getBree() {
+    return "JavaSE-1.6";
   }
   
   private String manifestEntry(final String key, final Iterable<String> value) {
