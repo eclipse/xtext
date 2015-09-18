@@ -11049,8 +11049,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleJvmTypeReference
 entryRuleJvmTypeReference returns [EObject current=null] 
 	:

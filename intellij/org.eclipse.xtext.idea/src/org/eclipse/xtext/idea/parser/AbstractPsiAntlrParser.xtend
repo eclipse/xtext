@@ -179,5 +179,10 @@ abstract class AbstractPsiAntlrParser extends Parser {
 			}
 		}
 	}
+	
+	def protected static short[][] unpackEncodedStringArray(String[] arr) {
+		// cannot be intuitively implemented in Xtend since we cannot create a short[numState][]
+		return DFAUtil.unpackEncodedStringArray(arr)
+	}
 
 }
