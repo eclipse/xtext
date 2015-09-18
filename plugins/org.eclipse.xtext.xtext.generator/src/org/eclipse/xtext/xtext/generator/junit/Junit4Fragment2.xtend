@@ -9,7 +9,6 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import com.google.inject.Injector
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 class Junit4Fragment2 extends AbstractGeneratorFragment2 {

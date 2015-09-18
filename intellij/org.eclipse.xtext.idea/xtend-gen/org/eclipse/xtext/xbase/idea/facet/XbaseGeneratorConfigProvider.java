@@ -52,7 +52,11 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final Module module = ModuleProvider.findModule(_resourceSet);
     final Facet<? extends AbstractFacetConfiguration> facet = this.facetProvider.getFacet(module);
-    final AbstractFacetConfiguration facetConfiguration = facet.getConfiguration();
+    AbstractFacetConfiguration _configuration = null;
+    if (facet!=null) {
+      _configuration=facet.getConfiguration();
+    }
+    final AbstractFacetConfiguration facetConfiguration = _configuration;
     if ((facetConfiguration instanceof XbaseFacetConfiguration)) {
       final XbaseGeneratorConfigurationState state = ((XbaseFacetConfiguration)facetConfiguration).getState();
       GeneratorConfig _generatorConfig = new GeneratorConfig();
@@ -73,7 +77,7 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
       };
       return ObjectExtensions.<GeneratorConfig>operator_doubleArrow(_generatorConfig, _function);
     }
-    return null;
+    return new GeneratorConfig();
   }
   
   protected JavaVersion getTargetJavaVersion(final XbaseGeneratorConfigurationState state, final Module module) {

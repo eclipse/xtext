@@ -35,7 +35,7 @@ class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
 	override get(EObject context) {
 		val module = ModuleProvider.findModule(context.eResource.resourceSet)
 		val facet = facetProvider.getFacet(module)
-		val facetConfiguration = facet.configuration
+		val facetConfiguration = facet?.configuration
 		if(facetConfiguration instanceof XbaseFacetConfiguration) {
 			val state = facetConfiguration.state
 			return new GeneratorConfig => [
@@ -46,7 +46,7 @@ class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
 				javaSourceVersion = getTargetJavaVersion(state, module)
 			]
 		}
-		return null
+		return new GeneratorConfig
 	}
 	
 	protected def getTargetJavaVersion(XbaseGeneratorConfigurationState state, Module module) {
