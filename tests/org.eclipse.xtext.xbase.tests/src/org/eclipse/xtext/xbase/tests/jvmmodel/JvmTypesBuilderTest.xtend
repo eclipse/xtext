@@ -257,7 +257,14 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		list += otherList
 		assertTrue(list.empty)
 	}
-	
+
+	@Test
+	def void testToGetterWithNullTypeRef() {
+		val e = expression("''")
+		// there should be no NPE
+		e.toGetter("foo", null)
+	}
+
 	@Test
 	def void testInitializeSafely_0() {
 		expectErrorLogging(2) [
