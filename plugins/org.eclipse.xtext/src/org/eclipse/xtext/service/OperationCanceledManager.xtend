@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.service
 
-import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.xtext.util.CancelIndicator
 
@@ -74,12 +73,6 @@ class OperationCanceledManager {
 	}
 	
 	def void checkCanceled(CancelIndicator indicator) {
-		if (indicator != null && indicator.isCanceled) {
-			throwOperationCanceledException
-		}
-	}
-	
-	def void checkCanceled(IProgressMonitor indicator) {
 		if (indicator != null && indicator.isCanceled) {
 			throwOperationCanceledException
 		}
