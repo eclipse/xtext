@@ -4114,19 +4114,12 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
 
 
     protected DFA17 dfa17 = new DFA17(this);
-    static final String DFA17_eotS =
-        "\15\uffff";
-    static final String DFA17_eofS =
-        "\15\uffff";
-    static final String DFA17_minS =
-        "\1\21\1\uffff\7\0\4\uffff";
-    static final String DFA17_maxS =
-        "\1\30\1\uffff\7\0\4\uffff";
-    static final String DFA17_acceptS =
-        "\1\uffff\1\5\7\uffff\1\1\1\2\1\3\1\4";
-    static final String DFA17_specialS =
-        "\2\uffff\1\1\1\5\1\4\1\6\1\0\1\2\1\3\4\uffff}>";
-    static final String[] DFA17_transitionS = {
+    static final String dfa_1s = "\15\uffff";
+    static final String dfa_2s = "\1\21\1\uffff\7\0\4\uffff";
+    static final String dfa_3s = "\1\30\1\uffff\7\0\4\uffff";
+    static final String dfa_4s = "\1\uffff\1\5\7\uffff\1\1\1\2\1\3\1\4";
+    static final String dfa_5s = "\2\uffff\1\1\1\5\1\4\1\6\1\0\1\2\1\3\4\uffff}>";
+    static final String[] dfa_6s = {
             "\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\1",
             "",
             "\1\uffff",
@@ -4142,34 +4135,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
             ""
     };
 
-    static final short[] DFA17_eot = DFA.unpackEncodedString(DFA17_eotS);
-    static final short[] DFA17_eof = DFA.unpackEncodedString(DFA17_eofS);
-    static final char[] DFA17_min = DFA.unpackEncodedStringToUnsignedChars(DFA17_minS);
-    static final char[] DFA17_max = DFA.unpackEncodedStringToUnsignedChars(DFA17_maxS);
-    static final short[] DFA17_accept = DFA.unpackEncodedString(DFA17_acceptS);
-    static final short[] DFA17_special = DFA.unpackEncodedString(DFA17_specialS);
-    static final short[][] DFA17_transition;
-
-    static {
-        int numStates = DFA17_transitionS.length;
-        DFA17_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA17_transition[i] = DFA.unpackEncodedString(DFA17_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
 
     class DFA17 extends DFA {
 
         public DFA17(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 17;
-            this.eot = DFA17_eot;
-            this.eof = DFA17_eof;
-            this.min = DFA17_min;
-            this.max = DFA17_max;
-            this.accept = DFA17_accept;
-            this.special = DFA17_special;
-            this.transition = DFA17_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "()+ loopback of 900:3: ( ({...}? => ( ({...}? => ( ( (lv_visibility_1_1= 'public' | lv_visibility_1_2= 'private' | lv_visibility_1_3= 'protected' ) ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_static_2_0= 'static' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_synchronized_3_0= 'synchronized' ) ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_abstract_4_0= 'abstract' ) ) | ( (lv_final_5_0= 'final' ) ) ) ) ) ) )+";

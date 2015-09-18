@@ -345,7 +345,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final ClassElements pClass;
 	private final AttributeElements pAttribute;
 	private final OperationElements pOperation;
-	private final VisibilityElements unknownRuleVisibility;
+	private final VisibilityElements eVisibility;
 	
 	private final Grammar grammar;
 
@@ -360,7 +360,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pClass = new ClassElements();
 		this.pAttribute = new AttributeElements();
 		this.pOperation = new OperationElements();
-		this.unknownRuleVisibility = new VisibilityElements();
+		this.eVisibility = new VisibilityElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -440,7 +440,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum Visibility:
 	//	PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
 	public VisibilityElements getVisibilityAccess() {
-		return unknownRuleVisibility;
+		return eVisibility;
 	}
 	
 	public EnumRule getVisibilityRule() {
