@@ -26,6 +26,7 @@ var ideProjectName = "org.eclipse.xtend.ide.common"
 var ideProjectPath = "../${ideProjectName}"
 var backtrack = false
 var memoize = false
+var skipUnusedRules = true
 
 var ideaProjectName = "org.eclipse.xtend.idea"
 var ideaProjectPath = "../../intellij/${ideaProjectName}"
@@ -37,6 +38,10 @@ var fileHeader = "/*************************************************************
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/"
+
+var codeQualityHelper = org.eclipse.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper {
+	stripAllComments = true
+}
 
 Workflow {
 	bean = StandaloneSetup {
@@ -210,7 +215,9 @@ Workflow {
 					additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 				}
 			}
-			fragment = org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+			fragment = org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+				options = auto-inject {}
+			}
 			fragment = org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator auto-inject {}
 		}
 	}
