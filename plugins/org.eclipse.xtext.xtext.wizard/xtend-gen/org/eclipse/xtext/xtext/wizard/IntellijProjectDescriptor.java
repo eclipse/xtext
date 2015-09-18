@@ -10,7 +10,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.XtextVersion;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -103,11 +102,6 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
       }
     };
     return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
-  }
-  
-  @Override
-  public PomFile pom() {
-    throw new UnsupportedOperationException("IntelliJ projects cannot be built with Maven");
   }
   
   public IntellijProjectDescriptor(final WizardConfiguration config) {

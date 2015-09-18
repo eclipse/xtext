@@ -160,7 +160,51 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         {
           boolean _isEclipsePluginProject_2 = TestProjectDescriptor.this.isEclipsePluginProject();
-          boolean _not_1 = (!_isEclipsePluginProject_2);
+          if (_isEclipsePluginProject_2) {
+            _builder.append("\t\t");
+            _builder.append("<plugin>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<groupId>org.eclipse.tycho</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<artifactId>tycho-surefire-plugin</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<version>${tycho-version}</version>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<configuration>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("<failIfNoTests>false</failIfNoTests>");
+            _builder.newLine();
+            {
+              boolean _needsUiHarness = TestProjectDescriptor.this.needsUiHarness();
+              if (_needsUiHarness) {
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<useUIHarness>true</useUIHarness>");
+                _builder.newLine();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("</configuration>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("</plugin>");
+            _builder.newLine();
+          }
+        }
+        {
+          boolean _isEclipsePluginProject_3 = TestProjectDescriptor.this.isEclipsePluginProject();
+          boolean _not_1 = (!_isEclipsePluginProject_3);
           if (_not_1) {
             _builder.append("\t\t");
             _builder.append("<plugin>");
@@ -277,6 +321,10 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  }
+  
+  public boolean needsUiHarness() {
+    return false;
   }
   
   @Pure
