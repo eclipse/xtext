@@ -7,8 +7,10 @@
  */
 package org.eclipse.xtext.idea.util;
 
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -17,11 +19,16 @@ import org.eclipse.xtext.util.CancelIndicator;
 public class CancelProgressIndicator implements CancelIndicator {
   @Override
   public boolean isCanceled() {
-    boolean _xblockexpression = false;
-    {
+    try {
       ProgressIndicatorProvider.checkCanceled();
-      _xblockexpression = false;
+      return false;
+    } catch (final Throwable _t) {
+      if (_t instanceof ProcessCanceledException) {
+        final ProcessCanceledException exception = (ProcessCanceledException)_t;
+        return true;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
-    return _xblockexpression;
   }
 }

@@ -259,7 +259,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(_xtendTypes, _function);
   }
   
-  private boolean canceled = false;
+  private volatile boolean canceled = false;
   
   public boolean setCanceled(final boolean canceled) {
     return this.canceled = canceled;
