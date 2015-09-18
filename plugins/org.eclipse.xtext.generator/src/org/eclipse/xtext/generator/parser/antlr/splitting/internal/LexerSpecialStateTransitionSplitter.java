@@ -27,10 +27,10 @@ public class LexerSpecialStateTransitionSplitter {
 			
 	public static final Pattern CASE_PATTERN = Pattern.compile(
 			"(^\\s*case\\s+(\\d+)\\s*:(\\s*))" +// case # -> $1, $2, $3
-			"([^;]*;)" + // int .. = input.LA(..) -> $4
+			"([^;]*;(\\s*int\\s+index[^;]*;\\s*input\\.rewind\\(\\)\\s*;)?)" + // int .. = input.LA(..); ... -> $4 $5
 			"\\s*s = -1;"  + // local var init
-			"(\\s*if.*?;\\}(\\s*else if.*?;\\})*(\\s*else s.*?;)?)" + // $5
-			"\\s*(if\\s*\\(\\s*s\\s*>=0\\s*\\)\\s*return\\s*s;\\s*" + // if ( s>=0 ) return s; $8
+			"(\\s*if.*?;\\}(\\s*else if.*?;\\})*(\\s*else s.*?;)?(\\s*input\\.seek[^;]*;)?)" + // $6
+			"\\s*(if\\s*\\(\\s*s\\s*>=0\\s*\\)\\s*return\\s*s;\\s*" + // if ( s>=0 ) return s; $10
 			"^\\s*break;$)" // break, end case
 			, Pattern.DOTALL | Pattern.MULTILINE);
 	
@@ -43,6 +43,8 @@ public class LexerSpecialStateTransitionSplitter {
 	 */
 	private final boolean ignoreCaseCountGuard;
 	
+	private boolean allowDFAStaticClasses = true;
+	
 	public LexerSpecialStateTransitionSplitter(boolean ignoreCaseCountGuard) {
 		this.ignoreCaseCountGuard = ignoreCaseCountGuard;
 	}
@@ -53,7 +55,7 @@ public class LexerSpecialStateTransitionSplitter {
 		while(dfaMatcher.find()) {
 			String specialStateTransition = dfaMatcher.group(2);
 			String staticOrNot = "$1";
-			if (!STATE_PATTERN.matcher(specialStateTransition).find())
+			if (allowDFAStaticClasses && !STATE_PATTERN.matcher(specialStateTransition).find())
 				staticOrNot = "static $1";
 			String transformedDfa = staticOrNot + extractSpecialStateMethods(specialStateTransition) + "$3";
 			dfaMatcher.appendReplacement(result, transformedDfa);
@@ -70,14 +72,14 @@ public class LexerSpecialStateTransitionSplitter {
 		StringBuffer result = new StringBuffer();
 		StringBuffer extractedMethods = new StringBuffer();
 		while(caseMatcher.find()) {
-			String replacedCaseBody = "$1s = specialStateTransition$2(input);$3$8";
+			String replacedCaseBody = "$1s = specialStateTransition$2(input);$3$10";
 			extractedMethods.append("\n        protected int specialStateTransition");
 			extractedMethods.append(caseMatcher.group(2));
 			extractedMethods.append("(IntStream input) {\n");
 			extractedMethods.append("            int s = -1;\n            ");
 			extractedMethods.append(caseMatcher.group(4));
 			extractedMethods.append("\n");
-			extractedMethods.append(caseMatcher.group(5).replaceAll("(^|\n)\\s+", "$1            "));
+			extractedMethods.append(caseMatcher.group(6).replaceAll("(^|\n)\\s+", "$1            "));
 			extractedMethods.append("\n            return s;\n");
 			extractedMethods.append("        }");
 			caseMatcher.appendReplacement(result, replacedCaseBody);
@@ -87,5 +89,20 @@ public class LexerSpecialStateTransitionSplitter {
 		result.append("\n");
 		return result.toString().replace("\\", "\\\\").replace("$", "\\$");
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public boolean isAllowDFAStaticClasses() {
+		return allowDFAStaticClasses;
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public void setAllowDFAStaticClasses(boolean value) {
+		this.allowDFAStaticClasses = value;
+	}
+
 
 }
