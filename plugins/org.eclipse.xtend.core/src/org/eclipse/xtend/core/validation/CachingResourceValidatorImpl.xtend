@@ -55,9 +55,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 		try {
 			contexts.before(ActiveAnnotationContexts.AnnotationCallback.VALIDATION);
 			for (ActiveAnnotationContext ctx : contexts.getContexts.values) {
-				if (monitor.canceled) {
-					return
-				}
+				operationCanceledManager.checkCanceled(monitor)
 				try {
 					annotationProcessor.validationPhase(ctx, monitor)
 				} catch (Throwable t) {
