@@ -166,7 +166,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		xtendFile.xtendTypes.map[toXtendTypeDeclaration(it)]
 	}
 
-	boolean canceled = false
+	volatile boolean canceled = false
 	
 	def setCanceled(boolean canceled) {
 		this.canceled = canceled
