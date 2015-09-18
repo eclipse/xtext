@@ -85,6 +85,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addDevelopmentTimeBundles(Lists.newArrayList(descriptor.getDevelopmentBundles()));
 		factory.addImportedPackages(Lists.newArrayList(descriptor.getImportedPackages()));
 		factory.addRequiredBundles(Lists.newArrayList(descriptor.getRequiredBundles()));
+		factory.setBreeToUse(descriptor.getBree());
 		return factory.createProject(monitor, null);
 	}
 

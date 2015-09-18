@@ -290,6 +290,7 @@ class WizardConfigurationTest {
 		val pom = config.runtimeProject.testProject.pom.content
 		assertFalse(pom.contains("useUIHarness"))
 	}
+	
 	@Test
 	def void tychoDoesNotFailOnMissingTests() {
 		config.preferredBuildSystem = BuildSystem.MAVEN
@@ -297,6 +298,19 @@ class WizardConfigurationTest {
 		val poms = allJavaProjects.filter(TestProjectDescriptor).filter[isEclipsePluginProject].map[pom]
 		poms.forEach[
 			assertTrue(content.contains("failIfNoTests"))
+		]
+	}
+	
+	@Test
+	def void allBuildSystemsUseJava6() {
+		val parentPom = config.parentProject.pom.content
+		assertTrue(parentPom.contains("<maven.compiler.source>1.6</maven.compiler.source>"))
+		assertTrue(parentPom.contains("<maven.compiler.target>1.6</maven.compiler.target>"))
+		val parentGradle = config.parentProject.buildGradle.content
+		assertTrue(parentGradle.contains("sourceCompatibility = '1.6'"))
+		assertTrue(parentGradle.contains("targetCompatibility = '1.6'"))
+		allJavaProjects.map[manifest].forEach[
+			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6"))
 		]
 	}
 	
