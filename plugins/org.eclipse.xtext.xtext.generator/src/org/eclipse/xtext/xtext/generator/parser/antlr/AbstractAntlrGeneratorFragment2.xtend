@@ -186,6 +186,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		if (codeQualityHelper !== null) {
 			codeQualityHelper.stripUnnecessaryComments(fsa, lexerJavaFile, parserJavaFile)
 			codeQualityHelper.removeDuplicateBitsets(fsa, parserJavaFile)
+			codeQualityHelper.removeDuplicateDFAs(fsa, parserJavaFile);
 		}
 		if (getOptions().isClassSplitting()) {
 			splitLexerClassFile(fsa, lexerJavaFile)

@@ -8,20 +8,26 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 
 @Log
 @Accessors
 @SuppressWarnings("all")
 public class PluginXmlAccess extends TextFileAccess {
+  @Inject
+  private CodeConfig codeConfig;
+  
   public PluginXmlAccess() {
     this.setPath("plugin.xml");
   }
@@ -36,10 +42,18 @@ public class PluginXmlAccess extends TextFileAccess {
   @Override
   public CharSequence getContent() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    _builder.newLine();
+    _builder.append("<?xml version=\"1.0\" encoding=\"");
+    String _elvis = null;
+    String _encoding = this.codeConfig.getEncoding();
+    if (_encoding != null) {
+      _elvis = _encoding;
+    } else {
+      _elvis = "UTF-8";
+    }
+    _builder.append(_elvis, "");
+    _builder.append("\"?>");
+    _builder.newLineIfNotEmpty();
     _builder.append("<?eclipse version=\"3.0\"?>");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("<plugin>");
     _builder.newLine();
@@ -77,7 +91,25 @@ public class PluginXmlAccess extends TextFileAccess {
     return _xblockexpression;
   }
   
+  @Override
+  public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
+    boolean _isEmpty = this.entries.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      super.writeTo(fileSystemAccess);
+    }
+  }
+  
   private final static Logger LOG = Logger.getLogger(PluginXmlAccess.class);
+  
+  @Pure
+  public CodeConfig getCodeConfig() {
+    return this.codeConfig;
+  }
+  
+  public void setCodeConfig(final CodeConfig codeConfig) {
+    this.codeConfig = codeConfig;
+  }
   
   @Pure
   public List<CharSequence> getEntries() {

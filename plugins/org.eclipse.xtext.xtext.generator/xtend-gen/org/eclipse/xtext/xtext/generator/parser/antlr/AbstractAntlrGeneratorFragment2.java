@@ -274,6 +274,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     if ((this.codeQualityHelper != null)) {
       this.codeQualityHelper.stripUnnecessaryComments(fsa, lexerJavaFile, parserJavaFile);
       this.codeQualityHelper.removeDuplicateBitsets(fsa, parserJavaFile);
+      this.codeQualityHelper.removeDuplicateDFAs(fsa, parserJavaFile);
     }
     AntlrOptions _options = this.getOptions();
     boolean _isClassSplitting = _options.isClassSplitting();

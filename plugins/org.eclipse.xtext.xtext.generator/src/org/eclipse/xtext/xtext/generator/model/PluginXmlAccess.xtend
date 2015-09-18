@@ -9,12 +9,17 @@ package org.eclipse.xtext.xtext.generator.model
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.CodeConfig
+import com.google.inject.Inject
 
 @Log
 @Accessors
 class PluginXmlAccess extends TextFileAccess {
+	
+	@Inject CodeConfig codeConfig
 	
 	new() {
 		this.path = 'plugin.xml'
@@ -27,9 +32,8 @@ class PluginXmlAccess extends TextFileAccess {
 	}
 	
 	override getContent() '''
-		<?xml version="1.0" encoding="UTF-8"?>
+		<?xml version="1.0" encoding="«codeConfig.encoding?:'UTF-8'»"?>
 		<?eclipse version="3.0"?>
-		
 		<plugin>
 			«FOR entry : entries»
 				«entry»
@@ -45,6 +49,12 @@ class PluginXmlAccess extends TextFileAccess {
 			LOG.warn('Merging plugin.xml files with different paths: ' + this.path + ', ' + other.path)
 		}
 		this.entries.addAll(other.entries)
+	}
+	
+	override writeTo(IFileSystemAccess2 fileSystemAccess) {
+		if (!entries.isEmpty) {
+			super.writeTo(fileSystemAccess)
+		}
 	}
 	
 }

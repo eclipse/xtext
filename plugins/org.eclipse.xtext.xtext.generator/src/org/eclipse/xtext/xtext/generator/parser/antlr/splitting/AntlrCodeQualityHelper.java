@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr.splitting;
 
+import static org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper.dfaStringPattern;
+import static org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper.dfaUnpackPattern;
+import static org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper.removeDuplicateFields;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -21,6 +25,7 @@ public class AntlrCodeQualityHelper {
 
 	private String keepBitsets;
 	private String keptName;
+	private boolean stripAllComments = false;
 	private boolean enabled = true;
 	
 	/**
@@ -60,6 +65,17 @@ public class AntlrCodeQualityHelper {
 		return fileContent;
 	}
 
+	protected void stripAllComments(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
+		String content = fsa.readTextFile(javaFile).toString();
+		content = stripAllComments(content);
+		fsa.generateFile(javaFile, content);
+	}
+	
+	protected String stripAllComments(String fileContent) {
+		fileContent = fileContent.replaceAll("(?m)^\\s+//.*$\\R", "");
+		return fileContent;
+	}
+	
 	/**
 	 * Remove all unnecessary comments from the lexer and the parser
 	 */
@@ -69,16 +85,24 @@ public class AntlrCodeQualityHelper {
 		}
 		stripUnnecessaryComments(fsa, lexer);
 		stripUnnecessaryComments(fsa, parser);
+		if (stripAllComments) {
+			stripAllComments(fsa, parser);
+			stripAllComments(fsa, lexer);
+		}
 	}
 
 	// public static final BitSet FOLLOW_Symbol_in_synpred90_InternalMyDslParser17129 = new BitSet(new
 	// long[]{0x0000000000000002L});
 	// ...........................1- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 2-
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	private static final Pattern bitsetPattern = Pattern.compile(
-			"^\\s+public static final BitSet (FOLLOW_\\w+) = (.*);$", Pattern.MULTILINE);
-
+	public static final Pattern followsetPattern = Pattern.compile(
+			"\\s+public static final BitSet (FOLLOW_\\w+) = (.*);$", Pattern.MULTILINE);
 	
+	public static final Pattern dfaStringPattern = Pattern.compile(
+			"\\s+static final String\\[?]? (DFA\\d+_\\w+) =\\s+([^;]*);$", Pattern.MULTILINE | Pattern.DOTALL);
+	
+	public static final Pattern dfaUnpackPattern = Pattern.compile(
+			"\\s+static final (?:short|char)\\[?]?\\[?]? (DFA\\d+_\\w+) = (\\w+(\\.\\w+)?\\(dfa_\\d+s\\));$", Pattern.MULTILINE | Pattern.DOTALL);
 	/**
 	 * Remove duplicate bitset declarations to reduce the size of the static initializer but keep the bitsets
 	 * that match the given pattern with a normalized name.
@@ -87,34 +111,54 @@ public class AntlrCodeQualityHelper {
 		if (!enabled) {
 			return;
 		}
-		Pattern bitsetsToKeep = null;
-		Set<String> doNotReplace = Sets.newHashSet();
-		if (keepBitsets != null) {
-			bitsetsToKeep = Pattern.compile(keepBitsets);
-		}
 		String content = fsa.readTextFile(javaFile).toString();
+		
+		CharSequence newContent = removeDuplicateFields(
+				content, followsetPattern, 1, 2, "\\bFOLLOW_\\w+\\b", "FOLLOW_%d", keepBitsets, keptName);
+		
+		fsa.generateFile(javaFile, newContent);
+	}
+
+	/**
+	 * 
+	 * @param content
+	 * @param lookupPattern the regular expression pattern that we try to find
+	 * @param synName
+	 * @param keepPattern
+	 * @param keptName
+	 * @return
+	 */
+	public static CharSequence removeDuplicateFields(CharSequence content, Pattern lookupPattern, int origNameGroup, int initGroup, String rawClientPattern, String synName, String keepPattern, String keptName) {
+		Pattern fieldnamesToKeep = null;
+		Set<String> doNotReplace = Sets.newHashSet();
+		if (keepPattern != null) {
+			fieldnamesToKeep = Pattern.compile(keepPattern);
+		}
 		StringBuilder newContent = new StringBuilder(content.length());
-		Matcher matcher = bitsetPattern.matcher(content);
+		Matcher matcher = lookupPattern.matcher(content);
 		int offset = 0;
-		Map<String, String> bitsets = Maps.newHashMap();
+		Map<String, String> fields = Maps.newHashMap();
 		Map<String, String> namesToReplace = Maps.newHashMap();
 		while (matcher.find(offset)) {
-			String originalFieldName = matcher.group(1);
-			String synthesizedFieldName = "FOLLOW_" + (bitsets.size() + 1);
-			String bitset = matcher.group(2);
-			String existing = putIfAbsent(bitsets, bitset, synthesizedFieldName);
+			String originalFieldName = matcher.group(origNameGroup);
+			String synthesizedFieldName = String.format(synName, fields.size() + 1);
+			String initializer = matcher.group(initGroup);
+			String existing = putIfAbsent(fields, initializer, synthesizedFieldName);
 			if (existing == null) {
 				existing = synthesizedFieldName;
-				newContent.append(content, offset, matcher.start(1));
+				newContent.append(content, offset, matcher.start(origNameGroup));
 				newContent.append(synthesizedFieldName);
 				newContent.append(" = ");
-				newContent.append(bitset);
+				newContent.append(initializer);
+				newContent.append(content, matcher.end(initGroup), matcher.end());
+			} else {
+				newContent.append(content, offset, matcher.start());
 			}
 			namesToReplace.put(originalFieldName, existing);
-			if (bitsetsToKeep != null) {
-				Matcher keepMatcher = bitsetsToKeep.matcher(originalFieldName);
+			if (fieldnamesToKeep != null) {
+				Matcher keepMatcher = fieldnamesToKeep.matcher(originalFieldName);
 				if (keepMatcher.matches()) {
-					newContent.append(content, offset, matcher.start(1));
+					newContent.append(content, offset, matcher.start(origNameGroup));
 					String simpleName = keptName != null ? keepMatcher.replaceFirst(keptName) : originalFieldName;
 					newContent.append(simpleName);
 					doNotReplace.add(simpleName);
@@ -122,37 +166,57 @@ public class AntlrCodeQualityHelper {
 					newContent.append(existing);
 				}
 			}
-			offset = matcher.end(2);
+			offset = matcher.end();
 		}
 		newContent.append(content, offset, content.length());
 		content = newContent.toString();
 		newContent = new StringBuilder(content.length());
-		String rawFollowPattern = "\\bFOLLOW_\\w+\\b";
-		Pattern followPattern = Pattern.compile(rawFollowPattern);
-		Matcher followMatcher = followPattern.matcher(content);
-		doNotReplace.addAll(bitsets.values());
+		Pattern clientPattern = Pattern.compile(rawClientPattern);
+		Matcher clientMatcher = clientPattern.matcher(content);
+		doNotReplace.addAll(fields.values());
 		offset = 0;
-		while (followMatcher.find(offset)) {
-			String replaceMe = followMatcher.group();
+		while (clientMatcher.find(offset)) {
+			String replaceMe = clientMatcher.group();
 			String replaceBy = namesToReplace.get(replaceMe);
 			if (replaceBy == null) {
-				if (!doNotReplace.contains(replaceMe))
-					throw new IllegalStateException(replaceMe);
 				replaceBy = replaceMe;
 			}
-			newContent.append(content, offset, followMatcher.start());
+			newContent.append(content, offset, clientMatcher.start());
 			newContent.append(replaceBy);
-			offset = followMatcher.end();
+			offset = clientMatcher.end();
 		}
 		newContent.append(content, offset, content.length());
-		fsa.generateFile(javaFile, newContent);
+		return newContent;
 	}
 	
-	private <K, V> V putIfAbsent(Map<K, V> map, K key, V value) {
+	private static <K, V> V putIfAbsent(Map<K, V> map, K key, V value) {
         V v = map.get(key);
         if (v == null) {
             v = map.put(key, value);
         }
         return v;
     }
+	
+	private static final Pattern dfaPattern = Pattern.compile(
+			"static final short\\[]\\[] (DFA\\d+_transition);\\s+static \\{[^{]*\\{[^}]*\\}[^}]*\\}", Pattern.DOTALL);
+	
+	private static final String replacement= "static final short[][] $1 = unpackEncodedStringArray($1S);";
+	
+	/**
+	 * Remove duplicate bitset declarations to reduce the size of the static initializer but keep the bitsets
+	 * that match the given pattern with a normalized name.
+	 */
+	public void removeDuplicateDFAs(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
+		if (!enabled) {
+			return;
+		}
+		String content = fsa.readTextFile(javaFile).toString();
+		CharSequence newContent = dfaPattern.matcher(content).replaceAll(replacement);
+		newContent = removeDuplicateFields(
+				newContent, dfaStringPattern, 1, 2, "\\bDFA\\d+_\\w+\\b", "dfa_%ds", null, null);
+		newContent = removeDuplicateFields(
+				newContent, dfaUnpackPattern, 1, 2, "\\bDFA\\d+_\\w+\\b", "dfa_%d", null, null);
+		fsa.generateFile(javaFile, newContent);
+	}
+	
 }
