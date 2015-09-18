@@ -9,7 +9,7 @@ package org.eclipse.xtend.idea.config
 
 import com.intellij.openapi.command.WriteCommandAction
 import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator
 import org.eclipse.xtend.idea.LightXtendTest
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrApplicationStatement
@@ -38,7 +38,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		        jcenter()
 		    }
 		    dependencies {
-		        classpath 'org.xtend:xtend-gradle-plugin:0.4.7'
+		        classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginVersion»'
 		    }
 		}
 		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
@@ -57,7 +57,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertEquals('''
 		buildscript{dependencies{
-		    classpath 'org.xtend:xtend-gradle-plugin:0.4.7'
+		    classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginVersion»'
 		}
 		    repositories {
 		        jcenter()
@@ -71,11 +71,11 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		val buildFile = myFixture.addFileToProject('build.gradle', '') as GroovyFile
 		assertNotNull(buildFile)
 		WriteCommandAction.runWriteCommandAction(myFixture.project, [
-			util.addDependency(buildFile, "compile '" + XtendLibraryManager.xtendLibMavenId().toString + "'")
+			util.addDependency(buildFile, "compile '" + XtendLibraryConfigurator.xtendLibMavenId().toString + "'")
 		])
 		assertEquals('''
 		dependencies {
-		    compile '«XtendLibraryManager.xtendLibMavenId().toString»'
+		    compile '«XtendLibraryConfigurator.xtendLibMavenId().toString»'
 		}'''.toString, buildFile.text)
 	}
 
@@ -84,11 +84,11 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertNotNull(buildFile)
 		WriteCommandAction.runWriteCommandAction(myFixture.project, [
-			util.addDependency(buildFile, "compile '" + XtendLibraryManager.xtendLibMavenId().toString + "'")
+			util.addDependency(buildFile, "compile '" + XtendLibraryConfigurator.xtendLibMavenId().toString + "'")
 		])
 		assertEquals('''
 		dependencies {
-		    compile '«XtendLibraryManager.xtendLibMavenId().toString»'
+		    compile '«XtendLibraryConfigurator.xtendLibMavenId().toString»'
 		}'''.toString, buildFile.text)
 	}
 

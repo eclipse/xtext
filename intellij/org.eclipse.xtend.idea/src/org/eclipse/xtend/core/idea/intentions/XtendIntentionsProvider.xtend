@@ -19,7 +19,6 @@ import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiFile
 import com.intellij.psi.codeStyle.CodeStyleManager
 import com.intellij.util.IncorrectOperationException
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager
 import org.eclipse.xtend.core.services.XtendGrammarAccess
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
@@ -39,6 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -174,7 +174,7 @@ class XtendIntentionsProvider extends IdeaIntentionsProvider {
 	}
 
 	static class AddXtendLibToClassPathIntentionAction extends AbstractIssueIntentionAction {
-		@Inject XtendLibraryManager libraryManager
+		@Inject XtendLibraryConfigurator libraryManager
 		public static val TEXT = "Add Xtend runtime Library"
 
 		override getText() {

@@ -10,15 +10,12 @@ package org.eclipse.xtend.core.idea.config
 import com.google.inject.Inject
 import com.intellij.facet.FacetManager
 import com.intellij.facet.FacetTypeRegistry
-import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.module.Module
-import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.SourceFolder
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
-import javax.inject.Provider
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState
@@ -26,35 +23,15 @@ import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author dhuebner - Initial contribution and API
  */
-class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
-
-	@Inject
-	Provider<XtendLibraryDescription> libraryDescriptionProvider
-	@Inject XtendLibraryManager xtendLibManager
+class XtendProjectConfigurator {
 	@Inject extension GradleBuildFileUtility
-
-	override addSupport(
-		Module module,
-		ModifiableRootModel rootModel,
-		ModifiableModelsProvider modifiableModelsProvider
-	) {
-		val conf = rootModel.module.createOrGetXtendFacetConf
-		rootModel.setupOutputConfiguration(conf)
-		rootModel.createOutputFolders(conf.state)
-		xtendLibManager.ensureXtendLibAvailable(rootModel)
-	}
 
 	def setupOutputConfiguration(ModifiableRootModel rootModel, XtendFacetConfiguration conf) {
 		val module = rootModel.module
 		val buildFile = module.locateBuildFile()
 		if (module.isGradleedModule && buildFile !== null) {
-			new WriteCommandAction.Simple(module.project, "Gradle: Xtend Configuration", newImmutableList(buildFile)) {
-				override protected run() throws Throwable {
-					module.setupGradleBuild(buildFile)
-				}
-			}.execute
 			conf.state.presetGradleOutputDirectories(rootModel)
 		} else {
 			conf.state.presetPlainJavaOutputDirectories(rootModel)
@@ -74,6 +51,17 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 	}
 
 	def presetGradleOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
+		val existingXtendGen = rootModel.findSourceFolder[!testSource && url.endsWith('xtend-gen')]
+		val existingXtendTestGen = rootModel.findSourceFolder[testSource && url.endsWith('xtend-gen')]
+		if (existingXtendGen !== null || existingXtendTestGen !== null) {
+			state.outputDirectory = {
+				existingXtendGen ?: existingXtendTestGen
+			}.toString
+			state.testOutputDirectory = {
+				existingXtendTestGen ?: existingXtendGen
+			}.toString
+			return
+		}
 		val parentPath = rootModel.contentRoots.head.path
 		if (rootModel.module.isAndroidGradleModule()) {
 			state.outputDirectory = '''«parentPath»/build/generated/source/xtend/debug'''
@@ -82,6 +70,12 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 			state.outputDirectory = '''«parentPath»/build/xtend-gen/main'''
 			state.testOutputDirectory = '''«parentPath»/build/xtend-gen/test'''
 		}
+		val buildFile = rootModel.module.locateBuildFile()
+		new WriteCommandAction.Simple(rootModel.project, "Gradle: Xtend Configuration", newImmutableList(buildFile)) {
+			override protected run() throws Throwable {
+				rootModel.module.setupGradleBuild(buildFile)
+			}
+		}.execute
 	}
 
 	def void presetPlainJavaOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel model) {
@@ -89,17 +83,17 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		val mainSrc = model.findSourceFolder[!testSource && file?.exists]
 		val testSrc = model.findSourceFolder[testSource && file?.exists]
 
-		if (mainSrc != null) {
-			state.outputDirectory = siblingPath(mainSrc, 'xtend-gen')
-		} else {
+		if (mainSrc === null && testSrc === null) {
 			val contentRoot = model.findBestContentRoot
 			state.outputDirectory = contentRoot.path + VfsUtil.VFS_SEPARATOR_CHAR + 'xtend-gen'
-
-		}
-		if (testSrc != null) {
-			state.testOutputDirectory = siblingPath(testSrc, 'xtend-gen')
-		} else {
 			state.testOutputDirectory = state.outputDirectory
+		} else {
+			state.outputDirectory = {
+				mainSrc ?: testSrc
+			}.siblingPath('xtend-gen')
+			state.testOutputDirectory = {
+				testSrc ?: mainSrc
+			}.siblingPath('xtend-gen')
 		}
 	}
 
@@ -148,7 +142,9 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 	def void addAsSourceFolder(ModifiableRootModel rootModel, VirtualFile xtendGenMain, JavaSourceRootType type) {
 		val contentRoot = rootModel.contentEntries.findFirst[VfsUtil.isAncestor(it.file, xtendGenMain, true)]
 		if (contentRoot !== null) {
-			val excludedParent = contentRoot.excludeFolders.findFirst[VfsUtil.isAncestor(it.file, xtendGenMain, true)]
+			val excludedParent = contentRoot.excludeFolders.findFirst [
+				it.file !== null && VfsUtil.isAncestor(it.file, xtendGenMain, true)
+			]
 			if (excludedParent !== null) {
 				contentRoot.removeExcludeFolder(excludedParent)
 			}
@@ -159,14 +155,6 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 
 	def private String siblingPath(VirtualFile sibling, String path) {
 		return sibling.parent.path + VfsUtil.VFS_SEPARATOR_CHAR + path
-	}
-
-	override createComponent() {
-		null
-	}
-
-	override createLibraryDescription() {
-		libraryDescriptionProvider.get
 	}
 
 }
