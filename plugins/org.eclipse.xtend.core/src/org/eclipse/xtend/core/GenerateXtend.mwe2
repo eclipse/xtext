@@ -39,10 +39,6 @@ var fileHeader = "/*************************************************************
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/"
 
-var codeQualityHelper = org.eclipse.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper {
-	stripAllComments = true
-}
-
 Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
@@ -137,7 +133,9 @@ Workflow {
 			}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ParserGenerator auto-inject {
-					options = auto-inject {}
+					options = auto-inject {
+						stripAllComments = true
+					}
 				}
 			}
 			fragment = adapter.FragmentAdapter {
