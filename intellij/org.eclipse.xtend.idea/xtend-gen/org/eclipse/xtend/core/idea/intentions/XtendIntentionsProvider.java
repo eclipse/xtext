@@ -30,7 +30,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -317,7 +317,7 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
   
   public static class AddXtendLibToClassPathIntentionAction extends AbstractIssueIntentionAction {
     @Inject
-    private XtendLibraryManager libraryManager;
+    private XtendLibraryConfigurator libraryManager;
     
     public final static String TEXT = "Add Xtend runtime Library";
     

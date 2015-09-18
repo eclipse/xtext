@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.idea.config;
+package org.eclipse.xtend.core.idea.framework;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JComponent;
-import org.eclipse.xtend.core.idea.config.XtendLibraryPresentationProvider;
+import org.eclipse.xtend.core.idea.framework.XtendLibraryPresentationProvider;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;

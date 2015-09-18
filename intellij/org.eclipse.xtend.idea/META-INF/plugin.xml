@@ -48,12 +48,12 @@
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendJunitClassConfigurationProducer"/>
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProducer"/>
 
-    	<framework.type implementation="org.eclipse.xtend.core.idea.config.XtendFrameworkType" />
-    	<library.presentationProvider implementation="org.eclipse.xtend.core.idea.config.XtendLibraryPresentationProvider" />
+    	<framework.type implementation="org.eclipse.xtend.core.idea.framework.XtendFrameworkType" />
+    	<library.presentationProvider implementation="org.eclipse.xtend.core.idea.framework.XtendLibraryPresentationProvider" />
 
     	<iconProvider implementation="org.eclipse.xtend.core.idea.icons.XtendIconProvider"/>
     	<treeStructureProvider implementation="org.eclipse.xtend.core.idea.projectview.XtendSelectableTreeStructureProvider" order="last"/>
-    	<framework.detector implementation="org.eclipse.xtend.core.idea.facet.XtendFrameworkDetector"/>
+    	<framework.detector implementation="org.eclipse.xtend.core.idea.framework.XtendFrameworkDetector"/>
     	<lang.importOptimizer language="org.eclipse.xtend.core.Xtend"
 							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
 							implementationClass="org.eclipse.xtext.xbase.idea.imports.XImportSectionOptimizer"/>
@@ -78,7 +78,7 @@
 	</extensions>
 	
 	<extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
-	  <frameworkSupport implementation="org.eclipse.xtend.core.idea.config.XtendGradleFrameworkSupportProvider"/>
+	  <frameworkSupport implementation="org.eclipse.xtend.core.idea.framework.XtendGradleFrameworkSupportProvider"/>
     </extensions>
 	
 </idea-plugin>

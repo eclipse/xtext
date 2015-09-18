@@ -24,7 +24,6 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.border.EmptyBorder
 
-import static org.eclipse.xtext.idea.util.IdeaWidgetFactory.*
 
 /**
  * @author dhuebner - Initial contribution and API

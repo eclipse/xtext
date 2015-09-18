@@ -16,7 +16,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -75,8 +75,10 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("dependencies {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:0.4.7\'");
-    _builder.newLine();
+    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
+    _builder.append(this.util.xtendGradlePluginVersion, "        ");
+    _builder.append("\'");
+    _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
@@ -114,8 +116,10 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("buildscript{dependencies{");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:0.4.7\'");
-    _builder.newLine();
+    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
+    _builder.append(this.util.xtendGradlePluginVersion, "    ");
+    _builder.append("\'");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     _builder.append("    ");
@@ -144,7 +148,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     final Runnable _function = new Runnable() {
       @Override
       public void run() {
-        MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
+        MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
         String _string = _xtendLibMavenId.toString();
         String _plus = ("compile \'" + _string);
         String _plus_1 = (_plus + "\'");
@@ -157,7 +161,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("compile \'");
-    MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
+    MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _string = _xtendLibMavenId.toString();
     _builder.append(_string, "    ");
     _builder.append("\'");
@@ -178,7 +182,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     final Runnable _function = new Runnable() {
       @Override
       public void run() {
-        MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
+        MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
         String _string = _xtendLibMavenId.toString();
         String _plus = ("compile \'" + _string);
         String _plus_1 = (_plus + "\'");
@@ -191,7 +195,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("compile \'");
-    MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
+    MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _string = _xtendLibMavenId.toString();
     _builder_1.append(_string, "    ");
     _builder_1.append("\'");

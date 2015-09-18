@@ -17,44 +17,37 @@ import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.libraries.Library
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar
-import com.intellij.openapi.startup.StartupManager
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.xml.DomUtil
+import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
 import org.jetbrains.idea.maven.dom.MavenDomUtil
 import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel
 import org.jetbrains.idea.maven.model.MavenId
 import org.jetbrains.idea.maven.project.MavenProject
 import org.jetbrains.idea.maven.project.MavenProjectsManager
-import com.intellij.openapi.project.DumbService
 
 /**
  * @author dhuebner - Initial contribution and API
  */
-class XtendLibraryManager {
-	protected static final Logger LOG = Logger.getInstance(XtendLibraryManager.name)
+class XtendLibraryConfigurator {
+	
+	protected static final Logger LOG = Logger.getInstance(XtendLibraryConfigurator.name)
 	@Inject extension GradleBuildFileUtility gradleUtils
 	@Inject XtendLibraryDescription xtendLibDescr
 	static MavenId XTEND_LIB_MAVEN_ID
+	@Inject extension  ProjectLifecycleUtil
 
 	def ensureXtendLibAvailable(ModifiableRootModel rootModel) {
 		ensureXtendLibAvailable(rootModel, null)
 	}
 
 	def ensureXtendLibAvailable(ModifiableRootModel rootModel, PsiFile context) {
-		val project = rootModel.project
-		if (project.initialized) {
-			DumbService.getInstance(project).runWhenSmart [
-				doEnsureXtendLibAvailable(rootModel, context)
-			]
-		} else {
-			StartupManager.getInstance(project).registerPostStartupActivity [
-				doEnsureXtendLibAvailable(rootModel, context)
-			]
-		}
+		rootModel.project.executeWhenProjectReady[doEnsureXtendLibAvailable(rootModel, context)]
 	}
 
 	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, PsiFile context) {
@@ -130,18 +123,6 @@ class XtendLibraryManager {
 		}.execute()
 	}
 
-	protected def boolean isTestScope(PsiFile context) {
-		var VirtualFile virtualFile = context.getOriginalFile().getVirtualFile()
-		if (virtualFile !== null) {
-			return ProjectRootManager.getInstance(context.project).getFileIndex().isInTestSourceContent(virtualFile)
-		}
-	}
-
-	def boolean isMavenizedModule(Module module) {
-		var mavenProjectsManager = MavenProjectsManager.getInstance(module.getProject())
-		return if(mavenProjectsManager !== null) mavenProjectsManager.isMavenizedModule(module) else false
-	}
-
 	def Library createOrGetXtendJavaLibrary(ModifiableRootModel rootModel, Module module) {
 		val libraryTable = LibraryTablesRegistrar.getInstance().getLibraryTable(module.project).libraries +
 			LibraryTablesRegistrar.getInstance().getLibraryTable().libraries
@@ -169,6 +150,18 @@ class XtendLibraryManager {
 			model.commit
 			return createdLib
 		}
+	}
+
+	protected def boolean isTestScope(PsiFile context) {
+		var VirtualFile virtualFile = context.getOriginalFile().getVirtualFile()
+		if (virtualFile !== null) {
+			return ProjectRootManager.getInstance(context.project).getFileIndex().isInTestSourceContent(virtualFile)
+		}
+	}
+
+	def boolean isMavenizedModule(Module module) {
+		var mavenProjectsManager = MavenProjectsManager.getInstance(module.getProject())
+		return if(mavenProjectsManager !== null) mavenProjectsManager.isMavenizedModule(module) else false
 	}
 
 }

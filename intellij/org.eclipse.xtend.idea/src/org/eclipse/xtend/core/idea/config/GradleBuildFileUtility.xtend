@@ -31,7 +31,7 @@ import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner
  */
 class GradleBuildFileUtility {
 
-	public val xtendGradlePluginVersion = '0.4.7'
+	public val xtendGradlePluginVersion = '0.4.8'
 
 	def boolean isGradleedModule(Module module) {
 		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) ||
@@ -43,10 +43,12 @@ class GradleBuildFileUtility {
 			return
 		}
 		val android = module.isAndroidGradleModule
+		if(buildFile.statements.findFirst[text.trim.matches('''apply plugin:.*org\\.xtend\\.xtend«if(android)'-android'».*''')] !== null) {
+			return
+		}
 		val buildScript = buildFile.createOrGetMethodCall("buildscript")
 		buildScript.createOrGetMethodCall('repositories').createStatementIfNotExists('jcenter()')
 		buildScript.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«xtendGradlePluginVersion»' ''')
-
 		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
 	}
 
@@ -71,13 +73,14 @@ class GradleBuildFileUtility {
 		parentElement.createOrGetMethodCall("dependencies").createStatementIfNotExists(dependencyEntry)
 	}
 
-	def private void createStatementIfNotExists(GrStatementOwner statementOwner, String statement) {
+	def private boolean createStatementIfNotExists(GrStatementOwner statementOwner, String statement) {
 		if (statementOwner.statements.findFirst[statement.trim == text] !== null) {
-			return
+			return false
 		}
 		var factory = GroovyPsiElementFactory.getInstance(statementOwner.project)
 		val entry = factory.createStatementFromText(statement)
 		statementOwner.addStatementBefore(entry, null)
+		return true
 	}
 
 	def private GrClosableBlock createOrGetMethodCall(GrStatementOwner element, String methodName) {

@@ -24,8 +24,8 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Consumer;
 import junit.framework.TestCase;
-import org.eclipse.xtend.core.idea.config.XtendLibraryDescription;
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
+import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription;
 import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -40,7 +40,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class XtendLibraryManagerTest extends LightXtendTest {
   @Inject
-  private XtendLibraryManager manager;
+  private XtendLibraryConfigurator manager;
   
   private Procedure1<? super Module> libraryAdder;
   

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.idea.config;
+package org.eclipse.xtend.core.idea.framework;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -15,8 +15,8 @@ import com.intellij.framework.addSupport.FrameworkSupportInModuleProvider;
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportModel;
 import com.intellij.openapi.module.JavaModuleType;
 import com.intellij.openapi.module.ModuleType;
-import org.eclipse.xtend.core.idea.config.XtendFrameworkType;
-import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
+import org.eclipse.xtend.core.idea.framework.XtendFrameworkType;
+import org.eclipse.xtend.core.idea.framework.XtendSupportConfigurable;
 
 /**
  * @author kosyakov - Initial contribution and API

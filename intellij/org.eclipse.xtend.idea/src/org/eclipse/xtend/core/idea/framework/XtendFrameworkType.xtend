@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.config
+package org.eclipse.xtend.core.idea.framework
 
 import com.google.inject.Inject
 import com.google.inject.Provider
@@ -22,7 +22,7 @@ class XtendFrameworkType extends FrameworkTypeEx {
 	Provider<XtendFrameworkSupportProvider> xtendFrameworkSupportProviderProvider
 
 	new() {
-		super(XtendLanguage.INSTANCE.ID)
+		super(XtendLanguage.INSTANCE.getID)
 		XtendLanguage.INSTANCE.injectMembers(this)
 	}
 
