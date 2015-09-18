@@ -19,7 +19,7 @@ public class Bug365368Test extends AbstractXtendContentAssistBugTest {
   @Test
   public void testEscapedIdentifierNoPrefix() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\r\n\t\t\tdef void ^as() {}\r\n\t\t\tdef void aa() {}\r\n\t\t\tdef void bb() {}\r\n\t\t\tdef void m() { this.");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.");
     _append.assertText(
       "^as", "aa", "bb", "m", 
       "class", "clone", "equals()", "finalize", "hashCode", "identityEquals()", "notify", "notifyAll", "toString", "wait", "wait()", "wait()");
@@ -28,38 +28,38 @@ public class Bug365368Test extends AbstractXtendContentAssistBugTest {
   @Test
   public void testEscapedIdentifierEscapeCharPrefix() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\r\n\t\t\tdef void ^as() {}\r\n\t\t\tdef void aa() {}\r\n\t\t\tdef void bb() {}\r\n\t\t\tdef void m() { this.^");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.^");
     _append.assertText("^as");
   }
   
   @Test
   public void testEscapedIdentifierFirstCharPrefix() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\r\n\t\t\tdef void ^as() {}\r\n\t\t\tdef void aa() {}\r\n\t\t\tdef void bb() {}\r\n\t\t\tdef void m() { this.a");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.a");
     _append.assertText("^as", "aa");
   }
   
   @Test
   public void testEscapedIdentifierFirstCharPrefixApplied() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\r\n\t\t\t\tdef void ^as() {}\r\n\t\t\t\tdef void aa() {}\r\n\t\t\t\tdef void bb() {}\r\n\t\t\t\tdef void m() { this.a");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.a");
     ContentAssistProcessorTestBuilder _assertText = _append.assertText("^as", "aa");
     ContentAssistProcessorTestBuilder _applyProposal = _assertText.applyProposal("^as");
-    _applyProposal.expectContent("class C {\r\n\t\t\t\tdef void ^as() {}\r\n\t\t\t\tdef void aa() {}\r\n\t\t\t\tdef void bb() {}\r\n\t\t\t\tdef void m() { this.^as");
+    _applyProposal.expectContent("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.^as");
   }
   
   @Test
   public void testEscapedIdentifierTwoCharsPrefix() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\r\n\t\t\tdef void ^as() {}\r\n\t\t\tdef void aa() {}\r\n\t\t\tdef void bb() {}\r\n\t\t\tdef void m() { this.as");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.as");
     _append.assertText("^as");
   }
   
   @Test
   public void testEscapedIdentifierTwoCharPrefixApplied() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\r\n\t\t\t\tdef void ^as() {}\r\n\t\t\t\tdef void aa() {}\r\n\t\t\t\tdef void bb() {}\r\n\t\t\t\tdef void m() { this.as");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.as");
     ContentAssistProcessorTestBuilder _applyProposal = _append.applyProposal();
-    _applyProposal.expectContent("class C {\r\n\t\t\t\tdef void ^as() {}\r\n\t\t\t\tdef void aa() {}\r\n\t\t\t\tdef void bb() {}\r\n\t\t\t\tdef void m() { this.^as");
+    _applyProposal.expectContent("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.^as");
   }
 }

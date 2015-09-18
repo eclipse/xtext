@@ -118,6 +118,7 @@ public class AntlrCodeQualityHelper {
 					doNotReplace.add(simpleName);
 					newContent.append(" = ");
 					newContent.append(existing);
+					newContent.append(";");
 				}
 			}
 			offset = matcher.end();

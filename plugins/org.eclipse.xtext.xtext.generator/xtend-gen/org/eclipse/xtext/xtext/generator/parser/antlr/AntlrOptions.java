@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
@@ -27,8 +28,10 @@ public class AntlrOptions {
   
   private boolean classSplitting = false;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
   
   private boolean skipUnusedRules = false;
@@ -115,17 +118,9 @@ public class AntlrOptions {
     return this.fieldsPerClass;
   }
   
-  public void setFieldsPerClass(final int fieldsPerClass) {
-    this.fieldsPerClass = fieldsPerClass;
-  }
-  
   @Pure
   public int getMethodsPerClass() {
     return this.methodsPerClass;
-  }
-  
-  public void setMethodsPerClass(final int methodsPerClass) {
-    this.methodsPerClass = methodsPerClass;
   }
   
   @Pure
