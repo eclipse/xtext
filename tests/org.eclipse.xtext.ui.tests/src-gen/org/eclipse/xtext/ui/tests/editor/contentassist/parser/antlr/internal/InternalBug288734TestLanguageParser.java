@@ -888,19 +888,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
 
     protected DFA1 dfa1 = new DFA1(this);
-    static final String DFA1_eotS =
-        "\7\uffff";
-    static final String DFA1_eofS =
-        "\7\uffff";
-    static final String DFA1_minS =
-        "\1\13\1\5\1\14\1\13\3\uffff";
-    static final String DFA1_maxS =
-        "\1\17\1\5\1\16\1\17\3\uffff";
-    static final String DFA1_acceptS =
-        "\4\uffff\1\3\1\2\1\1";
-    static final String DFA1_specialS =
-        "\7\uffff}>";
-    static final String[] DFA1_transitionS = {
+    static final String dfa_1s = "\7\uffff";
+    static final String dfa_2s = "\1\13\1\5\1\14\1\13\3\uffff";
+    static final String dfa_3s = "\1\17\1\5\1\16\1\17\3\uffff";
+    static final String dfa_4s = "\4\uffff\1\3\1\2\1\1";
+    static final String dfa_5s = "\7\uffff}>";
+    static final String[] dfa_6s = {
             "\1\2\3\uffff\1\1",
             "\1\3",
             "\1\6\1\5\1\4",
@@ -910,34 +903,25 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
             ""
     };
 
-    static final short[] DFA1_eot = DFA.unpackEncodedString(DFA1_eotS);
-    static final short[] DFA1_eof = DFA.unpackEncodedString(DFA1_eofS);
-    static final char[] DFA1_min = DFA.unpackEncodedStringToUnsignedChars(DFA1_minS);
-    static final char[] DFA1_max = DFA.unpackEncodedStringToUnsignedChars(DFA1_maxS);
-    static final short[] DFA1_accept = DFA.unpackEncodedString(DFA1_acceptS);
-    static final short[] DFA1_special = DFA.unpackEncodedString(DFA1_specialS);
-    static final short[][] DFA1_transition;
-
-    static {
-        int numStates = DFA1_transitionS.length;
-        DFA1_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA1_transition[i] = DFA.unpackEncodedString(DFA1_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
 
     class DFA1 extends DFA {
 
         public DFA1(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 1;
-            this.eot = DFA1_eot;
-            this.eof = DFA1_eof;
-            this.min = DFA1_min;
-            this.max = DFA1_max;
-            this.accept = DFA1_accept;
-            this.special = DFA1_special;
-            this.transition = DFA1_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "119:1: (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant )";

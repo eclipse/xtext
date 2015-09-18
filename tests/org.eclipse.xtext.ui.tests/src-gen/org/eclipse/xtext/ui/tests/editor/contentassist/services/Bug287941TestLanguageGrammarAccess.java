@@ -1266,11 +1266,11 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final DoubleWhereEntryElements pDoubleWhereEntry;
 	private final LongWhereEntryElements pLongWhereEntry;
 	private final VariableWhereEntryElements pVariableWhereEntry;
-	private final NumericOperatorElements unknownRuleNumericOperator;
+	private final NumericOperatorElements eNumericOperator;
 	private final StringAttributeWhereEntryElements pStringAttributeWhereEntry;
-	private final StringOperatorElements unknownRuleStringOperator;
+	private final StringOperatorElements eStringOperator;
 	private final BooleanAttributeWhereEntryElements pBooleanAttributeWhereEntry;
-	private final BooleanOperatorElements unknownRuleBooleanOperator;
+	private final BooleanOperatorElements eBooleanOperator;
 	private final NullWhereEntryElements pNullWhereEntry;
 	private final ReferenceAliasWhereEntryElements pReferenceAliasWhereEntry;
 	private final SubselectWhereEntryElements pSubselectWhereEntry;
@@ -1306,11 +1306,11 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pDoubleWhereEntry = new DoubleWhereEntryElements();
 		this.pLongWhereEntry = new LongWhereEntryElements();
 		this.pVariableWhereEntry = new VariableWhereEntryElements();
-		this.unknownRuleNumericOperator = new NumericOperatorElements();
+		this.eNumericOperator = new NumericOperatorElements();
 		this.pStringAttributeWhereEntry = new StringAttributeWhereEntryElements();
-		this.unknownRuleStringOperator = new StringOperatorElements();
+		this.eStringOperator = new StringOperatorElements();
 		this.pBooleanAttributeWhereEntry = new BooleanAttributeWhereEntryElements();
-		this.unknownRuleBooleanOperator = new BooleanOperatorElements();
+		this.eBooleanOperator = new BooleanOperatorElements();
 		this.pNullWhereEntry = new NullWhereEntryElements();
 		this.pReferenceAliasWhereEntry = new ReferenceAliasWhereEntryElements();
 		this.pSubselectWhereEntry = new SubselectWhereEntryElements();
@@ -1534,7 +1534,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum NumericOperator:
 	//	lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual="!=";
 	public NumericOperatorElements getNumericOperatorAccess() {
-		return unknownRuleNumericOperator;
+		return eNumericOperator;
 	}
 	
 	public EnumRule getNumericOperatorRule() {
@@ -1554,7 +1554,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum StringOperator:
 	//	equal="=" | notEqual="!=" | like | notLike="notlike";
 	public StringOperatorElements getStringOperatorAccess() {
-		return unknownRuleStringOperator;
+		return eStringOperator;
 	}
 	
 	public EnumRule getStringOperatorRule() {
@@ -1574,7 +1574,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum BooleanOperator:
 	//	equal="=" | notEqual="!=";
 	public BooleanOperatorElements getBooleanOperatorAccess() {
-		return unknownRuleBooleanOperator;
+		return eBooleanOperator;
 	}
 	
 	public EnumRule getBooleanOperatorRule() {

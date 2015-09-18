@@ -124,7 +124,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	private final ModelElements pModel;
-	private final EnumTElements unknownRuleEnumT;
+	private final EnumTElements eEnumT;
 	private final Elem1Elements pElem1;
 	private final Elem2Elements pElem2;
 	
@@ -138,7 +138,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
-		this.unknownRuleEnumT = new EnumTElements();
+		this.eEnumT = new EnumTElements();
 		this.pElem1 = new Elem1Elements();
 		this.pElem2 = new Elem2Elements();
 	}
@@ -183,7 +183,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum EnumT:
 	//	T1 | T2;
 	public EnumTElements getEnumTAccess() {
-		return unknownRuleEnumT;
+		return eEnumT;
 	}
 	
 	public EnumRule getEnumTRule() {

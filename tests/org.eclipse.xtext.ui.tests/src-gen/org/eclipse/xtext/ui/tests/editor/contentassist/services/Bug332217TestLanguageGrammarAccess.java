@@ -1090,13 +1090,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final StringFunctionElements pStringFunction;
 	private final CollectionLiteralElements pCollectionLiteral;
 	private final CollectionFunctionElements pCollectionFunction;
-	private final TableViewStyleElements unknownRuleTableViewStyle;
+	private final TableViewStyleElements eTableViewStyle;
 	private final TableViewElements pTableView;
 	private final ViewContentElementElements pViewContentElement;
 	private final SectionElements pSection;
 	private final CellElements pCell;
-	private final CellTypeElements unknownRuleCellType;
-	private final CellAccessoryElements unknownRuleCellAccessory;
+	private final CellTypeElements eCellType;
+	private final CellAccessoryElements eCellAccessory;
 	private final CollectionIteratorElements pCollectionIterator;
 	private final ViewActionElements pViewAction;
 	private final SelectorNameElements pSelectorName;
@@ -1126,13 +1126,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pStringFunction = new StringFunctionElements();
 		this.pCollectionLiteral = new CollectionLiteralElements();
 		this.pCollectionFunction = new CollectionFunctionElements();
-		this.unknownRuleTableViewStyle = new TableViewStyleElements();
+		this.eTableViewStyle = new TableViewStyleElements();
 		this.pTableView = new TableViewElements();
 		this.pViewContentElement = new ViewContentElementElements();
 		this.pSection = new SectionElements();
 		this.pCell = new CellElements();
-		this.unknownRuleCellType = new CellTypeElements();
-		this.unknownRuleCellAccessory = new CellAccessoryElements();
+		this.eCellType = new CellTypeElements();
+		this.eCellAccessory = new CellAccessoryElements();
 		this.pCollectionIterator = new CollectionIteratorElements();
 		this.pViewAction = new ViewActionElements();
 		this.pSelectorName = new SelectorNameElements();
@@ -1320,7 +1320,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum TableViewStyle:
 	//	Plain | Grouped;
 	public TableViewStyleElements getTableViewStyleAccess() {
-		return unknownRuleTableViewStyle;
+		return eTableViewStyle;
 	}
 	
 	public EnumRule getTableViewStyleRule() {
@@ -1383,7 +1383,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	value2='Value2' |
 	//	subtitle='Subtitle';
 	public CellTypeElements getCellTypeAccess() {
-		return unknownRuleCellType;
+		return eCellType;
 	}
 	
 	public EnumRule getCellTypeRule() {
@@ -1393,7 +1393,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum CellAccessory:
 	//	None | Link | Detail | Check;
 	public CellAccessoryElements getCellAccessoryAccess() {
-		return unknownRuleCellAccessory;
+		return eCellAccessory;
 	}
 	
 	public EnumRule getCellAccessoryRule() {

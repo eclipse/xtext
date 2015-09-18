@@ -2869,7 +2869,7 @@ public class PsiInternalBeeLangTestLanguageLexer extends Lexer {
         }
     }
 
-    static class DFA14 extends DFA {
+    class DFA14 extends DFA {
 
         public DFA14(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

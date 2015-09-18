@@ -182,7 +182,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	private final StateElements pState;
-	private final StateTypeElements unknownRuleStateType;
+	private final StateTypeElements eStateType;
 	
 	private final Grammar grammar;
 
@@ -194,7 +194,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pState = new StateElements();
-		this.unknownRuleStateType = new StateTypeElements();
+		this.eStateType = new StateTypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -241,7 +241,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum StateType:
 	//	NORMAL | PSEUDO='cond' | REFERENCE='reference' | TEXTUAL='textual';
 	public StateTypeElements getStateTypeAccess() {
-		return unknownRuleStateType;
+		return eStateType;
 	}
 	
 	public EnumRule getStateTypeRule() {

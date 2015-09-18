@@ -144,8 +144,8 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	private final ModelElements pModel;
-	private final ExistingEnumElements unknownRuleExistingEnum;
-	private final GeneratedEnumElements unknownRuleGeneratedEnum;
+	private final ExistingEnumElements eExistingEnum;
+	private final GeneratedEnumElements eGeneratedEnum;
 	
 	private final Grammar grammar;
 
@@ -157,8 +157,8 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
-		this.unknownRuleExistingEnum = new ExistingEnumElements();
-		this.unknownRuleGeneratedEnum = new GeneratedEnumElements();
+		this.eExistingEnum = new ExistingEnumElements();
+		this.eGeneratedEnum = new GeneratedEnumElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -201,7 +201,7 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	//enum ExistingEnum:
 	//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 	public ExistingEnumElements getExistingEnumAccess() {
-		return unknownRuleExistingEnum;
+		return eExistingEnum;
 	}
 	
 	public EnumRule getExistingEnumRule() {
@@ -211,7 +211,7 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	//enum GeneratedEnum:
 	//	SameName | DifferentName="DifferentLiteral";
 	public GeneratedEnumElements getGeneratedEnumAccess() {
-		return unknownRuleGeneratedEnum;
+		return eGeneratedEnum;
 	}
 	
 	public EnumRule getGeneratedEnumRule() {

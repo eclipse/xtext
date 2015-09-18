@@ -452,7 +452,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final AlternativeElements pAlternative;
 	private final FQNElements pFQN;
 	private final RecursiveClassDeclarationElements pRecursiveClassDeclaration;
-	private final VisibilityElements unknownRuleVisibility;
+	private final VisibilityElements eVisibility;
 	private final AlternativeClassModifiersElements pAlternativeClassModifiers;
 	private final UnorderedElements pUnordered;
 	private final SimpleClassDeclarationElements pSimpleClassDeclaration;
@@ -472,7 +472,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pAlternative = new AlternativeElements();
 		this.pFQN = new FQNElements();
 		this.pRecursiveClassDeclaration = new RecursiveClassDeclarationElements();
-		this.unknownRuleVisibility = new VisibilityElements();
+		this.eVisibility = new VisibilityElements();
 		this.pAlternativeClassModifiers = new AlternativeClassModifiersElements();
 		this.pUnordered = new UnorderedElements();
 		this.pSimpleClassDeclaration = new SimpleClassDeclarationElements();
@@ -554,7 +554,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum Visibility:
 	//	PUBLIC='public' | PROTECTED='protected' | PRIVATE='private';
 	public VisibilityElements getVisibilityAccess() {
-		return unknownRuleVisibility;
+		return eVisibility;
 	}
 	
 	public EnumRule getVisibilityRule() {

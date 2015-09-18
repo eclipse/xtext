@@ -1403,7 +1403,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final Child1_1Elements pChild1_1;
 	private final Child1_2Elements pChild1_2;
 	private final Child1_3Elements pChild1_3;
-	private final EnumTypeElements unknownRuleEnumType;
+	private final EnumTypeElements eEnumType;
 	private final Scenario2_1Elements pScenario2_1;
 	private final Scenario2_2Elements pScenario2_2;
 	private final Scenario2_3Elements pScenario2_3;
@@ -1436,7 +1436,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pChild1_1 = new Child1_1Elements();
 		this.pChild1_2 = new Child1_2Elements();
 		this.pChild1_3 = new Child1_3Elements();
-		this.unknownRuleEnumType = new EnumTypeElements();
+		this.eEnumType = new EnumTypeElements();
 		this.pScenario2_1 = new Scenario2_1Elements();
 		this.pScenario2_2 = new Scenario2_2Elements();
 		this.pScenario2_3 = new Scenario2_3Elements();
@@ -1594,7 +1594,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum EnumType:
 	//	a | b;
 	public EnumTypeElements getEnumTypeAccess() {
-		return unknownRuleEnumType;
+		return eEnumType;
 	}
 	
 	public EnumRule getEnumTypeRule() {
