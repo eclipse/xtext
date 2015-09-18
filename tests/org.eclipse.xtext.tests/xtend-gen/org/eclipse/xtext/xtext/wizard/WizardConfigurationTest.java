@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.XtextVersion;
@@ -85,6 +86,25 @@ public class WizardConfigurationTest {
     String _content_1 = _pom_1.getContent();
     boolean _contains_1 = _content_1.contains("tycho");
     Assert.assertFalse(_contains_1);
+    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
+    final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
+      @Override
+      public Boolean apply(final ProjectDescriptor it) {
+        boolean _isEclipsePluginProject = it.isEclipsePluginProject();
+        return Boolean.valueOf((!_isEclipsePluginProject));
+      }
+    };
+    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
+    final Function1<ProjectDescriptor, Boolean> _function_1 = new Function1<ProjectDescriptor, Boolean>() {
+      @Override
+      public Boolean apply(final ProjectDescriptor it) {
+        PomFile _pom = it.pom();
+        String _content = _pom.getContent();
+        return Boolean.valueOf(_content.contains("tycho"));
+      }
+    };
+    boolean _exists = IterableExtensions.exists(_filter, _function_1);
+    Assert.assertFalse(_exists);
   }
   
   @Test
@@ -744,6 +764,98 @@ public class WizardConfigurationTest {
       }
     };
     IterableExtensions.forEach(mainProjects, _function_3);
+  }
+  
+  @Test
+  public void uiTestsNeedTychoUiHarness() {
+    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
+    UiProjectDescriptor _uiProject = this.config.getUiProject();
+    _uiProject.setEnabled(true);
+    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
+    TestProjectDescriptor _testProject = _uiProject_1.getTestProject();
+    PomFile _pom = _testProject.pom();
+    final String pom = _pom.getContent();
+    boolean _contains = pom.contains("useUIHarness");
+    Assert.assertTrue(_contains);
+  }
+  
+  @Test
+  public void runtimeTestsDontNeedTychoUiHarness() {
+    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
+    UiProjectDescriptor _uiProject = this.config.getUiProject();
+    _uiProject.setEnabled(true);
+    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
+    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+    PomFile _pom = _testProject.pom();
+    final String pom = _pom.getContent();
+    boolean _contains = pom.contains("useUIHarness");
+    Assert.assertFalse(_contains);
+  }
+  
+  @Test
+  public void tychoDoesNotFailOnMissingTests() {
+    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
+    UiProjectDescriptor _uiProject = this.config.getUiProject();
+    _uiProject.setEnabled(true);
+    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
+    Iterable<TestProjectDescriptor> _filter = Iterables.<TestProjectDescriptor>filter(_allJavaProjects, TestProjectDescriptor.class);
+    final Function1<TestProjectDescriptor, Boolean> _function = new Function1<TestProjectDescriptor, Boolean>() {
+      @Override
+      public Boolean apply(final TestProjectDescriptor it) {
+        return Boolean.valueOf(it.isEclipsePluginProject());
+      }
+    };
+    Iterable<TestProjectDescriptor> _filter_1 = IterableExtensions.<TestProjectDescriptor>filter(_filter, _function);
+    final Function1<TestProjectDescriptor, PomFile> _function_1 = new Function1<TestProjectDescriptor, PomFile>() {
+      @Override
+      public PomFile apply(final TestProjectDescriptor it) {
+        return it.pom();
+      }
+    };
+    final Iterable<PomFile> poms = IterableExtensions.<TestProjectDescriptor, PomFile>map(_filter_1, _function_1);
+    final Procedure1<PomFile> _function_2 = new Procedure1<PomFile>() {
+      @Override
+      public void apply(final PomFile it) {
+        String _content = it.getContent();
+        boolean _contains = _content.contains("failIfNoTests");
+        Assert.assertTrue(_contains);
+      }
+    };
+    IterableExtensions.<PomFile>forEach(poms, _function_2);
+  }
+  
+  @Test
+  public void allBuildSystemsUseJava6() {
+    ParentProjectDescriptor _parentProject = this.config.getParentProject();
+    PomFile _pom = _parentProject.pom();
+    final String parentPom = _pom.getContent();
+    boolean _contains = parentPom.contains("<maven.compiler.source>1.6</maven.compiler.source>");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = parentPom.contains("<maven.compiler.target>1.6</maven.compiler.target>");
+    Assert.assertTrue(_contains_1);
+    ParentProjectDescriptor _parentProject_1 = this.config.getParentProject();
+    GradleBuildFile _buildGradle = _parentProject_1.buildGradle();
+    final String parentGradle = _buildGradle.getContent();
+    boolean _contains_2 = parentGradle.contains("sourceCompatibility = \'1.6\'");
+    Assert.assertTrue(_contains_2);
+    boolean _contains_3 = parentGradle.contains("targetCompatibility = \'1.6\'");
+    Assert.assertTrue(_contains_3);
+    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
+    final Function1<ProjectDescriptor, String> _function = new Function1<ProjectDescriptor, String>() {
+      @Override
+      public String apply(final ProjectDescriptor it) {
+        return it.manifest();
+      }
+    };
+    List<String> _map = ListExtensions.map(_allJavaProjects, _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
+      public void apply(final String it) {
+        boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+        Assert.assertTrue(_contains);
+      }
+    };
+    IterableExtensions.<String>forEach(_map, _function_1);
   }
   
   public List<? extends ProjectDescriptor> allJavaProjects() {

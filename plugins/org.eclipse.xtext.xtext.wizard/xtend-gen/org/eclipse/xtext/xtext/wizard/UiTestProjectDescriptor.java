@@ -57,6 +57,11 @@ public class UiTestProjectDescriptor extends TestProjectDescriptor {
     return true;
   }
   
+  @Override
+  public boolean needsUiHarness() {
+    return true;
+  }
+  
   public UiTestProjectDescriptor(final TestedProjectDescriptor testedProject) {
     super(testedProject);
   }

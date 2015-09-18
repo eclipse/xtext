@@ -11,7 +11,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override getSourceFolders() {
-		#{Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN}.map[sourceFolder].toSet
+		#[Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN].map[sourceFolder].toSet
 	}
 	
 	def isInlined() {
@@ -52,6 +52,19 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 							<groupId>org.eclipse.xtend</groupId>
 							<artifactId>xtend-maven-plugin</artifactId>
 						</plugin>
+						«IF isEclipsePluginProject»
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-surefire-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<configuration>
+									<failIfNoTests>false</failIfNoTests>
+									«IF needsUiHarness»
+										<useUIHarness>true</useUIHarness>
+									«ENDIF»
+								</configuration>
+							</plugin>
+						«ENDIF»
 						«IF !isEclipsePluginProject»
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
@@ -83,5 +96,9 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 				</build>
 			'''
 		]
+	}
+	
+	def needsUiHarness() {
+		false
 	}
 }

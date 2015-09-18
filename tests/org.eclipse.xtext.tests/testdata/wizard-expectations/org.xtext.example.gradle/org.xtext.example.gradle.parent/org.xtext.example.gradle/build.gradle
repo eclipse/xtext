@@ -1,0 +1,31 @@
+dependencies {
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.junit4:${xtextVersion}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:${xtextVersion}"
+	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
+}
+configurations {
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
+dependencies {
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
+}
+
+task generateXtextLanguage(type: JavaExec) {
+	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+	classpath = configurations.mwe2
+	inputs.file "src/main/resources/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+	inputs.file "src/main/resources/org/xtext/example/mydsl/MyDsl.xtext"
+	outputs.dir "src/main/xtext-gen"
+	args += "src/main/resources/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+	args += "-p"
+	args += "projectPath=/${projectDir}"
+}
+
+compileXtend.dependsOn(generateXtextLanguage)
+clean.dependsOn(cleanGenerateXtextLanguage)
+eclipse.classpath.plusConfigurations += [configurations.mwe2]

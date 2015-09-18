@@ -67,6 +67,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					apply plugin: 'java'
 					apply plugin: 'org.xtend.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
+					
+					sourceCompatibility = '1.6'
+					targetCompatibility = '1.6'
 				}
 			'''
 		]

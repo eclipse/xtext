@@ -22,7 +22,7 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 	}
 
 	override getUpstreamProjects() {
-		#{config.runtimeProject, config.ideProject}
+		newLinkedHashSet(config.runtimeProject, config.ideProject)
 	}
 
 	override buildGradle() {
@@ -49,9 +49,4 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 			'''
 		]
 	}
-
-	override pom() {
-		throw new UnsupportedOperationException("IntelliJ projects cannot be built with Maven")
-	}
-
 }

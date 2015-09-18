@@ -47,7 +47,7 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
         return Boolean.valueOf(it.isEnabled());
       }
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(_runtimeProject, _ideProject)), _function);
+    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject)), _function);
     return IterableExtensions.toSet(_filter);
   }
   

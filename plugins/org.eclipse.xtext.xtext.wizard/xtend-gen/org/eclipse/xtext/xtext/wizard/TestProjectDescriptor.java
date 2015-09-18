@@ -2,12 +2,14 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Objects;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -36,7 +38,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         return TestProjectDescriptor.this.sourceFolder(it);
       }
     };
-    Iterable<String> _map = IterableExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableSet(CollectionLiterals.<Outlet>newHashSet(Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN)), _function);
+    List<String> _map = ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN)), _function);
     return IterableExtensions.<String>toSet(_map);
   }
   
@@ -160,7 +162,51 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         {
           boolean _isEclipsePluginProject_2 = TestProjectDescriptor.this.isEclipsePluginProject();
-          boolean _not_1 = (!_isEclipsePluginProject_2);
+          if (_isEclipsePluginProject_2) {
+            _builder.append("\t\t");
+            _builder.append("<plugin>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<groupId>org.eclipse.tycho</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<artifactId>tycho-surefire-plugin</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<version>${tycho-version}</version>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<configuration>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("<failIfNoTests>false</failIfNoTests>");
+            _builder.newLine();
+            {
+              boolean _needsUiHarness = TestProjectDescriptor.this.needsUiHarness();
+              if (_needsUiHarness) {
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<useUIHarness>true</useUIHarness>");
+                _builder.newLine();
+              }
+            }
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("</configuration>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("</plugin>");
+            _builder.newLine();
+          }
+        }
+        {
+          boolean _isEclipsePluginProject_3 = TestProjectDescriptor.this.isEclipsePluginProject();
+          boolean _not_1 = (!_isEclipsePluginProject_3);
           if (_not_1) {
             _builder.append("\t\t");
             _builder.append("<plugin>");
@@ -277,6 +323,10 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  }
+  
+  public boolean needsUiHarness() {
+    return false;
   }
   
   @Pure

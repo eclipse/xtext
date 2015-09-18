@@ -15,7 +15,7 @@ class UiProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getUpstreamProjects() {
-		#{config.runtimeProject, config.ideProject}.filter[enabled].toSet
+		#[config.runtimeProject, config.ideProject].filter[enabled].toSet
 	}
 	
 	override getNameQualifier() {
