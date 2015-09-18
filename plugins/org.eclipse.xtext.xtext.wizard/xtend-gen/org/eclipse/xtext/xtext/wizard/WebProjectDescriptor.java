@@ -2,7 +2,6 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -42,7 +41,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
     WizardConfiguration _config_1 = this.getConfig();
     IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
-    return Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(_runtimeProject, _ideProject));
+    return CollectionLiterals.<ProjectDescriptor>newLinkedHashSet(_runtimeProject, _ideProject);
   }
   
   @Override

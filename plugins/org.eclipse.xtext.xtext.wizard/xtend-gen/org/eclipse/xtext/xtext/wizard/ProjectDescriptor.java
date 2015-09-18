@@ -13,6 +13,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
@@ -71,7 +72,7 @@ public abstract class ProjectDescriptor {
         return ProjectDescriptor.this.sourceFolder(it);
       }
     };
-    Iterable<String> _map = IterableExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableSet(CollectionLiterals.<Outlet>newHashSet(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
+    List<String> _map = ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
     return IterableExtensions.<String>toSet(_map);
   }
   
@@ -148,7 +149,7 @@ public abstract class ProjectDescriptor {
     String _sourceFolder = this.sourceFolder(Outlet.META_INF);
     _builder.append(_sourceFolder, "");
     _builder.append("/");
-    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(_builder.toString(), "."));
+    return CollectionLiterals.<String>newLinkedHashSet(".", _builder.toString());
   }
   
   public Set<String> getDevelopmentBundles() {
@@ -190,10 +191,6 @@ public abstract class ProjectDescriptor {
     _builder.append(_name_1, "");
     _builder.append("; singleton:=true");
     _builder.newLineIfNotEmpty();
-    _builder.append("Bundle-RequiredExecutionEnvironment: ");
-    String _bree = this.getBree();
-    _builder.append(_bree, "");
-    _builder.newLineIfNotEmpty();
     {
       Object _activatorClassName = this.getActivatorClassName();
       boolean _notEquals = (!Objects.equal(_activatorClassName, null));
@@ -213,6 +210,10 @@ public abstract class ProjectDescriptor {
     Set<String> _importedPackages = this.getImportedPackages();
     String _manifestEntry_1 = this.manifestEntry("Import-Package", _importedPackages);
     _builder.append(_manifestEntry_1, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("Bundle-RequiredExecutionEnvironment: ");
+    String _bree = this.getBree();
+    _builder.append(_bree, "");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }

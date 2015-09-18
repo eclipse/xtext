@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
@@ -151,14 +149,24 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public Set<String> getDevelopmentBundles() {
-    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("org.eclipse.xtext.xbase", "org.eclipse.xtext.generator", "org.eclipse.xtext.xtext.generator", "org.apache.commons.logging", "org.eclipse.emf.codegen.ecore", "org.eclipse.emf.mwe.utils", "org.eclipse.emf.mwe2.launch", "org.eclipse.xtext.common.types", "org.objectweb.asm", "org.apache.log4j"));
+    return CollectionLiterals.<String>newLinkedHashSet(
+      "org.eclipse.xtext.xbase", 
+      "org.eclipse.xtext.common.types", 
+      "org.eclipse.xtext.generator", 
+      "org.eclipse.xtext.xtext.generator", 
+      "org.eclipse.emf.codegen.ecore", 
+      "org.eclipse.emf.mwe.utils", 
+      "org.eclipse.emf.mwe2.launch", 
+      "org.objectweb.asm", 
+      "org.apache.commons.logging", 
+      "org.apache.log4j");
   }
   
   @Override
   public Set<String> getBinIncludes() {
-    HashSet<String> _xblockexpression = null;
+    LinkedHashSet<String> _xblockexpression = null;
     {
-      final HashSet<String> includes = CollectionLiterals.<String>newHashSet();
+      final LinkedHashSet<String> includes = CollectionLiterals.<String>newLinkedHashSet();
       Set<String> _binIncludes = super.getBinIncludes();
       Iterables.<String>addAll(includes, _binIncludes);
       includes.add("plugin.xml");

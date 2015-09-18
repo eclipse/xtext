@@ -31,7 +31,7 @@ abstract class ProjectDescriptor {
 	}
 
 	def Set<String> getSourceFolders() {
-		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
+		#[Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN].map[sourceFolder].toSet
 	}
 
 	def Iterable<? extends TextFile> getFiles() {
@@ -61,8 +61,8 @@ abstract class ProjectDescriptor {
 		«buildPropertiesEntry("additional.bundles", developmentBundles)»
 	'''
 	
-	def getBinIncludes() {
-		#{'''«Outlet.META_INF.sourceFolder»/''', "."}	
+	def Set<String> getBinIncludes() {
+		newLinkedHashSet(".", '''«Outlet.META_INF.sourceFolder»/''')	
 	}
 	
 	def Set<String> getDevelopmentBundles() {
@@ -84,13 +84,13 @@ abstract class ProjectDescriptor {
 		Bundle-Vendor: My Company
 		Bundle-Version: 1.0.0.qualifier
 		Bundle-SymbolicName: «name»; singleton:=true
-		Bundle-RequiredExecutionEnvironment: «bree»
 		«IF activatorClassName != null»
 			Bundle-Activator: «activatorClassName»
 		«ENDIF»
 		Bundle-ActivationPolicy: lazy
 		«manifestEntry("Require-Bundle", requiredBundles)»
 		«manifestEntry("Import-Package", importedPackages)»
+		Bundle-RequiredExecutionEnvironment: «bree»
 	'''
 	
 	def getBree() {

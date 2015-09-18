@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.wizard;
 
-import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -43,7 +42,7 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
     RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
     WizardConfiguration _config_1 = this.getConfig();
     IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
-    return Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(_runtimeProject, _ideProject));
+    return CollectionLiterals.<ProjectDescriptor>newLinkedHashSet(_runtimeProject, _ideProject);
   }
   
   @Override
