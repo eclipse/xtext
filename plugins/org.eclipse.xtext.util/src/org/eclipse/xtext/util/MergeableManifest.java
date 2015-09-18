@@ -68,7 +68,7 @@ public class MergeableManifest extends Manifest {
         			StringBuilder temp = new StringBuilder(string);
         			int length = temp.length();
         			while (idx < length - 2) {
-                        temp.insert(idx, "\r\n ");
+                        temp.insert(idx, LINEBREAK+" ");
                         idx += 512;
                         length += 3;
                     }
@@ -270,7 +270,7 @@ public class MergeableManifest extends Manifest {
 				value = new String(vb, 0, 0, vb.length);
 			}
 			buffer.append(value);
-			buffer.append("\r\n");
+			buffer.append(LINEBREAK);
 			dos.writeBytes(make512Safe(buffer));
 			((OrderAwareAttributes) e.getValue()).myWrite(dos);
 		}
@@ -370,7 +370,7 @@ public class MergeableManifest extends Manifest {
 				buff.append(";").append(entry.getValue());
 			}
 			if (iterator.hasNext())
-				buff.append(",\r\n ");
+				buff.append(","+LINEBREAK+" ");
 		}
 		String result = buff.toString();
 		return result;
