@@ -109,14 +109,14 @@ public class WizardConfig extends XtextProjectConfig {
     ManifestAccess _runtimeManifest = this.getRuntimeManifest();
     boolean _tripleEquals_3 = (_runtimeManifest == null);
     if (_tripleEquals_3) {
-      ManifestAccess _manifestAccess = new ManifestAccess();
-      this.setRuntimeManifest(_manifestAccess);
+      ManifestAccess _instance = injector.<ManifestAccess>getInstance(ManifestAccess.class);
+      this.setRuntimeManifest(_instance);
     }
     PluginXmlAccess _runtimePluginXml = this.getRuntimePluginXml();
     boolean _tripleEquals_4 = (_runtimePluginXml == null);
     if (_tripleEquals_4) {
-      PluginXmlAccess _pluginXmlAccess = new PluginXmlAccess();
-      this.setRuntimePluginXml(_pluginXmlAccess);
+      PluginXmlAccess _instance_1 = injector.<PluginXmlAccess>getInstance(PluginXmlAccess.class);
+      this.setRuntimePluginXml(_instance_1);
     }
     if (this.testingSupport) {
       IXtextGeneratorFileSystemAccess _runtimeTestRoot = this.getRuntimeTestRoot();
@@ -157,8 +157,8 @@ public class WizardConfig extends XtextProjectConfig {
       ManifestAccess _runtimeTestManifest = this.getRuntimeTestManifest();
       boolean _tripleEquals_8 = (_runtimeTestManifest == null);
       if (_tripleEquals_8) {
-        ManifestAccess _manifestAccess_1 = new ManifestAccess();
-        this.setRuntimeTestManifest(_manifestAccess_1);
+        ManifestAccess _instance_2 = injector.<ManifestAccess>getInstance(ManifestAccess.class);
+        this.setRuntimeTestManifest(_instance_2);
       }
     }
     if (this.eclipseEditor) {
@@ -200,14 +200,14 @@ public class WizardConfig extends XtextProjectConfig {
       ManifestAccess _eclipsePluginManifest = this.getEclipsePluginManifest();
       boolean _tripleEquals_13 = (_eclipsePluginManifest == null);
       if (_tripleEquals_13) {
-        ManifestAccess _manifestAccess_2 = new ManifestAccess();
-        this.setEclipsePluginManifest(_manifestAccess_2);
+        ManifestAccess _instance_3 = injector.<ManifestAccess>getInstance(ManifestAccess.class);
+        this.setEclipsePluginManifest(_instance_3);
       }
       PluginXmlAccess _eclipsePluginPluginXml = this.getEclipsePluginPluginXml();
       boolean _tripleEquals_14 = (_eclipsePluginPluginXml == null);
       if (_tripleEquals_14) {
-        PluginXmlAccess _pluginXmlAccess_1 = new PluginXmlAccess();
-        this.setEclipsePluginPluginXml(_pluginXmlAccess_1);
+        PluginXmlAccess _instance_4 = injector.<PluginXmlAccess>getInstance(PluginXmlAccess.class);
+        this.setEclipsePluginPluginXml(_instance_4);
       }
       if (this.testingSupport) {
         IXtextGeneratorFileSystemAccess _eclipsePluginTestRoot = this.getEclipsePluginTestRoot();
@@ -248,8 +248,8 @@ public class WizardConfig extends XtextProjectConfig {
         ManifestAccess _eclipsePluginTestManifest = this.getEclipsePluginTestManifest();
         boolean _tripleEquals_19 = (_eclipsePluginTestManifest == null);
         if (_tripleEquals_19) {
-          ManifestAccess _manifestAccess_3 = new ManifestAccess();
-          this.setEclipsePluginTestManifest(_manifestAccess_3);
+          ManifestAccess _instance_5 = injector.<ManifestAccess>getInstance(ManifestAccess.class);
+          this.setEclipsePluginTestManifest(_instance_5);
         }
       }
     }
@@ -366,8 +366,8 @@ public class WizardConfig extends XtextProjectConfig {
       ManifestAccess _genericIdeManifest = this.getGenericIdeManifest();
       boolean _tripleEquals_32 = (_genericIdeManifest == null);
       if (_tripleEquals_32) {
-        ManifestAccess _manifestAccess_4 = new ManifestAccess();
-        this.setGenericIdeManifest(_manifestAccess_4);
+        ManifestAccess _instance_6 = injector.<ManifestAccess>getInstance(ManifestAccess.class);
+        this.setGenericIdeManifest(_instance_6);
       }
     }
     super.initialize(injector);
