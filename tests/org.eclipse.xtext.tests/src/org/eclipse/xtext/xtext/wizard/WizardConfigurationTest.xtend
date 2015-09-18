@@ -175,7 +175,8 @@ class WizardConfigurationTest {
 	}
 	
 	@Test
-	def void projectsCanBeBuiltAgainstXtextReleases() {config.preferredBuildSystem = BuildSystem.GRADLE
+	def void projectsCanBeBuiltAgainstXtextReleases() {
+		config.preferredBuildSystem = BuildSystem.GRADLE
 		config.uiProject.enabled = true
 		config.intellijProject.enabled = true
 		config.xtextVersion = new XtextVersion("2.9.0")
