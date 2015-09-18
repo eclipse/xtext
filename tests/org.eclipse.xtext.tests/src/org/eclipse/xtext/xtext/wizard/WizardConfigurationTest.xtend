@@ -36,6 +36,7 @@ class WizardConfigurationTest {
 		assertFalse(config.runtimeProject.isEclipsePluginProject)
 		assertFalse(config.runtimeProject.pom.content.contains("eclipse-plugin"))
 		assertFalse(config.parentProject.pom.content.contains("tycho"))
+		assertFalse(allJavaProjects.filter[!isEclipsePluginProject].exists[pom.content.contains("tycho")])
 	}
 	
 	@Test
@@ -271,6 +272,31 @@ class WizardConfigurationTest {
 			assertFalse(pom.content.contains("<directory>src/main/resources</directory>"))
 			assertFalse(pom.content.contains("<testSourceDirectory>"))
 			assertFalse(pom.content.contains("<directory>src/test/resources</directory>"))
+		]
+	}
+	
+	@Test
+	def void uiTestsNeedTychoUiHarness() {
+		config.preferredBuildSystem = BuildSystem.MAVEN
+		config.uiProject.enabled = true
+		val pom = config.uiProject.testProject.pom.content
+		assertTrue(pom.contains("useUIHarness"))
+	}
+	
+	@Test
+	def void runtimeTestsDontNeedTychoUiHarness() {
+		config.preferredBuildSystem = BuildSystem.MAVEN
+		config.uiProject.enabled = true
+		val pom = config.runtimeProject.testProject.pom.content
+		assertFalse(pom.contains("useUIHarness"))
+	}
+	@Test
+	def void tychoDoesNotFailOnMissingTests() {
+		config.preferredBuildSystem = BuildSystem.MAVEN
+		config.uiProject.enabled = true
+		val poms = allJavaProjects.filter(TestProjectDescriptor).filter[isEclipsePluginProject].map[pom]
+		poms.forEach[
+			assertTrue(content.contains("failIfNoTests"))
 		]
 	}
 	
