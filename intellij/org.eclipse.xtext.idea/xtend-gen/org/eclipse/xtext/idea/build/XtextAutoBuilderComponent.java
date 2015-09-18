@@ -771,6 +771,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   private volatile boolean ignoreIncomingEvents = false;
   
+  private final static Object BUILD_MONITOR = new Object();
+  
   protected void build() {
     if (this.disposed) {
       return;
@@ -796,8 +798,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         _instance.run(new Task.Backgroundable(this.project, "Auto-building Xtext resources") {
           @Override
           public void run(final ProgressIndicator indicator) {
-            XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
-            XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
+            synchronized (XtextAutoBuilderComponent.BUILD_MONITOR) {
+              XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
+              XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
+            }
           }
         });
       }
