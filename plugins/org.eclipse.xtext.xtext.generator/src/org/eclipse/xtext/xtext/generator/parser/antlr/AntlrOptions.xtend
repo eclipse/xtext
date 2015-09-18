@@ -19,7 +19,9 @@ class AntlrOptions {
 	int k = -1
 	boolean ignoreCase = false
 	boolean classSplitting = false
+	@Accessors(PUBLIC_GETTER)
 	int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS
+	@Accessors(PUBLIC_GETTER)
 	int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS
 	boolean skipUnusedRules = false
 	boolean optimizeCodeQuality = true
