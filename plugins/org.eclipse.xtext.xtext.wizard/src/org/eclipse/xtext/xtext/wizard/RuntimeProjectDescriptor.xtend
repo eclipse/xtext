@@ -61,22 +61,22 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getDevelopmentBundles() {
-		#{
+		newLinkedHashSet(
 			"org.eclipse.xtext.xbase", 
+			"org.eclipse.xtext.common.types", 
 			"org.eclipse.xtext.generator",
 			"org.eclipse.xtext.xtext.generator",
-			"org.apache.commons.logging", 
 			"org.eclipse.emf.codegen.ecore", 
 			"org.eclipse.emf.mwe.utils",
 			"org.eclipse.emf.mwe2.launch",
-			"org.eclipse.xtext.common.types", 
 			"org.objectweb.asm",
+			"org.apache.commons.logging", 
 			"org.apache.log4j"
-		}
+		)
 	}
 	
 	override getBinIncludes() {
-		val includes = newHashSet
+		val includes = newLinkedHashSet
 		includes += super.binIncludes
 		includes += "plugin.xml"
 		includes

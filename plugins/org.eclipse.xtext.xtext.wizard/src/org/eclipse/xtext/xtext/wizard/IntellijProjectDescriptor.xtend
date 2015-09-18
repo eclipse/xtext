@@ -22,7 +22,7 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 	}
 
 	override getUpstreamProjects() {
-		#{config.runtimeProject, config.ideProject}
+		newLinkedHashSet(config.runtimeProject, config.ideProject)
 	}
 
 	override buildGradle() {

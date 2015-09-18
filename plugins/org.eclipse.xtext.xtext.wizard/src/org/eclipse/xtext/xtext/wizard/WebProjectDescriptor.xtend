@@ -15,7 +15,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 	static val ACE_VERSION = '1.1.9'
 	
 	override getUpstreamProjects() {
-		#{config.runtimeProject, config.ideProject}
+		newLinkedHashSet(config.runtimeProject, config.ideProject)
 	}
 	
 	override getNameQualifier() {
