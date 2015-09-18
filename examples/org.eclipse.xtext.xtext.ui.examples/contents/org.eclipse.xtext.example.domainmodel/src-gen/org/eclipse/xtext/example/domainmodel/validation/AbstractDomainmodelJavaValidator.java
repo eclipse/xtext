@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validation.ComposedChecks;
 
-@ComposedChecks(validators= {org.eclipse.xtext.validation.NamesAreUniqueValidator.class})
 public class AbstractDomainmodelJavaValidator extends org.eclipse.xtext.xbase.validation.XbaseJavaValidator {
 
 	@Override
