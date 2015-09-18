@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Set;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -155,8 +154,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 
 	protected IResolvedTypes resolve(CancelIndicator monitor) {
-		if (monitor.isCanceled())
-			throw new OperationCanceledException();
+		operationCanceledManager.checkCanceled(monitor);
 		if (isInvalidRoot()) {
 			return IResolvedTypes.NULL;
 		}
@@ -273,6 +271,10 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	
 	protected FeatureScopes getFeatureScopes() {
 		return featureScopes;
+	}
+	
+	public OperationCanceledManager getOperationCanceledManager() {
+		return operationCanceledManager;
 	}
 
 }

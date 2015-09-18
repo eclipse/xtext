@@ -99,10 +99,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       Collection<ActiveAnnotationContext> _values = _contexts.values();
       for (final ActiveAnnotationContext ctx : _values) {
         {
-          boolean _isCanceled = monitor.isCanceled();
-          if (_isCanceled) {
-            return;
-          }
+          this.operationCanceledManager.checkCanceled(monitor);
           try {
             this.annotationProcessor.validationPhase(ctx, monitor);
           } catch (final Throwable _t) {

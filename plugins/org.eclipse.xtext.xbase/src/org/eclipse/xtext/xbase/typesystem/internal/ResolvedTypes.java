@@ -204,6 +204,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return shared.monitor;
 	}
 	
+	protected void checkCanceled() {
+		getResolver().getOperationCanceledManager().checkCanceled(getMonitor());
+	}
+	
 	protected void clear() {
 		diagnostics = null;
 		deferredLogic = null;

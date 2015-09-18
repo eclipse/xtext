@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -121,8 +120,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	protected void validate(Resource resource, final CheckMode mode, final CancelIndicator monitor,
 			IAcceptor<Issue> acceptor) {
 		for (EObject ele : resource.getContents()) {
-			if (monitor.isCanceled())
-				throw new OperationCanceledException();
+			operationCanceledManager.checkCanceled(monitor);
 			validate(resource, ele, mode, monitor, acceptor);
 		}
 	}
@@ -196,6 +194,13 @@ public class ResourceValidatorImpl implements IResourceValidator {
 
 	public IDiagnosticConverter getDiagnosticConverter() {
 		return converter;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected OperationCanceledManager getOperationCanceledManager() {
+		return operationCanceledManager;
 	}
 
 }

@@ -25,8 +25,7 @@ public class DerivedStateAwareResourceValidator extends ResourceValidatorImpl {
 
 	@Override
 	protected void validate(Resource resource, CheckMode mode, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
-		if (monitor.isCanceled())
-			return;
+		getOperationCanceledManager().checkCanceled(monitor);
 		if (resource instanceof DerivedStateAwareResource) {
 			List<EObject> contents = resource.getContents();
 			if (!contents.isEmpty()) {

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.service;
 
 import com.google.common.base.Objects;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -104,20 +103,6 @@ public class OperationCanceledManager {
   }
   
   public void checkCanceled(final CancelIndicator indicator) {
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(indicator, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _isCanceled = indicator.isCanceled();
-      _and = _isCanceled;
-    }
-    if (_and) {
-      this.throwOperationCanceledException();
-    }
-  }
-  
-  public void checkCanceled(final IProgressMonitor indicator) {
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(indicator, null));
     if (!_notEquals) {
