@@ -1,0 +1,23 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'org.xtend:xtend-gradle-plugin:0.4.8'
+	}
+}
+subprojects {
+	ext.xtextVersion = "2.9.0-SNAPSHOT"
+	repositories {
+		jcenter()
+		maven {
+			url "https://oss.sonatype.org/content/repositories/snapshots"
+		}
+	}
+	apply plugin: 'java'
+	apply plugin: 'org.xtend.xtend'
+	apply from: "${rootDir}/gradle/source-layout.gradle"
+	
+	sourceCompatibility = '1.6'
+	targetCompatibility = '1.6'
+}

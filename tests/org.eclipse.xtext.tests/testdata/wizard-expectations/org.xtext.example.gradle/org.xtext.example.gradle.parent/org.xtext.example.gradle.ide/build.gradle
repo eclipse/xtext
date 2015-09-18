@@ -1,0 +1,5 @@
+dependencies {
+	compile project(':org.xtext.example.gradle')
+	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+}
