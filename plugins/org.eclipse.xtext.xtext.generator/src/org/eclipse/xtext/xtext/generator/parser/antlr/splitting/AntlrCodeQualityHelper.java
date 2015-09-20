@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr.splitting;
 
-import static org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper.dfaStringPattern;
-import static org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper.dfaUnpackPattern;
-import static org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper.removeDuplicateFields;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -164,6 +160,7 @@ public class AntlrCodeQualityHelper {
 					doNotReplace.add(simpleName);
 					newContent.append(" = ");
 					newContent.append(existing);
+					newContent.append(";");
 				}
 			}
 			offset = matcher.end();
