@@ -16,6 +16,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -42,7 +43,8 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 			Triple<INode, AbstractElement, EObject> node = ni.next();
 			if (node.getSecond() instanceof RuleCall) {
 				RuleCall rc = (RuleCall) node.getSecond();
-				if (rc.getRule().getType().getClassifier() instanceof EClass)
+				TypeRef ruleType = rc.getRule().getType();
+				if (ruleType == null || ruleType.getClassifier() instanceof EClass)
 					acceptSemantic(semanticObject, rc, node.getThird(), node.getFirst());
 				else if (GrammarUtil.containingCrossReference(node.getSecond()) != null) {
 					EStructuralFeature feature = FeatureFinderUtil
