@@ -87,7 +87,6 @@ class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestCase{
 
 	def ICompletionProposal[] computeCompletionProposals(XtextEditor editorForCompletion , XtextEditor dirtyEditor, int cursorPosition) throws BadLocationException {
 		syncUtil.waitForReconciler(dirtyEditor)
-		syncUtil.waitForDirtyStateUpdater(dirtyEditor)
 		val sourceViewer = editorForCompletion.internalSourceViewer
 		val contentAssistant = editorForCompletion.getXtextSourceViewerConfiguration().getContentAssistant(sourceViewer);
 		val contentType = editorForCompletion.document.getContentType(cursorPosition);
