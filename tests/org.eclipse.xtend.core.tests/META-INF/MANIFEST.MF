@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Core Tests
 Bundle-SymbolicName: org.eclipse.xtend.core.tests
 Bundle-Version: 2.9.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.junit4,

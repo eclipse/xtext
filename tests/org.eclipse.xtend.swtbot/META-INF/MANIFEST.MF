@@ -3,6 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Swtbot
 Bundle-SymbolicName: org.eclipse.xtend.swtbot
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Fragment-Host: org.eclipse.swtbot.swt.finder;bundle-version="2.1.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
