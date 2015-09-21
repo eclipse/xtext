@@ -16,8 +16,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -32,10 +35,19 @@ import org.jdom.Text;
 @SuppressWarnings("all")
 public class XtextAutoBuilderComponentState {
   public static class Codec {
-    public XtextAutoBuilderComponentState encode(final ChunkedResourceDescriptions index, final Map<String, Source2GeneratedMapping> module2GeneratedMapping) {
+    private final String SEP = ";";
+    
+    public XtextAutoBuilderComponentState encode(final IResourceServiceProvider.Registry registry, final ChunkedResourceDescriptions index, final Map<String, Source2GeneratedMapping> module2GeneratedMapping) {
+      Element _element = new Element("installedLanguages");
+      Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
+      Set<String> _keySet = _extensionToFactoryMap.keySet();
+      List<String> _list = IterableExtensions.<String>toList(_keySet);
+      List<String> _sort = IterableExtensions.<String>sort(_list);
+      String _join = IterableExtensions.join(_sort, this.SEP);
+      final Element installedLanguages = _element.addContent(_join);
       final Element indexData = this.toXml(index, "xtextIndex");
       final Element module2generatedData = this.toXml(module2GeneratedMapping, "module2generated");
-      return new XtextAutoBuilderComponentState(indexData, module2generatedData);
+      return new XtextAutoBuilderComponentState(installedLanguages, indexData, module2generatedData);
     }
     
     protected Element toXml(final Object object, final String name) {
@@ -62,6 +74,15 @@ public class XtextAutoBuilderComponentState {
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
+    }
+    
+    public Set<String> decodeInstalledLanguages(final XtextAutoBuilderComponentState state) {
+      if ((state.installedLanguages == null)) {
+        return null;
+      }
+      String _text = state.installedLanguages.getText();
+      String[] _split = _text.split(this.SEP);
+      return IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(_split)));
     }
     
     public ChunkedResourceDescriptions decodeIndex(final XtextAutoBuilderComponentState state) {
@@ -99,6 +120,9 @@ public class XtextAutoBuilderComponentState {
   }
   
   @Tag
+  private Element installedLanguages;
+  
+  @Tag
   private Element index;
   
   @Tag
@@ -107,7 +131,8 @@ public class XtextAutoBuilderComponentState {
   protected XtextAutoBuilderComponentState() {
   }
   
-  protected XtextAutoBuilderComponentState(final Element index, final Element module2generated) {
+  protected XtextAutoBuilderComponentState(final Element installedLanguages, final Element index, final Element module2generated) {
+    this.installedLanguages = installedLanguages;
     this.index = index;
     this.module2generated = module2generated;
   }

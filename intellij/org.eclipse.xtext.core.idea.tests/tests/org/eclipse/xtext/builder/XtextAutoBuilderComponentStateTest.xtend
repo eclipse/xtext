@@ -1,21 +1,22 @@
 package org.eclipse.xtext.builder
 
+import com.google.inject.Inject
 import org.eclipse.xtext.build.Source2GeneratedMapping
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponentState.Codec
 import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.emf.common.util.URI.*
 import static extension org.junit.Assert.*
-import org.eclipse.xtext.junit4.util.ParseHelper
-import com.google.inject.Inject
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.resource.IResourceDescription
 
 @RunWith(XtextRunner)
 @InjectWith(IndexTestLanguageInjectorProvider)
@@ -39,7 +40,7 @@ class XtextAutoBuilderComponentStateTest {
 		s2g1.addSource2Generated('foobar'.createURI, 'foobar2_'.createURI)
 		val map = #{'module0' -> s2g0, 'module1' -> s2g1}
 
-		val state = encode(new ChunkedResourceDescriptions, map)
+		val state = encode(new ResourceServiceProviderRegistryImpl(), new ChunkedResourceDescriptions, map)
 		val decodedState = decodeModuleToGenerated(state)
 
 		assertEquals(2, decodedState.keySet.size)
@@ -76,7 +77,7 @@ class XtextAutoBuilderComponentStateTest {
 			map.put('module'+j, new ResourceDescriptionsData(descriptions))
 		}
 		val index = new ChunkedResourceDescriptions(map)
-		val state = encode(index, emptyMap)
+		val state = encode(new ResourceServiceProviderRegistryImpl(), index, emptyMap)
 		val _index = decodeIndex(state)
 		assertEquals(index.allResourceDescriptions.size, _index.allResourceDescriptions.size)
 		for(desc: index.allResourceDescriptions) {

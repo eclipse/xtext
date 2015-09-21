@@ -52,7 +52,6 @@ import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
 import com.intellij.util.Function
 import com.intellij.util.graph.Graph
-import java.io.IOException
 import java.util.ArrayList
 import java.util.HashSet
 import java.util.List
@@ -400,7 +399,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		} else {
 			alarm.cancelAllRequests
 			cancelIndicators.forEach[canceled = true]
-			alarm.addRequest([build], 200)
+			alarm.addRequest([build], 200, ApplicationManager.application.defaultModalityState)
 		}
 	}
 	
@@ -464,9 +463,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					queue.drainTo(allEvents)
 					internalBuild(allEvents, null)
 			} else {
-				ProgressManager.instance.run(new Task.Backgroundable(project, 'Auto-building Xtext resources') {
+				ProgressManager.instance.run(new Task.Backgroundable(project, 'Code Generation...') {
 					override run(ProgressIndicator indicator) {
 						// we want only one thread to enter this code at any time
+						indicator.indeterminate = true
 						synchronized (BUILD_MONITOR) {
 							queue.drainTo(allEvents)
 							internalBuild(allEvents, indicator)
@@ -511,7 +511,6 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					collectChanges(events, module, changedUris, deletedUris, deltas)
 					
 					val newIndex = moduleDescriptions.copy
-					
 					val request = new BuildRequest => [
 						resourceSet = createResourceSet(module, newIndex)
 						dirtyFiles += changedUris
@@ -716,14 +715,25 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	@Inject XtextAutoBuilderComponentState.Codec codec
 	
 	override getState() {
-		codec.encode(chunkedResourceDescriptions, moduleName2GeneratedMapping)
+		codec.encode(resourceServiceProviderRegistry, chunkedResourceDescriptions, moduleName2GeneratedMapping)
 	}
 	
 	override loadState(XtextAutoBuilderComponentState state) {
 		try {
-			chunkedResourceDescriptions = codec.decodeIndex(state)
-			moduleName2GeneratedMapping = codec.decodeModuleToGenerated(state) 
-		} catch(IOException exc) {
+			val installedNow = resourceServiceProviderRegistry.extensionToFactoryMap.keySet
+			val installedLastTime = codec.decodeInstalledLanguages(state)
+			if (!installedNow.equals(installedLastTime)) {
+				LOG.info('Different Xtext plugins than last time. Reindexing project.')
+				chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
+				moduleName2GeneratedMapping.clear
+				doCleanBuild
+			} else {
+				if (LOG.debugEnabled)
+					LOG.debug("Loading persisted index state.")
+				chunkedResourceDescriptions = codec.decodeIndex(state)
+				moduleName2GeneratedMapping = codec.decodeModuleToGenerated(state) 
+			}
+		} catch (Exception exc) {
 			LOG.error('Error loading XtextAutoBuildComponentState ', exc)
 			chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 			moduleName2GeneratedMapping.clear

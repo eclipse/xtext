@@ -32,9 +32,15 @@ class SerializationExtensions {
     URI _trimFragment = uri.trimFragment();
     String _string = _trimFragment.toString();
     final EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(_string);
-    Resource _eResource = ePackage.eResource();
-    String _fragment = uri.fragment();
-    EObject _eObject = _eResource.getEObject(_fragment);
+    Resource _eResource = null;
+    if (ePackage!=null) {
+      _eResource=ePackage.eResource();
+    }
+    EObject _eObject = null;
+    if (_eResource!=null) {
+      String _fragment = uri.fragment();
+      _eObject=_eResource.getEObject(_fragment);
+    }
     return ((T) _eObject);
   }
   

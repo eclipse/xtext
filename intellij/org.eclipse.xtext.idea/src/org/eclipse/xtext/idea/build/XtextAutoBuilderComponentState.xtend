@@ -18,11 +18,14 @@ import org.eclipse.xtext.build.Source2GeneratedMapping
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.jdom.Element
 import org.jdom.Text
+import org.eclipse.xtext.resource.IResourceServiceProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 class XtextAutoBuilderComponentState {
+
+	@Tag Element installedLanguages
 
 	@Tag Element index
 	
@@ -30,16 +33,21 @@ class XtextAutoBuilderComponentState {
 
 	protected new() {}
 
-	protected new(Element index, Element module2generated) {
+	protected new(Element installedLanguages, Element index, Element module2generated) {
+		this.installedLanguages = installedLanguages
 		this.index = index
 		this.module2generated = module2generated			
 	}
 
 	static class Codec {
-		def encode(ChunkedResourceDescriptions index, Map<String, Source2GeneratedMapping> module2GeneratedMapping) {
+		
+		val SEP = ';'
+		
+		def encode(IResourceServiceProvider.Registry registry, ChunkedResourceDescriptions index, Map<String, Source2GeneratedMapping> module2GeneratedMapping) {
+			val installedLanguages = new Element('installedLanguages').addContent(registry.extensionToFactoryMap.keySet.toList.sort.join(SEP))
 			val indexData = index.toXml('xtextIndex')
 			val module2generatedData = module2GeneratedMapping.toXml('module2generated')
-			return new XtextAutoBuilderComponentState(indexData, module2generatedData)
+			return new XtextAutoBuilderComponentState(installedLanguages, indexData, module2generatedData)
 		}
 		 
 		protected def toXml(Object object, String name) {
@@ -58,6 +66,12 @@ class XtextAutoBuilderComponentState {
 			}
 		} 
 
+		def decodeInstalledLanguages(XtextAutoBuilderComponentState state) {
+			if (state.installedLanguages===null)
+				return null;
+			return state.installedLanguages.text.split(SEP).toSet
+		}
+		
 		def decodeIndex(XtextAutoBuilderComponentState state) {
 			state.index.toObject as ChunkedResourceDescriptions
 		}
