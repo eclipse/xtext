@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.config
+package org.eclipse.xtend.core.idea.framework
 
 import com.intellij.openapi.roots.libraries.LibraryKind
 import com.intellij.openapi.roots.libraries.LibraryPresentationProvider
@@ -20,7 +20,7 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage
  */
 class XtendLibraryPresentationProvider extends LibraryPresentationProvider<XtendLibraryProperties> {
 
-	public static val LIBRARY_KIND = LibraryKind.create(XtendLanguage.INSTANCE.ID)
+	public static val LIBRARY_KIND = LibraryKind.create(XtendLanguage.INSTANCE.getID)
 
 	new() {
 		super(LIBRARY_KIND)

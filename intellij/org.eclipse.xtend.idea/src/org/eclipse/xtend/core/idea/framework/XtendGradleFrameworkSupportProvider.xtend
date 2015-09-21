@@ -5,14 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.config
+package org.eclipse.xtend.core.idea.framework
 
 import com.google.inject.Inject
-import com.google.inject.Provider
 import com.intellij.framework.FrameworkTypeEx
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
+import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator
+import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder
 import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvider
@@ -23,7 +25,7 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
 class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
 
 	@Inject GradleBuildFileUtility gradleUtility
-	@Inject Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider
+	@Inject XtendProjectConfigurator projectConfigurator
 
 	new() {
 		XtendLanguage.INSTANCE.injectMembers(this)
@@ -35,8 +37,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 
 	override addSupport(Module module, ModifiableRootModel rootModel, ModifiableModelsProvider modifiableModelsProvider,
 		BuildScriptDataBuilder script) {
-		// TODO extract this to use in XtendSupportConfigurable
-		val snapshot = XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")
+		val snapshot = XtendLibraryConfigurator.xtendLibMavenId.version?.endsWith("-SNAPSHOT")
 		script.addOther('''
 			buildscript {
 				repositories {
@@ -54,7 +55,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 		''')
 		script.addPluginDefinition("apply plugin: 'java'").addPluginDefinition("apply plugin: 'org.xtend.xtend'").
 			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("jcenter()").
-			addDependencyNotation('''compile '«XtendLibraryManager.xtendLibMavenId.key»' ''')
+			addDependencyNotation('''compile '«XtendLibraryConfigurator.xtendLibMavenId.key»' ''')
 
 		if (snapshot) {
 			script.addRepositoriesDefinition('''
@@ -62,10 +63,9 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 				url 'http://oss.sonatype.org/content/repositories/snapshots'
 			}''')
 		}
-		val xtendSupport = xtendSupportConfigurableProvider.get
-		val conf = xtendSupport.createOrGetXtendFacetConf(rootModel.module)
-		xtendSupport.presetGradleOutputDirectories(conf.state, rootModel)
-		xtendSupport.createOutputFolders(rootModel, conf.state)
+		val conf = projectConfigurator.createOrGetXtendFacetConf(rootModel.module)
+		projectConfigurator.presetGradleOutputDirectories(conf.state, rootModel)
+		projectConfigurator.createOutputFolders(rootModel, conf.state)
 	}
 
 }
