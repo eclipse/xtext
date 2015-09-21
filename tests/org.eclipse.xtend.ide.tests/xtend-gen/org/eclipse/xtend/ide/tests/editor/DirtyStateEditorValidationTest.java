@@ -228,10 +228,10 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _builder_3.append("def void myMethod() {");
       _builder_3.newLine();
       _builder_3.append("\t\t");
-      _builder_3.append("val my = new mypack.MyClass(\"hello\")");
+      _builder_3.append("val my = new mypack.MyClass(true)");
       _builder_3.newLine();
       _builder_3.append("\t\t");
-      _builder_3.append("println(my.getMyProperty())");
+      _builder_3.append("println(my.isFoo())");
       _builder_3.newLine();
       _builder_3.append("\t");
       _builder_3.append("}");
@@ -352,7 +352,6 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       IXtextDocument _document = interfaceEditor.getDocument();
       _document.set(interfaceChanged);
       this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
       this._syncUtil.waitForReconciler(classEditor);
       IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
@@ -375,7 +374,6 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       IXtextDocument _document_2 = interfaceEditor.getDocument();
       _document_2.set(interface_);
       this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
       this._syncUtil.waitForReconciler(classEditor);
       IXtextDocument _document_3 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
@@ -442,7 +440,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       IXtextDocument _document = interfaceEditor.getDocument();
       _document.set(interfaceChanged);
       this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
+      this._syncUtil.waitForReconciler(classEditor);
       IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
         @Override
@@ -464,7 +462,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       IXtextDocument _document_2 = interfaceEditor.getDocument();
       _document_2.set(interface_);
       this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
+      this._syncUtil.waitForReconciler(classEditor);
       IXtextDocument _document_3 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
         @Override

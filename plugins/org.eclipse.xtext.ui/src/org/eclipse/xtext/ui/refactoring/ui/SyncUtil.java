@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IWorkspace;
@@ -18,9 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
@@ -30,8 +27,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -93,14 +90,6 @@ public class SyncUtil {
 		totalSync(saveAll, true);
 	}
 
-	/**
-	 * @deprecated use {@link #reconcileAllEditors(IWorkbench, boolean, IProgressMonitor)} instead
-	 */
-	@Deprecated
-	public void syncAllEditors(IWorkbench workbench, final boolean saveAll, IProgressMonitor monitor) {
-		reconcileAllEditors(workbench, saveAll, monitor);
-	}
-
 	public void reconcileAllEditors(IWorkbench workbench, final boolean saveAll, final IProgressMonitor monitor) {
 		for (IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
 			for (IWorkbenchPage page : window.getPages()) {
@@ -111,7 +100,6 @@ public class SyncUtil {
 					if (editor != null) {
 						if (editor instanceof XtextEditor) {
 							waitForReconciler((XtextEditor) editor);
-							waitForDirtyStateUpdater((XtextEditor) editor);
 						}
 						if (editor.isDirty() && saveAll) {
 							Display display = workbench.getDisplay();
@@ -128,6 +116,12 @@ public class SyncUtil {
 		}
 	}
 
+	/**
+	 * this methods blocks until the following jobs have finished,
+	 * - the reconciler
+	 * - the editor validation job
+	 * - the dirty state editor updater job
+	 */
 	public void waitForReconciler(XtextEditor editor) {
 		try {
 			editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
@@ -136,8 +130,14 @@ public class SyncUtil {
 					// this doesn't execute before the reconciler has finished
 				}
 			});
+			// reconciling schedules both, validation and dirty state
+			Job validationJob = ((XtextDocument)editor.getDocument()).getValidationJob();
+			validationJob.join();
+			editor.getDirtyStateEditorSupport().waitForUpdateEditorJob();
 		} catch (OperationCanceledException e) {
 		} catch (OperationCanceledError e) {
+		} catch (InterruptedException e) {
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
@@ -149,46 +149,6 @@ public class SyncUtil {
 		}
 	}
 	
-	public void expectDirtyStateUpdate(XtextEditor editor, Runnable runnable) {
-		final Job dirtyStateEditorJob = editor.getDirtyStateEditorSupport().getUpdateEditorStateJob();
-		final AtomicBoolean done = new AtomicBoolean(false);
-		JobChangeAdapter listener = new JobChangeAdapter() {
-			@Override
-			public void done(IJobChangeEvent event) {
-				if (event.getJob() == dirtyStateEditorJob) {
-					done.set(true);
-				}
-			}
-		};
-		try {
-			Job.getJobManager().addJobChangeListener(listener);
-			runnable.run();
-			long before = System.currentTimeMillis();
-			while (!done.get() && System.currentTimeMillis() < before + 5000) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-				}
-			}
-		} finally {
-			Job.getJobManager().removeJobChangeListener(listener);
-		}
-	}
-	
-	/**
-	 * This method will return immediately when the job hasn't been scheduled yet.
-	 * @deprecated use {@link #expectDirtyStateUpdate(XtextEditor, Runnable)} instead.
-	 */
-	@Deprecated()
-	public void waitForDirtyStateUpdater(XtextEditor editor) {
-		DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
-		try {
-			dirtyStateEditorSupport.waitForUpdateEditorJob();
-		} catch (InterruptedException e) {
-			// ignore
-		}
-	}
-
 	/**
 	 * @deprecated we should not rely on auto build to be triggered. Use {@link #waitForBuild(IProgressMonitor)}
 	 *             instead.

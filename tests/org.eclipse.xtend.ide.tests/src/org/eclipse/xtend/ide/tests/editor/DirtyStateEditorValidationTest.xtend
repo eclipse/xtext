@@ -112,23 +112,23 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 				boolean foo
 			}
 		''')
-		editor.waitForReconciler()
+		editor.waitForReconciler
 		editor.assertNumberOfErrorAnnotations(0)
 		
 		val editor2 = openEditor(file)
-		editor2.waitForReconciler()
+		editor2.waitForReconciler
 		editor2.assertNumberOfErrorAnnotations(2)
 		editor2.document.set('''
 			package otherpack
 			
 			class OtherClass {
 				def void myMethod() {
-					val my = new mypack.MyClass("hello")
-					println(my.getMyProperty())
+					val my = new mypack.MyClass(true)
+					println(my.isFoo())
 				}
 			}
 		''')
-		editor2.waitForReconciler()
+		editor2.waitForReconciler
 		editor2.assertNumberOfErrorAnnotations(0)
 		
 		// finally assure that @Data is really not directly visible from editor2
@@ -138,7 +138,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 			@org.eclipse.xtend.lib.annotations.Data class OtherClass {
 			}
 		''')
-		editor2.waitForReconciler()
+		editor2.waitForReconciler
 		editor2.assertNumberOfErrorAnnotations(1)
 	}
 	
@@ -168,11 +168,11 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		
 		val editor = openEditor(file)
 		editor.document.set(contentWithoutBar)
-		editor.waitForReconciler()
+		editor.waitForReconciler
 		editor.assertNumberOfErrorAnnotations(3)
 
 		editor.document.set(contentWithoutBar+bar)
-		editor.waitForReconciler()
+		editor.waitForReconciler
 		editor.assertNumberOfErrorAnnotations(0)
 	}
 	
@@ -201,7 +201,6 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		
 		interfaceEditor.document.set(interfaceChanged)
 		interfaceEditor.waitForReconciler
-		classEditor.waitForDirtyStateUpdater
 		classEditor.waitForReconciler
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
@@ -212,7 +211,6 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		
 		interfaceEditor.document.set(interface)
 		interfaceEditor.waitForReconciler
-		classEditor.waitForDirtyStateUpdater
 		classEditor.waitForReconciler
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
@@ -249,7 +247,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		
 		interfaceEditor.document.set(interfaceChanged)
 		interfaceEditor.waitForReconciler
-		classEditor.waitForDirtyStateUpdater
+		classEditor.waitForReconciler
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
 			assertEquals(issues.toString, 2, issues.size)
@@ -259,7 +257,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		
 		interfaceEditor.document.set(interface)
 		interfaceEditor.waitForReconciler
-		classEditor.waitForDirtyStateUpdater
+		classEditor.waitForReconciler
 		classEditor.document.readOnly [
 			val issues = validator.validate(it, CheckMode.NORMAL_AND_FAST, [|false])
 			assertTrue(issues.toString, issues.empty)
