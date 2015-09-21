@@ -73,11 +73,14 @@ class XtendProjectConfigurator {
 			state.testOutputDirectory = '''«parentPath»/build/xtend-gen/test'''
 		}
 		val buildFile = rootModel.module.locateBuildFile()
-		new WriteCommandAction.Simple(rootModel.project, "Gradle: Xtend Configuration", newImmutableList(buildFile)) {
-			override protected run() throws Throwable {
-				rootModel.module.setupGradleBuild(buildFile)
-			}
-		}.execute
+		if (buildFile !== null) {
+			new WriteCommandAction.Simple(rootModel.project, "Gradle: Xtend Configuration",
+				newImmutableList(buildFile)) {
+				override protected run() throws Throwable {
+					rootModel.module.setupGradleBuild(buildFile)
+				}
+			}.execute
+		}
 	}
 
 	def void presetPlainJavaOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel model) {

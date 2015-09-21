@@ -177,15 +177,17 @@ public class XtendProjectConfigurator {
     }
     Module _module_1 = rootModel.getModule();
     final GroovyFile buildFile = this._gradleBuildFileUtility.locateBuildFile(_module_1);
-    Project _project = rootModel.getProject();
-    List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(buildFile);
-    new WriteCommandAction.Simple(_project, "Gradle: Xtend Configuration", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
-      @Override
-      protected void run() throws Throwable {
-        Module _module = rootModel.getModule();
-        XtendProjectConfigurator.this._gradleBuildFileUtility.setupGradleBuild(_module, buildFile);
-      }
-    }.execute();
+    if ((buildFile != null)) {
+      Project _project = rootModel.getProject();
+      List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(buildFile);
+      new WriteCommandAction.Simple(_project, "Gradle: Xtend Configuration", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
+        @Override
+        protected void run() throws Throwable {
+          Module _module = rootModel.getModule();
+          XtendProjectConfigurator.this._gradleBuildFileUtility.setupGradleBuild(_module, buildFile);
+        }
+      }.execute();
+    }
   }
   
   public void presetPlainJavaOutputDirectories(final XbaseGeneratorConfigurationState state, final ModifiableRootModel model) {
