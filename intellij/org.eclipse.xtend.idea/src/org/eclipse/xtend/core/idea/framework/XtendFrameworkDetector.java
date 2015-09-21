@@ -5,10 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.facet;
+package org.eclipse.xtend.core.idea.framework;
 
-import org.eclipse.xtend.core.idea.config.XtendFrameworkSupportProvider;
+import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
+import org.eclipse.xtend.core.idea.facet.XtendFacetType;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
+import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
@@ -37,6 +39,8 @@ import com.intellij.util.indexing.FileContent;
 public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<XtendFacetConfiguration>, XtendFacetConfiguration> {
 	@Inject
 	private XtendFrameworkSupportProvider frameworkSupport;
+	@Inject
+	ProjectLifecycleUtil projectUtil;
 
 	public XtendFrameworkDetector() {
 		super("xtend");
@@ -44,19 +48,25 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Xt
 	}
 
 	@Override
-	public void setupFacet(Facet<XtendFacetConfiguration> facet, ModifiableRootModel model) {
+	public void setupFacet(Facet<XtendFacetConfiguration> facet, final ModifiableRootModel model) {
 		super.setupFacet(facet, model);
-		Module module = facet.getModule();
+		final Module module = model.getModule();
 		VirtualFile[] roots = ModuleRootManager.getInstance(module).getContentRoots();
 		final VirtualFile baseDir = roots.length > 0 ? roots[0] : module.getProject().getBaseDir();
 		final String baseDirectoryForLibraries = baseDir != null ? baseDir.getPath() : "";
 
 		LibrariesContainer librariesContainer = LibrariesContainerFactory.createContainer(module.getProject());
 		FrameworkSupportModelBase frameworkModel = new FrameworkSupportModelImpl(module.getProject(), baseDirectoryForLibraries, librariesContainer);
-		FrameworkSupportInModuleConfigurable configurable = frameworkSupport.createConfigurable(frameworkModel);
-		IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider();
-		configurable.addSupport(module, model, modelsProvider);
-		modelsProvider.commitModuleModifiableModel(model);
+		final FrameworkSupportInModuleConfigurable configurable = frameworkSupport.createConfigurable(frameworkModel);
+		projectUtil.executeWritableWhenProjectReady(module.getProject(), new Runnable() {
+			@Override
+			public void run() {
+				IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider();
+				configurable.addSupport(module, model, modelsProvider);
+				modelsProvider.commitModuleModifiableModel(model);
+			}
+		});
+
 	}
 
 	@Override

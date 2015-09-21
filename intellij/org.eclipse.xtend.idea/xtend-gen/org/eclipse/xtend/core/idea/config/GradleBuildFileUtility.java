@@ -43,7 +43,7 @@ import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner;
  */
 @SuppressWarnings("all")
 public class GradleBuildFileUtility {
-  public final String xtendGradlePluginVersion = "0.4.7";
+  public final String xtendGradlePluginVersion = "0.4.8";
   
   public boolean isGradleedModule(final Module module) {
     boolean _or = false;
@@ -63,6 +63,28 @@ public class GradleBuildFileUtility {
       return;
     }
     final boolean android = this.isAndroidGradleModule(module);
+    GrStatement[] _statements = buildFile.getStatements();
+    final Function1<GrStatement, Boolean> _function = new Function1<GrStatement, Boolean>() {
+      @Override
+      public Boolean apply(final GrStatement it) {
+        String _text = it.getText();
+        String _trim = _text.trim();
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("apply plugin:.*org\\\\.xtend\\\\.xtend");
+        String _xifexpression = null;
+        if (android) {
+          _xifexpression = "-android";
+        }
+        _builder.append(_xifexpression, "");
+        _builder.append(".*");
+        return Boolean.valueOf(_trim.matches(_builder.toString()));
+      }
+    };
+    GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(_statements)), _function);
+    boolean _tripleNotEquals = (_findFirst != null);
+    if (_tripleNotEquals) {
+      return;
+    }
     final GrClosableBlock buildScript = this.createOrGetMethodCall(buildFile, "buildscript");
     GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(buildScript, "repositories");
     this.createStatementIfNotExists(_createOrGetMethodCall, "jcenter()");
@@ -122,7 +144,7 @@ public class GradleBuildFileUtility {
     this.createStatementIfNotExists(_createOrGetMethodCall, dependencyEntry);
   }
   
-  private void createStatementIfNotExists(final GrStatementOwner statementOwner, final String statement) {
+  private boolean createStatementIfNotExists(final GrStatementOwner statementOwner, final String statement) {
     GrStatement[] _statements = statementOwner.getStatements();
     final Function1<GrStatement, Boolean> _function = new Function1<GrStatement, Boolean>() {
       @Override
@@ -135,12 +157,13 @@ public class GradleBuildFileUtility {
     GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(_statements)), _function);
     boolean _tripleNotEquals = (_findFirst != null);
     if (_tripleNotEquals) {
-      return;
+      return false;
     }
     Project _project = statementOwner.getProject();
     GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(_project);
     final GrStatement entry = factory.createStatementFromText(statement);
     statementOwner.addStatementBefore(entry, null);
+    return true;
   }
   
   private GrClosableBlock createOrGetMethodCall(final GrStatementOwner element, final String methodName) {

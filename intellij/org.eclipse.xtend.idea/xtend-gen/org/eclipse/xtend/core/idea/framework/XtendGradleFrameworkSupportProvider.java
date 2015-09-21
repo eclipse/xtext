@@ -5,19 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.idea.config;
+package org.eclipse.xtend.core.idea.framework;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.intellij.framework.FrameworkTypeEx;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
-import org.eclipse.xtend.core.idea.config.XtendFrameworkType;
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
-import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
+import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
+import org.eclipse.xtend.core.idea.framework.XtendFrameworkType;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
@@ -34,7 +33,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
   private GradleBuildFileUtility gradleUtility;
   
   @Inject
-  private Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider;
+  private XtendProjectConfigurator projectConfigurator;
   
   public XtendGradleFrameworkSupportProvider() {
     XtendLanguage.INSTANCE.injectMembers(this);
@@ -47,7 +46,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
   
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider, final BuildScriptDataBuilder script) {
-    MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
+    MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _version = _xtendLibMavenId.getVersion();
     boolean _endsWith = false;
     if (_version!=null) {
@@ -100,7 +99,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     BuildScriptDataBuilder _addRepositoriesDefinition = _addPropertyDefinition.addRepositoriesDefinition("jcenter()");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("compile \'");
-    MavenId _xtendLibMavenId_1 = XtendLibraryManager.xtendLibMavenId();
+    MavenId _xtendLibMavenId_1 = XtendLibraryConfigurator.xtendLibMavenId();
     String _key = _xtendLibMavenId_1.getKey();
     _builder_1.append(_key, "");
     _builder_1.append("\' ");
@@ -115,12 +114,11 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
       _builder_2.append("}");
       script.addRepositoriesDefinition(_builder_2.toString());
     }
-    final XtendSupportConfigurable xtendSupport = this.xtendSupportConfigurableProvider.get();
     Module _module = rootModel.getModule();
-    final XtendFacetConfiguration conf = xtendSupport.createOrGetXtendFacetConf(_module);
+    final XtendFacetConfiguration conf = this.projectConfigurator.createOrGetXtendFacetConf(_module);
     XbaseGeneratorConfigurationState _state = conf.getState();
-    xtendSupport.presetGradleOutputDirectories(_state, rootModel);
+    this.projectConfigurator.presetGradleOutputDirectories(_state, rootModel);
     XbaseGeneratorConfigurationState _state_1 = conf.getState();
-    xtendSupport.createOutputFolders(rootModel, _state_1);
+    this.projectConfigurator.createOutputFolders(rootModel, _state_1);
   }
 }

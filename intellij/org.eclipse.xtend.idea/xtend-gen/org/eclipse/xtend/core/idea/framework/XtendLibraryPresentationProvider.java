@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.idea.config;
+package org.eclipse.xtend.core.idea.framework;
 
 import com.intellij.openapi.roots.libraries.LibraryKind;
 import com.intellij.openapi.roots.libraries.LibraryPresentationProvider;
@@ -13,8 +13,8 @@ import com.intellij.openapi.roots.libraries.LibraryUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.util.List;
 import javax.swing.Icon;
-import org.eclipse.xtend.core.idea.config.XtendLibraryDescription;
-import org.eclipse.xtend.core.idea.config.XtendLibraryProperties;
+import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription;
+import org.eclipse.xtend.core.idea.framework.XtendLibraryProperties;
 import org.eclipse.xtend.core.idea.icons.XtendIcons;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;

@@ -14,18 +14,18 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ModuleRootManager
+import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.psi.PsiDocumentManager
-import org.eclipse.xtend.core.idea.config.XtendLibraryDescription
-import org.eclipse.xtend.core.idea.config.XtendLibraryManager
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator
+import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription
 import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider
 import org.eclipse.xtend.idea.LightXtendTest
-import com.intellij.openapi.roots.ModuleRootModificationUtil
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class XtendLibraryManagerTest extends LightXtendTest {
-	@Inject XtendLibraryManager manager
+	@Inject XtendLibraryConfigurator manager
 
 	(Module)=>void libraryAdder
 

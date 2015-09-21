@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.idea.config;
+package org.eclipse.xtend.core.idea.framework;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.framework.FrameworkTypeEx;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleProvider;
 import javax.swing.Icon;
-import org.eclipse.xtend.core.idea.config.XtendFrameworkSupportProvider;
+import org.eclipse.xtend.core.idea.framework.XtendFrameworkSupportProvider;
 import org.eclipse.xtend.core.idea.icons.XtendIcons;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 
