@@ -53,9 +53,16 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
     	try {
     		Object value = context.eGet(reference);
     		if (reference.isMany()) {
-    			value = ((InternalEList<EObject>) value).get(index);
+    			InternalEList<EObject> internalEList = (InternalEList<EObject>) value;
+    			if (internalEList.size() > index) {
+    				value = internalEList.get(index);
+    			}
     		}
-			return (EObject) value;
+    		if (value instanceof EObject) {
+    			return (EObject) value;
+    		} else {
+    			return null;
+    		}
     	} catch (OperationCanceledError e) {
     		throw e.getWrapped();
     	}
