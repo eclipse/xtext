@@ -12,11 +12,11 @@ import com.google.inject.Inject;
 import com.intellij.facet.Facet;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.EffectiveLanguageLevelUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.util.Computable;
 import com.intellij.pom.java.LanguageLevel;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,6 +24,7 @@ import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.FacetProvider;
 import org.eclipse.xtext.idea.resource.ModuleProvider;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Log
 @SuppressWarnings("all")
 public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
   @Inject
@@ -126,11 +128,9 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
           case JDK_1_4:
             JavaVersion _xblockexpression_2 = null;
             {
-              Class<? extends XbaseGeneratorConfigProvider> _class = this.getClass();
-              Logger _instance = Logger.getInstance(_class);
               String _shortName = this.languageInfo.getShortName();
               String _plus = (_shortName + " requires Java language level 1.5 or higher. Using Java 1.5.");
-              _instance.warn(_plus);
+              XbaseGeneratorConfigProvider.LOG.warn(_plus);
               _xblockexpression_2 = JavaVersion.JAVA5;
             }
             _switchResult = _xblockexpression_2;
@@ -155,4 +155,6 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
     }
     return _xblockexpression;
   }
+  
+  private final static Logger LOG = Logger.getLogger(XbaseGeneratorConfigProvider.class);
 }

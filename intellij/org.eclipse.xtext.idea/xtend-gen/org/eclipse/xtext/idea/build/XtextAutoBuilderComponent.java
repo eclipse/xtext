@@ -71,7 +71,6 @@ import com.intellij.util.Processor;
 import com.intellij.util.graph.Graph;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -653,7 +652,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           XtextAutoBuilderComponent.this.build();
         }
       };
-      this.alarm.addRequest(_function_1, 200);
+      Application _application = ApplicationManager.getApplication();
+      ModalityState _defaultModalityState = _application.getDefaultModalityState();
+      this.alarm.addRequest(_function_1, 200, _defaultModalityState);
     }
   }
   
@@ -795,9 +796,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         this.internalBuild(allEvents, null);
       } else {
         ProgressManager _instance = ProgressManager.getInstance();
-        _instance.run(new Task.Backgroundable(this.project, "Auto-building Xtext resources") {
+        _instance.run(new Task.Backgroundable(this.project, "Code Generation...") {
           @Override
           public void run(final ProgressIndicator indicator) {
+            indicator.setIndeterminate(true);
             synchronized (XtextAutoBuilderComponent.BUILD_MONITOR) {
               XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
               XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
@@ -1259,22 +1261,39 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   @Override
   public XtextAutoBuilderComponentState getState() {
-    return this.codec.encode(this.chunkedResourceDescriptions, this.moduleName2GeneratedMapping);
+    return this.codec.encode(this.resourceServiceProviderRegistry, this.chunkedResourceDescriptions, this.moduleName2GeneratedMapping);
   }
   
   @Override
   public void loadState(final XtextAutoBuilderComponentState state) {
     try {
-      ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
-      this.chunkedResourceDescriptions = _decodeIndex;
-      Map<String, Source2GeneratedMapping> _decodeModuleToGenerated = this.codec.decodeModuleToGenerated(state);
-      this.moduleName2GeneratedMapping = _decodeModuleToGenerated;
-    } catch (final Throwable _t) {
-      if (_t instanceof IOException) {
-        final IOException exc = (IOException)_t;
-        XtextAutoBuilderComponent.LOG.error("Error loading XtextAutoBuildComponentState ", exc);
+      Map<String, Object> _extensionToFactoryMap = this.resourceServiceProviderRegistry.getExtensionToFactoryMap();
+      final Set<String> installedNow = _extensionToFactoryMap.keySet();
+      final Set<String> installedLastTime = this.codec.decodeInstalledLanguages(state);
+      boolean _equals = installedNow.equals(installedLastTime);
+      boolean _not = (!_equals);
+      if (_not) {
+        XtextAutoBuilderComponent.LOG.info("Different Xtext plugins than last time. Reindexing project.");
         ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
         this.chunkedResourceDescriptions = _get;
+        this.moduleName2GeneratedMapping.clear();
+        this.doCleanBuild();
+      } else {
+        boolean _isDebugEnabled = XtextAutoBuilderComponent.LOG.isDebugEnabled();
+        if (_isDebugEnabled) {
+          XtextAutoBuilderComponent.LOG.debug("Loading persisted index state.");
+        }
+        ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
+        this.chunkedResourceDescriptions = _decodeIndex;
+        Map<String, Source2GeneratedMapping> _decodeModuleToGenerated = this.codec.decodeModuleToGenerated(state);
+        this.moduleName2GeneratedMapping = _decodeModuleToGenerated;
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception exc = (Exception)_t;
+        XtextAutoBuilderComponent.LOG.error("Error loading XtextAutoBuildComponentState ", exc);
+        ChunkedResourceDescriptions _get_1 = this.chunkedResourceDescriptionsProvider.get();
+        this.chunkedResourceDescriptions = _get_1;
         this.moduleName2GeneratedMapping.clear();
         this.doCleanBuild();
       } else {

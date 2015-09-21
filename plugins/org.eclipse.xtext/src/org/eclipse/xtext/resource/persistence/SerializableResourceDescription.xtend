@@ -229,7 +229,7 @@ package class SerializationExtensions {
 	def static <T extends ENamedElement> T readEcoreElement(ObjectInput in) throws IOException {
 		val uri = in.readURI
 		val ePackage = EPackage.Registry.INSTANCE.getEPackage(uri.trimFragment.toString)
-		return ePackage.eResource.getEObject(uri.fragment) as T
+		return ePackage?.eResource?.getEObject(uri.fragment) as T
 	}
 	
 	def static void writeEcoreElement(ObjectOutput out, ENamedElement namedElement) throws IOException {

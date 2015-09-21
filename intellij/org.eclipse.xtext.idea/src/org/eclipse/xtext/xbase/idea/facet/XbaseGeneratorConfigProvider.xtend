@@ -12,8 +12,10 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.util.Computable
 import com.intellij.pom.java.LanguageLevel
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.LanguageInfo
 import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.idea.resource.ModuleProvider
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JavaVersion
@@ -21,13 +23,11 @@ import org.eclipse.xtext.xbase.compiler.JavaVersion
 import static com.intellij.openapi.application.ApplicationManager.*
 
 import static extension com.intellij.openapi.module.EffectiveLanguageLevelUtil.*
-import com.intellij.openapi.diagnostic.Logger
-import org.eclipse.xtext.LanguageInfo
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
+@Log class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
 	
 	@Inject FacetProvider facetProvider
 	@Inject LanguageInfo languageInfo
@@ -62,9 +62,9 @@ class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
 				LanguageLevel.values.findFirst[presentableText == version]
 		switch languageLevel {
 			case JDK_1_3, case JDK_1_4: {
-				Logger.getInstance(class).warn(languageInfo.shortName + ' requires Java language level 1.5 or higher. Using Java 1.5.')
+				LOG.warn(languageInfo.shortName + ' requires Java language level 1.5 or higher. Using Java 1.5.')
 				JavaVersion.JAVA5
-			} 
+			}
 			case JDK_1_5: JavaVersion.JAVA5
 			case JDK_1_6: JavaVersion.JAVA6
 			case JDK_1_7: JavaVersion.JAVA7

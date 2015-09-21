@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -72,8 +73,9 @@ public class XtextAutoBuilderComponentStateTest {
     Pair<String, Source2GeneratedMapping> _mappedTo = Pair.<String, Source2GeneratedMapping>of("module0", s2g0);
     Pair<String, Source2GeneratedMapping> _mappedTo_1 = Pair.<String, Source2GeneratedMapping>of("module1", s2g1);
     final Map<String, Source2GeneratedMapping> map = Collections.<String, Source2GeneratedMapping>unmodifiableMap(CollectionLiterals.<String, Source2GeneratedMapping>newHashMap(_mappedTo, _mappedTo_1));
+    ResourceServiceProviderRegistryImpl _resourceServiceProviderRegistryImpl = new ResourceServiceProviderRegistryImpl();
     ChunkedResourceDescriptions _chunkedResourceDescriptions = new ChunkedResourceDescriptions();
-    final XtextAutoBuilderComponentState state = this._codec.encode(_chunkedResourceDescriptions, map);
+    final XtextAutoBuilderComponentState state = this._codec.encode(_resourceServiceProviderRegistryImpl, _chunkedResourceDescriptions, map);
     final Map<String, Source2GeneratedMapping> decodedState = this._codec.decodeModuleToGenerated(state);
     Set<String> _keySet = decodedState.keySet();
     int _size = _keySet.size();
@@ -166,8 +168,9 @@ public class XtextAutoBuilderComponentStateTest {
         }
       }
       final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(map);
+      ResourceServiceProviderRegistryImpl _resourceServiceProviderRegistryImpl = new ResourceServiceProviderRegistryImpl();
       Map<String, Source2GeneratedMapping> _emptyMap = CollectionLiterals.<String, Source2GeneratedMapping>emptyMap();
-      final XtextAutoBuilderComponentState state = this._codec.encode(index, _emptyMap);
+      final XtextAutoBuilderComponentState state = this._codec.encode(_resourceServiceProviderRegistryImpl, index, _emptyMap);
       final ChunkedResourceDescriptions _index = this._codec.decodeIndex(state);
       Iterable<IResourceDescription> _allResourceDescriptions = index.getAllResourceDescriptions();
       int _size = IterableExtensions.size(_allResourceDescriptions);
