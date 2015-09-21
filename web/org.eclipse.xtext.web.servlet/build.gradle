@@ -15,5 +15,5 @@ dependencies {
 
 jar.manifest {
 	name 'Xtext Servlet'
-	vendor 'Eclipse Modeling Project'
+	vendor 'Eclipse Xtext'
 }

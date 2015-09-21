@@ -15,7 +15,7 @@ dependencies {
 
 jar.manifest {
 	name 'Xtext Web Integration'
-	vendor 'Eclipse Modeling Project'
+	vendor 'Eclipse Xtext'
 }
 
 node {
