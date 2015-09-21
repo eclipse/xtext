@@ -164,8 +164,8 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		if (parseResult != null) {
 			batchLinkingService.resolveBatched(parseResult.getRootASTElement(), monitor);
 		}
-		if (monitor == null || !monitor.isCanceled())
-			super.resolveLazyCrossReferences(monitor);
+		operationCanceledManager.checkCanceled(monitor);
+		super.resolveLazyCrossReferences(monitor);
 	}
 	
 	@Override

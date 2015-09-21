@@ -39,8 +39,7 @@ public class XbaseDiagnostician extends CancelableDiagnostician {
 
 	@Override
 	protected boolean doValidateContents(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (isCanceled(context))
-			return true;
+		checkCanceled(context);
 		if (eObject instanceof XClosure) {
 			return doValidateLambdaContents((XClosure) eObject, diagnostics, context);
 		}

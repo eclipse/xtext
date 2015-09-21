@@ -125,15 +125,13 @@ public class LazyLinkingResource extends XtextResource {
 		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
 		TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
 		while (iterator.hasNext()) {
-			if (monitor.isCanceled())
-				throw new OperationCanceledException();
+			operationCanceledManager.checkCanceled(monitor);
 			InternalEObject source = (InternalEObject) iterator.next();
 			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
 					.getEAllStructuralFeatures()).crossReferences();
 			if (eStructuralFeatures != null) {
 				for (EStructuralFeature crossRef : eStructuralFeatures) {
-					if (monitor.isCanceled())
-						throw new OperationCanceledException();
+					operationCanceledManager.checkCanceled(monitor);
 					resolveLazyCrossReference(source, crossRef);
 				}
 			}
