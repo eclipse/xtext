@@ -343,5 +343,10 @@ public class AntlrGrammarGenUtil {
 		}
 		return sb.toString();
 	}
+	
+	public static String getClasspathURI(Grammar grammar, EObject object) {
+		String fragment = EcoreUtil.getURI(object).fragment();
+		return "classpath:/" + grammar.getName().replace('.', '/') + ".xmi#" + fragment;
+	}
 
 }

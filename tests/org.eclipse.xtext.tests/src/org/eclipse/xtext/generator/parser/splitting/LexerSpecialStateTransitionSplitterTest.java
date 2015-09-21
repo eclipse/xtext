@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.splitting;
 
-import org.eclipse.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

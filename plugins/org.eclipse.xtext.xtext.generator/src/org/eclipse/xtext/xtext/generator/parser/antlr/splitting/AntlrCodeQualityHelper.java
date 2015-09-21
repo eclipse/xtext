@@ -12,44 +12,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 public class AntlrCodeQualityHelper {
-
-	private String keepBitsets;
-	private String keptName;
-	private boolean stripAllComments = false;
-	private boolean enabled = true;
-	
-	/**
-	 * Optionally set a pattern for bitset names that should not be replaced by a simple variant.
-	 */
-	public void setKeepBitsets(String keepBitsets) {
-		this.keepBitsets = keepBitsets;
-	}
-	
-	/**
-	 * Optionally set a replacement string for the kept bitset names.
-	 */
-	public void setKeptName(String keptName) {
-		this.keptName = keptName;
-	}
-	
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-	
-	/**
-	 * Remove all unnecessary comments from the java code that was produced by Antlr
-	 */
-	public void stripUnnecessaryComments(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		String content = fsa.readTextFile(javaFile).toString();
-		content = stripUnnecessaryComments(content);
-		fsa.generateFile(javaFile, content);
-	}
 
 	protected String stripUnnecessaryComments(String fileContent) {
 		fileContent = fileContent.replaceAll(
@@ -61,29 +29,23 @@ public class AntlrCodeQualityHelper {
 		return fileContent;
 	}
 
-	protected void stripAllComments(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		String content = fsa.readTextFile(javaFile).toString();
-		content = stripAllComments(content);
-		fsa.generateFile(javaFile, content);
-	}
-	
+
 	protected String stripAllComments(String fileContent) {
 		fileContent = fileContent.replaceAll("(?m)^\\s+//.*$\\R", "");
 		return fileContent;
 	}
-	
+
 	/**
-	 * Remove all unnecessary comments from the lexer and the parser
+	 * Remove all unnecessary comments from a lexer or parser file
 	 */
-	public void stripUnnecessaryComments(IXtextGeneratorFileSystemAccess fsa, String lexer, String parser) {
-		if (!enabled) {
-			return;
+	public String stripUnnecessaryComments(String javaContent, AntlrOptions options) {
+		if (!options.isOptimizeCodeQuality()) {
+			return javaContent;
 		}
-		stripUnnecessaryComments(fsa, lexer);
-		stripUnnecessaryComments(fsa, parser);
-		if (stripAllComments) {
-			stripAllComments(fsa, parser);
-			stripAllComments(fsa, lexer);
+		if (options.isStripAllComments()) {
+			return stripAllComments(javaContent);
+		} else {
+			return stripUnnecessaryComments(javaContent);
 		}
 	}
 
@@ -93,30 +55,26 @@ public class AntlrCodeQualityHelper {
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	public static final Pattern followsetPattern = Pattern.compile(
 			"\\s+public static final BitSet (FOLLOW_\\w+) = (.*);$", Pattern.MULTILINE);
-	
+
 	public static final Pattern dfaStringPattern = Pattern.compile(
 			"\\s+static final String\\[?]? (DFA\\d+_\\w+) =\\s+([^;]*);$", Pattern.MULTILINE | Pattern.DOTALL);
-	
+
 	public static final Pattern dfaUnpackPattern = Pattern.compile(
 			"\\s+static final (?:short|char)\\[?]?\\[?]? (DFA\\d+_\\w+) = (\\w+(\\.\\w+)?\\(dfa_\\d+s\\));$", Pattern.MULTILINE | Pattern.DOTALL);
 	/**
 	 * Remove duplicate bitset declarations to reduce the size of the static initializer but keep the bitsets
 	 * that match the given pattern with a normalized name.
 	 */
-	public void removeDuplicateBitsets(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		if (!enabled) {
-			return;
+	public String removeDuplicateBitsets(String javaContent, AntlrOptions options) {
+		if (!options.isOptimizeCodeQuality()) {
+			return javaContent;
 		}
-		String content = fsa.readTextFile(javaFile).toString();
-		
-		CharSequence newContent = removeDuplicateFields(
-				content, followsetPattern, 1, 2, "\\bFOLLOW_\\w+\\b", "FOLLOW_%d", keepBitsets, keptName);
-		
-		fsa.generateFile(javaFile, newContent);
+
+		return removeDuplicateFields(javaContent, followsetPattern, 1, 2, "\\bFOLLOW_\\w+\\b", "FOLLOW_%d", options.getKeptBitSetsPattern(), options.getKeptBitSetName());
 	}
 
 	/**
-	 * 
+	 *
 	 * @param content
 	 * @param lookupPattern the regular expression pattern that we try to find
 	 * @param synName
@@ -124,7 +82,7 @@ public class AntlrCodeQualityHelper {
 	 * @param keptName
 	 * @return
 	 */
-	public static CharSequence removeDuplicateFields(CharSequence content, Pattern lookupPattern, int origNameGroup, int initGroup, String rawClientPattern, String synName, String keepPattern, String keptName) {
+	public static String removeDuplicateFields(String content, Pattern lookupPattern, int origNameGroup, int initGroup, String rawClientPattern, String synName, String keepPattern, String keptName) {
 		Pattern fieldnamesToKeep = null;
 		Set<String> doNotReplace = Sets.newHashSet();
 		if (keepPattern != null) {
@@ -183,9 +141,9 @@ public class AntlrCodeQualityHelper {
 			offset = clientMatcher.end();
 		}
 		newContent.append(content, offset, content.length());
-		return newContent;
+		return newContent.toString();
 	}
-	
+
 	private static <K, V> V putIfAbsent(Map<K, V> map, K key, V value) {
         V v = map.get(key);
         if (v == null) {
@@ -193,27 +151,26 @@ public class AntlrCodeQualityHelper {
         }
         return v;
     }
-	
+
 	private static final Pattern dfaPattern = Pattern.compile(
 			"static final short\\[]\\[] (DFA\\d+_transition);\\s+static \\{[^{]*\\{[^}]*\\}[^}]*\\}", Pattern.DOTALL);
-	
+
 	private static final String replacement= "static final short[][] $1 = unpackEncodedStringArray($1S);";
-	
+
 	/**
 	 * Remove duplicate bitset declarations to reduce the size of the static initializer but keep the bitsets
 	 * that match the given pattern with a normalized name.
 	 */
-	public void removeDuplicateDFAs(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		if (!enabled) {
-			return;
+	public String removeDuplicateDFAs(String content, AntlrOptions options) {
+		if (!options.isOptimizeCodeQuality()) {
+			return content;
 		}
-		String content = fsa.readTextFile(javaFile).toString();
-		CharSequence newContent = dfaPattern.matcher(content).replaceAll(replacement);
+		String newContent = dfaPattern.matcher(content).replaceAll(replacement);
 		newContent = removeDuplicateFields(
 				newContent, dfaStringPattern, 1, 2, "\\bDFA\\d+_\\w+\\b", "dfa_%ds", null, null);
 		newContent = removeDuplicateFields(
 				newContent, dfaUnpackPattern, 1, 2, "\\bDFA\\d+_\\w+\\b", "dfa_%d", null, null);
-		fsa.generateFile(javaFile, newContent);
+		return newContent;
 	}
-	
+
 }
