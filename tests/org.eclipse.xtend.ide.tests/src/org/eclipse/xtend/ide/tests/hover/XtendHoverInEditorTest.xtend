@@ -64,7 +64,6 @@ class XtendHoverInEditorTest extends AbstractXtendUITestCase {
 			class Foo {}
 		''')
 		fooEditor.waitForReconciler
-		editor.waitForDirtyStateUpdater
 		editor.waitForReconciler
 		val info2 = (hoverer as ITextHoverExtension2).getHoverInfo2(editor.internalSourceViewer as ITextViewer, new Region(19,1)) as XtextBrowserInformationControlInput
 		assertFalse(info2.html.contains("Hello Foo"))
@@ -104,7 +103,6 @@ class XtendHoverInEditorTest extends AbstractXtendUITestCase {
 			class Foo {}
 		''')
 		fooEditor.waitForReconciler
-		editor.waitForDirtyStateUpdater
 		editor.waitForReconciler
 		
 		val moreLoggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver) [

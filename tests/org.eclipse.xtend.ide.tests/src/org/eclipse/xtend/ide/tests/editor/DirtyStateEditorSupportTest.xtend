@@ -9,18 +9,14 @@ package org.eclipse.xtend.ide.tests.editor
 
 import com.google.inject.Inject
 import org.apache.log4j.Level
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jface.text.source.Annotation
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -34,7 +30,6 @@ import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPluginProjec
 class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 	@Inject extension WorkbenchTestHelper
 	@Inject extension SyncUtil
-	@Inject IResourceValidator validator
 
 	@Before def void start() {
 		createPluginProject(TESTPROJECT_NAME)
@@ -56,46 +51,24 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 			}
 		'''
 		val c1Editor = openEditor("C1.xtend", model)
+		c1Editor.waitForReconciler
+		
 		val c2Editor = openEditor("C2.xtend",'''
 			import A.B
 			
 			class C {}
 		''')
-		// editors are not dirty thus we need to wait for a build
-		IResourcesSetupUtil.waitForBuild
-		c1Editor.waitForReconciler.waitForDirtyStateUpdater
-		c2Editor.waitForReconciler.waitForDirtyStateUpdater
-		// resolve both
-		c1Editor.document.readOnly [ assertNoErrors ]
-		c2Editor.document.readOnly [ assertNoErrors ]
+		c2Editor.waitForReconciler
+
 		c1Editor.assertHasNoErrors
 		c2Editor.assertHasNoErrors
-		// now modify
+		// now remove the nested type
 		val staticOffset = model.indexOf('static')
 		LoggingTester.captureLogging(Level.ERROR, XtextDocument) [
 			c1Editor.document.replace(staticOffset, 0, "// ")
 			c1Editor.waitForReconciler
-			c2Editor.waitForDirtyStateUpdater
-			c2Editor.document.readOnly [ assertHasErrors('A.B cannot be resolved to a type.') ]
 			c2Editor.assertHasErrors('A.B cannot be resolved to a type.')
 		].assertNoLogEntries
-	}
-	
-	private def Object assertNoErrors(Resource res) {
-		val issues = validator.validate(res, CheckMode.ALL, null)
-		assertTrue(issues.toString, issues.filter[severity == Severity.ERROR].isEmpty)
-		return null
-	}
-	
-	private def waitForReconciler(XtextEditor editor) {
-		editor.document.readOnly [ null ]
-		return editor
-	}
-	
-	private def Object assertHasErrors(Resource res, String message) {
-		val issues = validator.validate(res, CheckMode.ALL, null)
-		assertTrue(issues.toString, issues.map[getMessage].contains(message))
-		return null
 	}
 	
 	@Test
@@ -142,16 +115,12 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 				} 
 			}
 		'''
-		consumer.expectDirtyStateUpdate [
-			editor.document.replace(0, model.length, replaceModel)
-			editor.waitForReconciler
-		]
+		editor.document.replace(0, model.length, replaceModel)
+		editor.waitForReconciler
 		consumer.assertHasErrors
 		
-		consumer.expectDirtyStateUpdate [
-			editor.document.replace(0, replaceModel.length, model)
-			editor.waitForReconciler
-		]
+		editor.document.replace(0, replaceModel.length, model)
+		editor.waitForReconciler
 		consumer.assertHasNoErrors
 	}
 	
