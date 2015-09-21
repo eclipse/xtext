@@ -4,7 +4,7 @@ Bundle-Name: Xtend Benchmarks
 Bundle-SymbolicName: org.eclipse.xtend.performance.tests
 Bundle-Version: 2.9.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-ClassPath: .
 Require-Bundle: com.google.inject;bundle-version="3.0.0",
  org.eclipse.emf.ecore;bundle-version="2.9.0",

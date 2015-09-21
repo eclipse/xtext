@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Junit4 Support
 Bundle-SymbolicName: org.eclipse.xtext.junit4
 Bundle-Version: 2.9.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.build,

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Wizard
 Bundle-SymbolicName: org.eclipse.xtext.xtext.wizard
 Bundle-Version: 2.9.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.xtext.wizard;x-friends:="org.eclipse.xtext.xtext.ui,org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.wizard.cli;x-internal:=true,

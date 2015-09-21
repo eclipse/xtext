@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.xtext.ide
 Bundle-Activator: org.eclipse.xtext.ui.tests.Activator
 Bundle-ActivationPolicy: lazy
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0"
 Export-Package: org.eclipse.xtext.ui.tests,

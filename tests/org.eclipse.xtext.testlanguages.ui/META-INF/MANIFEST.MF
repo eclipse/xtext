@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Xtext Testlanguages For UI and Runtime - UI
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.9.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages.ui; singleton:=true
 Bundle-ActivationPolicy: lazy

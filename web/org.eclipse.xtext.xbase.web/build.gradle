@@ -13,5 +13,5 @@ dependencies {
 
 jar.manifest {
 	name 'Xbase Web Integration'
-	vendor 'Eclipse Modeling Project'
+	vendor 'Eclipse Xtext'
 }

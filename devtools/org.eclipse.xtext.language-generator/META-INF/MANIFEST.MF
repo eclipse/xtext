@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.language-generator
 Bundle-SymbolicName: org.eclipse.xtext.language-generator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: %providerName
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext.tests,
  org.eclipse.xtext.ui.tests,

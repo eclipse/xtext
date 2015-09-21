@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Plug-in for testing restricted access
 Bundle-SymbolicName: org.eclipse.xtend.ide.tests.data
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.core.tests.internal;x-internal:=true,
  org.eclipse.xtend.ide.tests.data,

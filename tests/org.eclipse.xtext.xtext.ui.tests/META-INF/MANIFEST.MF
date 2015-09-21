@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Xtext Editor UI Tests
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.tests;singleton:=true
 Bundle-Version: 2.9.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.xpand;bundle-version="1.1.0",
