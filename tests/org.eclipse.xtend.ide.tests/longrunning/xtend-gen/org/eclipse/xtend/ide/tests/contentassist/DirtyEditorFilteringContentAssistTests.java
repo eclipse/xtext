@@ -180,7 +180,6 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
   
   public ICompletionProposal[] computeCompletionProposals(final XtextEditor editorForCompletion, final XtextEditor dirtyEditor, final int cursorPosition) throws BadLocationException {
     this.syncUtil.waitForReconciler(dirtyEditor);
-    this.syncUtil.waitForDirtyStateUpdater(dirtyEditor);
     final ISourceViewer sourceViewer = editorForCompletion.getInternalSourceViewer();
     XtextSourceViewerConfiguration _xtextSourceViewerConfiguration = editorForCompletion.getXtextSourceViewerConfiguration();
     final IContentAssistant contentAssistant = _xtextSourceViewerConfiguration.getContentAssistant(sourceViewer);

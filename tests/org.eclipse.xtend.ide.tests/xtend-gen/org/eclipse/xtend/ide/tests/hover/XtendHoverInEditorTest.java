@@ -101,7 +101,6 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _document.set(_builder_2.toString());
       this._syncUtil.waitForReconciler(fooEditor);
-      this._syncUtil.waitForDirtyStateUpdater(editor);
       this._syncUtil.waitForReconciler(editor);
       ISourceViewer _internalSourceViewer_1 = editor.getInternalSourceViewer();
       Region _region_1 = new Region(19, 1);
@@ -179,7 +178,6 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _document.set(_builder_2.toString());
       this._syncUtil.waitForReconciler(fooEditor);
-      this._syncUtil.waitForDirtyStateUpdater(editor);
       this._syncUtil.waitForReconciler(editor);
       final Runnable _function_1 = new Runnable() {
         @Override
