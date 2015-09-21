@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
@@ -27,11 +28,36 @@ public class AntlrOptions {
   
   private boolean classSplitting = false;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
   
   private boolean skipUnusedRules = false;
+  
+  private boolean optimizeCodeQuality = true;
+  
+  private boolean stripAllComments = false;
+  
+  private String keptBitSetsPattern;
+  
+  private String keptBitSetName;
+  
+  public void setFieldsPerClass(final String fieldsPerClass) {
+    int _parseInt = Integer.parseInt(fieldsPerClass);
+    this.fieldsPerClass = _parseInt;
+  }
+  
+  public void setMethodsPerClass(final String methodsPerClass) {
+    int _parseInt = Integer.parseInt(methodsPerClass);
+    this.methodsPerClass = _parseInt;
+  }
+  
+  public void setKAsString(final String k) {
+    int _parseInt = Integer.parseInt(k);
+    this.k = _parseInt;
+  }
   
   @Pure
   public boolean isBacktrack() {
@@ -92,17 +118,9 @@ public class AntlrOptions {
     return this.fieldsPerClass;
   }
   
-  public void setFieldsPerClass(final int fieldsPerClass) {
-    this.fieldsPerClass = fieldsPerClass;
-  }
-  
   @Pure
   public int getMethodsPerClass() {
     return this.methodsPerClass;
-  }
-  
-  public void setMethodsPerClass(final int methodsPerClass) {
-    this.methodsPerClass = methodsPerClass;
   }
   
   @Pure
@@ -112,5 +130,41 @@ public class AntlrOptions {
   
   public void setSkipUnusedRules(final boolean skipUnusedRules) {
     this.skipUnusedRules = skipUnusedRules;
+  }
+  
+  @Pure
+  public boolean isOptimizeCodeQuality() {
+    return this.optimizeCodeQuality;
+  }
+  
+  public void setOptimizeCodeQuality(final boolean optimizeCodeQuality) {
+    this.optimizeCodeQuality = optimizeCodeQuality;
+  }
+  
+  @Pure
+  public boolean isStripAllComments() {
+    return this.stripAllComments;
+  }
+  
+  public void setStripAllComments(final boolean stripAllComments) {
+    this.stripAllComments = stripAllComments;
+  }
+  
+  @Pure
+  public String getKeptBitSetsPattern() {
+    return this.keptBitSetsPattern;
+  }
+  
+  public void setKeptBitSetsPattern(final String keptBitSetsPattern) {
+    this.keptBitSetsPattern = keptBitSetsPattern;
+  }
+  
+  @Pure
+  public String getKeptBitSetName() {
+    return this.keptBitSetName;
+  }
+  
+  public void setKeptBitSetName(final String keptBitSetName) {
+    this.keptBitSetName = keptBitSetName;
   }
 }

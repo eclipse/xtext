@@ -11,8 +11,8 @@ package org.eclipse.xtext.generator.parser.splitting;
 import java.util.regex.Matcher;
 
 import org.eclipse.xtext.generator.parser.AbstractAntlrSplitterTest;
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter.ExtractedClass;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter.ExtractedClass;
 import org.junit.Test;
 
 

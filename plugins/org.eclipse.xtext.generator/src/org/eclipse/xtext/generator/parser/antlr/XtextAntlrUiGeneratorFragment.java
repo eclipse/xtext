@@ -30,7 +30,7 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;

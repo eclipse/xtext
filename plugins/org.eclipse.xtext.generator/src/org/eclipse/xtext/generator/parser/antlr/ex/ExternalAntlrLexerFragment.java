@@ -28,7 +28,7 @@ import org.eclipse.xtext.generator.NamingAware;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.util.Strings;
 

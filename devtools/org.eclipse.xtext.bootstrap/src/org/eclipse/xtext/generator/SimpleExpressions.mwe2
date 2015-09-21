@@ -5,10 +5,10 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var package = "org/eclipse/xtext/generator/parser/antlr/splitting"
+var package = "org/eclipse/xtext/xtext/generator/parser/antlr/splitting"
 var grammarURI = "classpath:/${package}/SimpleExpressions.xtext"
 var file.extensions = "simpleExpressions"
-var projectName = "org.eclipse.xtext.generator"
+var projectName = "org.eclipse.xtext.xtext.generator"
 var runtimeProject = "../../plugins/${projectName}"
 var lineDelimiter = '\n'
 
@@ -49,13 +49,6 @@ Workflow {
 			}
 				
 			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}
-			
-			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment {
-            }
-            
-			// formatter API 
-			fragment = formatting.FormatterFragment {}
 
 		}
 	}
