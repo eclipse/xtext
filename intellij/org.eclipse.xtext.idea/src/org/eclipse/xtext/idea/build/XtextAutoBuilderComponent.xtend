@@ -52,6 +52,7 @@ import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
 import com.intellij.util.Function
 import com.intellij.util.graph.Graph
+import java.io.IOException
 import java.util.ArrayList
 import java.util.HashSet
 import java.util.List
@@ -85,7 +86,6 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import java.io.IOException
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -449,6 +449,8 @@ import java.io.IOException
 	
 	volatile boolean ignoreIncomingEvents = false
 	
+	private static val BUILD_MONITOR = new Object()
+	
 	protected def void build() {
 		if (disposed) {
 			return
@@ -464,8 +466,11 @@ import java.io.IOException
 			} else {
 				ProgressManager.instance.run(new Task.Backgroundable(project, 'Auto-building Xtext resources') {
 					override run(ProgressIndicator indicator) {
-						queue.drainTo(allEvents)
-						internalBuild(allEvents, indicator)
+						// we want only one thread to enter this code at any time
+						synchronized (BUILD_MONITOR) {
+							queue.drainTo(allEvents)
+							internalBuild(allEvents, indicator)
+						}
 					}
 				})
 			}
