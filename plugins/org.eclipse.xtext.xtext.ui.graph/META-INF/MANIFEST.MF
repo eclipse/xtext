@@ -4,7 +4,7 @@ Bundle-Name: Xtext Railroad Diagram Plugin
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.graph;singleton:=true
 Bundle-Version: 2.9.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.xtext.ui.graph,
  org.eclipse.xtext.xtext.ui.graph.actions,

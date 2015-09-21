@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.junit4.tests
 Bundle-SymbolicName: org.eclipse.xtext.junit4.tests
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.9.0.qualifier
 Require-Bundle: org.junit,
  org.eclipse.xtext.junit4,
