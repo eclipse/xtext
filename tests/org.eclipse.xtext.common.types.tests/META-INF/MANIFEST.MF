@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.common.types.tests
 Bundle-SymbolicName: org.eclipse.xtext.common.types.tests;singleton:=true
 Bundle-Version: 2.9.0.qualifier
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.xtext.util,
