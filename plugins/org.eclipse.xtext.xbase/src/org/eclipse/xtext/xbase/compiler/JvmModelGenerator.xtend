@@ -130,8 +130,12 @@ class JvmModelGenerator implements IGenerator {
 			fsa.generateFile(type.qualifiedName.replace('.', '/') + '.java', type.generateType(generatorConfigProvider.get(type)))
 	}
 	
+	protected def boolean organizeImports() {
+		true
+	}
+	
 	def CharSequence generateType(JvmDeclaredType type, GeneratorConfig config) {
-		val importManager = new ImportManager(true, type)
+		val importManager = new ImportManager(organizeImports, type)
 		val bodyAppendable = createAppendable(type, importManager, config)
 		bodyAppendable.openScope
 		bodyAppendable.assignThisAndSuper(type, config)
@@ -392,7 +396,7 @@ class JvmModelGenerator implements IGenerator {
 	def void generateExtendsClause(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		val implicitSuperType = switch it {
 			JvmAnnotationType: 'java.lang.Annotation'
-			JvmEnumerationType: '''java.lang.Enum<«identifier»>'''.toString
+			JvmEnumerationType: '''java.lang.Enum<Â«identifierÂ»>'''.toString
 			default: 'java.lang.Object'
 		} 
 		if (it instanceof JvmAnnotationType || (it instanceof JvmGenericType && (it as JvmGenericType).isInterface)) {
