@@ -125,19 +125,12 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		checkGrammar(grammar);
-
-		super.generate(getFlattenedGrammar(grammar), ctx);
-	}
-
-	/**
-	 * @since 2.9
-	 */
-	protected Grammar getFlattenedGrammar(Grammar grammar) {
+		
 		RuleFilter filter = new RuleFilter();
 		filter.setDiscardUnreachableRules(getOptions().isSkipUnusedRules());
 		RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
 		Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
-		return flattened;
+		super.generate(flattened, ctx);
 	}
 
 	/**
