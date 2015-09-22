@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.util.Strings;
 
@@ -85,6 +85,8 @@ public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			// since dollar signs are a quite good indicator but not necessarily the best
 			Class<?> clazz = classFinder.forName(name);
 			return findTypeByClass(clazz);
+		} catch (UnknownNestedTypeException e) {
+			return null;
 		} catch (ClassNotFoundException e) {
 			return tryFindTypeInIndex(name, true);
 		} catch (NoClassDefFoundError e) { 
@@ -130,10 +132,12 @@ public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			 * See java.lang.ClassLoader.defineClass(String, byte[], int, int, ProtectionDomain)
 			 */
 			return tryFindTypeInIndex(name, false);
+		} catch (UnknownNestedTypeException e) {
+			return null;
 		}
 	}
 
-	private JvmType findTypeByClass(Class<?> clazz) {
+	private JvmType findTypeByClass(Class<?> clazz) throws UnknownNestedTypeException {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		URI resourceURI = uriHelper.createResourceURI(clazz);
 		if (indexedJvmTypeAccess != null) {
@@ -170,15 +174,6 @@ public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			} catch(ClassNotFoundException e) {
 				throw new ClassNotFoundExceptionWithBaseName(validBaseName);
 			}
-		}
-	}
-
-	protected JvmType tryFindTypeInIndex(String name, boolean binaryNestedTypeDelimiter) {
-		TypeInResourceSetAdapter adapter = (TypeInResourceSetAdapter) EcoreUtil.getAdapter(getResourceSet().eAdapters(), TypeInResourceSetAdapter.class);
-		if (adapter != null) {
-			return adapter.tryFindTypeInIndex(name, this, binaryNestedTypeDelimiter);
-		} else {
-			return doTryFindInIndex(name, binaryNestedTypeDelimiter);
 		}
 	}
 

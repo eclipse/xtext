@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.access.impl.IClassMirror
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.openapi.progress.ProcessCanceledException
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
@@ -101,9 +102,13 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		val indexedJvmTypeAccess = getIndexedJvmTypeAccess
 		if (indexedJvmTypeAccess !== null) {
 			val proxyURI = resourceURI.appendFragment(fragment)
-			val candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, resourceSet)
-			if (candidate instanceof JvmType) {
-				return candidate
+			try {
+				val candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, resourceSet)
+				if (candidate instanceof JvmType) {
+					return candidate
+				}
+			} catch(UnknownNestedTypeException e) {
+				return null
 			}
 		}
 		ProgressIndicatorProvider.checkCanceled

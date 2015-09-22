@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -112,9 +113,13 @@ public class ConflictResolver {
 				String contextPackage = usage.getContextPackageName();
 				if(!isEmpty(contextPackage)) {
 					QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(contextPackage + "." + simpleName);
-					EObject indexedJvmType = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, null, usage.getContext().eResource().getResourceSet());
-					if(indexedJvmType != null && indexedJvmType != type) 
-						return true;
+					try {
+						EObject indexedJvmType = indexedJvmTypeAccess.getIndexedJvmType(qualifiedName, null, usage.getContext().eResource().getResourceSet());
+						if(indexedJvmType != null && indexedJvmType != type) 
+							return true;
+					} catch(UnknownNestedTypeException e) {
+						// ignore
+					}
 				}
 			}
 		}

@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassFinder;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -234,16 +234,20 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	private JvmType findTypeByClass(BinaryClass clazz) {
-		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
-		URI resourceURI = clazz.getResourceURI();
-		if (indexedJvmTypeAccess != null) {
-			URI proxyURI = resourceURI.appendFragment(clazz.getURIFragment());
-			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
-			if (candidate instanceof JvmType)
-				return (JvmType) candidate;
+		try {
+			IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
+			URI resourceURI = clazz.getResourceURI();
+			if (indexedJvmTypeAccess != null) {
+				URI proxyURI = resourceURI.appendFragment(clazz.getURIFragment());
+				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
+				if (candidate instanceof JvmType)
+					return (JvmType) candidate;
+			}
+			TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
+			return findTypeByClass(clazz, result);
+		} catch(UnknownNestedTypeException e) {
+			return null;
 		}
-		TypeResource result = (TypeResource) getResourceSet().getResource(resourceURI, true);
-		return findTypeByClass(clazz, result);
 	}
 	
 	private BinaryClass findClassByName(String name) throws ClassNotFoundException {
@@ -270,15 +274,6 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			} catch(ClassNotFoundException e) {
 				throw new ClassNotFoundExceptionWithBaseName(validBaseName);
 			}
-		}
-	}
-
-	protected JvmType tryFindTypeInIndex(String name, boolean binaryNestedTypeDelimiter) {
-		TypeInResourceSetAdapter adapter = (TypeInResourceSetAdapter) EcoreUtil.getAdapter(getResourceSet().eAdapters(), TypeInResourceSetAdapter.class);
-		if (adapter != null) {
-			return adapter.tryFindTypeInIndex(name, this, binaryNestedTypeDelimiter);
-		} else {
-			return doTryFindInIndex(name, binaryNestedTypeDelimiter);
 		}
 	}
 

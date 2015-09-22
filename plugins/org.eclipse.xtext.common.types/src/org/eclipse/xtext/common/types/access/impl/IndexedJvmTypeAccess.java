@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -39,17 +38,8 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-/*
- * TODO honor container configuration
- * Since the IJavaProject is configured for the complete resourceSet, this lack of
- * support for IContainers is not critical for languages that reuse the visibility semantics
- * of IJavaProjects. Nevertheless one may run into transitivity issues with types that are
- * not properly re-exported but used on in the signatures of a given class.
- */
 public class IndexedJvmTypeAccess {
 	
-	private final static Logger logger = Logger.getLogger(IndexedJvmTypeAccess.class);
-
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	
@@ -72,11 +62,11 @@ public class IndexedJvmTypeAccess {
 	 *            the context resource set. May not be <code>null</code>.
 	 * @return the located instance. May be <code>null</code>.
 	 */
-	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet) {
+	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet) throws UnknownNestedTypeException {
 		return getIndexedJvmType(javaObjectURI, resourceSet, false);
 	}
 	
-	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet, boolean throwShadowedException) {
+	public EObject getIndexedJvmType(URI javaObjectURI, ResourceSet resourceSet, boolean throwShadowedException) throws UnknownNestedTypeException {
 		if (resourceSet != null) {
 			URI withoutFragment = javaObjectURI.trimFragment();
 			if (resourceSet instanceof ResourceSetImpl) {
@@ -97,11 +87,11 @@ public class IndexedJvmTypeAccess {
 		return null;
 	}
 	
-	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet) {
+	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet) throws UnknownNestedTypeException {
 		return getIndexedJvmType(qualifiedName, fragment, resourceSet, false);
 	}
 	
-	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet, boolean throwShadowedException) {
+	public EObject getIndexedJvmType(QualifiedName qualifiedName, String fragment, ResourceSet resourceSet, boolean throwShadowedException) throws UnknownNestedTypeException {
 		if (resourceSet != null) {
 			IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(resourceSet);
 			Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
@@ -126,7 +116,7 @@ public class IndexedJvmTypeAccess {
 	 * The given iterator is never empty.
 	 * @since 2.8
 	 */
-	protected EObject findAccessibleType(String fragment, ResourceSet resourceSet, Iterator<IEObjectDescription> fromIndex) {
+	protected EObject findAccessibleType(String fragment, ResourceSet resourceSet, Iterator<IEObjectDescription> fromIndex) throws UnknownNestedTypeException {
 		IEObjectDescription description = fromIndex.next();
 		return getAccessibleType(description, fragment, resourceSet);
 	}
@@ -136,7 +126,7 @@ public class IndexedJvmTypeAccess {
 	 * to the given fragment.
 	 * @since 2.8
 	 */
-	protected EObject getAccessibleType(IEObjectDescription description, String fragment, ResourceSet resourceSet) {
+	protected EObject getAccessibleType(IEObjectDescription description, String fragment, ResourceSet resourceSet) throws UnknownNestedTypeException {
 		EObject typeProxy = description.getEObjectOrProxy();
 		if (typeProxy.eIsProxy()) {
 			typeProxy = EcoreUtil.resolve(typeProxy, resourceSet);
@@ -156,7 +146,7 @@ public class IndexedJvmTypeAccess {
 	 * Locate a locale type with the given fragment. Does not consider types that
 	 * are defined in operations or constructors as inner classes.
 	 */
-	public EObject resolveJavaObject(JvmType rootType, String fragment) {
+	public EObject resolveJavaObject(JvmType rootType, String fragment) throws UnknownNestedTypeException {
 		if (fragment.endsWith("[]")) {
 			return resolveJavaArrayObject(rootType, fragment);
 		}
@@ -193,10 +183,7 @@ public class IndexedJvmTypeAccess {
 				if (members.hasNext()) {
 					current = members.next();
 				} else {
-					if (logger.isInfoEnabled()) {
-						logger.info("Couldn't resolve nested type for "+rootType.getIdentifier()+" and fragment "+fragment);
-					}
-					return null;
+					throw new UnknownNestedTypeException("Couldn't resolve nested type for "+rootType.getIdentifier()+" and fragment "+fragment);
 				}
 			}
 			return current;
@@ -204,7 +191,7 @@ public class IndexedJvmTypeAccess {
 		return null;	
 	}
 
-	public EObject resolveJavaArrayObject(JvmType rootType, String fragment) {
+	public EObject resolveJavaArrayObject(JvmType rootType, String fragment) throws UnknownNestedTypeException {
 		JvmComponentType component = (JvmComponentType) resolveJavaObject(rootType, fragment.substring(0, fragment.length() - 2));
 		if (component == null)
 			return null;
@@ -217,6 +204,20 @@ public class IndexedJvmTypeAccess {
 			super();
 		}
 		public ShadowedTypeException(String message) {
+			super(message);
+		}
+	}
+	
+	/**
+	 * This exception is raised if a matching top level type was found in the index but there is no nested type
+	 * with the requested name.
+	 */
+	@SuppressWarnings("serial")
+	public static class UnknownNestedTypeException extends RuntimeException {
+		public UnknownNestedTypeException() {
+			super();
+		}
+		public UnknownNestedTypeException(String message) {
 			super(message);
 		}
 	}
