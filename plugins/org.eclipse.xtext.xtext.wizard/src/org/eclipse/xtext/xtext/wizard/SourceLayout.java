@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xtext.wizard;
 
 public enum SourceLayout {
-	PLAIN {
+	PLAIN ("Plain"){
 		@Override
 		public String getPathFor(Outlet outlet) {
 			switch (outlet) {
@@ -31,8 +31,8 @@ public enum SourceLayout {
 			}
 		}
 	},
-	
-	MAVEN {
+
+	MAVEN("Maven/Gradle") {
 		@Override
 		public String getPathFor(Outlet outlet) {
 			switch (outlet) {
@@ -63,5 +63,13 @@ public enum SourceLayout {
 		}
 	};
 
+	private String humanReadableName;
 	public abstract String getPathFor(Outlet outlet);
+	
+	private SourceLayout(String humanReadableName) {
+		this.humanReadableName = humanReadableName;
+	}
+	public String toString() {
+		return humanReadableName;
+	}
 }
