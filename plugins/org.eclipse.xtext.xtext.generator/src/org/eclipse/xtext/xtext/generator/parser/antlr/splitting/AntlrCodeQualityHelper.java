@@ -19,7 +19,7 @@ import com.google.common.collect.Sets;
 
 public class AntlrCodeQualityHelper {
 
-	protected String stripUnnecessaryComments(String fileContent) {
+	protected String stripMachineDependentPaths(String fileContent) {
 		fileContent = fileContent.replaceAll(
 				"(?m)^(\\s+)// .*/(\\w+\\.g:.*)$",
 				"$1// $2");
@@ -29,9 +29,8 @@ public class AntlrCodeQualityHelper {
 		return fileContent;
 	}
 
-
 	protected String stripAllComments(String fileContent) {
-		fileContent = fileContent.replaceAll("(?m)^\\s+//.*$\\R", "");
+		fileContent = fileContent.replaceAll("(?m)^\\s+//.*$\\n", "");
 		return fileContent;
 	}
 
@@ -42,11 +41,11 @@ public class AntlrCodeQualityHelper {
 		if (!options.isOptimizeCodeQuality()) {
 			return javaContent;
 		}
+		javaContent = stripMachineDependentPaths(javaContent);
 		if (options.isStripAllComments()) {
-			return stripAllComments(javaContent);
-		} else {
-			return stripUnnecessaryComments(javaContent);
+			javaContent = stripAllComments(javaContent);
 		}
+		return javaContent;
 	}
 
 	// public static final BitSet FOLLOW_Symbol_in_synpred90_InternalMyDslParser17129 = new BitSet(new
