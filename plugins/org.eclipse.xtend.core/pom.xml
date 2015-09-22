@@ -30,6 +30,11 @@
 			<version>[${project.version}]</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.junit</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.equinox</groupId>
 			<artifactId>common</artifactId>
 			<version>${equinox-common-version}</version>
