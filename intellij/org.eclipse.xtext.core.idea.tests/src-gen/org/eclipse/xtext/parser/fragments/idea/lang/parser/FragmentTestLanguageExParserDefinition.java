@@ -37,48 +37,9 @@ public class FragmentTestLanguageExParserDefinition extends AbstractXtextParserD
 				elementTypeProvider.getPRFNamedWithAction_NameIDTerminalRuleCall_2_0ElementType()
 			);
 		}
-		if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedWithActionInFragment2ParserRuleCall_1_5_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getPRFNamedWithActionInFragment2_NameIDTerminalRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_7_1_0ElementType()) {
+		if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_4_1_0ElementType()) {
 			return new PsiNamedEObjectImpl(node,
 				elementTypeProvider.getPRFNamedWithFQN_NameFQNParserRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getPRFNamedWithActionInFragment_FragmentWithActionParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFragmentWithAction_NameIDTerminalRuleCall_0_0ElementType(),
-				elementTypeProvider.getFragmentWithAction_NameIDTerminalRuleCall_2_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getFragmentWithAction_PRFNamedWithActionPrevAction_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFragmentWithAction_NameIDTerminalRuleCall_0_0ElementType(),
-				elementTypeProvider.getFragmentWithAction_NameIDTerminalRuleCall_2_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getPRFNamedWithActionInFragment2_FragmentWithAction2ParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFragmentWithAction2_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getFragmentWithAction2_PRFNamedWithActionPrevAction_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFragmentWithAction2_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getPRFNamedWithActionInFragment3_FragmentWithAction3ParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFragmentWithAction3_NameIDTerminalRuleCall_0_0ElementType(),
-				elementTypeProvider.getFragmentWithAction3_NameIDTerminalRuleCall_1_2_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getFragmentWithAction3_PRFNamedWithActionPrevAction_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFragmentWithAction3_NameIDTerminalRuleCall_0_0ElementType(),
-				elementTypeProvider.getFragmentWithAction3_NameIDTerminalRuleCall_1_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getPRFNamed_PRFNamedFragmentParserRuleCall_0ElementType()) {
@@ -106,25 +67,7 @@ public class FragmentTestLanguageExParserDefinition extends AbstractXtextParserD
 		if (elementType == elementTypeProvider.getPRFNamedWithAction_Ref2PRFNamedCrossReference_3_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
-		if (elementType == elementTypeProvider.getPRFNamedWithActionInFragment_RefPRFNamedCrossReference_1_1_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getPRFNamedWithActionInFragment2_RefPRFNamedCrossReference_2_1_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getPRFNamedWithActionInFragment3_RefPRFNamedCrossReference_1_1_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
 		if (elementType == elementTypeProvider.getPRFNamedWithFQN_RefPRFNamedCrossReference_1_1_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getFragmentWithAction_Ref2PRFNamedCrossReference_3_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getFragmentWithAction2_Ref2PRFNamedCrossReference_2_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getFragmentWithAction3_Ref2PRFNamedCrossReference_1_3_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
 		if (elementType == elementTypeProvider.getPRFNamedRef_RefPRFNamedCrossReference_0ElementType()) {

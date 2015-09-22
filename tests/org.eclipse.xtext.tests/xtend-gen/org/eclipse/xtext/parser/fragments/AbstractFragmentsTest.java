@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -138,6 +139,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragment_01() {
     final ParserRuleFragments fragments = this.parseAndValidate("#5 prev current");
     Assert.assertNotNull(fragments);
@@ -151,6 +153,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragment_02() {
     final ParserRuleFragments fragments = this.parseAndValidate("#6 prev current");
     Assert.assertNotNull(fragments);
@@ -164,6 +167,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragmentAndReference_01() {
     final ParserRuleFragments fragments = this.parseAndValidate("#5 prev current current - prev");
     Assert.assertNotNull(fragments);
@@ -180,6 +184,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragmentAndReference_02() {
     final ParserRuleFragments fragments = this.parseAndValidate("#6 prev current current - prev");
     Assert.assertNotNull(fragments);
@@ -196,6 +201,7 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragmentAndReferenceLoop() {
     final ParserRuleFragments fragments = this.parseAndValidate("#7 root -> a a -> b b -> c c - root");
     Assert.assertNotNull(fragments);

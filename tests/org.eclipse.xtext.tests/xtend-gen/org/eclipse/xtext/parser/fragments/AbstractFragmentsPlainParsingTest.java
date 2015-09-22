@@ -11,6 +11,7 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -93,6 +94,7 @@ public abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTes
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragment_01() {
     try {
       this.getModel("#5 prev current");
@@ -102,6 +104,7 @@ public abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTes
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragment_02() {
     try {
       this.getModel("#6 prev current");
@@ -111,6 +114,7 @@ public abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTes
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragmentAndReference_01() {
     try {
       this.getModel("#5 prev current current - prev");
@@ -120,6 +124,7 @@ public abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTes
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragmentAndReference_02() {
     try {
       this.getModel("#6 prev current current - prev");
@@ -129,6 +134,7 @@ public abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTes
   }
   
   @Test
+  @Ignore("Actions are currently not supported in fragments")
   public void testActionInFragmentAndReferenceLoop() {
     try {
       this.getModel("#7 root -> a a -> b b -> c c - root");

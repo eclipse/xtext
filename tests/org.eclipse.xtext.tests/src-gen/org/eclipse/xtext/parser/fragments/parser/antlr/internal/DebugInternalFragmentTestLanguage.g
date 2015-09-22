@@ -9,9 +9,6 @@ ruleParserRuleFragments :
 	'#2' rulePRFNamed '->' RULE_ID |
 	'#3' rulePRFNamedRefFirst |
 	'#4' rulePRFNamedWithAction |
-	'#5' rulePRFNamedWithActionInFragment |
-	'#6' rulePRFNamedWithActionInFragment2 |
-	'#7' rulePRFNamedWithActionInFragment3 |
 	'#8' rulePRFNamedWithFQN
 ;
 
@@ -32,27 +29,6 @@ rulePRFNamedRefFirst :
 rulePRFNamedWithAction :
 	rulePRFNamed RULE_ID (
 		RULE_ID RULE_ID
-	)?
-;
-
-// Rule PRFNamedWithActionInFragment
-rulePRFNamedWithActionInFragment :
-	ruleFragmentWithAction (
-		'-' RULE_ID
-	)?
-;
-
-// Rule PRFNamedWithActionInFragment2
-rulePRFNamedWithActionInFragment2 :
-	RULE_ID ruleFragmentWithAction2 (
-		'-' RULE_ID
-	)?
-;
-
-// Rule PRFNamedWithActionInFragment3
-rulePRFNamedWithActionInFragment3 :
-	ruleFragmentWithAction3 (
-		'-' RULE_ID
 	)?
 ;
 
@@ -81,23 +57,6 @@ ruleSuffix :
 // Rule Suffix2
 ruleSuffix2 :
 	'.' RULE_ID
-;
-
-// Rule FragmentWithAction
-ruleFragmentWithAction :
-	RULE_ID RULE_ID RULE_ID?
-;
-
-// Rule FragmentWithAction2
-ruleFragmentWithAction2 :
-	RULE_ID RULE_ID?
-;
-
-// Rule FragmentWithAction3
-ruleFragmentWithAction3 :
-	RULE_ID (
-		'->' RULE_ID RULE_ID?
-	)*
 ;
 
 // Rule PRFNamedFragment

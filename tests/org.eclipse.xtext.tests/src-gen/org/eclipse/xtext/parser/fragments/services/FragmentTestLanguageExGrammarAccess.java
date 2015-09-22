@@ -86,9 +86,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	//	{ParserRuleFragments} ('#1' element=PRFNamed
 	//	| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
 	//	| '#4' element=PRFNamedWithAction
-	//	| '#5' element=PRFNamedWithActionInFragment
-	//	| '#6' element=PRFNamedWithActionInFragment2
-	//	| '#7' element=PRFNamedWithActionInFragment3
+	//	//  | '#5' element=PRFNamedWithActionInFragment
+	//	//  | '#6' element=PRFNamedWithActionInFragment2
+	//	//  | '#7' element=PRFNamedWithActionInFragment3
 	//	| '#8' element=PRFNamedWithFQN);
 	public FragmentTestLanguageGrammarAccess.ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return gaFragmentTestLanguage.getParserRuleFragmentsAccess();
@@ -128,36 +128,17 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		return getPRFNamedWithActionAccess().getRule();
 	}
 
-	//PRFNamedWithActionInFragment PRFNamed:
-	//	FragmentWithAction ('-' ref=[PRFNamed])?
-	public FragmentTestLanguageGrammarAccess.PRFNamedWithActionInFragmentElements getPRFNamedWithActionInFragmentAccess() {
-		return gaFragmentTestLanguage.getPRFNamedWithActionInFragmentAccess();
-	}
-	
-	public ParserRule getPRFNamedWithActionInFragmentRule() {
-		return getPRFNamedWithActionInFragmentAccess().getRule();
-	}
-
-	//PRFNamedWithActionInFragment2 PRFNamed:
-	//	name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
-	public FragmentTestLanguageGrammarAccess.PRFNamedWithActionInFragment2Elements getPRFNamedWithActionInFragment2Access() {
-		return gaFragmentTestLanguage.getPRFNamedWithActionInFragment2Access();
-	}
-	
-	public ParserRule getPRFNamedWithActionInFragment2Rule() {
-		return getPRFNamedWithActionInFragment2Access().getRule();
-	}
-
-	//PRFNamedWithActionInFragment3 PRFNamed:
-	//	FragmentWithAction3 ('-' ref=[PRFNamed])?
-	public FragmentTestLanguageGrammarAccess.PRFNamedWithActionInFragment3Elements getPRFNamedWithActionInFragment3Access() {
-		return gaFragmentTestLanguage.getPRFNamedWithActionInFragment3Access();
-	}
-	
-	public ParserRule getPRFNamedWithActionInFragment3Rule() {
-		return getPRFNamedWithActionInFragment3Access().getRule();
-	}
-
+	////PRFNamedWithActionInFragment returns PRFNamed:
+	////	FragmentWithAction ('-' ref=[PRFNamed])?
+	////;
+	////
+	////PRFNamedWithActionInFragment2 returns PRFNamed:
+	////	name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
+	////;
+	////
+	////PRFNamedWithActionInFragment3 returns PRFNamed:
+	////	FragmentWithAction3 ('-' ref=[PRFNamed])?
+	////;
 	//PRFNamedWithFQN PRFNamed:
 	//	name=FQN ('-' ref=[PRFNamed|FQN2])?
 	public FragmentTestLanguageGrammarAccess.PRFNamedWithFQNElements getPRFNamedWithFQNAccess() {
@@ -208,36 +189,17 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		return getSuffix2Access().getRule();
 	}
 
-	//fragment FragmentWithAction returns PRFNamed:
-	//	name=ID {PRFNamedWithAction.prev=current} name=ID ref2=[PRFNamed]?;
-	public FragmentTestLanguageGrammarAccess.FragmentWithActionElements getFragmentWithActionAccess() {
-		return gaFragmentTestLanguage.getFragmentWithActionAccess();
-	}
-	
-	public ParserRule getFragmentWithActionRule() {
-		return getFragmentWithActionAccess().getRule();
-	}
-
-	//fragment FragmentWithAction2 returns PRFNamed:
-	//	{PRFNamedWithAction.prev=current} name=ID ref2=[PRFNamed]?;
-	public FragmentTestLanguageGrammarAccess.FragmentWithAction2Elements getFragmentWithAction2Access() {
-		return gaFragmentTestLanguage.getFragmentWithAction2Access();
-	}
-	
-	public ParserRule getFragmentWithAction2Rule() {
-		return getFragmentWithAction2Access().getRule();
-	}
-
-	//fragment FragmentWithAction3 returns PRFNamed:
-	//	name=ID ({PRFNamedWithAction.prev=current} '->' name=ID ref2=[PRFNamed]?)*;
-	public FragmentTestLanguageGrammarAccess.FragmentWithAction3Elements getFragmentWithAction3Access() {
-		return gaFragmentTestLanguage.getFragmentWithAction3Access();
-	}
-	
-	public ParserRule getFragmentWithAction3Rule() {
-		return getFragmentWithAction3Access().getRule();
-	}
-
+	////fragment FragmentWithAction returns PRFNamed:
+	////	name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+	////;
+	////
+	////fragment FragmentWithAction2 returns PRFNamed:
+	////	{PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+	////;
+	////
+	////fragment FragmentWithAction3 returns PRFNamed:
+	////	name=ID ({PRFNamedWithAction.prev=current} '->' name=ID (ref2=[PRFNamed])?)* 
+	////;
 	//fragment PRFNamedFragment returns PRFNamed:
 	//	name=ID;
 	public FragmentTestLanguageGrammarAccess.PRFNamedFragmentElements getPRFNamedFragmentAccess() {

@@ -75,26 +75,6 @@ public class IdeaFragmentsTest extends AbstractLanguageParsingTestCase {
     delegate.testActionAndReference();
   }
   
-  public void testActionInFragmentAndReferenceLoop() {
-    delegate.testActionInFragmentAndReferenceLoop();
-  }
-  
-  public void testActionInFragmentAndReference_01() {
-    delegate.testActionInFragmentAndReference_01();
-  }
-  
-  public void testActionInFragmentAndReference_02() {
-    delegate.testActionInFragmentAndReference_02();
-  }
-  
-  public void testActionInFragment_01() {
-    delegate.testActionInFragment_01();
-  }
-  
-  public void testActionInFragment_02() {
-    delegate.testActionInFragment_02();
-  }
-  
   public void testDatatypeRule_01() {
     delegate.testDatatypeRule_01();
   }
