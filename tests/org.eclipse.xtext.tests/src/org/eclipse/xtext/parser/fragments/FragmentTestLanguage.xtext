@@ -18,6 +18,7 @@ ParserRuleFragments: {ParserRuleFragments}
 //  | '#6' element=PRFNamedWithActionInFragment2
 //  | '#7' element=PRFNamedWithActionInFragment3
   | '#8' element=PRFNamedWithFQN
+  | '#9' element=PRFWithPredicate
   )
 ;
 
@@ -49,6 +50,10 @@ PRFNamedWithAction returns PRFNamed:
 
 PRFNamedWithFQN returns PRFNamed:
 	name=FQN ('-' ref=[PRFNamed|FQN2])?
+;
+
+PRFWithPredicate returns PRFNamed:
+	PRFNamedFragment =>('-' PRFNamedRef)?
 ;
 
 FQN:

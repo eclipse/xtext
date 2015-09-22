@@ -74,13 +74,7 @@ public class AntlrCodeQualityHelper {
 	}
 
 	/**
-	 *
-	 * @param content
 	 * @param lookupPattern the regular expression pattern that we try to find
-	 * @param synName
-	 * @param keepPattern
-	 * @param keptName
-	 * @return
 	 */
 	public static String removeDuplicateFields(String content, Pattern lookupPattern, int origNameGroup, int initGroup, String rawClientPattern, String synName, String keepPattern, String keptName) {
 		Pattern fieldnamesToKeep = null;

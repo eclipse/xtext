@@ -139,14 +139,10 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	'''
 	
 	protected def compileEntryReturns(ParserRule it, AntlrOptions options) {
-		switch it {
-			ParserRule case datatypeRule:
-				'[String current=null]'
-			ParserRule:
-				'[EObject current=null]'
-			default:
-				throw new IllegalStateException("Unexpected rule: " + it)
-		}
+		if (datatypeRule)
+			return '[String current=null]'
+		else
+			return '[EObject current=null]'
 	}
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
@@ -200,7 +196,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					{
 						«newCompositeNode»
 					}
-					«localVar»=«super._dataTypeEbnf2(it, supportActions)»«getArgumentList(!isPassCurrentIntoFragment || !supportActions)»
+					«localVar»=«super._dataTypeEbnf2(it, supportActions)»«getArgumentList(isPassCurrentIntoFragment, !supportActions)»
 					{
 						$current.merge(«localVar»);
 					}
@@ -331,7 +327,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					{
 						«ref.newCompositeNode»
 					}
-					«ruleName»«call.getArgumentList(!isPassCurrentIntoFragment || !supportActions)»
+					«ruleName»«call.getArgumentList(isPassCurrentIntoFragment, !supportActions)»
 					{
 						afterParserOrEnumRuleCall();
 					}
