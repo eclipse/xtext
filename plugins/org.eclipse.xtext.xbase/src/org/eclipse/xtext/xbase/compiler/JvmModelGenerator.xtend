@@ -135,7 +135,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def CharSequence generateType(JvmDeclaredType type, GeneratorConfig config) {
-		val importManager = createImportManager()
+		val importManager = createImportManager(type)
 		val bodyAppendable = createAppendable(type, importManager, config)
 		bodyAppendable.openScope
 		bodyAppendable.assignThisAndSuper(type, config)
