@@ -28,13 +28,13 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.idea.generator.parser.antlr.AbstractAntlrGrammarWithActionsGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 
 @Singleton
 @SuppressWarnings("all")
@@ -542,15 +542,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder.append("=");
           String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
           _builder.append(__dataTypeEbnf2, "");
-          boolean _or = false;
           boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-          boolean _not = (!_isPassCurrentIntoFragment);
-          if (_not) {
-            _or = true;
-          } else {
-            _or = (!supportActions);
-          }
-          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
           _builder.append(_argumentList, "");
           _builder.newLineIfNotEmpty();
           _builder.append("{");
@@ -938,15 +931,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder.newLine();
           String _ruleName = this._grammarAccessExtensions.ruleName(it);
           _builder.append(_ruleName, "");
-          boolean _or = false;
           boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-          boolean _not = (!_isPassCurrentIntoFragment);
-          if (_not) {
-            _or = true;
-          } else {
-            _or = (!supportActions);
-          }
-          String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, Boolean.valueOf(_or));
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
           _builder.append(_argumentList, "");
           _builder.newLineIfNotEmpty();
           _builder.append("{");

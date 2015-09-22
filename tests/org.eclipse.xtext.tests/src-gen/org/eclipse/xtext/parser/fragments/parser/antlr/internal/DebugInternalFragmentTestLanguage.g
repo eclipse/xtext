@@ -9,7 +9,8 @@ ruleParserRuleFragments :
 	'#2' rulePRFNamed '->' RULE_ID |
 	'#3' rulePRFNamedRefFirst |
 	'#4' rulePRFNamedWithAction |
-	'#8' rulePRFNamedWithFQN
+	'#8' rulePRFNamedWithFQN |
+	'#9' rulePRFWithPredicate
 ;
 
 // Rule PRFNamed
@@ -37,6 +38,15 @@ rulePRFNamedWithFQN :
 	ruleFQN (
 		'-' ruleFQN2
 	)?
+;
+
+// Rule PRFWithPredicate
+rulePRFWithPredicate :
+	rulePRFNamedFragment ( (
+	'-' rulePRFNamedRef
+	) => (
+		'-' rulePRFNamedRef
+	) )?
 ;
 
 // Rule FQN

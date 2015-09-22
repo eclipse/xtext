@@ -214,6 +214,29 @@ ruleParserRuleFragments returns [EObject current=null]
 	    }
 
 )
+))
+    |(	otherlv_13='#9' 
+    {
+    	newLeafNode(otherlv_13, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitNineKeyword_1_5_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFWithPredicateParserRuleCall_1_5_1_0()); 
+	    }
+		lv_element_14_0=rulePRFWithPredicate		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
+	        }
+       		set(
+       			$current, 
+       			"element",
+        		lv_element_14_0, 
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFWithPredicate");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))))
 ;
 
@@ -469,6 +492,56 @@ rulePRFNamedWithFQN returns [EObject current=null]
 	    }
 
 )
+))?)
+;
+
+
+
+
+
+// Entry rule entryRulePRFWithPredicate
+entryRulePRFWithPredicate returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPRFWithPredicateRule()); }
+	 iv_rulePRFWithPredicate=rulePRFWithPredicate 
+	 { $current=$iv_rulePRFWithPredicate.current; } 
+	 EOF 
+;
+
+// Rule PRFWithPredicate
+rulePRFWithPredicate returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getPRFWithPredicateRule());
+		}
+        newCompositeNode(grammarAccess.getPRFWithPredicateAccess().getPRFNamedFragmentParserRuleCall_0()); 
+    }
+    this_PRFNamedFragment_0=rulePRFNamedFragment[$current]
+    { 
+        $current = $this_PRFNamedFragment_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+(((	'-' 
+	rulePRFNamedRef[null]))=>(	otherlv_1='-' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getPRFWithPredicateAccess().getHyphenMinusKeyword_1_0_0());
+    }
+
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getPRFWithPredicateRule());
+		}
+        newCompositeNode(grammarAccess.getPRFWithPredicateAccess().getPRFNamedRefParserRuleCall_1_0_1()); 
+    }
+    this_PRFNamedRef_2=rulePRFNamedRef[$current]
+    { 
+        $current = $this_PRFNamedRef_2.current; 
+        afterParserOrEnumRuleCall();
+    }
 ))?)
 ;
 

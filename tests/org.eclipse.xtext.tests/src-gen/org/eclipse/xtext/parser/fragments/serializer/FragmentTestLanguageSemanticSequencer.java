@@ -90,7 +90,14 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	/**
 	 * Constraint:
-	 *     (element=PRFNamed | (element=PRFNamed ref=[PRFNamed|ID]) | element=PRFNamedRefFirst | element=PRFNamedWithAction | element=PRFNamedWithFQN)
+	 *     (
+	 *         element=PRFNamed | 
+	 *         (element=PRFNamed ref=[PRFNamed|ID]) | 
+	 *         element=PRFNamedRefFirst | 
+	 *         element=PRFNamedWithAction | 
+	 *         element=PRFNamedWithFQN | 
+	 *         element=PRFWithPredicate
+	 *     )
 	 */
 	protected void sequence_ParserRuleFragments(EObject context, ParserRuleFragments semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -17,12 +17,12 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.idea.generator.parser.antlr.DefaultAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 
 @SuppressWarnings("all")
 public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenerator {
@@ -557,60 +557,32 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String __ebnf2 = super._ebnf2(it, options, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
     return (__ebnf2 + _argumentList);
   }
   
   @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
     return (__dataTypeEbnf2 + _argumentList);
   }
   
   @Override
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
     return (_crossrefEbnf + _argumentList);
   }
   
   @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
     return (__assignmentEbnf + _argumentList);
   }
   

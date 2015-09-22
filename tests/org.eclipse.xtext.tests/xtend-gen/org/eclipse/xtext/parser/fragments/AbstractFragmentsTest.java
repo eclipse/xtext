@@ -245,6 +245,19 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     Assert.assertEquals(element, _ref);
   }
   
+  @Test
+  public void testFragmentWithPredicate() {
+    final ParserRuleFragments fragments = this.parseAndValidate("#9 myName - myName");
+    Assert.assertNotNull(fragments);
+    PRFNamed _element = fragments.getElement();
+    String _name = _element.getName();
+    Assert.assertEquals("myName", _name);
+    PRFNamed _element_1 = fragments.getElement();
+    PRFNamed _element_2 = fragments.getElement();
+    PRFNamed _ref = _element_2.getRef();
+    Assert.assertEquals(_element_1, _ref);
+  }
+  
   protected ParserRuleFragments parseAndValidate(final CharSequence s) {
     try {
       final ParserRuleFragments result = this.parseHelper.parse(s);

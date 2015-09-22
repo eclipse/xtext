@@ -124,6 +124,18 @@ public class FragmentTestLanguageExElementTypeProvider implements IElementTypePr
 		public static IGrammarAwareElementType createParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_4_1_0ElementType() {
 			return new IGrammarAwareElementType("ParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_4_1_0_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementPRFNamedWithFQNParserRuleCall_1_4_1_0());
 		}
+		public static IGrammarAwareElementType createParserRuleFragments_Group_1_5ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_Group_1_5_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getGroup_1_5());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_NumberSignDigitNineKeyword_1_5_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_NumberSignDigitNineKeyword_1_5_0_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getNumberSignDigitNineKeyword_1_5_0());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_ElementAssignment_1_5_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_ElementAssignment_1_5_1_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementAssignment_1_5_1());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementPRFWithPredicateParserRuleCall_1_5_1_0());
+		}
 	}
 
 	public static final IGrammarAwareElementType ParserRuleFragments_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragmentsElementType());
@@ -181,6 +193,14 @@ public class FragmentTestLanguageExElementTypeProvider implements IElementTypePr
 	public static final IGrammarAwareElementType ParserRuleFragments_ElementAssignment_1_4_1_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementAssignment_1_4_1ElementType());
 
 	public static final IGrammarAwareElementType ParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_4_1_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_4_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_Group_1_5_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_Group_1_5ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_NumberSignDigitNineKeyword_1_5_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_NumberSignDigitNineKeyword_1_5_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_ElementAssignment_1_5_1_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementAssignment_1_5_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType());
 
 	private static class PRFNamedFactory {
 		public static IGrammarAwareElementType createPRFNamedElementType() {
@@ -398,6 +418,44 @@ public class FragmentTestLanguageExElementTypeProvider implements IElementTypePr
 	public static final IGrammarAwareElementType PRFNamedWithFQN_RefPRFNamedCrossReference_1_1_0_ELEMENT_TYPE = associate(PRFNamedWithFQNFactory.createPRFNamedWithFQN_RefPRFNamedCrossReference_1_1_0ElementType());
 
 	public static final IGrammarAwareElementType PRFNamedWithFQN_RefPRFNamedFQN2ParserRuleCall_1_1_0_1_ELEMENT_TYPE = associate(PRFNamedWithFQNFactory.createPRFNamedWithFQN_RefPRFNamedFQN2ParserRuleCall_1_1_0_1ElementType());
+
+	private static class PRFWithPredicateFactory {
+		public static IGrammarAwareElementType createPRFWithPredicateElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateRule());
+		}
+		public static IGrammarAwareElementType createPRFWithPredicate_GroupElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_Group_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_PRFNamedFragmentParserRuleCall_0_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateAccess().getPRFNamedFragmentParserRuleCall_0());
+		}
+		public static IGrammarAwareElementType createPRFWithPredicate_Group_1ElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_Group_1_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateAccess().getGroup_1());
+		}
+		public static IGrammarAwareElementType createPRFWithPredicate_Group_1_0ElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_Group_1_0_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateAccess().getGroup_1_0());
+		}
+		public static IGrammarAwareElementType createPRFWithPredicate_HyphenMinusKeyword_1_0_0ElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_HyphenMinusKeyword_1_0_0_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateAccess().getHyphenMinusKeyword_1_0_0());
+		}
+		public static IGrammarAwareElementType createPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType() {
+			return new IGrammarAwareElementType("PRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1_ELEMENT_TYPE", FragmentTestLanguageExLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFWithPredicateAccess().getPRFNamedRefParserRuleCall_1_0_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType PRFWithPredicate_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicateElementType());
+
+	public static final IGrammarAwareElementType PRFWithPredicate_Group_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicate_GroupElementType());
+
+	public static final IGrammarAwareElementType PRFWithPredicate_PRFNamedFragmentParserRuleCall_0_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType());
+
+	public static final IGrammarAwareElementType PRFWithPredicate_Group_1_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicate_Group_1ElementType());
+
+	public static final IGrammarAwareElementType PRFWithPredicate_Group_1_0_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicate_Group_1_0ElementType());
+
+	public static final IGrammarAwareElementType PRFWithPredicate_HyphenMinusKeyword_1_0_0_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicate_HyphenMinusKeyword_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType PRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1_ELEMENT_TYPE = associate(PRFWithPredicateFactory.createPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType());
 
 	private static class FQNFactory {
 		public static IGrammarAwareElementType createFQNElementType() {
@@ -667,6 +725,22 @@ public class FragmentTestLanguageExElementTypeProvider implements IElementTypePr
 		return ParserRuleFragments_ElementPRFNamedWithFQNParserRuleCall_1_4_1_0_ELEMENT_TYPE;
 	}
 
+	public IGrammarAwareElementType getParserRuleFragments_Group_1_5ElementType() {
+		return ParserRuleFragments_Group_1_5_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_NumberSignDigitNineKeyword_1_5_0ElementType() {
+		return ParserRuleFragments_NumberSignDigitNineKeyword_1_5_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_ElementAssignment_1_5_1ElementType() {
+		return ParserRuleFragments_ElementAssignment_1_5_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType() {
+		return ParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0_ELEMENT_TYPE;
+	}
+
 	public IGrammarAwareElementType getPRFNamedElementType() {
 		return PRFNamed_ELEMENT_TYPE;
 	}
@@ -829,6 +903,34 @@ public class FragmentTestLanguageExElementTypeProvider implements IElementTypePr
 
 	public IGrammarAwareElementType getPRFNamedWithFQN_RefPRFNamedFQN2ParserRuleCall_1_1_0_1ElementType() {
 		return PRFNamedWithFQN_RefPRFNamedFQN2ParserRuleCall_1_1_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicateElementType() {
+		return PRFWithPredicate_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicate_GroupElementType() {
+		return PRFWithPredicate_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType() {
+		return PRFWithPredicate_PRFNamedFragmentParserRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicate_Group_1ElementType() {
+		return PRFWithPredicate_Group_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicate_Group_1_0ElementType() {
+		return PRFWithPredicate_Group_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicate_HyphenMinusKeyword_1_0_0ElementType() {
+		return PRFWithPredicate_HyphenMinusKeyword_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType() {
+		return PRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getFQNElementType() {

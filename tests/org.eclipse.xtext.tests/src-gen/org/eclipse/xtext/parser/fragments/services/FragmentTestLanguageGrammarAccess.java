@@ -47,6 +47,10 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Keyword cNumberSignDigitEightKeyword_1_4_0 = (Keyword)cGroup_1_4.eContents().get(0);
 		private final Assignment cElementAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
 		private final RuleCall cElementPRFNamedWithFQNParserRuleCall_1_4_1_0 = (RuleCall)cElementAssignment_1_4_1.eContents().get(0);
+		private final Group cGroup_1_5 = (Group)cAlternatives_1.eContents().get(5);
+		private final Keyword cNumberSignDigitNineKeyword_1_5_0 = (Keyword)cGroup_1_5.eContents().get(0);
+		private final Assignment cElementAssignment_1_5_1 = (Assignment)cGroup_1_5.eContents().get(1);
+		private final RuleCall cElementPRFWithPredicateParserRuleCall_1_5_1_0 = (RuleCall)cElementAssignment_1_5_1.eContents().get(0);
 		
 		//ParserRuleFragments:
 		//	{ParserRuleFragments} ('#1' element=PRFNamed
@@ -55,14 +59,15 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//	//  | '#5' element=PRFNamedWithActionInFragment
 		//	//  | '#6' element=PRFNamedWithActionInFragment2
 		//	//  | '#7' element=PRFNamedWithActionInFragment3
-		//	| '#8' element=PRFNamedWithFQN);
+		//	| '#8' element=PRFNamedWithFQN
+		//	| '#9' element=PRFWithPredicate);
 		@Override public ParserRule getRule() { return rule; }
 
 		//{ParserRuleFragments} ('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
 		//| '#4' element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN)
+		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate)
 		public Group getGroup() { return cGroup; }
 
 		//{ParserRuleFragments}
@@ -72,7 +77,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN)
+		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'#1' element=PRFNamed
@@ -146,6 +151,18 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 		//PRFNamedWithFQN
 		public RuleCall getElementPRFNamedWithFQNParserRuleCall_1_4_1_0() { return cElementPRFNamedWithFQNParserRuleCall_1_4_1_0; }
+
+		//'#9' element=PRFWithPredicate
+		public Group getGroup_1_5() { return cGroup_1_5; }
+
+		//'#9'
+		public Keyword getNumberSignDigitNineKeyword_1_5_0() { return cNumberSignDigitNineKeyword_1_5_0; }
+
+		//element=PRFWithPredicate
+		public Assignment getElementAssignment_1_5_1() { return cElementAssignment_1_5_1; }
+
+		//PRFWithPredicate
+		public RuleCall getElementPRFWithPredicateParserRuleCall_1_5_1_0() { return cElementPRFWithPredicateParserRuleCall_1_5_1_0; }
 	}
 
 	public class PRFNamedElements extends AbstractParserRuleElementFinder {
@@ -339,6 +356,38 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		public RuleCall getRefPRFNamedFQN2ParserRuleCall_1_1_0_1() { return cRefPRFNamedFQN2ParserRuleCall_1_1_0_1; }
 	}
 
+	public class PRFWithPredicateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFWithPredicate");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cPRFNamedFragmentParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final RuleCall cPRFNamedRefParserRuleCall_1_0_1 = (RuleCall)cGroup_1_0.eContents().get(1);
+		
+		//PRFWithPredicate PRFNamed:
+		//	PRFNamedFragment => ('-' PRFNamedRef)?
+		@Override public ParserRule getRule() { return rule; }
+
+		//PRFNamedFragment => ('-' PRFNamedRef)?
+		public Group getGroup() { return cGroup; }
+
+		//PRFNamedFragment
+		public RuleCall getPRFNamedFragmentParserRuleCall_0() { return cPRFNamedFragmentParserRuleCall_0; }
+
+		//=> ('-' PRFNamedRef)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//('-' PRFNamedRef)
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//'-'
+		public Keyword getHyphenMinusKeyword_1_0_0() { return cHyphenMinusKeyword_1_0_0; }
+
+		//PRFNamedRef
+		public RuleCall getPRFNamedRefParserRuleCall_1_0_1() { return cPRFNamedRefParserRuleCall_1_0_1; }
+	}
+
 	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -476,6 +525,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	private final PRFNamedRefFirstElements pPRFNamedRefFirst;
 	private final PRFNamedWithActionElements pPRFNamedWithAction;
 	private final PRFNamedWithFQNElements pPRFNamedWithFQN;
+	private final PRFWithPredicateElements pPRFWithPredicate;
 	private final FQNElements pFQN;
 	private final FQN2Elements pFQN2;
 	private final SuffixElements pSuffix;
@@ -497,6 +547,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		this.pPRFNamedRefFirst = new PRFNamedRefFirstElements();
 		this.pPRFNamedWithAction = new PRFNamedWithActionElements();
 		this.pPRFNamedWithFQN = new PRFNamedWithFQNElements();
+		this.pPRFWithPredicate = new PRFWithPredicateElements();
 		this.pFQN = new FQNElements();
 		this.pFQN2 = new FQN2Elements();
 		this.pSuffix = new SuffixElements();
@@ -539,7 +590,8 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//	//  | '#5' element=PRFNamedWithActionInFragment
 	//	//  | '#6' element=PRFNamedWithActionInFragment2
 	//	//  | '#7' element=PRFNamedWithActionInFragment3
-	//	| '#8' element=PRFNamedWithFQN);
+	//	| '#8' element=PRFNamedWithFQN
+	//	| '#9' element=PRFWithPredicate);
 	public ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return pParserRuleFragments;
 	}
@@ -597,6 +649,16 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	public ParserRule getPRFNamedWithFQNRule() {
 		return getPRFNamedWithFQNAccess().getRule();
+	}
+
+	//PRFWithPredicate PRFNamed:
+	//	PRFNamedFragment => ('-' PRFNamedRef)?
+	public PRFWithPredicateElements getPRFWithPredicateAccess() {
+		return pPRFWithPredicate;
+	}
+	
+	public ParserRule getPRFWithPredicateRule() {
+		return getPRFWithPredicateAccess().getRule();
 	}
 
 	//FQN:

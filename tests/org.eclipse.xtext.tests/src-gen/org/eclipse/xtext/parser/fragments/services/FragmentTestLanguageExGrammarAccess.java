@@ -89,7 +89,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	//	//  | '#5' element=PRFNamedWithActionInFragment
 	//	//  | '#6' element=PRFNamedWithActionInFragment2
 	//	//  | '#7' element=PRFNamedWithActionInFragment3
-	//	| '#8' element=PRFNamedWithFQN);
+	//	| '#8' element=PRFNamedWithFQN
+	//	| '#9' element=PRFWithPredicate);
 	public FragmentTestLanguageGrammarAccess.ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return gaFragmentTestLanguage.getParserRuleFragmentsAccess();
 	}
@@ -147,6 +148,16 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	
 	public ParserRule getPRFNamedWithFQNRule() {
 		return getPRFNamedWithFQNAccess().getRule();
+	}
+
+	//PRFWithPredicate PRFNamed:
+	//	PRFNamedFragment => ('-' PRFNamedRef)?
+	public FragmentTestLanguageGrammarAccess.PRFWithPredicateElements getPRFWithPredicateAccess() {
+		return gaFragmentTestLanguage.getPRFWithPredicateAccess();
+	}
+	
+	public ParserRule getPRFWithPredicateRule() {
+		return getPRFWithPredicateAccess().getRule();
 	}
 
 	//FQN:

@@ -26,6 +26,8 @@ NumberSignDigitFour : '#4';
 
 NumberSignDigitEight : '#8';
 
+NumberSignDigitNine : '#9';
+
 HyphenMinusGreaterThanSign : '->';
 
 LessThanSignHyphenMinus : '<-';

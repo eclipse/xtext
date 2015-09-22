@@ -52,6 +52,11 @@ public class FragmentTestLanguageParserDefinition extends AbstractXtextParserDef
 				elementTypeProvider.getPRFNamedFragment_NameIDTerminalRuleCall_0ElementType()
 			);
 		}
+		if (elementType == elementTypeProvider.getPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getPRFNamedFragment_NameIDTerminalRuleCall_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getParserRuleFragments_RefPRFNamedCrossReference_1_1_3_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

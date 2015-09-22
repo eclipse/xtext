@@ -20,8 +20,6 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
 
-import static org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider.*
-
 @Singleton
 class ProcessorInstanceForJvmTypeProvider {
 	static val logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider)

@@ -176,19 +176,19 @@ abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGra
 	}
 	
 	override protected _ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {
-		super._ebnf2(it, options, supportActions) + getArgumentList(!isPassCurrentIntoFragment || !supportActions)
+		super._ebnf2(it, options, supportActions) + getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
 	
 	override protected _dataTypeEbnf2(RuleCall it, boolean supportActions) {
-		super._dataTypeEbnf2(it, supportActions) + getArgumentList(!isPassCurrentIntoFragment || !supportActions)
+		super._dataTypeEbnf2(it, supportActions) + getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
 	
 	override protected crossrefEbnf(AbstractRule it, RuleCall call, CrossReference ref, boolean supportActions) {
-		super.crossrefEbnf(it, call, ref, supportActions) + call.getArgumentList(!passCurrentIntoFragment || !supportActions)
+		super.crossrefEbnf(it, call, ref, supportActions) + call.getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
 	
 	override protected _assignmentEbnf(RuleCall it, Assignment assignment, AntlrOptions options, boolean supportActions) {
-		super._assignmentEbnf(it, assignment, options, supportActions) + it.getArgumentList(!passCurrentIntoFragment || !supportActions)
+		super._assignmentEbnf(it, assignment, options, supportActions) + it.getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
 	
 	protected def isPassCurrentIntoFragment() {

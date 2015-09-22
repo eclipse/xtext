@@ -186,6 +186,27 @@ ruleParserRuleFragments:
 					)
 				)
 			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParserRuleFragments_NumberSignDigitNineKeyword_1_5_0ElementType());
+				}
+				otherlv_13='#9'
+				{
+					doneLeaf(otherlv_13);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType());
+						}
+						lv_element_14_0=rulePRFWithPredicate
+						{
+							doneComposite();
+						}
+					)
+				)
+			)
 		)
 	)
 ;
@@ -383,6 +404,48 @@ rulePRFNamedWithFQN:
 						doneComposite();
 					}
 				)
+			)
+		)?
+	)
+;
+
+//Entry rule entryRulePRFWithPredicate
+entryRulePRFWithPredicate:
+	{ markComposite(elementTypeProvider.getPRFWithPredicateElementType()); }
+	rulePRFWithPredicate
+	EOF;
+
+// Rule PRFWithPredicate
+rulePRFWithPredicate:
+	(
+		{
+			markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType());
+		}
+		rulePRFNamedFragment
+		{
+			doneComposite();
+		}
+		(
+			((
+				'-'
+				rulePRFNamedRef
+			)
+			)=>
+			(
+				{
+					markLeaf(elementTypeProvider.getPRFWithPredicate_HyphenMinusKeyword_1_0_0ElementType());
+				}
+				otherlv_1='-'
+				{
+					doneLeaf(otherlv_1);
+				}
+				{
+					markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType());
+				}
+				rulePRFNamedRef
+				{
+					doneComposite();
+				}
 			)
 		)?
 	)
