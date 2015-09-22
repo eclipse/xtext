@@ -962,7 +962,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				public Boolean caseAction(Action object) {
 					if (object == action) {
 						if (!assignedActionAllowed) {
-							error("An action is not allowed in wildcard fragments and when the current may still be unassigned.", null);
+							error("An action is not allowed in fragments and when the current may still be unassigned.", null);
 							checkDone();
 						}
 					}
@@ -981,7 +981,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 				@Override
 				public Boolean caseParserRule(ParserRule object) {
-					assignedActionAllowed = !GrammarUtil.isDatatypeRule(object) && !(object.isFragment() && object.isWildcard());
+					assignedActionAllowed = !GrammarUtil.isDatatypeRule(object) && !object.isFragment();
 					return assignedActionAllowed;
 				}
 
