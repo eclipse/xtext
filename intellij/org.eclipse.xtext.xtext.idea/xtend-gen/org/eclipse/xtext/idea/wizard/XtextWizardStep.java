@@ -3,6 +3,8 @@ package org.eclipse.xtext.idea.wizard;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.ProjectBuilder;
 import com.intellij.ide.util.projectWizard.WizardContext;
+import com.intellij.ide.wizard.CommitStepException;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.ui.components.JBTextField;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
@@ -29,6 +32,8 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
 public class XtextWizardStep extends ModuleWizardStep {
+  private final static Logger LOG = Logger.getInstance(XtextWizardStep.class.getName());
+  
   @Extension
   private IdeaWidgetFactory _ideaWidgetFactory = new IdeaWidgetFactory();
   
@@ -65,6 +70,7 @@ public class XtextWizardStep extends ModuleWizardStep {
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception exception = (Exception)_t;
+        XtextWizardStep.LOG.error("Initialisation failed.", exception);
         return new JPanel();
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -231,15 +237,7 @@ public class XtextWizardStep extends ModuleWizardStep {
   public void updateDataModel() {
     ProjectBuilder _projectBuilder = this.context.getProjectBuilder();
     final XtextModuleBuilder xtextBuilder = ((XtextModuleBuilder) _projectBuilder);
-    final WizardConfiguration config = xtextBuilder.getWizardConfig();
-    RuntimeProjectDescriptor _runtimeProject = config.getRuntimeProject();
-    _runtimeProject.setEnabled(true);
-    RuntimeProjectDescriptor _runtimeProject_1 = config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject_1.getTestProject();
-    boolean _isSelected = this.test.isSelected();
-    _testProject.setEnabled(_isSelected);
-    IdeProjectDescriptor _ideProject = config.getIdeProject();
-    _ideProject.setEnabled(true);
+    final WizardConfiguration config = xtextBuilder.getWizardConfiguration();
     LanguageDescriptor _language = config.getLanguage();
     String _text = this.nameField.getText();
     _language.setName(_text);
@@ -247,6 +245,14 @@ public class XtextWizardStep extends ModuleWizardStep {
     String _text_1 = this.extensionField.getText();
     LanguageDescriptor.FileExtensions _fromString = LanguageDescriptor.FileExtensions.fromString(_text_1);
     _language_1.setFileExtensions(_fromString);
+    RuntimeProjectDescriptor _runtimeProject = config.getRuntimeProject();
+    _runtimeProject.setEnabled(true);
+    IdeProjectDescriptor _ideProject = config.getIdeProject();
+    _ideProject.setEnabled(true);
+    RuntimeProjectDescriptor _runtimeProject_1 = config.getRuntimeProject();
+    TestProjectDescriptor _testProject = _runtimeProject_1.getTestProject();
+    boolean _isSelected = this.test.isSelected();
+    _testProject.setEnabled(_isSelected);
     IntellijProjectDescriptor _intellijProject = config.getIntellijProject();
     boolean _isSelected_1 = this.idea.isSelected();
     _intellijProject.setEnabled(_isSelected_1);
@@ -257,8 +263,22 @@ public class XtextWizardStep extends ModuleWizardStep {
     config.setPreferredBuildSystem(((BuildSystem) _selectedItem));
     Object _selectedItem_1 = this.layout.getSelectedItem();
     config.setSourceLayout(((SourceLayout) _selectedItem_1));
+    config.setProjectLayout(ProjectLayout.HIERARCHICAL);
     String _text_2 = this.nameField.getText();
     String _nameWithoutExtension = FileUtil.getNameWithoutExtension(_text_2);
-    this.context.setProjectName(_nameWithoutExtension);
+    config.setBaseName(_nameWithoutExtension);
+  }
+  
+  @Override
+  public void updateStep() {
+  }
+  
+  @Override
+  public void onWizardFinished() throws CommitStepException {
+    ProjectBuilder _projectBuilder = this.context.getProjectBuilder();
+    final XtextModuleBuilder xtextBuilder = ((XtextModuleBuilder) _projectBuilder);
+    final WizardConfiguration config = xtextBuilder.getWizardConfiguration();
+    String _projectFileDirectory = this.context.getProjectFileDirectory();
+    config.setRootLocation(_projectFileDirectory);
   }
 }

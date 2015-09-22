@@ -1,13 +1,15 @@
 package org.eclipse.xtext.idea.wizard;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.JavaModuleType;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.StdModuleTypes;
 import com.intellij.openapi.options.ConfigurationException;
@@ -21,15 +23,11 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.File;
 import java.util.List;
-import java.util.Set;
 import javax.swing.Icon;
 import org.eclipse.xtext.idea.Icons;
+import org.eclipse.xtext.idea.wizard.IdeaProjectCreator;
 import org.eclipse.xtext.idea.wizard.XtextWizardStep;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
-import org.eclipse.xtext.xtext.wizard.cli.CliProjectsCreator;
 
 @SuppressWarnings("all")
 public class XtextModuleBuilder extends ModuleBuilder {
@@ -83,36 +81,33 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   @Override
   public List<Module> commit(final Project project, final ModifiableModuleModel model, final ModulesProvider modulesProvider) {
+    final List<Module> rootModule = super.commit(project, model, modulesProvider);
+    ModifiableModuleModel _xifexpression = null;
+    if ((model != null)) {
+      _xifexpression = model;
+    } else {
+      ModuleManager _instance = ModuleManager.getInstance(project);
+      _xifexpression = _instance.getModifiableModel();
+    }
+    final ModifiableModuleModel moduleModel = _xifexpression;
     String _basePath = project.getBasePath();
     this.wizardConfiguration.setRootLocation(_basePath);
-    WizardConfiguration _wizardConfig = this.getWizardConfig();
-    String _name = project.getName();
-    _wizardConfig.setBaseName(_name);
-    CliProjectsCreator _cliProjectsCreator = new CliProjectsCreator();
-    _cliProjectsCreator.createProjects(this.wizardConfiguration);
-    Set<ProjectDescriptor> _enabledProjects = this.wizardConfiguration.getEnabledProjects();
-    final Function1<ProjectDescriptor, Module> _function = new Function1<ProjectDescriptor, Module>() {
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
       @Override
-      public Module apply(final ProjectDescriptor it) {
-        String _location = it.getLocation();
-        ModuleType<?> _moduleType = XtextModuleBuilder.this.getModuleType();
-        String _id = _moduleType.getId();
-        final Module module = model.newModule(_location, _id);
-        return module;
+      public void run() {
+        IdeaProjectCreator _ideaProjectCreator = new IdeaProjectCreator(moduleModel);
+        _ideaProjectCreator.createProjects(XtextModuleBuilder.this.wizardConfiguration);
+        moduleModel.commit();
       }
     };
-    final Iterable<Module> createdModules = IterableExtensions.<ProjectDescriptor, Module>map(_enabledProjects, _function);
-    return IterableExtensions.<Module>toList(createdModules);
+    _application.runWriteAction(_function);
+    return rootModule;
   }
   
   @Override
   public int getWeight() {
     return 53;
-  }
-  
-  @Override
-  public Icon getBigIcon() {
-    return AllIcons.Modules.Types.JavaModule;
   }
   
   @Override
@@ -131,7 +126,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
     return new XtextWizardStep(context);
   }
   
-  public WizardConfiguration getWizardConfig() {
+  public WizardConfiguration getWizardConfiguration() {
     return this.wizardConfiguration;
   }
 }

@@ -1,29 +1,27 @@
 package org.eclipse.xtext.idea.wizard
 
-import com.intellij.icons.AllIcons
 import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
 import com.intellij.openapi.Disposable
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.JavaModuleType
+import com.intellij.openapi.module.ModifiableModuleModel
+import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.module.ModuleType
 import com.intellij.openapi.module.StdModuleTypes
 import com.intellij.openapi.options.ConfigurationException
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.JavaSdk
 import com.intellij.openapi.projectRoots.SdkTypeId
 import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.roots.ui.configuration.ModulesProvider
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
-import javax.swing.Icon
 import org.eclipse.xtext.idea.Icons
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.module.ModifiableModuleModel
-import com.intellij.openapi.roots.ui.configuration.ModulesProvider
-import org.eclipse.xtext.xtext.wizard.cli.CliProjectsCreator
-import com.intellij.openapi.vfs.VfsUtil
 
 class XtextModuleBuilder extends ModuleBuilder {
 
@@ -63,26 +61,26 @@ class XtextModuleBuilder extends ModuleBuilder {
 		} else {
 			rootModel.inheritSdk()
 		}
-	// DO setup here
 	}
 
 	override commit(Project project, ModifiableModuleModel model, ModulesProvider modulesProvider) {
+		val rootModule = super.commit(project, model, modulesProvider)
+		val ModifiableModuleModel moduleModel = if (model !== null)
+				model
+			else
+				ModuleManager.getInstance(project).getModifiableModel()
+
 		wizardConfiguration.rootLocation = project.basePath
-		wizardConfig.baseName = project.name
-		new CliProjectsCreator().createProjects(wizardConfiguration)
-		val createdModules = wizardConfiguration.enabledProjects.map [
-			val module = model.newModule(it.location, moduleType.id)
-			return module
+
+		ApplicationManager.getApplication().runWriteAction [
+			new IdeaProjectCreator(moduleModel).createProjects(wizardConfiguration)
+			moduleModel.commit
 		]
-		return createdModules.toList
+		return rootModule
 	}
 
 	override int getWeight() {
 		return 53
-	}
-
-	override Icon getBigIcon() {
-		return AllIcons.Modules.Types.JavaModule
 	}
 
 	override ModuleType<?> getModuleType() {
@@ -97,7 +95,7 @@ class XtextModuleBuilder extends ModuleBuilder {
 		return new XtextWizardStep(context)
 	}
 
-	def WizardConfiguration getWizardConfig() {
+	def WizardConfiguration getWizardConfiguration() {
 		return this.wizardConfiguration
 	}
 
