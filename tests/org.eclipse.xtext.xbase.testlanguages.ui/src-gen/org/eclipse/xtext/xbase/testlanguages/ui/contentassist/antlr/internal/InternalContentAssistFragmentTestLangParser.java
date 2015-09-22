@@ -56319,19 +56319,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
     protected DFA98 dfa98 = new DFA98(this);
     protected DFA107 dfa107 = new DFA107(this);
     protected DFA110 dfa110 = new DFA110(this);
-    static final String DFA9_eotS =
-        "\13\uffff";
-    static final String DFA9_eofS =
-        "\13\uffff";
-    static final String DFA9_minS =
-        "\1\33\2\uffff\1\33\7\uffff";
-    static final String DFA9_maxS =
-        "\1\42\2\uffff\1\37\7\uffff";
-    static final String DFA9_acceptS =
-        "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\6\1\3";
-    static final String DFA9_specialS =
-        "\13\uffff}>";
-    static final String[] DFA9_transitionS = {
+    static final String dfa_1s = "\13\uffff";
+    static final String dfa_2s = "\1\33\2\uffff\1\33\7\uffff";
+    static final String dfa_3s = "\1\42\2\uffff\1\37\7\uffff";
+    static final String dfa_4s = "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\6\1\3";
+    static final String dfa_5s = "\13\uffff}>";
+    static final String[] dfa_6s = {
             "\1\3\1\6\1\1\1\2\1\4\1\5\1\7\1\10",
             "",
             "",
@@ -56345,52 +56338,37 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA9_eot = DFA.unpackEncodedString(DFA9_eotS);
-    static final short[] DFA9_eof = DFA.unpackEncodedString(DFA9_eofS);
-    static final char[] DFA9_min = DFA.unpackEncodedStringToUnsignedChars(DFA9_minS);
-    static final char[] DFA9_max = DFA.unpackEncodedStringToUnsignedChars(DFA9_maxS);
-    static final short[] DFA9_accept = DFA.unpackEncodedString(DFA9_acceptS);
-    static final short[] DFA9_special = DFA.unpackEncodedString(DFA9_specialS);
-    static final short[][] DFA9_transition;
-
-    static {
-        int numStates = DFA9_transitionS.length;
-        DFA9_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA9_transition[i] = DFA.unpackEncodedString(DFA9_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
 
     class DFA9 extends DFA {
 
         public DFA9(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 9;
-            this.eot = DFA9_eot;
-            this.eof = DFA9_eof;
-            this.min = DFA9_min;
-            this.max = DFA9_max;
-            this.accept = DFA9_accept;
-            this.special = DFA9_special;
-            this.transition = DFA9_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
         }
         public String getDescription() {
             return "2450:1: rule__OpOther__Alternatives : ( ( '->' ) | ( '..<' ) | ( ( rule__OpOther__Group_2__0 ) ) | ( '..' ) | ( '=>' ) | ( ( rule__OpOther__Group_5__0 ) ) | ( ( rule__OpOther__Group_6__0 ) ) | ( '<>' ) | ( '?:' ) );";
         }
     }
-    static final String DFA17_eotS =
-        "\12\uffff";
-    static final String DFA17_eofS =
-        "\4\uffff\5\3\1\uffff";
-    static final String DFA17_minS =
-        "\1\54\2\4\1\uffff\5\4\1\uffff";
-    static final String DFA17_maxS =
-        "\1\124\2\61\1\uffff\5\126\1\uffff";
-    static final String DFA17_acceptS =
-        "\3\uffff\1\2\5\uffff\1\1";
-    static final String DFA17_specialS =
-        "\12\uffff}>";
-    static final String[] DFA17_transitionS = {
+    static final String dfa_7s = "\12\uffff";
+    static final String dfa_8s = "\4\uffff\5\3\1\uffff";
+    static final String dfa_9s = "\1\54\2\4\1\uffff\5\4\1\uffff";
+    static final String dfa_10s = "\1\124\2\61\1\uffff\5\126\1\uffff";
+    static final String dfa_11s = "\3\uffff\1\2\5\uffff\1\1";
+    static final String dfa_12s = "\12\uffff}>";
+    static final String[] dfa_13s = {
             "\1\1\46\uffff\1\2\1\3",
             "\1\4\27\uffff\1\3\20\uffff\1\5\1\6\1\7\1\10\1\3",
             "\1\4\27\uffff\1\3\20\uffff\1\5\1\6\1\7\1\10\1\3",
@@ -56403,52 +56381,37 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA17_eot = DFA.unpackEncodedString(DFA17_eotS);
-    static final short[] DFA17_eof = DFA.unpackEncodedString(DFA17_eofS);
-    static final char[] DFA17_min = DFA.unpackEncodedStringToUnsignedChars(DFA17_minS);
-    static final char[] DFA17_max = DFA.unpackEncodedStringToUnsignedChars(DFA17_maxS);
-    static final short[] DFA17_accept = DFA.unpackEncodedString(DFA17_acceptS);
-    static final short[] DFA17_special = DFA.unpackEncodedString(DFA17_specialS);
-    static final short[][] DFA17_transition;
-
-    static {
-        int numStates = DFA17_transitionS.length;
-        DFA17_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA17_transition[i] = DFA.unpackEncodedString(DFA17_transitionS[i]);
-        }
-    }
+    static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
+    static final short[] dfa_8 = DFA.unpackEncodedString(dfa_8s);
+    static final char[] dfa_9 = DFA.unpackEncodedStringToUnsignedChars(dfa_9s);
+    static final char[] dfa_10 = DFA.unpackEncodedStringToUnsignedChars(dfa_10s);
+    static final short[] dfa_11 = DFA.unpackEncodedString(dfa_11s);
+    static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
+    static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
     class DFA17 extends DFA {
 
         public DFA17(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 17;
-            this.eot = DFA17_eot;
-            this.eof = DFA17_eof;
-            this.min = DFA17_min;
-            this.max = DFA17_max;
-            this.accept = DFA17_accept;
-            this.special = DFA17_special;
-            this.transition = DFA17_transition;
+            this.eot = dfa_7;
+            this.eof = dfa_8;
+            this.min = dfa_9;
+            this.max = dfa_10;
+            this.accept = dfa_11;
+            this.special = dfa_12;
+            this.transition = dfa_13;
         }
         public String getDescription() {
             return "2732:1: rule__XMemberFeatureCall__Alternatives_1 : ( ( ( rule__XMemberFeatureCall__Group_1_0__0 ) ) | ( ( rule__XMemberFeatureCall__Group_1_1__0 ) ) );";
         }
     }
-    static final String DFA20_eotS =
-        "\43\uffff";
-    static final String DFA20_eofS =
-        "\43\uffff";
-    static final String DFA20_minS =
-        "\1\4\2\0\40\uffff";
-    static final String DFA20_maxS =
-        "\1\126\2\0\40\uffff";
-    static final String DFA20_acceptS =
-        "\3\uffff\1\1\1\uffff\1\2\35\uffff";
-    static final String DFA20_specialS =
-        "\1\uffff\1\0\1\1\40\uffff}>";
-    static final String[] DFA20_transitionS = {
+    static final String dfa_14s = "\43\uffff";
+    static final String dfa_15s = "\1\4\2\0\40\uffff";
+    static final String dfa_16s = "\1\126\2\0\40\uffff";
+    static final String dfa_17s = "\3\uffff\1\1\1\uffff\1\2\35\uffff";
+    static final String dfa_18s = "\1\uffff\1\0\1\1\40\uffff}>";
+    static final String[] dfa_19s = {
             "\1\1\4\5\23\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\3\uffff\6\5\4\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\6\uffff\1\3\1\5",
             "\1\uffff",
             "\1\uffff",
@@ -56486,34 +56449,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA20_eot = DFA.unpackEncodedString(DFA20_eotS);
-    static final short[] DFA20_eof = DFA.unpackEncodedString(DFA20_eofS);
-    static final char[] DFA20_min = DFA.unpackEncodedStringToUnsignedChars(DFA20_minS);
-    static final char[] DFA20_max = DFA.unpackEncodedStringToUnsignedChars(DFA20_maxS);
-    static final short[] DFA20_accept = DFA.unpackEncodedString(DFA20_acceptS);
-    static final short[] DFA20_special = DFA.unpackEncodedString(DFA20_specialS);
-    static final short[][] DFA20_transition;
-
-    static {
-        int numStates = DFA20_transitionS.length;
-        DFA20_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA20_transition[i] = DFA.unpackEncodedString(DFA20_transitionS[i]);
-        }
-    }
+    static final short[] dfa_14 = DFA.unpackEncodedString(dfa_14s);
+    static final char[] dfa_15 = DFA.unpackEncodedStringToUnsignedChars(dfa_15s);
+    static final char[] dfa_16 = DFA.unpackEncodedStringToUnsignedChars(dfa_16s);
+    static final short[] dfa_17 = DFA.unpackEncodedString(dfa_17s);
+    static final short[] dfa_18 = DFA.unpackEncodedString(dfa_18s);
+    static final short[][] dfa_19 = unpackEncodedStringArray(dfa_19s);
 
     class DFA20 extends DFA {
 
         public DFA20(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 20;
-            this.eot = DFA20_eot;
-            this.eof = DFA20_eof;
-            this.min = DFA20_min;
-            this.max = DFA20_max;
-            this.accept = DFA20_accept;
-            this.special = DFA20_special;
-            this.transition = DFA20_transition;
+            this.eot = dfa_14;
+            this.eof = dfa_14;
+            this.min = dfa_15;
+            this.max = dfa_16;
+            this.accept = dfa_17;
+            this.special = dfa_18;
+            this.transition = dfa_19;
         }
         public String getDescription() {
             return "2808:1: rule__XMemberFeatureCall__Alternatives_1_1_3_1 : ( ( ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 ) ) | ( ( rule__XMemberFeatureCall__Group_1_1_3_1_1__0 ) ) );";
@@ -56560,19 +56514,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA21_eotS =
-        "\40\uffff";
-    static final String DFA21_eofS =
-        "\40\uffff";
-    static final String DFA21_minS =
-        "\1\4\26\uffff\1\0\10\uffff";
-    static final String DFA21_maxS =
-        "\1\126\26\uffff\1\0\10\uffff";
-    static final String DFA21_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\6\uffff\1\6\11\uffff\1\7\1\uffff\1\12\1\13\1\14\1\15\1\16\1\17\1\10\1\11";
-    static final String DFA21_specialS =
-        "\27\uffff\1\0\10\uffff}>";
-    static final String[] DFA21_transitionS = {
+    static final String dfa_20s = "\40\uffff";
+    static final String dfa_21s = "\1\4\26\uffff\1\0\10\uffff";
+    static final String dfa_22s = "\1\126\26\uffff\1\0\10\uffff";
+    static final String dfa_23s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\6\uffff\1\6\11\uffff\1\7\1\uffff\1\12\1\13\1\14\1\15\1\16\1\17\1\10\1\11";
+    static final String dfa_24s = "\27\uffff\1\0\10\uffff}>";
+    static final String[] dfa_25s = {
             "\1\5\4\14\23\uffff\1\5\20\uffff\5\5\1\14\4\uffff\1\14\1\2\1\uffff\1\14\2\uffff\1\35\1\26\1\uffff\1\3\3\uffff\1\27\1\30\1\31\1\1\2\14\1\32\1\33\1\34\1\uffff\1\4\7\uffff\1\14",
             "",
             "",
@@ -56607,34 +56554,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA21_eot = DFA.unpackEncodedString(DFA21_eotS);
-    static final short[] DFA21_eof = DFA.unpackEncodedString(DFA21_eofS);
-    static final char[] DFA21_min = DFA.unpackEncodedStringToUnsignedChars(DFA21_minS);
-    static final char[] DFA21_max = DFA.unpackEncodedStringToUnsignedChars(DFA21_maxS);
-    static final short[] DFA21_accept = DFA.unpackEncodedString(DFA21_acceptS);
-    static final short[] DFA21_special = DFA.unpackEncodedString(DFA21_specialS);
-    static final short[][] DFA21_transition;
-
-    static {
-        int numStates = DFA21_transitionS.length;
-        DFA21_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA21_transition[i] = DFA.unpackEncodedString(DFA21_transitionS[i]);
-        }
-    }
+    static final short[] dfa_20 = DFA.unpackEncodedString(dfa_20s);
+    static final char[] dfa_21 = DFA.unpackEncodedStringToUnsignedChars(dfa_21s);
+    static final char[] dfa_22 = DFA.unpackEncodedStringToUnsignedChars(dfa_22s);
+    static final short[] dfa_23 = DFA.unpackEncodedString(dfa_23s);
+    static final short[] dfa_24 = DFA.unpackEncodedString(dfa_24s);
+    static final short[][] dfa_25 = unpackEncodedStringArray(dfa_25s);
 
     class DFA21 extends DFA {
 
         public DFA21(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 21;
-            this.eot = DFA21_eot;
-            this.eof = DFA21_eof;
-            this.min = DFA21_min;
-            this.max = DFA21_max;
-            this.accept = DFA21_accept;
-            this.special = DFA21_special;
-            this.transition = DFA21_transition;
+            this.eot = dfa_20;
+            this.eof = dfa_20;
+            this.min = dfa_21;
+            this.max = dfa_22;
+            this.accept = dfa_23;
+            this.special = dfa_24;
+            this.transition = dfa_25;
         }
         public String getDescription() {
             return "2830:1: rule__XPrimaryExpression__Alternatives : ( ( ruleXConstructorCall ) | ( ruleXBlockExpression ) | ( ruleXSwitchExpression ) | ( ( ruleXSynchronizedExpression ) ) | ( ruleXFeatureCall ) | ( ruleXLiteral ) | ( ruleXIfExpression ) | ( ( ruleXForLoopExpression ) ) | ( ruleXBasicForLoopExpression ) | ( ruleXWhileExpression ) | ( ruleXDoWhileExpression ) | ( ruleXThrowExpression ) | ( ruleXReturnExpression ) | ( ruleXTryCatchFinallyExpression ) | ( ruleXParenthesizedExpression ) );";
@@ -56666,19 +56604,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA24_eotS =
-        "\43\uffff";
-    static final String DFA24_eofS =
-        "\43\uffff";
-    static final String DFA24_minS =
-        "\1\4\1\0\41\uffff";
-    static final String DFA24_maxS =
-        "\1\126\1\0\41\uffff";
-    static final String DFA24_acceptS =
-        "\2\uffff\1\2\37\uffff\1\1";
-    static final String DFA24_specialS =
-        "\1\uffff\1\0\41\uffff}>";
-    static final String[] DFA24_transitionS = {
+    static final String dfa_26s = "\1\4\1\0\41\uffff";
+    static final String dfa_27s = "\1\126\1\0\41\uffff";
+    static final String dfa_28s = "\2\uffff\1\2\37\uffff\1\1";
+    static final String dfa_29s = "\1\uffff\1\0\41\uffff}>";
+    static final String[] dfa_30s = {
             "\5\2\23\uffff\1\2\3\uffff\1\2\2\uffff\2\2\4\uffff\1\2\3\uffff\6\2\4\uffff\2\2\1\uffff\1\2\2\uffff\1\1\1\2\1\uffff\1\2\3\uffff\11\2\1\uffff\1\2\7\uffff\1\2",
             "\1\uffff",
             "",
@@ -56715,35 +56645,24 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             "",
             ""
     };
-
-    static final short[] DFA24_eot = DFA.unpackEncodedString(DFA24_eotS);
-    static final short[] DFA24_eof = DFA.unpackEncodedString(DFA24_eofS);
-    static final char[] DFA24_min = DFA.unpackEncodedStringToUnsignedChars(DFA24_minS);
-    static final char[] DFA24_max = DFA.unpackEncodedStringToUnsignedChars(DFA24_maxS);
-    static final short[] DFA24_accept = DFA.unpackEncodedString(DFA24_acceptS);
-    static final short[] DFA24_special = DFA.unpackEncodedString(DFA24_specialS);
-    static final short[][] DFA24_transition;
-
-    static {
-        int numStates = DFA24_transitionS.length;
-        DFA24_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA24_transition[i] = DFA.unpackEncodedString(DFA24_transitionS[i]);
-        }
-    }
+    static final char[] dfa_26 = DFA.unpackEncodedStringToUnsignedChars(dfa_26s);
+    static final char[] dfa_27 = DFA.unpackEncodedStringToUnsignedChars(dfa_27s);
+    static final short[] dfa_28 = DFA.unpackEncodedString(dfa_28s);
+    static final short[] dfa_29 = DFA.unpackEncodedString(dfa_29s);
+    static final short[][] dfa_30 = unpackEncodedStringArray(dfa_30s);
 
     class DFA24 extends DFA {
 
         public DFA24(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 24;
-            this.eot = DFA24_eot;
-            this.eof = DFA24_eof;
-            this.min = DFA24_min;
-            this.max = DFA24_max;
-            this.accept = DFA24_accept;
-            this.special = DFA24_special;
-            this.transition = DFA24_transition;
+            this.eot = dfa_14;
+            this.eof = dfa_14;
+            this.min = dfa_26;
+            this.max = dfa_27;
+            this.accept = dfa_28;
+            this.special = dfa_29;
+            this.transition = dfa_30;
         }
         public String getDescription() {
             return "3004:1: rule__XSwitchExpression__Alternatives_2 : ( ( ( rule__XSwitchExpression__Group_2_0__0 ) ) | ( ( rule__XSwitchExpression__Group_2_1__0 ) ) );";
@@ -56775,84 +56694,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA27_eotS =
-        "\43\uffff";
-    static final String DFA27_eofS =
-        "\43\uffff";
-    static final String DFA27_minS =
-        "\1\4\2\0\40\uffff";
-    static final String DFA27_maxS =
-        "\1\126\2\0\40\uffff";
-    static final String DFA27_acceptS =
-        "\3\uffff\1\1\1\uffff\1\2\35\uffff";
-    static final String DFA27_specialS =
-        "\1\uffff\1\0\1\1\40\uffff}>";
-    static final String[] DFA27_transitionS = {
-            "\1\1\4\5\23\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\3\uffff\6\5\4\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\6\uffff\1\3\1\5",
-            "\1\uffff",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA27_eot = DFA.unpackEncodedString(DFA27_eotS);
-    static final short[] DFA27_eof = DFA.unpackEncodedString(DFA27_eofS);
-    static final char[] DFA27_min = DFA.unpackEncodedStringToUnsignedChars(DFA27_minS);
-    static final char[] DFA27_max = DFA.unpackEncodedStringToUnsignedChars(DFA27_maxS);
-    static final short[] DFA27_accept = DFA.unpackEncodedString(DFA27_acceptS);
-    static final short[] DFA27_special = DFA.unpackEncodedString(DFA27_specialS);
-    static final short[][] DFA27_transition;
-
-    static {
-        int numStates = DFA27_transitionS.length;
-        DFA27_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA27_transition[i] = DFA.unpackEncodedString(DFA27_transitionS[i]);
-        }
-    }
 
     class DFA27 extends DFA {
 
         public DFA27(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 27;
-            this.eot = DFA27_eot;
-            this.eof = DFA27_eof;
-            this.min = DFA27_min;
-            this.max = DFA27_max;
-            this.accept = DFA27_accept;
-            this.special = DFA27_special;
-            this.transition = DFA27_transition;
+            this.eot = dfa_14;
+            this.eof = dfa_14;
+            this.min = dfa_15;
+            this.max = dfa_16;
+            this.accept = dfa_17;
+            this.special = dfa_18;
+            this.transition = dfa_19;
         }
         public String getDescription() {
             return "3070:1: rule__XFeatureCall__Alternatives_3_1 : ( ( ( rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 ) ) | ( ( rule__XFeatureCall__Group_3_1_1__0 ) ) );";
@@ -56899,84 +56753,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA30_eotS =
-        "\43\uffff";
-    static final String DFA30_eofS =
-        "\43\uffff";
-    static final String DFA30_minS =
-        "\1\4\2\0\40\uffff";
-    static final String DFA30_maxS =
-        "\1\126\2\0\40\uffff";
-    static final String DFA30_acceptS =
-        "\3\uffff\1\1\1\uffff\1\2\35\uffff";
-    static final String DFA30_specialS =
-        "\1\uffff\1\0\1\1\40\uffff}>";
-    static final String[] DFA30_transitionS = {
-            "\1\1\4\5\23\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\3\uffff\6\5\4\uffff\2\5\1\uffff\1\5\2\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\6\uffff\1\3\1\5",
-            "\1\uffff",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA30_eot = DFA.unpackEncodedString(DFA30_eotS);
-    static final short[] DFA30_eof = DFA.unpackEncodedString(DFA30_eofS);
-    static final char[] DFA30_min = DFA.unpackEncodedStringToUnsignedChars(DFA30_minS);
-    static final char[] DFA30_max = DFA.unpackEncodedStringToUnsignedChars(DFA30_maxS);
-    static final short[] DFA30_accept = DFA.unpackEncodedString(DFA30_acceptS);
-    static final short[] DFA30_special = DFA.unpackEncodedString(DFA30_specialS);
-    static final short[][] DFA30_transition;
-
-    static {
-        int numStates = DFA30_transitionS.length;
-        DFA30_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA30_transition[i] = DFA.unpackEncodedString(DFA30_transitionS[i]);
-        }
-    }
 
     class DFA30 extends DFA {
 
         public DFA30(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 30;
-            this.eot = DFA30_eot;
-            this.eof = DFA30_eof;
-            this.min = DFA30_min;
-            this.max = DFA30_max;
-            this.accept = DFA30_accept;
-            this.special = DFA30_special;
-            this.transition = DFA30_transition;
+            this.eot = dfa_14;
+            this.eof = dfa_14;
+            this.min = dfa_15;
+            this.max = dfa_16;
+            this.accept = dfa_17;
+            this.special = dfa_18;
+            this.transition = dfa_19;
         }
         public String getDescription() {
             return "3164:1: rule__XConstructorCall__Alternatives_4_1 : ( ( ( rule__XConstructorCall__ArgumentsAssignment_4_1_0 ) ) | ( ( rule__XConstructorCall__Group_4_1_1__0 ) ) );";
@@ -57023,19 +56812,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA39_eotS =
-        "\7\uffff";
-    static final String DFA39_eofS =
-        "\2\uffff\1\4\2\uffff\1\4\1\uffff";
-    static final String DFA39_minS =
-        "\1\4\1\uffff\1\54\1\4\1\uffff\1\54\1\uffff";
-    static final String DFA39_maxS =
-        "\1\56\1\uffff\1\74\1\45\1\uffff\1\74\1\uffff";
-    static final String DFA39_acceptS =
-        "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
-    static final String DFA39_specialS =
-        "\7\uffff}>";
-    static final String[] DFA39_transitionS = {
+    static final String dfa_31s = "\7\uffff";
+    static final String dfa_32s = "\2\uffff\1\4\2\uffff\1\4\1\uffff";
+    static final String dfa_33s = "\1\4\1\uffff\1\54\1\4\1\uffff\1\54\1\uffff";
+    static final String dfa_34s = "\1\56\1\uffff\1\74\1\45\1\uffff\1\74\1\uffff";
+    static final String dfa_35s = "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
+    static final String dfa_36s = "\7\uffff}>";
+    static final String[] dfa_37s = {
             "\1\2\51\uffff\1\1",
             "",
             "\1\3\17\uffff\1\4",
@@ -57045,52 +56828,37 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA39_eot = DFA.unpackEncodedString(DFA39_eotS);
-    static final short[] DFA39_eof = DFA.unpackEncodedString(DFA39_eofS);
-    static final char[] DFA39_min = DFA.unpackEncodedStringToUnsignedChars(DFA39_minS);
-    static final char[] DFA39_max = DFA.unpackEncodedStringToUnsignedChars(DFA39_maxS);
-    static final short[] DFA39_accept = DFA.unpackEncodedString(DFA39_acceptS);
-    static final short[] DFA39_special = DFA.unpackEncodedString(DFA39_specialS);
-    static final short[][] DFA39_transition;
-
-    static {
-        int numStates = DFA39_transitionS.length;
-        DFA39_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA39_transition[i] = DFA.unpackEncodedString(DFA39_transitionS[i]);
-        }
-    }
+    static final short[] dfa_31 = DFA.unpackEncodedString(dfa_31s);
+    static final short[] dfa_32 = DFA.unpackEncodedString(dfa_32s);
+    static final char[] dfa_33 = DFA.unpackEncodedStringToUnsignedChars(dfa_33s);
+    static final char[] dfa_34 = DFA.unpackEncodedStringToUnsignedChars(dfa_34s);
+    static final short[] dfa_35 = DFA.unpackEncodedString(dfa_35s);
+    static final short[] dfa_36 = DFA.unpackEncodedString(dfa_36s);
+    static final short[][] dfa_37 = unpackEncodedStringArray(dfa_37s);
 
     class DFA39 extends DFA {
 
         public DFA39(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 39;
-            this.eot = DFA39_eot;
-            this.eof = DFA39_eof;
-            this.min = DFA39_min;
-            this.max = DFA39_max;
-            this.accept = DFA39_accept;
-            this.special = DFA39_special;
-            this.transition = DFA39_transition;
+            this.eot = dfa_31;
+            this.eof = dfa_32;
+            this.min = dfa_33;
+            this.max = dfa_34;
+            this.accept = dfa_35;
+            this.special = dfa_36;
+            this.transition = dfa_37;
         }
         public String getDescription() {
             return "3364:1: rule__XImportDeclaration__Alternatives_1 : ( ( ( rule__XImportDeclaration__Group_1_0__0 ) ) | ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_1 ) ) | ( ( rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 ) ) );";
         }
     }
-    static final String DFA42_eotS =
-        "\12\uffff";
-    static final String DFA42_eofS =
-        "\1\10\11\uffff";
-    static final String DFA42_minS =
-        "\1\4\7\0\2\uffff";
-    static final String DFA42_maxS =
-        "\1\126\7\0\2\uffff";
-    static final String DFA42_acceptS =
-        "\10\uffff\1\2\1\1";
-    static final String DFA42_specialS =
-        "\1\uffff\1\3\1\1\1\2\1\6\1\5\1\4\1\0\2\uffff}>";
-    static final String[] DFA42_transitionS = {
+    static final String dfa_38s = "\1\10\11\uffff";
+    static final String dfa_39s = "\1\4\7\0\2\uffff";
+    static final String dfa_40s = "\1\126\7\0\2\uffff";
+    static final String dfa_41s = "\10\uffff\1\2\1\1";
+    static final String dfa_42s = "\1\uffff\1\3\1\1\1\2\1\6\1\5\1\4\1\0\2\uffff}>";
+    static final String[] dfa_43s = {
             "\5\10\5\uffff\3\10\1\1\1\2\1\3\1\4\1\5\5\10\1\7\1\6\63\10\2\uffff\3\10\1\uffff\1\10",
             "\1\uffff",
             "\1\uffff",
@@ -57102,35 +56870,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             "",
             ""
     };
-
-    static final short[] DFA42_eot = DFA.unpackEncodedString(DFA42_eotS);
-    static final short[] DFA42_eof = DFA.unpackEncodedString(DFA42_eofS);
-    static final char[] DFA42_min = DFA.unpackEncodedStringToUnsignedChars(DFA42_minS);
-    static final char[] DFA42_max = DFA.unpackEncodedStringToUnsignedChars(DFA42_maxS);
-    static final short[] DFA42_accept = DFA.unpackEncodedString(DFA42_acceptS);
-    static final short[] DFA42_special = DFA.unpackEncodedString(DFA42_specialS);
-    static final short[][] DFA42_transition;
-
-    static {
-        int numStates = DFA42_transitionS.length;
-        DFA42_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA42_transition[i] = DFA.unpackEncodedString(DFA42_transitionS[i]);
-        }
-    }
+    static final short[] dfa_38 = DFA.unpackEncodedString(dfa_38s);
+    static final char[] dfa_39 = DFA.unpackEncodedStringToUnsignedChars(dfa_39s);
+    static final char[] dfa_40 = DFA.unpackEncodedStringToUnsignedChars(dfa_40s);
+    static final short[] dfa_41 = DFA.unpackEncodedString(dfa_41s);
+    static final short[] dfa_42 = DFA.unpackEncodedString(dfa_42s);
+    static final short[][] dfa_43 = unpackEncodedStringArray(dfa_43s);
 
     class DFA42 extends DFA {
 
         public DFA42(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 42;
-            this.eot = DFA42_eot;
-            this.eof = DFA42_eof;
-            this.min = DFA42_min;
-            this.max = DFA42_max;
-            this.accept = DFA42_accept;
-            this.special = DFA42_special;
-            this.transition = DFA42_transition;
+            this.eot = dfa_7;
+            this.eof = dfa_38;
+            this.min = dfa_39;
+            this.max = dfa_40;
+            this.accept = dfa_41;
+            this.special = dfa_42;
+            this.transition = dfa_43;
         }
         public String getDescription() {
             return "3867:1: ( rule__XAssignment__Group_1_1__0 )?";
@@ -57252,19 +57010,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA48_eotS =
-        "\13\uffff";
-    static final String DFA48_eofS =
-        "\1\1\12\uffff";
-    static final String DFA48_minS =
-        "\1\4\1\uffff\10\0\1\uffff";
-    static final String DFA48_maxS =
-        "\1\126\1\uffff\10\0\1\uffff";
-    static final String DFA48_acceptS =
-        "\1\uffff\1\2\10\uffff\1\1";
-    static final String DFA48_specialS =
-        "\2\uffff\1\5\1\2\1\4\1\6\1\0\1\1\1\3\1\7\1\uffff}>";
-    static final String[] DFA48_transitionS = {
+    static final String dfa_44s = "\1\1\12\uffff";
+    static final String dfa_45s = "\1\4\1\uffff\10\0\1\uffff";
+    static final String dfa_46s = "\1\126\1\uffff\10\0\1\uffff";
+    static final String dfa_47s = "\1\uffff\1\2\10\uffff\1\1";
+    static final String dfa_48s = "\2\uffff\1\5\1\2\1\4\1\6\1\0\1\1\1\3\1\7\1\uffff}>";
+    static final String[] dfa_49s = {
             "\5\1\5\uffff\15\1\1\3\1\2\1\4\1\5\1\6\1\7\1\10\1\11\55\1\2\uffff\3\1\1\uffff\1\1",
             "",
             "\1\uffff",
@@ -57277,35 +57028,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             "\1\uffff",
             ""
     };
-
-    static final short[] DFA48_eot = DFA.unpackEncodedString(DFA48_eotS);
-    static final short[] DFA48_eof = DFA.unpackEncodedString(DFA48_eofS);
-    static final char[] DFA48_min = DFA.unpackEncodedStringToUnsignedChars(DFA48_minS);
-    static final char[] DFA48_max = DFA.unpackEncodedStringToUnsignedChars(DFA48_maxS);
-    static final short[] DFA48_accept = DFA.unpackEncodedString(DFA48_acceptS);
-    static final short[] DFA48_special = DFA.unpackEncodedString(DFA48_specialS);
-    static final short[][] DFA48_transition;
-
-    static {
-        int numStates = DFA48_transitionS.length;
-        DFA48_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA48_transition[i] = DFA.unpackEncodedString(DFA48_transitionS[i]);
-        }
-    }
+    static final short[] dfa_44 = DFA.unpackEncodedString(dfa_44s);
+    static final char[] dfa_45 = DFA.unpackEncodedStringToUnsignedChars(dfa_45s);
+    static final char[] dfa_46 = DFA.unpackEncodedStringToUnsignedChars(dfa_46s);
+    static final short[] dfa_47 = DFA.unpackEncodedString(dfa_47s);
+    static final short[] dfa_48 = DFA.unpackEncodedString(dfa_48s);
+    static final short[][] dfa_49 = unpackEncodedStringArray(dfa_49s);
 
     class DFA48 extends DFA {
 
         public DFA48(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 48;
-            this.eot = DFA48_eot;
-            this.eof = DFA48_eof;
-            this.min = DFA48_min;
-            this.max = DFA48_max;
-            this.accept = DFA48_accept;
-            this.special = DFA48_special;
-            this.transition = DFA48_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_44;
+            this.min = dfa_45;
+            this.max = dfa_46;
+            this.accept = dfa_47;
+            this.special = dfa_48;
+            this.transition = dfa_49;
         }
         public String getDescription() {
             return "()* loopback of 5359:1: ( rule__XOtherOperatorExpression__Group_1__0 )*";
@@ -57442,19 +57183,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA55_eotS =
-        "\116\uffff";
-    static final String DFA55_eofS =
-        "\1\2\115\uffff";
-    static final String DFA55_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA55_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA55_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA55_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA55_transitionS = {
+    static final String dfa_50s = "\116\uffff";
+    static final String dfa_51s = "\1\2\115\uffff";
+    static final String dfa_52s = "\1\4\1\0\114\uffff";
+    static final String dfa_53s = "\1\126\1\0\114\uffff";
+    static final String dfa_54s = "\2\uffff\1\2\112\uffff\1\1";
+    static final String dfa_55s = "\1\uffff\1\0\114\uffff}>";
+    static final String[] dfa_56s = {
             "\5\2\5\uffff\57\2\1\1\22\2\2\uffff\3\2\1\uffff\1\2",
             "\1\uffff",
             "",
@@ -57535,34 +57270,26 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA55_eot = DFA.unpackEncodedString(DFA55_eotS);
-    static final short[] DFA55_eof = DFA.unpackEncodedString(DFA55_eofS);
-    static final char[] DFA55_min = DFA.unpackEncodedStringToUnsignedChars(DFA55_minS);
-    static final char[] DFA55_max = DFA.unpackEncodedStringToUnsignedChars(DFA55_maxS);
-    static final short[] DFA55_accept = DFA.unpackEncodedString(DFA55_acceptS);
-    static final short[] DFA55_special = DFA.unpackEncodedString(DFA55_specialS);
-    static final short[][] DFA55_transition;
-
-    static {
-        int numStates = DFA55_transitionS.length;
-        DFA55_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA55_transition[i] = DFA.unpackEncodedString(DFA55_transitionS[i]);
-        }
-    }
+    static final short[] dfa_50 = DFA.unpackEncodedString(dfa_50s);
+    static final short[] dfa_51 = DFA.unpackEncodedString(dfa_51s);
+    static final char[] dfa_52 = DFA.unpackEncodedStringToUnsignedChars(dfa_52s);
+    static final char[] dfa_53 = DFA.unpackEncodedStringToUnsignedChars(dfa_53s);
+    static final short[] dfa_54 = DFA.unpackEncodedString(dfa_54s);
+    static final short[] dfa_55 = DFA.unpackEncodedString(dfa_55s);
+    static final short[][] dfa_56 = unpackEncodedStringArray(dfa_56s);
 
     class DFA55 extends DFA {
 
         public DFA55(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 55;
-            this.eot = DFA55_eot;
-            this.eof = DFA55_eof;
-            this.min = DFA55_min;
-            this.max = DFA55_max;
-            this.accept = DFA55_accept;
-            this.special = DFA55_special;
-            this.transition = DFA55_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_56;
         }
         public String getDescription() {
             return "7186:1: ( rule__XMemberFeatureCall__Group_1_1_3__0 )?";
@@ -57594,19 +57321,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA56_eotS =
-        "\116\uffff";
-    static final String DFA56_eofS =
-        "\1\2\115\uffff";
-    static final String DFA56_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA56_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA56_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA56_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA56_transitionS = {
+    static final String[] dfa_57s = {
             "\5\2\5\uffff\54\2\1\1\25\2\2\uffff\3\2\1\uffff\1\2",
             "\1\uffff",
             "",
@@ -57686,35 +57401,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             "",
             ""
     };
-
-    static final short[] DFA56_eot = DFA.unpackEncodedString(DFA56_eotS);
-    static final short[] DFA56_eof = DFA.unpackEncodedString(DFA56_eofS);
-    static final char[] DFA56_min = DFA.unpackEncodedStringToUnsignedChars(DFA56_minS);
-    static final char[] DFA56_max = DFA.unpackEncodedStringToUnsignedChars(DFA56_maxS);
-    static final short[] DFA56_accept = DFA.unpackEncodedString(DFA56_acceptS);
-    static final short[] DFA56_special = DFA.unpackEncodedString(DFA56_specialS);
-    static final short[][] DFA56_transition;
-
-    static {
-        int numStates = DFA56_transitionS.length;
-        DFA56_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA56_transition[i] = DFA.unpackEncodedString(DFA56_transitionS[i]);
-        }
-    }
+    static final short[][] dfa_57 = unpackEncodedStringArray(dfa_57s);
 
     class DFA56 extends DFA {
 
         public DFA56(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 56;
-            this.eot = DFA56_eot;
-            this.eof = DFA56_eof;
-            this.min = DFA56_min;
-            this.max = DFA56_max;
-            this.accept = DFA56_accept;
-            this.special = DFA56_special;
-            this.transition = DFA56_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_57;
         }
         public String getDescription() {
             return "7214:1: ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 )?";
@@ -57746,19 +57446,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA64_eotS =
-        "\46\uffff";
-    static final String DFA64_eofS =
-        "\46\uffff";
-    static final String DFA64_minS =
-        "\1\4\2\0\43\uffff";
-    static final String DFA64_maxS =
-        "\1\126\2\0\43\uffff";
-    static final String DFA64_acceptS =
-        "\3\uffff\1\1\1\uffff\1\2\40\uffff";
-    static final String DFA64_specialS =
-        "\1\uffff\1\0\1\1\43\uffff}>";
-    static final String[] DFA64_transitionS = {
+    static final String dfa_58s = "\46\uffff";
+    static final String dfa_59s = "\1\4\2\0\43\uffff";
+    static final String dfa_60s = "\1\126\2\0\43\uffff";
+    static final String dfa_61s = "\3\uffff\1\1\1\uffff\1\2\40\uffff";
+    static final String dfa_62s = "\1\uffff\1\0\1\1\43\uffff}>";
+    static final String[] dfa_63s = {
             "\1\1\4\5\7\uffff\1\5\13\uffff\1\5\3\uffff\1\3\2\uffff\2\5\4\uffff\1\5\3\uffff\6\5\4\uffff\2\5\1\uffff\2\5\1\uffff\1\2\1\5\1\uffff\1\5\3\uffff\11\5\1\uffff\1\5\3\uffff\1\5\2\uffff\1\3\1\5",
             "\1\uffff",
             "\1\uffff",
@@ -57799,34 +57492,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA64_eot = DFA.unpackEncodedString(DFA64_eotS);
-    static final short[] DFA64_eof = DFA.unpackEncodedString(DFA64_eofS);
-    static final char[] DFA64_min = DFA.unpackEncodedStringToUnsignedChars(DFA64_minS);
-    static final char[] DFA64_max = DFA.unpackEncodedStringToUnsignedChars(DFA64_maxS);
-    static final short[] DFA64_accept = DFA.unpackEncodedString(DFA64_acceptS);
-    static final short[] DFA64_special = DFA.unpackEncodedString(DFA64_specialS);
-    static final short[][] DFA64_transition;
-
-    static {
-        int numStates = DFA64_transitionS.length;
-        DFA64_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA64_transition[i] = DFA.unpackEncodedString(DFA64_transitionS[i]);
-        }
-    }
+    static final short[] dfa_58 = DFA.unpackEncodedString(dfa_58s);
+    static final char[] dfa_59 = DFA.unpackEncodedStringToUnsignedChars(dfa_59s);
+    static final char[] dfa_60 = DFA.unpackEncodedStringToUnsignedChars(dfa_60s);
+    static final short[] dfa_61 = DFA.unpackEncodedString(dfa_61s);
+    static final short[] dfa_62 = DFA.unpackEncodedString(dfa_62s);
+    static final short[][] dfa_63 = unpackEncodedStringArray(dfa_63s);
 
     class DFA64 extends DFA {
 
         public DFA64(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 64;
-            this.eot = DFA64_eot;
-            this.eof = DFA64_eof;
-            this.min = DFA64_min;
-            this.max = DFA64_max;
-            this.accept = DFA64_accept;
-            this.special = DFA64_special;
-            this.transition = DFA64_transition;
+            this.eot = dfa_58;
+            this.eof = dfa_58;
+            this.min = dfa_59;
+            this.max = dfa_60;
+            this.accept = dfa_61;
+            this.special = dfa_62;
+            this.transition = dfa_63;
         }
         public String getDescription() {
             return "8355:1: ( rule__XClosure__Group_1__0 )?";
@@ -57873,19 +57557,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA74_eotS =
-        "\42\uffff";
-    static final String DFA74_eofS =
-        "\42\uffff";
-    static final String DFA74_minS =
-        "\1\4\2\0\37\uffff";
-    static final String DFA74_maxS =
-        "\1\126\2\0\37\uffff";
-    static final String DFA74_acceptS =
-        "\3\uffff\1\1\1\2\35\uffff";
-    static final String DFA74_specialS =
-        "\1\uffff\1\0\1\1\37\uffff}>";
-    static final String[] DFA74_transitionS = {
+    static final String dfa_64s = "\42\uffff";
+    static final String dfa_65s = "\1\4\2\0\37\uffff";
+    static final String dfa_66s = "\1\126\2\0\37\uffff";
+    static final String dfa_67s = "\3\uffff\1\1\1\2\35\uffff";
+    static final String dfa_68s = "\1\uffff\1\0\1\1\37\uffff}>";
+    static final String[] dfa_69s = {
             "\1\1\4\4\23\uffff\1\4\3\uffff\1\3\2\uffff\2\4\4\uffff\1\4\3\uffff\6\4\4\uffff\2\4\1\uffff\1\4\2\uffff\1\2\1\4\1\uffff\1\4\3\uffff\11\4\1\uffff\1\4\7\uffff\1\4",
             "\1\uffff",
             "\1\uffff",
@@ -57922,34 +57599,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA74_eot = DFA.unpackEncodedString(DFA74_eotS);
-    static final short[] DFA74_eof = DFA.unpackEncodedString(DFA74_eofS);
-    static final char[] DFA74_min = DFA.unpackEncodedStringToUnsignedChars(DFA74_minS);
-    static final char[] DFA74_max = DFA.unpackEncodedStringToUnsignedChars(DFA74_maxS);
-    static final short[] DFA74_accept = DFA.unpackEncodedString(DFA74_acceptS);
-    static final short[] DFA74_special = DFA.unpackEncodedString(DFA74_specialS);
-    static final short[][] DFA74_transition;
-
-    static {
-        int numStates = DFA74_transitionS.length;
-        DFA74_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA74_transition[i] = DFA.unpackEncodedString(DFA74_transitionS[i]);
-        }
-    }
+    static final short[] dfa_64 = DFA.unpackEncodedString(dfa_64s);
+    static final char[] dfa_65 = DFA.unpackEncodedStringToUnsignedChars(dfa_65s);
+    static final char[] dfa_66 = DFA.unpackEncodedStringToUnsignedChars(dfa_66s);
+    static final short[] dfa_67 = DFA.unpackEncodedString(dfa_67s);
+    static final short[] dfa_68 = DFA.unpackEncodedString(dfa_68s);
+    static final short[][] dfa_69 = unpackEncodedStringArray(dfa_69s);
 
     class DFA74 extends DFA {
 
         public DFA74(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 74;
-            this.eot = DFA74_eot;
-            this.eof = DFA74_eof;
-            this.min = DFA74_min;
-            this.max = DFA74_max;
-            this.accept = DFA74_accept;
-            this.special = DFA74_special;
-            this.transition = DFA74_transition;
+            this.eot = dfa_64;
+            this.eof = dfa_64;
+            this.min = dfa_65;
+            this.max = dfa_66;
+            this.accept = dfa_67;
+            this.special = dfa_68;
+            this.transition = dfa_69;
         }
         public String getDescription() {
             return "10023:1: ( rule__XSwitchExpression__Group_2_1_0__0 )?";
@@ -57996,127 +57664,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA86_eotS =
-        "\116\uffff";
-    static final String DFA86_eofS =
-        "\1\2\115\uffff";
-    static final String DFA86_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA86_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA86_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA86_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA86_transitionS = {
-            "\5\2\5\uffff\57\2\1\1\22\2\2\uffff\3\2\1\uffff\1\2",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA86_eot = DFA.unpackEncodedString(DFA86_eotS);
-    static final short[] DFA86_eof = DFA.unpackEncodedString(DFA86_eofS);
-    static final char[] DFA86_min = DFA.unpackEncodedStringToUnsignedChars(DFA86_minS);
-    static final char[] DFA86_max = DFA.unpackEncodedStringToUnsignedChars(DFA86_maxS);
-    static final short[] DFA86_accept = DFA.unpackEncodedString(DFA86_acceptS);
-    static final short[] DFA86_special = DFA.unpackEncodedString(DFA86_specialS);
-    static final short[][] DFA86_transition;
-
-    static {
-        int numStates = DFA86_transitionS.length;
-        DFA86_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA86_transition[i] = DFA.unpackEncodedString(DFA86_transitionS[i]);
-        }
-    }
 
     class DFA86 extends DFA {
 
         public DFA86(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 86;
-            this.eot = DFA86_eot;
-            this.eof = DFA86_eof;
-            this.min = DFA86_min;
-            this.max = DFA86_max;
-            this.accept = DFA86_accept;
-            this.special = DFA86_special;
-            this.transition = DFA86_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_56;
         }
         public String getDescription() {
             return "12232:1: ( rule__XFeatureCall__Group_3__0 )?";
@@ -58148,127 +57708,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA87_eotS =
-        "\116\uffff";
-    static final String DFA87_eofS =
-        "\1\2\115\uffff";
-    static final String DFA87_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA87_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA87_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA87_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA87_transitionS = {
-            "\5\2\5\uffff\54\2\1\1\25\2\2\uffff\3\2\1\uffff\1\2",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA87_eot = DFA.unpackEncodedString(DFA87_eotS);
-    static final short[] DFA87_eof = DFA.unpackEncodedString(DFA87_eofS);
-    static final char[] DFA87_min = DFA.unpackEncodedStringToUnsignedChars(DFA87_minS);
-    static final char[] DFA87_max = DFA.unpackEncodedStringToUnsignedChars(DFA87_maxS);
-    static final short[] DFA87_accept = DFA.unpackEncodedString(DFA87_acceptS);
-    static final short[] DFA87_special = DFA.unpackEncodedString(DFA87_specialS);
-    static final short[][] DFA87_transition;
-
-    static {
-        int numStates = DFA87_transitionS.length;
-        DFA87_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA87_transition[i] = DFA.unpackEncodedString(DFA87_transitionS[i]);
-        }
-    }
 
     class DFA87 extends DFA {
 
         public DFA87(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 87;
-            this.eot = DFA87_eot;
-            this.eof = DFA87_eof;
-            this.min = DFA87_min;
-            this.max = DFA87_max;
-            this.accept = DFA87_accept;
-            this.special = DFA87_special;
-            this.transition = DFA87_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_57;
         }
         public String getDescription() {
             return "12260:1: ( rule__XFeatureCall__FeatureCallArgumentsAssignment_4 )?";
@@ -58300,19 +57752,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA91_eotS =
-        "\116\uffff";
-    static final String DFA91_eofS =
-        "\1\2\115\uffff";
-    static final String DFA91_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA91_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA91_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA91_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA91_transitionS = {
+    static final String[] dfa_70s = {
             "\5\2\5\uffff\16\2\1\1\63\2\2\uffff\3\2\1\uffff\1\2",
             "\1\uffff",
             "",
@@ -58392,35 +57832,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             "",
             ""
     };
-
-    static final short[] DFA91_eot = DFA.unpackEncodedString(DFA91_eotS);
-    static final short[] DFA91_eof = DFA.unpackEncodedString(DFA91_eofS);
-    static final char[] DFA91_min = DFA.unpackEncodedStringToUnsignedChars(DFA91_minS);
-    static final char[] DFA91_max = DFA.unpackEncodedStringToUnsignedChars(DFA91_maxS);
-    static final short[] DFA91_accept = DFA.unpackEncodedString(DFA91_acceptS);
-    static final short[] DFA91_special = DFA.unpackEncodedString(DFA91_specialS);
-    static final short[][] DFA91_transition;
-
-    static {
-        int numStates = DFA91_transitionS.length;
-        DFA91_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA91_transition[i] = DFA.unpackEncodedString(DFA91_transitionS[i]);
-        }
-    }
+    static final short[][] dfa_70 = unpackEncodedStringArray(dfa_70s);
 
     class DFA91 extends DFA {
 
         public DFA91(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 91;
-            this.eot = DFA91_eot;
-            this.eof = DFA91_eof;
-            this.min = DFA91_min;
-            this.max = DFA91_max;
-            this.accept = DFA91_accept;
-            this.special = DFA91_special;
-            this.transition = DFA91_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_70;
         }
         public String getDescription() {
             return "12798:1: ( rule__XConstructorCall__Group_3__0 )?";
@@ -58452,127 +57877,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA92_eotS =
-        "\116\uffff";
-    static final String DFA92_eofS =
-        "\1\2\115\uffff";
-    static final String DFA92_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA92_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA92_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA92_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA92_transitionS = {
-            "\5\2\5\uffff\57\2\1\1\22\2\2\uffff\3\2\1\uffff\1\2",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA92_eot = DFA.unpackEncodedString(DFA92_eotS);
-    static final short[] DFA92_eof = DFA.unpackEncodedString(DFA92_eofS);
-    static final char[] DFA92_min = DFA.unpackEncodedStringToUnsignedChars(DFA92_minS);
-    static final char[] DFA92_max = DFA.unpackEncodedStringToUnsignedChars(DFA92_maxS);
-    static final short[] DFA92_accept = DFA.unpackEncodedString(DFA92_acceptS);
-    static final short[] DFA92_special = DFA.unpackEncodedString(DFA92_specialS);
-    static final short[][] DFA92_transition;
-
-    static {
-        int numStates = DFA92_transitionS.length;
-        DFA92_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA92_transition[i] = DFA.unpackEncodedString(DFA92_transitionS[i]);
-        }
-    }
 
     class DFA92 extends DFA {
 
         public DFA92(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 92;
-            this.eot = DFA92_eot;
-            this.eof = DFA92_eof;
-            this.min = DFA92_min;
-            this.max = DFA92_max;
-            this.accept = DFA92_accept;
-            this.special = DFA92_special;
-            this.transition = DFA92_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_56;
         }
         public String getDescription() {
             return "12827:1: ( rule__XConstructorCall__Group_4__0 )?";
@@ -58604,127 +57921,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA93_eotS =
-        "\116\uffff";
-    static final String DFA93_eofS =
-        "\1\2\115\uffff";
-    static final String DFA93_minS =
-        "\1\4\1\0\114\uffff";
-    static final String DFA93_maxS =
-        "\1\126\1\0\114\uffff";
-    static final String DFA93_acceptS =
-        "\2\uffff\1\2\112\uffff\1\1";
-    static final String DFA93_specialS =
-        "\1\uffff\1\0\114\uffff}>";
-    static final String[] DFA93_transitionS = {
-            "\5\2\5\uffff\54\2\1\1\25\2\2\uffff\3\2\1\uffff\1\2",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA93_eot = DFA.unpackEncodedString(DFA93_eotS);
-    static final short[] DFA93_eof = DFA.unpackEncodedString(DFA93_eofS);
-    static final char[] DFA93_min = DFA.unpackEncodedStringToUnsignedChars(DFA93_minS);
-    static final char[] DFA93_max = DFA.unpackEncodedStringToUnsignedChars(DFA93_maxS);
-    static final short[] DFA93_accept = DFA.unpackEncodedString(DFA93_acceptS);
-    static final short[] DFA93_special = DFA.unpackEncodedString(DFA93_specialS);
-    static final short[][] DFA93_transition;
-
-    static {
-        int numStates = DFA93_transitionS.length;
-        DFA93_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA93_transition[i] = DFA.unpackEncodedString(DFA93_transitionS[i]);
-        }
-    }
 
     class DFA93 extends DFA {
 
         public DFA93(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 93;
-            this.eot = DFA93_eot;
-            this.eof = DFA93_eof;
-            this.min = DFA93_min;
-            this.max = DFA93_max;
-            this.accept = DFA93_accept;
-            this.special = DFA93_special;
-            this.transition = DFA93_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_51;
+            this.min = dfa_52;
+            this.max = dfa_53;
+            this.accept = dfa_54;
+            this.special = dfa_55;
+            this.transition = dfa_57;
         }
         public String getDescription() {
             return "12855:1: ( rule__XConstructorCall__ArgumentsAssignment_5 )?";
@@ -58756,19 +57965,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA98_eotS =
-        "\116\uffff";
-    static final String DFA98_eofS =
-        "\1\41\115\uffff";
-    static final String DFA98_minS =
-        "\1\4\40\0\55\uffff";
-    static final String DFA98_maxS =
-        "\1\126\40\0\55\uffff";
-    static final String DFA98_acceptS =
-        "\41\uffff\1\2\53\uffff\1\1";
-    static final String DFA98_specialS =
-        "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\55\uffff}>";
-    static final String[] DFA98_transitionS = {
+    static final String dfa_71s = "\1\41\115\uffff";
+    static final String dfa_72s = "\1\4\40\0\55\uffff";
+    static final String dfa_73s = "\1\126\40\0\55\uffff";
+    static final String dfa_74s = "\41\uffff\1\2\53\uffff\1\1";
+    static final String dfa_75s = "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37\55\uffff}>";
+    static final String[] dfa_76s = {
             "\1\1\1\23\1\24\1\25\1\27\5\uffff\16\41\1\15\6\41\1\10\1\7\4\41\1\6\3\41\1\2\1\3\1\4\1\5\1\16\1\21\4\41\1\17\1\12\1\41\1\20\2\41\1\40\1\31\1\41\1\13\3\41\1\32\1\33\1\34\1\11\1\26\1\30\1\35\1\36\1\37\1\41\1\14\1\41\2\uffff\3\41\1\uffff\1\22",
             "\1\uffff",
             "\1\uffff",
@@ -58848,35 +58050,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             "",
             ""
     };
-
-    static final short[] DFA98_eot = DFA.unpackEncodedString(DFA98_eotS);
-    static final short[] DFA98_eof = DFA.unpackEncodedString(DFA98_eofS);
-    static final char[] DFA98_min = DFA.unpackEncodedStringToUnsignedChars(DFA98_minS);
-    static final char[] DFA98_max = DFA.unpackEncodedStringToUnsignedChars(DFA98_maxS);
-    static final short[] DFA98_accept = DFA.unpackEncodedString(DFA98_acceptS);
-    static final short[] DFA98_special = DFA.unpackEncodedString(DFA98_specialS);
-    static final short[][] DFA98_transition;
-
-    static {
-        int numStates = DFA98_transitionS.length;
-        DFA98_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA98_transition[i] = DFA.unpackEncodedString(DFA98_transitionS[i]);
-        }
-    }
+    static final short[] dfa_71 = DFA.unpackEncodedString(dfa_71s);
+    static final char[] dfa_72 = DFA.unpackEncodedStringToUnsignedChars(dfa_72s);
+    static final char[] dfa_73 = DFA.unpackEncodedStringToUnsignedChars(dfa_73s);
+    static final short[] dfa_74 = DFA.unpackEncodedString(dfa_74s);
+    static final short[] dfa_75 = DFA.unpackEncodedString(dfa_75s);
+    static final short[][] dfa_76 = unpackEncodedStringArray(dfa_76s);
 
     class DFA98 extends DFA {
 
         public DFA98(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 98;
-            this.eot = DFA98_eot;
-            this.eof = DFA98_eof;
-            this.min = DFA98_min;
-            this.max = DFA98_max;
-            this.accept = DFA98_accept;
-            this.special = DFA98_special;
-            this.transition = DFA98_transition;
+            this.eot = dfa_50;
+            this.eof = dfa_71;
+            this.min = dfa_72;
+            this.max = dfa_73;
+            this.accept = dfa_74;
+            this.special = dfa_75;
+            this.transition = dfa_76;
         }
         public String getDescription() {
             return "13908:1: ( rule__XReturnExpression__ExpressionAssignment_2 )?";
@@ -59373,19 +58565,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA107_eotS =
-        "\117\uffff";
-    static final String DFA107_eofS =
-        "\1\2\116\uffff";
-    static final String DFA107_minS =
-        "\1\4\1\0\115\uffff";
-    static final String DFA107_maxS =
-        "\1\126\1\0\115\uffff";
-    static final String DFA107_acceptS =
-        "\2\uffff\1\2\113\uffff\1\1";
-    static final String DFA107_specialS =
-        "\1\uffff\1\0\115\uffff}>";
-    static final String[] DFA107_transitionS = {
+    static final String dfa_77s = "\117\uffff";
+    static final String dfa_78s = "\1\2\116\uffff";
+    static final String dfa_79s = "\1\4\1\0\115\uffff";
+    static final String dfa_80s = "\1\126\1\0\115\uffff";
+    static final String dfa_81s = "\2\uffff\1\2\113\uffff\1\1";
+    static final String dfa_82s = "\1\uffff\1\0\115\uffff}>";
+    static final String[] dfa_83s = {
             "\5\2\5\uffff\16\2\1\1\63\2\1\uffff\4\2\1\uffff\1\2",
             "\1\uffff",
             "",
@@ -59467,34 +58653,26 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             ""
     };
 
-    static final short[] DFA107_eot = DFA.unpackEncodedString(DFA107_eotS);
-    static final short[] DFA107_eof = DFA.unpackEncodedString(DFA107_eofS);
-    static final char[] DFA107_min = DFA.unpackEncodedStringToUnsignedChars(DFA107_minS);
-    static final char[] DFA107_max = DFA.unpackEncodedStringToUnsignedChars(DFA107_maxS);
-    static final short[] DFA107_accept = DFA.unpackEncodedString(DFA107_acceptS);
-    static final short[] DFA107_special = DFA.unpackEncodedString(DFA107_specialS);
-    static final short[][] DFA107_transition;
-
-    static {
-        int numStates = DFA107_transitionS.length;
-        DFA107_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA107_transition[i] = DFA.unpackEncodedString(DFA107_transitionS[i]);
-        }
-    }
+    static final short[] dfa_77 = DFA.unpackEncodedString(dfa_77s);
+    static final short[] dfa_78 = DFA.unpackEncodedString(dfa_78s);
+    static final char[] dfa_79 = DFA.unpackEncodedStringToUnsignedChars(dfa_79s);
+    static final char[] dfa_80 = DFA.unpackEncodedStringToUnsignedChars(dfa_80s);
+    static final short[] dfa_81 = DFA.unpackEncodedString(dfa_81s);
+    static final short[] dfa_82 = DFA.unpackEncodedString(dfa_82s);
+    static final short[][] dfa_83 = unpackEncodedStringArray(dfa_83s);
 
     class DFA107 extends DFA {
 
         public DFA107(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 107;
-            this.eot = DFA107_eot;
-            this.eof = DFA107_eof;
-            this.min = DFA107_min;
-            this.max = DFA107_max;
-            this.accept = DFA107_accept;
-            this.special = DFA107_special;
-            this.transition = DFA107_transition;
+            this.eot = dfa_77;
+            this.eof = dfa_78;
+            this.min = dfa_79;
+            this.max = dfa_80;
+            this.accept = dfa_81;
+            this.special = dfa_82;
+            this.transition = dfa_83;
         }
         public String getDescription() {
             return "15487:1: ( rule__JvmParameterizedTypeReference__Group_1__0 )?";
@@ -59526,128 +58704,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             throw nvae;
         }
     }
-    static final String DFA110_eotS =
-        "\117\uffff";
-    static final String DFA110_eofS =
-        "\1\2\116\uffff";
-    static final String DFA110_minS =
-        "\1\4\1\0\115\uffff";
-    static final String DFA110_maxS =
-        "\1\126\1\0\115\uffff";
-    static final String DFA110_acceptS =
-        "\2\uffff\1\2\113\uffff\1\1";
-    static final String DFA110_specialS =
-        "\1\uffff\1\0\115\uffff}>";
-    static final String[] DFA110_transitionS = {
-            "\5\2\5\uffff\16\2\1\1\63\2\1\uffff\4\2\1\uffff\1\2",
-            "\1\uffff",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA110_eot = DFA.unpackEncodedString(DFA110_eotS);
-    static final short[] DFA110_eof = DFA.unpackEncodedString(DFA110_eofS);
-    static final char[] DFA110_min = DFA.unpackEncodedStringToUnsignedChars(DFA110_minS);
-    static final char[] DFA110_max = DFA.unpackEncodedStringToUnsignedChars(DFA110_maxS);
-    static final short[] DFA110_accept = DFA.unpackEncodedString(DFA110_acceptS);
-    static final short[] DFA110_special = DFA.unpackEncodedString(DFA110_specialS);
-    static final short[][] DFA110_transition;
-
-    static {
-        int numStates = DFA110_transitionS.length;
-        DFA110_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA110_transition[i] = DFA.unpackEncodedString(DFA110_transitionS[i]);
-        }
-    }
 
     class DFA110 extends DFA {
 
         public DFA110(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 110;
-            this.eot = DFA110_eot;
-            this.eof = DFA110_eof;
-            this.min = DFA110_min;
-            this.max = DFA110_max;
-            this.accept = DFA110_accept;
-            this.special = DFA110_special;
-            this.transition = DFA110_transition;
+            this.eot = dfa_77;
+            this.eof = dfa_78;
+            this.min = dfa_79;
+            this.max = dfa_80;
+            this.accept = dfa_81;
+            this.special = dfa_82;
+            this.transition = dfa_83;
         }
         public String getDescription() {
             return "15798:1: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )?";
