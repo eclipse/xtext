@@ -7,12 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import org.eclipse.xtext.util.internal.EmfAdaptable
-
 /**
- * Attach to a flattened grammar to indicate that we want to produce a debug grammar file.
+ * Static utility that allows to check if the current thread is producing 
+ * a debug grammar or not.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noreference
  */
-@EmfAdaptable
-class IsDebugGrammar {
+class DebugGrammarToken {
+	
+	static ThreadLocal<Boolean> store = new ThreadLocal
+	
+	static def DebugGrammarToken aquire() {
+		if (store.get() !== null) {
+			throw new IllegalStateException(String.valueOf(store.get))
+		}
+		return new DebugGrammarToken
+	}
+	
+	static def boolean isGeneratingDebugGrammar() {
+		return store.get == Boolean.TRUE
+	}
+	
+	private new() {
+		store.set(Boolean.TRUE)
+	}
+	
+	def void done() {
+		store.set(null)
+	}
+	
 }
