@@ -39,11 +39,11 @@ public class FirstSetComputationTest extends AbstractXtextTests {
 		ruleCall.setRule(rule);
 		List<AbstractElement> firstSet = AntlrGrammarGenUtil.getFirstSet(ruleCall);
 		StringBuilder actual = new StringBuilder();
-		GrammarElementTitleSwitch stringifyer = new GrammarElementTitleSwitch();
+		GrammarElementTitleSwitch stringifier = new GrammarElementTitleSwitch();
 		for(int i = 0; i < firstSet.size(); i++) {
 			if (i != 0)
 				actual.append(", ");
-			actual.append(stringifyer.apply(firstSet.get(i)));
+			actual.append(stringifier.apply(firstSet.get(i)));
 		}
 		assertEquals(expectation, actual.toString());
 	}

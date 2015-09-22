@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompositeCondition;
 import org.eclipse.xtext.Condition;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.ParameterReference;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.RuleNames;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -154,10 +157,10 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getArgumentList(final RuleCall ruleCall, final Boolean isPredicate) {
-		if (IsDebugGrammar.findInEmfObject(GrammarUtil.getGrammar(ruleCall)) != null) {
-			return null;
+		if (DebugGrammarToken.isGeneratingDebugGrammar()) {
+			return "";
 		}
-		return getArgumentList(ruleCall, IsDebugGrammar.findInEmfObject(GrammarUtil.getGrammar(ruleCall)) == null, isPredicate);
+		return getArgumentList(ruleCall, true, isPredicate);
 	}
 	
 	/**
@@ -280,7 +283,7 @@ public class AntlrGrammarGenUtil {
 	 */
 	public static AbstractElement getPredicatedElement(AbstractElement element) {
 		if (element.isPredicated()) {
-			return element;
+			return doGetPredicatedElement(element);
 		}
 		if (element instanceof Assignment) {
 			return getPredicatedElement(((Assignment) element).getTerminal());
@@ -316,6 +319,57 @@ public class AntlrGrammarGenUtil {
 				}
 			};
 			AbstractElement clone = (AbstractElement) copier.copy(result);
+		    copier.copyReferences();
+		    return clone;
+		}
+		return doGetPredicatedElement(element);
+	}
+	
+	private static AbstractElement doGetPredicatedElement(final AbstractElement element) {
+		if (element instanceof Alternatives || element instanceof Group) {
+			EcoreUtil.Copier copier = new EcoreUtil.Copier(true, true) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public EObject copy(EObject eObject) {
+					if (eObject instanceof AbstractElement) {
+						if (((AbstractElement) eObject).isFirstSetPredicated() && isLastInGroup(eObject)) {
+							Collection<AbstractElement> firstSet = EcoreUtil.copyAll(getFirstSet((AbstractElement) eObject));
+							if (firstSet.size() == 1) {
+								AbstractElement result = firstSet.iterator().next();
+								result.setCardinality(((AbstractElement) eObject).getCardinality());
+								return result;
+							}
+							Alternatives result = XtextFactory.eINSTANCE.createAlternatives();
+							for(AbstractElement firstElement: firstSet) {
+								firstElement.setCardinality(null);
+							}
+							result.getElements().addAll(firstSet);
+							result.setCardinality(((AbstractElement) eObject).getCardinality());
+							return result;
+						}
+					}
+					return super.copy(eObject);
+				}
+
+				private boolean isLastInGroup(EObject eObject) {
+					if (eObject == element) {
+						return true;
+					}
+					EObject container = eObject.eContainer();
+					if (container instanceof Group) {
+						List<AbstractElement> siblings = ((Group) container).getElements();
+						if (siblings.get(siblings.size() - 1) == eObject) {
+							return isLastInGroup(container);
+						}
+					}
+					if (container instanceof Alternatives) {
+						return isLastInGroup(container);
+					}
+					return false;
+				}
+			};
+			AbstractElement clone = (AbstractElement) copier.copy(element);
 		    copier.copyReferences();
 		    return clone;
 		}
