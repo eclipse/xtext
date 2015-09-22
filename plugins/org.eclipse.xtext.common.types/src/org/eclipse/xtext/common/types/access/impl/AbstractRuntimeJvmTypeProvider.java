@@ -13,7 +13,9 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 
@@ -42,7 +44,7 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 			return TypeInResourceSetAdapter.class.equals(type);
 		}
 		
-		public JvmType tryFindTypeInIndex(String name, AbstractRuntimeJvmTypeProvider typeProvider, boolean binaryNestedTypeDelimiter) {
+		public JvmType tryFindTypeInIndex(String name, AbstractRuntimeJvmTypeProvider typeProvider, boolean binaryNestedTypeDelimiter) throws UnknownNestedTypeException {
 			JvmType result = typeByQueryString.get(name);
 			if (result != null)
 				return result;
@@ -77,7 +79,7 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 	}
 
 	/* @Nullable */
-	protected JvmType doTryFindInIndex(String name, boolean binaryNestedTypeDelimiter) {
+	protected JvmType doTryFindInIndex(String name, boolean binaryNestedTypeDelimiter) throws UnknownNestedTypeException {
 		IndexedJvmTypeAccess indexAccess = getIndexedJvmTypeAccess();
 		if (indexAccess != null) {
 			JvmType result = doTryFindInIndex(name, indexAccess);
@@ -93,7 +95,7 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 		return null;
 	}
 	
-	private JvmType doTryFindInIndex(String name, IndexedJvmTypeAccess indexAccess) {
+	private JvmType doTryFindInIndex(String name, IndexedJvmTypeAccess indexAccess) throws UnknownNestedTypeException {
 		int index = name.indexOf('$');
 		if (index < 0)
 			index = name.indexOf('[');
@@ -104,5 +106,18 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 		if (candidate instanceof JvmType)
 			return (JvmType) candidate;
 		return null;
+	}
+	
+	protected JvmType tryFindTypeInIndex(String name, boolean binaryNestedTypeDelimiter) {
+		try {
+			TypeInResourceSetAdapter adapter = (TypeInResourceSetAdapter) EcoreUtil.getAdapter(getResourceSet().eAdapters(), TypeInResourceSetAdapter.class);
+			if (adapter != null) {
+				return adapter.tryFindTypeInIndex(name, this, binaryNestedTypeDelimiter);
+			} else {
+				return doTryFindInIndex(name, binaryNestedTypeDelimiter);
+			}
+		} catch(UnknownNestedTypeException e) {
+			return null;
+		}
 	}
 }
