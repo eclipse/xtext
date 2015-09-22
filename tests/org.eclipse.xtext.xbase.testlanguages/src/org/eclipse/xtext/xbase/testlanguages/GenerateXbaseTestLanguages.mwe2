@@ -203,6 +203,9 @@ Workflow {
     		fragment = exporting.QualifiedNamesFragment auto-inject {}
     		fragment = builder.BuilderIntegrationFragment auto-inject {}
     
+		    // generator API
+    		fragment = generator.GeneratorFragment auto-inject {}
+    
     		// content assist API
     		fragment = contentAssist.ContentAssistFragment auto-inject {}
     
