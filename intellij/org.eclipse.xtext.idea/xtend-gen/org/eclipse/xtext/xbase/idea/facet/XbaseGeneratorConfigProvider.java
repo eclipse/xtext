@@ -53,31 +53,33 @@ public class XbaseGeneratorConfigProvider implements IGeneratorConfigProvider {
     Resource _eResource = context.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final Module module = ModuleProvider.findModule(_resourceSet);
-    final Facet<? extends AbstractFacetConfiguration> facet = this.facetProvider.getFacet(module);
-    AbstractFacetConfiguration _configuration = null;
-    if (facet!=null) {
-      _configuration=facet.getConfiguration();
-    }
-    final AbstractFacetConfiguration facetConfiguration = _configuration;
-    if ((facetConfiguration instanceof XbaseFacetConfiguration)) {
-      final XbaseGeneratorConfigurationState state = ((XbaseFacetConfiguration)facetConfiguration).getState();
-      GeneratorConfig _generatorConfig = new GeneratorConfig();
-      final Procedure1<GeneratorConfig> _function = new Procedure1<GeneratorConfig>() {
-        @Override
-        public void apply(final GeneratorConfig it) {
-          String _generatedAnnotationComment = state.getGeneratedAnnotationComment();
-          it.setGeneratedAnnotationComment(_generatedAnnotationComment);
-          boolean _isGenerateGeneratedAnnotation = state.isGenerateGeneratedAnnotation();
-          it.setGenerateGeneratedAnnotation(_isGenerateGeneratedAnnotation);
-          boolean _isGenerateSuppressWarnings = state.isGenerateSuppressWarnings();
-          it.setGenerateSyntheticSuppressWarnings(_isGenerateSuppressWarnings);
-          boolean _isIncludeDateInGenerated = state.isIncludeDateInGenerated();
-          it.setIncludeDateInGeneratedAnnotation(_isIncludeDateInGenerated);
-          JavaVersion _targetJavaVersion = XbaseGeneratorConfigProvider.this.getTargetJavaVersion(state, module);
-          it.setJavaSourceVersion(_targetJavaVersion);
-        }
-      };
-      return ObjectExtensions.<GeneratorConfig>operator_doubleArrow(_generatorConfig, _function);
+    if ((module != null)) {
+      final Facet<? extends AbstractFacetConfiguration> facet = this.facetProvider.getFacet(module);
+      AbstractFacetConfiguration _configuration = null;
+      if (facet!=null) {
+        _configuration=facet.getConfiguration();
+      }
+      final AbstractFacetConfiguration facetConfiguration = _configuration;
+      if ((facetConfiguration instanceof XbaseFacetConfiguration)) {
+        final XbaseGeneratorConfigurationState state = ((XbaseFacetConfiguration)facetConfiguration).getState();
+        GeneratorConfig _generatorConfig = new GeneratorConfig();
+        final Procedure1<GeneratorConfig> _function = new Procedure1<GeneratorConfig>() {
+          @Override
+          public void apply(final GeneratorConfig it) {
+            String _generatedAnnotationComment = state.getGeneratedAnnotationComment();
+            it.setGeneratedAnnotationComment(_generatedAnnotationComment);
+            boolean _isGenerateGeneratedAnnotation = state.isGenerateGeneratedAnnotation();
+            it.setGenerateGeneratedAnnotation(_isGenerateGeneratedAnnotation);
+            boolean _isGenerateSuppressWarnings = state.isGenerateSuppressWarnings();
+            it.setGenerateSyntheticSuppressWarnings(_isGenerateSuppressWarnings);
+            boolean _isIncludeDateInGenerated = state.isIncludeDateInGenerated();
+            it.setIncludeDateInGeneratedAnnotation(_isIncludeDateInGenerated);
+            JavaVersion _targetJavaVersion = XbaseGeneratorConfigProvider.this.getTargetJavaVersion(state, module);
+            it.setJavaSourceVersion(_targetJavaVersion);
+          }
+        };
+        return ObjectExtensions.<GeneratorConfig>operator_doubleArrow(_generatorConfig, _function);
+      }
     }
     return new GeneratorConfig();
   }

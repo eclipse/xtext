@@ -179,7 +179,10 @@ public class XtendLibraryConfigurator {
       _and = _tripleEquals;
     }
     if (_and) {
-      rootModel.addLibraryEntry(library);
+      boolean _isWritable = rootModel.isWritable();
+      if (_isWritable) {
+        rootModel.addLibraryEntry(library);
+      }
     }
   }
   

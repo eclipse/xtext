@@ -34,17 +34,19 @@ import static extension com.intellij.openapi.module.EffectiveLanguageLevelUtil.*
 	
 	override get(EObject context) {
 		val module = ModuleProvider.findModule(context.eResource.resourceSet)
-		val facet = facetProvider.getFacet(module)
-		val facetConfiguration = facet?.configuration
-		if(facetConfiguration instanceof XbaseFacetConfiguration) {
-			val state = facetConfiguration.state
-			return new GeneratorConfig => [
-				generatedAnnotationComment = state.generatedAnnotationComment
-				generateGeneratedAnnotation = state.generateGeneratedAnnotation
-				generateSyntheticSuppressWarnings = state.generateSuppressWarnings
-				includeDateInGeneratedAnnotation = state.includeDateInGenerated
-				javaSourceVersion = getTargetJavaVersion(state, module)
-			]
+		if (module !== null) {
+			val facet = facetProvider.getFacet(module)
+			val facetConfiguration = facet?.configuration
+			if(facetConfiguration instanceof XbaseFacetConfiguration) {
+				val state = facetConfiguration.state
+				return new GeneratorConfig => [
+					generatedAnnotationComment = state.generatedAnnotationComment
+					generateGeneratedAnnotation = state.generateGeneratedAnnotation
+					generateSyntheticSuppressWarnings = state.generateSuppressWarnings
+					includeDateInGeneratedAnnotation = state.includeDateInGenerated
+					javaSourceVersion = getTargetJavaVersion(state, module)
+				]
+			}
 		}
 		return new GeneratorConfig
 	}
