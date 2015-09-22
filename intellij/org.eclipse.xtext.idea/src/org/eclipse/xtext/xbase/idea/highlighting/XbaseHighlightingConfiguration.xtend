@@ -33,7 +33,7 @@ class XbaseHighlightingConfiguration extends DefaultHighlightingConfiguration {
 		addStyle(STATIC_METHOD_INVOCATION, "Static method", CodeInsightColors.STATIC_METHOD_ATTRIBUTES)
 		addStyle(STATIC_FIELD, "Static field", CodeInsightColors.STATIC_FIELD_ATTRIBUTES)
 		addStyle(FIELD, "Field", DefaultLanguageHighlighterColors.INSTANCE_FIELD)
-		addStyle(ANNOTATION, "Annotation", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES)
+		addStyle(ANNOTATION, "Annotation", CodeInsightColors.ANNOTATION_NAME_ATTRIBUTES)
 		addStyle(EXTENSION_METHOD_INVOCATION, "Extension method", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES)
 		addStyle(DEPRECATED_MEMBERS, "Deprecated members", CodeInsightColors.DEPRECATED_ATTRIBUTES)
 	}

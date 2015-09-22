@@ -34,7 +34,7 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
     it.addStyle(XbaseHighlightingStyles.STATIC_METHOD_INVOCATION, "Static method", CodeInsightColors.STATIC_METHOD_ATTRIBUTES);
     it.addStyle(XbaseHighlightingStyles.STATIC_FIELD, "Static field", CodeInsightColors.STATIC_FIELD_ATTRIBUTES);
     it.addStyle(XbaseHighlightingStyles.FIELD, "Field", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
-    it.addStyle(XbaseHighlightingStyles.ANNOTATION, "Annotation", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.ANNOTATION, "Annotation", CodeInsightColors.ANNOTATION_NAME_ATTRIBUTES);
     it.addStyle(XbaseHighlightingStyles.EXTENSION_METHOD_INVOCATION, "Extension method", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES);
     it.addStyle(XbaseHighlightingStyles.DEPRECATED_MEMBERS, "Deprecated members", CodeInsightColors.DEPRECATED_ATTRIBUTES);
   }

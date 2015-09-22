@@ -42,6 +42,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.xtend.core.formatting2.FormatterFacade;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -164,6 +165,9 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
   @Inject
   private Provider<JavaConverter> jcProvider;
   
+  @Inject
+  private FormatterFacade formatter;
+  
   public ConvertJavaCodeHandler() {
     XtendLanguage.INSTANCE.injectMembers(this);
   }
@@ -255,8 +259,11 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
             final Module context = _fileIndex.getModuleForFile(_virtualFile);
             VirtualFile _virtualFile_1 = javaFile.getVirtualFile();
             String _nameWithoutExtension = _virtualFile_1.getNameWithoutExtension();
-            JavaConverter.ConversionResult _xtend = jc.toXtend(_nameWithoutExtension, javaSrc, context);
-            coversionResult.put(javaFile, _xtend);
+            final JavaConverter.ConversionResult result = jc.toXtend(_nameWithoutExtension, javaSrc, context);
+            String _xtendCode = result.getXtendCode();
+            String _format = ConvertJavaCodeHandler.this.formatter.format(_xtendCode);
+            result.setXtendCode(_format);
+            coversionResult.put(javaFile, result);
             _this__ConvertJavaCodeHandler_1.done++;
             int _size = files.size();
             double _divide = (((double) _this__ConvertJavaCodeHandler_1.done) / _size);

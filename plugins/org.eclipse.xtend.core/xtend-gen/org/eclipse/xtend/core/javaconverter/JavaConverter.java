@@ -17,7 +17,6 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.Block;
 import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.core.javaconverter.JavaASTFlattener;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -34,7 +33,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class JavaConverter {
-  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Accessors
   public static class ConversionResult {
     private String xtendCode;
     
@@ -58,9 +57,17 @@ public class JavaConverter {
       return this.xtendCode;
     }
     
+    public void setXtendCode(final String xtendCode) {
+      this.xtendCode = xtendCode;
+    }
+    
     @Pure
     public Iterable<String> getProblems() {
       return this.problems;
+    }
+    
+    public void setProblems(final Iterable<String> problems) {
+      this.problems = problems;
     }
   }
   

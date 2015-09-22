@@ -36,6 +36,7 @@ import java.util.Collection
 import java.util.Iterator
 import java.util.Map
 import java.util.Set
+import org.eclipse.xtend.core.formatting2.FormatterFacade
 import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler.ConvertJavaSequentialTask
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.javaconverter.JavaConverter
@@ -47,6 +48,7 @@ import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult
 class ConvertJavaCodeHandler implements RefactoringActionHandler {
 
 	@Inject Provider<JavaConverter> jcProvider
+	@Inject FormatterFacade formatter
 
 	new() {
 		XtendLanguage.INSTANCE.injectMembers(this)
@@ -72,7 +74,7 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 		]
 		return collector
 	}
-
+	
 	def runJavaConverter(Collection<PsiJavaFile> files, Project project) {
 		val Map<PsiFile, ConversionResult> coversionResult = newHashMap
 		var Task.Backgroundable task = new Task.Backgroundable(project, "Conversion...", true) {
@@ -89,8 +91,9 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 					val javaSrc = ApplicationManager.application.runReadAction([javaFile.text] as Computable<String>)
 					val context = ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(
 						javaFile.virtualFile)
-					coversionResult.put(javaFile,
-						jc.toXtend(javaFile.virtualFile.nameWithoutExtension, javaSrc, context))
+					val result = jc.toXtend(javaFile.virtualFile.nameWithoutExtension, javaSrc, context)
+					result.xtendCode = formatter.format(result.xtendCode)
+					coversionResult.put(javaFile, result)
 					done++
 					indicator.fraction = done as double / files.size
 				]
