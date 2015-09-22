@@ -173,10 +173,19 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       final IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
       if ((indexedJvmTypeAccess != null)) {
         final URI proxyURI = resourceURI.appendFragment(fragment);
-        ResourceSet _resourceSet = this.getResourceSet();
-        final EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, _resourceSet);
-        if ((candidate instanceof JvmType)) {
-          return ((JvmType)candidate);
+        try {
+          ResourceSet _resourceSet = this.getResourceSet();
+          final EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, _resourceSet);
+          if ((candidate instanceof JvmType)) {
+            return ((JvmType)candidate);
+          }
+        } catch (final Throwable _t) {
+          if (_t instanceof IndexedJvmTypeAccess.UnknownNestedTypeException) {
+            final IndexedJvmTypeAccess.UnknownNestedTypeException e = (IndexedJvmTypeAccess.UnknownNestedTypeException)_t;
+            return null;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         }
       }
       ProgressIndicatorProvider.checkCanceled();
@@ -199,12 +208,12 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         _resources.add(resource);
         resource.load(null);
         return this.findType(resource, fragment, traverseNestedTypes);
-      } catch (final Throwable _t) {
-        if (_t instanceof OperationCanceledError) {
-          final OperationCanceledError e = (OperationCanceledError)_t;
-          throw e.getWrapped();
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof OperationCanceledError) {
+          final OperationCanceledError e_1 = (OperationCanceledError)_t_1;
+          throw e_1.getWrapped();
         } else {
-          throw Exceptions.sneakyThrow(_t);
+          throw Exceptions.sneakyThrow(_t_1);
         }
       }
     } catch (Throwable _e) {

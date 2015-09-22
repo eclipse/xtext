@@ -58,6 +58,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.ShadowedTypeException;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.resource.ResourceSetContext;
@@ -206,6 +207,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			}
 		} catch (ShadowedTypeException e) {
 			return null;
+		} catch (UnknownNestedTypeException e) {
+			return null;
 		}
 	}
 
@@ -235,7 +238,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	/* @Nullable */
 	private JvmType findLoadedOrDerivedObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI,
-			/* @Nullable */ TypeResource resource, boolean traverseNestedTypes) {
+			/* @Nullable */ TypeResource resource, boolean traverseNestedTypes) throws UnknownNestedTypeException {
 		JvmType result = resource != null ? findTypeBySignature(signature, resource, traverseNestedTypes) : null;
 		if (result != null) {
 			return result;
@@ -547,7 +550,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return true;
 	}
 
-	private JvmType findObjectTypeInIndex(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) {
+	private JvmType findObjectTypeInIndex(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) throws UnknownNestedTypeException {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		if (indexedJvmTypeAccess != null) {
 			URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));

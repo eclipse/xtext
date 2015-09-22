@@ -27,6 +27,7 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -135,12 +136,21 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     final IndexedJvmTypeAccess access = this.getIndexJvmTypeAccess();
     boolean _notEquals = (!Objects.equal(access, null));
     if (_notEquals) {
-      URI _eProxyURI = proxy.eProxyURI();
-      ResourceSet _resourceSet = this.getResourceSet();
-      final EObject result = access.getIndexedJvmType(_eProxyURI, _resourceSet);
-      boolean _notEquals_1 = (!Objects.equal(result, null));
-      if (_notEquals_1) {
-        return result;
+      try {
+        URI _eProxyURI = proxy.eProxyURI();
+        ResourceSet _resourceSet = this.getResourceSet();
+        final EObject result = access.getIndexedJvmType(_eProxyURI, _resourceSet);
+        boolean _notEquals_1 = (!Objects.equal(result, null));
+        if (_notEquals_1) {
+          return result;
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof IndexedJvmTypeAccess.UnknownNestedTypeException) {
+          final IndexedJvmTypeAccess.UnknownNestedTypeException e = (IndexedJvmTypeAccess.UnknownNestedTypeException)_t;
+          return proxy;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
     }
     return EcoreUtil.resolve(proxy, sender);

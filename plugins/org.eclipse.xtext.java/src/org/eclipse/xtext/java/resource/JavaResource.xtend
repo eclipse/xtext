@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.CompilerPhases
@@ -98,9 +99,13 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	override resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
 		val access = getIndexJvmTypeAccess();
 		if (access != null) {
-			val result = access.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
-			if (result != null) {
-				return result;
+			try {
+				val result = access.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
+				if (result != null) {
+					return result;
+				}
+			} catch(UnknownNestedTypeException e) {
+				return proxy;
 			}
 		}
 		return EcoreUtil.resolve(proxy, sender)

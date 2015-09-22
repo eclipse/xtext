@@ -40,7 +40,7 @@ public class JdtIndexedJvmTypeAccess extends IndexedJvmTypeAccess {
 	
 	@Override
 	protected EObject findAccessibleType(String fragment, ResourceSet resourceSet,
-			Iterator<IEObjectDescription> fromIndex) {
+			Iterator<IEObjectDescription> fromIndex) throws UnknownNestedTypeException {
 		// we know that the iterator is not empty thus we can directly obtain the handles et al without additional guards
 		IJavaProject javaProject = javaProjectProvider.getJavaProject(resourceSet);
 		List<String> allVisibleContainerHandles = Lists.newArrayList(javaProjectsState.getVisibleContainerHandles(javaProject.getHandleIdentifier()));

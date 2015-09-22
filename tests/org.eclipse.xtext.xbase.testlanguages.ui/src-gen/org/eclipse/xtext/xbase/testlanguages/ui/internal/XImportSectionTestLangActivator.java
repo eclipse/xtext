@@ -25,6 +25,7 @@ public class XImportSectionTestLangActivator extends AbstractUIPlugin {
 	
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_XIMPORTSECTIONTESTLANG = "org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_CONTENTASSISTFRAGMENTTESTLANG = "org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang";
+	public static final String ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_BUG462047_BUG462047LANG = "org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047Lang";
 	
 	private static final Logger logger = Logger.getLogger(XImportSectionTestLangActivator.class);
 	
@@ -80,6 +81,9 @@ public class XImportSectionTestLangActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_CONTENTASSISTFRAGMENTTESTLANG.equals(grammar)) {
 			return new org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_BUG462047_BUG462047LANG.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangRuntimeModule();
+		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
@@ -90,6 +94,9 @@ public class XImportSectionTestLangActivator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_CONTENTASSISTFRAGMENTTESTLANG.equals(grammar)) {
 			return new org.eclipse.xtext.xbase.testlanguages.ui.ContentAssistFragmentTestLangUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_BUG462047_BUG462047LANG.equals(grammar)) {
+			return new org.eclipse.xtext.xbase.testlanguages.bug462047.ui.Bug462047LangUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);
