@@ -11,4 +11,8 @@
 	<depends>org.eclipse.xtext.idea</depends>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
+	
+	<extensions defaultExtensionNs="com.intellij">
+		<moduleBuilder builderClass="org.eclipse.xtext.idea.wizard.XtextModuleBuilder" id="xtextModuleBuilder"/>
+    </extensions>
 </idea-plugin>

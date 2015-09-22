@@ -9,9 +9,11 @@ package org.eclipse.xtext.idea.util
 
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.MacroAwareTextBrowseFolderListener
 import com.intellij.ui.SeparatorWithText
+import com.intellij.ui.components.JBTextField
 import java.awt.Color
 import java.awt.Component
 import java.awt.GridBagConstraints
@@ -23,7 +25,6 @@ import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.border.EmptyBorder
-
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -73,6 +74,20 @@ class IdeaWidgetFactory {
 		return field
 	}
 
+	def JBTextField textField() {
+		return textField("")
+	}
+
+	def JBTextField textField(String text) {
+		val jbTextField = new JBTextField(text, 20)
+		return jbTextField
+	}
+
+	def ComboBox comboBox(Object... values) {
+		val cb = new ComboBox(values)
+		return cb
+	}
+
 	def void expand(GridBagConstraints it, int dim) {
 		if (dim === GridBagConstraints.VERTICAL) {
 			weighty = 1.0
@@ -87,6 +102,10 @@ class IdeaWidgetFactory {
 
 	def void indent(GridBagConstraints it) {
 		insets = new Insets(insets.top, insets.left + 40, insets.bottom, insets.right)
+	}
+
+	def void indentRight(GridBagConstraints it, int size) {
+		insets = new Insets(insets.top, insets.left, insets.bottom, insets.right + size)
 	}
 
 	def SeparatorWithText separator(String title) {
@@ -109,6 +128,7 @@ class IdeaWidgetFactory {
 			gbc.anchor = GridBagConstraints.WEST
 			gbc.fill = GridBagConstraints.HORIZONTAL
 			gbc.gridwidth = 2
+			gbc.ipady = 4
 			host.add(col.apply(gbc), gbc)
 			rowsAdded++
 			return host
@@ -118,6 +138,7 @@ class IdeaWidgetFactory {
 			var gbc = new GridBagConstraints()
 			gbc.gridx = 0
 			gbc.gridy = rowsAdded
+			gbc.ipady = 4
 			gbc.anchor = GridBagConstraints.EAST
 			host.add(col1.apply(gbc), gbc)
 
@@ -136,8 +157,6 @@ class IdeaWidgetFactory {
 			if (comp instanceof JComponent) {
 				if (debug) {
 					comp.border = BorderFactory.createLineBorder(Color.BLACK)
-				} else {
-					comp.border = BorderFactory.createEmptyBorder(5, 5, 5, 5)
 				}
 			}
 		}

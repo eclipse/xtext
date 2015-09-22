@@ -162,8 +162,8 @@ public class XbaseFacetForm extends GeneratorFacetForm {
                 {
                   XbaseFacetForm.this._ideaWidgetFactory.expand(it, GridBagConstraints.HORIZONTAL);
                   it.anchor = GridBagConstraints.WEST;
-                  JBTextField _jBTextField = new JBTextField(20);
-                  _xblockexpression = XbaseFacetForm.this.generatedAnnotationComment = _jBTextField;
+                  JBTextField _textField = XbaseFacetForm.this._ideaWidgetFactory.textField();
+                  _xblockexpression = XbaseFacetForm.this.generatedAnnotationComment = _textField;
                 }
                 return _xblockexpression;
               }

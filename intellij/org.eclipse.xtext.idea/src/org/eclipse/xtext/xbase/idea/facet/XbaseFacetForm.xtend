@@ -73,7 +73,7 @@ class XbaseFacetForm extends GeneratorFacetForm {
 			container([label("Comment:")], [
 				expand(HORIZONTAL)
 				anchor = WEST
-				generatedAnnotationComment = new JBTextField(20)
+				generatedAnnotationComment = textField
 			])
 		]
 

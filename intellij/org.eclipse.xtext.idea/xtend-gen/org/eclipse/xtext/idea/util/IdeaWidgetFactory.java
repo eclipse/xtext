@@ -10,9 +10,11 @@ package org.eclipse.xtext.idea.util;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.MacroAwareTextBrowseFolderListener;
 import com.intellij.ui.SeparatorWithText;
+import com.intellij.ui.components.JBTextField;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -44,6 +46,7 @@ public class IdeaWidgetFactory {
       gbc.anchor = GridBagConstraints.WEST;
       gbc.fill = GridBagConstraints.HORIZONTAL;
       gbc.gridwidth = 2;
+      gbc.ipady = 4;
       JComponent _apply = col.apply(gbc);
       host.add(_apply, gbc);
       this.rowsAdded++;
@@ -54,6 +57,7 @@ public class IdeaWidgetFactory {
       GridBagConstraints gbc = new GridBagConstraints();
       gbc.gridx = 0;
       gbc.gridy = this.rowsAdded;
+      gbc.ipady = 4;
       gbc.anchor = GridBagConstraints.EAST;
       JComponent _apply = col1.apply(gbc);
       host.add(_apply, gbc);
@@ -76,9 +80,6 @@ public class IdeaWidgetFactory {
         if (IdeaWidgetFactory.debug) {
           Border _createLineBorder = BorderFactory.createLineBorder(Color.BLACK);
           ((JComponent)comp).setBorder(_createLineBorder);
-        } else {
-          Border _createEmptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-          ((JComponent)comp).setBorder(_createEmptyBorder);
         }
       }
     }
@@ -142,6 +143,20 @@ public class IdeaWidgetFactory {
     return field;
   }
   
+  public JBTextField textField() {
+    return this.textField("");
+  }
+  
+  public JBTextField textField(final String text) {
+    final JBTextField jbTextField = new JBTextField(text, 20);
+    return jbTextField;
+  }
+  
+  public ComboBox comboBox(final Object... values) {
+    final ComboBox cb = new ComboBox(values);
+    return cb;
+  }
+  
   public void expand(final GridBagConstraints it, final int dim) {
     if ((dim == GridBagConstraints.VERTICAL)) {
       it.weighty = 1.0;
@@ -158,6 +173,11 @@ public class IdeaWidgetFactory {
   
   public void indent(final GridBagConstraints it) {
     Insets _insets = new Insets(it.insets.top, (it.insets.left + 40), it.insets.bottom, it.insets.right);
+    it.insets = _insets;
+  }
+  
+  public void indentRight(final GridBagConstraints it, final int size) {
+    Insets _insets = new Insets(it.insets.top, it.insets.left, it.insets.bottom, (it.insets.right + size));
     it.insets = _insets;
   }
   
