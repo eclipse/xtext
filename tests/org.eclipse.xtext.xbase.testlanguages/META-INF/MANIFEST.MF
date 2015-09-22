@@ -34,5 +34,15 @@ Export-Package: org.eclipse.xtext.xbase.testlanguages,
  org.eclipse.xtext.xbase.testlanguages.jvmmodel,
  org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang,
  org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.impl,
- org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.util
+ org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.util,
+ org.eclipse.xtext.xbase.testlanguages.bug462047,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.services,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.impl,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.util,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.serializer,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.internal,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.validation,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.jvmmodel
 
