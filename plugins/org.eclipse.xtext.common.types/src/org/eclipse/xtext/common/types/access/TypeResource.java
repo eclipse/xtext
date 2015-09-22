@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.service.OperationCanceledManager;
@@ -156,9 +157,13 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	@Override
 	public EObject resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
 		if (indexedJvmTypeAccess != null) {
-			EObject result = indexedJvmTypeAccess.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
-			if (result != null) {
-				return result;
+			try {
+				EObject result = indexedJvmTypeAccess.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
+				if (result != null) {
+					return result;
+				}
+			} catch(UnknownNestedTypeException e) {
+				return proxy;
 			}
 		}
 		return EcoreUtil.resolve(proxy, sender);
