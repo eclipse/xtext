@@ -14,9 +14,9 @@ ParserRuleFragments: {ParserRuleFragments}
   | '#2' element=PRFNamed '->' ref=[PRFNamed]
   | '#3' element=PRFNamedRefFirst
   | '#4' element=PRFNamedWithAction
-  | '#5' element=PRFNamedWithActionInFragment
-  | '#6' element=PRFNamedWithActionInFragment2
-  | '#7' element=PRFNamedWithActionInFragment3
+//  | '#5' element=PRFNamedWithActionInFragment
+//  | '#6' element=PRFNamedWithActionInFragment2
+//  | '#7' element=PRFNamedWithActionInFragment3
   | '#8' element=PRFNamedWithFQN
   )
 ;
@@ -35,17 +35,17 @@ PRFNamedWithAction returns PRFNamed:
 	PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?
 ;
 
-PRFNamedWithActionInFragment returns PRFNamed:
-	FragmentWithAction ('-' ref=[PRFNamed])?
-;
-
-PRFNamedWithActionInFragment2 returns PRFNamed:
-	name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
-;
-
-PRFNamedWithActionInFragment3 returns PRFNamed:
-	FragmentWithAction3 ('-' ref=[PRFNamed])?
-;
+//PRFNamedWithActionInFragment returns PRFNamed:
+//	FragmentWithAction ('-' ref=[PRFNamed])?
+//;
+//
+//PRFNamedWithActionInFragment2 returns PRFNamed:
+//	name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
+//;
+//
+//PRFNamedWithActionInFragment3 returns PRFNamed:
+//	FragmentWithAction3 ('-' ref=[PRFNamed])?
+//;
 
 PRFNamedWithFQN returns PRFNamed:
 	name=FQN ('-' ref=[PRFNamed|FQN2])?
@@ -67,17 +67,17 @@ fragment Suffix2:
 	'.' ID
 ;
 
-fragment FragmentWithAction returns PRFNamed:
-	name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
-;
-
-fragment FragmentWithAction2 returns PRFNamed:
-	{PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
-;
-
-fragment FragmentWithAction3 returns PRFNamed:
-	name=ID ({PRFNamedWithAction.prev=current} '->' name=ID (ref2=[PRFNamed])?)* 
-;
+//fragment FragmentWithAction returns PRFNamed:
+//	name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+//;
+//
+//fragment FragmentWithAction2 returns PRFNamed:
+//	{PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+//;
+//
+//fragment FragmentWithAction3 returns PRFNamed:
+//	name=ID ({PRFNamedWithAction.prev=current} '->' name=ID (ref2=[PRFNamed])?)* 
+//;
 
 fragment PRFNamedFragment returns PRFNamed:
 	name=ID

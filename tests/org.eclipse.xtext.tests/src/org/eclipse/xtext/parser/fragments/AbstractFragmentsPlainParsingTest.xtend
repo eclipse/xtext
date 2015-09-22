@@ -11,6 +11,7 @@ import org.eclipse.xtext.junit4.AbstractXtextTests
 import com.google.inject.Injector
 import org.junit.Test
 import org.eclipse.xtext.resource.XtextResource
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -63,26 +64,31 @@ abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTests {
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragment_01() {
 		'#5 prev current'.model
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragment_02() {
 		'#6 prev current'.model
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragmentAndReference_01() {
 		'#5 prev current current - prev'.model
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragmentAndReference_02() {
 		'#6 prev current current - prev'.model
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragmentAndReferenceLoop() {
 		'#7 root -> a a -> b b -> c c - root'.model
 	}
