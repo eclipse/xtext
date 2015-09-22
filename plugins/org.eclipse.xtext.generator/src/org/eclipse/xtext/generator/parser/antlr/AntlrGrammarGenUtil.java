@@ -50,9 +50,8 @@ public class AntlrGrammarGenUtil {
 	/**
 	 * @since 2.9
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T getOriginalElement(T obj) {
-		return (T) org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getOriginalElement(obj);
+		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getOriginalElement(obj);
 	}
 
 	/**
