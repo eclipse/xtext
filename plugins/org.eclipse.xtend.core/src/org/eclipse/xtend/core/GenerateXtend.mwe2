@@ -27,6 +27,7 @@ var ideProjectPath = "../${ideProjectName}"
 var backtrack = false
 var memoize = false
 var skipUnusedRules = true
+var stripAllComments = true
 
 var ideaProjectName = "org.eclipse.xtend.idea"
 var ideaProjectPath = "../../intellij/${ideaProjectName}"
@@ -133,9 +134,7 @@ Workflow {
 			}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ParserGenerator auto-inject {
-					options = auto-inject {
-						stripAllComments = true
-					}
+					options = auto-inject {}
 				}
 			}
 			fragment = adapter.FragmentAdapter {
@@ -178,9 +177,7 @@ Workflow {
 				fragment = parser.ContentAssistParserGenerator auto-inject {
 					removeBacktrackingGuards = true
 					lookaheadThreshold = '5'
-					options = auto-inject {
-						classSplitting = true
-					}
+					options = auto-inject {}
 					partialParsing = true
 				}
 			}

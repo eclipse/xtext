@@ -4783,7 +4783,7 @@ public class InternalXtendLexer extends Lexer {
         }
     }
 
-    static class DFA54 extends DFA {
+    class DFA54 extends DFA {
 
         public DFA54(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

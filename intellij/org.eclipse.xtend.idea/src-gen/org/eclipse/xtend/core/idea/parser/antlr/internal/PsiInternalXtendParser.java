@@ -156,9 +156,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
     public static final int KW_Try=104;
     public static final int KW_Instanceof=72;
 
-    // delegates
-    // delegators
-
 
         public PsiInternalXtendParser(TokenStream input) {
             this(input, new RecognizerSharedState());
@@ -189,16 +186,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
     	protected String getFirstRuleName() {
     		return "File";
     	}
-
-
-
-
-    // $ANTLR start "entryRuleFile"
-    // PsiInternalXtend.g:164:1: entryRuleFile : ruleFile EOF ;
     public final void entryRuleFile() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:164:14: ( ruleFile EOF )
-            // PsiInternalXtend.g:165:2: ruleFile EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFileElementType()); 
@@ -221,23 +210,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleFile"
-
-
-    // $ANTLR start "ruleFile"
-    // PsiInternalXtend.g:170:1: ruleFile : ( (otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )? )? ( (lv_importSection_3_0= ruleXImportSection ) )? ( (lv_xtendTypes_4_0= ruleType ) )* ) ;
     public final void ruleFile() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtend.g:170:9: ( ( (otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )? )? ( (lv_importSection_3_0= ruleXImportSection ) )? ( (lv_xtendTypes_4_0= ruleType ) )* ) )
-            // PsiInternalXtend.g:171:2: ( (otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )? )? ( (lv_importSection_3_0= ruleXImportSection ) )? ( (lv_xtendTypes_4_0= ruleType ) )* )
             {
-            // PsiInternalXtend.g:171:2: ( (otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )? )? ( (lv_importSection_3_0= ruleXImportSection ) )? ( (lv_xtendTypes_4_0= ruleType ) )* )
-            // PsiInternalXtend.g:172:3: (otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )? )? ( (lv_importSection_3_0= ruleXImportSection ) )? ( (lv_xtendTypes_4_0= ruleType ) )*
             {
-            // PsiInternalXtend.g:172:3: (otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )? )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -264,7 +243,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalXtend.g:173:4: otherlv_0= 'package' ( (lv_package_1_0= ruleQualifiedName ) ) (otherlv_2= ';' )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -277,11 +255,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_0);
                       			
                     }
-                    // PsiInternalXtend.g:180:4: ( (lv_package_1_0= ruleQualifiedName ) )
-                    // PsiInternalXtend.g:181:5: (lv_package_1_0= ruleQualifiedName )
                     {
-                    // PsiInternalXtend.g:181:5: (lv_package_1_0= ruleQualifiedName )
-                    // PsiInternalXtend.g:182:6: lv_package_1_0= ruleQualifiedName
                     {
                     if ( state.backtracking==0 ) {
 
@@ -303,8 +277,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:191:4: (otherlv_2= ';' )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -313,7 +285,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt1) {
                         case 1 :
-                            // PsiInternalXtend.g:192:5: otherlv_2= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -337,8 +308,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:201:3: ( (lv_importSection_3_0= ruleXImportSection ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -347,10 +316,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalXtend.g:202:4: (lv_importSection_3_0= ruleXImportSection )
                     {
-                    // PsiInternalXtend.g:202:4: (lv_importSection_3_0= ruleXImportSection )
-                    // PsiInternalXtend.g:203:5: lv_importSection_3_0= ruleXImportSection
                     {
                     if ( state.backtracking==0 ) {
 
@@ -375,8 +341,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:212:3: ( (lv_xtendTypes_4_0= ruleType ) )*
             loop4:
             do {
                 int alt4=2;
@@ -389,10 +353,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt4) {
             	case 1 :
-            	    // PsiInternalXtend.g:213:4: (lv_xtendTypes_4_0= ruleType )
             	    {
-            	    // PsiInternalXtend.g:213:4: (lv_xtendTypes_4_0= ruleType )
-            	    // PsiInternalXtend.g:214:5: lv_xtendTypes_4_0= ruleType
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -436,15 +397,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleFile"
-
-
-    // $ANTLR start "entryRuleType"
-    // PsiInternalXtend.g:227:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:227:14: ( ruleType EOF )
-            // PsiInternalXtend.g:228:2: ruleType EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getTypeElementType()); 
@@ -467,11 +421,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleType"
-
-
-    // $ANTLR start "ruleType"
-    // PsiInternalXtend.g:233:1: ruleType : ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) ) ) ;
     public final void ruleType() throws RecognitionException {
         Token otherlv_4=null;
         Token otherlv_6=null;
@@ -500,14 +449,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_52=null;
 
         try {
-            // PsiInternalXtend.g:233:9: ( ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) ) ) )
-            // PsiInternalXtend.g:234:2: ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) ) )
             {
-            // PsiInternalXtend.g:234:2: ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) ) )
-            // PsiInternalXtend.g:235:3: () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )
             {
-            // PsiInternalXtend.g:235:3: ()
-            // PsiInternalXtend.g:236:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -517,8 +460,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:241:3: ( (lv_annotations_1_0= ruleXAnnotation ) )*
             loop5:
             do {
                 int alt5=2;
@@ -531,10 +472,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalXtend.g:242:4: (lv_annotations_1_0= ruleXAnnotation )
             	    {
-            	    // PsiInternalXtend.g:242:4: (lv_annotations_1_0= ruleXAnnotation )
-            	    // PsiInternalXtend.g:243:5: lv_annotations_1_0= ruleXAnnotation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -562,19 +500,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    break loop5;
                 }
             } while (true);
-
-            // PsiInternalXtend.g:252:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )
             int alt25=4;
             alt25 = dfa25.predict(input);
             switch (alt25) {
                 case 1 :
-                    // PsiInternalXtend.g:253:4: ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' )
                     {
-                    // PsiInternalXtend.g:253:4: ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' )
-                    // PsiInternalXtend.g:254:5: () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}'
                     {
-                    // PsiInternalXtend.g:254:5: ()
-                    // PsiInternalXtend.g:255:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -584,8 +515,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:260:5: ( (lv_modifiers_3_0= ruleCommonModifier ) )*
                     loop6:
                     do {
                         int alt6=2;
@@ -598,10 +527,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:261:6: (lv_modifiers_3_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:261:6: (lv_modifiers_3_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:262:7: lv_modifiers_3_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -641,11 +567,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_4);
                       				
                     }
-                    // PsiInternalXtend.g:278:5: ( (lv_name_5_0= ruleValidID ) )
-                    // PsiInternalXtend.g:279:6: (lv_name_5_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:279:6: (lv_name_5_0= ruleValidID )
-                    // PsiInternalXtend.g:280:7: lv_name_5_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -667,8 +589,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:289:5: (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -677,7 +597,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt8) {
                         case 1 :
-                            // PsiInternalXtend.g:290:6: otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -690,11 +609,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_6);
                               					
                             }
-                            // PsiInternalXtend.g:297:6: ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:298:7: (lv_typeParameters_7_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:298:7: (lv_typeParameters_7_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:299:8: lv_typeParameters_7_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -716,8 +631,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:308:6: (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )*
                             loop7:
                             do {
                                 int alt7=2;
@@ -730,7 +643,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt7) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:309:7: otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -743,11 +655,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_8);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:316:7: ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:317:8: (lv_typeParameters_9_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:317:8: (lv_typeParameters_9_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:318:9: lv_typeParameters_9_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -795,8 +703,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:336:5: (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -805,7 +711,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalXtend.g:337:6: otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) )
                             {
                             if ( state.backtracking==0 ) {
 
@@ -818,11 +723,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_11);
                               					
                             }
-                            // PsiInternalXtend.g:344:6: ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:345:7: (lv_extends_12_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:345:7: (lv_extends_12_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:346:8: lv_extends_12_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -850,8 +751,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:356:5: (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -860,7 +759,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt11) {
                         case 1 :
-                            // PsiInternalXtend.g:357:6: otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -873,11 +771,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_13);
                               					
                             }
-                            // PsiInternalXtend.g:364:6: ( (lv_implements_14_0= ruleJvmSuperTypeReference ) )
-                            // PsiInternalXtend.g:365:7: (lv_implements_14_0= ruleJvmSuperTypeReference )
                             {
-                            // PsiInternalXtend.g:365:7: (lv_implements_14_0= ruleJvmSuperTypeReference )
-                            // PsiInternalXtend.g:366:8: lv_implements_14_0= ruleJvmSuperTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -899,8 +793,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:375:6: (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )*
                             loop10:
                             do {
                                 int alt10=2;
@@ -913,7 +805,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt10) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:376:7: otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -926,11 +817,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_15);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:383:7: ( (lv_implements_16_0= ruleJvmSuperTypeReference ) )
-                            	    // PsiInternalXtend.g:384:8: (lv_implements_16_0= ruleJvmSuperTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:384:8: (lv_implements_16_0= ruleJvmSuperTypeReference )
-                            	    // PsiInternalXtend.g:385:9: lv_implements_16_0= ruleJvmSuperTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -979,7 +866,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_17);
                       				
                     }
-                    // PsiInternalXtend.g:403:5: ( (lv_members_18_0= ruleMember ) )*
                     loop12:
                     do {
                         int alt12=2;
@@ -992,10 +878,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:404:6: (lv_members_18_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:404:6: (lv_members_18_0= ruleMember )
-                    	    // PsiInternalXtend.g:405:7: lv_members_18_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1042,13 +925,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:423:4: ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' )
                     {
-                    // PsiInternalXtend.g:423:4: ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' )
-                    // PsiInternalXtend.g:424:5: () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}'
                     {
-                    // PsiInternalXtend.g:424:5: ()
-                    // PsiInternalXtend.g:425:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1058,8 +936,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:430:5: ( (lv_modifiers_21_0= ruleCommonModifier ) )*
                     loop13:
                     do {
                         int alt13=2;
@@ -1072,10 +948,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:431:6: (lv_modifiers_21_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:431:6: (lv_modifiers_21_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:432:7: lv_modifiers_21_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1115,11 +988,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_22);
                       				
                     }
-                    // PsiInternalXtend.g:448:5: ( (lv_name_23_0= ruleValidID ) )
-                    // PsiInternalXtend.g:449:6: (lv_name_23_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:449:6: (lv_name_23_0= ruleValidID )
-                    // PsiInternalXtend.g:450:7: lv_name_23_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1141,8 +1010,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:459:5: (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -1151,7 +1018,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt15) {
                         case 1 :
-                            // PsiInternalXtend.g:460:6: otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1164,11 +1030,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_24);
                               					
                             }
-                            // PsiInternalXtend.g:467:6: ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:468:7: (lv_typeParameters_25_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:468:7: (lv_typeParameters_25_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:469:8: lv_typeParameters_25_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1190,8 +1052,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:478:6: (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )*
                             loop14:
                             do {
                                 int alt14=2;
@@ -1204,7 +1064,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt14) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:479:7: otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1217,11 +1076,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_26);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:486:7: ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:487:8: (lv_typeParameters_27_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:487:8: (lv_typeParameters_27_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:488:9: lv_typeParameters_27_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1269,8 +1124,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:506:5: (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )?
                     int alt17=2;
                     int LA17_0 = input.LA(1);
 
@@ -1279,7 +1132,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt17) {
                         case 1 :
-                            // PsiInternalXtend.g:507:6: otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1292,11 +1144,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_29);
                               					
                             }
-                            // PsiInternalXtend.g:514:6: ( (lv_extends_30_0= ruleJvmSuperTypeReference ) )
-                            // PsiInternalXtend.g:515:7: (lv_extends_30_0= ruleJvmSuperTypeReference )
                             {
-                            // PsiInternalXtend.g:515:7: (lv_extends_30_0= ruleJvmSuperTypeReference )
-                            // PsiInternalXtend.g:516:8: lv_extends_30_0= ruleJvmSuperTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1318,8 +1166,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:525:6: (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )*
                             loop16:
                             do {
                                 int alt16=2;
@@ -1332,7 +1178,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt16) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:526:7: otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1345,11 +1190,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_31);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:533:7: ( (lv_extends_32_0= ruleJvmSuperTypeReference ) )
-                            	    // PsiInternalXtend.g:534:8: (lv_extends_32_0= ruleJvmSuperTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:534:8: (lv_extends_32_0= ruleJvmSuperTypeReference )
-                            	    // PsiInternalXtend.g:535:9: lv_extends_32_0= ruleJvmSuperTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1398,7 +1239,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_33);
                       				
                     }
-                    // PsiInternalXtend.g:553:5: ( (lv_members_34_0= ruleMember ) )*
                     loop18:
                     do {
                         int alt18=2;
@@ -1411,10 +1251,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt18) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:554:6: (lv_members_34_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:554:6: (lv_members_34_0= ruleMember )
-                    	    // PsiInternalXtend.g:555:7: lv_members_34_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1461,13 +1298,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:573:4: ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' )
                     {
-                    // PsiInternalXtend.g:573:4: ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' )
-                    // PsiInternalXtend.g:574:5: () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}'
                     {
-                    // PsiInternalXtend.g:574:5: ()
-                    // PsiInternalXtend.g:575:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1477,8 +1309,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:580:5: ( (lv_modifiers_37_0= ruleCommonModifier ) )*
                     loop19:
                     do {
                         int alt19=2;
@@ -1491,10 +1321,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt19) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:581:6: (lv_modifiers_37_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:581:6: (lv_modifiers_37_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:582:7: lv_modifiers_37_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1534,11 +1361,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_38);
                       				
                     }
-                    // PsiInternalXtend.g:598:5: ( (lv_name_39_0= ruleValidID ) )
-                    // PsiInternalXtend.g:599:6: (lv_name_39_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:599:6: (lv_name_39_0= ruleValidID )
-                    // PsiInternalXtend.g:600:7: lv_name_39_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1572,7 +1395,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_40);
                       				
                     }
-                    // PsiInternalXtend.g:616:5: ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )?
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
@@ -1581,13 +1403,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt21) {
                         case 1 :
-                            // PsiInternalXtend.g:617:6: ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )*
                             {
-                            // PsiInternalXtend.g:617:6: ( (lv_members_41_0= ruleXtendEnumLiteral ) )
-                            // PsiInternalXtend.g:618:7: (lv_members_41_0= ruleXtendEnumLiteral )
                             {
-                            // PsiInternalXtend.g:618:7: (lv_members_41_0= ruleXtendEnumLiteral )
-                            // PsiInternalXtend.g:619:8: lv_members_41_0= ruleXtendEnumLiteral
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1609,8 +1426,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:628:6: (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )*
                             loop20:
                             do {
                                 int alt20=2;
@@ -1623,7 +1438,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt20) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:629:7: otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1636,11 +1450,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_42);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:636:7: ( (lv_members_43_0= ruleXtendEnumLiteral ) )
-                            	    // PsiInternalXtend.g:637:8: (lv_members_43_0= ruleXtendEnumLiteral )
                             	    {
-                            	    // PsiInternalXtend.g:637:8: (lv_members_43_0= ruleXtendEnumLiteral )
-                            	    // PsiInternalXtend.g:638:9: lv_members_43_0= ruleXtendEnumLiteral
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1677,8 +1487,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:649:5: (otherlv_44= ';' )?
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -1687,7 +1495,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt22) {
                         case 1 :
-                            // PsiInternalXtend.g:650:6: otherlv_44= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1724,13 +1531,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:667:4: ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' )
                     {
-                    // PsiInternalXtend.g:667:4: ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' )
-                    // PsiInternalXtend.g:668:5: () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}'
                     {
-                    // PsiInternalXtend.g:668:5: ()
-                    // PsiInternalXtend.g:669:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1740,8 +1542,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:674:5: ( (lv_modifiers_47_0= ruleCommonModifier ) )*
                     loop23:
                     do {
                         int alt23=2;
@@ -1754,10 +1554,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt23) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:675:6: (lv_modifiers_47_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:675:6: (lv_modifiers_47_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:676:7: lv_modifiers_47_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1797,11 +1594,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_48);
                       				
                     }
-                    // PsiInternalXtend.g:692:5: ( (lv_name_49_0= ruleValidID ) )
-                    // PsiInternalXtend.g:693:6: (lv_name_49_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:693:6: (lv_name_49_0= ruleValidID )
-                    // PsiInternalXtend.g:694:7: lv_name_49_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1835,7 +1628,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_50);
                       				
                     }
-                    // PsiInternalXtend.g:710:5: ( (lv_members_51_0= ruleAnnotationField ) )*
                     loop24:
                     do {
                         int alt24=2;
@@ -1848,10 +1640,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt24) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:711:6: (lv_members_51_0= ruleAnnotationField )
                     	    {
-                    	    // PsiInternalXtend.g:711:6: (lv_members_51_0= ruleAnnotationField )
-                    	    // PsiInternalXtend.g:712:7: lv_members_51_0= ruleAnnotationField
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1915,15 +1704,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleType"
-
-
-    // $ANTLR start "entryRuleJvmSuperTypeReference"
-    // PsiInternalXtend.g:734:1: entryRuleJvmSuperTypeReference : ruleJvmSuperTypeReference EOF ;
     public final void entryRuleJvmSuperTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:734:31: ( ruleJvmSuperTypeReference EOF )
-            // PsiInternalXtend.g:735:2: ruleJvmSuperTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmSuperTypeReferenceElementType()); 
@@ -1946,17 +1728,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmSuperTypeReference"
-
-
-    // $ANTLR start "ruleJvmSuperTypeReference"
-    // PsiInternalXtend.g:740:1: ruleJvmSuperTypeReference : ( ruleJvmParameterizedTypeReference | ruleXFunctionSuperTypeRef ) ;
     public final void ruleJvmSuperTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:740:26: ( ( ruleJvmParameterizedTypeReference | ruleXFunctionSuperTypeRef ) )
-            // PsiInternalXtend.g:741:2: ( ruleJvmParameterizedTypeReference | ruleXFunctionSuperTypeRef )
             {
-            // PsiInternalXtend.g:741:2: ( ruleJvmParameterizedTypeReference | ruleXFunctionSuperTypeRef )
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -1975,7 +1749,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt26) {
                 case 1 :
-                    // PsiInternalXtend.g:742:3: ruleJvmParameterizedTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1996,7 +1769,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:750:3: ruleXFunctionSuperTypeRef
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2031,15 +1803,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmSuperTypeReference"
-
-
-    // $ANTLR start "entryRuleXFunctionSuperTypeRef"
-    // PsiInternalXtend.g:761:1: entryRuleXFunctionSuperTypeRef : ruleXFunctionSuperTypeRef EOF ;
     public final void entryRuleXFunctionSuperTypeRef() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:761:31: ( ruleXFunctionSuperTypeRef EOF )
-            // PsiInternalXtend.g:762:2: ruleXFunctionSuperTypeRef EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXFunctionSuperTypeRefElementType()); 
@@ -2062,11 +1827,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXFunctionSuperTypeRef"
-
-
-    // $ANTLR start "ruleXFunctionSuperTypeRef"
-    // PsiInternalXtend.g:767:1: ruleXFunctionSuperTypeRef : ( ( ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
     public final void ruleXFunctionSuperTypeRef() throws RecognitionException {
         Token lv_instanceContext_0_0=null;
         Token otherlv_2=null;
@@ -2074,13 +1834,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_5=null;
 
         try {
-            // PsiInternalXtend.g:767:26: ( ( ( ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
-            // PsiInternalXtend.g:768:2: ( ( ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
             {
-            // PsiInternalXtend.g:768:2: ( ( ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
-            // PsiInternalXtend.g:769:3: ( ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
             {
-            // PsiInternalXtend.g:769:3: ( ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -2089,13 +1844,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt29) {
                 case 1 :
-                    // PsiInternalXtend.g:770:4: ( (lv_instanceContext_0_0= '(' ) ) ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
                     {
-                    // PsiInternalXtend.g:770:4: ( (lv_instanceContext_0_0= '(' ) )
-                    // PsiInternalXtend.g:771:5: (lv_instanceContext_0_0= '(' )
                     {
-                    // PsiInternalXtend.g:771:5: (lv_instanceContext_0_0= '(' )
-                    // PsiInternalXtend.g:772:6: lv_instanceContext_0_0= '('
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2113,8 +1863,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:781:4: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
                     int alt28=2;
                     int LA28_0 = input.LA(1);
 
@@ -2123,13 +1871,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt28) {
                         case 1 :
-                            // PsiInternalXtend.g:782:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             {
-                            // PsiInternalXtend.g:782:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:783:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:783:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:784:7: lv_paramTypes_1_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2151,8 +1894,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:793:5: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             loop27:
                             do {
                                 int alt27=2;
@@ -2165,7 +1906,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt27) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:794:6: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -2178,11 +1918,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      						doneLeaf(otherlv_2);
                             	      					
                             	    }
-                            	    // PsiInternalXtend.g:801:6: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
-                            	    // PsiInternalXtend.g:802:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:802:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
-                            	    // PsiInternalXtend.g:803:8: lv_paramTypes_3_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -2248,11 +1984,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_5);
               		
             }
-            // PsiInternalXtend.g:829:3: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:830:4: (lv_returnType_6_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:830:4: (lv_returnType_6_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:831:5: lv_returnType_6_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -2290,15 +2022,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXFunctionSuperTypeRef"
-
-
-    // $ANTLR start "entryRuleAnnotationField"
-    // PsiInternalXtend.g:844:1: entryRuleAnnotationField : ruleAnnotationField EOF ;
     public final void entryRuleAnnotationField() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:844:25: ( ruleAnnotationField EOF )
-            // PsiInternalXtend.g:845:2: ruleAnnotationField EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAnnotationFieldElementType()); 
@@ -2321,11 +2046,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleAnnotationField"
-
-
-    // $ANTLR start "ruleAnnotationField"
-    // PsiInternalXtend.g:850:1: ruleAnnotationField : ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) ) ) ;
     public final void ruleAnnotationField() throws RecognitionException {
         Token otherlv_12=null;
         Token otherlv_14=null;
@@ -2356,14 +2076,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_65=null;
 
         try {
-            // PsiInternalXtend.g:850:20: ( ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) ) ) )
-            // PsiInternalXtend.g:851:2: ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) ) )
             {
-            // PsiInternalXtend.g:851:2: ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) ) )
-            // PsiInternalXtend.g:852:3: () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) )
             {
-            // PsiInternalXtend.g:852:3: ()
-            // PsiInternalXtend.g:853:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -2373,8 +2087,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:858:3: ( (lv_annotations_1_0= ruleXAnnotation ) )*
             loop30:
             do {
                 int alt30=2;
@@ -2387,10 +2099,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt30) {
             	case 1 :
-            	    // PsiInternalXtend.g:859:4: (lv_annotations_1_0= ruleXAnnotation )
             	    {
-            	    // PsiInternalXtend.g:859:4: (lv_annotations_1_0= ruleXAnnotation )
-            	    // PsiInternalXtend.g:860:5: lv_annotations_1_0= ruleXAnnotation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2418,29 +2127,18 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    break loop30;
                 }
             } while (true);
-
-            // PsiInternalXtend.g:869:3: ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) )
             int alt57=5;
             alt57 = dfa57.predict(input);
             switch (alt57) {
                 case 1 :
-                    // PsiInternalXtend.g:870:4: ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? )
                     {
-                    // PsiInternalXtend.g:870:4: ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? )
-                    // PsiInternalXtend.g:871:5: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )?
                     {
-                    // PsiInternalXtend.g:871:5: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) )
                     int alt35=2;
                     alt35 = dfa35.predict(input);
                     switch (alt35) {
                         case 1 :
-                            // PsiInternalXtend.g:872:6: ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) )
                             {
-                            // PsiInternalXtend.g:872:6: ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) )
-                            // PsiInternalXtend.g:873:7: () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) )
                             {
-                            // PsiInternalXtend.g:873:7: ()
-                            // PsiInternalXtend.g:874:8: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2450,8 +2148,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
 
                             }
-
-                            // PsiInternalXtend.g:879:7: ( (lv_modifiers_3_0= ruleCommonModifier ) )*
                             loop31:
                             do {
                                 int alt31=2;
@@ -2464,10 +2160,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt31) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:880:8: (lv_modifiers_3_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:880:8: (lv_modifiers_3_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:881:9: lv_modifiers_3_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -2495,12 +2188,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop31;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:890:7: ( (lv_modifiers_4_0= ruleFieldModifier ) )
-                            // PsiInternalXtend.g:891:8: (lv_modifiers_4_0= ruleFieldModifier )
                             {
-                            // PsiInternalXtend.g:891:8: (lv_modifiers_4_0= ruleFieldModifier )
-                            // PsiInternalXtend.g:892:9: lv_modifiers_4_0= ruleFieldModifier
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2522,8 +2210,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:901:7: ( (lv_modifiers_5_0= ruleCommonModifier ) )*
                             loop32:
                             do {
                                 int alt32=2;
@@ -2536,10 +2222,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt32) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:902:8: (lv_modifiers_5_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:902:8: (lv_modifiers_5_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:903:9: lv_modifiers_5_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -2567,16 +2250,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop32;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:912:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?
                             int alt33=2;
                             alt33 = dfa33.predict(input);
                             switch (alt33) {
                                 case 1 :
-                                    // PsiInternalXtend.g:913:8: (lv_type_6_0= ruleJvmTypeReference )
                                     {
-                                    // PsiInternalXtend.g:913:8: (lv_type_6_0= ruleJvmTypeReference )
-                                    // PsiInternalXtend.g:914:9: lv_type_6_0= ruleJvmTypeReference
                                     {
                                     if ( state.backtracking==0 ) {
 
@@ -2601,12 +2279,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                                     break;
 
                             }
-
-                            // PsiInternalXtend.g:923:7: ( (lv_name_7_0= ruleValidID ) )
-                            // PsiInternalXtend.g:924:8: (lv_name_7_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:924:8: (lv_name_7_0= ruleValidID )
-                            // PsiInternalXtend.g:925:9: lv_name_7_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2636,13 +2309,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:936:6: ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) )
                             {
-                            // PsiInternalXtend.g:936:6: ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) )
-                            // PsiInternalXtend.g:937:7: () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) )
                             {
-                            // PsiInternalXtend.g:937:7: ()
-                            // PsiInternalXtend.g:938:8: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2652,8 +2320,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
 
                             }
-
-                            // PsiInternalXtend.g:943:7: ( (lv_modifiers_9_0= ruleCommonModifier ) )*
                             loop34:
                             do {
                                 int alt34=2;
@@ -2666,10 +2332,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt34) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:944:8: (lv_modifiers_9_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:944:8: (lv_modifiers_9_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:945:9: lv_modifiers_9_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -2697,12 +2360,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop34;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:954:7: ( (lv_type_10_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:955:8: (lv_type_10_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:955:8: (lv_type_10_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:956:9: lv_type_10_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2724,12 +2382,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:965:7: ( (lv_name_11_0= ruleValidID ) )
-                            // PsiInternalXtend.g:966:8: (lv_name_11_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:966:8: (lv_name_11_0= ruleValidID )
-                            // PsiInternalXtend.g:967:9: lv_name_11_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2760,8 +2413,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:978:5: (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )?
                     int alt36=2;
                     int LA36_0 = input.LA(1);
 
@@ -2770,7 +2421,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt36) {
                         case 1 :
-                            // PsiInternalXtend.g:979:6: otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) )
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2783,11 +2433,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_12);
                               					
                             }
-                            // PsiInternalXtend.g:986:6: ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) )
-                            // PsiInternalXtend.g:987:7: (lv_initialValue_13_0= ruleXAnnotationElementValue )
                             {
-                            // PsiInternalXtend.g:987:7: (lv_initialValue_13_0= ruleXAnnotationElementValue )
-                            // PsiInternalXtend.g:988:8: lv_initialValue_13_0= ruleXAnnotationElementValue
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2815,8 +2461,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:998:5: (otherlv_14= ';' )?
                     int alt37=2;
                     int LA37_0 = input.LA(1);
 
@@ -2825,7 +2469,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt37) {
                         case 1 :
-                            // PsiInternalXtend.g:999:6: otherlv_14= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2851,13 +2494,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:1009:4: ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' )
                     {
-                    // PsiInternalXtend.g:1009:4: ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' )
-                    // PsiInternalXtend.g:1010:5: () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}'
                     {
-                    // PsiInternalXtend.g:1010:5: ()
-                    // PsiInternalXtend.g:1011:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2867,8 +2505,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:1016:5: ( (lv_modifiers_16_0= ruleCommonModifier ) )*
                     loop38:
                     do {
                         int alt38=2;
@@ -2881,10 +2517,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt38) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1017:6: (lv_modifiers_16_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1017:6: (lv_modifiers_16_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1018:7: lv_modifiers_16_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -2924,11 +2557,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_17);
                       				
                     }
-                    // PsiInternalXtend.g:1034:5: ( (lv_name_18_0= ruleValidID ) )
-                    // PsiInternalXtend.g:1035:6: (lv_name_18_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:1035:6: (lv_name_18_0= ruleValidID )
-                    // PsiInternalXtend.g:1036:7: lv_name_18_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2950,8 +2579,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:1045:5: (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )?
                     int alt40=2;
                     int LA40_0 = input.LA(1);
 
@@ -2960,7 +2587,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt40) {
                         case 1 :
-                            // PsiInternalXtend.g:1046:6: otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2973,11 +2599,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_19);
                               					
                             }
-                            // PsiInternalXtend.g:1053:6: ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:1054:7: (lv_typeParameters_20_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:1054:7: (lv_typeParameters_20_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:1055:8: lv_typeParameters_20_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2999,8 +2621,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1064:6: (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )*
                             loop39:
                             do {
                                 int alt39=2;
@@ -3013,7 +2633,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt39) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1065:7: otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3026,11 +2645,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_21);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:1072:7: ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:1073:8: (lv_typeParameters_22_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:1073:8: (lv_typeParameters_22_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:1074:9: lv_typeParameters_22_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3078,8 +2693,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1092:5: (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )?
                     int alt41=2;
                     int LA41_0 = input.LA(1);
 
@@ -3088,7 +2701,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt41) {
                         case 1 :
-                            // PsiInternalXtend.g:1093:6: otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) )
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3101,11 +2713,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_24);
                               					
                             }
-                            // PsiInternalXtend.g:1100:6: ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:1101:7: (lv_extends_25_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:1101:7: (lv_extends_25_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:1102:8: lv_extends_25_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3133,8 +2741,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1112:5: (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )?
                     int alt43=2;
                     int LA43_0 = input.LA(1);
 
@@ -3143,7 +2749,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt43) {
                         case 1 :
-                            // PsiInternalXtend.g:1113:6: otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3156,11 +2761,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_26);
                               					
                             }
-                            // PsiInternalXtend.g:1120:6: ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:1121:7: (lv_implements_27_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:1121:7: (lv_implements_27_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:1122:8: lv_implements_27_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3182,8 +2783,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1131:6: (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )*
                             loop42:
                             do {
                                 int alt42=2;
@@ -3196,7 +2795,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt42) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1132:7: otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3209,11 +2807,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_28);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:1139:7: ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) )
-                            	    // PsiInternalXtend.g:1140:8: (lv_implements_29_0= ruleJvmParameterizedTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:1140:8: (lv_implements_29_0= ruleJvmParameterizedTypeReference )
-                            	    // PsiInternalXtend.g:1141:9: lv_implements_29_0= ruleJvmParameterizedTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3262,7 +2856,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_30);
                       				
                     }
-                    // PsiInternalXtend.g:1159:5: ( (lv_members_31_0= ruleMember ) )*
                     loop44:
                     do {
                         int alt44=2;
@@ -3275,10 +2868,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt44) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1160:6: (lv_members_31_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:1160:6: (lv_members_31_0= ruleMember )
-                    	    // PsiInternalXtend.g:1161:7: lv_members_31_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -3325,13 +2915,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:1179:4: ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' )
                     {
-                    // PsiInternalXtend.g:1179:4: ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' )
-                    // PsiInternalXtend.g:1180:5: () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}'
                     {
-                    // PsiInternalXtend.g:1180:5: ()
-                    // PsiInternalXtend.g:1181:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3341,8 +2926,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:1186:5: ( (lv_modifiers_34_0= ruleCommonModifier ) )*
                     loop45:
                     do {
                         int alt45=2;
@@ -3355,10 +2938,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt45) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1187:6: (lv_modifiers_34_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1187:6: (lv_modifiers_34_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1188:7: lv_modifiers_34_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -3398,11 +2978,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_35);
                       				
                     }
-                    // PsiInternalXtend.g:1204:5: ( (lv_name_36_0= ruleValidID ) )
-                    // PsiInternalXtend.g:1205:6: (lv_name_36_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:1205:6: (lv_name_36_0= ruleValidID )
-                    // PsiInternalXtend.g:1206:7: lv_name_36_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3424,8 +3000,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:1215:5: (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )?
                     int alt47=2;
                     int LA47_0 = input.LA(1);
 
@@ -3434,7 +3008,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt47) {
                         case 1 :
-                            // PsiInternalXtend.g:1216:6: otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3447,11 +3020,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_37);
                               					
                             }
-                            // PsiInternalXtend.g:1223:6: ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:1224:7: (lv_typeParameters_38_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:1224:7: (lv_typeParameters_38_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:1225:8: lv_typeParameters_38_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3473,8 +3042,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1234:6: (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )*
                             loop46:
                             do {
                                 int alt46=2;
@@ -3487,7 +3054,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt46) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1235:7: otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3500,11 +3066,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_39);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:1242:7: ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:1243:8: (lv_typeParameters_40_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:1243:8: (lv_typeParameters_40_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:1244:9: lv_typeParameters_40_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3552,8 +3114,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1262:5: (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )?
                     int alt49=2;
                     int LA49_0 = input.LA(1);
 
@@ -3562,7 +3122,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt49) {
                         case 1 :
-                            // PsiInternalXtend.g:1263:6: otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3575,11 +3134,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_42);
                               					
                             }
-                            // PsiInternalXtend.g:1270:6: ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:1271:7: (lv_extends_43_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:1271:7: (lv_extends_43_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:1272:8: lv_extends_43_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3601,8 +3156,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1281:6: (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )*
                             loop48:
                             do {
                                 int alt48=2;
@@ -3615,7 +3168,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt48) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1282:7: otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3628,11 +3180,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_44);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:1289:7: ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) )
-                            	    // PsiInternalXtend.g:1290:8: (lv_extends_45_0= ruleJvmParameterizedTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:1290:8: (lv_extends_45_0= ruleJvmParameterizedTypeReference )
-                            	    // PsiInternalXtend.g:1291:9: lv_extends_45_0= ruleJvmParameterizedTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3681,7 +3229,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_46);
                       				
                     }
-                    // PsiInternalXtend.g:1309:5: ( (lv_members_47_0= ruleMember ) )*
                     loop50:
                     do {
                         int alt50=2;
@@ -3694,10 +3241,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt50) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1310:6: (lv_members_47_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:1310:6: (lv_members_47_0= ruleMember )
-                    	    // PsiInternalXtend.g:1311:7: lv_members_47_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -3744,13 +3288,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:1329:4: ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' )
                     {
-                    // PsiInternalXtend.g:1329:4: ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' )
-                    // PsiInternalXtend.g:1330:5: () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}'
                     {
-                    // PsiInternalXtend.g:1330:5: ()
-                    // PsiInternalXtend.g:1331:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3760,8 +3299,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:1336:5: ( (lv_modifiers_50_0= ruleCommonModifier ) )*
                     loop51:
                     do {
                         int alt51=2;
@@ -3774,10 +3311,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt51) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1337:6: (lv_modifiers_50_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1337:6: (lv_modifiers_50_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1338:7: lv_modifiers_50_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -3817,11 +3351,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_51);
                       				
                     }
-                    // PsiInternalXtend.g:1354:5: ( (lv_name_52_0= ruleValidID ) )
-                    // PsiInternalXtend.g:1355:6: (lv_name_52_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:1355:6: (lv_name_52_0= ruleValidID )
-                    // PsiInternalXtend.g:1356:7: lv_name_52_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3855,7 +3385,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_53);
                       				
                     }
-                    // PsiInternalXtend.g:1372:5: ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )?
                     int alt53=2;
                     int LA53_0 = input.LA(1);
 
@@ -3864,13 +3393,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt53) {
                         case 1 :
-                            // PsiInternalXtend.g:1373:6: ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )*
                             {
-                            // PsiInternalXtend.g:1373:6: ( (lv_members_54_0= ruleXtendEnumLiteral ) )
-                            // PsiInternalXtend.g:1374:7: (lv_members_54_0= ruleXtendEnumLiteral )
                             {
-                            // PsiInternalXtend.g:1374:7: (lv_members_54_0= ruleXtendEnumLiteral )
-                            // PsiInternalXtend.g:1375:8: lv_members_54_0= ruleXtendEnumLiteral
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3892,8 +3416,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1384:6: (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )*
                             loop52:
                             do {
                                 int alt52=2;
@@ -3906,7 +3428,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt52) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1385:7: otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3919,11 +3440,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_55);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:1392:7: ( (lv_members_56_0= ruleXtendEnumLiteral ) )
-                            	    // PsiInternalXtend.g:1393:8: (lv_members_56_0= ruleXtendEnumLiteral )
                             	    {
-                            	    // PsiInternalXtend.g:1393:8: (lv_members_56_0= ruleXtendEnumLiteral )
-                            	    // PsiInternalXtend.g:1394:9: lv_members_56_0= ruleXtendEnumLiteral
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -3960,8 +3477,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1405:5: (otherlv_57= ';' )?
                     int alt54=2;
                     int LA54_0 = input.LA(1);
 
@@ -3970,7 +3485,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt54) {
                         case 1 :
-                            // PsiInternalXtend.g:1406:6: otherlv_57= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4007,13 +3521,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:1423:4: ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' )
                     {
-                    // PsiInternalXtend.g:1423:4: ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' )
-                    // PsiInternalXtend.g:1424:5: () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}'
                     {
-                    // PsiInternalXtend.g:1424:5: ()
-                    // PsiInternalXtend.g:1425:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4023,8 +3532,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:1430:5: ( (lv_modifiers_60_0= ruleCommonModifier ) )*
                     loop55:
                     do {
                         int alt55=2;
@@ -4037,10 +3544,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt55) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1431:6: (lv_modifiers_60_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1431:6: (lv_modifiers_60_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1432:7: lv_modifiers_60_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -4080,11 +3584,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_61);
                       				
                     }
-                    // PsiInternalXtend.g:1448:5: ( (lv_name_62_0= ruleValidID ) )
-                    // PsiInternalXtend.g:1449:6: (lv_name_62_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:1449:6: (lv_name_62_0= ruleValidID )
-                    // PsiInternalXtend.g:1450:7: lv_name_62_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4118,7 +3618,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_63);
                       				
                     }
-                    // PsiInternalXtend.g:1466:5: ( (lv_members_64_0= ruleAnnotationField ) )*
                     loop56:
                     do {
                         int alt56=2;
@@ -4131,10 +3630,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt56) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1467:6: (lv_members_64_0= ruleAnnotationField )
                     	    {
-                    	    // PsiInternalXtend.g:1467:6: (lv_members_64_0= ruleAnnotationField )
-                    	    // PsiInternalXtend.g:1468:7: lv_members_64_0= ruleAnnotationField
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -4198,15 +3694,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleAnnotationField"
-
-
-    // $ANTLR start "entryRuleMember"
-    // PsiInternalXtend.g:1490:1: entryRuleMember : ruleMember EOF ;
     public final void entryRuleMember() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:1490:16: ( ruleMember EOF )
-            // PsiInternalXtend.g:1491:2: ruleMember EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getMemberElementType()); 
@@ -4229,11 +3718,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleMember"
-
-
-    // $ANTLR start "ruleMember"
-    // PsiInternalXtend.g:1496:1: ruleMember : ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) ) ) ;
     public final void ruleMember() throws RecognitionException {
         Token lv_modifiers_8_0=null;
         Token lv_modifiers_15_0=null;
@@ -4288,14 +3772,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_128=null;
 
         try {
-            // PsiInternalXtend.g:1496:11: ( ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) ) ) )
-            // PsiInternalXtend.g:1497:2: ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) ) )
             {
-            // PsiInternalXtend.g:1497:2: ( () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) ) )
-            // PsiInternalXtend.g:1498:3: () ( (lv_annotations_1_0= ruleXAnnotation ) )* ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) )
             {
-            // PsiInternalXtend.g:1498:3: ()
-            // PsiInternalXtend.g:1499:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -4305,8 +3783,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:1504:3: ( (lv_annotations_1_0= ruleXAnnotation ) )*
             loop58:
             do {
                 int alt58=2;
@@ -4319,10 +3795,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt58) {
             	case 1 :
-            	    // PsiInternalXtend.g:1505:4: (lv_annotations_1_0= ruleXAnnotation )
             	    {
-            	    // PsiInternalXtend.g:1505:4: (lv_annotations_1_0= ruleXAnnotation )
-            	    // PsiInternalXtend.g:1506:5: lv_annotations_1_0= ruleXAnnotation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4350,19 +3823,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    break loop58;
                 }
             } while (true);
-
-            // PsiInternalXtend.g:1515:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) )
             int alt106=7;
             alt106 = dfa106.predict(input);
             switch (alt106) {
                 case 1 :
-                    // PsiInternalXtend.g:1516:4: ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? )
                     {
-                    // PsiInternalXtend.g:1516:4: ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? )
-                    // PsiInternalXtend.g:1517:5: () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )?
                     {
-                    // PsiInternalXtend.g:1517:5: ()
-                    // PsiInternalXtend.g:1518:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4372,8 +3838,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:1523:5: ( (lv_modifiers_3_0= ruleCommonModifier ) )*
                     loop59:
                     do {
                         int alt59=2;
@@ -4386,10 +3850,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt59) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1524:6: (lv_modifiers_3_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1524:6: (lv_modifiers_3_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1525:7: lv_modifiers_3_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -4417,22 +3878,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    break loop59;
                         }
                     } while (true);
-
-                    // PsiInternalXtend.g:1534:5: ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) )
                     int alt67=4;
                     alt67 = dfa67.predict(input);
                     switch (alt67) {
                         case 1 :
-                            // PsiInternalXtend.g:1535:6: ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) )
                             {
-                            // PsiInternalXtend.g:1535:6: ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) )
-                            // PsiInternalXtend.g:1536:7: ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) )
                             {
-                            // PsiInternalXtend.g:1536:7: ( (lv_modifiers_4_0= ruleFieldModifier ) )
-                            // PsiInternalXtend.g:1537:8: (lv_modifiers_4_0= ruleFieldModifier )
                             {
-                            // PsiInternalXtend.g:1537:8: (lv_modifiers_4_0= ruleFieldModifier )
-                            // PsiInternalXtend.g:1538:9: lv_modifiers_4_0= ruleFieldModifier
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4454,8 +3906,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1547:7: ( (lv_modifiers_5_0= ruleCommonModifier ) )*
                             loop60:
                             do {
                                 int alt60=2;
@@ -4468,10 +3918,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt60) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1548:8: (lv_modifiers_5_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:1548:8: (lv_modifiers_5_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:1549:9: lv_modifiers_5_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -4499,16 +3946,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop60;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:1558:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?
                             int alt61=2;
                             alt61 = dfa61.predict(input);
                             switch (alt61) {
                                 case 1 :
-                                    // PsiInternalXtend.g:1559:8: (lv_type_6_0= ruleJvmTypeReference )
                                     {
-                                    // PsiInternalXtend.g:1559:8: (lv_type_6_0= ruleJvmTypeReference )
-                                    // PsiInternalXtend.g:1560:9: lv_type_6_0= ruleJvmTypeReference
                                     {
                                     if ( state.backtracking==0 ) {
 
@@ -4533,12 +3975,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                                     break;
 
                             }
-
-                            // PsiInternalXtend.g:1569:7: ( (lv_name_7_0= ruleValidID ) )
-                            // PsiInternalXtend.g:1570:8: (lv_name_7_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:1570:8: (lv_name_7_0= ruleValidID )
-                            // PsiInternalXtend.g:1571:9: lv_name_7_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4568,16 +4005,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:1582:6: ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? )
                             {
-                            // PsiInternalXtend.g:1582:6: ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? )
-                            // PsiInternalXtend.g:1583:7: ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )?
                             {
-                            // PsiInternalXtend.g:1583:7: ( (lv_modifiers_8_0= 'extension' ) )
-                            // PsiInternalXtend.g:1584:8: (lv_modifiers_8_0= 'extension' )
                             {
-                            // PsiInternalXtend.g:1584:8: (lv_modifiers_8_0= 'extension' )
-                            // PsiInternalXtend.g:1585:9: lv_modifiers_8_0= 'extension'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4595,8 +4025,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1594:7: ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )*
                             loop62:
                             do {
                                 int alt62=3;
@@ -4612,13 +4040,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt62) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1595:8: ( (lv_modifiers_9_0= ruleFieldModifier ) )
                             	    {
-                            	    // PsiInternalXtend.g:1595:8: ( (lv_modifiers_9_0= ruleFieldModifier ) )
-                            	    // PsiInternalXtend.g:1596:9: (lv_modifiers_9_0= ruleFieldModifier )
                             	    {
-                            	    // PsiInternalXtend.g:1596:9: (lv_modifiers_9_0= ruleFieldModifier )
-                            	    // PsiInternalXtend.g:1597:10: lv_modifiers_9_0= ruleFieldModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -4645,13 +4068,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    }
                             	    break;
                             	case 2 :
-                            	    // PsiInternalXtend.g:1607:8: ( (lv_modifiers_10_0= ruleCommonModifier ) )
                             	    {
-                            	    // PsiInternalXtend.g:1607:8: ( (lv_modifiers_10_0= ruleCommonModifier ) )
-                            	    // PsiInternalXtend.g:1608:9: (lv_modifiers_10_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:1608:9: (lv_modifiers_10_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:1609:10: lv_modifiers_10_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -4682,12 +4100,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop62;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:1619:7: ( (lv_type_11_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:1620:8: (lv_type_11_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:1620:8: (lv_type_11_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:1621:9: lv_type_11_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4709,16 +4122,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1630:7: ( (lv_name_12_0= ruleValidID ) )?
                             int alt63=2;
                             alt63 = dfa63.predict(input);
                             switch (alt63) {
                                 case 1 :
-                                    // PsiInternalXtend.g:1631:8: (lv_name_12_0= ruleValidID )
                                     {
-                                    // PsiInternalXtend.g:1631:8: (lv_name_12_0= ruleValidID )
-                                    // PsiInternalXtend.g:1632:9: lv_name_12_0= ruleValidID
                                     {
                                     if ( state.backtracking==0 ) {
 
@@ -4751,16 +4159,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 3 :
-                            // PsiInternalXtend.g:1643:6: ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? )
                             {
-                            // PsiInternalXtend.g:1643:6: ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? )
-                            // PsiInternalXtend.g:1644:7: ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )?
                             {
-                            // PsiInternalXtend.g:1644:7: ( (lv_modifiers_13_0= ruleFieldModifier ) )
-                            // PsiInternalXtend.g:1645:8: (lv_modifiers_13_0= ruleFieldModifier )
                             {
-                            // PsiInternalXtend.g:1645:8: (lv_modifiers_13_0= ruleFieldModifier )
-                            // PsiInternalXtend.g:1646:9: lv_modifiers_13_0= ruleFieldModifier
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4782,8 +4183,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1655:7: ( (lv_modifiers_14_0= ruleCommonModifier ) )*
                             loop64:
                             do {
                                 int alt64=2;
@@ -4796,10 +4195,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt64) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1656:8: (lv_modifiers_14_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:1656:8: (lv_modifiers_14_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:1657:9: lv_modifiers_14_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -4827,12 +4223,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop64;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:1666:7: ( (lv_modifiers_15_0= 'extension' ) )
-                            // PsiInternalXtend.g:1667:8: (lv_modifiers_15_0= 'extension' )
                             {
-                            // PsiInternalXtend.g:1667:8: (lv_modifiers_15_0= 'extension' )
-                            // PsiInternalXtend.g:1668:9: lv_modifiers_15_0= 'extension'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4850,8 +4241,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1677:7: ( (lv_modifiers_16_0= ruleCommonModifier ) )*
                             loop65:
                             do {
                                 int alt65=2;
@@ -4864,10 +4253,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt65) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1678:8: (lv_modifiers_16_0= ruleCommonModifier )
                             	    {
-                            	    // PsiInternalXtend.g:1678:8: (lv_modifiers_16_0= ruleCommonModifier )
-                            	    // PsiInternalXtend.g:1679:9: lv_modifiers_16_0= ruleCommonModifier
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -4895,12 +4281,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	    break loop65;
                                 }
                             } while (true);
-
-                            // PsiInternalXtend.g:1688:7: ( (lv_type_17_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:1689:8: (lv_type_17_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:1689:8: (lv_type_17_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:1690:9: lv_type_17_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4922,16 +4303,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1699:7: ( (lv_name_18_0= ruleValidID ) )?
                             int alt66=2;
                             alt66 = dfa66.predict(input);
                             switch (alt66) {
                                 case 1 :
-                                    // PsiInternalXtend.g:1700:8: (lv_name_18_0= ruleValidID )
                                     {
-                                    // PsiInternalXtend.g:1700:8: (lv_name_18_0= ruleValidID )
-                                    // PsiInternalXtend.g:1701:9: lv_name_18_0= ruleValidID
                                     {
                                     if ( state.backtracking==0 ) {
 
@@ -4964,16 +4340,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 4 :
-                            // PsiInternalXtend.g:1712:6: ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) )
                             {
-                            // PsiInternalXtend.g:1712:6: ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) )
-                            // PsiInternalXtend.g:1713:7: ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) )
                             {
-                            // PsiInternalXtend.g:1713:7: ( (lv_type_19_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:1714:8: (lv_type_19_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:1714:8: (lv_type_19_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:1715:9: lv_type_19_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -4995,12 +4364,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1724:7: ( (lv_name_20_0= ruleValidID ) )
-                            // PsiInternalXtend.g:1725:8: (lv_name_20_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:1725:8: (lv_name_20_0= ruleValidID )
-                            // PsiInternalXtend.g:1726:9: lv_name_20_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5031,8 +4395,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1737:5: (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )?
                     int alt68=2;
                     int LA68_0 = input.LA(1);
 
@@ -5041,7 +4403,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt68) {
                         case 1 :
-                            // PsiInternalXtend.g:1738:6: otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) )
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5054,11 +4415,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_21);
                               					
                             }
-                            // PsiInternalXtend.g:1745:6: ( (lv_initialValue_22_0= ruleXExpression ) )
-                            // PsiInternalXtend.g:1746:7: (lv_initialValue_22_0= ruleXExpression )
                             {
-                            // PsiInternalXtend.g:1746:7: (lv_initialValue_22_0= ruleXExpression )
-                            // PsiInternalXtend.g:1747:8: lv_initialValue_22_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5086,8 +4443,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1757:5: (otherlv_23= ';' )?
                     int alt69=2;
                     int LA69_0 = input.LA(1);
 
@@ -5096,7 +4451,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt69) {
                         case 1 :
-                            // PsiInternalXtend.g:1758:6: otherlv_23= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5122,13 +4476,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:1768:4: ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? )
                     {
-                    // PsiInternalXtend.g:1768:4: ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? )
-                    // PsiInternalXtend.g:1769:5: () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )?
                     {
-                    // PsiInternalXtend.g:1769:5: ()
-                    // PsiInternalXtend.g:1770:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5138,8 +4487,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:1775:5: ( (lv_modifiers_25_0= ruleCommonModifier ) )*
                     loop70:
                     do {
                         int alt70=2;
@@ -5152,10 +4499,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt70) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1776:6: (lv_modifiers_25_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1776:6: (lv_modifiers_25_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1777:7: lv_modifiers_25_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -5183,12 +4527,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    break loop70;
                         }
                     } while (true);
-
-                    // PsiInternalXtend.g:1786:5: ( (lv_modifiers_26_0= ruleMethodModifier ) )
-                    // PsiInternalXtend.g:1787:6: (lv_modifiers_26_0= ruleMethodModifier )
                     {
-                    // PsiInternalXtend.g:1787:6: (lv_modifiers_26_0= ruleMethodModifier )
-                    // PsiInternalXtend.g:1788:7: lv_modifiers_26_0= ruleMethodModifier
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5210,8 +4549,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:1797:5: ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )*
                     loop71:
                     do {
                         int alt71=3;
@@ -5227,13 +4564,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt71) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:1798:6: ( (lv_modifiers_27_0= ruleCommonModifier ) )
                     	    {
-                    	    // PsiInternalXtend.g:1798:6: ( (lv_modifiers_27_0= ruleCommonModifier ) )
-                    	    // PsiInternalXtend.g:1799:7: (lv_modifiers_27_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1799:7: (lv_modifiers_27_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:1800:8: lv_modifiers_27_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -5260,13 +4592,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalXtend.g:1810:6: ( (lv_modifiers_28_0= ruleMethodModifier ) )
                     	    {
-                    	    // PsiInternalXtend.g:1810:6: ( (lv_modifiers_28_0= ruleMethodModifier ) )
-                    	    // PsiInternalXtend.g:1811:7: (lv_modifiers_28_0= ruleMethodModifier )
                     	    {
-                    	    // PsiInternalXtend.g:1811:7: (lv_modifiers_28_0= ruleMethodModifier )
-                    	    // PsiInternalXtend.g:1812:8: lv_modifiers_28_0= ruleMethodModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -5297,8 +4624,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    break loop71;
                         }
                     } while (true);
-
-                    // PsiInternalXtend.g:1822:5: (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )?
                     int alt73=2;
                     int LA73_0 = input.LA(1);
 
@@ -5311,7 +4636,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt73) {
                         case 1 :
-                            // PsiInternalXtend.g:1823:6: otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5324,11 +4648,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_29);
                               					
                             }
-                            // PsiInternalXtend.g:1830:6: ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:1831:7: (lv_typeParameters_30_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:1831:7: (lv_typeParameters_30_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:1832:8: lv_typeParameters_30_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5350,8 +4670,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1841:6: (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )*
                             loop72:
                             do {
                                 int alt72=2;
@@ -5364,7 +4682,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt72) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:1842:7: otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -5377,11 +4694,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_31);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:1849:7: ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:1850:8: (lv_typeParameters_32_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:1850:8: (lv_typeParameters_32_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:1851:9: lv_typeParameters_32_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -5429,25 +4742,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:1869:5: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) )
                     int alt74=5;
                     alt74 = dfa74.predict(input);
                     switch (alt74) {
                         case 1 :
-                            // PsiInternalXtend.g:1870:6: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) )
                             {
-                            // PsiInternalXtend.g:1870:6: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) )
-                            // PsiInternalXtend.g:1871:7: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' )
                             {
-                            // PsiInternalXtend.g:1890:7: ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' )
-                            // PsiInternalXtend.g:1891:8: ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '('
                             {
-                            // PsiInternalXtend.g:1891:8: ( (lv_returnType_34_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:1892:9: (lv_returnType_34_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:1892:9: (lv_returnType_34_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:1893:10: lv_returnType_34_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5469,12 +4771,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1902:8: ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) )
-                            // PsiInternalXtend.g:1903:9: (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo )
                             {
-                            // PsiInternalXtend.g:1903:9: (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo )
-                            // PsiInternalXtend.g:1904:10: lv_createExtensionInfo_35_0= ruleCreateExtensionInfo
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5496,12 +4793,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1913:8: ( (lv_name_36_0= ruleValidID ) )
-                            // PsiInternalXtend.g:1914:9: (lv_name_36_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:1914:9: (lv_name_36_0= ruleValidID )
-                            // PsiInternalXtend.g:1915:10: lv_name_36_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5545,19 +4837,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:1934:6: ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) )
                             {
-                            // PsiInternalXtend.g:1934:6: ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) )
-                            // PsiInternalXtend.g:1935:7: ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' )
                             {
-                            // PsiInternalXtend.g:1949:7: ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' )
-                            // PsiInternalXtend.g:1950:8: ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '('
                             {
-                            // PsiInternalXtend.g:1950:8: ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) )
-                            // PsiInternalXtend.g:1951:9: (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs )
                             {
-                            // PsiInternalXtend.g:1951:9: (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs )
-                            // PsiInternalXtend.g:1952:10: lv_returnType_38_0= ruleTypeReferenceWithTypeArgs
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5579,12 +4862,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:1961:8: ( (lv_name_39_0= ruleFunctionID ) )
-                            // PsiInternalXtend.g:1962:9: (lv_name_39_0= ruleFunctionID )
                             {
-                            // PsiInternalXtend.g:1962:9: (lv_name_39_0= ruleFunctionID )
-                            // PsiInternalXtend.g:1963:10: lv_name_39_0= ruleFunctionID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5628,19 +4906,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 3 :
-                            // PsiInternalXtend.g:1982:6: ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) )
                             {
-                            // PsiInternalXtend.g:1982:6: ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) )
-                            // PsiInternalXtend.g:1983:7: ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' )
                             {
-                            // PsiInternalXtend.g:1997:7: ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' )
-                            // PsiInternalXtend.g:1998:8: ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '('
                             {
-                            // PsiInternalXtend.g:1998:8: ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) )
-                            // PsiInternalXtend.g:1999:9: (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs )
                             {
-                            // PsiInternalXtend.g:1999:9: (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs )
-                            // PsiInternalXtend.g:2000:10: lv_returnType_41_0= ruleTypeReferenceNoTypeArgs
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5662,12 +4931,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2009:8: ( (lv_name_42_0= ruleFunctionID ) )
-                            // PsiInternalXtend.g:2010:9: (lv_name_42_0= ruleFunctionID )
                             {
-                            // PsiInternalXtend.g:2010:9: (lv_name_42_0= ruleFunctionID )
-                            // PsiInternalXtend.g:2011:10: lv_name_42_0= ruleFunctionID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5711,19 +4975,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 4 :
-                            // PsiInternalXtend.g:2030:6: ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) )
                             {
-                            // PsiInternalXtend.g:2030:6: ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) )
-                            // PsiInternalXtend.g:2031:7: ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' )
                             {
-                            // PsiInternalXtend.g:2045:7: ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' )
-                            // PsiInternalXtend.g:2046:8: ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '('
                             {
-                            // PsiInternalXtend.g:2046:8: ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) )
-                            // PsiInternalXtend.g:2047:9: (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo )
                             {
-                            // PsiInternalXtend.g:2047:9: (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo )
-                            // PsiInternalXtend.g:2048:10: lv_createExtensionInfo_44_0= ruleCreateExtensionInfo
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5745,12 +5000,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2057:8: ( (lv_name_45_0= ruleValidID ) )
-                            // PsiInternalXtend.g:2058:9: (lv_name_45_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:2058:9: (lv_name_45_0= ruleValidID )
-                            // PsiInternalXtend.g:2059:10: lv_name_45_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5794,16 +5044,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 5 :
-                            // PsiInternalXtend.g:2078:6: ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' )
                             {
-                            // PsiInternalXtend.g:2078:6: ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' )
-                            // PsiInternalXtend.g:2079:7: ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '('
                             {
-                            // PsiInternalXtend.g:2079:7: ( (lv_name_47_0= ruleFunctionID ) )
-                            // PsiInternalXtend.g:2080:8: (lv_name_47_0= ruleFunctionID )
                             {
-                            // PsiInternalXtend.g:2080:8: (lv_name_47_0= ruleFunctionID )
-                            // PsiInternalXtend.g:2081:9: lv_name_47_0= ruleFunctionID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5845,8 +5088,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2099:5: ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )?
                     int alt76=2;
                     int LA76_0 = input.LA(1);
 
@@ -5855,13 +5096,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt76) {
                         case 1 :
-                            // PsiInternalXtend.g:2100:6: ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )*
                             {
-                            // PsiInternalXtend.g:2100:6: ( (lv_parameters_49_0= ruleParameter ) )
-                            // PsiInternalXtend.g:2101:7: (lv_parameters_49_0= ruleParameter )
                             {
-                            // PsiInternalXtend.g:2101:7: (lv_parameters_49_0= ruleParameter )
-                            // PsiInternalXtend.g:2102:8: lv_parameters_49_0= ruleParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5883,8 +5119,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2111:6: (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )*
                             loop75:
                             do {
                                 int alt75=2;
@@ -5897,7 +5131,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt75) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2112:7: otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -5910,11 +5143,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_50);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2119:7: ( (lv_parameters_51_0= ruleParameter ) )
-                            	    // PsiInternalXtend.g:2120:8: (lv_parameters_51_0= ruleParameter )
                             	    {
-                            	    // PsiInternalXtend.g:2120:8: (lv_parameters_51_0= ruleParameter )
-                            	    // PsiInternalXtend.g:2121:9: lv_parameters_51_0= ruleParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -5963,7 +5192,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_52);
                       				
                     }
-                    // PsiInternalXtend.g:2139:5: (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )?
                     int alt78=2;
                     int LA78_0 = input.LA(1);
 
@@ -5972,7 +5200,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt78) {
                         case 1 :
-                            // PsiInternalXtend.g:2140:6: otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5985,11 +5212,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_53);
                               					
                             }
-                            // PsiInternalXtend.g:2147:6: ( (lv_exceptions_54_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:2148:7: (lv_exceptions_54_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:2148:7: (lv_exceptions_54_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:2149:8: lv_exceptions_54_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6011,8 +5234,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2158:6: (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )*
                             loop77:
                             do {
                                 int alt77=2;
@@ -6025,7 +5246,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt77) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2159:7: otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6038,11 +5258,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_55);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2166:7: ( (lv_exceptions_56_0= ruleJvmTypeReference ) )
-                            	    // PsiInternalXtend.g:2167:8: (lv_exceptions_56_0= ruleJvmTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:2167:8: (lv_exceptions_56_0= ruleJvmTypeReference )
-                            	    // PsiInternalXtend.g:2168:9: lv_exceptions_56_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6079,8 +5295,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2179:5: ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )?
                     int alt79=4;
                     switch ( input.LA(1) ) {
                         case KW_LeftCurlyBracket:
@@ -6103,13 +5317,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                     switch (alt79) {
                         case 1 :
-                            // PsiInternalXtend.g:2180:6: ( (lv_expression_57_0= ruleXBlockExpression ) )
                             {
-                            // PsiInternalXtend.g:2180:6: ( (lv_expression_57_0= ruleXBlockExpression ) )
-                            // PsiInternalXtend.g:2181:7: (lv_expression_57_0= ruleXBlockExpression )
                             {
-                            // PsiInternalXtend.g:2181:7: (lv_expression_57_0= ruleXBlockExpression )
-                            // PsiInternalXtend.g:2182:8: lv_expression_57_0= ruleXBlockExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6136,13 +5345,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:2192:6: ( (lv_expression_58_0= ruleRichString ) )
                             {
-                            // PsiInternalXtend.g:2192:6: ( (lv_expression_58_0= ruleRichString ) )
-                            // PsiInternalXtend.g:2193:7: (lv_expression_58_0= ruleRichString )
                             {
-                            // PsiInternalXtend.g:2193:7: (lv_expression_58_0= ruleRichString )
-                            // PsiInternalXtend.g:2194:8: lv_expression_58_0= ruleRichString
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6169,7 +5373,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 3 :
-                            // PsiInternalXtend.g:2204:6: otherlv_59= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6195,13 +5398,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:2214:4: ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) )
                     {
-                    // PsiInternalXtend.g:2214:4: ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) )
-                    // PsiInternalXtend.g:2215:5: () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) )
                     {
-                    // PsiInternalXtend.g:2215:5: ()
-                    // PsiInternalXtend.g:2216:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6211,8 +5409,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:2221:5: ( (lv_modifiers_61_0= ruleCommonModifier ) )*
                     loop80:
                     do {
                         int alt80=2;
@@ -6225,10 +5421,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt80) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2222:6: (lv_modifiers_61_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:2222:6: (lv_modifiers_61_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:2223:7: lv_modifiers_61_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -6268,7 +5461,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_62);
                       				
                     }
-                    // PsiInternalXtend.g:2239:5: (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )?
                     int alt82=2;
                     int LA82_0 = input.LA(1);
 
@@ -6277,7 +5469,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt82) {
                         case 1 :
-                            // PsiInternalXtend.g:2240:6: otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6290,11 +5481,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_63);
                               					
                             }
-                            // PsiInternalXtend.g:2247:6: ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:2248:7: (lv_typeParameters_64_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:2248:7: (lv_typeParameters_64_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:2249:8: lv_typeParameters_64_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6316,8 +5503,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2258:6: (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )*
                             loop81:
                             do {
                                 int alt81=2;
@@ -6330,7 +5515,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt81) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2259:7: otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6343,11 +5527,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_65);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2266:7: ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:2267:8: (lv_typeParameters_66_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:2267:8: (lv_typeParameters_66_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:2268:9: lv_typeParameters_66_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6407,7 +5587,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_68);
                       				
                     }
-                    // PsiInternalXtend.g:2293:5: ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )?
                     int alt84=2;
                     int LA84_0 = input.LA(1);
 
@@ -6416,13 +5595,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt84) {
                         case 1 :
-                            // PsiInternalXtend.g:2294:6: ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )*
                             {
-                            // PsiInternalXtend.g:2294:6: ( (lv_parameters_69_0= ruleParameter ) )
-                            // PsiInternalXtend.g:2295:7: (lv_parameters_69_0= ruleParameter )
                             {
-                            // PsiInternalXtend.g:2295:7: (lv_parameters_69_0= ruleParameter )
-                            // PsiInternalXtend.g:2296:8: lv_parameters_69_0= ruleParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6444,8 +5618,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2305:6: (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )*
                             loop83:
                             do {
                                 int alt83=2;
@@ -6458,7 +5630,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt83) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2306:7: otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6471,11 +5642,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_70);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2313:7: ( (lv_parameters_71_0= ruleParameter ) )
-                            	    // PsiInternalXtend.g:2314:8: (lv_parameters_71_0= ruleParameter )
                             	    {
-                            	    // PsiInternalXtend.g:2314:8: (lv_parameters_71_0= ruleParameter )
-                            	    // PsiInternalXtend.g:2315:9: lv_parameters_71_0= ruleParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6524,7 +5691,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_72);
                       				
                     }
-                    // PsiInternalXtend.g:2333:5: (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )?
                     int alt86=2;
                     int LA86_0 = input.LA(1);
 
@@ -6533,7 +5699,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt86) {
                         case 1 :
-                            // PsiInternalXtend.g:2334:6: otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6546,11 +5711,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_73);
                               					
                             }
-                            // PsiInternalXtend.g:2341:6: ( (lv_exceptions_74_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:2342:7: (lv_exceptions_74_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:2342:7: (lv_exceptions_74_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:2343:8: lv_exceptions_74_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6572,8 +5733,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2352:6: (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )*
                             loop85:
                             do {
                                 int alt85=2;
@@ -6586,7 +5745,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt85) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2353:7: otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6599,11 +5757,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_75);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2360:7: ( (lv_exceptions_76_0= ruleJvmTypeReference ) )
-                            	    // PsiInternalXtend.g:2361:8: (lv_exceptions_76_0= ruleJvmTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:2361:8: (lv_exceptions_76_0= ruleJvmTypeReference )
-                            	    // PsiInternalXtend.g:2362:9: lv_exceptions_76_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6640,12 +5794,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2373:5: ( (lv_expression_77_0= ruleXBlockExpression ) )
-                    // PsiInternalXtend.g:2374:6: (lv_expression_77_0= ruleXBlockExpression )
                     {
-                    // PsiInternalXtend.g:2374:6: (lv_expression_77_0= ruleXBlockExpression )
-                    // PsiInternalXtend.g:2375:7: lv_expression_77_0= ruleXBlockExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6675,13 +5824,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:2386:4: ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' )
                     {
-                    // PsiInternalXtend.g:2386:4: ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' )
-                    // PsiInternalXtend.g:2387:5: () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}'
                     {
-                    // PsiInternalXtend.g:2387:5: ()
-                    // PsiInternalXtend.g:2388:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6691,8 +5835,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:2393:5: ( (lv_modifiers_79_0= ruleCommonModifier ) )*
                     loop87:
                     do {
                         int alt87=2;
@@ -6705,10 +5847,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt87) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2394:6: (lv_modifiers_79_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:2394:6: (lv_modifiers_79_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:2395:7: lv_modifiers_79_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -6748,11 +5887,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_80);
                       				
                     }
-                    // PsiInternalXtend.g:2411:5: ( (lv_name_81_0= ruleValidID ) )
-                    // PsiInternalXtend.g:2412:6: (lv_name_81_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:2412:6: (lv_name_81_0= ruleValidID )
-                    // PsiInternalXtend.g:2413:7: lv_name_81_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6774,8 +5909,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:2422:5: (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )?
                     int alt89=2;
                     int LA89_0 = input.LA(1);
 
@@ -6784,7 +5917,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt89) {
                         case 1 :
-                            // PsiInternalXtend.g:2423:6: otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6797,11 +5929,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_82);
                               					
                             }
-                            // PsiInternalXtend.g:2430:6: ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:2431:7: (lv_typeParameters_83_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:2431:7: (lv_typeParameters_83_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:2432:8: lv_typeParameters_83_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6823,8 +5951,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2441:6: (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )*
                             loop88:
                             do {
                                 int alt88=2;
@@ -6837,7 +5963,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt88) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2442:7: otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6850,11 +5975,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_84);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2449:7: ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:2450:8: (lv_typeParameters_85_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:2450:8: (lv_typeParameters_85_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:2451:9: lv_typeParameters_85_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -6902,8 +6023,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2469:5: (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )?
                     int alt90=2;
                     int LA90_0 = input.LA(1);
 
@@ -6912,7 +6031,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt90) {
                         case 1 :
-                            // PsiInternalXtend.g:2470:6: otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) )
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6925,11 +6043,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_87);
                               					
                             }
-                            // PsiInternalXtend.g:2477:6: ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:2478:7: (lv_extends_88_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:2478:7: (lv_extends_88_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:2479:8: lv_extends_88_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6957,8 +6071,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2489:5: (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )?
                     int alt92=2;
                     int LA92_0 = input.LA(1);
 
@@ -6967,7 +6079,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt92) {
                         case 1 :
-                            // PsiInternalXtend.g:2490:6: otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -6980,11 +6091,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_89);
                               					
                             }
-                            // PsiInternalXtend.g:2497:6: ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:2498:7: (lv_implements_90_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:2498:7: (lv_implements_90_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:2499:8: lv_implements_90_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7006,8 +6113,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2508:6: (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )*
                             loop91:
                             do {
                                 int alt91=2;
@@ -7020,7 +6125,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt91) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2509:7: otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7033,11 +6137,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_91);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2516:7: ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) )
-                            	    // PsiInternalXtend.g:2517:8: (lv_implements_92_0= ruleJvmParameterizedTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:2517:8: (lv_implements_92_0= ruleJvmParameterizedTypeReference )
-                            	    // PsiInternalXtend.g:2518:9: lv_implements_92_0= ruleJvmParameterizedTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7086,7 +6186,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_93);
                       				
                     }
-                    // PsiInternalXtend.g:2536:5: ( (lv_members_94_0= ruleMember ) )*
                     loop93:
                     do {
                         int alt93=2;
@@ -7099,10 +6198,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt93) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2537:6: (lv_members_94_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:2537:6: (lv_members_94_0= ruleMember )
-                    	    // PsiInternalXtend.g:2538:7: lv_members_94_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7149,13 +6245,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:2556:4: ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' )
                     {
-                    // PsiInternalXtend.g:2556:4: ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' )
-                    // PsiInternalXtend.g:2557:5: () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}'
                     {
-                    // PsiInternalXtend.g:2557:5: ()
-                    // PsiInternalXtend.g:2558:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7165,8 +6256,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:2563:5: ( (lv_modifiers_97_0= ruleCommonModifier ) )*
                     loop94:
                     do {
                         int alt94=2;
@@ -7179,10 +6268,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt94) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2564:6: (lv_modifiers_97_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:2564:6: (lv_modifiers_97_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:2565:7: lv_modifiers_97_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7222,11 +6308,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_98);
                       				
                     }
-                    // PsiInternalXtend.g:2581:5: ( (lv_name_99_0= ruleValidID ) )
-                    // PsiInternalXtend.g:2582:6: (lv_name_99_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:2582:6: (lv_name_99_0= ruleValidID )
-                    // PsiInternalXtend.g:2583:7: lv_name_99_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7248,8 +6330,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:2592:5: (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )?
                     int alt96=2;
                     int LA96_0 = input.LA(1);
 
@@ -7258,7 +6338,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt96) {
                         case 1 :
-                            // PsiInternalXtend.g:2593:6: otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7271,11 +6350,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_100);
                               					
                             }
-                            // PsiInternalXtend.g:2600:6: ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) )
-                            // PsiInternalXtend.g:2601:7: (lv_typeParameters_101_0= ruleJvmTypeParameter )
                             {
-                            // PsiInternalXtend.g:2601:7: (lv_typeParameters_101_0= ruleJvmTypeParameter )
-                            // PsiInternalXtend.g:2602:8: lv_typeParameters_101_0= ruleJvmTypeParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7297,8 +6372,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2611:6: (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )*
                             loop95:
                             do {
                                 int alt95=2;
@@ -7311,7 +6384,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt95) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2612:7: otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7324,11 +6396,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_102);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2619:7: ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) )
-                            	    // PsiInternalXtend.g:2620:8: (lv_typeParameters_103_0= ruleJvmTypeParameter )
                             	    {
-                            	    // PsiInternalXtend.g:2620:8: (lv_typeParameters_103_0= ruleJvmTypeParameter )
-                            	    // PsiInternalXtend.g:2621:9: lv_typeParameters_103_0= ruleJvmTypeParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7376,8 +6444,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2639:5: (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )?
                     int alt98=2;
                     int LA98_0 = input.LA(1);
 
@@ -7386,7 +6452,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt98) {
                         case 1 :
-                            // PsiInternalXtend.g:2640:6: otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )*
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7399,11 +6464,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               						doneLeaf(otherlv_105);
                               					
                             }
-                            // PsiInternalXtend.g:2647:6: ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) )
-                            // PsiInternalXtend.g:2648:7: (lv_extends_106_0= ruleJvmParameterizedTypeReference )
                             {
-                            // PsiInternalXtend.g:2648:7: (lv_extends_106_0= ruleJvmParameterizedTypeReference )
-                            // PsiInternalXtend.g:2649:8: lv_extends_106_0= ruleJvmParameterizedTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7425,8 +6486,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2658:6: (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )*
                             loop97:
                             do {
                                 int alt97=2;
@@ -7439,7 +6498,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt97) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2659:7: otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7452,11 +6510,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_107);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2666:7: ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) )
-                            	    // PsiInternalXtend.g:2667:8: (lv_extends_108_0= ruleJvmParameterizedTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:2667:8: (lv_extends_108_0= ruleJvmParameterizedTypeReference )
-                            	    // PsiInternalXtend.g:2668:9: lv_extends_108_0= ruleJvmParameterizedTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7505,7 +6559,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_109);
                       				
                     }
-                    // PsiInternalXtend.g:2686:5: ( (lv_members_110_0= ruleMember ) )*
                     loop99:
                     do {
                         int alt99=2;
@@ -7518,10 +6571,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt99) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2687:6: (lv_members_110_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:2687:6: (lv_members_110_0= ruleMember )
-                    	    // PsiInternalXtend.g:2688:7: lv_members_110_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7568,13 +6618,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:2706:4: ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' )
                     {
-                    // PsiInternalXtend.g:2706:4: ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' )
-                    // PsiInternalXtend.g:2707:5: () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}'
                     {
-                    // PsiInternalXtend.g:2707:5: ()
-                    // PsiInternalXtend.g:2708:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7584,8 +6629,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:2713:5: ( (lv_modifiers_113_0= ruleCommonModifier ) )*
                     loop100:
                     do {
                         int alt100=2;
@@ -7598,10 +6641,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt100) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2714:6: (lv_modifiers_113_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:2714:6: (lv_modifiers_113_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:2715:7: lv_modifiers_113_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7641,11 +6681,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_114);
                       				
                     }
-                    // PsiInternalXtend.g:2731:5: ( (lv_name_115_0= ruleValidID ) )
-                    // PsiInternalXtend.g:2732:6: (lv_name_115_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:2732:6: (lv_name_115_0= ruleValidID )
-                    // PsiInternalXtend.g:2733:7: lv_name_115_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7679,7 +6715,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_116);
                       				
                     }
-                    // PsiInternalXtend.g:2749:5: ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )?
                     int alt102=2;
                     int LA102_0 = input.LA(1);
 
@@ -7688,13 +6723,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt102) {
                         case 1 :
-                            // PsiInternalXtend.g:2750:6: ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )*
                             {
-                            // PsiInternalXtend.g:2750:6: ( (lv_members_117_0= ruleXtendEnumLiteral ) )
-                            // PsiInternalXtend.g:2751:7: (lv_members_117_0= ruleXtendEnumLiteral )
                             {
-                            // PsiInternalXtend.g:2751:7: (lv_members_117_0= ruleXtendEnumLiteral )
-                            // PsiInternalXtend.g:2752:8: lv_members_117_0= ruleXtendEnumLiteral
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7716,8 +6746,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:2761:6: (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )*
                             loop101:
                             do {
                                 int alt101=2;
@@ -7730,7 +6758,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt101) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:2762:7: otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7743,11 +6770,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_118);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:2769:7: ( (lv_members_119_0= ruleXtendEnumLiteral ) )
-                            	    // PsiInternalXtend.g:2770:8: (lv_members_119_0= ruleXtendEnumLiteral )
                             	    {
-                            	    // PsiInternalXtend.g:2770:8: (lv_members_119_0= ruleXtendEnumLiteral )
-                            	    // PsiInternalXtend.g:2771:9: lv_members_119_0= ruleXtendEnumLiteral
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7784,8 +6807,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:2782:5: (otherlv_120= ';' )?
                     int alt103=2;
                     int LA103_0 = input.LA(1);
 
@@ -7794,7 +6815,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt103) {
                         case 1 :
-                            // PsiInternalXtend.g:2783:6: otherlv_120= ';'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7831,13 +6851,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:2800:4: ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' )
                     {
-                    // PsiInternalXtend.g:2800:4: ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' )
-                    // PsiInternalXtend.g:2801:5: () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}'
                     {
-                    // PsiInternalXtend.g:2801:5: ()
-                    // PsiInternalXtend.g:2802:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7847,8 +6862,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:2807:5: ( (lv_modifiers_123_0= ruleCommonModifier ) )*
                     loop104:
                     do {
                         int alt104=2;
@@ -7861,10 +6874,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt104) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2808:6: (lv_modifiers_123_0= ruleCommonModifier )
                     	    {
-                    	    // PsiInternalXtend.g:2808:6: (lv_modifiers_123_0= ruleCommonModifier )
-                    	    // PsiInternalXtend.g:2809:7: lv_modifiers_123_0= ruleCommonModifier
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7904,11 +6914,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_124);
                       				
                     }
-                    // PsiInternalXtend.g:2825:5: ( (lv_name_125_0= ruleValidID ) )
-                    // PsiInternalXtend.g:2826:6: (lv_name_125_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:2826:6: (lv_name_125_0= ruleValidID )
-                    // PsiInternalXtend.g:2827:7: lv_name_125_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7942,7 +6948,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_126);
                       				
                     }
-                    // PsiInternalXtend.g:2843:5: ( (lv_members_127_0= ruleAnnotationField ) )*
                     loop105:
                     do {
                         int alt105=2;
@@ -7955,10 +6960,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt105) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2844:6: (lv_members_127_0= ruleAnnotationField )
                     	    {
-                    	    // PsiInternalXtend.g:2844:6: (lv_members_127_0= ruleAnnotationField )
-                    	    // PsiInternalXtend.g:2845:7: lv_members_127_0= ruleAnnotationField
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -8022,15 +7024,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleMember"
-
-
-    // $ANTLR start "entryRuleTypeReferenceNoTypeArgs"
-    // PsiInternalXtend.g:2867:1: entryRuleTypeReferenceNoTypeArgs : ruleTypeReferenceNoTypeArgs EOF ;
     public final void entryRuleTypeReferenceNoTypeArgs() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:2867:33: ( ruleTypeReferenceNoTypeArgs EOF )
-            // PsiInternalXtend.g:2868:2: ruleTypeReferenceNoTypeArgs EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getTypeReferenceNoTypeArgsElementType()); 
@@ -8053,21 +7048,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleTypeReferenceNoTypeArgs"
-
-
-    // $ANTLR start "ruleTypeReferenceNoTypeArgs"
-    // PsiInternalXtend.g:2873:1: ruleTypeReferenceNoTypeArgs : ( ( ruleQualifiedName ) ) ;
     public final void ruleTypeReferenceNoTypeArgs() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:2873:28: ( ( ( ruleQualifiedName ) ) )
-            // PsiInternalXtend.g:2874:2: ( ( ruleQualifiedName ) )
             {
-            // PsiInternalXtend.g:2874:2: ( ( ruleQualifiedName ) )
-            // PsiInternalXtend.g:2875:3: ( ruleQualifiedName )
             {
-            // PsiInternalXtend.g:2875:3: ( ruleQualifiedName )
-            // PsiInternalXtend.g:2876:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -8102,15 +7086,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleTypeReferenceNoTypeArgs"
-
-
-    // $ANTLR start "entryRuleTypeReferenceWithTypeArgs"
-    // PsiInternalXtend.g:2888:1: entryRuleTypeReferenceWithTypeArgs : ruleTypeReferenceWithTypeArgs EOF ;
     public final void entryRuleTypeReferenceWithTypeArgs() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:2888:35: ( ruleTypeReferenceWithTypeArgs EOF )
-            // PsiInternalXtend.g:2889:2: ruleTypeReferenceWithTypeArgs EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getTypeReferenceWithTypeArgsElementType()); 
@@ -8133,25 +7110,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleTypeReferenceWithTypeArgs"
-
-
-    // $ANTLR start "ruleTypeReferenceWithTypeArgs"
-    // PsiInternalXtend.g:2894:1: ruleTypeReferenceWithTypeArgs : ( ( ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ( ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | ruleXFunctionTypeRef ) ;
     public final void ruleTypeReferenceWithTypeArgs() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:2894:30: ( ( ( ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ( ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | ruleXFunctionTypeRef ) )
-            // PsiInternalXtend.g:2895:2: ( ( ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ( ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | ruleXFunctionTypeRef )
             {
-            // PsiInternalXtend.g:2895:2: ( ( ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ( ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | ruleXFunctionTypeRef )
             int alt109=3;
             alt109 = dfa109.predict(input);
             switch (alt109) {
                 case 1 :
-                    // PsiInternalXtend.g:2896:3: ( ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
                     {
-                    // PsiInternalXtend.g:2896:3: ( ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
-                    // PsiInternalXtend.g:2897:4: ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8168,7 +7134,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneComposite();
                       			
                     }
-                    // PsiInternalXtend.g:2904:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     loop107:
                     do {
                         int alt107=2;
@@ -8181,13 +7146,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt107) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2905:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
                     	    {
-                    	    // PsiInternalXtend.g:2911:5: ( () ruleArrayBrackets )
-                    	    // PsiInternalXtend.g:2912:6: () ruleArrayBrackets
                     	    {
-                    	    // PsiInternalXtend.g:2912:6: ()
-                    	    // PsiInternalXtend.g:2913:7: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -8232,10 +7192,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:2929:3: ( ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ )
                     {
-                    // PsiInternalXtend.g:2929:3: ( ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ )
-                    // PsiInternalXtend.g:2930:4: ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8252,7 +7209,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneComposite();
                       			
                     }
-                    // PsiInternalXtend.g:2937:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+
                     int cnt108=0;
                     loop108:
                     do {
@@ -8266,13 +7222,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt108) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:2938:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
                     	    {
-                    	    // PsiInternalXtend.g:2944:5: ( () ruleArrayBrackets )
-                    	    // PsiInternalXtend.g:2945:6: () ruleArrayBrackets
                     	    {
-                    	    // PsiInternalXtend.g:2945:6: ()
-                    	    // PsiInternalXtend.g:2946:7: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -8322,7 +7273,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:2962:3: ruleXFunctionTypeRef
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8357,15 +7307,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleTypeReferenceWithTypeArgs"
-
-
-    // $ANTLR start "entryRuleParameterizedTypeReferenceWithTypeArgs"
-    // PsiInternalXtend.g:2973:1: entryRuleParameterizedTypeReferenceWithTypeArgs : ruleParameterizedTypeReferenceWithTypeArgs EOF ;
     public final void entryRuleParameterizedTypeReferenceWithTypeArgs() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:2973:48: ( ruleParameterizedTypeReferenceWithTypeArgs EOF )
-            // PsiInternalXtend.g:2974:2: ruleParameterizedTypeReferenceWithTypeArgs EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getParameterizedTypeReferenceWithTypeArgsElementType()); 
@@ -8388,11 +7331,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleParameterizedTypeReferenceWithTypeArgs"
-
-
-    // $ANTLR start "ruleParameterizedTypeReferenceWithTypeArgs"
-    // PsiInternalXtend.g:2979:1: ruleParameterizedTypeReferenceWithTypeArgs : ( ( ( ruleQualifiedName ) ) (otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* ) ) ;
     public final void ruleParameterizedTypeReferenceWithTypeArgs() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -8403,17 +7341,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_13=null;
 
         try {
-            // PsiInternalXtend.g:2979:43: ( ( ( ( ruleQualifiedName ) ) (otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* ) ) )
-            // PsiInternalXtend.g:2980:2: ( ( ( ruleQualifiedName ) ) (otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* ) )
             {
-            // PsiInternalXtend.g:2980:2: ( ( ( ruleQualifiedName ) ) (otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* ) )
-            // PsiInternalXtend.g:2981:3: ( ( ruleQualifiedName ) ) (otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )
             {
-            // PsiInternalXtend.g:2981:3: ( ( ruleQualifiedName ) )
-            // PsiInternalXtend.g:2982:4: ( ruleQualifiedName )
             {
-            // PsiInternalXtend.g:2982:4: ( ruleQualifiedName )
-            // PsiInternalXtend.g:2983:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -8435,9 +7365,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:2992:3: (otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )
-            // PsiInternalXtend.g:2993:4: otherlv_1= '<' ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
             {
             if ( state.backtracking==0 ) {
 
@@ -8450,11 +7377,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               				doneLeaf(otherlv_1);
               			
             }
-            // PsiInternalXtend.g:3000:4: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
-            // PsiInternalXtend.g:3001:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
             {
-            // PsiInternalXtend.g:3001:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
-            // PsiInternalXtend.g:3002:6: lv_arguments_2_0= ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -8476,8 +7399,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:3011:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
             loop110:
             do {
                 int alt110=2;
@@ -8490,7 +7411,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt110) {
             	case 1 :
-            	    // PsiInternalXtend.g:3012:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -8503,11 +7423,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	      					doneLeaf(otherlv_3);
             	      				
             	    }
-            	    // PsiInternalXtend.g:3019:5: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
-            	    // PsiInternalXtend.g:3020:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
             	    {
-            	    // PsiInternalXtend.g:3020:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
-            	    // PsiInternalXtend.g:3021:7: lv_arguments_4_0= ruleJvmArgumentTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -8550,7 +7466,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               				doneLeaf(otherlv_5);
               			
             }
-            // PsiInternalXtend.g:3038:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
             loop113:
             do {
                 int alt113=2;
@@ -8563,16 +7478,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt113) {
             	case 1 :
-            	    // PsiInternalXtend.g:3039:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
             	    {
-            	    // PsiInternalXtend.g:3039:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
-            	    // PsiInternalXtend.g:3040:6: ( ( () '.' ) )=> ( () otherlv_7= '.' )
             	    {
-            	    // PsiInternalXtend.g:3046:6: ( () otherlv_7= '.' )
-            	    // PsiInternalXtend.g:3047:7: () otherlv_7= '.'
             	    {
-            	    // PsiInternalXtend.g:3047:7: ()
-            	    // PsiInternalXtend.g:3048:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -8599,12 +7507,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:3062:5: ( ( ruleValidID ) )
-            	    // PsiInternalXtend.g:3063:6: ( ruleValidID )
             	    {
-            	    // PsiInternalXtend.g:3063:6: ( ruleValidID )
-            	    // PsiInternalXtend.g:3064:7: ruleValidID
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -8626,16 +7529,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:3073:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
             	    int alt112=2;
             	    alt112 = dfa112.predict(input);
             	    switch (alt112) {
             	        case 1 :
-            	            // PsiInternalXtend.g:3074:6: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
             	            {
-            	            // PsiInternalXtend.g:3074:6: ( ( '<' )=>otherlv_9= '<' )
-            	            // PsiInternalXtend.g:3075:7: ( '<' )=>otherlv_9= '<'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -8650,12 +7548,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            }
 
             	            }
-
-            	            // PsiInternalXtend.g:3084:6: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
-            	            // PsiInternalXtend.g:3085:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
             	            {
-            	            // PsiInternalXtend.g:3085:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
-            	            // PsiInternalXtend.g:3086:8: lv_arguments_10_0= ruleJvmArgumentTypeReference
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -8677,8 +7570,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	            }
-
-            	            // PsiInternalXtend.g:3095:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
             	            loop111:
             	            do {
             	                int alt111=2;
@@ -8691,7 +7582,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             	                switch (alt111) {
             	            	case 1 :
-            	            	    // PsiInternalXtend.g:3096:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
@@ -8704,11 +7594,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            	      							doneLeaf(otherlv_11);
             	            	      						
             	            	    }
-            	            	    // PsiInternalXtend.g:3103:7: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
-            	            	    // PsiInternalXtend.g:3104:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
             	            	    {
-            	            	    // PsiInternalXtend.g:3104:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
-            	            	    // PsiInternalXtend.g:3105:9: lv_arguments_12_0= ruleJvmArgumentTypeReference
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
@@ -8784,15 +7670,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleParameterizedTypeReferenceWithTypeArgs"
-
-
-    // $ANTLR start "entryRuleFunctionID"
-    // PsiInternalXtend.g:3129:1: entryRuleFunctionID : ruleFunctionID EOF ;
     public final void entryRuleFunctionID() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3129:20: ( ruleFunctionID EOF )
-            // PsiInternalXtend.g:3130:2: ruleFunctionID EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFunctionIDElementType()); 
@@ -8815,17 +7694,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleFunctionID"
-
-
-    // $ANTLR start "ruleFunctionID"
-    // PsiInternalXtend.g:3135:1: ruleFunctionID : ( ruleValidID | ruleOperators ) ;
     public final void ruleFunctionID() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3135:15: ( ( ruleValidID | ruleOperators ) )
-            // PsiInternalXtend.g:3136:2: ( ruleValidID | ruleOperators )
             {
-            // PsiInternalXtend.g:3136:2: ( ruleValidID | ruleOperators )
             int alt114=2;
             int LA114_0 = input.LA(1);
 
@@ -8844,7 +7715,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt114) {
                 case 1 :
-                    // PsiInternalXtend.g:3137:3: ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8865,7 +7735,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3145:3: ruleOperators
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8900,15 +7769,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleFunctionID"
-
-
-    // $ANTLR start "entryRuleOperators"
-    // PsiInternalXtend.g:3156:1: entryRuleOperators : ruleOperators EOF ;
     public final void entryRuleOperators() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3156:19: ( ruleOperators EOF )
-            // PsiInternalXtend.g:3157:2: ruleOperators EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOperatorsElementType()); 
@@ -8931,22 +7793,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOperators"
-
-
-    // $ANTLR start "ruleOperators"
-    // PsiInternalXtend.g:3162:1: ruleOperators : ( ruleOpMultiAssign | ruleOpOr | ruleOpAnd | ruleOpEquality | ruleOpCompare | ruleOpOther | ruleOpMulti | ruleOpUnary | ruleOpPostfix ) ;
     public final void ruleOperators() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3162:14: ( ( ruleOpMultiAssign | ruleOpOr | ruleOpAnd | ruleOpEquality | ruleOpCompare | ruleOpOther | ruleOpMulti | ruleOpUnary | ruleOpPostfix ) )
-            // PsiInternalXtend.g:3163:2: ( ruleOpMultiAssign | ruleOpOr | ruleOpAnd | ruleOpEquality | ruleOpCompare | ruleOpOther | ruleOpMulti | ruleOpUnary | ruleOpPostfix )
             {
-            // PsiInternalXtend.g:3163:2: ( ruleOpMultiAssign | ruleOpOr | ruleOpAnd | ruleOpEquality | ruleOpCompare | ruleOpOther | ruleOpMulti | ruleOpUnary | ruleOpPostfix )
             int alt115=9;
             alt115 = dfa115.predict(input);
             switch (alt115) {
                 case 1 :
-                    // PsiInternalXtend.g:3164:3: ruleOpMultiAssign
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8967,7 +7820,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3172:3: ruleOpOr
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8988,7 +7840,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:3180:3: ruleOpAnd
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9009,7 +7860,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:3188:3: ruleOpEquality
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9030,7 +7880,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:3196:3: ruleOpCompare
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9051,7 +7900,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:3204:3: ruleOpOther
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9072,7 +7920,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:3212:3: ruleOpMulti
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9093,7 +7940,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 8 :
-                    // PsiInternalXtend.g:3220:3: ruleOpUnary
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9114,7 +7960,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 9 :
-                    // PsiInternalXtend.g:3228:3: ruleOpPostfix
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9149,15 +7994,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOperators"
-
-
-    // $ANTLR start "entryRuleXtendEnumLiteral"
-    // PsiInternalXtend.g:3239:1: entryRuleXtendEnumLiteral : ruleXtendEnumLiteral EOF ;
     public final void entryRuleXtendEnumLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3239:26: ( ruleXtendEnumLiteral EOF )
-            // PsiInternalXtend.g:3240:2: ruleXtendEnumLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXtendEnumLiteralElementType()); 
@@ -9180,21 +8018,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXtendEnumLiteral"
-
-
-    // $ANTLR start "ruleXtendEnumLiteral"
-    // PsiInternalXtend.g:3245:1: ruleXtendEnumLiteral : ( (lv_name_0_0= ruleValidID ) ) ;
     public final void ruleXtendEnumLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3245:21: ( ( (lv_name_0_0= ruleValidID ) ) )
-            // PsiInternalXtend.g:3246:2: ( (lv_name_0_0= ruleValidID ) )
             {
-            // PsiInternalXtend.g:3246:2: ( (lv_name_0_0= ruleValidID ) )
-            // PsiInternalXtend.g:3247:3: (lv_name_0_0= ruleValidID )
             {
-            // PsiInternalXtend.g:3247:3: (lv_name_0_0= ruleValidID )
-            // PsiInternalXtend.g:3248:4: lv_name_0_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -9229,15 +8056,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXtendEnumLiteral"
-
-
-    // $ANTLR start "entryRuleCommonModifier"
-    // PsiInternalXtend.g:3260:1: entryRuleCommonModifier : ruleCommonModifier EOF ;
     public final void entryRuleCommonModifier() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3260:24: ( ruleCommonModifier EOF )
-            // PsiInternalXtend.g:3261:2: ruleCommonModifier EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getCommonModifierElementType()); 
@@ -9260,19 +8080,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleCommonModifier"
-
-
-    // $ANTLR start "ruleCommonModifier"
-    // PsiInternalXtend.g:3266:1: ruleCommonModifier : (kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'package' | kw= 'abstract' | kw= 'static' | kw= 'dispatch' | kw= 'final' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' ) ;
     public final void ruleCommonModifier() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:3266:19: ( (kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'package' | kw= 'abstract' | kw= 'static' | kw= 'dispatch' | kw= 'final' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' ) )
-            // PsiInternalXtend.g:3267:2: (kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'package' | kw= 'abstract' | kw= 'static' | kw= 'dispatch' | kw= 'final' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' )
             {
-            // PsiInternalXtend.g:3267:2: (kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'package' | kw= 'abstract' | kw= 'static' | kw= 'dispatch' | kw= 'final' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' )
             int alt116=13;
             switch ( input.LA(1) ) {
             case KW_Public:
@@ -9350,7 +8162,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt116) {
                 case 1 :
-                    // PsiInternalXtend.g:3268:3: kw= 'public'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9367,7 +8178,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3276:3: kw= 'private'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9384,7 +8194,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:3284:3: kw= 'protected'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9401,7 +8210,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:3292:3: kw= 'package'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9418,7 +8226,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:3300:3: kw= 'abstract'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9435,7 +8242,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:3308:3: kw= 'static'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9452,7 +8258,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:3316:3: kw= 'dispatch'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9469,7 +8274,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 8 :
-                    // PsiInternalXtend.g:3324:3: kw= 'final'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9486,7 +8290,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 9 :
-                    // PsiInternalXtend.g:3332:3: kw= 'strictfp'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9503,7 +8306,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 10 :
-                    // PsiInternalXtend.g:3340:3: kw= 'native'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9520,7 +8322,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 11 :
-                    // PsiInternalXtend.g:3348:3: kw= 'volatile'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9537,7 +8338,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 12 :
-                    // PsiInternalXtend.g:3356:3: kw= 'synchronized'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9554,7 +8354,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 13 :
-                    // PsiInternalXtend.g:3364:3: kw= 'transient'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9585,15 +8384,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleCommonModifier"
-
-
-    // $ANTLR start "entryRuleFieldModifier"
-    // PsiInternalXtend.g:3375:1: entryRuleFieldModifier : ruleFieldModifier EOF ;
     public final void entryRuleFieldModifier() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3375:23: ( ruleFieldModifier EOF )
-            // PsiInternalXtend.g:3376:2: ruleFieldModifier EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFieldModifierElementType()); 
@@ -9616,19 +8408,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleFieldModifier"
-
-
-    // $ANTLR start "ruleFieldModifier"
-    // PsiInternalXtend.g:3381:1: ruleFieldModifier : (kw= 'val' | kw= 'var' ) ;
     public final void ruleFieldModifier() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:3381:18: ( (kw= 'val' | kw= 'var' ) )
-            // PsiInternalXtend.g:3382:2: (kw= 'val' | kw= 'var' )
             {
-            // PsiInternalXtend.g:3382:2: (kw= 'val' | kw= 'var' )
             int alt117=2;
             int LA117_0 = input.LA(1);
 
@@ -9647,7 +8431,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt117) {
                 case 1 :
-                    // PsiInternalXtend.g:3383:3: kw= 'val'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9664,7 +8447,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3391:3: kw= 'var'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9695,15 +8477,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleFieldModifier"
-
-
-    // $ANTLR start "entryRuleMethodModifier"
-    // PsiInternalXtend.g:3402:1: entryRuleMethodModifier : ruleMethodModifier EOF ;
     public final void entryRuleMethodModifier() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3402:24: ( ruleMethodModifier EOF )
-            // PsiInternalXtend.g:3403:2: ruleMethodModifier EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getMethodModifierElementType()); 
@@ -9726,19 +8501,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleMethodModifier"
-
-
-    // $ANTLR start "ruleMethodModifier"
-    // PsiInternalXtend.g:3408:1: ruleMethodModifier : (kw= 'def' | kw= 'override' ) ;
     public final void ruleMethodModifier() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:3408:19: ( (kw= 'def' | kw= 'override' ) )
-            // PsiInternalXtend.g:3409:2: (kw= 'def' | kw= 'override' )
             {
-            // PsiInternalXtend.g:3409:2: (kw= 'def' | kw= 'override' )
             int alt118=2;
             int LA118_0 = input.LA(1);
 
@@ -9757,7 +8524,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt118) {
                 case 1 :
-                    // PsiInternalXtend.g:3410:3: kw= 'def'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9774,7 +8540,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3418:3: kw= 'override'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9805,15 +8570,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleMethodModifier"
-
-
-    // $ANTLR start "entryRuleCreateExtensionInfo"
-    // PsiInternalXtend.g:3429:1: entryRuleCreateExtensionInfo : ruleCreateExtensionInfo EOF ;
     public final void entryRuleCreateExtensionInfo() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3429:29: ( ruleCreateExtensionInfo EOF )
-            // PsiInternalXtend.g:3430:2: ruleCreateExtensionInfo EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getCreateExtensionInfoElementType()); 
@@ -9836,21 +8594,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleCreateExtensionInfo"
-
-
-    // $ANTLR start "ruleCreateExtensionInfo"
-    // PsiInternalXtend.g:3435:1: ruleCreateExtensionInfo : (otherlv_0= 'create' ( ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':' )? ( (lv_createExpression_3_0= ruleXExpression ) ) ) ;
     public final void ruleCreateExtensionInfo() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtend.g:3435:24: ( (otherlv_0= 'create' ( ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':' )? ( (lv_createExpression_3_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:3436:2: (otherlv_0= 'create' ( ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':' )? ( (lv_createExpression_3_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:3436:2: (otherlv_0= 'create' ( ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':' )? ( (lv_createExpression_3_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:3437:3: otherlv_0= 'create' ( ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':' )? ( (lv_createExpression_3_0= ruleXExpression ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -9863,7 +8612,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:3444:3: ( ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':' )?
             int alt119=2;
             switch ( input.LA(1) ) {
                 case RULE_ID:
@@ -9924,13 +8672,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt119) {
                 case 1 :
-                    // PsiInternalXtend.g:3445:4: ( (lv_name_1_0= ruleValidID ) ) otherlv_2= ':'
                     {
-                    // PsiInternalXtend.g:3445:4: ( (lv_name_1_0= ruleValidID ) )
-                    // PsiInternalXtend.g:3446:5: (lv_name_1_0= ruleValidID )
                     {
-                    // PsiInternalXtend.g:3446:5: (lv_name_1_0= ruleValidID )
-                    // PsiInternalXtend.g:3447:6: lv_name_1_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9969,12 +8712,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:3464:3: ( (lv_createExpression_3_0= ruleXExpression ) )
-            // PsiInternalXtend.g:3465:4: (lv_createExpression_3_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:3465:4: (lv_createExpression_3_0= ruleXExpression )
-            // PsiInternalXtend.g:3466:5: lv_createExpression_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10012,15 +8750,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleCreateExtensionInfo"
-
-
-    // $ANTLR start "entryRuleValidID"
-    // PsiInternalXtend.g:3479:1: entryRuleValidID : ruleValidID EOF ;
     public final void entryRuleValidID() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3479:17: ( ruleValidID EOF )
-            // PsiInternalXtend.g:3480:2: ruleValidID EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getValidIDElementType()); 
@@ -10043,20 +8774,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleValidID"
-
-
-    // $ANTLR start "ruleValidID"
-    // PsiInternalXtend.g:3485:1: ruleValidID : (this_ID_0= RULE_ID | kw= 'create' | kw= 'annotation' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' ) ;
     public final void ruleValidID() throws RecognitionException {
         Token this_ID_0=null;
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:3485:12: ( (this_ID_0= RULE_ID | kw= 'create' | kw= 'annotation' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' ) )
-            // PsiInternalXtend.g:3486:2: (this_ID_0= RULE_ID | kw= 'create' | kw= 'annotation' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' )
             {
-            // PsiInternalXtend.g:3486:2: (this_ID_0= RULE_ID | kw= 'create' | kw= 'annotation' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' )
             int alt120=6;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -10099,7 +8822,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt120) {
                 case 1 :
-                    // PsiInternalXtend.g:3487:3: this_ID_0= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10116,7 +8838,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3495:3: kw= 'create'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10133,7 +8854,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:3503:3: kw= 'annotation'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10150,7 +8870,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:3511:3: kw= 'AFTER'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10167,7 +8886,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:3519:3: kw= 'BEFORE'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10184,7 +8902,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:3527:3: kw= 'SEPARATOR'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10215,15 +8932,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleValidID"
-
-
-    // $ANTLR start "entryRuleFeatureCallID"
-    // PsiInternalXtend.g:3538:1: entryRuleFeatureCallID : ruleFeatureCallID EOF ;
     public final void entryRuleFeatureCallID() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3538:23: ( ruleFeatureCallID EOF )
-            // PsiInternalXtend.g:3539:2: ruleFeatureCallID EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFeatureCallIDElementType()); 
@@ -10246,19 +8956,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleFeatureCallID"
-
-
-    // $ANTLR start "ruleFeatureCallID"
-    // PsiInternalXtend.g:3544:1: ruleFeatureCallID : ( ruleInnerVarID | kw= 'extension' ) ;
     public final void ruleFeatureCallID() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:3544:18: ( ( ruleInnerVarID | kw= 'extension' ) )
-            // PsiInternalXtend.g:3545:2: ( ruleInnerVarID | kw= 'extension' )
             {
-            // PsiInternalXtend.g:3545:2: ( ruleInnerVarID | kw= 'extension' )
             int alt121=2;
             int LA121_0 = input.LA(1);
 
@@ -10277,7 +8979,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt121) {
                 case 1 :
-                    // PsiInternalXtend.g:3546:3: ruleInnerVarID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10298,7 +8999,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3554:3: kw= 'extension'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10329,15 +9029,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleFeatureCallID"
-
-
-    // $ANTLR start "entryRuleInnerVarID"
-    // PsiInternalXtend.g:3565:1: entryRuleInnerVarID : ruleInnerVarID EOF ;
     public final void entryRuleInnerVarID() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3565:20: ( ruleInnerVarID EOF )
-            // PsiInternalXtend.g:3566:2: ruleInnerVarID EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getInnerVarIDElementType()); 
@@ -10360,20 +9053,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleInnerVarID"
-
-
-    // $ANTLR start "ruleInnerVarID"
-    // PsiInternalXtend.g:3571:1: ruleInnerVarID : (this_ID_0= RULE_ID | kw= 'abstract' | kw= 'annotation' | kw= 'class' | kw= 'create' | kw= 'def' | kw= 'dispatch' | kw= 'enum' | kw= 'extends' | kw= 'final' | kw= 'implements' | kw= 'import' | kw= 'interface' | kw= 'override' | kw= 'package' | kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'static' | kw= 'throws' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' ) ;
     public final void ruleInnerVarID() throws RecognitionException {
         Token this_ID_0=null;
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:3571:15: ( (this_ID_0= RULE_ID | kw= 'abstract' | kw= 'annotation' | kw= 'class' | kw= 'create' | kw= 'def' | kw= 'dispatch' | kw= 'enum' | kw= 'extends' | kw= 'final' | kw= 'implements' | kw= 'import' | kw= 'interface' | kw= 'override' | kw= 'package' | kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'static' | kw= 'throws' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' ) )
-            // PsiInternalXtend.g:3572:2: (this_ID_0= RULE_ID | kw= 'abstract' | kw= 'annotation' | kw= 'class' | kw= 'create' | kw= 'def' | kw= 'dispatch' | kw= 'enum' | kw= 'extends' | kw= 'final' | kw= 'implements' | kw= 'import' | kw= 'interface' | kw= 'override' | kw= 'package' | kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'static' | kw= 'throws' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' )
             {
-            // PsiInternalXtend.g:3572:2: (this_ID_0= RULE_ID | kw= 'abstract' | kw= 'annotation' | kw= 'class' | kw= 'create' | kw= 'def' | kw= 'dispatch' | kw= 'enum' | kw= 'extends' | kw= 'final' | kw= 'implements' | kw= 'import' | kw= 'interface' | kw= 'override' | kw= 'package' | kw= 'public' | kw= 'private' | kw= 'protected' | kw= 'static' | kw= 'throws' | kw= 'strictfp' | kw= 'native' | kw= 'volatile' | kw= 'synchronized' | kw= 'transient' | kw= 'AFTER' | kw= 'BEFORE' | kw= 'SEPARATOR' )
             int alt122=28;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -10526,7 +9211,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt122) {
                 case 1 :
-                    // PsiInternalXtend.g:3573:3: this_ID_0= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10543,7 +9227,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3581:3: kw= 'abstract'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10560,7 +9243,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:3589:3: kw= 'annotation'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10577,7 +9259,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:3597:3: kw= 'class'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10594,7 +9275,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:3605:3: kw= 'create'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10611,7 +9291,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:3613:3: kw= 'def'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10628,7 +9307,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:3621:3: kw= 'dispatch'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10645,7 +9323,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 8 :
-                    // PsiInternalXtend.g:3629:3: kw= 'enum'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10662,7 +9339,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 9 :
-                    // PsiInternalXtend.g:3637:3: kw= 'extends'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10679,7 +9355,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 10 :
-                    // PsiInternalXtend.g:3645:3: kw= 'final'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10696,7 +9371,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 11 :
-                    // PsiInternalXtend.g:3653:3: kw= 'implements'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10713,7 +9387,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 12 :
-                    // PsiInternalXtend.g:3661:3: kw= 'import'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10730,7 +9403,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 13 :
-                    // PsiInternalXtend.g:3669:3: kw= 'interface'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10747,7 +9419,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 14 :
-                    // PsiInternalXtend.g:3677:3: kw= 'override'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10764,7 +9435,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 15 :
-                    // PsiInternalXtend.g:3685:3: kw= 'package'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10781,7 +9451,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 16 :
-                    // PsiInternalXtend.g:3693:3: kw= 'public'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10798,7 +9467,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 17 :
-                    // PsiInternalXtend.g:3701:3: kw= 'private'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10815,7 +9483,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 18 :
-                    // PsiInternalXtend.g:3709:3: kw= 'protected'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10832,7 +9499,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 19 :
-                    // PsiInternalXtend.g:3717:3: kw= 'static'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10849,7 +9515,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 20 :
-                    // PsiInternalXtend.g:3725:3: kw= 'throws'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10866,7 +9531,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 21 :
-                    // PsiInternalXtend.g:3733:3: kw= 'strictfp'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10883,7 +9547,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 22 :
-                    // PsiInternalXtend.g:3741:3: kw= 'native'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10900,7 +9563,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 23 :
-                    // PsiInternalXtend.g:3749:3: kw= 'volatile'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10917,7 +9579,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 24 :
-                    // PsiInternalXtend.g:3757:3: kw= 'synchronized'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10934,7 +9595,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 25 :
-                    // PsiInternalXtend.g:3765:3: kw= 'transient'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10951,7 +9611,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 26 :
-                    // PsiInternalXtend.g:3773:3: kw= 'AFTER'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10968,7 +9627,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 27 :
-                    // PsiInternalXtend.g:3781:3: kw= 'BEFORE'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10985,7 +9643,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 28 :
-                    // PsiInternalXtend.g:3789:3: kw= 'SEPARATOR'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11016,15 +9673,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleInnerVarID"
-
-
-    // $ANTLR start "entryRuleParameter"
-    // PsiInternalXtend.g:3800:1: entryRuleParameter : ruleParameter EOF ;
     public final void entryRuleParameter() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3800:19: ( ruleParameter EOF )
-            // PsiInternalXtend.g:3801:2: ruleParameter EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getParameterElementType()); 
@@ -11047,23 +9697,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleParameter"
-
-
-    // $ANTLR start "ruleParameter"
-    // PsiInternalXtend.g:3806:1: ruleParameter : ( ( (lv_annotations_0_0= ruleXAnnotation ) )* ( ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )* )? ( (lv_parameterType_3_0= ruleJvmTypeReference ) ) ( (lv_varArg_4_0= '...' ) )? ( (lv_name_5_0= ruleValidID ) ) ) ;
     public final void ruleParameter() throws RecognitionException {
         Token lv_extension_1_0=null;
         Token lv_varArg_4_0=null;
 
         try {
-            // PsiInternalXtend.g:3806:14: ( ( ( (lv_annotations_0_0= ruleXAnnotation ) )* ( ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )* )? ( (lv_parameterType_3_0= ruleJvmTypeReference ) ) ( (lv_varArg_4_0= '...' ) )? ( (lv_name_5_0= ruleValidID ) ) ) )
-            // PsiInternalXtend.g:3807:2: ( ( (lv_annotations_0_0= ruleXAnnotation ) )* ( ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )* )? ( (lv_parameterType_3_0= ruleJvmTypeReference ) ) ( (lv_varArg_4_0= '...' ) )? ( (lv_name_5_0= ruleValidID ) ) )
             {
-            // PsiInternalXtend.g:3807:2: ( ( (lv_annotations_0_0= ruleXAnnotation ) )* ( ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )* )? ( (lv_parameterType_3_0= ruleJvmTypeReference ) ) ( (lv_varArg_4_0= '...' ) )? ( (lv_name_5_0= ruleValidID ) ) )
-            // PsiInternalXtend.g:3808:3: ( (lv_annotations_0_0= ruleXAnnotation ) )* ( ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )* )? ( (lv_parameterType_3_0= ruleJvmTypeReference ) ) ( (lv_varArg_4_0= '...' ) )? ( (lv_name_5_0= ruleValidID ) )
             {
-            // PsiInternalXtend.g:3808:3: ( (lv_annotations_0_0= ruleXAnnotation ) )*
             loop123:
             do {
                 int alt123=2;
@@ -11076,10 +9716,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt123) {
             	case 1 :
-            	    // PsiInternalXtend.g:3809:4: (lv_annotations_0_0= ruleXAnnotation )
             	    {
-            	    // PsiInternalXtend.g:3809:4: (lv_annotations_0_0= ruleXAnnotation )
-            	    // PsiInternalXtend.g:3810:5: lv_annotations_0_0= ruleXAnnotation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -11107,8 +9744,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    break loop123;
                 }
             } while (true);
-
-            // PsiInternalXtend.g:3819:3: ( ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )* )?
             int alt125=2;
             int LA125_0 = input.LA(1);
 
@@ -11117,13 +9752,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt125) {
                 case 1 :
-                    // PsiInternalXtend.g:3820:4: ( (lv_extension_1_0= 'extension' ) ) ( (lv_annotations_2_0= ruleXAnnotation ) )*
                     {
-                    // PsiInternalXtend.g:3820:4: ( (lv_extension_1_0= 'extension' ) )
-                    // PsiInternalXtend.g:3821:5: (lv_extension_1_0= 'extension' )
                     {
-                    // PsiInternalXtend.g:3821:5: (lv_extension_1_0= 'extension' )
-                    // PsiInternalXtend.g:3822:6: lv_extension_1_0= 'extension'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11141,8 +9771,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:3831:4: ( (lv_annotations_2_0= ruleXAnnotation ) )*
                     loop124:
                     do {
                         int alt124=2;
@@ -11155,10 +9783,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt124) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:3832:5: (lv_annotations_2_0= ruleXAnnotation )
                     	    {
-                    	    // PsiInternalXtend.g:3832:5: (lv_annotations_2_0= ruleXAnnotation )
-                    	    // PsiInternalXtend.g:3833:6: lv_annotations_2_0= ruleXAnnotation
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -11192,12 +9817,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:3843:3: ( (lv_parameterType_3_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:3844:4: (lv_parameterType_3_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:3844:4: (lv_parameterType_3_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:3845:5: lv_parameterType_3_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -11219,8 +9839,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:3854:3: ( (lv_varArg_4_0= '...' ) )?
             int alt126=2;
             int LA126_0 = input.LA(1);
 
@@ -11229,10 +9847,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt126) {
                 case 1 :
-                    // PsiInternalXtend.g:3855:4: (lv_varArg_4_0= '...' )
                     {
-                    // PsiInternalXtend.g:3855:4: (lv_varArg_4_0= '...' )
-                    // PsiInternalXtend.g:3856:5: lv_varArg_4_0= '...'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11253,12 +9868,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:3865:3: ( (lv_name_5_0= ruleValidID ) )
-            // PsiInternalXtend.g:3866:4: (lv_name_5_0= ruleValidID )
             {
-            // PsiInternalXtend.g:3866:4: (lv_name_5_0= ruleValidID )
-            // PsiInternalXtend.g:3867:5: lv_name_5_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -11296,15 +9906,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleParameter"
-
-
-    // $ANTLR start "entryRuleXVariableDeclaration"
-    // PsiInternalXtend.g:3880:1: entryRuleXVariableDeclaration : ruleXVariableDeclaration EOF ;
     public final void entryRuleXVariableDeclaration() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:3880:30: ( ruleXVariableDeclaration EOF )
-            // PsiInternalXtend.g:3881:2: ruleXVariableDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXVariableDeclarationElementType()); 
@@ -11327,11 +9930,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXVariableDeclaration"
-
-
-    // $ANTLR start "ruleXVariableDeclaration"
-    // PsiInternalXtend.g:3886:1: ruleXVariableDeclaration : ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) ) ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) ) (otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) ) )? ) ;
     public final void ruleXVariableDeclaration() throws RecognitionException {
         Token lv_writeable_1_0=null;
         Token otherlv_2=null;
@@ -11342,20 +9940,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_10=null;
 
         try {
-            // PsiInternalXtend.g:3886:25: ( ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) ) ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) ) (otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) ) )? ) )
-            // PsiInternalXtend.g:3887:2: ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) ) ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) ) (otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) ) )? )
             {
-            // PsiInternalXtend.g:3887:2: ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) ) ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) ) (otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) ) )? )
-            // PsiInternalXtend.g:3888:3: ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) ) ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) ) (otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) ) )?
             {
-            // PsiInternalXtend.g:3888:3: ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) ) )
-            // PsiInternalXtend.g:3889:4: ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) )
             {
-            // PsiInternalXtend.g:3929:4: ( () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) ) )
-            // PsiInternalXtend.g:3930:5: () ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) )
             {
-            // PsiInternalXtend.g:3930:5: ()
-            // PsiInternalXtend.g:3931:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -11365,8 +9953,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:3936:5: ( ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? ) | ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) ) )
             int alt130=2;
             int LA130_0 = input.LA(1);
 
@@ -11385,12 +9971,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt130) {
                 case 1 :
-                    // PsiInternalXtend.g:3937:6: ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? )
                     {
-                    // PsiInternalXtend.g:3937:6: ( ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )? )
-                    // PsiInternalXtend.g:3938:7: ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( (lv_extension_3_0= 'extension' ) )?
                     {
-                    // PsiInternalXtend.g:3938:7: ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' )
                     int alt127=2;
                     int LA127_0 = input.LA(1);
 
@@ -11409,13 +9991,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt127) {
                         case 1 :
-                            // PsiInternalXtend.g:3939:8: ( (lv_writeable_1_0= 'var' ) )
                             {
-                            // PsiInternalXtend.g:3939:8: ( (lv_writeable_1_0= 'var' ) )
-                            // PsiInternalXtend.g:3940:9: (lv_writeable_1_0= 'var' )
                             {
-                            // PsiInternalXtend.g:3940:9: (lv_writeable_1_0= 'var' )
-                            // PsiInternalXtend.g:3941:10: lv_writeable_1_0= 'var'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11438,7 +10015,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:3951:8: otherlv_2= 'val'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11456,8 +10032,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:3959:7: ( (lv_extension_3_0= 'extension' ) )?
                     int alt128=2;
                     int LA128_0 = input.LA(1);
 
@@ -11466,10 +10040,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt128) {
                         case 1 :
-                            // PsiInternalXtend.g:3960:8: (lv_extension_3_0= 'extension' )
                             {
-                            // PsiInternalXtend.g:3960:8: (lv_extension_3_0= 'extension' )
-                            // PsiInternalXtend.g:3961:9: lv_extension_3_0= 'extension'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11498,16 +10069,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:3972:6: ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) )
                     {
-                    // PsiInternalXtend.g:3972:6: ( ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' ) )
-                    // PsiInternalXtend.g:3973:7: ( (lv_extension_4_0= 'extension' ) ) ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' )
                     {
-                    // PsiInternalXtend.g:3973:7: ( (lv_extension_4_0= 'extension' ) )
-                    // PsiInternalXtend.g:3974:8: (lv_extension_4_0= 'extension' )
                     {
-                    // PsiInternalXtend.g:3974:8: (lv_extension_4_0= 'extension' )
-                    // PsiInternalXtend.g:3975:9: lv_extension_4_0= 'extension'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11525,8 +10089,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:3984:7: ( ( (lv_writeable_5_0= 'var' ) ) | otherlv_6= 'val' )
                     int alt129=2;
                     int LA129_0 = input.LA(1);
 
@@ -11545,13 +10107,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt129) {
                         case 1 :
-                            // PsiInternalXtend.g:3985:8: ( (lv_writeable_5_0= 'var' ) )
                             {
-                            // PsiInternalXtend.g:3985:8: ( (lv_writeable_5_0= 'var' ) )
-                            // PsiInternalXtend.g:3986:9: (lv_writeable_5_0= 'var' )
                             {
-                            // PsiInternalXtend.g:3986:9: (lv_writeable_5_0= 'var' )
-                            // PsiInternalXtend.g:3987:10: lv_writeable_5_0= 'var'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11574,7 +10131,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:3997:8: otherlv_6= 'val'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11607,25 +10163,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:4009:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) )
             int alt131=2;
             alt131 = dfa131.predict(input);
             switch (alt131) {
                 case 1 :
-                    // PsiInternalXtend.g:4010:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) )
                     {
-                    // PsiInternalXtend.g:4010:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) )
-                    // PsiInternalXtend.g:4011:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) )
                     {
-                    // PsiInternalXtend.g:4024:5: ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) )
-                    // PsiInternalXtend.g:4025:6: ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) )
                     {
-                    // PsiInternalXtend.g:4025:6: ( (lv_type_7_0= ruleJvmTypeReference ) )
-                    // PsiInternalXtend.g:4026:7: (lv_type_7_0= ruleJvmTypeReference )
                     {
-                    // PsiInternalXtend.g:4026:7: (lv_type_7_0= ruleJvmTypeReference )
-                    // PsiInternalXtend.g:4027:8: lv_type_7_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11647,12 +10192,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:4036:6: ( (lv_name_8_0= ruleInnerVarID ) )
-                    // PsiInternalXtend.g:4037:7: (lv_name_8_0= ruleInnerVarID )
                     {
-                    // PsiInternalXtend.g:4037:7: (lv_name_8_0= ruleInnerVarID )
-                    // PsiInternalXtend.g:4038:8: lv_name_8_0= ruleInnerVarID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11685,13 +10225,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4050:4: ( (lv_name_9_0= ruleInnerVarID ) )
                     {
-                    // PsiInternalXtend.g:4050:4: ( (lv_name_9_0= ruleInnerVarID ) )
-                    // PsiInternalXtend.g:4051:5: (lv_name_9_0= ruleInnerVarID )
                     {
-                    // PsiInternalXtend.g:4051:5: (lv_name_9_0= ruleInnerVarID )
-                    // PsiInternalXtend.g:4052:6: lv_name_9_0= ruleInnerVarID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11719,8 +10254,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:4062:3: (otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) ) )?
             int alt132=2;
             int LA132_0 = input.LA(1);
 
@@ -11729,7 +10262,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt132) {
                 case 1 :
-                    // PsiInternalXtend.g:4063:4: otherlv_10= '=' ( (lv_right_11_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11742,11 +10274,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_10);
                       			
                     }
-                    // PsiInternalXtend.g:4070:4: ( (lv_right_11_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:4071:5: (lv_right_11_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:4071:5: (lv_right_11_0= ruleXExpression )
-                    // PsiInternalXtend.g:4072:6: lv_right_11_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11790,15 +10318,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXVariableDeclaration"
-
-
-    // $ANTLR start "entryRuleXConstructorCall"
-    // PsiInternalXtend.g:4086:1: entryRuleXConstructorCall : ruleXConstructorCall EOF ;
     public final void entryRuleXConstructorCall() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4086:26: ( ruleXConstructorCall EOF )
-            // PsiInternalXtend.g:4087:2: ruleXConstructorCall EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXConstructorCallElementType()); 
@@ -11821,21 +10342,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXConstructorCall"
-
-
-    // $ANTLR start "ruleXConstructorCall"
-    // PsiInternalXtend.g:4092:1: ruleXConstructorCall : ( ruleXbaseConstructorCall ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )? ) ;
     public final void ruleXConstructorCall() throws RecognitionException {
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // PsiInternalXtend.g:4092:21: ( ( ruleXbaseConstructorCall ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )? ) )
-            // PsiInternalXtend.g:4093:2: ( ruleXbaseConstructorCall ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )? )
             {
-            // PsiInternalXtend.g:4093:2: ( ruleXbaseConstructorCall ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )? )
-            // PsiInternalXtend.g:4094:3: ruleXbaseConstructorCall ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )?
             {
             if ( state.backtracking==0 ) {
 
@@ -11852,21 +10364,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:4101:3: ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )?
             int alt134=2;
             alt134 = dfa134.predict(input);
             switch (alt134) {
                 case 1 :
-                    // PsiInternalXtend.g:4102:4: ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}'
                     {
-                    // PsiInternalXtend.g:4102:4: ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) )
-                    // PsiInternalXtend.g:4103:5: ( ( () '{' ) )=> ( () otherlv_2= '{' )
                     {
-                    // PsiInternalXtend.g:4109:5: ( () otherlv_2= '{' )
-                    // PsiInternalXtend.g:4110:6: () otherlv_2= '{'
                     {
-                    // PsiInternalXtend.g:4110:6: ()
-                    // PsiInternalXtend.g:4111:7: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11893,8 +10397,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:4125:4: ( (lv_members_3_0= ruleMember ) )*
                     loop133:
                     do {
                         int alt133=2;
@@ -11907,10 +10409,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt133) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:4126:5: (lv_members_3_0= ruleMember )
                     	    {
-                    	    // PsiInternalXtend.g:4126:5: (lv_members_3_0= ruleMember )
-                    	    // PsiInternalXtend.g:4127:6: lv_members_3_0= ruleMember
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -11971,15 +10470,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXConstructorCall"
-
-
-    // $ANTLR start "entryRuleXbaseConstructorCall"
-    // PsiInternalXtend.g:4148:1: entryRuleXbaseConstructorCall : ruleXbaseConstructorCall EOF ;
     public final void entryRuleXbaseConstructorCall() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4148:30: ( ruleXbaseConstructorCall EOF )
-            // PsiInternalXtend.g:4149:2: ruleXbaseConstructorCall EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXbaseConstructorCallElementType()); 
@@ -12002,11 +10494,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXbaseConstructorCall"
-
-
-    // $ANTLR start "ruleXbaseConstructorCall"
-    // PsiInternalXtend.g:4154:1: ruleXbaseConstructorCall : ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) ;
     public final void ruleXbaseConstructorCall() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -12017,14 +10504,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_13=null;
 
         try {
-            // PsiInternalXtend.g:4154:25: ( ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) )
-            // PsiInternalXtend.g:4155:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
             {
-            // PsiInternalXtend.g:4155:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
-            // PsiInternalXtend.g:4156:3: () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
             {
-            // PsiInternalXtend.g:4156:3: ()
-            // PsiInternalXtend.g:4157:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -12046,11 +10527,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:4169:3: ( ( ruleQualifiedName ) )
-            // PsiInternalXtend.g:4170:4: ( ruleQualifiedName )
             {
-            // PsiInternalXtend.g:4170:4: ( ruleQualifiedName )
-            // PsiInternalXtend.g:4171:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -12072,16 +10549,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:4180:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?
             int alt136=2;
             alt136 = dfa136.predict(input);
             switch (alt136) {
                 case 1 :
-                    // PsiInternalXtend.g:4181:4: ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>'
                     {
-                    // PsiInternalXtend.g:4181:4: ( ( '<' )=>otherlv_3= '<' )
-                    // PsiInternalXtend.g:4182:5: ( '<' )=>otherlv_3= '<'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12096,12 +10568,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:4191:4: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
-                    // PsiInternalXtend.g:4192:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
                     {
-                    // PsiInternalXtend.g:4192:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
-                    // PsiInternalXtend.g:4193:6: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12123,8 +10590,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:4202:4: (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )*
                     loop135:
                     do {
                         int alt135=2;
@@ -12137,7 +10602,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt135) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:4203:5: otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -12150,11 +10614,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_5);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:4210:5: ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
-                    	    // PsiInternalXtend.g:4211:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // PsiInternalXtend.g:4211:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
-                    	    // PsiInternalXtend.g:4212:7: lv_typeArguments_6_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -12202,19 +10662,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:4230:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?
             int alt139=2;
             alt139 = dfa139.predict(input);
             switch (alt139) {
                 case 1 :
-                    // PsiInternalXtend.g:4231:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')'
                     {
-                    // PsiInternalXtend.g:4231:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) )
-                    // PsiInternalXtend.g:4232:5: ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' )
                     {
-                    // PsiInternalXtend.g:4236:5: (lv_explicitConstructorCall_8_0= '(' )
-                    // PsiInternalXtend.g:4237:6: lv_explicitConstructorCall_8_0= '('
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12232,19 +10685,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:4246:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?
                     int alt138=3;
                     alt138 = dfa138.predict(input);
                     switch (alt138) {
                         case 1 :
-                            // PsiInternalXtend.g:4247:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
                             {
-                            // PsiInternalXtend.g:4247:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
-                            // PsiInternalXtend.g:4248:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure )
                             {
-                            // PsiInternalXtend.g:4273:6: (lv_arguments_9_0= ruleXShortClosure )
-                            // PsiInternalXtend.g:4274:7: lv_arguments_9_0= ruleXShortClosure
                             {
                             if ( state.backtracking==0 ) {
 
@@ -12271,16 +10717,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:4284:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
                             {
-                            // PsiInternalXtend.g:4284:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
-                            // PsiInternalXtend.g:4285:6: ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
                             {
-                            // PsiInternalXtend.g:4285:6: ( (lv_arguments_10_0= ruleXExpression ) )
-                            // PsiInternalXtend.g:4286:7: (lv_arguments_10_0= ruleXExpression )
                             {
-                            // PsiInternalXtend.g:4286:7: (lv_arguments_10_0= ruleXExpression )
-                            // PsiInternalXtend.g:4287:8: lv_arguments_10_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -12302,8 +10741,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:4296:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
                             loop137:
                             do {
                                 int alt137=2;
@@ -12316,7 +10753,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt137) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:4297:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -12329,11 +10765,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_11);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:4304:7: ( (lv_arguments_12_0= ruleXExpression ) )
-                            	    // PsiInternalXtend.g:4305:8: (lv_arguments_12_0= ruleXExpression )
                             	    {
-                            	    // PsiInternalXtend.g:4305:8: (lv_arguments_12_0= ruleXExpression )
-                            	    // PsiInternalXtend.g:4306:9: lv_arguments_12_0= ruleXExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -12390,16 +10822,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:4326:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
             int alt140=2;
             alt140 = dfa140.predict(input);
             switch (alt140) {
                 case 1 :
-                    // PsiInternalXtend.g:4327:4: ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure )
                     {
-                    // PsiInternalXtend.g:4333:4: (lv_arguments_14_0= ruleXClosure )
-                    // PsiInternalXtend.g:4334:5: lv_arguments_14_0= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12440,15 +10867,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXbaseConstructorCall"
-
-
-    // $ANTLR start "entryRuleJvmFormalParameter"
-    // PsiInternalXtend.g:4347:1: entryRuleJvmFormalParameter : ruleJvmFormalParameter EOF ;
     public final void entryRuleJvmFormalParameter() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4347:28: ( ruleJvmFormalParameter EOF )
-            // PsiInternalXtend.g:4348:2: ruleJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmFormalParameterElementType()); 
@@ -12471,22 +10891,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmFormalParameter"
-
-
-    // $ANTLR start "ruleJvmFormalParameter"
-    // PsiInternalXtend.g:4353:1: ruleJvmFormalParameter : ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) )? ( (lv_name_2_0= ruleInnerVarID ) ) ) ;
     public final void ruleJvmFormalParameter() throws RecognitionException {
         Token lv_extension_0_0=null;
 
         try {
-            // PsiInternalXtend.g:4353:23: ( ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) )? ( (lv_name_2_0= ruleInnerVarID ) ) ) )
-            // PsiInternalXtend.g:4354:2: ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) )? ( (lv_name_2_0= ruleInnerVarID ) ) )
             {
-            // PsiInternalXtend.g:4354:2: ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) )? ( (lv_name_2_0= ruleInnerVarID ) ) )
-            // PsiInternalXtend.g:4355:3: ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) )? ( (lv_name_2_0= ruleInnerVarID ) )
             {
-            // PsiInternalXtend.g:4355:3: ( (lv_extension_0_0= 'extension' ) )?
             int alt141=2;
             int LA141_0 = input.LA(1);
 
@@ -12495,10 +10905,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt141) {
                 case 1 :
-                    // PsiInternalXtend.g:4356:4: (lv_extension_0_0= 'extension' )
                     {
-                    // PsiInternalXtend.g:4356:4: (lv_extension_0_0= 'extension' )
-                    // PsiInternalXtend.g:4357:5: lv_extension_0_0= 'extension'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12519,8 +10926,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:4366:3: ( (lv_parameterType_1_0= ruleJvmTypeReference ) )?
             int alt142=2;
             switch ( input.LA(1) ) {
                 case RULE_ID:
@@ -12587,10 +10992,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt142) {
                 case 1 :
-                    // PsiInternalXtend.g:4367:4: (lv_parameterType_1_0= ruleJvmTypeReference )
                     {
-                    // PsiInternalXtend.g:4367:4: (lv_parameterType_1_0= ruleJvmTypeReference )
-                    // PsiInternalXtend.g:4368:5: lv_parameterType_1_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12615,12 +11017,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:4377:3: ( (lv_name_2_0= ruleInnerVarID ) )
-            // PsiInternalXtend.g:4378:4: (lv_name_2_0= ruleInnerVarID )
             {
-            // PsiInternalXtend.g:4378:4: (lv_name_2_0= ruleInnerVarID )
-            // PsiInternalXtend.g:4379:5: lv_name_2_0= ruleInnerVarID
             {
             if ( state.backtracking==0 ) {
 
@@ -12658,15 +11055,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmFormalParameter"
-
-
-    // $ANTLR start "entryRuleFullJvmFormalParameter"
-    // PsiInternalXtend.g:4392:1: entryRuleFullJvmFormalParameter : ruleFullJvmFormalParameter EOF ;
     public final void entryRuleFullJvmFormalParameter() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4392:32: ( ruleFullJvmFormalParameter EOF )
-            // PsiInternalXtend.g:4393:2: ruleFullJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFullJvmFormalParameterElementType()); 
@@ -12689,22 +11079,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleFullJvmFormalParameter"
-
-
-    // $ANTLR start "ruleFullJvmFormalParameter"
-    // PsiInternalXtend.g:4398:1: ruleFullJvmFormalParameter : ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) ) ( (lv_name_2_0= ruleInnerVarID ) ) ) ;
     public final void ruleFullJvmFormalParameter() throws RecognitionException {
         Token lv_extension_0_0=null;
 
         try {
-            // PsiInternalXtend.g:4398:27: ( ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) ) ( (lv_name_2_0= ruleInnerVarID ) ) ) )
-            // PsiInternalXtend.g:4399:2: ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) ) ( (lv_name_2_0= ruleInnerVarID ) ) )
             {
-            // PsiInternalXtend.g:4399:2: ( ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) ) ( (lv_name_2_0= ruleInnerVarID ) ) )
-            // PsiInternalXtend.g:4400:3: ( (lv_extension_0_0= 'extension' ) )? ( (lv_parameterType_1_0= ruleJvmTypeReference ) ) ( (lv_name_2_0= ruleInnerVarID ) )
             {
-            // PsiInternalXtend.g:4400:3: ( (lv_extension_0_0= 'extension' ) )?
             int alt143=2;
             int LA143_0 = input.LA(1);
 
@@ -12713,10 +11093,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt143) {
                 case 1 :
-                    // PsiInternalXtend.g:4401:4: (lv_extension_0_0= 'extension' )
                     {
-                    // PsiInternalXtend.g:4401:4: (lv_extension_0_0= 'extension' )
-                    // PsiInternalXtend.g:4402:5: lv_extension_0_0= 'extension'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12737,12 +11114,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:4411:3: ( (lv_parameterType_1_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:4412:4: (lv_parameterType_1_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:4412:4: (lv_parameterType_1_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:4413:5: lv_parameterType_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -12764,12 +11136,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:4422:3: ( (lv_name_2_0= ruleInnerVarID ) )
-            // PsiInternalXtend.g:4423:4: (lv_name_2_0= ruleInnerVarID )
             {
-            // PsiInternalXtend.g:4423:4: (lv_name_2_0= ruleInnerVarID )
-            // PsiInternalXtend.g:4424:5: lv_name_2_0= ruleInnerVarID
             {
             if ( state.backtracking==0 ) {
 
@@ -12807,15 +11174,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleFullJvmFormalParameter"
-
-
-    // $ANTLR start "entryRuleXStringLiteral"
-    // PsiInternalXtend.g:4437:1: entryRuleXStringLiteral : ruleXStringLiteral EOF ;
     public final void entryRuleXStringLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4437:24: ( ruleXStringLiteral EOF )
-            // PsiInternalXtend.g:4438:2: ruleXStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXStringLiteralElementType()); 
@@ -12838,17 +11198,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXStringLiteral"
-
-
-    // $ANTLR start "ruleXStringLiteral"
-    // PsiInternalXtend.g:4443:1: ruleXStringLiteral : ( ruleSimpleStringLiteral | ruleRichString ) ;
     public final void ruleXStringLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4443:19: ( ( ruleSimpleStringLiteral | ruleRichString ) )
-            // PsiInternalXtend.g:4444:2: ( ruleSimpleStringLiteral | ruleRichString )
             {
-            // PsiInternalXtend.g:4444:2: ( ruleSimpleStringLiteral | ruleRichString )
             int alt144=2;
             int LA144_0 = input.LA(1);
 
@@ -12867,7 +11219,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt144) {
                 case 1 :
-                    // PsiInternalXtend.g:4445:3: ruleSimpleStringLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12888,7 +11239,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4453:3: ruleRichString
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12923,15 +11273,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXStringLiteral"
-
-
-    // $ANTLR start "entryRuleXSwitchExpression"
-    // PsiInternalXtend.g:4464:1: entryRuleXSwitchExpression : ruleXSwitchExpression EOF ;
     public final void entryRuleXSwitchExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4464:27: ( ruleXSwitchExpression EOF )
-            // PsiInternalXtend.g:4465:2: ruleXSwitchExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXSwitchExpressionElementType()); 
@@ -12954,11 +11297,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXSwitchExpression"
-
-
-    // $ANTLR start "ruleXSwitchExpression"
-    // PsiInternalXtend.g:4470:1: ruleXSwitchExpression : ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
     public final void ruleXSwitchExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -12971,14 +11309,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_15=null;
 
         try {
-            // PsiInternalXtend.g:4470:22: ( ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
-            // PsiInternalXtend.g:4471:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
             {
-            // PsiInternalXtend.g:4471:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
-            // PsiInternalXtend.g:4472:3: () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
             {
-            // PsiInternalXtend.g:4472:3: ()
-            // PsiInternalXtend.g:4473:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13000,21 +11332,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:4485:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) )
             int alt146=2;
             alt146 = dfa146.predict(input);
             switch (alt146) {
                 case 1 :
-                    // PsiInternalXtend.g:4486:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
                     {
-                    // PsiInternalXtend.g:4486:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
-                    // PsiInternalXtend.g:4487:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')'
                     {
-                    // PsiInternalXtend.g:4487:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
-                    // PsiInternalXtend.g:4488:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
                     {
-                    // PsiInternalXtend.g:4498:6: (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
-                    // PsiInternalXtend.g:4499:7: otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13027,11 +11351,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       							doneLeaf(otherlv_2);
                       						
                     }
-                    // PsiInternalXtend.g:4506:7: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
-                    // PsiInternalXtend.g:4507:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
                     {
-                    // PsiInternalXtend.g:4507:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
-                    // PsiInternalXtend.g:4508:9: lv_declaredParam_3_0= ruleJvmFormalParameter
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13070,12 +11390,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:4526:5: ( (lv_switch_5_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:4527:6: (lv_switch_5_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:4527:6: (lv_switch_5_0= ruleXExpression )
-                    // PsiInternalXtend.g:4528:7: lv_switch_5_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13116,26 +11431,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4546:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) )
                     {
-                    // PsiInternalXtend.g:4546:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) )
-                    // PsiInternalXtend.g:4547:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) )
                     {
-                    // PsiInternalXtend.g:4547:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?
                     int alt145=2;
                     alt145 = dfa145.predict(input);
                     switch (alt145) {
                         case 1 :
-                            // PsiInternalXtend.g:4548:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
                             {
-                            // PsiInternalXtend.g:4557:6: ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
-                            // PsiInternalXtend.g:4558:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':'
                             {
-                            // PsiInternalXtend.g:4558:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) )
-                            // PsiInternalXtend.g:4559:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
                             {
-                            // PsiInternalXtend.g:4559:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
-                            // PsiInternalXtend.g:4560:9: lv_declaredParam_7_0= ruleJvmFormalParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -13177,12 +11481,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:4578:5: ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) )
-                    // PsiInternalXtend.g:4579:6: (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall )
                     {
-                    // PsiInternalXtend.g:4579:6: (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall )
-                    // PsiInternalXtend.g:4580:7: lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13225,7 +11524,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_10);
               		
             }
-            // PsiInternalXtend.g:4598:3: ( (lv_cases_11_0= ruleXCasePart ) )*
             loop147:
             do {
                 int alt147=2;
@@ -13238,10 +11536,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt147) {
             	case 1 :
-            	    // PsiInternalXtend.g:4599:4: (lv_cases_11_0= ruleXCasePart )
             	    {
-            	    // PsiInternalXtend.g:4599:4: (lv_cases_11_0= ruleXCasePart )
-            	    // PsiInternalXtend.g:4600:5: lv_cases_11_0= ruleXCasePart
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -13269,8 +11564,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    break loop147;
                 }
             } while (true);
-
-            // PsiInternalXtend.g:4609:3: (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )?
             int alt148=2;
             int LA148_0 = input.LA(1);
 
@@ -13279,7 +11572,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt148) {
                 case 1 :
-                    // PsiInternalXtend.g:4610:4: otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13303,11 +11595,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_13);
                       			
                     }
-                    // PsiInternalXtend.g:4624:4: ( (lv_default_14_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:4625:5: (lv_default_14_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:4625:5: (lv_default_14_0= ruleXExpression )
-                    // PsiInternalXtend.g:4626:6: lv_default_14_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13362,15 +11650,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXSwitchExpression"
-
-
-    // $ANTLR start "entryRuleXExpressionOrSimpleConstructorCall"
-    // PsiInternalXtend.g:4647:1: entryRuleXExpressionOrSimpleConstructorCall : ruleXExpressionOrSimpleConstructorCall EOF ;
     public final void entryRuleXExpressionOrSimpleConstructorCall() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4647:44: ( ruleXExpressionOrSimpleConstructorCall EOF )
-            // PsiInternalXtend.g:4648:2: ruleXExpressionOrSimpleConstructorCall EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXExpressionOrSimpleConstructorCallElementType()); 
@@ -13393,25 +11674,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXExpressionOrSimpleConstructorCall"
-
-
-    // $ANTLR start "ruleXExpressionOrSimpleConstructorCall"
-    // PsiInternalXtend.g:4653:1: ruleXExpressionOrSimpleConstructorCall : ( ( ( 'new' )=> ruleXbaseConstructorCall ) | ruleXExpression ) ;
     public final void ruleXExpressionOrSimpleConstructorCall() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4653:39: ( ( ( ( 'new' )=> ruleXbaseConstructorCall ) | ruleXExpression ) )
-            // PsiInternalXtend.g:4654:2: ( ( ( 'new' )=> ruleXbaseConstructorCall ) | ruleXExpression )
             {
-            // PsiInternalXtend.g:4654:2: ( ( ( 'new' )=> ruleXbaseConstructorCall ) | ruleXExpression )
             int alt149=2;
             alt149 = dfa149.predict(input);
             switch (alt149) {
                 case 1 :
-                    // PsiInternalXtend.g:4655:3: ( ( 'new' )=> ruleXbaseConstructorCall )
                     {
-                    // PsiInternalXtend.g:4655:3: ( ( 'new' )=> ruleXbaseConstructorCall )
-                    // PsiInternalXtend.g:4656:4: ( 'new' )=> ruleXbaseConstructorCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13435,7 +11705,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4666:3: ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13470,15 +11739,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXExpressionOrSimpleConstructorCall"
-
-
-    // $ANTLR start "entryRuleSimpleStringLiteral"
-    // PsiInternalXtend.g:4677:1: entryRuleSimpleStringLiteral : ruleSimpleStringLiteral EOF ;
     public final void entryRuleSimpleStringLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4677:29: ( ruleSimpleStringLiteral EOF )
-            // PsiInternalXtend.g:4678:2: ruleSimpleStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getSimpleStringLiteralElementType()); 
@@ -13501,23 +11763,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleSimpleStringLiteral"
-
-
-    // $ANTLR start "ruleSimpleStringLiteral"
-    // PsiInternalXtend.g:4683:1: ruleSimpleStringLiteral : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final void ruleSimpleStringLiteral() throws RecognitionException {
         Token lv_value_1_0=null;
 
         try {
-            // PsiInternalXtend.g:4683:24: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // PsiInternalXtend.g:4684:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // PsiInternalXtend.g:4684:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // PsiInternalXtend.g:4685:3: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // PsiInternalXtend.g:4685:3: ()
-            // PsiInternalXtend.g:4686:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13527,12 +11778,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4691:3: ( (lv_value_1_0= RULE_STRING ) )
-            // PsiInternalXtend.g:4692:4: (lv_value_1_0= RULE_STRING )
             {
-            // PsiInternalXtend.g:4692:4: (lv_value_1_0= RULE_STRING )
-            // PsiInternalXtend.g:4693:5: lv_value_1_0= RULE_STRING
             {
             if ( state.backtracking==0 ) {
 
@@ -13566,15 +11812,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleSimpleStringLiteral"
-
-
-    // $ANTLR start "entryRuleRichString"
-    // PsiInternalXtend.g:4706:1: entryRuleRichString : ruleRichString EOF ;
     public final void entryRuleRichString() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4706:20: ( ruleRichString EOF )
-            // PsiInternalXtend.g:4707:2: ruleRichString EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringElementType()); 
@@ -13597,21 +11836,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichString"
-
-
-    // $ANTLR start "ruleRichString"
-    // PsiInternalXtend.g:4712:1: ruleRichString : ( () ( ( (lv_expressions_1_0= ruleRichStringLiteral ) ) | ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) ) ) ) ;
     public final void ruleRichString() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4712:15: ( ( () ( ( (lv_expressions_1_0= ruleRichStringLiteral ) ) | ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) ) ) ) )
-            // PsiInternalXtend.g:4713:2: ( () ( ( (lv_expressions_1_0= ruleRichStringLiteral ) ) | ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) ) ) )
             {
-            // PsiInternalXtend.g:4713:2: ( () ( ( (lv_expressions_1_0= ruleRichStringLiteral ) ) | ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) ) ) )
-            // PsiInternalXtend.g:4714:3: () ( ( (lv_expressions_1_0= ruleRichStringLiteral ) ) | ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) ) )
             {
-            // PsiInternalXtend.g:4714:3: ()
-            // PsiInternalXtend.g:4715:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13621,8 +11849,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4720:3: ( ( (lv_expressions_1_0= ruleRichStringLiteral ) ) | ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) ) )
             int alt153=2;
             int LA153_0 = input.LA(1);
 
@@ -13641,13 +11867,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt153) {
                 case 1 :
-                    // PsiInternalXtend.g:4721:4: ( (lv_expressions_1_0= ruleRichStringLiteral ) )
                     {
-                    // PsiInternalXtend.g:4721:4: ( (lv_expressions_1_0= ruleRichStringLiteral ) )
-                    // PsiInternalXtend.g:4722:5: (lv_expressions_1_0= ruleRichStringLiteral )
                     {
-                    // PsiInternalXtend.g:4722:5: (lv_expressions_1_0= ruleRichStringLiteral )
-                    // PsiInternalXtend.g:4723:6: lv_expressions_1_0= ruleRichStringLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13674,16 +11895,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4733:4: ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) )
                     {
-                    // PsiInternalXtend.g:4733:4: ( ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) ) )
-                    // PsiInternalXtend.g:4734:5: ( (lv_expressions_2_0= ruleRichStringLiteralStart ) ) ( (lv_expressions_3_0= ruleRichStringPart ) )? ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )* ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) )
                     {
-                    // PsiInternalXtend.g:4734:5: ( (lv_expressions_2_0= ruleRichStringLiteralStart ) )
-                    // PsiInternalXtend.g:4735:6: (lv_expressions_2_0= ruleRichStringLiteralStart )
                     {
-                    // PsiInternalXtend.g:4735:6: (lv_expressions_2_0= ruleRichStringLiteralStart )
-                    // PsiInternalXtend.g:4736:7: lv_expressions_2_0= ruleRichStringLiteralStart
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13705,8 +11919,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:4745:5: ( (lv_expressions_3_0= ruleRichStringPart ) )?
                     int alt150=2;
                     int LA150_0 = input.LA(1);
 
@@ -13715,10 +11927,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt150) {
                         case 1 :
-                            // PsiInternalXtend.g:4746:6: (lv_expressions_3_0= ruleRichStringPart )
                             {
-                            // PsiInternalXtend.g:4746:6: (lv_expressions_3_0= ruleRichStringPart )
-                            // PsiInternalXtend.g:4747:7: lv_expressions_3_0= ruleRichStringPart
                             {
                             if ( state.backtracking==0 ) {
 
@@ -13743,8 +11952,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:4756:5: ( ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )? )*
                     loop152:
                     do {
                         int alt152=2;
@@ -13757,13 +11964,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt152) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:4757:6: ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) ) ( (lv_expressions_5_0= ruleRichStringPart ) )?
                     	    {
-                    	    // PsiInternalXtend.g:4757:6: ( (lv_expressions_4_0= ruleRichStringLiteralInbetween ) )
-                    	    // PsiInternalXtend.g:4758:7: (lv_expressions_4_0= ruleRichStringLiteralInbetween )
                     	    {
-                    	    // PsiInternalXtend.g:4758:7: (lv_expressions_4_0= ruleRichStringLiteralInbetween )
-                    	    // PsiInternalXtend.g:4759:8: lv_expressions_4_0= ruleRichStringLiteralInbetween
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -13785,8 +11987,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     	    }
-
-                    	    // PsiInternalXtend.g:4768:6: ( (lv_expressions_5_0= ruleRichStringPart ) )?
                     	    int alt151=2;
                     	    int LA151_0 = input.LA(1);
 
@@ -13795,10 +11995,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    }
                     	    switch (alt151) {
                     	        case 1 :
-                    	            // PsiInternalXtend.g:4769:7: (lv_expressions_5_0= ruleRichStringPart )
                     	            {
-                    	            // PsiInternalXtend.g:4769:7: (lv_expressions_5_0= ruleRichStringPart )
-                    	            // PsiInternalXtend.g:4770:8: lv_expressions_5_0= ruleRichStringPart
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -13832,12 +12029,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	    break loop152;
                         }
                     } while (true);
-
-                    // PsiInternalXtend.g:4780:5: ( (lv_expressions_6_0= ruleRichStringLiteralEnd ) )
-                    // PsiInternalXtend.g:4781:6: (lv_expressions_6_0= ruleRichStringLiteralEnd )
                     {
-                    // PsiInternalXtend.g:4781:6: (lv_expressions_6_0= ruleRichStringLiteralEnd )
-                    // PsiInternalXtend.g:4782:7: lv_expressions_6_0= ruleRichStringLiteralEnd
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13884,15 +12076,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichString"
-
-
-    // $ANTLR start "entryRuleRichStringLiteral"
-    // PsiInternalXtend.g:4797:1: entryRuleRichStringLiteral : ruleRichStringLiteral EOF ;
     public final void entryRuleRichStringLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4797:27: ( ruleRichStringLiteral EOF )
-            // PsiInternalXtend.g:4798:2: ruleRichStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringLiteralElementType()); 
@@ -13915,23 +12100,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringLiteral"
-
-
-    // $ANTLR start "ruleRichStringLiteral"
-    // PsiInternalXtend.g:4803:1: ruleRichStringLiteral : ( () ( (lv_value_1_0= RULE_RICH_TEXT ) ) ) ;
     public final void ruleRichStringLiteral() throws RecognitionException {
         Token lv_value_1_0=null;
 
         try {
-            // PsiInternalXtend.g:4803:22: ( ( () ( (lv_value_1_0= RULE_RICH_TEXT ) ) ) )
-            // PsiInternalXtend.g:4804:2: ( () ( (lv_value_1_0= RULE_RICH_TEXT ) ) )
             {
-            // PsiInternalXtend.g:4804:2: ( () ( (lv_value_1_0= RULE_RICH_TEXT ) ) )
-            // PsiInternalXtend.g:4805:3: () ( (lv_value_1_0= RULE_RICH_TEXT ) )
             {
-            // PsiInternalXtend.g:4805:3: ()
-            // PsiInternalXtend.g:4806:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13941,12 +12115,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4811:3: ( (lv_value_1_0= RULE_RICH_TEXT ) )
-            // PsiInternalXtend.g:4812:4: (lv_value_1_0= RULE_RICH_TEXT )
             {
-            // PsiInternalXtend.g:4812:4: (lv_value_1_0= RULE_RICH_TEXT )
-            // PsiInternalXtend.g:4813:5: lv_value_1_0= RULE_RICH_TEXT
             {
             if ( state.backtracking==0 ) {
 
@@ -13980,15 +12149,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringLiteral"
-
-
-    // $ANTLR start "entryRuleRichStringLiteralStart"
-    // PsiInternalXtend.g:4826:1: entryRuleRichStringLiteralStart : ruleRichStringLiteralStart EOF ;
     public final void entryRuleRichStringLiteralStart() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4826:32: ( ruleRichStringLiteralStart EOF )
-            // PsiInternalXtend.g:4827:2: ruleRichStringLiteralStart EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringLiteralStartElementType()); 
@@ -14011,23 +12173,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringLiteralStart"
-
-
-    // $ANTLR start "ruleRichStringLiteralStart"
-    // PsiInternalXtend.g:4832:1: ruleRichStringLiteralStart : ( () ( (lv_value_1_0= RULE_RICH_TEXT_START ) ) ) ;
     public final void ruleRichStringLiteralStart() throws RecognitionException {
         Token lv_value_1_0=null;
 
         try {
-            // PsiInternalXtend.g:4832:27: ( ( () ( (lv_value_1_0= RULE_RICH_TEXT_START ) ) ) )
-            // PsiInternalXtend.g:4833:2: ( () ( (lv_value_1_0= RULE_RICH_TEXT_START ) ) )
             {
-            // PsiInternalXtend.g:4833:2: ( () ( (lv_value_1_0= RULE_RICH_TEXT_START ) ) )
-            // PsiInternalXtend.g:4834:3: () ( (lv_value_1_0= RULE_RICH_TEXT_START ) )
             {
-            // PsiInternalXtend.g:4834:3: ()
-            // PsiInternalXtend.g:4835:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14037,12 +12188,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4840:3: ( (lv_value_1_0= RULE_RICH_TEXT_START ) )
-            // PsiInternalXtend.g:4841:4: (lv_value_1_0= RULE_RICH_TEXT_START )
             {
-            // PsiInternalXtend.g:4841:4: (lv_value_1_0= RULE_RICH_TEXT_START )
-            // PsiInternalXtend.g:4842:5: lv_value_1_0= RULE_RICH_TEXT_START
             {
             if ( state.backtracking==0 ) {
 
@@ -14076,15 +12222,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringLiteralStart"
-
-
-    // $ANTLR start "entryRuleRichStringLiteralInbetween"
-    // PsiInternalXtend.g:4855:1: entryRuleRichStringLiteralInbetween : ruleRichStringLiteralInbetween EOF ;
     public final void entryRuleRichStringLiteralInbetween() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4855:36: ( ruleRichStringLiteralInbetween EOF )
-            // PsiInternalXtend.g:4856:2: ruleRichStringLiteralInbetween EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringLiteralInbetweenElementType()); 
@@ -14107,24 +12246,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringLiteralInbetween"
-
-
-    // $ANTLR start "ruleRichStringLiteralInbetween"
-    // PsiInternalXtend.g:4861:1: ruleRichStringLiteralInbetween : ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) ) ) ) ;
     public final void ruleRichStringLiteralInbetween() throws RecognitionException {
         Token lv_value_1_0=null;
         Token lv_value_2_0=null;
 
         try {
-            // PsiInternalXtend.g:4861:31: ( ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) ) ) ) )
-            // PsiInternalXtend.g:4862:2: ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) ) ) )
             {
-            // PsiInternalXtend.g:4862:2: ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) ) ) )
-            // PsiInternalXtend.g:4863:3: () ( ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) ) )
             {
-            // PsiInternalXtend.g:4863:3: ()
-            // PsiInternalXtend.g:4864:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14134,8 +12262,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4869:3: ( ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) ) )
             int alt154=2;
             int LA154_0 = input.LA(1);
 
@@ -14154,13 +12280,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt154) {
                 case 1 :
-                    // PsiInternalXtend.g:4870:4: ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) )
                     {
-                    // PsiInternalXtend.g:4870:4: ( (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN ) )
-                    // PsiInternalXtend.g:4871:5: (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN )
                     {
-                    // PsiInternalXtend.g:4871:5: (lv_value_1_0= RULE_RICH_TEXT_INBETWEEN )
-                    // PsiInternalXtend.g:4872:6: lv_value_1_0= RULE_RICH_TEXT_INBETWEEN
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14183,13 +12304,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4882:4: ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) )
                     {
-                    // PsiInternalXtend.g:4882:4: ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN ) )
-                    // PsiInternalXtend.g:4883:5: (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN )
                     {
-                    // PsiInternalXtend.g:4883:5: (lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN )
-                    // PsiInternalXtend.g:4884:6: lv_value_2_0= RULE_COMMENT_RICH_TEXT_INBETWEEN
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14229,15 +12345,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringLiteralInbetween"
-
-
-    // $ANTLR start "entryRuleRichStringLiteralEnd"
-    // PsiInternalXtend.g:4898:1: entryRuleRichStringLiteralEnd : ruleRichStringLiteralEnd EOF ;
     public final void entryRuleRichStringLiteralEnd() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4898:30: ( ruleRichStringLiteralEnd EOF )
-            // PsiInternalXtend.g:4899:2: ruleRichStringLiteralEnd EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringLiteralEndElementType()); 
@@ -14260,24 +12369,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringLiteralEnd"
-
-
-    // $ANTLR start "ruleRichStringLiteralEnd"
-    // PsiInternalXtend.g:4904:1: ruleRichStringLiteralEnd : ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_END ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) ) ) ) ;
     public final void ruleRichStringLiteralEnd() throws RecognitionException {
         Token lv_value_1_0=null;
         Token lv_value_2_0=null;
 
         try {
-            // PsiInternalXtend.g:4904:25: ( ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_END ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) ) ) ) )
-            // PsiInternalXtend.g:4905:2: ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_END ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) ) ) )
             {
-            // PsiInternalXtend.g:4905:2: ( () ( ( (lv_value_1_0= RULE_RICH_TEXT_END ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) ) ) )
-            // PsiInternalXtend.g:4906:3: () ( ( (lv_value_1_0= RULE_RICH_TEXT_END ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) ) )
             {
-            // PsiInternalXtend.g:4906:3: ()
-            // PsiInternalXtend.g:4907:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14287,8 +12385,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4912:3: ( ( (lv_value_1_0= RULE_RICH_TEXT_END ) ) | ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) ) )
             int alt155=2;
             int LA155_0 = input.LA(1);
 
@@ -14307,13 +12403,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt155) {
                 case 1 :
-                    // PsiInternalXtend.g:4913:4: ( (lv_value_1_0= RULE_RICH_TEXT_END ) )
                     {
-                    // PsiInternalXtend.g:4913:4: ( (lv_value_1_0= RULE_RICH_TEXT_END ) )
-                    // PsiInternalXtend.g:4914:5: (lv_value_1_0= RULE_RICH_TEXT_END )
                     {
-                    // PsiInternalXtend.g:4914:5: (lv_value_1_0= RULE_RICH_TEXT_END )
-                    // PsiInternalXtend.g:4915:6: lv_value_1_0= RULE_RICH_TEXT_END
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14336,13 +12427,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:4925:4: ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) )
                     {
-                    // PsiInternalXtend.g:4925:4: ( (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END ) )
-                    // PsiInternalXtend.g:4926:5: (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END )
                     {
-                    // PsiInternalXtend.g:4926:5: (lv_value_2_0= RULE_COMMENT_RICH_TEXT_END )
-                    // PsiInternalXtend.g:4927:6: lv_value_2_0= RULE_COMMENT_RICH_TEXT_END
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14382,15 +12468,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringLiteralEnd"
-
-
-    // $ANTLR start "entryRuleInternalRichString"
-    // PsiInternalXtend.g:4941:1: entryRuleInternalRichString : ruleInternalRichString EOF ;
     public final void entryRuleInternalRichString() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4941:28: ( ruleInternalRichString EOF )
-            // PsiInternalXtend.g:4942:2: ruleInternalRichString EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getInternalRichStringElementType()); 
@@ -14413,21 +12492,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleInternalRichString"
-
-
-    // $ANTLR start "ruleInternalRichString"
-    // PsiInternalXtend.g:4947:1: ruleInternalRichString : ( () ( ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )* ) ) ;
     public final void ruleInternalRichString() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4947:23: ( ( () ( ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )* ) ) )
-            // PsiInternalXtend.g:4948:2: ( () ( ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )* ) )
             {
-            // PsiInternalXtend.g:4948:2: ( () ( ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )* ) )
-            // PsiInternalXtend.g:4949:3: () ( ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )* )
             {
-            // PsiInternalXtend.g:4949:3: ()
-            // PsiInternalXtend.g:4950:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14437,15 +12505,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:4955:3: ( ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )* )
-            // PsiInternalXtend.g:4956:4: ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) ) ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )*
             {
-            // PsiInternalXtend.g:4956:4: ( (lv_expressions_1_0= ruleRichStringLiteralInbetween ) )
-            // PsiInternalXtend.g:4957:5: (lv_expressions_1_0= ruleRichStringLiteralInbetween )
             {
-            // PsiInternalXtend.g:4957:5: (lv_expressions_1_0= ruleRichStringLiteralInbetween )
-            // PsiInternalXtend.g:4958:6: lv_expressions_1_0= ruleRichStringLiteralInbetween
             {
             if ( state.backtracking==0 ) {
 
@@ -14467,8 +12528,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:4967:4: ( ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) ) )*
             loop157:
             do {
                 int alt157=2;
@@ -14481,9 +12540,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt157) {
             	case 1 :
-            	    // PsiInternalXtend.g:4968:5: ( (lv_expressions_2_0= ruleRichStringPart ) )? ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) )
             	    {
-            	    // PsiInternalXtend.g:4968:5: ( (lv_expressions_2_0= ruleRichStringPart ) )?
             	    int alt156=2;
             	    int LA156_0 = input.LA(1);
 
@@ -14492,10 +12549,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    switch (alt156) {
             	        case 1 :
-            	            // PsiInternalXtend.g:4969:6: (lv_expressions_2_0= ruleRichStringPart )
             	            {
-            	            // PsiInternalXtend.g:4969:6: (lv_expressions_2_0= ruleRichStringPart )
-            	            // PsiInternalXtend.g:4970:7: lv_expressions_2_0= ruleRichStringPart
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -14520,12 +12574,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            break;
 
             	    }
-
-            	    // PsiInternalXtend.g:4979:5: ( (lv_expressions_3_0= ruleRichStringLiteralInbetween ) )
-            	    // PsiInternalXtend.g:4980:6: (lv_expressions_3_0= ruleRichStringLiteralInbetween )
             	    {
-            	    // PsiInternalXtend.g:4980:6: (lv_expressions_3_0= ruleRichStringLiteralInbetween )
-            	    // PsiInternalXtend.g:4981:7: lv_expressions_3_0= ruleRichStringLiteralInbetween
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -14575,15 +12624,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleInternalRichString"
-
-
-    // $ANTLR start "entryRuleRichStringPart"
-    // PsiInternalXtend.g:4996:1: entryRuleRichStringPart : ruleRichStringPart EOF ;
     public final void entryRuleRichStringPart() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:4996:24: ( ruleRichStringPart EOF )
-            // PsiInternalXtend.g:4997:2: ruleRichStringPart EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringPartElementType()); 
@@ -14606,17 +12648,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringPart"
-
-
-    // $ANTLR start "ruleRichStringPart"
-    // PsiInternalXtend.g:5002:1: ruleRichStringPart : ( ruleXExpressionOrVarDeclaration | ruleRichStringForLoop | ruleRichStringIf ) ;
     public final void ruleRichStringPart() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5002:19: ( ( ruleXExpressionOrVarDeclaration | ruleRichStringForLoop | ruleRichStringIf ) )
-            // PsiInternalXtend.g:5003:2: ( ruleXExpressionOrVarDeclaration | ruleRichStringForLoop | ruleRichStringIf )
             {
-            // PsiInternalXtend.g:5003:2: ( ruleXExpressionOrVarDeclaration | ruleRichStringForLoop | ruleRichStringIf )
             int alt158=3;
             switch ( input.LA(1) ) {
             case KW_Package:
@@ -14702,7 +12736,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt158) {
                 case 1 :
-                    // PsiInternalXtend.g:5004:3: ruleXExpressionOrVarDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14723,7 +12756,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:5012:3: ruleRichStringForLoop
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14744,7 +12776,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:5020:3: ruleRichStringIf
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14779,15 +12810,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringPart"
-
-
-    // $ANTLR start "entryRuleRichStringForLoop"
-    // PsiInternalXtend.g:5031:1: entryRuleRichStringForLoop : ruleRichStringForLoop EOF ;
     public final void entryRuleRichStringForLoop() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5031:27: ( ruleRichStringForLoop EOF )
-            // PsiInternalXtend.g:5032:2: ruleRichStringForLoop EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringForLoopElementType()); 
@@ -14810,11 +12834,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringForLoop"
-
-
-    // $ANTLR start "ruleRichStringForLoop"
-    // PsiInternalXtend.g:5037:1: ruleRichStringForLoop : ( () otherlv_1= 'FOR' ( (lv_declaredParam_2_0= ruleJvmFormalParameter ) ) otherlv_3= ':' ( (lv_forExpression_4_0= ruleXExpression ) ) (otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) ) )? (otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) ) )? (otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) ) )? ( (lv_eachExpression_11_0= ruleInternalRichString ) ) otherlv_12= 'ENDFOR' ) ;
     public final void ruleRichStringForLoop() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -14824,14 +12843,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_12=null;
 
         try {
-            // PsiInternalXtend.g:5037:22: ( ( () otherlv_1= 'FOR' ( (lv_declaredParam_2_0= ruleJvmFormalParameter ) ) otherlv_3= ':' ( (lv_forExpression_4_0= ruleXExpression ) ) (otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) ) )? (otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) ) )? (otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) ) )? ( (lv_eachExpression_11_0= ruleInternalRichString ) ) otherlv_12= 'ENDFOR' ) )
-            // PsiInternalXtend.g:5038:2: ( () otherlv_1= 'FOR' ( (lv_declaredParam_2_0= ruleJvmFormalParameter ) ) otherlv_3= ':' ( (lv_forExpression_4_0= ruleXExpression ) ) (otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) ) )? (otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) ) )? (otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) ) )? ( (lv_eachExpression_11_0= ruleInternalRichString ) ) otherlv_12= 'ENDFOR' )
             {
-            // PsiInternalXtend.g:5038:2: ( () otherlv_1= 'FOR' ( (lv_declaredParam_2_0= ruleJvmFormalParameter ) ) otherlv_3= ':' ( (lv_forExpression_4_0= ruleXExpression ) ) (otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) ) )? (otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) ) )? (otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) ) )? ( (lv_eachExpression_11_0= ruleInternalRichString ) ) otherlv_12= 'ENDFOR' )
-            // PsiInternalXtend.g:5039:3: () otherlv_1= 'FOR' ( (lv_declaredParam_2_0= ruleJvmFormalParameter ) ) otherlv_3= ':' ( (lv_forExpression_4_0= ruleXExpression ) ) (otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) ) )? (otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) ) )? (otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) ) )? ( (lv_eachExpression_11_0= ruleInternalRichString ) ) otherlv_12= 'ENDFOR'
             {
-            // PsiInternalXtend.g:5039:3: ()
-            // PsiInternalXtend.g:5040:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14853,11 +12866,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:5052:3: ( (lv_declaredParam_2_0= ruleJvmFormalParameter ) )
-            // PsiInternalXtend.g:5053:4: (lv_declaredParam_2_0= ruleJvmFormalParameter )
             {
-            // PsiInternalXtend.g:5053:4: (lv_declaredParam_2_0= ruleJvmFormalParameter )
-            // PsiInternalXtend.g:5054:5: lv_declaredParam_2_0= ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -14891,11 +12900,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_3);
               		
             }
-            // PsiInternalXtend.g:5070:3: ( (lv_forExpression_4_0= ruleXExpression ) )
-            // PsiInternalXtend.g:5071:4: (lv_forExpression_4_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:5071:4: (lv_forExpression_4_0= ruleXExpression )
-            // PsiInternalXtend.g:5072:5: lv_forExpression_4_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -14917,8 +12922,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:5081:3: (otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) ) )?
             int alt159=2;
             int LA159_0 = input.LA(1);
 
@@ -14927,7 +12930,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt159) {
                 case 1 :
-                    // PsiInternalXtend.g:5082:4: otherlv_5= 'BEFORE' ( (lv_before_6_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14940,11 +12942,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_5);
                       			
                     }
-                    // PsiInternalXtend.g:5089:4: ( (lv_before_6_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:5090:5: (lv_before_6_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:5090:5: (lv_before_6_0= ruleXExpression )
-                    // PsiInternalXtend.g:5091:6: lv_before_6_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14972,8 +12970,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:5101:3: (otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) ) )?
             int alt160=2;
             int LA160_0 = input.LA(1);
 
@@ -14982,7 +12978,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt160) {
                 case 1 :
-                    // PsiInternalXtend.g:5102:4: otherlv_7= 'SEPARATOR' ( (lv_separator_8_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14995,11 +12990,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_7);
                       			
                     }
-                    // PsiInternalXtend.g:5109:4: ( (lv_separator_8_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:5110:5: (lv_separator_8_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:5110:5: (lv_separator_8_0= ruleXExpression )
-                    // PsiInternalXtend.g:5111:6: lv_separator_8_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15027,8 +13018,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:5121:3: (otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) ) )?
             int alt161=2;
             int LA161_0 = input.LA(1);
 
@@ -15037,7 +13026,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt161) {
                 case 1 :
-                    // PsiInternalXtend.g:5122:4: otherlv_9= 'AFTER' ( (lv_after_10_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15050,11 +13038,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_9);
                       			
                     }
-                    // PsiInternalXtend.g:5129:4: ( (lv_after_10_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:5130:5: (lv_after_10_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:5130:5: (lv_after_10_0= ruleXExpression )
-                    // PsiInternalXtend.g:5131:6: lv_after_10_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15082,12 +13066,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:5141:3: ( (lv_eachExpression_11_0= ruleInternalRichString ) )
-            // PsiInternalXtend.g:5142:4: (lv_eachExpression_11_0= ruleInternalRichString )
             {
-            // PsiInternalXtend.g:5142:4: (lv_eachExpression_11_0= ruleInternalRichString )
-            // PsiInternalXtend.g:5143:5: lv_eachExpression_11_0= ruleInternalRichString
             {
             if ( state.backtracking==0 ) {
 
@@ -15136,15 +13115,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringForLoop"
-
-
-    // $ANTLR start "entryRuleRichStringIf"
-    // PsiInternalXtend.g:5163:1: entryRuleRichStringIf : ruleRichStringIf EOF ;
     public final void entryRuleRichStringIf() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5163:22: ( ruleRichStringIf EOF )
-            // PsiInternalXtend.g:5164:2: ruleRichStringIf EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringIfElementType()); 
@@ -15167,25 +13139,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringIf"
-
-
-    // $ANTLR start "ruleRichStringIf"
-    // PsiInternalXtend.g:5169:1: ruleRichStringIf : ( () otherlv_1= 'IF' ( (lv_if_2_0= ruleXExpression ) ) ( (lv_then_3_0= ruleInternalRichString ) ) ( (lv_elseIfs_4_0= ruleRichStringElseIf ) )* (otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) ) )? otherlv_7= 'ENDIF' ) ;
     public final void ruleRichStringIf() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_5=null;
         Token otherlv_7=null;
 
         try {
-            // PsiInternalXtend.g:5169:17: ( ( () otherlv_1= 'IF' ( (lv_if_2_0= ruleXExpression ) ) ( (lv_then_3_0= ruleInternalRichString ) ) ( (lv_elseIfs_4_0= ruleRichStringElseIf ) )* (otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) ) )? otherlv_7= 'ENDIF' ) )
-            // PsiInternalXtend.g:5170:2: ( () otherlv_1= 'IF' ( (lv_if_2_0= ruleXExpression ) ) ( (lv_then_3_0= ruleInternalRichString ) ) ( (lv_elseIfs_4_0= ruleRichStringElseIf ) )* (otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) ) )? otherlv_7= 'ENDIF' )
             {
-            // PsiInternalXtend.g:5170:2: ( () otherlv_1= 'IF' ( (lv_if_2_0= ruleXExpression ) ) ( (lv_then_3_0= ruleInternalRichString ) ) ( (lv_elseIfs_4_0= ruleRichStringElseIf ) )* (otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) ) )? otherlv_7= 'ENDIF' )
-            // PsiInternalXtend.g:5171:3: () otherlv_1= 'IF' ( (lv_if_2_0= ruleXExpression ) ) ( (lv_then_3_0= ruleInternalRichString ) ) ( (lv_elseIfs_4_0= ruleRichStringElseIf ) )* (otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) ) )? otherlv_7= 'ENDIF'
             {
-            // PsiInternalXtend.g:5171:3: ()
-            // PsiInternalXtend.g:5172:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -15207,11 +13168,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:5184:3: ( (lv_if_2_0= ruleXExpression ) )
-            // PsiInternalXtend.g:5185:4: (lv_if_2_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:5185:4: (lv_if_2_0= ruleXExpression )
-            // PsiInternalXtend.g:5186:5: lv_if_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -15233,12 +13190,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:5195:3: ( (lv_then_3_0= ruleInternalRichString ) )
-            // PsiInternalXtend.g:5196:4: (lv_then_3_0= ruleInternalRichString )
             {
-            // PsiInternalXtend.g:5196:4: (lv_then_3_0= ruleInternalRichString )
-            // PsiInternalXtend.g:5197:5: lv_then_3_0= ruleInternalRichString
             {
             if ( state.backtracking==0 ) {
 
@@ -15260,8 +13212,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:5206:3: ( (lv_elseIfs_4_0= ruleRichStringElseIf ) )*
             loop162:
             do {
                 int alt162=2;
@@ -15274,10 +13224,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt162) {
             	case 1 :
-            	    // PsiInternalXtend.g:5207:4: (lv_elseIfs_4_0= ruleRichStringElseIf )
             	    {
-            	    // PsiInternalXtend.g:5207:4: (lv_elseIfs_4_0= ruleRichStringElseIf )
-            	    // PsiInternalXtend.g:5208:5: lv_elseIfs_4_0= ruleRichStringElseIf
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -15305,8 +13252,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    break loop162;
                 }
             } while (true);
-
-            // PsiInternalXtend.g:5217:3: (otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) ) )?
             int alt163=2;
             int LA163_0 = input.LA(1);
 
@@ -15315,7 +13260,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt163) {
                 case 1 :
-                    // PsiInternalXtend.g:5218:4: otherlv_5= 'ELSE' ( (lv_else_6_0= ruleInternalRichString ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15328,11 +13272,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_5);
                       			
                     }
-                    // PsiInternalXtend.g:5225:4: ( (lv_else_6_0= ruleInternalRichString ) )
-                    // PsiInternalXtend.g:5226:5: (lv_else_6_0= ruleInternalRichString )
                     {
-                    // PsiInternalXtend.g:5226:5: (lv_else_6_0= ruleInternalRichString )
-                    // PsiInternalXtend.g:5227:6: lv_else_6_0= ruleInternalRichString
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15387,15 +13327,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringIf"
-
-
-    // $ANTLR start "entryRuleRichStringElseIf"
-    // PsiInternalXtend.g:5248:1: entryRuleRichStringElseIf : ruleRichStringElseIf EOF ;
     public final void entryRuleRichStringElseIf() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5248:26: ( ruleRichStringElseIf EOF )
-            // PsiInternalXtend.g:5249:2: ruleRichStringElseIf EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getRichStringElseIfElementType()); 
@@ -15418,20 +13351,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleRichStringElseIf"
-
-
-    // $ANTLR start "ruleRichStringElseIf"
-    // PsiInternalXtend.g:5254:1: ruleRichStringElseIf : (otherlv_0= 'ELSEIF' ( (lv_if_1_0= ruleXExpression ) ) ( (lv_then_2_0= ruleInternalRichString ) ) ) ;
     public final void ruleRichStringElseIf() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalXtend.g:5254:21: ( (otherlv_0= 'ELSEIF' ( (lv_if_1_0= ruleXExpression ) ) ( (lv_then_2_0= ruleInternalRichString ) ) ) )
-            // PsiInternalXtend.g:5255:2: (otherlv_0= 'ELSEIF' ( (lv_if_1_0= ruleXExpression ) ) ( (lv_then_2_0= ruleInternalRichString ) ) )
             {
-            // PsiInternalXtend.g:5255:2: (otherlv_0= 'ELSEIF' ( (lv_if_1_0= ruleXExpression ) ) ( (lv_then_2_0= ruleInternalRichString ) ) )
-            // PsiInternalXtend.g:5256:3: otherlv_0= 'ELSEIF' ( (lv_if_1_0= ruleXExpression ) ) ( (lv_then_2_0= ruleInternalRichString ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -15444,11 +13368,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:5263:3: ( (lv_if_1_0= ruleXExpression ) )
-            // PsiInternalXtend.g:5264:4: (lv_if_1_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:5264:4: (lv_if_1_0= ruleXExpression )
-            // PsiInternalXtend.g:5265:5: lv_if_1_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -15470,12 +13390,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:5274:3: ( (lv_then_2_0= ruleInternalRichString ) )
-            // PsiInternalXtend.g:5275:4: (lv_then_2_0= ruleInternalRichString )
             {
-            // PsiInternalXtend.g:5275:4: (lv_then_2_0= ruleInternalRichString )
-            // PsiInternalXtend.g:5276:5: lv_then_2_0= ruleInternalRichString
             {
             if ( state.backtracking==0 ) {
 
@@ -15513,15 +13428,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleRichStringElseIf"
-
-
-    // $ANTLR start "entryRuleXAnnotation"
-    // PsiInternalXtend.g:5289:1: entryRuleXAnnotation : ruleXAnnotation EOF ;
     public final void entryRuleXAnnotation() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5289:21: ( ruleXAnnotation EOF )
-            // PsiInternalXtend.g:5290:2: ruleXAnnotation EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAnnotationElementType()); 
@@ -15544,11 +13452,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAnnotation"
-
-
-    // $ANTLR start "ruleXAnnotation"
-    // PsiInternalXtend.g:5295:1: ruleXAnnotation : ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? ) ;
     public final void ruleXAnnotation() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -15556,14 +13459,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_8=null;
 
         try {
-            // PsiInternalXtend.g:5295:16: ( ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? ) )
-            // PsiInternalXtend.g:5296:2: ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? )
             {
-            // PsiInternalXtend.g:5296:2: ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? )
-            // PsiInternalXtend.g:5297:3: () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?
             {
-            // PsiInternalXtend.g:5297:3: ()
-            // PsiInternalXtend.g:5298:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -15585,11 +13482,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:5310:3: ( ( ruleQualifiedName ) )
-            // PsiInternalXtend.g:5311:4: ( ruleQualifiedName )
             {
-            // PsiInternalXtend.g:5311:4: ( ruleQualifiedName )
-            // PsiInternalXtend.g:5312:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -15611,16 +13504,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:5321:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?
             int alt166=2;
             alt166 = dfa166.predict(input);
             switch (alt166) {
                 case 1 :
-                    // PsiInternalXtend.g:5322:4: ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')'
                     {
-                    // PsiInternalXtend.g:5322:4: ( ( '(' )=>otherlv_3= '(' )
-                    // PsiInternalXtend.g:5323:5: ( '(' )=>otherlv_3= '('
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15635,22 +13523,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:5332:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?
                     int alt165=3;
                     alt165 = dfa165.predict(input);
                     switch (alt165) {
                         case 1 :
-                            // PsiInternalXtend.g:5333:5: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* )
                             {
-                            // PsiInternalXtend.g:5333:5: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* )
-                            // PsiInternalXtend.g:5334:6: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )*
                             {
-                            // PsiInternalXtend.g:5334:6: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) )
-                            // PsiInternalXtend.g:5335:7: ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair )
                             {
-                            // PsiInternalXtend.g:5344:7: (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair )
-                            // PsiInternalXtend.g:5345:8: lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair
                             {
                             if ( state.backtracking==0 ) {
 
@@ -15672,8 +13551,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:5354:6: (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )*
                             loop164:
                             do {
                                 int alt164=2;
@@ -15686,7 +13563,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt164) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:5355:7: otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -15699,11 +13575,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_5);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:5362:7: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
-                            	    // PsiInternalXtend.g:5363:8: ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair )
                             	    {
-                            	    // PsiInternalXtend.g:5372:8: (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair )
-                            	    // PsiInternalXtend.g:5373:9: lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -15742,13 +13614,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:5385:5: ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) )
                             {
-                            // PsiInternalXtend.g:5385:5: ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) )
-                            // PsiInternalXtend.g:5386:6: (lv_value_7_0= ruleXAnnotationElementValueOrCommaList )
                             {
-                            // PsiInternalXtend.g:5386:6: (lv_value_7_0= ruleXAnnotationElementValueOrCommaList )
-                            // PsiInternalXtend.g:5387:7: lv_value_7_0= ruleXAnnotationElementValueOrCommaList
                             {
                             if ( state.backtracking==0 ) {
 
@@ -15809,15 +13676,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAnnotation"
-
-
-    // $ANTLR start "entryRuleXAnnotationElementValuePair"
-    // PsiInternalXtend.g:5409:1: entryRuleXAnnotationElementValuePair : ruleXAnnotationElementValuePair EOF ;
     public final void entryRuleXAnnotationElementValuePair() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5409:37: ( ruleXAnnotationElementValuePair EOF )
-            // PsiInternalXtend.g:5410:2: ruleXAnnotationElementValuePair EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAnnotationElementValuePairElementType()); 
@@ -15840,32 +13700,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAnnotationElementValuePair"
-
-
-    // $ANTLR start "ruleXAnnotationElementValuePair"
-    // PsiInternalXtend.g:5415:1: ruleXAnnotationElementValuePair : ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) ) ;
     public final void ruleXAnnotationElementValuePair() throws RecognitionException {
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtend.g:5415:32: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) ) )
-            // PsiInternalXtend.g:5416:2: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) )
             {
-            // PsiInternalXtend.g:5416:2: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) )
-            // PsiInternalXtend.g:5417:3: ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) )
             {
-            // PsiInternalXtend.g:5417:3: ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) )
-            // PsiInternalXtend.g:5418:4: ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' )
             {
-            // PsiInternalXtend.g:5427:4: ( ( ( ruleValidID ) ) otherlv_1= '=' )
-            // PsiInternalXtend.g:5428:5: ( ( ruleValidID ) ) otherlv_1= '='
             {
-            // PsiInternalXtend.g:5428:5: ( ( ruleValidID ) )
-            // PsiInternalXtend.g:5429:6: ( ruleValidID )
             {
-            // PsiInternalXtend.g:5429:6: ( ruleValidID )
-            // PsiInternalXtend.g:5430:7: ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -15904,12 +13747,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:5448:3: ( (lv_value_2_0= ruleXAnnotationElementValue ) )
-            // PsiInternalXtend.g:5449:4: (lv_value_2_0= ruleXAnnotationElementValue )
             {
-            // PsiInternalXtend.g:5449:4: (lv_value_2_0= ruleXAnnotationElementValue )
-            // PsiInternalXtend.g:5450:5: lv_value_2_0= ruleXAnnotationElementValue
             {
             if ( state.backtracking==0 ) {
 
@@ -15947,15 +13785,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAnnotationElementValuePair"
-
-
-    // $ANTLR start "entryRuleXAnnotationElementValueOrCommaList"
-    // PsiInternalXtend.g:5463:1: entryRuleXAnnotationElementValueOrCommaList : ruleXAnnotationElementValueOrCommaList EOF ;
     public final void entryRuleXAnnotationElementValueOrCommaList() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5463:44: ( ruleXAnnotationElementValueOrCommaList EOF )
-            // PsiInternalXtend.g:5464:2: ruleXAnnotationElementValueOrCommaList EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAnnotationElementValueOrCommaListElementType()); 
@@ -15978,11 +13809,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAnnotationElementValueOrCommaList"
-
-
-    // $ANTLR start "ruleXAnnotationElementValueOrCommaList"
-    // PsiInternalXtend.g:5469:1: ruleXAnnotationElementValueOrCommaList : ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ( ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) ) ;
     public final void ruleXAnnotationElementValueOrCommaList() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -15991,27 +13817,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_9=null;
 
         try {
-            // PsiInternalXtend.g:5469:39: ( ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ( ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) ) )
-            // PsiInternalXtend.g:5470:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ( ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )
             {
-            // PsiInternalXtend.g:5470:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ( ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )
             int alt171=2;
             alt171 = dfa171.predict(input);
             switch (alt171) {
                 case 1 :
-                    // PsiInternalXtend.g:5471:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
                     {
-                    // PsiInternalXtend.g:5471:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
-                    // PsiInternalXtend.g:5472:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']'
                     {
-                    // PsiInternalXtend.g:5472:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) )
-                    // PsiInternalXtend.g:5473:5: ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' )
                     {
-                    // PsiInternalXtend.g:5480:5: ( () otherlv_1= '#' otherlv_2= '[' )
-                    // PsiInternalXtend.g:5481:6: () otherlv_1= '#' otherlv_2= '['
                     {
-                    // PsiInternalXtend.g:5481:6: ()
-                    // PsiInternalXtend.g:5482:7: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16049,8 +13863,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:5503:4: ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )?
                     int alt168=2;
                     int LA168_0 = input.LA(1);
 
@@ -16059,13 +13871,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt168) {
                         case 1 :
-                            // PsiInternalXtend.g:5504:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             {
-                            // PsiInternalXtend.g:5504:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) )
-                            // PsiInternalXtend.g:5505:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
                             {
-                            // PsiInternalXtend.g:5505:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
-                            // PsiInternalXtend.g:5506:7: lv_elements_3_0= ruleXAnnotationOrExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -16087,8 +13894,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:5515:5: (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             loop167:
                             do {
                                 int alt167=2;
@@ -16101,7 +13906,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt167) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:5516:6: otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16114,11 +13918,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      						doneLeaf(otherlv_4);
                             	      					
                             	    }
-                            	    // PsiInternalXtend.g:5523:6: ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
-                            	    // PsiInternalXtend.g:5524:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
                             	    {
-                            	    // PsiInternalXtend.g:5524:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
-                            	    // PsiInternalXtend.g:5525:8: lv_elements_5_0= ruleXAnnotationOrExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16174,10 +13974,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:5545:3: ( ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? )
                     {
-                    // PsiInternalXtend.g:5545:3: ( ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? )
-                    // PsiInternalXtend.g:5546:4: ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16194,7 +13991,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneComposite();
                       			
                     }
-                    // PsiInternalXtend.g:5553:4: ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )?
                     int alt170=2;
                     int LA170_0 = input.LA(1);
 
@@ -16203,10 +13999,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt170) {
                         case 1 :
-                            // PsiInternalXtend.g:5554:5: () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+
                             {
-                            // PsiInternalXtend.g:5554:5: ()
-                            // PsiInternalXtend.g:5555:6: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -16216,8 +14009,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
 
                             }
-
-                            // PsiInternalXtend.g:5560:5: (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+
                             int cnt169=0;
                             loop169:
                             do {
@@ -16231,7 +14022,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt169) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:5561:6: otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16244,11 +14034,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      						doneLeaf(otherlv_9);
                             	      					
                             	    }
-                            	    // PsiInternalXtend.g:5568:6: ( (lv_elements_10_0= ruleXAnnotationOrExpression ) )
-                            	    // PsiInternalXtend.g:5569:7: (lv_elements_10_0= ruleXAnnotationOrExpression )
                             	    {
-                            	    // PsiInternalXtend.g:5569:7: (lv_elements_10_0= ruleXAnnotationOrExpression )
-                            	    // PsiInternalXtend.g:5570:8: lv_elements_10_0= ruleXAnnotationOrExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16312,15 +14098,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAnnotationElementValueOrCommaList"
-
-
-    // $ANTLR start "entryRuleXAnnotationElementValue"
-    // PsiInternalXtend.g:5586:1: entryRuleXAnnotationElementValue : ruleXAnnotationElementValue EOF ;
     public final void entryRuleXAnnotationElementValue() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5586:33: ( ruleXAnnotationElementValue EOF )
-            // PsiInternalXtend.g:5587:2: ruleXAnnotationElementValue EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAnnotationElementValueElementType()); 
@@ -16343,11 +14122,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAnnotationElementValue"
-
-
-    // $ANTLR start "ruleXAnnotationElementValue"
-    // PsiInternalXtend.g:5592:1: ruleXAnnotationElementValue : ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ruleXAnnotationOrExpression ) ;
     public final void ruleXAnnotationElementValue() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -16355,27 +14129,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:5592:28: ( ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ruleXAnnotationOrExpression ) )
-            // PsiInternalXtend.g:5593:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ruleXAnnotationOrExpression )
             {
-            // PsiInternalXtend.g:5593:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | ruleXAnnotationOrExpression )
             int alt174=2;
             alt174 = dfa174.predict(input);
             switch (alt174) {
                 case 1 :
-                    // PsiInternalXtend.g:5594:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
                     {
-                    // PsiInternalXtend.g:5594:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
-                    // PsiInternalXtend.g:5595:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']'
                     {
-                    // PsiInternalXtend.g:5595:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) )
-                    // PsiInternalXtend.g:5596:5: ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' )
                     {
-                    // PsiInternalXtend.g:5603:5: ( () otherlv_1= '#' otherlv_2= '[' )
-                    // PsiInternalXtend.g:5604:6: () otherlv_1= '#' otherlv_2= '['
                     {
-                    // PsiInternalXtend.g:5604:6: ()
-                    // PsiInternalXtend.g:5605:7: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16413,8 +14175,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:5626:4: ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )?
                     int alt173=2;
                     int LA173_0 = input.LA(1);
 
@@ -16423,13 +14183,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt173) {
                         case 1 :
-                            // PsiInternalXtend.g:5627:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             {
-                            // PsiInternalXtend.g:5627:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) )
-                            // PsiInternalXtend.g:5628:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
                             {
-                            // PsiInternalXtend.g:5628:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
-                            // PsiInternalXtend.g:5629:7: lv_elements_3_0= ruleXAnnotationOrExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -16451,8 +14206,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:5638:5: (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             loop172:
                             do {
                                 int alt172=2;
@@ -16465,7 +14218,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt172) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:5639:6: otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16478,11 +14230,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      						doneLeaf(otherlv_4);
                             	      					
                             	    }
-                            	    // PsiInternalXtend.g:5646:6: ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
-                            	    // PsiInternalXtend.g:5647:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
                             	    {
-                            	    // PsiInternalXtend.g:5647:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
-                            	    // PsiInternalXtend.g:5648:8: lv_elements_5_0= ruleXAnnotationOrExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16538,7 +14286,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:5668:3: ruleXAnnotationOrExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16573,15 +14320,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAnnotationElementValue"
-
-
-    // $ANTLR start "entryRuleXAnnotationOrExpression"
-    // PsiInternalXtend.g:5679:1: entryRuleXAnnotationOrExpression : ruleXAnnotationOrExpression EOF ;
     public final void entryRuleXAnnotationOrExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5679:33: ( ruleXAnnotationOrExpression EOF )
-            // PsiInternalXtend.g:5680:2: ruleXAnnotationOrExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAnnotationOrExpressionElementType()); 
@@ -16604,17 +14344,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAnnotationOrExpression"
-
-
-    // $ANTLR start "ruleXAnnotationOrExpression"
-    // PsiInternalXtend.g:5685:1: ruleXAnnotationOrExpression : ( ruleXAnnotation | ruleXExpression ) ;
     public final void ruleXAnnotationOrExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5685:28: ( ( ruleXAnnotation | ruleXExpression ) )
-            // PsiInternalXtend.g:5686:2: ( ruleXAnnotation | ruleXExpression )
             {
-            // PsiInternalXtend.g:5686:2: ( ruleXAnnotation | ruleXExpression )
             int alt175=2;
             int LA175_0 = input.LA(1);
 
@@ -16633,7 +14365,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt175) {
                 case 1 :
-                    // PsiInternalXtend.g:5687:3: ruleXAnnotation
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16654,7 +14385,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:5695:3: ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16689,15 +14419,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAnnotationOrExpression"
-
-
-    // $ANTLR start "entryRuleXExpression"
-    // PsiInternalXtend.g:5706:1: entryRuleXExpression : ruleXExpression EOF ;
     public final void entryRuleXExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5706:21: ( ruleXExpression EOF )
-            // PsiInternalXtend.g:5707:2: ruleXExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXExpressionElementType()); 
@@ -16720,15 +14443,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXExpression"
-
-
-    // $ANTLR start "ruleXExpression"
-    // PsiInternalXtend.g:5712:1: ruleXExpression : ruleXAssignment ;
     public final void ruleXExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5712:16: ( ruleXAssignment )
-            // PsiInternalXtend.g:5713:2: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
 
@@ -16757,15 +14473,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXExpression"
-
-
-    // $ANTLR start "entryRuleXAssignment"
-    // PsiInternalXtend.g:5723:1: entryRuleXAssignment : ruleXAssignment EOF ;
     public final void entryRuleXAssignment() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5723:21: ( ruleXAssignment EOF )
-            // PsiInternalXtend.g:5724:2: ruleXAssignment EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAssignmentElementType()); 
@@ -16788,28 +14497,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAssignment"
-
-
-    // $ANTLR start "ruleXAssignment"
-    // PsiInternalXtend.g:5729:1: ruleXAssignment : ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | ( ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) ;
     public final void ruleXAssignment() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5729:16: ( ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | ( ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) )
-            // PsiInternalXtend.g:5730:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | ( ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
             {
-            // PsiInternalXtend.g:5730:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | ( ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
             int alt177=2;
             alt177 = dfa177.predict(input);
             switch (alt177) {
                 case 1 :
-                    // PsiInternalXtend.g:5731:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
                     {
-                    // PsiInternalXtend.g:5731:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
-                    // PsiInternalXtend.g:5732:4: () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) )
                     {
-                    // PsiInternalXtend.g:5732:4: ()
-                    // PsiInternalXtend.g:5733:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16819,12 +14515,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:5738:4: ( ( ruleFeatureCallID ) )
-                    // PsiInternalXtend.g:5739:5: ( ruleFeatureCallID )
                     {
-                    // PsiInternalXtend.g:5739:5: ( ruleFeatureCallID )
-                    // PsiInternalXtend.g:5740:6: ruleFeatureCallID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16862,11 +14553,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneComposite();
                       			
                     }
-                    // PsiInternalXtend.g:5756:4: ( (lv_value_3_0= ruleXAssignment ) )
-                    // PsiInternalXtend.g:5757:5: (lv_value_3_0= ruleXAssignment )
                     {
-                    // PsiInternalXtend.g:5757:5: (lv_value_3_0= ruleXAssignment )
-                    // PsiInternalXtend.g:5758:6: lv_value_3_0= ruleXAssignment
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16896,10 +14583,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:5769:3: ( ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
                     {
-                    // PsiInternalXtend.g:5769:3: ( ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
-                    // PsiInternalXtend.g:5770:4: ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16916,21 +14600,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneComposite();
                       			
                     }
-                    // PsiInternalXtend.g:5777:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
                     int alt176=2;
                     alt176 = dfa176.predict(input);
                     switch (alt176) {
                         case 1 :
-                            // PsiInternalXtend.g:5778:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) )
                             {
-                            // PsiInternalXtend.g:5778:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) )
-                            // PsiInternalXtend.g:5779:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) )
                             {
-                            // PsiInternalXtend.g:5789:6: ( () ( ( ruleOpMultiAssign ) ) )
-                            // PsiInternalXtend.g:5790:7: () ( ( ruleOpMultiAssign ) )
                             {
-                            // PsiInternalXtend.g:5790:7: ()
-                            // PsiInternalXtend.g:5791:8: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -16940,12 +14616,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
 
                             }
-
-                            // PsiInternalXtend.g:5796:7: ( ( ruleOpMultiAssign ) )
-                            // PsiInternalXtend.g:5797:8: ( ruleOpMultiAssign )
                             {
-                            // PsiInternalXtend.g:5797:8: ( ruleOpMultiAssign )
-                            // PsiInternalXtend.g:5798:9: ruleOpMultiAssign
                             {
                             if ( state.backtracking==0 ) {
 
@@ -16973,12 +14644,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:5809:5: ( (lv_rightOperand_7_0= ruleXAssignment ) )
-                            // PsiInternalXtend.g:5810:6: (lv_rightOperand_7_0= ruleXAssignment )
                             {
-                            // PsiInternalXtend.g:5810:6: (lv_rightOperand_7_0= ruleXAssignment )
-                            // PsiInternalXtend.g:5811:7: lv_rightOperand_7_0= ruleXAssignment
                             {
                             if ( state.backtracking==0 ) {
 
@@ -17028,15 +14694,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAssignment"
-
-
-    // $ANTLR start "entryRuleOpSingleAssign"
-    // PsiInternalXtend.g:5826:1: entryRuleOpSingleAssign : ruleOpSingleAssign EOF ;
     public final void entryRuleOpSingleAssign() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5826:24: ( ruleOpSingleAssign EOF )
-            // PsiInternalXtend.g:5827:2: ruleOpSingleAssign EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpSingleAssignElementType()); 
@@ -17059,17 +14718,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpSingleAssign"
-
-
-    // $ANTLR start "ruleOpSingleAssign"
-    // PsiInternalXtend.g:5832:1: ruleOpSingleAssign : kw= '=' ;
     public final void ruleOpSingleAssign() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:5832:19: (kw= '=' )
-            // PsiInternalXtend.g:5833:2: kw= '='
             {
             if ( state.backtracking==0 ) {
 
@@ -17094,15 +14746,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpSingleAssign"
-
-
-    // $ANTLR start "entryRuleOpMultiAssign"
-    // PsiInternalXtend.g:5843:1: entryRuleOpMultiAssign : ruleOpMultiAssign EOF ;
     public final void entryRuleOpMultiAssign() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5843:23: ( ruleOpMultiAssign EOF )
-            // PsiInternalXtend.g:5844:2: ruleOpMultiAssign EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpMultiAssignElementType()); 
@@ -17125,19 +14770,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpMultiAssign"
-
-
-    // $ANTLR start "ruleOpMultiAssign"
-    // PsiInternalXtend.g:5849:1: ruleOpMultiAssign : (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) ;
     public final void ruleOpMultiAssign() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:5849:18: ( (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) )
-            // PsiInternalXtend.g:5850:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
             {
-            // PsiInternalXtend.g:5850:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
             int alt179=7;
             switch ( input.LA(1) ) {
             case KW_PlusSignEqualsSign:
@@ -17185,7 +14822,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt179) {
                 case 1 :
-                    // PsiInternalXtend.g:5851:3: kw= '+='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17202,7 +14838,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:5859:3: kw= '-='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17219,7 +14854,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:5867:3: kw= '*='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17236,7 +14870,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:5875:3: kw= '/='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17253,7 +14886,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:5883:3: kw= '%='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17270,10 +14902,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:5891:3: (kw= '<' kw= '<' kw= '=' )
                     {
-                    // PsiInternalXtend.g:5891:3: (kw= '<' kw= '<' kw= '=' )
-                    // PsiInternalXtend.g:5892:4: kw= '<' kw= '<' kw= '='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17315,10 +14944,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:5915:3: (kw= '>' (kw= '>' )? kw= '>=' )
                     {
-                    // PsiInternalXtend.g:5915:3: (kw= '>' (kw= '>' )? kw= '>=' )
-                    // PsiInternalXtend.g:5916:4: kw= '>' (kw= '>' )? kw= '>='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17331,7 +14957,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(kw);
                       			
                     }
-                    // PsiInternalXtend.g:5923:4: (kw= '>' )?
                     int alt178=2;
                     int LA178_0 = input.LA(1);
 
@@ -17340,7 +14965,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt178) {
                         case 1 :
-                            // PsiInternalXtend.g:5924:5: kw= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -17391,15 +15015,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpMultiAssign"
-
-
-    // $ANTLR start "entryRuleXOrExpression"
-    // PsiInternalXtend.g:5944:1: entryRuleXOrExpression : ruleXOrExpression EOF ;
     public final void entryRuleXOrExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5944:23: ( ruleXOrExpression EOF )
-            // PsiInternalXtend.g:5945:2: ruleXOrExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXOrExpressionElementType()); 
@@ -17422,18 +15039,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXOrExpression"
-
-
-    // $ANTLR start "ruleXOrExpression"
-    // PsiInternalXtend.g:5950:1: ruleXOrExpression : ( ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) ;
     public final void ruleXOrExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:5950:18: ( ( ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) )
-            // PsiInternalXtend.g:5951:2: ( ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
             {
-            // PsiInternalXtend.g:5951:2: ( ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
-            // PsiInternalXtend.g:5952:3: ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -17450,7 +15058,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:5959:3: ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
             loop180:
             do {
                 int alt180=2;
@@ -17469,16 +15076,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt180) {
             	case 1 :
-            	    // PsiInternalXtend.g:5960:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) )
             	    {
-            	    // PsiInternalXtend.g:5960:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) )
-            	    // PsiInternalXtend.g:5961:5: ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) )
             	    {
-            	    // PsiInternalXtend.g:5971:5: ( () ( ( ruleOpOr ) ) )
-            	    // PsiInternalXtend.g:5972:6: () ( ( ruleOpOr ) )
             	    {
-            	    // PsiInternalXtend.g:5972:6: ()
-            	    // PsiInternalXtend.g:5973:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17488,12 +15088,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:5978:6: ( ( ruleOpOr ) )
-            	    // PsiInternalXtend.g:5979:7: ( ruleOpOr )
             	    {
-            	    // PsiInternalXtend.g:5979:7: ( ruleOpOr )
-            	    // PsiInternalXtend.g:5980:8: ruleOpOr
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17521,12 +15116,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:5991:4: ( (lv_rightOperand_3_0= ruleXAndExpression ) )
-            	    // PsiInternalXtend.g:5992:5: (lv_rightOperand_3_0= ruleXAndExpression )
             	    {
-            	    // PsiInternalXtend.g:5992:5: (lv_rightOperand_3_0= ruleXAndExpression )
-            	    // PsiInternalXtend.g:5993:6: lv_rightOperand_3_0= ruleXAndExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17573,15 +15163,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXOrExpression"
-
-
-    // $ANTLR start "entryRuleOpOr"
-    // PsiInternalXtend.g:6007:1: entryRuleOpOr : ruleOpOr EOF ;
     public final void entryRuleOpOr() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6007:14: ( ruleOpOr EOF )
-            // PsiInternalXtend.g:6008:2: ruleOpOr EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpOrElementType()); 
@@ -17604,17 +15187,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpOr"
-
-
-    // $ANTLR start "ruleOpOr"
-    // PsiInternalXtend.g:6013:1: ruleOpOr : kw= '||' ;
     public final void ruleOpOr() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6013:9: (kw= '||' )
-            // PsiInternalXtend.g:6014:2: kw= '||'
             {
             if ( state.backtracking==0 ) {
 
@@ -17639,15 +15215,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpOr"
-
-
-    // $ANTLR start "entryRuleXAndExpression"
-    // PsiInternalXtend.g:6024:1: entryRuleXAndExpression : ruleXAndExpression EOF ;
     public final void entryRuleXAndExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6024:24: ( ruleXAndExpression EOF )
-            // PsiInternalXtend.g:6025:2: ruleXAndExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAndExpressionElementType()); 
@@ -17670,18 +15239,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAndExpression"
-
-
-    // $ANTLR start "ruleXAndExpression"
-    // PsiInternalXtend.g:6030:1: ruleXAndExpression : ( ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) ;
     public final void ruleXAndExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6030:19: ( ( ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) )
-            // PsiInternalXtend.g:6031:2: ( ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
             {
-            // PsiInternalXtend.g:6031:2: ( ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
-            // PsiInternalXtend.g:6032:3: ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -17698,7 +15258,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6039:3: ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
             loop181:
             do {
                 int alt181=2;
@@ -17717,16 +15276,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt181) {
             	case 1 :
-            	    // PsiInternalXtend.g:6040:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
             	    {
-            	    // PsiInternalXtend.g:6040:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) )
-            	    // PsiInternalXtend.g:6041:5: ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) )
             	    {
-            	    // PsiInternalXtend.g:6051:5: ( () ( ( ruleOpAnd ) ) )
-            	    // PsiInternalXtend.g:6052:6: () ( ( ruleOpAnd ) )
             	    {
-            	    // PsiInternalXtend.g:6052:6: ()
-            	    // PsiInternalXtend.g:6053:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17736,12 +15288,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:6058:6: ( ( ruleOpAnd ) )
-            	    // PsiInternalXtend.g:6059:7: ( ruleOpAnd )
             	    {
-            	    // PsiInternalXtend.g:6059:7: ( ruleOpAnd )
-            	    // PsiInternalXtend.g:6060:8: ruleOpAnd
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17769,12 +15316,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6071:4: ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
-            	    // PsiInternalXtend.g:6072:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
             	    {
-            	    // PsiInternalXtend.g:6072:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
-            	    // PsiInternalXtend.g:6073:6: lv_rightOperand_3_0= ruleXEqualityExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17821,15 +15363,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAndExpression"
-
-
-    // $ANTLR start "entryRuleOpAnd"
-    // PsiInternalXtend.g:6087:1: entryRuleOpAnd : ruleOpAnd EOF ;
     public final void entryRuleOpAnd() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6087:15: ( ruleOpAnd EOF )
-            // PsiInternalXtend.g:6088:2: ruleOpAnd EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpAndElementType()); 
@@ -17852,17 +15387,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpAnd"
-
-
-    // $ANTLR start "ruleOpAnd"
-    // PsiInternalXtend.g:6093:1: ruleOpAnd : kw= '&&' ;
     public final void ruleOpAnd() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6093:10: (kw= '&&' )
-            // PsiInternalXtend.g:6094:2: kw= '&&'
             {
             if ( state.backtracking==0 ) {
 
@@ -17887,15 +15415,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpAnd"
-
-
-    // $ANTLR start "entryRuleXEqualityExpression"
-    // PsiInternalXtend.g:6104:1: entryRuleXEqualityExpression : ruleXEqualityExpression EOF ;
     public final void entryRuleXEqualityExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6104:29: ( ruleXEqualityExpression EOF )
-            // PsiInternalXtend.g:6105:2: ruleXEqualityExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXEqualityExpressionElementType()); 
@@ -17918,18 +15439,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXEqualityExpression"
-
-
-    // $ANTLR start "ruleXEqualityExpression"
-    // PsiInternalXtend.g:6110:1: ruleXEqualityExpression : ( ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) ;
     public final void ruleXEqualityExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6110:24: ( ( ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) )
-            // PsiInternalXtend.g:6111:2: ( ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
             {
-            // PsiInternalXtend.g:6111:2: ( ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
-            // PsiInternalXtend.g:6112:3: ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -17946,7 +15458,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6119:3: ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
             loop182:
             do {
                 int alt182=2;
@@ -18000,16 +15511,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt182) {
             	case 1 :
-            	    // PsiInternalXtend.g:6120:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
             	    {
-            	    // PsiInternalXtend.g:6120:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) )
-            	    // PsiInternalXtend.g:6121:5: ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) )
             	    {
-            	    // PsiInternalXtend.g:6131:5: ( () ( ( ruleOpEquality ) ) )
-            	    // PsiInternalXtend.g:6132:6: () ( ( ruleOpEquality ) )
             	    {
-            	    // PsiInternalXtend.g:6132:6: ()
-            	    // PsiInternalXtend.g:6133:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18019,12 +15523,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:6138:6: ( ( ruleOpEquality ) )
-            	    // PsiInternalXtend.g:6139:7: ( ruleOpEquality )
             	    {
-            	    // PsiInternalXtend.g:6139:7: ( ruleOpEquality )
-            	    // PsiInternalXtend.g:6140:8: ruleOpEquality
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18052,12 +15551,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6151:4: ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
-            	    // PsiInternalXtend.g:6152:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
             	    {
-            	    // PsiInternalXtend.g:6152:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
-            	    // PsiInternalXtend.g:6153:6: lv_rightOperand_3_0= ruleXRelationalExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18104,15 +15598,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXEqualityExpression"
-
-
-    // $ANTLR start "entryRuleOpEquality"
-    // PsiInternalXtend.g:6167:1: entryRuleOpEquality : ruleOpEquality EOF ;
     public final void entryRuleOpEquality() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6167:20: ( ruleOpEquality EOF )
-            // PsiInternalXtend.g:6168:2: ruleOpEquality EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpEqualityElementType()); 
@@ -18135,19 +15622,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpEquality"
-
-
-    // $ANTLR start "ruleOpEquality"
-    // PsiInternalXtend.g:6173:1: ruleOpEquality : (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) ;
     public final void ruleOpEquality() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6173:15: ( (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) )
-            // PsiInternalXtend.g:6174:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
             {
-            // PsiInternalXtend.g:6174:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
             int alt183=4;
             switch ( input.LA(1) ) {
             case KW_EqualsSignEqualsSign:
@@ -18180,7 +15659,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt183) {
                 case 1 :
-                    // PsiInternalXtend.g:6175:3: kw= '=='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18197,7 +15675,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6183:3: kw= '!='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18214,7 +15691,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:6191:3: kw= '==='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18231,7 +15707,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:6199:3: kw= '!=='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18262,15 +15737,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpEquality"
-
-
-    // $ANTLR start "entryRuleXRelationalExpression"
-    // PsiInternalXtend.g:6210:1: entryRuleXRelationalExpression : ruleXRelationalExpression EOF ;
     public final void entryRuleXRelationalExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6210:31: ( ruleXRelationalExpression EOF )
-            // PsiInternalXtend.g:6211:2: ruleXRelationalExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXRelationalExpressionElementType()); 
@@ -18293,20 +15761,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXRelationalExpression"
-
-
-    // $ANTLR start "ruleXRelationalExpression"
-    // PsiInternalXtend.g:6216:1: ruleXRelationalExpression : ( ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) ;
     public final void ruleXRelationalExpression() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtend.g:6216:26: ( ( ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) )
-            // PsiInternalXtend.g:6217:2: ( ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
             {
-            // PsiInternalXtend.g:6217:2: ( ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
-            // PsiInternalXtend.g:6218:3: ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -18323,7 +15782,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6225:3: ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
             loop184:
             do {
                 int alt184=3;
@@ -18377,19 +15835,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt184) {
             	case 1 :
-            	    // PsiInternalXtend.g:6226:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
             	    {
-            	    // PsiInternalXtend.g:6226:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
-            	    // PsiInternalXtend.g:6227:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
             	    {
-            	    // PsiInternalXtend.g:6227:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) )
-            	    // PsiInternalXtend.g:6228:6: ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' )
             	    {
-            	    // PsiInternalXtend.g:6234:6: ( () otherlv_2= 'instanceof' )
-            	    // PsiInternalXtend.g:6235:7: () otherlv_2= 'instanceof'
             	    {
-            	    // PsiInternalXtend.g:6235:7: ()
-            	    // PsiInternalXtend.g:6236:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18416,12 +15865,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6250:5: ( (lv_type_3_0= ruleJvmTypeReference ) )
-            	    // PsiInternalXtend.g:6251:6: (lv_type_3_0= ruleJvmTypeReference )
             	    {
-            	    // PsiInternalXtend.g:6251:6: (lv_type_3_0= ruleJvmTypeReference )
-            	    // PsiInternalXtend.g:6252:7: lv_type_3_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18451,19 +15895,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // PsiInternalXtend.g:6263:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
             	    {
-            	    // PsiInternalXtend.g:6263:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
-            	    // PsiInternalXtend.g:6264:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
             	    {
-            	    // PsiInternalXtend.g:6264:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) )
-            	    // PsiInternalXtend.g:6265:6: ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) )
             	    {
-            	    // PsiInternalXtend.g:6275:6: ( () ( ( ruleOpCompare ) ) )
-            	    // PsiInternalXtend.g:6276:7: () ( ( ruleOpCompare ) )
             	    {
-            	    // PsiInternalXtend.g:6276:7: ()
-            	    // PsiInternalXtend.g:6277:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18473,12 +15908,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:6282:7: ( ( ruleOpCompare ) )
-            	    // PsiInternalXtend.g:6283:8: ( ruleOpCompare )
             	    {
-            	    // PsiInternalXtend.g:6283:8: ( ruleOpCompare )
-            	    // PsiInternalXtend.g:6284:9: ruleOpCompare
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18506,12 +15936,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6295:5: ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
-            	    // PsiInternalXtend.g:6296:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
             	    {
-            	    // PsiInternalXtend.g:6296:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
-            	    // PsiInternalXtend.g:6297:7: lv_rightOperand_6_0= ruleXOtherOperatorExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18561,15 +15986,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXRelationalExpression"
-
-
-    // $ANTLR start "entryRuleOpCompare"
-    // PsiInternalXtend.g:6312:1: entryRuleOpCompare : ruleOpCompare EOF ;
     public final void entryRuleOpCompare() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6312:19: ( ruleOpCompare EOF )
-            // PsiInternalXtend.g:6313:2: ruleOpCompare EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpCompareElementType()); 
@@ -18592,19 +16010,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpCompare"
-
-
-    // $ANTLR start "ruleOpCompare"
-    // PsiInternalXtend.g:6318:1: ruleOpCompare : (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) ;
     public final void ruleOpCompare() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6318:14: ( (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) )
-            // PsiInternalXtend.g:6319:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
             {
-            // PsiInternalXtend.g:6319:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
             int alt185=4;
             switch ( input.LA(1) ) {
             case KW_GreaterThanSignEqualsSign:
@@ -18646,7 +16056,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt185) {
                 case 1 :
-                    // PsiInternalXtend.g:6320:3: kw= '>='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18663,10 +16072,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6328:3: (kw= '<' kw= '=' )
                     {
-                    // PsiInternalXtend.g:6328:3: (kw= '<' kw= '=' )
-                    // PsiInternalXtend.g:6329:4: kw= '<' kw= '='
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18697,7 +16103,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:6345:3: kw= '>'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18714,7 +16119,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:6353:3: kw= '<'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18745,15 +16149,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpCompare"
-
-
-    // $ANTLR start "entryRuleXOtherOperatorExpression"
-    // PsiInternalXtend.g:6364:1: entryRuleXOtherOperatorExpression : ruleXOtherOperatorExpression EOF ;
     public final void entryRuleXOtherOperatorExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6364:34: ( ruleXOtherOperatorExpression EOF )
-            // PsiInternalXtend.g:6365:2: ruleXOtherOperatorExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXOtherOperatorExpressionElementType()); 
@@ -18776,18 +16173,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXOtherOperatorExpression"
-
-
-    // $ANTLR start "ruleXOtherOperatorExpression"
-    // PsiInternalXtend.g:6370:1: ruleXOtherOperatorExpression : ( ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) ;
     public final void ruleXOtherOperatorExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6370:29: ( ( ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) )
-            // PsiInternalXtend.g:6371:2: ( ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
             {
-            // PsiInternalXtend.g:6371:2: ( ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
-            // PsiInternalXtend.g:6372:3: ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -18804,23 +16192,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6379:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
             loop186:
             do {
                 int alt186=2;
                 alt186 = dfa186.predict(input);
                 switch (alt186) {
             	case 1 :
-            	    // PsiInternalXtend.g:6380:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
             	    {
-            	    // PsiInternalXtend.g:6380:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) )
-            	    // PsiInternalXtend.g:6381:5: ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) )
             	    {
-            	    // PsiInternalXtend.g:6391:5: ( () ( ( ruleOpOther ) ) )
-            	    // PsiInternalXtend.g:6392:6: () ( ( ruleOpOther ) )
             	    {
-            	    // PsiInternalXtend.g:6392:6: ()
-            	    // PsiInternalXtend.g:6393:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18830,12 +16210,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:6398:6: ( ( ruleOpOther ) )
-            	    // PsiInternalXtend.g:6399:7: ( ruleOpOther )
             	    {
-            	    // PsiInternalXtend.g:6399:7: ( ruleOpOther )
-            	    // PsiInternalXtend.g:6400:8: ruleOpOther
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18863,12 +16238,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6411:4: ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
-            	    // PsiInternalXtend.g:6412:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
             	    {
-            	    // PsiInternalXtend.g:6412:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
-            	    // PsiInternalXtend.g:6413:6: lv_rightOperand_3_0= ruleXAdditiveExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18915,15 +16285,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXOtherOperatorExpression"
-
-
-    // $ANTLR start "entryRuleOpOther"
-    // PsiInternalXtend.g:6427:1: entryRuleOpOther : ruleOpOther EOF ;
     public final void entryRuleOpOther() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6427:17: ( ruleOpOther EOF )
-            // PsiInternalXtend.g:6428:2: ruleOpOther EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpOtherElementType()); 
@@ -18946,24 +16309,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpOther"
-
-
-    // $ANTLR start "ruleOpOther"
-    // PsiInternalXtend.g:6433:1: ruleOpOther : (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) ;
     public final void ruleOpOther() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6433:12: ( (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) )
-            // PsiInternalXtend.g:6434:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
             {
-            // PsiInternalXtend.g:6434:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
             int alt189=9;
             alt189 = dfa189.predict(input);
             switch (alt189) {
                 case 1 :
-                    // PsiInternalXtend.g:6435:3: kw= '->'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18980,7 +16334,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6443:3: kw= '..<'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18997,10 +16350,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:6451:3: (kw= '>' kw= '..' )
                     {
-                    // PsiInternalXtend.g:6451:3: (kw= '>' kw= '..' )
-                    // PsiInternalXtend.g:6452:4: kw= '>' kw= '..'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19031,7 +16381,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:6468:3: kw= '..'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19048,7 +16397,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:6476:3: kw= '=>'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19065,10 +16413,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:6484:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
                     {
-                    // PsiInternalXtend.g:6484:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
-                    // PsiInternalXtend.g:6485:4: kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19081,7 +16426,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(kw);
                       			
                     }
-                    // PsiInternalXtend.g:6492:4: ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
                     int alt187=2;
                     int LA187_0 = input.LA(1);
 
@@ -19111,13 +16455,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt187) {
                         case 1 :
-                            // PsiInternalXtend.g:6493:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
                             {
-                            // PsiInternalXtend.g:6493:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
-                            // PsiInternalXtend.g:6494:6: ( ( '>' '>' ) )=> (kw= '>' kw= '>' )
                             {
-                            // PsiInternalXtend.g:6499:6: (kw= '>' kw= '>' )
-                            // PsiInternalXtend.g:6500:7: kw= '>' kw= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -19151,7 +16490,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:6517:5: kw= '>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -19177,10 +16515,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:6527:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
                     {
-                    // PsiInternalXtend.g:6527:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
-                    // PsiInternalXtend.g:6528:4: kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19193,7 +16528,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(kw);
                       			
                     }
-                    // PsiInternalXtend.g:6535:4: ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
                     int alt188=3;
                     int LA188_0 = input.LA(1);
 
@@ -19226,13 +16560,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt188) {
                         case 1 :
-                            // PsiInternalXtend.g:6536:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
                             {
-                            // PsiInternalXtend.g:6536:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
-                            // PsiInternalXtend.g:6537:6: ( ( '<' '<' ) )=> (kw= '<' kw= '<' )
                             {
-                            // PsiInternalXtend.g:6542:6: (kw= '<' kw= '<' )
-                            // PsiInternalXtend.g:6543:7: kw= '<' kw= '<'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -19266,7 +16595,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:6560:5: kw= '<'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -19283,7 +16611,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 3 :
-                            // PsiInternalXtend.g:6568:5: kw= '=>'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -19309,7 +16636,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 8 :
-                    // PsiInternalXtend.g:6578:3: kw= '<>'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19326,7 +16652,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 9 :
-                    // PsiInternalXtend.g:6586:3: kw= '?:'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19357,15 +16682,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpOther"
-
-
-    // $ANTLR start "entryRuleXAdditiveExpression"
-    // PsiInternalXtend.g:6597:1: entryRuleXAdditiveExpression : ruleXAdditiveExpression EOF ;
     public final void entryRuleXAdditiveExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6597:29: ( ruleXAdditiveExpression EOF )
-            // PsiInternalXtend.g:6598:2: ruleXAdditiveExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXAdditiveExpressionElementType()); 
@@ -19388,18 +16706,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXAdditiveExpression"
-
-
-    // $ANTLR start "ruleXAdditiveExpression"
-    // PsiInternalXtend.g:6603:1: ruleXAdditiveExpression : ( ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) ;
     public final void ruleXAdditiveExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6603:24: ( ( ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) )
-            // PsiInternalXtend.g:6604:2: ( ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
             {
-            // PsiInternalXtend.g:6604:2: ( ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
-            // PsiInternalXtend.g:6605:3: ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -19416,7 +16725,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6612:3: ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
             loop190:
             do {
                 int alt190=2;
@@ -19444,16 +16752,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt190) {
             	case 1 :
-            	    // PsiInternalXtend.g:6613:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
             	    {
-            	    // PsiInternalXtend.g:6613:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) )
-            	    // PsiInternalXtend.g:6614:5: ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) )
             	    {
-            	    // PsiInternalXtend.g:6624:5: ( () ( ( ruleOpAdd ) ) )
-            	    // PsiInternalXtend.g:6625:6: () ( ( ruleOpAdd ) )
             	    {
-            	    // PsiInternalXtend.g:6625:6: ()
-            	    // PsiInternalXtend.g:6626:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -19463,12 +16764,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:6631:6: ( ( ruleOpAdd ) )
-            	    // PsiInternalXtend.g:6632:7: ( ruleOpAdd )
             	    {
-            	    // PsiInternalXtend.g:6632:7: ( ruleOpAdd )
-            	    // PsiInternalXtend.g:6633:8: ruleOpAdd
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -19496,12 +16792,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6644:4: ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
-            	    // PsiInternalXtend.g:6645:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
             	    {
-            	    // PsiInternalXtend.g:6645:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
-            	    // PsiInternalXtend.g:6646:6: lv_rightOperand_3_0= ruleXMultiplicativeExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -19548,15 +16839,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXAdditiveExpression"
-
-
-    // $ANTLR start "entryRuleOpAdd"
-    // PsiInternalXtend.g:6660:1: entryRuleOpAdd : ruleOpAdd EOF ;
     public final void entryRuleOpAdd() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6660:15: ( ruleOpAdd EOF )
-            // PsiInternalXtend.g:6661:2: ruleOpAdd EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpAddElementType()); 
@@ -19579,19 +16863,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpAdd"
-
-
-    // $ANTLR start "ruleOpAdd"
-    // PsiInternalXtend.g:6666:1: ruleOpAdd : (kw= '+' | kw= '-' ) ;
     public final void ruleOpAdd() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6666:10: ( (kw= '+' | kw= '-' ) )
-            // PsiInternalXtend.g:6667:2: (kw= '+' | kw= '-' )
             {
-            // PsiInternalXtend.g:6667:2: (kw= '+' | kw= '-' )
             int alt191=2;
             int LA191_0 = input.LA(1);
 
@@ -19610,7 +16886,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt191) {
                 case 1 :
-                    // PsiInternalXtend.g:6668:3: kw= '+'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19627,7 +16902,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6676:3: kw= '-'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19658,15 +16932,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpAdd"
-
-
-    // $ANTLR start "entryRuleXMultiplicativeExpression"
-    // PsiInternalXtend.g:6687:1: entryRuleXMultiplicativeExpression : ruleXMultiplicativeExpression EOF ;
     public final void entryRuleXMultiplicativeExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6687:35: ( ruleXMultiplicativeExpression EOF )
-            // PsiInternalXtend.g:6688:2: ruleXMultiplicativeExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXMultiplicativeExpressionElementType()); 
@@ -19689,18 +16956,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXMultiplicativeExpression"
-
-
-    // $ANTLR start "ruleXMultiplicativeExpression"
-    // PsiInternalXtend.g:6693:1: ruleXMultiplicativeExpression : ( ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) ;
     public final void ruleXMultiplicativeExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6693:30: ( ( ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) )
-            // PsiInternalXtend.g:6694:2: ( ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
             {
-            // PsiInternalXtend.g:6694:2: ( ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
-            // PsiInternalXtend.g:6695:3: ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -19717,7 +16975,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6702:3: ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
             loop192:
             do {
                 int alt192=2;
@@ -19771,16 +17028,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt192) {
             	case 1 :
-            	    // PsiInternalXtend.g:6703:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
             	    {
-            	    // PsiInternalXtend.g:6703:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) )
-            	    // PsiInternalXtend.g:6704:5: ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) )
             	    {
-            	    // PsiInternalXtend.g:6714:5: ( () ( ( ruleOpMulti ) ) )
-            	    // PsiInternalXtend.g:6715:6: () ( ( ruleOpMulti ) )
             	    {
-            	    // PsiInternalXtend.g:6715:6: ()
-            	    // PsiInternalXtend.g:6716:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -19790,12 +17040,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:6721:6: ( ( ruleOpMulti ) )
-            	    // PsiInternalXtend.g:6722:7: ( ruleOpMulti )
             	    {
-            	    // PsiInternalXtend.g:6722:7: ( ruleOpMulti )
-            	    // PsiInternalXtend.g:6723:8: ruleOpMulti
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -19823,12 +17068,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6734:4: ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
-            	    // PsiInternalXtend.g:6735:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
             	    {
-            	    // PsiInternalXtend.g:6735:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
-            	    // PsiInternalXtend.g:6736:6: lv_rightOperand_3_0= ruleXUnaryOperation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -19875,15 +17115,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXMultiplicativeExpression"
-
-
-    // $ANTLR start "entryRuleOpMulti"
-    // PsiInternalXtend.g:6750:1: entryRuleOpMulti : ruleOpMulti EOF ;
     public final void entryRuleOpMulti() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6750:17: ( ruleOpMulti EOF )
-            // PsiInternalXtend.g:6751:2: ruleOpMulti EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpMultiElementType()); 
@@ -19906,19 +17139,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpMulti"
-
-
-    // $ANTLR start "ruleOpMulti"
-    // PsiInternalXtend.g:6756:1: ruleOpMulti : (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) ;
     public final void ruleOpMulti() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6756:12: ( (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) )
-            // PsiInternalXtend.g:6757:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             {
-            // PsiInternalXtend.g:6757:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             int alt193=4;
             switch ( input.LA(1) ) {
             case KW_Asterisk:
@@ -19951,7 +17176,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt193) {
                 case 1 :
-                    // PsiInternalXtend.g:6758:3: kw= '*'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19968,7 +17192,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6766:3: kw= '**'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -19985,7 +17208,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:6774:3: kw= '/'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20002,7 +17224,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:6782:3: kw= '%'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20033,15 +17254,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpMulti"
-
-
-    // $ANTLR start "entryRuleXUnaryOperation"
-    // PsiInternalXtend.g:6793:1: entryRuleXUnaryOperation : ruleXUnaryOperation EOF ;
     public final void entryRuleXUnaryOperation() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6793:25: ( ruleXUnaryOperation EOF )
-            // PsiInternalXtend.g:6794:2: ruleXUnaryOperation EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXUnaryOperationElementType()); 
@@ -20064,17 +17278,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXUnaryOperation"
-
-
-    // $ANTLR start "ruleXUnaryOperation"
-    // PsiInternalXtend.g:6799:1: ruleXUnaryOperation : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | ruleXCastedExpression ) ;
     public final void ruleXUnaryOperation() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6799:20: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | ruleXCastedExpression ) )
-            // PsiInternalXtend.g:6800:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | ruleXCastedExpression )
             {
-            // PsiInternalXtend.g:6800:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | ruleXCastedExpression )
             int alt194=2;
             int LA194_0 = input.LA(1);
 
@@ -20093,13 +17299,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt194) {
                 case 1 :
-                    // PsiInternalXtend.g:6801:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
                     {
-                    // PsiInternalXtend.g:6801:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
-                    // PsiInternalXtend.g:6802:4: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) )
                     {
-                    // PsiInternalXtend.g:6802:4: ()
-                    // PsiInternalXtend.g:6803:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20109,12 +17310,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:6808:4: ( ( ruleOpUnary ) )
-                    // PsiInternalXtend.g:6809:5: ( ruleOpUnary )
                     {
-                    // PsiInternalXtend.g:6809:5: ( ruleOpUnary )
-                    // PsiInternalXtend.g:6810:6: ruleOpUnary
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20136,12 +17332,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:6819:4: ( (lv_operand_2_0= ruleXUnaryOperation ) )
-                    // PsiInternalXtend.g:6820:5: (lv_operand_2_0= ruleXUnaryOperation )
                     {
-                    // PsiInternalXtend.g:6820:5: (lv_operand_2_0= ruleXUnaryOperation )
-                    // PsiInternalXtend.g:6821:6: lv_operand_2_0= ruleXUnaryOperation
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20171,7 +17362,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6832:3: ruleXCastedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20206,15 +17396,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXUnaryOperation"
-
-
-    // $ANTLR start "entryRuleOpUnary"
-    // PsiInternalXtend.g:6843:1: entryRuleOpUnary : ruleOpUnary EOF ;
     public final void entryRuleOpUnary() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6843:17: ( ruleOpUnary EOF )
-            // PsiInternalXtend.g:6844:2: ruleOpUnary EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpUnaryElementType()); 
@@ -20237,19 +17420,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpUnary"
-
-
-    // $ANTLR start "ruleOpUnary"
-    // PsiInternalXtend.g:6849:1: ruleOpUnary : (kw= '!' | kw= '-' | kw= '+' ) ;
     public final void ruleOpUnary() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6849:12: ( (kw= '!' | kw= '-' | kw= '+' ) )
-            // PsiInternalXtend.g:6850:2: (kw= '!' | kw= '-' | kw= '+' )
             {
-            // PsiInternalXtend.g:6850:2: (kw= '!' | kw= '-' | kw= '+' )
             int alt195=3;
             switch ( input.LA(1) ) {
             case KW_ExclamationMark:
@@ -20277,7 +17452,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             switch (alt195) {
                 case 1 :
-                    // PsiInternalXtend.g:6851:3: kw= '!'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20294,7 +17468,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6859:3: kw= '-'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20311,7 +17484,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:6867:3: kw= '+'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20342,15 +17514,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpUnary"
-
-
-    // $ANTLR start "entryRuleXCastedExpression"
-    // PsiInternalXtend.g:6878:1: entryRuleXCastedExpression : ruleXCastedExpression EOF ;
     public final void entryRuleXCastedExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6878:27: ( ruleXCastedExpression EOF )
-            // PsiInternalXtend.g:6879:2: ruleXCastedExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXCastedExpressionElementType()); 
@@ -20373,20 +17538,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXCastedExpression"
-
-
-    // $ANTLR start "ruleXCastedExpression"
-    // PsiInternalXtend.g:6884:1: ruleXCastedExpression : ( ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) ;
     public final void ruleXCastedExpression() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtend.g:6884:22: ( ( ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) )
-            // PsiInternalXtend.g:6885:2: ( ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
             {
-            // PsiInternalXtend.g:6885:2: ( ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
-            // PsiInternalXtend.g:6886:3: ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -20403,7 +17559,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6893:3: ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
             loop196:
             do {
                 int alt196=2;
@@ -20422,16 +17577,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt196) {
             	case 1 :
-            	    // PsiInternalXtend.g:6894:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
             	    {
-            	    // PsiInternalXtend.g:6894:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) )
-            	    // PsiInternalXtend.g:6895:5: ( ( () 'as' ) )=> ( () otherlv_2= 'as' )
             	    {
-            	    // PsiInternalXtend.g:6901:5: ( () otherlv_2= 'as' )
-            	    // PsiInternalXtend.g:6902:6: () otherlv_2= 'as'
             	    {
-            	    // PsiInternalXtend.g:6902:6: ()
-            	    // PsiInternalXtend.g:6903:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -20458,12 +17606,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:6917:4: ( (lv_type_3_0= ruleJvmTypeReference ) )
-            	    // PsiInternalXtend.g:6918:5: (lv_type_3_0= ruleJvmTypeReference )
             	    {
-            	    // PsiInternalXtend.g:6918:5: (lv_type_3_0= ruleJvmTypeReference )
-            	    // PsiInternalXtend.g:6919:6: lv_type_3_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -20510,15 +17653,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXCastedExpression"
-
-
-    // $ANTLR start "entryRuleXPostfixOperation"
-    // PsiInternalXtend.g:6933:1: entryRuleXPostfixOperation : ruleXPostfixOperation EOF ;
     public final void entryRuleXPostfixOperation() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6933:27: ( ruleXPostfixOperation EOF )
-            // PsiInternalXtend.g:6934:2: ruleXPostfixOperation EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXPostfixOperationElementType()); 
@@ -20541,18 +17677,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXPostfixOperation"
-
-
-    // $ANTLR start "ruleXPostfixOperation"
-    // PsiInternalXtend.g:6939:1: ruleXPostfixOperation : ( ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) ;
     public final void ruleXPostfixOperation() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6939:22: ( ( ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) )
-            // PsiInternalXtend.g:6940:2: ( ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
             {
-            // PsiInternalXtend.g:6940:2: ( ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
-            // PsiInternalXtend.g:6941:3: ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
             {
             if ( state.backtracking==0 ) {
 
@@ -20569,7 +17696,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:6948:3: ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
             int alt197=2;
             int LA197_0 = input.LA(1);
 
@@ -20589,13 +17715,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt197) {
                 case 1 :
-                    // PsiInternalXtend.g:6949:4: ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) )
                     {
-                    // PsiInternalXtend.g:6959:4: ( () ( ( ruleOpPostfix ) ) )
-                    // PsiInternalXtend.g:6960:5: () ( ( ruleOpPostfix ) )
                     {
-                    // PsiInternalXtend.g:6960:5: ()
-                    // PsiInternalXtend.g:6961:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20605,12 +17726,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:6966:5: ( ( ruleOpPostfix ) )
-                    // PsiInternalXtend.g:6967:6: ( ruleOpPostfix )
                     {
-                    // PsiInternalXtend.g:6967:6: ( ruleOpPostfix )
-                    // PsiInternalXtend.g:6968:7: ruleOpPostfix
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20657,15 +17773,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXPostfixOperation"
-
-
-    // $ANTLR start "entryRuleOpPostfix"
-    // PsiInternalXtend.g:6983:1: entryRuleOpPostfix : ruleOpPostfix EOF ;
     public final void entryRuleOpPostfix() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:6983:19: ( ruleOpPostfix EOF )
-            // PsiInternalXtend.g:6984:2: ruleOpPostfix EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOpPostfixElementType()); 
@@ -20688,19 +17797,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleOpPostfix"
-
-
-    // $ANTLR start "ruleOpPostfix"
-    // PsiInternalXtend.g:6989:1: ruleOpPostfix : (kw= '++' | kw= '--' ) ;
     public final void ruleOpPostfix() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:6989:14: ( (kw= '++' | kw= '--' ) )
-            // PsiInternalXtend.g:6990:2: (kw= '++' | kw= '--' )
             {
-            // PsiInternalXtend.g:6990:2: (kw= '++' | kw= '--' )
             int alt198=2;
             int LA198_0 = input.LA(1);
 
@@ -20719,7 +17820,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt198) {
                 case 1 :
-                    // PsiInternalXtend.g:6991:3: kw= '++'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20736,7 +17836,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:6999:3: kw= '--'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -20767,15 +17866,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleOpPostfix"
-
-
-    // $ANTLR start "entryRuleXMemberFeatureCall"
-    // PsiInternalXtend.g:7010:1: entryRuleXMemberFeatureCall : ruleXMemberFeatureCall EOF ;
     public final void entryRuleXMemberFeatureCall() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7010:28: ( ruleXMemberFeatureCall EOF )
-            // PsiInternalXtend.g:7011:2: ruleXMemberFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXMemberFeatureCallElementType()); 
@@ -20798,11 +17890,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXMemberFeatureCall"
-
-
-    // $ANTLR start "ruleXMemberFeatureCall"
-    // PsiInternalXtend.g:7016:1: ruleXMemberFeatureCall : ( ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) ;
     public final void ruleXMemberFeatureCall() throws RecognitionException {
         Token otherlv_2=null;
         Token lv_explicitStatic_3_0=null;
@@ -20817,11 +17904,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_22=null;
 
         try {
-            // PsiInternalXtend.g:7016:23: ( ( ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) )
-            // PsiInternalXtend.g:7017:2: ( ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
             {
-            // PsiInternalXtend.g:7017:2: ( ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
-            // PsiInternalXtend.g:7018:3: ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -20838,7 +17921,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:7025:3: ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
             loop207:
             do {
                 int alt207=3;
@@ -20887,19 +17969,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt207) {
             	case 1 :
-            	    // PsiInternalXtend.g:7026:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
             	    {
-            	    // PsiInternalXtend.g:7026:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
-            	    // PsiInternalXtend.g:7027:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) )
             	    {
-            	    // PsiInternalXtend.g:7027:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
-            	    // PsiInternalXtend.g:7028:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
             	    {
-            	    // PsiInternalXtend.g:7048:6: ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
-            	    // PsiInternalXtend.g:7049:7: () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
             	    {
-            	    // PsiInternalXtend.g:7049:7: ()
-            	    // PsiInternalXtend.g:7050:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -20909,8 +17982,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:7055:7: (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) )
             	    int alt199=2;
             	    int LA199_0 = input.LA(1);
 
@@ -20929,7 +18000,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    switch (alt199) {
             	        case 1 :
-            	            // PsiInternalXtend.g:7056:8: otherlv_2= '.'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -20946,13 +18016,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // PsiInternalXtend.g:7064:8: ( (lv_explicitStatic_3_0= '::' ) )
             	            {
-            	            // PsiInternalXtend.g:7064:8: ( (lv_explicitStatic_3_0= '::' ) )
-            	            // PsiInternalXtend.g:7065:9: (lv_explicitStatic_3_0= '::' )
             	            {
-            	            // PsiInternalXtend.g:7065:9: (lv_explicitStatic_3_0= '::' )
-            	            // PsiInternalXtend.g:7066:10: lv_explicitStatic_3_0= '::'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -20976,12 +18041,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            break;
 
             	    }
-
-            	    // PsiInternalXtend.g:7076:7: ( ( ruleFeatureCallID ) )
-            	    // PsiInternalXtend.g:7077:8: ( ruleFeatureCallID )
             	    {
-            	    // PsiInternalXtend.g:7077:8: ( ruleFeatureCallID )
-            	    // PsiInternalXtend.g:7078:9: ruleFeatureCallID
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -21024,12 +18084,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:7096:5: ( (lv_value_6_0= ruleXAssignment ) )
-            	    // PsiInternalXtend.g:7097:6: (lv_value_6_0= ruleXAssignment )
             	    {
-            	    // PsiInternalXtend.g:7097:6: (lv_value_6_0= ruleXAssignment )
-            	    // PsiInternalXtend.g:7098:7: lv_value_6_0= ruleXAssignment
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -21059,19 +18114,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // PsiInternalXtend.g:7109:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
             	    {
-            	    // PsiInternalXtend.g:7109:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
-            	    // PsiInternalXtend.g:7110:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
             	    {
-            	    // PsiInternalXtend.g:7110:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) )
-            	    // PsiInternalXtend.g:7111:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
             	    {
-            	    // PsiInternalXtend.g:7131:6: ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
-            	    // PsiInternalXtend.g:7132:7: () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
             	    {
-            	    // PsiInternalXtend.g:7132:7: ()
-            	    // PsiInternalXtend.g:7133:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -21081,8 +18127,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
 
             	    }
-
-            	    // PsiInternalXtend.g:7138:7: (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
             	    int alt200=3;
             	    switch ( input.LA(1) ) {
             	    case KW_FullStop:
@@ -21110,7 +18154,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             	    switch (alt200) {
             	        case 1 :
-            	            // PsiInternalXtend.g:7139:8: otherlv_8= '.'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21127,13 +18170,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // PsiInternalXtend.g:7147:8: ( (lv_nullSafe_9_0= '?.' ) )
             	            {
-            	            // PsiInternalXtend.g:7147:8: ( (lv_nullSafe_9_0= '?.' ) )
-            	            // PsiInternalXtend.g:7148:9: (lv_nullSafe_9_0= '?.' )
             	            {
-            	            // PsiInternalXtend.g:7148:9: (lv_nullSafe_9_0= '?.' )
-            	            // PsiInternalXtend.g:7149:10: lv_nullSafe_9_0= '?.'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21156,13 +18194,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            }
             	            break;
             	        case 3 :
-            	            // PsiInternalXtend.g:7159:8: ( (lv_explicitStatic_10_0= '::' ) )
             	            {
-            	            // PsiInternalXtend.g:7159:8: ( (lv_explicitStatic_10_0= '::' ) )
-            	            // PsiInternalXtend.g:7160:9: (lv_explicitStatic_10_0= '::' )
             	            {
-            	            // PsiInternalXtend.g:7160:9: (lv_explicitStatic_10_0= '::' )
-            	            // PsiInternalXtend.g:7161:10: lv_explicitStatic_10_0= '::'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21192,8 +18225,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:7173:5: (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )?
             	    int alt202=2;
             	    int LA202_0 = input.LA(1);
 
@@ -21202,7 +18233,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    switch (alt202) {
             	        case 1 :
-            	            // PsiInternalXtend.g:7174:6: otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21215,11 +18245,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	              						doneLeaf(otherlv_11);
             	              					
             	            }
-            	            // PsiInternalXtend.g:7181:6: ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) )
-            	            // PsiInternalXtend.g:7182:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
             	            {
-            	            // PsiInternalXtend.g:7182:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
-            	            // PsiInternalXtend.g:7183:8: lv_typeArguments_12_0= ruleJvmArgumentTypeReference
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21241,8 +18267,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	            }
-
-            	            // PsiInternalXtend.g:7192:6: (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )*
             	            loop201:
             	            do {
             	                int alt201=2;
@@ -21255,7 +18279,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             	                switch (alt201) {
             	            	case 1 :
-            	            	    // PsiInternalXtend.g:7193:7: otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
@@ -21268,11 +18291,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            	      							doneLeaf(otherlv_13);
             	            	      						
             	            	    }
-            	            	    // PsiInternalXtend.g:7200:7: ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
-            	            	    // PsiInternalXtend.g:7201:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
             	            	    {
-            	            	    // PsiInternalXtend.g:7201:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
-            	            	    // PsiInternalXtend.g:7202:9: lv_typeArguments_14_0= ruleJvmArgumentTypeReference
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
@@ -21320,12 +18339,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            break;
 
             	    }
-
-            	    // PsiInternalXtend.g:7220:5: ( ( ruleIdOrSuper ) )
-            	    // PsiInternalXtend.g:7221:6: ( ruleIdOrSuper )
             	    {
-            	    // PsiInternalXtend.g:7221:6: ( ruleIdOrSuper )
-            	    // PsiInternalXtend.g:7222:7: ruleIdOrSuper
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -21347,19 +18361,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:7231:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?
             	    int alt205=2;
             	    alt205 = dfa205.predict(input);
             	    switch (alt205) {
             	        case 1 :
-            	            // PsiInternalXtend.g:7232:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')'
             	            {
-            	            // PsiInternalXtend.g:7232:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) )
-            	            // PsiInternalXtend.g:7233:7: ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' )
             	            {
-            	            // PsiInternalXtend.g:7237:7: (lv_explicitOperationCall_17_0= '(' )
-            	            // PsiInternalXtend.g:7238:8: lv_explicitOperationCall_17_0= '('
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21377,19 +18384,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	            }
-
-            	            // PsiInternalXtend.g:7247:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?
             	            int alt204=3;
             	            alt204 = dfa204.predict(input);
             	            switch (alt204) {
             	                case 1 :
-            	                    // PsiInternalXtend.g:7248:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
             	                    {
-            	                    // PsiInternalXtend.g:7248:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
-            	                    // PsiInternalXtend.g:7249:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure )
             	                    {
-            	                    // PsiInternalXtend.g:7274:8: (lv_memberCallArguments_18_0= ruleXShortClosure )
-            	                    // PsiInternalXtend.g:7275:9: lv_memberCallArguments_18_0= ruleXShortClosure
             	                    {
             	                    if ( state.backtracking==0 ) {
 
@@ -21416,16 +18416,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	                    }
             	                    break;
             	                case 2 :
-            	                    // PsiInternalXtend.g:7285:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
             	                    {
-            	                    // PsiInternalXtend.g:7285:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
-            	                    // PsiInternalXtend.g:7286:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
             	                    {
-            	                    // PsiInternalXtend.g:7286:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) )
-            	                    // PsiInternalXtend.g:7287:9: (lv_memberCallArguments_19_0= ruleXExpression )
             	                    {
-            	                    // PsiInternalXtend.g:7287:9: (lv_memberCallArguments_19_0= ruleXExpression )
-            	                    // PsiInternalXtend.g:7288:10: lv_memberCallArguments_19_0= ruleXExpression
             	                    {
             	                    if ( state.backtracking==0 ) {
 
@@ -21447,8 +18440,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	                    }
-
-            	                    // PsiInternalXtend.g:7297:8: (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
             	                    loop203:
             	                    do {
             	                        int alt203=2;
@@ -21461,7 +18452,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
             	                        switch (alt203) {
             	                    	case 1 :
-            	                    	    // PsiInternalXtend.g:7298:9: otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) )
             	                    	    {
             	                    	    if ( state.backtracking==0 ) {
 
@@ -21474,11 +18464,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	                    	      									doneLeaf(otherlv_20);
             	                    	      								
             	                    	    }
-            	                    	    // PsiInternalXtend.g:7305:9: ( (lv_memberCallArguments_21_0= ruleXExpression ) )
-            	                    	    // PsiInternalXtend.g:7306:10: (lv_memberCallArguments_21_0= ruleXExpression )
             	                    	    {
-            	                    	    // PsiInternalXtend.g:7306:10: (lv_memberCallArguments_21_0= ruleXExpression )
-            	                    	    // PsiInternalXtend.g:7307:11: lv_memberCallArguments_21_0= ruleXExpression
             	                    	    {
             	                    	    if ( state.backtracking==0 ) {
 
@@ -21535,16 +18521,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	            break;
 
             	    }
-
-            	    // PsiInternalXtend.g:7327:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
             	    int alt206=2;
             	    alt206 = dfa206.predict(input);
             	    switch (alt206) {
             	        case 1 :
-            	            // PsiInternalXtend.g:7328:6: ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure )
             	            {
-            	            // PsiInternalXtend.g:7334:6: (lv_memberCallArguments_23_0= ruleXClosure )
-            	            // PsiInternalXtend.g:7335:7: lv_memberCallArguments_23_0= ruleXClosure
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -21597,15 +18578,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXMemberFeatureCall"
-
-
-    // $ANTLR start "entryRuleXPrimaryExpression"
-    // PsiInternalXtend.g:7350:1: entryRuleXPrimaryExpression : ruleXPrimaryExpression EOF ;
     public final void entryRuleXPrimaryExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7350:28: ( ruleXPrimaryExpression EOF )
-            // PsiInternalXtend.g:7351:2: ruleXPrimaryExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXPrimaryExpressionElementType()); 
@@ -21628,22 +18602,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXPrimaryExpression"
-
-
-    // $ANTLR start "ruleXPrimaryExpression"
-    // PsiInternalXtend.g:7356:1: ruleXPrimaryExpression : ( ruleXConstructorCall | ruleXBlockExpression | ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression ) | ruleXFeatureCall | ruleXLiteral | ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression ) | ruleXBasicForLoopExpression | ruleXWhileExpression | ruleXDoWhileExpression | ruleXThrowExpression | ruleXReturnExpression | ruleXTryCatchFinallyExpression | ruleXParenthesizedExpression ) ;
     public final void ruleXPrimaryExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7356:23: ( ( ruleXConstructorCall | ruleXBlockExpression | ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression ) | ruleXFeatureCall | ruleXLiteral | ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression ) | ruleXBasicForLoopExpression | ruleXWhileExpression | ruleXDoWhileExpression | ruleXThrowExpression | ruleXReturnExpression | ruleXTryCatchFinallyExpression | ruleXParenthesizedExpression ) )
-            // PsiInternalXtend.g:7357:2: ( ruleXConstructorCall | ruleXBlockExpression | ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression ) | ruleXFeatureCall | ruleXLiteral | ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression ) | ruleXBasicForLoopExpression | ruleXWhileExpression | ruleXDoWhileExpression | ruleXThrowExpression | ruleXReturnExpression | ruleXTryCatchFinallyExpression | ruleXParenthesizedExpression )
             {
-            // PsiInternalXtend.g:7357:2: ( ruleXConstructorCall | ruleXBlockExpression | ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression ) | ruleXFeatureCall | ruleXLiteral | ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression ) | ruleXBasicForLoopExpression | ruleXWhileExpression | ruleXDoWhileExpression | ruleXThrowExpression | ruleXReturnExpression | ruleXTryCatchFinallyExpression | ruleXParenthesizedExpression )
             int alt208=15;
             alt208 = dfa208.predict(input);
             switch (alt208) {
                 case 1 :
-                    // PsiInternalXtend.g:7358:3: ruleXConstructorCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21664,7 +18629,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:7366:3: ruleXBlockExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21685,7 +18649,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:7374:3: ruleXSwitchExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21706,10 +18669,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:7382:3: ( ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression )
                     {
-                    // PsiInternalXtend.g:7382:3: ( ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression )
-                    // PsiInternalXtend.g:7383:4: ( ( () 'synchronized' '(' ) )=> ruleXSynchronizedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21733,7 +18693,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:7399:3: ruleXFeatureCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21754,7 +18713,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:7407:3: ruleXLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21775,7 +18733,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:7415:3: ruleXIfExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21796,10 +18753,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 8 :
-                    // PsiInternalXtend.g:7423:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression )
                     {
-                    // PsiInternalXtend.g:7423:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression )
-                    // PsiInternalXtend.g:7424:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ruleXForLoopExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21823,7 +18777,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 9 :
-                    // PsiInternalXtend.g:7446:3: ruleXBasicForLoopExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21844,7 +18797,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 10 :
-                    // PsiInternalXtend.g:7454:3: ruleXWhileExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21865,7 +18817,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 11 :
-                    // PsiInternalXtend.g:7462:3: ruleXDoWhileExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21886,7 +18837,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 12 :
-                    // PsiInternalXtend.g:7470:3: ruleXThrowExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21907,7 +18857,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 13 :
-                    // PsiInternalXtend.g:7478:3: ruleXReturnExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21928,7 +18877,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 14 :
-                    // PsiInternalXtend.g:7486:3: ruleXTryCatchFinallyExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21949,7 +18897,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 15 :
-                    // PsiInternalXtend.g:7494:3: ruleXParenthesizedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -21984,15 +18931,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXPrimaryExpression"
-
-
-    // $ANTLR start "entryRuleXLiteral"
-    // PsiInternalXtend.g:7505:1: entryRuleXLiteral : ruleXLiteral EOF ;
     public final void entryRuleXLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7505:18: ( ruleXLiteral EOF )
-            // PsiInternalXtend.g:7506:2: ruleXLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXLiteralElementType()); 
@@ -22015,17 +18955,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXLiteral"
-
-
-    // $ANTLR start "ruleXLiteral"
-    // PsiInternalXtend.g:7511:1: ruleXLiteral : ( ruleXCollectionLiteral | ( ( ( () '[' ) )=> ruleXClosure ) | ruleXBooleanLiteral | ruleXNumberLiteral | ruleXNullLiteral | ruleXStringLiteral | ruleXTypeLiteral ) ;
     public final void ruleXLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7511:13: ( ( ruleXCollectionLiteral | ( ( ( () '[' ) )=> ruleXClosure ) | ruleXBooleanLiteral | ruleXNumberLiteral | ruleXNullLiteral | ruleXStringLiteral | ruleXTypeLiteral ) )
-            // PsiInternalXtend.g:7512:2: ( ruleXCollectionLiteral | ( ( ( () '[' ) )=> ruleXClosure ) | ruleXBooleanLiteral | ruleXNumberLiteral | ruleXNullLiteral | ruleXStringLiteral | ruleXTypeLiteral )
             {
-            // PsiInternalXtend.g:7512:2: ( ruleXCollectionLiteral | ( ( ( () '[' ) )=> ruleXClosure ) | ruleXBooleanLiteral | ruleXNumberLiteral | ruleXNullLiteral | ruleXStringLiteral | ruleXTypeLiteral )
             int alt209=7;
             int LA209_0 = input.LA(1);
 
@@ -22059,7 +18991,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt209) {
                 case 1 :
-                    // PsiInternalXtend.g:7513:3: ruleXCollectionLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22080,10 +19011,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:7521:3: ( ( ( () '[' ) )=> ruleXClosure )
                     {
-                    // PsiInternalXtend.g:7521:3: ( ( ( () '[' ) )=> ruleXClosure )
-                    // PsiInternalXtend.g:7522:4: ( ( () '[' ) )=> ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22107,7 +19035,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:7537:3: ruleXBooleanLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22128,7 +19055,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtend.g:7545:3: ruleXNumberLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22149,7 +19075,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtend.g:7553:3: ruleXNullLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22170,7 +19095,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtend.g:7561:3: ruleXStringLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22191,7 +19115,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 7 :
-                    // PsiInternalXtend.g:7569:3: ruleXTypeLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22226,15 +19149,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXLiteral"
-
-
-    // $ANTLR start "entryRuleXCollectionLiteral"
-    // PsiInternalXtend.g:7580:1: entryRuleXCollectionLiteral : ruleXCollectionLiteral EOF ;
     public final void entryRuleXCollectionLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7580:28: ( ruleXCollectionLiteral EOF )
-            // PsiInternalXtend.g:7581:2: ruleXCollectionLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXCollectionLiteralElementType()); 
@@ -22257,17 +19173,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXCollectionLiteral"
-
-
-    // $ANTLR start "ruleXCollectionLiteral"
-    // PsiInternalXtend.g:7586:1: ruleXCollectionLiteral : ( ruleXSetLiteral | ruleXListLiteral ) ;
     public final void ruleXCollectionLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7586:23: ( ( ruleXSetLiteral | ruleXListLiteral ) )
-            // PsiInternalXtend.g:7587:2: ( ruleXSetLiteral | ruleXListLiteral )
             {
-            // PsiInternalXtend.g:7587:2: ( ruleXSetLiteral | ruleXListLiteral )
             int alt210=2;
             int LA210_0 = input.LA(1);
 
@@ -22297,7 +19205,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt210) {
                 case 1 :
-                    // PsiInternalXtend.g:7588:3: ruleXSetLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22318,7 +19225,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:7596:3: ruleXListLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22353,15 +19259,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXCollectionLiteral"
-
-
-    // $ANTLR start "entryRuleXSetLiteral"
-    // PsiInternalXtend.g:7607:1: entryRuleXSetLiteral : ruleXSetLiteral EOF ;
     public final void entryRuleXSetLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7607:21: ( ruleXSetLiteral EOF )
-            // PsiInternalXtend.g:7608:2: ruleXSetLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXSetLiteralElementType()); 
@@ -22384,11 +19283,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXSetLiteral"
-
-
-    // $ANTLR start "ruleXSetLiteral"
-    // PsiInternalXtend.g:7613:1: ruleXSetLiteral : ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) ;
     public final void ruleXSetLiteral() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -22396,14 +19290,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:7613:16: ( ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) )
-            // PsiInternalXtend.g:7614:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
             {
-            // PsiInternalXtend.g:7614:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
-            // PsiInternalXtend.g:7615:3: () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}'
             {
-            // PsiInternalXtend.g:7615:3: ()
-            // PsiInternalXtend.g:7616:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -22436,7 +19324,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalXtend.g:7635:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
             int alt212=2;
             int LA212_0 = input.LA(1);
 
@@ -22445,13 +19332,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt212) {
                 case 1 :
-                    // PsiInternalXtend.g:7636:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     {
-                    // PsiInternalXtend.g:7636:4: ( (lv_elements_3_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:7637:5: (lv_elements_3_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:7637:5: (lv_elements_3_0= ruleXExpression )
-                    // PsiInternalXtend.g:7638:6: lv_elements_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22473,8 +19355,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:7647:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     loop211:
                     do {
                         int alt211=2;
@@ -22487,7 +19367,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt211) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:7648:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -22500,11 +19379,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_4);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:7655:5: ( (lv_elements_5_0= ruleXExpression ) )
-                    	    // PsiInternalXtend.g:7656:6: (lv_elements_5_0= ruleXExpression )
                     	    {
-                    	    // PsiInternalXtend.g:7656:6: (lv_elements_5_0= ruleXExpression )
-                    	    // PsiInternalXtend.g:7657:7: lv_elements_5_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -22568,15 +19443,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXSetLiteral"
-
-
-    // $ANTLR start "entryRuleXListLiteral"
-    // PsiInternalXtend.g:7679:1: entryRuleXListLiteral : ruleXListLiteral EOF ;
     public final void entryRuleXListLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7679:22: ( ruleXListLiteral EOF )
-            // PsiInternalXtend.g:7680:2: ruleXListLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXListLiteralElementType()); 
@@ -22599,11 +19467,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXListLiteral"
-
-
-    // $ANTLR start "ruleXListLiteral"
-    // PsiInternalXtend.g:7685:1: ruleXListLiteral : ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) ;
     public final void ruleXListLiteral() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -22611,14 +19474,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:7685:17: ( ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) )
-            // PsiInternalXtend.g:7686:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
             {
-            // PsiInternalXtend.g:7686:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
-            // PsiInternalXtend.g:7687:3: () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']'
             {
-            // PsiInternalXtend.g:7687:3: ()
-            // PsiInternalXtend.g:7688:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -22651,7 +19508,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalXtend.g:7707:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
             int alt214=2;
             int LA214_0 = input.LA(1);
 
@@ -22660,13 +19516,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt214) {
                 case 1 :
-                    // PsiInternalXtend.g:7708:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     {
-                    // PsiInternalXtend.g:7708:4: ( (lv_elements_3_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:7709:5: (lv_elements_3_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:7709:5: (lv_elements_3_0= ruleXExpression )
-                    // PsiInternalXtend.g:7710:6: lv_elements_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -22688,8 +19539,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:7719:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     loop213:
                     do {
                         int alt213=2;
@@ -22702,7 +19551,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt213) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:7720:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -22715,11 +19563,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_4);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:7727:5: ( (lv_elements_5_0= ruleXExpression ) )
-                    	    // PsiInternalXtend.g:7728:6: (lv_elements_5_0= ruleXExpression )
                     	    {
-                    	    // PsiInternalXtend.g:7728:6: (lv_elements_5_0= ruleXExpression )
-                    	    // PsiInternalXtend.g:7729:7: lv_elements_5_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -22783,15 +19627,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXListLiteral"
-
-
-    // $ANTLR start "entryRuleXClosure"
-    // PsiInternalXtend.g:7751:1: entryRuleXClosure : ruleXClosure EOF ;
     public final void entryRuleXClosure() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7751:18: ( ruleXClosure EOF )
-            // PsiInternalXtend.g:7752:2: ruleXClosure EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXClosureElementType()); 
@@ -22814,11 +19651,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXClosure"
-
-
-    // $ANTLR start "ruleXClosure"
-    // PsiInternalXtend.g:7757:1: ruleXClosure : ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) ;
     public final void ruleXClosure() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -22826,20 +19658,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_7=null;
 
         try {
-            // PsiInternalXtend.g:7757:13: ( ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) )
-            // PsiInternalXtend.g:7758:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
             {
-            // PsiInternalXtend.g:7758:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
-            // PsiInternalXtend.g:7759:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']'
             {
-            // PsiInternalXtend.g:7759:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) )
-            // PsiInternalXtend.g:7760:4: ( ( () '[' ) )=> ( () otherlv_1= '[' )
             {
-            // PsiInternalXtend.g:7766:4: ( () otherlv_1= '[' )
-            // PsiInternalXtend.g:7767:5: () otherlv_1= '['
             {
-            // PsiInternalXtend.g:7767:5: ()
-            // PsiInternalXtend.g:7768:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -22866,18 +19688,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:7782:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?
             int alt217=2;
             alt217 = dfa217.predict(input);
             switch (alt217) {
                 case 1 :
-                    // PsiInternalXtend.g:7783:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
                     {
-                    // PsiInternalXtend.g:7806:4: ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
-                    // PsiInternalXtend.g:7807:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) )
                     {
-                    // PsiInternalXtend.g:7807:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )?
                     int alt216=2;
                     int LA216_0 = input.LA(1);
 
@@ -22886,13 +19702,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt216) {
                         case 1 :
-                            // PsiInternalXtend.g:7808:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
                             {
-                            // PsiInternalXtend.g:7808:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) )
-                            // PsiInternalXtend.g:7809:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
                             {
-                            // PsiInternalXtend.g:7809:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
-                            // PsiInternalXtend.g:7810:8: lv_declaredFormalParameters_2_0= ruleJvmFormalParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -22914,8 +19725,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:7819:6: (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
                             loop215:
                             do {
                                 int alt215=2;
@@ -22928,7 +19737,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt215) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:7820:7: otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -22941,11 +19749,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_3);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:7827:7: ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
-                            	    // PsiInternalXtend.g:7828:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
                             	    {
-                            	    // PsiInternalXtend.g:7828:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
-                            	    // PsiInternalXtend.g:7829:9: lv_declaredFormalParameters_4_0= ruleJvmFormalParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -22982,12 +19786,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:7840:5: ( (lv_explicitSyntax_5_0= '|' ) )
-                    // PsiInternalXtend.g:7841:6: (lv_explicitSyntax_5_0= '|' )
                     {
-                    // PsiInternalXtend.g:7841:6: (lv_explicitSyntax_5_0= '|' )
-                    // PsiInternalXtend.g:7842:7: lv_explicitSyntax_5_0= '|'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23014,12 +19813,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:7853:3: ( (lv_expression_6_0= ruleXExpressionInClosure ) )
-            // PsiInternalXtend.g:7854:4: (lv_expression_6_0= ruleXExpressionInClosure )
             {
-            // PsiInternalXtend.g:7854:4: (lv_expression_6_0= ruleXExpressionInClosure )
-            // PsiInternalXtend.g:7855:5: lv_expression_6_0= ruleXExpressionInClosure
             {
             if ( state.backtracking==0 ) {
 
@@ -23068,15 +19862,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXClosure"
-
-
-    // $ANTLR start "entryRuleXExpressionInClosure"
-    // PsiInternalXtend.g:7875:1: entryRuleXExpressionInClosure : ruleXExpressionInClosure EOF ;
     public final void entryRuleXExpressionInClosure() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7875:30: ( ruleXExpressionInClosure EOF )
-            // PsiInternalXtend.g:7876:2: ruleXExpressionInClosure EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXExpressionInClosureElementType()); 
@@ -23099,23 +19886,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXExpressionInClosure"
-
-
-    // $ANTLR start "ruleXExpressionInClosure"
-    // PsiInternalXtend.g:7881:1: ruleXExpressionInClosure : ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) ;
     public final void ruleXExpressionInClosure() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtend.g:7881:25: ( ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) )
-            // PsiInternalXtend.g:7882:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
             {
-            // PsiInternalXtend.g:7882:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
-            // PsiInternalXtend.g:7883:3: () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
             {
-            // PsiInternalXtend.g:7883:3: ()
-            // PsiInternalXtend.g:7884:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -23125,8 +19901,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:7889:3: ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
             loop219:
             do {
                 int alt219=2;
@@ -23139,13 +19913,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt219) {
             	case 1 :
-            	    // PsiInternalXtend.g:7890:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )?
             	    {
-            	    // PsiInternalXtend.g:7890:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) )
-            	    // PsiInternalXtend.g:7891:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
             	    {
-            	    // PsiInternalXtend.g:7891:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
-            	    // PsiInternalXtend.g:7892:6: lv_expressions_1_0= ruleXExpressionOrVarDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -23167,8 +19936,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:7901:4: (otherlv_2= ';' )?
             	    int alt218=2;
             	    int LA218_0 = input.LA(1);
 
@@ -23177,7 +19944,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    switch (alt218) {
             	        case 1 :
-            	            // PsiInternalXtend.g:7902:5: otherlv_2= ';'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -23220,15 +19986,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXExpressionInClosure"
-
-
-    // $ANTLR start "entryRuleXShortClosure"
-    // PsiInternalXtend.g:7915:1: entryRuleXShortClosure : ruleXShortClosure EOF ;
     public final void entryRuleXShortClosure() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:7915:23: ( ruleXShortClosure EOF )
-            // PsiInternalXtend.g:7916:2: ruleXShortClosure EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXShortClosureElementType()); 
@@ -23251,30 +20010,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXShortClosure"
-
-
-    // $ANTLR start "ruleXShortClosure"
-    // PsiInternalXtend.g:7921:1: ruleXShortClosure : ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) ;
     public final void ruleXShortClosure() throws RecognitionException {
         Token otherlv_2=null;
         Token lv_explicitSyntax_4_0=null;
 
         try {
-            // PsiInternalXtend.g:7921:18: ( ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:7922:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:7922:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:7923:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:7923:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) )
-            // PsiInternalXtend.g:7924:4: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
             {
-            // PsiInternalXtend.g:7949:4: ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
-            // PsiInternalXtend.g:7950:5: () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) )
             {
-            // PsiInternalXtend.g:7950:5: ()
-            // PsiInternalXtend.g:7951:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -23284,8 +20028,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:7956:5: ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )?
             int alt221=2;
             int LA221_0 = input.LA(1);
 
@@ -23294,13 +20036,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt221) {
                 case 1 :
-                    // PsiInternalXtend.g:7957:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
                     {
-                    // PsiInternalXtend.g:7957:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) )
-                    // PsiInternalXtend.g:7958:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
                     {
-                    // PsiInternalXtend.g:7958:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
-                    // PsiInternalXtend.g:7959:8: lv_declaredFormalParameters_1_0= ruleJvmFormalParameter
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23322,8 +20059,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:7968:6: (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
                     loop220:
                     do {
                         int alt220=2;
@@ -23336,7 +20071,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt220) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:7969:7: otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -23349,11 +20083,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      							doneLeaf(otherlv_2);
                     	      						
                     	    }
-                    	    // PsiInternalXtend.g:7976:7: ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
-                    	    // PsiInternalXtend.g:7977:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
                     	    {
-                    	    // PsiInternalXtend.g:7977:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
-                    	    // PsiInternalXtend.g:7978:9: lv_declaredFormalParameters_3_0= ruleJvmFormalParameter
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -23390,12 +20120,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:7989:5: ( (lv_explicitSyntax_4_0= '|' ) )
-            // PsiInternalXtend.g:7990:6: (lv_explicitSyntax_4_0= '|' )
             {
-            // PsiInternalXtend.g:7990:6: (lv_explicitSyntax_4_0= '|' )
-            // PsiInternalXtend.g:7991:7: lv_explicitSyntax_4_0= '|'
             {
             if ( state.backtracking==0 ) {
 
@@ -23419,12 +20144,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:8002:3: ( (lv_expression_5_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8003:4: (lv_expression_5_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8003:4: (lv_expression_5_0= ruleXExpression )
-            // PsiInternalXtend.g:8004:5: lv_expression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -23462,15 +20182,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXShortClosure"
-
-
-    // $ANTLR start "entryRuleXParenthesizedExpression"
-    // PsiInternalXtend.g:8017:1: entryRuleXParenthesizedExpression : ruleXParenthesizedExpression EOF ;
     public final void entryRuleXParenthesizedExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8017:34: ( ruleXParenthesizedExpression EOF )
-            // PsiInternalXtend.g:8018:2: ruleXParenthesizedExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXParenthesizedExpressionElementType()); 
@@ -23493,21 +20206,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXParenthesizedExpression"
-
-
-    // $ANTLR start "ruleXParenthesizedExpression"
-    // PsiInternalXtend.g:8023:1: ruleXParenthesizedExpression : (otherlv_0= '(' ruleXExpression otherlv_2= ')' ) ;
     public final void ruleXParenthesizedExpression() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtend.g:8023:29: ( (otherlv_0= '(' ruleXExpression otherlv_2= ')' ) )
-            // PsiInternalXtend.g:8024:2: (otherlv_0= '(' ruleXExpression otherlv_2= ')' )
             {
-            // PsiInternalXtend.g:8024:2: (otherlv_0= '(' ruleXExpression otherlv_2= ')' )
-            // PsiInternalXtend.g:8025:3: otherlv_0= '(' ruleXExpression otherlv_2= ')'
             {
             if ( state.backtracking==0 ) {
 
@@ -23561,15 +20265,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXParenthesizedExpression"
-
-
-    // $ANTLR start "entryRuleXIfExpression"
-    // PsiInternalXtend.g:8050:1: entryRuleXIfExpression : ruleXIfExpression EOF ;
     public final void entryRuleXIfExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8050:23: ( ruleXIfExpression EOF )
-            // PsiInternalXtend.g:8051:2: ruleXIfExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXIfExpressionElementType()); 
@@ -23592,11 +20289,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXIfExpression"
-
-
-    // $ANTLR start "ruleXIfExpression"
-    // PsiInternalXtend.g:8056:1: ruleXIfExpression : ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) ;
     public final void ruleXIfExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -23604,14 +20296,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:8056:18: ( ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) )
-            // PsiInternalXtend.g:8057:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
             {
-            // PsiInternalXtend.g:8057:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
-            // PsiInternalXtend.g:8058:3: () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
             {
-            // PsiInternalXtend.g:8058:3: ()
-            // PsiInternalXtend.g:8059:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -23644,11 +20330,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalXtend.g:8078:3: ( (lv_if_3_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8079:4: (lv_if_3_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8079:4: (lv_if_3_0= ruleXExpression )
-            // PsiInternalXtend.g:8080:5: lv_if_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -23682,11 +20364,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_4);
               		
             }
-            // PsiInternalXtend.g:8096:3: ( (lv_then_5_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8097:4: (lv_then_5_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8097:4: (lv_then_5_0= ruleXExpression )
-            // PsiInternalXtend.g:8098:5: lv_then_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -23708,8 +20386,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:8107:3: ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
             int alt222=2;
             int LA222_0 = input.LA(1);
 
@@ -23722,10 +20398,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt222) {
                 case 1 :
-                    // PsiInternalXtend.g:8108:4: ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) )
                     {
-                    // PsiInternalXtend.g:8108:4: ( ( 'else' )=>otherlv_6= 'else' )
-                    // PsiInternalXtend.g:8109:5: ( 'else' )=>otherlv_6= 'else'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23740,12 +20413,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:8118:4: ( (lv_else_7_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:8119:5: (lv_else_7_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:8119:5: (lv_else_7_0= ruleXExpression )
-                    // PsiInternalXtend.g:8120:6: lv_else_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23789,15 +20457,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXIfExpression"
-
-
-    // $ANTLR start "entryRuleXCasePart"
-    // PsiInternalXtend.g:8134:1: entryRuleXCasePart : ruleXCasePart EOF ;
     public final void entryRuleXCasePart() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8134:19: ( ruleXCasePart EOF )
-            // PsiInternalXtend.g:8135:2: ruleXCasePart EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXCasePartElementType()); 
@@ -23820,25 +20481,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXCasePart"
-
-
-    // $ANTLR start "ruleXCasePart"
-    // PsiInternalXtend.g:8140:1: ruleXCasePart : ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) ;
     public final void ruleXCasePart() throws RecognitionException {
         Token otherlv_2=null;
         Token otherlv_4=null;
         Token lv_fallThrough_6_0=null;
 
         try {
-            // PsiInternalXtend.g:8140:14: ( ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) )
-            // PsiInternalXtend.g:8141:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
             {
-            // PsiInternalXtend.g:8141:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
-            // PsiInternalXtend.g:8142:3: () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
             {
-            // PsiInternalXtend.g:8142:3: ()
-            // PsiInternalXtend.g:8143:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -23848,8 +20498,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:8148:3: ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )?
             int alt223=2;
             int LA223_0 = input.LA(1);
 
@@ -23858,10 +20506,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt223) {
                 case 1 :
-                    // PsiInternalXtend.g:8149:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
                     {
-                    // PsiInternalXtend.g:8149:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
-                    // PsiInternalXtend.g:8150:5: lv_typeGuard_1_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23886,8 +20531,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:8159:3: (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )?
             int alt224=2;
             int LA224_0 = input.LA(1);
 
@@ -23896,7 +20539,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt224) {
                 case 1 :
-                    // PsiInternalXtend.g:8160:4: otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23909,11 +20551,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_2);
                       			
                     }
-                    // PsiInternalXtend.g:8167:4: ( (lv_case_3_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:8168:5: (lv_case_3_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:8168:5: (lv_case_3_0= ruleXExpression )
-                    // PsiInternalXtend.g:8169:6: lv_case_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23941,8 +20579,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:8179:3: ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
             int alt225=2;
             int LA225_0 = input.LA(1);
 
@@ -23961,10 +20597,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt225) {
                 case 1 :
-                    // PsiInternalXtend.g:8180:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
                     {
-                    // PsiInternalXtend.g:8180:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
-                    // PsiInternalXtend.g:8181:5: otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -23977,11 +20610,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_4);
                       				
                     }
-                    // PsiInternalXtend.g:8188:5: ( (lv_then_5_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:8189:6: (lv_then_5_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:8189:6: (lv_then_5_0= ruleXExpression )
-                    // PsiInternalXtend.g:8190:7: lv_then_5_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -24011,13 +20640,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:8201:4: ( (lv_fallThrough_6_0= ',' ) )
                     {
-                    // PsiInternalXtend.g:8201:4: ( (lv_fallThrough_6_0= ',' ) )
-                    // PsiInternalXtend.g:8202:5: (lv_fallThrough_6_0= ',' )
                     {
-                    // PsiInternalXtend.g:8202:5: (lv_fallThrough_6_0= ',' )
-                    // PsiInternalXtend.g:8203:6: lv_fallThrough_6_0= ','
                     {
                     if ( state.backtracking==0 ) {
 
@@ -24057,15 +20681,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXCasePart"
-
-
-    // $ANTLR start "entryRuleXForLoopExpression"
-    // PsiInternalXtend.g:8217:1: entryRuleXForLoopExpression : ruleXForLoopExpression EOF ;
     public final void entryRuleXForLoopExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8217:28: ( ruleXForLoopExpression EOF )
-            // PsiInternalXtend.g:8218:2: ruleXForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXForLoopExpressionElementType()); 
@@ -24088,11 +20705,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXForLoopExpression"
-
-
-    // $ANTLR start "ruleXForLoopExpression"
-    // PsiInternalXtend.g:8223:1: ruleXForLoopExpression : ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) ;
     public final void ruleXForLoopExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -24100,20 +20712,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:8223:23: ( ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:8224:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:8224:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:8225:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:8225:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
-            // PsiInternalXtend.g:8226:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
             {
-            // PsiInternalXtend.g:8239:4: ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
-            // PsiInternalXtend.g:8240:5: () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
             {
-            // PsiInternalXtend.g:8240:5: ()
-            // PsiInternalXtend.g:8241:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -24146,11 +20748,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					doneLeaf(otherlv_2);
               				
             }
-            // PsiInternalXtend.g:8260:5: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
-            // PsiInternalXtend.g:8261:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
             {
-            // PsiInternalXtend.g:8261:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
-            // PsiInternalXtend.g:8262:7: lv_declaredParam_3_0= ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -24189,12 +20787,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:8280:3: ( (lv_forExpression_5_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8281:4: (lv_forExpression_5_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8281:4: (lv_forExpression_5_0= ruleXExpression )
-            // PsiInternalXtend.g:8282:5: lv_forExpression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -24228,11 +20821,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_6);
               		
             }
-            // PsiInternalXtend.g:8298:3: ( (lv_eachExpression_7_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8299:4: (lv_eachExpression_7_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8299:4: (lv_eachExpression_7_0= ruleXExpression )
-            // PsiInternalXtend.g:8300:5: lv_eachExpression_7_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -24270,15 +20859,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXForLoopExpression"
-
-
-    // $ANTLR start "entryRuleXBasicForLoopExpression"
-    // PsiInternalXtend.g:8313:1: entryRuleXBasicForLoopExpression : ruleXBasicForLoopExpression EOF ;
     public final void entryRuleXBasicForLoopExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8313:33: ( ruleXBasicForLoopExpression EOF )
-            // PsiInternalXtend.g:8314:2: ruleXBasicForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXBasicForLoopExpressionElementType()); 
@@ -24301,11 +20883,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXBasicForLoopExpression"
-
-
-    // $ANTLR start "ruleXBasicForLoopExpression"
-    // PsiInternalXtend.g:8319:1: ruleXBasicForLoopExpression : ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) ;
     public final void ruleXBasicForLoopExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
@@ -24316,14 +20893,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_12=null;
 
         try {
-            // PsiInternalXtend.g:8319:28: ( ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:8320:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:8320:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:8321:3: () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:8321:3: ()
-            // PsiInternalXtend.g:8322:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -24356,7 +20927,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalXtend.g:8341:3: ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )?
             int alt227=2;
             int LA227_0 = input.LA(1);
 
@@ -24365,13 +20935,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt227) {
                 case 1 :
-                    // PsiInternalXtend.g:8342:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
                     {
-                    // PsiInternalXtend.g:8342:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) )
-                    // PsiInternalXtend.g:8343:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
                     {
-                    // PsiInternalXtend.g:8343:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
-                    // PsiInternalXtend.g:8344:6: lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -24393,8 +20958,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:8353:4: (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
                     loop226:
                     do {
                         int alt226=2;
@@ -24407,7 +20970,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt226) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:8354:5: otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -24420,11 +20982,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_4);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:8361:5: ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
-                    	    // PsiInternalXtend.g:8362:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
                     	    {
-                    	    // PsiInternalXtend.g:8362:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
-                    	    // PsiInternalXtend.g:8363:7: lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -24473,7 +21031,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_6);
               		
             }
-            // PsiInternalXtend.g:8381:3: ( (lv_expression_7_0= ruleXExpression ) )?
             int alt228=2;
             int LA228_0 = input.LA(1);
 
@@ -24482,10 +21039,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt228) {
                 case 1 :
-                    // PsiInternalXtend.g:8382:4: (lv_expression_7_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:8382:4: (lv_expression_7_0= ruleXExpression )
-                    // PsiInternalXtend.g:8383:5: lv_expression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -24522,7 +21076,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_8);
               		
             }
-            // PsiInternalXtend.g:8399:3: ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )?
             int alt230=2;
             int LA230_0 = input.LA(1);
 
@@ -24531,13 +21084,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt230) {
                 case 1 :
-                    // PsiInternalXtend.g:8400:4: ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
                     {
-                    // PsiInternalXtend.g:8400:4: ( (lv_updateExpressions_9_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:8401:5: (lv_updateExpressions_9_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:8401:5: (lv_updateExpressions_9_0= ruleXExpression )
-                    // PsiInternalXtend.g:8402:6: lv_updateExpressions_9_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -24559,8 +21107,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:8411:4: (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
                     loop229:
                     do {
                         int alt229=2;
@@ -24573,7 +21119,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt229) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:8412:5: otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -24586,11 +21131,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_10);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:8419:5: ( (lv_updateExpressions_11_0= ruleXExpression ) )
-                    	    // PsiInternalXtend.g:8420:6: (lv_updateExpressions_11_0= ruleXExpression )
                     	    {
-                    	    // PsiInternalXtend.g:8420:6: (lv_updateExpressions_11_0= ruleXExpression )
-                    	    // PsiInternalXtend.g:8421:7: lv_updateExpressions_11_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -24639,11 +21180,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_12);
               		
             }
-            // PsiInternalXtend.g:8439:3: ( (lv_eachExpression_13_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8440:4: (lv_eachExpression_13_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8440:4: (lv_eachExpression_13_0= ruleXExpression )
-            // PsiInternalXtend.g:8441:5: lv_eachExpression_13_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -24681,15 +21218,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXBasicForLoopExpression"
-
-
-    // $ANTLR start "entryRuleXWhileExpression"
-    // PsiInternalXtend.g:8454:1: entryRuleXWhileExpression : ruleXWhileExpression EOF ;
     public final void entryRuleXWhileExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8454:26: ( ruleXWhileExpression EOF )
-            // PsiInternalXtend.g:8455:2: ruleXWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXWhileExpressionElementType()); 
@@ -24712,25 +21242,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXWhileExpression"
-
-
-    // $ANTLR start "ruleXWhileExpression"
-    // PsiInternalXtend.g:8460:1: ruleXWhileExpression : ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) ;
     public final void ruleXWhileExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // PsiInternalXtend.g:8460:21: ( ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:8461:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:8461:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:8462:3: () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:8462:3: ()
-            // PsiInternalXtend.g:8463:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -24763,11 +21282,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalXtend.g:8482:3: ( (lv_predicate_3_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8483:4: (lv_predicate_3_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8483:4: (lv_predicate_3_0= ruleXExpression )
-            // PsiInternalXtend.g:8484:5: lv_predicate_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -24801,11 +21316,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_4);
               		
             }
-            // PsiInternalXtend.g:8500:3: ( (lv_body_5_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8501:4: (lv_body_5_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8501:4: (lv_body_5_0= ruleXExpression )
-            // PsiInternalXtend.g:8502:5: lv_body_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -24843,15 +21354,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXWhileExpression"
-
-
-    // $ANTLR start "entryRuleXDoWhileExpression"
-    // PsiInternalXtend.g:8515:1: entryRuleXDoWhileExpression : ruleXDoWhileExpression EOF ;
     public final void entryRuleXDoWhileExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8515:28: ( ruleXDoWhileExpression EOF )
-            // PsiInternalXtend.g:8516:2: ruleXDoWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXDoWhileExpressionElementType()); 
@@ -24874,11 +21378,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXDoWhileExpression"
-
-
-    // $ANTLR start "ruleXDoWhileExpression"
-    // PsiInternalXtend.g:8521:1: ruleXDoWhileExpression : ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) ;
     public final void ruleXDoWhileExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -24886,14 +21385,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:8521:23: ( ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) )
-            // PsiInternalXtend.g:8522:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
             {
-            // PsiInternalXtend.g:8522:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
-            // PsiInternalXtend.g:8523:3: () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')'
             {
-            // PsiInternalXtend.g:8523:3: ()
-            // PsiInternalXtend.g:8524:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -24915,11 +21408,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:8536:3: ( (lv_body_2_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8537:4: (lv_body_2_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8537:4: (lv_body_2_0= ruleXExpression )
-            // PsiInternalXtend.g:8538:5: lv_body_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -24964,11 +21453,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_4);
               		
             }
-            // PsiInternalXtend.g:8561:3: ( (lv_predicate_5_0= ruleXExpression ) )
-            // PsiInternalXtend.g:8562:4: (lv_predicate_5_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:8562:4: (lv_predicate_5_0= ruleXExpression )
-            // PsiInternalXtend.g:8563:5: lv_predicate_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -25017,15 +21502,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXDoWhileExpression"
-
-
-    // $ANTLR start "entryRuleXBlockExpression"
-    // PsiInternalXtend.g:8583:1: entryRuleXBlockExpression : ruleXBlockExpression EOF ;
     public final void entryRuleXBlockExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8583:26: ( ruleXBlockExpression EOF )
-            // PsiInternalXtend.g:8584:2: ruleXBlockExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXBlockExpressionElementType()); 
@@ -25048,25 +21526,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXBlockExpression"
-
-
-    // $ANTLR start "ruleXBlockExpression"
-    // PsiInternalXtend.g:8589:1: ruleXBlockExpression : ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) ;
     public final void ruleXBlockExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
         Token otherlv_4=null;
 
         try {
-            // PsiInternalXtend.g:8589:21: ( ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) )
-            // PsiInternalXtend.g:8590:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
             {
-            // PsiInternalXtend.g:8590:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
-            // PsiInternalXtend.g:8591:3: () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}'
             {
-            // PsiInternalXtend.g:8591:3: ()
-            // PsiInternalXtend.g:8592:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -25088,7 +21555,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:8604:3: ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )*
             loop232:
             do {
                 int alt232=2;
@@ -25101,13 +21567,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt232) {
             	case 1 :
-            	    // PsiInternalXtend.g:8605:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )?
             	    {
-            	    // PsiInternalXtend.g:8605:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) )
-            	    // PsiInternalXtend.g:8606:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
             	    {
-            	    // PsiInternalXtend.g:8606:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
-            	    // PsiInternalXtend.g:8607:6: lv_expressions_2_0= ruleXExpressionOrVarDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -25129,8 +21590,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             	    }
-
-            	    // PsiInternalXtend.g:8616:4: (otherlv_3= ';' )?
             	    int alt231=2;
             	    int LA231_0 = input.LA(1);
 
@@ -25139,7 +21598,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             	    }
             	    switch (alt231) {
             	        case 1 :
-            	            // PsiInternalXtend.g:8617:5: otherlv_3= ';'
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -25193,15 +21651,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXBlockExpression"
-
-
-    // $ANTLR start "entryRuleXExpressionOrVarDeclaration"
-    // PsiInternalXtend.g:8637:1: entryRuleXExpressionOrVarDeclaration : ruleXExpressionOrVarDeclaration EOF ;
     public final void entryRuleXExpressionOrVarDeclaration() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8637:37: ( ruleXExpressionOrVarDeclaration EOF )
-            // PsiInternalXtend.g:8638:2: ruleXExpressionOrVarDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXExpressionOrVarDeclarationElementType()); 
@@ -25224,17 +21675,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXExpressionOrVarDeclaration"
-
-
-    // $ANTLR start "ruleXExpressionOrVarDeclaration"
-    // PsiInternalXtend.g:8643:1: ruleXExpressionOrVarDeclaration : ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration ) | ruleXExpression ) ;
     public final void ruleXExpressionOrVarDeclaration() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8643:32: ( ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration ) | ruleXExpression ) )
-            // PsiInternalXtend.g:8644:2: ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration ) | ruleXExpression )
             {
-            // PsiInternalXtend.g:8644:2: ( ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration ) | ruleXExpression )
             int alt233=2;
             int LA233_0 = input.LA(1);
 
@@ -25406,10 +21849,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt233) {
                 case 1 :
-                    // PsiInternalXtend.g:8645:3: ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration )
                     {
-                    // PsiInternalXtend.g:8645:3: ( ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration )
-                    // PsiInternalXtend.g:8646:4: ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )=> ruleXVariableDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -25433,7 +21873,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:8695:3: ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -25468,15 +21907,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXExpressionOrVarDeclaration"
-
-
-    // $ANTLR start "entryRuleXFeatureCall"
-    // PsiInternalXtend.g:8706:1: entryRuleXFeatureCall : ruleXFeatureCall EOF ;
     public final void entryRuleXFeatureCall() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8706:22: ( ruleXFeatureCall EOF )
-            // PsiInternalXtend.g:8707:2: ruleXFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXFeatureCallElementType()); 
@@ -25499,11 +21931,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXFeatureCall"
-
-
-    // $ANTLR start "ruleXFeatureCall"
-    // PsiInternalXtend.g:8712:1: ruleXFeatureCall : ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) ;
     public final void ruleXFeatureCall() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -25513,14 +21940,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_12=null;
 
         try {
-            // PsiInternalXtend.g:8712:17: ( ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) )
-            // PsiInternalXtend.g:8713:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
             {
-            // PsiInternalXtend.g:8713:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
-            // PsiInternalXtend.g:8714:3: () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
             {
-            // PsiInternalXtend.g:8714:3: ()
-            // PsiInternalXtend.g:8715:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -25530,8 +21951,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:8720:3: (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
             int alt235=2;
             int LA235_0 = input.LA(1);
 
@@ -25540,7 +21959,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt235) {
                 case 1 :
-                    // PsiInternalXtend.g:8721:4: otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -25553,11 +21971,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_1);
                       			
                     }
-                    // PsiInternalXtend.g:8728:4: ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // PsiInternalXtend.g:8729:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // PsiInternalXtend.g:8729:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
-                    // PsiInternalXtend.g:8730:6: lv_typeArguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -25579,8 +21993,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:8739:4: (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )*
                     loop234:
                     do {
                         int alt234=2;
@@ -25593,7 +22005,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt234) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:8740:5: otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -25606,11 +22017,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_3);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:8747:5: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // PsiInternalXtend.g:8748:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // PsiInternalXtend.g:8748:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // PsiInternalXtend.g:8749:7: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -25658,12 +22065,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:8767:3: ( ( ruleIdOrSuper ) )
-            // PsiInternalXtend.g:8768:4: ( ruleIdOrSuper )
             {
-            // PsiInternalXtend.g:8768:4: ( ruleIdOrSuper )
-            // PsiInternalXtend.g:8769:5: ruleIdOrSuper
             {
             if ( state.backtracking==0 ) {
 
@@ -25685,19 +22087,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:8778:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?
             int alt238=2;
             alt238 = dfa238.predict(input);
             switch (alt238) {
                 case 1 :
-                    // PsiInternalXtend.g:8779:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')'
                     {
-                    // PsiInternalXtend.g:8779:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) )
-                    // PsiInternalXtend.g:8780:5: ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' )
                     {
-                    // PsiInternalXtend.g:8784:5: (lv_explicitOperationCall_7_0= '(' )
-                    // PsiInternalXtend.g:8785:6: lv_explicitOperationCall_7_0= '('
                     {
                     if ( state.backtracking==0 ) {
 
@@ -25715,19 +22110,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:8794:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?
                     int alt237=3;
                     alt237 = dfa237.predict(input);
                     switch (alt237) {
                         case 1 :
-                            // PsiInternalXtend.g:8795:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
                             {
-                            // PsiInternalXtend.g:8795:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
-                            // PsiInternalXtend.g:8796:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure )
                             {
-                            // PsiInternalXtend.g:8821:6: (lv_featureCallArguments_8_0= ruleXShortClosure )
-                            // PsiInternalXtend.g:8822:7: lv_featureCallArguments_8_0= ruleXShortClosure
                             {
                             if ( state.backtracking==0 ) {
 
@@ -25754,16 +22142,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:8832:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
                             {
-                            // PsiInternalXtend.g:8832:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
-                            // PsiInternalXtend.g:8833:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
                             {
-                            // PsiInternalXtend.g:8833:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) )
-                            // PsiInternalXtend.g:8834:7: (lv_featureCallArguments_9_0= ruleXExpression )
                             {
-                            // PsiInternalXtend.g:8834:7: (lv_featureCallArguments_9_0= ruleXExpression )
-                            // PsiInternalXtend.g:8835:8: lv_featureCallArguments_9_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -25785,8 +22166,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:8844:6: (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
                             loop236:
                             do {
                                 int alt236=2;
@@ -25799,7 +22178,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt236) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:8845:7: otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -25812,11 +22190,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      							doneLeaf(otherlv_10);
                             	      						
                             	    }
-                            	    // PsiInternalXtend.g:8852:7: ( (lv_featureCallArguments_11_0= ruleXExpression ) )
-                            	    // PsiInternalXtend.g:8853:8: (lv_featureCallArguments_11_0= ruleXExpression )
                             	    {
-                            	    // PsiInternalXtend.g:8853:8: (lv_featureCallArguments_11_0= ruleXExpression )
-                            	    // PsiInternalXtend.g:8854:9: lv_featureCallArguments_11_0= ruleXExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -25873,16 +22247,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:8874:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
             int alt239=2;
             alt239 = dfa239.predict(input);
             switch (alt239) {
                 case 1 :
-                    // PsiInternalXtend.g:8875:4: ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure )
                     {
-                    // PsiInternalXtend.g:8881:4: (lv_featureCallArguments_13_0= ruleXClosure )
-                    // PsiInternalXtend.g:8882:5: lv_featureCallArguments_13_0= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -25923,15 +22292,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXFeatureCall"
-
-
-    // $ANTLR start "entryRuleIdOrSuper"
-    // PsiInternalXtend.g:8895:1: entryRuleIdOrSuper : ruleIdOrSuper EOF ;
     public final void entryRuleIdOrSuper() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8895:19: ( ruleIdOrSuper EOF )
-            // PsiInternalXtend.g:8896:2: ruleIdOrSuper EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getIdOrSuperElementType()); 
@@ -25954,19 +22316,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleIdOrSuper"
-
-
-    // $ANTLR start "ruleIdOrSuper"
-    // PsiInternalXtend.g:8901:1: ruleIdOrSuper : ( ruleFeatureCallID | kw= 'super' ) ;
     public final void ruleIdOrSuper() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:8901:14: ( ( ruleFeatureCallID | kw= 'super' ) )
-            // PsiInternalXtend.g:8902:2: ( ruleFeatureCallID | kw= 'super' )
             {
-            // PsiInternalXtend.g:8902:2: ( ruleFeatureCallID | kw= 'super' )
             int alt240=2;
             int LA240_0 = input.LA(1);
 
@@ -25985,7 +22339,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt240) {
                 case 1 :
-                    // PsiInternalXtend.g:8903:3: ruleFeatureCallID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -26006,7 +22359,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:8911:3: kw= 'super'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -26037,15 +22389,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleIdOrSuper"
-
-
-    // $ANTLR start "entryRuleXBooleanLiteral"
-    // PsiInternalXtend.g:8922:1: entryRuleXBooleanLiteral : ruleXBooleanLiteral EOF ;
     public final void entryRuleXBooleanLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8922:25: ( ruleXBooleanLiteral EOF )
-            // PsiInternalXtend.g:8923:2: ruleXBooleanLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXBooleanLiteralElementType()); 
@@ -26068,24 +22413,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXBooleanLiteral"
-
-
-    // $ANTLR start "ruleXBooleanLiteral"
-    // PsiInternalXtend.g:8928:1: ruleXBooleanLiteral : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
     public final void ruleXBooleanLiteral() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_isTrue_2_0=null;
 
         try {
-            // PsiInternalXtend.g:8928:20: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
-            // PsiInternalXtend.g:8929:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
             {
-            // PsiInternalXtend.g:8929:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
-            // PsiInternalXtend.g:8930:3: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             {
-            // PsiInternalXtend.g:8930:3: ()
-            // PsiInternalXtend.g:8931:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26095,8 +22429,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:8936:3: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             int alt241=2;
             int LA241_0 = input.LA(1);
 
@@ -26115,7 +22447,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt241) {
                 case 1 :
-                    // PsiInternalXtend.g:8937:4: otherlv_1= 'false'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -26132,13 +22463,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:8945:4: ( (lv_isTrue_2_0= 'true' ) )
                     {
-                    // PsiInternalXtend.g:8945:4: ( (lv_isTrue_2_0= 'true' ) )
-                    // PsiInternalXtend.g:8946:5: (lv_isTrue_2_0= 'true' )
                     {
-                    // PsiInternalXtend.g:8946:5: (lv_isTrue_2_0= 'true' )
-                    // PsiInternalXtend.g:8947:6: lv_isTrue_2_0= 'true'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -26178,15 +22504,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXBooleanLiteral"
-
-
-    // $ANTLR start "entryRuleXNullLiteral"
-    // PsiInternalXtend.g:8961:1: entryRuleXNullLiteral : ruleXNullLiteral EOF ;
     public final void entryRuleXNullLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8961:22: ( ruleXNullLiteral EOF )
-            // PsiInternalXtend.g:8962:2: ruleXNullLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXNullLiteralElementType()); 
@@ -26209,23 +22528,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXNullLiteral"
-
-
-    // $ANTLR start "ruleXNullLiteral"
-    // PsiInternalXtend.g:8967:1: ruleXNullLiteral : ( () otherlv_1= 'null' ) ;
     public final void ruleXNullLiteral() throws RecognitionException {
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtend.g:8967:17: ( ( () otherlv_1= 'null' ) )
-            // PsiInternalXtend.g:8968:2: ( () otherlv_1= 'null' )
             {
-            // PsiInternalXtend.g:8968:2: ( () otherlv_1= 'null' )
-            // PsiInternalXtend.g:8969:3: () otherlv_1= 'null'
             {
-            // PsiInternalXtend.g:8969:3: ()
-            // PsiInternalXtend.g:8970:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26262,15 +22570,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXNullLiteral"
-
-
-    // $ANTLR start "entryRuleXNumberLiteral"
-    // PsiInternalXtend.g:8986:1: entryRuleXNumberLiteral : ruleXNumberLiteral EOF ;
     public final void entryRuleXNumberLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8986:24: ( ruleXNumberLiteral EOF )
-            // PsiInternalXtend.g:8987:2: ruleXNumberLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXNumberLiteralElementType()); 
@@ -26293,21 +22594,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXNumberLiteral"
-
-
-    // $ANTLR start "ruleXNumberLiteral"
-    // PsiInternalXtend.g:8992:1: ruleXNumberLiteral : ( () ( (lv_value_1_0= ruleNumber ) ) ) ;
     public final void ruleXNumberLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:8992:19: ( ( () ( (lv_value_1_0= ruleNumber ) ) ) )
-            // PsiInternalXtend.g:8993:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
             {
-            // PsiInternalXtend.g:8993:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
-            // PsiInternalXtend.g:8994:3: () ( (lv_value_1_0= ruleNumber ) )
             {
-            // PsiInternalXtend.g:8994:3: ()
-            // PsiInternalXtend.g:8995:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26317,12 +22607,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
 
             }
-
-            // PsiInternalXtend.g:9000:3: ( (lv_value_1_0= ruleNumber ) )
-            // PsiInternalXtend.g:9001:4: (lv_value_1_0= ruleNumber )
             {
-            // PsiInternalXtend.g:9001:4: (lv_value_1_0= ruleNumber )
-            // PsiInternalXtend.g:9002:5: lv_value_1_0= ruleNumber
             {
             if ( state.backtracking==0 ) {
 
@@ -26360,15 +22645,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXNumberLiteral"
-
-
-    // $ANTLR start "entryRuleXTypeLiteral"
-    // PsiInternalXtend.g:9015:1: entryRuleXTypeLiteral : ruleXTypeLiteral EOF ;
     public final void entryRuleXTypeLiteral() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9015:22: ( ruleXTypeLiteral EOF )
-            // PsiInternalXtend.g:9016:2: ruleXTypeLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXTypeLiteralElementType()); 
@@ -26391,25 +22669,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXTypeLiteral"
-
-
-    // $ANTLR start "ruleXTypeLiteral"
-    // PsiInternalXtend.g:9021:1: ruleXTypeLiteral : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) ;
     public final void ruleXTypeLiteral() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token otherlv_5=null;
 
         try {
-            // PsiInternalXtend.g:9021:17: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) )
-            // PsiInternalXtend.g:9022:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
             {
-            // PsiInternalXtend.g:9022:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
-            // PsiInternalXtend.g:9023:3: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')'
             {
-            // PsiInternalXtend.g:9023:3: ()
-            // PsiInternalXtend.g:9024:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26442,11 +22709,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalXtend.g:9043:3: ( ( ruleQualifiedName ) )
-            // PsiInternalXtend.g:9044:4: ( ruleQualifiedName )
             {
-            // PsiInternalXtend.g:9044:4: ( ruleQualifiedName )
-            // PsiInternalXtend.g:9045:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -26468,8 +22731,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:9054:3: ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )*
             loop242:
             do {
                 int alt242=2;
@@ -26482,10 +22743,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt242) {
             	case 1 :
-            	    // PsiInternalXtend.g:9055:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
             	    {
-            	    // PsiInternalXtend.g:9055:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
-            	    // PsiInternalXtend.g:9056:5: lv_arrayDimensions_4_0= ruleArrayBrackets
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -26540,15 +22798,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXTypeLiteral"
-
-
-    // $ANTLR start "entryRuleXThrowExpression"
-    // PsiInternalXtend.g:9076:1: entryRuleXThrowExpression : ruleXThrowExpression EOF ;
     public final void entryRuleXThrowExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9076:26: ( ruleXThrowExpression EOF )
-            // PsiInternalXtend.g:9077:2: ruleXThrowExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXThrowExpressionElementType()); 
@@ -26571,23 +22822,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXThrowExpression"
-
-
-    // $ANTLR start "ruleXThrowExpression"
-    // PsiInternalXtend.g:9082:1: ruleXThrowExpression : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
     public final void ruleXThrowExpression() throws RecognitionException {
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtend.g:9082:21: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:9083:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:9083:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:9084:3: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:9084:3: ()
-            // PsiInternalXtend.g:9085:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26609,11 +22849,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:9097:3: ( (lv_expression_2_0= ruleXExpression ) )
-            // PsiInternalXtend.g:9098:4: (lv_expression_2_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:9098:4: (lv_expression_2_0= ruleXExpression )
-            // PsiInternalXtend.g:9099:5: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -26651,15 +22887,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXThrowExpression"
-
-
-    // $ANTLR start "entryRuleXReturnExpression"
-    // PsiInternalXtend.g:9112:1: entryRuleXReturnExpression : ruleXReturnExpression EOF ;
     public final void entryRuleXReturnExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9112:27: ( ruleXReturnExpression EOF )
-            // PsiInternalXtend.g:9113:2: ruleXReturnExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXReturnExpressionElementType()); 
@@ -26682,23 +22911,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXReturnExpression"
-
-
-    // $ANTLR start "ruleXReturnExpression"
-    // PsiInternalXtend.g:9118:1: ruleXReturnExpression : ( () otherlv_1= 'return' ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
     public final void ruleXReturnExpression() throws RecognitionException {
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtend.g:9118:22: ( ( () otherlv_1= 'return' ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )? ) )
-            // PsiInternalXtend.g:9119:2: ( () otherlv_1= 'return' ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )? )
             {
-            // PsiInternalXtend.g:9119:2: ( () otherlv_1= 'return' ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )? )
-            // PsiInternalXtend.g:9120:3: () otherlv_1= 'return' ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )?
             {
-            // PsiInternalXtend.g:9120:3: ()
-            // PsiInternalXtend.g:9121:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26720,15 +22938,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:9133:3: ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )?
             int alt243=2;
             alt243 = dfa243.predict(input);
             switch (alt243) {
                 case 1 :
-                    // PsiInternalXtend.g:9134:4: ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:9135:4: (lv_expression_2_0= ruleXExpression )
-                    // PsiInternalXtend.g:9136:5: lv_expression_2_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -26769,15 +22983,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXReturnExpression"
-
-
-    // $ANTLR start "entryRuleXTryCatchFinallyExpression"
-    // PsiInternalXtend.g:9149:1: entryRuleXTryCatchFinallyExpression : ruleXTryCatchFinallyExpression EOF ;
     public final void entryRuleXTryCatchFinallyExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9149:36: ( ruleXTryCatchFinallyExpression EOF )
-            // PsiInternalXtend.g:9150:2: ruleXTryCatchFinallyExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); 
@@ -26800,25 +23007,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXTryCatchFinallyExpression"
-
-
-    // $ANTLR start "ruleXTryCatchFinallyExpression"
-    // PsiInternalXtend.g:9155:1: ruleXTryCatchFinallyExpression : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
     public final void ruleXTryCatchFinallyExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_4=null;
         Token otherlv_6=null;
 
         try {
-            // PsiInternalXtend.g:9155:31: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
-            // PsiInternalXtend.g:9156:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
             {
-            // PsiInternalXtend.g:9156:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
-            // PsiInternalXtend.g:9157:3: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             {
-            // PsiInternalXtend.g:9157:3: ()
-            // PsiInternalXtend.g:9158:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -26840,11 +23036,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:9170:3: ( (lv_expression_2_0= ruleXExpression ) )
-            // PsiInternalXtend.g:9171:4: (lv_expression_2_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:9171:4: (lv_expression_2_0= ruleXExpression )
-            // PsiInternalXtend.g:9172:5: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -26866,8 +23058,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:9181:3: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             int alt246=2;
             int LA246_0 = input.LA(1);
 
@@ -26886,12 +23076,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt246) {
                 case 1 :
-                    // PsiInternalXtend.g:9182:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
                     {
-                    // PsiInternalXtend.g:9182:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
-                    // PsiInternalXtend.g:9183:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     {
-                    // PsiInternalXtend.g:9183:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
                     int cnt244=0;
                     loop244:
                     do {
@@ -26911,10 +23097,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt244) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:9184:6: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
                     	    {
-                    	    // PsiInternalXtend.g:9185:6: (lv_catchClauses_3_0= ruleXCatchClause )
-                    	    // PsiInternalXtend.g:9186:7: lv_catchClauses_3_0= ruleXCatchClause
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -26947,8 +23130,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         }
                         cnt244++;
                     } while (true);
-
-                    // PsiInternalXtend.g:9195:5: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     int alt245=2;
                     int LA245_0 = input.LA(1);
 
@@ -26961,10 +23142,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt245) {
                         case 1 :
-                            // PsiInternalXtend.g:9196:6: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
                             {
-                            // PsiInternalXtend.g:9196:6: ( ( 'finally' )=>otherlv_4= 'finally' )
-                            // PsiInternalXtend.g:9197:7: ( 'finally' )=>otherlv_4= 'finally'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -26979,12 +23157,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
 
                             }
-
-                            // PsiInternalXtend.g:9206:6: ( (lv_finallyExpression_5_0= ruleXExpression ) )
-                            // PsiInternalXtend.g:9207:7: (lv_finallyExpression_5_0= ruleXExpression )
                             {
-                            // PsiInternalXtend.g:9207:7: (lv_finallyExpression_5_0= ruleXExpression )
-                            // PsiInternalXtend.g:9208:8: lv_finallyExpression_5_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -27020,10 +23193,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:9220:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
                     {
-                    // PsiInternalXtend.g:9220:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
-                    // PsiInternalXtend.g:9221:5: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -27036,11 +23206,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       					doneLeaf(otherlv_6);
                       				
                     }
-                    // PsiInternalXtend.g:9228:5: ( (lv_finallyExpression_7_0= ruleXExpression ) )
-                    // PsiInternalXtend.g:9229:6: (lv_finallyExpression_7_0= ruleXExpression )
                     {
-                    // PsiInternalXtend.g:9229:6: (lv_finallyExpression_7_0= ruleXExpression )
-                    // PsiInternalXtend.g:9230:7: lv_finallyExpression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -27087,15 +23253,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXTryCatchFinallyExpression"
-
-
-    // $ANTLR start "entryRuleXSynchronizedExpression"
-    // PsiInternalXtend.g:9245:1: entryRuleXSynchronizedExpression : ruleXSynchronizedExpression EOF ;
     public final void entryRuleXSynchronizedExpression() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9245:33: ( ruleXSynchronizedExpression EOF )
-            // PsiInternalXtend.g:9246:2: ruleXSynchronizedExpression EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXSynchronizedExpressionElementType()); 
@@ -27118,31 +23277,16 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXSynchronizedExpression"
-
-
-    // $ANTLR start "ruleXSynchronizedExpression"
-    // PsiInternalXtend.g:9251:1: ruleXSynchronizedExpression : ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) ;
     public final void ruleXSynchronizedExpression() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // PsiInternalXtend.g:9251:28: ( ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:9252:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:9252:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:9253:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:9253:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) )
-            // PsiInternalXtend.g:9254:4: ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' )
             {
-            // PsiInternalXtend.g:9261:4: ( () otherlv_1= 'synchronized' otherlv_2= '(' )
-            // PsiInternalXtend.g:9262:5: () otherlv_1= 'synchronized' otherlv_2= '('
             {
-            // PsiInternalXtend.g:9262:5: ()
-            // PsiInternalXtend.g:9263:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -27180,12 +23324,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:9284:3: ( (lv_param_3_0= ruleXExpression ) )
-            // PsiInternalXtend.g:9285:4: (lv_param_3_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:9285:4: (lv_param_3_0= ruleXExpression )
-            // PsiInternalXtend.g:9286:5: lv_param_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -27219,11 +23358,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_4);
               		
             }
-            // PsiInternalXtend.g:9302:3: ( (lv_expression_5_0= ruleXExpression ) )
-            // PsiInternalXtend.g:9303:4: (lv_expression_5_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:9303:4: (lv_expression_5_0= ruleXExpression )
-            // PsiInternalXtend.g:9304:5: lv_expression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -27261,15 +23396,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXSynchronizedExpression"
-
-
-    // $ANTLR start "entryRuleXCatchClause"
-    // PsiInternalXtend.g:9317:1: entryRuleXCatchClause : ruleXCatchClause EOF ;
     public final void entryRuleXCatchClause() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9317:22: ( ruleXCatchClause EOF )
-            // PsiInternalXtend.g:9318:2: ruleXCatchClause EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXCatchClauseElementType()); 
@@ -27292,25 +23420,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXCatchClause"
-
-
-    // $ANTLR start "ruleXCatchClause"
-    // PsiInternalXtend.g:9323:1: ruleXCatchClause : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
     public final void ruleXCatchClause() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token otherlv_3=null;
 
         try {
-            // PsiInternalXtend.g:9323:17: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
-            // PsiInternalXtend.g:9324:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
             {
-            // PsiInternalXtend.g:9324:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
-            // PsiInternalXtend.g:9325:3: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
             {
-            // PsiInternalXtend.g:9325:3: ( ( 'catch' )=>otherlv_0= 'catch' )
-            // PsiInternalXtend.g:9326:4: ( 'catch' )=>otherlv_0= 'catch'
             {
             if ( state.backtracking==0 ) {
 
@@ -27337,11 +23454,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:9342:3: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
-            // PsiInternalXtend.g:9343:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
             {
-            // PsiInternalXtend.g:9343:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
-            // PsiInternalXtend.g:9344:5: lv_declaredParam_2_0= ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -27375,11 +23488,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_3);
               		
             }
-            // PsiInternalXtend.g:9360:3: ( (lv_expression_4_0= ruleXExpression ) )
-            // PsiInternalXtend.g:9361:4: (lv_expression_4_0= ruleXExpression )
             {
-            // PsiInternalXtend.g:9361:4: (lv_expression_4_0= ruleXExpression )
-            // PsiInternalXtend.g:9362:5: lv_expression_4_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -27417,15 +23526,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXCatchClause"
-
-
-    // $ANTLR start "entryRuleQualifiedName"
-    // PsiInternalXtend.g:9375:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
     public final void entryRuleQualifiedName() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9375:23: ( ruleQualifiedName EOF )
-            // PsiInternalXtend.g:9376:2: ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getQualifiedNameElementType()); 
@@ -27448,20 +23550,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleQualifiedName"
-
-
-    // $ANTLR start "ruleQualifiedName"
-    // PsiInternalXtend.g:9381:1: ruleQualifiedName : ( ruleValidID ( ( ( '.' )=>kw= '.' ) ruleValidID )* ) ;
     public final void ruleQualifiedName() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:9381:18: ( ( ruleValidID ( ( ( '.' )=>kw= '.' ) ruleValidID )* ) )
-            // PsiInternalXtend.g:9382:2: ( ruleValidID ( ( ( '.' )=>kw= '.' ) ruleValidID )* )
             {
-            // PsiInternalXtend.g:9382:2: ( ruleValidID ( ( ( '.' )=>kw= '.' ) ruleValidID )* )
-            // PsiInternalXtend.g:9383:3: ruleValidID ( ( ( '.' )=>kw= '.' ) ruleValidID )*
             {
             if ( state.backtracking==0 ) {
 
@@ -27478,17 +23571,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneComposite();
               		
             }
-            // PsiInternalXtend.g:9390:3: ( ( ( '.' )=>kw= '.' ) ruleValidID )*
             loop247:
             do {
                 int alt247=2;
                 alt247 = dfa247.predict(input);
                 switch (alt247) {
             	case 1 :
-            	    // PsiInternalXtend.g:9391:4: ( ( '.' )=>kw= '.' ) ruleValidID
             	    {
-            	    // PsiInternalXtend.g:9391:4: ( ( '.' )=>kw= '.' )
-            	    // PsiInternalXtend.g:9392:5: ( '.' )=>kw= '.'
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -27543,18 +23632,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleQualifiedName"
-
-
-    // $ANTLR start "entryRuleNumber"
-    // PsiInternalXtend.g:9413:1: entryRuleNumber : ruleNumber EOF ;
     public final void entryRuleNumber() throws RecognitionException {
 
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // PsiInternalXtend.g:9415:2: ( ruleNumber EOF )
-            // PsiInternalXtend.g:9416:2: ruleNumber EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getNumberElementType()); 
@@ -27580,11 +23662,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleNumber"
-
-
-    // $ANTLR start "ruleNumber"
-    // PsiInternalXtend.g:9424:1: ruleNumber : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
     public final void ruleNumber() throws RecognitionException {
         Token this_HEX_0=null;
         Token this_INT_1=null;
@@ -27597,10 +23674,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // PsiInternalXtend.g:9426:2: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
-            // PsiInternalXtend.g:9427:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             {
-            // PsiInternalXtend.g:9427:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             int alt251=2;
             int LA251_0 = input.LA(1);
 
@@ -27619,7 +23693,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt251) {
                 case 1 :
-                    // PsiInternalXtend.g:9428:3: this_HEX_0= RULE_HEX
                     {
                     if ( state.backtracking==0 ) {
 
@@ -27636,12 +23709,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:9436:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
                     {
-                    // PsiInternalXtend.g:9436:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
-                    // PsiInternalXtend.g:9437:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     {
-                    // PsiInternalXtend.g:9437:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
                     int alt248=2;
                     int LA248_0 = input.LA(1);
 
@@ -27660,7 +23729,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt248) {
                         case 1 :
-                            // PsiInternalXtend.g:9438:5: this_INT_1= RULE_INT
                             {
                             if ( state.backtracking==0 ) {
 
@@ -27677,7 +23745,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:9446:5: this_DECIMAL_2= RULE_DECIMAL
                             {
                             if ( state.backtracking==0 ) {
 
@@ -27695,8 +23762,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:9454:4: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     int alt250=2;
                     int LA250_0 = input.LA(1);
 
@@ -27709,7 +23774,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt250) {
                         case 1 :
-                            // PsiInternalXtend.g:9455:5: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             {
                             if ( state.backtracking==0 ) {
 
@@ -27722,7 +23786,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                               					doneLeaf(kw);
                               				
                             }
-                            // PsiInternalXtend.g:9462:5: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             int alt249=2;
                             int LA249_0 = input.LA(1);
 
@@ -27741,7 +23804,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             switch (alt249) {
                                 case 1 :
-                                    // PsiInternalXtend.g:9463:6: this_INT_4= RULE_INT
                                     {
                                     if ( state.backtracking==0 ) {
 
@@ -27758,7 +23820,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                                     }
                                     break;
                                 case 2 :
-                                    // PsiInternalXtend.g:9471:6: this_DECIMAL_5= RULE_DECIMAL
                                     {
                                     if ( state.backtracking==0 ) {
 
@@ -27807,15 +23868,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleNumber"
-
-
-    // $ANTLR start "entryRuleJvmTypeReference"
-    // PsiInternalXtend.g:9488:1: entryRuleJvmTypeReference : ruleJvmTypeReference EOF ;
     public final void entryRuleJvmTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9488:26: ( ruleJvmTypeReference EOF )
-            // PsiInternalXtend.g:9489:2: ruleJvmTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmTypeReferenceElementType()); 
@@ -27838,17 +23892,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmTypeReference"
-
-
-    // $ANTLR start "ruleJvmTypeReference"
-    // PsiInternalXtend.g:9494:1: ruleJvmTypeReference : ( ( ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ruleXFunctionTypeRef ) ;
     public final void ruleJvmTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9494:21: ( ( ( ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ruleXFunctionTypeRef ) )
-            // PsiInternalXtend.g:9495:2: ( ( ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ruleXFunctionTypeRef )
             {
-            // PsiInternalXtend.g:9495:2: ( ( ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | ruleXFunctionTypeRef )
             int alt253=2;
             int LA253_0 = input.LA(1);
 
@@ -27867,10 +23913,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt253) {
                 case 1 :
-                    // PsiInternalXtend.g:9496:3: ( ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
                     {
-                    // PsiInternalXtend.g:9496:3: ( ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
-                    // PsiInternalXtend.g:9497:4: ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     {
                     if ( state.backtracking==0 ) {
 
@@ -27887,7 +23930,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneComposite();
                       			
                     }
-                    // PsiInternalXtend.g:9504:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     loop252:
                     do {
                         int alt252=2;
@@ -27912,13 +23954,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt252) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:9505:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
                     	    {
-                    	    // PsiInternalXtend.g:9511:5: ( () ruleArrayBrackets )
-                    	    // PsiInternalXtend.g:9512:6: () ruleArrayBrackets
                     	    {
-                    	    // PsiInternalXtend.g:9512:6: ()
-                    	    // PsiInternalXtend.g:9513:7: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -27963,7 +24000,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:9529:3: ruleXFunctionTypeRef
                     {
                     if ( state.backtracking==0 ) {
 
@@ -27998,15 +24034,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmTypeReference"
-
-
-    // $ANTLR start "entryRuleArrayBrackets"
-    // PsiInternalXtend.g:9540:1: entryRuleArrayBrackets : ruleArrayBrackets EOF ;
     public final void entryRuleArrayBrackets() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9540:23: ( ruleArrayBrackets EOF )
-            // PsiInternalXtend.g:9541:2: ruleArrayBrackets EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getArrayBracketsElementType()); 
@@ -28029,20 +24058,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleArrayBrackets"
-
-
-    // $ANTLR start "ruleArrayBrackets"
-    // PsiInternalXtend.g:9546:1: ruleArrayBrackets : (kw= '[' kw= ']' ) ;
     public final void ruleArrayBrackets() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:9546:18: ( (kw= '[' kw= ']' ) )
-            // PsiInternalXtend.g:9547:2: (kw= '[' kw= ']' )
             {
-            // PsiInternalXtend.g:9547:2: (kw= '[' kw= ']' )
-            // PsiInternalXtend.g:9548:3: kw= '[' kw= ']'
             {
             if ( state.backtracking==0 ) {
 
@@ -28081,15 +24101,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleArrayBrackets"
-
-
-    // $ANTLR start "entryRuleXFunctionTypeRef"
-    // PsiInternalXtend.g:9566:1: entryRuleXFunctionTypeRef : ruleXFunctionTypeRef EOF ;
     public final void entryRuleXFunctionTypeRef() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9566:26: ( ruleXFunctionTypeRef EOF )
-            // PsiInternalXtend.g:9567:2: ruleXFunctionTypeRef EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXFunctionTypeRefElementType()); 
@@ -28112,11 +24125,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXFunctionTypeRef"
-
-
-    // $ANTLR start "ruleXFunctionTypeRef"
-    // PsiInternalXtend.g:9572:1: ruleXFunctionTypeRef : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
     public final void ruleXFunctionTypeRef() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
@@ -28124,13 +24132,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_5=null;
 
         try {
-            // PsiInternalXtend.g:9572:21: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
-            // PsiInternalXtend.g:9573:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
             {
-            // PsiInternalXtend.g:9573:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
-            // PsiInternalXtend.g:9574:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
             {
-            // PsiInternalXtend.g:9574:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
             int alt256=2;
             int LA256_0 = input.LA(1);
 
@@ -28139,7 +24142,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt256) {
                 case 1 :
-                    // PsiInternalXtend.g:9575:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -28152,7 +24154,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_0);
                       			
                     }
-                    // PsiInternalXtend.g:9582:4: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
                     int alt255=2;
                     int LA255_0 = input.LA(1);
 
@@ -28161,13 +24162,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt255) {
                         case 1 :
-                            // PsiInternalXtend.g:9583:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             {
-                            // PsiInternalXtend.g:9583:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
-                            // PsiInternalXtend.g:9584:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
                             {
-                            // PsiInternalXtend.g:9584:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
-                            // PsiInternalXtend.g:9585:7: lv_paramTypes_1_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -28189,8 +24185,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                             }
-
-                            // PsiInternalXtend.g:9594:5: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             loop254:
                             do {
                                 int alt254=2;
@@ -28203,7 +24197,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                                 switch (alt254) {
                             	case 1 :
-                            	    // PsiInternalXtend.g:9595:6: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -28216,11 +24209,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             	      						doneLeaf(otherlv_2);
                             	      					
                             	    }
-                            	    // PsiInternalXtend.g:9602:6: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
-                            	    // PsiInternalXtend.g:9603:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
                             	    {
-                            	    // PsiInternalXtend.g:9603:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
-                            	    // PsiInternalXtend.g:9604:8: lv_paramTypes_3_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -28286,11 +24275,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_5);
               		
             }
-            // PsiInternalXtend.g:9630:3: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:9631:4: (lv_returnType_6_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:9631:4: (lv_returnType_6_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:9632:5: lv_returnType_6_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -28328,15 +24313,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXFunctionTypeRef"
-
-
-    // $ANTLR start "entryRuleJvmParameterizedTypeReference"
-    // PsiInternalXtend.g:9645:1: entryRuleJvmParameterizedTypeReference : ruleJvmParameterizedTypeReference EOF ;
     public final void entryRuleJvmParameterizedTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9645:39: ( ruleJvmParameterizedTypeReference EOF )
-            // PsiInternalXtend.g:9646:2: ruleJvmParameterizedTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); 
@@ -28359,11 +24337,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmParameterizedTypeReference"
-
-
-    // $ANTLR start "ruleJvmParameterizedTypeReference"
-    // PsiInternalXtend.g:9651:1: ruleJvmParameterizedTypeReference : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) ;
     public final void ruleJvmParameterizedTypeReference() throws RecognitionException {
         Token otherlv_1=null;
         Token otherlv_3=null;
@@ -28374,17 +24347,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_13=null;
 
         try {
-            // PsiInternalXtend.g:9651:34: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) )
-            // PsiInternalXtend.g:9652:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
             {
-            // PsiInternalXtend.g:9652:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
-            // PsiInternalXtend.g:9653:3: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             {
-            // PsiInternalXtend.g:9653:3: ( ( ruleQualifiedName ) )
-            // PsiInternalXtend.g:9654:4: ( ruleQualifiedName )
             {
-            // PsiInternalXtend.g:9654:4: ( ruleQualifiedName )
-            // PsiInternalXtend.g:9655:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -28406,16 +24371,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:9664:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             int alt261=2;
             alt261 = dfa261.predict(input);
             switch (alt261) {
                 case 1 :
-                    // PsiInternalXtend.g:9665:4: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     {
-                    // PsiInternalXtend.g:9665:4: ( ( '<' )=>otherlv_1= '<' )
-                    // PsiInternalXtend.g:9666:5: ( '<' )=>otherlv_1= '<'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -28430,12 +24390,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
 
                     }
-
-                    // PsiInternalXtend.g:9675:4: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // PsiInternalXtend.g:9676:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // PsiInternalXtend.g:9676:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
-                    // PsiInternalXtend.g:9677:6: lv_arguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -28457,8 +24412,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:9686:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
                     loop257:
                     do {
                         int alt257=2;
@@ -28471,7 +24424,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt257) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:9687:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -28484,11 +24436,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	      					doneLeaf(otherlv_3);
                     	      				
                     	    }
-                    	    // PsiInternalXtend.g:9694:5: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // PsiInternalXtend.g:9695:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // PsiInternalXtend.g:9695:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // PsiInternalXtend.g:9696:7: lv_arguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -28531,23 +24479,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       				doneLeaf(otherlv_5);
                       			
                     }
-                    // PsiInternalXtend.g:9713:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     loop260:
                     do {
                         int alt260=2;
                         alt260 = dfa260.predict(input);
                         switch (alt260) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:9714:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
                     	    {
-                    	    // PsiInternalXtend.g:9714:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
-                    	    // PsiInternalXtend.g:9715:6: ( ( () '.' ) )=> ( () otherlv_7= '.' )
                     	    {
-                    	    // PsiInternalXtend.g:9721:6: ( () otherlv_7= '.' )
-                    	    // PsiInternalXtend.g:9722:7: () otherlv_7= '.'
                     	    {
-                    	    // PsiInternalXtend.g:9722:7: ()
-                    	    // PsiInternalXtend.g:9723:8: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -28574,12 +24514,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     	    }
-
-                    	    // PsiInternalXtend.g:9737:5: ( ( ruleValidID ) )
-                    	    // PsiInternalXtend.g:9738:6: ( ruleValidID )
                     	    {
-                    	    // PsiInternalXtend.g:9738:6: ( ruleValidID )
-                    	    // PsiInternalXtend.g:9739:7: ruleValidID
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -28601,16 +24536,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     	    }
-
-                    	    // PsiInternalXtend.g:9748:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
                     	    int alt259=2;
                     	    alt259 = dfa259.predict(input);
                     	    switch (alt259) {
                     	        case 1 :
-                    	            // PsiInternalXtend.g:9749:6: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
                     	            {
-                    	            // PsiInternalXtend.g:9749:6: ( ( '<' )=>otherlv_9= '<' )
-                    	            // PsiInternalXtend.g:9750:7: ( '<' )=>otherlv_9= '<'
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -28625,12 +24555,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	            }
 
                     	            }
-
-                    	            // PsiInternalXtend.g:9759:6: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
-                    	            // PsiInternalXtend.g:9760:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
                     	            {
-                    	            // PsiInternalXtend.g:9760:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
-                    	            // PsiInternalXtend.g:9761:8: lv_arguments_10_0= ruleJvmArgumentTypeReference
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -28652,8 +24577,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     	            }
-
-                    	            // PsiInternalXtend.g:9770:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
                     	            loop258:
                     	            do {
                     	                int alt258=2;
@@ -28666,7 +24589,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                     	                switch (alt258) {
                     	            	case 1 :
-                    	            	    // PsiInternalXtend.g:9771:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
                     	            	    {
                     	            	    if ( state.backtracking==0 ) {
 
@@ -28679,11 +24601,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     	            	      							doneLeaf(otherlv_11);
                     	            	      						
                     	            	    }
-                    	            	    // PsiInternalXtend.g:9778:7: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
-                    	            	    // PsiInternalXtend.g:9779:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
                     	            	    {
-                    	            	    // PsiInternalXtend.g:9779:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
-                    	            	    // PsiInternalXtend.g:9780:9: lv_arguments_12_0= ruleJvmArgumentTypeReference
                     	            	    {
                     	            	    if ( state.backtracking==0 ) {
 
@@ -28762,15 +24680,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmParameterizedTypeReference"
-
-
-    // $ANTLR start "entryRuleJvmArgumentTypeReference"
-    // PsiInternalXtend.g:9804:1: entryRuleJvmArgumentTypeReference : ruleJvmArgumentTypeReference EOF ;
     public final void entryRuleJvmArgumentTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9804:34: ( ruleJvmArgumentTypeReference EOF )
-            // PsiInternalXtend.g:9805:2: ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); 
@@ -28793,17 +24704,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmArgumentTypeReference"
-
-
-    // $ANTLR start "ruleJvmArgumentTypeReference"
-    // PsiInternalXtend.g:9810:1: ruleJvmArgumentTypeReference : ( ruleJvmTypeReference | ruleJvmWildcardTypeReference ) ;
     public final void ruleJvmArgumentTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9810:29: ( ( ruleJvmTypeReference | ruleJvmWildcardTypeReference ) )
-            // PsiInternalXtend.g:9811:2: ( ruleJvmTypeReference | ruleJvmWildcardTypeReference )
             {
-            // PsiInternalXtend.g:9811:2: ( ruleJvmTypeReference | ruleJvmWildcardTypeReference )
             int alt262=2;
             int LA262_0 = input.LA(1);
 
@@ -28822,7 +24725,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt262) {
                 case 1 :
-                    // PsiInternalXtend.g:9812:3: ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -28843,7 +24745,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:9820:3: ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -28878,15 +24779,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmArgumentTypeReference"
-
-
-    // $ANTLR start "entryRuleJvmWildcardTypeReference"
-    // PsiInternalXtend.g:9831:1: entryRuleJvmWildcardTypeReference : ruleJvmWildcardTypeReference EOF ;
     public final void entryRuleJvmWildcardTypeReference() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9831:34: ( ruleJvmWildcardTypeReference EOF )
-            // PsiInternalXtend.g:9832:2: ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); 
@@ -28909,23 +24803,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmWildcardTypeReference"
-
-
-    // $ANTLR start "ruleJvmWildcardTypeReference"
-    // PsiInternalXtend.g:9837:1: ruleJvmWildcardTypeReference : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
     public final void ruleJvmWildcardTypeReference() throws RecognitionException {
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtend.g:9837:29: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
-            // PsiInternalXtend.g:9838:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
             {
-            // PsiInternalXtend.g:9838:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
-            // PsiInternalXtend.g:9839:3: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             {
-            // PsiInternalXtend.g:9839:3: ()
-            // PsiInternalXtend.g:9840:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -28947,7 +24830,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalXtend.g:9852:3: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             int alt265=3;
             int LA265_0 = input.LA(1);
 
@@ -28959,16 +24841,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt265) {
                 case 1 :
-                    // PsiInternalXtend.g:9853:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
                     {
-                    // PsiInternalXtend.g:9853:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
-                    // PsiInternalXtend.g:9854:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     {
-                    // PsiInternalXtend.g:9854:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
-                    // PsiInternalXtend.g:9855:6: (lv_constraints_2_0= ruleJvmUpperBound )
                     {
-                    // PsiInternalXtend.g:9855:6: (lv_constraints_2_0= ruleJvmUpperBound )
-                    // PsiInternalXtend.g:9856:7: lv_constraints_2_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -28990,8 +24865,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:9865:5: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     loop263:
                     do {
                         int alt263=2;
@@ -29004,10 +24877,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt263) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:9866:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
                     	    {
-                    	    // PsiInternalXtend.g:9866:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
-                    	    // PsiInternalXtend.g:9867:7: lv_constraints_3_0= ruleJvmUpperBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -29043,16 +24913,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:9878:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
                     {
-                    // PsiInternalXtend.g:9878:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
-                    // PsiInternalXtend.g:9879:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     {
-                    // PsiInternalXtend.g:9879:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
-                    // PsiInternalXtend.g:9880:6: (lv_constraints_4_0= ruleJvmLowerBound )
                     {
-                    // PsiInternalXtend.g:9880:6: (lv_constraints_4_0= ruleJvmLowerBound )
-                    // PsiInternalXtend.g:9881:7: lv_constraints_4_0= ruleJvmLowerBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -29074,8 +24937,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:9890:5: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     loop264:
                     do {
                         int alt264=2;
@@ -29088,10 +24949,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt264) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:9891:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
                     	    {
-                    	    // PsiInternalXtend.g:9891:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
-                    	    // PsiInternalXtend.g:9892:7: lv_constraints_5_0= ruleJvmLowerBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -29144,15 +25002,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmWildcardTypeReference"
-
-
-    // $ANTLR start "entryRuleJvmUpperBound"
-    // PsiInternalXtend.g:9907:1: entryRuleJvmUpperBound : ruleJvmUpperBound EOF ;
     public final void entryRuleJvmUpperBound() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9907:23: ( ruleJvmUpperBound EOF )
-            // PsiInternalXtend.g:9908:2: ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmUpperBoundElementType()); 
@@ -29175,20 +25026,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmUpperBound"
-
-
-    // $ANTLR start "ruleJvmUpperBound"
-    // PsiInternalXtend.g:9913:1: ruleJvmUpperBound : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final void ruleJvmUpperBound() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalXtend.g:9913:18: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // PsiInternalXtend.g:9914:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // PsiInternalXtend.g:9914:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // PsiInternalXtend.g:9915:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -29201,11 +25043,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:9922:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:9923:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:9923:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:9924:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -29243,15 +25081,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmUpperBound"
-
-
-    // $ANTLR start "entryRuleJvmUpperBoundAnded"
-    // PsiInternalXtend.g:9937:1: entryRuleJvmUpperBoundAnded : ruleJvmUpperBoundAnded EOF ;
     public final void entryRuleJvmUpperBoundAnded() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9937:28: ( ruleJvmUpperBoundAnded EOF )
-            // PsiInternalXtend.g:9938:2: ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); 
@@ -29274,20 +25105,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmUpperBoundAnded"
-
-
-    // $ANTLR start "ruleJvmUpperBoundAnded"
-    // PsiInternalXtend.g:9943:1: ruleJvmUpperBoundAnded : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final void ruleJvmUpperBoundAnded() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalXtend.g:9943:23: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // PsiInternalXtend.g:9944:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // PsiInternalXtend.g:9944:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // PsiInternalXtend.g:9945:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -29300,11 +25122,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:9952:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:9953:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:9953:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:9954:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -29342,15 +25160,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmUpperBoundAnded"
-
-
-    // $ANTLR start "entryRuleJvmLowerBound"
-    // PsiInternalXtend.g:9967:1: entryRuleJvmLowerBound : ruleJvmLowerBound EOF ;
     public final void entryRuleJvmLowerBound() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9967:23: ( ruleJvmLowerBound EOF )
-            // PsiInternalXtend.g:9968:2: ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmLowerBoundElementType()); 
@@ -29373,20 +25184,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmLowerBound"
-
-
-    // $ANTLR start "ruleJvmLowerBound"
-    // PsiInternalXtend.g:9973:1: ruleJvmLowerBound : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final void ruleJvmLowerBound() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalXtend.g:9973:18: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // PsiInternalXtend.g:9974:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // PsiInternalXtend.g:9974:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // PsiInternalXtend.g:9975:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -29399,11 +25201,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:9982:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:9983:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:9983:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:9984:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -29441,15 +25239,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmLowerBound"
-
-
-    // $ANTLR start "entryRuleJvmLowerBoundAnded"
-    // PsiInternalXtend.g:9997:1: entryRuleJvmLowerBoundAnded : ruleJvmLowerBoundAnded EOF ;
     public final void entryRuleJvmLowerBoundAnded() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:9997:28: ( ruleJvmLowerBoundAnded EOF )
-            // PsiInternalXtend.g:9998:2: ruleJvmLowerBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); 
@@ -29472,20 +25263,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmLowerBoundAnded"
-
-
-    // $ANTLR start "ruleJvmLowerBoundAnded"
-    // PsiInternalXtend.g:10003:1: ruleJvmLowerBoundAnded : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final void ruleJvmLowerBoundAnded() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalXtend.g:10003:23: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // PsiInternalXtend.g:10004:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // PsiInternalXtend.g:10004:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // PsiInternalXtend.g:10005:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -29498,11 +25280,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:10012:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // PsiInternalXtend.g:10013:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // PsiInternalXtend.g:10013:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // PsiInternalXtend.g:10014:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -29540,15 +25318,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmLowerBoundAnded"
-
-
-    // $ANTLR start "entryRuleJvmTypeParameter"
-    // PsiInternalXtend.g:10027:1: entryRuleJvmTypeParameter : ruleJvmTypeParameter EOF ;
     public final void entryRuleJvmTypeParameter() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10027:26: ( ruleJvmTypeParameter EOF )
-            // PsiInternalXtend.g:10028:2: ruleJvmTypeParameter EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getJvmTypeParameterElementType()); 
@@ -29571,24 +25342,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmTypeParameter"
-
-
-    // $ANTLR start "ruleJvmTypeParameter"
-    // PsiInternalXtend.g:10033:1: ruleJvmTypeParameter : ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? ) ;
     public final void ruleJvmTypeParameter() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10033:21: ( ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? ) )
-            // PsiInternalXtend.g:10034:2: ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? )
             {
-            // PsiInternalXtend.g:10034:2: ( ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )? )
-            // PsiInternalXtend.g:10035:3: ( (lv_name_0_0= ruleValidID ) ) ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )?
             {
-            // PsiInternalXtend.g:10035:3: ( (lv_name_0_0= ruleValidID ) )
-            // PsiInternalXtend.g:10036:4: (lv_name_0_0= ruleValidID )
             {
-            // PsiInternalXtend.g:10036:4: (lv_name_0_0= ruleValidID )
-            // PsiInternalXtend.g:10037:5: lv_name_0_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -29610,8 +25368,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
             }
-
-            // PsiInternalXtend.g:10046:3: ( ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )* )?
             int alt267=2;
             int LA267_0 = input.LA(1);
 
@@ -29620,13 +25376,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt267) {
                 case 1 :
-                    // PsiInternalXtend.g:10047:4: ( (lv_constraints_1_0= ruleJvmUpperBound ) ) ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )*
                     {
-                    // PsiInternalXtend.g:10047:4: ( (lv_constraints_1_0= ruleJvmUpperBound ) )
-                    // PsiInternalXtend.g:10048:5: (lv_constraints_1_0= ruleJvmUpperBound )
                     {
-                    // PsiInternalXtend.g:10048:5: (lv_constraints_1_0= ruleJvmUpperBound )
-                    // PsiInternalXtend.g:10049:6: lv_constraints_1_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -29648,8 +25399,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:10058:4: ( (lv_constraints_2_0= ruleJvmUpperBoundAnded ) )*
                     loop266:
                     do {
                         int alt266=2;
@@ -29662,10 +25411,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                         switch (alt266) {
                     	case 1 :
-                    	    // PsiInternalXtend.g:10059:5: (lv_constraints_2_0= ruleJvmUpperBoundAnded )
                     	    {
-                    	    // PsiInternalXtend.g:10059:5: (lv_constraints_2_0= ruleJvmUpperBoundAnded )
-                    	    // PsiInternalXtend.g:10060:6: lv_constraints_2_0= ruleJvmUpperBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -29715,15 +25461,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmTypeParameter"
-
-
-    // $ANTLR start "entryRuleQualifiedNameWithWildcard"
-    // PsiInternalXtend.g:10074:1: entryRuleQualifiedNameWithWildcard : ruleQualifiedNameWithWildcard EOF ;
     public final void entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10074:35: ( ruleQualifiedNameWithWildcard EOF )
-            // PsiInternalXtend.g:10075:2: ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); 
@@ -29746,20 +25485,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleQualifiedNameWithWildcard"
-
-
-    // $ANTLR start "ruleQualifiedNameWithWildcard"
-    // PsiInternalXtend.g:10080:1: ruleQualifiedNameWithWildcard : ( ruleQualifiedName kw= '.' kw= '*' ) ;
     public final void ruleQualifiedNameWithWildcard() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:10080:30: ( ( ruleQualifiedName kw= '.' kw= '*' ) )
-            // PsiInternalXtend.g:10081:2: ( ruleQualifiedName kw= '.' kw= '*' )
             {
-            // PsiInternalXtend.g:10081:2: ( ruleQualifiedName kw= '.' kw= '*' )
-            // PsiInternalXtend.g:10082:3: ruleQualifiedName kw= '.' kw= '*'
             {
             if ( state.backtracking==0 ) {
 
@@ -29813,15 +25543,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleQualifiedNameWithWildcard"
-
-
-    // $ANTLR start "entryRuleXImportSection"
-    // PsiInternalXtend.g:10107:1: entryRuleXImportSection : ruleXImportSection EOF ;
     public final void entryRuleXImportSection() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10107:24: ( ruleXImportSection EOF )
-            // PsiInternalXtend.g:10108:2: ruleXImportSection EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXImportSectionElementType()); 
@@ -29844,17 +25567,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXImportSection"
-
-
-    // $ANTLR start "ruleXImportSection"
-    // PsiInternalXtend.g:10113:1: ruleXImportSection : ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+ ;
     public final void ruleXImportSection() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10113:19: ( ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+ )
-            // PsiInternalXtend.g:10114:2: ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+
             {
-            // PsiInternalXtend.g:10114:2: ( (lv_importDeclarations_0_0= ruleXImportDeclaration ) )+
             int cnt268=0;
             loop268:
             do {
@@ -29868,10 +25583,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt268) {
             	case 1 :
-            	    // PsiInternalXtend.g:10115:3: (lv_importDeclarations_0_0= ruleXImportDeclaration )
             	    {
-            	    // PsiInternalXtend.g:10115:3: (lv_importDeclarations_0_0= ruleXImportDeclaration )
-            	    // PsiInternalXtend.g:10116:4: lv_importDeclarations_0_0= ruleXImportDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -29917,15 +25629,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXImportSection"
-
-
-    // $ANTLR start "entryRuleXImportDeclaration"
-    // PsiInternalXtend.g:10128:1: entryRuleXImportDeclaration : ruleXImportDeclaration EOF ;
     public final void entryRuleXImportDeclaration() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10128:28: ( ruleXImportDeclaration EOF )
-            // PsiInternalXtend.g:10129:2: ruleXImportDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXImportDeclarationElementType()); 
@@ -29948,11 +25653,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleXImportDeclaration"
-
-
-    // $ANTLR start "ruleXImportDeclaration"
-    // PsiInternalXtend.g:10134:1: ruleXImportDeclaration : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
     public final void ruleXImportDeclaration() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_static_1_0=null;
@@ -29961,11 +25661,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         Token otherlv_8=null;
 
         try {
-            // PsiInternalXtend.g:10134:23: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
-            // PsiInternalXtend.g:10135:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
             {
-            // PsiInternalXtend.g:10135:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
-            // PsiInternalXtend.g:10136:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
             {
             if ( state.backtracking==0 ) {
 
@@ -29978,21 +25674,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalXtend.g:10143:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
             int alt271=3;
             alt271 = dfa271.predict(input);
             switch (alt271) {
                 case 1 :
-                    // PsiInternalXtend.g:10144:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
                     {
-                    // PsiInternalXtend.g:10144:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
-                    // PsiInternalXtend.g:10145:5: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     {
-                    // PsiInternalXtend.g:10145:5: ( (lv_static_1_0= 'static' ) )
-                    // PsiInternalXtend.g:10146:6: (lv_static_1_0= 'static' )
                     {
-                    // PsiInternalXtend.g:10146:6: (lv_static_1_0= 'static' )
-                    // PsiInternalXtend.g:10147:7: lv_static_1_0= 'static'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -30010,8 +25698,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:10156:5: ( (lv_extension_2_0= 'extension' ) )?
                     int alt269=2;
                     int LA269_0 = input.LA(1);
 
@@ -30020,10 +25706,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt269) {
                         case 1 :
-                            // PsiInternalXtend.g:10157:6: (lv_extension_2_0= 'extension' )
                             {
-                            // PsiInternalXtend.g:10157:6: (lv_extension_2_0= 'extension' )
-                            // PsiInternalXtend.g:10158:7: lv_extension_2_0= 'extension'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -30044,12 +25727,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             break;
 
                     }
-
-                    // PsiInternalXtend.g:10167:5: ( ( ruleQualifiedNameInStaticImport ) )
-                    // PsiInternalXtend.g:10168:6: ( ruleQualifiedNameInStaticImport )
                     {
-                    // PsiInternalXtend.g:10168:6: ( ruleQualifiedNameInStaticImport )
-                    // PsiInternalXtend.g:10169:7: ruleQualifiedNameInStaticImport
                     {
                     if ( state.backtracking==0 ) {
 
@@ -30071,8 +25749,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                     }
-
-                    // PsiInternalXtend.g:10178:5: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     int alt270=2;
                     int LA270_0 = input.LA(1);
 
@@ -30091,13 +25767,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     switch (alt270) {
                         case 1 :
-                            // PsiInternalXtend.g:10179:6: ( (lv_wildcard_4_0= '*' ) )
                             {
-                            // PsiInternalXtend.g:10179:6: ( (lv_wildcard_4_0= '*' ) )
-                            // PsiInternalXtend.g:10180:7: (lv_wildcard_4_0= '*' )
                             {
-                            // PsiInternalXtend.g:10180:7: (lv_wildcard_4_0= '*' )
-                            // PsiInternalXtend.g:10181:8: lv_wildcard_4_0= '*'
                             {
                             if ( state.backtracking==0 ) {
 
@@ -30120,13 +25791,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtend.g:10191:6: ( (lv_memberName_5_0= ruleValidID ) )
                             {
-                            // PsiInternalXtend.g:10191:6: ( (lv_memberName_5_0= ruleValidID ) )
-                            // PsiInternalXtend.g:10192:7: (lv_memberName_5_0= ruleValidID )
                             {
-                            // PsiInternalXtend.g:10192:7: (lv_memberName_5_0= ruleValidID )
-                            // PsiInternalXtend.g:10193:8: lv_memberName_5_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -30162,13 +25828,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtend.g:10205:4: ( ( ruleQualifiedName ) )
                     {
-                    // PsiInternalXtend.g:10205:4: ( ( ruleQualifiedName ) )
-                    // PsiInternalXtend.g:10206:5: ( ruleQualifiedName )
                     {
-                    // PsiInternalXtend.g:10206:5: ( ruleQualifiedName )
-                    // PsiInternalXtend.g:10207:6: ruleQualifiedName
                     {
                     if ( state.backtracking==0 ) {
 
@@ -30195,13 +25856,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtend.g:10217:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
                     {
-                    // PsiInternalXtend.g:10217:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
-                    // PsiInternalXtend.g:10218:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
                     {
-                    // PsiInternalXtend.g:10218:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
-                    // PsiInternalXtend.g:10219:6: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
                     {
                     if ( state.backtracking==0 ) {
 
@@ -30229,8 +25885,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                     break;
 
             }
-
-            // PsiInternalXtend.g:10229:3: (otherlv_8= ';' )?
             int alt272=2;
             int LA272_0 = input.LA(1);
 
@@ -30239,7 +25893,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             }
             switch (alt272) {
                 case 1 :
-                    // PsiInternalXtend.g:10230:4: otherlv_8= ';'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -30273,15 +25926,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleXImportDeclaration"
-
-
-    // $ANTLR start "entryRuleQualifiedNameInStaticImport"
-    // PsiInternalXtend.g:10242:1: entryRuleQualifiedNameInStaticImport : ruleQualifiedNameInStaticImport EOF ;
     public final void entryRuleQualifiedNameInStaticImport() throws RecognitionException {
         try {
-            // PsiInternalXtend.g:10242:37: ( ruleQualifiedNameInStaticImport EOF )
-            // PsiInternalXtend.g:10243:2: ruleQualifiedNameInStaticImport EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); 
@@ -30304,19 +25950,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleQualifiedNameInStaticImport"
-
-
-    // $ANTLR start "ruleQualifiedNameInStaticImport"
-    // PsiInternalXtend.g:10248:1: ruleQualifiedNameInStaticImport : ( ruleValidID kw= '.' )+ ;
     public final void ruleQualifiedNameInStaticImport() throws RecognitionException {
         Token kw=null;
 
         try {
-            // PsiInternalXtend.g:10248:32: ( ( ruleValidID kw= '.' )+ )
-            // PsiInternalXtend.g:10249:2: ( ruleValidID kw= '.' )+
             {
-            // PsiInternalXtend.g:10249:2: ( ruleValidID kw= '.' )+
             int cnt273=0;
             loop273:
             do {
@@ -30393,7 +26031,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                 switch (alt273) {
             	case 1 :
-            	    // PsiInternalXtend.g:10250:3: ruleValidID kw= '.'
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -30447,21 +26084,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         return ;
     }
-    // $ANTLR end "ruleQualifiedNameInStaticImport"
-
-    // $ANTLR start synpred1_PsiInternalXtend
     public final void synpred1_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:1871:7: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )
-        // PsiInternalXtend.g:1871:8: ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' )
         {
-        // PsiInternalXtend.g:1871:8: ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' )
-        // PsiInternalXtend.g:1872:8: ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '('
         {
-        // PsiInternalXtend.g:1872:8: ( ( ruleJvmTypeReference ) )
-        // PsiInternalXtend.g:1873:9: ( ruleJvmTypeReference )
         {
-        // PsiInternalXtend.g:1873:9: ( ruleJvmTypeReference )
-        // PsiInternalXtend.g:1874:10: ruleJvmTypeReference
         {
         pushFollow(FOLLOW_40);
         ruleJvmTypeReference();
@@ -30473,12 +26099,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
         }
-
-        // PsiInternalXtend.g:1877:8: ( ( ruleCreateExtensionInfo ) )
-        // PsiInternalXtend.g:1878:9: ( ruleCreateExtensionInfo )
         {
-        // PsiInternalXtend.g:1878:9: ( ruleCreateExtensionInfo )
-        // PsiInternalXtend.g:1879:10: ruleCreateExtensionInfo
         {
         pushFollow(FOLLOW_3);
         ruleCreateExtensionInfo();
@@ -30490,12 +26111,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
         }
-
-        // PsiInternalXtend.g:1882:8: ( ( ruleValidID ) )
-        // PsiInternalXtend.g:1883:9: ( ruleValidID )
         {
-        // PsiInternalXtend.g:1883:9: ( ruleValidID )
-        // PsiInternalXtend.g:1884:10: ruleValidID
         {
         pushFollow(FOLLOW_41);
         ruleValidID();
@@ -30515,21 +26131,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred1_PsiInternalXtend
-
-    // $ANTLR start synpred2_PsiInternalXtend
     public final void synpred2_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:1935:7: ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )
-        // PsiInternalXtend.g:1935:8: ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' )
         {
-        // PsiInternalXtend.g:1935:8: ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' )
-        // PsiInternalXtend.g:1936:8: ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '('
         {
-        // PsiInternalXtend.g:1936:8: ( ( ruleTypeReferenceWithTypeArgs ) )
-        // PsiInternalXtend.g:1937:9: ( ruleTypeReferenceWithTypeArgs )
         {
-        // PsiInternalXtend.g:1937:9: ( ruleTypeReferenceWithTypeArgs )
-        // PsiInternalXtend.g:1938:10: ruleTypeReferenceWithTypeArgs
         {
         pushFollow(FOLLOW_39);
         ruleTypeReferenceWithTypeArgs();
@@ -30541,12 +26146,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
         }
-
-        // PsiInternalXtend.g:1941:8: ( ( ruleFunctionID ) )
-        // PsiInternalXtend.g:1942:9: ( ruleFunctionID )
         {
-        // PsiInternalXtend.g:1942:9: ( ruleFunctionID )
-        // PsiInternalXtend.g:1943:10: ruleFunctionID
         {
         pushFollow(FOLLOW_41);
         ruleFunctionID();
@@ -30566,21 +26166,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred2_PsiInternalXtend
-
-    // $ANTLR start synpred3_PsiInternalXtend
     public final void synpred3_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:1983:7: ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )
-        // PsiInternalXtend.g:1983:8: ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' )
         {
-        // PsiInternalXtend.g:1983:8: ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' )
-        // PsiInternalXtend.g:1984:8: ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '('
         {
-        // PsiInternalXtend.g:1984:8: ( ( ruleTypeReferenceNoTypeArgs ) )
-        // PsiInternalXtend.g:1985:9: ( ruleTypeReferenceNoTypeArgs )
         {
-        // PsiInternalXtend.g:1985:9: ( ruleTypeReferenceNoTypeArgs )
-        // PsiInternalXtend.g:1986:10: ruleTypeReferenceNoTypeArgs
         {
         pushFollow(FOLLOW_39);
         ruleTypeReferenceNoTypeArgs();
@@ -30592,12 +26181,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
         }
-
-        // PsiInternalXtend.g:1989:8: ( ( ruleFunctionID ) )
-        // PsiInternalXtend.g:1990:9: ( ruleFunctionID )
         {
-        // PsiInternalXtend.g:1990:9: ( ruleFunctionID )
-        // PsiInternalXtend.g:1991:10: ruleFunctionID
         {
         pushFollow(FOLLOW_41);
         ruleFunctionID();
@@ -30617,21 +26201,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred3_PsiInternalXtend
-
-    // $ANTLR start synpred4_PsiInternalXtend
     public final void synpred4_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:2031:7: ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )
-        // PsiInternalXtend.g:2031:8: ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' )
         {
-        // PsiInternalXtend.g:2031:8: ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' )
-        // PsiInternalXtend.g:2032:8: ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '('
         {
-        // PsiInternalXtend.g:2032:8: ( ( ruleCreateExtensionInfo ) )
-        // PsiInternalXtend.g:2033:9: ( ruleCreateExtensionInfo )
         {
-        // PsiInternalXtend.g:2033:9: ( ruleCreateExtensionInfo )
-        // PsiInternalXtend.g:2034:10: ruleCreateExtensionInfo
         {
         pushFollow(FOLLOW_3);
         ruleCreateExtensionInfo();
@@ -30643,12 +26216,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
         }
-
-        // PsiInternalXtend.g:2037:8: ( ( ruleValidID ) )
-        // PsiInternalXtend.g:2038:9: ( ruleValidID )
         {
-        // PsiInternalXtend.g:2038:9: ( ruleValidID )
-        // PsiInternalXtend.g:2039:10: ruleValidID
         {
         pushFollow(FOLLOW_41);
         ruleValidID();
@@ -30668,18 +26236,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred4_PsiInternalXtend
-
-    // $ANTLR start synpred5_PsiInternalXtend
     public final void synpred5_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:2905:5: ( ( () ruleArrayBrackets ) )
-        // PsiInternalXtend.g:2905:6: ( () ruleArrayBrackets )
         {
-        // PsiInternalXtend.g:2905:6: ( () ruleArrayBrackets )
-        // PsiInternalXtend.g:2906:6: () ruleArrayBrackets
         {
-        // PsiInternalXtend.g:2906:6: ()
-        // PsiInternalXtend.g:2907:6: 
         {
         }
 
@@ -30694,18 +26253,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred5_PsiInternalXtend
-
-    // $ANTLR start synpred6_PsiInternalXtend
     public final void synpred6_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:2938:5: ( ( () ruleArrayBrackets ) )
-        // PsiInternalXtend.g:2938:6: ( () ruleArrayBrackets )
         {
-        // PsiInternalXtend.g:2938:6: ( () ruleArrayBrackets )
-        // PsiInternalXtend.g:2939:6: () ruleArrayBrackets
         {
-        // PsiInternalXtend.g:2939:6: ()
-        // PsiInternalXtend.g:2940:6: 
         {
         }
 
@@ -30720,18 +26270,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred6_PsiInternalXtend
-
-    // $ANTLR start synpred7_PsiInternalXtend
     public final void synpred7_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:3040:6: ( ( () '.' ) )
-        // PsiInternalXtend.g:3040:7: ( () '.' )
         {
-        // PsiInternalXtend.g:3040:7: ( () '.' )
-        // PsiInternalXtend.g:3041:7: () '.'
         {
-        // PsiInternalXtend.g:3041:7: ()
-        // PsiInternalXtend.g:3042:7: 
         {
         }
 
@@ -30742,32 +26283,16 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred7_PsiInternalXtend
-
-    // $ANTLR start synpred8_PsiInternalXtend
     public final void synpred8_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:3075:7: ( '<' )
-        // PsiInternalXtend.g:3075:8: '<'
         {
         match(input,KW_LessThanSign,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred8_PsiInternalXtend
-
-    // $ANTLR start synpred10_PsiInternalXtend
     public final void synpred10_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4011:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )
-        // PsiInternalXtend.g:4011:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) )
         {
-        // PsiInternalXtend.g:4011:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) )
-        // PsiInternalXtend.g:4012:6: ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) )
         {
-        // PsiInternalXtend.g:4012:6: ( ( ruleJvmTypeReference ) )
-        // PsiInternalXtend.g:4013:7: ( ruleJvmTypeReference )
         {
-        // PsiInternalXtend.g:4013:7: ( ruleJvmTypeReference )
-        // PsiInternalXtend.g:4014:8: ruleJvmTypeReference
         {
         pushFollow(FOLLOW_59);
         ruleJvmTypeReference();
@@ -30779,12 +26304,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
         }
-
-        // PsiInternalXtend.g:4017:6: ( ( ruleInnerVarID ) )
-        // PsiInternalXtend.g:4018:7: ( ruleInnerVarID )
         {
-        // PsiInternalXtend.g:4018:7: ( ruleInnerVarID )
-        // PsiInternalXtend.g:4019:8: ruleInnerVarID
         {
         pushFollow(FOLLOW_2);
         ruleInnerVarID();
@@ -30803,18 +26323,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred10_PsiInternalXtend
-
-    // $ANTLR start synpred11_PsiInternalXtend
     public final void synpred11_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4103:5: ( ( () '{' ) )
-        // PsiInternalXtend.g:4103:6: ( () '{' )
         {
-        // PsiInternalXtend.g:4103:6: ( () '{' )
-        // PsiInternalXtend.g:4104:6: () '{'
         {
-        // PsiInternalXtend.g:4104:6: ()
-        // PsiInternalXtend.g:4105:6: 
         {
         }
 
@@ -30825,26 +26336,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred11_PsiInternalXtend
-
-    // $ANTLR start synpred12_PsiInternalXtend
     public final void synpred12_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4182:5: ( '<' )
-        // PsiInternalXtend.g:4182:6: '<'
         {
         match(input,KW_LessThanSign,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred12_PsiInternalXtend
-
-    // $ANTLR start synpred13_PsiInternalXtend
     public final void synpred13_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4232:5: ( ( '(' ) )
-        // PsiInternalXtend.g:4232:6: ( '(' )
         {
-        // PsiInternalXtend.g:4232:6: ( '(' )
-        // PsiInternalXtend.g:4233:6: '('
         {
         match(input,KW_LeftParenthesis,FOLLOW_2); if (state.failed) return ;
 
@@ -30853,22 +26352,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred13_PsiInternalXtend
-
-    // $ANTLR start synpred14_PsiInternalXtend
     public final void synpred14_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4248:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // PsiInternalXtend.g:4248:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // PsiInternalXtend.g:4248:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // PsiInternalXtend.g:4249:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // PsiInternalXtend.g:4249:7: ()
-        // PsiInternalXtend.g:4250:7: 
         {
         }
-
-        // PsiInternalXtend.g:4251:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt279=2;
         int LA279_0 = input.LA(1);
 
@@ -30877,13 +26365,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         switch (alt279) {
             case 1 :
-                // PsiInternalXtend.g:4252:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // PsiInternalXtend.g:4252:8: ( ( ruleJvmFormalParameter ) )
-                // PsiInternalXtend.g:4253:9: ( ruleJvmFormalParameter )
                 {
-                // PsiInternalXtend.g:4253:9: ( ruleJvmFormalParameter )
-                // PsiInternalXtend.g:4254:10: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_104);
                 ruleJvmFormalParameter();
@@ -30895,8 +26378,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                 }
-
-                // PsiInternalXtend.g:4257:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop278:
                 do {
                     int alt278=2;
@@ -30909,14 +26390,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                     switch (alt278) {
                 	case 1 :
-                	    // PsiInternalXtend.g:4258:9: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,KW_Comma,FOLLOW_57); if (state.failed) return ;
-                	    // PsiInternalXtend.g:4259:9: ( ( ruleJvmFormalParameter ) )
-                	    // PsiInternalXtend.g:4260:10: ( ruleJvmFormalParameter )
                 	    {
-                	    // PsiInternalXtend.g:4260:10: ( ruleJvmFormalParameter )
-                	    // PsiInternalXtend.g:4261:11: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_104);
                 	    ruleJvmFormalParameter();
@@ -30943,12 +26419,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 break;
 
         }
-
-        // PsiInternalXtend.g:4266:7: ( ( '|' ) )
-        // PsiInternalXtend.g:4267:8: ( '|' )
         {
-        // PsiInternalXtend.g:4267:8: ( '|' )
-        // PsiInternalXtend.g:4268:9: '|'
         {
         match(input,KW_VerticalLine,FOLLOW_2); if (state.failed) return ;
 
@@ -30963,18 +26434,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred14_PsiInternalXtend
-
-    // $ANTLR start synpred15_PsiInternalXtend
     public final void synpred15_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4327:4: ( ( () '[' ) )
-        // PsiInternalXtend.g:4327:5: ( () '[' )
         {
-        // PsiInternalXtend.g:4327:5: ( () '[' )
-        // PsiInternalXtend.g:4328:5: () '['
         {
-        // PsiInternalXtend.g:4328:5: ()
-        // PsiInternalXtend.g:4329:5: 
         {
         }
 
@@ -30985,22 +26447,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred15_PsiInternalXtend
-
-    // $ANTLR start synpred16_PsiInternalXtend
     public final void synpred16_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4488:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // PsiInternalXtend.g:4488:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // PsiInternalXtend.g:4488:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
-        // PsiInternalXtend.g:4489:7: '(' ( ( ruleJvmFormalParameter ) ) ':'
         {
         match(input,KW_LeftParenthesis,FOLLOW_57); if (state.failed) return ;
-        // PsiInternalXtend.g:4490:7: ( ( ruleJvmFormalParameter ) )
-        // PsiInternalXtend.g:4491:8: ( ruleJvmFormalParameter )
         {
-        // PsiInternalXtend.g:4491:8: ( ruleJvmFormalParameter )
-        // PsiInternalXtend.g:4492:9: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_55);
         ruleJvmFormalParameter();
@@ -31020,21 +26471,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred16_PsiInternalXtend
-
-    // $ANTLR start synpred17_PsiInternalXtend
     public final void synpred17_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4548:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // PsiInternalXtend.g:4548:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // PsiInternalXtend.g:4548:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
-        // PsiInternalXtend.g:4549:7: ( ( ruleJvmFormalParameter ) ) ':'
         {
-        // PsiInternalXtend.g:4549:7: ( ( ruleJvmFormalParameter ) )
-        // PsiInternalXtend.g:4550:8: ( ruleJvmFormalParameter )
         {
-        // PsiInternalXtend.g:4550:8: ( ruleJvmFormalParameter )
-        // PsiInternalXtend.g:4551:9: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_55);
         ruleJvmFormalParameter();
@@ -31054,43 +26494,22 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred17_PsiInternalXtend
-
-    // $ANTLR start synpred18_PsiInternalXtend
     public final void synpred18_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:4656:4: ( 'new' )
-        // PsiInternalXtend.g:4656:5: 'new'
         {
         match(input,KW_New,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred18_PsiInternalXtend
-
-    // $ANTLR start synpred19_PsiInternalXtend
     public final void synpred19_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:5323:5: ( '(' )
-        // PsiInternalXtend.g:5323:6: '('
         {
         match(input,KW_LeftParenthesis,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred19_PsiInternalXtend
-
-    // $ANTLR start synpred20_PsiInternalXtend
     public final void synpred20_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:5335:7: ( ( ( ( ruleValidID ) ) '=' ) )
-        // PsiInternalXtend.g:5335:8: ( ( ( ruleValidID ) ) '=' )
         {
-        // PsiInternalXtend.g:5335:8: ( ( ( ruleValidID ) ) '=' )
-        // PsiInternalXtend.g:5336:8: ( ( ruleValidID ) ) '='
         {
-        // PsiInternalXtend.g:5336:8: ( ( ruleValidID ) )
-        // PsiInternalXtend.g:5337:9: ( ruleValidID )
         {
-        // PsiInternalXtend.g:5337:9: ( ruleValidID )
-        // PsiInternalXtend.g:5338:10: ruleValidID
         {
         pushFollow(FOLLOW_77);
         ruleValidID();
@@ -31110,18 +26529,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred20_PsiInternalXtend
-
-    // $ANTLR start synpred23_PsiInternalXtend
     public final void synpred23_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:5473:5: ( ( () '#' '[' ) )
-        // PsiInternalXtend.g:5473:6: ( () '#' '[' )
         {
-        // PsiInternalXtend.g:5473:6: ( () '#' '[' )
-        // PsiInternalXtend.g:5474:6: () '#' '['
         {
-        // PsiInternalXtend.g:5474:6: ()
-        // PsiInternalXtend.g:5475:6: 
         {
         }
 
@@ -31133,18 +26543,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred23_PsiInternalXtend
-
-    // $ANTLR start synpred24_PsiInternalXtend
     public final void synpred24_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:5596:5: ( ( () '#' '[' ) )
-        // PsiInternalXtend.g:5596:6: ( () '#' '[' )
         {
-        // PsiInternalXtend.g:5596:6: ( () '#' '[' )
-        // PsiInternalXtend.g:5597:6: () '#' '['
         {
-        // PsiInternalXtend.g:5597:6: ()
-        // PsiInternalXtend.g:5598:6: 
         {
         }
 
@@ -31156,26 +26557,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred24_PsiInternalXtend
-
-    // $ANTLR start synpred25_PsiInternalXtend
     public final void synpred25_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:5779:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )
-        // PsiInternalXtend.g:5779:7: ( () ( ( ruleOpMultiAssign ) ) )
         {
-        // PsiInternalXtend.g:5779:7: ( () ( ( ruleOpMultiAssign ) ) )
-        // PsiInternalXtend.g:5780:7: () ( ( ruleOpMultiAssign ) )
         {
-        // PsiInternalXtend.g:5780:7: ()
-        // PsiInternalXtend.g:5781:7: 
         {
         }
-
-        // PsiInternalXtend.g:5782:7: ( ( ruleOpMultiAssign ) )
-        // PsiInternalXtend.g:5783:8: ( ruleOpMultiAssign )
         {
-        // PsiInternalXtend.g:5783:8: ( ruleOpMultiAssign )
-        // PsiInternalXtend.g:5784:9: ruleOpMultiAssign
         {
         pushFollow(FOLLOW_2);
         ruleOpMultiAssign();
@@ -31194,26 +26581,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred25_PsiInternalXtend
-
-    // $ANTLR start synpred26_PsiInternalXtend
     public final void synpred26_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:5961:5: ( ( () ( ( ruleOpOr ) ) ) )
-        // PsiInternalXtend.g:5961:6: ( () ( ( ruleOpOr ) ) )
         {
-        // PsiInternalXtend.g:5961:6: ( () ( ( ruleOpOr ) ) )
-        // PsiInternalXtend.g:5962:6: () ( ( ruleOpOr ) )
         {
-        // PsiInternalXtend.g:5962:6: ()
-        // PsiInternalXtend.g:5963:6: 
         {
         }
-
-        // PsiInternalXtend.g:5964:6: ( ( ruleOpOr ) )
-        // PsiInternalXtend.g:5965:7: ( ruleOpOr )
         {
-        // PsiInternalXtend.g:5965:7: ( ruleOpOr )
-        // PsiInternalXtend.g:5966:8: ruleOpOr
         {
         pushFollow(FOLLOW_2);
         ruleOpOr();
@@ -31232,26 +26605,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred26_PsiInternalXtend
-
-    // $ANTLR start synpred27_PsiInternalXtend
     public final void synpred27_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6041:5: ( ( () ( ( ruleOpAnd ) ) ) )
-        // PsiInternalXtend.g:6041:6: ( () ( ( ruleOpAnd ) ) )
         {
-        // PsiInternalXtend.g:6041:6: ( () ( ( ruleOpAnd ) ) )
-        // PsiInternalXtend.g:6042:6: () ( ( ruleOpAnd ) )
         {
-        // PsiInternalXtend.g:6042:6: ()
-        // PsiInternalXtend.g:6043:6: 
         {
         }
-
-        // PsiInternalXtend.g:6044:6: ( ( ruleOpAnd ) )
-        // PsiInternalXtend.g:6045:7: ( ruleOpAnd )
         {
-        // PsiInternalXtend.g:6045:7: ( ruleOpAnd )
-        // PsiInternalXtend.g:6046:8: ruleOpAnd
         {
         pushFollow(FOLLOW_2);
         ruleOpAnd();
@@ -31270,26 +26629,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred27_PsiInternalXtend
-
-    // $ANTLR start synpred28_PsiInternalXtend
     public final void synpred28_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6121:5: ( ( () ( ( ruleOpEquality ) ) ) )
-        // PsiInternalXtend.g:6121:6: ( () ( ( ruleOpEquality ) ) )
         {
-        // PsiInternalXtend.g:6121:6: ( () ( ( ruleOpEquality ) ) )
-        // PsiInternalXtend.g:6122:6: () ( ( ruleOpEquality ) )
         {
-        // PsiInternalXtend.g:6122:6: ()
-        // PsiInternalXtend.g:6123:6: 
         {
         }
-
-        // PsiInternalXtend.g:6124:6: ( ( ruleOpEquality ) )
-        // PsiInternalXtend.g:6125:7: ( ruleOpEquality )
         {
-        // PsiInternalXtend.g:6125:7: ( ruleOpEquality )
-        // PsiInternalXtend.g:6126:8: ruleOpEquality
         {
         pushFollow(FOLLOW_2);
         ruleOpEquality();
@@ -31308,18 +26653,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred28_PsiInternalXtend
-
-    // $ANTLR start synpred29_PsiInternalXtend
     public final void synpred29_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6228:6: ( ( () 'instanceof' ) )
-        // PsiInternalXtend.g:6228:7: ( () 'instanceof' )
         {
-        // PsiInternalXtend.g:6228:7: ( () 'instanceof' )
-        // PsiInternalXtend.g:6229:7: () 'instanceof'
         {
-        // PsiInternalXtend.g:6229:7: ()
-        // PsiInternalXtend.g:6230:7: 
         {
         }
 
@@ -31330,26 +26666,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred29_PsiInternalXtend
-
-    // $ANTLR start synpred30_PsiInternalXtend
     public final void synpred30_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6265:6: ( ( () ( ( ruleOpCompare ) ) ) )
-        // PsiInternalXtend.g:6265:7: ( () ( ( ruleOpCompare ) ) )
         {
-        // PsiInternalXtend.g:6265:7: ( () ( ( ruleOpCompare ) ) )
-        // PsiInternalXtend.g:6266:7: () ( ( ruleOpCompare ) )
         {
-        // PsiInternalXtend.g:6266:7: ()
-        // PsiInternalXtend.g:6267:7: 
         {
         }
-
-        // PsiInternalXtend.g:6268:7: ( ( ruleOpCompare ) )
-        // PsiInternalXtend.g:6269:8: ( ruleOpCompare )
         {
-        // PsiInternalXtend.g:6269:8: ( ruleOpCompare )
-        // PsiInternalXtend.g:6270:9: ruleOpCompare
         {
         pushFollow(FOLLOW_2);
         ruleOpCompare();
@@ -31368,26 +26690,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred30_PsiInternalXtend
-
-    // $ANTLR start synpred31_PsiInternalXtend
     public final void synpred31_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6381:5: ( ( () ( ( ruleOpOther ) ) ) )
-        // PsiInternalXtend.g:6381:6: ( () ( ( ruleOpOther ) ) )
         {
-        // PsiInternalXtend.g:6381:6: ( () ( ( ruleOpOther ) ) )
-        // PsiInternalXtend.g:6382:6: () ( ( ruleOpOther ) )
         {
-        // PsiInternalXtend.g:6382:6: ()
-        // PsiInternalXtend.g:6383:6: 
         {
         }
-
-        // PsiInternalXtend.g:6384:6: ( ( ruleOpOther ) )
-        // PsiInternalXtend.g:6385:7: ( ruleOpOther )
         {
-        // PsiInternalXtend.g:6385:7: ( ruleOpOther )
-        // PsiInternalXtend.g:6386:8: ruleOpOther
         {
         pushFollow(FOLLOW_2);
         ruleOpOther();
@@ -31406,15 +26714,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred31_PsiInternalXtend
-
-    // $ANTLR start synpred32_PsiInternalXtend
     public final void synpred32_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6494:6: ( ( '>' '>' ) )
-        // PsiInternalXtend.g:6494:7: ( '>' '>' )
         {
-        // PsiInternalXtend.g:6494:7: ( '>' '>' )
-        // PsiInternalXtend.g:6495:7: '>' '>'
         {
         match(input,KW_GreaterThanSign,FOLLOW_90); if (state.failed) return ;
         match(input,KW_GreaterThanSign,FOLLOW_2); if (state.failed) return ;
@@ -31424,15 +26725,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred32_PsiInternalXtend
-
-    // $ANTLR start synpred33_PsiInternalXtend
     public final void synpred33_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6537:6: ( ( '<' '<' ) )
-        // PsiInternalXtend.g:6537:7: ( '<' '<' )
         {
-        // PsiInternalXtend.g:6537:7: ( '<' '<' )
-        // PsiInternalXtend.g:6538:7: '<' '<'
         {
         match(input,KW_LessThanSign,FOLLOW_51); if (state.failed) return ;
         match(input,KW_LessThanSign,FOLLOW_2); if (state.failed) return ;
@@ -31442,26 +26736,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred33_PsiInternalXtend
-
-    // $ANTLR start synpred34_PsiInternalXtend
     public final void synpred34_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6614:5: ( ( () ( ( ruleOpAdd ) ) ) )
-        // PsiInternalXtend.g:6614:6: ( () ( ( ruleOpAdd ) ) )
         {
-        // PsiInternalXtend.g:6614:6: ( () ( ( ruleOpAdd ) ) )
-        // PsiInternalXtend.g:6615:6: () ( ( ruleOpAdd ) )
         {
-        // PsiInternalXtend.g:6615:6: ()
-        // PsiInternalXtend.g:6616:6: 
         {
         }
-
-        // PsiInternalXtend.g:6617:6: ( ( ruleOpAdd ) )
-        // PsiInternalXtend.g:6618:7: ( ruleOpAdd )
         {
-        // PsiInternalXtend.g:6618:7: ( ruleOpAdd )
-        // PsiInternalXtend.g:6619:8: ruleOpAdd
         {
         pushFollow(FOLLOW_2);
         ruleOpAdd();
@@ -31480,26 +26760,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred34_PsiInternalXtend
-
-    // $ANTLR start synpred35_PsiInternalXtend
     public final void synpred35_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6704:5: ( ( () ( ( ruleOpMulti ) ) ) )
-        // PsiInternalXtend.g:6704:6: ( () ( ( ruleOpMulti ) ) )
         {
-        // PsiInternalXtend.g:6704:6: ( () ( ( ruleOpMulti ) ) )
-        // PsiInternalXtend.g:6705:6: () ( ( ruleOpMulti ) )
         {
-        // PsiInternalXtend.g:6705:6: ()
-        // PsiInternalXtend.g:6706:6: 
         {
         }
-
-        // PsiInternalXtend.g:6707:6: ( ( ruleOpMulti ) )
-        // PsiInternalXtend.g:6708:7: ( ruleOpMulti )
         {
-        // PsiInternalXtend.g:6708:7: ( ruleOpMulti )
-        // PsiInternalXtend.g:6709:8: ruleOpMulti
         {
         pushFollow(FOLLOW_2);
         ruleOpMulti();
@@ -31518,18 +26784,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred35_PsiInternalXtend
-
-    // $ANTLR start synpred36_PsiInternalXtend
     public final void synpred36_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6895:5: ( ( () 'as' ) )
-        // PsiInternalXtend.g:6895:6: ( () 'as' )
         {
-        // PsiInternalXtend.g:6895:6: ( () 'as' )
-        // PsiInternalXtend.g:6896:6: () 'as'
         {
-        // PsiInternalXtend.g:6896:6: ()
-        // PsiInternalXtend.g:6897:6: 
         {
         }
 
@@ -31540,26 +26797,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred36_PsiInternalXtend
-
-    // $ANTLR start synpred37_PsiInternalXtend
     public final void synpred37_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:6949:4: ( ( () ( ( ruleOpPostfix ) ) ) )
-        // PsiInternalXtend.g:6949:5: ( () ( ( ruleOpPostfix ) ) )
         {
-        // PsiInternalXtend.g:6949:5: ( () ( ( ruleOpPostfix ) ) )
-        // PsiInternalXtend.g:6950:5: () ( ( ruleOpPostfix ) )
         {
-        // PsiInternalXtend.g:6950:5: ()
-        // PsiInternalXtend.g:6951:5: 
         {
         }
-
-        // PsiInternalXtend.g:6952:5: ( ( ruleOpPostfix ) )
-        // PsiInternalXtend.g:6953:6: ( ruleOpPostfix )
         {
-        // PsiInternalXtend.g:6953:6: ( ruleOpPostfix )
-        // PsiInternalXtend.g:6954:7: ruleOpPostfix
         {
         pushFollow(FOLLOW_2);
         ruleOpPostfix();
@@ -31578,22 +26821,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred37_PsiInternalXtend
-
-    // $ANTLR start synpred38_PsiInternalXtend
     public final void synpred38_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7028:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
-        // PsiInternalXtend.g:7028:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
         {
-        // PsiInternalXtend.g:7028:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
-        // PsiInternalXtend.g:7029:7: () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
         {
-        // PsiInternalXtend.g:7029:7: ()
-        // PsiInternalXtend.g:7030:7: 
         {
         }
-
-        // PsiInternalXtend.g:7031:7: ( '.' | ( ( '::' ) ) )
         int alt280=2;
         int LA280_0 = input.LA(1);
 
@@ -31612,20 +26844,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         switch (alt280) {
             case 1 :
-                // PsiInternalXtend.g:7032:8: '.'
                 {
                 match(input,KW_FullStop,FOLLOW_97); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // PsiInternalXtend.g:7034:8: ( ( '::' ) )
                 {
-                // PsiInternalXtend.g:7034:8: ( ( '::' ) )
-                // PsiInternalXtend.g:7035:9: ( '::' )
                 {
-                // PsiInternalXtend.g:7035:9: ( '::' )
-                // PsiInternalXtend.g:7036:10: '::'
                 {
                 match(input,KW_ColonColon,FOLLOW_97); if (state.failed) return ;
 
@@ -31639,12 +26865,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 break;
 
         }
-
-        // PsiInternalXtend.g:7040:7: ( ( ruleFeatureCallID ) )
-        // PsiInternalXtend.g:7041:8: ( ruleFeatureCallID )
         {
-        // PsiInternalXtend.g:7041:8: ( ruleFeatureCallID )
-        // PsiInternalXtend.g:7042:9: ruleFeatureCallID
         {
         pushFollow(FOLLOW_77);
         ruleFeatureCallID();
@@ -31668,22 +26889,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred38_PsiInternalXtend
-
-    // $ANTLR start synpred39_PsiInternalXtend
     public final void synpred39_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7111:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )
-        // PsiInternalXtend.g:7111:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
         {
-        // PsiInternalXtend.g:7111:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
-        // PsiInternalXtend.g:7112:7: () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
         {
-        // PsiInternalXtend.g:7112:7: ()
-        // PsiInternalXtend.g:7113:7: 
         {
         }
-
-        // PsiInternalXtend.g:7114:7: ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
         int alt281=3;
         switch ( input.LA(1) ) {
         case KW_FullStop:
@@ -31711,20 +26921,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         switch (alt281) {
             case 1 :
-                // PsiInternalXtend.g:7115:8: '.'
                 {
                 match(input,KW_FullStop,FOLLOW_2); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // PsiInternalXtend.g:7117:8: ( ( '?.' ) )
                 {
-                // PsiInternalXtend.g:7117:8: ( ( '?.' ) )
-                // PsiInternalXtend.g:7118:9: ( '?.' )
                 {
-                // PsiInternalXtend.g:7118:9: ( '?.' )
-                // PsiInternalXtend.g:7119:10: '?.'
                 {
                 match(input,KW_QuestionMarkFullStop,FOLLOW_2); if (state.failed) return ;
 
@@ -31737,13 +26941,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 }
                 break;
             case 3 :
-                // PsiInternalXtend.g:7123:8: ( ( '::' ) )
                 {
-                // PsiInternalXtend.g:7123:8: ( ( '::' ) )
-                // PsiInternalXtend.g:7124:9: ( '::' )
                 {
-                // PsiInternalXtend.g:7124:9: ( '::' )
-                // PsiInternalXtend.g:7125:10: '::'
                 {
                 match(input,KW_ColonColon,FOLLOW_2); if (state.failed) return ;
 
@@ -31764,15 +26963,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred39_PsiInternalXtend
-
-    // $ANTLR start synpred40_PsiInternalXtend
     public final void synpred40_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7233:7: ( ( '(' ) )
-        // PsiInternalXtend.g:7233:8: ( '(' )
         {
-        // PsiInternalXtend.g:7233:8: ( '(' )
-        // PsiInternalXtend.g:7234:8: '('
         {
         match(input,KW_LeftParenthesis,FOLLOW_2); if (state.failed) return ;
 
@@ -31781,22 +26973,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred40_PsiInternalXtend
-
-    // $ANTLR start synpred41_PsiInternalXtend
     public final void synpred41_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7249:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // PsiInternalXtend.g:7249:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // PsiInternalXtend.g:7249:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // PsiInternalXtend.g:7250:9: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // PsiInternalXtend.g:7250:9: ()
-        // PsiInternalXtend.g:7251:9: 
         {
         }
-
-        // PsiInternalXtend.g:7252:9: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt283=2;
         int LA283_0 = input.LA(1);
 
@@ -31805,13 +26986,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         switch (alt283) {
             case 1 :
-                // PsiInternalXtend.g:7253:10: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // PsiInternalXtend.g:7253:10: ( ( ruleJvmFormalParameter ) )
-                // PsiInternalXtend.g:7254:11: ( ruleJvmFormalParameter )
                 {
-                // PsiInternalXtend.g:7254:11: ( ruleJvmFormalParameter )
-                // PsiInternalXtend.g:7255:12: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_104);
                 ruleJvmFormalParameter();
@@ -31823,8 +26999,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                 }
-
-                // PsiInternalXtend.g:7258:10: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop282:
                 do {
                     int alt282=2;
@@ -31837,14 +27011,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                     switch (alt282) {
                 	case 1 :
-                	    // PsiInternalXtend.g:7259:11: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,KW_Comma,FOLLOW_57); if (state.failed) return ;
-                	    // PsiInternalXtend.g:7260:11: ( ( ruleJvmFormalParameter ) )
-                	    // PsiInternalXtend.g:7261:12: ( ruleJvmFormalParameter )
                 	    {
-                	    // PsiInternalXtend.g:7261:12: ( ruleJvmFormalParameter )
-                	    // PsiInternalXtend.g:7262:13: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_104);
                 	    ruleJvmFormalParameter();
@@ -31871,12 +27040,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 break;
 
         }
-
-        // PsiInternalXtend.g:7267:9: ( ( '|' ) )
-        // PsiInternalXtend.g:7268:10: ( '|' )
         {
-        // PsiInternalXtend.g:7268:10: ( '|' )
-        // PsiInternalXtend.g:7269:11: '|'
         {
         match(input,KW_VerticalLine,FOLLOW_2); if (state.failed) return ;
 
@@ -31891,18 +27055,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred41_PsiInternalXtend
-
-    // $ANTLR start synpred42_PsiInternalXtend
     public final void synpred42_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7328:6: ( ( () '[' ) )
-        // PsiInternalXtend.g:7328:7: ( () '[' )
         {
-        // PsiInternalXtend.g:7328:7: ( () '[' )
-        // PsiInternalXtend.g:7329:7: () '['
         {
-        // PsiInternalXtend.g:7329:7: ()
-        // PsiInternalXtend.g:7330:7: 
         {
         }
 
@@ -31913,18 +27068,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred42_PsiInternalXtend
-
-    // $ANTLR start synpred43_PsiInternalXtend
     public final void synpred43_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7383:4: ( ( () 'synchronized' '(' ) )
-        // PsiInternalXtend.g:7383:5: ( () 'synchronized' '(' )
         {
-        // PsiInternalXtend.g:7383:5: ( () 'synchronized' '(' )
-        // PsiInternalXtend.g:7384:5: () 'synchronized' '('
         {
-        // PsiInternalXtend.g:7384:5: ()
-        // PsiInternalXtend.g:7385:5: 
         {
         }
 
@@ -31936,28 +27082,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred43_PsiInternalXtend
-
-    // $ANTLR start synpred44_PsiInternalXtend
     public final void synpred44_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7424:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // PsiInternalXtend.g:7424:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // PsiInternalXtend.g:7424:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
-        // PsiInternalXtend.g:7425:5: () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':'
         {
-        // PsiInternalXtend.g:7425:5: ()
-        // PsiInternalXtend.g:7426:5: 
         {
         }
 
         match(input,KW_For,FOLLOW_41); if (state.failed) return ;
         match(input,KW_LeftParenthesis,FOLLOW_57); if (state.failed) return ;
-        // PsiInternalXtend.g:7429:5: ( ( ruleJvmFormalParameter ) )
-        // PsiInternalXtend.g:7430:6: ( ruleJvmFormalParameter )
         {
-        // PsiInternalXtend.g:7430:6: ( ruleJvmFormalParameter )
-        // PsiInternalXtend.g:7431:7: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_55);
         ruleJvmFormalParameter();
@@ -31977,18 +27110,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred44_PsiInternalXtend
-
-    // $ANTLR start synpred45_PsiInternalXtend
     public final void synpred45_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7522:4: ( ( () '[' ) )
-        // PsiInternalXtend.g:7522:5: ( () '[' )
         {
-        // PsiInternalXtend.g:7522:5: ( () '[' )
-        // PsiInternalXtend.g:7523:5: () '['
         {
-        // PsiInternalXtend.g:7523:5: ()
-        // PsiInternalXtend.g:7524:5: 
         {
         }
 
@@ -31999,17 +27123,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred45_PsiInternalXtend
-
-    // $ANTLR start synpred47_PsiInternalXtend
     public final void synpred47_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:7783:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // PsiInternalXtend.g:7783:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // PsiInternalXtend.g:7783:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // PsiInternalXtend.g:7784:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // PsiInternalXtend.g:7784:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt285=2;
         int LA285_0 = input.LA(1);
 
@@ -32018,13 +27134,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         switch (alt285) {
             case 1 :
-                // PsiInternalXtend.g:7785:6: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // PsiInternalXtend.g:7785:6: ( ( ruleJvmFormalParameter ) )
-                // PsiInternalXtend.g:7786:7: ( ruleJvmFormalParameter )
                 {
-                // PsiInternalXtend.g:7786:7: ( ruleJvmFormalParameter )
-                // PsiInternalXtend.g:7787:8: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_104);
                 ruleJvmFormalParameter();
@@ -32036,8 +27147,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                 }
-
-                // PsiInternalXtend.g:7790:6: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop284:
                 do {
                     int alt284=2;
@@ -32050,14 +27159,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                     switch (alt284) {
                 	case 1 :
-                	    // PsiInternalXtend.g:7791:7: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,KW_Comma,FOLLOW_57); if (state.failed) return ;
-                	    // PsiInternalXtend.g:7792:7: ( ( ruleJvmFormalParameter ) )
-                	    // PsiInternalXtend.g:7793:8: ( ruleJvmFormalParameter )
                 	    {
-                	    // PsiInternalXtend.g:7793:8: ( ruleJvmFormalParameter )
-                	    // PsiInternalXtend.g:7794:9: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_104);
                 	    ruleJvmFormalParameter();
@@ -32084,12 +27188,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 break;
 
         }
-
-        // PsiInternalXtend.g:7799:5: ( ( '|' ) )
-        // PsiInternalXtend.g:7800:6: ( '|' )
         {
-        // PsiInternalXtend.g:7800:6: ( '|' )
-        // PsiInternalXtend.g:7801:7: '|'
         {
         match(input,KW_VerticalLine,FOLLOW_2); if (state.failed) return ;
 
@@ -32104,33 +27203,17 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred47_PsiInternalXtend
-
-    // $ANTLR start synpred49_PsiInternalXtend
     public final void synpred49_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:8109:5: ( 'else' )
-        // PsiInternalXtend.g:8109:6: 'else'
         {
         match(input,KW_Else,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred49_PsiInternalXtend
-
-    // $ANTLR start synpred51_PsiInternalXtend
     public final void synpred51_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:8646:4: ( ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) ) )
-        // PsiInternalXtend.g:8646:5: ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) )
         {
-        // PsiInternalXtend.g:8646:5: ( () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) ) )
-        // PsiInternalXtend.g:8647:5: () ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) )
         {
-        // PsiInternalXtend.g:8647:5: ()
-        // PsiInternalXtend.g:8648:5: 
         {
         }
-
-        // PsiInternalXtend.g:8649:5: ( ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? ) | ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) ) )
         int alt291=2;
         int LA291_0 = input.LA(1);
 
@@ -32149,12 +27232,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         switch (alt291) {
             case 1 :
-                // PsiInternalXtend.g:8650:6: ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? )
                 {
-                // PsiInternalXtend.g:8650:6: ( ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )? )
-                // PsiInternalXtend.g:8651:7: ( ( ( 'var' ) ) | 'val' ) ( ( 'extension' ) )?
                 {
-                // PsiInternalXtend.g:8651:7: ( ( ( 'var' ) ) | 'val' )
                 int alt288=2;
                 int LA288_0 = input.LA(1);
 
@@ -32173,13 +27252,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 }
                 switch (alt288) {
                     case 1 :
-                        // PsiInternalXtend.g:8652:8: ( ( 'var' ) )
                         {
-                        // PsiInternalXtend.g:8652:8: ( ( 'var' ) )
-                        // PsiInternalXtend.g:8653:9: ( 'var' )
                         {
-                        // PsiInternalXtend.g:8653:9: ( 'var' )
-                        // PsiInternalXtend.g:8654:10: 'var'
                         {
                         match(input,KW_Var,FOLLOW_136); if (state.failed) return ;
 
@@ -32192,7 +27266,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         }
                         break;
                     case 2 :
-                        // PsiInternalXtend.g:8658:8: 'val'
                         {
                         match(input,KW_Val,FOLLOW_136); if (state.failed) return ;
 
@@ -32200,8 +27273,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         break;
 
                 }
-
-                // PsiInternalXtend.g:8660:7: ( ( 'extension' ) )?
                 int alt289=2;
                 int LA289_0 = input.LA(1);
 
@@ -32210,10 +27281,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 }
                 switch (alt289) {
                     case 1 :
-                        // PsiInternalXtend.g:8661:8: ( 'extension' )
                         {
-                        // PsiInternalXtend.g:8661:8: ( 'extension' )
-                        // PsiInternalXtend.g:8662:9: 'extension'
                         {
                         match(input,KW_Extension,FOLLOW_2); if (state.failed) return ;
 
@@ -32232,16 +27300,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 }
                 break;
             case 2 :
-                // PsiInternalXtend.g:8667:6: ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) )
                 {
-                // PsiInternalXtend.g:8667:6: ( ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' ) )
-                // PsiInternalXtend.g:8668:7: ( ( 'extension' ) ) ( ( ( 'var' ) ) | 'val' )
                 {
-                // PsiInternalXtend.g:8668:7: ( ( 'extension' ) )
-                // PsiInternalXtend.g:8669:8: ( 'extension' )
                 {
-                // PsiInternalXtend.g:8669:8: ( 'extension' )
-                // PsiInternalXtend.g:8670:9: 'extension'
                 {
                 match(input,KW_Extension,FOLLOW_58); if (state.failed) return ;
 
@@ -32249,8 +27310,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                 }
-
-                // PsiInternalXtend.g:8673:7: ( ( ( 'var' ) ) | 'val' )
                 int alt290=2;
                 int LA290_0 = input.LA(1);
 
@@ -32269,13 +27328,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 }
                 switch (alt290) {
                     case 1 :
-                        // PsiInternalXtend.g:8674:8: ( ( 'var' ) )
                         {
-                        // PsiInternalXtend.g:8674:8: ( ( 'var' ) )
-                        // PsiInternalXtend.g:8675:9: ( 'var' )
                         {
-                        // PsiInternalXtend.g:8675:9: ( 'var' )
-                        // PsiInternalXtend.g:8676:10: 'var'
                         {
                         match(input,KW_Var,FOLLOW_2); if (state.failed) return ;
 
@@ -32288,7 +27342,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         }
                         break;
                     case 2 :
-                        // PsiInternalXtend.g:8680:8: 'val'
                         {
                         match(input,KW_Val,FOLLOW_2); if (state.failed) return ;
 
@@ -32312,15 +27365,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred51_PsiInternalXtend
-
-    // $ANTLR start synpred52_PsiInternalXtend
     public final void synpred52_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:8780:5: ( ( '(' ) )
-        // PsiInternalXtend.g:8780:6: ( '(' )
         {
-        // PsiInternalXtend.g:8780:6: ( '(' )
-        // PsiInternalXtend.g:8781:6: '('
         {
         match(input,KW_LeftParenthesis,FOLLOW_2); if (state.failed) return ;
 
@@ -32329,22 +27375,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred52_PsiInternalXtend
-
-    // $ANTLR start synpred53_PsiInternalXtend
     public final void synpred53_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:8796:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // PsiInternalXtend.g:8796:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // PsiInternalXtend.g:8796:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // PsiInternalXtend.g:8797:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // PsiInternalXtend.g:8797:7: ()
-        // PsiInternalXtend.g:8798:7: 
         {
         }
-
-        // PsiInternalXtend.g:8799:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt293=2;
         int LA293_0 = input.LA(1);
 
@@ -32353,13 +27388,8 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         }
         switch (alt293) {
             case 1 :
-                // PsiInternalXtend.g:8800:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // PsiInternalXtend.g:8800:8: ( ( ruleJvmFormalParameter ) )
-                // PsiInternalXtend.g:8801:9: ( ruleJvmFormalParameter )
                 {
-                // PsiInternalXtend.g:8801:9: ( ruleJvmFormalParameter )
-                // PsiInternalXtend.g:8802:10: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_104);
                 ruleJvmFormalParameter();
@@ -32371,8 +27401,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
 
                 }
-
-                // PsiInternalXtend.g:8805:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop292:
                 do {
                     int alt292=2;
@@ -32385,14 +27413,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                     switch (alt292) {
                 	case 1 :
-                	    // PsiInternalXtend.g:8806:9: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,KW_Comma,FOLLOW_57); if (state.failed) return ;
-                	    // PsiInternalXtend.g:8807:9: ( ( ruleJvmFormalParameter ) )
-                	    // PsiInternalXtend.g:8808:10: ( ruleJvmFormalParameter )
                 	    {
-                	    // PsiInternalXtend.g:8808:10: ( ruleJvmFormalParameter )
-                	    // PsiInternalXtend.g:8809:11: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_104);
                 	    ruleJvmFormalParameter();
@@ -32419,12 +27442,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                 break;
 
         }
-
-        // PsiInternalXtend.g:8814:7: ( ( '|' ) )
-        // PsiInternalXtend.g:8815:8: ( '|' )
         {
-        // PsiInternalXtend.g:8815:8: ( '|' )
-        // PsiInternalXtend.g:8816:9: '|'
         {
         match(input,KW_VerticalLine,FOLLOW_2); if (state.failed) return ;
 
@@ -32439,18 +27457,9 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred53_PsiInternalXtend
-
-    // $ANTLR start synpred54_PsiInternalXtend
     public final void synpred54_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:8875:4: ( ( () '[' ) )
-        // PsiInternalXtend.g:8875:5: ( () '[' )
         {
-        // PsiInternalXtend.g:8875:5: ( () '[' )
-        // PsiInternalXtend.g:8876:5: () '['
         {
-        // PsiInternalXtend.g:8876:5: ()
-        // PsiInternalXtend.g:8877:5: 
         {
         }
 
@@ -32461,12 +27470,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred54_PsiInternalXtend
-
-    // $ANTLR start synpred55_PsiInternalXtend
     public final void synpred55_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9134:4: ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )
-        // PsiInternalXtend.g:
         {
         if ( input.LA(1)==KW_Package||(input.LA(1)>=KW_Class && input.LA(1)<=KW_LessThanSign)||(input.LA(1)>=KW_Extends && input.LA(1)<=KW_LeftCurlyBracket)||(input.LA(1)>=KW_Interface && input.LA(1)<=KW_LeftParenthesis)||(input.LA(1)>=KW_Extension && input.LA(1)<=KW_New)||(input.LA(1)>=KW_Public && input.LA(1)<=KW_Transient)||(input.LA(1)>=KW_Def && input.LA(1)<=KW_Create)||(input.LA(1)>=KW_AFTER && input.LA(1)<=KW_Import)||input.LA(1)==KW_Switch||(input.LA(1)>=KW_NumberSign && input.LA(1)<=KW_LeftSquareBracket)||(input.LA(1)>=KW_PlusSign && input.LA(1)<=KW_HyphenMinus)||input.LA(1)==KW_ExclamationMark||input.LA(1)==KW_If||(input.LA(1)>=KW_For && input.LA(1)<=KW_Try)||(input.LA(1)>=RULE_ID && input.LA(1)<=RULE_RICH_TEXT_START)||(input.LA(1)>=RULE_HEX && input.LA(1)<=RULE_DECIMAL) ) {
             input.consume();
@@ -32481,51 +27485,27 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred55_PsiInternalXtend
-
-    // $ANTLR start synpred56_PsiInternalXtend
     public final void synpred56_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9184:6: ( 'catch' )
-        // PsiInternalXtend.g:9184:7: 'catch'
         {
         match(input,KW_Catch,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred56_PsiInternalXtend
-
-    // $ANTLR start synpred57_PsiInternalXtend
     public final void synpred57_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9197:7: ( 'finally' )
-        // PsiInternalXtend.g:9197:8: 'finally'
         {
         match(input,KW_Finally,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred57_PsiInternalXtend
-
-    // $ANTLR start synpred60_PsiInternalXtend
     public final void synpred60_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9392:5: ( '.' )
-        // PsiInternalXtend.g:9392:6: '.'
         {
         match(input,KW_FullStop,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred60_PsiInternalXtend
-
-    // $ANTLR start synpred61_PsiInternalXtend
     public final void synpred61_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9505:5: ( ( () ruleArrayBrackets ) )
-        // PsiInternalXtend.g:9505:6: ( () ruleArrayBrackets )
         {
-        // PsiInternalXtend.g:9505:6: ( () ruleArrayBrackets )
-        // PsiInternalXtend.g:9506:6: () ruleArrayBrackets
         {
-        // PsiInternalXtend.g:9506:6: ()
-        // PsiInternalXtend.g:9507:6: 
         {
         }
 
@@ -32540,29 +27520,15 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred61_PsiInternalXtend
-
-    // $ANTLR start synpred62_PsiInternalXtend
     public final void synpred62_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9666:5: ( '<' )
-        // PsiInternalXtend.g:9666:6: '<'
         {
         match(input,KW_LessThanSign,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred62_PsiInternalXtend
-
-    // $ANTLR start synpred63_PsiInternalXtend
     public final void synpred63_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9715:6: ( ( () '.' ) )
-        // PsiInternalXtend.g:9715:7: ( () '.' )
         {
-        // PsiInternalXtend.g:9715:7: ( () '.' )
-        // PsiInternalXtend.g:9716:7: () '.'
         {
-        // PsiInternalXtend.g:9716:7: ()
-        // PsiInternalXtend.g:9717:7: 
         {
         }
 
@@ -32573,20 +27539,12 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
         }
     }
-    // $ANTLR end synpred63_PsiInternalXtend
-
-    // $ANTLR start synpred64_PsiInternalXtend
     public final void synpred64_PsiInternalXtend_fragment() throws RecognitionException {   
-        // PsiInternalXtend.g:9750:7: ( '<' )
-        // PsiInternalXtend.g:9750:8: '<'
         {
         match(input,KW_LessThanSign,FOLLOW_2); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred64_PsiInternalXtend
-
-    // Delegated rules
 
     public final boolean synpred63_PsiInternalXtend() {
         state.backtracking++;
