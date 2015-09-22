@@ -185,6 +185,14 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		assertEquals(element, element.ref)
 	}
 	
+	@Test
+	def void testFragmentWithPredicate() {
+		val fragments = '#9 myName - myName'.parseAndValidate
+		assertNotNull(fragments)
+		assertEquals('myName', fragments.element.name)
+		assertEquals(fragments.element, fragments.element.ref)
+	}
+	
 	protected def parseAndValidate(CharSequence s) {
 		val result = s.parse
 		result.assertNoIssues

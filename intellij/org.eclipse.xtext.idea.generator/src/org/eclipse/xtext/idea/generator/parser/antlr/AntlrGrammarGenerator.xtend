@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 @Singleton
 class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
@@ -200,7 +200,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					{
 						«newCompositeNode»
 					}
-					«localVar»=«super._dataTypeEbnf2(it, supportActions)»«getArgumentList(!isPassCurrentIntoFragment || !supportActions)»
+					«localVar»=«super._dataTypeEbnf2(it, supportActions)»«getArgumentList(isPassCurrentIntoFragment, !supportActions)»
 					{
 						$current.merge(«localVar»);
 					}
@@ -331,7 +331,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					{
 						«ref.newCompositeNode»
 					}
-					«ruleName»«call.getArgumentList(!isPassCurrentIntoFragment || !supportActions)»
+					«ruleName»«call.getArgumentList(isPassCurrentIntoFragment, !supportActions)»
 					{
 						afterParserOrEnumRuleCall();
 					}
