@@ -24,4 +24,14 @@
 
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "xbase.bug462047" 
+       class = "org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.Bug462047Package"
+       genModel = "model/generated/Bug462047Lang.genmodel" /> 
+	
+  </extension>
+
+
+
 </plugin>

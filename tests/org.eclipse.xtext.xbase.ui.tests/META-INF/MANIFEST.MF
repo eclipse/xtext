@@ -23,6 +23,7 @@ Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.xbase.testlanguages.ui
-Import-Package: org.junit;version="4.5.0",
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",
  org.junit.runners;version="4.5.0"
