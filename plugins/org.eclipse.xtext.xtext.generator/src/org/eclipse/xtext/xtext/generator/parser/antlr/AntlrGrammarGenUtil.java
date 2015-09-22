@@ -53,7 +53,12 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getRuleName(AbstractRule rule) {
-		return rule.getName();
+		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
+		if (parameterValues != null) {
+			return rule.getName();
+		}
+		RuleNames ruleNames = RuleNames.getRuleNames(rule);
+		return ruleNames.getAntlrRuleName(rule);
 	}
 	
 	/**
@@ -61,12 +66,17 @@ public class AntlrGrammarGenUtil {
 	 */
 	public static String getEntryRuleName(ParserRule rule) {
 		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
-		if (parameterValues.getParamValues().isEmpty()) {
-			AbstractRule original = parameterValues.getOriginal();
-			RuleNames ruleNames = RuleNames.getRuleNames(original);
-			return "entry" + Strings.toFirstUpper(ruleNames.getAntlrRuleName(original));
+		if (parameterValues != null) {
+			if (parameterValues.getParamValues().isEmpty()) {
+				AbstractRule original = parameterValues.getOriginal();
+				RuleNames ruleNames = RuleNames.getRuleNames(original);
+				return "entry" + Strings.toFirstUpper(ruleNames.getAntlrRuleName(original));
+			}
+			return null;
+		} else {
+			RuleNames ruleNames = RuleNames.getRuleNames(rule);
+			return "entry" + Strings.toFirstUpper(ruleNames.getAntlrRuleName(rule));
 		}
-		return null;
 	}
 	
 	/**
