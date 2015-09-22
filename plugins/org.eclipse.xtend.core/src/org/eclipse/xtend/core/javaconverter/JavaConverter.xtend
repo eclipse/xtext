@@ -14,10 +14,7 @@ import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
 import org.eclipse.xtend.core.javaconverter.ASTParserFactory.ASTParserWrapper
-import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
-
-import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 
 /**
  * Converts Java code or an ICompilationUnit to Xtend code<br>
@@ -149,7 +146,7 @@ class JavaConverter {
 		return this
 	}
 
-	@Accessors(AccessorType.PUBLIC_GETTER)
+	@Accessors
 	static class ConversionResult {
 		String xtendCode
 		Iterable<String> problems = newArrayList()

@@ -97,7 +97,8 @@ class XtendLibraryConfigurator {
 	def void addJavaRuntimeLibrary(Module module, ModifiableRootModel rootModel) {
 		val library = createOrGetXtendJavaLibrary(rootModel, module)
 		if (library != null && rootModel.findLibraryOrderEntry(library) === null) {
-			rootModel.addLibraryEntry(library)
+			if (rootModel.isWritable)
+				rootModel.addLibraryEntry(library)
 		}
 	}
 
