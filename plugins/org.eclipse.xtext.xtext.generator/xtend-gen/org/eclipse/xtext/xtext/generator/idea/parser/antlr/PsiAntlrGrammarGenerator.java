@@ -247,7 +247,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("return \"");
     List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
     ParserRule _head = IterableExtensions.<ParserRule>head(_allParserRules);
-    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(_head);
+    ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(_head);
     String _name = ((AbstractRule) _originalElement).getName();
     _builder.append(_name, "\t\t");
     _builder.append("\";");
@@ -874,7 +874,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence markLeaf(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("markLeaf(elementTypeProvider.get");
-    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    EObject _originalElement = AntlrGrammarGenUtil.<EObject>getOriginalElement(it);
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");
@@ -892,7 +892,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence markComposite(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("markComposite(elementTypeProvider.get");
-    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    EObject _originalElement = AntlrGrammarGenUtil.<EObject>getOriginalElement(it);
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");
@@ -908,7 +908,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence precedeComposite(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("precedeComposite(elementTypeProvider.get");
-    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    EObject _originalElement = AntlrGrammarGenUtil.<EObject>getOriginalElement(it);
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");

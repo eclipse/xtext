@@ -29,11 +29,7 @@ public class FragmentTestLanguageExSemanticSequencer extends FragmentTestLanguag
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FragmentTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FragmentTestLanguagePackage.PRF_NAMED:
-				if(context == grammarAccess.getPRFNamedWithActionInFragment2Rule()) {
-					sequence_FragmentWithAction2_PRFNamedWithActionInFragment2(context, (PRFNamed) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getPRFNamedRefFirstRule()) {
+				if(context == grammarAccess.getPRFNamedRefFirstRule()) {
 					sequence_PRFNamedFragment_PRFNamedRefFirst(context, (PRFNamed) semanticObject); 
 					return; 
 				}
@@ -43,36 +39,8 @@ public class FragmentTestLanguageExSemanticSequencer extends FragmentTestLanguag
 				}
 				else break;
 			case FragmentTestLanguagePackage.PRF_NAMED_WITH_ACTION:
-				if(context == grammarAccess.getFragmentWithAction2Rule()) {
-					sequence_FragmentWithAction2(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getPRFNamedWithActionInFragment2Rule()) {
-					sequence_FragmentWithAction2_PRFNamedWithActionInFragment2(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getFragmentWithAction3Rule() ||
-				   context == grammarAccess.getFragmentWithAction3Access().getPRFNamedWithActionPrevAction_1_0()) {
-					sequence_FragmentWithAction3(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getPRFNamedWithActionInFragment3Rule()) {
-					sequence_FragmentWithAction3_PRFNamedWithActionInFragment3(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getFragmentWithActionRule()) {
-					sequence_FragmentWithAction(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getPRFNamedWithActionInFragmentRule()) {
-					sequence_FragmentWithAction_PRFNamedWithActionInFragment(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getPRFNamedWithActionRule()) {
-					sequence_PRFNamedWithAction(context, (PRFNamedWithAction) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_PRFNamedWithAction(context, (PRFNamedWithAction) semanticObject); 
+				return; 
 			case FragmentTestLanguagePackage.PARSER_RULE_FRAGMENTS:
 				sequence_ParserRuleFragments(context, (ParserRuleFragments) semanticObject); 
 				return; 

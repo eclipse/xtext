@@ -54,6 +54,10 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
     super.tearDown();
   }
   
+  public void publicNativeMethod() {
+    delegate.publicNativeMethod();
+  }
+  
   public void testAbstractMethod() throws Exception {
     delegate.testAbstractMethod();
   }

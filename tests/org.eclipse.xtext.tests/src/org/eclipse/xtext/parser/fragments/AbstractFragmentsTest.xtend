@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamedWithActio
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.ParserRuleFragments
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -98,6 +99,7 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragment_01() {
 		val fragments = '#5 prev current'.parseAndValidate
 		assertNotNull(fragments)
@@ -106,6 +108,7 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragment_02() {
 		val fragments = '#6 prev current'.parseAndValidate
 		assertNotNull(fragments)
@@ -114,6 +117,7 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragmentAndReference_01() {
 		val fragments = '#5 prev current current - prev'.parseAndValidate
 		assertNotNull(fragments)
@@ -127,6 +131,7 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragmentAndReference_02() {
 		val fragments = '#6 prev current current - prev'.parseAndValidate
 		assertNotNull(fragments)
@@ -140,6 +145,7 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 	}
 	
 	@Test
+	@Ignore("Actions are currently not supported in fragments")
 	def void testActionInFragmentAndReferenceLoop() {
 		val fragments = '#7 root -> a a -> b b -> c c - root'.parseAndValidate
 		assertNotNull(fragments)
@@ -177,6 +183,14 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		
 		var element = fragments.element
 		assertEquals(element, element.ref)
+	}
+	
+	@Test
+	def void testFragmentWithPredicate() {
+		val fragments = '#9 myName - myName'.parseAndValidate
+		assertNotNull(fragments)
+		assertEquals('myName', fragments.element.name)
+		assertEquals(fragments.element, fragments.element.ref)
 	}
 	
 	protected def parseAndValidate(CharSequence s) {

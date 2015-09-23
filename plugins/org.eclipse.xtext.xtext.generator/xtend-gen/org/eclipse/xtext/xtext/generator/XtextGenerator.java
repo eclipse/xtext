@@ -61,7 +61,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
- * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment}
+ * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment2}
  * instances as well as with some properties declared via setter or adder methods.
  * 
  * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>

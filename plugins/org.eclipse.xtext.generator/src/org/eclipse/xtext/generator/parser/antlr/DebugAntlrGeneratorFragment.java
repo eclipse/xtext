@@ -27,6 +27,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrStandaloneSetup
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xtext.generator.parser.antlr.DebugGrammarToken;
 
 import com.google.common.base.Joiner;
 import com.google.inject.Binder;
@@ -46,10 +47,15 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		super.generate(grammar, ctx);
-		String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
-		String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
-		prettyPrint(absoluteGrammarFileName, Charset.forName(getEncoding(ctx, Generator.SRC_GEN)));
+		DebugGrammarToken token = DebugGrammarToken.aquire();
+		try {
+			super.generate(grammar, ctx);
+			String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+			String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
+			prettyPrint(absoluteGrammarFileName, Charset.forName(getEncoding(ctx, Generator.SRC_GEN)));
+		} finally {
+			token.done();
+		}
 	}
 	
 	/**

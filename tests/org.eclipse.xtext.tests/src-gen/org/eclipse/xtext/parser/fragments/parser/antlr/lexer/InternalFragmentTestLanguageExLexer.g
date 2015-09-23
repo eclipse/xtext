@@ -24,13 +24,9 @@ NumberSignDigitThree : '#3';
 
 NumberSignDigitFour : '#4';
 
-NumberSignDigitFive : '#5';
-
-NumberSignDigitSix : '#6';
-
-NumberSignDigitSeven : '#7';
-
 NumberSignDigitEight : '#8';
+
+NumberSignDigitNine : '#9';
 
 HyphenMinusGreaterThanSign : '->';
 

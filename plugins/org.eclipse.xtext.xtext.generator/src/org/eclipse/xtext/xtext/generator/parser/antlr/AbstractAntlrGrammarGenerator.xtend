@@ -145,9 +145,9 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected def String compileEBNF(AbstractRule it, AntlrOptions options) '''
-		// Rule «(originalElement as AbstractRule).name»
+		// Rule «originalElement.name»
 		«ruleName»«compileInit(options)»:
-			«IF it instanceof ParserRule && (originalElement as AbstractRule).datatypeRule»
+			«IF it instanceof ParserRule && originalElement.datatypeRule»
 				«dataTypeEbnf(alternatives, true)»
 			«ELSE»
 				«ebnf(alternatives, options, true)»

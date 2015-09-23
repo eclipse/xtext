@@ -11,11 +11,13 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -23,6 +25,8 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Ignore;
+import org.junit.Test;
 
 @SuppressWarnings("all")
 public class TestDecoratorProcessor extends AbstractClassProcessor {
@@ -34,6 +38,8 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
       context.addWarning(cls, "Delegate is not declared");
       return;
     }
+    final Type atTest = context.findTypeGlobally(Test.class);
+    final Type atIgnore = context.findTypeGlobally(Ignore.class);
     delegate.markAsRead();
     TypeReference _type = delegate.getType();
     Iterable<? extends ResolvedMethod> _allResolvedMethods = _type.getAllResolvedMethods();
@@ -47,8 +53,17 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     final Function1<MethodDeclaration, Boolean> _function_1 = new Function1<MethodDeclaration, Boolean>() {
       @Override
       public Boolean apply(final MethodDeclaration it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(_simpleName.startsWith("test"));
+        boolean _and = false;
+        AnnotationReference _findAnnotation = it.findAnnotation(atTest);
+        boolean _tripleNotEquals = (_findAnnotation != null);
+        if (!_tripleNotEquals) {
+          _and = false;
+        } else {
+          AnnotationReference _findAnnotation_1 = it.findAnnotation(atIgnore);
+          boolean _tripleEquals = (_findAnnotation_1 == null);
+          _and = _tripleEquals;
+        }
+        return Boolean.valueOf(_and);
       }
     };
     Iterable<MethodDeclaration> _filter = IterableExtensions.<MethodDeclaration>filter(_map, _function_1);

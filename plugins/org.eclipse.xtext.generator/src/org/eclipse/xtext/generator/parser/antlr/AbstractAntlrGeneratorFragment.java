@@ -125,7 +125,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		checkGrammar(grammar);
-
+		
 		RuleFilter filter = new RuleFilter();
 		filter.setDiscardUnreachableRules(getOptions().isSkipUnusedRules());
 		RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);

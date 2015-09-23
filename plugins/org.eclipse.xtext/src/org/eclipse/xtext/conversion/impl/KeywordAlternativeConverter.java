@@ -14,6 +14,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -81,7 +82,7 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 	}
 	
 	/**
-	 * @throws IllegalArgumentException if the rule is not a datatype rule or does not fulfill
+	 * @throws IllegalArgumentException if the rule is not a datatype rule or does not match
 	 *   the pattern <pre>RuleName: 'keyword' | 'other';</pre>
 	 */
 	@Override
@@ -94,22 +95,53 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 				keywords = Collections.emptySet();
 				return;
 			}
-			throw new IllegalArgumentException(rule.getName() + " is not an alternative and not a rule call");
+			throw mismatchedRuleBody(rule);
 		}
 		Alternatives alternatives = (Alternatives) rule.getAlternatives();
 		ImmutableSet.Builder<String> builder = ImmutableSet.builder();
-		for(AbstractElement element: alternatives.getElements()) {
-			if (element instanceof Keyword) {
-				builder.add(keywordToString((Keyword) element));
-			} else if (element instanceof RuleCall) {
-				if (delegateRule != null)
-					throw new IllegalArgumentException(rule.getName() + "'s body does not contain an alternative of keywords and a single rule");
-				delegateRule = ((RuleCall) element).getRule();
-			} else {
-				throw new IllegalArgumentException(rule.getName() + "'s body does not contain an alternative of keywords and a single rule");
-			}
+		for (AbstractElement element : alternatives.getElements()) {
+			processElement(element, rule, builder);
 		}
 		keywords = builder.build();
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected void processElement(AbstractElement element, AbstractRule rule, ImmutableSet.Builder<String> result) {
+		if (element.getCardinality() != null) {
+			throw mismatchedRuleBody(rule);
+		}
+		if (element instanceof Keyword) {
+			result.add(keywordToString((Keyword) element));
+		} else if (element instanceof Group) {
+			Group group = (Group) element;
+			if (group.getGuardCondition() != null && group.getElements().size() == 1) {
+				for (AbstractElement child : group.getElements()) {
+					processElement(child, rule, result);
+				}
+			} else {
+				throw mismatchedRuleBody(rule);
+			}
+		} else if (element instanceof Alternatives) {
+			for (AbstractElement child : ((Alternatives) element).getElements()) {
+				processElement(child, rule, result);
+			}
+		} else if (element instanceof RuleCall) {
+			if (delegateRule != null)
+				throw mismatchedRuleBody(rule);
+			delegateRule = ((RuleCall) element).getRule();
+		} else {
+			throw mismatchedRuleBody(rule);
+		}
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected IllegalArgumentException mismatchedRuleBody(AbstractRule rule) {
+		return new IllegalArgumentException(
+				rule.getName() + "'s body does not contain an alternative of keywords and a single rule call");
 	} 
 	
 }

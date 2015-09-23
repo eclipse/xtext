@@ -861,8 +861,8 @@ public class GrammarAccessExtensions {
   
   protected String _localVar(final RuleCall it) {
     AbstractRule _rule = it.getRule();
-    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(_rule);
-    String _name = ((AbstractRule) _originalElement).getName();
+    AbstractRule _originalElement = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(_rule);
+    String _name = _originalElement.getName();
     String _plus = ("this_" + _name);
     String _plus_1 = (_plus + "_");
     ParserRule _containingParserRule = GrammarUtil.containingParserRule(it);

@@ -192,16 +192,16 @@ ruleParserRuleFragments returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_11='#5' 
+    |(	otherlv_11='#8' 
     {
-    	newLeafNode(otherlv_11, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitFiveKeyword_1_4_0());
+    	newLeafNode(otherlv_11, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitEightKeyword_1_4_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedWithActionInFragmentParserRuleCall_1_4_1_0()); 
+	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedWithFQNParserRuleCall_1_4_1_0()); 
 	    }
-		lv_element_12_0=rulePRFNamedWithActionInFragment		{
+		lv_element_12_0=rulePRFNamedWithFQN		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
 	        }
@@ -209,22 +209,22 @@ ruleParserRuleFragments returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_12_0, 
-        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedWithActionInFragment");
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedWithFQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))
-    |(	otherlv_13='#6' 
+    |(	otherlv_13='#9' 
     {
-    	newLeafNode(otherlv_13, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitSixKeyword_1_5_0());
+    	newLeafNode(otherlv_13, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitNineKeyword_1_5_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedWithActionInFragment2ParserRuleCall_1_5_1_0()); 
+	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFWithPredicateParserRuleCall_1_5_1_0()); 
 	    }
-		lv_element_14_0=rulePRFNamedWithActionInFragment2		{
+		lv_element_14_0=rulePRFWithPredicate		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
 	        }
@@ -232,53 +232,7 @@ ruleParserRuleFragments returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_14_0, 
-        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedWithActionInFragment2");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))
-    |(	otherlv_15='#7' 
-    {
-    	newLeafNode(otherlv_15, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitSevenKeyword_1_6_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedWithActionInFragment3ParserRuleCall_1_6_1_0()); 
-	    }
-		lv_element_16_0=rulePRFNamedWithActionInFragment3		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
-	        }
-       		set(
-       			$current, 
-       			"element",
-        		lv_element_16_0, 
-        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedWithActionInFragment3");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))
-    |(	otherlv_17='#8' 
-    {
-    	newLeafNode(otherlv_17, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitEightKeyword_1_7_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedWithFQNParserRuleCall_1_7_1_0()); 
-	    }
-		lv_element_18_0=rulePRFNamedWithFQN		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
-	        }
-       		set(
-       			$current, 
-       			"element",
-        		lv_element_18_0, 
-        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedWithFQN");
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFWithPredicate");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -487,174 +441,6 @@ rulePRFNamedWithAction returns [EObject current=null]
 
 
 
-// Entry rule entryRulePRFNamedWithActionInFragment
-entryRulePRFNamedWithActionInFragment returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getPRFNamedWithActionInFragmentRule()); }
-	 iv_rulePRFNamedWithActionInFragment=rulePRFNamedWithActionInFragment 
-	 { $current=$iv_rulePRFNamedWithActionInFragment.current; } 
-	 EOF 
-;
-
-// Rule PRFNamedWithActionInFragment
-rulePRFNamedWithActionInFragment returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-		if ($current==null) {
-			$current = createModelElement(grammarAccess.getPRFNamedWithActionInFragmentRule());
-		}
-        newCompositeNode(grammarAccess.getPRFNamedWithActionInFragmentAccess().getFragmentWithActionParserRuleCall_0()); 
-    }
-    this_FragmentWithAction_0=ruleFragmentWithAction[$current]
-    { 
-        $current = $this_FragmentWithAction_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-(	otherlv_1='-' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getPRFNamedWithActionInFragmentAccess().getHyphenMinusKeyword_1_0());
-    }
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPRFNamedWithActionInFragmentRule());
-	        }
-        }
-	otherlv_2=RULE_ID
-	{
-		newLeafNode(otherlv_2, grammarAccess.getPRFNamedWithActionInFragmentAccess().getRefPRFNamedCrossReference_1_1_0()); 
-	}
-
-)
-))?)
-;
-
-
-
-
-
-// Entry rule entryRulePRFNamedWithActionInFragment2
-entryRulePRFNamedWithActionInFragment2 returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getPRFNamedWithActionInFragment2Rule()); }
-	 iv_rulePRFNamedWithActionInFragment2=rulePRFNamedWithActionInFragment2 
-	 { $current=$iv_rulePRFNamedWithActionInFragment2.current; } 
-	 EOF 
-;
-
-// Rule PRFNamedWithActionInFragment2
-rulePRFNamedWithActionInFragment2 returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getPRFNamedWithActionInFragment2Access().getNameIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPRFNamedWithActionInFragment2Rule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)
-    { 
-		if ($current==null) {
-			$current = createModelElement(grammarAccess.getPRFNamedWithActionInFragment2Rule());
-		}
-        newCompositeNode(grammarAccess.getPRFNamedWithActionInFragment2Access().getFragmentWithAction2ParserRuleCall_1()); 
-    }
-    this_FragmentWithAction2_1=ruleFragmentWithAction2[$current]
-    { 
-        $current = $this_FragmentWithAction2_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-(	otherlv_2='-' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getPRFNamedWithActionInFragment2Access().getHyphenMinusKeyword_2_0());
-    }
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPRFNamedWithActionInFragment2Rule());
-	        }
-        }
-	otherlv_3=RULE_ID
-	{
-		newLeafNode(otherlv_3, grammarAccess.getPRFNamedWithActionInFragment2Access().getRefPRFNamedCrossReference_2_1_0()); 
-	}
-
-)
-))?)
-;
-
-
-
-
-
-// Entry rule entryRulePRFNamedWithActionInFragment3
-entryRulePRFNamedWithActionInFragment3 returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getPRFNamedWithActionInFragment3Rule()); }
-	 iv_rulePRFNamedWithActionInFragment3=rulePRFNamedWithActionInFragment3 
-	 { $current=$iv_rulePRFNamedWithActionInFragment3.current; } 
-	 EOF 
-;
-
-// Rule PRFNamedWithActionInFragment3
-rulePRFNamedWithActionInFragment3 returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-		if ($current==null) {
-			$current = createModelElement(grammarAccess.getPRFNamedWithActionInFragment3Rule());
-		}
-        newCompositeNode(grammarAccess.getPRFNamedWithActionInFragment3Access().getFragmentWithAction3ParserRuleCall_0()); 
-    }
-    this_FragmentWithAction3_0=ruleFragmentWithAction3[$current]
-    { 
-        $current = $this_FragmentWithAction3_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-(	otherlv_1='-' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getPRFNamedWithActionInFragment3Access().getHyphenMinusKeyword_1_0());
-    }
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getPRFNamedWithActionInFragment3Rule());
-	        }
-        }
-	otherlv_2=RULE_ID
-	{
-		newLeafNode(otherlv_2, grammarAccess.getPRFNamedWithActionInFragment3Access().getRefPRFNamedCrossReference_1_1_0()); 
-	}
-
-)
-))?)
-;
-
-
-
-
-
 // Entry rule entryRulePRFNamedWithFQN
 entryRulePRFNamedWithFQN returns [EObject current=null] 
 	:
@@ -706,6 +492,56 @@ rulePRFNamedWithFQN returns [EObject current=null]
 	    }
 
 )
+))?)
+;
+
+
+
+
+
+// Entry rule entryRulePRFWithPredicate
+entryRulePRFWithPredicate returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPRFWithPredicateRule()); }
+	 iv_rulePRFWithPredicate=rulePRFWithPredicate 
+	 { $current=$iv_rulePRFWithPredicate.current; } 
+	 EOF 
+;
+
+// Rule PRFWithPredicate
+rulePRFWithPredicate returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getPRFWithPredicateRule());
+		}
+        newCompositeNode(grammarAccess.getPRFWithPredicateAccess().getPRFNamedFragmentParserRuleCall_0()); 
+    }
+    this_PRFNamedFragment_0=rulePRFNamedFragment[$current]
+    { 
+        $current = $this_PRFNamedFragment_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+(((	'-' 
+	rulePRFNamedRef[null]))=>(	otherlv_1='-' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getPRFWithPredicateAccess().getHyphenMinusKeyword_1_0_0());
+    }
+
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getPRFWithPredicateRule());
+		}
+        newCompositeNode(grammarAccess.getPRFWithPredicateAccess().getPRFNamedRefParserRuleCall_1_0_1()); 
+    }
+    this_PRFNamedRef_2=rulePRFNamedRef[$current]
+    { 
+        $current = $this_PRFNamedRef_2.current; 
+        afterParserOrEnumRuleCall();
+    }
 ))?)
 ;
 
@@ -849,196 +685,6 @@ ruleSuffix2 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 )
     ;
-
-
-
-
-
-
-// Rule FragmentWithAction
-ruleFragmentWithAction [EObject in_current] returns [EObject current=in_current] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getFragmentWithActionAccess().getNameIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithActionRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-    {
-        $current = forceCreateModelElementAndSet(
-            grammarAccess.getFragmentWithActionAccess().getPRFNamedWithActionPrevAction_1(),
-            $current);
-    }
-)(
-(
-		lv_name_2_0=RULE_ID
-		{
-			newLeafNode(lv_name_2_0, grammarAccess.getFragmentWithActionAccess().getNameIDTerminalRuleCall_2_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithActionRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_2_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithActionRule());
-	        }
-        }
-	otherlv_3=RULE_ID
-	{
-		newLeafNode(otherlv_3, grammarAccess.getFragmentWithActionAccess().getRef2PRFNamedCrossReference_3_0()); 
-	}
-
-)
-)?)
-;
-
-
-
-
-
-
-// Rule FragmentWithAction2
-ruleFragmentWithAction2 [EObject in_current] returns [EObject current=in_current] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElementAndSet(
-            grammarAccess.getFragmentWithAction2Access().getPRFNamedWithActionPrevAction_0(),
-            $current);
-    }
-)(
-(
-		lv_name_1_0=RULE_ID
-		{
-			newLeafNode(lv_name_1_0, grammarAccess.getFragmentWithAction2Access().getNameIDTerminalRuleCall_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithAction2Rule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithAction2Rule());
-	        }
-        }
-	otherlv_2=RULE_ID
-	{
-		newLeafNode(otherlv_2, grammarAccess.getFragmentWithAction2Access().getRef2PRFNamedCrossReference_2_0()); 
-	}
-
-)
-)?)
-;
-
-
-
-
-
-
-// Rule FragmentWithAction3
-ruleFragmentWithAction3 [EObject in_current] returns [EObject current=in_current] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getFragmentWithAction3Access().getNameIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithAction3Rule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)((
-    {
-        $current = forceCreateModelElementAndSet(
-            grammarAccess.getFragmentWithAction3Access().getPRFNamedWithActionPrevAction_1_0(),
-            $current);
-    }
-)	otherlv_2='->' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getFragmentWithAction3Access().getHyphenMinusGreaterThanSignKeyword_1_1());
-    }
-(
-(
-		lv_name_3_0=RULE_ID
-		{
-			newLeafNode(lv_name_3_0, grammarAccess.getFragmentWithAction3Access().getNameIDTerminalRuleCall_1_2_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithAction3Rule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_3_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFragmentWithAction3Rule());
-	        }
-        }
-	otherlv_4=RULE_ID
-	{
-		newLeafNode(otherlv_4, grammarAccess.getFragmentWithAction3Access().getRef2PRFNamedCrossReference_1_3_0()); 
-	}
-
-)
-)?)*)
-;
 
 
 

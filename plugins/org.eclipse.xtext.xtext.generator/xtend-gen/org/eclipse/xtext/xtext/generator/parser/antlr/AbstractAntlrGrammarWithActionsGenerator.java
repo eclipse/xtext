@@ -132,7 +132,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
               _builder.appendImmediate(", ", "");
             }
             _builder.append("grammarAccess.");
-            EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(group);
+            UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(group);
             String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
             _builder.append(_gaRuleElementAccessor, "");
             _builder.newLineIfNotEmpty();
@@ -260,7 +260,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+        UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
         String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
         _builder.append(_gaRuleElementAccessor, "\t  ");
         _builder.append(");");
@@ -288,7 +288,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t");
             _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            EObject _originalElement_1 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_1 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_1 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_1));
             _builder.append(_gaRuleElementAccessor_1, "\t");
             _builder.append(", ");
@@ -301,7 +301,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            EObject _originalElement_2 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_2 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_2));
             _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
             _builder.append(", ");
@@ -331,7 +331,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            EObject _originalElement_3 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_3 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_3 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_3));
             _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
             _builder.append(");");
@@ -354,7 +354,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            EObject _originalElement_4 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_4 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_4 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_4));
             _builder.append(_gaRuleElementAccessor_4, "\t\t");
             _builder.append(")}?");
@@ -373,7 +373,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        EObject _originalElement_5 = AntlrGrammarGenUtil.getOriginalElement(it);
+        UnorderedGroup _originalElement_5 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
         String _gaRuleElementAccessor_5 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_5));
         _builder.append(_gaRuleElementAccessor_5, "\t  ");
         _builder.append(");");
@@ -431,7 +431,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+        UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
         String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
         _builder.append(_gaRuleElementAccessor, "\t  ");
         _builder.append(");");
@@ -459,7 +459,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t");
             _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            EObject _originalElement_1 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_1 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_1 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_1));
             _builder.append(_gaRuleElementAccessor_1, "\t");
             _builder.append(", ");
@@ -472,7 +472,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            EObject _originalElement_2 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_2 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_2));
             _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
             _builder.append(", ");
@@ -502,7 +502,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            EObject _originalElement_3 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_3 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_3 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_3));
             _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
             _builder.append(");");
@@ -525,7 +525,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            EObject _originalElement_4 = AntlrGrammarGenUtil.getOriginalElement(it);
+            UnorderedGroup _originalElement_4 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
             String _gaRuleElementAccessor_4 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_4));
             _builder.append(_gaRuleElementAccessor_4, "\t\t");
             _builder.append(")}?");
@@ -544,7 +544,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        EObject _originalElement_5 = AntlrGrammarGenUtil.getOriginalElement(it);
+        UnorderedGroup _originalElement_5 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
         String _gaRuleElementAccessor_5 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_5));
         _builder.append(_gaRuleElementAccessor_5, "\t  ");
         _builder.append(");");
@@ -564,60 +564,32 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String __ebnf2 = super._ebnf2(it, options, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
     return (__ebnf2 + _argumentList);
   }
   
   @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
     return (__dataTypeEbnf2 + _argumentList);
   }
   
   @Override
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
     return (_crossrefEbnf + _argumentList);
   }
   
   @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-    boolean _or = false;
     boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-    boolean _not = (!_isPassCurrentIntoFragment);
-    if (_not) {
-      _or = true;
-    } else {
-      _or = (!supportActions);
-    }
-    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
     return (__assignmentEbnf + _argumentList);
   }
   

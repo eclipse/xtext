@@ -369,27 +369,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   }
   
   protected String compileEntryReturns(final ParserRule it, final AntlrOptions options) {
-    String _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(it);
-        if (_isDatatypeRule) {
-          _matched=true;
-          _switchResult = "[String current=null]";
-        }
-      }
+    boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(it);
+    if (_isDatatypeRule) {
+      return "[String current=null]";
+    } else {
+      return "[EObject current=null]";
     }
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        _matched=true;
-        _switchResult = "[EObject current=null]";
-      }
-    }
-    if (!_matched) {
-      throw new IllegalStateException(("Unexpected rule: " + it));
-    }
-    return _switchResult;
   }
   
   @Override
@@ -547,15 +532,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder.append("=");
           String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
           _builder.append(__dataTypeEbnf2, "");
-          boolean _or = false;
           boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-          boolean _not = (!_isPassCurrentIntoFragment);
-          if (_not) {
-            _or = true;
-          } else {
-            _or = (!supportActions);
-          }
-          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, _isPassCurrentIntoFragment, (!supportActions));
           _builder.append(_argumentList, "");
           _builder.newLineIfNotEmpty();
           _builder.append("{");
@@ -943,15 +921,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder.newLine();
           String _ruleName = this._grammarAccessExtensions.ruleName(it);
           _builder.append(_ruleName, "");
-          boolean _or = false;
           boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-          boolean _not = (!_isPassCurrentIntoFragment);
-          if (_not) {
-            _or = true;
-          } else {
-            _or = (!supportActions);
-          }
-          String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, Boolean.valueOf(_or));
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
           _builder.append(_argumentList, "");
           _builder.newLineIfNotEmpty();
           _builder.append("{");

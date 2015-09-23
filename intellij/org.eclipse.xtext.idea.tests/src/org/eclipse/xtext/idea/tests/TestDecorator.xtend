@@ -11,6 +11,8 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.junit.Test
+import org.junit.Ignore
 
 @Active(TestDecoratorProcessor)
 annotation TestDecorator {
@@ -24,10 +26,12 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 			cls.addWarning("Delegate is not declared")
 			return
 		}
+		val atTest = context.findTypeGlobally(Test)
+		val atIgnore = context.findTypeGlobally(Ignore)
 		delegate.markAsRead
 		delegate.type.allResolvedMethods
 			.map[declaration]
-			.filter [simpleName.startsWith('test')]
+			.filter [findAnnotation(atTest) !== null && findAnnotation(atIgnore) === null]
 			.filter[cls.findDeclaredMethod(simpleName) == null]
 			.sortBy[simpleName]
 			.forEach[declaredMethod|
