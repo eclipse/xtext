@@ -130,8 +130,12 @@ class JvmModelGenerator implements IGenerator {
 			fsa.generateFile(type.qualifiedName.replace('.', '/') + '.java', type.generateType(generatorConfigProvider.get(type)))
 	}
 	
+	protected def createImportManager(JvmDeclaredType type) {
+		new ImportManager(true, type)
+	}
+	
 	def CharSequence generateType(JvmDeclaredType type, GeneratorConfig config) {
-		val importManager = new ImportManager(true, type)
+		val importManager = createImportManager(type)
 		val bodyAppendable = createAppendable(type, importManager, config)
 		bodyAppendable.openScope
 		bodyAppendable.assignThisAndSuper(type, config)

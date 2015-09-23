@@ -219,8 +219,12 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  protected ImportManager createImportManager(final JvmDeclaredType type) {
+    return new ImportManager(true, type);
+  }
+  
   public CharSequence generateType(final JvmDeclaredType type, final GeneratorConfig config) {
-    final ImportManager importManager = new ImportManager(true, type);
+    final ImportManager importManager = this.createImportManager(type);
     final TreeAppendable bodyAppendable = this.createAppendable(type, importManager, config);
     bodyAppendable.openScope();
     this.assignThisAndSuper(bodyAppendable, type, config);
