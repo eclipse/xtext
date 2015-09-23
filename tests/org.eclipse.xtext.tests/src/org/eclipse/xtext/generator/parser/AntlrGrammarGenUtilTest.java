@@ -38,7 +38,7 @@ public class AntlrGrammarGenUtilTest extends Assert {
 	
 	@Test public void testToAntlrStringIgnoreNoCases() throws Exception {
 		assertEquals("\u00DF", "ß");
-		//TODO: eszett will have a dedicated uppercase version in future. But for now...
+		//eszett will have a dedicated uppercase version in future. But for now...
 		assertEquals(Character.toLowerCase('ß'), Character.toUpperCase('ß'));
 		
 		assertEquals("('A'|'a')'\\u00DF'('C'|'c')", AntlrGrammarGenUtil.toAntlrStringIgnoreCase("AßC"));
