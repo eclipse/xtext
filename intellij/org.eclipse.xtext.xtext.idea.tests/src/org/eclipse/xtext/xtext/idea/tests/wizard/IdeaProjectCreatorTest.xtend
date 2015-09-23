@@ -57,7 +57,7 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 		assertEquals("mydsl.core", modules.get(1).name)
 		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl/mydsl.core/mydsl.core.iml'))
 		val allModules = ModuleManager.getInstance(project).modules
-		assertEquals(3, allModules.size)
+		assertEquals(2, allModules.size)
 	}
 
 	@Test

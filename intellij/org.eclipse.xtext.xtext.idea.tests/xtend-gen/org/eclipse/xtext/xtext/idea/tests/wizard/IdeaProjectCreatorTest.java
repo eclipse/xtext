@@ -102,7 +102,7 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     ModuleManager _instance = ModuleManager.getInstance(_project_1);
     final Module[] allModules = _instance.getModules();
     int _size_1 = ((List<Module>)Conversions.doWrapArray(allModules)).size();
-    TestCase.assertEquals(3, _size_1);
+    TestCase.assertEquals(2, _size_1);
   }
   
   @Test
