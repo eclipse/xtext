@@ -169,6 +169,7 @@ public class WorkbenchTestHelper extends Assert {
 	public XtextEditor openEditor(String fileName, String content) throws Exception {
 		int cursor = content.indexOf('|');
 		IFile file = createFile(fileName, content.replace("|", ""));
+		IResourcesSetupUtil.waitForBuild();
 		XtextEditor editor = openEditor(file);
 		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);
 		editor.getInternalSourceViewer().getTextWidget().setFocus();
