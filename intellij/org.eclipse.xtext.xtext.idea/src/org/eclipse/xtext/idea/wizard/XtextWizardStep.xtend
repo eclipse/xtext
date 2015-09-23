@@ -2,6 +2,9 @@ package org.eclipse.xtext.idea.wizard
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
+import com.intellij.ide.wizard.CommitStepException
+import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.options.ConfigurationException
 import com.intellij.openapi.ui.ComboBox
 import javax.swing.JCheckBox
 import javax.swing.JPanel
@@ -13,9 +16,6 @@ import org.eclipse.xtext.xtext.wizard.ProjectLayout
 import org.eclipse.xtext.xtext.wizard.SourceLayout
 
 import static java.awt.GridBagConstraints.*
-import com.intellij.openapi.diagnostic.Logger
-import com.intellij.ide.wizard.CommitStepException
-import com.intellij.openapi.util.io.FileUtil
 
 class XtextWizardStep extends ModuleWizardStep {
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
@@ -93,17 +93,16 @@ class XtextWizardStep extends ModuleWizardStep {
 		config.preferredBuildSystem = buildSystem.selectedItem as BuildSystem
 		config.sourceLayout = layout.selectedItem as SourceLayout
 		config.projectLayout = ProjectLayout.HIERARCHICAL
-		config.baseName = FileUtil.getNameWithoutExtension(nameField.text)
+	}
+
+	override validate() throws ConfigurationException {
+		super.validate()
 	}
 
 	override updateStep() {
 	}
 
 	override onWizardFinished() throws CommitStepException {
-		val xtextBuilder = context.projectBuilder as XtextModuleBuilder
-		val config = xtextBuilder.getWizardConfiguration
-		config.rootLocation = context.projectFileDirectory
-
 	}
 
 }

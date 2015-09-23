@@ -20,8 +20,14 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			throw new IllegalArgumentException("The runtime project is always enabled")
 	}
 	
+	String nameQualifier = ''
+	
 	override getNameQualifier() {
-		""
+		nameQualifier
+	}
+	
+	def void setNameQualifier(String nameQualifier) {
+		this.nameQualifier = nameQualifier
 	}
 	
 	override isEclipsePluginProject() {

@@ -15,15 +15,11 @@ import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory
 import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
 import com.intellij.testFramework.fixtures.JavaTestFixtureFactory
 import java.io.File
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType
+import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import com.intellij.openapi.module.Module
-import com.intellij.facet.FacetManager
-import com.intellij.facet.FacetTypeRegistry
-import com.intellij.facet.FacetType
-import org.eclipse.xtext.idea.tests.LightToolingTest
-import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType
 
 class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 	

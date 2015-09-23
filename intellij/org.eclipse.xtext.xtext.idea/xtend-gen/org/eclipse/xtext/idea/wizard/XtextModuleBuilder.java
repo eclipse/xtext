@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.wizard;
 
+import com.google.common.base.Objects;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
@@ -27,6 +28,11 @@ import javax.swing.Icon;
 import org.eclipse.xtext.idea.Icons;
 import org.eclipse.xtext.idea.wizard.IdeaProjectCreator;
 import org.eclipse.xtext.idea.wizard.XtextWizardStep;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
@@ -80,8 +86,21 @@ public class XtextModuleBuilder extends ModuleBuilder {
   }
   
   @Override
+  public Module commitModule(final Project project, final ModifiableModuleModel model) {
+    final List<Module> modulesCreated = this.commit(project, model, null);
+    final Function1<Module, Boolean> _function = new Function1<Module, Boolean>() {
+      @Override
+      public Boolean apply(final Module module) {
+        String _name = XtextModuleBuilder.this.getName();
+        String _name_1 = module.getName();
+        return Boolean.valueOf(Objects.equal(_name, _name_1));
+      }
+    };
+    return IterableExtensions.<Module>findFirst(modulesCreated, _function);
+  }
+  
+  @Override
   public List<Module> commit(final Project project, final ModifiableModuleModel model, final ModulesProvider modulesProvider) {
-    final List<Module> rootModule = super.commit(project, model, modulesProvider);
     ModifiableModuleModel _xifexpression = null;
     if ((model != null)) {
       _xifexpression = model;
@@ -90,8 +109,14 @@ public class XtextModuleBuilder extends ModuleBuilder {
       _xifexpression = _instance.getModifiableModel();
     }
     final ModifiableModuleModel moduleModel = _xifexpression;
+    WizardConfiguration _wizardConfiguration = this.getWizardConfiguration();
+    this.setupWizardConfiguration(_wizardConfiguration);
+    WizardConfiguration _wizardConfiguration_1 = this.getWizardConfiguration();
     String _basePath = project.getBasePath();
-    this.wizardConfiguration.setRootLocation(_basePath);
+    _wizardConfiguration_1.setRootLocation(_basePath);
+    WizardConfiguration _wizardConfiguration_2 = this.getWizardConfiguration();
+    String _name = this.getName();
+    _wizardConfiguration_2.setBaseName(_name);
     Application _application = ApplicationManager.getApplication();
     final Runnable _function = new Runnable() {
       @Override
@@ -102,7 +127,14 @@ public class XtextModuleBuilder extends ModuleBuilder {
       }
     };
     _application.runWriteAction(_function);
-    return rootModule;
+    return (List<Module>)Conversions.doWrapArray(moduleModel.getModules());
+  }
+  
+  public void setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
+    ParentProjectDescriptor _parentProject = wizardConfiguration.getParentProject();
+    _parentProject.setNameQualifier("");
+    RuntimeProjectDescriptor _runtimeProject = wizardConfiguration.getRuntimeProject();
+    _runtimeProject.setNameQualifier(".core");
   }
   
   @Override

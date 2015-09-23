@@ -63,20 +63,32 @@ class XtextModuleBuilder extends ModuleBuilder {
 		}
 	}
 
+	override commitModule(Project project, ModifiableModuleModel model) {
+		val modulesCreated = commit(project, model, null)
+		return modulesCreated.findFirst[module|name == module.name]
+	}
+
 	override commit(Project project, ModifiableModuleModel model, ModulesProvider modulesProvider) {
-		val rootModule = super.commit(project, model, modulesProvider)
-		val ModifiableModuleModel moduleModel = if (model !== null)
+		val moduleModel = if (model !== null)
 				model
 			else
 				ModuleManager.getInstance(project).getModifiableModel()
 
-		wizardConfiguration.rootLocation = project.basePath
+		setupWizardConfiguration(getWizardConfiguration)
+
+		getWizardConfiguration.rootLocation = project.basePath
+		getWizardConfiguration.baseName = name
 
 		ApplicationManager.getApplication().runWriteAction [
 			new IdeaProjectCreator(moduleModel).createProjects(wizardConfiguration)
 			moduleModel.commit
 		]
-		return rootModule
+		return moduleModel.modules
+	}
+
+	def setupWizardConfiguration(WizardConfiguration wizardConfiguration) {
+		wizardConfiguration.parentProject.nameQualifier = ''
+		wizardConfiguration.runtimeProject.nameQualifier = '.core'
 	}
 
 	override int getWeight() {

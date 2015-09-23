@@ -5,8 +5,8 @@ import com.intellij.ide.util.projectWizard.ProjectBuilder;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.ui.components.JBTextField;
 import java.awt.GridBagConstraints;
 import javax.swing.JCheckBox;
@@ -264,9 +264,11 @@ public class XtextWizardStep extends ModuleWizardStep {
     Object _selectedItem_1 = this.layout.getSelectedItem();
     config.setSourceLayout(((SourceLayout) _selectedItem_1));
     config.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    String _text_2 = this.nameField.getText();
-    String _nameWithoutExtension = FileUtil.getNameWithoutExtension(_text_2);
-    config.setBaseName(_nameWithoutExtension);
+  }
+  
+  @Override
+  public boolean validate() throws ConfigurationException {
+    return super.validate();
   }
   
   @Override
@@ -275,10 +277,5 @@ public class XtextWizardStep extends ModuleWizardStep {
   
   @Override
   public void onWizardFinished() throws CommitStepException {
-    ProjectBuilder _projectBuilder = this.context.getProjectBuilder();
-    final XtextModuleBuilder xtextBuilder = ((XtextModuleBuilder) _projectBuilder);
-    final WizardConfiguration config = xtextBuilder.getWizardConfiguration();
-    String _projectFileDirectory = this.context.getProjectFileDirectory();
-    config.setRootLocation(_projectFileDirectory);
   }
 }

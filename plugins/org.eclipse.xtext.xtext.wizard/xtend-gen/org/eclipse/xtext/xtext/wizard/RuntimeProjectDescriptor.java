@@ -61,9 +61,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
   }
   
+  private String nameQualifier = "";
+  
   @Override
   public String getNameQualifier() {
-    return "";
+    return this.nameQualifier;
+  }
+  
+  public void setNameQualifier(final String nameQualifier) {
+    this.nameQualifier = nameQualifier;
   }
   
   @Override
