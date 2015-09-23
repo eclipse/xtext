@@ -1226,7 +1226,8 @@ You may also need to initialize 'import'-ed ecore models that are not generated 
   class MyLanguageStandaloneSetup extends MyLanguageStandaloneSetupGenerated {
 
     def static void doSetup() {
-      MyPackageImpl.init
+      if (!EPackage.Registry.INSTANCE.containsKey(MyPackage.eNS_URI))
+          EPackage.Registry.INSTANCE.put(MyPackage.eNS_URI, MyPackage.eINSTANCE);
       new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
     }
 

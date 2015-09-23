@@ -24,7 +24,7 @@ Now the features are downloaded and installed. Eclipse will ask you for a restar
 You can now try the developer preview for Xtend on IntelliJ. Add the following URL to your update manager
 
 ```
-http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta2/updatePlugins.xml
+http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta3/updatePlugins.xml
 ```
 
 Then install all of the following plugins:
