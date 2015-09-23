@@ -906,6 +906,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (action.getFeature() != null) {
 			ParserRule rule = GrammarUtil.containingParserRule(action);
 			if (rule.isFragment() && !rule.isWildcard()) {
+				error("An action is not allowed in fragments.", action, null);
 				return;
 			}
 			XtextSwitch<Boolean> visitor = new XtextSwitch<Boolean>() {
