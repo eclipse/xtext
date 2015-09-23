@@ -47,12 +47,6 @@ class IdeaProjectCreator implements ProjectsCreator {
 			val VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it)
 			contentEntry.addSourceFolder(sourceRoot, false)
 		]
-		/*
-		 * TODO Facets gradle/maven setup
-		 * if (gradleBuildFile !== null) {
-		 * 	modifiableRootModel.getModule().putUserData(BUILD_SCRIPT_DATA, new BuildScriptDataBuilder(gradleBuildFile)) 
-		 * }
-		 */
 		rootModel.commit()
 	}
 

@@ -7,6 +7,11 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.externalSystem.service.execution.ProgressExecutionMode;
+import com.intellij.openapi.externalSystem.settings.AbstractExternalSystemSettings;
+import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil;
+import com.intellij.openapi.externalSystem.util.ExternalSystemUtil;
 import com.intellij.openapi.module.JavaModuleType;
 import com.intellij.openapi.module.ModifiableModuleModel;
 import com.intellij.openapi.module.Module;
@@ -23,20 +28,34 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.Icon;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.Icons;
+import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 import org.eclipse.xtext.idea.wizard.IdeaProjectCreator;
 import org.eclipse.xtext.idea.wizard.XtextWizardStep;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
+import org.jetbrains.idea.maven.project.MavenProjectsManager;
+import org.jetbrains.plugins.gradle.settings.DistributionType;
+import org.jetbrains.plugins.gradle.settings.GradleProjectSettings;
+import org.jetbrains.plugins.gradle.util.GradleConstants;
 
 @SuppressWarnings("all")
 public class XtextModuleBuilder extends ModuleBuilder {
+  @Extension
+  private ProjectLifecycleUtil _projectLifecycleUtil = new ProjectLifecycleUtil();
+  
+  private final static Logger LOG = Logger.getInstance(XtextWizardStep.class.getName());
+  
   private WizardConfiguration wizardConfiguration = new WizardConfiguration();
   
   @Override
@@ -109,14 +128,11 @@ public class XtextModuleBuilder extends ModuleBuilder {
       _xifexpression = _instance.getModifiableModel();
     }
     final ModifiableModuleModel moduleModel = _xifexpression;
-    WizardConfiguration _wizardConfiguration = this.getWizardConfiguration();
-    this.setupWizardConfiguration(_wizardConfiguration);
-    WizardConfiguration _wizardConfiguration_1 = this.getWizardConfiguration();
+    this.setupWizardConfiguration(this.wizardConfiguration);
     String _basePath = project.getBasePath();
-    _wizardConfiguration_1.setRootLocation(_basePath);
-    WizardConfiguration _wizardConfiguration_2 = this.getWizardConfiguration();
+    this.wizardConfiguration.setRootLocation(_basePath);
     String _name = this.getName();
-    _wizardConfiguration_2.setBaseName(_name);
+    this.wizardConfiguration.setBaseName(_name);
     Application _application = ApplicationManager.getApplication();
     final Runnable _function = new Runnable() {
       @Override
@@ -127,6 +143,46 @@ public class XtextModuleBuilder extends ModuleBuilder {
       }
     };
     _application.runWriteAction(_function);
+    boolean _needsMavenBuild = this.wizardConfiguration.needsMavenBuild();
+    if (_needsMavenBuild) {
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          MavenProjectsManager manager = MavenProjectsManager.getInstance(project);
+          if ((manager != null)) {
+            ParentProjectDescriptor _parentProject = XtextModuleBuilder.this.wizardConfiguration.getParentProject();
+            String _location = _parentProject.getLocation();
+            String _plus = (_location + File.separator);
+            final String pomFilePath = (_plus + "pom.xml");
+            LocalFileSystem _instance = LocalFileSystem.getInstance();
+            final VirtualFile virtualFile = _instance.refreshAndFindFileByPath(pomFilePath);
+            if ((virtualFile != null)) {
+              manager.addManagedFilesOrUnignore(Collections.<VirtualFile>unmodifiableList(CollectionLiterals.<VirtualFile>newArrayList(virtualFile)));
+            } else {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Can\'t start maven import. File ");
+              _builder.append(pomFilePath, "");
+              _builder.append(" does not exists.");
+              XtextModuleBuilder.LOG.warn(_builder.toString());
+            }
+          }
+        }
+      };
+      this._projectLifecycleUtil.executeWhenProjectReady(project, _function_1);
+    }
+    boolean _needsGradleBuild = this.wizardConfiguration.needsGradleBuild();
+    if (_needsGradleBuild) {
+      final GradleProjectSettings gradleProjectSettings = new GradleProjectSettings();
+      ParentProjectDescriptor _parentProject = this.wizardConfiguration.getParentProject();
+      String _location = _parentProject.getLocation();
+      gradleProjectSettings.setExternalProjectPath(_location);
+      gradleProjectSettings.setDistributionType(DistributionType.DEFAULT_WRAPPED);
+      final AbstractExternalSystemSettings settings = ExternalSystemApiUtil.getSettings(project, GradleConstants.SYSTEM_ID);
+      settings.linkProject(gradleProjectSettings);
+      ParentProjectDescriptor _parentProject_1 = this.wizardConfiguration.getParentProject();
+      String _location_1 = _parentProject_1.getLocation();
+      ExternalSystemUtil.refreshProject(project, GradleConstants.SYSTEM_ID, _location_1, false, ProgressExecutionMode.IN_BACKGROUND_ASYNC);
+    }
     return (List<Module>)Conversions.doWrapArray(moduleModel.getModules());
   }
   

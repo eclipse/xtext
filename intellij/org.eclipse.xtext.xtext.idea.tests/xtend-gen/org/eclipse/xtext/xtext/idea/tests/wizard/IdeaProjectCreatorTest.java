@@ -98,19 +98,29 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     String _moduleFilePath_1 = _get_3.getModuleFilePath();
     boolean _endsWith_1 = _moduleFilePath_1.endsWith("/mydsl/mydsl.core/mydsl.core.iml");
     TestCase.assertTrue(_endsWith_1);
+    Project _project_1 = this.getProject();
+    ModuleManager _instance = ModuleManager.getInstance(_project_1);
+    final Module[] allModules = _instance.getModules();
+    int _size_1 = ((List<Module>)Conversions.doWrapArray(allModules)).size();
+    TestCase.assertEquals(3, _size_1);
   }
   
   @Test
   public void testCreateTwoLanguagesProject() {
+    Project _project = this.getProject();
+    ModuleManager _instance = ModuleManager.getInstance(_project);
+    final Module[] allModules = _instance.getModules();
+    int _size = ((List<Module>)Conversions.doWrapArray(allModules)).size();
+    TestCase.assertEquals(0, _size);
     WizardConfiguration _wizardConfiguration = this.builder.getWizardConfiguration();
     _wizardConfiguration.setPreferredBuildSystem(BuildSystem.GRADLE);
     WizardConfiguration _wizardConfiguration_1 = this.builder.getWizardConfiguration();
     _wizardConfiguration_1.setProjectLayout(ProjectLayout.HIERARCHICAL);
     this.builder.setName("mydsl");
-    Project _project = this.getProject();
-    final List<Module> modules = this.builder.commit(_project);
-    int _size = modules.size();
-    TestCase.assertEquals(2, _size);
+    Project _project_1 = this.getProject();
+    final List<Module> modules = this.builder.commit(_project_1);
+    int _size_1 = modules.size();
+    TestCase.assertEquals(2, _size_1);
     Module _get = modules.get(0);
     String _name = _get.getName();
     TestCase.assertEquals("mydsl", _name);
@@ -126,8 +136,8 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     boolean _endsWith_1 = _moduleFilePath_1.endsWith("/mydsl/mydsl.core/mydsl.core.iml");
     TestCase.assertTrue(_endsWith_1);
     this.builder.setName("mydsl2");
-    Project _project_1 = this.getProject();
-    final Module rootModule = this.builder.commitModule(_project_1, null);
+    Project _project_2 = this.getProject();
+    final Module rootModule = this.builder.commitModule(_project_2, null);
     String _name_2 = rootModule.getName();
     TestCase.assertEquals("mydsl2", _name_2);
     String _moduleFilePath_2 = rootModule.getModuleFilePath();
@@ -136,10 +146,5 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     String _moduleFilePath_3 = rootModule.getModuleFilePath();
     boolean _endsWith_3 = _moduleFilePath_3.endsWith("/mydsl/mydsl2/mydsl2.iml");
     TestCase.assertFalse(_endsWith_3);
-    Project _project_2 = this.getProject();
-    ModuleManager _instance = ModuleManager.getInstance(_project_2);
-    final Module[] allModules = _instance.getModules();
-    int _size_1 = ((List<Module>)Conversions.doWrapArray(allModules)).size();
-    TestCase.assertEquals(4, _size_1);
   }
 }

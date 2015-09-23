@@ -5,6 +5,10 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.externalSystem.service.execution.ProgressExecutionMode
+import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil
+import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
 import com.intellij.openapi.module.JavaModuleType
 import com.intellij.openapi.module.ModifiableModuleModel
 import com.intellij.openapi.module.ModuleManager
@@ -21,9 +25,17 @@ import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
 import org.eclipse.xtext.idea.Icons
+import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
+import org.jetbrains.idea.maven.project.MavenProjectsManager
+import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
+import org.jetbrains.plugins.gradle.util.GradleConstants
+import org.jetbrains.plugins.gradle.settings.DistributionType
 
 class XtextModuleBuilder extends ModuleBuilder {
+
+	extension ProjectLifecycleUtil = new ProjectLifecycleUtil
+	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
 
 	WizardConfiguration wizardConfiguration = new WizardConfiguration
 
@@ -74,15 +86,39 @@ class XtextModuleBuilder extends ModuleBuilder {
 			else
 				ModuleManager.getInstance(project).getModifiableModel()
 
-		setupWizardConfiguration(getWizardConfiguration)
+		setupWizardConfiguration(wizardConfiguration)
 
-		getWizardConfiguration.rootLocation = project.basePath
-		getWizardConfiguration.baseName = name
+		wizardConfiguration.rootLocation = project.basePath
+		wizardConfiguration.baseName = name
 
 		ApplicationManager.getApplication().runWriteAction [
 			new IdeaProjectCreator(moduleModel).createProjects(wizardConfiguration)
 			moduleModel.commit
 		]
+
+		if (wizardConfiguration.needsMavenBuild) {
+			project.executeWhenProjectReady [
+				var manager = MavenProjectsManager.getInstance(project)
+				if (manager !== null) {
+					val pomFilePath = wizardConfiguration.parentProject.location + File.separator + 'pom.xml'
+					val virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(pomFilePath)
+					if (virtualFile !== null) {
+						manager.addManagedFilesOrUnignore(#[virtualFile])
+					} else {
+						LOG.warn('''Can't start maven import. File «pomFilePath» does not exists.''')
+					}
+				}
+			]
+		}
+		if (wizardConfiguration.needsGradleBuild) {
+			val gradleProjectSettings = new GradleProjectSettings
+			gradleProjectSettings.setExternalProjectPath(wizardConfiguration.parentProject.location);
+			gradleProjectSettings.distributionType = DistributionType.DEFAULT_WRAPPED
+			val settings = ExternalSystemApiUtil.getSettings(project, GradleConstants.SYSTEM_ID);
+			settings.linkProject(gradleProjectSettings);
+			ExternalSystemUtil.refreshProject(project, GradleConstants.SYSTEM_ID,
+				wizardConfiguration.parentProject.location, false, ProgressExecutionMode.IN_BACKGROUND_ASYNC);
+		}
 		return moduleModel.modules
 	}
 

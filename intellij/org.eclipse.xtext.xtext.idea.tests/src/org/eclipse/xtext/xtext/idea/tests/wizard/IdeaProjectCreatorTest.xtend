@@ -25,9 +25,7 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 
 	@Test
 	def void testCreateProject() {
-
 		val modules = builder.commit(project)
-
 		assertEquals(1, modules.size)
 		assertEquals("mydsl.core", modules.get(0).name)
 		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl.core/mydsl.core.iml'))
@@ -58,10 +56,14 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 
 		assertEquals("mydsl.core", modules.get(1).name)
 		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl/mydsl.core/mydsl.core.iml'))
+		val allModules = ModuleManager.getInstance(project).modules
+		assertEquals(3, allModules.size)
 	}
 
 	@Test
 	def void testCreateTwoLanguagesProject() {
+		val allModules = ModuleManager.getInstance(project).modules
+		assertEquals(0, allModules.size)
 		builder.wizardConfiguration.preferredBuildSystem = BuildSystem.GRADLE
 		builder.wizardConfiguration.projectLayout = ProjectLayout.HIERARCHICAL
 		builder.name = "mydsl"
@@ -80,7 +82,6 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 		assertEquals("mydsl2", rootModule.name)
 		assertTrue(rootModule.moduleFilePath.endsWith('/mydsl2/mydsl2.iml'))
 		assertFalse(rootModule.moduleFilePath.endsWith('/mydsl/mydsl2/mydsl2.iml'))
-		val allModules = ModuleManager.getInstance(project).modules
-		assertEquals(4, allModules.size)
+
 	}
 }
