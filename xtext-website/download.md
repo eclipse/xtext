@@ -27,7 +27,7 @@ If you have an Eclipse running :
  * Choose **Help -&gt; Install New Software...** from the menu bar and **Add...**. 
 
    Insert one of the update site URLs from above. This site aggregates all the necessary and optional components and dependencies of Xtext.
- * Select the **Xtext SDK** from the category **Xtext {version}** and complete the wizard by clicking the **Next** button until you can click **Finish**.
+ * Select the **Xtext SDK** from the category **Xtext** and complete the wizard by clicking the **Next** button until you can click **Finish**.
  * After a quick download and a restart of Eclipse, Xtext is ready to use.
 
 Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid this, you can manually install the feature *Xtext Antlr* from the itemis update site [http://download.itemis.com/updates/](http://download.itemis.com/updates/). The general installation procedures are not affected by this issue.

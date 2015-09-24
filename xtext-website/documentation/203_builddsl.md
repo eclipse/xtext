@@ -141,7 +141,7 @@ members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) 
 ]
 ```
 
-Finally, we create a field with the [Param]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java) annotation from each *Parameter*. The superclass will make the so marked fields initializable from command line arguments. 
+Finally, we create a field with the [Param]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend) annotation from each *Parameter*. The superclass will make the so marked fields initializable from command line arguments. 
 
 *   DSL:
     
@@ -221,7 +221,7 @@ public class BuildDSLRuntimeModule
 
 ## Operator Overloading {#builddsl-library}
 
-As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the [FileExtensions]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.java). We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to [File]({{site.javadoc.java}}/java/io/File.html):
+As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the [FileExtensions]({{site.src.sevenlang}}/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.xtend). We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to [File]({{site.javadoc.java}}/java/io/File.html):
 
 *   DSL:
     
