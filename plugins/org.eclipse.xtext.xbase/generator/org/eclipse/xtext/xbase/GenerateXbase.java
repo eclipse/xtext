@@ -11,7 +11,6 @@ import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
-import org.eclipse.xtext.generator.types.TypesGeneratorFragment;
 import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
+import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
 /**
@@ -138,7 +138,7 @@ final class GenerateXbase {
 				validator.setInheritImplementation(false);
 				addFragment(new FragmentAdapter(validator));
 				addFragment(new ImportNamespacesScopingFragment2());
-				addFragment(new FragmentAdapter(new TypesGeneratorFragment()));
+				addFragment(new TypesGeneratorFragment2());
 				XbaseGeneratorFragment2 xbase = new XbaseGeneratorFragment2();
 				xbase.setGenerateXtendInferrer(false);
 				xbase.setUseInferredJvmModel(false);
@@ -179,7 +179,7 @@ final class GenerateXbase {
 				addFragment(new FragmentAdapter(antlrDebug));
 				addFragment(new FragmentAdapter(new JavaValidatorFragment()));
 				addFragment(new ImportNamespacesScopingFragment2());
-				addFragment(new FragmentAdapter(new TypesGeneratorFragment()));
+				addFragment(new TypesGeneratorFragment2());
 				XbaseGeneratorFragment2 xbase = new XbaseGeneratorFragment2();
 				xbase.setGenerateXtendInferrer(false);
 				xbase.setUseInferredJvmModel(false);

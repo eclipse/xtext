@@ -31,6 +31,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -134,6 +135,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   public void initialize() {
     if ((this.injector == null)) {
       XtextGenerator.LOG.info("Initializing Xtext generator");
+      StandaloneSetup _standaloneSetup = new StandaloneSetup();
+      _standaloneSetup.addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
       Injector _createInjector = this.createInjector();
       this.injector = _createInjector;
       this.injector.injectMembers(this);

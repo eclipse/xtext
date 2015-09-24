@@ -184,9 +184,7 @@ Workflow {
 					useJdtRefactoring = true
 				}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = types.TypesGeneratorFragment {}
-			}
+			fragment = types.TypesGeneratorFragment2 {}
 			fragment = xbase.XbaseGeneratorFragment2 {
 				generateXtendInferrer = false
 			}

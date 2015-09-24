@@ -98,7 +98,7 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
 	public Class<? extends PrefixMatcher> bindPrefixMatcher() {
 		return FQNPrefixMatcher.class;
 	}

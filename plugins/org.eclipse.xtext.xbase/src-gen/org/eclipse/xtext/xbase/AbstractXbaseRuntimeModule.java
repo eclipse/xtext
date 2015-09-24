@@ -146,7 +146,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return TypesAwareDefaultGlobalScopeProvider.class;
 	}
