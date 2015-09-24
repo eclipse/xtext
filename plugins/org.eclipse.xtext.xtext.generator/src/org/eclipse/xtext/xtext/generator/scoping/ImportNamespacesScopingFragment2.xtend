@@ -12,7 +12,6 @@ import com.google.inject.name.Names
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.IgnoreCaseLinking
@@ -22,13 +21,15 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
+import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.util.GrammarUtil2
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
+import static org.eclipse.xtext.GrammarUtil.*
+
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
+import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 	
@@ -47,19 +48,19 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 	boolean inheritImplementation = true
 	
 	protected def TypeReference getScopeProviderClass(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage + '.scoping.' + GrammarUtil.getSimpleName(grammar) + 'ScopeProvider')
+		new TypeReference(grammar.runtimeBasePackage + '.scoping.' + getSimpleName(grammar) + 'ScopeProvider')
 	}
 	
 	protected def TypeReference getScopeProviderSuperClass(Grammar grammar) {
-		val superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar)
+		val superGrammar = grammar.nonTerminalsSuperGrammar
 		if (inheritImplementation && superGrammar !== null) 
-			grammar.scopeProviderClass
+			superGrammar.scopeProviderClass
 		else 
 			defaultScopeProviderSuperClass
 	}
 
 	protected def TypeReference getDefaultScopeProviderSuperClass() {
-		return AbstractDeclarativeScopeProvider.typeRef
+		new TypeReference(AbstractDeclarativeScopeProvider)
 	}
 	
 	override generate() {

@@ -43,6 +43,7 @@ Export-Package: org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.generator.scoping,
  org.eclipse.xtext.xtext.generator.types,
  org.eclipse.xtext.xtext.generator.util,
+ org.eclipse.xtext.xtext.generator.validation,
  org.eclipse.xtext.xtext.generator.web,
  org.eclipse.xtext.xtext.generator.xbase
 
