@@ -10,7 +10,6 @@ import org.eclipse.xtext.generator.parser.antlr.DebugAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
-import org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.generator.types.TypesGeneratorFragment;
 import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
+import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
 /**
@@ -137,7 +137,7 @@ final class GenerateXbase {
 				JavaValidatorFragment validator = new JavaValidatorFragment();
 				validator.setInheritImplementation(false);
 				addFragment(new FragmentAdapter(validator));
-				addFragment(new FragmentAdapter(new ImportNamespacesScopingFragment()));
+				addFragment(new ImportNamespacesScopingFragment2());
 				addFragment(new FragmentAdapter(new TypesGeneratorFragment()));
 				XbaseGeneratorFragment2 xbase = new XbaseGeneratorFragment2();
 				xbase.setGenerateXtendInferrer(false);
@@ -178,7 +178,7 @@ final class GenerateXbase {
 				antlrDebug.setOptions(antlrOptions);
 				addFragment(new FragmentAdapter(antlrDebug));
 				addFragment(new FragmentAdapter(new JavaValidatorFragment()));
-				addFragment(new FragmentAdapter(new ImportNamespacesScopingFragment()));
+				addFragment(new ImportNamespacesScopingFragment2());
 				addFragment(new FragmentAdapter(new TypesGeneratorFragment()));
 				XbaseGeneratorFragment2 xbase = new XbaseGeneratorFragment2();
 				xbase.setGenerateXtendInferrer(false);
