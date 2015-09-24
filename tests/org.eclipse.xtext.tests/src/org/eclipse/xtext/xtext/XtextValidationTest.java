@@ -1711,6 +1711,23 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	@Test public void testActionAllowed_02() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: name=ID Fragment;\n" +
+			"fragment Fragment: {Model.prev=current};\n";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(1);
+		Action action = (Action) rule.getAlternatives();
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkAssignedActionAfterAssignment(action);
+		messageAcceptor.validate();
+	}
+	
 	@Test public void testPredicatedUnorderedGroup_01() throws Exception {
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
