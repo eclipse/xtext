@@ -109,6 +109,7 @@ Workflow {
 				encoding = "ISO-8859-1"
 				lineDelimiter = lineDelimiter
 				fileHeader = fileHeader
+				preferXtendStubs = false
 			}
 		}
 		language = {
@@ -142,9 +143,7 @@ Workflow {
 					options = auto-inject {}
 				}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = validation.JavaValidatorFragment {}
-			}
+			fragment = validation.ValidatorFragment2 {}
 			fragment = formatting.Formatter2Fragment2 {}
 			fragment = generator.GeneratorFragment2 {}
 			fragment = scoping.ImportNamespacesScopingFragment2 {}

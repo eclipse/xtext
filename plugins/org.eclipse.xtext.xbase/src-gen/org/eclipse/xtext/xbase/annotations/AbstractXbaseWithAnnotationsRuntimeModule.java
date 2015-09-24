@@ -48,7 +48,7 @@ import org.eclipse.xtext.xbase.annotations.parser.antlr.internal.InternalXbaseWi
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSemanticSequencer;
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSyntacticSequencer;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
+import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsValidator;
 import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 
@@ -135,10 +135,10 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 		return AntlrTokenDefProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	@SingletonBinding(eager=true)
-	public Class<? extends XbaseWithAnnotationsJavaValidator> bindXbaseWithAnnotationsJavaValidator() {
-		return XbaseWithAnnotationsJavaValidator.class;
+	public Class<? extends XbaseWithAnnotationsValidator> bindXbaseWithAnnotationsValidator() {
+		return XbaseWithAnnotationsValidator.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2

@@ -18,7 +18,7 @@ import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.serializer.XtendSemanticSequencer;
 import org.eclipse.xtend.core.serializer.XtendSyntacticSequencer;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
-import org.eclipse.xtend.core.validation.XtendJavaValidator;
+import org.eclipse.xtend.core.validation.XtendValidator;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
@@ -147,10 +147,10 @@ public abstract class AbstractXtendRuntimeModule extends DefaultXbaseWithAnnotat
 		return AntlrTokenDefProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	@SingletonBinding(eager=true)
-	public Class<? extends XtendJavaValidator> bindXtendJavaValidator() {
-		return XtendJavaValidator.class;
+	public Class<? extends XtendValidator> bindXtendValidator() {
+		return XtendValidator.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2

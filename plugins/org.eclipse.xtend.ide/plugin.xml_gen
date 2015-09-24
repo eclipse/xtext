@@ -222,28 +222,27 @@
 	    </resourceServiceProvider>
 	</extension>
 	
-	
 	<!-- marker definitions for org.eclipse.xtend.core.Xtend -->
 	<extension
-	        id="xtend.check.fast"
-	        name="Xtend Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.fast"/>
-	    <persistent value="true"/>
+			id="xtend.check.fast"
+			name="Xtend Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
 	</extension>
 	<extension
-	        id="xtend.check.normal"
-	        name="Xtend Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.normal"/>
-	    <persistent value="true"/>
+			id="xtend.check.normal"
+			name="Xtend Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
 	</extension>
 	<extension
-	        id="xtend.check.expensive"
-	        name="Xtend Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.expensive"/>
-	    <persistent value="true"/>
+			id="xtend.check.expensive"
+			name="Xtend Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
 	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant

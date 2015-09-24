@@ -50,7 +50,7 @@ import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xbase.serializer.XbaseSyntacticSequencer;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xbase.validation.XbaseValidator;
 
 /**
  * Manual modifications go to {@link XbaseRuntimeModule}.
@@ -135,10 +135,10 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 		return AntlrTokenDefProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	@SingletonBinding(eager=true)
-	public Class<? extends XbaseJavaValidator> bindXbaseJavaValidator() {
-		return XbaseJavaValidator.class;
+	public Class<? extends XbaseValidator> bindXbaseValidator() {
+		return XbaseValidator.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2

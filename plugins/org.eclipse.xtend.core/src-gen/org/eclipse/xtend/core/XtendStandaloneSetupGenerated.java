@@ -39,6 +39,5 @@ public class XtendStandaloneSetupGenerated implements ISetup {
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtend", serviceProvider);
 		
 		
-		
 	}
 }

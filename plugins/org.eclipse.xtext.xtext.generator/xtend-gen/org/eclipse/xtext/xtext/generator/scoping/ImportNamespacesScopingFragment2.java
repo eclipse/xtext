@@ -83,7 +83,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
         _and = (superGrammar != null);
       }
       if (_and) {
-        _xifexpression = this.getScopeProviderClass(grammar);
+        _xifexpression = this.getScopeProviderClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultScopeProviderSuperClass();
       }
@@ -93,7 +93,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   }
   
   protected TypeReference getDefaultScopeProviderSuperClass() {
-    return TypeReference.typeRef(AbstractDeclarativeScopeProvider.class);
+    return new TypeReference(AbstractDeclarativeScopeProvider.class);
   }
   
   @Override
