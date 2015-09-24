@@ -35,6 +35,7 @@ import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -140,9 +141,9 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 		return XbaseJavaValidator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
-		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
+		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
 	
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
