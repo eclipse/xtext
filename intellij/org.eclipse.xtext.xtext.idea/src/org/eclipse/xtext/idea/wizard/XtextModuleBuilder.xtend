@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.wizard
 
+import com.google.inject.Inject
 import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
@@ -25,19 +26,29 @@ import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
 import org.eclipse.xtext.idea.Icons
+import org.eclipse.xtext.idea.lang.XtextLanguage
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
+import org.eclipse.xtext.idea.wizard.IdeaProjectCreator.Factory
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 import org.jetbrains.idea.maven.project.MavenProjectsManager
+import org.jetbrains.plugins.gradle.settings.DistributionType
 import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
 import org.jetbrains.plugins.gradle.util.GradleConstants
-import org.jetbrains.plugins.gradle.settings.DistributionType
+import com.google.inject.Provider
 
 class XtextModuleBuilder extends ModuleBuilder {
 
-	extension ProjectLifecycleUtil = new ProjectLifecycleUtil
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
 
-	WizardConfiguration wizardConfiguration = new WizardConfiguration
+	@Inject extension ProjectLifecycleUtil
+	@Inject Provider<WizardConfiguration> wizardConfigProvider
+	@Inject WizardConfiguration wizardConfiguration
+	@Inject Factory projectCreatorfactory
+
+	new() {
+		XtextLanguage.INSTANCE.injectMembers(this)
+		wizardConfiguration = wizardConfigProvider.get
+	}
 
 	override getNodeIcon() {
 		Icons.DSL_FILE_TYPE
@@ -77,6 +88,9 @@ class XtextModuleBuilder extends ModuleBuilder {
 
 	override commitModule(Project project, ModifiableModuleModel model) {
 		val modulesCreated = commit(project, model, null)
+		if (wizardConfiguration.parentProject.enabled) {
+			return modulesCreated.findFirst[module|module.name == wizardConfiguration.parentProject.name]
+		}
 		return modulesCreated.findFirst[module|name == module.name]
 	}
 
@@ -88,11 +102,11 @@ class XtextModuleBuilder extends ModuleBuilder {
 
 		setupWizardConfiguration(wizardConfiguration)
 
-		wizardConfiguration.rootLocation = project.basePath
+		wizardConfiguration.rootLocation = project.baseDir.path
 		wizardConfiguration.baseName = name
 
 		ApplicationManager.getApplication().runWriteAction [
-			new IdeaProjectCreator(moduleModel).createProjects(wizardConfiguration)
+			projectCreatorfactory.create(moduleModel).createProjects(wizardConfiguration)
 			moduleModel.commit
 		]
 
@@ -105,7 +119,7 @@ class XtextModuleBuilder extends ModuleBuilder {
 					if (virtualFile !== null) {
 						manager.addManagedFilesOrUnignore(#[virtualFile])
 					} else {
-						LOG.warn('''Can't start maven import. File «pomFilePath» does not exists.''')
+						LOG.error('''Can't start maven import. File «pomFilePath» does not exists.''')
 					}
 				}
 			]
@@ -123,8 +137,10 @@ class XtextModuleBuilder extends ModuleBuilder {
 	}
 
 	def setupWizardConfiguration(WizardConfiguration wizardConfiguration) {
-		wizardConfiguration.parentProject.nameQualifier = ''
-		wizardConfiguration.runtimeProject.nameQualifier = '.core'
+		// TODO root module will became a '.parent' ending SettingsPage will not validate this
+		// See com.intellij.ide.projectWizard.ProjectSettingsStep.getModuleNameField()
+		// wizardConfiguration.parentProject.nameQualifier = ''
+		// wizardConfiguration.runtimeProject.nameQualifier = '.core'
 	}
 
 	override int getWeight() {

@@ -25,37 +25,42 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 
 	@Test
 	def void testCreateProject() {
-		val modules = builder.commit(project)
+		val modules = executeModuleBuilder
 		assertEquals(1, modules.size)
-		assertEquals("mydsl.core", modules.get(0).name)
-		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl.core/mydsl.core.iml'))
+		assertEquals("mydsl", modules.get(0).name)
+		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl/mydsl.iml'))
+	}
+
+	def executeModuleBuilder() {
+		val modules = builder.commit(project)
+		return modules
 	}
 
 	@Test
 	def void testCreateGradleProject() {
 		builder.wizardConfiguration.preferredBuildSystem = BuildSystem.GRADLE
-		val modules = builder.commit(project)
+		val modules = executeModuleBuilder
 
 		assertEquals(2, modules.size)
-		assertEquals("mydsl", modules.get(0).name)
-		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl/mydsl.iml'))
+		assertEquals("mydsl.parent", modules.get(0).name)
+		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl.parent/mydsl.parent.iml'))
 
-		assertEquals("mydsl.core", modules.get(1).name)
-		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl.core/mydsl.core.iml'))
+		assertEquals("mydsl", modules.get(1).name)
+		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl/mydsl.iml'))
 	}
 
 	@Test
 	def void testCreateGradleHirachicalProject() {
 		builder.wizardConfiguration.preferredBuildSystem = BuildSystem.GRADLE
 		builder.wizardConfiguration.projectLayout = ProjectLayout.HIERARCHICAL
-		val modules = builder.commit(project)
+		val modules = executeModuleBuilder
 
 		assertEquals(2, modules.size)
-		assertEquals("mydsl", modules.get(0).name)
-		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl/mydsl.iml'))
+		assertEquals("mydsl.parent", modules.get(0).name)
+		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl.parent/mydsl.parent.iml'))
 
-		assertEquals("mydsl.core", modules.get(1).name)
-		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl/mydsl.core/mydsl.core.iml'))
+		assertEquals("mydsl", modules.get(1).name)
+		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl.parent/mydsl/mydsl.iml'))
 		val allModules = ModuleManager.getInstance(project).modules
 		assertEquals(2, allModules.size)
 	}
@@ -64,24 +69,31 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 	def void testCreateTwoLanguagesProject() {
 		val allModules = ModuleManager.getInstance(project).modules
 		assertEquals(0, allModules.size)
-		builder.wizardConfiguration.preferredBuildSystem = BuildSystem.GRADLE
+		builder.wizardConfiguration.preferredBuildSystem = BuildSystem.MAVEN
 		builder.wizardConfiguration.projectLayout = ProjectLayout.HIERARCHICAL
 		builder.name = "mydsl"
 
-		val modules = builder.commit(project)
+		val modules = executeModuleBuilder
 		assertEquals(2, modules.size)
-		assertEquals("mydsl", modules.get(0).name)
-		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl/mydsl.iml'))
+		assertEquals("mydsl.parent", modules.get(0).name)
+		assertTrue(modules.get(0).moduleFilePath.endsWith('/mydsl.parent/mydsl.parent.iml'))
 
-		assertEquals("mydsl.core", modules.get(1).name)
-		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl/mydsl.core/mydsl.core.iml'))
+		assertEquals("mydsl", modules.get(1).name)
+		assertTrue(modules.get(1).moduleFilePath.endsWith('/mydsl.parent/mydsl/mydsl.iml'))
 
 		builder.name = "mydsl2"
 
 		val rootModule = builder.commitModule(project, null)
-		assertEquals("mydsl2", rootModule.name)
-		assertTrue(rootModule.moduleFilePath.endsWith('/mydsl2/mydsl2.iml'))
-		assertFalse(rootModule.moduleFilePath.endsWith('/mydsl/mydsl2/mydsl2.iml'))
+		assertEquals("mydsl2.parent", rootModule.name)
+		assertEquals('''Wrong .iml path  «rootModule.moduleFilePath»''',
+			project.basePath + '/mydsl2.parent/mydsl2.parent.iml', rootModule.moduleFilePath)
 
 	}
+
+	override protected tearDown() throws Exception {
+		if (project !== null)
+			myModulesToDispose.addAll(ModuleManager.getInstance(project).modules)
+		super.tearDown()
+	}
+
 }

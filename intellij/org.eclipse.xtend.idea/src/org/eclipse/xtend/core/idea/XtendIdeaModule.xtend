@@ -57,6 +57,8 @@ import com.google.inject.name.Names
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.util.Key
 import com.intellij.psi.util.PsiModificationTracker
+import org.eclipse.xtext.idea.config.XtextProjectConfigurator
+import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator
 
 class XtendIdeaModule extends AbstractXtendIdeaModule {
 	
@@ -152,5 +154,9 @@ class XtendIdeaModule extends AbstractXtendIdeaModule {
 
 	@SingletonBinding def Class<? extends BaseXtextFindUsageProvider> bindBaseXtextFindUsageProvider() {
 		return XtendFindUsageProvider
+	}
+	
+	def Class<? extends XtextProjectConfigurator> bindXtextProjectConfigurator() {
+		return XtendProjectConfigurator
 	}
 }

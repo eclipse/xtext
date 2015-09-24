@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.wizard;
 
+import com.google.common.collect.Iterables;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.ProjectBuilder;
 import com.intellij.ide.util.projectWizard.WizardContext;
@@ -9,6 +10,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.ui.components.JBTextField;
 import java.awt.GridBagConstraints;
+import java.util.Set;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -19,14 +21,18 @@ import org.eclipse.xtext.idea.wizard.XtextModuleBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -65,6 +71,7 @@ public class XtextWizardStep extends ModuleWizardStep {
       if ((this.mainPanel == null)) {
         JPanel _createMainPanel = this.createMainPanel();
         this.mainPanel = _createMainPanel;
+        this.idea.setSelected(true);
       }
       return this.mainPanel;
     } catch (final Throwable _t) {
@@ -248,17 +255,32 @@ public class XtextWizardStep extends ModuleWizardStep {
     RuntimeProjectDescriptor _runtimeProject = config.getRuntimeProject();
     _runtimeProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = config.getIdeProject();
-    _ideProject.setEnabled(true);
-    RuntimeProjectDescriptor _runtimeProject_1 = config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject_1.getTestProject();
-    boolean _isSelected = this.test.isSelected();
-    _testProject.setEnabled(_isSelected);
+    boolean _or = false;
+    boolean _isSelected = this.idea.isSelected();
+    if (_isSelected) {
+      _or = true;
+    } else {
+      boolean _isSelected_1 = this.web.isSelected();
+      _or = _isSelected_1;
+    }
+    _ideProject.setEnabled(_or);
     IntellijProjectDescriptor _intellijProject = config.getIntellijProject();
-    boolean _isSelected_1 = this.idea.isSelected();
-    _intellijProject.setEnabled(_isSelected_1);
-    WebProjectDescriptor _webProject = config.getWebProject();
     boolean _isSelected_2 = this.idea.isSelected();
-    _webProject.setEnabled(_isSelected_2);
+    _intellijProject.setEnabled(_isSelected_2);
+    WebProjectDescriptor _webProject = config.getWebProject();
+    boolean _isSelected_3 = this.web.isSelected();
+    _webProject.setEnabled(_isSelected_3);
+    Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
+    Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
+    final Procedure1<TestedProjectDescriptor> _function = new Procedure1<TestedProjectDescriptor>() {
+      @Override
+      public void apply(final TestedProjectDescriptor it) {
+        TestProjectDescriptor _testProject = it.getTestProject();
+        boolean _isSelected = XtextWizardStep.this.test.isSelected();
+        _testProject.setEnabled(_isSelected);
+      }
+    };
+    IterableExtensions.<TestedProjectDescriptor>forEach(_filter, _function);
     Object _selectedItem = this.buildSystem.getSelectedItem();
     config.setPreferredBuildSystem(((BuildSystem) _selectedItem));
     Object _selectedItem_1 = this.layout.getSelectedItem();

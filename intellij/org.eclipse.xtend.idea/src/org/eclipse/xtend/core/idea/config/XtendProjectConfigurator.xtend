@@ -8,8 +8,6 @@
 package org.eclipse.xtend.core.idea.config
 
 import com.google.inject.Inject
-import com.intellij.facet.FacetManager
-import com.intellij.facet.FacetTypeRegistry
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableRootModel
@@ -18,16 +16,16 @@ import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
+import org.eclipse.xtext.idea.config.XtextProjectConfigurator
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState
+import org.jetbrains.jps.model.java.JavaSourceRootProperties
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
-import org.jetbrains.jps.model.module.JpsModuleSourceRoot
-import org.jetbrains.jps.model.java.JavaSourceRootProperties
 
 /**
  * @author dhuebner - Initial contribution and API
  */
-class XtendProjectConfigurator {
+class XtendProjectConfigurator extends XtextProjectConfigurator {
 	@Inject extension GradleBuildFileUtility
 
 	def setupOutputConfiguration(ModifiableRootModel rootModel, XtendFacetConfiguration conf) {
@@ -41,15 +39,7 @@ class XtendProjectConfigurator {
 	}
 
 	def XtendFacetConfiguration createOrGetXtendFacetConf(Module module) {
-		val facetType = FacetTypeRegistry.getInstance().findFacetType(XtendLanguage.INSTANCE.ID)
-		if (facetType === null) {
-			return null
-		}
-		val mnr = FacetManager.getInstance(module)
-		var facet = mnr.findFacet(facetType.id, facetType.defaultFacetName) ?:
-			FacetManager.getInstance(module).addFacet(facetType, facetType.defaultFacetName, null)
-		return facet.configuration as XtendFacetConfiguration
-
+		return createOrGetFacetConf(module, XtendLanguage.INSTANCE.ID) as XtendFacetConfiguration
 	}
 
 	def presetGradleOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {

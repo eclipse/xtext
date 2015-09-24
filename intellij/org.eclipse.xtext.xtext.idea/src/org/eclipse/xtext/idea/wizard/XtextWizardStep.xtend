@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.wizard.ProjectLayout
 import org.eclipse.xtext.xtext.wizard.SourceLayout
 
 import static java.awt.GridBagConstraints.*
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor
 
 class XtextWizardStep extends ModuleWizardStep {
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
@@ -44,6 +45,7 @@ class XtextWizardStep extends ModuleWizardStep {
 		try {
 			if (mainPanel === null) {
 				mainPanel = createMainPanel()
+				idea.selected = true
 			}
 			return mainPanel
 		} catch (Exception exception) {
@@ -75,6 +77,7 @@ class XtextWizardStep extends ModuleWizardStep {
 
 			row [expand(VERTICAL) label("")]
 		]
+		
 	}
 
 	override updateDataModel() {
@@ -85,10 +88,10 @@ class XtextWizardStep extends ModuleWizardStep {
 		config.language.fileExtensions = FileExtensions.fromString(extensionField.text)
 
 		config.runtimeProject.enabled = true
-		config.ideProject.enabled = true
-		config.runtimeProject.testProject.enabled = test.selected
+		config.ideProject.enabled = idea.selected || web.selected
 		config.intellijProject.enabled = idea.selected
-		config.webProject.enabled = idea.selected
+		config.webProject.enabled = web.selected
+		config.enabledProjects.filter(TestedProjectDescriptor).forEach[testProject.enabled = test.selected]
 
 		config.preferredBuildSystem = buildSystem.selectedItem as BuildSystem
 		config.sourceLayout = layout.selectedItem as SourceLayout

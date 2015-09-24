@@ -1,6 +1,8 @@
 package org.eclipse.xtext.idea.wizard;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
@@ -33,6 +35,7 @@ import java.util.List;
 import javax.swing.Icon;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.Icons;
+import org.eclipse.xtext.idea.lang.XtextLanguage;
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 import org.eclipse.xtext.idea.wizard.IdeaProjectCreator;
 import org.eclipse.xtext.idea.wizard.XtextWizardStep;
@@ -42,7 +45,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 import org.jetbrains.idea.maven.project.MavenProjectsManager;
 import org.jetbrains.plugins.gradle.settings.DistributionType;
@@ -51,12 +53,26 @@ import org.jetbrains.plugins.gradle.util.GradleConstants;
 
 @SuppressWarnings("all")
 public class XtextModuleBuilder extends ModuleBuilder {
-  @Extension
-  private ProjectLifecycleUtil _projectLifecycleUtil = new ProjectLifecycleUtil();
-  
   private final static Logger LOG = Logger.getInstance(XtextWizardStep.class.getName());
   
-  private WizardConfiguration wizardConfiguration = new WizardConfiguration();
+  @Inject
+  @Extension
+  private ProjectLifecycleUtil _projectLifecycleUtil;
+  
+  @Inject
+  private Provider<WizardConfiguration> wizardConfigProvider;
+  
+  @Inject
+  private WizardConfiguration wizardConfiguration;
+  
+  @Inject
+  private IdeaProjectCreator.Factory projectCreatorfactory;
+  
+  public XtextModuleBuilder() {
+    XtextLanguage.INSTANCE.injectMembers(this);
+    WizardConfiguration _get = this.wizardConfigProvider.get();
+    this.wizardConfiguration = _get;
+  }
   
   @Override
   public Icon getNodeIcon() {
@@ -107,7 +123,21 @@ public class XtextModuleBuilder extends ModuleBuilder {
   @Override
   public Module commitModule(final Project project, final ModifiableModuleModel model) {
     final List<Module> modulesCreated = this.commit(project, model, null);
-    final Function1<Module, Boolean> _function = new Function1<Module, Boolean>() {
+    ParentProjectDescriptor _parentProject = this.wizardConfiguration.getParentProject();
+    boolean _isEnabled = _parentProject.isEnabled();
+    if (_isEnabled) {
+      final Function1<Module, Boolean> _function = new Function1<Module, Boolean>() {
+        @Override
+        public Boolean apply(final Module module) {
+          String _name = module.getName();
+          ParentProjectDescriptor _parentProject = XtextModuleBuilder.this.wizardConfiguration.getParentProject();
+          String _name_1 = _parentProject.getName();
+          return Boolean.valueOf(Objects.equal(_name, _name_1));
+        }
+      };
+      return IterableExtensions.<Module>findFirst(modulesCreated, _function);
+    }
+    final Function1<Module, Boolean> _function_1 = new Function1<Module, Boolean>() {
       @Override
       public Boolean apply(final Module module) {
         String _name = XtextModuleBuilder.this.getName();
@@ -115,7 +145,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
         return Boolean.valueOf(Objects.equal(_name, _name_1));
       }
     };
-    return IterableExtensions.<Module>findFirst(modulesCreated, _function);
+    return IterableExtensions.<Module>findFirst(modulesCreated, _function_1);
   }
   
   @Override
@@ -129,16 +159,17 @@ public class XtextModuleBuilder extends ModuleBuilder {
     }
     final ModifiableModuleModel moduleModel = _xifexpression;
     this.setupWizardConfiguration(this.wizardConfiguration);
-    String _basePath = project.getBasePath();
-    this.wizardConfiguration.setRootLocation(_basePath);
+    VirtualFile _baseDir = project.getBaseDir();
+    String _path = _baseDir.getPath();
+    this.wizardConfiguration.setRootLocation(_path);
     String _name = this.getName();
     this.wizardConfiguration.setBaseName(_name);
     Application _application = ApplicationManager.getApplication();
     final Runnable _function = new Runnable() {
       @Override
       public void run() {
-        IdeaProjectCreator _ideaProjectCreator = new IdeaProjectCreator(moduleModel);
-        _ideaProjectCreator.createProjects(XtextModuleBuilder.this.wizardConfiguration);
+        IdeaProjectCreator _create = XtextModuleBuilder.this.projectCreatorfactory.create(moduleModel);
+        _create.createProjects(XtextModuleBuilder.this.wizardConfiguration);
         moduleModel.commit();
       }
     };
@@ -163,7 +194,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
               _builder.append("Can\'t start maven import. File ");
               _builder.append(pomFilePath, "");
               _builder.append(" does not exists.");
-              XtextModuleBuilder.LOG.warn(_builder.toString());
+              XtextModuleBuilder.LOG.error(_builder);
             }
           }
         }
@@ -186,11 +217,8 @@ public class XtextModuleBuilder extends ModuleBuilder {
     return (List<Module>)Conversions.doWrapArray(moduleModel.getModules());
   }
   
-  public void setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
-    ParentProjectDescriptor _parentProject = wizardConfiguration.getParentProject();
-    _parentProject.setNameQualifier("");
-    RuntimeProjectDescriptor _runtimeProject = wizardConfiguration.getRuntimeProject();
-    _runtimeProject.setNameQualifier(".core");
+  public Object setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
+    return null;
   }
   
   @Override
