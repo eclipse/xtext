@@ -147,9 +147,7 @@ Workflow {
 			}
 			fragment = formatting.Formatter2Fragment2 {}
 			fragment = generator.GeneratorFragment2 {}
-			fragment = adapter.FragmentAdapter {
-				fragment = scoping.ImportNamespacesScopingFragment {}
-			}
+			fragment = scoping.ImportNamespacesScopingFragment2 {}
 			fragment = builder.BuilderIntegrationFragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = quickfix.QuickfixProviderFragment {}
