@@ -73,8 +73,10 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
     Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
     Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
-    ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.web.servlet");
+    ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase.web");
     deps.add(_createXtextDependency);
+    ExternalDependency _createXtextDependency_1 = ExternalDependency.createXtextDependency("org.eclipse.xtext.web.servlet");
+    deps.add(_createXtextDependency_1);
     ExternalDependency _createMavenDependency = ExternalDependency.createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}");
     deps.add(_createMavenDependency);
     ExternalDependency _createMavenDependency_1 = ExternalDependency.createMavenDependency(("org.webjars:requirejs:" + WebProjectDescriptor.REQUIREJS_VERSION));

@@ -4,6 +4,7 @@ plugins {
 dependencies {
 	compile project(':org.xtext.example.full')
 	compile project(':org.xtext.example.full.ide')
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.web:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
 	compile "org.webjars:requirejs:2.1.17"
