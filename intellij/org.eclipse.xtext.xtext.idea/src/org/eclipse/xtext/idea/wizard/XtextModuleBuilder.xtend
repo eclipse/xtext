@@ -2,7 +2,7 @@ package org.eclipse.xtext.idea.wizard
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.intellij.ide.util.projectWizard.EmptyModuleBuilder
+import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
 import com.intellij.openapi.Disposable
@@ -36,7 +36,7 @@ import org.jetbrains.plugins.gradle.settings.DistributionType
 import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
 import org.jetbrains.plugins.gradle.util.GradleConstants
 
-class XtextModuleBuilder extends EmptyModuleBuilder {
+class XtextModuleBuilder extends ModuleBuilder {
 
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
 
@@ -74,14 +74,6 @@ class XtextModuleBuilder extends EmptyModuleBuilder {
 		return JavaModuleType.JAVA_GROUP
 	}
 
-	override boolean isOpenProjectSettingsAfter() {
-		return false
-	}
-
-	override canCreateModule() {
-		true
-	}
-
 	override int getWeight() {
 		return 53
 	}
@@ -96,10 +88,6 @@ class XtextModuleBuilder extends EmptyModuleBuilder {
 
 	override ModuleWizardStep getCustomOptionsStep(WizardContext context, Disposable parentDisposable) {
 		return new XtextWizardStep(context)
-	}
-
-	override isTemplateBased() {
-		return false
 	}
 
 	override void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {

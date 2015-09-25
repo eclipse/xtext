@@ -3,7 +3,7 @@ package org.eclipse.xtext.idea.wizard;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.intellij.ide.util.projectWizard.EmptyModuleBuilder;
+import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.Disposable;
@@ -52,7 +52,7 @@ import org.jetbrains.plugins.gradle.settings.GradleProjectSettings;
 import org.jetbrains.plugins.gradle.util.GradleConstants;
 
 @SuppressWarnings("all")
-public class XtextModuleBuilder extends EmptyModuleBuilder {
+public class XtextModuleBuilder extends ModuleBuilder {
   private final static Logger LOG = Logger.getInstance(XtextWizardStep.class.getName());
   
   @Inject
@@ -105,16 +105,6 @@ public class XtextModuleBuilder extends EmptyModuleBuilder {
   }
   
   @Override
-  public boolean isOpenProjectSettingsAfter() {
-    return false;
-  }
-  
-  @Override
-  public boolean canCreateModule() {
-    return true;
-  }
-  
-  @Override
   public int getWeight() {
     return 53;
   }
@@ -133,11 +123,6 @@ public class XtextModuleBuilder extends EmptyModuleBuilder {
   @Override
   public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
     return new XtextWizardStep(context);
-  }
-  
-  @Override
-  public boolean isTemplateBased() {
-    return false;
   }
   
   @Override
