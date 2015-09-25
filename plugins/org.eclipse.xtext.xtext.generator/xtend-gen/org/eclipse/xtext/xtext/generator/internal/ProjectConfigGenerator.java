@@ -151,6 +151,11 @@ public class ProjectConfigGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("IXtextGeneratorFileSystemAccess getRuntimeModelGen();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
     {
       for(final String p : ProjectConfigGenerator.PROJECTS) {
         _builder.append("\t");
@@ -278,6 +283,9 @@ public class ProjectConfigGenerator {
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private IXtextGeneratorFileSystemAccess runtimeModelGen;");
     _builder.newLine();
     {
       for(final String p : ProjectConfigGenerator.PROJECTS) {
@@ -415,6 +423,15 @@ public class ProjectConfigGenerator {
     _builder.append("\t\t");
     _builder.append("injector.injectMembers(this);");
     _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (runtimeModelGen != null) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("runtimeModelGen.initialize(injector);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
     {
       for(final String p_2 : ProjectConfigGenerator.PROJECTS) {
         _builder.append("\t\t");
@@ -488,6 +505,31 @@ public class ProjectConfigGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public IXtextGeneratorFileSystemAccess getRuntimeModelGen() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return runtimeModelGen;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void setRuntimeModelGen(String path) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.runtimeModelGen = new XtextGeneratorFileSystemAccess(path, true);");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

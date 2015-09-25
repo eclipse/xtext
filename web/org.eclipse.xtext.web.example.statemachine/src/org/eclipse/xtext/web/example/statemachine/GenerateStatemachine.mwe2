@@ -74,11 +74,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 
 			// generates Java API for the generated EPackages
-			fragment = adapter.FragmentAdapter {
-				fragment = ecore.EMFGeneratorFragment auto-inject {
-					javaModelDirectory = "/${projectName}/src-gen"
-				}
-			}
+			fragment = ecore.EMFGeneratorFragment2 auto-inject {}
 
 			fragment = adapter.FragmentAdapter {
 				fragment = serializer.SerializerFragment auto-inject {
@@ -98,19 +94,13 @@ Workflow {
 			}
 
 			// Xtend-based API for validation
-			fragment = adapter.FragmentAdapter {
-				fragment = validation.ValidatorFragment auto-inject {
-				    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				}
+			fragment = validation.ValidatorFragment2 auto-inject {
+			    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
 
 			// scoping and exporting API
-			fragment = adapter.FragmentAdapter {
-				fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = exporting.QualifiedNamesFragment auto-inject {}
-			}
+			fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
+			fragment = exporting.QualifiedNamesFragment2 auto-inject {}
 
 			// generator API
 			fragment = generator.GeneratorFragment2 auto-inject {}

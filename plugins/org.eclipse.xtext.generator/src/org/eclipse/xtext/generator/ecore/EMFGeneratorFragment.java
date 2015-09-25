@@ -834,8 +834,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	/**
-	 * Sets the target directory for the generated EMF-editor code. Only needed if you want to generate an EMF editor
-	 * plug_in.
+	 * Sets the target directory for the generated EMF-editor code. Only needed if you want to generate an EMF editor plug-in.
 	 * 
 	 * @param editorDirectory
 	 */
@@ -844,8 +843,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	/**
-	 * Sets the plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor
-	 * plug_in.
+	 * Sets the plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
 	 * 
 	 * @param editorPluginId
 	 */
@@ -854,7 +852,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	/**
-	 * Sets the plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF editor plug_in.
+	 * Sets the plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
 	 * 
 	 * @param editPluginId
 	 */

@@ -214,11 +214,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						«ENDIF»
 				
 						// generates Java API for the generated EPackages
-						fragment = adapter.FragmentAdapter { 
-							fragment = ecore.EMFGeneratorFragment auto-inject {
-								javaModelDirectory = "/${projectName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
-								updateBuildProperties = «isEclipsePluginProject»
-							}
+						fragment = ecore.EMFGeneratorFragment2 auto-inject {
+							«IF !isEclipsePluginProject»
+								updateBuildProperties = false
+							«ENDIF»
 						}
 			
 						fragment = adapter.FragmentAdapter {
@@ -238,19 +237,13 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						}
 			
 						// Xtend-based API for validation
-						fragment = adapter.FragmentAdapter {
-							fragment = validation.ValidatorFragment auto-inject {
-							//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-							}
+						fragment = validation.ValidatorFragment2 auto-inject {
+						//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 						}
 			
 						// scoping and exporting API
-						fragment = adapter.FragmentAdapter {
-							fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-						}
-						fragment = adapter.FragmentAdapter {
-							fragment = exporting.QualifiedNamesFragment auto-inject {}
-						}
+						fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
+						fragment = exporting.QualifiedNamesFragment2 auto-inject {}
 			
 						// generator API
 						fragment = generator.GeneratorFragment2 {}
@@ -315,9 +308,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 						«ENDIF»
 						// provides the necessary bindings for java types integration
-						fragment = adapter.FragmentAdapter {
-							fragment = types.TypesGeneratorFragment auto-inject {}
-						}
+						fragment = types.TypesGeneratorFragment2 auto-inject {}
 			
 						// generates the required bindings only if the grammar inherits from Xbase
 						fragment = xbase.XbaseGeneratorFragment2 auto-inject {}

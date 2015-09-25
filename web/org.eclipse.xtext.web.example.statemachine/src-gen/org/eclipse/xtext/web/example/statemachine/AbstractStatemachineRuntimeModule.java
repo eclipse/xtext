@@ -29,7 +29,10 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -130,33 +133,33 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 		return AntlrTokenDefProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.validation.ValidatorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	@SingletonBinding(eager=true)
 	public Class<? extends StatemachineValidator> bindStatemachineValidator() {
 		return StatemachineValidator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return StatemachineScopeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ImportedNamespaceAwareLocalScopeProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return DefaultGlobalScopeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
-		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
+		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
+	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return DefaultDeclarativeQualifiedNameProvider.class;
 	}

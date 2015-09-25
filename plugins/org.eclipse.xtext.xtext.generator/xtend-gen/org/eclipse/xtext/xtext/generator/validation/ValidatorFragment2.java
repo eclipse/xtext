@@ -317,7 +317,8 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
                 } else {
                   _builder.appendImmediate(", ", "");
                 }
-                _builder.append(validator, "");
+                TypeReference _typeRef = TypeReference.typeRef(validator);
+                _builder.append(_typeRef, "");
                 _builder.append(".class");
               }
             }
