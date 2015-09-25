@@ -221,6 +221,58 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
   }
   
   @Test
+  public void testSimpleMixedBuild04() {
+    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
+      @Override
+      public void apply(final BuildRequest it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("import b.B");
+        _builder.newLine();
+        _builder.append("class A {");
+        _builder.newLine();
+        _builder.append("   ");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("   ");
+        _builder.append("def foo() {");
+        _builder.newLine();
+        _builder.append("      ");
+        _builder.append("B.foo");
+        _builder.newLine();
+        _builder.append("   ");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        URI _minus = XtendIncrementalBuilderTest.this.operator_minus(
+          "src/A.xtend", _builder.toString());
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("package b;");
+        _builder_1.newLine();
+        _builder_1.append("public class B {");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("public static String foo;");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        URI _minus_1 = XtendIncrementalBuilderTest.this.operator_minus("src/b/B.java", _builder_1.toString());
+        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
+      }
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    this.build(buildRequest);
+    String _string = this.issues.toString();
+    boolean _isEmpty = this.issues.isEmpty();
+    Assert.assertTrue(_string, _isEmpty);
+    int _size = this.generated.size();
+    Assert.assertEquals(2, _size);
+    Collection<URI> _values = this.generated.values();
+    boolean _containsSuffix = this.containsSuffix(_values, "xtend-gen/A.java");
+    Assert.assertTrue(_containsSuffix);
+  }
+  
+  @Test
   public void testSimpleFullBuild() {
     final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
       @Override
