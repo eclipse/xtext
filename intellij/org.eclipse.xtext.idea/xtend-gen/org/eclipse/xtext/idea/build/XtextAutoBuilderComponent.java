@@ -120,7 +120,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@State(name = "XtextAutoBuilderState", storages = { @Storage(id = "other", file = StoragePathMacros.WORKSPACE_FILE), @Storage(id = "dir", file = StoragePathMacros.WORKSPACE_FILE, scheme = StorageScheme.DIRECTORY_BASED) })
+@State(name = "XtextAutoBuilderState", storages = { @Storage(id = "other", file = StoragePathMacros.WORKSPACE_FILE), @Storage(id = "dir", file = (StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml"), scheme = StorageScheme.DIRECTORY_BASED) })
 @Log
 @SuppressWarnings("all")
 public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {

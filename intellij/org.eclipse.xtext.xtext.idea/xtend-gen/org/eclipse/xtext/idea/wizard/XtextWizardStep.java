@@ -21,6 +21,7 @@ import org.eclipse.xtext.idea.wizard.XtextModuleBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
@@ -214,7 +215,7 @@ public class XtextWizardStep extends ModuleWizardStep {
               ComboBox _xblockexpression = null;
               {
                 XtextWizardStep.this._ideaWidgetFactory.indentRight(it, 400);
-                ComboBox _comboBox = XtextWizardStep.this._ideaWidgetFactory.comboBox(SourceLayout.PLAIN, SourceLayout.MAVEN);
+                ComboBox _comboBox = XtextWizardStep.this._ideaWidgetFactory.comboBox(SourceLayout.MAVEN, SourceLayout.PLAIN);
                 _xblockexpression = XtextWizardStep.this.layout = _comboBox;
               }
               return _xblockexpression;
@@ -290,11 +291,14 @@ public class XtextWizardStep extends ModuleWizardStep {
   
   @Override
   public boolean validate() throws ConfigurationException {
-    return super.validate();
+    InputOutput.<String>println("validate");
+    final boolean superCall = super.validate();
+    return superCall;
   }
   
   @Override
   public void updateStep() {
+    InputOutput.<String>println("update");
   }
   
   @Override

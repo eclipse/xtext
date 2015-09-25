@@ -29,6 +29,7 @@ class XtextWizardStep extends ModuleWizardStep {
 	JTextField extensionField
 
 	JCheckBox idea
+//	JCheckBox eclipse
 	JCheckBox web
 	JCheckBox test
 
@@ -64,6 +65,7 @@ class XtextWizardStep extends ModuleWizardStep {
 
 			row [separator("Facets")]
 			row [idea = checkBox("Intellij Idea Plugin")]
+			//row [eclipse = checkBox("Eclipse Plugin")]
 			row [web = checkBox("Web Integration")]
 			row [test = checkBox("Testing Support")]
 			row [label(" ")]
@@ -73,7 +75,7 @@ class XtextWizardStep extends ModuleWizardStep {
 				indentRight(400)
 				buildSystem = comboBox(BuildSystem.GRADLE, BuildSystem.MAVEN)
 			])
-			row([label("Source Layout:")], [indentRight(400) layout = comboBox(SourceLayout.PLAIN, SourceLayout.MAVEN)])
+			row([label("Source Layout:")], [indentRight(400) layout = comboBox(SourceLayout.MAVEN, SourceLayout.PLAIN)])
 
 			row [expand(VERTICAL) label("")]
 		]
@@ -90,6 +92,7 @@ class XtextWizardStep extends ModuleWizardStep {
 		config.runtimeProject.enabled = true
 		config.ideProject.enabled = idea.selected || web.selected
 		config.intellijProject.enabled = idea.selected
+//		config.uiProject.enabled = eclipse.selected
 		config.webProject.enabled = web.selected
 		config.enabledProjects.filter(TestedProjectDescriptor).forEach[testProject.enabled = test.selected]
 
@@ -99,10 +102,16 @@ class XtextWizardStep extends ModuleWizardStep {
 	}
 
 	override validate() throws ConfigurationException {
-		super.validate()
+		println("validate")
+		val superCall = super.validate()
+//		if(eclipse.isSelected && layout.selectedItem == SourceLayout.MAVEN) {
+//			throw new ConfigurationException('''For "Eclipse Plugin" please select Source Layout: «SourceLayout.PLAIN».''')
+//		}
+		return superCall
 	}
 
 	override updateStep() {
+		println("update")
 	}
 
 	override onWizardFinished() throws CommitStepException {
