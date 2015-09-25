@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 class ValidatorFragment2 extends AbstractGeneratorFragment2 {
@@ -146,7 +147,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(grammar.abstractValidatorClass)
 		javaFile.content = '''
 			«IF !composedChecks.empty»
-			@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator».class«ENDFOR»})
+			@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator.typeRef».class«ENDFOR»})
 			«ENDIF»
 			public «IF generateStub»abstract «ENDIF»class «grammar.abstractValidatorClass.simpleName» extends «grammar.validatorSuperClass» {
 				

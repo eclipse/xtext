@@ -65,6 +65,7 @@ class XtextGeneratorTemplates {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val file = fileAccessFactory.createGeneratedJavaFile(runtimeGenSetup)
+		// The following imports are added for backwards-compatibility
 		for (type : langConfig.runtimeGenSetup.imports) {
 			file.importType(type)
 		}
