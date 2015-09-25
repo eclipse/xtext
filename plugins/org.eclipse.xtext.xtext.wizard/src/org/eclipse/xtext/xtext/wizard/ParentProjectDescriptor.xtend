@@ -242,6 +242,14 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							<snapshots><enabled>true</enabled></snapshots>
 						</repository>
 					</repositories>
+					<pluginRepositories>
+						<pluginRepository>
+							<id>sonatype-snapshots</id>
+							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+							<releases><enabled>false</enabled></releases>
+							<snapshots><enabled>true</enabled></snapshots>
+						</pluginRepository>
+					</pluginRepositories>
 				«ENDIF»
 			'''
 		]
