@@ -31,7 +31,7 @@ public class GeneratorDelegate implements IGenerator, IGenerator2 {
 	public void doGenerate(Resource input, IFileSystemAccess2 fsa) {
 		if (generator != null) {
 			generator.doGenerate(input, fsa);
-		} else {
+		} else if (getLegacyGenerator() != null) {
 			getLegacyGenerator().doGenerate(input, fsa);
 		}
 	}
