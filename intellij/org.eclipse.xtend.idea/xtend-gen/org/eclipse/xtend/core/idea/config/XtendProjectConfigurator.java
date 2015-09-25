@@ -9,12 +9,6 @@ package org.eclipse.xtend.core.idea.config;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.facet.Facet;
-import com.intellij.facet.FacetConfiguration;
-import com.intellij.facet.FacetManager;
-import com.intellij.facet.FacetType;
-import com.intellij.facet.FacetTypeId;
-import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -30,6 +24,8 @@ import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.config.XtextProjectConfigurator;
+import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -49,7 +45,7 @@ import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendProjectConfigurator {
+public class XtendProjectConfigurator extends XtextProjectConfigurator {
   @Inject
   @Extension
   private GradleBuildFileUtility _gradleBuildFileUtility;
@@ -74,28 +70,9 @@ public class XtendProjectConfigurator {
   }
   
   public XtendFacetConfiguration createOrGetXtendFacetConf(final Module module) {
-    FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
     String _iD = XtendLanguage.INSTANCE.getID();
-    final FacetType facetType = _instance.findFacetType(_iD);
-    if ((facetType == null)) {
-      return null;
-    }
-    final FacetManager mnr = FacetManager.getInstance(module);
-    Facet _elvis = null;
-    FacetTypeId _id = facetType.getId();
-    String _defaultFacetName = facetType.getDefaultFacetName();
-    Facet _findFacet = mnr.<Facet>findFacet(_id, _defaultFacetName);
-    if (_findFacet != null) {
-      _elvis = _findFacet;
-    } else {
-      FacetManager _instance_1 = FacetManager.getInstance(module);
-      String _defaultFacetName_1 = facetType.getDefaultFacetName();
-      Facet _addFacet = _instance_1.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName_1, null);
-      _elvis = _addFacet;
-    }
-    Facet facet = _elvis;
-    FacetConfiguration _configuration = facet.getConfiguration();
-    return ((XtendFacetConfiguration) _configuration);
+    AbstractFacetConfiguration _createOrGetFacetConf = this.createOrGetFacetConf(module, _iD);
+    return ((XtendFacetConfiguration) _createOrGetFacetConf);
   }
   
   public void presetGradleOutputDirectories(final XbaseGeneratorConfigurationState state, final ModifiableRootModel rootModel) {

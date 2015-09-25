@@ -319,7 +319,7 @@ public abstract class ProjectDescriptor {
     return new PomFile(this);
   }
   
-  protected String sourceFolder(final Outlet outlet) {
+  public String sourceFolder(final Outlet outlet) {
     SourceLayout _sourceLayout = this.config.getSourceLayout();
     return _sourceLayout.getPathFor(outlet);
   }

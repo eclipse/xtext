@@ -1,5 +1,12 @@
+dependencies {
+	compile project(":plugins:org.eclipse.xtext.xtext.wizard")
+}
+
 ideaDevelopment {
 	pluginDependencies {
 		project ':intellij:org.eclipse.xtext.idea'
+		id 'maven' // id is org.jetbrains.idea.maven
+		id 'gradle'// is is org.jetbrains.plugins.gradle
+		id 'Groovy'// id is org.intellij.groovy
 	}
 }

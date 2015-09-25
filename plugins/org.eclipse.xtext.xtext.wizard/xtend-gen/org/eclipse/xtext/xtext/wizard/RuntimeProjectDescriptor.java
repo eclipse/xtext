@@ -45,13 +45,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   public RuntimeProjectDescriptor(final WizardConfiguration config) {
     super(config);
+    this.setEnabled(true);
     RuntimeTestProjectDescriptor _runtimeTestProjectDescriptor = new RuntimeTestProjectDescriptor(this);
     this.testProject = _runtimeTestProjectDescriptor;
-  }
-  
-  @Override
-  public boolean isEnabled() {
-    return true;
   }
   
   @Override
@@ -59,11 +55,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     if ((!enabled)) {
       throw new IllegalArgumentException("The runtime project is always enabled");
     }
+    super.setEnabled(enabled);
   }
+  
+  private String nameQualifier = "";
   
   @Override
   public String getNameQualifier() {
-    return "";
+    return this.nameQualifier;
+  }
+  
+  public void setNameQualifier(final String nameQualifier) {
+    this.nameQualifier = nameQualifier;
   }
   
   @Override

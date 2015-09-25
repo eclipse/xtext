@@ -8,20 +8,24 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	
 	new(WizardConfiguration config) {
 		super(config)
+		enabled = true
 		testProject = new RuntimeTestProjectDescriptor(this)
-	}
-	
-	override isEnabled() {
-		true
 	}
 	
 	override setEnabled(boolean enabled) {
 		if (!enabled)
 			throw new IllegalArgumentException("The runtime project is always enabled")
+		super.enabled = enabled
 	}
 	
+	String nameQualifier = ''
+	
 	override getNameQualifier() {
-		""
+		nameQualifier
+	}
+	
+	def void setNameQualifier(String nameQualifier) {
+		this.nameQualifier = nameQualifier
 	}
 	
 	override isEclipsePluginProject() {

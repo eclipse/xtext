@@ -16,6 +16,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiModificationTracker;
 import org.eclipse.xtend.core.idea.AbstractXtendIdeaModule;
+import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator;
 import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
 import org.eclipse.xtend.core.idea.findUsages.XtendFindUsageProvider;
@@ -48,6 +49,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.idea.config.XtextProjectConfigurator;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider;
@@ -182,5 +184,9 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
   @SingletonBinding
   public Class<? extends BaseXtextFindUsageProvider> bindBaseXtextFindUsageProvider() {
     return XtendFindUsageProvider.class;
+  }
+  
+  public Class<? extends XtextProjectConfigurator> bindXtextProjectConfigurator() {
+    return XtendProjectConfigurator.class;
   }
 }

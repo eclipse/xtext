@@ -28,9 +28,15 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ParentProjectDescriptor extends ProjectDescriptor {
+  private String nameQualifier = ".parent";
+  
   @Override
   public String getNameQualifier() {
-    return ".parent";
+    return this.nameQualifier;
+  }
+  
+  public void setNameQualifier(final String nameQualifier) {
+    this.nameQualifier = nameQualifier;
   }
   
   @Override

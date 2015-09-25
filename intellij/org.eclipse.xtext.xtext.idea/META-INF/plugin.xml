@@ -8,7 +8,13 @@
 	<vendor url="http://xtext.org">Eclipse Xtext</vendor>
 
 	<idea-version since-build="131"/>
+	<depends>org.jetbrains.idea.maven</depends>
+	<depends>org.jetbrains.plugins.gradle</depends>
 	<depends>org.eclipse.xtext.idea</depends>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
+	
+	<extensions defaultExtensionNs="com.intellij">
+		<moduleBuilder builderClass="org.eclipse.xtext.idea.wizard.XtextModuleBuilder" id="xtextModuleBuilder"/>
+    </extensions>
 </idea-plugin>

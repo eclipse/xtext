@@ -4,9 +4,14 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
-
+	String nameQualifier = '.parent'
+	
 	override getNameQualifier() {
-		".parent"
+		nameQualifier
+	}
+	
+	def void setNameQualifier(String nameQualifier) {
+		this.nameQualifier = nameQualifier
 	}
 	
 	override isEnabled() {
