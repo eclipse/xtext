@@ -28,7 +28,6 @@ import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -133,25 +132,15 @@ public class IdeaProjectCreator implements ProjectsCreator {
         }
       };
       IterableExtensions.<String>forEach(_sourceFolders, _function_2);
-      if ((project instanceof RuntimeProjectDescriptor)) {
-        String _iD = XtextLanguage.INSTANCE.getID();
-        final AbstractFacetConfiguration conf = this.projectConfigrator.createOrGetFacetConf(module, _iD);
-        GeneratorConfigurationState _state = conf.getState();
-        String _absoluteSourceFolder = this.absoluteSourceFolder(project, Outlet.MAIN_SRC_GEN);
-        _state.setOutputDirectory(_absoluteSourceFolder);
-        GeneratorConfigurationState _state_1 = conf.getState();
-        String _absoluteSourceFolder_1 = this.absoluteSourceFolder(project, Outlet.TEST_SRC_GEN);
-        _state_1.setTestOutputDirectory(_absoluteSourceFolder_1);
-      }
       if ((!(project instanceof ParentProjectDescriptor))) {
-        final AbstractFacetConfiguration conf_1 = this.projectConfigrator.createOrGetFacetConf(module, "org.eclipse.xtend.core.Xtend");
-        if ((conf_1 != null)) {
-          GeneratorConfigurationState _state_2 = conf_1.getState();
-          String _absoluteSourceFolder_2 = this.absoluteSourceFolder(project, Outlet.MAIN_XTEND_GEN);
-          _state_2.setOutputDirectory(_absoluteSourceFolder_2);
-          GeneratorConfigurationState _state_3 = conf_1.getState();
-          String _absoluteSourceFolder_3 = this.absoluteSourceFolder(project, Outlet.TEST_XTEND_GEN);
-          _state_3.setTestOutputDirectory(_absoluteSourceFolder_3);
+        final AbstractFacetConfiguration conf = this.projectConfigrator.createOrGetFacetConf(module, "org.eclipse.xtend.core.Xtend");
+        if ((conf != null)) {
+          GeneratorConfigurationState _state = conf.getState();
+          String _absoluteSourceFolder = this.absoluteSourceFolder(project, Outlet.MAIN_XTEND_GEN);
+          _state.setOutputDirectory(_absoluteSourceFolder);
+          GeneratorConfigurationState _state_1 = conf.getState();
+          String _absoluteSourceFolder_1 = this.absoluteSourceFolder(project, Outlet.TEST_XTEND_GEN);
+          _state_1.setTestOutputDirectory(_absoluteSourceFolder_1);
         }
       }
       rootModel.commit();

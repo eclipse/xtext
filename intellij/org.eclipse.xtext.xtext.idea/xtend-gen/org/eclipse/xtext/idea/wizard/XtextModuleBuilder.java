@@ -3,7 +3,7 @@ package org.eclipse.xtext.idea.wizard;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.intellij.ide.util.projectWizard.ModuleBuilder;
+import com.intellij.ide.util.projectWizard.EmptyModuleBuilder;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.openapi.Disposable;
@@ -52,7 +52,7 @@ import org.jetbrains.plugins.gradle.settings.GradleProjectSettings;
 import org.jetbrains.plugins.gradle.util.GradleConstants;
 
 @SuppressWarnings("all")
-public class XtextModuleBuilder extends ModuleBuilder {
+public class XtextModuleBuilder extends EmptyModuleBuilder {
   private final static Logger LOG = Logger.getInstance(XtextWizardStep.class.getName());
   
   @Inject
@@ -102,6 +102,42 @@ public class XtextModuleBuilder extends ModuleBuilder {
   @Override
   public String getParentGroup() {
     return JavaModuleType.JAVA_GROUP;
+  }
+  
+  @Override
+  public boolean isOpenProjectSettingsAfter() {
+    return false;
+  }
+  
+  @Override
+  public boolean canCreateModule() {
+    return true;
+  }
+  
+  @Override
+  public int getWeight() {
+    return 53;
+  }
+  
+  @Override
+  public ModuleType<?> getModuleType() {
+    return StdModuleTypes.JAVA;
+  }
+  
+  @Override
+  public boolean isSuitableSdkType(final SdkTypeId sdk) {
+    JavaSdk _instance = JavaSdk.getInstance();
+    return (sdk == _instance);
+  }
+  
+  @Override
+  public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
+    return new XtextWizardStep(context);
+  }
+  
+  @Override
+  public boolean isTemplateBased() {
+    return false;
   }
   
   @Override
@@ -219,27 +255,6 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   public Object setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
     return null;
-  }
-  
-  @Override
-  public int getWeight() {
-    return 53;
-  }
-  
-  @Override
-  public ModuleType<?> getModuleType() {
-    return StdModuleTypes.JAVA;
-  }
-  
-  @Override
-  public boolean isSuitableSdkType(final SdkTypeId sdk) {
-    JavaSdk _instance = JavaSdk.getInstance();
-    return (sdk == _instance);
-  }
-  
-  @Override
-  public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
-    return new XtextWizardStep(context);
   }
   
   public WizardConfiguration getWizardConfiguration() {
