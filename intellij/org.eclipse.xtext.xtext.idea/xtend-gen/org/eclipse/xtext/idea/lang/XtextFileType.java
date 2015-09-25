@@ -1,5 +1,7 @@
 package org.eclipse.xtext.idea.lang;
 
+import javax.swing.Icon;
+import org.eclipse.xtext.idea.XtextXtextIcons;
 import org.eclipse.xtext.idea.lang.AbstractXtextFileType;
 import org.eclipse.xtext.idea.lang.XtextLanguage;
 
@@ -9,5 +11,10 @@ public class XtextFileType extends AbstractXtextFileType {
   
   public XtextFileType() {
     super(XtextLanguage.INSTANCE);
+  }
+  
+  @Override
+  public Icon getIcon() {
+    return XtextXtextIcons.GRAMMAR_FILE_TYPE;
   }
 }

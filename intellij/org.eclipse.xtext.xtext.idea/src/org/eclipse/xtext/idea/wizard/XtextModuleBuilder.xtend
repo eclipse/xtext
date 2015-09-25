@@ -26,7 +26,7 @@ import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.File
-import org.eclipse.xtext.idea.Icons
+import org.eclipse.xtext.idea.XtextXtextIcons
 import org.eclipse.xtext.idea.lang.XtextLanguage
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
 import org.eclipse.xtext.idea.wizard.IdeaProjectCreator.Factory
@@ -51,7 +51,7 @@ class XtextModuleBuilder extends ModuleBuilder {
 	}
 
 	override getNodeIcon() {
-		Icons.DSL_FILE_TYPE
+		XtextXtextIcons.GRAMMAR_FILE_TYPE
 	}
 
 	override String getDescription() {

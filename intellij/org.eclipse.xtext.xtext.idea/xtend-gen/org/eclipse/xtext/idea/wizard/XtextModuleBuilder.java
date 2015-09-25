@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.Icon;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.Icons;
+import org.eclipse.xtext.idea.XtextXtextIcons;
 import org.eclipse.xtext.idea.lang.XtextLanguage;
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 import org.eclipse.xtext.idea.wizard.IdeaProjectCreator;
@@ -76,7 +76,7 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   @Override
   public Icon getNodeIcon() {
-    return Icons.DSL_FILE_TYPE;
+    return XtextXtextIcons.GRAMMAR_FILE_TYPE;
   }
   
   @Override
