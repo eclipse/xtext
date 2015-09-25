@@ -105,6 +105,27 @@ public class XtextModuleBuilder extends ModuleBuilder {
   }
   
   @Override
+  public int getWeight() {
+    return 53;
+  }
+  
+  @Override
+  public ModuleType<?> getModuleType() {
+    return StdModuleTypes.JAVA;
+  }
+  
+  @Override
+  public boolean isSuitableSdkType(final SdkTypeId sdk) {
+    JavaSdk _instance = JavaSdk.getInstance();
+    return (sdk == _instance);
+  }
+  
+  @Override
+  public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
+    return new XtextWizardStep(context);
+  }
+  
+  @Override
   public void setupRootModel(final ModifiableRootModel rootModel) throws ConfigurationException {
     String _contentEntryPath = this.getContentEntryPath();
     String path = FileUtil.toSystemIndependentName(_contentEntryPath);
@@ -219,27 +240,6 @@ public class XtextModuleBuilder extends ModuleBuilder {
   
   public Object setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
     return null;
-  }
-  
-  @Override
-  public int getWeight() {
-    return 53;
-  }
-  
-  @Override
-  public ModuleType<?> getModuleType() {
-    return StdModuleTypes.JAVA;
-  }
-  
-  @Override
-  public boolean isSuitableSdkType(final SdkTypeId sdk) {
-    JavaSdk _instance = JavaSdk.getInstance();
-    return (sdk == _instance);
-  }
-  
-  @Override
-  public ModuleWizardStep getCustomOptionsStep(final WizardContext context, final Disposable parentDisposable) {
-    return new XtextWizardStep(context);
   }
   
   public WizardConfiguration getWizardConfiguration() {

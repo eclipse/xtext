@@ -1,6 +1,7 @@
 package org.eclipse.xtext.idea.wizard
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import com.intellij.ide.util.projectWizard.ModuleBuilder
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
@@ -34,7 +35,6 @@ import org.jetbrains.idea.maven.project.MavenProjectsManager
 import org.jetbrains.plugins.gradle.settings.DistributionType
 import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
 import org.jetbrains.plugins.gradle.util.GradleConstants
-import com.google.inject.Provider
 
 class XtextModuleBuilder extends ModuleBuilder {
 
@@ -72,6 +72,22 @@ class XtextModuleBuilder extends ModuleBuilder {
 
 	override String getParentGroup() {
 		return JavaModuleType.JAVA_GROUP
+	}
+
+	override int getWeight() {
+		return 53
+	}
+
+	override ModuleType<?> getModuleType() {
+		return StdModuleTypes.JAVA
+	}
+
+	override boolean isSuitableSdkType(SdkTypeId sdk) {
+		return sdk === JavaSdk.getInstance()
+	}
+
+	override ModuleWizardStep getCustomOptionsStep(WizardContext context, Disposable parentDisposable) {
+		return new XtextWizardStep(context)
 	}
 
 	override void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
@@ -141,22 +157,6 @@ class XtextModuleBuilder extends ModuleBuilder {
 		// See com.intellij.ide.projectWizard.ProjectSettingsStep.getModuleNameField()
 		// wizardConfiguration.parentProject.nameQualifier = ''
 		// wizardConfiguration.runtimeProject.nameQualifier = '.core'
-	}
-
-	override int getWeight() {
-		return 53
-	}
-
-	override ModuleType<?> getModuleType() {
-		return StdModuleTypes.JAVA
-	}
-
-	override boolean isSuitableSdkType(SdkTypeId sdk) {
-		return sdk === JavaSdk.getInstance()
-	}
-
-	override ModuleWizardStep getCustomOptionsStep(WizardContext context, Disposable parentDisposable) {
-		return new XtextWizardStep(context)
 	}
 
 	def WizardConfiguration getWizardConfiguration() {

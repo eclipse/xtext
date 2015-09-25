@@ -16,7 +16,6 @@ import org.eclipse.xtext.xtext.wizard.Outlet
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
@@ -78,12 +77,12 @@ class IdeaProjectCreator implements ProjectsCreator {
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", isGen)
 			contentEntry.addSourceFolder(sourceRoot, rootType, properties)
 		]
-
-		if (project instanceof RuntimeProjectDescriptor) {
-			val conf = projectConfigrator.createOrGetFacetConf(module, XtextLanguage.INSTANCE.ID)
-			conf.state.outputDirectory = project.absoluteSourceFolder(Outlet.MAIN_SRC_GEN)
-			conf.state.testOutputDirectory = project.absoluteSourceFolder(Outlet.TEST_SRC_GEN)
-		}
+		// TODO re-enable when xtext.xtext is ready to use
+		// if (project instanceof RuntimeProjectDescriptor) {
+		// val conf = projectConfigrator.createOrGetFacetConf(module, XtextLanguage.INSTANCE.ID)
+		// conf.state.outputDirectory = project.absoluteSourceFolder(Outlet.MAIN_SRC_GEN)
+		// conf.state.testOutputDirectory = project.absoluteSourceFolder(Outlet.TEST_SRC_GEN)
+		// }
 		if (!(project instanceof ParentProjectDescriptor)) {
 			val conf = projectConfigrator.createOrGetFacetConf(module, "org.eclipse.xtend.core.Xtend")
 			if (conf !== null) {
