@@ -21,7 +21,8 @@ Model:
 	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
 	x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional |
 	x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | 
-	x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
+	x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted |
+	x33=FragmentCaller;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -170,3 +171,9 @@ NullCrossRefGenerated returns NullCrossRef:
 	
 NullCrossRefInterpreted returns NullCrossRef:
 	"#32" ref=[ecore::EObject|ID] foo=ID?;
+	
+FragmentCaller returns FragmentCallerType:
+	"#33" val1=ID Fragment1 val=ID;
+	
+fragment Fragment1 returns FragmentCallerType:
+	fragVal=ID;

@@ -23,7 +23,8 @@ import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
-import org.eclipse.xtext.serializer.analysis.IContextProvider;
+import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
+import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
@@ -71,14 +72,15 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
 	public void drawGrammar(String path, Grammar grammar) {
 		try {
-			IContextProvider contexts = get(IContextProvider.class);
+			IContextPDAProvider contexts = get(IContextPDAProvider.class);
+			IContextTypePDAProvider types = get(IContextTypePDAProvider.class);
 			SyntacticSequencerPDA2ExtendedDot seq2dot = get(SyntacticSequencerPDA2ExtendedDot.class);
 			for (EObject ctx : contexts.getAllContexts(grammar))
-				for (EClass type : contexts.getTypesForContext(ctx))
-					seq2dot.draw(
-							new Pair<EObject, EClass>(ctx, type),
+				for (EClass type : types.getTypesForContext(grammar, ctx))
+					seq2dot.draw(new Pair<EObject, EClass>(ctx, type),
 							path + "-" + new Context2NameFunction().toFunction(grammar).apply(ctx) + "_"
-									+ (type == null ? "null" : type.getName()) + "-PDA.pdf", "-T pdf");
+									+ (type == null ? "null" : type.getName()) + "-PDA.pdf",
+							"-T pdf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -86,10 +88,11 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
 	private List<Triple<EClass, EObject, String>> getContexts(Grammar grammar) {
 		final Context2NameFunction ctx2name = get(Context2NameFunction.class);
-		final IContextProvider contextProvider = get(IContextProvider.class);
+		final IContextPDAProvider contextProvider = get(IContextPDAProvider.class);
+		final IContextTypePDAProvider typeProvider = get(IContextTypePDAProvider.class);
 		List<Triple<EClass, EObject, String>> result = Lists.newArrayList();
 		for (EObject ctx : contextProvider.getAllContexts(grammar))
-			for (EClass type : contextProvider.getTypesForContext(ctx))
+			for (EClass type : typeProvider.getTypesForContext(grammar, ctx))
 				result.add(Tuples.create(type, ctx, ctx2name.getContextName(grammar, ctx)));
 		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
 			@Override
@@ -697,7 +700,11 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		expected.append("  start '}'* greetings2+=Greeting2\n");
 		expected.append("  start '}'+ stop\n");
 		expected.append("null_AllElements:\n");
-		expected.append("  start stop");
+		expected.append("  start stop\n");
+		expected.append("null_Elements:\n");
+		expected.append("  start >>Model '}'+ <<Model stop\n");
+		expected.append("null_Model:\n");
+		expected.append("  start '}'+ stop");
 		assertEquals(expected.toString(), actual);
 	}
 

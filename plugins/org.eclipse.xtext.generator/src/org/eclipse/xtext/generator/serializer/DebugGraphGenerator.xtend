@@ -15,17 +15,13 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider
-import org.eclipse.xtext.serializer.analysis.IContextProvider
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
-import org.eclipse.xtext.util.formallang.PdaToDot
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.util.formallang.NfaToDot
+import org.eclipse.xtext.util.formallang.PdaToDot
 
 class DebugGraphGenerator { 
-	
-	@Inject extension IContextProvider contextProvider
 	
 	@Inject Grammar grammar
 	
@@ -51,12 +47,12 @@ class DebugGraphGenerator {
 	
 	def Iterable<Pair<String, String>> generateDebugGraphs() {
 		val result = <Pair<String, String>>newArrayList()
-		for(context: contextProvider.getAllContexts(grammar)) {
+		for(context: contextPDAProvider.getAllContexts(grammar)) {
 			try {
-				result.add(file("context", context) -> pdaToDot.draw(contextPDAProvider.getContextPDA(context)))
-				for(type: contextProvider.getTypesForContext(context)) {
+				result.add(file("context", context) -> pdaToDot.draw(contextPDAProvider.getContextPDA(grammar, context)))
+				for(type: contextTypePDAProvider.getTypesForContext(grammar, context)) {
 					try {
-						result.add(file("context_type", context, type) -> pdaToDot.draw(contextTypePDAProvider.getContextTypePDA(context, type)))
+						result.add(file("context_type", context, type) -> pdaToDot.draw(contextTypePDAProvider.getContextTypePDA(grammar, context, type)))
 						result.add(file("syntactic_sequencer", context, type) -> syntacticSequencerPDA2Dot.draw(syntacticSequencerPDAProvider.getPDA(context, type)))
 						result.add(file("semantic_sequencer", context, type) -> nfaToDot.draw(semanticSequencerNFAProvider.getNFA(context, type)))
 					} catch(Throwable t) {
