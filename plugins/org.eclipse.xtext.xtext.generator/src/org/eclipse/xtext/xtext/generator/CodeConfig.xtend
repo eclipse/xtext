@@ -13,6 +13,7 @@ import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
 /**

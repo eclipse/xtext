@@ -1,10 +1,10 @@
 package org.eclipse.xtext.xtext.wizard
 
-import java.nio.charset.Charset
-import org.eclipse.xtend.lib.annotations.Accessors
 import com.google.common.collect.ImmutableSet
+import java.nio.charset.Charset
 import java.util.Set
-import org.eclipse.xtext.xtext.generator.XtextVersion
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.XtextVersion
 
 @Accessors
 class WizardConfiguration {

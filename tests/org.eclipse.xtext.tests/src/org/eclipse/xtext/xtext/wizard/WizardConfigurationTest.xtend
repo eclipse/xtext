@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.wizard
 
+import org.eclipse.xtext.util.XtextVersion
+import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
+import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
-import org.junit.Before
-import org.eclipse.xtext.xtext.generator.XtextVersion
 
 class WizardConfigurationTest {
 

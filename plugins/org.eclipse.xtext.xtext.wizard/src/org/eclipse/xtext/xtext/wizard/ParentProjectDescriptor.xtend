@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.XtextVersion
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
@@ -56,7 +57,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						jcenter()
 					}
 					dependencies {
-						classpath 'org.xtend:xtend-gradle-plugin:0.4.8'
+						classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.XTEND_GRADLE_PLUGIN_VERSION»'
 					}
 				}
 				subprojects {
