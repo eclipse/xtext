@@ -25,13 +25,13 @@ import org.jetbrains.plugins.groovy.lang.psi.api.statements.blocks.GrClosableBlo
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
 import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner
+import org.eclipse.xtext.util.XtextVersion
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class GradleBuildFileUtility {
 
-	public val xtendGradlePluginVersion = '0.4.8'
 
 	def boolean isGradleedModule(Module module) {
 		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) ||
@@ -48,7 +48,7 @@ class GradleBuildFileUtility {
 		}
 		val buildScript = buildFile.createOrGetMethodCall("buildscript")
 		buildScript.createOrGetMethodCall('repositories').createStatementIfNotExists('jcenter()')
-		buildScript.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«xtendGradlePluginVersion»' ''')
+		buildScript.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«XtextVersion.XTEND_GRADLE_PLUGIN_VERSION»' ''')
 		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
 	}
 
