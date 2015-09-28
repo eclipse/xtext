@@ -12,19 +12,18 @@ import com.intellij.framework.FrameworkTypeEx
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
-import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator
 import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder
 import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvider
+import static org.eclipse.xtext.util.XtextVersion.*
 
 /**
  * @author Dennis Huebner (dhuebner) - Initial contribution and API
  */
 class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
 
-	@Inject GradleBuildFileUtility gradleUtility
 	@Inject XtendProjectConfigurator projectConfigurator
 
 	new() {
@@ -37,7 +36,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 
 	override addSupport(Module module, ModifiableRootModel rootModel, ModifiableModelsProvider modifiableModelsProvider,
 		BuildScriptDataBuilder script) {
-		val snapshot = XtendLibraryConfigurator.xtendLibMavenId.version?.endsWith("-SNAPSHOT")
+		val snapshot = current.snapshot
 		script.addOther('''
 			buildscript {
 				repositories {
@@ -49,7 +48,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 				    jcenter()
 				}
 			    dependencies {
-			        classpath 'org.xtend:xtend-gradle-plugin:«gradleUtility.xtendGradlePluginVersion»'
+			        classpath 'org.xtend:xtend-gradle-plugin:«XTEND_GRADLE_PLUGIN_VERSION»'
 			    }
 			}
 		''')

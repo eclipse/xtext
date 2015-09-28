@@ -10,11 +10,8 @@ package org.eclipse.xtend.core.idea.config;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.LibraryOrderEntry;
@@ -41,6 +38,7 @@ import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
+import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -153,15 +151,10 @@ public class XtendLibraryConfigurator {
   
   public static MavenId xtendLibMavenId() {
     if ((XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID == null)) {
-      PluginId _id = PluginId.getId("org.eclipse.xtend.idea");
-      final IdeaPluginDescriptor xtendPlugin = PluginManager.getPlugin(_id);
-      String _version = null;
-      if (xtendPlugin!=null) {
-        _version=xtendPlugin.getVersion();
-      }
-      final String version = _version;
+      XtextVersion _current = XtextVersion.getCurrent();
+      final String version = _current.getVersion();
       XtendLibraryConfigurator.LOG.info(("The current Xtend plugin version is " + version));
-      MavenId _mavenId = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", "2.8.4");
+      MavenId _mavenId = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", version);
       XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID = _mavenId;
     }
     return XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID;

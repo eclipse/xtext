@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.XtextVersion
 
 @FinalFieldsConstructor
 class IntellijProjectDescriptor extends ProjectDescriptor {
@@ -29,7 +30,7 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 		super.buildGradle => [
 			pluginsSection = '''
 				plugins {
-					id 'org.xtext.idea-plugin' version '0.3.21'
+					id 'org.xtext.idea-plugin' version '«XtextVersion.IDEA_GRADLE_PLUGIN_VERSION»'
 				}
 			'''
 			additionalContent = '''
