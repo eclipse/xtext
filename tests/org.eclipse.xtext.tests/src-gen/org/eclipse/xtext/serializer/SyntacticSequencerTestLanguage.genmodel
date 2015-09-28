@@ -23,6 +23,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x12"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x13"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x14"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x15"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val1"/>
@@ -77,6 +78,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val8"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//ActionOnly"/>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//FragmentCallerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//FragmentCallerType/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//FragmentCallerType/val"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//FragmentCallerType/fragVal"/>
+    </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Add0">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add0/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add0/right"/>

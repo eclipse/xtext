@@ -193,13 +193,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X14 = 13;
 
   /**
+   * The feature id for the '<em><b>X15</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X15 = 14;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 14;
+  int MODEL_FEATURE_COUNT = 15;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -730,6 +739,52 @@ public interface SyntacticsequencertestPackage extends EPackage
   int ACTION_ONLY_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.FragmentCallerTypeImpl <em>Fragment Caller Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.FragmentCallerTypeImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getFragmentCallerType()
+   * @generated
+   */
+  int FRAGMENT_CALLER_TYPE = 16;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE__VAL = 1;
+
+  /**
+   * The feature id for the '<em><b>Frag Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE__FRAG_VAL = 2;
+
+  /**
+   * The number of structural features of the '<em>Fragment Caller Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -737,7 +792,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 16;
+  int ADD0 = 17;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -774,7 +829,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 17;
+  int VAL0 = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -802,7 +857,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 18;
+  int ADD1 = 19;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -839,7 +894,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 19;
+  int VAL1 = 20;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -867,7 +922,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 20;
+  int ADD2 = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -904,7 +959,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 21;
+  int MULT2 = 22;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -941,7 +996,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 22;
+  int VAL2 = 23;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1125,6 +1180,17 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X14();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX15 <em>X15</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X15</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX15()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X15();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -1574,6 +1640,49 @@ public interface SyntacticsequencertestPackage extends EPackage
   EClass getActionOnly();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType <em>Fragment Caller Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fragment Caller Type</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType
+   * @generated
+   */
+  EClass getFragmentCallerType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType#getVal1()
+   * @see #getFragmentCallerType()
+   * @generated
+   */
+  EAttribute getFragmentCallerType_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType#getVal()
+   * @see #getFragmentCallerType()
+   * @generated
+   */
+  EAttribute getFragmentCallerType_Val();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType#getFragVal <em>Frag Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Frag Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType#getFragVal()
+   * @see #getFragmentCallerType()
+   * @generated
+   */
+  EAttribute getFragmentCallerType_FragVal();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1908,6 +2017,14 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X14 = eINSTANCE.getModel_X14();
+
+    /**
+     * The meta object literal for the '<em><b>X15</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X15 = eINSTANCE.getModel_X15();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -2274,6 +2391,40 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EClass ACTION_ONLY = eINSTANCE.getActionOnly();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.FragmentCallerTypeImpl <em>Fragment Caller Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.FragmentCallerTypeImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getFragmentCallerType()
+     * @generated
+     */
+    EClass FRAGMENT_CALLER_TYPE = eINSTANCE.getFragmentCallerType();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FRAGMENT_CALLER_TYPE__VAL1 = eINSTANCE.getFragmentCallerType_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FRAGMENT_CALLER_TYPE__VAL = eINSTANCE.getFragmentCallerType_Val();
+
+    /**
+     * The meta object literal for the '<em><b>Frag Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FRAGMENT_CALLER_TYPE__FRAG_VAL = eINSTANCE.getFragmentCallerType_FragVal();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

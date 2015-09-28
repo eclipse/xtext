@@ -18,7 +18,8 @@ ruleModel :
 	ruleAlternativeTransition |
 	ruleBooleanValues |
 	ruleLongAlternative |
-	ruleActionOnly
+	ruleActionOnly |
+	ruleFragmentCaller
 ;
 
 // Rule MandatoryKeywords
@@ -181,6 +182,16 @@ ruleActionOnly :
 	'#14' 'kw1'? ( (
 	RULE_ID
 	) => RULE_ID )? 'kw2'? RULE_ID?
+;
+
+// Rule FragmentCaller
+ruleFragmentCaller :
+	'#15' RULE_ID ruleFragment1 RULE_ID
+;
+
+// Rule Fragment1
+ruleFragment1 :
+	RULE_ID
 ;
 
 RULE_TERMINAL_ID :

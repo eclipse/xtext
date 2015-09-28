@@ -21,6 +21,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
@@ -155,6 +156,13 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * @generated
    */
   private EClass actionOnlyEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fragmentCallerTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -419,6 +427,16 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
   public EReference getModel_X14()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(13);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X15()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(14);
   }
 
   /**
@@ -846,6 +864,46 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getFragmentCallerType()
+  {
+    return fragmentCallerTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFragmentCallerType_Val1()
+  {
+    return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFragmentCallerType_Val()
+  {
+    return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFragmentCallerType_FragVal()
+  {
+    return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAdd0()
   {
     return add0EClass;
@@ -1066,6 +1124,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(modelEClass, MODEL__X12);
     createEReference(modelEClass, MODEL__X13);
     createEReference(modelEClass, MODEL__X14);
+    createEReference(modelEClass, MODEL__X15);
 
     mandatoryKeywordsEClass = createEClass(MANDATORY_KEYWORDS);
     createEAttribute(mandatoryKeywordsEClass, MANDATORY_KEYWORDS__VAL1);
@@ -1123,6 +1182,11 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL8);
 
     actionOnlyEClass = createEClass(ACTION_ONLY);
+
+    fragmentCallerTypeEClass = createEClass(FRAGMENT_CALLER_TYPE);
+    createEAttribute(fragmentCallerTypeEClass, FRAGMENT_CALLER_TYPE__VAL1);
+    createEAttribute(fragmentCallerTypeEClass, FRAGMENT_CALLER_TYPE__VAL);
+    createEAttribute(fragmentCallerTypeEClass, FRAGMENT_CALLER_TYPE__FRAG_VAL);
 
     add0EClass = createEClass(ADD0);
     createEReference(add0EClass, ADD0__LEFT);
@@ -1206,6 +1270,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getModel_X12(), this.getBooleanValues(), null, "x12", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X13(), this.getLongAlternative(), null, "x13", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X14(), this.getActionOnly(), null, "x14", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X15(), this.getFragmentCallerType(), null, "x15", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryKeywordsEClass, MandatoryKeywords.class, "MandatoryKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMandatoryKeywords_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, MandatoryKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1263,6 +1328,11 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEAttribute(getLongAlternative_Val8(), theEcorePackage.getEString(), "val8", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actionOnlyEClass, ActionOnly.class, "ActionOnly", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(fragmentCallerTypeEClass, FragmentCallerType.class, "FragmentCallerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFragmentCallerType_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, FragmentCallerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFragmentCallerType_Val(), theEcorePackage.getEString(), "val", null, 0, 1, FragmentCallerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFragmentCallerType_FragVal(), theEcorePackage.getEString(), "fragVal", null, 0, 1, FragmentCallerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(add0EClass, Add0.class, "Add0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd0_Left(), this.getExp0(), null, "left", null, 0, 1, Add0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

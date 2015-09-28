@@ -685,6 +685,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX33FragmentCallerParserRuleCall_32_0()); 
+	    }
+		lv_x33_32_0=ruleFragmentCaller		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x33",
+        		lv_x33_32_0, 
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.FragmentCaller");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -4020,6 +4039,110 @@ ruleNullCrossRefInterpreted returns [EObject current=null]
 
 )
 )?)
+;
+
+
+
+
+
+// Entry rule entryRuleFragmentCaller
+entryRuleFragmentCaller returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getFragmentCallerRule()); }
+	 iv_ruleFragmentCaller=ruleFragmentCaller 
+	 { $current=$iv_ruleFragmentCaller.current; } 
+	 EOF 
+;
+
+// Rule FragmentCaller
+ruleFragmentCaller returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#33' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getFragmentCallerAccess().getNumberSignDigitThreeDigitThreeKeyword_0());
+    }
+(
+(
+		lv_val1_1_0=RULE_ID
+		{
+			newLeafNode(lv_val1_1_0, grammarAccess.getFragmentCallerAccess().getVal1IDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getFragmentCallerRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val1",
+        		lv_val1_1_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getFragmentCallerRule());
+		}
+        newCompositeNode(grammarAccess.getFragmentCallerAccess().getFragment1ParserRuleCall_2()); 
+    }
+    this_Fragment1_2=ruleFragment1[$current]
+    { 
+        $current = $this_Fragment1_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+(
+(
+		lv_val_3_0=RULE_ID
+		{
+			newLeafNode(lv_val_3_0, grammarAccess.getFragmentCallerAccess().getValIDTerminalRuleCall_3_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getFragmentCallerRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_3_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+
+// Rule Fragment1
+ruleFragment1 [EObject in_current] returns [EObject current=in_current] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		lv_fragVal_0_0=RULE_ID
+		{
+			newLeafNode(lv_fragVal_0_0, grammarAccess.getFragment1Access().getFragValIDTerminalRuleCall_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getFragment1Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"fragVal",
+        		lv_fragVal_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)
 ;
 
 

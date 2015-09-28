@@ -18,6 +18,7 @@ import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DefEnum;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
@@ -146,6 +147,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.OPTIONAL_DOUBLE: return createOptionalDouble();
       case SequencertestPackage.NULL_VALUE: return createNullValue();
       case SequencertestPackage.NULL_CROSS_REF: return createNullCrossRef();
+      case SequencertestPackage.FRAGMENT_CALLER_TYPE: return createFragmentCallerType();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -623,6 +625,17 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     NullCrossRefImpl nullCrossRef = new NullCrossRefImpl();
     return nullCrossRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FragmentCallerType createFragmentCallerType()
+  {
+    FragmentCallerTypeImpl fragmentCallerType = new FragmentCallerTypeImpl();
+    return fragmentCallerType;
   }
 
   /**

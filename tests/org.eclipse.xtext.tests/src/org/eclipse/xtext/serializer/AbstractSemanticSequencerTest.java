@@ -561,5 +561,11 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		EObject model = testSequence("#32 null");
 		Assert.assertNull(((NullCrossRef) model).getRef());
 	}
+	
+	@Test
+	public void testFragment() throws Exception {
+		testSequence("#33 foo bar baz");
+	}
 
+	
 }

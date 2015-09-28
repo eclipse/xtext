@@ -57,6 +57,7 @@ import com.google.inject.Singleton;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Singleton
+@SuppressWarnings("deprecation")
 public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	protected abstract static class AbstractConstraintContext implements IConstraintContext {
@@ -1442,7 +1443,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		AssignedActionConstraintContext result = new AssignedActionConstraintContext(context,
 				context2Name.getContextName(grammar, context));
 		ActionFilterState start = nfaProvider.getNFA(context);
-		Set<EClass> types = contextProvider.getTypesForContext(context);
+		Set<EClass> types = contextProvider.getTypesForContext(grammar, context);
 		for (EClass type : types) {
 			if (type == null) {
 				Constraint constraint = new ActionConstraint(context, null, null, this);
@@ -1470,7 +1471,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		if (result == null) {
 			result = Lists.newArrayList();
 			for (ParserRule parserRule : GrammarUtil.allParserRules(context)) {
-				if (parserRule.getType() != null && parserRule.getType().getClassifier() instanceof EClass) {
+				if (parserRule.getType() != null && parserRule.getType().getClassifier() instanceof EClass && !parserRule.isFragment()) {
 					result.add(getConstraints(context, parserRule));
 					for (Action action : GrammarUtil.containedActions(parserRule))
 						if (action.getFeature() != null)
@@ -1486,7 +1487,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	protected IConstraintContext getConstraints(Grammar grammar, ParserRule context) {
 		ParserRuleConstraintContext result = new ParserRuleConstraintContext(context,
 				context2Name.getContextName(grammar, context));
-		Set<EClass> types = contextProvider.getTypesForContext(context);
+		Set<EClass> types = contextProvider.getTypesForContext(grammar, context);
 		for (EClass type : types) {
 			if (type == null) {
 				Constraint constraint = new RuleConstraint(context, null, null, this);

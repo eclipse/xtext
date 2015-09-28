@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
+import org.eclipse.xtext.xtextTest.AbstractElement;
 import org.eclipse.xtext.xtextTest.Action;
 import org.eclipse.xtext.xtextTest.Alternatives;
 import org.eclipse.xtext.xtextTest.Assignment;
@@ -52,6 +53,24 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == XtextTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case XtextTestPackage.ABSTRACT_ELEMENT:
+				if(context == grammarAccess.getAssignmentRule()) {
+					sequence_Assignment_Predicate(context, (AbstractElement) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getPredicatedGroupRule()) {
+					sequence_Predicate_PredicatedGroup(context, (AbstractElement) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getPredicatedKeywordRule()) {
+					sequence_Predicate_PredicatedKeyword(context, (AbstractElement) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getPredicatedRuleCallRule()) {
+					sequence_Predicate_PredicatedRuleCall(context, (AbstractElement) semanticObject); 
+					return; 
+				}
+				else break;
 			case XtextTestPackage.ACTION:
 				if(context == grammarAccess.getAbstractTokenWithCardinalityRule()) {
 					sequence_AbstractTokenWithCardinality_Action_Cardinalities(context, (Action) semanticObject); 
@@ -569,6 +588,15 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	 * Constraint:
 	 *     ((predicated?='=>' | firstSetPredicated?='->')? feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
 	 */
+	protected void sequence_Assignment_Predicate(EObject context, AbstractElement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((predicated?='=>' | firstSetPredicated?='->')? feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
+	 */
 	protected void sequence_Assignment_Predicate(EObject context, Assignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
@@ -798,6 +826,33 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((predicated?='=>' | firstSetPredicated?='->') elements+=Alternatives)
+	 */
+	protected void sequence_Predicate_PredicatedGroup(EObject context, AbstractElement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((predicated?='=>' | firstSetPredicated?='->') value=STRING)
+	 */
+	protected void sequence_Predicate_PredicatedKeyword(EObject context, AbstractElement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|ID])
+	 */
+	protected void sequence_Predicate_PredicatedRuleCall(EObject context, AbstractElement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

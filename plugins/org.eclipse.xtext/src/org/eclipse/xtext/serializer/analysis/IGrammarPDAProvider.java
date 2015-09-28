@@ -7,32 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.util.formallang.Pda;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- * @deprecated see methods of this class for documentation about their replacements
  */
-@Deprecated
-@ImplementedBy(ContextProvider.class)
-public interface IContextProvider {
+@ImplementedBy(GrammarPDAProvider.class)
+public interface IGrammarPDAProvider {
 
-	/**
-	 * @deprecated use {@link IContextPDAProvider#getAllContexts(Grammar)}
-	 */
-	@Deprecated
-	public List<EObject> getAllContexts(Grammar grammar);
+	Pda<ISerState, RuleCall> getGrammarPDA(Grammar grammar, ParserRule entryRule);
 
-	/**
-	 * @deprecated use {@link IContextTypePDAProvider#getTypesForContext(Grammar, EObject)}
-	 */
-	@Deprecated
-	public Set<EClass> getTypesForContext(Grammar grammar, EObject context);
+	Set<ParserRule> getAllRules(Grammar grammar);
 }

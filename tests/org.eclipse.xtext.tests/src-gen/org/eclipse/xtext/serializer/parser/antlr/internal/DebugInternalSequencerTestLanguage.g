@@ -36,7 +36,8 @@ ruleModel :
 	ruleNullValueGenerated |
 	ruleNullValueInterpreted |
 	ruleNullCrossRefGenerated |
-	ruleNullCrossRefInterpreted
+	ruleNullCrossRefInterpreted |
+	ruleFragmentCaller
 ;
 
 // Rule SimpleGroup
@@ -370,6 +371,16 @@ ruleNullCrossRefGenerated :
 // Rule NullCrossRefInterpreted
 ruleNullCrossRefInterpreted :
 	'#32' RULE_ID RULE_ID?
+;
+
+// Rule FragmentCaller
+ruleFragmentCaller :
+	'#33' RULE_ID ruleFragment1 RULE_ID
+;
+
+// Rule Fragment1
+ruleFragment1 :
+	RULE_ID
 ;
 
 // Rule DefEnum1

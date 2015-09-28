@@ -167,6 +167,15 @@ public interface SyntacticsequencertestFactory extends EFactory
   ActionOnly createActionOnly();
 
   /**
+   * Returns a new object of class '<em>Fragment Caller Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Fragment Caller Type</em>'.
+   * @generated
+   */
+  FragmentCallerType createFragmentCallerType();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
