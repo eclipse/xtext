@@ -98,7 +98,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		),
 		@Storage(
 			id = "dir", 
-			file = StoragePathMacros.WORKSPACE_FILE, 
+			file = StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml", 
 			scheme = StorageScheme.DIRECTORY_BASED
 		)])
 @Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
