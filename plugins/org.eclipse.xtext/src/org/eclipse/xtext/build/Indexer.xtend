@@ -147,19 +147,20 @@ import org.eclipse.xtext.service.OperationCanceledManager
 		new(IResourceDescription original) {
 			this.URI = original.getURI
 			this.exported = ImmutableList.copyOf(
-			original.exportedObjects.map [ IEObjectDescription from |
-				if (from.getEObjectOrProxy.eIsProxy)
-					return from
-				var result = EcoreUtil.create(from.getEClass()) as InternalEObject
-				result.eSetProxyURI(from.getEObjectURI)
-				var Map<String, String> userData = null
-				for (key : from.userDataKeys) {
-					if (userData == null)
-						userData = Maps.newHashMapWithExpectedSize(2)
-					userData.put(key, from.getUserData(key))
-				}
-				return EObjectDescription.create(from.name, result, userData)
-			])
+				original.exportedObjects.map [ IEObjectDescription from |
+					if (from.getEObjectOrProxy.eIsProxy)
+						return from
+					var result = EcoreUtil.create(from.getEClass()) as InternalEObject
+					result.eSetProxyURI(from.getEObjectURI)
+					var Map<String, String> userData = null
+					for (key : from.userDataKeys) {
+						if (userData == null)
+							userData = Maps.newHashMapWithExpectedSize(2)
+						userData.put(key, from.getUserData(key))
+					}
+					return EObjectDescription.create(from.name, result, userData)
+				]
+			)
 		}
 
 		override protected List<IEObjectDescription> computeExportedObjects() {
