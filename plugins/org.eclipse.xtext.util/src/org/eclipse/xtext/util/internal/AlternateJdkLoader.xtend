@@ -17,7 +17,7 @@ class AlternateJdkLoader extends URLClassLoader {
 	private final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
 
 	new(Iterable<File> files) {
-		super(files.map[toURL])
+		super(files.map[toURI.toURL])
 	}
 
 	override protected loadClass(String name, boolean resolve) throws ClassNotFoundException {

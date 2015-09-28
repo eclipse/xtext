@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xtext.generator
+package org.eclipse.xtext.util
 
 import java.io.IOException
 import java.io.InputStream
@@ -6,9 +6,14 @@ import java.net.URL
 import java.util.jar.Manifest
 import org.eclipse.emf.common.EMFPlugin
 import org.eclipse.xtend.lib.annotations.Data
-
+/**
+ * @since 2.9
+ */
 @Data
 class XtextVersion {
+	
+	public static String XTEND_GRADLE_PLUGIN_VERSION  = '0.4.8'
+	public static String IDEA_GRADLE_PLUGIN_VERSION  = '0.3.21'
 	
 	static def getCurrent() {
 		new XtextVersion(readVersionFromManifest ?: 'unknown')

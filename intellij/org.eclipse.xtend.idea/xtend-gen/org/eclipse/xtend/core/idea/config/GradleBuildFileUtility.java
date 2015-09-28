@@ -22,6 +22,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -43,8 +44,6 @@ import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner;
  */
 @SuppressWarnings("all")
 public class GradleBuildFileUtility {
-  public final String xtendGradlePluginVersion = "0.4.8";
-  
   public boolean isGradleedModule(final Module module) {
     boolean _or = false;
     boolean _isExternalSystemAwareModule = ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module);
@@ -96,7 +95,7 @@ public class GradleBuildFileUtility {
     }
     _builder.append(_xifexpression, "");
     _builder.append("-gradle-plugin:");
-    _builder.append(this.xtendGradlePluginVersion, "");
+    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "");
     _builder.append("\' ");
     this.addDependency(buildScript, _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();

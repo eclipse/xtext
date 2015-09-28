@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -76,7 +77,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(this.util.xtendGradlePluginVersion, "        ");
+    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "        ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
@@ -117,7 +118,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(this.util.xtendGradlePluginVersion, "    ");
+    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "    ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("}");

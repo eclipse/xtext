@@ -8,10 +8,8 @@
 package org.eclipse.xtend.core.idea.config
 
 import com.google.inject.Inject
-import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ProjectRootManager
@@ -25,6 +23,7 @@ import com.intellij.util.xml.DomUtil
 import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
+import org.eclipse.xtext.util.XtextVersion
 import org.jetbrains.idea.maven.dom.MavenDomUtil
 import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel
 import org.jetbrains.idea.maven.model.MavenId
@@ -85,11 +84,9 @@ class XtendLibraryConfigurator {
 
 	def static xtendLibMavenId() {
 		if (XTEND_LIB_MAVEN_ID === null) {
-			// TODO use 2.8.4 because snapshot repo is not available 
-			val xtendPlugin = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtend.idea"))
-			val version = xtendPlugin?.version
+			val version = XtextVersion.current.version
 			LOG.info("The current Xtend plugin version is " + version)
-			XTEND_LIB_MAVEN_ID = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", "2.8.4")
+			XTEND_LIB_MAVEN_ID = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", version)
 		}
 		return XTEND_LIB_MAVEN_ID
 	}

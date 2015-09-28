@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.util;
 
 import com.google.common.base.Objects;
 import java.io.IOException;
@@ -12,6 +12,9 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @since 2.9
+ */
 @Data
 @SuppressWarnings("all")
 public class XtextVersion {
@@ -27,6 +30,10 @@ public class XtextVersion {
       return null;
     }
   }
+  
+  public static String XTEND_GRADLE_PLUGIN_VERSION = "0.4.8";
+  
+  public static String IDEA_GRADLE_PLUGIN_VERSION = "0.3.21";
   
   public static XtextVersion getCurrent() {
     String _elvis = null;
