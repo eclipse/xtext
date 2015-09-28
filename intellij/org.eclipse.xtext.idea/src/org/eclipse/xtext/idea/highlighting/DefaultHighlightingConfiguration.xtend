@@ -11,6 +11,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.colors.CodeInsightColors
 
 import static org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles.*
+import com.intellij.openapi.editor.HighlighterColors
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -23,7 +24,7 @@ class DefaultHighlightingConfiguration implements IHighlightingConfiguration {
 		addStyle(COMMENT_ID, "Comment", DefaultLanguageHighlighterColors.LINE_COMMENT)
 		addStyle(STRING_ID, "String", DefaultLanguageHighlighterColors.STRING)
 		addStyle(NUMBER_ID, "Number", DefaultLanguageHighlighterColors.NUMBER)
-		addStyle(DEFAULT_ID, "Default", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR)
+		addStyle(DEFAULT_ID, "Default",  HighlighterColors.TEXT)
 		addStyle(INVALID_TOKEN_ID, "Error", CodeInsightColors.ERRORS_ATTRIBUTES)
 		addStyle(TASK_ID, "Todo", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES)
 	}

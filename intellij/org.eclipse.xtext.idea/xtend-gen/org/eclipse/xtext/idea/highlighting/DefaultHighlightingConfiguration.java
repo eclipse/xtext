@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.highlighting;
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
+import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -24,7 +25,7 @@ public class DefaultHighlightingConfiguration implements IHighlightingConfigurat
     it.addStyle(HighlightingStyles.COMMENT_ID, "Comment", DefaultLanguageHighlighterColors.LINE_COMMENT);
     it.addStyle(HighlightingStyles.STRING_ID, "String", DefaultLanguageHighlighterColors.STRING);
     it.addStyle(HighlightingStyles.NUMBER_ID, "Number", DefaultLanguageHighlighterColors.NUMBER);
-    it.addStyle(HighlightingStyles.DEFAULT_ID, "Default", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+    it.addStyle(HighlightingStyles.DEFAULT_ID, "Default", HighlighterColors.TEXT);
     it.addStyle(HighlightingStyles.INVALID_TOKEN_ID, "Error", CodeInsightColors.ERRORS_ATTRIBUTES);
     it.addStyle(HighlightingStyles.TASK_ID, "Todo", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
   }
