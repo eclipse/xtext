@@ -392,6 +392,13 @@ class TestBatchCompiler {
 		batchCompiler.setClassPath('./batch-compiler-data/classpathTest/dependency')
 		assertTrue("Compiling with correct dependency resolution", batchCompiler.compile)
 	}
+	
+	@Test
+	def void testClassPathOverride() {
+		batchCompiler.sourcePath = './batch-compiler-data/classpathOverrideTest/src'
+		batchCompiler.setClassPath('./batch-compiler-data/classpathOverrideTest/dependency')
+		assertFalse("Local classes have precedence over upstream classes", batchCompiler.compile)
+	}
 
 	@Test
 	def void testCompileTestDataWithTrace() {
