@@ -98,7 +98,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 				''',
 				'src/mypack/MyClass.java' - '''
 					package mypack;
-					class MyClass extends Third {
+					public class MyClass extends Third {
 						public A a;
 					}
 				''',
