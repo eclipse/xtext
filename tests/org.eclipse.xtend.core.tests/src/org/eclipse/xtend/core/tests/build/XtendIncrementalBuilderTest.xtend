@@ -98,7 +98,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 				''',
 				'src/mypack/MyClass.java' - '''
 					package mypack;
-					class MyClass extends Third {
+					public class MyClass extends Third {
 						public A a;
 					}
 				''',
@@ -117,6 +117,34 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		assertTrue(generated.values.containsSuffix('xtend-gen/.A.java._trace'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/mypack/Third.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/mypack/.Third.java._trace'))
+	}
+	
+	@Test 
+	def void testSimpleMixedBuild04() {
+		val buildRequest = newBuildRequest [
+			dirtyFiles = #[
+				'src/A.xtend' - '''
+					import b.B
+					class A {
+					   @Override
+					   def foo() {
+					      B.foo
+					   }
+					}
+				'''
+				,'src/b/B.java' - '''
+					package b;
+					public class B {
+						public static String foo;
+					}
+				'''
+				
+			]
+		]
+		build(buildRequest)
+		assertTrue(issues.toString, issues.isEmpty)
+		assertEquals(2, generated.size)
+		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
 	}
 
 	@Test def void testSimpleFullBuild() {
