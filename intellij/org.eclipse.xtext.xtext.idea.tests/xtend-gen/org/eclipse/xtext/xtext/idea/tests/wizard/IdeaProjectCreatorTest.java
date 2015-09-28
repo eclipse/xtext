@@ -9,7 +9,6 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.wizard.XtextModuleBuilder;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
@@ -153,18 +152,5 @@ public class IdeaProjectCreatorTest extends PsiTestCase {
     String _plus = (_basePath + "/mydsl2.parent/mydsl2.parent.iml");
     String _moduleFilePath_3 = rootModule.getModuleFilePath();
     TestCase.assertEquals(_builder.toString(), _plus, _moduleFilePath_3);
-  }
-  
-  @Override
-  protected void tearDown() throws Exception {
-    Project _project = this.getProject();
-    boolean _tripleNotEquals = (_project != null);
-    if (_tripleNotEquals) {
-      Project _project_1 = this.getProject();
-      ModuleManager _instance = ModuleManager.getInstance(_project_1);
-      Module[] _modules = _instance.getModules();
-      CollectionExtensions.<Module>addAll(this.myModulesToDispose, _modules);
-    }
-    super.tearDown();
   }
 }

@@ -145,7 +145,7 @@ class XtextModuleBuilder extends ModuleBuilder {
 			gradleProjectSettings.setExternalProjectPath(wizardConfiguration.parentProject.location);
 			gradleProjectSettings.distributionType = DistributionType.DEFAULT_WRAPPED
 			val settings = ExternalSystemApiUtil.getSettings(project, GradleConstants.SYSTEM_ID);
-			settings.linkProject(gradleProjectSettings);
+			settings.linkProject(gradleProjectSettings)
 			ExternalSystemUtil.refreshProject(project, GradleConstants.SYSTEM_ID,
 				wizardConfiguration.parentProject.location, false, ProgressExecutionMode.IN_BACKGROUND_ASYNC);
 		}

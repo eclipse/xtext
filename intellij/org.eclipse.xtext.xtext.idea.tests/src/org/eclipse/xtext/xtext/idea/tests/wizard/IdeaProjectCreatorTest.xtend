@@ -89,11 +89,4 @@ class IdeaProjectCreatorTest extends PsiTestCase {
 			project.basePath + '/mydsl2.parent/mydsl2.parent.iml', rootModule.moduleFilePath)
 
 	}
-
-	override protected tearDown() throws Exception {
-		if (project !== null)
-			myModulesToDispose.addAll(ModuleManager.getInstance(project).modules)
-		super.tearDown()
-	}
-
 }
