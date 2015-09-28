@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
@@ -24,12 +26,13 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.java.resource.JavaDerivedStateComputer;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
@@ -54,9 +57,6 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Inject
   private IEncodingProvider encodingProvider;
-  
-  @Inject
-  private CompilerPhases compilerPhases;
   
   @Inject
   private JavaDerivedStateComputer derivedStateComputer;
@@ -91,44 +91,73 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     return this.compilationUnit;
   }
   
-  private boolean isInitialized = false;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private boolean initialized = false;
   
-  private boolean isFullyInitialized = false;
-  
-  private boolean isInitializing = false;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private boolean initializing = false;
   
   @Override
   public EList<EObject> getContents() {
+    EList<EObject> _xsynchronizedexpression = null;
     synchronized (this.getLock()) {
-      if (this.isInitializing) {
-        return super.getContents();
-      }
-      try {
-        this.isInitializing = true;
-        final boolean isIndexing = this.compilerPhases.isIndexing(this);
-        if (((!isIndexing) && (!this.isFullyInitialized))) {
-          this.derivedStateComputer.discardDerivedState(this);
-          this.derivedStateComputer.installFull(this);
-          this.isFullyInitialized = true;
-          this.isInitialized = true;
-        } else {
-          boolean _and = false;
-          if (!isIndexing) {
-            _and = false;
-          } else {
-            _and = (!this.isInitialized);
-          }
-          if (_and) {
-            this.derivedStateComputer.installStubs(this);
-            this.isFullyInitialized = false;
-            this.isInitialized = true;
+      EList<EObject> _xblockexpression = null;
+      {
+        if ((((this.isLoaded && (!this.isLoading)) && (!this.initializing)) && (!this.initialized))) {
+          try {
+            this.eSetDeliver(false);
+            this.installFull();
+          } finally {
+            this.eSetDeliver(true);
           }
         }
-      } finally {
-        this.isInitializing = false;
+        _xblockexpression = super.getContents();
       }
-      return super.getContents();
+      _xsynchronizedexpression = _xblockexpression;
     }
+    return _xsynchronizedexpression;
+  }
+  
+  public void installStubs() {
+    final Procedure0 _function = new Procedure0() {
+      @Override
+      public void apply() {
+        JavaResource.this.derivedStateComputer.installStubs(JavaResource.this);
+        JavaResource.this.initialized = true;
+      }
+    };
+    this.initializing(_function);
+  }
+  
+  public void installFull() {
+    final Procedure0 _function = new Procedure0() {
+      @Override
+      public void apply() {
+        JavaResource.this.derivedStateComputer.installFull(JavaResource.this);
+        JavaResource.this.initialized = true;
+      }
+    };
+    this.initializing(_function);
+  }
+  
+  private void initializing(final Procedure0 init) {
+    try {
+      this.initializing = true;
+      init.apply();
+    } finally {
+      this.initializing = false;
+    }
+  }
+  
+  public void discardDerivedState() {
+    final Procedure0 _function = new Procedure0() {
+      @Override
+      public void apply() {
+        JavaResource.this.derivedStateComputer.discardDerivedState(JavaResource.this);
+        JavaResource.this.initialized = false;
+      }
+    };
+    this.initializing(_function);
   }
   
   @Override
@@ -190,5 +219,15 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     synchronized (this.getLock()) {
       return unit.exec(this);
     }
+  }
+  
+  @Pure
+  public boolean isInitialized() {
+    return this.initialized;
+  }
+  
+  @Pure
+  public boolean isInitializing() {
+    return this.initializing;
   }
 }

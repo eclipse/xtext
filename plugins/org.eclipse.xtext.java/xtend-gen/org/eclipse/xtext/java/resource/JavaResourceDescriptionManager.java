@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
+import org.eclipse.xtext.java.resource.JavaResource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -11,12 +12,17 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class JavaResourceDescriptionManager implements IResourceDescription.Manager {
   @Inject
   private JvmTypesResourceDescriptionStrategy descriptionStrategy;
+  
+  @Inject
+  private IResourceScopeCache cache;
   
   @Override
   public IResourceDescription.Delta createDelta(final IResourceDescription oldDescription, final IResourceDescription newDescription) {
@@ -25,10 +31,41 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
   
   @Override
   public IResourceDescription getResourceDescription(final Resource resource) {
-    final DefaultResourceDescription result = new DefaultResourceDescription(resource, this.descriptionStrategy);
-    Iterable<IEObjectDescription> _exportedObjects = result.getExportedObjects();
-    IterableExtensions.<IEObjectDescription>toSet(_exportedObjects);
-    return result;
+    if ((resource instanceof JavaResource)) {
+      boolean _or = false;
+      boolean _isInitialized = ((JavaResource)resource).isInitialized();
+      if (_isInitialized) {
+        _or = true;
+      } else {
+        boolean _isInitializing = ((JavaResource)resource).isInitializing();
+        _or = _isInitializing;
+      }
+      final boolean initialized = _or;
+      try {
+        if ((!initialized)) {
+          ((JavaResource)resource).eSetDeliver(false);
+          ((JavaResource)resource).installStubs();
+        }
+        final DefaultResourceDescription result = new DefaultResourceDescription(resource, this.descriptionStrategy, this.cache);
+        if ((!initialized)) {
+          Iterable<IEObjectDescription> _exportedObjects = result.getExportedObjects();
+          final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
+            @Override
+            public void apply(final IEObjectDescription it) {
+              it.getEObjectURI();
+            }
+          };
+          IterableExtensions.<IEObjectDescription>forEach(_exportedObjects, _function);
+        }
+        return result;
+      } finally {
+        if ((!initialized)) {
+          ((JavaResource)resource).discardDerivedState();
+          ((JavaResource)resource).eSetDeliver(true);
+        }
+      }
+    }
+    throw new IllegalArgumentException("Can only handle JavaResources");
   }
   
   @Override

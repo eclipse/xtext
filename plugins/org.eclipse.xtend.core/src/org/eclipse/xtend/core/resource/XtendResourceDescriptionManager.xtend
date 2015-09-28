@@ -63,10 +63,6 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	
 	Set<QualifiedName> importedNames
 
-	new(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
-		super(resource, strategy)
-	}
-
 	new(Resource resource, IDefaultResourceDescriptionStrategy strategy, IResourceScopeCache cache, IBatchTypeResolver typeResolver, IQualifiedNameConverter nameConverter) {
 		super(resource, strategy, cache)
 		this.typeResolver = typeResolver

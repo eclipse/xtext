@@ -48,10 +48,6 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   private Set<QualifiedName> importedNames;
   
-  public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
-    super(resource, strategy);
-  }
-  
   public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy, final IResourceScopeCache cache, final IBatchTypeResolver typeResolver, final IQualifiedNameConverter nameConverter) {
     super(resource, strategy, cache);
     this.typeResolver = typeResolver;

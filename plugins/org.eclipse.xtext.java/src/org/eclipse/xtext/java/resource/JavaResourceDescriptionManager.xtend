@@ -11,20 +11,38 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
+import org.eclipse.xtext.util.IResourceScopeCache
 
 class JavaResourceDescriptionManager implements IResourceDescription.Manager {
 	
 	@Inject JvmTypesResourceDescriptionStrategy descriptionStrategy
+	@Inject IResourceScopeCache cache
 
 	override createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription)
 	}
 
 	override getResourceDescription(Resource resource) {
-		val result = new DefaultResourceDescription(resource, descriptionStrategy)
-		// initialize
-		result.exportedObjects.toSet
-		return result
+		if (resource instanceof JavaResource) {
+			val initialized = resource.isInitialized || resource.isInitializing
+			try {
+				if (!initialized) {
+					resource.eSetDeliver(false)
+					resource.installStubs
+				}
+				val result = new DefaultResourceDescription(resource, descriptionStrategy, cache)
+				if (!initialized) {
+					result.exportedObjects.forEach[EObjectURI]
+				}
+				return result
+			} finally {
+				if (!initialized) {
+					resource.discardDerivedState
+					resource.eSetDeliver(true)
+				}
+			}
+		}
+		throw new IllegalArgumentException("Can only handle JavaResources")
 	}
 
 	override isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {

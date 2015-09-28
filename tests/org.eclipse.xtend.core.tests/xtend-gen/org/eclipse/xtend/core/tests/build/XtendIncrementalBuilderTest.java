@@ -175,7 +175,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("package mypack;");
         _builder_1.newLine();
-        _builder_1.append("class MyClass extends Third {");
+        _builder_1.append("public class MyClass extends Third {");
         _builder_1.newLine();
         _builder_1.append("\t");
         _builder_1.append("public A a;");
