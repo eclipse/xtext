@@ -400,4 +400,9 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	public void testActionOnlyWithOptionals() throws Exception {
 		testSequence("#14 kw1 foo kw2 bar");
 	}
+	
+	@Test
+	public void testFragment() throws Exception {
+		testSequence("#15 foo bar baz");
+	}
 }

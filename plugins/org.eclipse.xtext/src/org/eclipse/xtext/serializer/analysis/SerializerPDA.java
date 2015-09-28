@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
@@ -20,6 +20,7 @@ import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 public class SerializerPDA implements Pda<ISerState, RuleCall> {
@@ -54,8 +55,8 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 		}
 	}
 
-	public static class SerializerPDAElementFactory implements
-			PdaFactory<SerializerPDA, ISerState, RuleCall, AbstractElement> {
+	public static class SerializerPDAElementFactory
+			implements PdaFactory<SerializerPDA, ISerState, RuleCall, AbstractElement> {
 
 		@Override
 		public SerializerPDA create(AbstractElement start, AbstractElement stop) {
@@ -82,6 +83,9 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 		@Override
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
 			((SerializerPDA.SerializerPDAState) owner).followers = Lists.newArrayList(followers);
+			for (ISerState follower : followers) {
+				((SerializerPDA.SerializerPDAState) follower).precedents.add(owner);
+			}
 		}
 	}
 
@@ -94,10 +98,21 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 
 	}
 
+	public static class SerializerPDAIsAssignedAction implements Predicate<ISerState> {
+
+		@Override
+		public boolean apply(ISerState input) {
+			return input != null && GrammarUtil.isAssignedAction(input.getGrammarElement());
+		}
+
+	}
+
 	protected static class SerializerPDAState implements ISerState {
-		protected List<ISerState> followers = Collections.emptyList();
-		protected AbstractElement grammarElement;
-		protected SerStateType type;
+		protected List<ISerState> followers = Lists.newArrayList();
+		protected final List<ISerState> precedents = Lists.newArrayList();
+		protected final AbstractElement grammarElement;
+		protected final SerStateType type;
+		//		protected final SerializerPDAState opposite;
 
 		public SerializerPDAState(AbstractElement grammarElement, SerStateType type) {
 			super();
@@ -151,6 +166,16 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 			}
 			return "";
 		}
+
+		@Override
+		public List<ISerState> getPrecedents() {
+			return precedents;
+		}
+
+		//		@Override
+		//		public ISerState getOpposite() {
+		//			return null;
+		//		}
 	}
 
 	protected SerializerPDA.SerializerPDAState start;
@@ -187,12 +212,12 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 	}
 
 	@Override
-	public ISerState getStart() {
+	public SerializerPDAState getStart() {
 		return start;
 	}
 
 	@Override
-	public ISerState getStop() {
+	public SerializerPDAState getStop() {
 		return stop;
 	}
 
