@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.util.internal.AlternateJdkLoader;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
@@ -702,8 +704,8 @@ public class XtendBatchCompiler {
 	 * Performs the actual installation of the JvmTypeProvider.
 	 */
 	private void internalInstallJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory, boolean skipIndexLookup) {
-		Iterable<String> classPathEntries = concat(getClassPathEntries(), getSourcePathDirectories(),
-				asList(tmpClassDirectory.toString()));
+		Iterable<String> classPathEntries = concat(getSourcePathDirectories(),
+				asList(tmpClassDirectory.toString()), getClassPathEntries());
 		classPathEntries = filter(classPathEntries, new Predicate<String>() {
 			@Override
 			public boolean apply(String input) {
@@ -733,6 +735,15 @@ public class XtendBatchCompiler {
 		// for annotation processing we need to have the compiler's classpath as a parent.
 		annotationProcessingClassLoader = createClassLoader(classpath, currentClassLoader);
 		resourceSet.eAdapters().add(new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(annotationProcessingClassLoader));
+		removePossiblyShadowedTypeResources(resourceSet);
+	}
+
+	private void removePossiblyShadowedTypeResources(ResourceSet resourceSet) {
+		Iterator<Resource> resources = resourceSet.getResources().iterator();
+		while(resources.hasNext()) {
+			if (resources.next() instanceof TypeResource)
+				resources.remove();
+		}
 	}
 	
 	private static final Function<String, File> TO_FILE = new Function<String, File>() {
@@ -743,11 +754,10 @@ public class XtendBatchCompiler {
 	};
 	
 	private static final Function<File, URL> TO_URL= new Function<File, URL>() {
-		@SuppressWarnings("deprecation")
 		@Override
 		public URL apply(File from) {
 			try {
-				return from.toURL();
+				return from.toURI().toURL();
 			} catch (MalformedURLException e) {
 				throw new RuntimeException(e);
 			}

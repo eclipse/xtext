@@ -806,6 +806,14 @@ public class TestBatchCompiler {
   }
   
   @Test
+  public void testClassPathOverride() {
+    this.batchCompiler.setSourcePath("./batch-compiler-data/classpathOverrideTest/src");
+    this.batchCompiler.setClassPath("./batch-compiler-data/classpathOverrideTest/dependency");
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertFalse("Local classes have precedence over upstream classes", _compile);
+  }
+  
+  @Test
   public void testCompileTestDataWithTrace() {
     this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.compile();
