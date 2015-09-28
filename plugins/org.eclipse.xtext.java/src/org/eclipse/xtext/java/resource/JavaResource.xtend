@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider
@@ -21,7 +22,6 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
 
@@ -41,7 +41,6 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	}
 	
 	@Inject IEncodingProvider encodingProvider
-	@Inject CompilerPhases compilerPhases
 	@Inject JavaDerivedStateComputer derivedStateComputer
 	
 	CompilationUnit compilationUnit
@@ -66,34 +65,54 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 		return compilationUnit
 	}
 	
-	private boolean isInitialized = false
-	private boolean isFullyInitialized = false
+	@Accessors(PUBLIC_GETTER)
+	private boolean initialized = false
 	
-	private boolean isInitializing = false;
+	@Accessors(PUBLIC_GETTER)
+	private boolean initializing = false;
 	
 	override getContents() {
 		synchronized (getLock()) {
-			if (isInitializing)
-				return super.getContents();
-			try {
-				isInitializing = true
-				// already in the correct state
-				val isIndexing = compilerPhases.isIndexing(this)
-				if (!isIndexing && !isFullyInitialized) {
-					derivedStateComputer.discardDerivedState(this);
-					derivedStateComputer.installFull(this);
-					isFullyInitialized = true
-					isInitialized = true
-				} else if (isIndexing && !isInitialized) {
-					derivedStateComputer.installStubs(this)
-					isFullyInitialized = false
-					isInitialized = true
+			if (isLoaded && !isLoading && !initializing && !initialized ) {
+				try {
+					eSetDeliver(false)
+					installFull
+				} finally {
+					eSetDeliver(true)
 				}
-			} finally {
-				isInitializing = false;
 			}
-			return super.getContents();
+			super.getContents()
 		}
+	}
+	
+	def installStubs() {
+		initializing[
+			derivedStateComputer.installStubs(this)
+			initialized = true
+		]
+	}
+	
+	def installFull() {
+		initializing[
+			derivedStateComputer.installFull(this)
+			initialized = true
+		]
+	}
+	
+	private def initializing(() => void init) {
+		try {
+			initializing = true
+			init.apply
+		} finally {
+			initializing = false
+		}
+	}
+	
+	def discardDerivedState() {
+		initializing[
+			derivedStateComputer.discardDerivedState(this)
+			initialized = false
+		]
 	}
 	
 	override resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
