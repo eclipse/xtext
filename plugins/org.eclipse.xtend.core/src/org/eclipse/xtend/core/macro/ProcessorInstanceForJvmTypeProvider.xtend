@@ -19,6 +19,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.internal.AlternateJdkLoader
+import java.net.URL
 
 @Singleton
 class ProcessorInstanceForJvmTypeProvider {
@@ -86,7 +88,13 @@ class ProcessorInstanceForJvmTypeProvider {
 					Class<?> : classLoaderCtx.classLoader
 				}
 				val processorClassLoader = if (jvmTypeLoader instanceof URLClassLoader) {
-					new URLClassLoader(jvmTypeLoader.URLs, TransformationContext.classLoader)
+					val urls = <URL>newArrayList
+					urls += jvmTypeLoader.URLs
+					val bootClassloader = jvmTypeLoader.parent
+					if (bootClassloader instanceof AlternateJdkLoader) {
+						urls += bootClassloader.URLs
+					}
+					new URLClassLoader(urls, TransformationContext.classLoader)
 				} else {
 					jvmTypeLoader
 				}

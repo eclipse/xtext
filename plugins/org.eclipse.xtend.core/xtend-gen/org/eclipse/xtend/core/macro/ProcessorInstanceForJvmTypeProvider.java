@@ -14,6 +14,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -26,6 +27,9 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.internal.AlternateJdkLoader;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -160,9 +164,20 @@ public class ProcessorInstanceForJvmTypeProvider {
         final ClassLoader jvmTypeLoader = _switchResult_1;
         ClassLoader _xifexpression = null;
         if ((jvmTypeLoader instanceof URLClassLoader)) {
-          URL[] _uRLs = ((URLClassLoader)jvmTypeLoader).getURLs();
-          ClassLoader _classLoader = TransformationContext.class.getClassLoader();
-          _xifexpression = new URLClassLoader(_uRLs, _classLoader);
+          URLClassLoader _xblockexpression = null;
+          {
+            final ArrayList<URL> urls = CollectionLiterals.<URL>newArrayList();
+            URL[] _uRLs = ((URLClassLoader)jvmTypeLoader).getURLs();
+            Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs)));
+            final ClassLoader bootClassloader = ((URLClassLoader)jvmTypeLoader).getParent();
+            if ((bootClassloader instanceof AlternateJdkLoader)) {
+              URL[] _uRLs_1 = ((AlternateJdkLoader)bootClassloader).getURLs();
+              Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs_1)));
+            }
+            ClassLoader _classLoader = TransformationContext.class.getClassLoader();
+            _xblockexpression = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
+          }
+          _xifexpression = _xblockexpression;
         } else {
           _xifexpression = jvmTypeLoader;
         }
