@@ -34,7 +34,7 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 			'''
 			additionalContent = '''
 				ideaDevelopment {
-					ideaVersion = '141.814.3'
+					ideaVersion = '142.5047.6'
 					pluginRepositories {
 						«IF config.xtextVersion.isSnapshot»
 							url "https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml"
