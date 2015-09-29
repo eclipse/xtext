@@ -267,7 +267,7 @@
     <requirement
         name="org.eclipse.wst.jsdt.feature.feature.group"/>
     <repository
-        url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
+        url="http://download.eclipse.org/modeling/emft/b3/updates-4.4/"/>
     <repository
         url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
     <repository
