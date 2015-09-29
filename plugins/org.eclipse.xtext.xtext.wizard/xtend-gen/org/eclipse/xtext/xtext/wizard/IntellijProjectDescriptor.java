@@ -69,7 +69,7 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
         _builder_1.append("ideaDevelopment {");
         _builder_1.newLine();
         _builder_1.append("\t");
-        _builder_1.append("ideaVersion = \'141.814.3\'");
+        _builder_1.append("ideaVersion = \'142.5047.6\'");
         _builder_1.newLine();
         _builder_1.append("\t");
         _builder_1.append("pluginRepositories {");
