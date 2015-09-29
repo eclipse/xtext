@@ -181,7 +181,7 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 		]
 		waitForContextChange [
 			myDebuggerSession.process.processHandler.startNotify
-			while (myDebuggerSession.state == 2) {
+			while (!myDebuggerSession.isAttached) {
 				UIUtil.dispatchAllInvocationEvents()
 				Thread.sleep(10)
 			}

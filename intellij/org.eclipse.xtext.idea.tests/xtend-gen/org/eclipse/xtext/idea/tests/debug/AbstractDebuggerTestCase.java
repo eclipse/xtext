@@ -340,7 +340,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
           DebugProcessImpl _process = AbstractDebuggerTestCase.this.myDebuggerSession.getProcess();
           ProcessHandler _processHandler = _process.getProcessHandler();
           _processHandler.startNotify();
-          while ((AbstractDebuggerTestCase.this.myDebuggerSession.getState() == 2)) {
+          while ((!AbstractDebuggerTestCase.this.myDebuggerSession.isAttached())) {
             {
               UIUtil.dispatchAllInvocationEvents();
               Thread.sleep(10);

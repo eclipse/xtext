@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.21"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.23"
 	}
 }
 
@@ -16,7 +16,7 @@ allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
 	ideaDevelopment {
-		ideaVersion = "142.3371.3"
+		ideaVersion = "142.5047.6"
 		pluginDependencies {
 			id 'junit'
 		}
