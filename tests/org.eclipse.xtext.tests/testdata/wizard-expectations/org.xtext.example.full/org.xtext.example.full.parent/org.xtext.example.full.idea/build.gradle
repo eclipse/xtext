@@ -1,12 +1,12 @@
 plugins {
-	id 'org.xtext.idea-plugin' version '0.3.22'
+	id 'org.xtext.idea-plugin' version '0.3.23'
 }
 dependencies {
 	compile project(':org.xtext.example.full')
 	compile project(':org.xtext.example.full.ide')
 }
 ideaDevelopment {
-	ideaVersion = '141.814.3'
+	ideaVersion = '142.5047.6'
 	pluginRepositories {
 		url "https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml"
 	}
