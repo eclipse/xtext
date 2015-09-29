@@ -1,5 +1,5 @@
 plugins {
-	id 'org.xtext.idea-plugin' version '0.3.21'
+	id 'org.xtext.idea-plugin' version '0.3.22'
 }
 dependencies {
 	compile project(':org.xtext.example.gradle')
