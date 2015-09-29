@@ -12,9 +12,6 @@ import org.eclipse.xtend.lib.annotations.Data
 @Data
 class XtextVersion {
 	
-	public static String XTEND_GRADLE_PLUGIN_VERSION  = '0.4.8'
-	public static String IDEA_GRADLE_PLUGIN_VERSION  = '0.3.21'
-	
 	static def getCurrent() {
 		new XtextVersion(readVersionFromManifest ?: 'unknown')
 	}
@@ -49,6 +46,14 @@ class XtextVersion {
 	
 	def isSnapshot() {
 		version.endsWith("-SNAPSHOT")
+	}
+	
+	def getXtendGradlePluginVersion() {
+		'0.4.8'
+	}
+	
+	def getXtextGradlePluginVersion() {
+		'0.3.22'
 	}
 	
 	override toString() {

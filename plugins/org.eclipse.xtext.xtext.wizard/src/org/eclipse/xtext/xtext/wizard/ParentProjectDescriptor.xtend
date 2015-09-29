@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.util.XtextVersion
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
@@ -57,7 +56,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						jcenter()
 					}
 					dependencies {
-						classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.XTEND_GRADLE_PLUGIN_VERSION»'
+						classpath 'org.xtend:xtend-gradle-plugin:«config.xtextVersion.xtendGradlePluginVersion»'
 					}
 				}
 				subprojects {
@@ -73,6 +72,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					apply plugin: 'java'
 					apply plugin: 'org.xtend.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
+					apply plugin: 'eclipse'
+					apply plugin: 'idea'
 					
 					sourceCompatibility = '1.6'
 					targetCompatibility = '1.6'

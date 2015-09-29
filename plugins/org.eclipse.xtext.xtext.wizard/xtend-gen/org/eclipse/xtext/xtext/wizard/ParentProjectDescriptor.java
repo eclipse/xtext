@@ -133,7 +133,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-        _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "\t\t");
+        WizardConfiguration _config = ParentProjectDescriptor.this.getConfig();
+        XtextVersion _xtextVersion = _config.getXtextVersion();
+        String _xtendGradlePluginVersion = _xtextVersion.getXtendGradlePluginVersion();
+        _builder.append(_xtendGradlePluginVersion, "\t\t");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -145,9 +148,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("ext.xtextVersion = \"");
-        WizardConfiguration _config = ParentProjectDescriptor.this.getConfig();
-        XtextVersion _xtextVersion = _config.getXtextVersion();
-        _builder.append(_xtextVersion, "\t");
+        WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
+        XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
+        _builder.append(_xtextVersion_1, "\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -157,9 +160,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("jcenter()");
         _builder.newLine();
         {
-          WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
-          XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
-          boolean _isSnapshot = _xtextVersion_1.isSnapshot();
+          WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_2 = _config_2.getXtextVersion();
+          boolean _isSnapshot = _xtextVersion_2.isSnapshot();
           if (_isSnapshot) {
             _builder.append("\t\t");
             _builder.append("maven {");
@@ -184,6 +187,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("apply plugin: \'eclipse\'");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("apply plugin: \'idea\'");
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
