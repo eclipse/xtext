@@ -3,7 +3,7 @@
   <validationSets description="Most recent TP" label="Latest">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
     <contributions label="Latest">
-      <repositories location="http://download.eclipse.org/eclipse/updates/4.5-I-builds/">
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.5/">
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>

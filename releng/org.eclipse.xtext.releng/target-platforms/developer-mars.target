@@ -24,7 +24,7 @@
 <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
 <unit id="org.eclipse.core.databinding.beans" version="0.0.0"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.5-I-builds/"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.5/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="com.google.guava" version="15.0.0.v201403281430"/>
