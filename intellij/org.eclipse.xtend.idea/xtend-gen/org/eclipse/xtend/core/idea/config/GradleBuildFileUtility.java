@@ -95,7 +95,9 @@ public class GradleBuildFileUtility {
     }
     _builder.append(_xifexpression, "");
     _builder.append("-gradle-plugin:");
-    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "");
+    XtextVersion _current = XtextVersion.getCurrent();
+    String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
+    _builder.append(_xtendGradlePluginVersion, "");
     _builder.append("\' ");
     this.addDependency(buildScript, _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();

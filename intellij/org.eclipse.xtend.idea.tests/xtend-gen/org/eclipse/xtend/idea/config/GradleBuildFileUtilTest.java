@@ -77,7 +77,9 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "        ");
+    XtextVersion _current = XtextVersion.getCurrent();
+    String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
+    _builder.append(_xtendGradlePluginVersion, "        ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
@@ -118,7 +120,9 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "    ");
+    XtextVersion _current = XtextVersion.getCurrent();
+    String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
+    _builder.append(_xtendGradlePluginVersion, "    ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("}");

@@ -56,7 +56,10 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("id \'org.xtext.idea-plugin\' version \'");
-        _builder.append(XtextVersion.IDEA_GRADLE_PLUGIN_VERSION, "\t");
+        WizardConfiguration _config = IntellijProjectDescriptor.this.getConfig();
+        XtextVersion _xtextVersion = _config.getXtextVersion();
+        String _xtextGradlePluginVersion = _xtextVersion.getXtextGradlePluginVersion();
+        _builder.append(_xtextGradlePluginVersion, "\t");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -72,9 +75,9 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
         _builder_1.append("pluginRepositories {");
         _builder_1.newLine();
         {
-          WizardConfiguration _config = IntellijProjectDescriptor.this.getConfig();
-          XtextVersion _xtextVersion = _config.getXtextVersion();
-          boolean _isSnapshot = _xtextVersion.isSnapshot();
+          WizardConfiguration _config_1 = IntellijProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
+          boolean _isSnapshot = _xtextVersion_1.isSnapshot();
           if (_isSnapshot) {
             _builder_1.append("\t\t");
             _builder_1.append("url \"https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml\"");

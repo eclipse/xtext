@@ -18,6 +18,7 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder
 import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvider
 import static org.eclipse.xtext.util.XtextVersion.*
+import org.eclipse.xtext.util.XtextVersion
 
 /**
  * @author Dennis Huebner (dhuebner) - Initial contribution and API
@@ -48,7 +49,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 				    jcenter()
 				}
 			    dependencies {
-			        classpath 'org.xtend:xtend-gradle-plugin:«XTEND_GRADLE_PLUGIN_VERSION»'
+			        classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
 			    }
 			}
 		''')

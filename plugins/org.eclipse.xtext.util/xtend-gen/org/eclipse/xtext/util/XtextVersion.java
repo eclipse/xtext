@@ -31,10 +31,6 @@ public class XtextVersion {
     }
   }
   
-  public static String XTEND_GRADLE_PLUGIN_VERSION = "0.4.8";
-  
-  public static String IDEA_GRADLE_PLUGIN_VERSION = "0.3.21";
-  
   public static XtextVersion getCurrent() {
     String _elvis = null;
     String _readVersionFromManifest = XtextVersion.readVersionFromManifest();
@@ -84,6 +80,14 @@ public class XtextVersion {
   
   public boolean isSnapshot() {
     return this.version.endsWith("-SNAPSHOT");
+  }
+  
+  public String getXtendGradlePluginVersion() {
+    return "0.4.8";
+  }
+  
+  public String getXtextGradlePluginVersion() {
+    return "0.3.21";
   }
   
   @Override

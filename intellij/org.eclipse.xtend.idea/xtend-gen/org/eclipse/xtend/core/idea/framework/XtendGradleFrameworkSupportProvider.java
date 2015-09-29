@@ -76,7 +76,9 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     _builder.newLine();
     _builder.append("        ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(XtextVersion.XTEND_GRADLE_PLUGIN_VERSION, "        ");
+    XtextVersion _current_1 = XtextVersion.getCurrent();
+    String _xtendGradlePluginVersion = _current_1.getXtendGradlePluginVersion();
+    _builder.append(_xtendGradlePluginVersion, "        ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
