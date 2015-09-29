@@ -87,7 +87,7 @@ public class XtextVersion {
   }
   
   public String getXtextGradlePluginVersion() {
-    return "0.3.21";
+    return "0.3.22";
   }
   
   @Override
