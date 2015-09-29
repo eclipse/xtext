@@ -48,7 +48,7 @@ class GradleBuildFileUtility {
 		}
 		val buildScript = buildFile.createOrGetMethodCall("buildscript")
 		buildScript.createOrGetMethodCall('repositories').createStatementIfNotExists('jcenter()')
-		buildScript.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«XtextVersion.XTEND_GRADLE_PLUGIN_VERSION»' ''')
+		buildScript.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»' ''')
 		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
 	}
 

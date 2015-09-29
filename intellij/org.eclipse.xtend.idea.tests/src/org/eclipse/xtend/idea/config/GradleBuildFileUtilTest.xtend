@@ -14,7 +14,7 @@ import org.eclipse.xtend.idea.LightXtendTest
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrApplicationStatement
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.path.GrMethodCallExpression
-import static org.eclipse.xtext.util.XtextVersion.XTEND_GRADLE_PLUGIN_VERSION
+import org.eclipse.xtext.util.XtextVersion
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -39,7 +39,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		        jcenter()
 		    }
 		    dependencies {
-		        classpath 'org.xtend:xtend-gradle-plugin:«XTEND_GRADLE_PLUGIN_VERSION»'
+		        classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
 		    }
 		}
 		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
@@ -58,7 +58,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertEquals('''
 		buildscript{dependencies{
-		    classpath 'org.xtend:xtend-gradle-plugin:«XTEND_GRADLE_PLUGIN_VERSION»'
+		    classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
 		}
 		    repositories {
 		        jcenter()
