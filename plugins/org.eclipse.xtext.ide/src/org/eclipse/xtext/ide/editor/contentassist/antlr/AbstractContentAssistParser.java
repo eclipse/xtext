@@ -329,4 +329,12 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
 	}
+	
+	public void setRequiredRuleNameComputer(RequiredRuleNameComputer requiredRuleNameComputer) {
+		this.requiredRuleNameComputer = requiredRuleNameComputer;
+	}
+	
+	public RequiredRuleNameComputer getRequiredRuleNameComputer() {
+		return requiredRuleNameComputer;
+	}
 }
