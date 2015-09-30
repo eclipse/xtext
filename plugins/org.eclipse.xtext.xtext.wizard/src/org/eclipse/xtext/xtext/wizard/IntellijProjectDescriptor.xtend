@@ -28,11 +28,13 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 	override buildGradle() {
 		super.buildGradle => [
 			pluginsSection = '''
-				plugins {
-					id 'org.xtext.idea-plugin' version '«config.xtextVersion.xtextGradlePluginVersion»'
-				}
+				//see https://github.com/xtext/xtext-gradle-plugin/tree/master/xtext-idea-gradle-plugin
+				apply plugin: 'org.xtext.idea-plugin'
+				apply plugin: 'org.xtext.idea-repository'
+				
 			'''
 			additionalContent = '''
+				
 				ideaDevelopment {
 					ideaVersion = '142.5047.6'
 					pluginRepositories {
@@ -46,6 +48,8 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 						id 'org.eclipse.xtext.idea' version xtextVersion
 					}
 				}
+				
+				ideaRepository.rootUrl = "${buildDir}/ideaRepository"
 			'''
 		]
 	}

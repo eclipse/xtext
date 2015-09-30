@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
+import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
@@ -106,6 +107,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       CharSequence _sourceLayoutGradle = this.sourceLayoutGradle();
       PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/source-layout.gradle", _sourceLayoutGradle);
       files.add(_file_1);
+      CharSequence _mavenDeploymentGradle = this.mavenDeploymentGradle();
+      PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradle/maven-deployment.gradle", _mavenDeploymentGradle);
+      files.add(_file_2);
     }
     return files;
   }
@@ -139,19 +143,35 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append(_xtendGradlePluginVersion, "\t\t");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
+        {
+          WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
+          IntellijProjectDescriptor _intellijProject = _config_1.getIntellijProject();
+          boolean _isEnabled = _intellijProject.isEnabled();
+          if (_isEnabled) {
+            _builder.append("\t\t");
+            _builder.append("classpath \'org.xtext:xtext-idea-gradle-plugin:");
+            WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
+            XtextVersion _xtextVersion_1 = _config_2.getXtextVersion();
+            String _xtextGradlePluginVersion = _xtextVersion_1.getXtextGradlePluginVersion();
+            _builder.append(_xtextGradlePluginVersion, "\t\t");
+            _builder.append("\'");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
         _builder.append("}");
+        _builder.newLine();
         _builder.newLine();
         _builder.append("subprojects {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("ext.xtextVersion = \"");
-        WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
-        XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
-        _builder.append(_xtextVersion_1, "\t");
-        _builder.append("\"");
+        _builder.append("ext.xtextVersion = \'");
+        WizardConfiguration _config_3 = ParentProjectDescriptor.this.getConfig();
+        XtextVersion _xtextVersion_2 = _config_3.getXtextVersion();
+        _builder.append(_xtextVersion_2, "\t");
+        _builder.append("\'");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("repositories {");
@@ -160,16 +180,16 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("jcenter()");
         _builder.newLine();
         {
-          WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
-          XtextVersion _xtextVersion_2 = _config_2.getXtextVersion();
-          boolean _isSnapshot = _xtextVersion_2.isSnapshot();
+          WizardConfiguration _config_4 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_3 = _config_4.getXtextVersion();
+          boolean _isSnapshot = _xtextVersion_3.isSnapshot();
           if (_isSnapshot) {
             _builder.append("\t\t");
             _builder.append("maven {");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots\"");
+            _builder.append("url \'https://oss.sonatype.org/content/repositories/snapshots\'");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("}");
@@ -178,6 +198,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         }
         _builder.append("\t");
         _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("apply plugin: \'java\'");
@@ -189,10 +211,25 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("apply from: \"${rootDir}/gradle/maven-deployment.gradle\"");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("apply plugin: \'eclipse\'");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("apply plugin: \'idea\'");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("group = \'");
+        WizardConfiguration _config_5 = ParentProjectDescriptor.this.getConfig();
+        String _baseName = _config_5.getBaseName();
+        _builder.append(_baseName, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("version = \'1.0.0-SNAPSHOT\'");
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
@@ -447,6 +484,38 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.append(_sourceFolder_21, "\t");
     _builder.append("\')");
     _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence mavenDeploymentGradle() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("//see https://docs.gradle.org/current/userguide/maven_plugin.html");
+    _builder.newLine();
+    _builder.append("apply plugin: \'maven\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("uploadArchives {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("repositories {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("mavenDeployer {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("repository(url: \"file://${buildDir}/localRepo\")");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("snapshotRepository(url: \"file://${buildDir}/localRepo\")");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
