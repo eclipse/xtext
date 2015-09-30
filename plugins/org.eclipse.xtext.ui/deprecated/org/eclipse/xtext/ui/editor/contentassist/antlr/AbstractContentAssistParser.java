@@ -336,4 +336,22 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
 	}
+	
+	/**
+	 * @since 2.9
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	public void setRequiredRuleNameComputer(RequiredRuleNameComputer requiredRuleNameComputer) {
+		this.requiredRuleNameComputer = requiredRuleNameComputer;
+	}
+	
+	/**
+	 * @since 2.9
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	public RequiredRuleNameComputer getRequiredRuleNameComputer() {
+		return requiredRuleNameComputer;
+	}
 }

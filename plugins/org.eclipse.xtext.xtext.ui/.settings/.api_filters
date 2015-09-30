@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xtext.ui" version="2">
-    <resource path="xtend-gen/org/eclipse/xtext/xtext/ui/wizard/project/DefaultProjectFactoryContributor.java" type="org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributor">
+    <resource path="src/org/eclipse/xtext/xtext/ui/wizard/project/XtextProjectCreator.java" type="org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator$DescriptorBasedContributor">
         <filter id="574619656">
             <message_arguments>
                 <message_argument value="IProjectFactoryContributor"/>
-                <message_argument value="DefaultProjectFactoryContributor"/>
+                <message_argument value="DescriptorBasedContributor"/>
             </message_arguments>
         </filter>
     </resource>
