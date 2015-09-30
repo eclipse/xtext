@@ -239,6 +239,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("targetCompatibility = \'1.6\'");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("configurations.all {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("exclude group: \'asm\'");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
         _builder.append("}");
         _builder.newLine();
         it.setAdditionalContent(_builder.toString());
