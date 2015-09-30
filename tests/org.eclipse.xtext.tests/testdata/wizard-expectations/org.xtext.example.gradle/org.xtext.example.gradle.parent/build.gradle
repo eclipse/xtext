@@ -4,21 +4,28 @@ buildscript {
 	}
 	dependencies {
 		classpath 'org.xtend:xtend-gradle-plugin:0.4.8'
+		classpath 'org.xtext:xtext-idea-gradle-plugin:0.3.23'
 	}
 }
+
 subprojects {
-	ext.xtextVersion = "2.9.0-SNAPSHOT"
+	ext.xtextVersion = '2.9.0-SNAPSHOT'
 	repositories {
 		jcenter()
 		maven {
-			url "https://oss.sonatype.org/content/repositories/snapshots"
+			url 'https://oss.sonatype.org/content/repositories/snapshots'
 		}
 	}
+	
 	apply plugin: 'java'
 	apply plugin: 'org.xtend.xtend'
 	apply from: "${rootDir}/gradle/source-layout.gradle"
+	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
+	
+	group = 'org.xtext.example.gradle'
+	version = '1.0.0-SNAPSHOT'
 	
 	sourceCompatibility = '1.6'
 	targetCompatibility = '1.6'

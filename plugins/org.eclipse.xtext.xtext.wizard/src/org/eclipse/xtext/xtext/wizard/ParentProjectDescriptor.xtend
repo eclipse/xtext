@@ -44,6 +44,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		if (config.needsGradleBuild) {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
 			files += file(Outlet.ROOT, 'gradle/source-layout.gradle', sourceLayoutGradle)
+			files += file(Outlet.ROOT, 'gradle/maven-deployment.gradle', mavenDeploymentGradle)
 		}
 		return files
 	}
@@ -57,23 +58,32 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 					dependencies {
 						classpath 'org.xtend:xtend-gradle-plugin:«config.xtextVersion.xtendGradlePluginVersion»'
+						«IF config.intellijProject.isEnabled»
+							classpath 'org.xtext:xtext-idea-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
+						«ENDIF»
 					}
 				}
+				
 				subprojects {
-					ext.xtextVersion = "«config.xtextVersion»"
+					ext.xtextVersion = '«config.xtextVersion»'
 					repositories {
 						jcenter()
 						«IF config.xtextVersion.isSnapshot»
 							maven {
-								url "https://oss.sonatype.org/content/repositories/snapshots"
+								url 'https://oss.sonatype.org/content/repositories/snapshots'
 							}
 						«ENDIF»
 					}
+					
 					apply plugin: 'java'
 					apply plugin: 'org.xtend.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
+					apply from: "${rootDir}/gradle/maven-deployment.gradle"
 					apply plugin: 'eclipse'
 					apply plugin: 'idea'
+					
+					group = '«config.baseName»'
+					version = '1.0.0-SNAPSHOT'
 					
 					sourceCompatibility = '1.6'
 					targetCompatibility = '1.6'
@@ -136,6 +146,20 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		
 		plugins.withId('org.xtext.idea-plugin') {
 			assembleSandbox.metaInf.from('«Outlet.META_INF.sourceFolder»')
+		}
+	'''
+	
+	def mavenDeploymentGradle() '''
+		//see https://docs.gradle.org/current/userguide/maven_plugin.html
+		apply plugin: 'maven'
+		
+		uploadArchives {
+			repositories {
+				mavenDeployer {
+					repository(url: "file://${buildDir}/localRepo")
+					snapshotRepository(url: "file://${buildDir}/localRepo")
+				}
+			}
 		}
 	'''
 
