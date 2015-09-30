@@ -139,6 +139,12 @@ The second plug-in invokes the MWE2 file through a standard Java process:
     <arguments>
       <argument>file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
     </arguments>
+    <argument>
+		-p
+	</argument>
+	<argument>
+		runtimeProject=/${project.basedir}
+	</argument>
   </configuration>
   <dependencies>
     <dependency>
