@@ -89,9 +89,13 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	override getFiles() {
 		val files = newArrayList
 		files += super.files
-		files += file(Outlet.MAIN_RESOURCES, grammarFilePath, grammar)
-		files += file(Outlet.MAIN_RESOURCES, workflowFilePath, workflow)
+		files += grammarFile
+		files += file(Outlet.MAIN_JAVA, workflowFilePath, workflow)
 		return files
+	}
+	
+	def getGrammarFile() {
+		file(Outlet.MAIN_JAVA, grammarFilePath, grammar)
 	}
 	
 	def String getGrammarFilePath() {
@@ -135,7 +139,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			var projectPath = "../${projectName}"
 			
 			var fileExtensions = "«config.language.fileExtensions»"
-			var grammarURI = "platform:/resource/${projectName}/«Outlet.MAIN_RESOURCES.sourceFolder»/«grammarFilePath»"
+			var grammarURI = "platform:/resource/${projectName}/«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
 			
 			var encoding = "«config.encoding»"
 			var lineDelimiter = "\n"
@@ -367,10 +371,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				task generateXtextLanguage(type: JavaExec) {
 					main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 					classpath = configurations.mwe2
-					inputs.file "«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»"
-					inputs.file "«Outlet.MAIN_RESOURCES.sourceFolder»/«grammarFilePath»"
+					inputs.file "«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»"
+					inputs.file "«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
 					outputs.dir "«Outlet.MAIN_SRC_GEN.sourceFolder»"
-					args += "«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»"
+					args += "«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»"
 					args += "-p"
 					args += "projectPath=/${projectDir}"
 				}
@@ -378,6 +382,12 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				compileXtend.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)
 				eclipse.classpath.plusConfigurations += [configurations.mwe2]
+				
+				jar {
+					from('model/generated') {
+						into('model/generated')
+					}
+				}
 			'''
 		]
 	}
@@ -412,7 +422,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							<configuration>
 								<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 								<arguments>
-									<argument>/${project.basedir}/«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»</argument>
+									<argument>/${project.basedir}/«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»</argument>
 									<argument>-p</argument>
 									<argument>projectPath=/${project.basedir}</argument>
 								</arguments>
