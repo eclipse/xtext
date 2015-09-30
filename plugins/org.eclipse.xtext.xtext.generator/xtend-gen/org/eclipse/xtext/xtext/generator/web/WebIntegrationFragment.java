@@ -2134,12 +2134,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("setAttribute(");
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.jetty.webapp.WebInfConfiguration");
         _builder.append(_typeRef_7, "\t\t\t");
-        _builder.append(".CONTAINER_JAR_PATTERN, \'.*/");
-        Grammar _grammar_1 = WebIntegrationFragment.this.getGrammar();
-        String _webBasePackage = WebIntegrationFragment.this._xtextGeneratorNaming.getWebBasePackage(_grammar_1);
-        String _replace_1 = _webBasePackage.replace(".", "\\\\.");
-        _builder.append(_replace_1, "\t\t\t");
-        _builder.append(".*,.*/org\\\\.eclipse\\\\.xtext\\\\.web.*,.*/org\\\\.webjars.*\')");
+        _builder.append(".CONTAINER_JAR_PATTERN, \'.*\')");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("]");
@@ -2149,8 +2144,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.jetty.util.log.Slf4jLog");
         _builder.append(_typeRef_8, "\t\t");
         _builder.append("(");
-        Grammar _grammar_2 = WebIntegrationFragment.this.getGrammar();
-        TypeReference _serverLauncherClass_1 = WebIntegrationFragment.this.getServerLauncherClass(_grammar_2);
+        Grammar _grammar_1 = WebIntegrationFragment.this.getGrammar();
+        TypeReference _serverLauncherClass_1 = WebIntegrationFragment.this.getServerLauncherClass(_grammar_1);
         String _simpleName_1 = _serverLauncherClass_1.getSimpleName();
         _builder.append(_simpleName_1, "\t\t");
         _builder.append(".name)");
