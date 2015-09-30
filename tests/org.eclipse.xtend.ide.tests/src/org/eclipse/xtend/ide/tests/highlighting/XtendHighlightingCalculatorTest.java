@@ -58,6 +58,13 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	private Set<String> injects;
 	
+	/**
+	 * whether every accepted region must be expected
+	 */
+	private boolean strictMode = false;
+
+	private boolean logEnabled = false;
+	
 	@Before
 	public void setUp() throws Exception {
 		expectedRegions = HashMultimap.create();
@@ -125,6 +132,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 	
 	@Test public void testSingleLineLiteral() {
+		strictMode = true;
 		expectInsignificant(0, 3);
 		expectInsignificant(9, 3);
 		highlight(
@@ -132,11 +140,13 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 	
 	@Test public void testLiteral() {
+		strictMode = true;
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 2);
+		expectInsignificant(5, 1);
 		expectInsignificant(6, 1);
+		expectSemanticLineBreak(14, 1);
 		expectInsignificant(15,3);
-		expectAbsolute(14,1,TEMPLATE_LINE_BREAK);
 		highlight(
 				"'''  \n" +
 				" foobar \n" +
@@ -144,15 +154,17 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 	
 	@Test public void testLiteralsWithComments() {
+		strictMode = true;
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 2);
+		expectInsignificant(5, 1);
 		expectInsignificant(6, 2);
-		expectAbsolute(18, 1, TEMPLATE_LINE_BREAK);
+		expectSemanticLineBreak(18, 1); 
 		expectInsignificant(19, 1);
 		expectInsignificant(37, 1);
-		expectAbsolute(50, 1, TEMPLATE_LINE_BREAK);
+		expectSemanticLineBreak(50, 1); 
 		expectInsignificant(51, 2);
-		expectAbsolute(86, 1, TEMPLATE_LINE_BREAK);
+		expectSemanticLineBreak(86, 1);
 		expectInsignificant(87, 3);
 		highlight(
 				"'''  \n" +
@@ -165,10 +177,14 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 	
 	@Test public void testBug375272_01() {
+		strictMode = true;
 		expectInsignificant(0, 3);
+		expectInsignificant(3, 1);
 		expectInsignificant(4, 6);
+		expectInsignificant(19, 1);
 		expectAbsolute(20, 11, HighlightingStyles.COMMENT_ID);
 		expectInsignificant(32, 6);
+		expectInsignificant(45, 1);
 		expectInsignificant(46, 3);
 		highlight(
 				"'''\n" + 
@@ -179,10 +195,14 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 	
 	@Test public void testBug375272_02() {
+		strictMode = true;
 		expectInsignificant(0, 3);
+		expectInsignificant(3, 2);
 		expectInsignificant(5, 6);
+		expectInsignificant(20, 2);
 		expectAbsolute(22, 11, HighlightingStyles.COMMENT_ID);
 		expectInsignificant(35, 6);
+		expectInsignificant(48, 2);
 		expectInsignificant(50, 3);
 		highlight(
 				"'''\r\n" + 
@@ -193,11 +213,13 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 	
 	@Test public void testExpression() {
+		strictMode = true;
 		String model = 
 			"'''\n" +
 			"\t\t«'foobar'» \n" +
 			"  '''";
 		expectInsignificant(0, 3);
+		expectInsignificant(3, 1);
 		expectInsignificant(model.indexOf('\t'), 2);
 		expectInsignificant(model.indexOf("  "), 2);
 		expectInsignificant(model.lastIndexOf("'''"), 3);
@@ -700,6 +722,10 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	protected void expectInsignificant(int offset, int length) {
 		expectAbsolute(offset, length, INSIGNIFICANT_TEMPLATE_TEXT);
 	}
+	
+	protected void expectSemanticLineBreak(int offset, int length) {
+		expectAbsolute(offset, length, SEMANTIC_LINE_BREAK);
+	}
 
 	protected void expect(int offset, int length, String highlightID) {
 		expectedRegions.put(new TextRegion(offset, length), highlightID);
@@ -719,16 +745,20 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 
 	@Override
 	public void addPosition(int offset, int length, String... ids) {
-//		System.out.print("acceptor.addPosition(" + offset + ", " + length);
-//		for(String id: ids) {
-//			System.out.print(", \"" + id + "\"");	
-//		}
-//		System.out.println(");");
+		if (logEnabled ) {
+			System.out.print("acceptor.addPosition(" + (offset-22) + ", " + length);
+			for(String id: ids) {
+				System.out.print(", \"" + id + "\"");	
+			}
+			System.out.println(");");
+		}
 		assertTrue("length = " + length, length >= 0);
 		TextRegion region = new TextRegion(offset, length);
 		assertEquals(1, ids.length);
 		assertFalse(region.toString() + " is not contained in " + expectedRegions, expectedRegions.isEmpty());
 		Collection<String> expectedIds = expectedRegions.get(region);
+		if(strictMode && expectedIds.isEmpty())
+			fail("No Region for (offset: "+offset+", length : "+length+", id : "+ids[0]+") expected.");
 		if(expectedIds.size() > 0)
 			assertTrue("expected: " + expectedRegions.toString() + " but was: " + region + " (" + ids[0] + ")", expectedIds.contains(ids[0]));
 		if(expectedIds.contains(ids[0]))

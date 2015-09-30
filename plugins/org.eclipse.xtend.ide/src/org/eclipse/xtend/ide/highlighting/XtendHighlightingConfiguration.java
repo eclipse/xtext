@@ -23,10 +23,10 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		super.configure(acceptor);
 		acceptor.acceptDefaultHighlighting(RICH_TEXT_ID, "Template Text", richTextStyle());
-		acceptor.acceptDefaultHighlighting(RICH_TEXT_DELIMITER_ID, "Template Delimiter", richTextDelimiterStyle());
-		acceptor.acceptDefaultHighlighting(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Text", insignificantTemplateTextStyle());
-		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateTextStyle());
-		acceptor.acceptDefaultHighlighting(TEMPLATE_LINE_BREAK, "Template Line Break", richTextStyle());
+		acceptor.acceptDefaultHighlighting(RICH_TEXT_DELIMITER_ID, "Template Terminals", richTextDelimiterStyle());
+		acceptor.acceptDefaultHighlighting(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Whitespace", insignificantTemplateTextStyle());
+		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Semantic Template Line Break", insignificantTemplateTextStyle());
+		acceptor.acceptDefaultHighlighting(SEMANTIC_LINE_BREAK, "Semantic Template Line Break", richTextStyle());
 		acceptor.acceptDefaultHighlighting(ACTIVE_ANNOTATION, "Active Annotation", activeAnnotationStyle());
 	}
 	

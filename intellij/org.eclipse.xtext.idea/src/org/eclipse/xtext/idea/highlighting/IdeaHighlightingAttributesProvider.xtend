@@ -19,6 +19,7 @@ import java.util.List
 import java.util.Map
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration.IHighlightingStyleAcceptor
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,14 +37,29 @@ class IdeaHighlightingAttributesProvider {
 	List<AttributesDescriptor> attributesDescriptors
 	
 	Map<String, HighlightInfoType> name2highlightInfoType
+	Map<String, String> xtextStyle2xtextStyleRedirectMap
 	
 	protected def void initialize() {
-		if(attributesDescriptors == null) {
+		if (attributesDescriptors == null) {
 			attributesDescriptors = newArrayList
 			name2highlightInfoType = newHashMap
-			highlightingConfiguration.configure [ simpleStyleName, displayName, fallbackKey |
-				addHighlightingConfiguration(simpleStyleName, displayName, fallbackKey).attributesKey
-			]
+			xtextStyle2xtextStyleRedirectMap = newHashMap
+			highlightingConfiguration.configure( new IHighlightingStyleAcceptor() {
+				
+				override addStyle(String xtextStyleId, String displayName, TextAttributesKey fallbackKey) {
+					addHighlightingConfiguration(xtextStyleId, displayName, fallbackKey).attributesKey
+				}
+				
+				override addRedirect(String fromXtextStyleId, String toXtextStyleId) {
+					if (name2highlightInfoType.containsKey(fromXtextStyleId)) {
+						IdeaHighlightingAttributesProvider.LOG.error('Redirected highlighting style ' + fromXtextStyleId + ' already registered.')
+					}
+					if (xtextStyle2xtextStyleRedirectMap.put(fromXtextStyleId, toXtextStyleId) !==null) {
+						IdeaHighlightingAttributesProvider.LOG.error('Duplicate redirected highlighting style ' + fromXtextStyleId + '.')
+					}
+				}
+				
+			})
 		}
 	}
 	
@@ -58,9 +74,10 @@ class IdeaHighlightingAttributesProvider {
 	
 	def HighlightInfoType getHighlightInfoType(String xtextStyle) {
 		initialize
-		return name2highlightInfoType.get(xtextStyle) ?: {
-			IdeaHighlightingAttributesProvider.LOG.error('Highlighting style ' + xtextStyle + ' has not been registered.')
-			addHighlightingConfiguration(xtextStyle, xtextStyle + ' (unregistered) ', DefaultLanguageHighlighterColors.LINE_COMMENT)
+		val realId = xtextStyle2xtextStyleRedirectMap.get(xtextStyle) ?: xtextStyle
+		return name2highlightInfoType.get(realId) ?: {
+			IdeaHighlightingAttributesProvider.LOG.error('Highlighting style ' + realId + ' has not been registered.')
+			addHighlightingConfiguration(realId, realId + ' (unregistered) ', DefaultLanguageHighlighterColors.LINE_COMMENT)
 		}
 	}
 	
