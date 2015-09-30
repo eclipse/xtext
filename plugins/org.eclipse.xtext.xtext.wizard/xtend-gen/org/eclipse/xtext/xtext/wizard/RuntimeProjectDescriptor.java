@@ -183,15 +183,19 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
     Iterable<? extends TextFile> _files = super.getFiles();
     Iterables.<TextFile>addAll(files, _files);
-    String _grammarFilePath = this.getGrammarFilePath();
-    CharSequence _grammar = this.grammar();
-    PlainTextFile _file = this.file(Outlet.MAIN_RESOURCES, _grammarFilePath, _grammar);
-    files.add(_file);
+    PlainTextFile _grammarFile = this.getGrammarFile();
+    files.add(_grammarFile);
     String _workflowFilePath = this.getWorkflowFilePath();
     CharSequence _workflow = this.workflow();
-    PlainTextFile _file_1 = this.file(Outlet.MAIN_RESOURCES, _workflowFilePath, _workflow);
-    files.add(_file_1);
+    PlainTextFile _file = this.file(Outlet.MAIN_JAVA, _workflowFilePath, _workflow);
+    files.add(_file);
     return files;
+  }
+  
+  public PlainTextFile getGrammarFile() {
+    String _grammarFilePath = this.getGrammarFilePath();
+    CharSequence _grammar = this.grammar();
+    return this.file(Outlet.MAIN_JAVA, _grammarFilePath, _grammar);
   }
   
   public String getGrammarFilePath() {
@@ -315,7 +319,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("var grammarURI = \"platform:/resource/${projectName}/");
-    String _sourceFolder = this.sourceFolder(Outlet.MAIN_RESOURCES);
+    String _sourceFolder = this.sourceFolder(Outlet.MAIN_JAVA);
     _builder.append(_sourceFolder, "");
     _builder.append("/");
     String _grammarFilePath = this.getGrammarFilePath();
@@ -1087,7 +1091,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("inputs.file \"");
-        String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_JAVA);
         _builder.append(_sourceFolder, "\t");
         _builder.append("/");
         String _workflowFilePath = RuntimeProjectDescriptor.this.getWorkflowFilePath();
@@ -1096,7 +1100,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("inputs.file \"");
-        String _sourceFolder_1 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        String _sourceFolder_1 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_JAVA);
         _builder.append(_sourceFolder_1, "\t");
         _builder.append("/");
         String _grammarFilePath = RuntimeProjectDescriptor.this.getGrammarFilePath();
@@ -1111,7 +1115,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("args += \"");
-        String _sourceFolder_3 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        String _sourceFolder_3 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_JAVA);
         _builder.append(_sourceFolder_3, "\t");
         _builder.append("/");
         String _workflowFilePath_1 = RuntimeProjectDescriptor.this.getWorkflowFilePath();
@@ -1132,6 +1136,20 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("clean.dependsOn(cleanGenerateXtextLanguage)");
         _builder.newLine();
         _builder.append("eclipse.classpath.plusConfigurations += [configurations.mwe2]");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("jar {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("from(\'model/generated\') {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("into(\'model/generated\')");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
         _builder.newLine();
         it.setAdditionalContent(_builder.toString());
       }
@@ -1251,7 +1269,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
         _builder.append("<argument>/${project.basedir}/");
-        String _sourceFolder_2 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        String _sourceFolder_2 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_JAVA);
         _builder.append(_sourceFolder_2, "\t\t\t\t\t");
         _builder.append("/");
         String _workflowFilePath = RuntimeProjectDescriptor.this.getWorkflowFilePath();
