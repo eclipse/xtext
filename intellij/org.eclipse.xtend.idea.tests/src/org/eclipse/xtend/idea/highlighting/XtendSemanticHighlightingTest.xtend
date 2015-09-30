@@ -21,9 +21,10 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
  	static val Q3 = "'''"
 	static val GL = '«'
 	static val GR = '»'
+	static val NL = '§' // yes, I know, it doesn't look like a 'new line', but it will become one when once it's grown up ;-)
  
 	protected def void checkHighlight(CharSequence text) {
-		myFixture.addFileToProject('Foo.xtend', text.toString)
+		myFixture.addFileToProject('Foo.xtend', text.toString.replace(NL, '\n'))
 		myFixture.testFile('Foo.xtend') => [
 			checkSymbolNames	
 			test
@@ -31,7 +32,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	}
 	
 	protected def $(String xtextStyle, String text) {
-		'''<symbolName descr="«xtextStyle»">«text»</symbolName>'''
+		'<symbolName descr="'+xtextStyle+'">'+text+'</symbolName>'
 	}
 
  	protected def white(String whitespace) {
@@ -115,8 +116,8 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_0() {
 		'''
 			class Foo {
-				def foo() «white(Q3)»
-			«white('\t\t')»this is a template«TEMPLATE_LINE_BREAK.$('\n')
+				def foo() «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is a template«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
 		'''.checkHighlight
@@ -125,10 +126,10 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_1() {
 		'''
 			class Foo {
-				def foo() «white(Q3)»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
-			»«white('\t\t')»	this is indented«TEMPLATE_LINE_BREAK.$('\n')
-			»«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
+				def foo() «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»	this is indented«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
 		'''.checkHighlight
@@ -137,12 +138,12 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_2() {
 		'''
 			class Foo {
-				def foo(String[] nums) «white(Q3)»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
-			»«white('\t\t')»«GL»FOR i:nums«GR»
-			«white('\t\t')»«white('\t')»loop body«TEMPLATE_LINE_BREAK.$('\n')
-			»«white('\t\t')»«GL»ENDFOR«GR»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
+				def foo(String[] nums) «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»«GL»FOR i:nums«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»«white('\t')»loop body«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»«GL»ENDFOR«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
 		'''.checkHighlight
@@ -151,12 +152,12 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_3() {
 		'''
 			class Foo {
-				def foo(String[] nums) «white(Q3)»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
-			»«white('\t\t\t')»«GL»FOR i:nums«GR»
-			«white('\t\t')»	«white('\t')»loop body«TEMPLATE_LINE_BREAK.$('\n')
-			»«white('\t\t\t')»«GL»ENDFOR«GR»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
+				def foo(String[] nums) «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t\t')»«GL»FOR i:nums«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»	«white('\t')»loop body«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t\t')»«GL»ENDFOR«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
 		'''.checkHighlight
@@ -165,10 +166,10 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_4() {
 		'''
 			class Foo {
-				def foo() «white(Q3)»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
+				def foo() «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«COMMENT_ID.$(GL+GL+GL+' a comment')»
-			«white('\t\t')»this is not indented«TEMPLATE_LINE_BREAK.$('\n')
+			«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
 			

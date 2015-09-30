@@ -21,11 +21,13 @@ class XtendHighlightingConfiguration extends XbaseHighlightingConfiguration {
 	
 	override configure(IHighlightingStyleAcceptor it) {
 		super.configure(it)
-		addStyle(RICH_TEXT_ID, "Template text", EditorColors.INJECTED_LANGUAGE_FRAGMENT)
-		addStyle(RICH_TEXT_DELIMITER_ID, "Template guillemets", DefaultLanguageHighlighterColors.PARENTHESES)
-		addStyle(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant template text", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR)
-		addStyle(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR)
-		addStyle(TEMPLATE_LINE_BREAK, "Template Line Break", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR)
+		addStyle(RICH_TEXT_ID, "Template Text", EditorColors.INJECTED_LANGUAGE_FRAGMENT)
+		addStyle(RICH_TEXT_DELIMITER_ID, "Template Terminals", DefaultLanguageHighlighterColors.PARENTHESES)
+		addStyle(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Whitespace", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR)
+		addRedirect(POTENTIAL_LINE_BREAK, INSIGNIFICANT_TEMPLATE_TEXT)
+		addRedirect(SEMANTIC_LINE_BREAK, INSIGNIFICANT_TEMPLATE_TEXT)
 		addStyle(ACTIVE_ANNOTATION, "Active Annotation", JavaHighlightingColors.VALID_STRING_ESCAPE)
 	}
+	
+	
 }
