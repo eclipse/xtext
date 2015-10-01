@@ -223,11 +223,17 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						«ENDIF»
 				
 						// generates Java API for the generated EPackages
-						fragment = ecore.EMFGeneratorFragment2 auto-inject {
-							«IF !isEclipsePluginProject»
-								updateBuildProperties = false
-							«ENDIF»
+						fragment = adapter.FragmentAdapter { 
+							fragment = ecore.EMFGeneratorFragment auto-inject {
+							     javaModelDirectory = "/${projectName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
+							     updateBuildProperties = «isEclipsePluginProject»
+							}
 						}
+«««						fragment = ecore.EMFGeneratorFragment2 auto-inject {
+«««							«IF !isEclipsePluginProject»
+«««								updateBuildProperties = false
+«««							«ENDIF»
+«««						}
 			
 						fragment = adapter.FragmentAdapter {
 							fragment = serializer.SerializerFragment auto-inject {
