@@ -8,7 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.build,
  org.eclipse.xtext.junit4.formatter;x-friends:="org.eclipse.xtext.xbase.tests",
- org.eclipse.xtext.junit4.internal;x-internal:=true,
+ org.eclipse.xtext.junit4.internal;x-friends:="org.eclipse.xtext.tests,org.eclipse.xtext.junit4.tests",
  org.eclipse.xtext.junit4.logging;x-internal:=true,
  org.eclipse.xtext.junit4.serializer;x-internal:=true,
  org.eclipse.xtext.junit4.smoketest,
