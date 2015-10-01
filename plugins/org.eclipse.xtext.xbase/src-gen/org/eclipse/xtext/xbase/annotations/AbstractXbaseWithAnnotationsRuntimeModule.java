@@ -35,6 +35,7 @@ import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -47,7 +48,7 @@ import org.eclipse.xtext.xbase.annotations.parser.antlr.internal.InternalXbaseWi
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSemanticSequencer;
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSyntacticSequencer;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
+import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsValidator;
 import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 
@@ -134,18 +135,18 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 		return AntlrTokenDefProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	@SingletonBinding(eager=true)
-	public Class<? extends XbaseWithAnnotationsJavaValidator> bindXbaseWithAnnotationsJavaValidator() {
-		return XbaseWithAnnotationsJavaValidator.class;
+	public Class<? extends XbaseWithAnnotationsValidator> bindXbaseWithAnnotationsValidator() {
+		return XbaseWithAnnotationsValidator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
-		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
+		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return TypesAwareDefaultGlobalScopeProvider.class;
 	}

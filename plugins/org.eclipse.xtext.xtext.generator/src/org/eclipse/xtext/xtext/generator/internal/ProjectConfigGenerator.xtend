@@ -70,6 +70,8 @@ class ProjectConfigGenerator {
 		 */
 		public interface «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» extends IGuiceAwareGeneratorComponent {
 			
+			IXtextGeneratorFileSystemAccess getRuntimeModelGen();
+			
 			«FOR p : PROJECTS»
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»Root();
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»MetaInf();
@@ -109,6 +111,7 @@ class ProjectConfigGenerator {
 		 */
 		public class «IMPL_NAME.substring(IMPL_NAME.lastIndexOf('.') + 1)» implements «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» {
 			
+			private IXtextGeneratorFileSystemAccess runtimeModelGen;
 			«FOR p : PROJECTS»
 				private IXtextGeneratorFileSystemAccess «p»Root;
 				private IXtextGeneratorFileSystemAccess «p»MetaInf;
@@ -143,6 +146,9 @@ class ProjectConfigGenerator {
 			@Override
 			public void initialize(Injector injector) {
 				injector.injectMembers(this);
+				if (runtimeModelGen != null) {
+					runtimeModelGen.initialize(injector);
+				}
 				«FOR p : PROJECTS»
 					
 					// Initialize «p» configuration
@@ -163,6 +169,15 @@ class ProjectConfigGenerator {
 				if (webApp != null) {
 					webApp.initialize(injector);
 				}
+			}
+			
+			@Override
+			public IXtextGeneratorFileSystemAccess getRuntimeModelGen() {
+				return runtimeModelGen;
+			}
+			
+			public void setRuntimeModelGen(String path) {
+				this.runtimeModelGen = new XtextGeneratorFileSystemAccess(path, true);
 			}
 			
 			«FOR p : PROJECTS»

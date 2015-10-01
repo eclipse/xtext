@@ -26,6 +26,7 @@ import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
@@ -155,10 +156,16 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
       Output _output_1 = ctx.getOutput();
       final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
       StandaloneSetupAccess _runtimeGenSetup = config2.getRuntimeGenSetup();
-      List<CharSequence> _registrations = _runtimeGenSetup.getRegistrations();
-      String _string = result.toString();
-      StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 2);
-      _registrations.add(_decreaseIndentation);
+      List<StringConcatenationClient> _registrations = _runtimeGenSetup.getRegistrations();
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          String _string = result.toString();
+          StringBuilder _decreaseIndentation = FragmentAdapter.this.decreaseIndentation(_string, 2);
+          _builder.append(_decreaseIndentation, "");
+        }
+      };
+      _registrations.add(_client);
       StandaloneSetupAccess _runtimeGenSetup_1 = config2.getRuntimeGenSetup();
       Set<TypeReference> _imports = _runtimeGenSetup_1.getImports();
       TypeReference _typeReference = new TypeReference("org.eclipse.emf.ecore.EPackage");

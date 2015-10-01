@@ -28,7 +28,6 @@ import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
-import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -70,7 +69,6 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
       this.with(new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final DefaultXbaseIdeModule ideModule = new DefaultXbaseIdeModule();
           final Provider<ExecutorService> _function = new Provider<ExecutorService>() {
             @Override
             public ExecutorService get() {
@@ -87,7 +85,7 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
           final EntitiesWebModule webModule = new EntitiesWebModule(_function);
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
           EntitiesRuntimeModule _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
-          Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
+          Module _mixin = Modules2.mixin(_runtimeModule, webModule);
           return Guice.createInjector(_mixin);
         }
       });

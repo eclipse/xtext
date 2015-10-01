@@ -35,6 +35,7 @@ import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -49,7 +50,7 @@ import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xbase.serializer.XbaseSyntacticSequencer;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xbase.validation.XbaseValidator;
 
 /**
  * Manual modifications go to {@link XbaseRuntimeModule}.
@@ -134,18 +135,18 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 		return AntlrTokenDefProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	@SingletonBinding(eager=true)
-	public Class<? extends XbaseJavaValidator> bindXbaseJavaValidator() {
-		return XbaseJavaValidator.class;
+	public Class<? extends XbaseValidator> bindXbaseValidator() {
+		return XbaseValidator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
-		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
+		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return TypesAwareDefaultGlobalScopeProvider.class;
 	}

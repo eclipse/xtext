@@ -32,8 +32,7 @@ class FileAccessFactory {
 	}
 	
 	def JavaFileAccess createJavaFile(TypeReference typeRef) {
-		val result = new JavaFileAccess(typeRef, codeConfig)
-		return result
+		new JavaFileAccess(typeRef, codeConfig)
 	}
 	
 	def JavaFileAccess createJavaFile(TypeReference typeRef, StringConcatenationClient content) {
@@ -53,7 +52,6 @@ class FileAccessFactory {
 	}
 	
 	def GeneratedJavaFileAccess createGeneratedJavaFile(TypeReference typeRef) {
-		val result = new GeneratedJavaFileAccess(typeRef, codeConfig)
-		return result
+		new GeneratedJavaFileAccess(typeRef, codeConfig)
 	}
 }

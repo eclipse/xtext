@@ -13,8 +13,12 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess implements IXtextGeneratorFileSystemAccess {
 
 	new(String path, boolean overwrite) {
-		outputPath = path
+		outputPath = path.removeTrailingPathSeparator
 		defaultOutput.overrideExistingResources = overwrite
+	}
+	
+	private def String removeTrailingPathSeparator(String s) {
+		if (s.endsWith('/')) s.substring(0, s.length - 1) else s
 	}
 
 	private def getDefaultOutput() {

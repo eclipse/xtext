@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Objects;
@@ -734,16 +741,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("// Xtend-based API for validation");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.append("fragment = validation.ValidatorFragment2 auto-inject {");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = validation.ValidatorFragment auto-inject {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
+    _builder.append("\t\t\t");
     _builder.append("//\tcomposedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
@@ -753,22 +754,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("// scoping and exporting API");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = scoping.ImportNamespacesScopingFragment auto-inject {}");
+    _builder.append("fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = exporting.QualifiedNamesFragment auto-inject {}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
+    _builder.append("fragment = exporting.QualifiedNamesFragment2 auto-inject {}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");
@@ -977,13 +966,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("// provides the necessary bindings for java types integration");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = types.TypesGeneratorFragment auto-inject {}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
+    _builder.append("fragment = types.TypesGeneratorFragment2 auto-inject {}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");

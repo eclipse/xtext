@@ -113,7 +113,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 				fragment.addToStandaloneSetup(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			config2.runtimeGenSetup.registrations += result.toString.decreaseIndentation(2)
+			config2.runtimeGenSetup.registrations.add('''«result.toString.decreaseIndentation(2)»''')
 			config2.runtimeGenSetup.imports += new TypeReference('org.eclipse.emf.ecore.EPackage')
 			config2.runtimeGenSetup.imports += new TypeReference('org.eclipse.emf.ecore.resource.Resource')
 		} finally {
