@@ -41,7 +41,7 @@ class AntlrDelegatingIdeaLexer extends LexerBase {
 	}
 
 	override int getState() {
-		return if(token != null) token.type else 0
+		return 0
 	}
 
 	override IElementType getTokenType() {

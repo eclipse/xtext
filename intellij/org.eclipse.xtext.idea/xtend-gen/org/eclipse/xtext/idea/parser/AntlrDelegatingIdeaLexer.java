@@ -49,14 +49,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
   
   @Override
   public int getState() {
-    int _xifexpression = (int) 0;
-    boolean _notEquals = (!Objects.equal(this.token, null));
-    if (_notEquals) {
-      _xifexpression = this.token.getType();
-    } else {
-      _xifexpression = 0;
-    }
-    return _xifexpression;
+    return 0;
   }
   
   @Override
