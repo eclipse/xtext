@@ -1,4 +1,4 @@
-package org.eclipse.xtext.junit4;
+package org.eclipse.xtext.junit4.internal;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.GlobalRegistries;
@@ -8,22 +8,22 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 import com.google.inject.Injector;
 
-public class XtextInjectorProvider implements IInjectorProvider, IRegistryConfigurator
-{
+/**
+ * @since 2.9
+ */
+public class XtextInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
-	static
-	{
+	static {
 		GlobalRegistries.initializeDefaults();
 	}
 
-	public Injector getInjector()
-	{
-		if (injector == null)
-		{
+	@Override
+	public Injector getInjector() {
+		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 			this.injector = new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
@@ -31,13 +31,13 @@ public class XtextInjectorProvider implements IInjectorProvider, IRegistryConfig
 		return injector;
 	}
 
-	public void restoreRegistry()
-	{
+	@Override
+	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
-	public void setupRegistry()
-	{
+	@Override
+	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();
 	}
