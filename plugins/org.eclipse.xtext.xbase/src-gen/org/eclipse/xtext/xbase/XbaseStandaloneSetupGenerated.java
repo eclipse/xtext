@@ -37,6 +37,5 @@ public class XbaseStandaloneSetupGenerated implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("___xbase", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("___xbase", serviceProvider);
 		
-		
 	}
 }

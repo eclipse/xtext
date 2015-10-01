@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider
 import org.eclipse.xtext.formatting2.FormatterPreferences
@@ -46,7 +45,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension GrammarAccessExtensions
 	
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + GrammarUtil.getSimpleName(grammar) + 'Formatter')
+		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + getSimpleName(grammar) + 'Formatter')
 	}
 	
 	override generate() {

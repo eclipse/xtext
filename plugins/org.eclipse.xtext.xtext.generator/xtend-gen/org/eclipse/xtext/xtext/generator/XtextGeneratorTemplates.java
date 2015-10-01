@@ -273,8 +273,8 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         {
           StandaloneSetupAccess _runtimeGenSetup_1 = langConfig.getRuntimeGenSetup();
-          List<CharSequence> _registrations = _runtimeGenSetup_1.getRegistrations();
-          for(final CharSequence reg : _registrations) {
+          List<StringConcatenationClient> _registrations = _runtimeGenSetup_1.getRegistrations();
+          for(final StringConcatenationClient reg : _registrations) {
             _builder.append("\t\t");
             _builder.append(reg, "\t\t");
             _builder.newLineIfNotEmpty();

@@ -30,6 +30,8 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
 
 @SuppressWarnings("all")
 public class GenModelUtil2 {
@@ -185,49 +187,42 @@ public class GenModelUtil2 {
           }
         }
       }
-      final StringBuilder buf = new StringBuilder();
-      String loc = locationInfo;
-      boolean _and = false;
-      if (!(loc != null)) {
-        _and = false;
-      } else {
-        int _length = loc.length();
-        boolean _greaterThan = (_length > 0);
-        _and = _greaterThan;
-      }
-      if (_and) {
-        loc = (" from " + loc);
-      } else {
-        loc = "";
-      }
-      StringBuilder _append = buf.append("Could not find a GenModel for EPackage \'");
-      StringBuilder _append_1 = _append.append(nsURI);
-      StringBuilder _append_2 = _append_1.append("\'");
-      StringBuilder _append_3 = _append_2.append(loc);
-      _append_3.append("\n");
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("If the missing GenModel has been generated via EMFGeneratorFragment.class.getSimpleName() or org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment.class.getSimpleName()");
-      buf.append(_builder);
-      buf.append(" make sure to run it first in the workflow.\n");
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String)");
-      buf.append(_builder_1);
-      String _string = buf.toString();
-      throw new RuntimeException(_string);
+      _builder.append("Could not find a GenModel for EPackage \'");
+      _builder.append(nsURI, "");
+      _builder.append("\'");
+      {
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(locationInfo);
+        boolean _not = (!_isNullOrEmpty);
+        if (_not) {
+          _builder.append(" from ");
+          _builder.append(locationInfo, "");
+        }
+      }
+      _builder.append(".");
+      _builder.newLineIfNotEmpty();
+      _builder.append("If the missing GenModel has been generated via ");
+      String _simpleName = EMFGeneratorFragment2.class.getSimpleName();
+      _builder.append(_simpleName, "");
+      _builder.append(", make sure to run it first in the workflow.");
+      _builder.newLineIfNotEmpty();
+      _builder.append("If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String).");
+      _builder.newLine();
+      throw new RuntimeException(_builder.toString());
     }
     if ((resourceSet == null)) {
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("There is no ResourceSet for EPackage \'");
-      _builder_2.append(nsURI, "");
-      _builder_2.append("\'. Please make sure the EPackage has been loaded from a .ecore file and not from the generated Java file.");
-      throw new RuntimeException(_builder_2.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("There is no ResourceSet for EPackage \'");
+      _builder_1.append(nsURI, "");
+      _builder_1.append("\'. Please make sure the EPackage has been loaded from a .ecore file and not from the generated Java file.");
+      throw new RuntimeException(_builder_1.toString());
     }
     final Resource genModelResource = resourceSet.getResource(genModelURI, true);
     if ((genModelResource == null)) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("Error loading GenModel ");
-      _builder_3.append(genModelURI, "");
-      throw new RuntimeException(_builder_3.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("Error loading GenModel ");
+      _builder_2.append(genModelURI, "");
+      throw new RuntimeException(_builder_2.toString());
     }
     EList<EObject> _contents_1 = genModelResource.getContents();
     for (final EObject content : _contents_1) {

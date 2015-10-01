@@ -38,8 +38,7 @@ public class FileAccessFactory {
   }
   
   public JavaFileAccess createJavaFile(final TypeReference typeRef) {
-    final JavaFileAccess result = new JavaFileAccess(typeRef, this.codeConfig);
-    return result;
+    return new JavaFileAccess(typeRef, this.codeConfig);
   }
   
   public JavaFileAccess createJavaFile(final TypeReference typeRef, final StringConcatenationClient content) {
@@ -59,7 +58,6 @@ public class FileAccessFactory {
   }
   
   public GeneratedJavaFileAccess createGeneratedJavaFile(final TypeReference typeRef) {
-    final GeneratedJavaFileAccess result = new GeneratedJavaFileAccess(typeRef, this.codeConfig);
-    return result;
+    return new GeneratedJavaFileAccess(typeRef, this.codeConfig);
   }
 }

@@ -279,7 +279,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		binder.bind(org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class).annotatedWith(org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class).to(org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
 	public Class<? extends PrefixMatcher> bindPrefixMatcher() {
 		return FQNPrefixMatcher.class;
 	}

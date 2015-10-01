@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +43,7 @@ public abstract class AbstractInjectableValidator implements EValidator {
 	
 	@Inject
 	public void register(EValidatorRegistrar registrar) {
-		List<EPackage> packages = getEPackages();
+		Collection<EPackage> packages = new LinkedHashSet<EPackage>(getEPackages());
 		if (packages.size()==0) {
 			throw new IllegalStateException("No EPackages were registered for the validator "+getClass().getName()+" please override and implement getEPackages().");
 		}

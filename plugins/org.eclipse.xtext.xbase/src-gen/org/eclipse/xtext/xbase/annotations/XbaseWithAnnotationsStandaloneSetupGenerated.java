@@ -38,6 +38,5 @@ public class XbaseWithAnnotationsStandaloneSetupGenerated implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("___xbasewithannotations", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("___xbasewithannotations", serviceProvider);
 		
-		
 	}
 }

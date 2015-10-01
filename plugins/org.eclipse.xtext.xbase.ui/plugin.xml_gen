@@ -425,28 +425,27 @@
 	    </resourceServiceProvider>
 	</extension>
 	
-	
 	<!-- marker definitions for org.eclipse.xtext.xbase.Xbase -->
 	<extension
-	        id="xbase.check.fast"
-	        name="Xbase Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.fast"/>
-	    <persistent value="true"/>
+			id="xbase.check.fast"
+			name="Xbase Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
 	</extension>
 	<extension
-	        id="xbase.check.normal"
-	        name="Xbase Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.normal"/>
-	    <persistent value="true"/>
+			id="xbase.check.normal"
+			name="Xbase Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
 	</extension>
 	<extension
-	        id="xbase.check.expensive"
-	        name="Xbase Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.expensive"/>
-	    <persistent value="true"/>
+			id="xbase.check.expensive"
+			name="Xbase Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
 	</extension>
 	<!-- Call Hierachy -->
 	<extension point="org.eclipse.ui.handlers">
@@ -813,28 +812,27 @@
 	    </resourceServiceProvider>
 	</extension>
 	
-	
 	<!-- marker definitions for org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations -->
 	<extension
-	        id="xbasewithannotations.check.fast"
-	        name="XbaseWithAnnotations Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.fast"/>
-	    <persistent value="true"/>
+			id="xbasewithannotations.check.fast"
+			name="XbaseWithAnnotations Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
 	</extension>
 	<extension
-	        id="xbasewithannotations.check.normal"
-	        name="XbaseWithAnnotations Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.normal"/>
-	    <persistent value="true"/>
+			id="xbasewithannotations.check.normal"
+			name="XbaseWithAnnotations Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
 	</extension>
 	<extension
-	        id="xbasewithannotations.check.expensive"
-	        name="XbaseWithAnnotations Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.expensive"/>
-	    <persistent value="true"/>
+			id="xbasewithannotations.check.expensive"
+			name="XbaseWithAnnotations Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
 	</extension>
 	<!-- Call Hierachy -->
 	<extension point="org.eclipse.ui.handlers">

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.model;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -17,17 +18,22 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 @Accessors
 @SuppressWarnings("all")
 public class StandaloneSetupAccess {
-  private final List<CharSequence> registrations = CollectionLiterals.<CharSequence>newArrayList();
+  private final List<StringConcatenationClient> registrations = CollectionLiterals.<StringConcatenationClient>newArrayList();
   
+  @Deprecated
   private final Set<TypeReference> imports = CollectionLiterals.<TypeReference>newHashSet();
   
-  @Pure
-  public List<CharSequence> getRegistrations() {
-    return this.registrations;
+  /**
+   * @deprecated this set is required for backwards-compatibility to Xpand templates included with
+   * 		{@code org.eclipse.xtext.generator.adapter.FragmentAdapter}.
+   */
+  @Deprecated
+  public Set<TypeReference> getImports() {
+    return this.imports;
   }
   
   @Pure
-  public Set<TypeReference> getImports() {
-    return this.imports;
+  public List<StringConcatenationClient> getRegistrations() {
+    return this.registrations;
   }
 }

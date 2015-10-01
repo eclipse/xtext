@@ -104,7 +104,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
+import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -159,7 +159,7 @@ import com.google.inject.Inject;
  * @author Holger Schill
  */
 @ComposedChecks(validators = { AnnotationValidation.class })
-public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
+public class XtendValidator extends XbaseWithAnnotationsValidator {
 
 	@Inject
 	private RichStringProcessor richStringProcessor;

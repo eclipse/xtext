@@ -6,17 +6,17 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtend.core.validation;
- 
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsValidator;
 
-public class AbstractXtendJavaValidator extends org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator {
-
+public abstract class AbstractXtendValidator extends XbaseWithAnnotationsValidator {
+	
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
+	    List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtend"));
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/common/JavaVMTypes"));
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/xbase/Xtype"));
@@ -24,5 +24,5 @@ public class AbstractXtendJavaValidator extends org.eclipse.xtext.xbase.annotati
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/Xtext/Xbase/XAnnotations"));
 		return result;
 	}
-
+	
 }

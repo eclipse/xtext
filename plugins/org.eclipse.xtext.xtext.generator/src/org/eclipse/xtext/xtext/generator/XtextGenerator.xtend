@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
+import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
@@ -87,6 +88,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	def void initialize() {
 		if (injector === null) {
 			LOG.info('Initializing Xtext generator')
+			new StandaloneSetup().addRegisterGeneratedEPackage('org.eclipse.xtext.common.types.TypesPackage')
 			injector = createInjector
 			injector.injectMembers(this)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
