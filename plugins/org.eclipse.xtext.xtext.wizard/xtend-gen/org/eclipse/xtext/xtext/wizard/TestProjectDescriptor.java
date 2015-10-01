@@ -117,17 +117,17 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           }
           if (_and) {
             _builder.append("\t");
-            _builder.append("<sourceDirectory>");
+            _builder.append("<testSourceDirectory>");
             String _sourceFolder = TestProjectDescriptor.this.sourceFolder(Outlet.TEST_JAVA);
             _builder.append(_sourceFolder, "\t");
-            _builder.append("</sourceDirectory>");
+            _builder.append("</testSourceDirectory>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("<resources>");
+            _builder.append("<testResources>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("<resource>");
+            _builder.append("<testResource>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
@@ -137,11 +137,27 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
             _builder.append("</directory>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("</resource>");
+            _builder.append("\t\t");
+            _builder.append("<excludes>");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("</resources>");
+            _builder.append("\t\t\t");
+            _builder.append("<exclude>**/*.java</exclude>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t\t");
+            _builder.append("<exclude>**/*.xtend</exclude>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("</excludes>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("</testResource>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</testResources>");
             _builder.newLine();
           }
         }
@@ -289,6 +305,18 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
             _builder.append(_sourceFolder_3, "\t\t\t\t\t\t\t\t");
             _builder.append("</directory>");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t");
+            _builder.append("<excludes>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t\t");
+            _builder.append("<exclude>**/*.java</exclude>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t");
+            _builder.append("</excludes>");
+            _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t\t\t\t\t");
             _builder.append("</resource>");

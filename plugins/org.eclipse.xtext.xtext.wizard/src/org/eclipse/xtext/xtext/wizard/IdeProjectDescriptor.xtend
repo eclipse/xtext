@@ -44,6 +44,10 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 						<resources>
 							<resource>
 								<directory>«Outlet.MAIN_RESOURCES.sourceFolder»</directory>
+								<excludes>
+									<exclude>**/*.java</exclude>
+									<exclude>**/*.xtend</exclude>
+								</excludes>
 							</resource>
 						</resources>
 					«ENDIF»
@@ -72,6 +76,10 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 											<resources>
 												<resource>
 													<directory>«Outlet.MAIN_SRC_GEN.sourceFolder»</directory>
+													<excludes>
+														<exclude>**/*.java</exclude>
+														<exclude>**/*.g</exclude>
+													</excludes>
 												</resource>
 											</resources>
 										</configuration>

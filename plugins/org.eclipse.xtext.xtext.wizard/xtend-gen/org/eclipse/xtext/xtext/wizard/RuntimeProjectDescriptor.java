@@ -189,7 +189,27 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     CharSequence _workflow = this.workflow();
     PlainTextFile _file = this.file(Outlet.MAIN_JAVA, _workflowFilePath, _workflow);
     files.add(_file);
+    boolean _isPlainMavenBuild = this.isPlainMavenBuild();
+    if (_isPlainMavenBuild) {
+      CharSequence _jarDescriptor = this.jarDescriptor();
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "jar-with-ecore-model.xml", _jarDescriptor);
+      files.add(_file_1);
+    }
     return files;
+  }
+  
+  private boolean isPlainMavenBuild() {
+    boolean _and = false;
+    WizardConfiguration _config = this.getConfig();
+    boolean _needsMavenBuild = _config.needsMavenBuild();
+    if (!_needsMavenBuild) {
+      _and = false;
+    } else {
+      boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+      boolean _not = (!_isEclipsePluginProject);
+      _and = _not;
+    }
+    return _and;
   }
   
   public PlainTextFile getGrammarFile() {
@@ -340,7 +360,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.append("Workflow {");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t");
     _builder.append("bean = StandaloneSetup {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -720,7 +740,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("fragment = validation.ValidatorFragment auto-inject {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("//    composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
+    _builder.append("//\tcomposedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");
@@ -1208,6 +1228,30 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("</directory>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("<excludes>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t\t");
+            _builder.append("<exclude>**/*.java</exclude>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t\t");
+            _builder.append("<exclude>**/*.xtend</exclude>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t\t");
+            _builder.append("<exclude>**/*.xtext</exclude>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t\t");
+            _builder.append("<exclude>**/*.mwe2</exclude>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("</excludes>");
+            _builder.newLine();
+            _builder.append("\t");
             _builder.append("\t");
             _builder.append("</resource>");
             _builder.newLine();
@@ -1552,6 +1596,22 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("</directory>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t");
+            _builder.append("<excludes>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t\t");
+            _builder.append("<exclude>**/*.java</exclude>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t\t");
+            _builder.append("<exclude>**/*.g</exclude>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t\t\t\t\t");
+            _builder.append("</excludes>");
+            _builder.newLine();
+            _builder.append("\t\t");
             _builder.append("\t\t\t\t\t");
             _builder.append("</resource>");
             _builder.newLine();
@@ -1647,6 +1707,21 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
                 _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<excludes>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t\t");
+                _builder.append("<exclude>**/*.java</exclude>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("</excludes>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
                 _builder.append("\t\t\t");
                 _builder.append("</resource>");
                 _builder.newLine();
@@ -1673,6 +1748,85 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("\t\t");
             _builder.append("</plugin>");
             _builder.newLine();
+            {
+              boolean _isPlainMavenBuild = RuntimeProjectDescriptor.this.isPlainMavenBuild();
+              if (_isPlainMavenBuild) {
+                _builder.append("\t\t");
+                _builder.append("<plugin>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<artifactId>maven-assembly-plugin</artifactId>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<version>2.5.5</version>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<configuration>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<descriptors>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<descriptor>jar-with-ecore-model.xml</descriptor>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("</descriptors>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<appendAssemblyId>false</appendAssemblyId>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("</configuration>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<executions>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<execution>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<id>make-assembly</id>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<phase>package</phase>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<goals>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<goal>single</goal>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("</goals>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("</execution>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("</executions>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("</plugin>");
+                _builder.newLine();
+              }
+            }
           }
         }
         _builder.append("\t");
@@ -1684,5 +1838,65 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  }
+  
+  public CharSequence jarDescriptor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<assembly xmlns=\"http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3\" ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xsi:schemaLocation=\"http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<id>jar-with-ecore-model</id>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<formats>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<format>jar</format>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</formats>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<includeBaseDirectory>false</includeBaseDirectory>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<fileSets>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<fileSet>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<outputDirectory>/</outputDirectory>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<directory>target/classes</directory>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("</fileSet>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<fileSet>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<outputDirectory>model/generated</outputDirectory>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<directory>model/generated</directory>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("</fileSet>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</fileSets>");
+    _builder.newLine();
+    _builder.append("</assembly>");
+    _builder.newLine();
+    return _builder;
   }
 }

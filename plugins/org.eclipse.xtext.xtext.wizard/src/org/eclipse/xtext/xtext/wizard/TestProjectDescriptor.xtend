@@ -40,12 +40,16 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 			buildSection = '''
 				<build>
 					«IF !isEclipsePluginProject && config.sourceLayout == SourceLayout.PLAIN»
-						<sourceDirectory>«Outlet.TEST_JAVA.sourceFolder»</sourceDirectory>
-						<resources>
-							<resource>
+						<testSourceDirectory>«Outlet.TEST_JAVA.sourceFolder»</testSourceDirectory>
+						<testResources>
+							<testResource>
 								<directory>«Outlet.TEST_RESOURCES.sourceFolder»</directory>
-							</resource>
-						</resources>
+								<excludes>
+									<exclude>**/*.java</exclude>
+									<exclude>**/*.xtend</exclude>
+								</excludes>
+							</testResource>
+						</testResources>
 					«ENDIF»
 					<plugins>
 						<plugin>
@@ -85,6 +89,9 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 											<resources>
 												<resource>
 													<directory>«Outlet.TEST_SRC_GEN.sourceFolder»</directory>
+													<excludes>
+														<exclude>**/*.java</exclude>
+													</excludes>
 												</resource>
 											</resources>
 										</configuration>

@@ -412,7 +412,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("sourceSets.all {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("resources.exclude \'**/*.g\', \'**/*.tokens\', \'**/*.xtext\', \'**/*.mwe2\', \'**/*.xtend\', \'**/*._trace\'");
+        _builder.append("resources.exclude \'**/*.g\', \'**/*.xtext\', \'**/*.mwe2\', \'**/*.xtend\', \'**/*._trace\'");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
