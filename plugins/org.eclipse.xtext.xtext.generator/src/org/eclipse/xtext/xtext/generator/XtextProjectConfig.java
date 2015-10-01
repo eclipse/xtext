@@ -20,6 +20,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
  */
 public class XtextProjectConfig implements IXtextProjectConfig {
 	
+	private IXtextGeneratorFileSystemAccess runtimeModelGen;
 	private IXtextGeneratorFileSystemAccess runtimeRoot;
 	private IXtextGeneratorFileSystemAccess runtimeMetaInf;
 	private IXtextGeneratorFileSystemAccess runtimeSrc;
@@ -138,6 +139,9 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	@Override
 	public void initialize(Injector injector) {
 		injector.injectMembers(this);
+		if (runtimeModelGen != null) {
+			runtimeModelGen.initialize(injector);
+		}
 		
 		// Initialize runtime configuration
 		if (runtimeRoot != null) {
@@ -282,6 +286,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (webApp != null) {
 			webApp.initialize(injector);
 		}
+	}
+	
+	@Override
+	public IXtextGeneratorFileSystemAccess getRuntimeModelGen() {
+		return runtimeModelGen;
+	}
+	
+	public void setRuntimeModelGen(String path) {
+		this.runtimeModelGen = new XtextGeneratorFileSystemAccess(path, true);
 	}
 	
 	@Override

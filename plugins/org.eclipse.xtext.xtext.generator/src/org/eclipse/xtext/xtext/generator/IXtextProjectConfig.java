@@ -19,6 +19,8 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
  */
 public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	
+	IXtextGeneratorFileSystemAccess getRuntimeModelGen();
+	
 	IXtextGeneratorFileSystemAccess getRuntimeRoot();
 	IXtextGeneratorFileSystemAccess getRuntimeMetaInf();
 	IXtextGeneratorFileSystemAccess getRuntimeSrc();

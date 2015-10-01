@@ -10,12 +10,23 @@ package org.eclipse.xtext.xtext.generator.model
 import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 @Accessors
 class StandaloneSetupAccess {
 	
-	val List<CharSequence> registrations = newArrayList
+	val List<StringConcatenationClient> registrations = newArrayList
 	
+	@Deprecated
 	val Set<TypeReference> imports = newHashSet
+	
+	/**
+	 * @deprecated this set is required for backwards-compatibility to Xpand templates included with
+	 * 		{@code org.eclipse.xtext.generator.adapter.FragmentAdapter}.
+	 */
+	@Deprecated
+	def getImports() {
+		imports
+	}
 	
 }
