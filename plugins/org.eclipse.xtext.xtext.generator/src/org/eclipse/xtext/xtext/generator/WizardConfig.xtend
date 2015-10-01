@@ -28,9 +28,18 @@ class WizardConfig extends XtextProjectConfig {
 	
 	boolean mavenLayout = false
 	
+	String rootPath
+	
+	String baseName
+	
 	@Mandatory
-	override setRuntimeRoot(String path) {
-		super.setRuntimeRoot(path)
+	def setBaseName(String baseName) {
+		this.baseName = baseName
+	}
+	
+	@Mandatory
+	def setRootPath(String rootPath) {
+		this.rootPath = rootPath
 	}
 	
 	override checkConfiguration(Issues issues) {
@@ -64,6 +73,10 @@ class WizardConfig extends XtextProjectConfig {
 			srcWeb = 'src/main/webapp'
 		}
 		
+		if (runtimeProjectName=== null)
+			runtimeProjectName = baseName
+		if (runtimeRoot === null)
+			runtimeRoot = rootPath + '/' + runtimeProjectName
 		if (runtimeMetaInf === null)
 			runtimeMetaInf = runtimeRoot.path + '/' + metaInf
 		if (runtimeSrc === null)
@@ -78,13 +91,15 @@ class WizardConfig extends XtextProjectConfig {
 			runtimeModelGen = runtimeRoot.path + '/' + modelGen
 			
 		if (testingSupport) {
-			if (runtimeTestRoot === null)
+			if (runtimeTestProjectName=== null)
 				if(mavenLayout) {
-					runtimeTestRoot = runtimeRoot.path
+					runtimeTestProjectName = runtimeProjectName
 				} else {
-					runtimeTestRoot = runtimeRoot.path + ".tests"
+					runtimeTestProjectName = runtimeProjectName + ".tests"
 				}
-			if (runtimeTestMetaInf == null)
+			if (runtimeTestRoot === null)
+				runtimeTestRoot = rootPath + '/' + runtimeTestProjectName
+			if (runtimeTestMetaInf=== null)
 				runtimeTestMetaInf = runtimeTestRoot.path + '/' + metaInf
 			if (runtimeTestSrc === null)
 				runtimeTestSrc = runtimeTestRoot.path + '/' + testSrc
@@ -95,8 +110,10 @@ class WizardConfig extends XtextProjectConfig {
 		}
 		
 		if (eclipseEditor) {
+			if (eclipsePluginProjectName=== null)
+				eclipsePluginProjectName = baseName + '.ui'
 			if (eclipsePluginRoot === null)
-				eclipsePluginRoot = runtimeRoot.path + '.ui'
+				eclipsePluginRoot = rootPath + '/' + eclipsePluginProjectName
 			if (eclipsePluginMetaInf === null)
 				eclipsePluginMetaInf = eclipsePluginRoot.path + '/' + metaInf
 			if (eclipsePluginSrc === null)
@@ -109,6 +126,10 @@ class WizardConfig extends XtextProjectConfig {
 				eclipsePluginPluginXml = injector.getInstance(PluginXmlAccess)
 				
 			if (testingSupport) {
+				if (eclipsePluginTestProjectName=== null)
+					eclipsePluginTestProjectName = eclipsePluginProjectName + '.tests'
+				if (eclipsePluginTestRoot === null)
+					eclipsePluginTestRoot = rootPath + '/' + eclipsePluginTestProjectName
 				if (eclipsePluginTestRoot === null)
 					eclipsePluginTestRoot = eclipsePluginRoot.path + '.tests'
 				if (eclipsePluginTestMetaInf === null)
@@ -123,8 +144,10 @@ class WizardConfig extends XtextProjectConfig {
 		}
 		
 		if (ideaEditor) {
+			if (ideaPluginProjectName=== null)
+				ideaPluginProjectName = baseName + '.idea'
 			if (ideaPluginRoot === null)
-				ideaPluginRoot = runtimeRoot.path + '.idea'
+				ideaPluginRoot = rootPath + '/' + ideaPluginProjectName
 			if (ideaPluginSrc === null)
 				ideaPluginSrc = ideaPluginRoot.path + '/' + src
 			if (ideaPluginSrcGen === null)
@@ -134,8 +157,10 @@ class WizardConfig extends XtextProjectConfig {
 		}
 		
 		if (webSupport) {
+			if (webProjectName=== null)
+				webProjectName = baseName + '.web'
 			if (webRoot === null)
-				webRoot = runtimeRoot.path + '.web'
+				webRoot = rootPath + '/' + webProjectName
 			if (webSrc === null)
 				webSrc = webRoot.path + '/' + src
 			if (webSrcGen === null)
@@ -145,8 +170,10 @@ class WizardConfig extends XtextProjectConfig {
 		}
 		
 		if (genericIdeSupport) {
+			if (genericIdeProjectName=== null)
+				genericIdeProjectName = baseName + '.ide'
 			if (genericIdeRoot === null)
-				genericIdeRoot = runtimeRoot.path + '.ide'
+				genericIdeRoot = rootPath + '/' + genericIdeProjectName
 			if (genericIdeMetaInf === null)
 				genericIdeMetaInf = genericIdeRoot.path + '/' + metaInf
 			if (genericIdeSrc === null)

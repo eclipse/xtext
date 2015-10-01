@@ -29,7 +29,7 @@
 					<arguments>
 						<argument>/${project.basedir}/src/main/resources/org/xtext/example/mydsl/GenerateMyDsl.mwe2</argument>
 						<argument>-p</argument>
-						<argument>projectPath=/${project.basedir}</argument>
+						<argument>rootPath=/${project.basedir}/..</argument>
 					</arguments>
 					<includePluginDependencies>true</includePluginDependencies>
 				</configuration>

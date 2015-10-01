@@ -30,7 +30,6 @@ import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -306,12 +305,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("import org.eclipse.xtext.ui.generator.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("var projectName = \"");
+    _builder.append("var baseName = \"");
     String _name = this.getName();
     _builder.append(_name, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("var projectPath = \"../${projectName}\"");
+    _builder.append("var rootPath = \"..\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("var fileExtensions = \"");
@@ -321,7 +320,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(_fileExtensions, "");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("var grammarURI = \"platform:/resource/${projectName}/");
+    _builder.append("var grammarURI = \"platform:/resource/${baseName}/");
     String _sourceFolder = this.sourceFolder(Outlet.MAIN_RESOURCES);
     _builder.append(_sourceFolder, "");
     _builder.append("/");
@@ -349,38 +348,17 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t");
     _builder.append("scanClassPath = true");
     _builder.newLine();
-    {
-      WizardConfiguration _config_4 = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects = _config_4.getEnabledProjects();
-      final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
-        @Override
-        public Boolean apply(final ProjectDescriptor it) {
-          WizardConfiguration _config = it.getConfig();
-          ParentProjectDescriptor _parentProject = _config.getParentProject();
-          return Boolean.valueOf((!Objects.equal(it, _parentProject)));
-        }
-      };
-      Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
-      for(final ProjectDescriptor p : _filter) {
-        _builder.append("\t\t");
-        _builder.append("projectMapping = { projectName = \'");
-        String _name_1 = p.getName();
-        _builder.append(_name_1, "\t\t");
-        _builder.append("\' path = \'${projectPath}/../");
-        String _name_2 = p.getName();
-        _builder.append(_name_2, "\t\t");
-        _builder.append("\' }");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("\t\t");
+    _builder.append("platformUri = rootPath");
+    _builder.newLine();
     {
       boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
       if (_isFromExistingEcoreModels) {
         {
-          WizardConfiguration _config_5 = this.getConfig();
-          Ecore2XtextConfiguration _ecore2Xtext = _config_5.getEcore2Xtext();
+          WizardConfiguration _config_4 = this.getConfig();
+          Ecore2XtextConfiguration _ecore2Xtext = _config_4.getEcore2Xtext();
           Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
-          final Function1<EPackageInfo, Boolean> _function_1 = new Function1<EPackageInfo, Boolean>() {
+          final Function1<EPackageInfo, Boolean> _function = new Function1<EPackageInfo, Boolean>() {
             @Override
             public Boolean apply(final EPackageInfo it) {
               URI _genmodelURI = it.getGenmodelURI();
@@ -388,14 +366,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               return Boolean.valueOf((!Objects.equal(_fileExtension, "xcore")));
             }
           };
-          Iterable<EPackageInfo> _filter_1 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos, _function_1);
-          final Function1<EPackageInfo, String> _function_2 = new Function1<EPackageInfo, String>() {
+          Iterable<EPackageInfo> _filter = IterableExtensions.<EPackageInfo>filter(_ePackageInfos, _function);
+          final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
             @Override
             public String apply(final EPackageInfo it) {
               return it.getEPackageJavaFQN();
             }
           };
-          Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_filter_1, _function_2);
+          Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_filter, _function_1);
           Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
           for(final String ePackageInfo : _filterNull) {
             _builder.append("\t\t");
@@ -406,10 +384,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           }
         }
         {
-          WizardConfiguration _config_6 = this.getConfig();
-          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_6.getEcore2Xtext();
+          WizardConfiguration _config_5 = this.getConfig();
+          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_5.getEcore2Xtext();
           Set<EPackageInfo> _ePackageInfos_1 = _ecore2Xtext_1.getEPackageInfos();
-          final Function1<EPackageInfo, Boolean> _function_3 = new Function1<EPackageInfo, Boolean>() {
+          final Function1<EPackageInfo, Boolean> _function_2 = new Function1<EPackageInfo, Boolean>() {
             @Override
             public Boolean apply(final EPackageInfo it) {
               URI _genmodelURI = it.getGenmodelURI();
@@ -417,15 +395,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               return Boolean.valueOf((!Objects.equal(_fileExtension, "xcore")));
             }
           };
-          Iterable<EPackageInfo> _filter_2 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_1, _function_3);
-          final Function1<EPackageInfo, String> _function_4 = new Function1<EPackageInfo, String>() {
+          Iterable<EPackageInfo> _filter_1 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_1, _function_2);
+          final Function1<EPackageInfo, String> _function_3 = new Function1<EPackageInfo, String>() {
             @Override
             public String apply(final EPackageInfo it) {
               URI _genmodelURI = it.getGenmodelURI();
               return _genmodelURI.toString();
             }
           };
-          Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_filter_2, _function_4);
+          Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_filter_1, _function_3);
           Set<String> _set = IterableExtensions.<String>toSet(_map_1);
           for(final String genmodelURI : _set) {
             _builder.append("\t\t");
@@ -453,9 +431,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_7 = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects_1 = _config_7.getEnabledProjects();
-      final Function1<ProjectDescriptor, Boolean> _function_5 = new Function1<ProjectDescriptor, Boolean>() {
+      WizardConfiguration _config_6 = this.getConfig();
+      Set<ProjectDescriptor> _enabledProjects = _config_6.getEnabledProjects();
+      final Function1<ProjectDescriptor, Boolean> _function_4 = new Function1<ProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final ProjectDescriptor it) {
           Set<String> _sourceFolders = it.getSourceFolders();
@@ -463,16 +441,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           return Boolean.valueOf(_sourceFolders.contains(_sourceFolder));
         }
       };
-      Iterable<ProjectDescriptor> _filter_3 = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects_1, _function_5);
-      for(final ProjectDescriptor p_1 : _filter_3) {
+      Iterable<ProjectDescriptor> _filter_2 = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function_4);
+      for(final ProjectDescriptor p : _filter_2) {
         _builder.append("\t");
         _builder.append("component = DirectoryCleaner {");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
-        _builder.append("directory = \"${projectPath}");
-        String _nameQualifier = p_1.getNameQualifier();
-        _builder.append(_nameQualifier, "\t\t");
+        _builder.append("directory = \"${rootPath}/");
+        String _name_1 = p.getName();
+        _builder.append(_name_1, "\t\t");
         _builder.append("/");
         String _sourceFolder_1 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
         _builder.append(_sourceFolder_1, "\t\t");
@@ -489,8 +467,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("component = DirectoryCleaner {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("directory = \"${projectPath}/model/generated\"");
-    _builder.newLine();
+    _builder.append("directory = \"${rootPath}/");
+    String _name_2 = this.getName();
+    _builder.append(_name_2, "\t\t");
+    _builder.append("/model/generated\"");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -503,14 +484,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("configuration = {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("project = WizardConfig {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("runtimeRoot = projectPath");
+    _builder.append("project = WizardConfig auto-inject {");
     _builder.newLine();
     {
-      WizardConfiguration _config_8 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_8.getUiProject();
+      WizardConfiguration _config_7 = this.getConfig();
+      UiProjectDescriptor _uiProject = _config_7.getUiProject();
       boolean _isEnabled = _uiProject.isEnabled();
       boolean _not = (!_isEnabled);
       if (_not) {
@@ -520,8 +498,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_9 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject = _config_9.getIntellijProject();
+      WizardConfiguration _config_8 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject = _config_8.getIntellijProject();
       boolean _isEnabled_1 = _intellijProject.isEnabled();
       if (_isEnabled_1) {
         _builder.append("\t\t\t\t");
@@ -530,8 +508,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_10 = this.getConfig();
-      WebProjectDescriptor _webProject = _config_10.getWebProject();
+      WizardConfiguration _config_9 = this.getConfig();
+      WebProjectDescriptor _webProject = _config_9.getWebProject();
       boolean _isEnabled_2 = _webProject.isEnabled();
       if (_isEnabled_2) {
         _builder.append("\t\t\t\t");
@@ -540,8 +518,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_11 = this.getConfig();
-      IdeProjectDescriptor _ideProject = _config_11.getIdeProject();
+      WizardConfiguration _config_10 = this.getConfig();
+      IdeProjectDescriptor _ideProject = _config_10.getIdeProject();
       boolean _isEnabled_3 = _ideProject.isEnabled();
       if (_isEnabled_3) {
         _builder.append("\t\t\t\t");
@@ -558,8 +536,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_12 = this.getConfig();
-      SourceLayout _sourceLayout = _config_12.getSourceLayout();
+      WizardConfiguration _config_11 = this.getConfig();
+      SourceLayout _sourceLayout = _config_11.getSourceLayout();
       boolean _equals = Objects.equal(_sourceLayout, SourceLayout.MAVEN);
       if (_equals) {
         _builder.append("\t\t\t\t");
@@ -589,10 +567,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("uri = grammarURI");
     _builder.newLine();
     {
-      WizardConfiguration _config_13 = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext_2 = _config_13.getEcore2Xtext();
+      WizardConfiguration _config_12 = this.getConfig();
+      Ecore2XtextConfiguration _ecore2Xtext_2 = _config_12.getEcore2Xtext();
       Set<EPackageInfo> _ePackageInfos_2 = _ecore2Xtext_2.getEPackageInfos();
-      final Function1<EPackageInfo, Boolean> _function_6 = new Function1<EPackageInfo, Boolean>() {
+      final Function1<EPackageInfo, Boolean> _function_5 = new Function1<EPackageInfo, Boolean>() {
         @Override
         public Boolean apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
@@ -600,15 +578,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           return Boolean.valueOf(Objects.equal(_fileExtension, "xcore"));
         }
       };
-      Iterable<EPackageInfo> _filter_4 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_6);
-      final Function1<EPackageInfo, String> _function_7 = new Function1<EPackageInfo, String>() {
+      Iterable<EPackageInfo> _filter_3 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_5);
+      final Function1<EPackageInfo, String> _function_6 = new Function1<EPackageInfo, String>() {
         @Override
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();
         }
       };
-      Iterable<String> _map_2 = IterableExtensions.<EPackageInfo, String>map(_filter_4, _function_7);
+      Iterable<String> _map_2 = IterableExtensions.<EPackageInfo, String>map(_filter_3, _function_6);
       Set<String> _set_1 = IterableExtensions.<String>toSet(_map_2);
       for(final String genmodelURI_1 : _set_1) {
         _builder.append("\t\t\t");
@@ -654,7 +632,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("fragment = ecore.EMFGeneratorFragment auto-inject {");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("javaModelDirectory = \"/${projectName}/");
+    _builder.append("javaModelDirectory = \"/${baseName}/");
     String _sourceFolder_2 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
     _builder.append(_sourceFolder_2, "\t\t\t\t\t");
     _builder.append("\"");
@@ -768,16 +746,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_14 = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects_2 = _config_14.getEnabledProjects();
-      Iterable<TestedProjectDescriptor> _filter_5 = Iterables.<TestedProjectDescriptor>filter(_enabledProjects_2, TestedProjectDescriptor.class);
-      final Function1<TestedProjectDescriptor, Boolean> _function_8 = new Function1<TestedProjectDescriptor, Boolean>() {
+      WizardConfiguration _config_13 = this.getConfig();
+      Set<ProjectDescriptor> _enabledProjects_1 = _config_13.getEnabledProjects();
+      Iterable<TestedProjectDescriptor> _filter_4 = Iterables.<TestedProjectDescriptor>filter(_enabledProjects_1, TestedProjectDescriptor.class);
+      final Function1<TestedProjectDescriptor, Boolean> _function_7 = new Function1<TestedProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final TestedProjectDescriptor it) {
           return Boolean.valueOf(RuntimeProjectDescriptor.this.testProject.isEnabled());
         }
       };
-      boolean _exists = IterableExtensions.<TestedProjectDescriptor>exists(_filter_5, _function_8);
+      boolean _exists = IterableExtensions.<TestedProjectDescriptor>exists(_filter_4, _function_7);
       if (_exists) {
         _builder.append("\t\t\t");
         _builder.append("fragment = junit.Junit4Fragment2 auto-inject {}");
@@ -787,8 +765,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_15 = this.getConfig();
-      UiProjectDescriptor _uiProject_1 = _config_15.getUiProject();
+      WizardConfiguration _config_14 = this.getConfig();
+      UiProjectDescriptor _uiProject_1 = _config_14.getUiProject();
       boolean _isEnabled_5 = _uiProject_1.isEnabled();
       if (_isEnabled_5) {
         _builder.append("\t\t\t");
@@ -911,14 +889,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     {
       boolean _or = false;
-      WizardConfiguration _config_16 = this.getConfig();
-      UiProjectDescriptor _uiProject_2 = _config_16.getUiProject();
+      WizardConfiguration _config_15 = this.getConfig();
+      UiProjectDescriptor _uiProject_2 = _config_15.getUiProject();
       boolean _isEnabled_6 = _uiProject_2.isEnabled();
       if (_isEnabled_6) {
         _or = true;
       } else {
-        WizardConfiguration _config_17 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_17.getIdeProject();
+        WizardConfiguration _config_16 = this.getConfig();
+        IdeProjectDescriptor _ideProject_1 = _config_16.getIdeProject();
         boolean _isEnabled_7 = _ideProject_1.isEnabled();
         _or = _isEnabled_7;
       }
@@ -960,8 +938,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.newLine();
     {
-      WizardConfiguration _config_18 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject_1 = _config_18.getIntellijProject();
+      WizardConfiguration _config_17 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject_1 = _config_17.getIntellijProject();
       boolean _isEnabled_8 = _intellijProject_1.isEnabled();
       if (_isEnabled_8) {
         _builder.append("\t\t\t");
@@ -978,8 +956,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_19 = this.getConfig();
-      WebProjectDescriptor _webProject_1 = _config_19.getWebProject();
+      WizardConfiguration _config_18 = this.getConfig();
+      WebProjectDescriptor _webProject_1 = _config_18.getWebProject();
       boolean _isEnabled_9 = _webProject_1.isEnabled();
       if (_isEnabled_9) {
         _builder.append("\t\t\t");
@@ -1105,7 +1083,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("args += \"-p\"");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("args += \"projectPath=/${projectDir}\"");
+        _builder.append("args += \"rootPath=/${projectDir}/..\"");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -1245,7 +1223,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<argument>-p</argument>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
-        _builder.append("<argument>projectPath=/${project.basedir}</argument>");
+        _builder.append("<argument>rootPath=/${project.basedir}/..</argument>");
         _builder.newLine();
         _builder.append("\t\t\t\t");
         _builder.append("</arguments>");
