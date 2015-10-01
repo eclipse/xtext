@@ -51,14 +51,16 @@ class WizardConfig extends XtextProjectConfig {
 		var testSrc = src
 		var srcGen = 'src-gen'
 		var testSrcGen = srcGen
-		var srcWeb = 'WebRoot'
 		var metaInf = 'META-INF'
+		var modelGen = 'model/generated'
+		var srcWeb = 'WebRoot'
 		if (mavenLayout) {
 			src = 'src/main/java'
 			testSrc = 'src/test/java'
-			metaInf = 'src/main/resources/META-INF'
 			srcGen = 'src/main/xtext-gen'
 			testSrcGen = 'src/test/xtext-gen'
+			metaInf = 'src/main/resources/META-INF'
+			modelGen = 'src/main/model-gen'
 			srcWeb = 'src/main/webapp'
 		}
 		
@@ -72,6 +74,8 @@ class WizardConfig extends XtextProjectConfig {
 			runtimeManifest = injector.getInstance(ManifestAccess)
 		if (runtimePluginXml === null)
 			runtimePluginXml = injector.getInstance(PluginXmlAccess)
+		if (runtimeModelGen === null)
+			runtimeModelGen = runtimeRoot.path + '/' + modelGen
 			
 		if (testingSupport) {
 			if (runtimeTestRoot === null)

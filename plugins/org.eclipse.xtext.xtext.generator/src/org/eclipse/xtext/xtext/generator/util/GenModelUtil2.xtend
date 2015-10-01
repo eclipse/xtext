@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
 
 class GenModelUtil2 {
 	
@@ -110,18 +111,11 @@ class GenModelUtil2 {
 					}
 				}
 			}
-			val buf = new StringBuilder
-			var loc = locationInfo
-			if (loc !== null && loc.length > 0)
-				loc = ' from ' + loc
-			else
-				loc = ''
-			buf.append("Could not find a GenModel for EPackage '").append(nsURI).append("'").append(loc).append("\n")
-			// TODO replace with references to new fragments
-			buf.append('''If the missing GenModel has been generated via EMFGeneratorFragment.class.getSimpleName() or org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment.class.getSimpleName()''')
-			buf.append(" make sure to run it first in the workflow.\n")
-			buf.append('''If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String)''')
-			throw new RuntimeException(buf.toString)
+			throw new RuntimeException('''
+				Could not find a GenModel for EPackage '«nsURI»'«IF !locationInfo.nullOrEmpty» from «locationInfo»«ENDIF».
+				If the missing GenModel has been generated via «EMFGeneratorFragment2.simpleName», make sure to run it first in the workflow.
+				If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String).
+			''')
 		}
 		if (resourceSet === null)
 			throw new RuntimeException('''There is no ResourceSet for EPackage '«nsURI»'. Please make sure the EPackage has been loaded from a .ecore file and not from the generated Java file.''')
