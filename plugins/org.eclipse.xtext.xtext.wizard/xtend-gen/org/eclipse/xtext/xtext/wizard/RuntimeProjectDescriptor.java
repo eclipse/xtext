@@ -648,17 +648,25 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("// generates Java API for the generated EPackages");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fragment = ecore.EMFGeneratorFragment2 auto-inject {");
+    _builder.append("fragment = adapter.FragmentAdapter { ");
     _builder.newLine();
-    {
-      boolean _isEclipsePluginProject = this.isEclipsePluginProject();
-      boolean _not_1 = (!_isEclipsePluginProject);
-      if (_not_1) {
-        _builder.append("\t\t\t\t");
-        _builder.append("updateBuildProperties = false");
-        _builder.newLine();
-      }
-    }
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = ecore.EMFGeneratorFragment auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t     ");
+    _builder.append("javaModelDirectory = \"/${projectName}/");
+    String _sourceFolder_2 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+    _builder.append(_sourceFolder_2, "\t\t\t\t     ");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t     ");
+    _builder.append("updateBuildProperties = ");
+    boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+    _builder.append(_isEclipsePluginProject, "\t\t\t\t     ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
