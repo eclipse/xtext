@@ -24,7 +24,6 @@ import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
-import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule
 
 @Accessors(PROTECTED_GETTER)
@@ -53,10 +52,9 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 		resourceBaseProvider = new TestResourceBaseProvider
 		with(new EntitiesStandaloneSetup {
 			override createInjector() {
-				val ideModule = new DefaultXbaseIdeModule
 				val webModule = new EntitiesWebModule[Executors.newCachedThreadPool => [executorServices += it]]
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
+				return Guice.createInjector(Modules2.mixin(runtimeModule, webModule))
 			}
 		})
 		dispatcher = injector.getInstance(XtextServiceDispatcher)
