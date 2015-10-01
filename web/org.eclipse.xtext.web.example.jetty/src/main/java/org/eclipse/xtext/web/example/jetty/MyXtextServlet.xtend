@@ -20,7 +20,6 @@ import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
-import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule
 
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 class MyXtextServlet extends XtextServlet {
@@ -42,10 +41,9 @@ class MyXtextServlet extends XtextServlet {
 		new EntitiesStandaloneSetup {
 			override createInjector() {
 				val runtimeModule = new EntitiesRuntimeModule
-				val ideModule = new DefaultXbaseIdeModule
 				val webModule = new EntitiesWebModule(executorServiceProvider)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
+				return Guice.createInjector(Modules2.mixin(runtimeModule, webModule))
 			}
 		}.createInjectorAndDoEMFRegistration
 	}
