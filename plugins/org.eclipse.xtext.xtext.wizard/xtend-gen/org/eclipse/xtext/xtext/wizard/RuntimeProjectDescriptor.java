@@ -343,7 +343,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.append("Workflow {");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t");
     _builder.append("bean = StandaloneSetup {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -653,16 +653,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t\t");
     _builder.append("fragment = ecore.EMFGeneratorFragment auto-inject {");
     _builder.newLine();
-    _builder.append("\t\t\t\t     ");
+    _builder.append("\t\t\t\t\t");
     _builder.append("javaModelDirectory = \"/${projectName}/");
     String _sourceFolder_2 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
-    _builder.append(_sourceFolder_2, "\t\t\t\t     ");
+    _builder.append(_sourceFolder_2, "\t\t\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t     ");
+    _builder.append("\t\t\t\t\t");
     _builder.append("updateBuildProperties = ");
     boolean _isEclipsePluginProject = this.isEclipsePluginProject();
-    _builder.append(_isEclipsePluginProject, "\t\t\t\t     ");
+    _builder.append(_isEclipsePluginProject, "\t\t\t\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("}");
@@ -720,7 +720,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("fragment = validation.ValidatorFragment2 auto-inject {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("//    composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
+    _builder.append("//\tcomposedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
