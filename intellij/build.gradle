@@ -11,7 +11,7 @@ def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + pro
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
 
-if version.endsWith("-SNAPSHOT") {
+if (version.endsWith("-SNAPSHOT")) {
 	ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository'
 } else {
 	ideaRepository.rootUrl = "http://download.eclipse.org/modeling/tmf/xtext/idea/${version}"
