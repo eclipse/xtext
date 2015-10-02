@@ -157,9 +157,9 @@ Workflow {
 					generateStub = false
 				}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = outline.OutlineTreeProviderFragment {}
-			}
+
+			fragment = ui.outline.OutlineTreeProviderFragment2 {}
+
 			fragment = adapter.FragmentAdapter {
 				fragment = outline.QuickOutlineFragment {}
 			}

@@ -158,12 +158,12 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.annotations.ui.labeling.XbaseWithAnnotationsDescriptionLabelProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return XbaseWithAnnotationsOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
 		return XbaseWithAnnotationsOutlineTreeProvider.class;
 	}
