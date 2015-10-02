@@ -98,9 +98,20 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	override getFiles() {
 		val files = newArrayList
 		files += super.files
-		files += file(Outlet.MAIN_RESOURCES, grammarFilePath, grammar)
-		files += file(Outlet.MAIN_RESOURCES, workflowFilePath, workflow)
+		files += grammarFile
+		files += file(Outlet.MAIN_JAVA, workflowFilePath, workflow)
+		if (isPlainMavenBuild) {
+			files += file(Outlet.ROOT, "jar-with-ecore-model.xml", jarDescriptor)
+		}
 		return files
+	}
+	
+	private def isPlainMavenBuild() {
+		config.needsMavenBuild && !isEclipsePluginProject
+	}
+
+	def getGrammarFile() {
+		file(Outlet.MAIN_JAVA, grammarFilePath, grammar)
 	}
 	
 	def String getGrammarFilePath() {
@@ -144,7 +155,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			var projectPath = "../${projectName}"
 			
 			var fileExtensions = "«config.language.fileExtensions»"
-			var grammarURI = "platform:/resource/${projectName}/«Outlet.MAIN_RESOURCES.sourceFolder»/«grammarFilePath»"
+			var grammarURI = "platform:/resource/${projectName}/«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
 			
 			var encoding = "«config.encoding»"
 			var lineDelimiter = "\n"
@@ -373,10 +384,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				task generateXtextLanguage(type: JavaExec) {
 					main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 					classpath = configurations.mwe2
-					inputs.file "«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»"
-					inputs.file "«Outlet.MAIN_RESOURCES.sourceFolder»/«grammarFilePath»"
+					inputs.file "«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»"
+					inputs.file "«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
 					outputs.dir "«Outlet.MAIN_SRC_GEN.sourceFolder»"
-					args += "«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»"
+					args += "«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»"
 					args += "-p"
 					args += "projectPath=/${projectDir}"
 				}
@@ -384,6 +395,12 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				compileXtend.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)
 				eclipse.classpath.plusConfigurations += [configurations.mwe2]
+				
+				jar {
+					from('model/generated') {
+						into('model/generated')
+					}
+				}
 			'''
 		]
 	}
@@ -398,6 +415,12 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						<resources>
 							<resource>
 								<directory>«Outlet.MAIN_RESOURCES.sourceFolder»</directory>
+								<excludes>
+									<exclude>**/*.java</exclude>
+									<exclude>**/*.xtend</exclude>
+									<exclude>**/*.xtext</exclude>
+									<exclude>**/*.mwe2</exclude>
+								</excludes>
 							</resource>
 						</resources>
 					«ENDIF»
@@ -418,7 +441,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							<configuration>
 								<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 								<arguments>
-									<argument>/${project.basedir}/«Outlet.MAIN_RESOURCES.sourceFolder»/«workflowFilePath»</argument>
+									<argument>/${project.basedir}/«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»</argument>
 									<argument>-p</argument>
 									<argument>projectPath=/${project.basedir}</argument>
 								</arguments>
@@ -497,6 +520,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 											<resources>
 												<resource>
 													<directory>«Outlet.MAIN_SRC_GEN.sourceFolder»</directory>
+													<excludes>
+														<exclude>**/*.java</exclude>
+														<exclude>**/*.g</exclude>
+													</excludes>
 												</resource>
 											</resources>
 										</configuration>
@@ -516,6 +543,9 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 												<resources>
 													<resource>
 														<directory>«Outlet.TEST_SRC_GEN.sourceFolder»</directory>
+														<excludes>
+															<exclude>**/*.java</exclude>
+														</excludes>
 													</resource>
 												</resources>
 											</configuration>
@@ -523,10 +553,53 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 									«ENDIF»	
 								</executions>
 							</plugin>
+							«IF isPlainMavenBuild»
+							<plugin>
+								<artifactId>maven-assembly-plugin</artifactId>
+								<version>2.5.5</version>
+								<configuration>
+									<descriptors>
+										<descriptor>jar-with-ecore-model.xml</descriptor>
+									</descriptors>
+									<appendAssemblyId>false</appendAssemblyId>
+								</configuration>
+								<executions>
+									<execution>
+										<id>make-assembly</id>
+										<phase>package</phase>
+										<goals>
+											<goal>single</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							«ENDIF»
 						«ENDIF»
 					</plugins>
 				</build>
 			'''
 		]
 	}
+	
+	def jarDescriptor() '''
+		<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+			<id>jar-with-ecore-model</id>
+			<formats>
+				<format>jar</format>
+			</formats>
+			<includeBaseDirectory>false</includeBaseDirectory>
+			<fileSets>
+				<fileSet>
+					<outputDirectory>/</outputDirectory>
+					<directory>target/classes</directory>
+				</fileSet>
+				<fileSet>
+					<outputDirectory>model/generated</outputDirectory>
+					<directory>model/generated</directory>
+				</fileSet>
+			</fileSets>
+		</assembly>
+	'''
 }

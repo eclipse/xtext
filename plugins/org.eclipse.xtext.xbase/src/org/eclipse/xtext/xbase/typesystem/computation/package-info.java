@@ -46,7 +46,7 @@
  *	</li>
  *  <li>{@link org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals NumberLiterals} -
  *    Type computation for {@link org.eclipse.xtext.xbase.XNumberLiteral}, e.g. which sort of concrete
- *    syntax may yield a {@link com.ibm.icu.math.BigDecimal BigDecimal} or {@link java.math.BigInteger BigInteger}.
+ *    syntax may yield a {@link java.math.BigDecimal BigDecimal} or {@link java.math.BigInteger BigInteger}.
  *	</li>
  *  <li>{@link org.eclipse.xtext.xbase.typesystem.computation.ClosureTypeComputer ClosureTypeComputer} -
  *    The type computation of {@link org.eclipse.xtext.xbase.XClosure lambda expressions} is implemented in

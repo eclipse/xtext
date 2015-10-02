@@ -415,6 +415,14 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
+        _builder.newLine();
+        _builder.append("sourceSets.all {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("resources.exclude \'**/*.g\', \'**/*.xtext\', \'**/*.mwe2\', \'**/*.xtend\', \'**/*._trace\'");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
       } else {
         _builder.append("sourceSets {");
         _builder.newLine();
@@ -482,6 +490,14 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
       }
     }
+    _builder.newLine();
+    _builder.append("jar.manifest {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("attributes \'Bundle-SymbolicName\': project.name");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("plugins.withId(\'war\') {");
     _builder.newLine();
