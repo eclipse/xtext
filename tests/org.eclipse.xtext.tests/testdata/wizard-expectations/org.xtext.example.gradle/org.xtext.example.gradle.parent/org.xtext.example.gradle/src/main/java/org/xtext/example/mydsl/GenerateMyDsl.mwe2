@@ -9,7 +9,7 @@ var baseName = "org.xtext.example.gradle"
 var rootPath = ".."
 
 var fileExtensions = "mydsl"
-var grammarURI = "platform:/resource/${baseName}/src/main/resources/org/xtext/example/mydsl/MyDsl.xtext"
+var grammarURI = "platform:/resource/${baseName}/src/main/java/org/xtext/example/mydsl/MyDsl.xtext"
 
 var encoding = "UTF-8"
 var lineDelimiter = "\n"
