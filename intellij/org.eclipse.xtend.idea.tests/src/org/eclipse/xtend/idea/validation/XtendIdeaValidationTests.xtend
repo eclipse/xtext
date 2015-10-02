@@ -10,6 +10,7 @@ package org.eclipse.xtend.idea.validation
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.roots.ModuleRootManager
 import org.eclipse.xtend.idea.LightXtendTest
+import com.intellij.openapi.vfs.VfsUtil
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -29,7 +30,7 @@ class XtendIdeaValidationTests extends LightXtendTest {
 		ApplicationManager.application.runWriteAction[
 			val model = ModuleRootManager.getInstance(myFixture.module).modifiableModel
 			val contentEntry = model.contentEntries.head
-			val excludedDir = contentEntry.file.createChildDirectory(null, 'excluded')
+			val excludedDir = VfsUtil.createDirectoryIfMissing(contentEntry.file, 'excluded')
 			contentEntry.addExcludeFolder(excludedDir)
 			model.commit
 		]

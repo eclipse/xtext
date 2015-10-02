@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtext.idea.tests.AbstractIdeaTestCase
 import org.eclipse.xtext.idea.tests.LibraryUtil
 import org.eclipse.xtext.idea.tests.LightToolingTest
+import com.intellij.openapi.vfs.VfsUtil
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -21,7 +22,7 @@ import org.eclipse.xtext.idea.tests.LightToolingTest
 abstract class XtendIdeaTestCase extends AbstractIdeaTestCase {
 	override configureModule(Module module, ModifiableRootModel model, ContentEntry entry) {
 		LibraryUtil.addXtendLibrary(model)
-		val srcGenFolder = project.baseDir.createChildDirectory(null, "xtend-gen")
+		val srcGenFolder = VfsUtil.createDirectoryIfMissing(project.baseDir, "xtend-gen")
 		entry.addSourceFolder(srcGenFolder, false)
 		LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
 	}
