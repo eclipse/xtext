@@ -14,10 +14,12 @@ import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
 import org.eclipse.xtext.resource.XtextResourceSet 
 
+var rootPath = ".."
+var baseName = "org.eclipse.xtend.core"
+var projectPath = "${rootPath}/${baseName}"
+
 var grammarURI = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 var file.extensions = "xtend"
-var projectName = "org.eclipse.xtend.core"
-var projectPath = "../${projectName}"
 
 var lineDelimiter = "\n"
 var uiProjectName = "org.eclipse.xtend.ide"
@@ -53,7 +55,7 @@ Workflow {
 		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
 		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
 		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
-		registerEcoreFile = "platform:/resource/${projectName}/model/Xtend.ecore"
+		registerEcoreFile = "platform:/resource/${baseName}/model/Xtend.ecore"
 	}
 	
 	component = DirectoryCleaner {
@@ -61,16 +63,16 @@ Workflow {
 	}
 
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${projectName}/model/Xtend.genmodel"
-		srcPath ="platform:/resource/${projectName}/src"
+		genModel = "platform:/resource/${baseName}/model/Xtend.genmodel"
+		srcPath ="platform:/resource/${baseName}/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
 		lineDelimiter = lineDelimiter
 	}
 	
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${projectName}/model/RichStrings.genmodel"
-		srcPath ="platform:/resource/${projectName}/src"
+		genModel = "platform:/resource/${baseName}/model/RichStrings.genmodel"
+		srcPath ="platform:/resource/${baseName}/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
 		lineDelimiter = lineDelimiter
@@ -96,8 +98,7 @@ Workflow {
 
 	component = XtextGenerator auto-inject {
 		configuration =  {
-			project = WizardConfig {
-				runtimeRoot = projectPath
+			project = WizardConfig auto-inject {
 				eclipseEditor = true
 				eclipsePluginRoot = uiProjectPath
 				genericIdeSupport = true
