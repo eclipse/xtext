@@ -11,6 +11,10 @@ sourceSets {
 	}
 }
 
+jar.manifest {
+	attributes 'Bundle-SymbolicName': project.name
+}
+
 plugins.withId('war') {
 	webAppDirName = "src/main/webapp"
 }

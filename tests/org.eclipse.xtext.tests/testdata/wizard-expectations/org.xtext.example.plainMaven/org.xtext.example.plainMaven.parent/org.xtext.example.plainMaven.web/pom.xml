@@ -50,6 +50,9 @@
 							<resources>
 								<resource>
 									<directory>src/main/xtext-gen</directory>
+									<excludes>
+										<exclude>**/*.java</exclude>
+									</excludes>
 								</resource>
 							</resources>
 						</configuration>
