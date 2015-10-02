@@ -97,7 +97,7 @@ Workflow {
 	component = parser.JFlexLoader : jFlexMain {}
 
 	component = XtextGenerator auto-inject {
-		configuration =  {
+		configuration = parser.XtendGeneratorModule {
 			project = WizardConfig auto-inject {
 				eclipseEditor = true
 				eclipsePluginRoot = uiProjectPath
@@ -118,10 +118,6 @@ Workflow {
 			uri = grammarURI
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
-			naming = {
-				eclipsePluginBasePackage = uiProjectName
-				genericIdeBasePackage = ideProjectName
-			}
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = adapter.FragmentAdapter {
