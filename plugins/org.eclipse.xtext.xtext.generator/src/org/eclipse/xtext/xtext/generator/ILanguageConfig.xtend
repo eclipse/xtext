@@ -17,8 +17,6 @@ interface ILanguageConfig {
 	
 	def Grammar getGrammar()
 	
-	def XtextGeneratorNaming getNaming()
-	
 	def List<String> getFileExtensions()
 	
 	def StandaloneSetupAccess getRuntimeGenSetup()

@@ -22,10 +22,6 @@ class LanguageModule extends AbstractGenericModule {
 		binder.bind(ILanguageConfig).toInstance(language)
 	}
 	
-	def configureNaming(Binder binder) {
-		binder.bind(XtextGeneratorNaming).toInstance(language.naming)
-	}
-	
 	def configureGrammar(Binder binder) {
 		binder.bind(Grammar).toProvider[language.grammar]
 	}
