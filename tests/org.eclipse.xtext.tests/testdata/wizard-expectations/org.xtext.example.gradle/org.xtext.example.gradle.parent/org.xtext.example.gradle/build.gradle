@@ -18,10 +18,10 @@ dependencies {
 task generateXtextLanguage(type: JavaExec) {
 	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 	classpath = configurations.mwe2
-	inputs.file "src/main/resources/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
-	inputs.file "src/main/resources/org/xtext/example/mydsl/MyDsl.xtext"
+	inputs.file "src/main/java/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+	inputs.file "src/main/java/org/xtext/example/mydsl/MyDsl.xtext"
 	outputs.dir "src/main/xtext-gen"
-	args += "src/main/resources/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
+	args += "src/main/java/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
 	args += "-p"
 	args += "rootPath=/${projectDir}/.."
 }
@@ -29,3 +29,9 @@ task generateXtextLanguage(type: JavaExec) {
 compileXtend.dependsOn(generateXtextLanguage)
 clean.dependsOn(cleanGenerateXtextLanguage)
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
+
+jar {
+	from('model/generated') {
+		into('model/generated')
+	}
+}
