@@ -215,18 +215,19 @@ class WizardConfigurationTest {
 		config.sourceLayout = SourceLayout.PLAIN
 		val plainMavenProjects = allJavaProjects.filter[!isEclipsePluginProject && isPartOfMavenBuild]
 		plainMavenProjects.forEach[
-			assertTrue(pom.content.contains("<sourceDirectory>src</sourceDirectory>"))
 			assertTrue(pom.content.contains("<directory>src</directory>"))
 			assertTrue(pom.content.contains("<source>src-gen</source>"))
 			assertTrue(pom.content.contains("<directory>src-gen</directory>"))
 		]
 		plainMavenProjects.filter[!(it instanceof TestProjectDescriptor)].forEach[
+			assertTrue(pom.content.contains("<sourceDirectory>src</sourceDirectory>"))
 			assertTrue(pom.content.contains("add-source"))
 			assertTrue(pom.content.contains("add-resource"))
 			assertFalse(pom.content.contains("add-test-source"))
 			assertFalse(pom.content.contains("add-test-resource"))
 		]
 		plainMavenProjects.filter(TestProjectDescriptor).forEach[
+			assertTrue(pom.content.contains("<testSourceDirectory>src</testSourceDirectory>"))
 			assertTrue(pom.content.contains("add-test-source"))
 			assertTrue(pom.content.contains("add-test-resource"))
 			assertFalse(pom.content.contains("add-source"))
