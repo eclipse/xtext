@@ -30,10 +30,8 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
-import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
-import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -62,7 +60,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		}
 		
 		IProject runtimeProject = createdProjects.get(projectInfo.getRuntimeProject());
-		IFile dslGrammarFile = runtimeProject.getFile(getModelFolderName() + "/" + projectInfo.getRuntimeProject().getGrammarFilePath());
+		IFile dslGrammarFile = runtimeProject.getFile(getPath(projectInfo.getRuntimeProject().getGrammarFile()));
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		result = dslGrammarFile;
 	}
@@ -129,8 +127,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		public void contributeFiles(IProject project, IFileCreator fileWriter) {
 			for (TextFile file : descriptor.getFiles()) {
 				if (!isFiltered(file)) {
-					WizardConfiguration config = descriptor.getConfig();
-					String path = config.getSourceLayout().getPathFor(file.getOutlet()) + "/" + file.getRelativePath();
+					String path = getPath(file);
 					fileWriter.writeToFile(file.getContent(), path);
 				}
 			}
@@ -160,10 +157,6 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		return Messages.XtextProjectCreator_CreatingProjectsMessage2 + projectInfo.getProjectName();
 	}
 
-	protected String getModelFolderName() {
-		return projectInfo.getSourceLayout().getPathFor(Outlet.MAIN_RESOURCES);
-	}
-
 	@Override
 	public void setProjectInfo(IProjectInfo projectInfo) {
 		this.projectInfo = (XtextProjectInfo) projectInfo;
@@ -172,6 +165,10 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 	@Override
 	public IFile getResult() {
 		return result;
+	}
+
+	private String getPath(TextFile file) {
+		return file.getProject().sourceFolder(file.getOutlet()) + "/" + file.getRelativePath();
 	}
 
 }
