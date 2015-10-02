@@ -384,7 +384,6 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 		@Override
 		public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 			resetCurrentOffset(origin);
-			acceptor.addPosition(currentOffset, charCount, TEMPLATE_LINE_BREAK);
 			currentOffset += charCount;
 		}
 

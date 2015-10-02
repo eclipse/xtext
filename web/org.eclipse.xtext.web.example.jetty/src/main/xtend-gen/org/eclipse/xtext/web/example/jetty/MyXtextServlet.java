@@ -24,7 +24,6 @@ import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
-import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -69,10 +68,9 @@ public class MyXtextServlet extends XtextServlet {
         @Override
         public Injector createInjector() {
           final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
-          final DefaultXbaseIdeModule ideModule = new DefaultXbaseIdeModule();
           final EntitiesWebModule webModule = new EntitiesWebModule(executorServiceProvider);
           webModule.setResourceBaseProvider(resourceBaseProvider);
-          Module _mixin = Modules2.mixin(runtimeModule, ideModule, webModule);
+          Module _mixin = Modules2.mixin(runtimeModule, webModule);
           return Guice.createInjector(_mixin);
         }
       }.createInjectorAndDoEMFRegistration();
