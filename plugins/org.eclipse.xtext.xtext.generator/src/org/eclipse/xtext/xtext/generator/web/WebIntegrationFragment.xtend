@@ -675,14 +675,14 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 					val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 					try {
 						server.start
-						log.info('Server started' + server.getURI + '...')
+						log.info('Server started ' + server.getURI + '...')
 						new Thread[
 							log.info('Press enter to stop the server...')
 							val key = System.in.read
 							if (key !== -1) {
 								server.stop
 							} else {
-								log.warn('Console input is not available. In order to stop the server, you need to cancle process manuelly.')
+								log.warn('Console input is not available. In order to stop the server, you need to cancel process manually.')
 							}
 						].start
 						server.join

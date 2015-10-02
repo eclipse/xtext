@@ -2157,7 +2157,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("server.start");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("log.info(\'Server started\' + server.getURI + \'...\')");
+        _builder.append("log.info(\'Server started \' + server.getURI + \'...\')");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("new Thread[");
@@ -2178,7 +2178,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("} else {");
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
-        _builder.append("log.warn(\'Console input is not available. In order to stop the server, you need to cancle process manuelly.\')");
+        _builder.append("log.warn(\'Console input is not available. In order to stop the server, you need to cancel process manually.\')");
         _builder.newLine();
         _builder.append("\t\t\t\t");
         _builder.append("}");
