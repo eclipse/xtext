@@ -545,20 +545,16 @@ public class WizardConfigurationTest {
       public void apply(final ProjectDescriptor it) {
         PomFile _pom = it.pom();
         String _content = _pom.getContent();
-        boolean _contains = _content.contains("<sourceDirectory>src</sourceDirectory>");
+        boolean _contains = _content.contains("<directory>src</directory>");
         Assert.assertTrue(_contains);
         PomFile _pom_1 = it.pom();
         String _content_1 = _pom_1.getContent();
-        boolean _contains_1 = _content_1.contains("<directory>src</directory>");
+        boolean _contains_1 = _content_1.contains("<source>src-gen</source>");
         Assert.assertTrue(_contains_1);
         PomFile _pom_2 = it.pom();
         String _content_2 = _pom_2.getContent();
-        boolean _contains_2 = _content_2.contains("<source>src-gen</source>");
+        boolean _contains_2 = _content_2.contains("<directory>src-gen</directory>");
         Assert.assertTrue(_contains_2);
-        PomFile _pom_3 = it.pom();
-        String _content_3 = _pom_3.getContent();
-        boolean _contains_3 = _content_3.contains("<directory>src-gen</directory>");
-        Assert.assertTrue(_contains_3);
       }
     };
     IterableExtensions.forEach(plainMavenProjects, _function_1);
@@ -574,20 +570,24 @@ public class WizardConfigurationTest {
       public void apply(final ProjectDescriptor it) {
         PomFile _pom = it.pom();
         String _content = _pom.getContent();
-        boolean _contains = _content.contains("add-source");
+        boolean _contains = _content.contains("<sourceDirectory>src</sourceDirectory>");
         Assert.assertTrue(_contains);
         PomFile _pom_1 = it.pom();
         String _content_1 = _pom_1.getContent();
-        boolean _contains_1 = _content_1.contains("add-resource");
+        boolean _contains_1 = _content_1.contains("add-source");
         Assert.assertTrue(_contains_1);
         PomFile _pom_2 = it.pom();
         String _content_2 = _pom_2.getContent();
-        boolean _contains_2 = _content_2.contains("add-test-source");
-        Assert.assertFalse(_contains_2);
+        boolean _contains_2 = _content_2.contains("add-resource");
+        Assert.assertTrue(_contains_2);
         PomFile _pom_3 = it.pom();
         String _content_3 = _pom_3.getContent();
-        boolean _contains_3 = _content_3.contains("add-test-resource");
+        boolean _contains_3 = _content_3.contains("add-test-source");
         Assert.assertFalse(_contains_3);
+        PomFile _pom_4 = it.pom();
+        String _content_4 = _pom_4.getContent();
+        boolean _contains_4 = _content_4.contains("add-test-resource");
+        Assert.assertFalse(_contains_4);
       }
     };
     IterableExtensions.forEach(_filter, _function_3);
@@ -597,20 +597,24 @@ public class WizardConfigurationTest {
       public void apply(final TestProjectDescriptor it) {
         PomFile _pom = it.pom();
         String _content = _pom.getContent();
-        boolean _contains = _content.contains("add-test-source");
+        boolean _contains = _content.contains("<testSourceDirectory>src</testSourceDirectory>");
         Assert.assertTrue(_contains);
         PomFile _pom_1 = it.pom();
         String _content_1 = _pom_1.getContent();
-        boolean _contains_1 = _content_1.contains("add-test-resource");
+        boolean _contains_1 = _content_1.contains("add-test-source");
         Assert.assertTrue(_contains_1);
         PomFile _pom_2 = it.pom();
         String _content_2 = _pom_2.getContent();
-        boolean _contains_2 = _content_2.contains("add-source");
-        Assert.assertFalse(_contains_2);
+        boolean _contains_2 = _content_2.contains("add-test-resource");
+        Assert.assertTrue(_contains_2);
         PomFile _pom_3 = it.pom();
         String _content_3 = _pom_3.getContent();
-        boolean _contains_3 = _content_3.contains("add-resource");
+        boolean _contains_3 = _content_3.contains("add-source");
         Assert.assertFalse(_contains_3);
+        PomFile _pom_4 = it.pom();
+        String _content_4 = _pom_4.getContent();
+        boolean _contains_4 = _content_4.contains("add-resource");
+        Assert.assertFalse(_contains_4);
       }
     };
     IterableExtensions.<TestProjectDescriptor>forEach(_filter_1, _function_4);
