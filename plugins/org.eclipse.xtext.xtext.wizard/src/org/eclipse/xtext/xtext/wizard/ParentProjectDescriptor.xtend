@@ -136,6 +136,10 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 				}
 			}
+			
+			sourceSets.all {
+				resources.exclude '**/*.g', '**/*.xtext', '**/*.mwe2', '**/*.xtend', '**/*._trace'
+			}
 		«ELSE»
 			sourceSets {
 				main {
@@ -150,6 +154,10 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 				}
 			}
 		«ENDIF»
+		
+		jar.manifest {
+			attributes 'Bundle-SymbolicName': project.name
+		}
 		
 		plugins.withId('war') {
 			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
