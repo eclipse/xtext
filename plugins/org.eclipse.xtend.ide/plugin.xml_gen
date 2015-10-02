@@ -322,7 +322,6 @@
 	        </attribute>
 	    </markerResolutionGenerator>
 	</extension>
-	
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
