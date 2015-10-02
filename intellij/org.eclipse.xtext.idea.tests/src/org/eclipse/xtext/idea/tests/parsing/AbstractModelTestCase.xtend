@@ -24,6 +24,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
+import org.eclipse.xtext.util.LazyStringInputStream
 
 class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 
@@ -91,7 +92,7 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 		var resourceSet = resourceSetProvider.get(myModule)
 		var resource = resourceSet.createResource(URI.createURI(xtextFile.virtualFile.url)) as XtextResource
 		try {
-			resource.load(new ByteArrayInputStream(xtextFile.text.bytes), null)
+			resource.load(new LazyStringInputStream(xtextFile.text), null)
 		} catch (IOException e) {
 			throw new RuntimeException(e)
 		}

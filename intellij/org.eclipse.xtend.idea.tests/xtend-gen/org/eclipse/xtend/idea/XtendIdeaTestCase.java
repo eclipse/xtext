@@ -11,6 +11,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtext.idea.tests.AbstractIdeaTestCase;
@@ -29,7 +30,7 @@ public abstract class XtendIdeaTestCase extends AbstractIdeaTestCase {
       LibraryUtil.addXtendLibrary(model);
       Project _project = this.getProject();
       VirtualFile _baseDir = _project.getBaseDir();
-      final VirtualFile srcGenFolder = _baseDir.createChildDirectory(null, "xtend-gen");
+      final VirtualFile srcGenFolder = VfsUtil.createDirectoryIfMissing(_baseDir, "xtend-gen");
       entry.addSourceFolder(srcGenFolder, false);
       String _iD = XtendLanguage.INSTANCE.getID();
       LightToolingTest.addFacetToModule(module, _iD);

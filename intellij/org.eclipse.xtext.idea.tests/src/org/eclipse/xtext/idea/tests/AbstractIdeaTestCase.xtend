@@ -14,6 +14,7 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
+import com.intellij.openapi.vfs.VfsUtil
 
 abstract class AbstractIdeaTestCase extends IdeaTestCase {
 
@@ -31,8 +32,8 @@ abstract class AbstractIdeaTestCase extends IdeaTestCase {
 
 	protected def VirtualFile addFile(Pair<String, String> file) {
 		write [
-			val result = srcFolder.createChildData(null, file.key)
-			result.binaryContent = file.value.getBytes
+			val result = srcFolder.findOrCreateChildData(AbstractIdeaTestCase.this, file.key)
+			VfsUtil.saveText(result, file.value)
 			assertNoCompileErrors(result)
 			return result
 		]
@@ -44,7 +45,7 @@ abstract class AbstractIdeaTestCase extends IdeaTestCase {
 			val mnr = ModuleRootManager.getInstance(module)
 			val model = mnr.modifiableModel
 			val entry = model.addContentEntry(project.baseDir)
-			srcFolder = project.baseDir.createChildDirectory(null, "src")
+			srcFolder = VfsUtil.createDirectoryIfMissing(project.baseDir, "src")
 			entry.addSourceFolder(srcFolder, false)
 			configureModule(module, model, entry)
 			model.commit

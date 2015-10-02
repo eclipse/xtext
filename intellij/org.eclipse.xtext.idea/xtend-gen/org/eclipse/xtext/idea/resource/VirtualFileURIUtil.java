@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import org.eclipse.emf.common.util.URI;
@@ -68,10 +69,10 @@ public class VirtualFileURIUtil {
       final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(_trimSegments, true);
       if (isDirectory) {
         String _lastSegment = uri.lastSegment();
-        return parent.createChildDirectory(uri, _lastSegment);
+        return VfsUtil.createDirectoryIfMissing(parent, _lastSegment);
       } else {
         String _lastSegment_1 = uri.lastSegment();
-        return parent.createChildData(uri, _lastSegment_1);
+        return parent.findOrCreateChildData(uri, _lastSegment_1);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

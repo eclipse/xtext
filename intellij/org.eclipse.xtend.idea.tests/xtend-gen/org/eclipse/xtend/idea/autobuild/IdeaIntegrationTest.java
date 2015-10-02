@@ -1124,7 +1124,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
           ContentEntry[] _contentEntries = model.getContentEntries();
           final ContentEntry contentEntry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
           VirtualFile _file = contentEntry.getFile();
-          final VirtualFile excludedDir = _file.createChildDirectory(null, "excluded");
+          final VirtualFile excludedDir = VfsUtil.createDirectoryIfMissing(_file, "excluded");
           contentEntry.addExcludeFolder(excludedDir);
           model.commit();
         } catch (Throwable _e) {

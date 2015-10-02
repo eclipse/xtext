@@ -593,7 +593,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		ApplicationManager.application.runWriteAction[
 			val model = ModuleRootManager.getInstance(myFixture.module).modifiableModel
 			val contentEntry = model.contentEntries.head
-			val excludedDir = contentEntry.file.createChildDirectory(null, 'excluded')
+			val excludedDir = VfsUtil.createDirectoryIfMissing(contentEntry.file, 'excluded')
 			contentEntry.addExcludeFolder(excludedDir)
 			model.commit
 		]
