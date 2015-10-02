@@ -14,7 +14,6 @@ import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
 import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
-import org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment;
 import org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
@@ -151,7 +151,7 @@ final class GenerateXbase {
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateStub(false);
 				addFragment(new FragmentAdapter(label));
-				addFragment(new FragmentAdapter(new OutlineTreeProviderFragment()));
+				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
 				antlrUI.setOptions(antlrOptions);
@@ -192,7 +192,7 @@ final class GenerateXbase {
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateXtendStub(true);
 				addFragment(new FragmentAdapter(label));
-				addFragment(new FragmentAdapter(new OutlineTreeProviderFragment()));
+				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
 				antlrUI.setOptions(antlrOptions);
