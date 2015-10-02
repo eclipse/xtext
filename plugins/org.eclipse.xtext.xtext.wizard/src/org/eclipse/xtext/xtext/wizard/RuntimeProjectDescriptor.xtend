@@ -151,11 +151,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			import org.eclipse.xtext.generator.*
 			import org.eclipse.xtext.ui.generator.*
 			
-			var projectName = "«name»"
-			var projectPath = "../${projectName}"
+			var baseName = "«name»"
+			var rootPath = ".."
 			
 			var fileExtensions = "«config.language.fileExtensions»"
-			var grammarURI = "platform:/resource/${projectName}/«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
+			var grammarURI = "platform:/resource/${baseName}/«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
 			
 			var encoding = "«config.encoding»"
 			var lineDelimiter = "\n"
@@ -164,9 +164,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			Workflow {
 				bean = StandaloneSetup {
 					scanClassPath = true
-					«FOR p : config.enabledProjects.filter[it != config.parentProject]»
-						projectMapping = { projectName = '«p.name»' path = '${projectPath}/../«p.name»' }
-					«ENDFOR»
+					platformUri = rootPath
 					«IF fromExistingEcoreModels»
 						«FOR ePackageInfo : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[EPackageJavaFQN].filterNull»
 							registerGeneratedEPackage = "«ePackageInfo»"
@@ -183,18 +181,17 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				
 				«FOR p : config.enabledProjects.filter[it.sourceFolders.contains(Outlet.MAIN_SRC_GEN.sourceFolder)]»
 					component = DirectoryCleaner {
-						directory = "${projectPath}«p.nameQualifier»/«Outlet.MAIN_SRC_GEN.sourceFolder»"
+						directory = "${rootPath}/«p.name»/«Outlet.MAIN_SRC_GEN.sourceFolder»"
 					}
 				«ENDFOR»
 				
 				component = DirectoryCleaner {
-					directory = "${projectPath}/model/generated"
+					directory = "${rootPath}/«name»/model/generated"
 				}
 				
 				component = XtextGenerator auto-inject {
 					configuration = {
-						project = WizardConfig {
-							runtimeRoot = projectPath
+						project = WizardConfig auto-inject {
 							«IF !config.uiProject.enabled»
 								eclipseEditor = false
 							«ENDIF»
@@ -236,7 +233,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						// generates Java API for the generated EPackages
 						fragment = adapter.FragmentAdapter { 
 							fragment = ecore.EMFGeneratorFragment auto-inject {
-								javaModelDirectory = "/${projectName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
+								javaModelDirectory = "/${baseName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
 								updateBuildProperties = «isEclipsePluginProject»
 							}
 						}
@@ -389,7 +386,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					outputs.dir "«Outlet.MAIN_SRC_GEN.sourceFolder»"
 					args += "«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»"
 					args += "-p"
-					args += "projectPath=/${projectDir}"
+					args += "rootPath=/${projectDir}/.."
 				}
 				
 				compileXtend.dependsOn(generateXtextLanguage)
@@ -443,7 +440,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								<arguments>
 									<argument>/${project.basedir}/«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»</argument>
 									<argument>-p</argument>
-									<argument>projectPath=/${project.basedir}</argument>
+									<argument>rootPath=/${project.basedir}/..</argument>
 								</arguments>
 								<includePluginDependencies>true</includePluginDependencies>
 							</configuration>

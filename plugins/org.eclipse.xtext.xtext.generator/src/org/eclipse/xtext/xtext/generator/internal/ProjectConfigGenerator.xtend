@@ -73,6 +73,7 @@ class ProjectConfigGenerator {
 			IXtextGeneratorFileSystemAccess getRuntimeModelGen();
 			
 			«FOR p : PROJECTS»
+				String get«p.toFirstUpper»ProjectName();
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»Root();
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»MetaInf();
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»Src();
@@ -113,6 +114,7 @@ class ProjectConfigGenerator {
 			
 			private IXtextGeneratorFileSystemAccess runtimeModelGen;
 			«FOR p : PROJECTS»
+				private String «p»ProjectName;
 				private IXtextGeneratorFileSystemAccess «p»Root;
 				private IXtextGeneratorFileSystemAccess «p»MetaInf;
 				private IXtextGeneratorFileSystemAccess «p»Src;
@@ -181,6 +183,15 @@ class ProjectConfigGenerator {
 			}
 			
 			«FOR p : PROJECTS»
+				@Override
+				public String get«p.toFirstUpper»ProjectName() {
+					return «p»ProjectName;
+				}
+				
+				public void set«p.toFirstUpper»ProjectName(String projectName) {
+					this.«p»ProjectName = projectName;
+				}
+				
 				@Override
 				public IXtextGeneratorFileSystemAccess get«p.toFirstUpper»Root() {
 					return «p»Root;

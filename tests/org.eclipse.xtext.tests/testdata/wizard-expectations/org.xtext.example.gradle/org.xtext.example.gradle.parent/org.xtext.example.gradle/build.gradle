@@ -23,7 +23,7 @@ task generateXtextLanguage(type: JavaExec) {
 	outputs.dir "src/main/xtext-gen"
 	args += "src/main/resources/org/xtext/example/mydsl/GenerateMyDsl.mwe2"
 	args += "-p"
-	args += "projectPath=/${projectDir}"
+	args += "rootPath=/${projectDir}/.."
 }
 
 compileXtend.dependsOn(generateXtextLanguage)

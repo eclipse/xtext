@@ -21,57 +21,67 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	private IXtextGeneratorFileSystemAccess runtimeModelGen;
+	private String runtimeProjectName;
 	private IXtextGeneratorFileSystemAccess runtimeRoot;
 	private IXtextGeneratorFileSystemAccess runtimeMetaInf;
 	private IXtextGeneratorFileSystemAccess runtimeSrc;
 	private IXtextGeneratorFileSystemAccess runtimeSrcGen;
 	private ManifestAccess runtimeManifest;
 	private PluginXmlAccess runtimePluginXml;
+	private String runtimeTestProjectName;
 	private IXtextGeneratorFileSystemAccess runtimeTestRoot;
 	private IXtextGeneratorFileSystemAccess runtimeTestMetaInf;
 	private IXtextGeneratorFileSystemAccess runtimeTestSrc;
 	private IXtextGeneratorFileSystemAccess runtimeTestSrcGen;
 	private ManifestAccess runtimeTestManifest;
 	private PluginXmlAccess runtimeTestPluginXml;
+	private String genericIdeProjectName;
 	private IXtextGeneratorFileSystemAccess genericIdeRoot;
 	private IXtextGeneratorFileSystemAccess genericIdeMetaInf;
 	private IXtextGeneratorFileSystemAccess genericIdeSrc;
 	private IXtextGeneratorFileSystemAccess genericIdeSrcGen;
 	private ManifestAccess genericIdeManifest;
 	private PluginXmlAccess genericIdePluginXml;
+	private String genericIdeTestProjectName;
 	private IXtextGeneratorFileSystemAccess genericIdeTestRoot;
 	private IXtextGeneratorFileSystemAccess genericIdeTestMetaInf;
 	private IXtextGeneratorFileSystemAccess genericIdeTestSrc;
 	private IXtextGeneratorFileSystemAccess genericIdeTestSrcGen;
 	private ManifestAccess genericIdeTestManifest;
 	private PluginXmlAccess genericIdeTestPluginXml;
+	private String eclipsePluginProjectName;
 	private IXtextGeneratorFileSystemAccess eclipsePluginRoot;
 	private IXtextGeneratorFileSystemAccess eclipsePluginMetaInf;
 	private IXtextGeneratorFileSystemAccess eclipsePluginSrc;
 	private IXtextGeneratorFileSystemAccess eclipsePluginSrcGen;
 	private ManifestAccess eclipsePluginManifest;
 	private PluginXmlAccess eclipsePluginPluginXml;
+	private String eclipsePluginTestProjectName;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestRoot;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestMetaInf;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestSrc;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestSrcGen;
 	private ManifestAccess eclipsePluginTestManifest;
 	private PluginXmlAccess eclipsePluginTestPluginXml;
+	private String ideaPluginProjectName;
 	private IXtextGeneratorFileSystemAccess ideaPluginRoot;
 	private IXtextGeneratorFileSystemAccess ideaPluginMetaInf;
 	private IXtextGeneratorFileSystemAccess ideaPluginSrc;
 	private IXtextGeneratorFileSystemAccess ideaPluginSrcGen;
 	private ManifestAccess ideaPluginManifest;
+	private String ideaPluginTestProjectName;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestRoot;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestMetaInf;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestSrc;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestSrcGen;
 	private ManifestAccess ideaPluginTestManifest;
+	private String webProjectName;
 	private IXtextGeneratorFileSystemAccess webRoot;
 	private IXtextGeneratorFileSystemAccess webMetaInf;
 	private IXtextGeneratorFileSystemAccess webSrc;
 	private IXtextGeneratorFileSystemAccess webSrcGen;
 	private ManifestAccess webManifest;
+	private String webTestProjectName;
 	private IXtextGeneratorFileSystemAccess webTestRoot;
 	private IXtextGeneratorFileSystemAccess webTestMetaInf;
 	private IXtextGeneratorFileSystemAccess webTestSrc;
@@ -298,6 +308,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
+	public String getRuntimeProjectName() {
+		return runtimeProjectName;
+	}
+	
+	public void setRuntimeProjectName(String projectName) {
+		this.runtimeProjectName = projectName;
+	}
+	
+	@Override
 	public IXtextGeneratorFileSystemAccess getRuntimeRoot() {
 		return runtimeRoot;
 	}
@@ -349,6 +368,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	public void setRuntimePluginXml(PluginXmlAccess pluginXml) {
 		this.runtimePluginXml = pluginXml;
+	}
+	
+	@Override
+	public String getRuntimeTestProjectName() {
+		return runtimeTestProjectName;
+	}
+	
+	public void setRuntimeTestProjectName(String projectName) {
+		this.runtimeTestProjectName = projectName;
 	}
 	
 	@Override
@@ -406,6 +434,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
+	public String getGenericIdeProjectName() {
+		return genericIdeProjectName;
+	}
+	
+	public void setGenericIdeProjectName(String projectName) {
+		this.genericIdeProjectName = projectName;
+	}
+	
+	@Override
 	public IXtextGeneratorFileSystemAccess getGenericIdeRoot() {
 		return genericIdeRoot;
 	}
@@ -457,6 +494,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	public void setGenericIdePluginXml(PluginXmlAccess pluginXml) {
 		this.genericIdePluginXml = pluginXml;
+	}
+	
+	@Override
+	public String getGenericIdeTestProjectName() {
+		return genericIdeTestProjectName;
+	}
+	
+	public void setGenericIdeTestProjectName(String projectName) {
+		this.genericIdeTestProjectName = projectName;
 	}
 	
 	@Override
@@ -514,6 +560,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
+	public String getEclipsePluginProjectName() {
+		return eclipsePluginProjectName;
+	}
+	
+	public void setEclipsePluginProjectName(String projectName) {
+		this.eclipsePluginProjectName = projectName;
+	}
+	
+	@Override
 	public IXtextGeneratorFileSystemAccess getEclipsePluginRoot() {
 		return eclipsePluginRoot;
 	}
@@ -565,6 +620,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	public void setEclipsePluginPluginXml(PluginXmlAccess pluginXml) {
 		this.eclipsePluginPluginXml = pluginXml;
+	}
+	
+	@Override
+	public String getEclipsePluginTestProjectName() {
+		return eclipsePluginTestProjectName;
+	}
+	
+	public void setEclipsePluginTestProjectName(String projectName) {
+		this.eclipsePluginTestProjectName = projectName;
 	}
 	
 	@Override
@@ -622,6 +686,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
+	public String getIdeaPluginProjectName() {
+		return ideaPluginProjectName;
+	}
+	
+	public void setIdeaPluginProjectName(String projectName) {
+		this.ideaPluginProjectName = projectName;
+	}
+	
+	@Override
 	public IXtextGeneratorFileSystemAccess getIdeaPluginRoot() {
 		return ideaPluginRoot;
 	}
@@ -664,6 +737,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	public void setIdeaPluginManifest(ManifestAccess manifest) {
 		this.ideaPluginManifest = manifest;
+	}
+	
+	@Override
+	public String getIdeaPluginTestProjectName() {
+		return ideaPluginTestProjectName;
+	}
+	
+	public void setIdeaPluginTestProjectName(String projectName) {
+		this.ideaPluginTestProjectName = projectName;
 	}
 	
 	@Override
@@ -712,6 +794,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
+	public String getWebProjectName() {
+		return webProjectName;
+	}
+	
+	public void setWebProjectName(String projectName) {
+		this.webProjectName = projectName;
+	}
+	
+	@Override
 	public IXtextGeneratorFileSystemAccess getWebRoot() {
 		return webRoot;
 	}
@@ -754,6 +845,15 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	public void setWebManifest(ManifestAccess manifest) {
 		this.webManifest = manifest;
+	}
+	
+	@Override
+	public String getWebTestProjectName() {
+		return webTestProjectName;
+	}
+	
+	public void setWebTestProjectName(String projectName) {
+		this.webTestProjectName = projectName;
 	}
 	
 	@Override
