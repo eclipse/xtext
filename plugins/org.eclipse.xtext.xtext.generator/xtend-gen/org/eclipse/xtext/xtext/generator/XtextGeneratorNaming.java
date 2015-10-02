@@ -7,51 +7,14 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.base.Objects;
-import org.eclipse.xtend.lib.annotations.AccessorType;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class XtextGeneratorNaming {
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String eclipsePluginActivator;
-  
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String runtimeBasePackage;
-  
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String eclipsePluginBasePackage;
-  
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String genericIdeBasePackage;
-  
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String ideaBasePackage;
-  
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String webBasePackage;
-  
-  private Grammar myGrammar;
-  
-  Grammar setGrammar(final Grammar grammar) {
-    return this.myGrammar = grammar;
-  }
-  
   public String getRuntimeBasePackage(final Grammar grammar) {
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (this.runtimeBasePackage == null);
-    }
-    if (_or) {
-      return GrammarUtil.getNamespace(grammar);
-    }
-    return this.runtimeBasePackage;
+    return GrammarUtil.getNamespace(grammar);
   }
   
   public String getRuntimeTestBasePackage(final Grammar grammar) {
@@ -93,18 +56,8 @@ public class XtextGeneratorNaming {
   }
   
   public String getEclipsePluginBasePackage(final Grammar grammar) {
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (this.eclipsePluginBasePackage == null);
-    }
-    if (_or) {
-      String _namespace = GrammarUtil.getNamespace(grammar);
-      return (_namespace + ".ui");
-    }
-    return this.eclipsePluginBasePackage;
+    String _namespace = GrammarUtil.getNamespace(grammar);
+    return (_namespace + ".ui");
   }
   
   public String getEclipsePluginTestBasePackage(final Grammar grammar) {
@@ -139,36 +92,16 @@ public class XtextGeneratorNaming {
   }
   
   public TypeReference getEclipsePluginActivator(final Grammar grammar) {
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (this.eclipsePluginActivator == null);
-    }
-    if (_or) {
-      String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
-      String _plus = (_eclipsePluginBasePackage + ".internal");
-      String _simpleName = GrammarUtil.getSimpleName(grammar);
-      String _plus_1 = (_simpleName + "Activator");
-      return new TypeReference(_plus, _plus_1);
-    }
-    return new TypeReference(this.eclipsePluginActivator);
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _plus = (_eclipsePluginBasePackage + ".internal");
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus_1 = (_simpleName + "Activator");
+    return new TypeReference(_plus, _plus_1);
   }
   
   public String getGenericIdeBasePackage(final Grammar grammar) {
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (this.genericIdeBasePackage == null);
-    }
-    if (_or) {
-      String _namespace = GrammarUtil.getNamespace(grammar);
-      return (_namespace + ".ide");
-    }
-    return this.genericIdeBasePackage;
+    String _namespace = GrammarUtil.getNamespace(grammar);
+    return (_namespace + ".ide");
   }
   
   public TypeReference getGenericIdeModule(final Grammar grammar) {
@@ -187,18 +120,8 @@ public class XtextGeneratorNaming {
   }
   
   public String getIdeaBasePackage(final Grammar grammar) {
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (this.ideaBasePackage == null);
-    }
-    if (_or) {
-      String _namespace = GrammarUtil.getNamespace(grammar);
-      return (_namespace + ".idea");
-    }
-    return this.ideaBasePackage;
+    String _namespace = GrammarUtil.getNamespace(grammar);
+    return (_namespace + ".idea");
   }
   
   public TypeReference getIdeaModule(final Grammar grammar) {
@@ -228,18 +151,8 @@ public class XtextGeneratorNaming {
   }
   
   public String getWebBasePackage(final Grammar grammar) {
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (this.webBasePackage == null);
-    }
-    if (_or) {
-      String _namespace = GrammarUtil.getNamespace(grammar);
-      return (_namespace + ".web");
-    }
-    return this.webBasePackage;
+    String _namespace = GrammarUtil.getNamespace(grammar);
+    return (_namespace + ".web");
   }
   
   public TypeReference getWebModule(final Grammar grammar) {
@@ -266,29 +179,5 @@ public class XtextGeneratorNaming {
     String _simpleName = GrammarUtil.getSimpleName(grammar);
     String _plus = (_simpleName + "WebSetup");
     return new TypeReference(_webBasePackage, _plus);
-  }
-  
-  public void setEclipsePluginActivator(final String eclipsePluginActivator) {
-    this.eclipsePluginActivator = eclipsePluginActivator;
-  }
-  
-  public void setRuntimeBasePackage(final String runtimeBasePackage) {
-    this.runtimeBasePackage = runtimeBasePackage;
-  }
-  
-  public void setEclipsePluginBasePackage(final String eclipsePluginBasePackage) {
-    this.eclipsePluginBasePackage = eclipsePluginBasePackage;
-  }
-  
-  public void setGenericIdeBasePackage(final String genericIdeBasePackage) {
-    this.genericIdeBasePackage = genericIdeBasePackage;
-  }
-  
-  public void setIdeaBasePackage(final String ideaBasePackage) {
-    this.ideaBasePackage = ideaBasePackage;
-  }
-  
-  public void setWebBasePackage(final String webBasePackage) {
-    this.webBasePackage = webBasePackage;
   }
 }

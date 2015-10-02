@@ -52,7 +52,7 @@ Workflow {
 	}
 	
 	component = XtextGenerator auto-inject {
-		configuration = {
+		configuration = StateMachineGeneratorModule {
 			project = WizardConfig auto-inject {
 				runtimeRoot = runtimeProject
 				genericIdeSupport = true
@@ -67,9 +67,6 @@ Workflow {
 		}
 		language = auto-inject {
 			uri = grammarURI
-			naming = {
-				webBasePackage = "org.eclipse.xtext.web.example.jetty"
-			}
 
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}

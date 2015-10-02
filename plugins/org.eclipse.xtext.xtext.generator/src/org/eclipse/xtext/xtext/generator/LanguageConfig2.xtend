@@ -67,9 +67,6 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	Module guiceModule = [] 
 	
 	@Accessors
-	extension XtextGeneratorNaming naming = new XtextGeneratorNaming
-	
-	@Accessors
 	val List<String> loadedResources = newArrayList
 	
 	@Accessors
@@ -92,6 +89,8 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject extension XbaseUsageDetector
+	
+	@Inject extension XtextGeneratorNaming naming
 	
 	@Mandatory
 	def void setUri(String uri) {
@@ -193,7 +192,6 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 		validateGrammar(grammar)
 		this.grammar = grammar
 		this.ruleNames = RuleNames.getRuleNames(grammar, true)
-		this.naming.grammar = grammar
 		for (fragment : fragments) {
 			fragment.initialize(injector)
 		}
