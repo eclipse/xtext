@@ -1,4 +1,5 @@
 def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
+def exampleProjects = subprojects.findAll{it.name.contains("example")}
 
 configure(eclipsePluginProjects) {
 	apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
@@ -6,7 +7,6 @@ configure(eclipsePluginProjects) {
 
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'java'
-	apply from: "$rootDir/gradle/maven-deployment.gradle"
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 
 	sourceSets {
@@ -20,4 +20,8 @@ configure(subprojects - eclipsePluginProjects) {
 			options.addStringOption('Xdoclint:syntax,reference', '-quiet')
 		}
 	}
+}
+
+configure(subprojects - exampleProjects) {
+	apply from: "$rootDir/gradle/maven-deployment.gradle"
 }

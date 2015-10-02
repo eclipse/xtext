@@ -16,6 +16,7 @@ if (version.endsWith("-SNAPSHOT")) {
 } else {
 	ideaRepository.rootUrl = "http://download.eclipse.org/modeling/tmf/xtext/idea/${version}"
 }
+ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**', '**/*common.types.tests*/**'
 
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
