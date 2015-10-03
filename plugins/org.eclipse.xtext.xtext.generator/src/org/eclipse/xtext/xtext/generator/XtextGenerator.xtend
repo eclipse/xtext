@@ -55,6 +55,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	@Inject XtextGeneratorTemplates templates
 	
+	@Inject XtextGeneratorNaming naming
+	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
 	}
@@ -188,7 +190,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			}
 			if (manifest === projectConfig.eclipsePluginManifest) {
 				val firstLanguage = languageConfigs.head
-				manifest.activator = firstLanguage?.naming?.getEclipsePluginActivator(firstLanguage.grammar)
+				manifest.activator = naming?.getEclipsePluginActivator(firstLanguage.grammar)
 			}
 			if (metaInf.isFile(manifest.path)) {
 				if (manifest.merge) {
