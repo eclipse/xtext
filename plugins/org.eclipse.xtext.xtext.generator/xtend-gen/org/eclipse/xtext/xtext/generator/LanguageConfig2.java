@@ -99,10 +99,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   };
   
   @Accessors
-  @Extension
-  private XtextGeneratorNaming naming = new XtextGeneratorNaming();
-  
-  @Accessors
   private final List<String> loadedResources = CollectionLiterals.<String>newArrayList();
   
   @Accessors
@@ -129,6 +125,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
+  
+  @Inject
+  @Extension
+  private XtextGeneratorNaming naming;
   
   @Mandatory
   public void setUri(final String uri) {
@@ -323,7 +323,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     this.grammar = grammar;
     RuleNames _ruleNames = RuleNames.getRuleNames(grammar, true);
     this.ruleNames = _ruleNames;
-    this.naming.setGrammar(grammar);
     List<IGeneratorFragment2> _fragments = this.getFragments();
     for (final IGeneratorFragment2 fragment : _fragments) {
       fragment.initialize(injector);
@@ -1278,15 +1277,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   
   public void setGuiceModule(final Module guiceModule) {
     this.guiceModule = guiceModule;
-  }
-  
-  @Pure
-  public XtextGeneratorNaming getNaming() {
-    return this.naming;
-  }
-  
-  public void setNaming(final XtextGeneratorNaming naming) {
-    this.naming = naming;
   }
   
   @Pure

@@ -18,7 +18,6 @@ import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
-import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -28,12 +27,6 @@ public class LanguageModule extends AbstractGenericModule {
   public void configureLanguage(final Binder binder) {
     AnnotatedBindingBuilder<ILanguageConfig> _bind = binder.<ILanguageConfig>bind(ILanguageConfig.class);
     _bind.toInstance(this.language);
-  }
-  
-  public void configureNaming(final Binder binder) {
-    AnnotatedBindingBuilder<XtextGeneratorNaming> _bind = binder.<XtextGeneratorNaming>bind(XtextGeneratorNaming.class);
-    XtextGeneratorNaming _naming = this.language.getNaming();
-    _bind.toInstance(_naming);
   }
   
   public ScopedBindingBuilder configureGrammar(final Binder binder) {

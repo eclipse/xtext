@@ -7,43 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
-// TODO discuss API (remove setters?)
 class XtextGeneratorNaming {
 	
-	@Accessors(PUBLIC_SETTER)
-	String eclipsePluginActivator
-	
-	@Accessors(PUBLIC_SETTER)
-	String runtimeBasePackage
-	
-	@Accessors(PUBLIC_SETTER)
-	String eclipsePluginBasePackage
-	
-	@Accessors(PUBLIC_SETTER)
-	String genericIdeBasePackage
-	
-	@Accessors(PUBLIC_SETTER)
-	String ideaBasePackage
-	
-	@Accessors(PUBLIC_SETTER)
-	String webBasePackage
-	
-	Grammar myGrammar
-	
-	package def setGrammar(Grammar grammar) {
-		myGrammar = grammar
-	}
-	
 	def getRuntimeBasePackage(Grammar grammar) {
-		if (grammar != myGrammar || runtimeBasePackage === null)
-			return getNamespace(grammar)
-		return runtimeBasePackage
+		return getNamespace(grammar)
 	}
 	
 	def getRuntimeTestBasePackage(Grammar grammar) {
@@ -71,9 +43,7 @@ class XtextGeneratorNaming {
 	}
 	
 	def getEclipsePluginBasePackage(Grammar grammar) {
-		if (grammar != myGrammar || eclipsePluginBasePackage === null)
-			return getNamespace(grammar) + '.ui'
-		return eclipsePluginBasePackage
+		return getNamespace(grammar) + '.ui'
 	}
 	
 	def getEclipsePluginTestBasePackage(Grammar grammar) {
@@ -97,16 +67,11 @@ class XtextGeneratorNaming {
 	}
 	
 	def getEclipsePluginActivator(Grammar grammar) {
-		if (grammar != myGrammar || eclipsePluginActivator === null) {
-			return new TypeReference(grammar.eclipsePluginBasePackage + '.internal',getSimpleName(grammar) + 'Activator')
-		}
-		return new TypeReference(eclipsePluginActivator)
+		return new TypeReference(grammar.eclipsePluginBasePackage + '.internal',getSimpleName(grammar) + 'Activator')
 	}
 	
 	def getGenericIdeBasePackage(Grammar grammar) {
-		if (grammar != myGrammar || genericIdeBasePackage === null)
-			return getNamespace(grammar) + '.ide'
-		return genericIdeBasePackage
+		return getNamespace(grammar) + '.ide'
 	}
 	
 	def getGenericIdeModule(Grammar grammar) {
@@ -118,9 +83,7 @@ class XtextGeneratorNaming {
 	}
 	
 	def getIdeaBasePackage(Grammar grammar) {
-		if (grammar != myGrammar || ideaBasePackage === null)
-			return getNamespace(grammar) + ".idea"
-		return ideaBasePackage
+		return getNamespace(grammar) + ".idea"
 	}
 	
 	def getIdeaModule(Grammar grammar) {
@@ -140,9 +103,7 @@ class XtextGeneratorNaming {
 	}
 	
 	def getWebBasePackage(Grammar grammar) {
-		if (grammar != myGrammar || webBasePackage === null)
-			return getNamespace(grammar) + ".web"
-		return webBasePackage
+		return getNamespace(grammar) + ".web"
 	}
 	
 	def getWebModule(Grammar grammar) {

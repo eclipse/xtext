@@ -84,6 +84,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Inject
   private XtextGeneratorTemplates templates;
   
+  @Inject
+  private XtextGeneratorNaming naming;
+  
   public XtextGenerator() {
     XtextStandaloneSetup _xtextStandaloneSetup = new XtextStandaloneSetup();
     _xtextStandaloneSetup.createInjectorAndDoEMFRegistration();
@@ -307,14 +310,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           boolean _tripleEquals_1 = (manifest == _eclipsePluginManifest_1);
           if (_tripleEquals_1) {
             final LanguageConfig2 firstLanguage = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
-            XtextGeneratorNaming _naming = null;
-            if (firstLanguage!=null) {
-              _naming=firstLanguage.getNaming();
-            }
             TypeReference _eclipsePluginActivator = null;
-            if (_naming!=null) {
+            if (this.naming!=null) {
               Grammar _grammar = firstLanguage.getGrammar();
-              _eclipsePluginActivator=_naming.getEclipsePluginActivator(_grammar);
+              _eclipsePluginActivator=this.naming.getEclipsePluginActivator(_grammar);
             }
             manifest.setActivator(_eclipsePluginActivator);
           }
