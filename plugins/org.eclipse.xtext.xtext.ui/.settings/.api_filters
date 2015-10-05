@@ -8,4 +8,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/xtext/ui/wizard/project/XtextProjectCreator.java" type="org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator$GradleContributor">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="IProjectFactoryContributor"/>
+                <message_argument value="GradleContributor"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
