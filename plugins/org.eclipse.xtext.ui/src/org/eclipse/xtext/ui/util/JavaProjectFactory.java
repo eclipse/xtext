@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.util;
 import static org.eclipse.xtext.ui.util.JREContainerProvider.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -28,12 +29,16 @@ import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkingSet;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JavaProjectFactory extends ProjectFactory {
 
 	private static final Logger logger = Logger.getLogger(JavaProjectFactory.class);
+	
+	private List<IClasspathEntry> extraClasspathEntries = Lists.newArrayList();
 
 	@Override
 	protected void enhanceProject(IProject project, SubMonitor monitor, Shell shell) throws CoreException {
@@ -54,6 +59,7 @@ public class JavaProjectFactory extends ProjectFactory {
 					final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(sourceFolder.getFullPath());
 					classpathEntries.add(srcClasspathEntry);
 				}
+				classpathEntries.addAll(extraClasspathEntries);
 
 				IClasspathEntry defaultJREContainerEntry = getDefaultJREContainerEntry();
 				classpathEntries.add(defaultJREContainerEntry);
@@ -76,6 +82,14 @@ public class JavaProjectFactory extends ProjectFactory {
 	protected void addMoreClasspathEntriesTo(List<IClasspathEntry> classpathEntries) {
 	}
 
+	/**
+	 * @since 2.9
+	 */
+	public JavaProjectFactory addClasspathEntries(IClasspathEntry...classpathEntries) {
+		this.extraClasspathEntries.addAll(Arrays.asList(classpathEntries));
+		return this;
+	}
+	
 	@Override
 	public JavaProjectFactory addBuilderIds(String... builderIds) {
 		return (JavaProjectFactory) super.addBuilderIds(builderIds);
