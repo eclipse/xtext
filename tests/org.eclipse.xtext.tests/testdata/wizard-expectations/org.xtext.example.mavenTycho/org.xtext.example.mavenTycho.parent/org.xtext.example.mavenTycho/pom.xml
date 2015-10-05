@@ -62,19 +62,25 @@
 				<configuration>
 					<filesets combine.children="append">
 						<fileset>
-							<directory>${basedir}/src-gen/</directory>
+							<directory>${basedir}/../org.xtext.example.mavenTycho/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.tests/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.ide/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.ui/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.ui.tests/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.web/src-gen/</directory>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.ide/src-gen/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.ui/src-gen/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.web/src-gen/</directory>
 						</fileset>
 					</filesets>
 				</configuration>
