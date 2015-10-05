@@ -10,8 +10,9 @@ Require-Bundle: org.eclipse.m2e.core;bundle-version="1.0.0";resolution:=optional
  org.eclipse.equinox.registry;bundle-version="3.4.0",
  org.eclipse.xtext.ui,
  org.eclipse.xtext.builder,
- org.eclipse.xtend.core
+ org.eclipse.xtend.core,
+ org.eclipse.m2e.maven.runtime;bundle-version="[1.0.0,1.6.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.m2e;x-internal:=true
-Import-Package: org.apache.maven.plugin;resolution:=optional,
- org.apache.maven.project;resolution:=optional
+Import-Package: org.apache.maven.plugin;provider=m2e;resolution:=optional,
+ org.apache.maven.project;provider=m2e;resolution:=optional
