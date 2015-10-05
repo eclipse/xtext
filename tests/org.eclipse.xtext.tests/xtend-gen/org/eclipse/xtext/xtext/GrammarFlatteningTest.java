@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -16,9 +16,9 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
+import org.eclipse.xtext.xtext.RuleFilter;
 import org.eclipse.xtext.xtext.RuleNames;
-import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess;
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator.normalization;
+package org.eclipse.xtext.xtext;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.HashMultimap;
@@ -53,12 +53,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.ConditionEvaluator;
+import org.eclipse.xtext.xtext.OriginalElement;
+import org.eclipse.xtext.xtext.OriginalGrammar;
+import org.eclipse.xtext.xtext.RuleFilter;
 import org.eclipse.xtext.xtext.RuleNames;
+import org.eclipse.xtext.xtext.RuleWithParameterValues;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
-import org.eclipse.xtext.xtext.generator.normalization.OriginalElement;
-import org.eclipse.xtext.xtext.generator.normalization.OriginalGrammar;
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
-import org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

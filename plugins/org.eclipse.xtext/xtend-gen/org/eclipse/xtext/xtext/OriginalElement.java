@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator.normalization;
+package org.eclipse.xtext.xtext;
 
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -23,56 +23,56 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @EmfAdaptable
 @Data
 @SuppressWarnings("all")
-public class OriginalGrammar {
-  public static class OriginalGrammarAdapter extends AdapterImpl {
-    private OriginalGrammar element;
+public class OriginalElement {
+  public static class OriginalElementAdapter extends AdapterImpl {
+    private OriginalElement element;
     
-    public OriginalGrammarAdapter(final OriginalGrammar element) {
+    public OriginalElementAdapter(final OriginalElement element) {
       this.element = element;
     }
     
-    public OriginalGrammar get() {
+    public OriginalElement get() {
       return this.element;
     }
     
     @Override
     public boolean isAdapterForType(final Object object) {
-      return object == OriginalGrammar.class;
+      return object == OriginalElement.class;
     }
   }
   
-  private final Grammar original;
+  private final AbstractElement original;
   
-  public static OriginalGrammar findInEmfObject(final Notifier emfObject) {
+  public static OriginalElement findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {
-    	if (adapter instanceof OriginalGrammar.OriginalGrammarAdapter) {
-    		return ((OriginalGrammar.OriginalGrammarAdapter) adapter).get();
+    	if (adapter instanceof OriginalElement.OriginalElementAdapter) {
+    		return ((OriginalElement.OriginalElementAdapter) adapter).get();
     	}
     }
     return null;
   }
   
-  public static OriginalGrammar removeFromEmfObject(final Notifier emfObject) {
+  public static OriginalElement removeFromEmfObject(final Notifier emfObject) {
     List<Adapter> adapters = emfObject.eAdapters();
     for(int i = 0, max = adapters.size(); i < max; i++) {
     	Adapter adapter = adapters.get(i);
-    	if (adapter instanceof OriginalGrammar.OriginalGrammarAdapter) {
+    	if (adapter instanceof OriginalElement.OriginalElementAdapter) {
     		emfObject.eAdapters().remove(i);
-    		return ((OriginalGrammar.OriginalGrammarAdapter) adapter).get();
+    		return ((OriginalElement.OriginalElementAdapter) adapter).get();
     	}
     }
     return null;
   }
   
   public void attachToEmfObject(final Notifier emfObject) {
-    OriginalGrammar result = findInEmfObject(emfObject);
+    OriginalElement result = findInEmfObject(emfObject);
     if (result != null)
-    	throw new IllegalStateException("The given EMF object already contains an adapter for OriginalGrammar");
-    OriginalGrammar.OriginalGrammarAdapter adapter = new OriginalGrammar.OriginalGrammarAdapter(this);
+    	throw new IllegalStateException("The given EMF object already contains an adapter for OriginalElement");
+    OriginalElement.OriginalElementAdapter adapter = new OriginalElement.OriginalElementAdapter(this);
     emfObject.eAdapters().add(adapter);
   }
   
-  public OriginalGrammar(final Grammar original) {
+  public OriginalElement(final AbstractElement original) {
     super();
     this.original = original;
   }
@@ -95,7 +95,7 @@ public class OriginalGrammar {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    OriginalGrammar other = (OriginalGrammar) obj;
+    OriginalElement other = (OriginalElement) obj;
     if (this.original == null) {
       if (other.original != null)
         return false;
@@ -113,7 +113,7 @@ public class OriginalGrammar {
   }
   
   @Pure
-  public Grammar getOriginal() {
+  public AbstractElement getOriginal() {
     return this.original;
   }
 }
