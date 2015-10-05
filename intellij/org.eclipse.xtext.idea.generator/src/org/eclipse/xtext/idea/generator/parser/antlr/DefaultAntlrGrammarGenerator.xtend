@@ -15,6 +15,7 @@ import org.eclipse.xtext.Action
 import org.eclipse.xtext.Alternatives
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.EnumLiteralDeclaration
 import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.Group
@@ -27,14 +28,13 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
+import org.eclipse.xtext.xtext.RuleNames
+import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
-import org.eclipse.xtext.EnumLiteralDeclaration
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
-import org.eclipse.xtext.RuleNames
-import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
 
 @Singleton
 class DefaultAntlrGrammarGenerator {

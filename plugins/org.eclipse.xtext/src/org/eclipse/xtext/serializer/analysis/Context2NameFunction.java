@@ -17,8 +17,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;

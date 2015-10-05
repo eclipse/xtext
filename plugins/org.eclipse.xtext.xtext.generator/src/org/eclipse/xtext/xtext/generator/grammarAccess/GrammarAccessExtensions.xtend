@@ -31,13 +31,13 @@ import org.eclipse.xtext.Group
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.TypeRef
 import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.resource.SaveOptions
 import org.eclipse.xtext.serializer.ISerializer
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.TypeReference
