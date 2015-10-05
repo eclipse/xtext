@@ -299,9 +299,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 							
 							// quickfix API
-							fragment = adapter.FragmentAdapter {
-								fragment = quickfix.QuickfixProviderFragment auto-inject {}
-							}
+							fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}
 							
 							// content assist API
 							fragment = adapter.FragmentAdapter {
