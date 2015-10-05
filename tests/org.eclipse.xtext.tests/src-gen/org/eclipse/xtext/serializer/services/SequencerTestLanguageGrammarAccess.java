@@ -85,6 +85,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX31NullCrossRefGeneratedParserRuleCall_30_0 = (RuleCall)cX31Assignment_30.eContents().get(0);
 		private final Assignment cX32Assignment_31 = (Assignment)cAlternatives.eContents().get(31);
 		private final RuleCall cX32NullCrossRefInterpretedParserRuleCall_31_0 = (RuleCall)cX32Assignment_31.eContents().get(0);
+		private final Assignment cX33Assignment_32 = (Assignment)cAlternatives.eContents().get(32);
+		private final RuleCall cX33FragmentCallerParserRuleCall_32_0 = (RuleCall)cX33Assignment_32.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
@@ -93,7 +95,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 		//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
 		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
-		//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
+		//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted | x33=FragmentCaller;
 		@Override public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
@@ -102,7 +104,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
 		//x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 |
 		//x28=OptionalDouble | x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated |
-		//x32=NullCrossRefInterpreted
+		//x32=NullCrossRefInterpreted | x33=FragmentCaller
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -296,6 +298,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//NullCrossRefInterpreted
 		public RuleCall getX32NullCrossRefInterpretedParserRuleCall_31_0() { return cX32NullCrossRefInterpretedParserRuleCall_31_0; }
+
+		//x33=FragmentCaller
+		public Assignment getX33Assignment_32() { return cX33Assignment_32; }
+
+		//FragmentCaller
+		public RuleCall getX33FragmentCallerParserRuleCall_32_0() { return cX33FragmentCallerParserRuleCall_32_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -2166,6 +2174,58 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getFooIDTerminalRuleCall_2_0() { return cFooIDTerminalRuleCall_2_0; }
 	}
+
+	public class FragmentCallerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.FragmentCaller");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitThreeDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_1_0 = (RuleCall)cVal1Assignment_1.eContents().get(0);
+		private final RuleCall cFragment1ParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cValAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValIDTerminalRuleCall_3_0 = (RuleCall)cValAssignment_3.eContents().get(0);
+		
+		//FragmentCaller FragmentCallerType:
+		//	"#33" val1=ID Fragment1 val=ID
+		@Override public ParserRule getRule() { return rule; }
+
+		//"#33" val1=ID Fragment1 val=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#33"
+		public Keyword getNumberSignDigitThreeDigitThreeKeyword_0() { return cNumberSignDigitThreeDigitThreeKeyword_0; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1() { return cVal1Assignment_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_0() { return cVal1IDTerminalRuleCall_1_0; }
+
+		//Fragment1
+		public RuleCall getFragment1ParserRuleCall_2() { return cFragment1ParserRuleCall_2; }
+
+		//val=ID
+		public Assignment getValAssignment_3() { return cValAssignment_3; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_3_0() { return cValIDTerminalRuleCall_3_0; }
+	}
+
+	public class Fragment1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.Fragment1");
+		private final Assignment cFragValAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cFragValIDTerminalRuleCall_0 = (RuleCall)cFragValAssignment.eContents().get(0);
+		
+		//fragment Fragment1 returns FragmentCallerType:
+		//	fragVal=ID;
+		@Override public ParserRule getRule() { return rule; }
+
+		//fragVal=ID
+		public Assignment getFragValAssignment() { return cFragValAssignment; }
+
+		//ID
+		public RuleCall getFragValIDTerminalRuleCall_0() { return cFragValIDTerminalRuleCall_0; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -2266,6 +2326,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final NULL_STRINGElements pNULL_STRING;
 	private final NullCrossRefGeneratedElements pNullCrossRefGenerated;
 	private final NullCrossRefInterpretedElements pNullCrossRefInterpreted;
+	private final FragmentCallerElements pFragmentCaller;
+	private final Fragment1Elements pFragment1;
 	
 	private final Grammar grammar;
 
@@ -2326,6 +2388,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pNULL_STRING = new NULL_STRINGElements();
 		this.pNullCrossRefGenerated = new NullCrossRefGeneratedElements();
 		this.pNullCrossRefInterpreted = new NullCrossRefInterpretedElements();
+		this.pFragmentCaller = new FragmentCallerElements();
+		this.pFragment1 = new Fragment1Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2362,7 +2426,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 	//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
 	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
-	//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
+	//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted | x33=FragmentCaller;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -2850,6 +2914,26 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getNullCrossRefInterpretedRule() {
 		return getNullCrossRefInterpretedAccess().getRule();
+	}
+
+	//FragmentCaller FragmentCallerType:
+	//	"#33" val1=ID Fragment1 val=ID
+	public FragmentCallerElements getFragmentCallerAccess() {
+		return pFragmentCaller;
+	}
+	
+	public ParserRule getFragmentCallerRule() {
+		return getFragmentCallerAccess().getRule();
+	}
+
+	//fragment Fragment1 returns FragmentCallerType:
+	//	fragVal=ID;
+	public Fragment1Elements getFragment1Access() {
+		return pFragment1;
+	}
+	
+	public ParserRule getFragment1Rule() {
+		return getFragment1Access().getRule();
 	}
 
 	//terminal ID:

@@ -7,24 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaUtil;
 import org.eclipse.xtext.util.formallang.Traverser;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -112,7 +120,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 		}
 	}
 
-	protected static class TypeFilter implements Traverser<Pda<ISerState, RuleCall>, ISerState, FilterState> {
+	protected class TypeFilter implements Traverser<Pda<ISerState, RuleCall>, ISerState, FilterState> {
 		final protected EClass type;
 
 		public TypeFilter(EClass type) {
@@ -125,20 +133,11 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 			switch (state.getType()) {
 				case ELEMENT:
 					if (previous.type == null) {
-						Assignment ass = GrammarUtil.containingAssignment(state.getGrammarElement());
-						if (ass != null) {
-							TypeRef returnType = GrammarUtil.containingRule(ass).getType();
-							EClassifier cls = returnType != null ? returnType.getClassifier() : null;
-							if (cls == type)
-								return new FilterState(previous, type, previous.stack, state);
+						EClass cls = getInstantiatedType(state.getGrammarElement());
+						if (cls == type)
+							return new FilterState(previous, type, previous.stack, state);
+						if (cls != null)
 							return null;
-						}
-						if (state.getGrammarElement() instanceof Action) {
-							EClassifier cls = ((Action) state.getGrammarElement()).getType().getClassifier();
-							if (cls == type)
-								return new FilterState(previous, type, previous.stack, state);
-							return null;
-						}
 					} else if (state.getGrammarElement() instanceof Action)
 						return null;
 					return new FilterState(previous, previous.type, previous.stack, state);
@@ -167,16 +166,17 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	}
 
 	protected Map<Pair<EObject, EClass>, Pda<ISerState, RuleCall>> cache = Maps.newHashMap();
-	@Inject
-	protected IContextProvider contextProvider;
 
 	@Inject
 	protected IContextPDAProvider pdaProvider;
 
-	protected Pda<ISerState, RuleCall> createPDA(EObject context, EClass type) {
-		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(context);
+	@Inject
+	protected PdaUtil pdaUtil;
+
+	protected Pda<ISerState, RuleCall> createPDA(Grammar grammar, EObject context, EClass type) {
+		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(grammar, context);
 		Pda<ISerState, RuleCall> contextTypePda = null;
-		if (contextProvider.getTypesForContext(context).size() > 1) {
+		if (getTypesForContext(grammar, context).size() > 1) {
 			TypeFilter typeFilter = newTypeFilter(type);
 			SerializerPDACloneFactory factory = new SerializerPDACloneFactory();
 			contextTypePda = new PdaUtil().filterEdges(contextPda, typeFilter, factory);
@@ -186,11 +186,46 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	}
 
 	@Override
-	public Pda<ISerState, RuleCall> getContextTypePDA(EObject context, EClass type) {
+	public Pda<ISerState, RuleCall> getContextTypePDA(Grammar grammar, EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
 		Pda<ISerState, RuleCall> result = cache.get(key);
 		if (result == null)
-			cache.put(key, result = createPDA(context, type));
+			cache.put(key, result = createPDA(grammar, context, type));
+		return result;
+	}
+
+	protected EClass getInstantiatedType(AbstractElement element) {
+		Assignment ass = GrammarUtil.containingAssignment(element);
+		TypeRef type = null;
+		if (ass != null) {
+			type = GrammarUtil.containingRule(ass).getType();
+		} else if (element instanceof Action) {
+			type = ((Action) element).getType();
+		}
+		if (type != null) {
+			EClassifier classifier = type.getClassifier();
+			if (classifier instanceof EClass && !classifier.eIsProxy()) {
+				return (EClass) classifier;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Set<EClass> getTypesForContext(Grammar grammar, EObject context) {
+		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(grammar, context);
+		final Wrapper<Boolean> canReachStop = new Wrapper<Boolean>(false);
+		List<EClass> list = pdaUtil.collectReachable(contextPda, new Function<ISerState, EClass>() {
+			@Override
+			public EClass apply(ISerState input) {
+				if (input.getType() == SerStateType.STOP)
+					canReachStop.set(true);
+				return getInstantiatedType(input.getGrammarElement());
+			}
+		});
+		Set<EClass> result = Sets.newLinkedHashSet(list);
+		if (canReachStop.get())
+			result.add(null);
 		return result;
 	}
 

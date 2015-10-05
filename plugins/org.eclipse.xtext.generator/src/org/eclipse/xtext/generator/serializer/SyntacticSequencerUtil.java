@@ -22,7 +22,8 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.IContextProvider;
+import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
+import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
@@ -41,7 +42,10 @@ import com.google.inject.Inject;
 public class SyntacticSequencerUtil {
 
 	@Inject
-	protected IContextProvider contextProvider;
+	protected IContextPDAProvider contextPDAProvider;
+	
+	@Inject
+	protected IContextTypePDAProvider contextTypePDAProvider;
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
@@ -54,8 +58,8 @@ public class SyntacticSequencerUtil {
 
 	protected List<ISynAbsorberState> getAllPDAs() {
 		List<ISynAbsorberState> result = Lists.newArrayList();
-		for (EObject context : contextProvider.getAllContexts(grammar))
-			for (EClass type : contextProvider.getTypesForContext(context))
+		for (EObject context : contextPDAProvider.getAllContexts(grammar))
+			for (EClass type : contextTypePDAProvider.getTypesForContext(grammar, context))
 				result.add(pdaProvider.getPDA(context, type));
 		return result;
 	}

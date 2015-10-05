@@ -18,6 +18,7 @@ import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DefEnum;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
@@ -341,6 +342,13 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * @generated
    */
   private EClass nullCrossRefEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fragmentCallerTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -713,6 +721,16 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
   public EReference getModel_X32()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(28);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X33()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(29);
   }
 
   /**
@@ -1920,6 +1938,46 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getFragmentCallerType()
+  {
+    return fragmentCallerTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFragmentCallerType_Val1()
+  {
+    return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFragmentCallerType_Val()
+  {
+    return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFragmentCallerType_FragVal()
+  {
+    return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -1985,6 +2043,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(modelEClass, MODEL__X30);
     createEReference(modelEClass, MODEL__X31);
     createEReference(modelEClass, MODEL__X32);
+    createEReference(modelEClass, MODEL__X33);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -2145,6 +2204,11 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(nullCrossRefEClass, NULL_CROSS_REF__REF);
     createEAttribute(nullCrossRefEClass, NULL_CROSS_REF__FOO);
 
+    fragmentCallerTypeEClass = createEClass(FRAGMENT_CALLER_TYPE);
+    createEAttribute(fragmentCallerTypeEClass, FRAGMENT_CALLER_TYPE__VAL1);
+    createEAttribute(fragmentCallerTypeEClass, FRAGMENT_CALLER_TYPE__VAL);
+    createEAttribute(fragmentCallerTypeEClass, FRAGMENT_CALLER_TYPE__FRAG_VAL);
+
     // Create enums
     defEnumEEnum = createEEnum(DEF_ENUM);
   }
@@ -2215,6 +2279,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEReference(getModel_X30(), this.getNullValue(), null, "x30", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X31(), this.getNullCrossRef(), null, "x31", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X32(), this.getNullCrossRef(), null, "x32", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X33(), this.getFragmentCallerType(), null, "x33", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2374,6 +2439,11 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEClass(nullCrossRefEClass, NullCrossRef.class, "NullCrossRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNullCrossRef_Ref(), theEcorePackage.getEObject(), null, "ref", null, 0, 1, NullCrossRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getNullCrossRef_Foo(), theEcorePackage.getEString(), "foo", null, 0, 1, NullCrossRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fragmentCallerTypeEClass, FragmentCallerType.class, "FragmentCallerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFragmentCallerType_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, FragmentCallerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFragmentCallerType_Val(), theEcorePackage.getEString(), "val", null, 0, 1, FragmentCallerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFragmentCallerType_FragVal(), theEcorePackage.getEString(), "fragVal", null, 0, 1, FragmentCallerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(defEnumEEnum, DefEnum.class, "DefEnum");

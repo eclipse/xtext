@@ -168,6 +168,10 @@ public class NfaUtil {
 		return null;
 	}
 
+	public <S, ITERABLE extends Iterable<? extends S>> boolean canReach(Nfa<S> nfa, Predicate<S> matcher) {
+		return find(nfa, Collections.singleton(nfa.getStart()), matcher) != null;
+	}
+	
 	public <S, ITERABLE extends Iterable<? extends S>> boolean canReach(Nfa<S> nfa, S state, Predicate<S> matcher) {
 		return find(nfa, Collections.singleton(state), matcher) != null;
 	}
@@ -513,5 +517,5 @@ public class NfaUtil {
 	public <S, COMP extends Comparable<COMP>> Nfa<S> sort(Nfa<S> nfa, Map<S, COMP> comparator) {
 		return sort(nfa, new MappedComparator<S, COMP>(comparator));
 	}
-
+	
 }

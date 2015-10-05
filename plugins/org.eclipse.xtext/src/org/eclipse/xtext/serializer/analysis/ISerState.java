@@ -16,7 +16,11 @@ public interface ISerState {
 		ELEMENT, POP, PUSH, START, STOP;
 	}
 
+	//	ISerState getOpposite();
+
 	List<? extends ISerState> getFollowers();
+
+	List<? extends ISerState> getPrecedents();
 
 	AbstractElement getGrammarElement();
 

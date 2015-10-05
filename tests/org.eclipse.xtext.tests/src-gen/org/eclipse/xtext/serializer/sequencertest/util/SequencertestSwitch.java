@@ -13,6 +13,7 @@ import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
@@ -390,6 +391,13 @@ public class SequencertestSwitch<T> extends Switch<T>
       {
         NullCrossRef nullCrossRef = (NullCrossRef)theEObject;
         T result = caseNullCrossRef(nullCrossRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.FRAGMENT_CALLER_TYPE:
+      {
+        FragmentCallerType fragmentCallerType = (FragmentCallerType)theEObject;
+        T result = caseFragmentCallerType(fragmentCallerType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1033,6 +1041,22 @@ public class SequencertestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseNullCrossRef(NullCrossRef object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Fragment Caller Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Fragment Caller Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFragmentCallerType(FragmentCallerType object)
   {
     return null;
   }

@@ -107,6 +107,8 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '[' filtered=InverseLiteralValue
 	 *     (rule start) (ambiguity) '{' type=TypeRef
 	 *     (rule start) (ambiguity) feature=ID
+	 *     (rule start) (ambiguity) firstSetPredicated?='->'
+	 *     (rule start) (ambiguity) predicated?='=>'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
@@ -125,6 +127,8 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '[' filtered=InverseLiteralValue
 	 *     (rule start) (ambiguity) '{' type=TypeRef
 	 *     (rule start) (ambiguity) feature=ID
+	 *     (rule start) (ambiguity) firstSetPredicated?='->'
+	 *     (rule start) (ambiguity) predicated?='=>'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}

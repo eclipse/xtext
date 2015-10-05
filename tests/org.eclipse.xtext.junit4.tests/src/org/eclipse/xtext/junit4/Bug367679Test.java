@@ -9,8 +9,7 @@ package org.eclipse.xtext.junit4;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.internal.XtextInjectorProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.junit.Assert;
 import org.junit.Test;

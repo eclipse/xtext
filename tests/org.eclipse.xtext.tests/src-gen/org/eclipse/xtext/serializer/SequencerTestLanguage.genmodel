@@ -43,6 +43,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x30"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x31"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x32"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x33"/>
     </genClasses>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -199,6 +200,11 @@
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//NullCrossRef">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//NullCrossRef/ref"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//NullCrossRef/foo"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//FragmentCallerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//FragmentCallerType/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//FragmentCallerType/val"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//FragmentCallerType/fragVal"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

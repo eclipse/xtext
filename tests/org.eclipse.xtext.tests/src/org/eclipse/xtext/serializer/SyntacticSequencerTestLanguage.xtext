@@ -13,7 +13,7 @@ generate syntacticsequencertest "http://www.eclipse.org/2009/tmf/xtext/syntactic
 Model:
 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative | 
 	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition | 
-	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly;
+	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller;
 
 MandatoryKeywords:
 	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
@@ -105,7 +105,12 @@ LongAlternative:
      "kw7" val7+=ID? | 
      "kw8" val8+=ID?)* 
   '!';
-
   
 ActionOnly:
 	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
+	
+FragmentCaller returns FragmentCallerType:
+	"#15" val1=ID Fragment1 val=ID;
+	
+fragment Fragment1 returns FragmentCallerType:
+	fragVal=ID;

@@ -20,6 +20,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -612,7 +613,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		if (result == null) {
 			Map<ISerState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newHashMap();
-			Pda<? extends ISerState, RuleCall> pda = pdaProvider.getContextTypePDA(context, type);
+			Grammar grammar = GrammarUtil.getGrammar(context);
+			Pda<? extends ISerState, RuleCall> pda = pdaProvider.getContextTypePDA(grammar, context, type);
 			result = createAbsorberState(pda.getStart(), absorbers, emitters, context, type);
 			cache.put(key, result);
 		}
