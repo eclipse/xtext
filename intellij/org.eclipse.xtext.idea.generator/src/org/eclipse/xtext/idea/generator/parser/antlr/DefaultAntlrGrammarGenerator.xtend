@@ -28,9 +28,9 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
+import org.eclipse.xtext.xtext.FlattenedGrammarAccess
+import org.eclipse.xtext.xtext.RuleFilter
 import org.eclipse.xtext.xtext.RuleNames
-import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
