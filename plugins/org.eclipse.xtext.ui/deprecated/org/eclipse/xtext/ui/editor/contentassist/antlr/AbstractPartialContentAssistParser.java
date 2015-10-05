@@ -14,7 +14,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.InfiniteRecursion;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;

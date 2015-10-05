@@ -8,7 +8,7 @@
 package org.eclipse.xtext.generator.serializer;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.RuleNames;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

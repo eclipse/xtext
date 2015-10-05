@@ -18,7 +18,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

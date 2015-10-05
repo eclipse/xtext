@@ -5,9 +5,9 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.TypeRef
 import org.eclipse.xtext.generator.Naming
+import org.eclipse.xtext.xtext.RuleNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 

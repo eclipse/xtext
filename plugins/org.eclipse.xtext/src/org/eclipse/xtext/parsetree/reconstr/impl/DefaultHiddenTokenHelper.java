@@ -9,7 +9,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleNames;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;

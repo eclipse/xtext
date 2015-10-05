@@ -32,11 +32,11 @@ import org.eclipse.xtext.Group
 import org.eclipse.xtext.Parameter
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.util.internal.EmfAdaptable
 import org.eclipse.xtext.xtext.ConditionEvaluator
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.UsedRulesFinder
 
 import static extension org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues.*

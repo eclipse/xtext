@@ -10,8 +10,8 @@ package org.eclipse.xtext.xtext.generator
 import com.google.inject.Binder
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.xtext.RuleNames
 
 @FinalFieldsConstructor
 class LanguageModule extends AbstractGenericModule {

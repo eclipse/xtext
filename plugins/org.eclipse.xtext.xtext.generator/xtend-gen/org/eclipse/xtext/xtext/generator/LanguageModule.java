@@ -14,8 +14,8 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 
