@@ -23,18 +23,18 @@ import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.UnorderedGroup
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
-import org.eclipse.xtext.RuleNames
-import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
 
 abstract class AbstractAntlrGrammarGenerator {
 	

@@ -9,12 +9,12 @@ package org.eclipse.xtext.serializer.tokens;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider;
 
 import com.google.inject.Inject;
