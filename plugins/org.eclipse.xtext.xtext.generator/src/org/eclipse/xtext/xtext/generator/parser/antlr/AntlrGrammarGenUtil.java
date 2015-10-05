@@ -35,10 +35,10 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.OriginalElement;
+import org.eclipse.xtext.xtext.OriginalGrammar;
 import org.eclipse.xtext.xtext.RuleNames;
-import org.eclipse.xtext.xtext.generator.normalization.OriginalElement;
-import org.eclipse.xtext.xtext.generator.normalization.OriginalGrammar;
-import org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues;
+import org.eclipse.xtext.xtext.RuleWithParameterValues;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;

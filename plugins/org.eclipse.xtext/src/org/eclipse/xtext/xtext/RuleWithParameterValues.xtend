@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator.normalization
+package org.eclipse.xtext.xtext
 
 import java.util.Collections
 import java.util.Set
@@ -15,7 +15,6 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Parameter
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.util.internal.EmfAdaptable
-import org.eclipse.xtext.xtext.ParameterConfigHelper
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,16 +26,17 @@ class RuleWithParameterValues {
 	val Set<Parameter> paramValues
 
 	@FinalFieldsConstructor
-	new() {}
-	
+	new() {
+	}
+
 	package new(AbstractRule original) {
 		this(original, Collections.<Parameter>emptySet())
 	}
-	
+
 	def static AbstractRule getOriginalRule(AbstractRule copy) {
 		return findInEmfObject(copy).getOriginal()
 	}
-	
+
 	def static AbstractRule tryGetOriginalRule(AbstractRule copy) {
 		return findInEmfObject(copy)?.getOriginal()
 	}
@@ -44,7 +44,7 @@ class RuleWithParameterValues {
 	def static Set<Parameter> getParamValues(AbstractRule copy) {
 		return findInEmfObject(copy).getParamValues()
 	}
-	
+
 	def static int getParamConfig(AbstractRule copy) {
 		val values = findInEmfObject(copy)
 		return ParameterConfigHelper.getParameterConfig(values.paramValues, values.original as ParserRule)
