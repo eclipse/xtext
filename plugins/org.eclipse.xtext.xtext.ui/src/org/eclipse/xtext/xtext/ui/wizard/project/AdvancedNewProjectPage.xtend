@@ -65,14 +65,14 @@ class AdvancedNewProjectPage extends WizardPage {
 				text = "Preferred Build System"
 				preferredBuildSystem = DropDown[
 					enabled = true
-					items = #["Eclipse", "Maven", "Gradle"]
+					items = BuildSystem.values.map[toString]
 				]
 			]
 			Group [
 				text = "Source Layout"
 				sourceLayout = DropDown[
 					enabled = true
-					items = #["Plain", "Maven/Gradle"]
+					items = SourceLayout.values.map[toString]
 				]
 			]
 		]
@@ -80,6 +80,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeaProject.require(createIdeProject)
 		createWebProject.require(createIdeProject)
 		makeUiProjectRequirePlainLayout
+		makeWebProjectRequireMavenOrGradle
 		setDefaults
 	}
 
@@ -173,5 +174,19 @@ class AdvancedNewProjectPage extends WizardPage {
 		}
 		createUiProject.addSelectionListener(selectionControl)
 		sourceLayout.addSelectionListener(selectionControl)
+	}
+	
+	def void makeWebProjectRequireMavenOrGradle() {
+		val selectionControl = new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if (e.widget == createWebProject && createWebProject.selection) {
+					preferredBuildSystem.select(2)
+				} else if (e.widget == preferredBuildSystem && preferredBuildSystem.selectionIndex == 0) {
+					createWebProject.selection = false
+				}
+			}
+		}
+		createWebProject.addSelectionListener(selectionControl)
+		preferredBuildSystem.addSelectionListener(selectionControl)
 	}
 }
