@@ -471,27 +471,23 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							<artifactId>maven-clean-plugin</artifactId>
 							<configuration>
 								<filesets combine.children="append">
-									<fileset>
-										<directory>${basedir}/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
-									</fileset>
+									«FOR p : #[this, config.ideProject, config.uiProject, config.webProject]»
+										«IF p.enabled»
+											<fileset>
+												<directory>${basedir}/../«p.name»/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
+											</fileset>
+											«IF p instanceof TestedProjectDescriptor»
+												«IF p.testProject.enabled»
+													<fileset>
+														<directory>${basedir}/../«if(p.testProject.isInlined) p.name else p.testProject.name»/«Outlet.TEST_SRC_GEN.sourceFolder»/</directory>
+													</fileset>
+												«ENDIF»
+											«ENDIF»
+										«ENDIF»
+									«ENDFOR»
 									<fileset>
 										<directory>${basedir}/model/generated/</directory>
 									</fileset>
-									«IF config.ideProject.enabled»
-										<fileset>
-											<directory>${basedir}/../${project.artifactId}.ide/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
-										</fileset>
-									«ENDIF»
-									«IF config.uiProject.enabled»
-										<fileset>
-											<directory>${basedir}/../${project.artifactId}.ui/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
-										</fileset>
-									«ENDIF»
-									«IF config.webProject.enabled»
-										<fileset>
-											<directory>${basedir}/../${project.artifactId}.web/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
-										</fileset>
-									«ENDIF»
 								</filesets>
 							</configuration>
 						</plugin>
