@@ -30,7 +30,6 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.ReferencedMetamodel
-import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
@@ -39,12 +38,14 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
 	

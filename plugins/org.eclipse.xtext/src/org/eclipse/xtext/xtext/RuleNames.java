@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext;
+package org.eclipse.xtext.xtext;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +14,13 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;

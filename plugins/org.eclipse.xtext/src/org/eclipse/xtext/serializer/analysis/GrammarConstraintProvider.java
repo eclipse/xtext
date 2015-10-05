@@ -32,7 +32,6 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
@@ -43,6 +42,7 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.ProductionFormatter;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
