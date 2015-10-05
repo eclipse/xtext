@@ -50,6 +50,8 @@ public class IdeaHighlightingAttributesProvider {
   
   private Map<String, HighlightInfoType> name2highlightInfoType;
   
+  private Map<String, String> xtextStyle2xtextStyleRedirectMap;
+  
   protected void initialize() {
     boolean _equals = Objects.equal(this.attributesDescriptors, null);
     if (_equals) {
@@ -57,14 +59,28 @@ public class IdeaHighlightingAttributesProvider {
       this.attributesDescriptors = _newArrayList;
       HashMap<String, HighlightInfoType> _newHashMap = CollectionLiterals.<String, HighlightInfoType>newHashMap();
       this.name2highlightInfoType = _newHashMap;
-      final IHighlightingConfiguration.IHighlightingStyleAcceptor _function = new IHighlightingConfiguration.IHighlightingStyleAcceptor() {
+      HashMap<String, String> _newHashMap_1 = CollectionLiterals.<String, String>newHashMap();
+      this.xtextStyle2xtextStyleRedirectMap = _newHashMap_1;
+      this.highlightingConfiguration.configure(new IHighlightingConfiguration.IHighlightingStyleAcceptor() {
         @Override
-        public TextAttributesKey addStyle(final String simpleStyleName, final String displayName, final TextAttributesKey fallbackKey) {
-          HighlightInfoType _addHighlightingConfiguration = IdeaHighlightingAttributesProvider.this.addHighlightingConfiguration(simpleStyleName, displayName, fallbackKey);
+        public TextAttributesKey addStyle(final String xtextStyleId, final String displayName, final TextAttributesKey fallbackKey) {
+          HighlightInfoType _addHighlightingConfiguration = IdeaHighlightingAttributesProvider.this.addHighlightingConfiguration(xtextStyleId, displayName, fallbackKey);
           return _addHighlightingConfiguration.getAttributesKey();
         }
-      };
-      this.highlightingConfiguration.configure(_function);
+        
+        @Override
+        public void addRedirect(final String fromXtextStyleId, final String toXtextStyleId) {
+          boolean _containsKey = IdeaHighlightingAttributesProvider.this.name2highlightInfoType.containsKey(fromXtextStyleId);
+          if (_containsKey) {
+            IdeaHighlightingAttributesProvider.LOG.error((("Redirected highlighting style " + fromXtextStyleId) + " already registered."));
+          }
+          String _put = IdeaHighlightingAttributesProvider.this.xtextStyle2xtextStyleRedirectMap.put(fromXtextStyleId, toXtextStyleId);
+          boolean _tripleNotEquals = (_put != null);
+          if (_tripleNotEquals) {
+            IdeaHighlightingAttributesProvider.LOG.error((("Duplicate redirected highlighting style " + fromXtextStyleId) + "."));
+          }
+        }
+      });
     }
   }
   
@@ -79,19 +95,27 @@ public class IdeaHighlightingAttributesProvider {
   
   public HighlightInfoType getHighlightInfoType(final String xtextStyle) {
     this.initialize();
-    HighlightInfoType _elvis = null;
-    HighlightInfoType _get = this.name2highlightInfoType.get(xtextStyle);
+    String _elvis = null;
+    String _get = this.xtextStyle2xtextStyleRedirectMap.get(xtextStyle);
     if (_get != null) {
       _elvis = _get;
     } else {
+      _elvis = xtextStyle;
+    }
+    final String realId = _elvis;
+    HighlightInfoType _elvis_1 = null;
+    HighlightInfoType _get_1 = this.name2highlightInfoType.get(realId);
+    if (_get_1 != null) {
+      _elvis_1 = _get_1;
+    } else {
       HighlightInfoType _xblockexpression = null;
       {
-        IdeaHighlightingAttributesProvider.LOG.error((("Highlighting style " + xtextStyle) + " has not been registered."));
-        _xblockexpression = this.addHighlightingConfiguration(xtextStyle, (xtextStyle + " (unregistered) "), DefaultLanguageHighlighterColors.LINE_COMMENT);
+        IdeaHighlightingAttributesProvider.LOG.error((("Highlighting style " + realId) + " has not been registered."));
+        _xblockexpression = this.addHighlightingConfiguration(realId, (realId + " (unregistered) "), DefaultLanguageHighlighterColors.LINE_COMMENT);
       }
-      _elvis = _xblockexpression;
+      _elvis_1 = _xblockexpression;
     }
-    return _elvis;
+    return _elvis_1;
   }
   
   public TextAttributesKey getTextAttributesKey(final String xtextStyle) {

@@ -17,6 +17,6 @@ interface XtendHighlightingStyles extends XbaseHighlightingStyles {
 	String RICH_TEXT_DELIMITER_ID = "xtend.richText.delimiter";
 	String INSIGNIFICANT_TEMPLATE_TEXT = "xtend.insignificant.template.text";
 	String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
-	String TEMPLATE_LINE_BREAK = "xtend.template.line.break";
+	String SEMANTIC_LINE_BREAK = "xtend.template.line.break";
 	String ACTIVE_ANNOTATION = "xtend.active.annotation";
 }
