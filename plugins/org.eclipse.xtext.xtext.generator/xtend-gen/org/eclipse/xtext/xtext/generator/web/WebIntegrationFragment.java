@@ -2134,7 +2134,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("setAttribute(");
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.jetty.webapp.WebInfConfiguration");
         _builder.append(_typeRef_7, "\t\t\t");
-        _builder.append(".CONTAINER_JAR_PATTERN, \'.*\')");
+        _builder.append(".CONTAINER_JAR_PATTERN, \'.*/");
+        IXtextProjectConfig _projectConfig_2 = WebIntegrationFragment.this.getProjectConfig();
+        String _webProjectName = _projectConfig_2.getWebProjectName();
+        String _replace_1 = _webProjectName.replace(".", "\\\\.");
+        _builder.append(_replace_1, "\t\t\t");
+        _builder.append("/.*,.*/org\\\\.eclipse\\\\.xtext\\\\.web.*,.*/org\\\\.webjars.*\')");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("]");
