@@ -469,7 +469,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-clean-plugin</artifactId>
-							<version>2.5</version>
 							<configuration>
 								<filesets combine.children="append">
 									<fileset>
@@ -550,28 +549,62 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								</executions>
 							</plugin>
 							«IF isPlainMavenBuild»
-							<plugin>
-								<artifactId>maven-assembly-plugin</artifactId>
-								<version>2.5.5</version>
-								<configuration>
-									<descriptors>
-										<descriptor>jar-with-ecore-model.xml</descriptor>
-									</descriptors>
-									<appendAssemblyId>false</appendAssemblyId>
-								</configuration>
-								<executions>
-									<execution>
-										<id>make-assembly</id>
-										<phase>package</phase>
-										<goals>
-											<goal>single</goal>
-										</goals>
-									</execution>
-								</executions>
-							</plugin>
+								<plugin>
+									<artifactId>maven-assembly-plugin</artifactId>
+									<version>2.5.5</version>
+									<configuration>
+										<descriptors>
+											<descriptor>jar-with-ecore-model.xml</descriptor>
+										</descriptors>
+										<appendAssemblyId>false</appendAssemblyId>
+									</configuration>
+									<executions>
+										<execution>
+											<id>make-assembly</id>
+											<phase>package</phase>
+											<goals>
+												<goal>single</goal>
+											</goals>
+										</execution>
+									</executions>
+								</plugin>
 							«ENDIF»
 						«ENDIF»
 					</plugins>
+					<pluginManagement>
+						<plugins>
+							<plugin>
+								<groupId>org.eclipse.m2e</groupId>
+								<artifactId>lifecycle-mapping</artifactId>
+								<version>1.0.0</version>
+								<configuration>
+									<lifecycleMappingMetadata>
+										<pluginExecutions>
+											<pluginExecution>
+												<pluginExecutionFilter>
+													<groupId>
+														org.codehaus.mojo
+													</groupId>
+													<artifactId>
+														exec-maven-plugin
+													</artifactId>
+													<versionRange>
+														[1.2.1,)
+													</versionRange>
+													<goals>
+														<goal>java</goal>
+													</goals>
+												</pluginExecutionFilter>
+												<action>
+													<ignore></ignore>
+												</action>
+											</pluginExecution>
+										</pluginExecutions>
+									</lifecycleMappingMetadata>
+								</configuration>
+							</plugin>
+						</plugins>
+					</pluginManagement>
 				</build>
 			'''
 		]
