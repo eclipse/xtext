@@ -76,6 +76,7 @@ class XtendHighlightingLexer extends LexerBase {
 	@Inject extension AntlrTokenDefProvider
 
 	RichTextToken _currentRichTextToken
+	
 
 	override advance() {
 		if (currentRichTextToken?.hasNext) {
@@ -99,10 +100,7 @@ class XtendHighlightingLexer extends LexerBase {
 	}
 
 	override getState() {
-		if (currentRichTextToken != null)
-			currentRichTextToken.type
-		else
-			delegate.state
+		return if (_currentRichTextToken === null) 0 else 1
 	}
 
 	override getTokenEnd() {

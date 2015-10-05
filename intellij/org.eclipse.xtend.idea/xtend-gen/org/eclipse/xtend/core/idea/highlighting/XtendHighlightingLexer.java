@@ -143,13 +143,10 @@ public class XtendHighlightingLexer extends LexerBase {
   @Override
   public int getState() {
     int _xifexpression = (int) 0;
-    XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _xifexpression = _currentRichTextToken_1.getType();
+    if ((this._currentRichTextToken == null)) {
+      _xifexpression = 0;
     } else {
-      _xifexpression = this.delegate.getState();
+      _xifexpression = 1;
     }
     return _xifexpression;
   }
