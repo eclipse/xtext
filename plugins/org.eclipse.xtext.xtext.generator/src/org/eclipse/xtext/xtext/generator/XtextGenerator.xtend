@@ -27,6 +27,7 @@ import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
@@ -149,24 +150,24 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	protected def generateManifests() {
 		val manifests = newLinkedList(
-			projectConfig.runtimeManifest -> projectConfig.runtimeMetaInf,
-			projectConfig.runtimeTestManifest -> projectConfig.runtimeTestMetaInf,
-			projectConfig.genericIdeManifest -> projectConfig.genericIdeMetaInf,
-			projectConfig.genericIdeTestManifest -> projectConfig.genericIdeTestMetaInf,
-			projectConfig.eclipsePluginManifest -> projectConfig.eclipsePluginMetaInf,
-			projectConfig.eclipsePluginTestManifest -> projectConfig.eclipsePluginTestMetaInf,
-			projectConfig.ideaPluginManifest -> projectConfig.ideaPluginMetaInf,
-			projectConfig.ideaPluginTestManifest -> projectConfig.ideaPluginTestMetaInf,
-			projectConfig.webManifest -> projectConfig.webMetaInf,
-			projectConfig.webTestManifest -> projectConfig.webTestMetaInf
+			Tuples.create(projectConfig.runtimeManifest, projectConfig.runtimeMetaInf, projectConfig.runtimeProjectName),
+			Tuples.create(projectConfig.runtimeTestManifest, projectConfig.runtimeTestMetaInf, projectConfig.runtimeTestProjectName),
+			Tuples.create(projectConfig.genericIdeManifest, projectConfig.genericIdeMetaInf, projectConfig.genericIdeProjectName),
+			Tuples.create(projectConfig.genericIdeTestManifest, projectConfig.genericIdeTestMetaInf, projectConfig.genericIdeTestProjectName),
+			Tuples.create(projectConfig.eclipsePluginManifest, projectConfig.eclipsePluginMetaInf, projectConfig.eclipsePluginProjectName),
+			Tuples.create(projectConfig.eclipsePluginTestManifest, projectConfig.eclipsePluginTestMetaInf, projectConfig.eclipsePluginTestProjectName),
+			Tuples.create(projectConfig.ideaPluginManifest, projectConfig.ideaPluginMetaInf, projectConfig.ideaPluginProjectName),
+			Tuples.create(projectConfig.ideaPluginTestManifest, projectConfig.ideaPluginTestMetaInf, projectConfig.ideaPluginTestProjectName),
+			Tuples.create(projectConfig.webManifest, projectConfig.webMetaInf, projectConfig.webProjectName),
+			Tuples.create(projectConfig.webTestManifest, projectConfig.webTestMetaInf, projectConfig.webTestProjectName)
 		)
 		// Filter null values and merge duplicate entries
 		val uri2Manifest = Maps.<URI, ManifestAccess>newHashMapWithExpectedSize(manifests.size)
 		val manifestIter = manifests.listIterator
 		while (manifestIter.hasNext) {
 			val entry = manifestIter.next
-			val manifest = entry.key
-			val metaInf = entry.value
+			val manifest = entry.first
+			val metaInf = entry.second
 			if (manifest === null || metaInf === null) {
 				manifestIter.remove()
 			} else {
@@ -181,12 +182,10 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 		
 		for (entry : manifests) {
-			val manifest = entry.key
-			val metaInf = entry.value
+			val manifest = entry.first
+			val metaInf = entry.second
 			if (manifest.bundleName === null) {
-				/*TODO add explicit project names to XtextProjectConfig
-				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
-					manifest.bundleName = segments.get(segments.length - 3)*/
+				manifest.bundleName = entry.third
 			}
 			if (manifest === projectConfig.eclipsePluginManifest) {
 				val firstLanguage = languageConfigs.head
