@@ -798,7 +798,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("// outline API");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = ui.outline.OutlineTreeProviderFragment2 {}");
+        _builder.append("fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.newLine();
