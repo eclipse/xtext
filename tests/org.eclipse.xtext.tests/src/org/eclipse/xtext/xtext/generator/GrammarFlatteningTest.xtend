@@ -9,13 +9,13 @@ package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.resource.XtextResource
-import org.junit.Test
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
+import org.junit.Test
 
 /** 
  * @author Sebastian Zarnekow - Initial contribution and API
