@@ -293,7 +293,6 @@
 			</activeWhen>
 		</handler>
 	</extension>
-	
 	<!-- quickfix marker resolution generator for org.eclipse.xtend.core.Xtend -->
 	<extension
 	        point="org.eclipse.ui.ide.markerResolution">
