@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator.normalization
+package org.eclipse.xtext.xtext
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.ImmutableSet
@@ -35,11 +35,8 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.util.internal.EmfAdaptable
-import org.eclipse.xtext.xtext.ConditionEvaluator
-import org.eclipse.xtext.xtext.RuleNames
-import org.eclipse.xtext.xtext.UsedRulesFinder
 
-import static extension org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues.*
+import static extension org.eclipse.xtext.xtext.RuleWithParameterValues.*
 
 /** 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -74,8 +71,9 @@ class FlattenedGrammarAccess {
 	}
 
 	def private void setHiddenTokens(
-			Grammar copy, Grammar orig,
-			Map<RuleWithParameterValues, AbstractRule> origToCopy
+		Grammar copy,
+		Grammar orig,
+		Map<RuleWithParameterValues, AbstractRule> origToCopy
 	) {
 		if (orig === null) {
 			copy.definesHiddenTokens = true
@@ -84,26 +82,26 @@ class FlattenedGrammarAccess {
 		} else {
 			copy.definesHiddenTokens = true
 			copy.hiddenTokens += orig.hiddenTokens.map [ hidden |
-				origToCopy.get(new RuleWithParameterValues(hidden)) 
+				origToCopy.get(new RuleWithParameterValues(hidden))
 			]
 		}
 	}
 
 	def private void markAsFragment(Multimap<TerminalRule, AbstractRule> calledFrom) {
-		calledFrom.keySet.filter[
+		calledFrom.keySet.filter [
 			!isFragment
-		].filter[
+		].filter [
 			allAreTerminalRules(calledFrom.get(it))
-		].filter[
+		].filter [
 			!(it.eContainer as Grammar).hiddenTokens.contains(it)
-		].forEach[
-			fragment=true
+		].forEach [
+			fragment = true
 		]
 	}
 
 	def private Multimap<TerminalRule, AbstractRule> copyRuleBodies(
-			List<AbstractRule> copies,
-			Map<RuleWithParameterValues, AbstractRule> origToCopy
+		List<AbstractRule> copies,
+		Map<RuleWithParameterValues, AbstractRule> origToCopy
 	) {
 		val calledFrom = HashMultimap.create()
 		for (copy : copies) {
@@ -115,7 +113,8 @@ class FlattenedGrammarAccess {
 						var origRuleCall = eObject as RuleCall
 						var copyRuleCall = copyEObject as RuleCall
 						var calledCopy = origToCopy.get(
-							new RuleWithParameterValues(origRuleCall.getRule(),	getParameterConfig(origRuleCall, copyRuleCall)))
+							new RuleWithParameterValues(origRuleCall.getRule(),
+								getParameterConfig(origRuleCall, copyRuleCall)))
 						copyRuleCall.rule = calledCopy
 						if (calledCopy instanceof TerminalRule) {
 							calledFrom.put(calledCopy, copy)
@@ -126,17 +125,17 @@ class FlattenedGrammarAccess {
 				}
 
 				def private Set<Parameter> getParameterConfig(RuleCall origRuleCall, RuleCall copyRuleCall) {
-					if(origRuleCall.getArguments().isEmpty())
+					if (origRuleCall.getArguments().isEmpty())
 						return Collections.emptySet()
-					var result = origRuleCall.arguments.filter [ value.evaluate ].map[ parameter ].toSet
+					var result = origRuleCall.arguments.filter[value.evaluate].map[parameter].toSet
 					return result
 				}
 
 				override protected void copyContainment(EReference eReference, EObject eObject, EObject copyEObject) {
-					switch(eReference) {
+					switch (eReference) {
 						case XtextPackage.Literals.RULE_CALL__ARGUMENTS,
 						case XtextPackage.Literals.GROUP__GUARD_CONDITION: return
-						default: super.copyContainment(eReference, eObject, copyEObject)  
+						default: super.copyContainment(eReference, eObject, copyEObject)
 					}
 				}
 
@@ -171,7 +170,8 @@ class FlattenedGrammarAccess {
 					if (eObject instanceof AbstractElement) {
 						var original = new OriginalElement(eObject)
 						if (eObject.eClass != result.eClass) {
-							throw new IllegalStateException("copy is: '" + result.eClass.name + "' but original was: '" + eObject.eClass.name + "'")
+							throw new IllegalStateException(
+								"copy is: '" + result.eClass.name + "' but original was: '" + eObject.eClass.name + "'")
 						}
 						original.attachToEmfObject(result)
 					}
@@ -195,7 +195,7 @@ class FlattenedGrammarAccess {
 						case c1 == '+' && c2 == '?',
 						case c1 == '?' && c2 == '+': '*'
 						case null: c2
-						default: c1 
+						default: c1
 					}
 				}
 
@@ -241,7 +241,7 @@ class FlattenedGrammarAccess {
 						copy.attachTo(rule, origToCopy)
 						result += copy
 					} else {
-						Sets.powerSet(ImmutableSet.copyOf(params)).forEach[ parameterConfig, i |
+						Sets.powerSet(ImmutableSet.copyOf(params)).forEach [ parameterConfig, i |
 							var parameterValues = new RuleWithParameterValues(rule, parameterConfig)
 							var copy = copy(rule)
 							copy.name = names.getAntlrRuleName(rule, i)
@@ -271,7 +271,7 @@ class FlattenedGrammarAccess {
 		}
 		return result
 	}
-	
+
 	def private attachTo(AbstractRule copy, AbstractRule orig, Map<RuleWithParameterValues, AbstractRule> origToCopy) {
 		var parameterValues = new RuleWithParameterValues(orig)
 		parameterValues.attachToEmfObject(copy)
@@ -279,7 +279,7 @@ class FlattenedGrammarAccess {
 	}
 
 	def private boolean allAreTerminalRules(Collection<AbstractRule> callers) {
-		return callers.forall[ it instanceof TerminalRule ]
+		return callers.forall[it instanceof TerminalRule]
 	}
 
 	def private <T extends EObject> T copy(T t) {
