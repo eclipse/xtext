@@ -152,6 +152,38 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           }
         }
       }
+      boolean _and = false;
+      boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+      boolean _not = (!_isEclipsePluginProject);
+      if (!_not) {
+        _and = false;
+      } else {
+        WizardConfiguration _config_1 = this.getConfig();
+        boolean _needsMavenBuild = _config_1.needsMavenBuild();
+        _and = _needsMavenBuild;
+      }
+      if (_and) {
+        ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xtext");
+        final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
+          @Override
+          public void apply(final ExternalDependency it) {
+            ExternalDependency.MavenCoordinates _maven = it.getMaven();
+            _maven.setOptional(true);
+          }
+        };
+        ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_2, _function_1);
+        deps.add(_doubleArrow_1);
+        ExternalDependency _createXtextDependency_3 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xtext.generator");
+        final Procedure1<ExternalDependency> _function_2 = new Procedure1<ExternalDependency>() {
+          @Override
+          public void apply(final ExternalDependency it) {
+            ExternalDependency.MavenCoordinates _maven = it.getMaven();
+            _maven.setOptional(true);
+          }
+        };
+        ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_3, _function_2);
+        deps.add(_doubleArrow_2);
+      }
       _xblockexpression = deps;
     }
     return _xblockexpression;
@@ -1318,21 +1350,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
         _builder.append("<artifactId>org.eclipse.xtext.xtext.generator</artifactId>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<version>${xtextVersion}</version>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("</dependency>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("<dependency>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<groupId>org.eclipse.xtext</groupId>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<artifactId>org.eclipse.xtext.xbase</artifactId>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
         _builder.append("<version>${xtextVersion}</version>");

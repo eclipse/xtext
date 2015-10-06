@@ -233,6 +233,16 @@ public class PomFile extends TextFile {
                 _builder.newLineIfNotEmpty();
               }
             }
+            {
+              boolean _isOptional = dep.isOptional();
+              if (_isOptional) {
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<optional>true</optional>");
+                _builder.newLine();
+              }
+            }
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("</dependency>");
