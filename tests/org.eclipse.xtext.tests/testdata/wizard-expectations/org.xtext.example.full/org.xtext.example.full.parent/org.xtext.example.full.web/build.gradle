@@ -16,6 +16,8 @@ dependencies {
 task jettyRun(type:JavaExec) {
 	dependsOn(sourceSets.main.runtimeClasspath)
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-	main = "org.xtext.example.mydsl.web.ServerLauncher"
+	main = 'org.xtext.example.mydsl.web.ServerLauncher'
 	standardInput = System.in
+	group = 'run'
+	description = 'Starts an example Jetty server with your language'
 }
