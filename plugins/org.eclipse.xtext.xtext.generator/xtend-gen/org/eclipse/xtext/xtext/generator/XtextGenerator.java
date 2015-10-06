@@ -55,6 +55,7 @@ import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.LanguageModule;
 import org.eclipse.xtext.xtext.generator.MweIssues;
+import org.eclipse.xtext.xtext.generator.XtextDirectoryCleaner;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -77,6 +78,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   @Accessors
   private final List<LanguageConfig2> languageConfigs = CollectionLiterals.<LanguageConfig2>newArrayList();
+  
+  @Accessors
+  private XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner();
   
   private Injector injector;
   
@@ -154,6 +158,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       };
       ObjectExtensions.<CodeConfig>operator_doubleArrow(_instance, _function);
       this.projectConfig.initialize(this.injector);
+      this.cleaner.initialize(this.injector);
       for (final LanguageConfig2 language : this.languageConfigs) {
         {
           final Injector languageInjector = this.createLanguageInjector(this.injector, language);
@@ -175,6 +180,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Override
   protected void invokeInternal(final WorkflowContext ctx, final ProgressMonitor monitor, final Issues issues) {
     this.initialize();
+    this.cleaner.clean();
     for (final LanguageConfig2 language : this.languageConfigs) {
       {
         Grammar _grammar = language.getGrammar();
@@ -521,5 +527,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Pure
   public List<LanguageConfig2> getLanguageConfigs() {
     return this.languageConfigs;
+  }
+  
+  @Pure
+  public XtextDirectoryCleaner getCleaner() {
+    return this.cleaner;
+  }
+  
+  public void setCleaner(final XtextDirectoryCleaner cleaner) {
+    this.cleaner = cleaner;
   }
 }
