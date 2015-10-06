@@ -56,6 +56,9 @@ class PomFile extends TextFile {
 						«IF dep.scope != Scope.COMPILE»
 							<scope>«dep.scope.mavenNotation»</scope>
 						«ENDIF»
+						«IF dep.optional»
+							<optional>true</optional>
+						«ENDIF»
 					</dependency>
 				«ENDFOR»
 			</dependencies>

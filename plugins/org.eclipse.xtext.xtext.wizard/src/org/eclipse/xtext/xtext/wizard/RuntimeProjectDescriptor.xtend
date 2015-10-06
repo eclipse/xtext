@@ -70,6 +70,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				deps += createBundleDependency("org.eclipse.emf.ecore.xcore")
 			}
 		}
+		if (!isEclipsePluginProject && config.needsMavenBuild) {
+			deps += createXtextDependency("org.eclipse.xtext.xtext") => [maven.optional = true]
+			deps += createXtextDependency("org.eclipse.xtext.xtext.generator")  => [maven.optional = true]
+		}
 		deps
 	}
 	
@@ -452,11 +456,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								<dependency>
 									<groupId>org.eclipse.xtext</groupId>
 									<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-									<version>${xtextVersion}</version>
-								</dependency>
-								<dependency>
-									<groupId>org.eclipse.xtext</groupId>
-									<artifactId>org.eclipse.xtext.xbase</artifactId>
 									<version>${xtextVersion}</version>
 								</dependency>
 							</dependencies>
