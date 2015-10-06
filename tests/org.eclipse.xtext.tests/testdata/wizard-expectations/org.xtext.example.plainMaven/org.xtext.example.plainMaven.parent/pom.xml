@@ -50,7 +50,41 @@
 						</filesets>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											build-helper-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.9.1,)
+										</versionRange>
+										<goals>
+											<goal>add-resource</goal>
+											<goal>add-source</goal>
+											<goal>add-test-resource</goal>
+											<goal>add-test-source</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
 			</plugins>
+			
 		</pluginManagement>
 	</build>
 	<repositories>
