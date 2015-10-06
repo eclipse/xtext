@@ -39,8 +39,9 @@ final class GenerateXbase {
 	 * Can't use MWE2 because of circular dependencies
 	 */
 	public static void main(String[] args) {
+		final String root = "..";
 		final String projectName = "org.eclipse.xtext.xbase";
-		final String runtimeProject = "../" + projectName;
+		final String runtimeProject = root + "/" + projectName;
 		final String uiProject = runtimeProject + ".ui";
 		final boolean backtrack = false;
 		final boolean memoize = false;
@@ -91,7 +92,8 @@ final class GenerateXbase {
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
 				setProject(new WizardConfig() {{
-					setRuntimeRoot(runtimeProject);
+					setRootPath(root);
+					setBaseName(projectName);
 					setEclipseEditor(true);
 				}});
 				setCode(new CodeConfig() {{
