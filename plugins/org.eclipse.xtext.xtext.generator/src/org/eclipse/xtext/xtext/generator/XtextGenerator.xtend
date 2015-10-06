@@ -50,6 +50,9 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	@Accessors
 	val List<LanguageConfig2> languageConfigs = newArrayList
 	
+	@Accessors
+	XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner
+	
 	Injector injector
 	
 	@Inject IXtextProjectConfig projectConfig
@@ -96,6 +99,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			injector.injectMembers(this)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
 			projectConfig.initialize(injector)
+			cleaner.initialize(injector)
 			for (language : languageConfigs) {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)
@@ -113,6 +117,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, org.eclipse.emf.mwe.core.issues.Issues issues) {
 		initialize
+		cleaner.clean
 		for (language : languageConfigs) {
 			LOG.info('Generating ' + language.grammar.name)
 			language.generate
