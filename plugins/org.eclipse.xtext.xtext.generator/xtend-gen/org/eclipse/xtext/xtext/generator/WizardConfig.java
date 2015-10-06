@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -50,17 +50,22 @@ public class WizardConfig extends XtextProjectConfig {
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
+    boolean _equals = Objects.equal(this.rootPath, null);
+    if (_equals) {
+      issues.addError("The property \'rootPath\' must be set.", this);
+      return;
+    }
+    boolean _equals_1 = Objects.equal(this.baseName, null);
+    if (_equals_1) {
+      issues.addError("The property \'baseName\' must be set.", this);
+      return;
+    }
     IXtextGeneratorFileSystemAccess _runtimeRoot = this.getRuntimeRoot();
     String _path = null;
     if (_runtimeRoot!=null) {
       _path=_runtimeRoot.getPath();
     }
     final String runtimeBase = _path;
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(runtimeBase);
-    if (_isNullOrEmpty) {
-      issues.addError("The property \'runtimeRoot\' must be set.", this);
-      return;
-    }
     int _length = runtimeBase.length();
     int _minus = (_length - 1);
     char _charAt = runtimeBase.charAt(_minus);
