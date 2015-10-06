@@ -42,7 +42,6 @@ final class GenerateXbase {
 		final String root = "..";
 		final String projectName = "org.eclipse.xtext.xbase";
 		final String runtimeProject = root + "/" + projectName;
-		final String uiProject = runtimeProject + ".ui";
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
@@ -57,7 +56,7 @@ final class GenerateXbase {
 		new StandaloneSetup() {{
 			// the maven archetype contains a template file called .project
 			setIgnoreBrokenProjectFiles(true);
-			setPlatformUri(runtimeProject + "/../..");
+			setPlatformUri(root + "/..");
 			setScanClassPath(true);
 		}};
 		
@@ -215,14 +214,6 @@ final class GenerateXbase {
 			addSrcPath("platform:/resource/" + projectName + "/src");
 			addSrcPath("platform:/resource/org.eclipse.xtext.common.types/src");
 			setLineDelimiter(lineDelimiter);
-		}}.invoke(null);
-		
-		new DirectoryCleaner() {{
-			setDirectory(uiProject + "/src-gen");
-		}}.invoke(null);
-		
-		new DirectoryCleaner() {{
-			setDirectory(runtimeProject + "/src-gen");
 		}}.invoke(null);
 		
 		generator.invoke(null);
