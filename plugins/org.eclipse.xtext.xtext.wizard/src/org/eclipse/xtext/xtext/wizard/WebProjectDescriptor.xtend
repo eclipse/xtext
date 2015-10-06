@@ -68,8 +68,10 @@ class WebProjectDescriptor extends ProjectDescriptor {
 				task jettyRun(type:JavaExec) {
 					dependsOn(sourceSets.main.runtimeClasspath)
 					classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-					main = "«config.language.basePackage».web.ServerLauncher"
+					main = '«config.language.basePackage».web.ServerLauncher'
 					standardInput = System.in
+					group = 'run'
+					description = 'Starts an example Jetty server with your language'
 				}
 			'''
 		]
