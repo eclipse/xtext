@@ -102,7 +102,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(MyDslValidator::INVALID_NAME)
+			//	@Fix(MyDslValidator.INVALID_NAME)
 			//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
 			//			context |
