@@ -275,9 +275,9 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		StringBuilder expected = new StringBuilder();
 		expected.append("Assignment: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
 		expected.append("  Addition_Assignment_Multiplication_Bin returns Bin: (\n");
+		expected.append("    (left+=Assignment_Bin_1_0 op='=' right=Addition) | \n");
 		expected.append("    (left+=Addition_Bin_1_0 op='+' right=Multiplication) | \n");
-		expected.append("    (left+=Multiplication_Bin_1_0 op='*' right=Prim) | \n");
-		expected.append("    (left+=Assignment_Bin_1_0 op='=' right=Addition)\n");
+		expected.append("    (left+=Multiplication_Bin_1_0 op='*' right=Prim)\n");
 		expected.append(");\n");
 		expected.append("  Prim_Val returns Val: name=ID;\n");
 		expected.append("Assignment_Bin_1_0: Addition_Assignment_Multiplication_Bin | Prim_Val;\n");
@@ -326,17 +326,17 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 	@Test
 	public void testActionSequence3() throws Exception {
 		StringBuilder grammar = new StringBuilder();
-		grammar.append("Rule: val1=ID ({A.a1=current} a2=ID ({A.a1=current} a2=ID ({A.a1=current} a2=ID)?)?)?;\n");
+		grammar.append("Rule: v0=ID ({A.a1=current} v1=ID ({A.a1=current} v2=ID ({A.a1=current} v3=ID)?)?)?;\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_A | Rule_Rule;\n");
-		expected.append("  Rule_A returns A: ((a1=Rule_A_1_2_2_0 a2=ID) | (a1=Rule_A_1_2_0 a2=ID) | (a1=Rule_A_1_0 a2=ID));\n");
-		expected.append("  Rule_Rule returns Rule: val1=ID;\n");
+		expected.append("  Rule_A returns A: ((a1=Rule_A_1_0 v1=ID) | (a1=Rule_A_1_2_0 v2=ID) | (a1=Rule_A_1_2_2_0 v3=ID));\n");
+		expected.append("  Rule_Rule returns Rule: v0=ID;\n");
 		expected.append("Rule_A_1_0: Rule_Rule;\n");
 		expected.append("Rule_A_1_2_0: Rule_A_1_2_0_A;\n");
-		expected.append("  Rule_A_1_2_0_A returns A: (a1=Rule_A_1_0 a2=ID);\n");
+		expected.append("  Rule_A_1_2_0_A returns A: (a1=Rule_A_1_0 v1=ID);\n");
 		expected.append("Rule_A_1_2_2_0: Rule_A_1_2_2_0_A;\n");
-		expected.append("  Rule_A_1_2_2_0_A returns A: (a1=Rule_A_1_2_0 a2=ID);");
+		expected.append("  Rule_A_1_2_2_0_A returns A: (a1=Rule_A_1_2_0 v2=ID);");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -455,7 +455,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Expr: Abs_Expr_Op | Prim_NumberLiteral;\n");
-		expected.append("  Abs_Expr_Op returns Op: ((op='ABS' rhs=Prim) | ((op='+' | op='-') rhs=Abs));\n");
+		expected.append("  Abs_Expr_Op returns Op: (((op='+' | op='-') rhs=Abs) | (op='ABS' rhs=Prim));\n");
 		expected.append("  Prim_NumberLiteral returns NumberLiteral: value=INT;\n");
 		expected.append("Abs: Abs_Expr_Op | Prim_NumberLiteral;\n");
 		expected.append("Prim: Abs_Expr_Op | Prim_NumberLiteral;");
@@ -471,10 +471,10 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
 		expected.append("Ex1: Ex1_Ex2_Ex3_o | Ex3_Ex;\n");
-		expected.append("  Ex1_Ex2_Ex3_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID) | (l=Ex1_o_1_0_0 o='a' r=Ex2) | (l=Ex1_o_1_1_0 o='b' r=Ex2));\n");
+		expected.append("  Ex1_Ex2_Ex3_o returns o: ((l=Ex1_o_1_0_0 o='a' r=Ex2) | (l=Ex1_o_1_1_0 o='b' r=Ex2) | (l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID));\n");
 		expected.append("  Ex3_Ex returns Ex: name=ID;\n");
 		expected.append("Ex1_o_1_0_0: Ex1_Ex2_Ex3_o_1_0_0_o | Ex3_Ex;\n");
-		expected.append("  Ex1_Ex2_Ex3_o_1_0_0_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID) | (l=Ex1_o_1_0_0 o='a' r=Ex2));\n");
+		expected.append("  Ex1_Ex2_Ex3_o_1_0_0_o returns o: ((l=Ex1_o_1_0_0 o='a' r=Ex2) | (l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID));\n");
 		expected.append("Ex1_o_1_1_0: Ex2_Ex3_o | Ex3_Ex;\n");
 		expected.append("  Ex2_Ex3_o returns o: ((l=Ex2_o_1_0 o='c' r=Ex3) | (l=Ex3_o_1_0 o='d' name=ID));\n");
 		expected.append("Ex2: Ex2_Ex3_o | Ex3_Ex;\n");
