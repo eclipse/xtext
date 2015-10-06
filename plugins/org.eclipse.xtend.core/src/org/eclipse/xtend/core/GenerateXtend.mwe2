@@ -36,7 +36,6 @@ var fileHeader = "/*************************************************************
 
 Workflow {
 	bean = StandaloneSetup {
-		ignoreBrokenProjectFiles = true
 		scanClassPath = true
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 	}
