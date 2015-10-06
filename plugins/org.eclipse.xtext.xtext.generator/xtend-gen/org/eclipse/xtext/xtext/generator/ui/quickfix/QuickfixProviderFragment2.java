@@ -177,7 +177,7 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
-        _builder.append("//\t@Fix(MyDslValidator::INVALID_NAME)");
+        _builder.append("//\t@Fix(MyDslValidator.INVALID_NAME)");
         _builder.newLine();
         _builder.append("//\tdef capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {");
         _builder.newLine();
