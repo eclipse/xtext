@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
@@ -31,6 +32,9 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 
 	@Inject
 	extension CodeConfig
+	
+	@Inject
+	extension ValidatorFragment2
 
 	@Inject
 	FileAccessFactory fileAccessFactory
@@ -102,7 +106,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(MyDslValidator.INVALID_NAME)
+			//	@Fix(«grammar.validatorClass».INVALID_NAME)
 			//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
 			//			context |
@@ -124,7 +128,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			public class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(MyJavaValidator.INVALID_NAME)
+			//	@Fix(«grammar.validatorClass».INVALID_NAME)
 			//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
 			//			public void apply(IModificationContext context) throws BadLocationException {
