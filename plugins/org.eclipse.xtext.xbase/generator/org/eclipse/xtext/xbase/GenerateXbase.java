@@ -54,9 +54,7 @@ final class GenerateXbase {
 			" *******************************************************************************/";
 		
 		new StandaloneSetup() {{
-			// the maven archetype contains a template file called .project
-			setIgnoreBrokenProjectFiles(true);
-			setPlatformUri(root + "/..");
+			setPlatformUri(root);
 			setScanClassPath(true);
 		}};
 		
