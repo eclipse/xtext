@@ -18,21 +18,13 @@ var rootPath = ".."
 var baseName = "org.eclipse.xtend.core"
 var projectPath = "${rootPath}/${baseName}"
 
-var grammarURI = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 var file.extensions = "xtend"
 
 var lineDelimiter = "\n"
-var uiProjectName = "org.eclipse.xtend.ide"
-var uiProjectPath = "../${uiProjectName}"
-var ideProjectName = "org.eclipse.xtend.ide.common"
-var ideProjectPath = "../${ideProjectName}"
 var backtrack = false
 var memoize = false
 var skipUnusedRules = true
 var stripAllComments = true
-
-var ideaProjectName = "org.eclipse.xtend.idea"
-var ideaProjectPath = "../../intellij/${ideaProjectName}"
 
 var fileHeader = "/*******************************************************************************
  * Copyright (c) 2010-\${year} itemis AG (http://www.itemis.eu) and others.
@@ -77,22 +69,6 @@ Workflow {
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
 		lineDelimiter = lineDelimiter
 	}
-
-	component = DirectoryCleaner {
-		directory = "${projectPath}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${uiProjectPath}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${ideProjectPath}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${ideaProjectPath}/src-gen"
-	}
 	
 	component = parser.JFlexLoader : jFlexMain {}
 
@@ -100,11 +76,11 @@ Workflow {
 		configuration = parser.XtendGeneratorModule {
 			project = WizardConfig auto-inject {
 				eclipseEditor = true
-				eclipsePluginRoot = uiProjectPath
+				eclipsePluginProjectName = "org.eclipse.xtend.ide"
 				genericIdeSupport = true
-				genericIdeRoot = ideProjectPath
+				genericIdeProjectName = "org.eclipse.xtend.ide.common"
 				ideaEditor = true
-				ideaPluginRoot = ideaProjectPath
+				ideaPluginRoot = "../../intellij/org.eclipse.xtend.idea"
 			}
 			code = {
 				encoding = "ISO-8859-1"
@@ -115,7 +91,7 @@ Workflow {
 		}
 		language = {
 			resourceSet = resourceSet
-			uri = grammarURI
+			uri = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
 			
