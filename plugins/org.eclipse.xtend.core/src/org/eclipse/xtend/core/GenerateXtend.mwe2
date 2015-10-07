@@ -15,8 +15,9 @@ import org.eclipse.xtext.generator.parser.antlr.*
 import org.eclipse.xtext.resource.XtextResourceSet 
 
 var rootPath = ".."
-var baseName = "org.eclipse.xtend.core"
-var projectPath = "${rootPath}/${baseName}"
+var baseName = "org.eclipse.xtend"
+var runtimeProjectName = "org.eclipse.xtend.core"
+var projectPath = "${rootPath}/${runtimeProjectName}"
 
 var file.extensions = "xtend"
 
@@ -35,40 +36,7 @@ var fileHeader = "/*************************************************************
  *******************************************************************************/"
 
 Workflow {
-	bean = StandaloneSetup {
-		scanClassPath = true
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-	}
-	
-	bean = StandaloneSetup {
-		resourceSet = XtextResourceSet : resourceSet {}
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
-		registerEcoreFile = "platform:/resource/${baseName}/model/Xtend.ecore"
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${projectPath}/emf-gen"
-	}
 
-	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${baseName}/model/Xtend.genmodel"
-		srcPath ="platform:/resource/${baseName}/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
-		lineDelimiter = lineDelimiter
-	}
-	
-	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${baseName}/model/RichStrings.genmodel"
-		srcPath ="platform:/resource/${baseName}/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
-		lineDelimiter = lineDelimiter
-	}
-	
 	component = parser.JFlexLoader : jFlexMain {}
 
 	component = XtextGenerator auto-inject {
@@ -89,7 +57,11 @@ Workflow {
 			}
 		}
 		language = {
-			resourceSet = resourceSet
+			resourceSet = XtextResourceSet : resourceSet {}
+			standaloneSetup = {
+				loadedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+				loadedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+			}
 			uri = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
@@ -182,5 +154,23 @@ Workflow {
 			}
 			fragment = org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator auto-inject {}
 		}
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${projectPath}/emf-gen"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator auto-inject {
+		genModel = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+		srcPath ="platform:/resource/${runtimeProjectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator auto-inject {
+		genModel = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+		srcPath ="platform:/resource/${runtimeProjectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
 	}
 }

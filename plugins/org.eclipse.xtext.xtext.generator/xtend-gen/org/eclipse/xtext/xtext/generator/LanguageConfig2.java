@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,7 +25,6 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -42,7 +40,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -50,9 +47,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.internal.Log;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.RuleNames;
@@ -60,6 +55,7 @@ import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
+import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 
@@ -82,14 +78,14 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   private ResourceSet resourceSet;
   
   @Accessors
+  private XtextLanguageStandaloneSetup standaloneSetup = new XtextLanguageStandaloneSetup();
+  
+  @Accessors
   private Module guiceModule = new Module() {
     @Override
     public void configure(final Binder it) {
     }
   };
-  
-  @Accessors
-  private final List<String> loadedResources = CollectionLiterals.<String>newArrayList();
   
   @Accessors
   private final StandaloneSetupAccess runtimeGenSetup = new StandaloneSetupAccess();
@@ -139,10 +135,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     return this.fileExtensions;
   }
   
-  public void addLoadedResource(final String uri) {
-    this.loadedResources.add(uri);
-  }
-  
   @Override
   public void initialize(final Injector injector) {
     List<IGeneratorFragment2> _fragments = this.getFragments();
@@ -153,88 +145,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       ResourceSet _get = this.resourceSetProvider.get();
       this.resourceSet = _get;
     }
-    for (final String loadedResource : this.loadedResources) {
-      {
-        final URI loadedResourceUri = URI.createURI(loadedResource);
-        String _fileExtension = loadedResourceUri.fileExtension();
-        boolean _matched = false;
-        if (!_matched) {
-          if (Objects.equal(_fileExtension, "genmodel")) {
-            _matched=true;
-            final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
-            if ((resourceServiceProvider == null)) {
-              try {
-                final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
-                final Object instance = genModelSupport.newInstance();
-                Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
-                _declaredMethod.invoke(instance);
-              } catch (final Throwable _t) {
-                if (_t instanceof ClassNotFoundException) {
-                  final ClassNotFoundException e = (ClassNotFoundException)_t;
-                  LanguageConfig2.LOG.error("Couldn\'t initialize GenModel support. Is it on the classpath?");
-                  String _message = e.getMessage();
-                  LanguageConfig2.LOG.debug(_message, e);
-                } else if (_t instanceof Exception) {
-                  final Exception e_1 = (Exception)_t;
-                  LanguageConfig2.LOG.error("Couldn\'t initialize GenModel support.", e_1);
-                } else {
-                  throw Exceptions.sneakyThrow(_t);
-                }
-              }
-            }
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(_fileExtension, "ecore")) {
-            _matched=true;
-            final IResourceServiceProvider resourceServiceProvider_1 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
-            if ((resourceServiceProvider_1 == null)) {
-              EcoreSupportStandaloneSetup.setup();
-            }
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(_fileExtension, "xcore")) {
-            _matched=true;
-            final IResourceServiceProvider resourceServiceProvider_2 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri);
-            if ((resourceServiceProvider_2 == null)) {
-              try {
-                final Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
-                Method _declaredMethod_1 = xcore.getDeclaredMethod("doSetup", new Class[] {});
-                _declaredMethod_1.invoke(null);
-              } catch (final Throwable _t_1) {
-                if (_t_1 instanceof ClassNotFoundException) {
-                  final ClassNotFoundException e_2 = (ClassNotFoundException)_t_1;
-                  LanguageConfig2.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
-                  String _message_1 = e_2.getMessage();
-                  LanguageConfig2.LOG.debug(_message_1, e_2);
-                } else if (_t_1 instanceof Exception) {
-                  final Exception e_3 = (Exception)_t_1;
-                  LanguageConfig2.LOG.error("Couldn\'t initialize Xcore support.", e_3);
-                } else {
-                  throw Exceptions.sneakyThrow(_t_1);
-                }
-              }
-            }
-            final URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
-            try {
-              this.resourceSet.getResource(xcoreLangURI, true);
-            } catch (final Throwable _t_2) {
-              if (_t_2 instanceof WrappedException) {
-                final WrappedException e_4 = (WrappedException)_t_2;
-                LanguageConfig2.LOG.error("Could not load XcoreLang.xcore.", e_4);
-                final Resource brokenResource = this.resourceSet.getResource(xcoreLangURI, false);
-                EList<Resource> _resources = this.resourceSet.getResources();
-                _resources.remove(brokenResource);
-              } else {
-                throw Exceptions.sneakyThrow(_t_2);
-              }
-            }
-          }
-        }
-        this.resourceSet.getResource(loadedResourceUri, true);
-      }
-    }
+    this.standaloneSetup.initialize(injector);
     EList<Resource> _resources = this.resourceSet.getResources();
     boolean _isEmpty = _resources.isEmpty();
     boolean _not = (!_isEmpty);
@@ -447,17 +358,21 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   }
   
   @Pure
+  public XtextLanguageStandaloneSetup getStandaloneSetup() {
+    return this.standaloneSetup;
+  }
+  
+  public void setStandaloneSetup(final XtextLanguageStandaloneSetup standaloneSetup) {
+    this.standaloneSetup = standaloneSetup;
+  }
+  
+  @Pure
   public Module getGuiceModule() {
     return this.guiceModule;
   }
   
   public void setGuiceModule(final Module guiceModule) {
     this.guiceModule = guiceModule;
-  }
-  
-  @Pure
-  public List<String> getLoadedResources() {
-    return this.loadedResources;
   }
   
   @Pure

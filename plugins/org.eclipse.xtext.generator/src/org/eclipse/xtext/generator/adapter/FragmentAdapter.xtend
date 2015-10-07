@@ -291,9 +291,6 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	protected def LanguageConfig createLanguageConfig() {
 		val config2 = language as LanguageConfig2
 		val config = new LanguageConfig
-		for (resource : config2.loadedResources) {
-			config.addLoadedResource(resource)
-		}
 		config.forcedResourceSet = config2.resourceSet
 		config.fileExtensions = config2.fileExtensions.join(',')
 		config.uri = config2.uri

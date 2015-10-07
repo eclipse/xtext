@@ -612,10 +612,6 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
     ILanguageConfig _language = this.getLanguage();
     final LanguageConfig2 config2 = ((LanguageConfig2) _language);
     final LanguageConfig config = new LanguageConfig();
-    List<String> _loadedResources = config2.getLoadedResources();
-    for (final String resource : _loadedResources) {
-      config.addLoadedResource(resource);
-    }
     ResourceSet _resourceSet = config2.getResourceSet();
     config.setForcedResourceSet(_resourceSet);
     List<String> _fileExtensions = config2.getFileExtensions();
