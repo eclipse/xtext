@@ -162,22 +162,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			var fileExtensions = "«config.language.fileExtensions»"
 			
 			Workflow {
-				bean = StandaloneSetup {
-					scanClassPath = true
-					platformUri = rootPath
-					«IF fromExistingEcoreModels»
-						«FOR ePackageInfo : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[EPackageJavaFQN].filterNull»
-							registerGeneratedEPackage = "«ePackageInfo»"
-						«ENDFOR»
-						«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[genmodelURI.toString].toSet»
-							registerGenModelFile = "«genmodelURI»"
-						«ENDFOR»
-					«ELSE»
-						// The following two lines can be removed, if Xbase is not used.
-						registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-						registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-					«ENDIF»
-				}
 				
 				component = XtextGenerator auto-inject {
 					configuration = {
@@ -209,9 +193,13 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					}
 					language = auto-inject {
 						uri = "platform:/resource/${baseName}/«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
-						«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension == "xcore"].map[genmodelURI.toString].toSet»
-							loadedResource = "«genmodelURI»"
-						«ENDFOR»
+						standaloneSetup = {
+							//can be removed if Xbase is not used
+							loadedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+							«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.map[genmodelURI.toString].toSet»
+								loadedResource = "«genmodelURI»"
+							«ENDFOR»
+						}
 			
 						// Java API to access grammar elements (required by several other fragments)
 						fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
