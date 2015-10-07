@@ -182,6 +182,22 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof ParserRule);
 	}
 	
+	@Test public void testFindActualSemanticObjectFor_10() throws Exception {
+		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
+		Grammar grammar = (Grammar) getModel(grammarString);
+		ILeafNode ruleName = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf("Model"));
+		EObject object = NodeModelUtils.findActualSemanticObjectFor(ruleName);
+		assertTrue(object instanceof ParserRule);
+	}
+	
+	@Test public void testFindActualSemanticObjectFor_11() throws Exception {
+		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model<Param>:name=ID;";
+		Grammar grammar = (Grammar) getModel(grammarString);
+		ILeafNode lessThan = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf("<"));
+		EObject object = NodeModelUtils.findActualSemanticObjectFor(lessThan);
+		assertTrue(object instanceof ParserRule);
+	}
+	
 	@Test public void testCompactDump_1() throws Exception {
 		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
 		Grammar grammar = (Grammar) getModel(grammarString);
