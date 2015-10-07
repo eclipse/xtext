@@ -78,10 +78,9 @@ Workflow {
 			fragment = junit.Junit4Fragment2 auto-inject {}
 			
 			fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+			
 			// labeling API
-			fragment = adapter.FragmentAdapter {
-				fragment = labeling.LabelProviderFragment auto-inject {}
-			}
+			fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
 			
 			// outline API
 			fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
