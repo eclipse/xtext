@@ -95,10 +95,8 @@ Workflow {
 
 			fragment = ui.quickfix.QuickfixProviderFragment2 {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = labeling.LabelProviderFragment {
-					generateStub = false
-				}
+			fragment = ui.labeling.LabelProviderFragment2 {
+				generateStub = false
 			}
 
 			fragment = ui.outline.OutlineTreeProviderFragment2 {}
