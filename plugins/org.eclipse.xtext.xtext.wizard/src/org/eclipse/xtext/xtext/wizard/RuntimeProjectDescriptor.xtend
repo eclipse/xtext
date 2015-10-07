@@ -266,10 +266,9 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						
 						«IF config.uiProject.enabled»
 							fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+							
 							// labeling API
-							fragment = adapter.FragmentAdapter {
-								fragment = labeling.LabelProviderFragment auto-inject {}
-							}
+							fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
 							
 							// outline API
 							fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
