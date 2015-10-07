@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.ReferencedMetamodel
@@ -35,16 +34,11 @@ import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
-import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
-
-import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
@@ -87,12 +81,6 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
-	@Inject IXtextProjectConfig projectConfig
-	
-	@Inject extension XbaseUsageDetector
-	
-	@Inject extension XtextGeneratorNaming naming
-	
 	@Mandatory
 	def void setUri(String uri) {
 		this.uri = uri
@@ -116,6 +104,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	}
 	
 	override initialize(Injector injector) {
+		fragments.add(0, new ImplicitFragment)
 		injector.injectMembers(this)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
@@ -267,250 +256,4 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 			+ "You might want to register that EPackage in your workflow file."
 		throw new IllegalStateException(msg)
 	}
-	
-	override generate() {
-		addImplicitContributions()
-		super.generate()
-	}
-	
-	protected def void addImplicitContributions() {
-		//TODO move this logic into its own class
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext', 'org.eclipse.xtext.util', 'org.eclipse.xtend.lib'
-			])
-			projectConfig.runtimeManifest.importedPackages.add('org.apache.log4j')
-		}
-		if (projectConfig.eclipsePluginManifest !== null) {
-			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui', 'org.eclipse.xtend.lib'
-			])
-		}
-		if (projectConfig.eclipsePluginPluginXml !== null) {
-			projectConfig.eclipsePluginPluginXml.entries += grammar.implicitPluginXmlEnties
-		}
-		
-		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''
-		val bindingFactory = new GuiceModuleAccess.BindingFactory()
-			.addTypeToProviderInstance(IAllContainersState.typeRef, expression)
-		if (inheritsXbase(grammar)) {
-			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.XtextEditor'.typeRef,
-					'org.eclipse.xtext.xbase.ui.editor.XbaseEditor'.typeRef)
-				.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
-					'org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider'.typeRef)
-				.addTypeToType('org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler'.typeRef,
-					'org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler'.typeRef)
-		}
-		bindingFactory.contributeTo(eclipsePluginGenModule)
-	}
-	
-	def getImplicitPluginXmlEnties(Grammar it) '''
-		<extension
-			point="org.eclipse.ui.editors">
-			<editor
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.XtextEditor"
-				contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-				default="true"
-				extensions="«fileExtensions.join(",")»"
-				id="«name»"
-				«IF grammar.inheritsXbase»
-					matchingStrategy="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
-				«ENDIF»
-				name="«it.simpleName» Editor">
-			</editor>
-		</extension>
-		<extension
-			point="org.eclipse.ui.handlers">
-			<handler
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
-				commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
-				<activeWhen>
-					<reference
-						definitionId="«name».Editor.opened">
-					</reference>
-				</activeWhen>
-			</handler>
-			<handler
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-				commandId="«name».validate">
-			<activeWhen>
-				<reference
-						definitionId="«name».Editor.opened">
-				</reference>
-			</activeWhen>
-			</handler>
-			<!-- copy qualified name -->
-			<handler
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
-				commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
-				<activeWhen>
-					<reference definitionId="«name».Editor.opened" />
-				</activeWhen>
-			</handler>
-			<handler
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
-				commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
-				<activeWhen>
-					<and>
-						<reference definitionId="«name».XtextEditor.opened" />
-						<iterate>
-							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
-						</iterate>
-					</and>
-				</activeWhen>
-			</handler>
-		</extension>
-		<extension point="org.eclipse.core.expressions.definitions">
-			<definition id="«name».Editor.opened">
-				<and>
-					<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-					<with variable="activeEditor">
-						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-							value="«name»" 
-							forcePluginActivation="true"/>
-					</with>		
-				</and>
-			</definition>
-			<definition id="«name».XtextEditor.opened">
-				<and>
-					<reference definitionId="isXtextEditorActive"/>
-					<with variable="activeEditor">
-						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-							value="«name»" 
-							forcePluginActivation="true"/>
-					</with>		
-				</and>
-			</definition>
-		</extension>
-		<extension
-				point="org.eclipse.ui.preferencePages">
-			<page
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-				id="«name»"
-				name="«simpleName»">
-				<keywordReference id="«namespace + ".ui.keyword_"+simpleName»"/>
-			</page>
-			<page
-				category="«name»"
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-				id="«name».coloring"
-				name="Syntax Coloring">
-				<keywordReference id="«namespace + ".ui.keyword_"+simpleName»"/>
-			</page>
-			<page
-				category="«name»"
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-				id="«name».templates"
-				name="Templates">
-				<keywordReference id="«namespace + ".ui.keyword_"+simpleName»"/>
-			</page>
-		</extension>
-		<extension
-				point="org.eclipse.ui.propertyPages">
-			<page
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-				id="«name»"
-				name="«simpleName»">
-				<keywordReference id="«namespace + ".ui.keyword_"+simpleName»"/>
-				<enabledWhen>
-					<adapt type="org.eclipse.core.resources.IProject"/>
-				</enabledWhen>
-				<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-			</page>
-		</extension>
-		<extension
-			point="org.eclipse.ui.keywords">
-			<keyword
-				id="«namespace + ".ui.keyword_"+simpleName»"
-				label="«simpleName»"/>
-		</extension>
-		<extension
-			point="org.eclipse.ui.commands">
-		<command
-				description="Trigger expensive validation"
-				id="«name».validate"
-				name="Validate">
-		</command>
-		<!-- copy qualified name -->
-		<command
-				id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
-				categoryId="org.eclipse.ui.category.edit"
-				description="Copy the qualified name for the selected element"
-				name="Copy Qualified Name">
-		</command>
-		<command
-				id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
-				categoryId="org.eclipse.ui.category.edit"
-				description="Copy the qualified name for the selected element"
-				name="Copy Qualified Name">
-		</command>
-		</extension>
-		<extension point="org.eclipse.ui.menus">
-			<menuContribution
-				locationURI="popup:#TextEditorContext?after=group.edit">
-				 <command
-					 commandId="«name».validate"
-					 style="push"
-					 tooltip="Trigger expensive validation">
-				<visibleWhen checkEnabled="false">
-					<reference
-						definitionId="«name».Editor.opened">
-					</reference>
-				</visibleWhen>
-			</command>  
-			</menuContribution>
-			!-- copy qualified name -->
-			<menuContribution locationURI="popup:#TextEditorContext?after=copy">
-				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
-					style="push" tooltip="Copy Qualified Name">
-					<visibleWhen checkEnabled="false">
-						<reference definitionId="«name».Editor.opened" />
-					</visibleWhen>
-				</command>  
-			</menuContribution>
-			<menuContribution locationURI="menu:edit?after=copy">
-				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
-					style="push" tooltip="Copy Qualified Name">
-					<visibleWhen checkEnabled="false">
-						<reference definitionId="«name».Editor.opened" />
-					</visibleWhen>
-				</command>  
-			</menuContribution>
-			<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
-					style="push" tooltip="Copy Qualified Name">
-					<visibleWhen checkEnabled="false">
-						<and>
-							<reference definitionId="«name».XtextEditor.opened" />
-							<iterate>
-								<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
-							</iterate>
-						</and>
-					</visibleWhen>
-				</command>
-			</menuContribution>
-		</extension>
-		<extension point="org.eclipse.ui.menus">
-			<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
-				<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
-					<visibleWhen checkEnabled="false">
-						<reference definitionId="«name».Editor.opened">
-						</reference>
-					</visibleWhen>
-				</command>
-			</menuContribution>
-		</extension>
-		<extension point="org.eclipse.ui.handlers">
-			<handler
-				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
-				commandId="org.eclipse.xtext.ui.editor.FindReferences">
-				<activeWhen>
-					<reference
-						definitionId="«name».Editor.opened">
-					</reference>
-				</activeWhen>
-			</handler>
-		</extension>
-	'''
-	
 }
