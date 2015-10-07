@@ -56,10 +56,6 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected GrammarAccessExtensions _grammarAccessExtensions;
   
   @Inject
-  @Extension
-  protected GrammarNaming _grammarNaming;
-  
-  @Inject
   private CodeConfig codeConfig;
   
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
@@ -70,14 +66,15 @@ public abstract class AbstractAntlrGrammarGenerator {
     final RuleNames ruleNames = RuleNames.getRuleNames(_grammar, true);
     FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
     final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
-    TypeReference _grammarClass = this.getGrammarClass(it);
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
     String _path = _grammarClass.getPath();
     String _plus = (_path + ".g");
     CharSequence _compile = this.compile(flattened, options);
     fsa.generateFile(_plus, _compile);
   }
   
-  protected abstract TypeReference getGrammarClass(final Grammar it);
+  protected abstract GrammarNaming getGrammarNaming();
   
   protected CharSequence compile(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -85,7 +82,8 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append(_fileHeader, "");
     _builder.newLineIfNotEmpty();
     _builder.append("grammar ");
-    TypeReference _grammarClass = this.getGrammarClass(it);
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
     String _simpleName = _grammarClass.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append(";");
@@ -128,7 +126,8 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append("@lexer::header {");
     _builder.newLine();
     _builder.append("package ");
-    TypeReference _grammarClass = this.getGrammarClass(it);
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
     String _packageName = _grammarClass.getPackageName();
     _builder.append(_packageName, "");
     _builder.append(";");
@@ -159,7 +158,8 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append("@parser::header {");
     _builder.newLine();
     _builder.append("package ");
-    TypeReference _grammarClass = this.getGrammarClass(it);
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
     String _packageName = _grammarClass.getPackageName();
     _builder.append(_packageName, "");
     _builder.append(";");

@@ -27,14 +27,13 @@ public class GrammarNaming {
     StringConcatenation _builder = new StringConcatenation();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
     _builder.append(_runtimeBasePackage, "");
-    _builder.append(".idea.parser.antlr.internal");
+    _builder.append(".parser.antlr.internal");
     return _builder.toString();
   }
   
-  public TypeReference getGrammarClass(final Grammar it, final String prefix) {
+  public TypeReference getGrammarClass(final Grammar it) {
     String _parserPackage = this.getParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(prefix, "");
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");

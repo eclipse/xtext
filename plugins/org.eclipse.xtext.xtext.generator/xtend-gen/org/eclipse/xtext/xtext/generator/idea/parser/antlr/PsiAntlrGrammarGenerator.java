@@ -31,10 +31,12 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginClassNames;
+import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiGrammarNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGrammarWithActionsGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
+import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
 @SuppressWarnings("all")
 public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
@@ -42,9 +44,13 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   @Extension
   private IdeaPluginClassNames _ideaPluginClassNames;
   
+  @Inject
+  @Extension
+  private PsiGrammarNaming naming;
+  
   @Override
-  protected TypeReference getGrammarClass(final Grammar it) {
-    return this._grammarNaming.getGrammarClass(it, "Psi");
+  protected GrammarNaming getGrammarNaming() {
+    return this.naming;
   }
   
   @Override

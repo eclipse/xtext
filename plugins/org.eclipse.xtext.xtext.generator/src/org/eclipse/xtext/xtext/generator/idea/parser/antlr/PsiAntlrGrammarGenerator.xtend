@@ -33,9 +33,11 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 	
 	@Inject
 	extension IdeaPluginClassNames
+	@Inject
+	extension PsiGrammarNaming naming
 	
-	override protected getGrammarClass(Grammar it) {
-		getGrammarClass('Psi')
+	override protected getGrammarNaming() {
+		naming
 	}
 	
 	override protected compileOptions(Grammar it, AntlrOptions options) '''

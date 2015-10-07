@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.parser.antlr;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -36,13 +38,18 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGrammarWithActionsGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
+import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
 @Singleton
 @SuppressWarnings("all")
 public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
+  @Inject
+  @Extension
+  private GrammarNaming naming;
+  
   @Override
-  protected TypeReference getGrammarClass(final Grammar it) {
-    return this._grammarNaming.getGrammarClass(it, "");
+  protected GrammarNaming getGrammarNaming() {
+    return this.naming;
   }
   
   @Override
@@ -206,7 +213,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");
-    TypeReference _internalParserClass = this._grammarNaming.getInternalParserClass(it);
+    TypeReference _internalParserClass = this.naming.getInternalParserClass(it);
     String _simpleName_1 = _internalParserClass.getSimpleName();
     _builder.append(_simpleName_1, "    ");
     _builder.append("(TokenStream input, ");
