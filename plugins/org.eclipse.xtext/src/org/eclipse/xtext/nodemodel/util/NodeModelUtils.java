@@ -254,7 +254,7 @@ public class NodeModelUtils {
 				}
 				sibling = sibling.getNextSibling();
 			}
-		} else {
+		} else if (!GrammarUtil.isEObjectFragmentRuleCall(grammarElement)) {
 			EObject result = findActualSemanticObjectInChildren(node, grammarElement);
 			if (result != null)
 				return result;
