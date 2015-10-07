@@ -77,6 +77,7 @@ class AdvancedNewProjectPage extends WizardPage {
 			]
 		]
 
+		createUiProject.require(createIdeProject)
 		createIdeaProject.require(createIdeProject)
 		createWebProject.require(createIdeProject)
 		makeUiProjectRequirePlainLayout

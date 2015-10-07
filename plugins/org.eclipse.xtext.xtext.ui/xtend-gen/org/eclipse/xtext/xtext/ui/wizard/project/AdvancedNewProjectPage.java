@@ -163,6 +163,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     };
     Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
     this.setControl(_doubleArrow);
+    this.require(this.createUiProject, this.createIdeProject);
     this.require(this.createIdeaProject, this.createIdeProject);
     this.require(this.createWebProject, this.createIdeProject);
     this.makeUiProjectRequirePlainLayout();
