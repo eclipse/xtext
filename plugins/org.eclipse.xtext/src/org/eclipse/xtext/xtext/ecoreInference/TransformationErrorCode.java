@@ -23,6 +23,7 @@ public enum TransformationErrorCode {
 	InvalidSupertype, 
 	InvalidFeature,
 	InvalidFragmentOverride,
+	InvalidFragmentCall,
 	InvalidRuleOverride;
 
 	public String getFullyQualifiedCode() {
