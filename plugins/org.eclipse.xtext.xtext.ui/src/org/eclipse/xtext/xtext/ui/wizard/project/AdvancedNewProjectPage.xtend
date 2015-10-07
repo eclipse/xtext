@@ -112,10 +112,10 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def protected setDefaults() {
 		createUiProject.selection = true
+		createIdeProject.selection = true
+		createTestProject.selection = true
 		createIdeaProject.selection = false
 		createWebProject.selection = false
-		createIdeProject.selection = false
-		createTestProject.selection = false
 		preferredBuildSystem.select(0)
 		sourceLayout.select(0)
 	}
