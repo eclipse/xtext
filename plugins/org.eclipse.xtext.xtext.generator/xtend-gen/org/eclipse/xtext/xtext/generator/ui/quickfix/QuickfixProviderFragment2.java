@@ -149,13 +149,6 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("//import org.eclipse.xtext.ui.editor.quickfix.Fix");
-        _builder.newLine();
-        _builder.append("//import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor");
-        _builder.newLine();
-        _builder.append("//import org.eclipse.xtext.validation.Issue");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
