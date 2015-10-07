@@ -381,92 +381,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("Workflow {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("bean = StandaloneSetup {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("scanClassPath = true");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("platformUri = rootPath");
-    _builder.newLine();
-    {
-      boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
-      if (_isFromExistingEcoreModels) {
-        {
-          WizardConfiguration _config_3 = this.getConfig();
-          Ecore2XtextConfiguration _ecore2Xtext = _config_3.getEcore2Xtext();
-          Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
-          final Function1<EPackageInfo, Boolean> _function = new Function1<EPackageInfo, Boolean>() {
-            @Override
-            public Boolean apply(final EPackageInfo it) {
-              URI _genmodelURI = it.getGenmodelURI();
-              String _fileExtension = _genmodelURI.fileExtension();
-              return Boolean.valueOf((!Objects.equal(_fileExtension, "xcore")));
-            }
-          };
-          Iterable<EPackageInfo> _filter = IterableExtensions.<EPackageInfo>filter(_ePackageInfos, _function);
-          final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
-            @Override
-            public String apply(final EPackageInfo it) {
-              return it.getEPackageJavaFQN();
-            }
-          };
-          Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_filter, _function_1);
-          Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
-          for(final String ePackageInfo : _filterNull) {
-            _builder.append("\t\t");
-            _builder.append("registerGeneratedEPackage = \"");
-            _builder.append(ePackageInfo, "\t\t");
-            _builder.append("\"");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          WizardConfiguration _config_4 = this.getConfig();
-          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_4.getEcore2Xtext();
-          Set<EPackageInfo> _ePackageInfos_1 = _ecore2Xtext_1.getEPackageInfos();
-          final Function1<EPackageInfo, Boolean> _function_2 = new Function1<EPackageInfo, Boolean>() {
-            @Override
-            public Boolean apply(final EPackageInfo it) {
-              URI _genmodelURI = it.getGenmodelURI();
-              String _fileExtension = _genmodelURI.fileExtension();
-              return Boolean.valueOf((!Objects.equal(_fileExtension, "xcore")));
-            }
-          };
-          Iterable<EPackageInfo> _filter_1 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_1, _function_2);
-          final Function1<EPackageInfo, String> _function_3 = new Function1<EPackageInfo, String>() {
-            @Override
-            public String apply(final EPackageInfo it) {
-              URI _genmodelURI = it.getGenmodelURI();
-              return _genmodelURI.toString();
-            }
-          };
-          Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_filter_1, _function_3);
-          Set<String> _set = IterableExtensions.<String>toSet(_map_1);
-          for(final String genmodelURI : _set) {
-            _builder.append("\t\t");
-            _builder.append("registerGenModelFile = \"");
-            _builder.append(genmodelURI, "\t\t");
-            _builder.append("\"");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      } else {
-        _builder.append("\t\t");
-        _builder.append("// The following two lines can be removed, if Xbase is not used.");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("registerGeneratedEPackage = \"org.eclipse.xtext.xbase.XbasePackage\"");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("registerGenModelFile = \"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel\"");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("component = XtextGenerator auto-inject {");
@@ -478,8 +392,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("project = WizardConfig auto-inject {");
     _builder.newLine();
     {
-      WizardConfiguration _config_5 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_5.getUiProject();
+      WizardConfiguration _config_3 = this.getConfig();
+      UiProjectDescriptor _uiProject = _config_3.getUiProject();
       boolean _isEnabled = _uiProject.isEnabled();
       boolean _not = (!_isEnabled);
       if (_not) {
@@ -489,8 +403,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_6 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject = _config_6.getIntellijProject();
+      WizardConfiguration _config_4 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject = _config_4.getIntellijProject();
       boolean _isEnabled_1 = _intellijProject.isEnabled();
       if (_isEnabled_1) {
         _builder.append("\t\t\t\t");
@@ -499,8 +413,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_7 = this.getConfig();
-      WebProjectDescriptor _webProject = _config_7.getWebProject();
+      WizardConfiguration _config_5 = this.getConfig();
+      WebProjectDescriptor _webProject = _config_5.getWebProject();
       boolean _isEnabled_2 = _webProject.isEnabled();
       if (_isEnabled_2) {
         _builder.append("\t\t\t\t");
@@ -509,8 +423,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_8 = this.getConfig();
-      IdeProjectDescriptor _ideProject = _config_8.getIdeProject();
+      WizardConfiguration _config_6 = this.getConfig();
+      IdeProjectDescriptor _ideProject = _config_6.getIdeProject();
       boolean _isEnabled_3 = _ideProject.isEnabled();
       if (_isEnabled_3) {
         _builder.append("\t\t\t\t");
@@ -527,8 +441,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_9 = this.getConfig();
-      SourceLayout _sourceLayout = _config_9.getSourceLayout();
+      WizardConfiguration _config_7 = this.getConfig();
+      SourceLayout _sourceLayout = _config_7.getSourceLayout();
       boolean _equals = Objects.equal(_sourceLayout, SourceLayout.MAVEN);
       if (_equals) {
         _builder.append("\t\t\t\t");
@@ -544,8 +458,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("encoding = \"");
-    WizardConfiguration _config_10 = this.getConfig();
-    Charset _encoding = _config_10.getEncoding();
+    WizardConfiguration _config_8 = this.getConfig();
+    Charset _encoding = _config_8.getEncoding();
     _builder.append(_encoding, "\t\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -573,36 +487,39 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(_grammarFilePath, "\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("standaloneSetup = {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("//can be removed if Xbase is not used");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("loadedResource = \"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel\"");
+    _builder.newLine();
     {
-      WizardConfiguration _config_11 = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext_2 = _config_11.getEcore2Xtext();
-      Set<EPackageInfo> _ePackageInfos_2 = _ecore2Xtext_2.getEPackageInfos();
-      final Function1<EPackageInfo, Boolean> _function_4 = new Function1<EPackageInfo, Boolean>() {
-        @Override
-        public Boolean apply(final EPackageInfo it) {
-          URI _genmodelURI = it.getGenmodelURI();
-          String _fileExtension = _genmodelURI.fileExtension();
-          return Boolean.valueOf(Objects.equal(_fileExtension, "xcore"));
-        }
-      };
-      Iterable<EPackageInfo> _filter_2 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_4);
-      final Function1<EPackageInfo, String> _function_5 = new Function1<EPackageInfo, String>() {
+      WizardConfiguration _config_9 = this.getConfig();
+      Ecore2XtextConfiguration _ecore2Xtext = _config_9.getEcore2Xtext();
+      Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
+      final Function1<EPackageInfo, String> _function = new Function1<EPackageInfo, String>() {
         @Override
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();
         }
       };
-      Iterable<String> _map_2 = IterableExtensions.<EPackageInfo, String>map(_filter_2, _function_5);
-      Set<String> _set_1 = IterableExtensions.<String>toSet(_map_2);
-      for(final String genmodelURI_1 : _set_1) {
-        _builder.append("\t\t\t");
+      Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos, _function);
+      Set<String> _set = IterableExtensions.<String>toSet(_map);
+      for(final String genmodelURI : _set) {
+        _builder.append("\t\t\t\t");
         _builder.append("loadedResource = \"");
-        _builder.append(genmodelURI_1, "\t\t\t");
+        _builder.append(genmodelURI, "\t\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("// Java API to access grammar elements (required by several other fragments)");
@@ -613,8 +530,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      boolean _isFromExistingEcoreModels_1 = this.isFromExistingEcoreModels();
-      if (_isFromExistingEcoreModels_1) {
+      boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
+      if (_isFromExistingEcoreModels) {
         _builder.append("\t\t\t");
         _builder.append("fragment = adapter.FragmentAdapter { ");
         _builder.newLine();
@@ -732,8 +649,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("// formatter API");
     _builder.newLine();
     {
-      boolean _isFromExistingEcoreModels_2 = this.isFromExistingEcoreModels();
-      if (_isFromExistingEcoreModels_2) {
+      boolean _isFromExistingEcoreModels_1 = this.isFromExistingEcoreModels();
+      if (_isFromExistingEcoreModels_1) {
         _builder.append("\t\t\t");
         _builder.append("fragment = adapter.FragmentAdapter {");
         _builder.newLine();
@@ -753,16 +670,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_12 = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects = _config_12.getEnabledProjects();
-      Iterable<TestedProjectDescriptor> _filter_3 = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
-      final Function1<TestedProjectDescriptor, Boolean> _function_6 = new Function1<TestedProjectDescriptor, Boolean>() {
+      WizardConfiguration _config_10 = this.getConfig();
+      Set<ProjectDescriptor> _enabledProjects = _config_10.getEnabledProjects();
+      Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
+      final Function1<TestedProjectDescriptor, Boolean> _function_1 = new Function1<TestedProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final TestedProjectDescriptor it) {
           return Boolean.valueOf(RuntimeProjectDescriptor.this.testProject.isEnabled());
         }
       };
-      boolean _exists = IterableExtensions.<TestedProjectDescriptor>exists(_filter_3, _function_6);
+      boolean _exists = IterableExtensions.<TestedProjectDescriptor>exists(_filter, _function_1);
       if (_exists) {
         _builder.append("\t\t\t");
         _builder.append("fragment = junit.Junit4Fragment2 auto-inject {}");
@@ -772,8 +689,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_13 = this.getConfig();
-      UiProjectDescriptor _uiProject_1 = _config_13.getUiProject();
+      WizardConfiguration _config_11 = this.getConfig();
+      UiProjectDescriptor _uiProject_1 = _config_11.getUiProject();
       boolean _isEnabled_5 = _uiProject_1.isEnabled();
       if (_isEnabled_5) {
         _builder.append("\t\t\t");
@@ -891,14 +808,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     {
       boolean _or = false;
-      WizardConfiguration _config_14 = this.getConfig();
-      UiProjectDescriptor _uiProject_2 = _config_14.getUiProject();
+      WizardConfiguration _config_12 = this.getConfig();
+      UiProjectDescriptor _uiProject_2 = _config_12.getUiProject();
       boolean _isEnabled_6 = _uiProject_2.isEnabled();
       if (_isEnabled_6) {
         _or = true;
       } else {
-        WizardConfiguration _config_15 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_15.getIdeProject();
+        WizardConfiguration _config_13 = this.getConfig();
+        IdeProjectDescriptor _ideProject_1 = _config_13.getIdeProject();
         boolean _isEnabled_7 = _ideProject_1.isEnabled();
         _or = _isEnabled_7;
       }
@@ -940,8 +857,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.newLine();
     {
-      WizardConfiguration _config_16 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject_1 = _config_16.getIntellijProject();
+      WizardConfiguration _config_14 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject_1 = _config_14.getIntellijProject();
       boolean _isEnabled_8 = _intellijProject_1.isEnabled();
       if (_isEnabled_8) {
         _builder.append("\t\t\t");
@@ -958,8 +875,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.newLine();
     {
-      WizardConfiguration _config_17 = this.getConfig();
-      WebProjectDescriptor _webProject_1 = _config_17.getWebProject();
+      WizardConfiguration _config_15 = this.getConfig();
+      WebProjectDescriptor _webProject_1 = _config_15.getWebProject();
       boolean _isEnabled_9 = _webProject_1.isEnabled();
       if (_isEnabled_9) {
         _builder.append("\t\t\t");

@@ -53,6 +53,9 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	@Accessors
 	XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner
 	
+	@Accessors
+	XtextGeneratorStandaloneSetup standaloneSetup = new XtextGeneratorStandaloneSetup
+	
 	Injector injector
 	
 	@Inject IXtextProjectConfig projectConfig
@@ -100,6 +103,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			injector.getInstance(CodeConfig) => [initialize(injector)]
 			projectConfig.initialize(injector)
 			cleaner.initialize(injector)
+			standaloneSetup.initialize(injector)
 			for (language : languageConfigs) {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)

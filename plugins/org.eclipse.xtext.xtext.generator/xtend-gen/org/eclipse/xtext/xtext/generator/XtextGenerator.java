@@ -57,6 +57,7 @@ import org.eclipse.xtext.xtext.generator.LanguageModule;
 import org.eclipse.xtext.xtext.generator.MweIssues;
 import org.eclipse.xtext.xtext.generator.XtextDirectoryCleaner;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
@@ -81,6 +82,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   @Accessors
   private XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner();
+  
+  @Accessors
+  private XtextGeneratorStandaloneSetup standaloneSetup = new XtextGeneratorStandaloneSetup();
   
   private Injector injector;
   
@@ -159,6 +163,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       ObjectExtensions.<CodeConfig>operator_doubleArrow(_instance, _function);
       this.projectConfig.initialize(this.injector);
       this.cleaner.initialize(this.injector);
+      this.standaloneSetup.initialize(this.injector);
       for (final LanguageConfig2 language : this.languageConfigs) {
         {
           final Injector languageInjector = this.createLanguageInjector(this.injector, language);
@@ -536,5 +541,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   public void setCleaner(final XtextDirectoryCleaner cleaner) {
     this.cleaner = cleaner;
+  }
+  
+  @Pure
+  public XtextGeneratorStandaloneSetup getStandaloneSetup() {
+    return this.standaloneSetup;
+  }
+  
+  public void setStandaloneSetup(final XtextGeneratorStandaloneSetup standaloneSetup) {
+    this.standaloneSetup = standaloneSetup;
   }
 }

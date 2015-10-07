@@ -16,10 +16,6 @@ var rootPath = ".."
 var baseName = "org.eclipse.xtext.web.example.statemachine"
 
 Workflow {
-    bean = StandaloneSetup {
-		scanClassPath = true
-		platformUri = rootPath
-	}
 	
 	component = XtextGenerator auto-inject {
 		configuration = StateMachineGeneratorModule {

@@ -19,7 +19,6 @@ import java.util.List
 import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.DiagnosticChain
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.common.util.WrappedException
 import org.eclipse.emf.ecore.EValidator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -30,7 +29,6 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.ReferencedMetamodel
 import org.eclipse.xtext.XtextPackage
-import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
@@ -59,10 +57,10 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	ResourceSet resourceSet
 	
 	@Accessors
-	Module guiceModule = [] 
+	XtextLanguageStandaloneSetup standaloneSetup = new XtextLanguageStandaloneSetup
 	
 	@Accessors
-	val List<String> loadedResources = newArrayList
+	Module guiceModule = [] 
 	
 	@Accessors
 	val runtimeGenSetup = new StandaloneSetupAccess
@@ -99,65 +97,13 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 		return fileExtensions
 	}
 	
-	def void addLoadedResource(String uri) {
-		this.loadedResources.add(uri)
-	}
-	
 	override initialize(Injector injector) {
 		fragments.add(0, new ImplicitFragment)
 		injector.injectMembers(this)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
-		for (String loadedResource : loadedResources) {
-			val loadedResourceUri = URI.createURI(loadedResource)
-			switch (loadedResourceUri.fileExtension) {
-				case 'genmodel': {
-					val resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri)
-					if (resourceServiceProvider === null) {
-						try {
-							val genModelSupport = Class.forName('org.eclipse.emf.codegen.ecore.xtext.GenModelSupport')
-							val instance = genModelSupport.newInstance()
-							genModelSupport.getDeclaredMethod('createInjectorAndDoEMFRegistration').invoke(instance)
-						} catch (ClassNotFoundException e) {
-							LOG.error("Couldn't initialize GenModel support. Is it on the classpath?")
-							LOG.debug(e.getMessage(), e)
-						} catch (Exception e) {
-							LOG.error("Couldn't initialize GenModel support.", e)
-						}
-					}
-				}
-				case 'ecore': {
-					val resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri)
-					if (resourceServiceProvider === null) {
-						EcoreSupportStandaloneSetup.setup()
-					}
-				}
-				case 'xcore': {
-					val resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResourceUri)
-					if (resourceServiceProvider === null) {
-						try {
-							val xcore = Class.forName('org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup')
-							xcore.getDeclaredMethod('doSetup', #[]).invoke(null)
-						} catch (ClassNotFoundException e) {
-							LOG.error("Couldn't initialize Xcore support. Is it on the classpath?")
-							LOG.debug(e.getMessage(), e)
-						} catch (Exception e) {
-							LOG.error("Couldn't initialize Xcore support.", e)
-						}
-					}
-					val xcoreLangURI = URI.createPlatformResourceURI('/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore', true)
-					try {
-						resourceSet.getResource(xcoreLangURI, true)
-					} catch (WrappedException e) {
-						LOG.error("Could not load XcoreLang.xcore.", e)
-						val brokenResource = resourceSet.getResource(xcoreLangURI, false)
-						resourceSet.resources.remove(brokenResource)
-					}
-				}
-			}
-			resourceSet.getResource(loadedResourceUri, true)
-			
-		}
+		standaloneSetup.initialize(injector)
+		
 		if (!resourceSet.resources.isEmpty) {
 			installIndex()
 			for (var i = 0, var size = resourceSet.resources.size; i < size; i++) {
