@@ -15,15 +15,17 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFrag
 class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 
 	@Inject
-	extension PsiAntlrGrammarGenerator
+	PsiAntlrGrammarGenerator generator
 
 	@Inject CodeConfig codeConfig
 
 	@Inject IXtextProjectConfig projectConfig
+	
+	@Inject extension PsiGrammarNaming
 
 	override protected doGenerate() {
 		val fsa = projectConfig.ideaPluginSrcGen
-		grammar.generate(options, fsa)
+		generator.generate(grammar, options, fsa)
 
 		val encoding = codeConfig.encoding
 		val grammarFileName = '''«grammar.grammarClass.path».g'''

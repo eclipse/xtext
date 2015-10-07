@@ -27,12 +27,14 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import com.google.inject.Inject
 
 @Singleton
 class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
+	@Inject extension GrammarNaming naming
 	
-	protected override getGrammarClass(Grammar it) {
-		getGrammarClass('')
+	protected override getGrammarNaming() {
+		naming
 	}
 	
 	protected override compileOptions(Grammar it, AntlrOptions options) '''
