@@ -2,7 +2,6 @@ package org.eclipse.xtext.xbase;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
-import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.adapter.FragmentAdapter;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
@@ -11,7 +10,6 @@ import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
 import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
 import org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment;
@@ -52,36 +50,8 @@ final class GenerateXbase {
 			" * which accompanies this distribution, and is available at\n" +
 			" * http://www.eclipse.org/legal/epl-v10.html\n" +
 			" *******************************************************************************/";
+		final String xbaseGenModel = "platform:/resource/" + projectName + "/model/Xbase.genmodel";
 		
-		new StandaloneSetup() {{
-			setPlatformUri(root);
-			setScanClassPath(true);
-		}};
-		
-		final XtextResourceSet xtypeResourceSet = new XtextResourceSet();
-		new StandaloneSetup() {{
-			setResourceSet(xtypeResourceSet);
-			addRegisterEcoreFile("platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xtype.ecore");
-		}};
-
-		final XtextResourceSet xbaseResourceSet = new XtextResourceSet();
-		new StandaloneSetup() {{
-			setResourceSet(xbaseResourceSet);
-			addRegisterEcoreFile("platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xtype.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xbase.ecore");
-		}};
-		
-		final XtextResourceSet xannotationsResourceSet = new XtextResourceSet();
-		new StandaloneSetup() {{
-			setResourceSet(xannotationsResourceSet);
-			addRegisterEcoreFile("platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xtype.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xbase.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/XAnnotations.ecore");
-		}};
-
 		final AntlrOptions antlrOptions = new AntlrOptions();
 		antlrOptions.setBacktrack(backtrack);
 		antlrOptions.setMemoize(memoize);
@@ -104,8 +74,8 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xtype";
 				
-				setResourceSet(xtypeResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
+				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
@@ -118,8 +88,8 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbase";
 				
-				setResourceSet(xbaseResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
+				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
@@ -161,8 +131,8 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbasewithannotations";
 				
-				setResourceSet(xannotationsResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
+				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
@@ -208,7 +178,7 @@ final class GenerateXbase {
 		}}.invoke(null);
 		
 		new EcoreGenerator() {{
-			setGenModel("platform:/resource/" + projectName + "/model/Xbase.genmodel");
+			setGenModel(xbaseGenModel);
 			addSrcPath("platform:/resource/" + projectName + "/src");
 			addSrcPath("platform:/resource/org.eclipse.xtext.common.types/src");
 			setLineDelimiter(lineDelimiter);
