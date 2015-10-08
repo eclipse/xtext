@@ -115,71 +115,72 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    boolean _and = false;
-    if (!(!this.generateStub)) {
-      _and = false;
+    boolean _or = false;
+    if (this.generateStub) {
+      _or = true;
     } else {
       Grammar _grammar = this.getGrammar();
       boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
-      boolean _not = (!_inheritsXbase);
-      _and = _not;
+      _or = _inheritsXbase;
+    }
+    if (_or) {
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      ManifestAccess _eclipsePluginManifest = _projectConfig.getEclipsePluginManifest();
+      boolean _notEquals = (!Objects.equal(_eclipsePluginManifest, null));
+      if (_notEquals) {
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        ManifestAccess _eclipsePluginManifest_1 = _projectConfig_1.getEclipsePluginManifest();
+        Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
+        _requiredBundles.add("org.eclipse.xtext.ui");
+      }
+      TypeReference _xifexpression = null;
+      if (this.generateStub) {
+        Grammar _grammar_1 = this.getGrammar();
+        _xifexpression = this.getEObjectLabelProviderClass(_grammar_1);
+      } else {
+        _xifexpression = new TypeReference(LabelProviderFragment2.XBASE_LABEL_PROVIDER);
+      }
+      final TypeReference labelProviderClass = _xifexpression;
+      TypeReference _xifexpression_1 = null;
+      if (this.generateStub) {
+        Grammar _grammar_2 = this.getGrammar();
+        _xifexpression_1 = this.getDescriptionLabelProviderClass(_grammar_2);
+      } else {
+        _xifexpression_1 = new TypeReference(LabelProviderFragment2.XBASE_DESCRIPTION_LABEL_PROVIDER);
+      }
+      final TypeReference descriptionLabelProviderClass = _xifexpression_1;
+      final TypeReference iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider");
+      final TypeReference rsdLabelProviderClass = new TypeReference("org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider");
+      GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+      GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(iLabelProviderClass, labelProviderClass);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("binder.bind(");
+          _builder.append(iLabelProviderClass, "");
+          _builder.append(".class).annotatedWith(");
+          _builder.append(rsdLabelProviderClass, "");
+          _builder.append(".class).to(");
+          _builder.append(descriptionLabelProviderClass, "");
+          _builder.append(".class);");
+          _builder.newLineIfNotEmpty();
+        }
+      };
+      GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ResourceUIServiceLabelProvider", _client);
+      ILanguageConfig _language = this.getLanguage();
+      GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
+      _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
+    }
+    boolean _and = false;
+    if (!this.generateStub) {
+      _and = false;
+    } else {
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig_2.getEclipsePluginSrc();
+      boolean _tripleNotEquals = (_eclipsePluginSrc != null);
+      _and = _tripleNotEquals;
     }
     if (_and) {
-      return;
-    }
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    ManifestAccess _eclipsePluginManifest = _projectConfig.getEclipsePluginManifest();
-    boolean _notEquals = (!Objects.equal(_eclipsePluginManifest, null));
-    if (_notEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_1.getEclipsePluginManifest();
-      Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
-      _requiredBundles.add("org.eclipse.xtext.ui");
-    }
-    TypeReference _xifexpression = null;
-    if (this.generateStub) {
-      Grammar _grammar_1 = this.getGrammar();
-      _xifexpression = this.getEObjectLabelProviderClass(_grammar_1);
-    } else {
-      _xifexpression = new TypeReference(LabelProviderFragment2.XBASE_LABEL_PROVIDER);
-    }
-    final TypeReference labelProviderClass = _xifexpression;
-    TypeReference _xifexpression_1 = null;
-    if (this.generateStub) {
-      Grammar _grammar_2 = this.getGrammar();
-      _xifexpression_1 = this.getDescriptionLabelProviderClass(_grammar_2);
-    } else {
-      _xifexpression_1 = new TypeReference(LabelProviderFragment2.XBASE_DESCRIPTION_LABEL_PROVIDER);
-    }
-    final TypeReference descriptionLabelProviderClass = _xifexpression_1;
-    final TypeReference iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider");
-    final TypeReference rsdLabelProviderClass = new TypeReference("org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider");
-    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(iLabelProviderClass, labelProviderClass);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("binder.bind(");
-        _builder.append(iLabelProviderClass, "");
-        _builder.append(".class).annotatedWith(");
-        _builder.append(rsdLabelProviderClass, "");
-        _builder.append(".class).to(");
-        _builder.append(descriptionLabelProviderClass, "");
-        _builder.append(".class);");
-        _builder.newLineIfNotEmpty();
-      }
-    };
-    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ResourceUIServiceLabelProvider", _client);
-    ILanguageConfig _language = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
-    _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
-    if ((!this.generateStub)) {
-      return;
-    }
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig_2.getEclipsePluginSrc();
-    boolean _tripleNotEquals = (_eclipsePluginSrc != null);
-    if (_tripleNotEquals) {
       boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
         this.generateXtendEObjectLabelProvider();
