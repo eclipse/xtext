@@ -47,7 +47,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 
 	def protected TypeReference getQuickfixProviderClass(Grammar g) {
 		return new TypeReference(
-			grammar.eclipsePluginBasePackage + ".quickfix." + grammar.simpleName + "QuickfixProvider"
+			g.eclipsePluginBasePackage + ".quickfix." + g.simpleName + "QuickfixProvider"
 		)
 	}
 

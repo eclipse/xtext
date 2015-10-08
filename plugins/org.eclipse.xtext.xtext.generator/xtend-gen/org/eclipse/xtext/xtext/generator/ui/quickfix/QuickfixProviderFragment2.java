@@ -63,11 +63,9 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
   private boolean inheritImplementation;
   
   protected TypeReference getQuickfixProviderClass(final Grammar g) {
-    Grammar _grammar = this.getGrammar();
-    String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar);
+    String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
     String _plus = (_eclipsePluginBasePackage + ".quickfix.");
-    Grammar _grammar_1 = this.getGrammar();
-    String _simpleName = GrammarUtil.getSimpleName(_grammar_1);
+    String _simpleName = GrammarUtil.getSimpleName(g);
     String _plus_1 = (_plus + _simpleName);
     String _plus_2 = (_plus_1 + "QuickfixProvider");
     return new TypeReference(_plus_2);
