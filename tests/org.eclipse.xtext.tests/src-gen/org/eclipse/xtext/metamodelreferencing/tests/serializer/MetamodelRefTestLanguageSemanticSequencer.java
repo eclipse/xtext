@@ -13,12 +13,15 @@ import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSim
 import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.Foo;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -58,7 +61,14 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     name=ID
 	 */
 	protected void sequence_MyRule(EObject context, ParserRule semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XtextPackage.Literals.ABSTRACT_RULE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtextPackage.Literals.ABSTRACT_RULE__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getMyRuleAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -67,6 +77,13 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     rule=[ParserRule|ID]
 	 */
 	protected void sequence_NameRef(EObject context, RuleCall semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XtextPackage.Literals.RULE_CALL__RULE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtextPackage.Literals.RULE_CALL__RULE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getNameRefAccess().getRuleParserRuleIDTerminalRuleCall_0_1(), semanticObject.getRule());
+		feeder.finish();
 	}
 }

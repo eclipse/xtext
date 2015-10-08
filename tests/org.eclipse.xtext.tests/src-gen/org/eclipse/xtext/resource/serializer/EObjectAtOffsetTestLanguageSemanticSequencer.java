@@ -101,7 +101,7 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	/**
 	 * Constraint:
-	 *     (foos+=Foo | bars+=AbstractBar)*
+	 *     (foos+=Foo | bars+=AbstractBar)+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

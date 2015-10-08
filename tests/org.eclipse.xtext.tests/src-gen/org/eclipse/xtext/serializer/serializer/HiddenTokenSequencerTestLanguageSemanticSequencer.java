@@ -46,7 +46,7 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	
 	/**
 	 * Constraint:
-	 *     entities+=Entity*
+	 *     entities+=Entity+
 	 */
 	protected void sequence_DomainModel(EObject context, DomainModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

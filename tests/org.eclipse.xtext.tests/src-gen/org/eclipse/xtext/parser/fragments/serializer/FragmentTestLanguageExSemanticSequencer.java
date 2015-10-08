@@ -34,7 +34,7 @@ public class FragmentTestLanguageExSemanticSequencer extends FragmentTestLanguag
 					return; 
 				}
 				else if(context == grammarAccess.getPRFWithPredicateRule()) {
-					sequence_PRFNamedFragment_PRFNamedRef_PRFWithPredicate(context, (PRFNamed) semanticObject); 
+					sequence_PRFNamedFragment_PRFNamedRef(context, (PRFNamed) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getPRFNamedWithFQNRule()) {

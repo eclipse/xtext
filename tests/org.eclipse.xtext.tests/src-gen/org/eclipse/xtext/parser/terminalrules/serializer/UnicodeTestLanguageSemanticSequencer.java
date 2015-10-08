@@ -62,7 +62,7 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	/**
 	 * Constraint:
-	 *     strings+=AbstractString*
+	 *     strings+=AbstractString+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

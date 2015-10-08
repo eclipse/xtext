@@ -85,10 +85,10 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 */
 	protected void sequence_Reference(EObject context, NestedRef semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug311337Package.Literals.REFERENCE__REF_CHILD) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug311337Package.Literals.REFERENCE__REF_CHILD));
 			if(transientValues.isValueTransient(semanticObject, Bug311337Package.Literals.NESTED_REF__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug311337Package.Literals.NESTED_REF__LEFT));
+			if(transientValues.isValueTransient(semanticObject, Bug311337Package.Literals.REFERENCE__REF_CHILD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug311337Package.Literals.REFERENCE__REF_CHILD));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);

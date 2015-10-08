@@ -59,7 +59,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Constraint:
-	 *     multiFeature+=AbstractRule*
+	 *     multiFeature+=AbstractRule+
 	 */
 	protected void sequence_EntryRule(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

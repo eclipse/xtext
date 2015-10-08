@@ -165,18 +165,18 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		 */
 		protected void sequence_«c.simpleName»(EObject context, «file.importedGenTypeName(c.type)» semanticObject) {
 			«val cast = file.getEObjectCast(c.type)»
-			«IF c.canGenerate()»
+			«val states = c.linearListOfMandatoryAssignments»
+			«IF states !== null»
 				if(errorAcceptor != null) {
-					«FOR f:c.features.filter(e|e != null)»
+					«FOR f:states»
 						if(transientValues.isValueTransient(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)») == «file.imported(ITransientValueService.ValueTransient)».YES)
 							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(«cast»semanticObject, «file.importedGenTypeLiteral(f.feature)»));
 					«ENDFOR»
 				}
 				«file.imported(ISemanticNodeProvider.INodesForEObjectProvider)» nodes = createNodeProvider(«cast»semanticObject);
 				«file.imported(SequenceFeeder)» feeder = createSequencerFeeder(«cast»semanticObject, nodes);
-				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
-					«val assignment=f.assignments.get(0)»
-					feeder.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«file.getGetAccessor(f.feature)»());
+				«FOR f: states»
+					feeder.accept(grammarAccess.«f.assignedGrammarElement.gaAccessor()», semanticObject.«file.getGetAccessor(f.feature)»());
 				«ENDFOR»
 				feeder.finish();
 			«ELSE»

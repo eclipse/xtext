@@ -42,7 +42,7 @@ public class EncodingTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	/**
 	 * Constraint:
-	 *     words+=Word*
+	 *     words+=Word+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

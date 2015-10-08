@@ -50,7 +50,7 @@ public class Bug296889TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (expressions+=Expression* | values+=DataTypeExpression*)
+	 *     (expressions+=Expression+ | values+=DataTypeExpression+)
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

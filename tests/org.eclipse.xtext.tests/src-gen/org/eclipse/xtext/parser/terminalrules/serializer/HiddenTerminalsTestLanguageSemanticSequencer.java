@@ -139,10 +139,10 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	 */
 	protected void sequence_OverridingHiddens(EObject context, OverridingHiddens semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, HiddenTerminalsTestLanguagePackage.Literals.MODEL__VALID) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, HiddenTerminalsTestLanguagePackage.Literals.MODEL__VALID));
 			if(transientValues.isValueTransient(semanticObject, HiddenTerminalsTestLanguagePackage.Literals.OVERRIDING_HIDDENS__CALLED) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, HiddenTerminalsTestLanguagePackage.Literals.OVERRIDING_HIDDENS__CALLED));
+			if(transientValues.isValueTransient(semanticObject, HiddenTerminalsTestLanguagePackage.Literals.MODEL__VALID) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, HiddenTerminalsTestLanguagePackage.Literals.MODEL__VALID));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);

@@ -83,7 +83,7 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	/**
 	 * Constraint:
-	 *     elements+=Element*
+	 *     elements+=Element+
 	 */
 	protected void sequence_File(EObject context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

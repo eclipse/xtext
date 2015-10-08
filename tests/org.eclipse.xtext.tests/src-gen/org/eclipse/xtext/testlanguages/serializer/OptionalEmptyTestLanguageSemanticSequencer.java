@@ -58,9 +58,16 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	/**
 	 * Constraint:
-	 *     child=Greeting?
+	 *     child=Greeting
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, OptionalEmptyPackage.Literals.MODEL__CHILD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OptionalEmptyPackage.Literals.MODEL__CHILD));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getModelAccess().getChildGreetingParserRuleCall_0(), semanticObject.getChild());
+		feeder.finish();
 	}
 }

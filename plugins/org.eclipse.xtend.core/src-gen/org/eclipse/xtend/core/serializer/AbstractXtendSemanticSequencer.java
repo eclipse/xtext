@@ -148,9 +148,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				}
 				else break;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
+				if(context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()) {
+					sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(context, (JvmParameterizedTypeReference) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() ||
 				   context == grammarAccess.getJvmSuperTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
@@ -645,13 +648,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (
-	 *             (annotationInfo=AnnotationField_XtendAnnotationType_2_4_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=AnnotationField_XtendAnnotationType_2_4_0 name=ValidID)
-	 *         ) 
-	 *         members+=AnnotationField*
-	 *     )
+	 *     (annotationInfo=AnnotationField_XtendAnnotationType_2_4_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
 	 */
 	protected void sequence_AnnotationField(EObject context, XtendAnnotationType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -660,7 +657,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     annotations+=XAnnotation+
+	 *     annotations+=XAnnotation*
 	 */
 	protected void sequence_AnnotationField_XtendAnnotationType_2_4_0_XtendClass_2_1_0_XtendEnum_2_3_0_XtendField_2_0_0_0_0_XtendField_2_0_0_1_0_XtendInterface_2_2_0(EObject context, XtendMember semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -670,10 +667,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         (
-	 *             (annotationInfo=AnnotationField_XtendClass_2_1_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=AnnotationField_XtendClass_2_1_0 name=ValidID)
-	 *         ) 
+	 *         annotationInfo=AnnotationField_XtendClass_2_1_0 
+	 *         modifiers+=CommonModifier* 
+	 *         name=ValidID 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         extends=JvmParameterizedTypeReference? 
 	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 
@@ -687,13 +683,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (
-	 *             (annotationInfo=AnnotationField_XtendEnum_2_3_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=AnnotationField_XtendEnum_2_3_0 name=ValidID)
-	 *         ) 
-	 *         (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?
-	 *     )
+	 *     (annotationInfo=AnnotationField_XtendEnum_2_3_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
 	 */
 	protected void sequence_AnnotationField(EObject context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -705,22 +695,16 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     (
 	 *         (
 	 *             (
-	 *                 (annotationInfo=AnnotationField_XtendField_2_0_0_0_0 modifiers+=CommonModifier* modifiers+=FieldModifier) | 
-	 *                 (annotationInfo=AnnotationField_XtendField_2_0_0_0_0 modifiers+=FieldModifier)
-	 *             ) 
-	 *             modifiers+=CommonModifier* 
-	 *             type=JvmTypeReference? 
-	 *             name=ValidID 
-	 *             initialValue=XAnnotationElementValue?
-	 *         ) | 
-	 *         (
-	 *             (
-	 *                 (annotationInfo=AnnotationField_XtendField_2_0_0_1_0 modifiers+=CommonModifier* type=JvmTypeReference) | 
-	 *                 (annotationInfo=AnnotationField_XtendField_2_0_0_1_0 type=JvmTypeReference)
-	 *             ) 
-	 *             name=ValidID 
-	 *             initialValue=XAnnotationElementValue?
-	 *         )
+	 *                 annotationInfo=AnnotationField_XtendField_2_0_0_0_0 
+	 *                 modifiers+=CommonModifier* 
+	 *                 modifiers+=FieldModifier 
+	 *                 modifiers+=CommonModifier* 
+	 *                 type=JvmTypeReference? 
+	 *                 name=ValidID
+	 *             ) | 
+	 *             (annotationInfo=AnnotationField_XtendField_2_0_0_1_0 modifiers+=CommonModifier* type=JvmTypeReference name=ValidID)
+	 *         ) 
+	 *         initialValue=XAnnotationElementValue?
 	 *     )
 	 */
 	protected void sequence_AnnotationField(EObject context, XtendField semanticObject) {
@@ -731,10 +715,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         (
-	 *             (annotationInfo=AnnotationField_XtendInterface_2_2_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=AnnotationField_XtendInterface_2_2_0 name=ValidID)
-	 *         ) 
+	 *         annotationInfo=AnnotationField_XtendInterface_2_2_0 
+	 *         modifiers+=CommonModifier* 
+	 *         name=ValidID 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (extends+=JvmParameterizedTypeReference extends+=JvmParameterizedTypeReference*)? 
 	 *         members+=Member*
@@ -756,7 +739,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (package=QualifiedName? importSection=XImportSection? xtendTypes+=Type*)
+	 *     ((package=QualifiedName? importSection=XImportSection xtendTypes+=Type+) | (package=QualifiedName? xtendTypes+=Type+) | xtendTypes+=Type+)?
 	 */
 	protected void sequence_File(EObject context, XtendFile semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -792,13 +775,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (
-	 *             (annotationInfo=Member_XtendAnnotationType_2_6_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=Member_XtendAnnotationType_2_6_0 name=ValidID)
-	 *         ) 
-	 *         members+=AnnotationField*
-	 *     )
+	 *     (annotationInfo=Member_XtendAnnotationType_2_6_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
 	 */
 	protected void sequence_Member(EObject context, XtendAnnotationType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -807,7 +784,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     annotations+=XAnnotation+
+	 *     annotations+=XAnnotation*
 	 */
 	protected void sequence_Member_XtendAnnotationType_2_6_0_XtendClass_2_3_0_XtendConstructor_2_2_0_XtendEnum_2_5_0_XtendField_2_0_0_XtendFunction_2_1_0_XtendInterface_2_4_0(EObject context, XtendMember semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -817,7 +794,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((annotationInfo=Member_XtendClass_2_3_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Member_XtendClass_2_3_0 name=ValidID)) 
+	 *         annotationInfo=Member_XtendClass_2_3_0 
+	 *         modifiers+=CommonModifier* 
+	 *         name=ValidID 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         extends=JvmParameterizedTypeReference? 
 	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 
@@ -832,26 +811,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         (
-	 *             (
-	 *                 (
-	 *                     (
-	 *                         (
-	 *                             (
-	 *                                 (annotationInfo=Member_XtendConstructor_2_2_0 modifiers+=CommonModifier* (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?) | 
-	 *                                 (annotationInfo=Member_XtendConstructor_2_2_0 (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?)
-	 *                             ) 
-	 *                             (parameters+=Parameter parameters+=Parameter*)?
-	 *                         ) | 
-	 *                         (annotationInfo=Member_XtendConstructor_2_2_0 (parameters+=Parameter parameters+=Parameter*)?)
-	 *                     ) 
-	 *                     (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)?
-	 *                 ) | 
-	 *                 (annotationInfo=Member_XtendConstructor_2_2_0 (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)?)
-	 *             ) 
-	 *             expression=XBlockExpression
-	 *         ) | 
-	 *         (annotationInfo=Member_XtendConstructor_2_2_0 expression=XBlockExpression)
+	 *         annotationInfo=Member_XtendConstructor_2_2_0 
+	 *         modifiers+=CommonModifier* 
+	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
+	 *         (parameters+=Parameter parameters+=Parameter*)? 
+	 *         (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)? 
+	 *         expression=XBlockExpression
 	 *     )
 	 */
 	protected void sequence_Member(EObject context, XtendConstructor semanticObject) {
@@ -861,10 +826,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         ((annotationInfo=Member_XtendEnum_2_5_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Member_XtendEnum_2_5_0 name=ValidID)) 
-	 *         (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?
-	 *     )
+	 *     (annotationInfo=Member_XtendEnum_2_5_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
 	 */
 	protected void sequence_Member(EObject context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -874,40 +836,20 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
+	 *         annotationInfo=Member_XtendField_2_0_0 
+	 *         modifiers+=CommonModifier* 
 	 *         (
+	 *             (modifiers+=FieldModifier modifiers+=CommonModifier* type=JvmTypeReference? name=ValidID) | 
+	 *             (modifiers+='extension' (modifiers+=FieldModifier | modifiers+=CommonModifier)* type=JvmTypeReference name=ValidID?) | 
 	 *             (
-	 *                 annotationInfo=Member_XtendField_2_0_0 
+	 *                 modifiers+=FieldModifier 
 	 *                 modifiers+=CommonModifier* 
-	 *                 (
-	 *                     (modifiers+=FieldModifier modifiers+=CommonModifier* type=JvmTypeReference? name=ValidID) | 
-	 *                     (modifiers+='extension' (modifiers+=FieldModifier | modifiers+=CommonModifier)* type=JvmTypeReference name=ValidID?) | 
-	 *                     (
-	 *                         modifiers+=FieldModifier 
-	 *                         modifiers+=CommonModifier* 
-	 *                         modifiers+='extension' 
-	 *                         modifiers+=CommonModifier* 
-	 *                         type=JvmTypeReference 
-	 *                         name=ValidID?
-	 *                     ) | 
-	 *                     (type=JvmTypeReference name=ValidID)
-	 *                 )
+	 *                 modifiers+='extension' 
+	 *                 modifiers+=CommonModifier* 
+	 *                 type=JvmTypeReference 
+	 *                 name=ValidID?
 	 *             ) | 
-	 *             (
-	 *                 annotationInfo=Member_XtendField_2_0_0 
-	 *                 (
-	 *                     (modifiers+=FieldModifier modifiers+=CommonModifier* type=JvmTypeReference? name=ValidID) | 
-	 *                     (modifiers+='extension' (modifiers+=FieldModifier | modifiers+=CommonModifier)* type=JvmTypeReference name=ValidID?) | 
-	 *                     (
-	 *                         modifiers+=FieldModifier 
-	 *                         modifiers+=CommonModifier* 
-	 *                         modifiers+='extension' 
-	 *                         modifiers+=CommonModifier* 
-	 *                         type=JvmTypeReference 
-	 *                         name=ValidID?
-	 *                     ) | 
-	 *                     (type=JvmTypeReference name=ValidID)
-	 *                 )
-	 *             )
+	 *             (type=JvmTypeReference name=ValidID)
 	 *         ) 
 	 *         initialValue=XExpression?
 	 *     )
@@ -920,10 +862,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         (
-	 *             (annotationInfo=Member_XtendFunction_2_1_0 modifiers+=CommonModifier* modifiers+=MethodModifier) | 
-	 *             (annotationInfo=Member_XtendFunction_2_1_0 modifiers+=MethodModifier)
-	 *         ) 
+	 *         annotationInfo=Member_XtendFunction_2_1_0 
+	 *         modifiers+=CommonModifier* 
+	 *         modifiers+=MethodModifier 
 	 *         (modifiers+=CommonModifier | modifiers+=MethodModifier)* 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (
@@ -946,10 +887,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         (
-	 *             (annotationInfo=Member_XtendInterface_2_4_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=Member_XtendInterface_2_4_0 name=ValidID)
-	 *         ) 
+	 *         annotationInfo=Member_XtendInterface_2_4_0 
+	 *         modifiers+=CommonModifier* 
+	 *         name=ValidID 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (extends+=JvmParameterizedTypeReference extends+=JvmParameterizedTypeReference*)? 
 	 *         members+=Member*
@@ -1123,7 +1063,14 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     type=[JvmType|QualifiedName]
 	 */
 	protected void sequence_TypeReferenceNoTypeArgs(EObject context, JvmParameterizedTypeReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getTypeReferenceNoTypeArgsAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1(), semanticObject.getType());
+		feeder.finish();
 	}
 	
 	
@@ -1173,13 +1120,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (
-	 *             (annotationInfo=Type_XtendAnnotationType_2_3_0 modifiers+=CommonModifier* name=ValidID) | 
-	 *             (annotationInfo=Type_XtendAnnotationType_2_3_0 name=ValidID)
-	 *         ) 
-	 *         members+=AnnotationField*
-	 *     )
+	 *     (annotationInfo=Type_XtendAnnotationType_2_3_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
 	 */
 	protected void sequence_Type(EObject context, XtendAnnotationType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1188,7 +1129,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     annotations+=XAnnotation+
+	 *     annotations+=XAnnotation*
 	 */
 	protected void sequence_Type_XtendAnnotationType_2_3_0_XtendClass_2_0_0_XtendEnum_2_2_0_XtendInterface_2_1_0(EObject context, XtendTypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1198,7 +1139,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((annotationInfo=Type_XtendClass_2_0_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Type_XtendClass_2_0_0 name=ValidID)) 
+	 *         annotationInfo=Type_XtendClass_2_0_0 
+	 *         modifiers+=CommonModifier* 
+	 *         name=ValidID 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         extends=JvmParameterizedTypeReference? 
 	 *         (implements+=JvmSuperTypeReference implements+=JvmSuperTypeReference*)? 
@@ -1212,10 +1155,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         ((annotationInfo=Type_XtendEnum_2_2_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Type_XtendEnum_2_2_0 name=ValidID)) 
-	 *         (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?
-	 *     )
+	 *     (annotationInfo=Type_XtendEnum_2_2_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
 	 */
 	protected void sequence_Type(EObject context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1225,7 +1165,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((annotationInfo=Type_XtendInterface_2_1_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Type_XtendInterface_2_1_0 name=ValidID)) 
+	 *         annotationInfo=Type_XtendInterface_2_1_0 
+	 *         modifiers+=CommonModifier* 
+	 *         name=ValidID 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (extends+=JvmSuperTypeReference extends+=JvmSuperTypeReference*)? 
 	 *         members+=Member*
@@ -1238,7 +1180,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     ((constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*) | constructorCall=XConstructorCall_AnonymousClass_1_0_0_0)
+	 *     (constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*)
 	 */
 	protected void sequence_XConstructorCall(EObject context, AnonymousClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1299,6 +1241,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     name=ValidID
 	 */
 	protected void sequence_XtendEnumLiteral(EObject context, XtendEnumLiteral semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 }
