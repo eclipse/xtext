@@ -89,40 +89,33 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 
 
 	override generate() {
-		if (!generateStub && !grammar.inheritsXbase) {
-			// the binding of the DefaultEObjectLabelProvider and the 
-			//  DefaultDescriptionLabelProvider is done in the DefaultUIModule, so ...
-			return;
+		if (generateStub || grammar.inheritsXbase) {
+
+			if (projectConfig.eclipsePluginManifest != null) {
+				projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.ui"
+			}
+	
+			val labelProviderClass =
+				if (generateStub) grammar.EObjectLabelProviderClass
+				else new TypeReference(XBASE_LABEL_PROVIDER)
+	
+			val descriptionLabelProviderClass =
+				if (generateStub) grammar.descriptionLabelProviderClass
+				else new TypeReference(XBASE_DESCRIPTION_LABEL_PROVIDER)			 
+	
+			val iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider")
+			val rsdLabelProviderClass = 
+					new TypeReference("org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider")
+	
+			new GuiceModuleAccess.BindingFactory()
+					.addTypeToType(iLabelProviderClass, labelProviderClass)
+					.addConfiguredBinding("ResourceUIServiceLabelProvider", '''
+						binder.bind(«iLabelProviderClass».class).annotatedWith(«
+							rsdLabelProviderClass».class).to(«descriptionLabelProviderClass».class);
+					''').contributeTo(language.eclipsePluginGenModule)			
 		}
 
-		if (projectConfig.eclipsePluginManifest != null) {
-			projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.ui"
-		}
-
-		val labelProviderClass =
-			if (generateStub) grammar.EObjectLabelProviderClass
-			else new TypeReference(XBASE_LABEL_PROVIDER)
-
-		val descriptionLabelProviderClass =
-			if (generateStub) grammar.descriptionLabelProviderClass
-			else new TypeReference(XBASE_DESCRIPTION_LABEL_PROVIDER)			 
-
-		val iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider")
-		val rsdLabelProviderClass = 
-				new TypeReference("org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider")
-
-		new GuiceModuleAccess.BindingFactory()
-				.addTypeToType(iLabelProviderClass, labelProviderClass)
-				.addConfiguredBinding("ResourceUIServiceLabelProvider", '''
-					binder.bind(«iLabelProviderClass».class).annotatedWith(«
-						rsdLabelProviderClass».class).to(«descriptionLabelProviderClass».class);
-				''').contributeTo(language.eclipsePluginGenModule)			
-
-		if (!generateStub) {
-			return;
-		}
-
-		if (projectConfig.eclipsePluginSrc !== null) {
+		if (generateStub && projectConfig.eclipsePluginSrc !== null) {
 			if (preferXtendStubs) {
 				generateXtendEObjectLabelProvider
 				generateXtendDescriptionLabelProvider
