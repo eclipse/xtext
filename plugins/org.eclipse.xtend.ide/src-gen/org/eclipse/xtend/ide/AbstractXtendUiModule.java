@@ -229,7 +229,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return DefaultViewerCreator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XtendProposalProvider.class;
 	}
