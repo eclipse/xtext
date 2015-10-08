@@ -117,13 +117,16 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
     ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
-    if ((!this.generateStub)) {
-      return;
+    boolean _and = false;
+    if (!this.generateStub) {
+      _and = false;
+    } else {
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
+      boolean _tripleNotEquals = (_eclipsePluginSrc != null);
+      _and = _tripleNotEquals;
     }
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
-    boolean _tripleNotEquals = (_eclipsePluginSrc != null);
-    if (_tripleNotEquals) {
+    if (_and) {
       boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
         this.generateXtendQuickfixProvider();
@@ -132,12 +135,22 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       }
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       ManifestAccess _eclipsePluginManifest = _projectConfig_1.getEclipsePluginManifest();
-      Set<String> _exportedPackages = _eclipsePluginManifest.getExportedPackages();
-      Grammar _grammar_2 = this.getGrammar();
-      TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar_2);
-      String _packageName = _quickfixProviderClass.getPackageName();
-      _exportedPackages.add(_packageName);
-      this.addRegistrationToPluginXml();
+      boolean _notEquals = (!Objects.equal(_eclipsePluginManifest, null));
+      if (_notEquals) {
+        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+        ManifestAccess _eclipsePluginManifest_1 = _projectConfig_2.getEclipsePluginManifest();
+        Set<String> _exportedPackages = _eclipsePluginManifest_1.getExportedPackages();
+        Grammar _grammar_2 = this.getGrammar();
+        TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar_2);
+        String _packageName = _quickfixProviderClass.getPackageName();
+        _exportedPackages.add(_packageName);
+      }
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      PluginXmlAccess _eclipsePluginPluginXml = _projectConfig_3.getEclipsePluginPluginXml();
+      boolean _notEquals_1 = (!Objects.equal(_eclipsePluginPluginXml, null));
+      if (_notEquals_1) {
+        this.addRegistrationToPluginXml();
+      }
     }
   }
   

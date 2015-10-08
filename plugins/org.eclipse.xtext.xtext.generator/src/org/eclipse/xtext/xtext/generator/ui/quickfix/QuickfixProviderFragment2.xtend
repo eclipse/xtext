@@ -76,20 +76,20 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 					instanceClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (!generateStub) {
-			return;
-		}
-
-		if (projectConfig.eclipsePluginSrc !== null) {
+		if (generateStub && projectConfig.eclipsePluginSrc !== null) {
 			if (preferXtendStubs) {
 				generateXtendQuickfixProvider
 			} else {
 				generateJavaQuickfixProvider
 			}
 
-			projectConfig.eclipsePluginManifest.exportedPackages += grammar.quickfixProviderClass.packageName
+			if (projectConfig.eclipsePluginManifest != null) {
+				projectConfig.eclipsePluginManifest.exportedPackages += grammar.quickfixProviderClass.packageName
+			}
 
-			addRegistrationToPluginXml
+			if (projectConfig.eclipsePluginPluginXml != null) {
+				addRegistrationToPluginXml
+			}
 		}
 	}
 
