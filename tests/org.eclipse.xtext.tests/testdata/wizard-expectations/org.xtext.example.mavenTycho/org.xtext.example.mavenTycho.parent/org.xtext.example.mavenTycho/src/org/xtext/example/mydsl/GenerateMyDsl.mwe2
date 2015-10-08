@@ -15,9 +15,19 @@ Workflow {
 	component = XtextGenerator auto-inject {
 		configuration = {
 			project = WizardConfig auto-inject {
-				webSupport = true
-				genericIdeSupport = true
-				testingSupport = true
+				runtimeTest = {
+					enabled = true
+				}
+				eclipsePlugin = {
+					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = true
+				}
+				web = {
+					enabled = true
+				}
+				createEclipseMetaData = true
 			}
 			code = auto-inject {
 				encoding = "UTF-8"

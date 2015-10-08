@@ -61,7 +61,7 @@ final class GenerateXbase {
 				setProject(new WizardConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
-					setEclipseEditor(true);
+					getEclipsePlugin().setEnabled(true);
 				}});
 				setCode(new CodeConfig() {{
 					setEncoding("ISO-8859-1");
