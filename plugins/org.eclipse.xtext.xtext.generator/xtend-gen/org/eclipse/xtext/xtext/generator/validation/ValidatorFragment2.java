@@ -31,10 +31,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -147,21 +149,24 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     }
     this.generateAbstractValidator();
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    ManifestAccess _runtimeManifest = _projectConfig.getRuntimeManifest();
-    boolean _tripleNotEquals = (_runtimeManifest != null);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    ManifestAccess _manifest = _runtime.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _runtimeManifest_1 = _projectConfig_1.getRuntimeManifest();
-      Set<String> _exportedPackages = _runtimeManifest_1.getExportedPackages();
+      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      RuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_1.getManifest();
+      Set<String> _exportedPackages = _manifest_1.getExportedPackages();
       Grammar _grammar_4 = this.getGrammar();
       TypeReference _validatorClass_2 = this.getValidatorClass(_grammar_4);
       String _packageName = _validatorClass_2.getPackageName();
       _exportedPackages.add(_packageName);
     }
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    PluginXmlAccess _eclipsePluginPluginXml = _projectConfig_2.getEclipsePluginPluginXml();
-    boolean _tripleNotEquals_1 = (_eclipsePluginPluginXml != null);
+    XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig_2.getEclipsePlugin();
+    PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+    boolean _tripleNotEquals_1 = (_pluginXml != null);
     if (_tripleNotEquals_1) {
       this.contributeEclipsePluginExtensions();
     }
@@ -230,9 +235,10 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_validatorClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    _createXtendFile.writeTo(_runtimeSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    _createXtendFile.writeTo(_src);
   }
   
   protected void generateJavaValidatorStub() {
@@ -290,9 +296,10 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_validatorClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    _createJavaFile.writeTo(_runtimeSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    _createJavaFile.writeTo(_src);
   }
   
   protected void generateAbstractValidator() {
@@ -415,9 +422,10 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     javaFile.setContent(_client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrcGen = _projectConfig.getRuntimeSrcGen();
-    javaFile.writeTo(_runtimeSrcGen);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    javaFile.writeTo(_srcGen);
   }
   
   protected Iterable<EPackage> getGeneratedPackagesToValidate() {
@@ -472,9 +480,10 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
     {
       Grammar _grammar = this.getGrammar();
       final String simpleName = GrammarUtil.getSimpleName(_grammar);
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      PluginXmlAccess _eclipsePluginPluginXml = _projectConfig.getEclipsePluginPluginXml();
-      List<CharSequence> _entries = _eclipsePluginPluginXml.getEntries();
+      XtextProjectConfig _projectConfig = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+      List<CharSequence> _entries = _pluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- marker definitions for ");
       Grammar _grammar_1 = this.getGrammar();

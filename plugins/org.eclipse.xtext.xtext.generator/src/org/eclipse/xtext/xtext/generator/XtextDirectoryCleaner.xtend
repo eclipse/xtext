@@ -15,7 +15,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.io.File
 
 class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
-	@Inject IXtextProjectConfig config
+	@Inject XtextProjectConfig config
 
 	@Accessors(PUBLIC_SETTER)
 	boolean enabled = true
@@ -38,19 +38,7 @@ class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
 			return;
 			
 		val directories = newArrayList
-		directories += #[
-			config.runtimeModelGen,
-			config.runtimeSrcGen,
-			config.runtimeTestSrcGen,
-			config.genericIdeSrcGen,
-			config.genericIdeTestSrcGen,
-			config.eclipsePluginSrcGen,
-			config.eclipsePluginTestSrcGen,
-			config.ideaPluginSrcGen,
-			config.ideaPluginTestSrcGen,
-			config.webSrcGen,
-			config.webTestSrcGen
-		].filterNull.map[path].filter[new File(it).isDirectory]
+		directories += (config.enabledProjects.map[srcGen] + #[config.runtime.ecoreModel]).filterNull.map[path].filter[new File(it).isDirectory]
 		directories += extraDirectories
 		
 		val delegate = new DirectoryCleaner

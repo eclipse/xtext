@@ -25,8 +25,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -115,22 +116,25 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
       } else {
         this.generateJavaScopeProvider();
       }
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      ManifestAccess _runtimeManifest = _projectConfig.getRuntimeManifest();
-      boolean _tripleNotEquals = (_runtimeManifest != null);
+      XtextProjectConfig _projectConfig = this.getProjectConfig();
+      RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      ManifestAccess _manifest = _runtime.getManifest();
+      boolean _tripleNotEquals = (_manifest != null);
       if (_tripleNotEquals) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        ManifestAccess _runtimeManifest_1 = _projectConfig_1.getRuntimeManifest();
-        Set<String> _exportedPackages = _runtimeManifest_1.getExportedPackages();
+        XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        RuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+        ManifestAccess _manifest_1 = _runtime_1.getManifest();
+        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
         Grammar _grammar_1 = this.getGrammar();
         TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar_1);
         String _packageName = _scopeProviderClass.getPackageName();
         _exportedPackages.add(_packageName);
         boolean _isPreferXtendStubs_1 = this.codeConfig.isPreferXtendStubs();
         if (_isPreferXtendStubs_1) {
-          IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-          ManifestAccess _runtimeManifest_2 = _projectConfig_2.getRuntimeManifest();
-          Set<String> _requiredBundles = _runtimeManifest_2.getRequiredBundles();
+          XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+          RuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
+          ManifestAccess _manifest_2 = _runtime_2.getManifest();
+          Set<String> _requiredBundles = _manifest_2.getRequiredBundles();
           _requiredBundles.add("org.eclipse.xtext.xbase.lib");
         }
       }
@@ -233,9 +237,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_scopeProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    _createJavaFile.writeTo(_runtimeSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    _createJavaFile.writeTo(_src);
   }
   
   protected void generateXtendScopeProvider() {
@@ -278,9 +283,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_scopeProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    _createXtendFile.writeTo(_runtimeSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    _createXtendFile.writeTo(_src);
   }
   
   @Pure

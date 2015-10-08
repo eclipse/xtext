@@ -72,10 +72,10 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 			else
 				generateJavaScopeProvider()
 			
-			if (projectConfig.runtimeManifest !== null) {
-				projectConfig.runtimeManifest.exportedPackages += grammar.scopeProviderClass.packageName
+			if (projectConfig.runtime.manifest !== null) {
+				projectConfig.runtime.manifest.exportedPackages += grammar.scopeProviderClass.packageName
 				if (codeConfig.preferXtendStubs)
-					projectConfig.runtimeManifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
+					projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
 			}
 		}
 	}
@@ -109,7 +109,7 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 			public class «grammar.scopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
 			
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def generateXtendScopeProvider() {
@@ -123,7 +123,7 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 			class «grammar.scopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
 			
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 }

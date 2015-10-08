@@ -27,8 +27,8 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 		addRuntimeGuiceBindings
 		addEclipsePluginGuiceBindings
 		
-		if (projectConfig.eclipsePluginManifest !== null) {
-			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
+		if (projectConfig.eclipsePlugin.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext.builder', 'org.eclipse.xtext.ui'
 			])
 		}
