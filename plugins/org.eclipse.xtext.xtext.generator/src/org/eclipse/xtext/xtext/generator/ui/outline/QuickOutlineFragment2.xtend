@@ -22,12 +22,12 @@ class QuickOutlineFragment2 extends AbstractGeneratorFragment2 {
 	extension XtextGeneratorNaming
 	
 	override generate() {
-		if (projectConfig.eclipsePluginManifest != null) {
-			projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.ui"
+		if (projectConfig.eclipsePlugin.manifest != null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 		
-		if (projectConfig.eclipsePluginPluginXml != null) {
-			projectConfig.eclipsePluginPluginXml.entries += '''
+		if (projectConfig.eclipsePlugin.pluginXml != null) {
+			projectConfig.eclipsePlugin.pluginXml.entries += '''
 				<!-- Quick Outline -->
 				<extension
 					point="org.eclipse.ui.handlers">
