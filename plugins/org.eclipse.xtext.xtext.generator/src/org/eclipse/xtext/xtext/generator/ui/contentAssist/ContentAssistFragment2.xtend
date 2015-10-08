@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator.ui.contentAssist
 
 import com.google.common.collect.Sets
 import com.google.inject.Inject
-import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
@@ -69,16 +68,14 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		val superGrammar = g.nonTerminalsSuperGrammar
 		if(inheritImplementation && superGrammar != null)
 			superGrammar.proposalProviderClass
-		else new TypeReference(
-			"org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider"
-		)
+		else getDefaultGenProposalProviderSuperClass
 	}
 
 	/**
 	 * Extra getter facilitates customization by overriding. 
 	 */
-	def protected TypeReference getDefaultEObjectLabelProviderSuperClass() {
-		new TypeReference("org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider")
+	def protected TypeReference getDefaultGenProposalProviderSuperClass() {
+		new TypeReference("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider")
 	}
 
 
@@ -96,12 +93,9 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 					chosenClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		var generatedCode = false
-
 		if (projectConfig.eclipsePluginSrcGen !== null) {
 			// generate the 'Abstract...ProposalProvider'
 			generateGenJavaProposalProvider
-			generatedCode = true
 		}
 
 		if (generateStub && projectConfig.eclipsePluginSrc != null) {
@@ -110,15 +104,14 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 
 				if (projectConfig.eclipsePluginManifest != null) {
 					projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.xbase.lib"
+					projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtend.lib;resolution:=optional"
 				}
 			} else {
 				generateJavaProposalProviderStub
 			}
-
-			generatedCode = true
 		}
 
-		if (generatedCode && projectConfig.eclipsePluginManifest != null) {
+		if (projectConfig.eclipsePluginManifest != null) {
 			projectConfig.eclipsePluginManifest.exportedPackages += grammar.proposalProviderClass.packageName
 		}
 	}
@@ -147,8 +140,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		''').writeTo(projectConfig.eclipsePluginSrc)
 	}
 
-	// generation of the 'Abstract...ProposalProvider'
 
+	// generation of the 'Abstract...ProposalProvider'
 	
 	def generateGenJavaProposalProvider() {
 		// excluded features are those that stem from inherited grammars,
@@ -156,8 +149,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		val excludedFqnFeatureNames = grammar.getFQFeatureNamesToExclude
 		val processedNames = newHashSet()
 
-		// determine all assignments within the grammar that are not excluded
-		//  and not handled yet, (iterable is evaluated lazily!)
+		// determine all assignments within the grammar that are not excluded and not handled yet
+		//  (fold evaluates eager!)
 		val assignments = grammar.containedAssignments().fold(<Assignment>newArrayList()) [ candidates, assignment |
 			val fqFeatureName = assignment.FQFeatureName
 			if (!processedNames.contains(fqFeatureName) && !excludedFqnFeatureNames.contains(fqFeatureName)) {
@@ -167,8 +160,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 			candidates
 		]
 		
-		// determine the remaining rules that are not excluded
-		//  and not handled yet, (iterable is evaluated lazily!)
+		// determine the (remaining) rules that are not excluded and not handled yet
 		val remainingRules = grammar.rules.fold(<AbstractRule>newArrayList()) [candidates, rule |
   			val fqnFeatureName = rule.FQFeatureName
 			if (!processedNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)) {
@@ -230,7 +222,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	private def StringConcatenationClient handleAssignmentOptions(Iterable<AbstractElement> terminals) {
 		val processedTerminals = newHashSet();
 		
-		// for each type of terminal occurring in 'terminals' (evaluated lazily) ...
+		// for each type of terminal occurring in 'terminals' (fold evaluates eager!) ...
 		val candidates = terminals.fold(<AbstractElement>newHashSet) [ candidates, terminal |
 			if (!processedTerminals.contains(terminal.eClass)) {
 				processedTerminals += terminal.eClass
@@ -249,32 +241,23 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		'''
 	}
 
-	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, String accessor) {
-		'''
+	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, String accessor) '''
 		// subclasses may override
-		'''
-	}	
+	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, String accessor) {
-		'''
+	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, String accessor)  '''
 		lookupCrossReference(((«CrossReference»)«accessor»), context, acceptor);
-		'''
-	}	
+	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, String accessor) {
-		'''
+	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, String accessor) '''
 		completeRuleCall(((«RuleCall»)«accessor»), context, acceptor);
-		'''
-	}
-	
-	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, String accessor) {
-		val list = alternatives.elements
-		'''
-			«FOR it : list»
-				«it.assignmentTerminal("((Alternatives)" + accessor + ").getElements.get("+ list.indexOf(it) +")")»
-			«ENDFOR»
-		'''
-	}
+	'''
+
+	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, String accessor) '''
+		«FOR pair : alternatives.elements.indexed»
+			«pair.value.assignmentTerminal("((Alternatives)" + accessor + ").getElements.get("+ pair.key +")")»
+		«ENDFOR»
+	'''
 
 	// helper methods
 
@@ -299,32 +282,16 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	def getFQFeatureNamesToExclude(Grammar g) {
-		val superGrammar = g.nonTerminalsSuperGrammar
-		if (superGrammar != null) {
-			val superGrammarsFqFeatureNames = computeFQFeatureNamesFromSuperGrammars(g).toSet
+		if (g.nonTerminalsSuperGrammar != null) {
 			val thisGrammarFqFeatureNames = g.computeFQFeatureNames.toSet
+			val superGrammarsFqFeatureNames = g.allUsedGrammars.map[
+				computeFQFeatureNames
+			].flatten.toSet
 
-			// return all elements that are already defined in some inherited grammars
+			// return all elements (of 'g') that are already defined in some inherited grammars
 			Sets.intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames)
 		} else {
-			newHashSet()
-		}
-	}
-
-	def private computeFQFeatureNamesFromSuperGrammars(Grammar g) {
-		val superGrammars = newHashSet()
-		computeAllSuperGrammars(g, superGrammars)
-		superGrammars.map[
-			computeFQFeatureNames
-		].flatten
-	}
-
-	def private void computeAllSuperGrammars(Grammar current, Set<Grammar> visitedGrammars) {
-		for (s : current.usedGrammars) {
-			if (!visitedGrammars.contains(s)) {
-				visitedGrammars.add(s)
-				computeAllSuperGrammars(s, visitedGrammars)
-			}
+			emptySet()
 		}
 	}
 }

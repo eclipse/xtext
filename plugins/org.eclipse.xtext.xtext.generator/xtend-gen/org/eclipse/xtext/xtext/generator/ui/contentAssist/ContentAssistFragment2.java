@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
@@ -111,8 +111,7 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       if (_and) {
         _xifexpression = this.getProposalProviderClass(superGrammar);
       } else {
-        _xifexpression = new TypeReference(
-          "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider");
+        _xifexpression = this.getDefaultGenProposalProviderSuperClass();
       }
       _xblockexpression = _xifexpression;
     }
@@ -122,8 +121,8 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   /**
    * Extra getter facilitates customization by overriding.
    */
-  protected TypeReference getDefaultEObjectLabelProviderSuperClass() {
-    return new TypeReference("org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider");
+  protected TypeReference getDefaultGenProposalProviderSuperClass() {
+    return new TypeReference("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider");
   }
   
   @Override
@@ -152,13 +151,11 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
     ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
-    boolean generatedCode = false;
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _eclipsePluginSrcGen = _projectConfig_2.getEclipsePluginSrcGen();
     boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
     if (_tripleNotEquals) {
       this.generateGenJavaProposalProvider();
-      generatedCode = true;
     }
     boolean _and = false;
     if (!this.generateStub) {
@@ -181,25 +178,22 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
           ManifestAccess _eclipsePluginManifest_3 = _projectConfig_5.getEclipsePluginManifest();
           Set<String> _requiredBundles_1 = _eclipsePluginManifest_3.getRequiredBundles();
           _requiredBundles_1.add("org.eclipse.xtext.xbase.lib");
+          IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+          ManifestAccess _eclipsePluginManifest_4 = _projectConfig_6.getEclipsePluginManifest();
+          Set<String> _requiredBundles_2 = _eclipsePluginManifest_4.getRequiredBundles();
+          _requiredBundles_2.add("org.eclipse.xtend.lib;resolution:=optional");
         }
       } else {
         this.generateJavaProposalProviderStub();
       }
-      generatedCode = true;
     }
-    boolean _and_1 = false;
-    if (!generatedCode) {
-      _and_1 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_4 = _projectConfig_6.getEclipsePluginManifest();
-      boolean _notEquals_3 = (!Objects.equal(_eclipsePluginManifest_4, null));
-      _and_1 = _notEquals_3;
-    }
-    if (_and_1) {
-      IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_5 = _projectConfig_7.getEclipsePluginManifest();
-      Set<String> _exportedPackages = _eclipsePluginManifest_5.getExportedPackages();
+    IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
+    ManifestAccess _eclipsePluginManifest_5 = _projectConfig_7.getEclipsePluginManifest();
+    boolean _notEquals_3 = (!Objects.equal(_eclipsePluginManifest_5, null));
+    if (_notEquals_3) {
+      IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
+      ManifestAccess _eclipsePluginManifest_6 = _projectConfig_8.getEclipsePluginManifest();
+      Set<String> _exportedPackages = _eclipsePluginManifest_6.getExportedPackages();
       Grammar _grammar_2 = this.getGrammar();
       TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar_2);
       String _packageName = _proposalProviderClass.getPackageName();
@@ -285,7 +279,7 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   
   public void generateGenJavaProposalProvider() {
     Grammar _grammar = this.getGrammar();
-    final AbstractSet<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(_grammar);
+    final Set<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(_grammar);
     final HashSet<String> processedNames = CollectionLiterals.<String>newHashSet();
     Grammar _grammar_1 = this.getGrammar();
     List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(_grammar_1);
@@ -592,27 +586,25 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   }
   
   private StringConcatenationClient _assignmentTerminal(final Alternatives alternatives, final String accessor) {
-    StringConcatenationClient _xblockexpression = null;
-    {
-      final EList<AbstractElement> list = alternatives.getElements();
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          {
-            for(final AbstractElement it : list) {
-              int _indexOf = list.indexOf(it);
-              String _plus = ((("((Alternatives)" + accessor) + ").getElements.get(") + Integer.valueOf(_indexOf));
-              String _plus_1 = (_plus + ")");
-              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(it, _plus_1);
-              _builder.append(_assignmentTerminal, "");
-              _builder.newLineIfNotEmpty();
-            }
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          EList<AbstractElement> _elements = alternatives.getElements();
+          Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements);
+          for(final Pair<Integer, AbstractElement> pair : _indexed) {
+            AbstractElement _value = pair.getValue();
+            Integer _key = pair.getKey();
+            String _plus = ((("((Alternatives)" + accessor) + ").getElements.get(") + _key);
+            String _plus_1 = (_plus + ")");
+            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _plus_1);
+            _builder.append(_assignmentTerminal, "");
+            _builder.newLineIfNotEmpty();
           }
         }
-      };
-      _xblockexpression = _client;
-    }
-    return _xblockexpression;
+      }
+    };
+    return _client;
   }
   
   private TypeReference getContentAssistContextClass() {
@@ -658,57 +650,32 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
     return Iterables.<String>concat(_map, _map_1);
   }
   
-  public AbstractSet<String> getFQFeatureNamesToExclude(final Grammar g) {
-    AbstractSet<String> _xblockexpression = null;
-    {
-      final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
-      AbstractSet<String> _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(superGrammar, null));
-      if (_notEquals) {
-        Sets.SetView<String> _xblockexpression_1 = null;
-        {
-          Iterable<String> _computeFQFeatureNamesFromSuperGrammars = this.computeFQFeatureNamesFromSuperGrammars(g);
-          final Set<String> superGrammarsFqFeatureNames = IterableExtensions.<String>toSet(_computeFQFeatureNamesFromSuperGrammars);
-          Iterable<String> _computeFQFeatureNames = this.computeFQFeatureNames(g);
-          final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFQFeatureNames);
-          _xblockexpression_1 = Sets.<String>intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames);
-        }
-        _xifexpression = _xblockexpression_1;
-      } else {
-        _xifexpression = CollectionLiterals.<String>newHashSet();
+  public Set<String> getFQFeatureNamesToExclude(final Grammar g) {
+    Set<String> _xifexpression = null;
+    Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
+    boolean _notEquals = (!Objects.equal(_nonTerminalsSuperGrammar, null));
+    if (_notEquals) {
+      Sets.SetView<String> _xblockexpression = null;
+      {
+        Iterable<String> _computeFQFeatureNames = this.computeFQFeatureNames(g);
+        final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFQFeatureNames);
+        List<Grammar> _allUsedGrammars = GrammarUtil.allUsedGrammars(g);
+        final Function1<Grammar, Iterable<String>> _function = new Function1<Grammar, Iterable<String>>() {
+          @Override
+          public Iterable<String> apply(final Grammar it) {
+            return ContentAssistFragment2.this.computeFQFeatureNames(it);
+          }
+        };
+        List<Iterable<String>> _map = ListExtensions.<Grammar, Iterable<String>>map(_allUsedGrammars, _function);
+        Iterable<String> _flatten = Iterables.<String>concat(_map);
+        final Set<String> superGrammarsFqFeatureNames = IterableExtensions.<String>toSet(_flatten);
+        _xblockexpression = Sets.<String>intersection(thisGrammarFqFeatureNames, superGrammarsFqFeatureNames);
       }
-      _xblockexpression = _xifexpression;
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = CollectionLiterals.<String>emptySet();
     }
-    return _xblockexpression;
-  }
-  
-  private Iterable<String> computeFQFeatureNamesFromSuperGrammars(final Grammar g) {
-    Iterable<String> _xblockexpression = null;
-    {
-      final HashSet<Grammar> superGrammars = CollectionLiterals.<Grammar>newHashSet();
-      this.computeAllSuperGrammars(g, superGrammars);
-      final Function1<Grammar, Iterable<String>> _function = new Function1<Grammar, Iterable<String>>() {
-        @Override
-        public Iterable<String> apply(final Grammar it) {
-          return ContentAssistFragment2.this.computeFQFeatureNames(it);
-        }
-      };
-      Iterable<Iterable<String>> _map = IterableExtensions.<Grammar, Iterable<String>>map(superGrammars, _function);
-      _xblockexpression = Iterables.<String>concat(_map);
-    }
-    return _xblockexpression;
-  }
-  
-  private void computeAllSuperGrammars(final Grammar current, final Set<Grammar> visitedGrammars) {
-    EList<Grammar> _usedGrammars = current.getUsedGrammars();
-    for (final Grammar s : _usedGrammars) {
-      boolean _contains = visitedGrammars.contains(s);
-      boolean _not = (!_contains);
-      if (_not) {
-        visitedGrammars.add(s);
-        this.computeAllSuperGrammars(s, visitedGrammars);
-      }
-    }
+    return _xifexpression;
   }
   
   private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final String accessor) {
