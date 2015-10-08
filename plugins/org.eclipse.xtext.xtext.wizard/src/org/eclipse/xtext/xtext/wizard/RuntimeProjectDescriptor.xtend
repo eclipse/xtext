@@ -283,9 +283,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 							
 							// content assist API
-							fragment = adapter.FragmentAdapter {
-								fragment = contentAssist.ContentAssistFragment auto-inject {}
-							}
+							fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}
 							
 							// provides a preference page for template proposals
 							fragment = adapter.FragmentAdapter {
