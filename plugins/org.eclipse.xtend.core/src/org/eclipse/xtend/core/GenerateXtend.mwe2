@@ -103,9 +103,8 @@ Workflow {
 
 			fragment = ui.outline.OutlineTreeProviderFragment2 {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = outline.QuickOutlineFragment {}
-			}
+			fragment = ui.outline.QuickOutlineFragment2 {}
+
 			fragment = adapter.FragmentAdapter {
 				fragment = compare.CompareFragment {
 					fileExtensions = file.extensions
