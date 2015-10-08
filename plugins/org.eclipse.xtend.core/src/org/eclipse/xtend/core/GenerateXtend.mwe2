@@ -42,12 +42,21 @@ Workflow {
 	component = XtextGenerator auto-inject {
 		configuration = parser.XtendGeneratorModule {
 			project = WizardConfig auto-inject {
-				eclipseEditor = true
-				eclipsePluginProjectName = "org.eclipse.xtend.ide"
-				genericIdeSupport = true
-				genericIdeProjectName = "org.eclipse.xtend.ide.common"
-				ideaEditor = true
-				ideaPluginRoot = "../../intellij/org.eclipse.xtend.idea"
+				runtime = {
+					name = runtimeProjectName
+				}
+				eclipsePlugin = {
+					enabled = true
+					name = "org.eclipse.xtend.ide"
+				}
+				genericIde = {
+					enabled = true
+					name = "org.eclipse.xtend.ide.common"
+				}
+				ideaPlugin = {
+					enabled = true
+					root = "../../intellij/org.eclipse.xtend.idea" 
+				}
 			}
 			code = {
 				encoding = "ISO-8859-1"
