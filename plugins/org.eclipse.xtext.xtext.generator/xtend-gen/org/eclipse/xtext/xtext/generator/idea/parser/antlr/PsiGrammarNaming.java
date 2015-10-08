@@ -29,17 +29,26 @@ public class PsiGrammarNaming extends GrammarNaming {
     StringConcatenation _builder = new StringConcatenation();
     String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
     _builder.append(_ideaBasePackage, "");
+    _builder.append(".parser.antlr");
+    return _builder.toString();
+  }
+  
+  @Override
+  public String getInternalParserPackage(final Grammar it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
+    _builder.append(_ideaBasePackage, "");
     _builder.append(".parser.antlr.internal");
     return _builder.toString();
   }
   
   @Override
   public TypeReference getGrammarClass(final Grammar it) {
-    String _parserPackage = this.getParserPackage(it);
+    String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("PsiInternal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
-    return new TypeReference(_parserPackage, _builder.toString());
+    return new TypeReference(_internalParserPackage, _builder.toString());
   }
 }
