@@ -95,12 +95,13 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			new GuiceModuleAccess.BindingFactory()
 				.addTypeToType(IGenerator.typeRef, language.grammar.generatorStub)
 				.contributeTo(language.runtimeGenModule)
-			if (projectConfig.runtimeManifest !== null)
-				projectConfig.runtimeManifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
+			if (projectConfig.runtime.manifest !== null)
+				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
 			doGenerateStubFile
 		}
 		if (isGenerateStub || isGenerateJavaMain) {
-			projectConfig.runtimeManifest.exportedPackages += language.grammar.generatorStub.packageName
+			if (projectConfig.runtime.manifest !== null)
+				projectConfig.runtime.manifest.exportedPackages += language.grammar.generatorStub.packageName
 		}
 		
 		if (isGenerateJavaMain)
@@ -111,9 +112,9 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			doGenerateMweFile
 		
 		contributeEclipsePluginGuiceBindings
-		if (projectConfig.eclipsePluginManifest !== null)
-			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.builder'
-		if (projectConfig.eclipsePluginPluginXml !== null)
+		if (projectConfig.eclipsePlugin.manifest !== null)
+			projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtext.builder'
+		if (projectConfig.eclipsePlugin.pluginXml !== null)
 			contributeEclipsePluginExtensions
 	}
 	
@@ -147,7 +148,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 				}
 			
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 
 	protected def void doGenerateJavaMain() {
@@ -197,7 +198,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					System.out.println("Code generation finished.");
 				}
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 
 	protected def void doGenerateXtendMain() {
@@ -240,7 +241,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					System.out.println('Code generation finished.')
 				}
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def void doGenerateMweFile() {
@@ -278,12 +279,12 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					}
 				}
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def contributeEclipsePluginExtensions() {
 		val name = language.grammar.name
-		projectConfig.eclipsePluginPluginXml.entries += '''
+		projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<extension point="org.eclipse.xtext.builder.participant">
 				<participant
 					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.IXtextBuilderParticipant"

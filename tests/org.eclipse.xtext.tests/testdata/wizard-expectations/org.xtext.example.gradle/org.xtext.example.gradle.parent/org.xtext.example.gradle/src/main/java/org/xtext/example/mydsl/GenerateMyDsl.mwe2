@@ -15,11 +15,15 @@ Workflow {
 	component = XtextGenerator auto-inject {
 		configuration = {
 			project = WizardConfig auto-inject {
-				eclipseEditor = false
-				ideaEditor = true
-				webSupport = true
-				genericIdeSupport = true
-				testingSupport = true
+				runtimeTest = {
+					enabled = true
+				}
+				ideaPlugin = {
+					enabled = true
+				}
+				web = {
+					enabled = true
+				}
 				mavenLayout = true
 			}
 			code = auto-inject {

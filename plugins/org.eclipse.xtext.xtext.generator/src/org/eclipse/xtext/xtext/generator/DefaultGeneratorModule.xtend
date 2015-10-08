@@ -27,7 +27,7 @@ class DefaultGeneratorModule extends AbstractGenericModule {
 	}
 	
 	def void configureXtextProjectConfig(Binder binder) {
-		binder.bind(IXtextProjectConfig).toInstance(project)
+		binder.bind(XtextProjectConfig).toInstance(project)
 	}
 	
 	def void configureCodeConfig(Binder binder) {

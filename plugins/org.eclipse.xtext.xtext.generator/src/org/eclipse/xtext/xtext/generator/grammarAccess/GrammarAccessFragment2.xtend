@@ -65,8 +65,8 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 		}
 		bindingFactory.addTypeToType(IGrammarAccess.typeRef, language.grammar.grammarAccess)
 			.contributeTo(language.runtimeGenModule)
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest.exportedPackages.addAll(#[
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.exportedPackages.addAll(#[
 				grammar.runtimeBasePackage, grammar.runtimeBasePackage + ".services"
 			])
 		}
@@ -98,7 +98,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 						+ ". Therefore, the grammar is persisted as XMI and not as binary. This can be a performance drawback.")
 				copy.classpathRelativePathToXmi
 			}
-		val uri = projectConfig.runtimeSrcGen.getURI(path)
+		val uri = projectConfig.runtime.srcGen.getURI(path)
 		val resource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE)
 		addAllGrammarsToResource(resource, copy, new HashSet<Grammar>())
 		isSaving.set(true)
@@ -243,7 +243,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 				«ENDFOR»
 			}
 		'''
-		javaFile.writeTo(projectConfig.runtimeSrcGen)
+		javaFile.writeTo(projectConfig.runtime.srcGen)
 	}
 	
 	protected def StringConcatenationClient parserRuleClasses(ParserRule it) '''
