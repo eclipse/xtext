@@ -62,9 +62,7 @@ Workflow {
 			}
 
 			// The antlr parser generator fragment.
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-				}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
 			}
 
 			// Xtend-based API for validation
