@@ -272,11 +272,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 							
 							// outline API
-							fragment = ui.outline.OutlineTreeProviderFragment2 {}
+							fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
 							
-							fragment = adapter.FragmentAdapter {
-								fragment = outline.QuickOutlineFragment auto-inject {}
-							}
+							// quick outline menu contribution
+							fragment = ui.outline.QuickOutlineFragment2 auto-inject {}
 							
 							// quickfix API
 							fragment = adapter.FragmentAdapter {
