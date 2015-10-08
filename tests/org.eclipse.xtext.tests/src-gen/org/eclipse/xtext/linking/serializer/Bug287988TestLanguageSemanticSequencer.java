@@ -12,12 +12,15 @@ import org.eclipse.xtext.linking.bug287988Test.Master;
 import org.eclipse.xtext.linking.bug287988Test.Model;
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -142,7 +145,14 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     name=ID
 	 */
 	protected void sequence_CallMe2(EObject context, Attribute semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, Bug287988TestPackage.Literals.BASE_ATTRIBUTE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287988TestPackage.Literals.BASE_ATTRIBUTE__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getCallMe2Access().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -160,7 +170,14 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     name=ID
 	 */
 	protected void sequence_CallMe4(EObject context, Attribute semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, Bug287988TestPackage.Literals.BASE_ATTRIBUTE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287988TestPackage.Literals.BASE_ATTRIBUTE__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getCallMe4Access().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -203,12 +220,12 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	/**
 	 * Constraint:
 	 *     (
-	 *         attributes+=BaseAttribute* | 
-	 *         attributes+=SimpleAttribute* | 
-	 *         attributes+=RuleCallAttribute* | 
-	 *         attributes+=RuleCallAttribute2* | 
-	 *         attributes+=RuleCallAttribute3* | 
-	 *         attributes+=ActionAttribute*
+	 *         attributes+=BaseAttribute+ | 
+	 *         attributes+=SimpleAttribute+ | 
+	 *         attributes+=RuleCallAttribute+ | 
+	 *         attributes+=RuleCallAttribute2+ | 
+	 *         attributes+=RuleCallAttribute3+ | 
+	 *         attributes+=ActionAttribute+
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {

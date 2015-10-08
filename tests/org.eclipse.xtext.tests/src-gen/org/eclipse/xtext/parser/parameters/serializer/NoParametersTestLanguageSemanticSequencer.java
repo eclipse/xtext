@@ -12,11 +12,14 @@ import org.eclipse.xtext.parser.parameters.parametersTestLanguage.Scenario;
 import org.eclipse.xtext.parser.parameters.serializer.ParametersTestLanguageSemanticSequencer;
 import org.eclipse.xtext.parser.parameters.services.NoParametersTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLanguageSemanticSequencer {
@@ -115,7 +118,14 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *     second=ID
 	 */
 	protected void sequence_Scenario1_False(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario1_FalseAccess().getSecondIDTerminalRuleCall_0(), semanticObject.getSecond());
+		feeder.finish();
 	}
 	
 	
@@ -124,7 +134,14 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *     first=ID
 	 */
 	protected void sequence_Scenario1_True(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario1_TrueAccess().getFirstIDTerminalRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
@@ -133,7 +150,14 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *     first=IdOrKeyword_False
 	 */
 	protected void sequence_Scenario2_False(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario2_FalseAccess().getFirstIdOrKeyword_FalseParserRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
@@ -142,7 +166,14 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *     first=IdOrKeyword_True
 	 */
 	protected void sequence_Scenario2_True(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario2_TrueAccess().getFirstIdOrKeyword_TrueParserRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
@@ -169,7 +200,14 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *     second=IdOrKeyword_False
 	 */
 	protected void sequence_Scenario4_False(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario4_FalseAccess().getSecondIdOrKeyword_FalseParserRuleCall_0_0(), semanticObject.getSecond());
+		feeder.finish();
 	}
 	
 	
@@ -178,6 +216,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *     second=IdOrKeyword_True
 	 */
 	protected void sequence_Scenario4_True(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario4_TrueAccess().getSecondIdOrKeyword_TrueParserRuleCall_0_0(), semanticObject.getSecond());
+		feeder.finish();
 	}
 }

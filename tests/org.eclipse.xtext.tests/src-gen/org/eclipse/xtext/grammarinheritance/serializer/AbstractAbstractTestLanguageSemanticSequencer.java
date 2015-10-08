@@ -64,7 +64,7 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	/**
 	 * Constraint:
-	 *     elements+=ExtendableParserRule*
+	 *     elements+=ExtendableParserRule+
 	 */
 	protected void sequence_AbstractCallExtendedParserRule(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -73,7 +73,7 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	/**
 	 * Constraint:
-	 *     elements+=OverridableParserRule*
+	 *     elements+=OverridableParserRule+
 	 */
 	protected void sequence_AbstractCallOverridenParserRule(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

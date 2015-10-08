@@ -200,7 +200,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	/**
 	 * Constraint:
-	 *     (isTrue?='kw2'?)
+	 *     isTrue?='kw2'?
 	 */
 	protected void sequence_BooleanAlternativeLiteral(EObject context, BooleanAlternativeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -240,10 +240,10 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL1) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL1));
-			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL));
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__FRAG_VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__FRAG_VAL));
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
@@ -259,14 +259,14 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *     (
 	 *         foo=ID 
 	 *         (
-	 *             val1+=ID? | 
-	 *             val2+=ID? | 
-	 *             val3+=ID? | 
-	 *             val4+=ID? | 
-	 *             val5+=ID? | 
-	 *             val6+=ID? | 
-	 *             val7+=ID? | 
-	 *             val8+=ID?
+	 *             val1+=ID | 
+	 *             val2+=ID | 
+	 *             val3+=ID | 
+	 *             val4+=ID | 
+	 *             val5+=ID | 
+	 *             val6+=ID | 
+	 *             val7+=ID | 
+	 *             val8+=ID
 	 *         )*
 	 *     )
 	 */

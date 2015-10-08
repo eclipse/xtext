@@ -62,7 +62,7 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     ((child=Baz_Baz_2_0 name=ID) | name=ID)
+	 *     (name=ID | (child=Baz_Baz_2_0 name=ID))
 	 */
 	protected void sequence_Baz(EObject context, Baz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

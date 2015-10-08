@@ -39,7 +39,7 @@ public class TreeTestLanguageSemanticSequencer extends AbstractDelegatingSemanti
 	
 	/**
 	 * Constraint:
-	 *     children+=Node*
+	 *     children+=Node+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

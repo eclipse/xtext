@@ -64,7 +64,7 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	/**
 	 * Constraint:
-	 *     elements+=Type*
+	 *     elements+=Type+
 	 */
 	protected void sequence_Root(EObject context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage;
 import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRef;
 import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRefN;
@@ -24,8 +25,10 @@ import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvi
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess;
 
 @SuppressWarnings("all")
@@ -89,7 +92,14 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 *     val1=ID
 	 */
 	protected void sequence_ContainmentRef1(EObject context, ContainmentRefN semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL1));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getContainmentRef1Access().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		feeder.finish();
 	}
 	
 	
@@ -98,7 +108,14 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 *     val2=ID
 	 */
 	protected void sequence_ContainmentRef2(EObject context, ContainmentRefN semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL2) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL2));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getContainmentRef2Access().getVal2IDTerminalRuleCall_1_0(), semanticObject.getVal2());
+		feeder.finish();
 	}
 	
 	
