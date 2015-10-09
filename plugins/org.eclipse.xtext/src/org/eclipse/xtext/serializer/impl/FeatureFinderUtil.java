@@ -14,6 +14,8 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 
+import com.google.common.base.Preconditions;
+
 /**
  * @author Sebastian Zarnekow - Moved from GrammarUtil
  */
@@ -23,6 +25,7 @@ public class FeatureFinderUtil {
 	 * @since 2.0
 	 */
 	public static EStructuralFeature getFeature(AbstractElement grammarElement, EClass owner) {
+		Preconditions.checkNotNull(owner);
 		if (grammarElement == null)
 			return null;
 		String featureName = null;
