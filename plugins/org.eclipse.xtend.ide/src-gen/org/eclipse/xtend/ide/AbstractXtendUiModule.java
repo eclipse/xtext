@@ -226,7 +226,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return XtendOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 	public Class<? extends IViewerCreator> bindIViewerCreator() {
 		return DefaultViewerCreator.class;
 	}
