@@ -20,13 +20,16 @@ Workflow {
 	component = XtextGenerator auto-inject {
 		configuration = StateMachineGeneratorModule {
 			project = WizardConfig auto-inject {
-				genericIdeSupport = true
-				eclipseEditor = false
-				webSupport = true
-				webRoot = "../org.eclipse.xtext.web.example.jetty"
-				webSrc = "../org.eclipse.xtext.web.example.jetty/src/main/java"
-				webSrcGen = "../org.eclipse.xtext.web.example.jetty/src/main/xtext-gen"
-				webApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp"
+				genericIde = {
+					enabled = true
+				}
+				web = {
+					enabled = true
+					root = "../org.eclipse.xtext.web.example.jetty"
+					src = "../org.eclipse.xtext.web.example.jetty/src/main/java"
+					srcGen = "../org.eclipse.xtext.web.example.jetty/src/main/xtext-gen"
+					assets = "../org.eclipse.xtext.web.example.jetty/src/main/webapp"
+				}
 			}
 			code = auto-inject {
 				encoding = "UTF-8"
