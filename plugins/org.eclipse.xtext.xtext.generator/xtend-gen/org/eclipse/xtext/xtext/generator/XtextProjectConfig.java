@@ -12,6 +12,7 @@ import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -24,23 +25,78 @@ import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.WebProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
+import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
-@Accessors
+@Accessors(AccessorType.PUBLIC_GETTER)
 @SuppressWarnings("all")
 public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
-  private RuntimeProjectConfig runtime = new RuntimeProjectConfig();
+  private RuntimeProjectConfig runtime;
   
-  private BundleProjectConfig runtimeTest = new BundleProjectConfig();
+  private BundleProjectConfig runtimeTest;
   
-  private BundleProjectConfig genericIde = new BundleProjectConfig();
+  private BundleProjectConfig genericIde;
   
-  private BundleProjectConfig eclipsePlugin = new BundleProjectConfig();
+  private BundleProjectConfig eclipsePlugin;
   
-  private BundleProjectConfig eclipsePluginTest = new BundleProjectConfig();
+  private BundleProjectConfig eclipsePluginTest;
   
-  private SubProjectConfig ideaPlugin = new SubProjectConfig();
+  private SubProjectConfig ideaPlugin;
   
-  private WebProjectConfig web = new WebProjectConfig();
+  private WebProjectConfig web;
+  
+  public XtextProjectConfig() {
+    RuntimeProjectConfig _runtimeProjectConfig = new RuntimeProjectConfig();
+    this.setRuntime(_runtimeProjectConfig);
+    BundleProjectConfig _bundleProjectConfig = new BundleProjectConfig();
+    this.setRuntimeTest(_bundleProjectConfig);
+    BundleProjectConfig _bundleProjectConfig_1 = new BundleProjectConfig();
+    this.setGenericIde(_bundleProjectConfig_1);
+    BundleProjectConfig _bundleProjectConfig_2 = new BundleProjectConfig();
+    this.setEclipsePlugin(_bundleProjectConfig_2);
+    BundleProjectConfig _bundleProjectConfig_3 = new BundleProjectConfig();
+    this.setEclipsePluginTest(_bundleProjectConfig_3);
+    SubProjectConfig _subProjectConfig = new SubProjectConfig();
+    this.setIdeaPlugin(_subProjectConfig);
+    WebProjectConfig _webProjectConfig = new WebProjectConfig();
+    this.setWeb(_webProjectConfig);
+  }
+  
+  public void setRuntime(final RuntimeProjectConfig config) {
+    this.runtime = config;
+    config.setOwner(this);
+  }
+  
+  public void setRuntimeTest(final BundleProjectConfig config) {
+    this.runtimeTest = config;
+    config.setOwner(this);
+  }
+  
+  public void setGenericIde(final BundleProjectConfig config) {
+    this.genericIde = config;
+    config.setOwner(this);
+  }
+  
+  public void setEclipsePlugin(final BundleProjectConfig config) {
+    this.eclipsePlugin = config;
+    config.setOwner(this);
+  }
+  
+  public void setEclipsePluginTest(final BundleProjectConfig config) {
+    this.eclipsePluginTest = config;
+    config.setOwner(this);
+  }
+  
+  public void setIdeaPlugin(final SubProjectConfig config) {
+    this.ideaPlugin = config;
+    config.setOwner(this);
+  }
+  
+  public void setWeb(final WebProjectConfig config) {
+    this.web = config;
+    config.setOwner(this);
+  }
   
   public void checkConfiguration(final Issues issues) {
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
@@ -119,13 +175,21 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     }
   }
   
+  protected ManifestAccess newManifestAccess() {
+    return new ManifestAccess();
+  }
+  
+  protected PluginXmlAccess newPluginXmlAccess() {
+    return new PluginXmlAccess();
+  }
+  
+  protected XtextGeneratorFileSystemAccess newFileSystemAccess(final String path, final boolean overWrite) {
+    return new XtextGeneratorFileSystemAccess(path, overWrite);
+  }
+  
   @Pure
   public RuntimeProjectConfig getRuntime() {
     return this.runtime;
-  }
-  
-  public void setRuntime(final RuntimeProjectConfig runtime) {
-    this.runtime = runtime;
   }
   
   @Pure
@@ -133,17 +197,9 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return this.runtimeTest;
   }
   
-  public void setRuntimeTest(final BundleProjectConfig runtimeTest) {
-    this.runtimeTest = runtimeTest;
-  }
-  
   @Pure
   public BundleProjectConfig getGenericIde() {
     return this.genericIde;
-  }
-  
-  public void setGenericIde(final BundleProjectConfig genericIde) {
-    this.genericIde = genericIde;
   }
   
   @Pure
@@ -151,17 +207,9 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return this.eclipsePlugin;
   }
   
-  public void setEclipsePlugin(final BundleProjectConfig eclipsePlugin) {
-    this.eclipsePlugin = eclipsePlugin;
-  }
-  
   @Pure
   public BundleProjectConfig getEclipsePluginTest() {
     return this.eclipsePluginTest;
-  }
-  
-  public void setEclipsePluginTest(final BundleProjectConfig eclipsePluginTest) {
-    this.eclipsePluginTest = eclipsePluginTest;
   }
   
   @Pure
@@ -169,16 +217,8 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return this.ideaPlugin;
   }
   
-  public void setIdeaPlugin(final SubProjectConfig ideaPlugin) {
-    this.ideaPlugin = ideaPlugin;
-  }
-  
   @Pure
   public WebProjectConfig getWeb() {
     return this.web;
-  }
-  
-  public void setWeb(final WebProjectConfig web) {
-    this.web = web;
   }
 }

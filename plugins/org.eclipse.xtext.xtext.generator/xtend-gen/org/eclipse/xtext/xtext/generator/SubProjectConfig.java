@@ -13,11 +13,15 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.Issues;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
 public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
+  @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PACKAGE_SETTER })
+  private XtextProjectConfig owner;
+  
   @Accessors
   private boolean enabled;
   
@@ -37,23 +41,23 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
   private IXtextGeneratorFileSystemAccess srcGen;
   
   public void setRoot(final String path) {
-    XtextGeneratorFileSystemAccess _xtextGeneratorFileSystemAccess = new XtextGeneratorFileSystemAccess(path, true);
-    this.root = _xtextGeneratorFileSystemAccess;
+    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, true);
+    this.root = _newFileSystemAccess;
   }
   
   public void setMetaInf(final String path) {
-    XtextGeneratorFileSystemAccess _xtextGeneratorFileSystemAccess = new XtextGeneratorFileSystemAccess(path, true);
-    this.metaInf = _xtextGeneratorFileSystemAccess;
+    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, true);
+    this.metaInf = _newFileSystemAccess;
   }
   
   public void setSrc(final String path) {
-    XtextGeneratorFileSystemAccess _xtextGeneratorFileSystemAccess = new XtextGeneratorFileSystemAccess(path, false);
-    this.src = _xtextGeneratorFileSystemAccess;
+    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, false);
+    this.src = _newFileSystemAccess;
   }
   
   public void setSrcGen(final String path) {
-    XtextGeneratorFileSystemAccess _xtextGeneratorFileSystemAccess = new XtextGeneratorFileSystemAccess(path, true);
-    this.srcGen = _xtextGeneratorFileSystemAccess;
+    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, true);
+    this.srcGen = _newFileSystemAccess;
   }
   
   public void checkConfiguration(final Issues issues) {
@@ -74,6 +78,15 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
     if (this.srcGen!=null) {
       this.srcGen.initialize(injector);
     }
+  }
+  
+  @Pure
+  public XtextProjectConfig getOwner() {
+    return this.owner;
+  }
+  
+  void setOwner(final XtextProjectConfig owner) {
+    this.owner = owner;
   }
   
   @Pure

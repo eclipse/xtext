@@ -98,14 +98,14 @@ public class WizardConfig extends XtextProjectConfig {
             ManifestAccess _manifest = ((BundleProjectConfig)it).getManifest();
             boolean _tripleEquals_5 = (_manifest == null);
             if (_tripleEquals_5) {
-              ManifestAccess _manifestAccess = new ManifestAccess();
-              ((BundleProjectConfig)it).setManifest(_manifestAccess);
+              ManifestAccess _newManifestAccess = WizardConfig.this.newManifestAccess();
+              ((BundleProjectConfig)it).setManifest(_newManifestAccess);
             }
             PluginXmlAccess _pluginXml = ((BundleProjectConfig)it).getPluginXml();
             boolean _tripleEquals_6 = (_pluginXml == null);
             if (_tripleEquals_6) {
-              PluginXmlAccess _pluginXmlAccess = new PluginXmlAccess();
-              ((BundleProjectConfig)it).setPluginXml(_pluginXmlAccess);
+              PluginXmlAccess _newPluginXmlAccess = WizardConfig.this.newPluginXmlAccess();
+              ((BundleProjectConfig)it).setPluginXml(_newPluginXmlAccess);
             }
           }
         }

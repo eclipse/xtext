@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.SubProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
@@ -21,8 +22,9 @@ public class WebProjectConfig extends SubProjectConfig {
   private IXtextGeneratorFileSystemAccess assets;
   
   public void setAssets(final String path) {
-    XtextGeneratorFileSystemAccess _xtextGeneratorFileSystemAccess = new XtextGeneratorFileSystemAccess(path, true);
-    this.assets = _xtextGeneratorFileSystemAccess;
+    XtextProjectConfig _owner = this.getOwner();
+    XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(path, true);
+    this.assets = _newFileSystemAccess;
   }
   
   @Override

@@ -9,8 +9,6 @@ package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.xtext.generator.model.ManifestAccess
-import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
 @Accessors
 class WizardConfig extends XtextProjectConfig {
@@ -54,9 +52,9 @@ class WizardConfig extends XtextProjectConfig {
 			if (it instanceof BundleProjectConfig) {
 				if (createEclipseMetaData) {
 					if (manifest === null)
-						manifest = new ManifestAccess
+						manifest = newManifestAccess
 					if (pluginXml === null)
-						pluginXml = new PluginXmlAccess
+						pluginXml = newPluginXmlAccess
 				}
 			}
 			if (it instanceof RuntimeProjectConfig) {

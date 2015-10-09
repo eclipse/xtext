@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
@@ -22,8 +23,9 @@ public class RuntimeProjectConfig extends BundleProjectConfig {
   private IXtextGeneratorFileSystemAccess ecoreModel;
   
   public void setEcoreModel(final String path) {
-    XtextGeneratorFileSystemAccess _xtextGeneratorFileSystemAccess = new XtextGeneratorFileSystemAccess(path, true);
-    this.ecoreModel = _xtextGeneratorFileSystemAccess;
+    XtextProjectConfig _owner = this.getOwner();
+    XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(path, true);
+    this.ecoreModel = _newFileSystemAccess;
   }
   
   /**
