@@ -50,7 +50,7 @@ public class XbaseEditorInputRedirector {
   public ITypeRoot getTypeRoot(final IEditorInput it) {
     ITypeRoot _xblockexpression = null;
     {
-      final IJavaElement adapter = it.<IJavaElement>getAdapter(IJavaElement.class);
+      final Object adapter = it.getAdapter(IJavaElement.class);
       ITypeRoot _xifexpression = null;
       if ((adapter instanceof ITypeRoot)) {
         _xifexpression = ((ITypeRoot)adapter);
