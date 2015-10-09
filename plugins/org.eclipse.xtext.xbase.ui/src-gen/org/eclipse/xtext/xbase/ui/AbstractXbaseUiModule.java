@@ -40,12 +40,14 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.ide.contentassist.antlr.XbaseParser;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.ui.outline.XbaseOutlineTreeProvider;
 import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes;
@@ -148,14 +150,14 @@ public abstract class AbstractXbaseUiModule extends DefaultXbaseUiModule {
 		return XbaseQuickfixProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return XbaseLabelProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 	public void configureResourceUIServiceLabelProvider(Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider.class);
+		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(XbaseDescriptionLabelProvider.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2

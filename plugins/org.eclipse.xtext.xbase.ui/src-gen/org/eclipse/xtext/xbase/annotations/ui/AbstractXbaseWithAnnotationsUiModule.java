@@ -40,9 +40,12 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.XbaseWithAnnotationsParser;
 import org.eclipse.xtext.xbase.annotations.ui.contentassist.XbaseWithAnnotationsProposalProvider;
+import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.XbaseWithAnnotationsParser;
+import org.eclipse.xtext.xbase.annotations.ui.labeling.XbaseWithAnnotationsDescriptionLabelProvider;
 import org.eclipse.xtext.xbase.annotations.ui.labeling.XbaseWithAnnotationsLabelProvider;
 import org.eclipse.xtext.xbase.annotations.ui.outline.XbaseWithAnnotationsOutlineTreeProvider;
 import org.eclipse.xtext.xbase.annotations.ui.quickfix.XbaseWithAnnotationsQuickfixProvider;
@@ -139,23 +142,27 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	@Override
 	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
 		return ContentFormatterFactory.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
+	@Override
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XbaseWithAnnotationsQuickfixProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
+	@Override
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return XbaseWithAnnotationsLabelProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
+	@Override
 	public void configureResourceUIServiceLabelProvider(Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.annotations.ui.labeling.XbaseWithAnnotationsDescriptionLabelProvider.class);
+		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(XbaseWithAnnotationsDescriptionLabelProvider.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
