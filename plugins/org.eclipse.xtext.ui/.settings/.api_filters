@@ -24,44 +24,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/contentassist/antlr/EntryPointFinder.java" type="org.eclipse.xtext.ui.editor.contentassist.antlr.EntryPointFinder">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.contentassist.antlr.EntryPointFinder"/>
-                <message_argument value="findEntryPoint(ICompositeNode, int)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.contentassist.antlr.EntryPointFinder"/>
-                <message_argument value="findEntryPoint(IParseResult, int)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.contentassist.antlr.EntryPointFinder"/>
-                <message_argument value="getApplicableNode(ICompositeNode)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.contentassist.antlr.EntryPointFinder"/>
-                <message_argument value="normalizeToParent(ICompositeNode)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.contentassist.antlr.EntryPointFinder"/>
-                <message_argument value="shouldUseParent(ICompositeNode, int, ILeafNode)"/>
-            </message_arguments>
-        </filter>
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="EntryPointFinder"/>
-                <message_argument value="EntryPointFinder"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultSemanticHighlightingCalculator.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator">
         <filter id="643846161">
             <message_arguments>
@@ -270,22 +232,6 @@
             <message_arguments>
                 <message_argument value="ProjectionViewer"/>
                 <message_argument value="XtextSourceViewer"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/contentassist/antlr/DelegatingContentAssistContextFactory.java" type="org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory$StatefulFactory">
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="ContentAssistContextFactory"/>
-                <message_argument value="StatefulFactory"/>
-                <message_argument value="getDelegate()"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="ContentAssistContext"/>
-                <message_argument value="StatefulFactory"/>
-                <message_argument value="convert(ContentAssistContext)"/>
             </message_arguments>
         </filter>
     </resource>
