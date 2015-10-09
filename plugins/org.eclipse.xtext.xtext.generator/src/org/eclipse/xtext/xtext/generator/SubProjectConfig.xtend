@@ -13,10 +13,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
-import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
-
 
 class SubProjectConfig implements IGuiceAwareGeneratorComponent {
+	@Accessors(PUBLIC_GETTER, PACKAGE_SETTER)
+	XtextProjectConfig owner
 	@Accessors
 	boolean enabled
 	@Accessors
@@ -29,21 +29,21 @@ class SubProjectConfig implements IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess src
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess srcGen
-
+	
 	def void setRoot(String path) {
-		root = new XtextGeneratorFileSystemAccess(path, true)
+		root = owner.newFileSystemAccess(path, true)
 	}
 
 	def void setMetaInf(String path) {
-		metaInf = new XtextGeneratorFileSystemAccess(path, true)
+		metaInf = owner.newFileSystemAccess(path, true)
 	}
 
 	def void setSrc(String path) {
-		src = new XtextGeneratorFileSystemAccess(path, false)
+		src = owner.newFileSystemAccess(path, false)
 	}
 
 	def void setSrcGen(String path) {
-		srcGen = new XtextGeneratorFileSystemAccess(path, true)
+		srcGen = owner.newFileSystemAccess(path, true)
 	}
 	
 	def void checkConfiguration(Issues issues) {
@@ -58,6 +58,8 @@ class SubProjectConfig implements IGuiceAwareGeneratorComponent {
 	}
 	
 }
+
+
 
 @Accessors
 class BundleProjectConfig extends SubProjectConfig {
@@ -82,12 +84,13 @@ class BundleProjectConfig extends SubProjectConfig {
 	
 }
 
+
 class RuntimeProjectConfig extends BundleProjectConfig {
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess ecoreModel
 	
 	def void setEcoreModel(String path) {
-		ecoreModel = new XtextGeneratorFileSystemAccess(path, true)
+		ecoreModel = owner.newFileSystemAccess(path, true)
 	}
 	
 	/**
@@ -112,7 +115,7 @@ class WebProjectConfig extends SubProjectConfig {
 	IXtextGeneratorFileSystemAccess assets
 	
 	def void setAssets(String path) {
-		assets = new XtextGeneratorFileSystemAccess(path, true)
+		assets = owner.newFileSystemAccess(path, true)
 	}
 	
 	override initialize(Injector injector) {
