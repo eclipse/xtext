@@ -200,7 +200,7 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def String getJavaModelDirectory() {
-		javaModelDirectory ?: projectConfig.runtimeSrcGen.path
+		javaModelDirectory ?: projectConfig.runtime.srcGen.path
 	}
 
 	protected def String getModelName(Grammar grammar) {
@@ -215,7 +215,7 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def String getEcoreFilePath(Grammar grammar) {
-		projectConfig.runtimeModelGen.path + '/' + grammar.modelName + '.ecore'
+		projectConfig.runtime.ecoreModel.path + '/' + grammar.modelName + '.ecore'
 	}
 	
 	protected def URI getEcoreFileUri(Grammar grammar) {
@@ -223,7 +223,7 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def String getGenModelPath(Grammar grammar) {
-		genModel ?: projectConfig.runtimeModelGen.path + '/' + grammar.modelName + '.genmodel'
+		genModel ?: projectConfig.runtime.ecoreModel.path + '/' + grammar.modelName + '.genmodel'
 	}
 
 	protected def URI getGenModelUri(Grammar grammar) {
@@ -231,7 +231,7 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def String getRelativePath(String pathInRoot) {
-		val projectRoot = projectConfig.runtimeRoot.path
+		val projectRoot = projectConfig.runtime.root.path
 		if (pathInRoot.startsWith(projectRoot))
 			pathInRoot.substring(projectRoot.length + 1)
 		else
@@ -258,17 +258,17 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 
 	protected def String getModelPluginID() {
 		modelPluginID ?: {
-			val path = projectConfig.runtimeRoot.path
+			val path = projectConfig.runtime.root.path
 			path.substring(path.lastIndexOf('/') + 1)
 		}
 	}
 	
 	protected def String getEditDirectory() {
-		editDirectory ?: projectConfig.runtimeRoot.path + '.edit/src'
+		editDirectory ?: projectConfig.runtime.root.path + '.edit/src'
 	}
 
 	protected def String getEditorDirectory() {
-		editorDirectory ?: projectConfig.runtimeRoot.path + '.editor/src'
+		editorDirectory ?: projectConfig.runtime.root.path + '.editor/src'
 	}
 
 	protected def String getEditPluginID() {
@@ -346,8 +346,8 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void addProjectContributions(Grammar grammar, List<EPackage> generatedPackages, ResourceSet rs) {
-		if (projectConfig.runtimePluginXml !== null) {
-			projectConfig.runtimePluginXml.entries += '''
+		if (projectConfig.runtime.pluginXml !== null) {
+			projectConfig.runtime.pluginXml.entries += '''
 				<extension point="org.eclipse.emf.ecore.generated_package">
 					«FOR pack : generatedPackages»
 						<package 
@@ -358,13 +358,13 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 				</extension>
 			'''
 		}
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest.requiredBundles.addAll('org.eclipse.emf.ecore', 'org.eclipse.emf.common')
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.requiredBundles.addAll('org.eclipse.emf.ecore', 'org.eclipse.emf.common')
 		}
 		for (pack : generatedPackages) {
 			val genPackage = pack.getGenPackage(rs)
-			if (projectConfig.runtimeManifest !== null && modelPluginID == null) {
-				projectConfig.runtimeManifest.exportedPackages.addAll(
+			if (projectConfig.runtime.manifest !== null && modelPluginID == null) {
+				projectConfig.runtime.manifest.exportedPackages.addAll(
 					genPackage.interfacePackageName,
 					genPackage.classPackageName,
 					genPackage.utilitiesPackageName
@@ -694,12 +694,9 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	private def void updateBuildProperties() {
 		if (!updateBuildProperties || modelPluginID !== null)
 			return;
-		val rootOutlet = projectConfig.runtimeRoot
-		val modelOutlet = projectConfig.runtimeModelGen
+		val rootOutlet = projectConfig.runtime.root
 		val buildPropertiesPath = rootOutlet.path + '/build.properties'
-		val modelPath = modelOutlet.path.substring(rootOutlet.path.length + 1)
-		val modelContainerEnd = modelPath.indexOf('/')
-		val modelContainer = if (modelContainerEnd > 0) modelPath.substring(0, modelContainerEnd) else modelPath
+		val modelContainer = projectConfig.runtime.ecoreModelFolder
 		val buildProperties = new Properties
 		val reader = new InputStreamReader(new FileInputStream(new File(buildPropertiesPath)), Charset.forName(codeConfig.encoding))
 		try {

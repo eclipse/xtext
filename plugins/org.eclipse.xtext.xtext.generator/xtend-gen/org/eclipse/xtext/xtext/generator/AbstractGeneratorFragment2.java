@@ -15,14 +15,14 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 
 @SuppressWarnings("all")
 public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
-  private IXtextProjectConfig projectConfig;
+  private XtextProjectConfig projectConfig;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -42,7 +42,7 @@ public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 
   }
   
   @Pure
-  protected IXtextProjectConfig getProjectConfig() {
+  protected XtextProjectConfig getProjectConfig() {
     return this.projectConfig;
   }
   

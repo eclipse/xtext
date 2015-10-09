@@ -15,8 +15,8 @@ class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension XbaseUsageDetector
 	
 	override generate() {
-		if (language.grammar.inheritsXtype && projectConfig.eclipsePluginManifest !== null)
-			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.xbase.ui'
+		if (language.grammar.inheritsXtype && projectConfig.eclipsePlugin.manifest !== null)
+			projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtext.xbase.ui'
 	}
 	
 }

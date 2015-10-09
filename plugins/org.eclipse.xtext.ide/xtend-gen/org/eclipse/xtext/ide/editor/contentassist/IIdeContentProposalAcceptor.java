@@ -9,6 +9,9 @@ package org.eclipse.xtext.ide.editor.contentassist;
 
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 
+/**
+ * @noreference
+ */
 @SuppressWarnings("all")
 public interface IIdeContentProposalAcceptor {
   public abstract void accept(final ContentAssistEntry entry, final int priority);

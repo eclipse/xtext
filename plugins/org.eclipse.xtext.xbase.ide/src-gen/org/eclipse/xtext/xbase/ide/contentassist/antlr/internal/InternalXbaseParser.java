@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xbase.ui.contentassist.antlr.internal; 
+package org.eclipse.xtext.xbase.ide.contentassist.antlr.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 
@@ -63,8 +63,8 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;

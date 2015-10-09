@@ -166,23 +166,42 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				component = XtextGenerator auto-inject {
 					configuration = {
 						project = WizardConfig auto-inject {
-							«IF !config.uiProject.enabled»
-								eclipseEditor = false
+							«IF testProject.enabled»
+								runtimeTest = {
+									enabled = true
+								}
+							«ENDIF»
+							«IF config.ideProject.enabled 
+								&& !#[config.webProject, config.intellijProject, config.uiProject].exists[enabled]»
+								genericIde = {
+									enabled = true
+								}
+							«ENDIF»
+							«IF config.uiProject.enabled»
+								eclipsePlugin = {
+									enabled = true
+								}
+							«ENDIF»
+							«IF config.uiProject.testProject.enabled»
+								eclipsePluginTest = {
+									enabled = true
+								}
 							«ENDIF»
 							«IF config.intellijProject.enabled»
-								ideaEditor = true
+								ideaPlugin = {
+									enabled = true
+								}
 							«ENDIF»
 							«IF config.webProject.enabled»
-								webSupport = true
-							«ENDIF»
-							«IF config.ideProject.enabled»
-								genericIdeSupport = true
-							«ENDIF»
-							«IF testProject.enabled»
-								testingSupport = true
+								web = {
+									enabled = true
+								}
 							«ENDIF»
 							«IF config.sourceLayout == SourceLayout.MAVEN»
 								mavenLayout = true
+							«ENDIF»
+							«IF isEclipsePluginProject»
+								createEclipseMetaData = true
 							«ENDIF»
 						}
 						code = auto-inject {

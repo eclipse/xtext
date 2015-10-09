@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import com.google.inject.Injector;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -25,13 +26,14 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @Log
 @Accessors
 @SuppressWarnings("all")
-public class ManifestAccess extends TextFileAccess {
+public class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
   private String bundleName;
   
   private String symbolicName;
@@ -266,6 +268,11 @@ public class ManifestAccess extends TextFileAccess {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  public void initialize(final Injector injector) {
+    injector.injectMembers(this);
   }
   
   private final static Logger LOG = Logger.getLogger(ManifestAccess.class);

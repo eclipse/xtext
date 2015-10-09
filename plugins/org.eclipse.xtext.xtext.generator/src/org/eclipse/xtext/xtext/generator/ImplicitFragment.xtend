@@ -19,26 +19,24 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 package class ImplicitFragment extends AbstractGeneratorFragment2 {
 	
-	@Inject IXtextProjectConfig projectConfig
-	
 	@Inject extension XbaseUsageDetector
 	
 	@Inject extension XtextGeneratorNaming naming
 	
 	override generate() {
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest.requiredBundles.addAll(#[
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext', 'org.eclipse.xtext.util', 'org.eclipse.xtend.lib'
 			])
-			projectConfig.runtimeManifest.importedPackages.add('org.apache.log4j')
+			projectConfig.runtime.manifest.importedPackages.add('org.apache.log4j')
 		}
-		if (projectConfig.eclipsePluginManifest !== null) {
-			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
+		if (projectConfig.eclipsePlugin.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui', 'org.eclipse.xtend.lib'
 			])
 		}
-		if (projectConfig.eclipsePluginPluginXml !== null) {
-			projectConfig.eclipsePluginPluginXml.entries += grammar.implicitPluginXmlEnties
+		if (projectConfig.eclipsePlugin.pluginXml !== null) {
+			projectConfig.eclipsePlugin.pluginXml.entries += grammar.implicitPluginXmlEnties
 		}
 		
 		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''

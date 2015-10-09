@@ -13,6 +13,7 @@ import org.eclipse.xtext.parser.IParseResult;
 
 /**
  * A content assist parser that can skip parts of the document for faster parsing
+ * @since 2.9
  */
 public interface IPartialContentAssistParser extends IContentAssistParser {
 

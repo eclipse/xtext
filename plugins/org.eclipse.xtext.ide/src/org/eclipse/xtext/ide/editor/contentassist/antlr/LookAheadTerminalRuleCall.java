@@ -11,6 +11,9 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 
+/**
+ * @since 2.9
+ */
 public class LookAheadTerminalRuleCall extends LookAheadTerminal {
 
 	private TerminalRule rule;

@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.IEObjectDescription
 /**
  * Determines priorities for content assist proposal entries. The priorities can be used
  * to sort the list of proposals.
+ * @noreference
  */
 @Singleton
 @Accessors(PROTECTED_GETTER, PROTECTED_SETTER)

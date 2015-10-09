@@ -14,10 +14,12 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import com.google.inject.Inject
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
+import com.google.inject.Injector
 
 @Log
 @Accessors
-class PluginXmlAccess extends TextFileAccess {
+class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
 	
 	@Inject CodeConfig codeConfig
 	
@@ -55,6 +57,10 @@ class PluginXmlAccess extends TextFileAccess {
 		if (!entries.isEmpty) {
 			super.writeTo(fileSystemAccess)
 		}
+	}
+	
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
 	}
 	
 }

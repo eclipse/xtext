@@ -81,7 +81,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 				«ENDFOR»	
 			}
 		'''
-		xtendFile.writeTo(projectConfig.runtimeSrc)
+		xtendFile.writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''

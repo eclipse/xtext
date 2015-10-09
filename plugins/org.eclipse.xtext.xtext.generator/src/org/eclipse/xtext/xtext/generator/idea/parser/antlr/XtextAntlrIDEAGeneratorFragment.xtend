@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator.idea.parser.antlr
 
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2
 
 class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
@@ -19,12 +18,10 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 
 	@Inject CodeConfig codeConfig
 
-	@Inject IXtextProjectConfig projectConfig
-	
 	@Inject extension PsiGrammarNaming
 
 	override protected doGenerate() {
-		val fsa = projectConfig.ideaPluginSrcGen
+		val fsa = projectConfig.ideaPlugin.srcGen
 		generator.generate(grammar, options, fsa)
 
 		val encoding = codeConfig.encoding

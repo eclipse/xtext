@@ -15,10 +15,12 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
+import com.google.inject.Injector
 
 @Log
 @Accessors
-class ManifestAccess extends TextFileAccess {
+class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
 	
 	String bundleName
 	
@@ -127,6 +129,10 @@ class ManifestAccess extends TextFileAccess {
 			mergableManifest.write(bout)
 			fileSystemAccess.generateFile(path, new ByteArrayInputStream(bout.toByteArray))
 		}
+	}
+	
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
 	}
 	
 }

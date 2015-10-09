@@ -11,6 +11,9 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognizerSharedState;
 import org.apache.log4j.Logger;
 
+/**
+ * @since 2.9
+ */
 public abstract class Lexer extends org.antlr.runtime.Lexer {
 
 	private static final Logger logger = Logger.getLogger(Lexer.class);

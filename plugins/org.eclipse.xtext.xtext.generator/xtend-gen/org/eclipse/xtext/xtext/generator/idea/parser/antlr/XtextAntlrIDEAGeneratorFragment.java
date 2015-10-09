@@ -12,7 +12,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.SubProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiAntlrGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiGrammarNaming;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -30,15 +31,14 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
   private CodeConfig codeConfig;
   
   @Inject
-  private IXtextProjectConfig projectConfig;
-  
-  @Inject
   @Extension
   private PsiGrammarNaming _psiGrammarNaming;
   
   @Override
   protected void doGenerate() {
-    final IXtextGeneratorFileSystemAccess fsa = this.projectConfig.getIdeaPluginSrcGen();
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    SubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
+    final IXtextGeneratorFileSystemAccess fsa = _ideaPlugin.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     this.generator.generate(_grammar, _options, fsa);

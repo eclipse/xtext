@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * Special content assist proposal provider for cross-references.
+ * @noreference
  */
 @SuppressWarnings("all")
 public class IdeCrossrefProposalProvider {
