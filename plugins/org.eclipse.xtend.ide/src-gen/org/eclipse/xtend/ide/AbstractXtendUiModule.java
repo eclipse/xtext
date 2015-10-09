@@ -199,7 +199,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return PersistentDataAwareDirtyResource.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XtendQuickfixProvider.class;
 	}

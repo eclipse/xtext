@@ -143,7 +143,7 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		return ContentFormatterFactory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XbaseWithAnnotationsQuickfixProvider.class;
 	}

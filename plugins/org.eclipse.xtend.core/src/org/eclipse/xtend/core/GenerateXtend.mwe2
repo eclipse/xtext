@@ -92,9 +92,9 @@ Workflow {
 			fragment = generator.GeneratorFragment2 {}
 			fragment = scoping.ImportNamespacesScopingFragment2 {}
 			fragment = builder.BuilderIntegrationFragment2 {}
-			fragment = adapter.FragmentAdapter {
-				fragment = quickfix.QuickfixProviderFragment {}
-			}
+
+			fragment = ui.quickfix.QuickfixProviderFragment2 {}
+
 			fragment = adapter.FragmentAdapter {
 				fragment = labeling.LabelProviderFragment {
 					generateStub = false
