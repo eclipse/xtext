@@ -13,19 +13,26 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfigurationAdapter;
+import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -39,6 +46,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Before;
@@ -62,6 +70,13 @@ public abstract class AbstractIncrementalBuilderTest {
   
   @Inject
   protected Provider<XtextResourceSet> resourceSetProvider;
+  
+  @Inject
+  @Named(Constants.LANGUAGE_NAME)
+  private String languageName;
+  
+  @Inject
+  private OutputConfigurationProvider configurationProvider;
   
   protected Multimap<URI, URI> generated;
   
@@ -104,6 +119,17 @@ public abstract class AbstractIncrementalBuilderTest {
     IndexState _indexState = _build.getIndexState();
     this.indexState = _indexState;
     return this.indexState;
+  }
+  
+  protected void withOutputConfig(final BuildRequest it, final Procedure1<? super OutputConfiguration> init) {
+    Set<OutputConfiguration> _outputConfigurations = this.configurationProvider.getOutputConfigurations();
+    final OutputConfiguration config = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
+    init.apply(config);
+    Pair<String, Set<OutputConfiguration>> _mappedTo = Pair.<String, Set<OutputConfiguration>>of(this.languageName, Collections.<OutputConfiguration>unmodifiableSet(CollectionLiterals.<OutputConfiguration>newHashSet(config)));
+    final OutputConfigurationAdapter adapter = new OutputConfigurationAdapter(Collections.<String, Set<OutputConfiguration>>unmodifiableMap(CollectionLiterals.<String, Set<OutputConfiguration>>newHashMap(_mappedTo)));
+    XtextResourceSet _resourceSet = it.getResourceSet();
+    EList<Adapter> _eAdapters = _resourceSet.eAdapters();
+    _eAdapters.add(adapter);
   }
   
   protected abstract IResourceServiceProvider.Registry getLanguages();

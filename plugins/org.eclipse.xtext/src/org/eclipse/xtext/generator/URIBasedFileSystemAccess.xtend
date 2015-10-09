@@ -37,7 +37,7 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	}
 	
 	static interface BeforeWrite {
-		def InputStream beforeWrite(URI changed, InputStream in)
+		def InputStream beforeWrite(URI changed, String outputCfgName, InputStream in)
 	}
 	
 	static interface BeforeRead {
@@ -51,7 +51,7 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	@Accessors TraceRegionSerializer traceRegionSerializer
 	@Accessors TraceFileNameProvider traceFileNameProvider
 	@Accessors BeforeDelete beforeDelete = [true]
-	@Accessors BeforeWrite beforeWrite = [$1]
+	@Accessors BeforeWrite beforeWrite = [$2]
 	@Accessors BeforeRead beforeRead = [$1]
 	
 	public override void setPostProcessor(IFilePostProcessor filePostProcessor) {
@@ -77,6 +77,9 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	override generateFile(String fileName, String outputCfgName, CharSequence contents) {
 		val uri = getURI(fileName, outputCfgName)
+		if (!getOutputConfig(outputCfgName).isOverrideExistingResources && converter.exists(uri, emptyMap)) {
+			return;
+		}
 		val encoding = getEncoding(uri)
 		val postProcessed = postProcess(fileName, outputCfgName, contents, encoding)
 		generateTrace(fileName, outputCfgName, postProcessed)
@@ -98,7 +101,7 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 		val uri = getURI(fileName, outputCfgName)
 		val out = converter.createOutputStream(uri)
 		try {
-			val processedContent = beforeWrite.beforeWrite(uri, content)
+			val processedContent = beforeWrite.beforeWrite(uri, outputCfgName, content)
 			ByteStreams.copy(processedContent, out);
 		} finally {
 			out.close

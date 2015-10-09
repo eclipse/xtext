@@ -32,6 +32,7 @@ import org.eclipse.xtext.build.Indexer;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -163,22 +164,45 @@ public class IncrementalBuilder {
       List<URI> _deletedFiles = this.request.getDeletedFiles();
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
-        public void apply(final URI it) {
-          Set<URI> _deleteSource = newSource2GeneratedMapping.deleteSource(it);
+        public void apply(final URI source) {
+          Set<URI> _deleteSource = newSource2GeneratedMapping.deleteSource(source);
           final Procedure1<URI> _function = new Procedure1<URI>() {
             @Override
-            public void apply(final URI it) {
+            public void apply(final URI generated) {
               try {
                 boolean _isInfoEnabled = IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.isInfoEnabled();
                 if (_isInfoEnabled) {
-                  IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting " + it));
+                  IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting " + generated));
                 }
-                XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
-                URIConverter _uRIConverter = _resourceSet.getURIConverter();
-                Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-                _uRIConverter.delete(it, _emptyMap);
-                Procedure1<? super URI> _afterDeleteFile = InternalStatefulIncrementalBuilder.this.request.getAfterDeleteFile();
-                _afterDeleteFile.apply(it);
+                final IResourceServiceProvider serviceProvider = InternalStatefulIncrementalBuilder.this.context.getResourceServiceProvider(source);
+                IContextualOutputConfigurationProvider2 _get = serviceProvider.<IContextualOutputConfigurationProvider2>get(IContextualOutputConfigurationProvider2.class);
+                XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.request.getResourceSet();
+                final Set<OutputConfiguration> configs = _get.getOutputConfigurations(_resourceSet);
+                final String configName = newSource2GeneratedMapping.getOutputConfigName(generated);
+                final Function1<OutputConfiguration, Boolean> _function = new Function1<OutputConfiguration, Boolean>() {
+                  @Override
+                  public Boolean apply(final OutputConfiguration it) {
+                    String _name = it.getName();
+                    return Boolean.valueOf(Objects.equal(_name, configName));
+                  }
+                };
+                final OutputConfiguration config = IterableExtensions.<OutputConfiguration>findFirst(configs, _function);
+                boolean _and = false;
+                boolean _notEquals = (!Objects.equal(config, null));
+                if (!_notEquals) {
+                  _and = false;
+                } else {
+                  boolean _isCleanUpDerivedResources = config.isCleanUpDerivedResources();
+                  _and = _isCleanUpDerivedResources;
+                }
+                if (_and) {
+                  XtextResourceSet _resourceSet_1 = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
+                  URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
+                  Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+                  _uRIConverter.delete(generated, _emptyMap);
+                  Procedure1<? super URI> _afterDeleteFile = InternalStatefulIncrementalBuilder.this.request.getAfterDeleteFile();
+                  _afterDeleteFile.apply(generated);
+                }
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
@@ -299,9 +323,9 @@ public class IncrementalBuilder {
         public void apply(final URIBasedFileSystemAccess it) {
           final URIBasedFileSystemAccess.BeforeWrite _function = new URIBasedFileSystemAccess.BeforeWrite() {
             @Override
-            public InputStream beforeWrite(final URI uri, final InputStream contents) {
+            public InputStream beforeWrite(final URI uri, final String outputCfgName, final InputStream contents) {
               URI _uRI = resource.getURI();
-              newMappings.addSource2Generated(_uRI, uri);
+              newMappings.addSource2Generated(_uRI, uri, outputCfgName);
               previous.remove(uri);
               Procedure2<? super URI, ? super URI> _afterGenerateFile = request.getAfterGenerateFile();
               URI _uRI_1 = resource.getURI();
