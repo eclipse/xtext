@@ -209,7 +209,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append("def foo() ");
     String _white = this.white(XtendSemanticHighlightingTest.Q3);
     _builder.append(_white, "\t");
-    String _$ = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$ = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$, "\t");
     String _white_1 = this.white("\t\t");
     _builder.append(_white_1, "\t");
@@ -234,7 +234,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append("def foo() ");
     String _white = this.white(XtendSemanticHighlightingTest.Q3);
     _builder.append(_white, "\t");
-    String _$ = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$ = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$, "\t");
     String _white_1 = this.white("\t\t");
     _builder.append(_white_1, "\t");
@@ -269,7 +269,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append("def foo(String[] nums) ");
     String _white = this.white(XtendSemanticHighlightingTest.Q3);
     _builder.append(_white, "\t");
-    String _$ = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$ = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$, "\t");
     String _white_1 = this.white("\t\t");
     _builder.append(_white_1, "\t");
@@ -281,7 +281,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append(XtendSemanticHighlightingTest.GL, "\t");
     _builder.append("FOR i:nums");
     _builder.append(XtendSemanticHighlightingTest.GR, "\t");
-    String _$_2 = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$_2 = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$_2, "\t");
     String _white_3 = this.white("\t\t");
     _builder.append(_white_3, "\t");
@@ -295,7 +295,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append(XtendSemanticHighlightingTest.GL, "\t");
     _builder.append("ENDFOR");
     _builder.append(XtendSemanticHighlightingTest.GR, "\t");
-    String _$_4 = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$_4 = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$_4, "\t");
     String _white_6 = this.white("\t\t");
     _builder.append(_white_6, "\t");
@@ -320,7 +320,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append("def foo(String[] nums) ");
     String _white = this.white(XtendSemanticHighlightingTest.Q3);
     _builder.append(_white, "\t");
-    String _$ = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$ = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$, "\t");
     String _white_1 = this.white("\t\t");
     _builder.append(_white_1, "\t");
@@ -332,7 +332,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append(XtendSemanticHighlightingTest.GL, "\t");
     _builder.append("FOR i:nums");
     _builder.append(XtendSemanticHighlightingTest.GR, "\t");
-    String _$_2 = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$_2 = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$_2, "\t");
     String _white_3 = this.white("\t\t");
     _builder.append(_white_3, "\t");
@@ -347,7 +347,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append(XtendSemanticHighlightingTest.GL, "\t");
     _builder.append("ENDFOR");
     _builder.append(XtendSemanticHighlightingTest.GR, "\t");
-    String _$_4 = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$_4 = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$_4, "\t");
     String _white_6 = this.white("\t\t");
     _builder.append(_white_6, "\t");
@@ -372,7 +372,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append("def foo() ");
     String _white = this.white(XtendSemanticHighlightingTest.Q3);
     _builder.append(_white, "\t");
-    String _$ = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
+    String _$ = this.$(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, XtendSemanticHighlightingTest.NL);
     _builder.append(_$, "\t");
     String _white_1 = this.white("\t\t");
     _builder.append(_white_1, "\t");

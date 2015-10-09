@@ -852,14 +852,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("// provides a compare view");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.append("fragment = ui.compare.CompareFragment2 auto-inject {}");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = compare.CompareFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
         _builder.newLine();
       }
     }
