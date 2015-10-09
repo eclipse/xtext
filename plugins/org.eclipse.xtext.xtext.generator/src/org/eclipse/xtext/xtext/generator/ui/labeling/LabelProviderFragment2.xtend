@@ -91,8 +91,8 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 	override generate() {
 		if (generateStub || grammar.inheritsXbase) {
 
-			if (projectConfig.eclipsePluginManifest != null) {
-				projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.ui"
+			if (projectConfig.eclipsePlugin.manifest != null) {
+				projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 			}
 	
 			val labelProviderClass =
@@ -115,7 +115,7 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 					''').contributeTo(language.eclipsePluginGenModule)			
 		}
 
-		if (generateStub && projectConfig.eclipsePluginSrc !== null) {
+		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
 			if (preferXtendStubs) {
 				generateXtendEObjectLabelProvider
 				generateXtendDescriptionLabelProvider
@@ -150,7 +150,7 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 			//		'Greeting.gif'
 			//	}
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
 	def protected generateXtendDescriptionLabelProvider() {
@@ -172,7 +172,7 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 			//		ele.EClass.name + '.gif'
 			//	}
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
 	def protected generateJavaEObjectLabelProvider() {
@@ -201,7 +201,7 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 			//		return "Greeting.gif";
 			//	}
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
 	def protected generateJavaDescriptionLabelProvider() {
@@ -223,6 +223,6 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 			//     return ele.getEClass().getName() + ".gif";
 			//  }	 
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 }

@@ -83,8 +83,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		val chosenClass = 
 			if (generateStub) grammar.getProposalProviderClass else grammar.getGenProposalProviderClass;
 		
-		if (projectConfig.eclipsePluginManifest != null) {
-			projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.ui"
+		if (projectConfig.eclipsePlugin.manifest != null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 
 		new GuiceModuleAccess.BindingFactory()
@@ -93,26 +93,26 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 					chosenClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (projectConfig.eclipsePluginSrcGen !== null) {
+		if (projectConfig.eclipsePlugin.srcGen !== null) {
 			// generate the 'Abstract...ProposalProvider'
 			generateGenJavaProposalProvider
 		}
 
-		if (generateStub && projectConfig.eclipsePluginSrc != null) {
+		if (generateStub && projectConfig.eclipsePlugin.src != null) {
 			if (preferXtendStubs) {
 				generateXtendProposalProviderStub
 
-				if (projectConfig.eclipsePluginManifest != null) {
-					projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.xbase.lib"
-					projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtend.lib;resolution:=optional"
+				if (projectConfig.eclipsePlugin.manifest != null) {
+					projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.xbase.lib"
+					projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtend.lib;resolution:=optional"
 				}
 			} else {
 				generateJavaProposalProviderStub
 			}
 		}
 
-		if (projectConfig.eclipsePluginManifest != null) {
-			projectConfig.eclipsePluginManifest.exportedPackages += grammar.proposalProviderClass.packageName
+		if (projectConfig.eclipsePlugin.manifest != null) {
+			projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.proposalProviderClass.packageName
 		}
 	}
 
@@ -126,7 +126,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			class «grammar.proposalProviderClass.simpleName» extends «grammar.genProposalProviderClass» {
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
 	def generateJavaProposalProviderStub() {
@@ -137,7 +137,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			public class «grammar.proposalProviderClass.simpleName» extends «grammar.genProposalProviderClass» {
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
 
@@ -191,7 +191,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 					}
 		    	«ENDFOR»
 			}
-		''').writeTo(projectConfig.eclipsePluginSrcGen)	
+		''').writeTo(projectConfig.eclipsePlugin.srcGen)	
 
 	}
 

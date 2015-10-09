@@ -13,8 +13,8 @@ Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.editor.bracketmatching;x-friends:="org.eclipse.xtend.ide.common,org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.editor.contentassist;x-friends:="org.eclipse.xtend.ide,org.eclipse.xtext.xbase.ide",
- org.eclipse.xtext.ide.editor.contentassist.antlr;x-friends:="org.eclipse.xtend.ide.common,org.eclipse.xtend.ide",
- org.eclipse.xtext.ide.editor.contentassist.antlr.internal;x-friends:="org.eclipse.xtend.ide.common,org.eclipse.xtend.ide",
+ org.eclipse.xtext.ide.editor.contentassist.antlr,
+ org.eclipse.xtext.ide.editor.contentassist.antlr.internal,
  org.eclipse.xtext.ide.editor.model;x-internal:=true,
  org.eclipse.xtext.ide.editor.partialEditing;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.editor.syntaxcoloring;
