@@ -39,8 +39,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
+import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
@@ -65,7 +66,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   private CodeConfig codeConfig;
   
   @Inject
-  private IXtextProjectConfig projectConfig;
+  private XtextProjectConfig projectConfig;
   
   @Inject
   private FileAccessFactory fileFactory;
@@ -80,7 +81,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   @Override
   protected void doGenerate() {
-    final IXtextGeneratorFileSystemAccess fsa = this.projectConfig.getRuntimeSrcGen();
+    RuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+    final IXtextGeneratorFileSystemAccess fsa = _runtime.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     this.generator.generate(_grammar, _options, fsa);
@@ -112,11 +114,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     this.normalizeLineDelimiters(fsa, grammarFileName);
     this.normalizeTokens(fsa, grammarFileName);
     JavaFileAccess _generateXtextParser = this.generateXtextParser();
-    IXtextGeneratorFileSystemAccess _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
-    _generateXtextParser.writeTo(_runtimeSrcGen);
+    RuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime_1.getSrcGen();
+    _generateXtextParser.writeTo(_srcGen);
     JavaFileAccess _generateAntlrTokenFileProvider = this.generateAntlrTokenFileProvider();
-    IXtextGeneratorFileSystemAccess _runtimeSrcGen_1 = this.projectConfig.getRuntimeSrcGen();
-    _generateAntlrTokenFileProvider.writeTo(_runtimeSrcGen_1);
+    RuntimeProjectConfig _runtime_2 = this.projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime_2.getSrcGen();
+    _generateAntlrTokenFileProvider.writeTo(_srcGen_1);
     this.addBindingsAndImports();
   }
   
@@ -329,10 +333,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   }
   
   public void addBindingsAndImports() {
-    ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-    boolean _tripleNotEquals = (_runtimeManifest != null);
+    RuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+    ManifestAccess _manifest = _runtime.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
+      RuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_1.getManifest();
       final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
         @Override
         public void apply(final ManifestAccess it) {
@@ -346,7 +352,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _requiredBundles.add("org.antlr.runtime");
         }
       };
-      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_runtimeManifest_1, _function);
+      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IParser.class);
@@ -388,16 +394,18 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append(Lexer.class, "");
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append(".annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class, "\t");
         _builder.append(".named(");
-        _builder.append(LexerBindings.class, "");
+        _builder.append(LexerBindings.class, "\t");
         _builder.append(".RUNTIME))");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append(".to(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
         TypeReference _lexerClass = XtextAntlrGeneratorFragment2.this._grammarNaming.getLexerClass(_grammar);
-        _builder.append(_lexerClass, "");
+        _builder.append(_lexerClass, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
       }
@@ -424,14 +432,16 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append(Lexer.class, "");
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append(".annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class, "\t");
         _builder.append(".named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append(".to(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
         TypeReference _lexerClass = XtextAntlrGeneratorFragment2.this._grammarNaming.getLexerClass(_grammar);
-        _builder.append(_lexerClass, "");
+        _builder.append(_lexerClass, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
       }
@@ -444,12 +454,14 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append(ITokenDefProvider.class, "");
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append(".annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class, "\t");
         _builder.append(".named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append(".to(");
-        _builder.append(AntlrTokenDefProvider.class, "");
+        _builder.append(AntlrTokenDefProvider.class, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
       }

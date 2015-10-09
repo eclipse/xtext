@@ -42,12 +42,21 @@ Workflow {
 	component = XtextGenerator auto-inject {
 		configuration = parser.XtendGeneratorModule {
 			project = WizardConfig auto-inject {
-				eclipseEditor = true
-				eclipsePluginProjectName = "org.eclipse.xtend.ide"
-				genericIdeSupport = true
-				genericIdeProjectName = "org.eclipse.xtend.ide.common"
-				ideaEditor = true
-				ideaPluginRoot = "../../intellij/org.eclipse.xtend.idea"
+				runtime = {
+					name = runtimeProjectName
+				}
+				eclipsePlugin = {
+					enabled = true
+					name = "org.eclipse.xtend.ide"
+				}
+				genericIde = {
+					enabled = true
+					name = "org.eclipse.xtend.ide.common"
+				}
+				ideaPlugin = {
+					enabled = true
+					root = "../../intellij/org.eclipse.xtend.idea" 
+				}
 			}
 			code = {
 				encoding = "ISO-8859-1"
@@ -95,21 +104,16 @@ Workflow {
 
 			fragment = ui.quickfix.QuickfixProviderFragment2 {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = labeling.LabelProviderFragment {
-					generateStub = false
-				}
+			fragment = ui.labeling.LabelProviderFragment2 {
+				generateStub = false
 			}
 
 			fragment = ui.outline.OutlineTreeProviderFragment2 {}
 
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = compare.CompareFragment {
-					fileExtensions = file.extensions
-				}
-			}
+			fragment = ui.compare.CompareFragment2 {}
+			
 			fragment = ui.contentAssist.ContentAssistFragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ContentAssistParserGenerator auto-inject {

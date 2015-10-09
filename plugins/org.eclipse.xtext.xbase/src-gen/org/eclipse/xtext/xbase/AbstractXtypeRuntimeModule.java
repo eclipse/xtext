@@ -130,8 +130,8 @@ public abstract class AbstractXtypeRuntimeModule extends DefaultRuntimeModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureRuntimeLexer(Binder binder) {
 		binder.bind(Lexer.class)
-		.annotatedWith(Names.named(LexerBindings.RUNTIME))
-		.to(InternalXtypeLexer.class);
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalXtypeLexer.class);
 	}
 	
 }

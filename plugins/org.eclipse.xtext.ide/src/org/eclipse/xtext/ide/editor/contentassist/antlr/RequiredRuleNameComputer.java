@@ -25,6 +25,7 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
  */
 @Singleton
 public class RequiredRuleNameComputer {

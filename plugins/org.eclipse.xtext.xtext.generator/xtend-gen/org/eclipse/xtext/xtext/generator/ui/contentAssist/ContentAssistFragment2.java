@@ -40,10 +40,11 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -136,13 +137,15 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       _xifexpression = this.getGenProposalProviderClass(_grammar_1);
     }
     final TypeReference chosenClass = _xifexpression;
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    ManifestAccess _eclipsePluginManifest = _projectConfig.getEclipsePluginManifest();
-    boolean _notEquals = (!Objects.equal(_eclipsePluginManifest, null));
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    ManifestAccess _manifest = _eclipsePlugin.getManifest();
+    boolean _notEquals = (!Objects.equal(_manifest, null));
     if (_notEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_1.getEclipsePluginManifest();
-      Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
+      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
+      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
@@ -151,9 +154,10 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
     ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrcGen = _projectConfig_2.getEclipsePluginSrcGen();
-    boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
+    XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin_2.getSrcGen();
+    boolean _tripleNotEquals = (_srcGen != null);
     if (_tripleNotEquals) {
       this.generateGenJavaProposalProvider();
     }
@@ -161,39 +165,45 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
     if (!this.generateStub) {
       _and = false;
     } else {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig_3.getEclipsePluginSrc();
-      boolean _notEquals_1 = (!Objects.equal(_eclipsePluginSrc, null));
+      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
+      IXtextGeneratorFileSystemAccess _src = _eclipsePlugin_3.getSrc();
+      boolean _notEquals_1 = (!Objects.equal(_src, null));
       _and = _notEquals_1;
     }
     if (_and) {
       boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
         this.generateXtendProposalProviderStub();
-        IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-        ManifestAccess _eclipsePluginManifest_2 = _projectConfig_4.getEclipsePluginManifest();
-        boolean _notEquals_2 = (!Objects.equal(_eclipsePluginManifest_2, null));
+        XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+        BundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
+        ManifestAccess _manifest_2 = _eclipsePlugin_4.getManifest();
+        boolean _notEquals_2 = (!Objects.equal(_manifest_2, null));
         if (_notEquals_2) {
-          IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-          ManifestAccess _eclipsePluginManifest_3 = _projectConfig_5.getEclipsePluginManifest();
-          Set<String> _requiredBundles_1 = _eclipsePluginManifest_3.getRequiredBundles();
+          XtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+          BundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
+          ManifestAccess _manifest_3 = _eclipsePlugin_5.getManifest();
+          Set<String> _requiredBundles_1 = _manifest_3.getRequiredBundles();
           _requiredBundles_1.add("org.eclipse.xtext.xbase.lib");
-          IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-          ManifestAccess _eclipsePluginManifest_4 = _projectConfig_6.getEclipsePluginManifest();
-          Set<String> _requiredBundles_2 = _eclipsePluginManifest_4.getRequiredBundles();
+          XtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+          BundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
+          ManifestAccess _manifest_4 = _eclipsePlugin_6.getManifest();
+          Set<String> _requiredBundles_2 = _manifest_4.getRequiredBundles();
           _requiredBundles_2.add("org.eclipse.xtend.lib;resolution:=optional");
         }
       } else {
         this.generateJavaProposalProviderStub();
       }
     }
-    IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-    ManifestAccess _eclipsePluginManifest_5 = _projectConfig_7.getEclipsePluginManifest();
-    boolean _notEquals_3 = (!Objects.equal(_eclipsePluginManifest_5, null));
+    XtextProjectConfig _projectConfig_7 = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin_7 = _projectConfig_7.getEclipsePlugin();
+    ManifestAccess _manifest_5 = _eclipsePlugin_7.getManifest();
+    boolean _notEquals_3 = (!Objects.equal(_manifest_5, null));
     if (_notEquals_3) {
-      IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_6 = _projectConfig_8.getEclipsePluginManifest();
-      Set<String> _exportedPackages = _eclipsePluginManifest_6.getExportedPackages();
+      XtextProjectConfig _projectConfig_8 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_8 = _projectConfig_8.getEclipsePlugin();
+      ManifestAccess _manifest_6 = _eclipsePlugin_8.getManifest();
+      Set<String> _exportedPackages = _manifest_6.getExportedPackages();
       Grammar _grammar_2 = this.getGrammar();
       TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar_2);
       String _packageName = _proposalProviderClass.getPackageName();
@@ -234,9 +244,10 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_proposalProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
-    _createXtendFile.writeTo(_eclipsePluginSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+    _createXtendFile.writeTo(_src);
   }
   
   public void generateJavaProposalProviderStub() {
@@ -272,9 +283,10 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_proposalProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
-    _createJavaFile.writeTo(_eclipsePluginSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+    _createJavaFile.writeTo(_src);
   }
   
   public void generateGenJavaProposalProvider() {
@@ -416,9 +428,10 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_genProposalProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrcGen = _projectConfig.getEclipsePluginSrcGen();
-    _createJavaFile.writeTo(_eclipsePluginSrcGen);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
+    _createJavaFile.writeTo(_srcGen);
   }
   
   private StringConcatenationClient handleAssignment(final Assignment assignment) {

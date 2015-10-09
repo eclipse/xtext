@@ -9,6 +9,9 @@ package org.eclipse.xtext.ide.editor.contentassist
 
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 
+/**
+ * @noreference
+ */
 interface IIdeContentProposalAcceptor {
 	
 	def void accept(ContentAssistEntry entry, int priority)

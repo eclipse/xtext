@@ -21,6 +21,7 @@ import org.eclipse.xtext.scoping.IScope
 
 /**
  * Special content assist proposal provider for cross-references.
+ * @noreference
  */
 class IdeCrossrefProposalProvider {
 	

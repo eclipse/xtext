@@ -10,30 +10,31 @@ package org.eclipse.xtext.build
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.List
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.generator.GeneratorDelegate
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2
+import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.xtext.generator.IShouldGenerate
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer
+import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
-import org.eclipse.xtext.generator.trace.TraceFileNameProvider
-import org.eclipse.xtext.generator.trace.TraceRegionSerializer
-import org.eclipse.xtext.generator.IFilePostProcessor
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -56,13 +57,18 @@ import org.eclipse.xtext.service.OperationCanceledManager
 		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.state.fileMappings
-			request.deletedFiles.forEach [
-				newSource2GeneratedMapping.deleteSource(it).forEach [
+			request.deletedFiles.forEach [ source |
+				newSource2GeneratedMapping.deleteSource(source).forEach [ generated |
 					if (LOG.isInfoEnabled)
-						LOG.info("Deleting " + it)
-					
-					context.resourceSet.getURIConverter.delete(it, emptyMap)
-					request.afterDeleteFile.apply(it)
+						LOG.info("Deleting " + generated)
+					val serviceProvider = context.getResourceServiceProvider(source)
+					val configs = serviceProvider.get(IContextualOutputConfigurationProvider2).getOutputConfigurations(request.resourceSet)
+					val configName = newSource2GeneratedMapping.getOutputConfigName(generated)
+					val config = configs.findFirst[name == configName]
+					if (config!=null && config.isCleanUpDerivedResources) {
+						context.resourceSet.getURIConverter.delete(generated, emptyMap)
+						request.afterDeleteFile.apply(generated)
+					}
 				]
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
@@ -112,8 +118,8 @@ import org.eclipse.xtext.service.OperationCanceledManager
 			}
 			val previous = newMappings.deleteSource(resource.getURI)
 			val fileSystemAccess = createFileSystemAccess(serviceProvider, resource) => [
-				beforeWrite = [ uri, contents |
-					newMappings.addSource2Generated(resource.getURI, uri)
+				beforeWrite = [ uri, outputCfgName, contents |
+					newMappings.addSource2Generated(resource.getURI, uri, outputCfgName)
 					previous.remove(uri)
 					request.afterGenerateFile.apply(resource.getURI, uri)
 					return contents

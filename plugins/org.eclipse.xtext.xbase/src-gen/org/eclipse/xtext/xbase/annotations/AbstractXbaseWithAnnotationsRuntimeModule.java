@@ -135,8 +135,8 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureRuntimeLexer(Binder binder) {
 		binder.bind(Lexer.class)
-		.annotatedWith(Names.named(LexerBindings.RUNTIME))
-		.to(InternalXbaseWithAnnotationsLexer.class);
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalXbaseWithAnnotationsLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2

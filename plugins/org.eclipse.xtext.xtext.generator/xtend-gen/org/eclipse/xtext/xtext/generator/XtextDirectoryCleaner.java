@@ -21,15 +21,18 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.SubProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
 public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
   @Inject
-  private IXtextProjectConfig config;
+  private XtextProjectConfig config;
   
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean enabled = true;
@@ -54,45 +57,45 @@ public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
       return;
     }
     final ArrayList<String> directories = CollectionLiterals.<String>newArrayList();
-    IXtextGeneratorFileSystemAccess _runtimeModelGen = this.config.getRuntimeModelGen();
-    IXtextGeneratorFileSystemAccess _runtimeSrcGen = this.config.getRuntimeSrcGen();
-    IXtextGeneratorFileSystemAccess _runtimeTestSrcGen = this.config.getRuntimeTestSrcGen();
-    IXtextGeneratorFileSystemAccess _genericIdeSrcGen = this.config.getGenericIdeSrcGen();
-    IXtextGeneratorFileSystemAccess _genericIdeTestSrcGen = this.config.getGenericIdeTestSrcGen();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrcGen = this.config.getEclipsePluginSrcGen();
-    IXtextGeneratorFileSystemAccess _eclipsePluginTestSrcGen = this.config.getEclipsePluginTestSrcGen();
-    IXtextGeneratorFileSystemAccess _ideaPluginSrcGen = this.config.getIdeaPluginSrcGen();
-    IXtextGeneratorFileSystemAccess _ideaPluginTestSrcGen = this.config.getIdeaPluginTestSrcGen();
-    IXtextGeneratorFileSystemAccess _webSrcGen = this.config.getWebSrcGen();
-    IXtextGeneratorFileSystemAccess _webTestSrcGen = this.config.getWebTestSrcGen();
-    Iterable<IXtextGeneratorFileSystemAccess> _filterNull = IterableExtensions.<IXtextGeneratorFileSystemAccess>filterNull(Collections.<IXtextGeneratorFileSystemAccess>unmodifiableList(CollectionLiterals.<IXtextGeneratorFileSystemAccess>newArrayList(_runtimeModelGen, _runtimeSrcGen, _runtimeTestSrcGen, _genericIdeSrcGen, _genericIdeTestSrcGen, _eclipsePluginSrcGen, _eclipsePluginTestSrcGen, _ideaPluginSrcGen, _ideaPluginTestSrcGen, _webSrcGen, _webTestSrcGen)));
-    final Function1<IXtextGeneratorFileSystemAccess, String> _function = new Function1<IXtextGeneratorFileSystemAccess, String>() {
+    List<? extends SubProjectConfig> _enabledProjects = this.config.getEnabledProjects();
+    final Function1<SubProjectConfig, IXtextGeneratorFileSystemAccess> _function = new Function1<SubProjectConfig, IXtextGeneratorFileSystemAccess>() {
+      @Override
+      public IXtextGeneratorFileSystemAccess apply(final SubProjectConfig it) {
+        return it.getSrcGen();
+      }
+    };
+    List<IXtextGeneratorFileSystemAccess> _map = ListExtensions.map(_enabledProjects, _function);
+    RuntimeProjectConfig _runtime = this.config.getRuntime();
+    IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
+    Iterable<IXtextGeneratorFileSystemAccess> _plus = Iterables.<IXtextGeneratorFileSystemAccess>concat(_map, Collections.<IXtextGeneratorFileSystemAccess>unmodifiableList(CollectionLiterals.<IXtextGeneratorFileSystemAccess>newArrayList(_ecoreModel)));
+    Iterable<IXtextGeneratorFileSystemAccess> _filterNull = IterableExtensions.<IXtextGeneratorFileSystemAccess>filterNull(_plus);
+    final Function1<IXtextGeneratorFileSystemAccess, String> _function_1 = new Function1<IXtextGeneratorFileSystemAccess, String>() {
       @Override
       public String apply(final IXtextGeneratorFileSystemAccess it) {
         return it.getPath();
       }
     };
-    Iterable<String> _map = IterableExtensions.<IXtextGeneratorFileSystemAccess, String>map(_filterNull, _function);
-    final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+    Iterable<String> _map_1 = IterableExtensions.<IXtextGeneratorFileSystemAccess, String>map(_filterNull, _function_1);
+    final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
       @Override
       public Boolean apply(final String it) {
         File _file = new File(it);
         return Boolean.valueOf(_file.isDirectory());
       }
     };
-    Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
+    Iterable<String> _filter = IterableExtensions.<String>filter(_map_1, _function_2);
     Iterables.<String>addAll(directories, _filter);
     Iterables.<String>addAll(directories, this.extraDirectories);
     final DirectoryCleaner delegate = new DirectoryCleaner();
     delegate.setUseDefaultExcludes(this.useDefaultExcludes);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
+    final Procedure1<String> _function_3 = new Procedure1<String>() {
       @Override
       public void apply(final String it) {
         delegate.addExclude(it);
       }
     };
-    IterableExtensions.<String>forEach(this.excludes, _function_2);
-    final Procedure1<String> _function_3 = new Procedure1<String>() {
+    IterableExtensions.<String>forEach(this.excludes, _function_3);
+    final Procedure1<String> _function_4 = new Procedure1<String>() {
       @Override
       public void apply(final String it) {
         try {
@@ -102,7 +105,7 @@ public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
         }
       }
     };
-    IterableExtensions.<String>forEach(directories, _function_3);
+    IterableExtensions.<String>forEach(directories, _function_4);
   }
   
   @Override

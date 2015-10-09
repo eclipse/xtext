@@ -36,6 +36,7 @@ import com.google.inject.Inject;
 /**
  * Base class for content assist parsers that can reduce the input preceding the cursor
  * position without any impact on the follow set.
+ * @since 2.9
  */
 public abstract class AbstractPartialContentAssistParser extends AbstractContentAssistParser implements IPartialContentAssistParser {
 	

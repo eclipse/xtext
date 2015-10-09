@@ -34,9 +34,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -108,40 +110,46 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     }
     this.contributeRuntimeGuiceBindings();
     this.contributeEclipsePluginGuiceBindings();
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    PluginXmlAccess _eclipsePluginPluginXml = _projectConfig.getEclipsePluginPluginXml();
-    boolean _tripleNotEquals = (_eclipsePluginPluginXml != null);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+    boolean _tripleNotEquals = (_pluginXml != null);
     if (_tripleNotEquals) {
       this.contributeEclipsePluginExtensions();
     }
     if (this.generateXtendInferrer) {
       this.doGenerateXtendInferrer();
     }
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    ManifestAccess _runtimeManifest = _projectConfig_1.getRuntimeManifest();
-    boolean _tripleNotEquals_1 = (_runtimeManifest != null);
+    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig_1.getRuntime();
+    ManifestAccess _manifest = _runtime.getManifest();
+    boolean _tripleNotEquals_1 = (_manifest != null);
     if (_tripleNotEquals_1) {
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      ManifestAccess _runtimeManifest_1 = _projectConfig_2.getRuntimeManifest();
-      Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
+      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      RuntimeProjectConfig _runtime_1 = _projectConfig_2.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_1.getManifest();
+      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase", "org.eclipse.xtext.xbase.lib")));
       if (((this.generateXtendInferrer || this.useInferredJvmModel) && (!this.skipExportedPackage))) {
-        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        ManifestAccess _runtimeManifest_2 = _projectConfig_3.getRuntimeManifest();
-        Set<String> _exportedPackages = _runtimeManifest_2.getExportedPackages();
+        XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+        RuntimeProjectConfig _runtime_2 = _projectConfig_3.getRuntime();
+        ManifestAccess _manifest_2 = _runtime_2.getManifest();
+        Set<String> _exportedPackages = _manifest_2.getExportedPackages();
         TypeReference _jvmModelInferrer = this.getJvmModelInferrer();
         String _packageName = _jvmModelInferrer.getPackageName();
         _exportedPackages.add(_packageName);
       }
     }
-    IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-    ManifestAccess _eclipsePluginManifest = _projectConfig_4.getEclipsePluginManifest();
-    boolean _tripleNotEquals_2 = (_eclipsePluginManifest != null);
+    XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin_1 = _projectConfig_4.getEclipsePlugin();
+    ManifestAccess _manifest_3 = _eclipsePlugin_1.getManifest();
+    boolean _tripleNotEquals_2 = (_manifest_3 != null);
     if (_tripleNotEquals_2) {
-      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_5.getEclipsePluginManifest();
-      Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
+      XtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_2 = _projectConfig_5.getEclipsePlugin();
+      ManifestAccess _manifest_4 = _eclipsePlugin_2.getManifest();
+      Set<String> _requiredBundles_1 = _manifest_4.getRequiredBundles();
       _requiredBundles_1.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase.ui", "org.eclipse.jdt.debug.ui")));
     }
@@ -530,9 +538,10 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_jvmModelInferrer, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    _createXtendFile.writeTo(_runtimeSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    _createXtendFile.writeTo(_src);
   }
   
   protected boolean contributeEclipsePluginExtensions() {
@@ -542,9 +551,10 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       Grammar _grammar = _language.getGrammar();
       final String name = _grammar.getName();
       if (this.jdtTypeHierarchy) {
-        IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        PluginXmlAccess _eclipsePluginPluginXml = _projectConfig.getEclipsePluginPluginXml();
-        List<CharSequence> _entries = _eclipsePluginPluginXml.getEntries();
+        XtextProjectConfig _projectConfig = this.getProjectConfig();
+        BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+        PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+        List<CharSequence> _entries = _pluginXml.getEntries();
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<!-- Type Hierarchy  -->");
         _builder.newLine();
@@ -795,9 +805,10 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _entries.add(_builder.toString());
       }
       if (this.jdtCallHierarchy) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        PluginXmlAccess _eclipsePluginPluginXml_1 = _projectConfig_1.getEclipsePluginPluginXml();
-        List<CharSequence> _entries_1 = _eclipsePluginPluginXml_1.getEntries();
+        XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        BundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+        PluginXmlAccess _pluginXml_1 = _eclipsePlugin_1.getPluginXml();
+        List<CharSequence> _entries_1 = _pluginXml_1.getEntries();
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("<!-- Call Hierachy -->");
         _builder_1.newLine();
@@ -876,9 +887,10 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder_1.newLine();
         _entries_1.add(_builder_1.toString());
       }
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      PluginXmlAccess _eclipsePluginPluginXml_2 = _projectConfig_2.getEclipsePluginPluginXml();
-      List<CharSequence> _entries_2 = _eclipsePluginPluginXml_2.getEntries();
+      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+      PluginXmlAccess _pluginXml_2 = _eclipsePlugin_2.getPluginXml();
+      List<CharSequence> _entries_2 = _pluginXml_2.getEntries();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("<extension point=\"org.eclipse.core.runtime.adapters\">");
       _builder_2.newLine();

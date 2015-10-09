@@ -11,6 +11,9 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
+/**
+ * @since 2.9
+ */
 public class LeafNodeFinder {
 	private final int offset;
 	private final boolean leading;

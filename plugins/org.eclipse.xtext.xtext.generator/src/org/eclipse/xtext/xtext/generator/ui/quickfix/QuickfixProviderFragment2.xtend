@@ -76,18 +76,18 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 					instanceClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (generateStub && projectConfig.eclipsePluginSrc !== null) {
+		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
 			if (preferXtendStubs) {
 				generateXtendQuickfixProvider
 			} else {
 				generateJavaQuickfixProvider
 			}
 
-			if (projectConfig.eclipsePluginManifest != null) {
-				projectConfig.eclipsePluginManifest.exportedPackages += grammar.quickfixProviderClass.packageName
+			if (projectConfig.eclipsePlugin.manifest != null) {
+				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
 			}
 
-			if (projectConfig.eclipsePluginPluginXml != null) {
+			if (projectConfig.eclipsePlugin.pluginXml != null) {
 				addRegistrationToPluginXml
 			}
 		}
@@ -112,7 +112,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			//		]
 			//	}
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 	
 	protected def generateJavaQuickfixProvider() {
@@ -136,14 +136,14 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			//	}
 			
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)		
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 	
 	protected def addRegistrationToPluginXml() {
 		val markerTypePrefix = grammar.eclipsePluginBasePackage + "." + grammar.simpleName.toLowerCase
 		val executableExtensionFactory = grammar.eclipsePluginExecutableExtensionFactory
 
-		projectConfig.eclipsePluginPluginXml.entries += '''
+		projectConfig.eclipsePlugin.pluginXml.entries += '''
 		    <!-- quickfix marker resolution generator for «grammar.name» -->
 		    <extension
 		            point="org.eclipse.ui.ide.markerResolution">

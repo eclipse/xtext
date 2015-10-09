@@ -58,15 +58,15 @@ public abstract class AbstractXtypeUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(Lexer.class)
-		.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
-		.to(InternalXtypeLexer.class);
+			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.to(InternalXtypeLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider.class)
-		.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
-		.to(AntlrTokenDefProvider.class);
+			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.to(AntlrTokenDefProvider.class);
 	}
 	
 }

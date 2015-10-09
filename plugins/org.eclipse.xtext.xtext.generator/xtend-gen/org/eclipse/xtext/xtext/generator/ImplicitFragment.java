@@ -20,9 +20,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -31,9 +33,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
 class ImplicitFragment extends AbstractGeneratorFragment2 {
-  @Inject
-  private IXtextProjectConfig projectConfig;
-  
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
@@ -44,30 +43,44 @@ class ImplicitFragment extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-    boolean _tripleNotEquals = (_runtimeManifest != null);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    ManifestAccess _manifest = _runtime.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
-      Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
+      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      RuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_1.getManifest();
+      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util", "org.eclipse.xtend.lib")));
-      ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
-      Set<String> _importedPackages = _runtimeManifest_2.getImportedPackages();
+      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      RuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
+      ManifestAccess _manifest_2 = _runtime_2.getManifest();
+      Set<String> _importedPackages = _manifest_2.getImportedPackages();
       _importedPackages.add("org.apache.log4j");
     }
-    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    boolean _tripleNotEquals_1 = (_eclipsePluginManifest != null);
+    XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig_3.getEclipsePlugin();
+    ManifestAccess _manifest_3 = _eclipsePlugin.getManifest();
+    boolean _tripleNotEquals_1 = (_manifest_3 != null);
     if (_tripleNotEquals_1) {
-      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
-      Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
+      XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_1 = _projectConfig_4.getEclipsePlugin();
+      ManifestAccess _manifest_4 = _eclipsePlugin_1.getManifest();
+      Set<String> _requiredBundles_1 = _manifest_4.getRequiredBundles();
       _requiredBundles_1.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui", "org.eclipse.xtend.lib")));
     }
-    PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
-    boolean _tripleNotEquals_2 = (_eclipsePluginPluginXml != null);
+    XtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin_2 = _projectConfig_5.getEclipsePlugin();
+    PluginXmlAccess _pluginXml = _eclipsePlugin_2.getPluginXml();
+    boolean _tripleNotEquals_2 = (_pluginXml != null);
     if (_tripleNotEquals_2) {
-      PluginXmlAccess _eclipsePluginPluginXml_1 = this.projectConfig.getEclipsePluginPluginXml();
-      List<CharSequence> _entries = _eclipsePluginPluginXml_1.getEntries();
+      XtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_3 = _projectConfig_6.getEclipsePlugin();
+      PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
+      List<CharSequence> _entries = _pluginXml_1.getEntries();
       Grammar _grammar = this.getGrammar();
       CharSequence _implicitPluginXmlEnties = this.getImplicitPluginXmlEnties(_grammar);
       _entries.add(_implicitPluginXmlEnties);

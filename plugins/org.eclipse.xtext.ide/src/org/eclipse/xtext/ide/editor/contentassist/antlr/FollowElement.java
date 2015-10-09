@@ -14,6 +14,7 @@ import org.eclipse.xtext.AbstractElement;
 /**
  * Simple bean that reflects the current state, when the content assist parser
  * hit EOF.
+ * @since 2.9
  */
 public class FollowElement {
 

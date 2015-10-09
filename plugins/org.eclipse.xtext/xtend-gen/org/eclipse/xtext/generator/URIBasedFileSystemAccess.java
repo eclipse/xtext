@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IFilePostProcessor;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -44,7 +46,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   }
   
   public interface BeforeWrite {
-    public abstract InputStream beforeWrite(final URI changed, final InputStream in);
+    public abstract InputStream beforeWrite(final URI changed, final String outputCfgName, final InputStream in);
   }
   
   public interface BeforeRead {
@@ -80,8 +82,8 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   @Accessors
   private URIBasedFileSystemAccess.BeforeWrite beforeWrite = new URIBasedFileSystemAccess.BeforeWrite() {
     @Override
-    public InputStream beforeWrite(final URI $0, final InputStream $1) {
-      return $1;
+    public InputStream beforeWrite(final URI $0, final String $1, final InputStream $2) {
+      return $2;
     }
   };
   
@@ -124,6 +126,20 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   public void generateFile(final String fileName, final String outputCfgName, final CharSequence contents) {
     try {
       final URI uri = this.getURI(fileName, outputCfgName);
+      boolean _and = false;
+      OutputConfiguration _outputConfig = this.getOutputConfig(outputCfgName);
+      boolean _isOverrideExistingResources = _outputConfig.isOverrideExistingResources();
+      boolean _not = (!_isOverrideExistingResources);
+      if (!_not) {
+        _and = false;
+      } else {
+        Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+        boolean _exists = this.converter.exists(uri, _emptyMap);
+        _and = _exists;
+      }
+      if (_and) {
+        return;
+      }
       final String encoding = this.getEncoding(uri);
       final CharSequence postProcessed = this.postProcess(fileName, outputCfgName, contents, encoding);
       this.generateTrace(fileName, outputCfgName, postProcessed);
@@ -165,7 +181,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
       final URI uri = this.getURI(fileName, outputCfgName);
       final OutputStream out = this.converter.createOutputStream(uri);
       try {
-        final InputStream processedContent = this.beforeWrite.beforeWrite(uri, content);
+        final InputStream processedContent = this.beforeWrite.beforeWrite(uri, outputCfgName, content);
         ByteStreams.copy(processedContent, out);
       } finally {
         out.close();

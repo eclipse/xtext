@@ -15,8 +15,16 @@ Workflow {
 	component = XtextGenerator auto-inject {
 		configuration = {
 			project = WizardConfig auto-inject {
-				genericIdeSupport = true
-				testingSupport = true
+				runtimeTest = {
+					enabled = true
+				}
+				eclipsePlugin = {
+					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = true
+				}
+				createEclipseMetaData = true
 			}
 			code = auto-inject {
 				encoding = "UTF-8"
@@ -77,10 +85,9 @@ Workflow {
 			fragment = junit.Junit4Fragment2 auto-inject {}
 			
 			fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+			
 			// labeling API
-			fragment = adapter.FragmentAdapter {
-				fragment = labeling.LabelProviderFragment auto-inject {}
-			}
+			fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
 			
 			// outline API
 			fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
@@ -105,9 +112,8 @@ Workflow {
 			}
 			
 			// provides a compare view
-			fragment = adapter.FragmentAdapter {
-				fragment = compare.CompareFragment auto-inject {}
-			}
+			fragment = ui.compare.CompareFragment2 auto-inject {}
+			
 			// generates a more lightweight Antlr parser and lexer tailored for content assist
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}

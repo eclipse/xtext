@@ -19,10 +19,11 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -121,9 +122,10 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
     if (!this.generateStub) {
       _and = false;
     } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
-      boolean _tripleNotEquals = (_eclipsePluginSrc != null);
+      XtextProjectConfig _projectConfig = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+      boolean _tripleNotEquals = (_src != null);
       _and = _tripleNotEquals;
     }
     if (_and) {
@@ -133,21 +135,24 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       } else {
         this.generateJavaQuickfixProvider();
       }
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest = _projectConfig_1.getEclipsePluginManifest();
-      boolean _notEquals = (!Objects.equal(_eclipsePluginManifest, null));
+      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      ManifestAccess _manifest = _eclipsePlugin_1.getManifest();
+      boolean _notEquals = (!Objects.equal(_manifest, null));
       if (_notEquals) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        ManifestAccess _eclipsePluginManifest_1 = _projectConfig_2.getEclipsePluginManifest();
-        Set<String> _exportedPackages = _eclipsePluginManifest_1.getExportedPackages();
+        XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+        BundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+        ManifestAccess _manifest_1 = _eclipsePlugin_2.getManifest();
+        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
         Grammar _grammar_2 = this.getGrammar();
         TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar_2);
         String _packageName = _quickfixProviderClass.getPackageName();
         _exportedPackages.add(_packageName);
       }
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      PluginXmlAccess _eclipsePluginPluginXml = _projectConfig_3.getEclipsePluginPluginXml();
-      boolean _notEquals_1 = (!Objects.equal(_eclipsePluginPluginXml, null));
+      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
+      PluginXmlAccess _pluginXml = _eclipsePlugin_3.getPluginXml();
+      boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
       if (_notEquals_1) {
         this.addRegistrationToPluginXml();
       }
@@ -213,9 +218,10 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_quickfixProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
-    _createXtendFile.writeTo(_eclipsePluginSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+    _createXtendFile.writeTo(_src);
   }
   
   protected void generateJavaQuickfixProvider() {
@@ -280,9 +286,10 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_quickfixProviderClass, _client);
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _eclipsePluginSrc = _projectConfig.getEclipsePluginSrc();
-    _createJavaFile.writeTo(_eclipsePluginSrc);
+    XtextProjectConfig _projectConfig = this.getProjectConfig();
+    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+    _createJavaFile.writeTo(_src);
   }
   
   protected boolean addRegistrationToPluginXml() {
@@ -297,9 +304,10 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       final String markerTypePrefix = (_plus + _lowerCase);
       Grammar _grammar_2 = this.getGrammar();
       final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_2);
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      PluginXmlAccess _eclipsePluginPluginXml = _projectConfig.getEclipsePluginPluginXml();
-      List<CharSequence> _entries = _eclipsePluginPluginXml.getEntries();
+      XtextProjectConfig _projectConfig = this.getProjectConfig();
+      BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+      List<CharSequence> _entries = _pluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- quickfix marker resolution generator for ");
       Grammar _grammar_3 = this.getGrammar();

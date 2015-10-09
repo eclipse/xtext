@@ -16,6 +16,7 @@ import java.util.LinkedHashSet;
  * with caution.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
  */
 public class LinkedHashSetWithoutNull<T> extends LinkedHashSet<T> {
 	private static final long serialVersionUID = 1L;
