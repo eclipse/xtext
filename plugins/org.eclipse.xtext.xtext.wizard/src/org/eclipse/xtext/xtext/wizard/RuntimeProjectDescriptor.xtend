@@ -166,23 +166,42 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				component = XtextGenerator auto-inject {
 					configuration = {
 						project = WizardConfig auto-inject {
-							«IF !config.uiProject.enabled»
-								eclipseEditor = false
+							«IF testProject.enabled»
+								runtimeTest = {
+									enabled = true
+								}
+							«ENDIF»
+							«IF config.ideProject.enabled 
+								&& !#[config.webProject, config.intellijProject, config.uiProject].exists[enabled]»
+								genericIde = {
+									enabled = true
+								}
+							«ENDIF»
+							«IF config.uiProject.enabled»
+								eclipsePlugin = {
+									enabled = true
+								}
+							«ENDIF»
+							«IF config.uiProject.testProject.enabled»
+								eclipsePluginTest = {
+									enabled = true
+								}
 							«ENDIF»
 							«IF config.intellijProject.enabled»
-								ideaEditor = true
+								ideaPlugin = {
+									enabled = true
+								}
 							«ENDIF»
 							«IF config.webProject.enabled»
-								webSupport = true
-							«ENDIF»
-							«IF config.ideProject.enabled»
-								genericIdeSupport = true
-							«ENDIF»
-							«IF testProject.enabled»
-								testingSupport = true
+								web = {
+									enabled = true
+								}
 							«ENDIF»
 							«IF config.sourceLayout == SourceLayout.MAVEN»
 								mavenLayout = true
+							«ENDIF»
+							«IF isEclipsePluginProject»
+								createEclipseMetaData = true
 							«ENDIF»
 						}
 						code = auto-inject {
@@ -266,10 +285,9 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						
 						«IF config.uiProject.enabled»
 							fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+							
 							// labeling API
-							fragment = adapter.FragmentAdapter {
-								fragment = labeling.LabelProviderFragment auto-inject {}
-							}
+							fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
 							
 							// outline API
 							fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
@@ -294,9 +312,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 							
 							// provides a compare view
-							fragment = adapter.FragmentAdapter {
-								fragment = compare.CompareFragment auto-inject {}
-							}
+							fragment = ui.compare.CompareFragment2 auto-inject {}
+							
 						«ENDIF»
 						«IF config.uiProject.enabled || config.ideProject.enabled»
 							// generates a more lightweight Antlr parser and lexer tailored for content assist

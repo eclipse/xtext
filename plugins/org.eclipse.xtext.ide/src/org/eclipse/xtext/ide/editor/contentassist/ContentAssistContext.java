@@ -23,6 +23,7 @@ import com.google.inject.Provider;
 
 /**
  * Abstraction of a commonly used set of attributes related to the current content assist request.
+ * @since 2.9
  */
 public class ContentAssistContext {
 	

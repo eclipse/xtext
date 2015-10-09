@@ -8,31 +8,32 @@
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.Issues
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-import org.eclipse.xtext.parser.ITokenToStringConverter
-import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
-import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper
-import org.eclipse.xtext.parser.antlr.Lexer
-import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter
+import com.google.inject.name.Names
+import java.io.InputStream
 import org.eclipse.xtext.parser.IParser
+import org.eclipse.xtext.parser.ITokenToStringConverter
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
+import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper
-import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import com.google.inject.name.Names
+import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.LexerBindings
 import org.eclipse.xtext.parser.antlr.LexerProvider
-import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
-import org.eclipse.xtext.parser.antlr.AbstractAntlrParser
-import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
-import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper
 import org.eclipse.xtext.parser.antlr.XtextTokenStream
-import java.io.InputStream
+import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.Issues
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig
+import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
+import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+
+import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 
@@ -40,7 +41,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 
 	@Inject CodeConfig codeConfig
 
-	@Inject IXtextProjectConfig projectConfig
+	@Inject XtextProjectConfig projectConfig
 	
 	@Inject FileAccessFactory fileFactory
 
@@ -48,7 +49,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Inject extension GrammarAccessExtensions
 
 	override protected doGenerate() {
-		val fsa = projectConfig.runtimeSrcGen
+		val fsa = projectConfig.runtime.srcGen
 		generator.generate(grammar, options, fsa)
 
 		val encoding = codeConfig.encoding
@@ -63,8 +64,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		suppressWarnings(fsa, grammarFileName)
 		normalizeLineDelimiters(fsa, grammarFileName)
 		normalizeTokens(fsa, grammarFileName)
-		generateXtextParser.writeTo(projectConfig.runtimeSrcGen)
-		generateAntlrTokenFileProvider.writeTo(projectConfig.runtimeSrcGen)
+		generateXtextParser.writeTo(projectConfig.runtime.srcGen)
+		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
 		addBindingsAndImports()
 	}
 	
@@ -129,8 +130,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	}
 	
 	def addBindingsAndImports() {
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest=>[
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest=>[
 				exportedPackages += #[
 					grammar.parserPackage,
 					grammar.internalParserPackage
@@ -147,8 +148,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			.addTypeToProviderInstance(grammar.lexerClass, '''«LexerProvider».create(«grammar.lexerClass».class)''')
 			.addConfiguredBinding("RuntimeLexer", '''
 					binder.bind(«Lexer».class)
-					.annotatedWith(«Names».named(«LexerBindings».RUNTIME))
-					.to(«grammar.lexerClass».class);
+						.annotatedWith(«Names».named(«LexerBindings».RUNTIME))
+						.to(«grammar.lexerClass».class);
 				'''
 			)
 		if (containsUnorderedGroup(grammar))
@@ -162,13 +163,13 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			)
 			.addConfiguredBinding("HighlightingLexer", '''
 				binder.bind(«Lexer».class)
-				.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
-				.to(«grammar.lexerClass».class);
+					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+					.to(«grammar.lexerClass».class);
 			''')
 			.addConfiguredBinding("HighlightingTokenDefProvider", '''
 				binder.bind(«ITokenDefProvider».class)
-				.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
-				.to(«AntlrTokenDefProvider».class);
+					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+					.to(«AntlrTokenDefProvider».class);
 			''')
 			.contributeTo(language.eclipsePluginGenModule)
 	}

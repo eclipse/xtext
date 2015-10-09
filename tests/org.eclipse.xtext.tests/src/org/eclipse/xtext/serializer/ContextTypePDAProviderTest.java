@@ -393,4 +393,18 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		expected.append("  '}' -> stop");
 		assertEquals(expected.toString(), actual);
 	}
+	
+	@Test
+	public void testWildcardFragment() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: F; fragment F*:name=ID;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  start -> >>F\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> name=ID\n");
+		expected.append("  name=ID -> <<F");
+		assertEquals(expected.toString(), actual);
+	}
 }

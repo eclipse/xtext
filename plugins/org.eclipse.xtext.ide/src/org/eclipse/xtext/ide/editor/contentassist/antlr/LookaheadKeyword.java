@@ -10,6 +10,9 @@ package org.eclipse.xtext.ide.editor.contentassist.antlr;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
 
+/**
+ * @since 2.9
+ */
 public class LookaheadKeyword extends LookAheadTerminal {
 
 	private String keyword;

@@ -29,21 +29,21 @@ class TypesGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			.contributeTo(language.eclipsePluginGenModule)
 		language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule'.typeRef
 		
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest.requiredBundles.addAll(
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.requiredBundles.addAll(
 				'org.eclipse.xtext.common.types',
 				'org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional'
 			)
 		}
 		
-		if (projectConfig.runtimeTestManifest !== null) {
-			projectConfig.runtimeTestManifest.requiredBundles.add(
+		if (projectConfig.runtimeTest.manifest !== null) {
+			projectConfig.runtimeTest.manifest.requiredBundles.add(
 				'org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional'
 			)
 		}
 		
-		if (projectConfig.eclipsePluginManifest !== null) {
-			projectConfig.eclipsePluginManifest.requiredBundles.add(
+		if (projectConfig.eclipsePlugin.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles.add(
 				'org.eclipse.xtext.common.types.ui'
 			)
 		}

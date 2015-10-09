@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ide.editor.contentassist;
 
 import org.eclipse.xtext.AbstractElement;
-
+/**
+ * @since 2.9
+ */
 public interface IFollowElementAcceptor {
 	
 	void accept(AbstractElement element);

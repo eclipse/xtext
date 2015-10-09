@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.internal.Log
 
 @Log
 class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
-	@Inject IXtextProjectConfig projectConfig
+	@Inject XtextProjectConfig projectConfig
 
 	@Accessors boolean scanClasspath = true
 
@@ -31,23 +31,12 @@ class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
 		projectMappings.forEach [ mapping |
 			delegate.addProjectMapping(new ProjectMapping => [
 				projectName = mapping.key
-				path = mapping.value.path
+				path = mapping.value
 			])
 		]
 	}
 
 	private def getProjectMappings() {
-		#[
-			projectConfig.runtimeProjectName -> projectConfig.runtimeRoot,
-			projectConfig.runtimeTestProjectName -> projectConfig.runtimeTestRoot,
-			projectConfig.genericIdeProjectName -> projectConfig.genericIdeRoot,
-			projectConfig.genericIdeTestProjectName -> projectConfig.genericIdeTestRoot,
-			projectConfig.eclipsePluginProjectName -> projectConfig.eclipsePluginRoot,
-			projectConfig.eclipsePluginTestProjectName -> projectConfig.eclipsePluginTestRoot,
-			projectConfig.ideaPluginProjectName -> projectConfig.ideaPluginRoot,
-			projectConfig.ideaPluginTestProjectName -> projectConfig.ideaPluginTestRoot,
-			projectConfig.webProjectName -> projectConfig.webRoot,
-			projectConfig.webTestProjectName -> projectConfig.webTestRoot
-		].filter[key != null && value != null]
+		projectConfig.enabledProjects.filter[name != null && root != null].map[name -> root.path]
 	}
 }	

@@ -14,11 +14,14 @@ import java.io.Externalizable
 import java.io.IOException
 import java.io.ObjectInput
 import java.io.ObjectOutput
+import java.util.HashMap
 import java.util.HashSet
 import java.util.List
+import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.generator.IFileSystemAccess
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,18 +30,24 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 	
 	val Multimap<URI, URI> source2generated
 	val Multimap<URI, URI> generated2source
+	val Map<URI,String> generated2OutputConfigName
 	
 	new() {
-		this(HashMultimap.create, HashMultimap.create)
+		this(HashMultimap.create, HashMultimap.create, newHashMap)
 	}
 	  
 	def copy() {
-		new Source2GeneratedMapping(HashMultimap.create(source2generated), HashMultimap.create(generated2source))
+		new Source2GeneratedMapping(HashMultimap.create(source2generated), HashMultimap.create(generated2source), new HashMap(generated2OutputConfigName))
 	}
 	
 	def void addSource2Generated(URI source, URI generated) {
+		addSource2Generated(source, generated, IFileSystemAccess.DEFAULT_OUTPUT)
+	}
+	
+	def void addSource2Generated(URI source, URI generated, String outputCfgName) {
 		source2generated.put(source, generated)
 		generated2source.put(generated, source)
+		generated2OutputConfigName.put(generated, outputCfgName)
 	}
 	
 	def void removeSource2Generated(URI source, URI generated) {
@@ -58,6 +67,11 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 		generated2source.removeAll(generated).forEach[
 			source2generated.remove(it, generated)
 		]
+		generated2OutputConfigName.remove(generated)
+	}
+	
+	def String getOutputConfigName(URI generated) {
+		return generated2OutputConfigName.get(generated)
 	}
 	
 	def List<URI> getGenerated(URI source) {
@@ -79,7 +93,8 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 			val numGenerated = in.readInt
 			for(j: 0..<numGenerated) {
 				val generated = URI.createURI(in.readUTF)
-				addSource2Generated(source, generated)
+				val outputConfig = in.readUTF
+				addSource2Generated(source, generated, outputConfig)
 			}
 		}
 	}
@@ -92,6 +107,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 			out.writeInt(value.size)
 			value.forEach[
 				out.writeUTF(toString)
+				out.writeUTF(generated2OutputConfigName.get(it)?:IFileSystemAccess.DEFAULT_OUTPUT)
 			]
 		]		
 	}

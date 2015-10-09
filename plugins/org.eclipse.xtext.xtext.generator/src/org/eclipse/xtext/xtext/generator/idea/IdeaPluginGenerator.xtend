@@ -122,7 +122,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			grammar.compileFacetConfiguration,
 			grammar.compileColorSettingsPage
 		].forEach[
-			writeTo(projectConfig.ideaPluginSrc)
+			writeTo(projectConfig.ideaPlugin.src)
 		]
 
 		#[
@@ -145,15 +145,15 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			grammar.compileFacetType,
 			grammar.compileBaseColorSettingsPage
 		].forEach[
-			writeTo(projectConfig.ideaPluginSrcGen)
+			writeTo(projectConfig.ideaPlugin.srcGen)
 		]
 
 		if (deployable) {
 			val pluginXml = grammar.compilePluginXml
-			if (!projectConfig.ideaPluginMetaInf.isFile(pluginXml.path)) {
-				pluginXml.writeTo(projectConfig.ideaPluginMetaInf)
+			if (!projectConfig.ideaPlugin.metaInf.isFile(pluginXml.path)) {
+				pluginXml.writeTo(projectConfig.ideaPlugin.metaInf)
 			}
-			grammar.compilePluginGenXml.writeTo(projectConfig.ideaPluginMetaInf)
+			grammar.compilePluginGenXml.writeTo(projectConfig.ideaPlugin.metaInf)
 		}
 	}
 	
