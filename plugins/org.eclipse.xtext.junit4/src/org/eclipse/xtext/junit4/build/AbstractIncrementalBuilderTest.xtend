@@ -12,11 +12,16 @@ import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.google.inject.name.Named
 import java.util.List
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.Constants
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IndexState
+import org.eclipse.xtext.generator.OutputConfiguration
+import org.eclipse.xtext.generator.OutputConfigurationAdapter
+import org.eclipse.xtext.generator.OutputConfigurationProvider
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -39,6 +44,8 @@ abstract class AbstractIncrementalBuilderTest {
 	@Inject protected IncrementalBuilder incrementalBuilder
 	@Inject protected IndexState indexState
 	@Inject protected Provider<XtextResourceSet> resourceSetProvider
+	@Inject @Named(Constants.LANGUAGE_NAME) String languageName
+	@Inject OutputConfigurationProvider configurationProvider
 	
 	protected Multimap<URI, URI> generated
 	protected List<URI> deleted
@@ -60,6 +67,13 @@ abstract class AbstractIncrementalBuilderTest {
 		clean()
 		this.indexState = incrementalBuilder.build(buildRequest, [getLanguages.getResourceServiceProvider(it)]).indexState
 		return indexState
+	}
+	
+	protected def void withOutputConfig(BuildRequest it, (OutputConfiguration)=>void init) {
+		val config = configurationProvider.outputConfigurations.head
+		init.apply(config)
+		val adapter = new OutputConfigurationAdapter(#{languageName -> #{config}})
+		resourceSet.eAdapters += adapter
 	}
 	
 	abstract protected def IResourceServiceProvider.Registry getLanguages();
