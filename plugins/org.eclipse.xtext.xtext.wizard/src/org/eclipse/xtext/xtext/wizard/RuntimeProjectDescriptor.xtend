@@ -293,9 +293,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 							
 							// provides a compare view
-							fragment = adapter.FragmentAdapter {
-								fragment = compare.CompareFragment auto-inject {}
-							}
+							fragment = ui.compare.CompareFragment2 auto-inject {}
+							
 						«ENDIF»
 						«IF config.uiProject.enabled || config.ideProject.enabled»
 							// generates a more lightweight Antlr parser and lexer tailored for content assist
