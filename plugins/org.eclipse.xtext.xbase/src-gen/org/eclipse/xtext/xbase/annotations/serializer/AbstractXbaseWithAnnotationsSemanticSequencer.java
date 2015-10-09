@@ -106,8 +106,18 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				}
 				else break;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
-				sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
-				return; 
+				if(context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()) {
+					sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(context, (JvmParameterizedTypeReference) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
+				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
+				   context == grammarAccess.getJvmTypeReferenceRule() ||
+				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case TypesPackage.JVM_TYPE_PARAMETER:
 				sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
 				return; 
@@ -370,10 +380,10 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*)?) | 
+	 *         (elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*) | 
 	 *         (elements+=XAnnotationElementValueOrCommaList_XListLiteral_1_1_0 elements+=XAnnotationOrExpression+) | 
-	 *         ((elements+=XExpression elements+=XExpression*)?)
-	 *     )
+	 *         (elements+=XExpression elements+=XExpression*)
+	 *     )?
 	 */
 	protected void sequence_XAnnotationElementValueOrCommaList_XListLiteral(EObject context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -386,10 +396,10 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 */
 	protected void sequence_XAnnotationElementValuePair(EObject context, XAnnotationElementValuePair semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE));
 			if(transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT));
+			if(transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
@@ -401,7 +411,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	
 	/**
 	 * Constraint:
-	 *     (((elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*)?) | ((elements+=XExpression elements+=XExpression*)?))
+	 *     ((elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*) | (elements+=XExpression elements+=XExpression*))?
 	 */
 	protected void sequence_XAnnotationElementValue_XListLiteral(EObject context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

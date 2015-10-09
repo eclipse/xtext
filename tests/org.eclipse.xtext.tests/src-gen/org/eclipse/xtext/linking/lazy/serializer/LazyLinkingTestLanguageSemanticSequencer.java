@@ -47,7 +47,7 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	/**
 	 * Constraint:
-	 *     types+=Type*
+	 *     types+=Type+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

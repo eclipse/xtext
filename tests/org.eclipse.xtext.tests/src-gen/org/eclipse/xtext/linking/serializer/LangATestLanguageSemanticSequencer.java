@@ -62,7 +62,7 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	/**
 	 * Constraint:
-	 *     (imports+=Import* types+=Type*)
+	 *     ((imports+=Import+ types+=Type+) | types+=Type+)?
 	 */
 	protected void sequence_Main(EObject context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

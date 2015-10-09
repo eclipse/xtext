@@ -148,7 +148,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	/**
 	 * Constraint:
-	 *     (elements+=Element* components+=Component*)
+	 *     ((elements+=Element+ components+=Component+) | components+=Component+)?
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

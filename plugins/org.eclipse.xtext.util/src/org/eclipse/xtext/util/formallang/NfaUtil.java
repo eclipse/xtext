@@ -8,10 +8,10 @@
 package org.eclipse.xtext.util.formallang;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,14 +19,13 @@ import java.util.Stack;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
+import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
 /**
@@ -171,7 +170,7 @@ public class NfaUtil {
 	public <S, ITERABLE extends Iterable<? extends S>> boolean canReach(Nfa<S> nfa, Predicate<S> matcher) {
 		return find(nfa, Collections.singleton(nfa.getStart()), matcher) != null;
 	}
-	
+
 	public <S, ITERABLE extends Iterable<? extends S>> boolean canReach(Nfa<S> nfa, S state, Predicate<S> matcher) {
 		return find(nfa, Collections.singleton(state), matcher) != null;
 	}
@@ -321,13 +320,45 @@ public class NfaUtil {
 		});
 	}
 
-	public <S> boolean equalsIgnoreOrder(Nfa<S> nfa1, Nfa<S> nfa2, Function<S, ? super Object> keyFunc) {
+	/**
+	 * returns the sum of all edge-hashes.
+	 * 
+	 * An edge-hash is computed as precedingStateKey.hashCode * (followingStateKey.hashCode + 1). Adding 1 ensures the
+	 * direction of edges is considered.
+	 * 
+	 * Disadvantage of this implementation: it calls keyFunc and key.hashCode twice on each state.
+	 */
+	public <S> int hashCodeIgnoreOrder(Nfa<S> nfa, Function<S, ? extends Object> keyFunc) {
+		int result = 0;
+		LinkedList<S> remaining = new LinkedList<S>();
+		Set<S> visited = Sets.newHashSet();
+		remaining.add(nfa.getStart());
+		while (!remaining.isEmpty()) {
+			S state = remaining.removeFirst();
+			Object stateKey = keyFunc.apply(state);
+			int stateHash = stateKey == null ? 0 : stateKey.hashCode();
+			for (S follower : nfa.getFollowers(state)) {
+				Object followerKey = keyFunc.apply(follower);
+				int followerHash = followerKey == null ? 0 : followerKey.hashCode();
+				int edgeHash = stateHash * (followerHash + 1);
+				result += edgeHash;
+				if (visited.add(follower)) {
+					remaining.add(follower);
+				}
+			}
+		}
+		return result;
+	}
+
+	public <S> boolean equalsIgnoreOrder(Nfa<S> nfa1, Nfa<S> nfa2, Function<S, ? extends Object> keyFunc) {
+		if (nfa1 == nfa2)
+			return true;
 		if (!Objects.equal(keyFunc.apply(nfa1.getStart()), keyFunc.apply(nfa2.getStart())))
 			return false;
 		return equalsIgnoreOrder(nfa1, nfa2, nfa1.getStart(), nfa2.getStart(), keyFunc, Sets.<S> newHashSet());
 	}
 
-	public <S> boolean equalsIgnoreOrder(Nfa<S> nfa1, Nfa<S> nfa2, S s1, S s2, Function<S, ? super Object> keyFunc,
+	public <S> boolean equalsIgnoreOrder(Nfa<S> nfa1, Nfa<S> nfa2, S s1, S s2, Function<S, ? extends Object> keyFunc,
 			Set<S> visited) {
 		if (!visited.add(s1))
 			return true;
@@ -335,16 +366,48 @@ public class NfaUtil {
 		Iterable<S> followers2 = nfa1.getFollowers(s2);
 		if (Iterables.size(followers1) != Iterables.size(followers2))
 			return false;
-		Multimap<? super Object, S> index = Multimaps.index(followers1, keyFunc);
+		Map<Object, S> index = Maps.newHashMap();
+		for (S f1 : followers1)
+			if (index.put(keyFunc.apply(f1), f1) != null)
+				return false;
 		for (S f : followers2) {
 			Object key2 = keyFunc.apply(f);
-			Collection<S> key1s = index.get(key2);
-			if (key1s.size() != 1)
-				return false;
-			if (!equalsIgnoreOrder(nfa1, nfa2, key1s.iterator().next(), f, keyFunc, visited))
+			S key1s = index.get(key2);
+			if (!equalsIgnoreOrder(nfa1, nfa2, key1s, f, keyFunc, visited))
 				return false;
 		}
 		return true;
+	}
+
+	public <S> String identityString(Nfa<S> nfa, Function<S, String> idFunc) {
+		Map<String, S> names = Maps.newHashMap();
+		Map<S, Integer> ids = Maps.newHashMap();
+		for (S s : collect(nfa)) {
+			String name = idFunc.apply(s);
+			if (name == null) {
+				name = "(null)";
+			}
+			if (s == nfa.getStart())
+				name = "start:" + name;
+			else if (s == nfa.getStop())
+				name = "stop:" + name;
+			names.put(name, s);
+		}
+		List<String> sorted = Lists.newArrayList(names.keySet());
+		Collections.sort(sorted);
+		for (int i = 0; i < sorted.size(); i++)
+			ids.put(names.get(sorted.get(i)), i);
+		List<String> result = Lists.newArrayListWithExpectedSize(sorted.size());
+		for (String name : sorted) {
+			S state = names.get(name);
+			Integer id = ids.get(state);
+			List<Integer> followers = Lists.newArrayList();
+			for (S f : nfa.getFollowers(state))
+				followers.add(ids.get(f));
+			Collections.sort(followers);
+			result.add(id + ":" + name + "->" + Joiner.on(",").join(followers));
+		}
+		return Joiner.on("\n").join(result);
 	}
 
 	public <S> Nfa<S> filter(final Nfa<S> nfa, final Predicate<S> filter) {
@@ -517,5 +580,5 @@ public class NfaUtil {
 	public <S, COMP extends Comparable<COMP>> Nfa<S> sort(Nfa<S> nfa, Map<S, COMP> comparator) {
 		return sort(nfa, new MappedComparator<S, COMP>(comparator));
 	}
-	
+
 }

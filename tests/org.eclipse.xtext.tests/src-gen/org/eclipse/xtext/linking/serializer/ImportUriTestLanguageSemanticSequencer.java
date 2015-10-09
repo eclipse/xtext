@@ -62,7 +62,7 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (imports+=Import* types+=Type*)
+	 *     ((imports+=Import+ types+=Type+) | types+=Type+)?
 	 */
 	protected void sequence_Main(EObject context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

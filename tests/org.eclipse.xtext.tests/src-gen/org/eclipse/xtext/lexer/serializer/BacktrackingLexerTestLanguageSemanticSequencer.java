@@ -66,13 +66,17 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	/**
 	 * Constraint:
 	 *     (
-	 *         enums+=EnumName* 
-	 *         ycs+=Yc* 
-	 *         abs+=Ab* 
-	 *         xbs+=Xb* 
-	 *         ys+=CharY* 
-	 *         as+=CharA*
-	 *     )
+	 *         (enums+=EnumName* ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
+	 *         (enums+=EnumName* ycs+=Yc+ ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
+	 *         (((enums+=EnumName* abs+=Ab+) | (enums+=EnumName* ycs+=Yc+ abs+=Ab+) | abs+=Ab+) ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
+	 *         (
+	 *             ((enums+=EnumName* ((abs+=Ab+ xbs+=Xb+) | xbs+=Xb+)) | (enums+=EnumName* ycs+=Yc+ ((abs+=Ab+ xbs+=Xb+) | xbs+=Xb+)) | (abs+=Ab+ xbs+=Xb+) | xbs+=Xb+)? 
+	 *             ys+=CharY+ 
+	 *             as+=CharA+
+	 *         ) | 
+	 *         (xbs+=Xb+ as+=CharA+) | 
+	 *         as+=CharA+
+	 *     )?
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

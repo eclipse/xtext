@@ -147,12 +147,12 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 					sequence_TwoVersionNo1(context, (TwoVersion) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTwoVersionNo2Rule()) {
-					sequence_TwoVersionNo2(context, (TwoVersion) semanticObject); 
+				else if(context == grammarAccess.getTwoVersionRule()) {
+					sequence_TwoVersionNo1_TwoVersionNo2(context, (TwoVersion) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTwoVersionRule()) {
-					sequence_TwoVersion_TwoVersionNo1_TwoVersionNo2(context, (TwoVersion) semanticObject); 
+				else if(context == grammarAccess.getTwoVersionNo2Rule()) {
+					sequence_TwoVersionNo2(context, (TwoVersion) semanticObject); 
 					return; 
 				}
 				else break;
@@ -212,7 +212,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ (val6+=ID | val7+=ID)*)
+	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ val7+=ID? (val6+=ID? val7+=ID?)*)
 	 */
 	protected void sequence_AlternativeMultiplicities(EObject context, AlternativeMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -224,7 +224,17 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 *     (val1=ID val2=ID)
 	 */
 	protected void sequence_AssignedActionSecond(EObject context, AssignedAction semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__VAL1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__VAL1));
+			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__VAL2) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__VAL2));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAssignedActionSecondAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		feeder.accept(grammarAccess.getAssignedActionSecondAccess().getVal2IDTerminalRuleCall_3_0(), semanticObject.getVal2());
+		feeder.finish();
 	}
 	
 	
@@ -233,13 +243,23 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 *     (child=AssignedAction_AssignedAction_2_0 val1=ID)
 	 */
 	protected void sequence_AssignedAction(EObject context, AssignedAction semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__CHILD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__CHILD));
+			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__VAL1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.ASSIGNED_ACTION__VAL1));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAssignedActionAccess().getAssignedActionChildAction_2_0(), semanticObject.getChild());
+		feeder.accept(grammarAccess.getAssignedActionAccess().getVal1IDTerminalRuleCall_2_1_0(), semanticObject.getVal1());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     ((child=AssignedAction_AssignedAction_2_0 val1=ID) | val1=ID)
+	 *     (val1=ID | (child=AssignedAction_AssignedAction_2_0 val1=ID))
 	 */
 	protected void sequence_AssignedAction_AssignedAction_2_0(EObject context, AssignedAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -257,7 +277,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     (val1=ID (val2=ID | (val3+=ID val4+=ID)*))
+	 *     (val1=ID (val2=ID | (val3+=ID val4+=ID)+)?)
 	 */
 	protected void sequence_Combination2(EObject context, Combination2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -266,7 +286,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     (val1=ID | val2=INT | val3=STRING)*
+	 *     (val1=ID | val2=INT | val3=STRING)+
 	 */
 	protected void sequence_Combination3(EObject context, Combination3 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -293,7 +313,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     ((a+=ID b+=ID)* (a+=ID c+=ID)* (b+=ID c+=ID)*)
+	 *     (((a+=ID b+=ID)* (a+=ID c+=ID)+ (b+=ID c+=ID)+) | ((a+=ID b+=ID)* (b+=ID c+=ID)+) | (b+=ID c+=ID)+)?
 	 */
 	protected void sequence_Heuristic1(EObject context, Heuristic1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -311,7 +331,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     (val1+=ID val1+=ID*)?
+	 *     (val1+=ID val1+=ID*)
 	 */
 	protected void sequence_List2(EObject context, List2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -459,7 +479,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     (val1=ID nested=TransientObjectSub)?
+	 *     (val1=ID nested=TransientObjectSub)
 	 */
 	protected void sequence_TransientObject(EObject context, TransientObject semanticObject) {
 		if(errorAcceptor != null) {
@@ -478,7 +498,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     ((val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?)
+	 *     ((val1=ID enum1=TransientSerializeables1Enum (val2=ID int1=INT)) | (val2=ID int1=INT))?
 	 */
 	protected void sequence_TransientSerializeables1(EObject context, TransientSerializeables1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -496,21 +516,21 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	/**
 	 * Constraint:
-	 *     (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? extra1=ID? ((extra2=ID extra3=ID) | extra4=ID)?)
+	 *     (
+	 *         (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? version1=ID?) | 
+	 *         (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? extra1=ID? ((extra2=ID extra3=ID) | extra4=ID)?)
+	 *     )
 	 */
-	protected void sequence_TwoVersionNo2(EObject context, TwoVersion semanticObject) {
+	protected void sequence_TwoVersionNo1_TwoVersionNo2(EObject context, TwoVersion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? version1=ID?) | 
-	 *         (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? extra1=ID? ((extra2=ID extra3=ID) | extra4=ID)?)
-	 *     )
+	 *     (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? extra1=ID? ((extra2=ID extra3=ID) | extra4=ID)?)
 	 */
-	protected void sequence_TwoVersion_TwoVersionNo1_TwoVersionNo2(EObject context, TwoVersion semanticObject) {
+	protected void sequence_TwoVersionNo2(EObject context, TwoVersion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -556,7 +576,14 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 *     val1=ID
 	 */
 	protected void sequence_UnassignedRuleCall1Sub(EObject context, UnassignedRuleCall1Sub semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL1));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnassignedRuleCall1SubAccess().getVal1IDTerminalRuleCall_0(), semanticObject.getVal1());
+		feeder.finish();
 	}
 	
 	
@@ -566,10 +593,10 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 */
 	protected void sequence_UnassignedRuleCall1_UnassignedRuleCall1Sub(EObject context, UnassignedRuleCall1Sub semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL2) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL2));
 			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL1) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL1));
+			if(transientValues.isValueTransient(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL2) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CsvalidationtestPackage.Literals.UNASSIGNED_RULE_CALL1_SUB__VAL2));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);

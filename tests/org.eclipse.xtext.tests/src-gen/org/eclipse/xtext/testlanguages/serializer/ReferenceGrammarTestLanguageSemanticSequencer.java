@@ -114,7 +114,7 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	/**
 	 * Constraint:
-	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)?
+	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)
 	 */
 	protected void sequence_Spielplatz(EObject context, Spielplatz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

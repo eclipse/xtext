@@ -562,7 +562,6 @@
 			</command>
 		</menuContribution>
 	</extension>
-	
 	<!-- quickfix marker resolution generator for org.eclipse.xtext.xbase.Xbase -->
 	<extension
 	        point="org.eclipse.ui.ide.markerResolution">
@@ -949,7 +948,6 @@
 			</command>
 		</menuContribution>
 	</extension>
-	
 	<!-- quickfix marker resolution generator for org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations -->
 	<extension
 	        point="org.eclipse.ui.ide.markerResolution">

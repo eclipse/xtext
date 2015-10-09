@@ -58,7 +58,7 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     contents+=Alts*
+	 *     contents+=Alts+
 	 */
 	protected void sequence_Entry(EObject context, Entry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -87,10 +87,10 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 */
 	protected void sequence_LookAhead1(EObject context, LookAhead1 semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
 			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y));
+			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
 			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z));
 		}
