@@ -116,7 +116,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_0() {
 		'''
 			class Foo {
-				def foo() «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+				def foo() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is a template«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
@@ -126,7 +126,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_1() {
 		'''
 			class Foo {
-				def foo() «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+				def foo() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t\t')»	this is indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
@@ -138,11 +138,11 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_2() {
 		'''
 			class Foo {
-				def foo(String[] nums) «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+				def foo(String[] nums) «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
-			»«white('\t\t')»«GL»FOR i:nums«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»«GL»FOR i:nums«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»«white('\t')»loop body«SEMANTIC_LINE_BREAK.$(NL)
-			»«white('\t\t')»«GL»ENDFOR«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t')»«GL»ENDFOR«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
@@ -152,11 +152,11 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_3() {
 		'''
 			class Foo {
-				def foo(String[] nums) «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+				def foo(String[] nums) «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
-			»«white('\t\t\t')»«GL»FOR i:nums«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t\t')»«GL»FOR i:nums«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»	«white('\t')»loop body«SEMANTIC_LINE_BREAK.$(NL)
-			»«white('\t\t\t')»«GL»ENDFOR«GR»«SEMANTIC_LINE_BREAK.$(NL)
+			»«white('\t\t\t')»«GL»ENDFOR«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
@@ -166,7 +166,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testRichText_4() {
 		'''
 			class Foo {
-				def foo() «white(Q3)»«SEMANTIC_LINE_BREAK.$(NL)
+				def foo() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«COMMENT_ID.$(GL+GL+GL+' a comment')»
 			«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
