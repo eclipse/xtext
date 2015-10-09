@@ -103,14 +103,10 @@ Workflow {
 			fragment = ui.outline.QuickOutlineFragment2 auto-inject {}
 			
 			// quickfix API
-			fragment = adapter.FragmentAdapter {
-				fragment = quickfix.QuickfixProviderFragment auto-inject {}
-			}
+			fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}
 			
 			// content assist API
-			fragment = adapter.FragmentAdapter {
-				fragment = contentAssist.ContentAssistFragment auto-inject {}
-			}
+			fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}
 			
 			// provides a preference page for template proposals
 			fragment = adapter.FragmentAdapter {

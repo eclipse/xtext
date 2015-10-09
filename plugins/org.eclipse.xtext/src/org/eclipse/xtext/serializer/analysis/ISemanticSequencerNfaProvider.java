@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.util.formallang.Nfa;
 
+import com.google.common.base.Function;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -23,6 +24,13 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(SemanticSequencerNfaProvider.class)
 public interface ISemanticSequencerNfaProvider {
+
+	public Function<ISemState, AbstractElement> GET_ASSIGNED_GRAMMAR_ELEMENT = new Function<ISemState, AbstractElement>() {
+		@Override
+		public AbstractElement apply(ISemState input) {
+			return input.getAssignedGrammarElement();
+		}
+	};
 
 	public interface ISemState {
 		BitSet getAllFollowerFeatures();
@@ -38,7 +46,7 @@ public interface ISemanticSequencerNfaProvider {
 		int getOrderID();
 
 		List<AbstractElement> getToBeValidatedAssignedElements();
-		
+
 		boolean isBooleanAssignment();
 	}
 
