@@ -45,6 +45,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
+/**
+ * @since 2.9
+ */
 public abstract class AbstractInternalContentAssistParser extends Parser implements
 		ObservableXtextTokenStream.StreamListener, ITokenDefProvider {
 

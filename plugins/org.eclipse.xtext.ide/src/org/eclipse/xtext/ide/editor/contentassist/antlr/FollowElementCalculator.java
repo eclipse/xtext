@@ -34,6 +34,9 @@ import org.eclipse.xtext.xtext.ParameterConfigHelper;
 
 import com.google.common.collect.Sets;
 
+/**
+ * @since 2.9
+ */
 public class FollowElementCalculator extends XtextSwitch<Boolean> {
 	
 	protected IFollowElementAcceptor acceptor;
