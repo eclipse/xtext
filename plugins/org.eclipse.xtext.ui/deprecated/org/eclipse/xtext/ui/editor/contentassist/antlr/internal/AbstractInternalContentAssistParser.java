@@ -623,7 +623,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 		currentMarker = marker;
 		lookAheadAddOn = currentMarker - firstMarker;
-		if (useLookAhead != -1) {
+		if (useLookAhead != -1 && useLookAhead + firstMarker >= input.index()) {
 			announceEof(useLookAhead);
 		}
 		marked --;
