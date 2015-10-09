@@ -11,6 +11,7 @@ import java.util.Collection;
 
 /**
  * Parser that returns the expected elements when EOF is reached.
+ * @since 2.9
  */
 public interface IContentAssistParser {
 

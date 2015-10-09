@@ -10,6 +10,9 @@ package org.eclipse.xtext.ide.editor.contentassist.antlr;
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.AbstractElement;
 
+/**
+ * @since 2.9
+ */
 public abstract class LookAheadTerminal {
 
 	private Token token;

@@ -55,6 +55,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
+/**
+ * @since 2.9
+ */
 public class ContentAssistContextFactory implements Function<ContentAssistContext.Builder, ContentAssistContext> {
 	
 	private static final Logger log = Logger.getLogger(ContentAssistContextFactory.class);

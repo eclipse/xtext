@@ -16,6 +16,9 @@ import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * @noreference
+ */
 @Accessors
 @ToString(skipNulls = true)
 @EqualsHashCode

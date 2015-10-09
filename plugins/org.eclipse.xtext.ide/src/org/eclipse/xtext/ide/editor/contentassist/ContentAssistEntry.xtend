@@ -14,6 +14,9 @@ import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.util.TextRegion
 
+/**
+ * @noreference
+ */
 @Accessors
 @ToString(skipNulls = true)
 @EqualsHashCode

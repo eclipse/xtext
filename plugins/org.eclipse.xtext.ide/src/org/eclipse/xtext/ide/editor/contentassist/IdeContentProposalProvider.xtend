@@ -30,6 +30,7 @@ import org.eclipse.xtext.xtext.CurrentTypeFinder
  * Generic content proposal provider for use in different IDE contexts. This provider is
  * <em>not</em> used by the Eclipse integration, which has its own abstraction for
  * content assist proposals.
+ * @noreference
  */
 class IdeContentProposalProvider {
 	

@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * Determines priorities for content assist proposal entries. The priorities can be used
  * to sort the list of proposals.
+ * @noreference
  */
 @Singleton
 @Accessors({ AccessorType.PROTECTED_GETTER, AccessorType.PROTECTED_SETTER })
