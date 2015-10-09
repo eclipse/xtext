@@ -427,7 +427,7 @@ public class PdaUtil {
 		HashStack<TraversalItem<S, R>> trace = new HashStack<TraversalItem<S, R>>();
 		R previous = traverser.enter(pda, pda.getStart(), null);
 		if (previous == null)
-			return factory.create(pda.getStart(), pda.getStop());
+			return factory == null ? null : factory.create(pda.getStart(), pda.getStop());
 		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
 		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
 		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous));
@@ -461,6 +461,8 @@ public class PdaUtil {
 			}
 			trace.pop();
 		}
+		if (factory == null)
+			return null;
 		D result = factory.create(pda.getStart(), pda.getStop());
 		Map<S, S> old2new = Maps.newLinkedHashMap();
 		old2new.put(pda.getStart(), result.getStart());
