@@ -73,7 +73,7 @@ public class NfaToProductionTest extends Assert {
 		nfa.start().followedBy("x", "y", "stop");
 		nfa.state("x").followedBy("stop", "x");
 		nfa.state("y").followedBy("stop");
-		assertEquals("start (x* | y?) stop", nfa2g(nfa));
+		assertEquals("start (x+ | y)? stop", nfa2g(nfa));
 	}
 
 	@Test public void testAlternative7() {
