@@ -11,7 +11,6 @@ import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
-import org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
+import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
@@ -116,7 +116,7 @@ final class GenerateXbase {
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new Formatter2Fragment2());
-				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
+				addFragment(new QuickfixProviderFragment2());
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateStub(false);
 				addFragment(new FragmentAdapter(label));
@@ -157,7 +157,7 @@ final class GenerateXbase {
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new Formatter2Fragment2());
-				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
+				addFragment(new QuickfixProviderFragment2());
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateXtendStub(true);
 				addFragment(new FragmentAdapter(label));
