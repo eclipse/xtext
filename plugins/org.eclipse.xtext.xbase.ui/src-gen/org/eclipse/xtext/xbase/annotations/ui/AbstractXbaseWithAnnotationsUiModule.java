@@ -143,7 +143,7 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		return ContentFormatterFactory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XbaseWithAnnotationsQuickfixProvider.class;
 	}
@@ -168,7 +168,7 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		return XbaseWithAnnotationsOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XbaseWithAnnotationsProposalProvider.class;
 	}

@@ -35,7 +35,7 @@ public class EcoreTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	/**
 	 * Constraint:
-	 *     (intValues+=EINT | doubleValues+=EDOUBLE | dateValues+=EDATE)*
+	 *     (intValues+=EINT | doubleValues+=EDOUBLE | dateValues+=EDATE)+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

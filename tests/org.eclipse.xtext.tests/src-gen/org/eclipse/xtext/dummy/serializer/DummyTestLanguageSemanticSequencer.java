@@ -48,7 +48,7 @@ public class DummyTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	/**
 	 * Constraint:
-	 *     elements+=Element*
+	 *     elements+=Element+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

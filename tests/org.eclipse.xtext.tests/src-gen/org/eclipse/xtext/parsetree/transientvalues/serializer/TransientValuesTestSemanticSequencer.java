@@ -46,7 +46,7 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	
 	/**
 	 * Constraint:
-	 *     (item+=INT*)
+	 *     item+=INT*
 	 */
 	protected void sequence_TestList(EObject context, TestList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -1,5 +1,6 @@
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -7,11 +8,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.Production;
 
 import com.google.inject.ImplementedBy;
@@ -49,7 +58,49 @@ public interface IGrammarConstraintProvider {
 		ASSIGNED_KEYWORD, //
 		ASSIGNED_PARSER_RULE_CALL, //
 		ASSIGNED_TERMINAL_RULE_CALL, //
-		GROUP,
+		GROUP, // 
+		UNORDERED_GROUP;
+
+		public static ConstraintElementType getConstraintElementType(AbstractElement ele) {
+			if (ele instanceof Action) {
+				if (((Action) ele).getFeature() != null)
+					return ConstraintElementType.ASSIGNED_ACTION_CALL;
+			} else if (ele instanceof Alternatives) {
+				return ConstraintElementType.ALTERNATIVE;
+			} else if (ele instanceof Group) {
+				return ConstraintElementType.GROUP;
+			} else if (ele instanceof UnorderedGroup) {
+				return ConstraintElementType.UNORDERED_GROUP;
+			} else if (GrammarUtil.containingCrossReference(ele) != null) {
+				if (ele instanceof RuleCall) {
+					RuleCall rc = (RuleCall) ele;
+					if (rc.getRule() instanceof ParserRule)
+						return ConstraintElementType.ASSIGNED_CROSSREF_DATATYPE_RULE_CALL;
+					if (rc.getRule() instanceof TerminalRule)
+						return ConstraintElementType.ASSIGNED_CROSSREF_TERMINAL_RULE_CALL;
+					if (rc.getRule() instanceof EnumRule)
+						return ConstraintElementType.ASSIGNED_CROSSREF_ENUM_RULE_CALL;
+				} else if (ele instanceof Keyword)
+					return ConstraintElementType.ASSIGNED_CROSSREF_KEYWORD;
+			} else if (GrammarUtil.containingAssignment(ele) != null) {
+				if (ele instanceof RuleCall) {
+					RuleCall rc = (RuleCall) ele;
+					if (rc.getRule() instanceof ParserRule) {
+						if (rc.getRule().getType().getClassifier() instanceof EClass)
+							return ConstraintElementType.ASSIGNED_PARSER_RULE_CALL;
+						return ConstraintElementType.ASSIGNED_DATATYPE_RULE_CALL;
+					}
+					if (rc.getRule() instanceof TerminalRule)
+						return ConstraintElementType.ASSIGNED_TERMINAL_RULE_CALL;
+					if (rc.getRule() instanceof EnumRule)
+						return ConstraintElementType.ASSIGNED_ENUM_RULE_CALL;
+
+				} else if (ele instanceof Keyword) {
+					return ConstraintElementType.ASSIGNED_KEYWORD;
+				}
+			}
+			throw new RuntimeException("Unknown Grammar Element: " + EmfFormatter.objPath(ele));
+		}
 	}
 
 	/**
@@ -62,24 +113,9 @@ public interface IGrammarConstraintProvider {
 	public interface IConstraint extends Comparable<IConstraint> {
 
 		/**
-		 * @return a list of all assignments represented by this constraint.
-		 *         {@link IConstraintElement#getAssignmentID()} returns an Assignment's index in this list. The order of
-		 *         the list reflects the order of the assignments in the constraint. Assignments are
-		 *         {@link IConstraintElement}s with {@link IConstraintElement#getType()} == ASSIGNED_*
-		 */
-		IConstraintElement[] getAssignments();
-
-		/**
 		 * @return the root of the tree of {@link IConstraintElement} that defines this constraint.
 		 */
 		IConstraintElement getBody();
-
-		/**
-		 * @return a list of all elements represented by this constraint. This is a flattened version of the tree
-		 *         returned by {@link #getBody()}. {@link IConstraintElement#getElementID()} returns an Assignment's
-		 *         index in this list. The order of the list reflects the order of the elements in the constraint.
-		 */
-		IConstraintElement[] getElements();
 
 		/**
 		 * @return a list of {@link IFeatureInfo} for all {@link EStructuralFeature}s from the {@link EClass} returned
@@ -87,10 +123,6 @@ public interface IGrammarConstraintProvider {
 		 *         {@link EStructuralFeature} in this constraint, the array's item is null.
 		 */
 		IFeatureInfo[] getFeatures();
-
-		Iterable<IFeatureInfo> getSingleAssignementFeatures();
-
-		Iterable<IFeatureInfo> getMultiAssignementFeatures();
 
 		/**
 		 * @return a name that is unique for a grammar and that aims to be human-readable.
@@ -103,6 +135,10 @@ public interface IGrammarConstraintProvider {
 		 * @return This constraint only applies to EObjects of this type.
 		 */
 		EClass getType();
+
+		List<IConstraintContext> getContexts();
+
+		Nfa<ISemState> getNfa();
 	}
 
 	/**
@@ -192,77 +228,33 @@ public interface IGrammarConstraintProvider {
 	 */
 	public interface IConstraintElement {
 
-		// valid for *_ACTION_CALL
-		Action getAction();
-
-		int getAssignmentID();
-
 		EObject getCallContext();
 
-		String getCardinality();
-
 		// valid for GROUP and ALTERNATIVE, null otherwise
-		List<IConstraintElement> getChildren();
+		Collection<IConstraintElement> getChildren();
 
 		IConstraintElement getContainer();
 
 		IConstraint getContainingConstraint();
 
-		// valid for *_CROSSREF_*
-		CrossReference getCrossReference();
-
-		// valid for *_CROSSREF_*
-		EClass getCrossReferenceType();
-
-		int getElementID();
-
 		// valid for ASSIGNED_*
-		EStructuralFeature getFeature();
-
-		int getFeatureAssignmentID();
-
-		// valid for ASSIGNED_*
-		IFeatureInfo getFeatureInfo();
+		//		IFeatureInfo getFeatureInfo();
 
 		// returns a RuleCall, Keyword or Action. But never an Assignment or
 		// Cross Reference.
 		AbstractElement getGrammarElement();
 
-		// valid for *_KEYWORD
-		Keyword getKeyword();
-
-		// valid for *_RULE_CALL
-		RuleCall getRuleCall();
-
 		ConstraintElementType getType();
-
-		List<Pair<IConstraintElement, RelationalDependencyType>> getDependingAssignment();
-
-		List<IConstraintElement> getContainedAssignments();
-
-		boolean isCardinalityOneAmongAssignments(List<IConstraintElement> assignments);
 
 		boolean isMany();
 
-		/**
-		 * @return true, if this element or one of its containers is isMany().
-		 */
-		boolean isManyRecursive(IConstraintElement root);
-
 		boolean isOptional();
 
-		boolean isRoot();
-
-		/**
-		 * @return true, if this element or one of its containers is optional. Also true, if one of the containers is an
-		 *         alternative.
-		 */
-		boolean isOptionalRecursive(IConstraintElement root);
 	}
 
 	public interface IFeatureInfo {
 
-		IConstraintElement[] getAssignments();
+		List<IConstraintElement> getAssignments();
 
 		List<EObject> getCalledContexts();
 
@@ -270,49 +262,9 @@ public interface IGrammarConstraintProvider {
 
 		EStructuralFeature getFeature();
 
-		/**
-		 * @return true for ASSIGNED_*, if there are multiple IConstraintELements for the same EStructuralFeature, which
-		 *         refer to different keywords, rulecalls or cross references.
-		 */
-		boolean isContentValidationNeeded();
-
-		List<Pair<IFeatureInfo, RelationalDependencyType>> getDependingFeatures();
-
 		int getUpperBound();
 
 		int getLowerBound();
-	}
-
-	public enum RelationalDependencyType {
-		/**
-		 * (b >= 1) => (a == 0)
-		 */
-		EXCLUDE_IF_SET,
-
-		/**
-		 * (b == 0) => (a == 0)
-		 */
-		EXCLUDE_IF_UNSET,
-
-		/**
-		 * (b >= 1) => (a >= 0)
-		 */
-		MANDATORY_IF_SET,
-
-		/**
-		 * a == b
-		 */
-		SAME,
-
-		/**
-		 * a >= b
-		 */
-		SAME_OR_MORE,
-
-		/**
-		 * a <= b
-		 */
-		SAME_OR_LESS
 	}
 
 	final int MAX = Integer.MAX_VALUE;

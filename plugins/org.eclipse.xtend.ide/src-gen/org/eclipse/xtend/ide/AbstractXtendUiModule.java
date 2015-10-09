@@ -199,7 +199,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return PersistentDataAwareDirtyResource.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XtendQuickfixProvider.class;
 	}
@@ -229,7 +229,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return DefaultViewerCreator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XtendProposalProvider.class;
 	}

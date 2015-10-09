@@ -39,7 +39,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == RegionaccesstestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case RegionaccesstestlanguagePackage.ACTION:
-				sequence_Root(context, (Action) semanticObject); 
+				sequence_Mixed(context, (Action) semanticObject); 
 				return; 
 			case RegionaccesstestlanguagePackage.ADD:
 				sequence_Expression(context, (Add) semanticObject); 
@@ -77,7 +77,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     name=ID
 	 */
 	protected void sequence_Delegate(EObject context, Delegate semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.DELEGATE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.DELEGATE__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getDelegateAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -86,7 +93,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     delegate=Delegate
 	 */
 	protected void sequence_Delegation(EObject context, Delegation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.DELEGATION__DELEGATE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.DELEGATION__DELEGATE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getDelegationAccess().getDelegateDelegateParserRuleCall_1_0(), semanticObject.getDelegate());
+		feeder.finish();
 	}
 	
 	
@@ -95,13 +109,32 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     (left=Expression_Add_1_0 right=Primary)
 	 */
 	protected void sequence_Expression(EObject context, Add semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__LEFT));
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.ADD__RIGHT));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getExpressionAccess().getAddLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getExpressionAccess().getRightPrimaryParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {Action}
+	 */
+	protected void sequence_Mixed(EObject context, Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     ((child=Mixed_AssignedAction_4_0 body=Mixed?) | child=Mixed_AssignedAction_4_0)
+	 *     (child=Mixed_AssignedAction_4_0 body=Mixed?)
 	 */
 	protected void sequence_Mixed(EObject context, AssignedAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -122,7 +155,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     delegate=PrefixedDelegate
 	 */
 	protected void sequence_PrefixedUnassigned(EObject context, PrefixedUnassigned semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.PREFIXED_UNASSIGNED__DELEGATE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.PREFIXED_UNASSIGNED__DELEGATE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrefixedUnassignedAccess().getDelegatePrefixedDelegateParserRuleCall_1_0(), semanticObject.getDelegate());
+		feeder.finish();
 	}
 	
 	
@@ -131,16 +171,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     name=ID
 	 */
 	protected void sequence_Primary(EObject context, Named semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     mixed=Mixed
-	 */
-	protected void sequence_Root(EObject context, Action semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.NAMED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.NAMED__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrimaryAccess().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -165,6 +203,13 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     name=ID
 	 */
 	protected void sequence_Simple(EObject context, Simple semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.SIMPLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.SIMPLE__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getSimpleAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 }

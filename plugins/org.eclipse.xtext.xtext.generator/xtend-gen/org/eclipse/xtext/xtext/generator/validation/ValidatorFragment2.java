@@ -78,7 +78,10 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
     this.composedChecks.add(composedCheckValidator);
   }
   
-  protected TypeReference getValidatorClass(final Grammar grammar) {
+  /**
+   * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
+   */
+  public TypeReference getValidatorClass(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".validation.");
     String _simpleName = GrammarUtil.getSimpleName(grammar);

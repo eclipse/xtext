@@ -35,7 +35,7 @@ public class Bug292245TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (fix+=Fix+ | error+=Error+ | tick+=Apostrophe+)*
+	 *     (fix+=Fix | error+=Error | tick+=Apostrophe)+
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -60,8 +60,18 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 				}
 				else break;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
-				sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
-				return; 
+				if(context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()) {
+					sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(context, (JvmParameterizedTypeReference) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
+				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
+				   context == grammarAccess.getJvmTypeReferenceRule() ||
+				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case TypesPackage.JVM_TYPE_PARAMETER:
 				sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
 				return; 
@@ -98,7 +108,14 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *     typeReference=JvmTypeReference
 	 */
 	protected void sequence_JvmLowerBoundAnded(EObject context, JvmLowerBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getJvmLowerBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
 	}
 	
 	
@@ -107,7 +124,14 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *     typeReference=JvmTypeReference
 	 */
 	protected void sequence_JvmLowerBound(EObject context, JvmLowerBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
 	}
 	
 	
@@ -127,6 +151,15 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	/**
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
+	 */
+	protected void sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(EObject context, JvmParameterizedTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
 	 */
 	protected void sequence_JvmParameterizedTypeReference(EObject context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -163,7 +196,14 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *     typeReference=JvmTypeReference
 	 */
 	protected void sequence_JvmUpperBoundAnded(EObject context, JvmUpperBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
 	}
 	
 	
@@ -172,13 +212,20 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *     typeReference=JvmTypeReference
 	 */
 	protected void sequence_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), semanticObject.getTypeReference());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?)
+	 *     ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?
 	 */
 	protected void sequence_JvmWildcardTypeReference(EObject context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

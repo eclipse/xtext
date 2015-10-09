@@ -37,7 +37,7 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 					return; 
 				}
 				else if(context == grammarAccess.getPRFWithPredicateRule()) {
-					sequence_PRFNamedFragment_PRFNamedRef_PRFWithPredicate(context, (PRFNamed) semanticObject); 
+					sequence_PRFNamedFragment_PRFNamedRef(context, (PRFNamed) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getPRFNamedWithFQNRule()) {
@@ -83,7 +83,7 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 * Constraint:
 	 *     (name=ID ref=[PRFNamed|ID]?)
 	 */
-	protected void sequence_PRFNamedFragment_PRFNamedRef_PRFWithPredicate(EObject context, PRFNamed semanticObject) {
+	protected void sequence_PRFNamedFragment_PRFNamedRef(EObject context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

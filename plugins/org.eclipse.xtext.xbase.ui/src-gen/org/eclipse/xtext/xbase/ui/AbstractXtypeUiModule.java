@@ -40,7 +40,7 @@ public abstract class AbstractXtypeUiModule extends DefaultUiModule {
 		return ContentFormatterFactory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XtypeProposalProvider.class;
 	}

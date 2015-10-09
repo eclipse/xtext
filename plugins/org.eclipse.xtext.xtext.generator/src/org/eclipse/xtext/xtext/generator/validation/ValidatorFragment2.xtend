@@ -52,7 +52,11 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 		composedChecks += composedCheckValidator
 	}
 	
-	protected def TypeReference getValidatorClass(Grammar grammar) {
+	/**
+	 * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
+	 */
+	public def TypeReference getValidatorClass(Grammar grammar) {
+		// is public for being callable by QuickFixProviderFragement2
 		new TypeReference(grammar.runtimeBasePackage + '.validation.' + getSimpleName(grammar) + 'Validator')
 	}
 	

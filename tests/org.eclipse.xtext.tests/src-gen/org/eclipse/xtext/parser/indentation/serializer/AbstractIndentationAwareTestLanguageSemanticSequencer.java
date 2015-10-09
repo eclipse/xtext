@@ -48,7 +48,7 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 	
 	/**
 	 * Constraint:
-	 *     (nodes+=TreeNode*)
+	 *     nodes+=TreeNode*
 	 */
 	protected void sequence_Tree(EObject context, Tree semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

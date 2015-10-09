@@ -162,7 +162,14 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	 *     attr1=ID
 	 */
 	protected void sequence_AttributeExclusionTest1(EObject context, AttributeExclusionTest semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.ATTRIBUTE_EXCLUSION_TEST__ATTR1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.ATTRIBUTE_EXCLUSION_TEST__ATTR1));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAttributeExclusionTest1Access().getAttr1IDTerminalRuleCall_1_0(), semanticObject.getAttr1());
+		feeder.finish();
 	}
 	
 	
@@ -171,7 +178,14 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	 *     attr2=ID
 	 */
 	protected void sequence_AttributeExclusionTest2(EObject context, AttributeExclusionTest semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.ATTRIBUTE_EXCLUSION_TEST__ATTR2) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.ATTRIBUTE_EXCLUSION_TEST__ATTR2));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAttributeExclusionTest2Access().getAttr2IDTerminalRuleCall_1_0(), semanticObject.getAttr2());
+		feeder.finish();
 	}
 	
 	
@@ -407,7 +421,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	/**
 	 * Constraint:
-	 *     (child=ParentRefTestChild1?)
+	 *     child=ParentRefTestChild1?
 	 */
 	protected void sequence_ParentRefTestChild1(EObject context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -416,7 +430,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	/**
 	 * Constraint:
-	 *     (child=ParentRefTestChild2?)
+	 *     child=ParentRefTestChild2?
 	 */
 	protected void sequence_ParentRefTestChild2(EObject context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

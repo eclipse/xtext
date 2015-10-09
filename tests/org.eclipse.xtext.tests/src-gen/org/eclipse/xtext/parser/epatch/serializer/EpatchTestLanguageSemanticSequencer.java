@@ -76,12 +76,12 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				sequence_JavaImport(context, (JavaImport) semanticObject); 
 				return; 
 			case EpatchTestLanguagePackage.LIST_ASSIGNMENT:
-				if(context == grammarAccess.getAssignmentRule()) {
-					sequence_Assignment_BiListAssignment_MonoListAssignment(context, (ListAssignment) semanticObject); 
+				if(context == grammarAccess.getBiListAssignmentRule()) {
+					sequence_BiListAssignment(context, (ListAssignment) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getBiListAssignmentRule()) {
-					sequence_BiListAssignment(context, (ListAssignment) semanticObject); 
+				else if(context == grammarAccess.getAssignmentRule()) {
+					sequence_BiListAssignment_MonoListAssignment(context, (ListAssignment) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getMonoListAssignmentRule()) {
@@ -125,7 +125,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				return; 
 			case EpatchTestLanguagePackage.SINGLE_ASSIGNMENT:
 				if(context == grammarAccess.getAssignmentRule()) {
-					sequence_Assignment_BiSingleAssignment_MonoSingleAssignment(context, (SingleAssignment) semanticObject); 
+					sequence_BiSingleAssignment_MonoSingleAssignment(context, (SingleAssignment) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getBiSingleAssignmentRule()) {
@@ -153,6 +153,19 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	/**
 	 * Constraint:
 	 *     (
+	 *         feature=ID 
+	 *         (leftValues+=ListAssignmentValue leftValues+=ListAssignmentValue*)? 
+	 *         (rightValues+=ListAssignmentValue rightValues+=ListAssignmentValue*)?
+	 *     )
+	 */
+	protected void sequence_BiListAssignment(EObject context, ListAssignment semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
 	 *         (
 	 *             feature=ID 
 	 *             (leftValues+=ListAssignmentValue leftValues+=ListAssignmentValue*)? 
@@ -161,7 +174,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
 	 *     )
 	 */
-	protected void sequence_Assignment_BiListAssignment_MonoListAssignment(EObject context, ListAssignment semanticObject) {
+	protected void sequence_BiListAssignment_MonoListAssignment(EObject context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -170,20 +183,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 * Constraint:
 	 *     ((feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue) | (feature=ID leftValue=SingleAssignmentValue))
 	 */
-	protected void sequence_Assignment_BiSingleAssignment_MonoSingleAssignment(EObject context, SingleAssignment semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (
-	 *         feature=ID 
-	 *         (leftValues+=ListAssignmentValue leftValues+=ListAssignmentValue*)? 
-	 *         (rightValues+=ListAssignmentValue rightValues+=ListAssignmentValue*)?
-	 *     )
-	 */
-	protected void sequence_BiListAssignment(EObject context, ListAssignment semanticObject) {
+	protected void sequence_BiSingleAssignment_MonoSingleAssignment(EObject context, SingleAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -352,7 +352,17 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *     (feature=ID leftValue=SingleAssignmentValue)
 	 */
 	protected void sequence_MonoSingleAssignment(EObject context, SingleAssignment semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EpatchTestLanguagePackage.Literals.ASSIGNMENT__FEATURE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.ASSIGNMENT__FEATURE));
+			if(transientValues.isValueTransient(semanticObject, EpatchTestLanguagePackage.Literals.SINGLE_ASSIGNMENT__LEFT_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.SINGLE_ASSIGNMENT__LEFT_VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getMonoSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), semanticObject.getFeature());
+		feeder.accept(grammarAccess.getMonoSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(), semanticObject.getLeftValue());
+		feeder.finish();
 	}
 	
 	
@@ -370,7 +380,17 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *     (resource=[NamedResource|ID] fragment=FRAGMENT)
 	 */
 	protected void sequence_ObjectCopy(EObject context, ObjectCopy semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_COPY__RESOURCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_COPY__RESOURCE));
+			if(transientValues.isValueTransient(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_COPY__FRAGMENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_COPY__FRAGMENT));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getObjectCopyAccess().getResourceNamedResourceIDTerminalRuleCall_1_0_1(), semanticObject.getResource());
+		feeder.accept(grammarAccess.getObjectCopyAccess().getFragmentFRAGMENTTerminalRuleCall_2_0(), semanticObject.getFragment());
+		feeder.finish();
 	}
 	
 	
@@ -379,7 +399,17 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *     (import=[Import|ID] impFrag=FRAGMENT)
 	 */
 	protected void sequence_ObjectNew(EObject context, ObjectNew semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_NEW__IMPORT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_NEW__IMPORT));
+			if(transientValues.isValueTransient(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_NEW__IMP_FRAG) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_NEW__IMP_FRAG));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getObjectNewAccess().getImportImportIDTerminalRuleCall_1_0_1(), semanticObject.getImport());
+		feeder.accept(grammarAccess.getObjectNewAccess().getImpFragFRAGMENTTerminalRuleCall_2_0(), semanticObject.getImpFrag());
+		feeder.finish();
 	}
 	
 	
