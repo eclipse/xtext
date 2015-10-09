@@ -106,9 +106,8 @@ Workflow {
 			}
 			
 			// provides a compare view
-			fragment = adapter.FragmentAdapter {
-				fragment = compare.CompareFragment auto-inject {}
-			}
+			fragment = ui.compare.CompareFragment2 auto-inject {}
+			
 			// generates a more lightweight Antlr parser and lexer tailored for content assist
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
