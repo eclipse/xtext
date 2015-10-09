@@ -42,6 +42,7 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.generator.IStubGenerating
 
 /**
  * @since 2.9
@@ -85,6 +86,11 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	override generate() {
 		if (naming === null)
 			naming = createNaming()
+		
+		if (fragment instanceof IStubGenerating.XtendOption) {
+			fragment.generateXtendStub = codeConfig.preferXtendStubs
+		}
+		
 		val ctx = createExecutionContext()
 		val config1 = createLanguageConfig()
 		if (fragment instanceof IGeneratorFragmentExtension2) {

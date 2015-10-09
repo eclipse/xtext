@@ -38,6 +38,7 @@ import org.eclipse.xtext.generator.IGeneratorFragmentExtension;
 import org.eclipse.xtext.generator.IGeneratorFragmentExtension2;
 import org.eclipse.xtext.generator.IGeneratorFragmentExtension3;
 import org.eclipse.xtext.generator.IGeneratorFragmentExtension4;
+import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.LanguageConfig;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.NamingAware;
@@ -122,6 +123,10 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
     if ((this.naming == null)) {
       Naming _createNaming = this.createNaming();
       this.naming = _createNaming;
+    }
+    if ((this.fragment instanceof IStubGenerating.XtendOption)) {
+      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
+      ((IStubGenerating.XtendOption)this.fragment).setGenerateXtendStub(_isPreferXtendStubs);
     }
     final XpandExecutionContext ctx = this.createExecutionContext();
     final LanguageConfig config1 = this.createLanguageConfig();
