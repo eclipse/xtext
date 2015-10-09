@@ -12,6 +12,7 @@ import java.util.Map;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -29,6 +30,8 @@ import com.google.inject.name.Named;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConverter<T> implements IValueConverter.RuleSpecific {
+	
+	private final static Logger LOG = Logger.getLogger(AbstractLexerBasedConverter.class);
 
 	@Inject(optional=true)
 	@Named(LexerBindings.RUNTIME)
@@ -102,7 +105,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 	}
 	
 	protected Lexer getLexer() {
-		if (lexerProvider != null)
+		if (lexerProvider != null && rule instanceof TerminalRule)
 			return lexerProvider.get();
 		return null;
 	}
@@ -123,10 +126,9 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 	
 	@Override
 	public void setRule(AbstractRule rule) {
-		if (rule instanceof TerminalRule) {
-			this.rule = rule;
-		} else {
-			throw new IllegalArgumentException("Only terminal rules are supported by lexer based converters but got " + 
+		this.rule = rule;
+		if (!(rule instanceof TerminalRule)) {
+			LOG.warn("Only terminal rules are supported by lexer based converters but got " + 
 				String.valueOf(rule.getName()) + " which is an instance of " + rule.eClass().getName());
 		}
 	}
