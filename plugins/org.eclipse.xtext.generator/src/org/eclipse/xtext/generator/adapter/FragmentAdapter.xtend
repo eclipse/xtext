@@ -170,7 +170,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	}
 	
 	private def void generatePluginXmlRt(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (projectConfig.runtimePluginXml !== null) {
+		if (projectConfig.runtime.pluginXml !== null) {
 			ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
 			try {
 				if (fragment instanceof IGeneratorFragmentExtension2) {
@@ -181,7 +181,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 				val result = (ctx.output as StringConcatOutputImpl).stringOutlet
 				val entry = result.toString.decreaseIndentation(1)
 				if (!entry.toString.trim.isEmpty)
-					projectConfig.runtimePluginXml.entries += entry 
+					projectConfig.runtime.pluginXml.entries += entry 
 			} finally {
 				ctx.output.closeFile()
 			}
@@ -189,7 +189,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	}
 	
 	private def void generatePluginXmlUi(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (projectConfig.eclipsePluginPluginXml !== null) {
+		if (projectConfig.eclipsePlugin.pluginXml !== null) {
 			ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
 			try {
 				if (fragment instanceof IGeneratorFragmentExtension2) {
@@ -200,7 +200,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 				val result = (ctx.output as StringConcatOutputImpl).stringOutlet
 				val entry = result.toString.decreaseIndentation(1)
 				if (!entry.toString.trim.isEmpty)
-					projectConfig.eclipsePluginPluginXml.entries += entry
+					projectConfig.eclipsePlugin.pluginXml.entries += entry
 			} finally {
 				ctx.output.closeFile()
 			}
@@ -208,73 +208,73 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	}
 	
 	private def void generateManifestRt(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (projectConfig.runtimeManifest !== null) {
+		if (projectConfig.runtime.manifest !== null) {
 			val exported = fragment.getExportedPackagesRt(config1.grammar)
 			if (exported !== null)
-				projectConfig.runtimeManifest.exportedPackages.addAll(exported)
+				projectConfig.runtime.manifest.exportedPackages.addAll(exported)
 			val required = fragment.getRequiredBundlesRt(config1.grammar)
 			if (required !== null)
-				projectConfig.runtimeManifest.requiredBundles.addAll(required)
+				projectConfig.runtime.manifest.requiredBundles.addAll(required)
 			val imported = fragment.getImportedPackagesRt(config1.grammar)
 			if (imported !== null)
-				projectConfig.runtimeManifest.importedPackages.addAll(imported)
+				projectConfig.runtime.manifest.importedPackages.addAll(imported)
 		}
 	}
 	
 	private def void generateManifestUi(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (projectConfig.eclipsePluginManifest !== null) {
+		if (projectConfig.eclipsePlugin.manifest !== null) {
 			val exported = fragment.getExportedPackagesUi(config1.grammar)
 			if (exported !== null)
-				projectConfig.eclipsePluginManifest.exportedPackages.addAll(exported)
+				projectConfig.eclipsePlugin.manifest.exportedPackages.addAll(exported)
 			val required = fragment.getRequiredBundlesUi(config1.grammar)
 			if (required !== null)
-				projectConfig.eclipsePluginManifest.requiredBundles.addAll(required)
+				projectConfig.eclipsePlugin.manifest.requiredBundles.addAll(required)
 			val imported = fragment.getImportedPackagesUi(config1.grammar)
 			if (imported !== null)
-				projectConfig.eclipsePluginManifest.importedPackages.addAll(imported)
+				projectConfig.eclipsePlugin.manifest.importedPackages.addAll(imported)
 		}
 	}
 	
 	private def void generateManifestIde(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (fragment instanceof IGeneratorFragmentExtension3 && projectConfig.genericIdeManifest !== null) {
+		if (fragment instanceof IGeneratorFragmentExtension3 && projectConfig.genericIde.manifest !== null) {
 			val fr = fragment as IGeneratorFragmentExtension3
 			val exported = fr.getExportedPackagesIde(config1.grammar)
 			if (exported !== null)
-				projectConfig.genericIdeManifest.exportedPackages.addAll(exported)
+				projectConfig.genericIde.manifest.exportedPackages.addAll(exported)
 			val required = fr.getRequiredBundlesIde(config1.grammar)
 			if (required !== null)
-				projectConfig.genericIdeManifest.requiredBundles.addAll(required)
+				projectConfig.genericIde.manifest.requiredBundles.addAll(required)
 			val imported = fr.getImportedPackagesIde(config1.grammar)
 			if (imported !== null)
-				projectConfig.genericIdeManifest.importedPackages.addAll(imported)
+				projectConfig.genericIde.manifest.importedPackages.addAll(imported)
 		}
 	}
 	
 	private def void generateManifestTests(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (fragment instanceof IGeneratorFragmentExtension && projectConfig.runtimeTestManifest !== null) {
+		if (fragment instanceof IGeneratorFragmentExtension && projectConfig.runtimeTest.manifest !== null) {
 			val fr = fragment as IGeneratorFragmentExtension
 			val exported = fr.getExportedPackagesTests(config1.grammar)
 			if (exported !== null)
-				projectConfig.runtimeTestManifest.exportedPackages.addAll(exported)
+				projectConfig.runtimeTest.manifest.exportedPackages.addAll(exported)
 			val required = fr.getRequiredBundlesTests(config1.grammar)
 			if (required !== null)
-				projectConfig.runtimeTestManifest.requiredBundles.addAll(required)
+				projectConfig.runtimeTest.manifest.requiredBundles.addAll(required)
 			val imported = fr.getImportedPackagesTests(config1.grammar)
 			if (imported !== null)
-				projectConfig.runtimeTestManifest.importedPackages.addAll(imported)
+				projectConfig.runtimeTest.manifest.importedPackages.addAll(imported)
 		}
 	}
 	
 	protected def Naming createNaming() {
 		val config2 = language
 		val result = new Naming => [
-			projectNameRt = projectConfig.runtimeRoot?.path.lastSegment
-			projectNameIde = projectConfig.genericIdeRoot?.path.lastSegment
-			projectNameUi = projectConfig.eclipsePluginRoot?.path.lastSegment
+			projectNameRt = projectConfig.runtime.root?.path.lastSegment
+			projectNameIde = projectConfig.genericIde.root?.path.lastSegment
+			projectNameUi = projectConfig.eclipsePlugin.root?.path.lastSegment
 			ideBasePackage = config2.grammar.genericIdeBasePackage
 			uiBasePackage = config2.grammar.eclipsePluginBasePackage
 			activatorName = config2.grammar.eclipsePluginActivator.name
-			pathTestProject = projectConfig.runtimeTestRoot?.path
+			pathTestProject = projectConfig.runtimeTest.root?.path
 			lineDelimiter = codeConfig.lineDelimiter
 			fileHeader = codeConfig.fileHeader
 			classAnnotations = codeConfig.classAnnotationsAsString
@@ -302,56 +302,56 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		val encoding = encodingProvider.getEncoding(null)
 		val output = new StringConcatOutputImpl
 
-		if (projectConfig.runtimeRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_RT, false, projectConfig.runtimeRoot.path))
-		if (projectConfig.runtimeSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC, false, projectConfig.runtimeSrc.path))
-		if (projectConfig.runtimeSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN, true, projectConfig.runtimeSrcGen.path))
-		if (projectConfig.runtimeRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.MODEL, false, projectConfig.runtimeRoot.path + "/model"))
-		if (projectConfig.eclipsePluginRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.eclipsePluginRoot.path))
-		else if (projectConfig.runtimeRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.runtimeRoot.path))
-		if (projectConfig.eclipsePluginSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_UI, false, projectConfig.eclipsePluginSrc.path))
-		else if (projectConfig.runtimeSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_UI, false, projectConfig.runtimeSrc.path))
-		if (projectConfig.eclipsePluginSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.eclipsePluginSrcGen.path))
-		else if (projectConfig.runtimeSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.runtimeSrcGen.path))
-		if (projectConfig.genericIdeRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.genericIdeRoot.path))
-		else if (projectConfig.eclipsePluginRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.eclipsePluginRoot.path))
-		else if (projectConfig.runtimeRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.runtimeRoot.path))
-		if (projectConfig.genericIdeSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.genericIdeSrc.path))
-		else if (projectConfig.eclipsePluginSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.eclipsePluginSrc.path))
-		else if (projectConfig.runtimeSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.runtimeSrc.path))
-		if (projectConfig.genericIdeSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.genericIdeSrcGen.path))
-		else if (projectConfig.eclipsePluginSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.eclipsePluginSrcGen.path))
-		else if (projectConfig.runtimeSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.runtimeSrcGen.path))
-		if (projectConfig.runtimeTestRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeTestRoot.path))
-		else if (projectConfig.runtimeRoot !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeRoot.path))
-		if (projectConfig.runtimeTestSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtimeTestSrc.path))
-		else if (projectConfig.runtimeSrc !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtimeSrc.path))
-		if (projectConfig.runtimeTestSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, projectConfig.runtimeTestSrcGen.path))
-		else if (projectConfig.runtimeSrcGen !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, projectConfig.runtimeSrcGen.path))
+		if (projectConfig.runtime.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_RT, false, projectConfig.runtime.root.path))
+		if (projectConfig.runtime.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC, false, projectConfig.runtime.src.path))
+		if (projectConfig.runtime.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN, true, projectConfig.runtime.srcGen.path))
+		if (projectConfig.runtime.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.MODEL, false, projectConfig.runtime.root.path + "/model"))
+		if (projectConfig.eclipsePlugin.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.eclipsePlugin.root.path))
+		else if (projectConfig.runtime.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.runtime.root.path))
+		if (projectConfig.eclipsePlugin.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_UI, false, projectConfig.eclipsePlugin.src.path))
+		else if (projectConfig.runtime.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_UI, false, projectConfig.runtime.src.path))
+		if (projectConfig.eclipsePlugin.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.eclipsePlugin.srcGen.path))
+		else if (projectConfig.runtime.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.runtime.srcGen.path))
+		if (projectConfig.genericIde.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.genericIde.root.path))
+		else if (projectConfig.eclipsePlugin.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.eclipsePlugin.root.path))
+		else if (projectConfig.runtime.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.runtime.root.path))
+		if (projectConfig.genericIde.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.genericIde.src.path))
+		else if (projectConfig.eclipsePlugin.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.eclipsePlugin.src.path))
+		else if (projectConfig.runtime.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.runtime.src.path))
+		if (projectConfig.genericIde.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.genericIde.srcGen.path))
+		else if (projectConfig.eclipsePlugin.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.eclipsePlugin.srcGen.path))
+		else if (projectConfig.runtime.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.runtime.srcGen.path))
+		if (projectConfig.runtimeTest.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeTest.root.path))
+		else if (projectConfig.runtime.root !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtime.root.path))
+		if (projectConfig.runtimeTest.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtimeTest.src.path))
+		else if (projectConfig.runtime.src !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtime.src.path))
+		if (projectConfig.runtimeTest.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, projectConfig.runtimeTest.srcGen.path))
+		else if (projectConfig.runtime.srcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, projectConfig.runtime.srcGen.path))
 		val Map<String, Variable> globalVars = Maps.newHashMap
 		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME, naming))
 
