@@ -112,11 +112,8 @@ Workflow {
 
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = compare.CompareFragment {
-					fileExtensions = file.extensions
-				}
-			}
+			fragment = ui.compare.CompareFragment2 {}
+			
 			fragment = ui.contentAssist.ContentAssistFragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ContentAssistParserGenerator auto-inject {
