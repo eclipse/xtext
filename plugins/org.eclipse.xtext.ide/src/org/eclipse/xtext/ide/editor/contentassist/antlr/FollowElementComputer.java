@@ -34,7 +34,7 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
- * 
+ * @since 2.9
  */
 public class FollowElementComputer {
 	

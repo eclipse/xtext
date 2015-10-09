@@ -68,21 +68,21 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		
 		contributeRuntimeGuiceBindings()
 		contributeEclipsePluginGuiceBindings()
-		if (projectConfig.eclipsePluginPluginXml !== null)
+		if (projectConfig.eclipsePlugin.pluginXml !== null)
 			contributeEclipsePluginExtensions()
 		if (generateXtendInferrer)
 			doGenerateXtendInferrer()
 		
-		if (projectConfig.runtimeManifest !== null) {
-			projectConfig.runtimeManifest.requiredBundles.addAll(#[
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext.xbase', 'org.eclipse.xtext.xbase.lib'
 			])
 			if ((generateXtendInferrer || useInferredJvmModel) && !skipExportedPackage) {
-				projectConfig.runtimeManifest.exportedPackages += jvmModelInferrer.packageName
+				projectConfig.runtime.manifest.exportedPackages += jvmModelInferrer.packageName
 			}
 		}
-		if (projectConfig.eclipsePluginManifest !== null) {
-			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
+		if (projectConfig.eclipsePlugin.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext.xbase.ui', 'org.eclipse.jdt.debug.ui'
 			])
 		}
@@ -259,13 +259,13 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			//   		]
 				}
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def contributeEclipsePluginExtensions() {
 		val name = language.grammar.name
 		if (jdtTypeHierarchy) {
-			projectConfig.eclipsePluginPluginXml.entries += '''
+			projectConfig.eclipsePlugin.pluginXml.entries += '''
 				<!-- Type Hierarchy  -->
 				<extension point="org.eclipse.ui.handlers">
 					<handler 
@@ -338,7 +338,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			'''
 		}
 		if (jdtCallHierarchy) {
-			projectConfig.eclipsePluginPluginXml.entries += '''
+			projectConfig.eclipsePlugin.pluginXml.entries += '''
 				<!-- Call Hierachy -->
 				<extension point="org.eclipse.ui.handlers">
 					<handler 
@@ -365,7 +365,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 				</extension>
 			'''
 		}
-		projectConfig.eclipsePluginPluginXml.entries += '''
+		projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<extension point="org.eclipse.core.runtime.adapters">
 				<factory class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
 					adaptableType="org.eclipse.xtext.ui.editor.XtextEditor">

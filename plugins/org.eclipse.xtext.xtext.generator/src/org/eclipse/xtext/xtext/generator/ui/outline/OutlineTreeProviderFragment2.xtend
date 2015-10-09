@@ -38,15 +38,15 @@ class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	override generate() {
-		if (projectConfig.eclipsePluginManifest != null) {
-			projectConfig.eclipsePluginManifest.requiredBundles += "org.eclipse.xtext.ui"
+		if (projectConfig.eclipsePlugin.manifest != null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 		
 		if (!generateStub) {
 			return;
 		}
 
-		if (projectConfig.eclipsePluginSrc !== null) {
+		if (projectConfig.eclipsePlugin.src !== null) {
 			if (codeConfig.preferXtendStubs) {
 				generateXtendOutlineTreeProvider
 			} else {
@@ -73,7 +73,7 @@ class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
 				"org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider".typeRef» {
 			
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 	
 	def protected generateXtendOutlineTreeProvider() {
@@ -87,5 +87,5 @@ class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
 				"org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider".typeRef» {
 			
 			}
-		''').writeTo(projectConfig.eclipsePluginSrc)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}}

@@ -16,6 +16,9 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
+/**
+ * @since 2.9
+ */
 public class PartialContentAssistContextFactory extends ContentAssistContextFactory {
 	@Override
 	protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict) {

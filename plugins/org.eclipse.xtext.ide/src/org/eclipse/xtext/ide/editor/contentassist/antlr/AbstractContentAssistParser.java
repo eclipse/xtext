@@ -38,6 +38,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
+/**
+ * @since 2.9
+ */
 public abstract class AbstractContentAssistParser implements IContentAssistParser {
 
 	@Inject
