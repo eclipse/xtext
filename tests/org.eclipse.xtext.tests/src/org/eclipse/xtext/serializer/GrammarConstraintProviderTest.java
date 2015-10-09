@@ -376,4 +376,13 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		expected.append("  NullRule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
 	}
+	
+	@Test
+	public void testWildcardFragment() throws Exception {
+		String actual = getParserRule("Rule: F; fragment F*:name=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: F_Rule;\n");
+		expected.append("  F_Rule returns Rule: name=ID;");
+		assertEquals(expected.toString(), actual);
+	}
 }
