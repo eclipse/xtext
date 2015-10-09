@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.google.inject.ImplementedBy;
 
@@ -29,7 +30,7 @@ public interface IOutputConfigurationProvider {
 	 */
 	Set<OutputConfiguration> getOutputConfigurations();
 
-	class Delegate implements IOutputConfigurationProvider, IContextualOutputConfigurationProvider {
+	class Delegate implements IOutputConfigurationProvider, IContextualOutputConfigurationProvider, IContextualOutputConfigurationProvider2 {
 		private IOutputConfigurationProvider delegate;
 
 		public IOutputConfigurationProvider getDelegate() {
@@ -53,6 +54,17 @@ public interface IOutputConfigurationProvider {
 		public Set<OutputConfiguration> getOutputConfigurations(Resource context) {
 			if (delegate instanceof IContextualOutputConfigurationProvider) {
 				return ((IContextualOutputConfigurationProvider) delegate).getOutputConfigurations(context);
+			}
+			return delegate.getOutputConfigurations();
+		}
+
+		/**
+		 * @since 2.9
+		 */
+		@Override
+		public Set<OutputConfiguration> getOutputConfigurations(ResourceSet context) {
+			if (delegate instanceof IContextualOutputConfigurationProvider2) {
+				return ((IContextualOutputConfigurationProvider2) delegate).getOutputConfigurations(context);
 			}
 			return delegate.getOutputConfigurations();
 		}
