@@ -61,7 +61,7 @@ final class GenerateXbase {
 				setProject(new WizardConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
-					setEclipseEditor(true);
+					getEclipsePlugin().setEnabled(true);
 				}});
 				setCode(new CodeConfig() {{
 					setEncoding("ISO-8859-1");
@@ -158,7 +158,9 @@ final class GenerateXbase {
 				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new Formatter2Fragment2());
 				addFragment(new QuickfixProviderFragment2());
-				addFragment(new LabelProviderFragment2());
+				LabelProviderFragment2 label = new LabelProviderFragment2();
+				label.setGenerateStub(false);
+				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
