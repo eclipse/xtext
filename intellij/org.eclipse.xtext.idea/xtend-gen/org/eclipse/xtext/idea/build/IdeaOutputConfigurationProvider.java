@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -30,7 +31,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider {
+public class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider, IContextualOutputConfigurationProvider2 {
   @Inject
   private FacetProvider facetProvider;
   
@@ -40,7 +41,12 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   @Override
   public Set<OutputConfiguration> getOutputConfigurations(final Resource context) {
     ResourceSet _resourceSet = context.getResourceSet();
-    final Object module = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
+    return this.getOutputConfigurations(_resourceSet);
+  }
+  
+  @Override
+  public Set<OutputConfiguration> getOutputConfigurations(final ResourceSet context) {
+    final Object module = ((XtextResourceSet) context).getClasspathURIContext();
     if ((module instanceof Module)) {
       return this.getOutputConfigurations(((Module)module));
     }

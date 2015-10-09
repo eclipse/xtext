@@ -9,20 +9,20 @@ package org.eclipse.xtext.build
 
 import com.google.inject.Inject
 import java.util.concurrent.atomic.AtomicBoolean
+import org.eclipse.core.runtime.OperationCanceledException
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.build.BuildRequest.IPostValidationCallback
 import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.Issue
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.build.BuildRequest.IPostValidationCallback
-import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.validation.Issue
-import org.eclipse.core.runtime.OperationCanceledException
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -37,6 +37,82 @@ class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		resourceServiceProviderFactory
 	}
 
+	@Test def void testNoCleanupBuild() {
+		val buildRequest = newBuildRequest [
+			withOutputConfig [
+				cleanUpDerivedResources = false
+			]
+			dirtyFiles = #[
+				'src/MyFile.indextestlanguage' - '''
+					foo {
+						entity B {}
+						entity A { foo.B myReference }
+					}
+				'''
+			]
+		]
+		build(buildRequest)
+		assertTrue(issues.toString, issues.isEmpty)
+		assertEquals(2, generated.size)
+		assertTrue(generated.values.containsSuffix('src-gen/B.txt'))
+		assertTrue(generated.values.containsSuffix('src-gen/A.txt'))
+		
+		newBuildRequest [
+			withOutputConfig [
+				cleanUpDerivedResources = false
+			]
+			deletedFiles = #[
+				uri('src/A.indextestlanguage').delete
+			]
+		]
+		assertTrue(issues.toString, issues.isEmpty)
+		assertEquals(2, generated.size)
+		assertTrue(generated.values.containsSuffix('src-gen/B.txt'))
+		assertTrue(generated.values.containsSuffix('src-gen/A.txt'))
+		
+	}
+	
+	@Test def void testGeneratedOnceBuild() {
+		val buildRequest = newBuildRequest [
+			withOutputConfig [
+				overrideExistingResources = false
+			]
+			dirtyFiles = #[
+				'src/MyFile.indextestlanguage' - '''
+					foo {
+						entity B {}
+						entity A { foo.B myReference }
+					}
+				'''
+			]
+			
+		]
+		build(buildRequest)
+		assertTrue(issues.toString, issues.isEmpty)
+		assertEquals(2, generated.size)
+		assertTrue(generated.values.containsSuffix('src-gen/B.txt'))
+		assertTrue(generated.values.containsSuffix('src-gen/A.txt'))
+		newBuildRequest [
+			withOutputConfig [
+				overrideExistingResources = false
+			]
+			dirtyFiles = #[
+				'src/MyFile.indextestlanguage' - '''
+					foo {
+						entity B {}
+						entity A { foo.B someReference }
+					}
+				'''
+			]
+			afterGenerateFile = [
+				// no generation expected
+				fail
+			]
+		]
+	}
+	
+
+	
 	@Test def void testSimpleFullBuild() {
 		val buildRequest = newBuildRequest [
 			dirtyFiles = #[

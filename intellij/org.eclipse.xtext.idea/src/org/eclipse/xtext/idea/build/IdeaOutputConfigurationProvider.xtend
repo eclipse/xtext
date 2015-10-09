@@ -21,17 +21,23 @@ import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2
+import org.eclipse.emf.ecore.resource.ResourceSet
 
 /**
  * @author dhuebner - Initial contribution and API
  */
-class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider {
+class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider, IContextualOutputConfigurationProvider2 {
 
 	@Inject FacetProvider facetProvider;
 	@Inject IOutputConfigurationProvider defaultOutput
 
 	override Set<OutputConfiguration> getOutputConfigurations(Resource context) {
-		val module = (context.resourceSet as XtextResourceSet).classpathURIContext
+		return getOutputConfigurations(context.resourceSet)
+	}
+	
+	override getOutputConfigurations(ResourceSet context) {
+		val module = (context as XtextResourceSet).classpathURIContext
 		if (module instanceof Module) {
 			return module.outputConfigurations
 		}
