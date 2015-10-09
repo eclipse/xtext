@@ -746,14 +746,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("// content assist API");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = contentAssist.ContentAssistFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
+        _builder.append("fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.newLine();
