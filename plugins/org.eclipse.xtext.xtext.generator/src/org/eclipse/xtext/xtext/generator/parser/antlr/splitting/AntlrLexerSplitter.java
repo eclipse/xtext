@@ -46,6 +46,8 @@ public class AntlrLexerSplitter {
 	
 	private boolean allowDFAStaticClasses = true;
 	
+	private int casesPerSpecialStateSwitch = LexerSpecialStateTransitionSplitter.CASES_PER_SPECIAL_STATE_SWITCH;
+	
 	public AntlrLexerSplitter(String content) {
 		scanner = new Scanner(content);
 	}
@@ -75,6 +77,7 @@ public class AntlrLexerSplitter {
 		LexerSpecialStateTransitionSplitter lexerSplitter;
 		lexerSplitter = new LexerSpecialStateTransitionSplitter(false);
 		lexerSplitter.setAllowDFAStaticClasses(allowDFAStaticClasses);
+		lexerSplitter.setCasesPerSpecialStateSwitch(casesPerSpecialStateSwitch);
 		result = lexerSplitter.transform(result);
 		return result;
 	}
@@ -231,6 +234,20 @@ public class AntlrLexerSplitter {
 	 */
 	public void setAllowDFAStaticClasses(boolean value) {
 		this.allowDFAStaticClasses = value;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public int getCasesPerSpecialStateSwitch(){
+		return casesPerSpecialStateSwitch;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setCasesPerSpecialStateSwitch(int value){
+		this.casesPerSpecialStateSwitch = value;
 	}
 
 	static public class ExtractedMethod {
