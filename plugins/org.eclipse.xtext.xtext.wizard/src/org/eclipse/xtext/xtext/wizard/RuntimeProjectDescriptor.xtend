@@ -307,9 +307,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 							
 							// rename refactoring
-							fragment = adapter.FragmentAdapter {
-								fragment = refactoring.RefactorElementNameFragment auto-inject {}
-							}
+							fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {}
 							
 							// provides a compare view
 							fragment = ui.compare.CompareFragment2 auto-inject {}

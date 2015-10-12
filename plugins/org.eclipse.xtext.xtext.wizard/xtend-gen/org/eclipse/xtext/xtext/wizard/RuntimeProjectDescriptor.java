@@ -837,14 +837,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("// rename refactoring");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = refactoring.RefactorElementNameFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
+        _builder.append("fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.newLine();
