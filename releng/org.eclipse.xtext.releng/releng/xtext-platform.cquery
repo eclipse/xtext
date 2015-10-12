@@ -2,16 +2,17 @@
     <cq:rootRequest name="org.eclipse.xtext.releng" componentType="buckminster"/>
     <cq:property key="target.arch" value="*"/>
     <cq:property key="target.os" value="*"/>
-    <cq:property key="target.ws" value="*"/>
+    <cq:property key="target.ws" value="*" />
     <cq:advisorNode namePattern="^org\.eclipse\.xtext$" skipComponent="true" filter="(WITH.MWE2=true)"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.util$" skipComponent="true" filter="(WITH.MWE2=true)"/>
     <!-- Latest Job -->
-   	<cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="2.11.0"/>
+   	<cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(ECLIPSE.TARGET.ALIAS=Helios)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.10.1,2.12.0)"/>
    	<!-- Gerrit and other -->
     <!--  Production Hudson xtext-xtend Job-->
-    <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(!(ECLIPSE.TARGET.ALIAS=Latest))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.10.1,2.12.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(!(ECLIPSE.TARGET.ALIAS=Helios))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="2.10.1"/>
    	
     <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(ECLIPSE.TARGET.ALIAS=Helios)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[12.0.0,13.0.0)"/>
     <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(!(ECLIPSE.TARGET.ALIAS=Helios))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[12.0.0,19.0.0)"/>
-    <cq:advisorNode namePattern="^" useTargetPlatform="false"/>
+    <cq:advisorNode namePattern="^" useTargetPlatform="false">
+    </cq:advisorNode>
 </cq:componentQuery>
