@@ -16,6 +16,9 @@ allprojects {
 	repositories.addAll(rootProject.buildscript.repositories)
 
 	plugins.withType(JavaPlugin) {
+		configurations.all {
+			exclude group: 'org.antlr', module: 'stringtemplate'	
+		}
 		sourceCompatibility = 1.6
 		tasks.withType(JavaCompile) {
 			options.encoding = 'ISO-8859-1'
