@@ -15,7 +15,7 @@ import org.eclipse.xtext.Grammar
 abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
 	
 	@Accessors(PROTECTED_GETTER)
-	@Inject XtextProjectConfig projectConfig
+	@Inject IXtextProjectConfig projectConfig
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject ILanguageConfig language

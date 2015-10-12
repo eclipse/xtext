@@ -15,7 +15,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.io.File
 
 class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
-	@Inject XtextProjectConfig config
+	@Inject IXtextProjectConfig config
 
 	@Accessors(PUBLIC_SETTER)
 	boolean enabled = true

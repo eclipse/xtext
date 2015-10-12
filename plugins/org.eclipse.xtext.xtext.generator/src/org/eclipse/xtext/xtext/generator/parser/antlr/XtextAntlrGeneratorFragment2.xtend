@@ -25,7 +25,6 @@ import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper
 import org.eclipse.xtext.parser.antlr.XtextTokenStream
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -40,8 +39,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Inject AntlrGrammarGenerator generator
 
 	@Inject CodeConfig codeConfig
-
-	@Inject XtextProjectConfig projectConfig
 	
 	@Inject FileAccessFactory fileFactory
 

@@ -14,60 +14,27 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
 
-@Accessors(PUBLIC_GETTER)
-class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
-	RuntimeProjectConfig runtime
-	BundleProjectConfig runtimeTest
-	BundleProjectConfig genericIde
-	BundleProjectConfig eclipsePlugin
-	BundleProjectConfig eclipsePluginTest
-	SubProjectConfig ideaPlugin
-	WebProjectConfig web
-	
-	new() {
-		setRuntime(new RuntimeProjectConfig)
-		setRuntimeTest(new BundleProjectConfig)
-		setGenericIde(new BundleProjectConfig)
-		setEclipsePlugin(new BundleProjectConfig)
-		setEclipsePluginTest(new BundleProjectConfig)
-		setIdeaPlugin(new SubProjectConfig)
-		setWeb(new WebProjectConfig)
-	}
-	
-	def void setRuntime(RuntimeProjectConfig config) {
-		this.runtime = config
-		config.owner = this
-	}
-	
-	def void setRuntimeTest(BundleProjectConfig config) {
-		this.runtimeTest = config
-		config.owner = this
-	}
-	
-	def void setGenericIde(BundleProjectConfig config) {
-		this.genericIde = config
-		config.owner = this
-	}
-	
-	def void setEclipsePlugin(BundleProjectConfig config) {
-		this.eclipsePlugin = config
-		config.owner = this
-	}
-	
-	def void setEclipsePluginTest(BundleProjectConfig config) {
-		this.eclipsePluginTest = config
-		config.owner = this
-	}
-	
-	def void setIdeaPlugin(SubProjectConfig config) {
-		this.ideaPlugin = config
-		config.owner = this
-	}
-	
-	def void setWeb(WebProjectConfig config) {
-		this.web = config
-		config.owner = this
-	}
+interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
+	def IRuntimeProjectConfig getRuntime()
+	def IBundleProjectConfig getRuntimeTest()
+	def IBundleProjectConfig getGenericIde()
+	def IBundleProjectConfig getEclipsePlugin()
+	def IBundleProjectConfig getEclipsePluginTest()
+	def ISubProjectConfig getIdeaPlugin()
+	def IWebProjectConfig getWeb()
+	def List<? extends ISubProjectConfig> getEnabledProjects()
+	def List<? extends ISubProjectConfig> getTestProjects()
+}
+
+@Accessors
+class XtextProjectConfig implements IXtextProjectConfig {
+	RuntimeProjectConfig runtime = new RuntimeProjectConfig
+	BundleProjectConfig runtimeTest = new BundleProjectConfig
+	BundleProjectConfig genericIde = new BundleProjectConfig
+	BundleProjectConfig eclipsePlugin = new BundleProjectConfig
+	BundleProjectConfig eclipsePluginTest = new BundleProjectConfig
+	SubProjectConfig ideaPlugin = new SubProjectConfig
+	WebProjectConfig web = new WebProjectConfig
 	
 	def void checkConfiguration(Issues issues) {
 		enabledProjects.forEach[checkConfiguration(issues)]
@@ -87,7 +54,7 @@ class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
 		allProjects
 	}
 
-	def List<? extends SubProjectConfig> getTestProjects() {
+	override List<? extends SubProjectConfig> getTestProjects() {
 		val testProjects = newArrayList
 		testProjects += #[
 			runtimeTest,
@@ -96,7 +63,7 @@ class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
 		testProjects
 	}
 
-	def List<? extends SubProjectConfig> getEnabledProjects() {
+	override List<? extends SubProjectConfig> getEnabledProjects() {
 		val enabledProjects = newArrayList
 		enabledProjects += allProjects.filter[enabled]
 		enabledProjects
