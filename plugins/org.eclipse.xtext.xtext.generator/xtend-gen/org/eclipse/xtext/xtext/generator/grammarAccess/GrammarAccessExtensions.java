@@ -965,13 +965,7 @@ public class GrammarAccessExtensions {
         boolean _notEquals = (!Objects.equal(_rule, null));
         if (_notEquals) {
           _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("\"");
-          AbstractRule _rule_1 = ((RuleCall)it).getRule();
-          String _name = _rule_1.getName();
-          _builder.append(_name, "");
-          _builder.append("\"");
-          _switchResult = _builder;
+          _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
         }
       }
     }
