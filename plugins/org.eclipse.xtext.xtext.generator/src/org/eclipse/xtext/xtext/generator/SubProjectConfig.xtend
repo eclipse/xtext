@@ -13,37 +13,79 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import com.google.inject.Inject
 
-class SubProjectConfig implements IGuiceAwareGeneratorComponent {
-	@Accessors(PUBLIC_GETTER, PACKAGE_SETTER)
+interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
+	def String getName()
+	def IXtextGeneratorFileSystemAccess getRoot()
+	def IXtextGeneratorFileSystemAccess getMetaInf()
+	def IXtextGeneratorFileSystemAccess getSrc()
+	def IXtextGeneratorFileSystemAccess getSrcGen()
+}
+
+interface IBundleProjectConfig extends ISubProjectConfig {
+	def ManifestAccess getManifest()
+	def PluginXmlAccess getPluginXml()
+}
+
+interface IRuntimeProjectConfig extends IBundleProjectConfig {
+	def IXtextGeneratorFileSystemAccess getEcoreModel()
+	def String getEcoreModelFolder()
+}
+
+interface IWebProjectConfig extends ISubProjectConfig {
+	def IXtextGeneratorFileSystemAccess getAssets()
+}
+
+class SubProjectConfig implements ISubProjectConfig {
+	@Inject
+	@Accessors(PUBLIC_GETTER)
 	XtextProjectConfig owner
+	
 	@Accessors
 	boolean enabled
+	
 	@Accessors
 	String name
+	
+	@Accessors(PUBLIC_GETTER)
+	String rootPath
+	
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess root
+	
+	@Accessors(PUBLIC_GETTER)
+	String metaInfPath
+	
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess metaInf
+	
+	@Accessors(PUBLIC_GETTER)
+	String srcPath
+	
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess src
+	
+	@Accessors(PUBLIC_GETTER)
+	String srcGenPath
+	
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess srcGen
 	
 	def void setRoot(String path) {
-		root = owner.newFileSystemAccess(path, true)
+		rootPath = path
 	}
 
 	def void setMetaInf(String path) {
-		metaInf = owner.newFileSystemAccess(path, true)
+		metaInfPath = path
 	}
 
 	def void setSrc(String path) {
-		src = owner.newFileSystemAccess(path, false)
+		srcPath = path
 	}
 
 	def void setSrcGen(String path) {
-		srcGen = owner.newFileSystemAccess(path, true)
+		srcGenPath = path
 	}
 	
 	def void checkConfiguration(Issues issues) {
@@ -51,10 +93,22 @@ class SubProjectConfig implements IGuiceAwareGeneratorComponent {
 	
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
-		root?.initialize(injector)
-		metaInf?.initialize(injector)
-		src?.initialize(injector)
-		srcGen?.initialize(injector)
+		if (rootPath !== null) {
+			root = owner.newFileSystemAccess(rootPath, true)
+			root.initialize(injector)
+		}
+		if (metaInfPath !== null) {
+			metaInf = owner.newFileSystemAccess(metaInfPath, true)
+			metaInf.initialize(injector)
+		}
+		if (srcPath !== null) {
+			src = owner.newFileSystemAccess(srcPath, false)
+			src.initialize(injector)
+		}
+		if (srcGenPath !== null) {
+			srcGen = owner.newFileSystemAccess(srcGenPath, true)
+			srcGen.initialize(injector)
+		}
 	}
 	
 }
@@ -62,7 +116,7 @@ class SubProjectConfig implements IGuiceAwareGeneratorComponent {
 
 
 @Accessors
-class BundleProjectConfig extends SubProjectConfig {
+class BundleProjectConfig extends SubProjectConfig implements IBundleProjectConfig{
 	ManifestAccess manifest
 	PluginXmlAccess pluginXml
 	
@@ -85,42 +139,51 @@ class BundleProjectConfig extends SubProjectConfig {
 }
 
 
-class RuntimeProjectConfig extends BundleProjectConfig {
+class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjectConfig {
+	@Accessors(PUBLIC_GETTER)
+	String ecoreModelPath
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess ecoreModel
 	
 	def void setEcoreModel(String path) {
-		ecoreModel = owner.newFileSystemAccess(path, true)
+		ecoreModelPath = path
 	}
 	
 	/**
 	 * Returns the root-relative path of the folder where the generated .ecore and .genmodel can be found.
 	 * The path is delimited by and ends with '/'
 	 */
-	def String getEcoreModelFolder() {
-		val ecoreModelFolder = ecoreModel.path.replace(root.path, "").replace('\\', '/')
+	override String getEcoreModelFolder() {
+		val ecoreModelFolder = ecoreModelPath.replace(root.path, "").replace('\\', '/')
 		val slashes = CharMatcher.is('/')
 		slashes.trimFrom(ecoreModelFolder) + "/"
 	}
 	
 	override initialize(Injector injector) {
 		super.initialize(injector)
-		ecoreModel?.initialize(injector)
+		if (ecoreModelPath !== null) {
+			ecoreModel = owner.newFileSystemAccess(ecoreModelPath, true)
+			ecoreModel.initialize(injector)
+		}
 	}
 
 }
 
-class WebProjectConfig extends SubProjectConfig {
+class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {
+	@Accessors(PUBLIC_GETTER)
+	String assetsPath
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess assets
 	
 	def void setAssets(String path) {
-		assets = owner.newFileSystemAccess(path, true)
+		assetsPath = path
 	}
 	
 	override initialize(Injector injector) {
 		super.initialize(injector)
-		assets?.initialize(injector)
+		if (assetsPath !== null) {
+			assets = owner.newFileSystemAccess(assetsPath, true)
+			assets.initialize(injector)
+		}
 	}
-	
 }

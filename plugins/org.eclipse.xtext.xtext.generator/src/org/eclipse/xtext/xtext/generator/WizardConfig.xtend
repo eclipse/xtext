@@ -41,13 +41,13 @@ class WizardConfig extends XtextProjectConfig {
 		enabledProjects.forEach [
 			if (name === null)
 				name = computeName
-			if (root === null)
+			if (it.rootPath === null)
 				root = computeRoot
-			if (metaInf === null)
+			if (metaInfPath === null)
 				metaInf = computeMetaInf
-			if (src === null)
+			if (srcPath === null)
 				src = computeSrc
-			if (srcGen === null)
+			if (srcGenPath === null)
 				srcGen = computeSrcGen
 			if (it instanceof BundleProjectConfig) {
 				if (createEclipseMetaData) {
@@ -58,11 +58,11 @@ class WizardConfig extends XtextProjectConfig {
 				}
 			}
 			if (it instanceof RuntimeProjectConfig) {
-				if (ecoreModel === null)
+				if (ecoreModelPath === null)
 					ecoreModel = computeEcoreModel
 			}
 			if (it instanceof WebProjectConfig) {
-				if (assets === null)
+				if (assetsPath === null)
 					assets = computeAssets
 			}
 		]
@@ -85,23 +85,23 @@ class WizardConfig extends XtextProjectConfig {
 	}
 
 	protected def computeSrc(SubProjectConfig project) {
-		project.root.path + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/java' else 'src'
+		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/java' else 'src'
 	}
 
 	protected def computeSrcGen(SubProjectConfig project) {
-		project.root.path + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/xtext-gen' else 'src-gen'
+		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/xtext-gen' else 'src-gen'
 	}
 
 	protected def computeMetaInf(SubProjectConfig project) {
-		project.root.path + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/resources/META-INF' else 'META-INF'
+		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/resources/META-INF' else 'META-INF'
 	}
 
 	protected def computeEcoreModel(RuntimeProjectConfig project) {
-		project.root.path + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/ecore/generated' else 'model/generated'
+		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/ecore/generated' else 'model/generated'
 	}
 
 	protected def computeAssets(WebProjectConfig project) {
-		project.root.path + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/webapp' else 'WebRoot'
+		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/webapp' else 'WebRoot'
 	}
 
 	protected def computeSourceSet(SubProjectConfig project) {
