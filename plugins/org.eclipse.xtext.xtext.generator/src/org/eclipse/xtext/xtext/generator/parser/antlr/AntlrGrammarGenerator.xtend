@@ -37,23 +37,9 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		naming
 	}
 	
-	protected override compileOptions(Grammar it, AntlrOptions options) '''
-		
-		options {
-			superClass=AbstractInternalAntlrParser;
-			«IF options.backtrack || options.memoize || options.k >= 0»
-			«IF options.backtrack»
-			backtrack=true;
-			«ENDIF»
-			«IF options.memoize»
-			memoize=true;
-			«ENDIF»
-			«IF options.k >= 0»
-			memoize=«options.k»;
-			«ENDIF»
-			«ENDIF»
-		}
-	''' 
+	override protected getInternalParserSuperClass() {
+		"AbstractInternalAntlrParser"
+	}
 	
 	protected override compileParserImports(Grammar it, AntlrOptions options) '''
 

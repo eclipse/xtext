@@ -30,7 +30,7 @@ class GrammarNaming {
 	}
 
 	def TypeReference getLexerClass(Grammar it) {
-		new TypeReference(internalParserPackage, '''Internal«simpleName»Lexer''')
+		new TypeReference(grammarClass.packageName, '''«grammarClass.simpleName»Lexer''')
 	}
 
 	def TypeReference getParserClass(Grammar it) {
@@ -38,7 +38,7 @@ class GrammarNaming {
 	}
 
 	def TypeReference getInternalParserClass(Grammar it) {
-		new TypeReference(internalParserPackage, '''Internal«simpleName»Parser''')
+		new TypeReference(grammarClass.packageName, '''«grammarClass.simpleName»Parser''')
 	}
 
 	def TypeReference getContentAssistParserClass(Grammar it) {
@@ -54,7 +54,7 @@ class GrammarNaming {
 	}
 	
 	def String getTokenFileName(Grammar it) {
-		internalParserPackage.replace('.', '/') + "/Internal" + simpleName + ".tokens"
+		grammarClass.name.replace('.', '/') + ".tokens"
 	}
 
 }

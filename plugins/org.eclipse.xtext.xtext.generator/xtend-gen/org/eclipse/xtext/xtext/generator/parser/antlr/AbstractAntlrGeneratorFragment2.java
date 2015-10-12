@@ -35,6 +35,7 @@ import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
@@ -125,16 +126,19 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     return _and;
   }
   
-  protected void splitLexerClassFile(final IXtextGeneratorFileSystemAccess fsa, final String filename) {
-    CharSequence _readTextFile = fsa.readTextFile(filename);
+  protected void splitLexerClassFile(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer) {
+    String _javaPath = lexer.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     final String content = _readTextFile.toString();
     AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
+    String _javaPath_1 = lexer.getJavaPath();
     String _transform = splitter.transform();
-    fsa.generateFile(filename, _transform);
+    fsa.generateFile(_javaPath_1, _transform);
   }
   
-  protected void splitParserClassFile(final IXtextGeneratorFileSystemAccess fsa, final String filename) {
-    CharSequence _readTextFile = fsa.readTextFile(filename);
+  protected void splitParserClassFile(final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser) {
+    String _javaPath = parser.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     final String content = _readTextFile.toString();
     AntlrOptions _options = this.getOptions();
     int _fieldsPerClass = _options.getFieldsPerClass();
@@ -143,11 +147,12 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     AntlrOptions _options_1 = this.getOptions();
     int _methodsPerClass = _options_1.getMethodsPerClass();
     final PartialClassExtractor extractor = new PartialClassExtractor(_transform, _methodsPerClass);
+    String _javaPath_1 = parser.getJavaPath();
     String _transform_1 = extractor.transform();
-    fsa.generateFile(filename, _transform_1);
+    fsa.generateFile(_javaPath_1, _transform_1);
   }
   
-  protected void simplifyUnorderedGroupPredicatesIfRequired(final Grammar grammar, final IXtextGeneratorFileSystemAccess fsa, final String parserFileName) {
+  protected void simplifyUnorderedGroupPredicatesIfRequired(final Grammar grammar, final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser) {
     boolean _or = false;
     boolean _containsUnorderedGroup = this.containsUnorderedGroup(grammar);
     if (_containsUnorderedGroup) {
@@ -157,9 +162,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
       _or = _hasParameterizedRules;
     }
     if (_or) {
-      String _parserFileNameSuffix = this.getParserFileNameSuffix();
-      final String javaFile = parserFileName.replaceAll("\\.g$", _parserFileNameSuffix);
-      this.simplifyUnorderedGroupPredicates(fsa, javaFile);
+      this.simplifyUnorderedGroupPredicates(fsa, parser);
     }
   }
   
@@ -176,12 +179,9 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     return false;
   }
   
-  protected String getParserFileNameSuffix() {
-    return "Parser.java";
-  }
-  
-  protected void simplifyUnorderedGroupPredicates(final IXtextGeneratorFileSystemAccess fsa, final String fileName) {
-    CharSequence _readTextFile = fsa.readTextFile(fileName);
+  protected void simplifyUnorderedGroupPredicates(final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser) {
+    String _javaPath = parser.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     final String content = _readTextFile.toString();
     UnorderedGroupsSplitter splitter = new UnorderedGroupsSplitter(content);
     String transformed = splitter.transform();
@@ -190,48 +190,36 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     transformed = _transform;
     BacktrackingGuardForUnorderedGroupsRemover remover = new BacktrackingGuardForUnorderedGroupsRemover(transformed);
     String newContent = remover.transform();
-    fsa.generateFile(fileName, newContent);
+    String _javaPath_1 = parser.getJavaPath();
+    fsa.generateFile(_javaPath_1, newContent);
   }
   
-  private void suppressWarningsImpl(final IXtextGeneratorFileSystemAccess fsa, final String javaFile) {
-    CharSequence _readTextFile = fsa.readTextFile(javaFile);
+  protected void suppressWarnings(final IXtextGeneratorFileSystemAccess fsa, final TypeReference type) {
+    String _javaPath = type.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     final String content = _readTextFile.toString();
     SuppressWarningsProcessor _suppressWarningsProcessor = new SuppressWarningsProcessor();
     final String newContent = _suppressWarningsProcessor.process(content);
-    fsa.generateFile(javaFile, newContent);
+    String _javaPath_1 = type.getJavaPath();
+    fsa.generateFile(_javaPath_1, newContent);
   }
   
-  protected void suppressWarnings(final IXtextGeneratorFileSystemAccess fsa, final String grammarFileName) {
-    this.suppressWarnings(fsa, grammarFileName, grammarFileName);
-  }
-  
-  protected void suppressWarnings(final IXtextGeneratorFileSystemAccess fsa, final String lexerGrammarFileName, final String parserGrammarFileName) {
-    String _lexerFileNameSuffix = this.getLexerFileNameSuffix();
-    String _replaceAll = lexerGrammarFileName.replaceAll("\\.g$", _lexerFileNameSuffix);
-    this.suppressWarningsImpl(fsa, _replaceAll);
-    String _parserFileNameSuffix = this.getParserFileNameSuffix();
-    String _replaceAll_1 = parserGrammarFileName.replaceAll("\\.g$", _parserFileNameSuffix);
-    this.suppressWarningsImpl(fsa, _replaceAll_1);
-  }
-  
-  private void normalizeLineDelimitersImpl(final IXtextGeneratorFileSystemAccess fsa, final String textFile) {
-    CharSequence _readTextFile = fsa.readTextFile(textFile);
+  protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final TypeReference type) {
+    String _javaPath = type.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     String content = _readTextFile.toString();
-    URI _uRI = fsa.getURI(textFile);
+    String _javaPath_1 = type.getJavaPath();
+    URI _uRI = fsa.getURI(_javaPath_1);
     CharSequence _postProcess = this.newLineNormalizer.postProcess(_uRI, content);
     String _string = _postProcess.toString();
     content = _string;
     String _replaceAll = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "");
     content = _replaceAll;
-    fsa.generateFile(textFile, content);
+    String _javaPath_2 = type.getJavaPath();
+    fsa.generateFile(_javaPath_2, content);
   }
   
-  protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final String grammarFileName) {
-    this.normalizeLineDelimiters(fsa, grammarFileName, grammarFileName);
-  }
-  
-  protected void normalizeTokens(final IXtextGeneratorFileSystemAccess fsa, final String grammarFileName) {
-    final String tokenFile = this.toTokenFileName(grammarFileName);
+  protected void normalizeTokens(final IXtextGeneratorFileSystemAccess fsa, final String tokenFile) {
     CharSequence _readTextFile = fsa.readTextFile(tokenFile);
     String content = _readTextFile.toString();
     URI _uRI = fsa.getURI(tokenFile);
@@ -249,44 +237,26 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     fsa.generateFile(tokenFile, content);
   }
   
-  private String toTokenFileName(final String grammarFileName) {
-    return grammarFileName.replaceAll("\\.g$", ".tokens");
-  }
-  
-  protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final String lexerGrammarFileName, final String parserGrammarFileName) {
-    String _lexerFileNameSuffix = this.getLexerFileNameSuffix();
-    String _replaceAll = lexerGrammarFileName.replaceAll("\\.g$", _lexerFileNameSuffix);
-    this.normalizeLineDelimitersImpl(fsa, _replaceAll);
-    String _parserFileNameSuffix = this.getParserFileNameSuffix();
-    String _replaceAll_1 = parserGrammarFileName.replaceAll("\\.g$", _parserFileNameSuffix);
-    this.normalizeLineDelimitersImpl(fsa, _replaceAll_1);
-  }
-  
-  protected String getLexerFileNameSuffix() {
-    return "Lexer.java";
-  }
-  
-  protected void splitParserAndLexerIfEnabled(final IXtextGeneratorFileSystemAccess fsa, final String lexerGrammarFileName, final String parserGrammarFileName) {
-    String _lexerFileNameSuffix = this.getLexerFileNameSuffix();
-    final String lexerJavaFile = lexerGrammarFileName.replaceAll("\\.g$", _lexerFileNameSuffix);
-    String _parserFileNameSuffix = this.getParserFileNameSuffix();
-    final String parserJavaFile = parserGrammarFileName.replaceAll("\\.g$", _parserFileNameSuffix);
-    this.improveCodeQuality(fsa, lexerJavaFile, parserJavaFile);
+  protected void splitParserAndLexerIfEnabled(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer, final TypeReference parser) {
+    this.improveCodeQuality(fsa, lexer, parser);
     AntlrOptions _options = this.getOptions();
     boolean _isClassSplitting = _options.isClassSplitting();
     if (_isClassSplitting) {
-      this.splitLexerClassFile(fsa, lexerJavaFile);
-      this.splitParserClassFile(fsa, parserJavaFile);
+      this.splitLexerClassFile(fsa, lexer);
+      this.splitParserClassFile(fsa, parser);
     }
   }
   
-  protected void improveCodeQuality(final IXtextGeneratorFileSystemAccess fsa, final String lexerJavaFile, final String parserJavaFile) {
-    CharSequence _readTextFile = fsa.readTextFile(lexerJavaFile);
+  protected void improveCodeQuality(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer, final TypeReference parser) {
+    String _javaPath = lexer.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     String lexerContent = _readTextFile.toString();
     String _stripUnnecessaryComments = this.codeQualityHelper.stripUnnecessaryComments(lexerContent, this.options);
     lexerContent = _stripUnnecessaryComments;
-    fsa.generateFile(lexerJavaFile, lexerContent);
-    CharSequence _readTextFile_1 = fsa.readTextFile(parserJavaFile);
+    String _javaPath_1 = lexer.getJavaPath();
+    fsa.generateFile(_javaPath_1, lexerContent);
+    String _javaPath_2 = parser.getJavaPath();
+    CharSequence _readTextFile_1 = fsa.readTextFile(_javaPath_2);
     String parserContent = _readTextFile_1.toString();
     String _stripUnnecessaryComments_1 = this.codeQualityHelper.stripUnnecessaryComments(parserContent, this.options);
     parserContent = _stripUnnecessaryComments_1;
@@ -294,11 +264,8 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     parserContent = _removeDuplicateBitsets;
     String _removeDuplicateDFAs = this.codeQualityHelper.removeDuplicateDFAs(parserContent, this.options);
     parserContent = _removeDuplicateDFAs;
-    fsa.generateFile(parserJavaFile, parserContent);
-  }
-  
-  protected void splitParserAndLexerIfEnabled(final IXtextGeneratorFileSystemAccess fsa, final String grammarFileName) {
-    this.splitParserAndLexerIfEnabled(fsa, grammarFileName, grammarFileName);
+    String _javaPath_3 = parser.getJavaPath();
+    fsa.generateFile(_javaPath_3, parserContent);
   }
   
   protected boolean containsUnorderedGroup(final Grammar grammar) {

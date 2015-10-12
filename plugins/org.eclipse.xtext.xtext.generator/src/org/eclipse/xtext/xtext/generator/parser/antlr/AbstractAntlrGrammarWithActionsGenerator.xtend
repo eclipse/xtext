@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
+import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.Group
+import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ParserRule
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.UnorderedGroup
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.CrossReference
-import org.eclipse.xtext.Assignment
-import org.eclipse.xtext.Group
-import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.Alternatives
 
 abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGrammarGenerator {
 	
@@ -179,6 +180,12 @@ abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGra
 		super._ebnf2(it, options, supportActions) + getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
 	
+	protected dispatch override String ebnf2(Assignment it, AntlrOptions options, boolean supportActions) '''
+		(
+			«super._ebnf2(it, options, supportActions)»
+		)
+	'''
+	
 	override protected _dataTypeEbnf2(RuleCall it, boolean supportActions) {
 		super._dataTypeEbnf2(it, supportActions) + getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
@@ -191,8 +198,34 @@ abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGra
 		super._assignmentEbnf(it, assignment, options, supportActions) + it.getArgumentList(isPassCurrentIntoFragment, !supportActions)
 	}
 	
+	protected dispatch override String assignmentEbnf(Alternatives it, Assignment assignment, AntlrOptions options, boolean supportActions) '''
+		(
+			«super._assignmentEbnf(it, assignment, options, supportActions)»
+		)
+	'''
+	
 	protected def isPassCurrentIntoFragment() {
 		return false
+	}
+	
+	dispatch override mustBeParenthesized(AbstractElement it) {
+		true
+	}
+	
+	dispatch override mustBeParenthesized(Group it) {
+		true
+	}
+	
+	dispatch override mustBeParenthesized(Alternatives it) {
+		true
+	}
+	
+	dispatch def mustBeParenthesized(Keyword it) {
+		predicated() || firstSetPredicated || cardinality != null
+	}
+
+	dispatch def mustBeParenthesized(RuleCall it) {
+		predicated() || firstSetPredicated || cardinality != null
 	}
 	
 }

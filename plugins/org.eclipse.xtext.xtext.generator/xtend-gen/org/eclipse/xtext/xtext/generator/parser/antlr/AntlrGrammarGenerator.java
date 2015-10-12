@@ -53,65 +53,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   }
   
   @Override
-  protected String compileOptions(final Grammar it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
-    _builder.append("options {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("superClass=AbstractInternalAntlrParser;");
-    _builder.newLine();
-    {
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _isBacktrack = options.isBacktrack();
-      if (_isBacktrack) {
-        _or_1 = true;
-      } else {
-        boolean _isMemoize = options.isMemoize();
-        _or_1 = _isMemoize;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        int _k = options.getK();
-        boolean _greaterEqualsThan = (_k >= 0);
-        _or = _greaterEqualsThan;
-      }
-      if (_or) {
-        {
-          boolean _isBacktrack_1 = options.isBacktrack();
-          if (_isBacktrack_1) {
-            _builder.append("\t");
-            _builder.append("backtrack=true;");
-            _builder.newLine();
-          }
-        }
-        {
-          boolean _isMemoize_1 = options.isMemoize();
-          if (_isMemoize_1) {
-            _builder.append("\t");
-            _builder.append("memoize=true;");
-            _builder.newLine();
-          }
-        }
-        {
-          int _k_1 = options.getK();
-          boolean _greaterEqualsThan_1 = (_k_1 >= 0);
-          if (_greaterEqualsThan_1) {
-            _builder.append("\t");
-            _builder.append("memoize=");
-            int _k_2 = options.getK();
-            _builder.append(_k_2, "\t");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    _builder.append("}");
-    _builder.newLine();
-    return _builder.toString();
+  protected String getInternalParserSuperClass() {
+    return "AbstractInternalAntlrParser";
   }
   
   @Override

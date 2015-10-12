@@ -425,12 +425,6 @@ class GrammarAccessExtensions {
 		options.backtrack && !eAllContentsAsList.typeSelect(UnorderedGroup).empty
 	}
 
-	dispatch def mustBeParenthesized(AbstractElement it) { true }
-
-	dispatch def mustBeParenthesized(Keyword it) { predicated() || firstSetPredicated || cardinality != null }
-
-	dispatch def mustBeParenthesized(RuleCall it) { predicated() || firstSetPredicated || cardinality != null }
-	
 	dispatch def boolean predicated(AbstractElement it) {
 		predicated
 	}

@@ -31,10 +31,12 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')))
 		antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, antlrParams)
 
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammarFileName)
-		splitParserAndLexerIfEnabled(fsa, grammarFileName)
-		suppressWarnings(fsa, grammarFileName)
-		normalizeLineDelimiters(fsa, grammarFileName)
-		normalizeTokens(fsa, grammarFileName)
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
+		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
+		#[grammar.internalParserClass, grammar.lexerClass].forEach[
+			suppressWarnings(fsa, it)
+			normalizeLineDelimiters(fsa, it)
+		]
+		normalizeTokens(fsa, grammar.tokenFileName)
 	}
 }
