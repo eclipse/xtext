@@ -29,6 +29,7 @@ import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.util.Strings;
 
@@ -50,6 +51,8 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	private boolean contentAssist;
 	
 	private boolean classSplitting = false;
+	
+	private int casesPerSpecialStateSwitch = LexerSpecialStateTransitionSplitter.CASES_PER_SPECIAL_STATE_SWITCH;
 
 	private List<String> antlrParams = Lists.newArrayList();
 	
@@ -131,6 +134,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 			String content = readFileIntoString(lexerJavaFile, encoding);
 			AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 			splitter.setAllowDFAStaticClasses(false);
+			splitter.setCasesPerSpecialStateSwitch(casesPerSpecialStateSwitch);
 			writeStringIntoFile(lexerJavaFile, splitter.transform(), encoding);
 		}
 	}
@@ -280,6 +284,20 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 		this.classSplitting = value;
 	}
 
+	/**
+	 * @since 2.9
+	 */
+	public int getCasesPerSpecialStateSwitch(){
+		return casesPerSpecialStateSwitch;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setCasesPerSpecialStateSwitch(final String casesPerSpecialStateSwitch){
+	    int _parseInt = Integer.parseInt(casesPerSpecialStateSwitch);
+	    this.casesPerSpecialStateSwitch = _parseInt;
+	}
 	
 	private String readFileIntoString(String filename, Charset encoding) {
 		try {
