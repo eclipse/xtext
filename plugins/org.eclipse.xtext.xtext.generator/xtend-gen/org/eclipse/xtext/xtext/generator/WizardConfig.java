@@ -20,7 +20,6 @@ import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.WebProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
@@ -69,26 +68,26 @@ public class WizardConfig extends XtextProjectConfig {
           String _computeName = WizardConfig.this.computeName(it);
           it.setName(_computeName);
         }
-        IXtextGeneratorFileSystemAccess _root = it.getRoot();
-        boolean _tripleEquals_1 = (_root == null);
+        String _rootPath = it.getRootPath();
+        boolean _tripleEquals_1 = (_rootPath == null);
         if (_tripleEquals_1) {
           String _computeRoot = WizardConfig.this.computeRoot(it);
           it.setRoot(_computeRoot);
         }
-        IXtextGeneratorFileSystemAccess _metaInf = it.getMetaInf();
-        boolean _tripleEquals_2 = (_metaInf == null);
+        String _metaInfPath = it.getMetaInfPath();
+        boolean _tripleEquals_2 = (_metaInfPath == null);
         if (_tripleEquals_2) {
           String _computeMetaInf = WizardConfig.this.computeMetaInf(it);
           it.setMetaInf(_computeMetaInf);
         }
-        IXtextGeneratorFileSystemAccess _src = it.getSrc();
-        boolean _tripleEquals_3 = (_src == null);
+        String _srcPath = it.getSrcPath();
+        boolean _tripleEquals_3 = (_srcPath == null);
         if (_tripleEquals_3) {
           String _computeSrc = WizardConfig.this.computeSrc(it);
           it.setSrc(_computeSrc);
         }
-        IXtextGeneratorFileSystemAccess _srcGen = it.getSrcGen();
-        boolean _tripleEquals_4 = (_srcGen == null);
+        String _srcGenPath = it.getSrcGenPath();
+        boolean _tripleEquals_4 = (_srcGenPath == null);
         if (_tripleEquals_4) {
           String _computeSrcGen = WizardConfig.this.computeSrcGen(it);
           it.setSrcGen(_computeSrcGen);
@@ -110,16 +109,16 @@ public class WizardConfig extends XtextProjectConfig {
           }
         }
         if ((it instanceof RuntimeProjectConfig)) {
-          IXtextGeneratorFileSystemAccess _ecoreModel = ((RuntimeProjectConfig)it).getEcoreModel();
-          boolean _tripleEquals_7 = (_ecoreModel == null);
+          String _ecoreModelPath = ((RuntimeProjectConfig)it).getEcoreModelPath();
+          boolean _tripleEquals_7 = (_ecoreModelPath == null);
           if (_tripleEquals_7) {
             String _computeEcoreModel = WizardConfig.this.computeEcoreModel(((RuntimeProjectConfig)it));
             ((RuntimeProjectConfig)it).setEcoreModel(_computeEcoreModel);
           }
         }
         if ((it instanceof WebProjectConfig)) {
-          IXtextGeneratorFileSystemAccess _assets = ((WebProjectConfig)it).getAssets();
-          boolean _tripleEquals_8 = (_assets == null);
+          String _assetsPath = ((WebProjectConfig)it).getAssetsPath();
+          boolean _tripleEquals_8 = (_assetsPath == null);
           if (_tripleEquals_8) {
             String _computeAssets = WizardConfig.this.computeAssets(((WebProjectConfig)it));
             ((WebProjectConfig)it).setAssets(_computeAssets);
@@ -191,9 +190,8 @@ public class WizardConfig extends XtextProjectConfig {
   }
   
   protected String computeSrc(final SubProjectConfig project) {
-    IXtextGeneratorFileSystemAccess _root = project.getRoot();
-    String _path = _root.getPath();
-    String _plus = (_path + "/");
+    String _rootPath = project.getRootPath();
+    String _plus = (_rootPath + "/");
     String _xifexpression = null;
     if (this.mavenLayout) {
       String _computeSourceSet = this.computeSourceSet(project);
@@ -206,9 +204,8 @@ public class WizardConfig extends XtextProjectConfig {
   }
   
   protected String computeSrcGen(final SubProjectConfig project) {
-    IXtextGeneratorFileSystemAccess _root = project.getRoot();
-    String _path = _root.getPath();
-    String _plus = (_path + "/");
+    String _rootPath = project.getRootPath();
+    String _plus = (_rootPath + "/");
     String _xifexpression = null;
     if (this.mavenLayout) {
       String _computeSourceSet = this.computeSourceSet(project);
@@ -221,9 +218,8 @@ public class WizardConfig extends XtextProjectConfig {
   }
   
   protected String computeMetaInf(final SubProjectConfig project) {
-    IXtextGeneratorFileSystemAccess _root = project.getRoot();
-    String _path = _root.getPath();
-    String _plus = (_path + "/");
+    String _rootPath = project.getRootPath();
+    String _plus = (_rootPath + "/");
     String _xifexpression = null;
     if (this.mavenLayout) {
       String _computeSourceSet = this.computeSourceSet(project);
@@ -236,9 +232,8 @@ public class WizardConfig extends XtextProjectConfig {
   }
   
   protected String computeEcoreModel(final RuntimeProjectConfig project) {
-    IXtextGeneratorFileSystemAccess _root = project.getRoot();
-    String _path = _root.getPath();
-    String _plus = (_path + "/");
+    String _rootPath = project.getRootPath();
+    String _plus = (_rootPath + "/");
     String _xifexpression = null;
     if (this.mavenLayout) {
       String _computeSourceSet = this.computeSourceSet(project);
@@ -251,9 +246,8 @@ public class WizardConfig extends XtextProjectConfig {
   }
   
   protected String computeAssets(final WebProjectConfig project) {
-    IXtextGeneratorFileSystemAccess _root = project.getRoot();
-    String _path = _root.getPath();
-    String _plus = (_path + "/");
+    String _rootPath = project.getRootPath();
+    String _plus = (_rootPath + "/");
     String _xifexpression = null;
     if (this.mavenLayout) {
       String _computeSourceSet = this.computeSourceSet(project);

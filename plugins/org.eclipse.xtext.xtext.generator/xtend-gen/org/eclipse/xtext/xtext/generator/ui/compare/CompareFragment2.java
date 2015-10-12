@@ -18,10 +18,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -46,13 +46,13 @@ public class CompareFragment2 extends AbstractGeneratorFragment2 {
     if (_isInfoEnabled) {
       CompareFragment2.log.info("generating Compare Framework infrastructure");
     }
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = _eclipsePlugin.getManifest();
     boolean _notEquals = (!Objects.equal(_manifest, null));
     if (_notEquals) {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
@@ -64,13 +64,13 @@ public class CompareFragment2 extends AbstractGeneratorFragment2 {
     ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
-    XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
     PluginXmlAccess _pluginXml = _eclipsePlugin_2.getPluginXml();
     boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
     if (_notEquals_1) {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
       List<CharSequence> _entries = _pluginXml_1.getEntries();
       StringConcatenation _builder = new StringConcatenation();

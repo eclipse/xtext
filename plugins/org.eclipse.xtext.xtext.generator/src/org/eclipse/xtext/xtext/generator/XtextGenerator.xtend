@@ -58,7 +58,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	Injector injector
 	
-	@Inject XtextProjectConfig projectConfig
+	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject XtextGeneratorTemplates templates
 	

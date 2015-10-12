@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator;
 import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -18,7 +19,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
 @Accessors
 @SuppressWarnings("all")
-public class BundleProjectConfig extends SubProjectConfig {
+public class BundleProjectConfig extends SubProjectConfig implements IBundleProjectConfig {
   private ManifestAccess manifest;
   
   private PluginXmlAccess pluginXml;
