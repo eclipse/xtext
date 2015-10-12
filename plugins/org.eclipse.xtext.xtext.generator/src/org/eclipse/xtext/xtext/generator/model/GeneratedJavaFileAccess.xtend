@@ -4,8 +4,6 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
-import java.util.Collections
-import com.google.common.collect.Lists
 
 class GeneratedJavaFileAccess extends JavaFileAccess {
 	
@@ -28,24 +26,26 @@ class GeneratedJavaFileAccess extends JavaFileAccess {
 			throw new IllegalArgumentException("It's always generated");
 	}
 
+	/**
+	 * prepends the addition of required imports of the employed annotations
+	 */
 	override getContent() {
-		val classAnnotations = annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
-		classAnnotations.forEach[importType(annotationImport)]
-		val sortedImports = Lists.newArrayList(imports.values)
-		Collections.sort(sortedImports)
-		return '''
-			«codeConfig.fileHeader»
-			package «javaType.packageName»«IF appendSemicolons»;«ENDIF»
-			
-			«FOR importName : sortedImports»
-				import «importName»«IF appendSemicolons»;«ENDIF»
-			«ENDFOR»
-			
-			«typeComment»
-			«FOR annot : classAnnotations»
-				«annot.generate()»
-			«ENDFOR»
-			«internalContents»
-		'''
-	}	
+		classAnnotations.forEach[
+			importType(annotationImport)
+		]
+		super.getContent()
+	}
+	
+	private def getClassAnnotations() {
+		annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
+	}
+	
+	override getInternalContent() '''
+		«typeComment»
+		«FOR annot : classAnnotations»
+			«annot.generate()»
+		«ENDFOR»	
+		«super.getInternalContent»
+	'''
+	
 }
