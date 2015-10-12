@@ -130,11 +130,9 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment2 {
 				generateXtendInferrer = false
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = templates.CodetemplatesGeneratorFragment {
-					suppressRestriction = false
-				}
-			}
+
+			fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
+
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.JFlexGeneratorFragment auto-inject {
 					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
