@@ -11,28 +11,38 @@ import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
 import org.eclipse.xtext.xtext.generator.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
-public class WebProjectConfig extends SubProjectConfig {
+public class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private String assetsPath;
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess assets;
   
   public void setAssets(final String path) {
-    XtextProjectConfig _owner = this.getOwner();
-    XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(path, true);
-    this.assets = _newFileSystemAccess;
+    this.assetsPath = path;
   }
   
   @Override
   public void initialize(final Injector injector) {
     super.initialize(injector);
-    if (this.assets!=null) {
+    if ((this.assetsPath != null)) {
+      XtextProjectConfig _owner = this.getOwner();
+      XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(this.assetsPath, true);
+      this.assets = _newFileSystemAccess;
       this.assets.initialize(injector);
     }
+  }
+  
+  @Pure
+  public String getAssetsPath() {
+    return this.assetsPath;
   }
   
   @Pure

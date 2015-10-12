@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.WizardConfig;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
@@ -35,7 +36,7 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
   }
   
   public void configureXtextProjectConfig(final Binder binder) {
-    AnnotatedBindingBuilder<XtextProjectConfig> _bind = binder.<XtextProjectConfig>bind(XtextProjectConfig.class);
+    AnnotatedBindingBuilder<IXtextProjectConfig> _bind = binder.<IXtextProjectConfig>bind(IXtextProjectConfig.class);
     _bind.toInstance(this.project);
   }
   

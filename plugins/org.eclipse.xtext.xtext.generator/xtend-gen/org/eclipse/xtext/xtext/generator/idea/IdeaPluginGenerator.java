@@ -59,9 +59,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.SubProjectConfig;
+import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginClassNames;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginExtension;
@@ -260,8 +260,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     final Procedure1<JavaFileAccess> _function = new Procedure1<JavaFileAccess>() {
       @Override
       public void apply(final JavaFileAccess it) {
-        XtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
-        SubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
+        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
+        ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
         IXtextGeneratorFileSystemAccess _src = _ideaPlugin.getSrc();
         it.writeTo(_src);
       }
@@ -288,8 +288,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     final Procedure1<TextFileAccess> _function_1 = new Procedure1<TextFileAccess>() {
       @Override
       public void apply(final TextFileAccess it) {
-        XtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
-        SubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
+        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
+        ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
         IXtextGeneratorFileSystemAccess _srcGen = _ideaPlugin.getSrcGen();
         it.writeTo(_srcGen);
       }
@@ -297,21 +297,21 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
     if (this.deployable) {
       final TextFileAccess pluginXml = this.compilePluginXml(grammar);
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      SubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
       IXtextGeneratorFileSystemAccess _metaInf = _ideaPlugin.getMetaInf();
       String _path = pluginXml.getPath();
       boolean _isFile = _metaInf.isFile(_path);
       boolean _not = (!_isFile);
       if (_not) {
-        XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        SubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
         IXtextGeneratorFileSystemAccess _metaInf_1 = _ideaPlugin_1.getMetaInf();
         pluginXml.writeTo(_metaInf_1);
       }
       TextFileAccess _compilePluginGenXml = this.compilePluginGenXml(grammar);
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      SubProjectConfig _ideaPlugin_2 = _projectConfig_2.getIdeaPlugin();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_2 = _projectConfig_2.getIdeaPlugin();
       IXtextGeneratorFileSystemAccess _metaInf_2 = _ideaPlugin_2.getMetaInf();
       _compilePluginGenXml.writeTo(_metaInf_2);
     }

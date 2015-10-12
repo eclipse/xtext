@@ -17,11 +17,11 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -125,13 +125,13 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
       _or = _inheritsXbase;
     }
     if (_or) {
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
       ManifestAccess _manifest = _eclipsePlugin.getManifest();
       boolean _notEquals = (!Objects.equal(_manifest, null));
       if (_notEquals) {
-        XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        BundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
         ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
         Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
         _requiredBundles.add("org.eclipse.xtext.ui");
@@ -178,8 +178,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
     if (!this.generateStub) {
       _and = false;
     } else {
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
       IXtextGeneratorFileSystemAccess _src = _eclipsePlugin_2.getSrc();
       boolean _tripleNotEquals = (_src != null);
       _and = _tripleNotEquals;
@@ -269,8 +269,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_eObjectLabelProviderClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createXtendFile.writeTo(_src);
   }
@@ -331,8 +331,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_descriptionLabelProviderClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createXtendFile.writeTo(_src);
   }
@@ -415,8 +415,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_eObjectLabelProviderClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createJavaFile.writeTo(_src);
   }
@@ -477,8 +477,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_descriptionLabelProviderClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createJavaFile.writeTo(_src);
   }

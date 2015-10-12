@@ -39,9 +39,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
@@ -66,9 +66,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   private CodeConfig codeConfig;
   
   @Inject
-  private XtextProjectConfig projectConfig;
-  
-  @Inject
   private FileAccessFactory fileFactory;
   
   @Inject
@@ -81,7 +78,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   @Override
   protected void doGenerate() {
-    RuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     final IXtextGeneratorFileSystemAccess fsa = _runtime.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
@@ -114,11 +112,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     this.normalizeLineDelimiters(fsa, grammarFileName);
     this.normalizeTokens(fsa, grammarFileName);
     JavaFileAccess _generateXtextParser = this.generateXtextParser();
-    RuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime_1.getSrcGen();
     _generateXtextParser.writeTo(_srcGen);
     JavaFileAccess _generateAntlrTokenFileProvider = this.generateAntlrTokenFileProvider();
-    RuntimeProjectConfig _runtime_2 = this.projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime_2.getSrcGen();
     _generateAntlrTokenFileProvider.writeTo(_srcGen_1);
     this.addBindingsAndImports();
@@ -333,11 +333,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   }
   
   public void addBindingsAndImports() {
-    RuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      RuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
       final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
         @Override

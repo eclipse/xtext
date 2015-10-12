@@ -13,32 +13,34 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
-public class RuntimeProjectConfig extends BundleProjectConfig {
+public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjectConfig {
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private String ecoreModelPath;
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess ecoreModel;
   
   public void setEcoreModel(final String path) {
-    XtextProjectConfig _owner = this.getOwner();
-    XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(path, true);
-    this.ecoreModel = _newFileSystemAccess;
+    this.ecoreModelPath = path;
   }
   
   /**
    * Returns the root-relative path of the folder where the generated .ecore and .genmodel can be found.
    * The path is delimited by and ends with '/'
    */
+  @Override
   public String getEcoreModelFolder() {
     String _xblockexpression = null;
     {
-      String _path = this.ecoreModel.getPath();
       IXtextGeneratorFileSystemAccess _root = this.getRoot();
-      String _path_1 = _root.getPath();
-      String _replace = _path.replace(_path_1, "");
+      String _path = _root.getPath();
+      String _replace = this.ecoreModelPath.replace(_path, "");
       final String ecoreModelFolder = _replace.replace("\\", "/");
       final CharMatcher slashes = CharMatcher.is('/');
       String _trimFrom = slashes.trimFrom(ecoreModelFolder);
@@ -50,9 +52,17 @@ public class RuntimeProjectConfig extends BundleProjectConfig {
   @Override
   public void initialize(final Injector injector) {
     super.initialize(injector);
-    if (this.ecoreModel!=null) {
+    if ((this.ecoreModelPath != null)) {
+      XtextProjectConfig _owner = this.getOwner();
+      XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(this.ecoreModelPath, true);
+      this.ecoreModel = _newFileSystemAccess;
       this.ecoreModel.initialize(injector);
     }
+  }
+  
+  @Pure
+  public String getEcoreModelPath() {
+    return this.ecoreModelPath;
   }
   
   @Pure
