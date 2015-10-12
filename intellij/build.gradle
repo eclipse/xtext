@@ -48,6 +48,7 @@ configure(subprojects - eclipsePluginProjects) {
 		// Eclipse produced. They are immediately available and
 		// contain debug information.
 		compileJava.enabled = false
+		processResources.enabled = false
 
 		task copyFromBin(type: Sync) {
 		    from 'bin'
