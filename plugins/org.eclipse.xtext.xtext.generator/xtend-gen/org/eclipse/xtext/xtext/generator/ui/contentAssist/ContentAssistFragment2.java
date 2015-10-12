@@ -511,11 +511,11 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
     StringConcatenationClient _xblockexpression = null;
     {
       final HashSet<EClass> processedTerminals = CollectionLiterals.<EClass>newHashSet();
-      HashSet<AbstractElement> _newHashSet = CollectionLiterals.<AbstractElement>newHashSet();
-      final Function2<HashSet<AbstractElement>, AbstractElement, HashSet<AbstractElement>> _function = new Function2<HashSet<AbstractElement>, AbstractElement, HashSet<AbstractElement>>() {
+      ArrayList<AbstractElement> _newArrayList = CollectionLiterals.<AbstractElement>newArrayList();
+      final Function2<ArrayList<AbstractElement>, AbstractElement, ArrayList<AbstractElement>> _function = new Function2<ArrayList<AbstractElement>, AbstractElement, ArrayList<AbstractElement>>() {
         @Override
-        public HashSet<AbstractElement> apply(final HashSet<AbstractElement> candidates, final AbstractElement terminal) {
-          HashSet<AbstractElement> _xblockexpression = null;
+        public ArrayList<AbstractElement> apply(final ArrayList<AbstractElement> candidates, final AbstractElement terminal) {
+          ArrayList<AbstractElement> _xblockexpression = null;
           {
             EClass _eClass = terminal.eClass();
             boolean _contains = processedTerminals.contains(_eClass);
@@ -530,7 +530,7 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
           return _xblockexpression;
         }
       };
-      final HashSet<AbstractElement> candidates = IterableExtensions.<AbstractElement, HashSet<AbstractElement>>fold(terminals, _newHashSet, _function);
+      final ArrayList<AbstractElement> candidates = IterableExtensions.<AbstractElement, ArrayList<AbstractElement>>fold(terminals, _newArrayList, _function);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

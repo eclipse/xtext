@@ -150,7 +150,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		val processedNames = newHashSet()
 
 		// determine all assignments within the grammar that are not excluded and not handled yet
-		//  (fold evaluates eager!)
+		//  (fold evaluates eagerly!)
 		val assignments = grammar.containedAssignments().fold(<Assignment>newArrayList()) [ candidates, assignment |
 			val fqFeatureName = assignment.FQFeatureName
 			if (!processedNames.contains(fqFeatureName) && !excludedFqnFeatureNames.contains(fqFeatureName)) {
@@ -222,8 +222,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	private def StringConcatenationClient handleAssignmentOptions(Iterable<AbstractElement> terminals) {
 		val processedTerminals = newHashSet();
 		
-		// for each type of terminal occurring in 'terminals' (fold evaluates eager!) ...
-		val candidates = terminals.fold(<AbstractElement>newHashSet) [ candidates, terminal |
+		// for each type of terminal occurring in 'terminals' (fold evaluates eagerly!) ...
+		val candidates = terminals.fold(<AbstractElement>newArrayList()) [ candidates, terminal |
 			if (!processedTerminals.contains(terminal.eClass)) {
 				processedTerminals += terminal.eClass
 				candidates += terminal
