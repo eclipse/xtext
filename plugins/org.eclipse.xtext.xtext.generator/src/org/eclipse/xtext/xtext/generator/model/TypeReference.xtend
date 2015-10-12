@@ -144,4 +144,12 @@ class TypeReference {
 		return packageName.replace('.', '/') + '/' + simpleNames.head
 	}
 	
+	def String getJavaPath() {
+		path + ".java"
+	}
+	
+	def String getXtendPath() {
+		path + ".xtend"
+	}
+	
 }

@@ -23,6 +23,7 @@ import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter
@@ -82,23 +83,22 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		return firstRule instanceof ParserRule && !GrammarUtil::isDatatypeRule(firstRule as ParserRule)
 	}
 
-	def protected void splitLexerClassFile(IXtextGeneratorFileSystemAccess fsa, String filename) {
-		val content = fsa.readTextFile(filename).toString
+	def protected void splitLexerClassFile(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer) {
+		val content = fsa.readTextFile(lexer.javaPath).toString
 		var AntlrLexerSplitter splitter = new AntlrLexerSplitter(content)
-		fsa.generateFile(filename, splitter.transform)
+		fsa.generateFile(lexer.javaPath, splitter.transform)
 	}
 
-	def protected void splitParserClassFile(IXtextGeneratorFileSystemAccess fsa, String filename) {
-		val content = fsa.readTextFile(filename).toString
+	def protected void splitParserClassFile(IXtextGeneratorFileSystemAccess fsa, TypeReference parser) {
+		val content = fsa.readTextFile(parser.javaPath).toString
 		val splitter = new AntlrParserSplitter(content, getOptions.fieldsPerClass)
 		val extractor = new PartialClassExtractor(splitter.transform, getOptions.methodsPerClass)
-		fsa.generateFile(filename, extractor.transform)
+		fsa.generateFile(parser.javaPath, extractor.transform)
 	}
 
-	def protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, IXtextGeneratorFileSystemAccess fsa, String parserFileName) {
+	def protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, IXtextGeneratorFileSystemAccess fsa, TypeReference parser) {
 		if (containsUnorderedGroup(grammar) || hasParameterizedRules(grammar)) {
-			val javaFile = parserFileName.replaceAll("\\.g$", getParserFileNameSuffix())
-			simplifyUnorderedGroupPredicates(fsa, javaFile)
+			simplifyUnorderedGroupPredicates(fsa, parser)
 		}
 	}
 
@@ -112,53 +112,35 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		return false
 	}
 
-	def protected String getParserFileNameSuffix() {
-		return "Parser.java"
-	}
-
-	def protected void simplifyUnorderedGroupPredicates(IXtextGeneratorFileSystemAccess fsa, String fileName) {
-		val content = fsa.readTextFile(fileName).toString
+	def protected void simplifyUnorderedGroupPredicates(IXtextGeneratorFileSystemAccess fsa, TypeReference parser) {
+		val content = fsa.readTextFile(parser.javaPath).toString
 		var UnorderedGroupsSplitter splitter = new UnorderedGroupsSplitter(content)
 		var String transformed = splitter.transform()
 		var SyntacticPredicateFixup fixup = new SyntacticPredicateFixup(transformed)
 		transformed = fixup.transform()
 		var BacktrackingGuardForUnorderedGroupsRemover remover = new BacktrackingGuardForUnorderedGroupsRemover(transformed)
 		var String newContent = remover.transform()
-		fsa.generateFile(fileName, newContent)
+		fsa.generateFile(parser.javaPath, newContent)
 	}
 
-	def private void suppressWarningsImpl(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		val content = fsa.readTextFile(javaFile).toString
+	def protected void suppressWarnings(IXtextGeneratorFileSystemAccess fsa, TypeReference type) {
+		val content = fsa.readTextFile(type.javaPath).toString
 		val newContent = new SuppressWarningsProcessor().process(content)
-		fsa.generateFile(javaFile, newContent)
+		fsa.generateFile(type.javaPath, newContent)
 	}
 
-	def protected void suppressWarnings(IXtextGeneratorFileSystemAccess fsa, String grammarFileName) {
-		suppressWarnings(fsa, grammarFileName, grammarFileName)
-	}
-
-	def protected void suppressWarnings(IXtextGeneratorFileSystemAccess fsa, String lexerGrammarFileName, String parserGrammarFileName) {
-		suppressWarningsImpl(fsa, lexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()))
-		suppressWarningsImpl(fsa, parserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()))
-	}
-
-	def private void normalizeLineDelimitersImpl(IXtextGeneratorFileSystemAccess fsa, String textFile) {
-		var String content = fsa.readTextFile(textFile).toString
-		content = newLineNormalizer.postProcess(fsa.getURI(textFile), content).toString
+	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, TypeReference type) {
+		var String content = fsa.readTextFile(type.javaPath).toString
+		content = newLineNormalizer.postProcess(fsa.getURI(type.javaPath), content).toString
 		// Antlr tries to outsmart us by using a line length that depends on the system
 		// line delimiter when it splits a very long String (encoded DFA) into a
 		// string concatenation
 		// Here we join these lines again.
 		content = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "")
-		fsa.generateFile(textFile, content)
+		fsa.generateFile(type.javaPath, content)
 	}
 
-	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, String grammarFileName) {
-		normalizeLineDelimiters(fsa, grammarFileName, grammarFileName)
-	}
-
-	def protected void normalizeTokens(IXtextGeneratorFileSystemAccess fsa, String grammarFileName) {
-		val tokenFile = toTokenFileName(grammarFileName)
+	def protected void normalizeTokens(IXtextGeneratorFileSystemAccess fsa, String tokenFile) {
 		var content = fsa.readTextFile(tokenFile).toString
 		content = newLineNormalizer.postProcess(fsa.getURI(tokenFile), content).toString
 		val splitted = Strings.split(content, codeConfig.lineDelimiter)
@@ -167,43 +149,24 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		fsa.generateFile(tokenFile, content)
 	}
 
-	def private String toTokenFileName(String grammarFileName) {
-		return grammarFileName.replaceAll("\\.g$", ".tokens")
-	}
-
-	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, String lexerGrammarFileName, String parserGrammarFileName) {
-		normalizeLineDelimitersImpl(fsa, lexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()))
-		normalizeLineDelimitersImpl(fsa, parserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()))
-	}
-
-	def protected String getLexerFileNameSuffix() {
-		return "Lexer.java"
-	}
-
-	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, String lexerGrammarFileName, String parserGrammarFileName) {
-		val lexerJavaFile = lexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix())
-		val parserJavaFile = parserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix())
-		improveCodeQuality(fsa, lexerJavaFile, parserJavaFile)
+	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer, TypeReference parser) {
+		improveCodeQuality(fsa, lexer, parser)
 		if (getOptions().isClassSplitting()) {
-			splitLexerClassFile(fsa, lexerJavaFile)
-			splitParserClassFile(fsa, parserJavaFile)
+			splitLexerClassFile(fsa, lexer)
+			splitParserClassFile(fsa, parser)
 		}
 	}
 
-	def protected improveCodeQuality(IXtextGeneratorFileSystemAccess fsa, String lexerJavaFile, String parserJavaFile) {
-		var lexerContent = fsa.readTextFile(lexerJavaFile).toString
+	def protected improveCodeQuality(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer, TypeReference parser) {
+		var lexerContent = fsa.readTextFile(lexer.javaPath).toString
 		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, options)
-		fsa.generateFile(lexerJavaFile, lexerContent)
+		fsa.generateFile(lexer.javaPath, lexerContent)
 
-		var parserContent = fsa.readTextFile(parserJavaFile).toString
+		var parserContent = fsa.readTextFile(parser.javaPath).toString
 		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, options)
-		fsa.generateFile(parserJavaFile, parserContent)
-	}
-
-	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, String grammarFileName) {
-		splitParserAndLexerIfEnabled(fsa, grammarFileName, grammarFileName)
+		fsa.generateFile(parser.javaPath, parserContent)
 	}
 
 	def protected boolean containsUnorderedGroup(Grammar grammar) {

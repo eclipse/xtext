@@ -40,23 +40,9 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		naming
 	}
 	
-	override protected compileOptions(Grammar it, AntlrOptions options) '''
-
-		options {
-			superClass=AbstractPsiAntlrParser;
-			«IF options.backtrack || options.memoize || options.k >= 0»
-				«IF options.backtrack»
-					backtrack=true;
-				«ENDIF»
-				«IF options.memoize»
-					memoize=true;
-				«ENDIF»
-				«IF options.k >= 0»
-					memoize=«options.k»;
-				«ENDIF»
-			«ENDIF»
-		}
-	'''
+	override protected getInternalParserSuperClass() {
+		"AbstractPsiAntlrParser"
+	}
 	
 	override protected compileParserImports(Grammar it, AntlrOptions options) '''
 
