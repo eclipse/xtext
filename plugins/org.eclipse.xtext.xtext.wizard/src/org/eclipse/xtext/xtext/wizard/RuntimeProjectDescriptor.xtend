@@ -302,9 +302,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}
 							
 							// provides a preference page for template proposals
-							fragment = adapter.FragmentAdapter {
-								fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
-							}
+							fragment = ui.templates.CodetemplatesGeneratorFragment2 auto-inject {}
 							
 							// rename refactoring
 							fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {}
