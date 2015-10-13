@@ -67,8 +67,27 @@ abstract class AbstractAntlrGrammarGenerator {
 		«compileRules(options)»
 	'''
 	
-	protected def compileOptions(Grammar it, AntlrOptions options) {
-		''
+	protected def compileOptions(Grammar it, AntlrOptions options) '''
+		options {
+			«IF internalParserSuperClass != null»
+				superClass=«internalParserSuperClass»;
+			«ENDIF»
+			«IF options.backtrack || options.memoize || options.k >= 0»
+				«IF options.backtrack»
+					backtrack=true;
+				«ENDIF»
+				«IF options.memoize»
+					memoize=true;
+				«ENDIF»
+				«IF options.k >= 0»
+					memoize=«options.k»;
+				«ENDIF»
+			«ENDIF»
+		}
+	'''
+	
+	protected def String getInternalParserSuperClass() {
+		null
 	}
 	
 	protected def compileTokens(Grammar it, AntlrOptions options) {
@@ -217,9 +236,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	'''
 	
 	protected dispatch def String ebnf2(Assignment it, AntlrOptions options, boolean supportActions) '''
-		(
-			«terminal.assignmentEbnf(it, options, supportActions)»
-		)
+		«terminal.assignmentEbnf(it, options, supportActions)»
 	'''
 	
 	protected dispatch def String ebnf2(Action it, AntlrOptions options, boolean supportActions) {
@@ -280,9 +297,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def String assignmentEbnf(Alternatives it, Assignment assignment, AntlrOptions options, boolean supportActions) '''
-		(
-			«FOR element:elements SEPARATOR '\n    |'»«element.assignmentEbnf(assignment, options, supportActions)»«ENDFOR»
-		)
+		«FOR element:elements SEPARATOR '\n    |'»«element.assignmentEbnf(assignment, options, supportActions)»«ENDFOR»
 	'''
 	
 	protected dispatch def String assignmentEbnf(RuleCall it, Assignment assignment, AntlrOptions options, boolean supportActions) {
@@ -303,5 +318,16 @@ abstract class AbstractAntlrGrammarGenerator {
 	protected dispatch def String assignmentEbnf(AbstractElement it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		ebnf(options, supportActions)
 	}
-
+	
+	def dispatch mustBeParenthesized(AbstractElement it) {
+		predicated() || firstSetPredicated
+	}
+	
+	def dispatch mustBeParenthesized(Group it) {
+		predicated() || firstSetPredicated || cardinality != null
+	}
+	
+	def dispatch mustBeParenthesized(Alternatives it) {
+		predicated() || firstSetPredicated || cardinality != null
+	}
 }

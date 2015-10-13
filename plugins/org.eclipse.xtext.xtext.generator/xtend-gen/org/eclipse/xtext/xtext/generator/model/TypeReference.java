@@ -252,6 +252,16 @@ public class TypeReference {
     return (_plus + _head);
   }
   
+  public String getJavaPath() {
+    String _path = this.getPath();
+    return (_path + ".java");
+  }
+  
+  public String getXtendPath() {
+    String _path = this.getPath();
+    return (_path + ".xtend");
+  }
+  
   @Pure
   public String getPackageName() {
     return this.packageName;

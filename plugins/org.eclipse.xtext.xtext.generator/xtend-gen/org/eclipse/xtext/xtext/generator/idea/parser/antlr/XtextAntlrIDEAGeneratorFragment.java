@@ -64,10 +64,26 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
     String[] _antlrParams = this.getAntlrParams();
     _antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, _antlrParams);
     Grammar _grammar_2 = this.getGrammar();
-    this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_2, fsa, grammarFileName);
-    this.splitParserAndLexerIfEnabled(fsa, grammarFileName);
-    this.suppressWarnings(fsa, grammarFileName);
-    this.normalizeLineDelimiters(fsa, grammarFileName);
-    this.normalizeTokens(fsa, grammarFileName);
+    Grammar _grammar_3 = this.getGrammar();
+    TypeReference _internalParserClass = this._psiGrammarNaming.getInternalParserClass(_grammar_3);
+    this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_2, fsa, _internalParserClass);
+    Grammar _grammar_4 = this.getGrammar();
+    TypeReference _internalParserClass_1 = this._psiGrammarNaming.getInternalParserClass(_grammar_4);
+    Grammar _grammar_5 = this.getGrammar();
+    TypeReference _lexerClass = this._psiGrammarNaming.getLexerClass(_grammar_5);
+    this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
+    Grammar _grammar_6 = this.getGrammar();
+    String _tokenFileName = this._psiGrammarNaming.getTokenFileName(_grammar_6);
+    this.normalizeTokens(fsa, _tokenFileName);
+    Grammar _grammar_7 = this.getGrammar();
+    TypeReference _internalParserClass_2 = this._psiGrammarNaming.getInternalParserClass(_grammar_7);
+    Grammar _grammar_8 = this.getGrammar();
+    TypeReference _lexerClass_1 = this._psiGrammarNaming.getLexerClass(_grammar_8);
+    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
+    Grammar _grammar_9 = this.getGrammar();
+    TypeReference _internalParserClass_3 = this._psiGrammarNaming.getInternalParserClass(_grammar_9);
+    Grammar _grammar_10 = this.getGrammar();
+    TypeReference _lexerClass_2 = this._psiGrammarNaming.getLexerClass(_grammar_10);
+    this.normalizeLineDelimiters(fsa, _internalParserClass_3, _lexerClass_2);
   }
 }

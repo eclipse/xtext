@@ -49,13 +49,14 @@ public class GrammarNaming {
   }
   
   public TypeReference getLexerClass(final Grammar it) {
-    String _internalParserPackage = this.getInternalParserPackage(it);
+    TypeReference _grammarClass = this.getGrammarClass(it);
+    String _packageName = _grammarClass.getPackageName();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Internal");
-    String _simpleName = GrammarUtil.getSimpleName(it);
+    TypeReference _grammarClass_1 = this.getGrammarClass(it);
+    String _simpleName = _grammarClass_1.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append("Lexer");
-    return new TypeReference(_internalParserPackage, _builder.toString());
+    return new TypeReference(_packageName, _builder.toString());
   }
   
   public TypeReference getParserClass(final Grammar it) {
@@ -68,13 +69,14 @@ public class GrammarNaming {
   }
   
   public TypeReference getInternalParserClass(final Grammar it) {
-    String _internalParserPackage = this.getInternalParserPackage(it);
+    TypeReference _grammarClass = this.getGrammarClass(it);
+    String _packageName = _grammarClass.getPackageName();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Internal");
-    String _simpleName = GrammarUtil.getSimpleName(it);
+    TypeReference _grammarClass_1 = this.getGrammarClass(it);
+    String _simpleName = _grammarClass_1.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append("Parser");
-    return new TypeReference(_internalParserPackage, _builder.toString());
+    return new TypeReference(_packageName, _builder.toString());
   }
   
   public TypeReference getContentAssistParserClass(final Grammar it) {
@@ -112,11 +114,9 @@ public class GrammarNaming {
   }
   
   public String getTokenFileName(final Grammar it) {
-    String _internalParserPackage = this.getInternalParserPackage(it);
-    String _replace = _internalParserPackage.replace(".", "/");
-    String _plus = (_replace + "/Internal");
-    String _simpleName = GrammarUtil.getSimpleName(it);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + ".tokens");
+    TypeReference _grammarClass = this.getGrammarClass(it);
+    String _name = _grammarClass.getName();
+    String _replace = _name.replace(".", "/");
+    return (_replace + ".tokens");
   }
 }

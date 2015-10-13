@@ -755,50 +755,6 @@ public class GrammarAccessExtensions {
     return _and;
   }
   
-  protected boolean _mustBeParenthesized(final AbstractElement it) {
-    return true;
-  }
-  
-  protected boolean _mustBeParenthesized(final Keyword it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
-  }
-  
-  protected boolean _mustBeParenthesized(final RuleCall it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
-  }
-  
   protected boolean _predicated(final AbstractElement it) {
     return it.isPredicated();
   }
@@ -1028,19 +984,6 @@ public class GrammarAccessExtensions {
       return _grammarElementAccess((AbstractRule)it);
     } else if (it != null) {
       return _grammarElementAccess(it);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
-    }
-  }
-  
-  public boolean mustBeParenthesized(final AbstractElement it) {
-    if (it instanceof Keyword) {
-      return _mustBeParenthesized((Keyword)it);
-    } else if (it instanceof RuleCall) {
-      return _mustBeParenthesized((RuleCall)it);
-    } else if (it != null) {
-      return _mustBeParenthesized(it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());
