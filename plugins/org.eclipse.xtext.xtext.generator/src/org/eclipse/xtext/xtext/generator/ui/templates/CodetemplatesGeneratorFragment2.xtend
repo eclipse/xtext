@@ -56,11 +56,11 @@ class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		new GuiceModuleAccess.BindingFactory()
 				.addTypeToProviderInstance(
 					"org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration".typeRef,
-					'''org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()''')
+					'''«"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator".typeRef».getTemplatesLanguageConfigurationProvider()''')
 				
 				.addTypeToProviderInstance(
 					"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry".typeRef,
-					'''org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry()''')
+					'''«"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator".typeRef».getLanguageRegistry()''')
 				
 				.addTypeToTypeEagerSingleton(
 					"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar".typeRef,
@@ -82,14 +82,14 @@ class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		
 		if (projectConfig.genericIde?.srcGen != null) {
 			fileAccessFactory.createGeneratedJavaFile(grammar.partialContentAssistParserClass) => [
-				content = genJavaProposalProvider
+				content = genPartialContentAssistParser
 				writeTo(projectConfig.genericIde.srcGen)
 			]
 		}
 	}
 	
-	private def StringConcatenationClient getGenJavaProposalProvider() '''
-		public class «grammar.partialContentAssistParserClass.simpleName» extends «grammar.contentAssistParserClass.simpleName» implements «
+	private def StringConcatenationClient getGenPartialContentAssistParser() '''
+		public class «grammar.partialContentAssistParserClass.simpleName» extends «grammar.contentAssistParserClass» implements «
 				"org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser".typeRef()» {
 		
 			private «AbstractRule» rule;
