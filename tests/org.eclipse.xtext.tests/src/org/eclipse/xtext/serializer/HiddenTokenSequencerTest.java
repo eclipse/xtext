@@ -22,6 +22,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
@@ -92,7 +93,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
-		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
+		IContext context = nmSequencer.findContexts(model, true, null).iterator().next();
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
 		ISemanticSequencer semanticSequencer = semanticSequencerProvider.get();
 		ISyntacticSequencer syntacticSequencer = syntacticSequencerProvider.get();
