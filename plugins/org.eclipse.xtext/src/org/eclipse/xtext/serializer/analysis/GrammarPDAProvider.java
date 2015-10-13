@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
@@ -16,6 +15,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.CfgAdapter;
+import org.eclipse.xtext.serializer.analysis.SerializationContext.RuleContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAElementFactory;
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl;
 import org.eclipse.xtext.util.formallang.Pda;
@@ -24,7 +24,6 @@ import org.eclipse.xtext.util.formallang.Production;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -67,7 +66,8 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 
 	}
 
-	protected Map<ParserRule, Pda<ISerState, RuleCall>> cache = Maps.newHashMap();
+	@Inject
+	protected SerializerPDAElementFactory factory;
 
 	@Inject
 	protected PdaUtil pdaUtil;
@@ -76,30 +76,24 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 		Preconditions.checkArgument(isValidRule(entryRule));
 		SerializerParserRuleCfg cfg = new SerializerParserRuleCfg(grammar, entryRule);
 		SerializerParserRuleFollowerFunction ff = new SerializerParserRuleFollowerFunction(cfg);
-		Pda<ISerState, RuleCall> pda = pdaUtil.create(cfg, ff, new SerializerPDAElementFactory());
-		//		return pdaUtil.filterOrphans(pda, new SerializerPDACloneFactory());
+		SerializerPDA pda = pdaUtil.create(cfg, ff, factory);
 		return pda;
 	}
 
 	@Override
-	public Pda<ISerState, RuleCall> getGrammarPDA(Grammar grammar, ParserRule entryRule) {
-		Pda<ISerState, RuleCall> result = cache.get(entryRule);
-		if (result == null)
-			cache.put(entryRule, result = createPDA(grammar, entryRule));
+	public Map<IContext, Pda<ISerState, RuleCall>> getGrammarPDAs(Grammar grammar) {
+		Map<IContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
+		for (ParserRule rule : GrammarUtil.allParserRules(grammar))
+			if (isValidRule(rule)) {
+				IContext context = new RuleContext(null, rule);
+				Pda<ISerState, RuleCall> pda = createPDA(grammar, rule);
+				result.put(context, pda);
+			}
 		return result;
 	}
 
 	protected boolean isValidRule(ParserRule rule) {
 		return GrammarUtil.isEObjectRule(rule) && !rule.isFragment();
-	}
-
-	@Override
-	public Set<ParserRule> getAllRules(Grammar grammar) {
-		Set<ParserRule> result = Sets.newLinkedHashSet();
-		for (ParserRule rule : GrammarUtil.allParserRules(grammar))
-			if (isValidRule(rule))
-				result.add(rule);
-		return result;
 	}
 
 }

@@ -19,6 +19,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.util.Strings;
 
 public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
@@ -201,10 +202,10 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		// not relevant
 	}
 
-	public TextRegionAccessBuildingSequencer withRoot(EObject ctx, EObject root) {
+	public TextRegionAccessBuildingSequencer withRoot(IContext ctx, EObject root) {
 		this.regionAccess = new StringBasedRegionAccess((XtextResource) root.eResource());
 		this.last = createHiddenRegion();
-		this.regionAccess.setRootEObject(enterEObject(ctx, root));
+		this.regionAccess.setRootEObject(enterEObject(ctx.getActionOrRule(), root));
 		return this;
 	}
 

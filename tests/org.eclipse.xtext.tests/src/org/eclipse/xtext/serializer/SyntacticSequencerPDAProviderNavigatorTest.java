@@ -7,15 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
@@ -51,10 +53,21 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		//		SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
 		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 
-		AbstractRule rule = name == null ? grammar.getRules().get(0) : GrammarUtil.findRuleForName(grammar, name);
-		EClass type = (EClass) (typeName == null ? rule.getType().getClassifier() : grammar.getMetamodelDeclarations()
-				.get(0).getEPackage().getEClassifier(typeName));
-		return get(ISyntacticSequencerPDAProvider.class).getPDA(rule, type);
+		ISyntacticSequencerPDAProvider pdaProvider = get(ISyntacticSequencerPDAProvider.class);
+		Map<IContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		for (Entry<IContext, ISynAbsorberState> s : pdas.entrySet()) {
+			IContext context = s.getKey();
+			if (context.getAssignedAction() != null)
+				continue;
+			ISynAbsorberState pda = s.getValue();
+			ParserRule rule = context.getParserRule();
+			EClass type = context.getType();
+			boolean nameMatches = rule == null || name == null || rule.getName().equals(name);
+			boolean typeMatches = type == null || typeName == null || typeName.equals(type.getName());
+			if (nameMatches && typeMatches)
+				return pda;
+		}
+		throw new IllegalStateException();
 	}
 
 	protected ISynTransition findTransition(ISynAbsorberState start, String fromAbsorber, String toAbsorber) {
@@ -102,7 +115,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		return result;
 	}
 
-	@Test public void testSimple() throws Exception {
+	@Test
+	public void testSimple() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID 'kw1' a2=ID;");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
@@ -111,7 +125,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("['kw1']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testTerminal() throws Exception {
+	@Test
+	public void testTerminal() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID FOO a2=ID; terminal FOO: '$';");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertTrue(trans.involvesUnassignedTokenRuleCalls());
@@ -120,7 +135,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("[FOO]", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testDatatype() throws Exception {
+	@Test
+	public void testDatatype() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID Foo a2=ID; Foo: ID;");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertTrue(trans.involvesUnassignedTokenRuleCalls());
@@ -129,7 +145,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("[Foo]", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testAmbiguousOptional() throws Exception {
+	@Test
+	public void testAmbiguousOptional() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID 'kw1' 'kw2'? a2=ID;");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
@@ -138,7 +155,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("['kw1']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testAmbiguousMany() throws Exception {
+	@Test
+	public void testAmbiguousMany() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID 'kw1' 'kw2'+ a2=ID;");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
@@ -147,7 +165,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("['kw1', 'kw2'+]", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testAmbiguousManyOptional() throws Exception {
+	@Test
+	public void testAmbiguousManyOptional() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID 'kw1' 'kw2'* a2=ID;");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
@@ -156,7 +175,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("['kw1']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testAmbiguousAlternative() throws Exception {
+	@Test
+	public void testAmbiguousAlternative() throws Exception {
 		ISynAbsorberState start = getParserRule("Rule: a1=ID ('kw1' 'kw2' | 'kw3') a2=ID;");
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
@@ -165,7 +185,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals("['kw3']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
-	@Test public void testAmbiguousRecursion() throws Exception {
+	@Test
+	public void testAmbiguousRecursion() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*;\n");
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");

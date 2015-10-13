@@ -373,7 +373,7 @@ public class NfaUtil {
 		for (S f : followers2) {
 			Object key2 = keyFunc.apply(f);
 			S key1s = index.get(key2);
-			if (!equalsIgnoreOrder(nfa1, nfa2, key1s, f, keyFunc, visited))
+			if (key1s == null || !equalsIgnoreOrder(nfa1, nfa2, key1s, f, keyFunc, visited))
 				return false;
 		}
 		return true;

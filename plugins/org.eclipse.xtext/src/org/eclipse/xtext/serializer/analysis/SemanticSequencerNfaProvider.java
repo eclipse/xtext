@@ -13,10 +13,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -29,8 +29,6 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
 import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaFactory;
 import org.eclipse.xtext.util.formallang.NfaGraphFormatter;
@@ -52,21 +50,14 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	protected static class SemNfa implements Nfa<ISemState> {
 
+		protected int hashCode = -1;
 		protected final ISemState start;
 		protected final ISemState stop;
-		protected int hashCode = -1;
 
 		public SemNfa(ISemState starts, ISemState stops) {
 			super();
 			this.start = starts;
 			this.stop = stops;
-		}
-
-		@Override
-		public int hashCode() {
-			if (hashCode == -1)
-				hashCode = new NfaUtil().hashCodeIgnoreOrder(this, GET_ASSIGNED_GRAMMAR_ELEMENT);
-			return hashCode;
 		}
 
 		@Override
@@ -94,6 +85,13 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		}
 
 		@Override
+		public int hashCode() {
+			if (hashCode == -1)
+				hashCode = new NfaUtil().hashCodeIgnoreOrder(this, GET_ASSIGNED_GRAMMAR_ELEMENT);
+			return hashCode;
+		}
+
+		@Override
 		public String toString() {
 			return new NfaGraphFormatter().format(this);
 		}
@@ -104,13 +102,13 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 		protected BitSet allFollowerFeatures;
 		protected AbstractElement assignedGrammarElement;
+		protected Boolean booleanAssignment;
 		protected List<AbstractElement> contentValidationNeeded;
 		protected EStructuralFeature feature;
 		protected int featureID = -2;
 		protected List<ISemState> followers;
 		protected int orderID = 0;
 		protected EClass type;
-		protected Boolean booleanAssignment;
 
 		public SemState(EClass type, AbstractElement assignedGrammarElement) {
 			super();
@@ -160,19 +158,19 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		}
 
 		@Override
-		public String toString() {
-			if (assignedGrammarElement == null)
-				return "(null)";
-			return new GrammarElementTitleSwitch().showQualified().showAssignments().apply(assignedGrammarElement);
-		}
-
-		@Override
 		public boolean isBooleanAssignment() {
 			if (booleanAssignment == null) {
 				Assignment assignment = GrammarUtil.containingAssignment(assignedGrammarElement);
 				booleanAssignment = assignment != null && GrammarUtil.isBooleanAssignment(assignment);
 			}
 			return booleanAssignment;
+		}
+
+		@Override
+		public String toString() {
+			if (assignedGrammarElement == null)
+				return "(null)";
+			return new GrammarElementTitleSwitch().showQualified().showAssignments().apply(assignedGrammarElement);
 		}
 	}
 
@@ -197,10 +195,13 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	}
 
+	protected Map<Grammar, Map<IContext, Nfa<ISemState>>> cache = Maps.newHashMap();
+
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
-	protected Map<Pair<EObject, EClass>, Nfa<ISemState>> resultCache = Maps.newHashMap();
+	@Inject
+	private NfaUtil util;
 
 	protected boolean addAll(BitSet to, BitSet bits) {
 		BitSet cpy = new BitSet();
@@ -212,25 +213,36 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		return true;
 	}
 
-	@Override
-	public Nfa<ISemState> getNFA(EObject context, EClass type) {
-		Pair<EObject, EClass> key = Tuples.create(context, type);
-		Nfa<ISemState> nfa = resultCache.get(key);
-		if (nfa != null)
-			return nfa;
-		NfaUtil util = new NfaUtil();
-		SynAbsorberNfaAdapter synNfa = new SynAbsorberNfaAdapter(pdaProvider.getPDA(context, type));
+	protected SemNfa createNfa(Grammar grammar, ISynAbsorberState synState, IContext context) {
+		EClass type = context.getType();
+		SynAbsorberNfaAdapter synNfa = new SynAbsorberNfaAdapter(synState);
 		//		System.out.println(new NfaFormatter().format(synNfa));
 		Map<ISynAbsorberState, Integer> distanceMap = util.distanceToFinalStateMap(synNfa);
-		nfa = util.create(util.sort(synNfa, distanceMap), new SemStateFactory());
+		SemNfa nfa = util.create(util.sort(synNfa, distanceMap), new SemStateFactory());
 		//		util.sortInplace(nfa, distanceMap);
 		if (type != null)
 			initContentValidationNeeded(type, nfa);
 		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState> newHashSet());
-		initOrderIDs(GrammarUtil.getGrammar(context), nfa);
+		initOrderIDs(grammar, nfa);
 		//		System.out.println(new NfaFormatter().format(nfa));
-		resultCache.put(key, nfa);
 		return nfa;
+	}
+
+	@Override
+	public Map<IContext, Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar) {
+		Map<IContext, Nfa<ISemState>> result = cache.get(grammar);
+		if (result != null)
+			return result;
+		result = Maps.newLinkedHashMap();
+		cache.put(grammar, result);
+		Map<IContext, ISynAbsorberState> PDAs = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		for (Entry<IContext, ISynAbsorberState> e : PDAs.entrySet()) {
+			ISynAbsorberState synState = e.getValue();
+			IContext context = e.getKey();
+			SemNfa nfa = createNfa(grammar, synState, context);
+			result.put(context, nfa);
+		}
+		return result;
 	}
 
 	protected void initContentValidationNeeded(EClass clazz, Nfa<ISemState> nfa) {
@@ -291,4 +303,5 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		}
 		return false;
 	}
+
 }

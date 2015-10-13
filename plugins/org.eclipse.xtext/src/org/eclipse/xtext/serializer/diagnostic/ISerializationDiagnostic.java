@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
@@ -34,7 +34,7 @@ public interface ISerializationDiagnostic {
 	public class ExceptionDiagnostic implements ISerializationDiagnostic {
 
 		protected Throwable exception;
-		
+
 		protected Grammar grammar;
 
 		public ExceptionDiagnostic(Grammar grammar, Throwable exception) {
@@ -63,10 +63,11 @@ public interface ISerializationDiagnostic {
 		}
 
 		@Override
+		@Deprecated
 		public EObject getContext() {
 			return null;
 		}
-		
+
 		@Override
 		public Grammar getGrammar() {
 			return grammar;
@@ -79,6 +80,11 @@ public interface ISerializationDiagnostic {
 
 		@Override
 		public EStructuralFeature getEStructuralFeature() {
+			return null;
+		}
+
+		@Override
+		public IContext getIContext() {
 			return null;
 		}
 	}
@@ -98,8 +104,9 @@ public interface ISerializationDiagnostic {
 				if (eObject.eResource() != null && eObject.eResource().getURI() != null)
 					result.add("URI: " + eObject.eResource().getURI());
 			}
-			if (diagnostic.getContext() != null)
-				result.add("Context: " + new Context2NameFunction().getContextName(diagnostic.getGrammar(), diagnostic.getContext()));
+			IContext context = diagnostic.getIContext();
+			if (context != null)
+				result.add("Context: " + context);
 			if (diagnostic.getEStructuralFeature() != null) {
 				EStructuralFeature feature = diagnostic.getEStructuralFeature();
 				EClass eClass = feature.getEContainingClass();
@@ -148,8 +155,14 @@ public interface ISerializationDiagnostic {
 
 	EObject getSemanticObject();
 
+	/**
+	 * @deprecated use {@link #getIContext()}
+	 */
+	@Deprecated
 	EObject getContext();
-	
+
+	IContext getIContext();
+
 	Grammar getGrammar();
 
 	String getId();

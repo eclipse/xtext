@@ -21,6 +21,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.ExceptionDiagnostic;
 
@@ -142,9 +143,19 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		}
 	}
 
+	/**
+	 * @deprecated use {@link #init(IContext)}
+	 */
+	@Deprecated
 	public void init(EObject context) {
 		if (context instanceof ParserRule && out instanceof ITokenStreamExtension) {
 			((ITokenStreamExtension) out).init((ParserRule) context);
+		}
+	}
+	
+	public void init(IContext context) {
+		if (context instanceof ParserRule && out instanceof ITokenStreamExtension) {
+			((ITokenStreamExtension) out).init(context.getParserRule());
 		}
 	}
 

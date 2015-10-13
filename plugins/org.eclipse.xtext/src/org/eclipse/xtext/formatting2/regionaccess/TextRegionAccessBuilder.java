@@ -12,6 +12,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionA
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegionAccessBuildingSequencer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
+import org.eclipse.xtext.serializer.analysis.IContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -27,7 +28,7 @@ public class TextRegionAccessBuilder {
 		return this;
 	}
 
-	public ISequenceAcceptor forSequence(EObject ctx, EObject root) {
+	public ISequenceAcceptor forSequence(IContext ctx, EObject root) {
 		return this.fromSequencer = new TextRegionAccessBuildingSequencer().withRoot(ctx, root);
 	}
 
