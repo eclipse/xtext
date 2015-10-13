@@ -38,14 +38,10 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     }
   }
   
-  public CharSequence setTypeComment(final StringConcatenationClient javaContent) {
-    CharSequence _xblockexpression = null;
-    {
-      final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
-      javaStringConcat.append(javaContent);
-      _xblockexpression = this.typeComment = javaStringConcat;
-    }
-    return _xblockexpression;
+  public void setTypeComment(final StringConcatenationClient javaContent) {
+    final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
+    javaStringConcat.append(javaContent);
+    this.typeComment = javaStringConcat;
   }
   
   /**

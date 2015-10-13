@@ -27,7 +27,7 @@ class GeneratedJavaFileAccess extends JavaFileAccess {
 			throw new IllegalArgumentException("It's always generated");
 	}
 	
-	def setTypeComment(StringConcatenationClient javaContent) {
+	def void setTypeComment(StringConcatenationClient javaContent) {
 		val javaStringConcat = new JavaTypeAwareStringConcatenation(this)
 		javaStringConcat.append(javaContent)
 		this.typeComment = javaStringConcat

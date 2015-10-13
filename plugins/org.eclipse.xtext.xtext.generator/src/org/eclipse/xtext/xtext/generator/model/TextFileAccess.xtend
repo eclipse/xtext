@@ -19,7 +19,7 @@ class TextFileAccess {
 
 	protected CharSequence internalContents
 	
-	def setContent(StringConcatenationClient content) {
+	def void setContent(StringConcatenationClient content) {
 		internalContents = new StringConcatenation() => [
 			append(content)
 		]

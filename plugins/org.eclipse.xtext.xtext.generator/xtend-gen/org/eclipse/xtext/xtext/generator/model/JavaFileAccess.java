@@ -196,14 +196,10 @@ public class JavaFileAccess extends TextFileAccess {
   }
   
   @Override
-  public CharSequence setContent(final StringConcatenationClient javaContent) {
-    CharSequence _xblockexpression = null;
-    {
-      final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
-      javaStringConcat.append(javaContent);
-      _xblockexpression = this.internalContents = javaStringConcat;
-    }
-    return _xblockexpression;
+  public void setContent(final StringConcatenationClient javaContent) {
+    final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
+    javaStringConcat.append(javaContent);
+    this.internalContents = javaStringConcat;
   }
   
   protected boolean appendSemicolons() {
