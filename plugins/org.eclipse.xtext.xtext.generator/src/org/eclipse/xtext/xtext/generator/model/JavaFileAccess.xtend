@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
-import com.google.common.collect.Lists
-import java.util.Collections
 import java.util.Map
 import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.emf.ecore.EClass
@@ -105,19 +103,19 @@ class JavaFileAccess extends TextFileAccess {
 		true
 	}
 	
-	override getContent() {
-		val sortedImports = Lists.newArrayList(imports.values)
-		Collections.sort(sortedImports)
-		return '''
-			«codeConfig.fileHeader»
-			package «javaType.packageName»«IF appendSemicolons»;«ENDIF»
-			
-			«FOR importName : sortedImports»
-				import «importName»«IF appendSemicolons»;«ENDIF»
-			«ENDFOR»
-			
-			«internalContents»
-		'''
+	override getContent() '''
+		«codeConfig.fileHeader»
+		package «javaType.packageName»«IF appendSemicolons»;«ENDIF»
+
+		«FOR importName : imports.values.toSet.sort»
+			import «importName»«IF appendSemicolons»;«ENDIF»
+		«ENDFOR»
+		
+		«getInternalContent»
+	'''
+	
+	protected def getInternalContent() {
+		internalContents
 	}
 	
 	private static class JavaTypeAwareStringConcatenation extends StringConcatenation {

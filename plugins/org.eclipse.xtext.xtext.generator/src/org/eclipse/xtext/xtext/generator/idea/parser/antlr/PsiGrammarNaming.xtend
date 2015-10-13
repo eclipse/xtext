@@ -20,9 +20,11 @@ class PsiGrammarNaming extends GrammarNaming {
 	@Inject
 	extension XtextGeneratorNaming
 	
-	override String getParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr.internal'''
+	override String getParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr'''
+	
+	override String getInternalParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr.internal'''
 
 	override getGrammarClass(Grammar it) {
-		new TypeReference(parserPackage, '''PsiInternal«simpleName»''')
+		new TypeReference(internalParserPackage, '''PsiInternal«simpleName»''')
 	}
 }
