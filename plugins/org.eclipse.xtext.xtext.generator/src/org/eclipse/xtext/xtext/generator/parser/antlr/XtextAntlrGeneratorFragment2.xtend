@@ -74,10 +74,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
 		splitParserAndLexerIfEnabled(fsa, grammar.lexerClass, grammar.internalParserClass)
 		normalizeTokens(fsa, grammar.tokenFileName)
-		#[grammar.internalParserClass, grammar.lexerClass].forEach[
-			suppressWarnings(fsa, it)
-			normalizeLineDelimiters(fsa, it)
-		]
+		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
+		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
 	}
 	
 	protected def generateDebugGrammar() {

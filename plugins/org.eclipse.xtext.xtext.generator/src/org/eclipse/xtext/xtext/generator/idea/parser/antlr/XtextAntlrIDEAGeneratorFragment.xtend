@@ -33,10 +33,8 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
 		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
-		#[grammar.internalParserClass, grammar.lexerClass].forEach[
-			suppressWarnings(fsa, it)
-			normalizeLineDelimiters(fsa, it)
-		]
 		normalizeTokens(fsa, grammar.tokenFileName)
+		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
+		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
 	}
 }
