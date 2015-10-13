@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -34,7 +33,6 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -103,17 +101,14 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	protected static class SynAbsorberState extends SynState implements ISynAbsorberState {
 
-		protected EObject context;
-
 		protected EClass eClass;
 
 		protected Map<AbstractElement, ISynTransition> outTransitionsByElement = Maps.newHashMap();
 
 		protected List<ISynAbsorberState> outAbsorber = Lists.newArrayList();
 
-		public SynAbsorberState(SynStateType type, AbstractElement element, EObject context, EClass eClass) {
+		public SynAbsorberState(SynStateType type, AbstractElement element, EClass eClass) {
 			super(type, element);
-			this.context = context;
 			this.eClass = eClass;
 		}
 
@@ -133,11 +128,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 				case RULECALL_EXIT:
 			}
 
-		}
-
-		@Override
-		public EObject getContext() {
-			return context;
 		}
 
 		@Override
@@ -191,11 +181,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		public SynNavigable(SynStateType type, AbstractElement element, ISynAbsorberState target) {
 			super(type, element);
 			this.target = target;
-		}
-
-		@Override
-		public EObject getContext() {
-			return target.getContext();
 		}
 
 		@Override
@@ -511,7 +496,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	}
 
-	protected Map<Pair<EObject, EClass>, ISynAbsorberState> cache = Maps.newHashMap();
+	protected Map<Grammar, Map<IContext, ISynAbsorberState>> cache = Maps.newHashMap();
 
 	//	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
 	@Inject
@@ -544,19 +529,19 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	protected SynAbsorberState createAbsorberState(ISerState state, Map<ISerState, SynAbsorberState> absorbers,
-			Map<SynAbsorberState, Map<ISerState, SynState>> emitters, EObject context, EClass eClass) {
+			Map<SynAbsorberState, Map<ISerState, SynState>> emitters, EClass eClass) {
 		SynAbsorberState result = absorbers.get(state);
 		if (result != null)
 			return result;
 		if (state.getType() == SerStateType.STOP) {
-			absorbers.put(state, result = createAbsorberState(SynStateType.STOP, null, context, eClass));
+			absorbers.put(state, result = createAbsorberState(SynStateType.STOP, null, eClass));
 			return result;
 		}
-		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement(), context, eClass));
+		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement(), eClass));
 		Set<ISerState> followers = Sets.newHashSet();
 		collectFollowingAbsorberStates(state, false, Sets.<ISerState> newHashSet(), followers);
 		for (ISerState follower : followers) {
-			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters, context, eClass);
+			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters, eClass);
 			SynTransition transition = createTransition(result, target);
 			Map<ISerState, SynState> emitter = emitters.get(target);
 			if (emitter == null)
@@ -567,9 +552,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return result;
 	}
 
-	protected SynAbsorberState createAbsorberState(SynStateType type, AbstractElement element, EObject context,
-			EClass eClass) {
-		return new SynAbsorberState(type, element, context, eClass);
+	protected SynAbsorberState createAbsorberState(SynStateType type, AbstractElement element, EClass eClass) {
+		return new SynAbsorberState(type, element, eClass);
 	}
 
 	protected SynState createEmitterState(SynStateType type, AbstractElement element, SynAbsorberState target) {
@@ -606,17 +590,25 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	@Override
-	public ISynAbsorberState getPDA(EObject context, EClass type) {
-		//		SequencerPDAContext ctx = new SequencerPDAContext(context, type);
-		Pair<EObject, EClass> key = Tuples.create(context, type);
-		ISynAbsorberState result = cache.get(key);
-		if (result == null) {
+	public Map<IContext, ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar) {
+		Map<IContext, ISynAbsorberState> result = cache.get(grammar);
+		if (result != null)
+			return result;
+		result = Maps.newLinkedHashMap();
+		cache.put(grammar, result);
+		Map<IContext, Pda<ISerState, RuleCall>> typePDAs = pdaProvider.getContextTypePDAs(grammar);
+		List<Pair<List<IContext>, Pda<ISerState, RuleCall>>> grouped = SerializationContext
+				.groupByEqualityAndSort(typePDAs);
+		for (Pair<List<IContext>, Pda<ISerState, RuleCall>> e : grouped) {
+			Pda<ISerState, RuleCall> pda = e.getSecond();
+			List<IContext> contexts = e.getFirst();
+			EClass type = contexts.get(0).getType();
 			Map<ISerState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newHashMap();
-			Grammar grammar = GrammarUtil.getGrammar(context);
-			Pda<? extends ISerState, RuleCall> pda = pdaProvider.getContextTypePDA(grammar, context, type);
-			result = createAbsorberState(pda.getStart(), absorbers, emitters, context, type);
-			cache.put(key, result);
+			SynAbsorberState state = createAbsorberState(pda.getStart(), absorbers, emitters, type);
+			for (IContext ctx : contexts) {
+				result.put(ctx, state);
+			}
 		}
 		return result;
 	}

@@ -10,6 +10,8 @@ package org.eclipse.xtext.serializer.sequencer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -22,7 +24,13 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
+	@Inject
+	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
+
 	protected ISerializationDiagnostic.Acceptor errorAcceptor;
+
+	@Inject
+	protected SequenceFeeder.Provider feederProvider;
 
 	protected ISemanticSequencer masterSequencer;
 
@@ -30,28 +38,58 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	protected ISemanticNodeProvider nodeProvider;
 
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
-	
-	@Inject
-	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-	
+
 	@Inject
 	protected ITransientValueService transientValues;
 
-	@Inject
-	protected SequenceFeeder.Provider feederProvider;
+	private final boolean USES_EOBJECT_AS_CONTEXT = usesEObjectAsContext();
+
+	// TODO: deprecate this method
+	protected IContext createContext(EObject deprecatedContext, EObject semanticObject) {
+		return SerializationContext.fromEObject(deprecatedContext, semanticObject);
+	}
 
 	protected INodesForEObjectProvider createNodeProvider(EObject semanticObject) {
 		return nodeProvider.getNodesForSemanticObject(semanticObject, null);
 	}
 
+	@Override
+	@Deprecated
+	public void createSequence(EObject context, EObject semanticObject) {
+		throw new UnsupportedOperationException("Either overwrite, or, better, don't call this method.");
+	}
+
+	@Override
+	public void createSequence(IContext context, EObject semanticObject) {
+		if (USES_EOBJECT_AS_CONTEXT) {
+			createSequence(context.getActionOrRule(), semanticObject);
+		} else {
+			sequence(context, semanticObject);
+		}
+	}
+
+	// TODO: deprecate this method
+	@SuppressWarnings("deprecation")
 	protected SequenceFeeder createSequencerFeeder(EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
-		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor, errorAcceptor);
+	}
+
+	// TODO: deprecate this method
+	@SuppressWarnings("deprecation")
+	protected SequenceFeeder createSequencerFeeder(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
+		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor, errorAcceptor);
+	}
+
+	protected SequenceFeeder createSequencerFeeder(IContext context, EObject semanticObject) {
+		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
+		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
-	protected SequenceFeeder createSequencerFeeder(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
-		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+	protected SequenceFeeder createSequencerFeeder(IContext context, EObject semanticObject,
+			INodesForEObjectProvider nodeProvider) {
+		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
@@ -68,8 +106,31 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 		this.errorAcceptor = errorAcceptor;
 	}
 
+	public void sequence(IContext context, EObject semanticObject) {
+	}
+
 	public void setMasterSequencer(ISemanticSequencer sequencer) {
 		this.masterSequencer = sequencer;
+	}
+
+	private boolean usesEObjectAsContext() {
+		Class<?> eObj = null;
+		try {
+			eObj = getClass().getMethod("createSequence", EObject.class, EObject.class).getDeclaringClass();
+		} catch (NoSuchMethodException e) {
+			return false;
+		} catch (SecurityException e) {
+			return false;
+		}
+		Class<?> iContext = null;
+		try {
+			iContext = getClass().getMethod("sequence", IContext.class, EObject.class).getDeclaringClass();
+		} catch (NoSuchMethodException e) {
+			return true;
+		} catch (SecurityException e) {
+			return true;
+		}
+		return iContext.isAssignableFrom(eObj);
 	}
 
 }

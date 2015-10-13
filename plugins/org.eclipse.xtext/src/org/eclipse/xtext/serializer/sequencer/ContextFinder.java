@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.sequencer;
 
+import static org.eclipse.xtext.serializer.analysis.SerializationContext.*;
+
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,19 +25,18 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtext.RuleNames;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -50,27 +53,25 @@ public class ContextFinder implements IContextFinder {
 	@Inject
 	protected IAssignmentFinder assignmentFinder;
 
-	protected List<IConstraintContext> constraintContexts;
-
-	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
-
-	@Inject
-	protected RuleNames ruleNames;
+	protected Map<IContext, IConstraint> constraints;
 
 	@Inject
 	protected IGrammarConstraintProvider grammarConstraintProvider;
 
 	@Inject
-	protected TransientValueUtil transientValueUtil;
+	protected ISemanticNodeProvider nodesProvider;
+
+	@Inject
+	protected RuleNames ruleNames;
 
 	@Inject
 	protected ITransientValueService transientValues;
 
 	@Inject
-	protected ISemanticNodeProvider nodesProvider;
+	protected TransientValueUtil transientValueUtil;
 
-	protected Iterable<AbstractElement> findAssignedElements(EObject obj, EStructuralFeature feature,
-			Iterable<AbstractElement> candidates) {
+	protected Set<AbstractElement> findAssignedElements(EObject obj, EStructuralFeature feature,
+			Multimap<AbstractElement, IContext> assignments) {
 		if (feature.isMany()) {
 			Set<AbstractElement> r = Sets.newLinkedHashSet();
 			INodesForEObjectProvider nodes = nodesProvider.getNodesForSemanticObject(obj, null);
@@ -82,7 +83,7 @@ public class ContextFinder implements IContextFinder {
 						if (!transientValues.isValueInListTransient(obj, i, feature)) {
 							Object value = values1.get(i);
 							INode node = nodes.getNodeForMultiValue(feature, i, j, value);
-							Iterables.addAll(r, assignmentFinder.findAssignmentsByValue(obj, candidates, value, node));
+							r.addAll(assignmentFinder.findAssignmentsByValue(obj, assignments, value, node));
 							j++;
 						}
 					return r;
@@ -91,37 +92,114 @@ public class ContextFinder implements IContextFinder {
 					for (int i = 0; i < values2.size(); i++) {
 						Object value = values2.get(i);
 						INode node = nodes.getNodeForMultiValue(feature, i, i, value);
-						Iterables.addAll(r, assignmentFinder.findAssignmentsByValue(obj, candidates, value, node));
+						r.addAll(assignmentFinder.findAssignmentsByValue(obj, assignments, value, node));
 					}
 					return r;
 				default:
-					return Collections.emptyList();
+					return Collections.emptySet();
 			}
 		} else {
 			if (transientValues.isValueTransient(obj, feature) == ValueTransient.YES)
-				return Collections.emptyList();
+				return Collections.emptySet();
 			Object value = obj.eGet(feature);
 			INode node = nodesProvider.getNodesForSemanticObject(obj, null).getNodeForSingelValue(feature, value);
-			return assignmentFinder.findAssignmentsByValue(obj, candidates, value, node);
+			return assignmentFinder.findAssignmentsByValue(obj, assignments, value, node);
 		}
 	}
 
-	protected Iterable<EObject> findContextsByContainer(EObject semanticObject, Iterable<EObject> contextCandidates) {
-		if (semanticObject.eResource() != null && semanticObject.eResource().getContents().contains(semanticObject))
-			return Collections.singleton(getRootContext());
-		EReference ref = semanticObject.eContainmentFeature();
+	protected Multimap<AbstractElement, IContext> collectAssignments(Multimap<IConstraint, IContext> constraints,
+			EStructuralFeature feature) {
+		Multimap<AbstractElement, IContext> result = ArrayListMultimap.create();
+		for (Entry<IConstraint, Collection<IContext>> e : constraints.asMap().entrySet()) {
+			IConstraint constraint = e.getKey();
+			Collection<IContext> contexts = e.getValue();
+			IFeatureInfo featureInfo = constraint.getFeatures()[constraint.getType().getFeatureID(feature)];
+			List<IConstraintElement> assignments = featureInfo.getAssignments();
+			for (IConstraintElement assignment : assignments) {
+				result.putAll(assignment.getGrammarElement(), contexts);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Set<IContext> findByContents(EObject semanticObject, Iterable<IContext> contextCandidates) {
+		if (semanticObject == null)
+			throw new NullPointerException();
+
+		initConstraints();
+
+		Multimap<IConstraint, IContext> constraints;
+		if (contextCandidates != null)
+			constraints = getConstraints(semanticObject, contextCandidates);
+		else
+			constraints = getConstraints(semanticObject);
+
+		if (constraints.size() < 2)
+			return Sets.newLinkedHashSet(constraints.values());
+
+		for (IConstraint cand : Lists.newArrayList(constraints.keySet()))
+			if (!isValidValueQuantity(cand, semanticObject))
+				constraints.removeAll(cand);
+
+		if (constraints.size() < 2)
+			return Sets.newLinkedHashSet(constraints.values());
+
+		LinkedHashSet<IContext> result = Sets.newLinkedHashSet(constraints.values());
+		for (EStructuralFeature feat : semanticObject.eClass().getEAllStructuralFeatures()) {
+			if (transientValueUtil.isTransient(semanticObject, feat) != ValueTransient.NO)
+				continue;
+			if (feat.isMany() && ((List<?>) semanticObject.eGet(feat)).isEmpty())
+				continue;
+			Multimap<AbstractElement, IContext> assignments = collectAssignments(constraints, feat);
+			Set<AbstractElement> assignedElements = findAssignedElements(semanticObject, feat, assignments);
+			Set<IContext> keep = Sets.newHashSet();
+			for (AbstractElement ele : assignedElements)
+				keep.addAll(assignments.get(ele));
+			result.retainAll(keep);
+		}
+		return result;
+	}
+
+	@Override
+	public Set<IContext> findByContentsAndContainer(EObject semanticObject, Iterable<IContext> contextCandidates) {
+		initConstraints();
+		contextCandidates = findContextsByContainer(semanticObject, contextCandidates);
+		if (contextCandidates != null && Iterables.size(contextCandidates) < 2)
+			return Sets.newLinkedHashSet(contextCandidates);
+		return findByContents(semanticObject, contextCandidates);
+	}
+
+	protected List<IContext> createContextsForFeatures(Collection<IContext> containers, IFeatureInfo feature,
+			EObject sem) {
+		List<IContext> result = Lists.newArrayList();
+		for (IConstraintElement assignment : feature.getAssignments()) {
+			for (IContext container : containers) {
+				result.add(SerializationContext.forChild(container, assignment.getGrammarElement(), sem));
+			}
+		}
+		return result;
+	}
+
+	protected Iterable<IContext> findContextsByContainer(EObject sem, Iterable<IContext> contextCandidates) {
+		if (sem.eResource() != null && sem.eResource().getContents().contains(sem))
+			return Collections.singleton(getRootContext(sem));
+		EReference ref = sem.eContainmentFeature();
 		if (ref == null || (contextCandidates != null && Iterables.size(contextCandidates) < 2))
 			return contextCandidates;
-		Map<IConstraint, List<EObject>> containerConstraints = getConstraints(semanticObject.eContainer().eClass());
-		int refID = semanticObject.eContainer().eClass().getFeatureID(ref);
-		Set<EObject> childContexts = Sets.newLinkedHashSet();
-		for (IConstraint constraint : Lists.newArrayList(containerConstraints.keySet()))
+		Multimap<IConstraint, IContext> containerConstraints = getConstraints(sem.eContainer());
+		int refID = sem.eContainer().eClass().getFeatureID(ref);
+		Set<IContext> childContexts = Sets.newLinkedHashSet();
+		for (Entry<IConstraint, Collection<IContext>> e : Lists.newArrayList(containerConstraints.asMap().entrySet())) {
+			IConstraint constraint = e.getKey();
+			Collection<IContext> contexts = e.getValue();
 			if (constraint.getFeatures()[refID] == null)
-				containerConstraints.remove(constraint);
-			else
-				childContexts.addAll(constraint.getFeatures()[refID].getCalledContexts());
-
-		Set<EObject> result;
+				containerConstraints.removeAll(constraint);
+			else {
+				childContexts.addAll(createContextsForFeatures(contexts, constraint.getFeatures()[refID], sem));
+			}
+		}
+		Set<IContext> result;
 		if (contextCandidates != null) {
 			result = Sets.newLinkedHashSet(contextCandidates);
 			result.retainAll(childContexts);
@@ -129,122 +207,73 @@ public class ContextFinder implements IContextFinder {
 			result = childContexts;
 		if (result.size() < 2)
 			return result;
-		Iterable<EObject> filteredContexts = findContextsByContainer(semanticObject.eContainer(),
-				Iterables.concat(containerConstraints.values()));
+		Iterable<IContext> filteredContexts = findContextsByContainer(sem.eContainer(), containerConstraints.values());
 		childContexts = Sets.newLinkedHashSet();
-		for (Map.Entry<IConstraint, List<EObject>> e : Lists.newArrayList(containerConstraints.entrySet()))
+		for (Entry<IConstraint, Collection<IContext>> e : Lists.newArrayList(containerConstraints.asMap().entrySet()))
 			if (intersect(filteredContexts, e.getValue()))
-				childContexts.addAll(e.getKey().getFeatures()[refID].getCalledContexts());
+				childContexts.addAll(createContextsForFeatures(e.getValue(), e.getKey().getFeatures()[refID], sem));
 		result.retainAll(childContexts);
 		return result;
 	}
 
 	@Override
+	@Deprecated
 	public Iterable<EObject> findContextsByContents(EObject semanticObject, Iterable<EObject> contextCandidates) {
-		if (semanticObject == null)
-			throw new NullPointerException();
-
-		initConstraints();
-
-		Map<IConstraint, List<EObject>> constraints;
-		if (contextCandidates != null)
-			constraints = getConstraints(semanticObject, contextCandidates);
-		else
-			constraints = getConstraints(semanticObject.eClass());
-
-		if (constraints.size() < 2)
-			return Iterables.concat(constraints.values());
-
-		for (IConstraint cand : Lists.newArrayList(constraints.keySet()))
-			if (!isValidValueQuantity(cand, semanticObject))
-				constraints.remove(cand);
-
-		if (constraints.size() < 2)
-			return Iterables.concat(constraints.values());
-
-		for (EStructuralFeature feat : semanticObject.eClass().getEAllStructuralFeatures())
-			if (transientValueUtil.isTransient(semanticObject, feat) == ValueTransient.NO) {
-				constraints.keySet().retainAll(findContextsByValue(semanticObject, feat, constraints.keySet()));
-				if (constraints.size() < 2)
-					return Iterables.concat(constraints.values());
-			}
-		return Iterables.concat(constraints.values());
+		List<IContext> candidates = fromEObjects(contextCandidates, semanticObject);
+		return fromIContexts(findByContents(semanticObject, candidates));
 	}
 
 	@Override
+	@Deprecated
 	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanticObject,
 			Iterable<EObject> contextCandidates) {
-		initConstraints();
-		contextCandidates = findContextsByContainer(semanticObject, contextCandidates);
-		if (contextCandidates != null && Iterables.size(contextCandidates) < 2)
-			return contextCandidates;
-		return findContextsByContents(semanticObject, contextCandidates);
+		List<IContext> candidates = fromEObjects(contextCandidates, semanticObject);
+		return fromIContexts(findByContentsAndContainer(semanticObject, candidates));
 	}
 
-	protected Collection<IConstraint> findContextsByValue(EObject semanicObj, EStructuralFeature feature,
-			Iterable<IConstraint> constraints) {
-		Multimap<IConstraint, AbstractElement> contexts = LinkedHashMultimap.create();
-		int refID = semanicObj.eClass().getFeatureID(feature);
-		for (IConstraint constraint : constraints)
-			for (IConstraintElement ass : constraint.getFeatures()[refID].getAssignments())
-				contexts.put(constraint, ass.getGrammarElement());
-		Set<AbstractElement> ass = Sets.newHashSet(findAssignedElements(semanicObj, feature, contexts.values()));
-		for (IConstraint constraint : constraints)
-			if (Collections.disjoint(contexts.get(constraint), ass))
-				contexts.removeAll(constraint);
-		return contexts.keySet();
-	}
-
-	protected Map<IConstraint, List<EObject>> getConstraints(EClass cls) {
-		Map<IConstraint, List<EObject>> result = Maps.newLinkedHashMap();
-		for (IConstraintContext cc : constraintContexts)
-			for (IConstraint constraint : cc.getConstraints())
-				if (constraint.getType() == cls) {
-					List<EObject> ctxs = result.get(constraint);
-					if (ctxs == null)
-						result.put(constraint, ctxs = Lists.newArrayList());
-					ctxs.add(cc.getContext());
-				}
-		return result;
-	}
-
-	protected Map<IConstraint, List<EObject>> getConstraints(EObject semanticObject,
-			Iterable<EObject> contextCandidates) {
-		Map<IConstraint, List<EObject>> result = Maps.newLinkedHashMap();
-		for (EObject ctx : contextCandidates) {
-			IConstraint constraint = constraints.get(Tuples.create(ctx, semanticObject.eClass()));
-			if (ctx == null)
-				continue;
-			List<EObject> ctxs = result.get(constraint);
-			if (ctxs == null)
-				result.put(constraint, ctxs = Lists.newArrayList());
-			ctxs.add(ctx);
+	protected Multimap<IConstraint, IContext> getConstraints(EObject sem) {
+		EClass type = sem == null ? null : sem.eClass();
+		Multimap<IConstraint, IContext> result = ArrayListMultimap.create();
+		for (Entry<IContext, IConstraint> e : constraints.entrySet()) {
+			IContext context = e.getKey();
+			IConstraint constraint = e.getValue();
+			if (constraint.getType() == type) {
+				result.put(constraint, context);
+			}
 		}
 		return result;
 	}
 
-	protected EObject getRootContext() {
+	protected Multimap<IConstraint, IContext> getConstraints(EObject sem, Iterable<IContext> contextCandidates) {
+		EClass type = sem == null ? null : sem.eClass();
+		Multimap<IConstraint, IContext> result = ArrayListMultimap.create();
+		for (IContext ctx : contextCandidates) {
+			IConstraint constraint = constraints.get(ctx);
+			if (constraint != null && constraint.getType() == type) {
+				result.put(constraint, ctx);
+			}
+		}
+		return result;
+	}
+
+	protected IContext getRootContext(EObject sem) {
 		for (AbstractRule rule : ruleNames.getAllRules())
 			if (GrammarUtil.isEObjectRule(rule))
-				return rule;
+				return SerializationContext.fromEObject(rule, sem);
 		throw new RuntimeException("There is no parser rule in the grammar.");
 	}
 
 	protected void initConstraints() {
-		if (constraintContexts == null) {
+		if (constraints == null) {
 			constraints = Maps.newLinkedHashMap();
-			constraintContexts = grammarConstraintProvider.getConstraints(ruleNames.getContextGrammar());
-			//			System.out.println(Joiner.on("\n").join(constraintContexts));
-			for (IConstraintContext ctx : constraintContexts)
-				for (IConstraint constraint : ctx.getConstraints())
-					constraints.put(Tuples.create(ctx.getContext(), constraint.getType()), constraint);
+			constraints = grammarConstraintProvider.getConstraints(ruleNames.getContextGrammar());
 		}
 	}
 
-	protected boolean intersect(Iterable<EObject> it1, Iterable<EObject> it2) {
-		for (EObject i1 : it1)
-			for (EObject i2 : it2)
-				if (i1 == i2)
+	protected boolean intersect(Iterable<IContext> it1, Iterable<IContext> it2) {
+		for (IContext i1 : it1)
+			for (IContext i2 : it2)
+				if (i1.equals(i2))
 					return true;
 		return false;
 	}

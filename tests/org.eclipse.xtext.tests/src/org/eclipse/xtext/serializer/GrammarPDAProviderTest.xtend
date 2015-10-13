@@ -402,13 +402,12 @@ class GrammarPDAProviderTest {
 			«rulesText»
 		''')
 		validator.assertNoErrors(grammar)
-		val rules = pdaProvider.getAllRules(grammar)
-		val pdas = rules.toInvertedMap[pdaProvider.getGrammarPDA(grammar, it)]
+		val pdas = pdaProvider.getGrammarPDAs(grammar)
 //		pdas.forEach[p1, p2|p2.toDot(p1.name)]
-		return pdas.entrySet.map [
+		return pdas.keySet.sort.map [
 			'''
-				«key.name»:
-					«value.toListString»
+				«it»:
+					«pdas.get(it).toListString»
 			'''
 		].join
 	}

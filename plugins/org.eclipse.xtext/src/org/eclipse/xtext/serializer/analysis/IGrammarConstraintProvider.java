@@ -2,9 +2,9 @@ package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -136,35 +136,9 @@ public interface IGrammarConstraintProvider {
 		 */
 		EClass getType();
 
-		List<IConstraintContext> getContexts();
+		List<IContext> getContexts();
 
 		Nfa<ISemState> getNfa();
-	}
-
-	/**
-	 * A ConstraintContext is defined by a ParserRule or an AssignedAction. A ConstraintContext holds a list of all
-	 * constraints that are valid for this context. All these constraints have an EClass as their common super type.
-	 * 
-	 * If the context is a parser rule, the constraints of this context describe all the objects that can be
-	 * instantiated via this parser rule.
-	 * 
-	 * If this context is an assigned action, the constraints of this context describe all the objects that can assigned
-	 * by this action. These are all the objects that can be the "current" *before* the action is being executed. This
-	 * is *not* the EObject that is instantiated by the action.
-	 */
-	public interface IConstraintContext {
-
-		// TODO: make sure this type is right for actions
-		EClass getCommonType();
-
-		List<IConstraint> getConstraints();
-
-		/**
-		 * @return an AssignedAction or ParserRule
-		 */
-		EObject getContext();
-
-		String getName();
 	}
 
 	public class ConstraintElementProduction implements Production<IConstraintElement, AbstractElement> {
@@ -228,8 +202,6 @@ public interface IGrammarConstraintProvider {
 	 */
 	public interface IConstraintElement {
 
-		EObject getCallContext();
-
 		// valid for GROUP and ALTERNATIVE, null otherwise
 		Collection<IConstraintElement> getChildren();
 
@@ -256,8 +228,6 @@ public interface IGrammarConstraintProvider {
 
 		List<IConstraintElement> getAssignments();
 
-		List<EObject> getCalledContexts();
-
 		IConstraint getContainingConstraint();
 
 		EStructuralFeature getFeature();
@@ -273,6 +243,6 @@ public interface IGrammarConstraintProvider {
 	 * Returns all constraints form this grammar. If a constraint belongs to multiple ConstraintContexts, it is
 	 * important to call this method to ensure there is inly one instance fo this constraint.
 	 */
-	public List<IConstraintContext> getConstraints(Grammar context);
+	public Map<IContext, IConstraint> getConstraints(Grammar context);
 
 }

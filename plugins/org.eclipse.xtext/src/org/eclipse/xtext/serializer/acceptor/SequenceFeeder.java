@@ -24,6 +24,8 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -53,29 +55,41 @@ public class SequenceFeeder {
 		@Inject
 		protected IValueSerializer valueSerializer;
 
+		/**
+		 * @deprecated use {@link #create(IContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
+		 */
+		@Deprecated
 		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes,
 				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			return new SequenceFeeder(this, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+			return new SequenceFeeder(this, null, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+		}
+		
+		public SequenceFeeder create(IContext context, EObject semanticObject, INodesForEObjectProvider nodes,
+				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+			return new SequenceFeeder(this, context, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
 	}
 
-	protected ISerializationDiagnostic.Acceptor errorAcceptor;
+	protected final ISerializationDiagnostic.Acceptor errorAcceptor;
 
-	protected ISemanticSequencer masterSequencer;
+	protected final ISemanticSequencer masterSequencer;
 
-	protected INodesForEObjectProvider nodes;
+	protected final INodesForEObjectProvider nodes;
 
-	protected Provider provider;
+	protected final Provider provider;
 
-	protected EObject semanticObject;
+	protected final EObject semanticObject;
 
-	protected ISemanticSequenceAcceptor sequenceAcceptor;
+	protected final ISemanticSequenceAcceptor sequenceAcceptor;
+	
+	protected final IContext context;
 
-	protected SequenceFeeder(Provider provider, EObject semanticObject, INodesForEObjectProvider nodes,
+	protected SequenceFeeder(Provider provider, IContext context, EObject semanticObject, INodesForEObjectProvider nodes,
 			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super();
 		if (semanticObject == null || nodes == null || sequenceAcceptor == null)
 			throw new NullPointerException();
+		this.context = context;
 		this.provider = provider;
 		this.semanticObject = semanticObject;
 		this.nodes = nodes;
@@ -290,14 +304,16 @@ public class SequenceFeeder {
 
 	protected void acceptAction(Action action, EObject semanticChild, ICompositeNode node) {
 		if (sequenceAcceptor.enterAssignedAction(action, semanticChild, node)) {
-			masterSequencer.createSequence(action, semanticChild);
+			IContext child = SerializationContext.forChild(context, action, semanticChild);
+			masterSequencer.createSequence(child, semanticChild);
 			sequenceAcceptor.leaveAssignedAction(action, semanticChild);
 		}
 	}
 
 	protected void acceptEObjectRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
 		if (sequenceAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild, node)) {
-			masterSequencer.createSequence(ruleCall.getRule(), semanticChild);
+			IContext child = SerializationContext.forChild(context, ruleCall, semanticChild);
+			masterSequencer.createSequence(child, semanticChild);
 			sequenceAcceptor.leaveAssignedParserRuleCall(ruleCall, semanticChild);
 		}
 	}

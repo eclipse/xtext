@@ -14,8 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
@@ -60,16 +58,10 @@ public class SyntacticSequencerExtensions {
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
   
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
-    List<ISyntacticSequencerPDAProvider.ISynAbsorberState> result = CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList();
-    Set<EObject> _allContexts = this.contextPDAProvider.getAllContexts(this.grammar);
-    for (final EObject context : _allContexts) {
-      Set<EClass> _typesForContext = this.contextTypePDAProvider.getTypesForContext(this.grammar, context);
-      for (final EClass type : _typesForContext) {
-        ISyntacticSequencerPDAProvider.ISynAbsorberState _pDA = this.pdaProvider.getPDA(context, type);
-        result.add(_pDA);
-      }
-    }
-    return result;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method getAllContexts(Grammar) is undefined for the type IContextPDAProvider"
+      + "\nThe method getTypesForContext(Grammar, Object) is undefined for the type IContextTypePDAProvider"
+      + "\nThe method getPDA(Object, Object) is undefined for the type ISyntacticSequencerPDAProvider");
   }
   
   protected void collectAllAmbiguousTransitions(final ISyntacticSequencerPDAProvider.ISynFollowerOwner state, final Set<ISyntacticSequencerPDAProvider.ISynTransition> result, final Set<Object> visited) {

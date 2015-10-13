@@ -9,12 +9,12 @@ package org.eclipse.xtext.serializer;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -22,6 +22,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.XtextInjectorProvider;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.util.formallang.Pda;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.util.formallang.PdaToDot;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -778,33 +780,25 @@ public class GrammarPDAProviderTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      final Set<ParserRule> rules = this.pdaProvider.getAllRules(grammar);
-      final Function1<ParserRule, Pda<ISerState, RuleCall>> _function = new Function1<ParserRule, Pda<ISerState, RuleCall>>() {
+      final Map<IContext, Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
+      Set<IContext> _keySet = pdas.keySet();
+      List<IContext> _sort = IterableExtensions.<IContext>sort(_keySet);
+      final Function1<IContext, String> _function = new Function1<IContext, String>() {
         @Override
-        public Pda<ISerState, RuleCall> apply(final ParserRule it) {
-          return GrammarPDAProviderTest.this.pdaProvider.getGrammarPDA(grammar, it);
-        }
-      };
-      final Map<ParserRule, Pda<ISerState, RuleCall>> pdas = IterableExtensions.<ParserRule, Pda<ISerState, RuleCall>>toInvertedMap(rules, _function);
-      Set<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>> _entrySet = pdas.entrySet();
-      final Function1<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>, String> _function_1 = new Function1<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>, String>() {
-        @Override
-        public String apply(final Map.Entry<ParserRule, Pda<ISerState, RuleCall>> it) {
+        public String apply(final IContext it) {
           StringConcatenation _builder = new StringConcatenation();
-          ParserRule _key = it.getKey();
-          String _name = _key.getName();
-          _builder.append(_name, "");
+          _builder.append(it, "");
           _builder.append(":");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          Pda<ISerState, RuleCall> _value = it.getValue();
-          String _listString = GrammarPDAProviderTest.this.toListString(_value);
+          Pda<ISerState, RuleCall> _get = pdas.get(it);
+          String _listString = GrammarPDAProviderTest.this.toListString(_get);
           _builder.append(_listString, "\t");
           _builder.newLineIfNotEmpty();
           return _builder.toString();
         }
       };
-      Iterable<String> _map = IterableExtensions.<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>, String>map(_entrySet, _function_1);
+      List<String> _map = ListExtensions.<IContext, String>map(_sort, _function);
       return IterableExtensions.join(_map);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
