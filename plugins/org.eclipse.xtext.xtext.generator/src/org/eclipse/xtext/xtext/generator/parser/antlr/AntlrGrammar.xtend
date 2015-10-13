@@ -7,14 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import org.eclipse.xtext.Grammar
+import org.eclipse.xtend.lib.annotations.Data
 
-import static extension org.eclipse.xtext.GrammarUtil.*
-
-class DebugGrammarNaming extends GrammarNaming {
+@Data
+class AntlrGrammar {
+	String packageName
+	String simpleName
 	
-	override getParserGrammar(Grammar it) {
-		new AntlrGrammar(internalParserPackage, '''DebugInternal«simpleName»''')
+	def String getName() {
+		packageName + "." + simpleName
 	}
 	
+	def String getGrammarFileName() {
+		name.replace('.', '/') + ".g"
+	}
+	
+	def String getTokensFileName() {
+		name.replace('.', '/') + ".tokens"
+	}
+	
+	override def toString() {
+		name
+	}
 }

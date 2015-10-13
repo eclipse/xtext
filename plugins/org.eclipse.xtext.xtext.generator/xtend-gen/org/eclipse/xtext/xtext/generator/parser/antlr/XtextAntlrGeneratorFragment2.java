@@ -7,22 +7,31 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Names;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
+import org.eclipse.xtext.conversion.impl.IgnoreCaseIDValueConverter;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ITokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.AbstractIndentationTokenSource;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
@@ -33,8 +42,12 @@ import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -54,106 +67,224 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrDebugGrammarGenerator;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ExtendedAntlrGrammarGenerator;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ExtendedGrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
+import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 
 @SuppressWarnings("all")
 public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
   @Accessors
   private boolean debugGrammar;
   
+  @Accessors
+  private Boolean combinedGrammar = null;
+  
   @Inject
-  private AntlrGrammarGenerator productionGenerator;
+  private AntlrGrammarGenerator combinedGenerator;
+  
+  @Inject
+  private ExtendedAntlrGrammarGenerator extendedGenerator;
   
   @Inject
   private AntlrDebugGrammarGenerator debugGenerator;
   
   @Inject
-  private CodeConfig codeConfig;
-  
-  @Inject
   private FileAccessFactory fileFactory;
   
   @Inject
-  @Extension
-  private GrammarNaming productionNaming;
+  private GrammarNaming combinedNaming;
+  
+  @Inject
+  private ExtendedGrammarNaming extendedNaming;
   
   @Inject
   @Extension
-  private GrammarAccessExtensions _grammarAccessExtensions;
+  private GrammarAccessExtensions grammarUtil;
   
   @Override
   protected void doGenerate() {
-    this.generateProductionGrammar();
-    if (this.debugGrammar) {
-      this.generateDebugGrammar();
+    Grammar _grammar = this.getGrammar();
+    AntlrOptions _options = this.getOptions();
+    boolean _isIgnoreCase = _options.isIgnoreCase();
+    final KeywordHelper keywordHelper = new KeywordHelper(_grammar, _isIgnoreCase, this.grammarUtil);
+    try {
+      this.generateProductionGrammar();
+      if (this.debugGrammar) {
+        this.generateDebugGrammar();
+      }
+      JavaFileAccess _generateXtextParser = this.generateXtextParser();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+      _generateXtextParser.writeTo(_srcGen);
+      JavaFileAccess _generateAntlrTokenFileProvider = this.generateAntlrTokenFileProvider();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime_1.getSrcGen();
+      _generateAntlrTokenFileProvider.writeTo(_srcGen_1);
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      boolean _not = (!_isCombinedGrammar);
+      if (_not) {
+        JavaFileAccess _generateTokenSource = this.generateTokenSource();
+        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+        IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
+        IXtextGeneratorFileSystemAccess _srcGen_2 = _runtime_2.getSrcGen();
+        _generateTokenSource.writeTo(_srcGen_2);
+      }
+      this.addBindingsAndImports();
+    } finally {
+      Grammar _grammar_1 = this.getGrammar();
+      keywordHelper.discardHelper(_grammar_1);
     }
-    JavaFileAccess _generateXtextParser = this.generateXtextParser();
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
-    _generateXtextParser.writeTo(_srcGen);
-    JavaFileAccess _generateAntlrTokenFileProvider = this.generateAntlrTokenFileProvider();
-    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime_1.getSrcGen();
-    _generateAntlrTokenFileProvider.writeTo(_srcGen_1);
-    this.addBindingsAndImports();
   }
   
   protected void generateProductionGrammar() {
+    @Extension
+    final GrammarNaming naming = this.getProductionNaming();
+    AntlrGrammarGenerator _xifexpression = null;
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    if (_isCombinedGrammar) {
+      _xifexpression = this.combinedGenerator;
+    } else {
+      _xifexpression = this.extendedGenerator;
+    }
+    final AntlrGrammarGenerator generator = _xifexpression;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     final IXtextGeneratorFileSystemAccess fsa = _runtime.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
-    this.productionGenerator.generate(_grammar, _options, fsa);
-    final String encoding = this.codeConfig.getEncoding();
-    StringConcatenation _builder = new StringConcatenation();
+    generator.generate(_grammar, _options, fsa);
     Grammar _grammar_1 = this.getGrammar();
-    TypeReference _grammarClass = this.productionNaming.getGrammarClass(_grammar_1);
-    String _path = _grammarClass.getPath();
+    AntlrGrammar _parserGrammar = naming.getParserGrammar(_grammar_1);
+    Grammar _grammar_2 = this.getGrammar();
+    AntlrGrammar _lexerGrammar = naming.getLexerGrammar(_grammar_2);
+    this.runAntlr(_parserGrammar, _lexerGrammar, fsa);
+    Grammar _grammar_3 = this.getGrammar();
+    Grammar _grammar_4 = this.getGrammar();
+    TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_4);
+    this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_3, fsa, _internalParserClass);
+    Grammar _grammar_5 = this.getGrammar();
+    TypeReference _lexerClass = naming.getLexerClass(_grammar_5);
+    Grammar _grammar_6 = this.getGrammar();
+    TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_6);
+    this.splitParserAndLexerIfEnabled(fsa, _lexerClass, _internalParserClass_1);
+    Grammar _grammar_7 = this.getGrammar();
+    AntlrGrammar _lexerGrammar_1 = naming.getLexerGrammar(_grammar_7);
+    String _tokensFileName = _lexerGrammar_1.getTokensFileName();
+    this.normalizeTokens(fsa, _tokensFileName);
+    Grammar _grammar_8 = this.getGrammar();
+    TypeReference _internalParserClass_2 = naming.getInternalParserClass(_grammar_8);
+    Grammar _grammar_9 = this.getGrammar();
+    TypeReference _lexerClass_1 = naming.getLexerClass(_grammar_9);
+    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
+    Grammar _grammar_10 = this.getGrammar();
+    TypeReference _internalParserClass_3 = naming.getInternalParserClass(_grammar_10);
+    Grammar _grammar_11 = this.getGrammar();
+    TypeReference _lexerClass_2 = naming.getLexerClass(_grammar_11);
+    this.normalizeLineDelimiters(fsa, _internalParserClass_3, _lexerClass_2);
+  }
+  
+  protected void runAntlr(final AntlrGrammar parserGrammar, final AntlrGrammar lexerGrammar, final IXtextGeneratorFileSystemAccess fsa) {
+    CodeConfig _codeConfig = this.getCodeConfig();
+    final String encoding = _codeConfig.getEncoding();
+    StringConcatenation _builder = new StringConcatenation();
+    String _path = fsa.getPath();
     _builder.append(_path, "");
-    _builder.append(".g");
-    final String grammarFileName = _builder.toString();
+    _builder.append("/");
+    String _grammarFileName = lexerGrammar.getGrammarFileName();
+    _builder.append(_grammarFileName, "");
+    final String lexerGrammarFile = _builder.toString();
+    String[] _antlrParams = this.getAntlrParams();
+    final ArrayList<String> lexerAntlrParams = CollectionLiterals.<String>newArrayList(_antlrParams);
+    lexerAntlrParams.add("-fo");
+    int _lastIndexOf = lexerGrammarFile.lastIndexOf("/");
+    final String lexerOutputDir = lexerGrammarFile.substring(0, _lastIndexOf);
+    lexerAntlrParams.add(lexerOutputDir);
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    boolean _not = (!_isCombinedGrammar);
+    if (_not) {
+      AntlrToolFacade _antlrTool = this.getAntlrTool();
+      _antlrTool.runWithEncodingAndParams(lexerGrammarFile, encoding, ((String[])Conversions.unwrapArray(lexerAntlrParams, String.class)));
+      Grammar _grammar = this.getGrammar();
+      KeywordHelper _helper = KeywordHelper.getHelper(_grammar);
+      this.cleanupLexerTokensFile(lexerGrammar, _helper, fsa);
+    }
     StringConcatenation _builder_1 = new StringConcatenation();
     String _path_1 = fsa.getPath();
     _builder_1.append(_path_1, "");
     _builder_1.append("/");
-    _builder_1.append(grammarFileName, "");
-    final String absoluteGrammarFileName = _builder_1.toString();
-    this.addAntlrParam("-fo");
-    int _lastIndexOf = absoluteGrammarFileName.lastIndexOf("/");
-    String _substring = absoluteGrammarFileName.substring(0, _lastIndexOf);
-    this.addAntlrParam(_substring);
-    AntlrToolFacade _antlrTool = this.getAntlrTool();
-    String[] _antlrParams = this.getAntlrParams();
-    _antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, _antlrParams);
-    Grammar _grammar_2 = this.getGrammar();
-    Grammar _grammar_3 = this.getGrammar();
-    TypeReference _internalParserClass = this.productionNaming.getInternalParserClass(_grammar_3);
-    this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_2, fsa, _internalParserClass);
-    Grammar _grammar_4 = this.getGrammar();
-    TypeReference _lexerClass = this.productionNaming.getLexerClass(_grammar_4);
-    Grammar _grammar_5 = this.getGrammar();
-    TypeReference _internalParserClass_1 = this.productionNaming.getInternalParserClass(_grammar_5);
-    this.splitParserAndLexerIfEnabled(fsa, _lexerClass, _internalParserClass_1);
-    Grammar _grammar_6 = this.getGrammar();
-    String _tokenFileName = this.productionNaming.getTokenFileName(_grammar_6);
-    this.normalizeTokens(fsa, _tokenFileName);
-    Grammar _grammar_7 = this.getGrammar();
-    TypeReference _internalParserClass_2 = this.productionNaming.getInternalParserClass(_grammar_7);
-    Grammar _grammar_8 = this.getGrammar();
-    TypeReference _lexerClass_1 = this.productionNaming.getLexerClass(_grammar_8);
-    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
-    Grammar _grammar_9 = this.getGrammar();
-    TypeReference _internalParserClass_3 = this.productionNaming.getInternalParserClass(_grammar_9);
-    Grammar _grammar_10 = this.getGrammar();
-    TypeReference _lexerClass_2 = this.productionNaming.getLexerClass(_grammar_10);
-    this.normalizeLineDelimiters(fsa, _internalParserClass_3, _lexerClass_2);
+    String _grammarFileName_1 = parserGrammar.getGrammarFileName();
+    _builder_1.append(_grammarFileName_1, "");
+    final String parserGrammarFile = _builder_1.toString();
+    String[] _antlrParams_1 = this.getAntlrParams();
+    final ArrayList<String> parserAntlrParams = CollectionLiterals.<String>newArrayList(_antlrParams_1);
+    parserAntlrParams.add("-fo");
+    int _lastIndexOf_1 = parserGrammarFile.lastIndexOf("/");
+    String _substring = parserGrammarFile.substring(0, _lastIndexOf_1);
+    parserAntlrParams.add(_substring);
+    boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
+    boolean _not_1 = (!_isCombinedGrammar_1);
+    if (_not_1) {
+      parserAntlrParams.add("-lib");
+      parserAntlrParams.add(lexerOutputDir);
+    }
+    AntlrToolFacade _antlrTool_1 = this.getAntlrTool();
+    _antlrTool_1.runWithEncodingAndParams(parserGrammarFile, encoding, ((String[])Conversions.unwrapArray(parserAntlrParams, String.class)));
+    boolean _isCombinedGrammar_2 = this.isCombinedGrammar();
+    boolean _not_2 = (!_isCombinedGrammar_2);
+    if (_not_2) {
+      Grammar _grammar_1 = this.getGrammar();
+      KeywordHelper _helper_1 = KeywordHelper.getHelper(_grammar_1);
+      this.cleanupParserTokensFile(lexerGrammar, parserGrammar, _helper_1, fsa);
+    }
+  }
+  
+  public boolean isCombinedGrammar() {
+    boolean _or = false;
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _equals = Objects.equal(this.combinedGrammar, null);
+    if (!_equals) {
+      _and_1 = false;
+    } else {
+      AntlrOptions _options = this.getOptions();
+      boolean _isBacktrackLexer = _options.isBacktrackLexer();
+      boolean _not = (!_isBacktrackLexer);
+      _and_1 = _not;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      AntlrOptions _options_1 = this.getOptions();
+      boolean _isIgnoreCase = _options_1.isIgnoreCase();
+      boolean _not_1 = (!_isIgnoreCase);
+      _and = _not_1;
+    }
+    if (_and) {
+      _or = true;
+    } else {
+      boolean _equals_1 = Objects.equal(this.combinedGrammar, Boolean.TRUE);
+      _or = _equals_1;
+    }
+    return _or;
+  }
+  
+  protected GrammarNaming getProductionNaming() {
+    GrammarNaming _xifexpression = null;
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    if (_isCombinedGrammar) {
+      _xifexpression = this.combinedNaming;
+    } else {
+      _xifexpression = this.extendedNaming;
+    }
+    return _xifexpression;
   }
   
   protected void generateDebugGrammar() {
@@ -168,15 +299,17 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   public JavaFileAccess generateXtextParser() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
+      @Extension
+      final GrammarNaming naming = this.getProductionNaming();
       Grammar _grammar = this.getGrammar();
-      TypeReference _parserClass = this.productionNaming.getParserClass(_grammar);
+      TypeReference _parserClass = naming.getParserClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_parserClass);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _parserClass = XtextAntlrGeneratorFragment2.this.productionNaming.getParserClass(_grammar);
+          TypeReference _parserClass = naming.getParserClass(_grammar);
           String _simpleName = _parserClass.getSimpleName();
           _builder.append(_simpleName, "");
           _builder.append(" extends ");
@@ -191,7 +324,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("\t");
           _builder.append("private ");
           Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _grammarAccess = XtextAntlrGeneratorFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
+          TypeReference _grammarAccess = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(_grammar_1);
           _builder.append(_grammarAccess, "\t");
           _builder.append(" grammarAccess;");
           _builder.newLineIfNotEmpty();
@@ -208,7 +341,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("tokenStream.setInitialHiddenTokens(");
           {
             Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
-            List<String> _initialHiddenTokens = XtextAntlrGeneratorFragment2.this._grammarAccessExtensions.initialHiddenTokens(_grammar_2);
+            List<String> _initialHiddenTokens = XtextAntlrGeneratorFragment2.this.grammarUtil.initialHiddenTokens(_grammar_2);
             boolean _hasElements = false;
             for(final String hidden : _initialHiddenTokens) {
               if (!_hasElements) {
@@ -226,14 +359,80 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          {
+            Grammar _grammar_3 = XtextAntlrGeneratorFragment2.this.getGrammar();
+            List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_3);
+            final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+              @Override
+              public Boolean apply(final TerminalRule it) {
+                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this.grammarUtil.isSyntheticTerminalRule(it));
+              }
+            };
+            boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+            if (_exists) {
+              _builder.append("\t");
+              _builder.append("@Override");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("protected ");
+              _builder.append(TokenSource.class, "\t");
+              _builder.append(" createLexer(");
+              _builder.append(CharStream.class, "\t");
+              _builder.append(" stream) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("return new ");
+              Grammar _grammar_4 = XtextAntlrGeneratorFragment2.this.getGrammar();
+              TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar_4);
+              _builder.append(_tokenSourceClass, "\t\t");
+              _builder.append("(super.createLexer(stream));");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("/**");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append(" ");
+              _builder.append("* Indentation aware languages do not support partial parsing since the lexer is inherently stateful.");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append(" ");
+              _builder.append("* Override and return {@code true} if your terminal splitting is stateless.");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append(" ");
+              _builder.append("*/");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("@Override");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("protected boolean isReparseSupported() {");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("return false;");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Override");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("protected ");
-          Grammar _grammar_3 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _internalParserClass = XtextAntlrGeneratorFragment2.this.productionNaming.getInternalParserClass(_grammar_3);
+          Grammar _grammar_5 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_5);
           _builder.append(_internalParserClass, "\t");
           _builder.append(" createParser(");
           _builder.append(XtextTokenStream.class, "\t");
@@ -241,8 +440,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("return new ");
-          Grammar _grammar_4 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _internalParserClass_1 = XtextAntlrGeneratorFragment2.this.productionNaming.getInternalParserClass(_grammar_4);
+          Grammar _grammar_6 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_6);
           _builder.append(_internalParserClass_1, "\t\t");
           _builder.append("(stream, getGrammarAccess());");
           _builder.newLineIfNotEmpty();
@@ -258,8 +457,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("return \"");
-          Grammar _grammar_5 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          List<ParserRule> _allParserRules = GrammarUtil.allParserRules(_grammar_5);
+          Grammar _grammar_7 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          List<ParserRule> _allParserRules = GrammarUtil.allParserRules(_grammar_7);
           ParserRule _head = IterableExtensions.<ParserRule>head(_allParserRules);
           ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(_head);
           String _name = _originalElement.getName();
@@ -272,8 +471,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public ");
-          Grammar _grammar_6 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _grammarAccess_1 = XtextAntlrGeneratorFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_6);
+          Grammar _grammar_8 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _grammarAccess_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(_grammar_8);
           _builder.append(_grammarAccess_1, "\t");
           _builder.append(" getGrammarAccess() {");
           _builder.newLineIfNotEmpty();
@@ -286,8 +485,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public void setGrammarAccess(");
-          Grammar _grammar_7 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _grammarAccess_2 = XtextAntlrGeneratorFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_7);
+          Grammar _grammar_9 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _grammarAccess_2 = XtextAntlrGeneratorFragment2.this.grammarUtil.getGrammarAccess(_grammar_9);
           _builder.append(_grammarAccess_2, "\t");
           _builder.append(" grammarAccess) {");
           _builder.newLineIfNotEmpty();
@@ -310,15 +509,17 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   public JavaFileAccess generateAntlrTokenFileProvider() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
+      @Extension
+      final GrammarNaming naming = this.getProductionNaming();
       Grammar _grammar = this.getGrammar();
-      TypeReference _antlrTokenFileProviderClass = this.productionNaming.getAntlrTokenFileProviderClass(_grammar);
+      TypeReference _antlrTokenFileProviderClass = naming.getAntlrTokenFileProviderClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_antlrTokenFileProviderClass);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public class ");
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _antlrTokenFileProviderClass = XtextAntlrGeneratorFragment2.this.productionNaming.getAntlrTokenFileProviderClass(_grammar);
+          TypeReference _antlrTokenFileProviderClass = naming.getAntlrTokenFileProviderClass(_grammar);
           String _simpleName = _antlrTokenFileProviderClass.getSimpleName();
           _builder.append(_simpleName, "");
           _builder.append(" implements ");
@@ -341,8 +542,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("\t\t");
           _builder.append("return classLoader.getResourceAsStream(\"");
           Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          String _tokenFileName = XtextAntlrGeneratorFragment2.this.productionNaming.getTokenFileName(_grammar_1);
-          _builder.append(_tokenFileName, "\t\t");
+          AntlrGrammar _lexerGrammar = naming.getLexerGrammar(_grammar_1);
+          String _tokensFileName = _lexerGrammar.getTokensFileName();
+          _builder.append(_tokensFileName, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -358,22 +560,239 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     return _xblockexpression;
   }
   
+  public JavaFileAccess generateTokenSource() {
+    GeneratedJavaFileAccess _xblockexpression = null;
+    {
+      @Extension
+      final GrammarNaming naming = this.getProductionNaming();
+      Grammar _grammar = this.getGrammar();
+      TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
+      final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_tokenSourceClass);
+      Grammar _grammar_1 = this.getGrammar();
+      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_1);
+      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          String _name = it.getName();
+          String _upperCase = _name.toUpperCase();
+          return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("BEGIN", "INDENT", "OPEN")).contains(_upperCase));
+        }
+      };
+      final Iterable<TerminalRule> open = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
+      Grammar _grammar_2 = this.getGrammar();
+      List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(_grammar_2);
+      final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          String _name = it.getName();
+          String _upperCase = _name.toUpperCase();
+          return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("END", "DEDENT", "CLOSE")).contains(_upperCase));
+        }
+      };
+      final Iterable<TerminalRule> close = IterableExtensions.<TerminalRule>filter(_allTerminalRules_1, _function_1);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public class ");
+          Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
+          String _simpleName = _tokenSourceClass.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          _builder.append(AbstractIndentationTokenSource.class, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public ");
+          Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _tokenSourceClass_1 = naming.getTokenSourceClass(_grammar_1);
+          String _simpleName_1 = _tokenSourceClass_1.getSimpleName();
+          _builder.append(_simpleName_1, "\t");
+          _builder.append("(");
+          _builder.append(TokenSource.class, "\t");
+          _builder.append(" delegate) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("super(delegate);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected boolean shouldSplitTokenImpl(");
+          _builder.append(Token.class, "\t");
+          _builder.append(" token) {");
+          _builder.newLineIfNotEmpty();
+          {
+            Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
+            List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
+            final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+              @Override
+              public Boolean apply(final TerminalRule it) {
+                String _name = it.getName();
+                String _upperCase = _name.toUpperCase();
+                return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
+              }
+            };
+            boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+            if (_exists) {
+              _builder.append("\t\t");
+              _builder.append("// TODO Review assumption");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("return token.getType() == ");
+              Grammar _grammar_3 = XtextAntlrGeneratorFragment2.this.getGrammar();
+              TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_3);
+              _builder.append(_internalParserClass, "\t\t");
+              _builder.append(".RULE_WS;");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              _builder.append("// TODO Implement me");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("throw new UnsupportedOperationException(\"Implement me\");");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected int getBeginTokenType() {");
+          _builder.newLine();
+          {
+            int _size = IterableExtensions.size(open);
+            boolean _equals = (_size == 1);
+            if (_equals) {
+              _builder.append("\t\t");
+              _builder.append("// TODO Review assumption");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("return ");
+              Grammar _grammar_4 = XtextAntlrGeneratorFragment2.this.getGrammar();
+              TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_4);
+              _builder.append(_internalParserClass_1, "\t\t");
+              _builder.append(".");
+              TerminalRule _head = IterableExtensions.<TerminalRule>head(open);
+              String _ruleName = XtextAntlrGeneratorFragment2.this.grammarUtil.ruleName(_head);
+              _builder.append(_ruleName, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              _builder.append("// TODO Implement me");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("throw new UnsupportedOperationException(\"Implement me\");");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected int getEndTokenType() {");
+          _builder.newLine();
+          {
+            int _size_1 = IterableExtensions.size(close);
+            boolean _equals_1 = (_size_1 == 1);
+            if (_equals_1) {
+              _builder.append("\t\t");
+              _builder.append("// TODO Review assumption");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("return ");
+              Grammar _grammar_5 = XtextAntlrGeneratorFragment2.this.getGrammar();
+              TypeReference _internalParserClass_2 = naming.getInternalParserClass(_grammar_5);
+              _builder.append(_internalParserClass_2, "\t\t");
+              _builder.append(".");
+              TerminalRule _head_1 = IterableExtensions.<TerminalRule>head(close);
+              String _ruleName_1 = XtextAntlrGeneratorFragment2.this.grammarUtil.ruleName(_head_1);
+              _builder.append(_ruleName_1, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              _builder.append("// TODO Implement me");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("throw new UnsupportedOperationException(\"Implement me\");");
+              _builder.newLine();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      file.setContent(_client);
+      _xblockexpression = file;
+    }
+    return _xblockexpression;
+  }
+  
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
+    boolean _and = false;
     AntlrOptions _options = this.getOptions();
     boolean _isBacktrackLexer = _options.isBacktrackLexer();
-    if (_isBacktrackLexer) {
-      issues.addError("This fragment does not support the option \'backtracking\' for the lexer. Use \'org.eclipse.xtext.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment2\' instead");
+    if (!_isBacktrackLexer) {
+      _and = false;
+    } else {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      _and = _isCombinedGrammar;
     }
+    if (_and) {
+      issues.addError("A combined grammar cannot have a backtracking lexer");
+    }
+    boolean _and_1 = false;
     AntlrOptions _options_1 = this.getOptions();
     boolean _isIgnoreCase = _options_1.isIgnoreCase();
-    if (_isIgnoreCase) {
-      issues.addError("This fragment does not support the option \'ignorecase\'. Use \'org.eclipse.xtext.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment2\' instead");
+    if (!_isIgnoreCase) {
+      _and_1 = false;
+    } else {
+      boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
+      _and_1 = _isCombinedGrammar_1;
+    }
+    if (_and_1) {
+      issues.addError("A combined grammar cannot have an ignorecase lexer");
+    }
+    boolean _and_2 = false;
+    AntlrOptions _options_2 = this.getOptions();
+    boolean _isBacktrackLexer_1 = _options_2.isBacktrackLexer();
+    if (!_isBacktrackLexer_1) {
+      _and_2 = false;
+    } else {
+      AntlrOptions _options_3 = this.getOptions();
+      boolean _isIgnoreCase_1 = _options_3.isIgnoreCase();
+      _and_2 = _isIgnoreCase_1;
+    }
+    if (_and_2) {
+      issues.addError("Backtracking lexer and ignorecase cannot be combined for now.");
     }
   }
   
   public void addBindingsAndImports() {
+    @Extension
+    final GrammarNaming naming = this.getProductionNaming();
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
@@ -387,10 +806,15 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         public void apply(final ManifestAccess it) {
           Set<String> _exportedPackages = it.getExportedPackages();
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-          String _parserPackage = XtextAntlrGeneratorFragment2.this.productionNaming.getParserPackage(_grammar);
+          TypeReference _lexerClass = naming.getLexerClass(_grammar);
+          String _packageName = _lexerClass.getPackageName();
           Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          String _internalParserPackage = XtextAntlrGeneratorFragment2.this.productionNaming.getInternalParserPackage(_grammar_1);
-          Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_parserPackage, _internalParserPackage)));
+          TypeReference _parserClass = naming.getParserClass(_grammar_1);
+          String _packageName_1 = _parserClass.getPackageName();
+          Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_2);
+          String _packageName_2 = _internalParserClass.getPackageName();
+          Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
           Set<String> _requiredBundles = it.getRequiredBundles();
           _requiredBundles.add("org.antlr.runtime");
         }
@@ -400,31 +824,31 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IParser.class);
     Grammar _grammar = this.getGrammar();
-    TypeReference _parserClass = this.productionNaming.getParserClass(_grammar);
+    TypeReference _parserClass = naming.getParserClass(_grammar);
     GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _parserClass);
     TypeReference _typeRef_1 = TypeReference.typeRef(ITokenToStringConverter.class);
     TypeReference _typeRef_2 = TypeReference.typeRef(AntlrTokenToStringConverter.class);
     GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addTypeToType.addTypeToType(_typeRef_1, _typeRef_2);
     TypeReference _typeRef_3 = TypeReference.typeRef(IAntlrTokenFileProvider.class);
     Grammar _grammar_1 = this.getGrammar();
-    TypeReference _antlrTokenFileProviderClass = this.productionNaming.getAntlrTokenFileProviderClass(_grammar_1);
+    TypeReference _antlrTokenFileProviderClass = naming.getAntlrTokenFileProviderClass(_grammar_1);
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_3, _antlrTokenFileProviderClass);
     TypeReference _typeRef_4 = TypeReference.typeRef(Lexer.class);
     Grammar _grammar_2 = this.getGrammar();
-    TypeReference _lexerClass = this.productionNaming.getLexerClass(_grammar_2);
+    TypeReference _lexerClass = naming.getLexerClass(_grammar_2);
     GuiceModuleAccess.BindingFactory _addTypeToType_3 = _addTypeToType_2.addTypeToType(_typeRef_4, _lexerClass);
     TypeReference _typeRef_5 = TypeReference.typeRef(ITokenDefProvider.class);
     TypeReference _typeRef_6 = TypeReference.typeRef(AntlrTokenDefProvider.class);
     GuiceModuleAccess.BindingFactory _addTypeToType_4 = _addTypeToType_3.addTypeToType(_typeRef_5, _typeRef_6);
     Grammar _grammar_3 = this.getGrammar();
-    TypeReference _lexerClass_1 = this.productionNaming.getLexerClass(_grammar_3);
+    TypeReference _lexerClass_1 = naming.getLexerClass(_grammar_3);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append(LexerProvider.class, "");
         _builder.append(".create(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass = XtextAntlrGeneratorFragment2.this.productionNaming.getLexerClass(_grammar);
+        TypeReference _lexerClass = naming.getLexerClass(_grammar);
         _builder.append(_lexerClass, "");
         _builder.append(".class)");
       }
@@ -447,7 +871,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append("\t");
         _builder.append(".to(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass = XtextAntlrGeneratorFragment2.this.productionNaming.getLexerClass(_grammar);
+        TypeReference _lexerClass = naming.getLexerClass(_grammar);
         _builder.append(_lexerClass, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
@@ -461,13 +885,23 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       TypeReference _typeRef_8 = TypeReference.typeRef(UnorderedGroupHelper.class);
       rtBindings.addTypeToType(_typeRef_7, _typeRef_8);
     }
+    AntlrOptions _options = this.getOptions();
+    boolean _isIgnoreCase = _options.isIgnoreCase();
+    if (_isIgnoreCase) {
+      TypeReference _typeRef_9 = TypeReference.typeRef(ITokenSerializer.IKeywordSerializer.class);
+      TypeReference _typeRef_10 = TypeReference.typeRef(IgnoreCaseKeywordSerializer.class);
+      GuiceModuleAccess.BindingFactory _addTypeToType_5 = rtBindings.addTypeToType(_typeRef_9, _typeRef_10);
+      TypeReference _typeRef_11 = TypeReference.typeRef(AbstractIDValueConverter.class);
+      TypeReference _typeRef_12 = TypeReference.typeRef(IgnoreCaseIDValueConverter.class);
+      _addTypeToType_5.addTypeToType(_typeRef_11, _typeRef_12);
+    }
     ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     rtBindings.contributeTo(_runtimeGenModule);
     GuiceModuleAccess.BindingFactory _bindingFactory_1 = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper");
-    TypeReference _typeRef_10 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper");
-    GuiceModuleAccess.BindingFactory _addTypeToType_5 = _bindingFactory_1.addTypeToType(_typeRef_9, _typeRef_10);
+    TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper");
+    TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper");
+    GuiceModuleAccess.BindingFactory _addTypeToType_6 = _bindingFactory_1.addTypeToType(_typeRef_13, _typeRef_14);
     StringConcatenationClient _client_2 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -483,13 +917,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append("\t");
         _builder.append(".to(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass = XtextAntlrGeneratorFragment2.this.productionNaming.getLexerClass(_grammar);
+        TypeReference _lexerClass = naming.getLexerClass(_grammar);
         _builder.append(_lexerClass, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
       }
     };
-    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType_5.addConfiguredBinding("HighlightingLexer", _client_2);
+    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType_6.addConfiguredBinding("HighlightingLexer", _client_2);
     StringConcatenationClient _client_3 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -522,5 +956,14 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   public void setDebugGrammar(final boolean debugGrammar) {
     this.debugGrammar = debugGrammar;
+  }
+  
+  @Pure
+  public Boolean getCombinedGrammar() {
+    return this.combinedGrammar;
+  }
+  
+  public void setCombinedGrammar(final Boolean combinedGrammar) {
+    this.combinedGrammar = combinedGrammar;
   }
 }

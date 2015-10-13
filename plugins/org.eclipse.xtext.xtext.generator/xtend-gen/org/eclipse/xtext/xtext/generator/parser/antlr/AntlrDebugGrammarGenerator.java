@@ -30,7 +30,7 @@ public class AntlrDebugGrammarGenerator extends AbstractAntlrGrammarGenerator {
   }
   
   @Override
-  protected CharSequence compileOptions(final Grammar it, final AntlrOptions options) {
+  protected CharSequence compileParserOptions(final Grammar it, final AntlrOptions options) {
     return "";
   }
   

@@ -64,7 +64,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	
 	protected override compileParserMembers(Grammar it, AntlrOptions options) '''
 		
-		@parser::members {
+		@«IF combinedGrammar»parser::«ENDIF»members {
 		
 		«IF options.backtrack»
 		/*

@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
 import org.eclipse.xtext.xtext.RuleFilter;
 import org.eclipse.xtext.xtext.RuleNames;
@@ -40,10 +42,11 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
+import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 import org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
 
 @SuppressWarnings("all")
@@ -59,45 +62,77 @@ public abstract class AbstractAntlrGrammarGenerator {
   @Inject
   private CodeConfig codeConfig;
   
+  private KeywordHelper keyWordHelper;
+  
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
+    KeywordHelper _helper = KeywordHelper.getHelper(it);
+    this.keyWordHelper = _helper;
     final RuleFilter filter = new RuleFilter();
     boolean _isSkipUnusedRules = options.isSkipUnusedRules();
     filter.setDiscardUnreachableRules(_isSkipUnusedRules);
-    Grammar _grammar = GrammarUtil.getGrammar(it);
-    final RuleNames ruleNames = RuleNames.getRuleNames(_grammar, true);
+    final RuleNames ruleNames = RuleNames.getRuleNames(it, true);
     FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
     final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
     GrammarNaming _grammarNaming = this.getGrammarNaming();
-    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
-    String _path = _grammarClass.getPath();
-    String _plus = (_path + ".g");
-    CharSequence _compile = this.compile(flattened, options);
-    fsa.generateFile(_plus, _compile);
+    AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
+    String _grammarFileName = _parserGrammar.getGrammarFileName();
+    CharSequence _compileParser = this.compileParser(flattened, options);
+    fsa.generateFile(_grammarFileName, _compileParser);
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    boolean _not = (!_isCombinedGrammar);
+    if (_not) {
+      GrammarNaming _grammarNaming_1 = this.getGrammarNaming();
+      AntlrGrammar _lexerGrammar = _grammarNaming_1.getLexerGrammar(it);
+      String _grammarFileName_1 = _lexerGrammar.getGrammarFileName();
+      CharSequence _compileLexer = this.compileLexer(flattened, options);
+      fsa.generateFile(_grammarFileName_1, _compileLexer);
+    }
+  }
+  
+  protected boolean isCombinedGrammar() {
+    return true;
   }
   
   protected abstract GrammarNaming getGrammarNaming();
   
-  protected CharSequence compile(final Grammar it, final AntlrOptions options) {
+  protected CharSequence compileParser(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
     _builder.append(_fileHeader, "");
     _builder.newLineIfNotEmpty();
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      boolean _not = (!_isCombinedGrammar);
+      if (_not) {
+        _builder.append("parser ");
+      }
+    }
     _builder.append("grammar ");
     GrammarNaming _grammarNaming = this.getGrammarNaming();
-    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
-    String _simpleName = _grammarClass.getSimpleName();
+    AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
+    String _simpleName = _parserGrammar.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    CharSequence _compileOptions = this.compileOptions(it, options);
-    _builder.append(_compileOptions, "");
+    CharSequence _compileParserOptions = this.compileParserOptions(it, options);
+    _builder.append(_compileParserOptions, "");
     _builder.newLineIfNotEmpty();
-    String _compileTokens = this.compileTokens(it, options);
-    _builder.append(_compileTokens, "");
-    _builder.newLineIfNotEmpty();
-    CharSequence _compileLexerHeader = this.compileLexerHeader(it, options);
-    _builder.append(_compileLexerHeader, "");
-    _builder.newLineIfNotEmpty();
+    {
+      boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
+      if (_isCombinedGrammar_1) {
+        CharSequence _compileTokens = this.compileTokens(it, options);
+        _builder.append(_compileTokens, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isCombinedGrammar_2 = this.isCombinedGrammar();
+      if (_isCombinedGrammar_2) {
+        CharSequence _compileLexerHeader = this.compileLexerHeader(it, options);
+        _builder.append(_compileLexerHeader, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     CharSequence _compileParserHeader = this.compileParserHeader(it, options);
     _builder.append(_compileParserHeader, "");
     _builder.newLineIfNotEmpty();
@@ -113,10 +148,54 @@ public abstract class AbstractAntlrGrammarGenerator {
     return _builder;
   }
   
-  protected CharSequence compileOptions(final Grammar it, final AntlrOptions options) {
+  protected CharSequence compileLexer(final Grammar it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _fileHeader = this.codeConfig.getFileHeader();
+    _builder.append(_fileHeader, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("lexer grammar ");
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    AntlrGrammar _lexerGrammar = _grammarNaming.getLexerGrammar(it);
+    String _simpleName = _lexerGrammar.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileLexerOptions = this.compileLexerOptions(it, options);
+    _builder.append(_compileLexerOptions, "");
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileTokens = this.compileTokens(it, options);
+    _builder.append(_compileTokens, "");
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileLexerHeader = this.compileLexerHeader(it, options);
+    _builder.append(_compileLexerHeader, "");
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileKeywordRules = this.compileKeywordRules(it, options);
+    _builder.append(_compileKeywordRules, "");
+    _builder.newLineIfNotEmpty();
+    CharSequence _compileTerminalRules = this.compileTerminalRules(it, options);
+    _builder.append(_compileTerminalRules, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  protected CharSequence compileParserOptions(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("options {");
     _builder.newLine();
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      boolean _not = (!_isCombinedGrammar);
+      if (_not) {
+        _builder.append("\t");
+        _builder.append("tokenVocab=");
+        GrammarNaming _grammarNaming = this.getGrammarNaming();
+        AntlrGrammar _lexerGrammar = _grammarNaming.getLexerGrammar(it);
+        String _simpleName = _lexerGrammar.getSimpleName();
+        _builder.append(_simpleName, "\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     {
       String _internalParserSuperClass = this.getInternalParserSuperClass();
       boolean _notEquals = (!Objects.equal(_internalParserSuperClass, null));
@@ -182,23 +261,88 @@ public abstract class AbstractAntlrGrammarGenerator {
     return _builder;
   }
   
+  protected CharSequence compileLexerOptions(final Grammar it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isBacktrackLexer = options.isBacktrackLexer();
+      if (_isBacktrackLexer) {
+        _builder.append("options {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("backtrack=true;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("memoize=true;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    return _builder;
+  }
+  
   protected String getInternalParserSuperClass() {
     return null;
   }
   
-  protected String compileTokens(final Grammar it, final AntlrOptions options) {
-    return "";
+  protected CharSequence compileTokens(final Grammar it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isBacktrackLexer = options.isBacktrackLexer();
+      if (_isBacktrackLexer) {
+        _builder.append("tokens {");
+        _builder.newLine();
+        {
+          Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
+          List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
+          final Function1<String, Integer> _function = new Function1<String, Integer>() {
+            @Override
+            public Integer apply(final String it) {
+              return Integer.valueOf(it.length());
+            }
+          };
+          List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
+          for(final String kw : _sortBy) {
+            _builder.append("\t");
+            String _ruleName = this.keyWordHelper.getRuleName(kw);
+            _builder.append(_ruleName, "\t");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(it);
+          for(final TerminalRule rule : _allTerminalRules) {
+            _builder.append("\t");
+            String _ruleName_1 = this._grammarAccessExtensions.ruleName(rule);
+            _builder.append(_ruleName_1, "\t");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    return _builder;
   }
   
   protected CharSequence compileLexerHeader(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("@lexer::header {");
-    _builder.newLine();
+    _builder.append("@");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      if (_isCombinedGrammar) {
+        _builder.append("lexer::");
+      }
+    }
+    _builder.append("header {");
+    _builder.newLineIfNotEmpty();
     _builder.append("package ");
     GrammarNaming _grammarNaming = this.getGrammarNaming();
-    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
-    String _packageName = _grammarClass.getPackageName();
+    AntlrGrammar _lexerGrammar = _grammarNaming.getLexerGrammar(it);
+    String _packageName = _lexerGrammar.getPackageName();
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -225,12 +369,19 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected CharSequence compileParserHeader(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("@parser::header {");
-    _builder.newLine();
+    _builder.append("@");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      if (_isCombinedGrammar) {
+        _builder.append("parser::");
+      }
+    }
+    _builder.append("header {");
+    _builder.newLineIfNotEmpty();
     _builder.append("package ");
     GrammarNaming _grammarNaming = this.getGrammarNaming();
-    TypeReference _grammarClass = _grammarNaming.getGrammarClass(it);
-    String _packageName = _grammarClass.getPackageName();
+    AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
+    String _packageName = _parserGrammar.getPackageName();
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -289,12 +440,171 @@ public abstract class AbstractAntlrGrammarGenerator {
       }
     }
     {
-      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(it);
-      for(final TerminalRule rule_2 : _allTerminalRules) {
-        _builder.newLine();
-        CharSequence _compileRule_2 = this.compileRule(rule_2, it, options);
-        _builder.append(_compileRule_2, "");
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      if (_isCombinedGrammar) {
+        CharSequence _compileTerminalRules = this.compileTerminalRules(it, options);
+        _builder.append(_compileTerminalRules, "");
         _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence compileKeywordRules(final Grammar it, final AntlrOptions options) {
+    CharSequence _xblockexpression = null;
+    {
+      Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
+      List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
+      final Function1<String, Integer> _function = new Function1<String, Integer>() {
+        @Override
+        public Integer apply(final String it) {
+          int _length = it.length();
+          return Integer.valueOf((-_length));
+        }
+      };
+      final List<String> allKeywords = IterableExtensions.<String, Integer>sortBy(_sort, _function);
+      final List<TerminalRule> allTerminalRules = GrammarUtil.allTerminalRules(it);
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _isBacktrackLexer = options.isBacktrackLexer();
+        if (_isBacktrackLexer) {
+          _builder.append("SYNTHETIC_ALL_KEYWORDS :");
+          _builder.newLine();
+          {
+            Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(allKeywords);
+            for(final Pair<Integer, String> kw : _indexed) {
+              _builder.append("(FRAGMENT_");
+              String _value = kw.getValue();
+              String _ruleName = this.keyWordHelper.getRuleName(_value);
+              _builder.append(_ruleName, "");
+              _builder.append(")=> FRAGMENT_");
+              String _value_1 = kw.getValue();
+              String _ruleName_1 = this.keyWordHelper.getRuleName(_value_1);
+              _builder.append(_ruleName_1, "");
+              _builder.append(" {$type = ");
+              String _value_2 = kw.getValue();
+              String _ruleName_2 = this.keyWordHelper.getRuleName(_value_2);
+              _builder.append(_ruleName_2, "");
+              _builder.append("; } ");
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _or = false;
+                Integer _key = kw.getKey();
+                int _size = allKeywords.size();
+                boolean _notEquals = ((_key).intValue() != _size);
+                if (_notEquals) {
+                  _or = true;
+                } else {
+                  List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(it);
+                  boolean _isEmpty = _allTerminalRules.isEmpty();
+                  boolean _not = (!_isEmpty);
+                  _or = _not;
+                }
+                if (_or) {
+                  _builder.append("|");
+                }
+              }
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          {
+            Iterable<Pair<Integer, TerminalRule>> _indexed_1 = IterableExtensions.<TerminalRule>indexed(allTerminalRules);
+            for(final Pair<Integer, TerminalRule> rule : _indexed_1) {
+              {
+                boolean _and = false;
+                TerminalRule _value_3 = rule.getValue();
+                boolean _isSyntheticTerminalRule = this._grammarAccessExtensions.isSyntheticTerminalRule(_value_3);
+                boolean _not_1 = (!_isSyntheticTerminalRule);
+                if (!_not_1) {
+                  _and = false;
+                } else {
+                  TerminalRule _value_4 = rule.getValue();
+                  boolean _isFragment = _value_4.isFragment();
+                  boolean _not_2 = (!_isFragment);
+                  _and = _not_2;
+                }
+                if (_and) {
+                  _builder.append("(FRAGMENT_");
+                  TerminalRule _value_5 = rule.getValue();
+                  String _ruleName_3 = this._grammarAccessExtensions.ruleName(_value_5);
+                  _builder.append(_ruleName_3, "");
+                  _builder.append(")=> FRAGMENT_");
+                  TerminalRule _value_6 = rule.getValue();
+                  String _ruleName_4 = this._grammarAccessExtensions.ruleName(_value_6);
+                  _builder.append(_ruleName_4, "");
+                  _builder.append(" {$type = ");
+                  TerminalRule _value_7 = rule.getValue();
+                  String _ruleName_5 = this._grammarAccessExtensions.ruleName(_value_7);
+                  _builder.append(_ruleName_5, "");
+                  _builder.append("; }");
+                  _builder.newLineIfNotEmpty();
+                  {
+                    Integer _key_1 = rule.getKey();
+                    int _size_1 = allTerminalRules.size();
+                    boolean _notEquals_1 = ((_key_1).intValue() != _size_1);
+                    if (_notEquals_1) {
+                      _builder.append("|");
+                    }
+                  }
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+          _builder.append(";");
+          _builder.newLine();
+          {
+            for(final String kw_1 : allKeywords) {
+              _builder.append("fragment FRAGMENT_");
+              String _ruleName_6 = this.keyWordHelper.getRuleName(kw_1);
+              _builder.append(_ruleName_6, "");
+              _builder.append(" : \'");
+              String _antlrString = AntlrGrammarGenUtil.toAntlrString(kw_1);
+              _builder.append(_antlrString, "");
+              _builder.append("\';");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        } else {
+          {
+            for(final String rule_1 : allKeywords) {
+              _builder.newLine();
+              CharSequence _compileKeyword = this.compileKeyword(rule_1, it, options);
+              _builder.append(_compileKeyword, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  protected CharSequence compileTerminalRules(final Grammar it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isBacktrackLexer = options.isBacktrackLexer();
+      if (_isBacktrackLexer) {
+        {
+          List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(it);
+          for(final TerminalRule rule : _allTerminalRules) {
+            _builder.newLine();
+            CharSequence _compileBacktrackingRule = this.compileBacktrackingRule(rule, it, options);
+            _builder.append(_compileBacktrackingRule, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      } else {
+        {
+          List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(it);
+          for(final TerminalRule rule_1 : _allTerminalRules_1) {
+            _builder.newLine();
+            CharSequence _compileRule = this.compileRule(rule_1, it, options);
+            _builder.append(_compileRule, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     return _builder;
@@ -311,30 +621,115 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected CharSequence compileRule(final TerminalRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _isFragment = it.isFragment();
-      if (_isFragment) {
+      boolean _isSyntheticTerminalRule = this._grammarAccessExtensions.isSyntheticTerminalRule(it);
+      if (_isSyntheticTerminalRule) {
         _builder.append("fragment ");
+        String _ruleName = this._grammarAccessExtensions.ruleName(it);
+        _builder.append(_ruleName, "");
+        _builder.append(" : ;");
+        _builder.newLineIfNotEmpty();
+      } else {
+        {
+          boolean _isFragment = it.isFragment();
+          if (_isFragment) {
+            _builder.append("fragment ");
+          }
+        }
+        String _ruleName_1 = this._grammarAccessExtensions.ruleName(it);
+        _builder.append(_ruleName_1, "");
+        _builder.append(" : ");
+        String _lexerBody = TerminalRuleToLexerBody.toLexerBody(it);
+        _builder.append(_lexerBody, "");
+        {
+          boolean _shouldBeSkipped = this.shouldBeSkipped(it, grammar);
+          if (_shouldBeSkipped) {
+            _builder.append(" {skip();}");
+          }
+        }
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
       }
     }
-    String _ruleName = this._grammarAccessExtensions.ruleName(it);
-    _builder.append(_ruleName, "");
-    _builder.append(" : ");
-    String _lexerBody = TerminalRuleToLexerBody.toLexerBody(it);
-    _builder.append(_lexerBody, "");
-    {
-      boolean _shouldBeSkipped = this.shouldBeSkipped(it, grammar);
-      if (_shouldBeSkipped) {
-        _builder.append(" {skip();}");
-      }
-    }
-    _builder.append(";");
     return _builder;
   }
   
+  protected CharSequence compileBacktrackingRule(final TerminalRule it, final Grammar grammar, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isSyntheticTerminalRule = this._grammarAccessExtensions.isSyntheticTerminalRule(it);
+      boolean _not = (!_isSyntheticTerminalRule);
+      if (_not) {
+        {
+          boolean _isFragment = it.isFragment();
+          if (_isFragment) {
+            _builder.append("fragment ");
+            String _ruleName = this._grammarAccessExtensions.ruleName(it);
+            _builder.append(_ruleName, "");
+            _builder.append(" : ");
+            String _lexerBody = TerminalRuleToLexerBody.toLexerBody(it);
+            _builder.append(_lexerBody, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          } else {
+            _builder.append("fragment ");
+            String _ruleName_1 = this._grammarAccessExtensions.ruleName(it);
+            _builder.append(_ruleName_1, "");
+            _builder.append(" : FRAGMENT_");
+            String _ruleName_2 = this._grammarAccessExtensions.ruleName(it);
+            _builder.append(_ruleName_2, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            _builder.append("fragment FRAGMENT_");
+            String _ruleName_3 = this._grammarAccessExtensions.ruleName(it);
+            _builder.append(_ruleName_3, "");
+            _builder.append(" : ");
+            String _lexerBody_1 = TerminalRuleToLexerBody.toLexerBody(it);
+            _builder.append(_lexerBody_1, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence compileKeyword(final String keyWord, final Grammar grammar, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _ruleName = this.keyWordHelper.getRuleName(keyWord);
+    _builder.append(_ruleName, "");
+    _builder.append(" : ");
+    String _antlrKeyWordRule = this.toAntlrKeyWordRule(keyWord, options);
+    _builder.append(_antlrKeyWordRule, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  protected String toAntlrKeyWordRule(final String keyWord, final AntlrOptions options) {
+    String _xifexpression = null;
+    boolean _isIgnoreCase = options.isIgnoreCase();
+    if (_isIgnoreCase) {
+      _xifexpression = AntlrGrammarGenUtil.toAntlrStringIgnoreCase(keyWord);
+    } else {
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(keyWord);
+      _xifexpression = (_antlrString + "\'");
+    }
+    return ("\'" + _xifexpression);
+  }
+  
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
+    boolean _and = false;
     List<String> _initialHiddenTokens = this._grammarAccessExtensions.initialHiddenTokens(grammar);
     String _ruleName = this._grammarAccessExtensions.ruleName(it);
-    return _initialHiddenTokens.contains(_ruleName);
+    boolean _contains = _initialHiddenTokens.contains(_ruleName);
+    if (!_contains) {
+      _and = false;
+    } else {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      _and = _isCombinedGrammar;
+    }
+    return _and;
   }
   
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
@@ -587,10 +982,18 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
-    String _value = it.getValue();
-    String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
-    String _plus = ("\'" + _antlrString);
-    return (_plus + "\'");
+    String _xifexpression = null;
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    if (_isCombinedGrammar) {
+      String _value = it.getValue();
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+      String _plus = ("\'" + _antlrString);
+      _xifexpression = (_plus + "\'");
+    } else {
+      String _value_1 = it.getValue();
+      _xifexpression = this.keyWordHelper.getRuleName(_value_1);
+    }
+    return _xifexpression;
   }
   
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
@@ -675,10 +1078,18 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
-    String _value = it.getValue();
-    String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
-    String _plus = ("\'" + _antlrString);
-    return (_plus + "\'");
+    String _xifexpression = null;
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    if (_isCombinedGrammar) {
+      String _value = it.getValue();
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(_value);
+      String _plus = ("\'" + _antlrString);
+      _xifexpression = (_plus + "\'");
+    } else {
+      String _value_1 = it.getValue();
+      _xifexpression = this.keyWordHelper.getRuleName(_value_1);
+    }
+    return _xifexpression;
   }
   
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {

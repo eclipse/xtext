@@ -43,6 +43,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextRuntimeModule;
@@ -941,6 +942,10 @@ public class GrammarAccessExtensions {
       _switchResult = "null";
     }
     return _switchResult;
+  }
+  
+  public boolean isSyntheticTerminalRule(final TerminalRule rule) {
+    return false;
   }
   
   private ISerializer getSerializer() {

@@ -45,30 +45,57 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	@Inject CodeConfig codeConfig
 	
+	KeywordHelper keyWordHelper
+	
 	def generate(Grammar it, AntlrOptions options, IXtextGeneratorFileSystemAccess fsa) {
+		this.keyWordHelper = KeywordHelper.getHelper(it)
 		val RuleFilter filter = new RuleFilter();
 		filter.discardUnreachableRules = options.skipUnusedRules
-		val RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
+		val RuleNames ruleNames = RuleNames.getRuleNames(it, true);
 		val Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
-		fsa.generateFile(grammarNaming.getGrammarClass(it).path + '.g', flattened.compile(options))
+		fsa.generateFile(grammarNaming.getParserGrammar(it).grammarFileName, flattened.compileParser(options))
+		if (!isCombinedGrammar) {
+			fsa.generateFile(grammarNaming.getLexerGrammar(it).grammarFileName, flattened.compileLexer(options))
+		}
+	}
+	
+	protected def isCombinedGrammar() {
+		true
 	}
 	
 	protected abstract def GrammarNaming getGrammarNaming()
 	
-	protected def compile(Grammar it, AntlrOptions options) '''
+	protected def compileParser(Grammar it, AntlrOptions options) '''
 		«codeConfig.fileHeader»
-		grammar «grammarNaming.getGrammarClass(it).simpleName»;
-		«compileOptions(options)»
-		«compileTokens(options)»
-		«compileLexerHeader(options)»
+		«IF !combinedGrammar»parser «ENDIF»grammar «grammarNaming.getParserGrammar(it).simpleName»;
+		«compileParserOptions(options)»
+		«IF isCombinedGrammar»
+			«compileTokens(options)»
+		«ENDIF»
+		«IF isCombinedGrammar»
+			«compileLexerHeader(options)»
+		«ENDIF»
 		«compileParserHeader(options)»
 		«compileParserMembers(options)»
 		«compileRuleCatch(options)»
 		«compileRules(options)»
 	'''
 	
-	protected def compileOptions(Grammar it, AntlrOptions options) '''
+	protected def compileLexer(Grammar it, AntlrOptions options) '''
+		«codeConfig.fileHeader»
+		lexer grammar «grammarNaming.getLexerGrammar(it).simpleName»;
+		«compileLexerOptions(options)»
+		«compileTokens(options)»
+		«compileLexerHeader(options)»
+		«compileKeywordRules(options)»
+		«compileTerminalRules(options)»
+	'''
+	
+	protected def compileParserOptions(Grammar it, AntlrOptions options) '''
 		options {
+			«IF !isCombinedGrammar»
+				tokenVocab=«grammarNaming.getLexerGrammar(it).simpleName»;
+			«ENDIF»
 			«IF internalParserSuperClass != null»
 				superClass=«internalParserSuperClass»;
 			«ENDIF»
@@ -85,19 +112,36 @@ abstract class AbstractAntlrGrammarGenerator {
 			«ENDIF»
 		}
 	'''
+	protected def compileLexerOptions(Grammar it, AntlrOptions options) '''
+		«IF options.backtrackLexer»
+			options {
+				backtrack=true;
+				memoize=true;
+			}
+		«ENDIF»
+	'''
 	
 	protected def String getInternalParserSuperClass() {
 		null
 	}
 	
-	protected def compileTokens(Grammar it, AntlrOptions options) {
-		''
-	}
+	protected def compileTokens(Grammar it, AntlrOptions options) '''
+		«IF options.isBacktrackLexer»
+			tokens {
+				«FOR kw : allKeywords.sort.sortBy[length]»
+					«keyWordHelper.getRuleName(kw)»;
+				«ENDFOR»
+				«FOR rule: allTerminalRules»
+					«rule.ruleName»;
+				«ENDFOR»
+			}
+		«ENDIF»
+	'''
 	
 	protected def compileLexerHeader(Grammar it, AntlrOptions options) '''
 		
-		@lexer::header {
-		package «grammarNaming.getGrammarClass(it).packageName»;
+		@«IF isCombinedGrammar»lexer::«ENDIF»header {
+		package «grammarNaming.getLexerGrammar(it).packageName»;
 		«compileLexerImports(options)»
 		}
 	'''
@@ -111,8 +155,8 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	protected def compileParserHeader(Grammar it, AntlrOptions options) '''
 		
-		@parser::header {
-		package «grammarNaming.getGrammarClass(it).packageName»;
+		@«IF isCombinedGrammar»parser::«ENDIF»header {
+		package «grammarNaming.getParserGrammar(it).packageName»;
 		«compileParserImports(options)»
 		}
 	'''
@@ -131,17 +175,60 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	protected def compileRules(Grammar it, AntlrOptions options) '''
 		«FOR rule:allParserRules.filter[rule | rule.isCalled(it)]»
-
+			
 			«rule.compileRule(it, options)»
 		«ENDFOR»
 		«FOR rule:allEnumRules.filter[rule | rule.isCalled(it)]»
-
+			
 			«rule.compileRule(it, options)»
 		«ENDFOR»
-		«FOR rule:allTerminalRules»
-
-			«rule.compileRule(it, options)»
-		«ENDFOR»
+		«IF isCombinedGrammar»
+			«compileTerminalRules(options)»
+		«ENDIF»
+	'''
+	
+	protected def compileKeywordRules(Grammar it, AntlrOptions options) {
+		val allKeywords = allKeywords.sort.sortBy[-length]
+		val allTerminalRules = allTerminalRules
+		
+		'''
+			«IF options.isBacktrackLexer»
+				SYNTHETIC_ALL_KEYWORDS :
+				«FOR kw: allKeywords.indexed»
+					(FRAGMENT_«keyWordHelper.getRuleName(kw.value)»)=> FRAGMENT_«keyWordHelper.getRuleName(kw.value)» {$type = «keyWordHelper.getRuleName(kw.value)»; } 
+					«IF kw.key != allKeywords.size || !allTerminalRules().isEmpty»|«ENDIF»
+				«ENDFOR»
+				«FOR rule : allTerminalRules.indexed»
+					«IF !isSyntheticTerminalRule(rule.value) && !rule.value.fragment»
+						(FRAGMENT_«rule.value.ruleName()»)=> FRAGMENT_«rule.value.ruleName()» {$type = «rule.value.ruleName()»; }
+						«IF rule.key != allTerminalRules.size»|«ENDIF»
+					«ENDIF»
+				«ENDFOR»
+				;
+				«FOR kw:  allKeywords»
+					fragment FRAGMENT_«keyWordHelper.getRuleName(kw)» : '«kw.toAntlrString()»';
+				«ENDFOR»
+			«ELSE»
+				«FOR rule:allKeywords»
+					
+					«rule.compileKeyword(it, options)»
+				«ENDFOR»
+			«ENDIF»
+		'''
+	}
+	
+	protected def compileTerminalRules(Grammar it, AntlrOptions options) '''
+		«IF options.isBacktrackLexer»
+			«FOR rule:allTerminalRules»
+				
+				«rule.compileBacktrackingRule(it, options)»
+			«ENDFOR»
+		«ELSE»
+			«FOR rule:allTerminalRules»
+				
+				«rule.compileRule(it, options)»
+			«ENDFOR»
+		«ENDIF»
 	'''
 	
 	protected def compileRule(EnumRule it, Grammar grammar, AntlrOptions options) {
@@ -153,10 +240,33 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected def compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
-		«IF fragment»fragment «ENDIF»«ruleName» : «toLexerBody»«IF shouldBeSkipped(grammar)» {skip();}«ENDIF»;'''
+		«IF isSyntheticTerminalRule(it)»
+			fragment «ruleName» : ;
+		«ELSE»
+			«IF fragment»fragment «ENDIF»«ruleName» : «toLexerBody»«IF shouldBeSkipped(grammar)» {skip();}«ENDIF»;
+		«ENDIF»
+	'''
+	
+	protected def compileBacktrackingRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
+		«IF !isSyntheticTerminalRule(it)»
+			«IF fragment»
+				fragment «ruleName» : «toLexerBody»;
+			«ELSE»
+				fragment «ruleName» : FRAGMENT_«ruleName»;
+				fragment FRAGMENT_«ruleName» : «toLexerBody»;
+			«ENDIF»
+		«ENDIF»
+	'''
+	
+	protected def compileKeyword(String keyWord, Grammar grammar, AntlrOptions options) '''
+		«keyWordHelper.getRuleName(keyWord)» : «keyWord.toAntlrKeyWordRule(options)»;
+	'''
 		
+	protected def toAntlrKeyWordRule(String keyWord, AntlrOptions options) {
+		 "'" + if (options.ignoreCase) keyWord.toAntlrStringIgnoreCase else keyWord.toAntlrString + "'"
+	}
 	protected def shouldBeSkipped(TerminalRule it, Grammar grammar) {
-		grammar.initialHiddenTokens.contains(ruleName)
+		grammar.initialHiddenTokens.contains(ruleName) && isCombinedGrammar
 	}
 	
 	protected def String compileEBNF(AbstractRule it, AntlrOptions options) '''
@@ -214,7 +324,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	'''
 	
 	protected dispatch def String dataTypeEbnf2(Keyword it, boolean supportActions) {
-		"'" + value.toAntlrString + "'"
+		if (combinedGrammar) "'" + value.toAntlrString + "'" else keyWordHelper.getRuleName(value)
 	}
 	
 	protected dispatch def String dataTypeEbnf2(RuleCall it, boolean supportActions) {
@@ -244,7 +354,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def String ebnf2(Keyword it, AntlrOptions options, boolean supportActions) {
-		"'" + value.toAntlrString + "'"
+		if (combinedGrammar) "'" + value.toAntlrString + "'" else keyWordHelper.getRuleName(value) 
 	}
 	
 	protected dispatch def String ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {

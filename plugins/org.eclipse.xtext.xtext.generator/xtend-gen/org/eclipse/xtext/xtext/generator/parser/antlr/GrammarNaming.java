@@ -15,6 +15,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 
 @Singleton
 @SuppressWarnings("all")
@@ -23,7 +24,7 @@ public class GrammarNaming {
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
-  public String getParserPackage(final Grammar it) {
+  protected String getParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
     _builder.append(_runtimeBasePackage, "");
@@ -31,7 +32,7 @@ public class GrammarNaming {
     return _builder.toString();
   }
   
-  public String getInternalParserPackage(final Grammar it) {
+  protected String getInternalParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
     _builder.append(_runtimeBasePackage, "");
@@ -39,21 +40,25 @@ public class GrammarNaming {
     return _builder.toString();
   }
   
-  public TypeReference getGrammarClass(final Grammar it) {
+  public AntlrGrammar getParserGrammar(final Grammar it) {
     String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
-    return new TypeReference(_internalParserPackage, _builder.toString());
+    return new AntlrGrammar(_internalParserPackage, _builder.toString());
+  }
+  
+  public AntlrGrammar getLexerGrammar(final Grammar it) {
+    return this.getParserGrammar(it);
   }
   
   public TypeReference getLexerClass(final Grammar it) {
-    TypeReference _grammarClass = this.getGrammarClass(it);
-    String _packageName = _grammarClass.getPackageName();
+    AntlrGrammar _lexerGrammar = this.getLexerGrammar(it);
+    String _packageName = _lexerGrammar.getPackageName();
     StringConcatenation _builder = new StringConcatenation();
-    TypeReference _grammarClass_1 = this.getGrammarClass(it);
-    String _simpleName = _grammarClass_1.getSimpleName();
+    AntlrGrammar _lexerGrammar_1 = this.getLexerGrammar(it);
+    String _simpleName = _lexerGrammar_1.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append("Lexer");
     return new TypeReference(_packageName, _builder.toString());
@@ -69,11 +74,11 @@ public class GrammarNaming {
   }
   
   public TypeReference getInternalParserClass(final Grammar it) {
-    TypeReference _grammarClass = this.getGrammarClass(it);
-    String _packageName = _grammarClass.getPackageName();
+    AntlrGrammar _parserGrammar = this.getParserGrammar(it);
+    String _packageName = _parserGrammar.getPackageName();
     StringConcatenation _builder = new StringConcatenation();
-    TypeReference _grammarClass_1 = this.getGrammarClass(it);
-    String _simpleName = _grammarClass_1.getSimpleName();
+    AntlrGrammar _parserGrammar_1 = this.getParserGrammar(it);
+    String _simpleName = _parserGrammar_1.getSimpleName();
     _builder.append(_simpleName, "");
     _builder.append("Parser");
     return new TypeReference(_packageName, _builder.toString());
@@ -113,10 +118,10 @@ public class GrammarNaming {
     return new TypeReference(_parserPackage, _builder.toString());
   }
   
-  public String getTokenFileName(final Grammar it) {
-    TypeReference _grammarClass = this.getGrammarClass(it);
-    String _name = _grammarClass.getName();
-    String _replace = _name.replace(".", "/");
-    return (_replace + ".tokens");
+  public TypeReference getTokenSourceClass(final Grammar it) {
+    String _parserPackage = this.getParserPackage(it);
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    String _plus = (_simpleName + "TokenSource");
+    return new TypeReference(_parserPackage, _plus);
   }
 }

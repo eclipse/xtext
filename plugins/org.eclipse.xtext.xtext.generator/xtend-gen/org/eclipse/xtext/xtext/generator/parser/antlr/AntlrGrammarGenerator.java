@@ -127,8 +127,15 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   protected String compileParserMembers(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("@parser::members {");
-    _builder.newLine();
+    _builder.append("@");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar();
+      if (_isCombinedGrammar) {
+        _builder.append("parser::");
+      }
+    }
+    _builder.append("members {");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
       boolean _isBacktrack = options.isBacktrack();

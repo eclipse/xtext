@@ -10,6 +10,9 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import com.google.common.collect.Iterators
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import java.io.CharArrayWriter
+import java.io.PrintWriter
+import java.nio.charset.Charset
 import java.util.Collections
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractRule
@@ -174,6 +177,43 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, options)
 		fsa.generateFile(parser.javaPath, parserContent)
+	}
+	
+	def protected void cleanupLexerTokensFile(AntlrGrammar lexerGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
+		if (options.backtrackLexer) {
+			val provider = createLexerTokensProvider(lexerGrammar, helper, fsa)
+			val entries = provider.tokenDefMap.entrySet.iterator
+			while (entries.hasNext) {
+				val value = entries.next.value
+				if(!helper.isKeywordRule(value) && !value.startsWith("RULE_") && !value.startsWith("SUPER_")) 
+					entries.remove
+			}
+			val writer = new CharArrayWriter
+			provider.writeTokenFile(new PrintWriter(writer))
+			fsa.generateFile(lexerGrammar.tokensFileName, new String(writer.toCharArray))
+		}
+	}
+
+	def protected MutableTokenDefProvider createLexerTokensProvider(AntlrGrammar lexerGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
+		val provider = new MutableTokenDefProvider(helper, Charset.forName(codeConfig.encoding))
+		provider.antlrTokenFileProvider = [fsa.readBinaryFile(lexerGrammar.tokensFileName)]
+		return provider
+	}
+	
+	def protected void cleanupParserTokensFile(AntlrGrammar lexerGrammar, AntlrGrammar parserGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
+		val provider= createLexerTokensProvider(lexerGrammar, helper, fsa) 
+		for (entry : provider.tokenDefMap.entrySet) {
+			val value = entry.value 
+			if (helper.isKeywordRule(value)) {
+				val keywordAsAntlrString = AntlrGrammarGenUtil.toAntlrString(helper.getKeywordValue(value)) 
+				entry.setValue("'" + keywordAsAntlrString + "'") 
+			} else if (value.startsWith("'")) {
+				entry.setValue("'" + AntlrGrammarGenUtil.toAntlrString(value) + "'") 
+			}
+		}
+		val writer = new CharArrayWriter
+		provider.writeTokenFile(new PrintWriter(writer))
+		fsa.generateFile(parserGrammar.tokensFileName, new String(writer.toCharArray))
 	}
 
 	def protected boolean containsUnorderedGroup(Grammar grammar) {

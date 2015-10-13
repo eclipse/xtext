@@ -48,6 +48,7 @@ import static extension java.lang.Character.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.TerminalRule
 
 /**
  * This API can be used by other templates to generate code
@@ -500,6 +501,10 @@ class GrammarAccessExtensions {
 			default:
 				"null"
 		}
+	}
+	
+	def isSyntheticTerminalRule(TerminalRule rule) {
+		false
 	}
 
 	private def ISerializer getSerializer() {

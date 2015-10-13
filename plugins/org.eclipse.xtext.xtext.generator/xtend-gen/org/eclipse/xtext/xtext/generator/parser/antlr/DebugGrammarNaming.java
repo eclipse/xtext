@@ -10,18 +10,18 @@ package org.eclipse.xtext.xtext.generator.parser.antlr;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
 @SuppressWarnings("all")
 public class DebugGrammarNaming extends GrammarNaming {
   @Override
-  public TypeReference getGrammarClass(final Grammar it) {
+  public AntlrGrammar getParserGrammar(final Grammar it) {
     String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("DebugInternal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
-    return new TypeReference(_internalParserPackage, _builder.toString());
+    return new AntlrGrammar(_internalParserPackage, _builder.toString());
   }
 }

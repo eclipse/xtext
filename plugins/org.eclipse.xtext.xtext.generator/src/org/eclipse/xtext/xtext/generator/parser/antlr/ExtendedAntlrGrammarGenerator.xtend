@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import org.eclipse.xtext.Grammar
+import com.google.inject.Inject
 
-import static extension org.eclipse.xtext.GrammarUtil.*
-
-class DebugGrammarNaming extends GrammarNaming {
+class ExtendedAntlrGrammarGenerator extends AntlrGrammarGenerator {
 	
-	override getParserGrammar(Grammar it) {
-		new AntlrGrammar(internalParserPackage, '''DebugInternal«simpleName»''')
+	@Inject ExtendedGrammarNaming naming
+	
+	override protected getGrammarNaming() {
+		naming
+	}
+	
+	override protected isCombinedGrammar() {
+		false
 	}
 	
 }

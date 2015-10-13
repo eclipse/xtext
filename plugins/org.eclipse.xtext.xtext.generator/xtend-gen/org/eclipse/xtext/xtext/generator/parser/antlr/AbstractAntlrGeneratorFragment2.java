@@ -11,9 +11,16 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
+import java.io.CharArrayWriter;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -27,9 +34,11 @@ import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -38,8 +47,12 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
+import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
+import org.eclipse.xtext.xtext.generator.parser.antlr.MutableTokenDefProvider;
 import org.eclipse.xtext.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
@@ -288,6 +301,105 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     parserContent = _removeDuplicateDFAs;
     String _javaPath_3 = parser.getJavaPath();
     fsa.generateFile(_javaPath_3, parserContent);
+  }
+  
+  protected void cleanupLexerTokensFile(final AntlrGrammar lexerGrammar, final KeywordHelper helper, final IXtextGeneratorFileSystemAccess fsa) {
+    try {
+      boolean _isBacktrackLexer = this.options.isBacktrackLexer();
+      if (_isBacktrackLexer) {
+        final MutableTokenDefProvider provider = this.createLexerTokensProvider(lexerGrammar, helper, fsa);
+        Map<Integer, String> _tokenDefMap = provider.getTokenDefMap();
+        Set<Map.Entry<Integer, String>> _entrySet = _tokenDefMap.entrySet();
+        final Iterator<Map.Entry<Integer, String>> entries = _entrySet.iterator();
+        while (entries.hasNext()) {
+          {
+            Map.Entry<Integer, String> _next = entries.next();
+            final String value = _next.getValue();
+            boolean _and = false;
+            boolean _and_1 = false;
+            boolean _isKeywordRule = helper.isKeywordRule(value);
+            boolean _not = (!_isKeywordRule);
+            if (!_not) {
+              _and_1 = false;
+            } else {
+              boolean _startsWith = value.startsWith("RULE_");
+              boolean _not_1 = (!_startsWith);
+              _and_1 = _not_1;
+            }
+            if (!_and_1) {
+              _and = false;
+            } else {
+              boolean _startsWith_1 = value.startsWith("SUPER_");
+              boolean _not_2 = (!_startsWith_1);
+              _and = _not_2;
+            }
+            if (_and) {
+              entries.remove();
+            }
+          }
+        }
+        final CharArrayWriter writer = new CharArrayWriter();
+        PrintWriter _printWriter = new PrintWriter(writer);
+        provider.writeTokenFile(_printWriter);
+        String _tokensFileName = lexerGrammar.getTokensFileName();
+        char[] _charArray = writer.toCharArray();
+        String _string = new String(_charArray);
+        fsa.generateFile(_tokensFileName, _string);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected MutableTokenDefProvider createLexerTokensProvider(final AntlrGrammar lexerGrammar, final KeywordHelper helper, final IXtextGeneratorFileSystemAccess fsa) {
+    String _encoding = this.codeConfig.getEncoding();
+    Charset _forName = Charset.forName(_encoding);
+    final MutableTokenDefProvider provider = new MutableTokenDefProvider(helper, _forName);
+    final IAntlrTokenFileProvider _function = new IAntlrTokenFileProvider() {
+      @Override
+      public InputStream getAntlrTokenFile() {
+        String _tokensFileName = lexerGrammar.getTokensFileName();
+        return fsa.readBinaryFile(_tokensFileName);
+      }
+    };
+    provider.setAntlrTokenFileProvider(_function);
+    return provider;
+  }
+  
+  protected void cleanupParserTokensFile(final AntlrGrammar lexerGrammar, final AntlrGrammar parserGrammar, final KeywordHelper helper, final IXtextGeneratorFileSystemAccess fsa) {
+    try {
+      final MutableTokenDefProvider provider = this.createLexerTokensProvider(lexerGrammar, helper, fsa);
+      Map<Integer, String> _tokenDefMap = provider.getTokenDefMap();
+      Set<Map.Entry<Integer, String>> _entrySet = _tokenDefMap.entrySet();
+      for (final Map.Entry<Integer, String> entry : _entrySet) {
+        {
+          final String value = entry.getValue();
+          boolean _isKeywordRule = helper.isKeywordRule(value);
+          if (_isKeywordRule) {
+            String _keywordValue = helper.getKeywordValue(value);
+            final String keywordAsAntlrString = AntlrGrammarGenUtil.toAntlrString(_keywordValue);
+            entry.setValue((("\'" + keywordAsAntlrString) + "\'"));
+          } else {
+            boolean _startsWith = value.startsWith("\'");
+            if (_startsWith) {
+              String _antlrString = AntlrGrammarGenUtil.toAntlrString(value);
+              String _plus = ("\'" + _antlrString);
+              String _plus_1 = (_plus + "\'");
+              entry.setValue(_plus_1);
+            }
+          }
+        }
+      }
+      final CharArrayWriter writer = new CharArrayWriter();
+      PrintWriter _printWriter = new PrintWriter(writer);
+      provider.writeTokenFile(_printWriter);
+      String _tokensFileName = parserGrammar.getTokensFileName();
+      char[] _charArray = writer.toCharArray();
+      String _string = new String(_charArray);
+      fsa.generateFile(_tokensFileName, _string);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected boolean containsUnorderedGroup(final Grammar grammar) {
