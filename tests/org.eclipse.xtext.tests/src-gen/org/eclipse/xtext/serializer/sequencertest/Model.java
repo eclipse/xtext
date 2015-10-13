@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX30 <em>X30</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX33 <em>X33</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel()
@@ -803,5 +804,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX32(NullCrossRef value);
+
+  /**
+   * Returns the value of the '<em><b>X33</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X33</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X33</em>' containment reference.
+   * @see #setX33(FragmentCallerType)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X33()
+   * @model containment="true"
+   * @generated
+   */
+  FragmentCallerType getX33();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX33 <em>X33</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X33</em>' containment reference.
+   * @see #getX33()
+   * @generated
+   */
+  void setX33(FragmentCallerType value);
 
 } // Model

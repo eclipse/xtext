@@ -84,9 +84,11 @@ import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
+import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule;
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
@@ -105,6 +107,7 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElements
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameContextFactory;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.CombinedJvmJdtRenameRefactoringProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.ui.refactoring.XbaseReferenceUpdater;
 import org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType;
@@ -119,22 +122,22 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		super(plugin);
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Provider<IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextEditor> bindXtextEditor() {
 		return XbaseEditor.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
 		return XbaseDocumentProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends OpenGeneratedFileHandler> bindOpenGeneratedFileHandler() {
 		return XbaseOpenGeneratedFileHandler.class;
 	}
@@ -199,37 +202,37 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return PersistentDataAwareDirtyResource.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XtendQuickfixProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return XbaseLabelProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 	public void configureResourceUIServiceLabelProvider(Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider.class);
+		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(XbaseDescriptionLabelProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return XtendOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
 		return XtendOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 	public Class<? extends IViewerCreator> bindIViewerCreator() {
 		return DefaultViewerCreator.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XtendProposalProvider.class;
 	}
@@ -259,24 +262,24 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return PartialContentAssistContextFactory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 	public void configureIPreferenceStoreInitializer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).annotatedWith(com.google.inject.name.Names.named("RefactoringPreferences")).to(org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer.class);
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("RefactoringPreferences")).to(RefactoringPreferences.Initializer.class);
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 	public Class<? extends IRenameSupport.Factory> bindIRenameSupport$Factory() {
 		return JdtRenameSupport.Factory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
 		return JvmMemberRenameStrategy.Provider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 	public void configureJvmMemberRenameStrategy$Provider$Delegate(Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.class).annotatedWith(org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate.class).to(org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider.class);
+		binder.bind(IRenameStrategy.Provider.class).annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class).to(DefaultRenameStrategyProvider.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -19,12 +20,13 @@ import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 
 @Log
 @Accessors
 @SuppressWarnings("all")
-public class PluginXmlAccess extends TextFileAccess {
+public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
   @Inject
   private CodeConfig codeConfig;
   
@@ -98,6 +100,11 @@ public class PluginXmlAccess extends TextFileAccess {
     if (_not) {
       super.writeTo(fileSystemAccess);
     }
+  }
+  
+  @Override
+  public void initialize(final Injector injector) {
+    injector.injectMembers(this);
   }
   
   private final static Logger LOG = Logger.getLogger(PluginXmlAccess.class);

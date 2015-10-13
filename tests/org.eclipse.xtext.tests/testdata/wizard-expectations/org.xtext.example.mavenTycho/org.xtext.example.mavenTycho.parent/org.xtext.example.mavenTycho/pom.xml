@@ -44,11 +44,6 @@
 						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
 						<version>${xtextVersion}</version>
 					</dependency>
-					<dependency>
-						<groupId>org.eclipse.xtext</groupId>
-						<artifactId>org.eclipse.xtext.xbase</artifactId>
-						<version>${xtextVersion}</version>
-					</dependency>
 				</dependencies>
 			</plugin>
 			<plugin>
@@ -59,28 +54,67 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
 				<configuration>
 					<filesets combine.children="append">
 						<fileset>
-							<directory>${basedir}/src-gen/</directory>
+							<directory>${basedir}/../org.xtext.example.mavenTycho/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.tests/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.ide/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.ui/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.ui.tests/src-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.mavenTycho.web/src-gen/</directory>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.ide/src-gen/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.ui/src-gen/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.web/src-gen/</directory>
 						</fileset>
 					</filesets>
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											exec-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.2.1,)
+										</versionRange>
+										<goals>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>

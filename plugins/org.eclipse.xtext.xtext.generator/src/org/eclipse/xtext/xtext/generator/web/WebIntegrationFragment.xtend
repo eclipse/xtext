@@ -179,13 +179,13 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		super.checkConfiguration(issues)
 		if (framework === null)
 			issues.addError('The property \'framework\' is required.')
-		if (generateJsHighlighting && projectConfig.webApp === null)
+		if (generateJsHighlighting && projectConfig.web.assets === null)
 			issues.addWarning('The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.')
-		if (generateServlet && projectConfig.webSrc === null)
-			issues.addWarning('The \'webSrc\' outlet is not defined in the project configuration; the generated servlet is disabled.')
-		if (generateJettyLauncher && projectConfig.webSrc === null)
-			issues.addWarning('The \'webSrc\' outlet is not defined in the project configuration; the Jetty launcher is disabled.')
-		if (generateHtmlExample && projectConfig.webApp === null)
+		if (generateServlet && projectConfig.web.src === null)
+			issues.addWarning('The \'web.src\' outlet is not defined in the project configuration; the generated servlet is disabled.')
+		if (generateJettyLauncher && projectConfig.web.src === null)
+			issues.addWarning('The \'web.src\' outlet is not defined in the project configuration; the Jetty launcher is disabled.')
+		if (generateHtmlExample && projectConfig.web.assets === null)
 			issues.addWarning('The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.')
 		for (pattern : enabledPatterns.filter[suppressedPatterns.contains(it)]) {
 			issues.addError('The pattern \'' + pattern + '\' cannot be enabled and suppressed.')
@@ -193,7 +193,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	override generate() {
-		if (generateJsHighlighting && projectConfig.webApp !== null) {
+		if (generateJsHighlighting && projectConfig.web.assets !== null) {
 			val langId = language.fileExtensions.head
 			if (highlightingModuleName.nullOrEmpty) {
 				highlightingModuleName = switch framework {
@@ -208,17 +208,17 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			generateJsHighlighting(langId)
 		}
 		
-		if (generateServlet && projectConfig.webSrc !== null) {
+		if (generateServlet && projectConfig.web.src !== null) {
 			generateServlet()
 		}
-		if (generateJettyLauncher && projectConfig.webSrc !== null) {
+		if (generateJettyLauncher && projectConfig.web.src !== null) {
 			generateServerLauncher()
 		}
-		if (generateHtmlExample && projectConfig.webApp !== null) {
+		if (generateHtmlExample && projectConfig.web.assets !== null) {
 			generateIndexDoc()
 			generateStyleSheet()
 		}
-		if (generateWebXml && projectConfig.webApp !== null) {
+		if (generateWebXml && projectConfig.web.assets !== null) {
 			generateWebXml()
 		}
 		
@@ -344,7 +344,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			}
 			
 		}
-		jsFile.writeTo(projectConfig.webApp)
+		jsFile.writeTo(projectConfig.web.assets)
 	}
 	
 	protected def Collection<String> createOrionPatterns(String langId, Set<String> keywords) {
@@ -460,7 +460,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def void generateIndexDoc() {
-		if (projectConfig.webApp.isFile('index.html')) {
+		if (projectConfig.web.assets.isFile('index.html')) {
 			// Don't overwrite an existing index document
 			return
 		}
@@ -561,11 +561,11 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			</body>
 			</html>
 		'''
-		indexFile.writeTo(projectConfig.webApp)
+		indexFile.writeTo(projectConfig.web.assets)
 	}
 	
 	protected def void generateStyleSheet() {
-		if (projectConfig.webApp.isFile('style.css')) {
+		if (projectConfig.web.assets.isFile('style.css')) {
 			// Don't overwrite an existing style sheet
 			return
 		}
@@ -648,7 +648,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				 */
 			«ENDIF»
 		'''
-		styleFile.writeTo(projectConfig.webApp)
+		styleFile.writeTo(projectConfig.web.assets)
 	}
 	
 	protected def void generateServerLauncher() {
@@ -661,7 +661,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				def static void main(String[] args) {
 					val server = new «'org.eclipse.jetty.server.Server'.typeRef»(new «'java.net.InetSocketAddress'.typeRef»('localhost', 8080))
 					server.handler = new «'org.eclipse.jetty.webapp.WebAppContext'.typeRef» => [
-						resourceBase = '«projectConfig.webApp.path.replace(projectConfig.webRoot.path + "/", "")»'
+						resourceBase = '«projectConfig.web.assets.path.replace(projectConfig.web.root.path + "/", "")»'
 						welcomeFiles = #["index.html"]
 						contextPath = "/"
 						configurations = #[
@@ -670,7 +670,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 							new «'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef»,
 							new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»
 						]
-						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*')
+						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*/org\\.eclipse\\.xtext\\.web.*,.*/org\\.webjars.*')
 					]
 					val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 					try {
@@ -692,7 +692,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 					}
 				}
 			}
-		''').writeTo(projectConfig.webSrc)
+		''').writeTo(projectConfig.web.src)
 	}
 	
 	protected def void generateServlet() {
@@ -720,11 +720,11 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				}
 				
 			}
-		''').writeTo(projectConfig.webSrc)
+		''').writeTo(projectConfig.web.src)
 	}
 	
 	protected def void generateWebXml() {
-		if (projectConfig.webApp.isFile('WEB-INF/web.xml')) {
+		if (projectConfig.web.assets.isFile('WEB-INF/web.xml')) {
 			// Don't overwrite an existing web.xml
 			return
 		}
@@ -787,7 +787,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				</session-config>
 			</web-app>
 		'''
-		xmlFile.writeTo(projectConfig.webApp)
+		xmlFile.writeTo(projectConfig.web.assets)
 	}
 	
 }

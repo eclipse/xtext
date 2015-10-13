@@ -23,18 +23,17 @@ import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.UnorderedGroup
+import org.eclipse.xtext.xtext.FlattenedGrammarAccess
+import org.eclipse.xtext.xtext.RuleFilter
+import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
-import org.eclipse.xtext.RuleNames
-import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
 
 abstract class AbstractAntlrGrammarGenerator {
 	
@@ -44,9 +43,6 @@ abstract class AbstractAntlrGrammarGenerator {
 	@Inject
 	protected extension GrammarAccessExtensions
 	
-	@Inject
-	protected extension GrammarNaming
-	
 	@Inject CodeConfig codeConfig
 	
 	def generate(Grammar it, AntlrOptions options, IXtextGeneratorFileSystemAccess fsa) {
@@ -54,14 +50,14 @@ abstract class AbstractAntlrGrammarGenerator {
 		filter.discardUnreachableRules = options.skipUnusedRules
 		val RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
 		val Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
-		fsa.generateFile(grammarClass.path + '.g', flattened.compile(options))
+		fsa.generateFile(grammarNaming.getGrammarClass(it).path + '.g', flattened.compile(options))
 	}
 	
-	protected abstract def TypeReference getGrammarClass(Grammar it)
+	protected abstract def GrammarNaming getGrammarNaming()
 	
 	protected def compile(Grammar it, AntlrOptions options) '''
 		«codeConfig.fileHeader»
-		grammar «grammarClass.simpleName»;
+		grammar «grammarNaming.getGrammarClass(it).simpleName»;
 		«compileOptions(options)»
 		«compileTokens(options)»
 		«compileLexerHeader(options)»
@@ -82,7 +78,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	protected def compileLexerHeader(Grammar it, AntlrOptions options) '''
 		
 		@lexer::header {
-		package «grammarClass.packageName»;
+		package «grammarNaming.getGrammarClass(it).packageName»;
 		«compileLexerImports(options)»
 		}
 	'''
@@ -97,7 +93,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	protected def compileParserHeader(Grammar it, AntlrOptions options) '''
 		
 		@parser::header {
-		package «grammarClass.packageName»;
+		package «grammarNaming.getGrammarClass(it).packageName»;
 		«compileParserImports(options)»
 		}
 	'''

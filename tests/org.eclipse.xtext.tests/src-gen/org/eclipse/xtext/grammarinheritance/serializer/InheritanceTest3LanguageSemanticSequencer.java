@@ -46,7 +46,7 @@ public class InheritanceTest3LanguageSemanticSequencer extends InheritanceTestLa
 	
 	/**
 	 * Constraint:
-	 *     (name=ID | name=ID | name=STRING)
+	 *     (name=ID | name=STRING | name=ID)
 	 */
 	protected void sequence_Element_InheritanceTestLanguageElement(EObject context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

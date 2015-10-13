@@ -18,10 +18,21 @@ import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated see methods of this class for documentation about their replacements
  */
+@Deprecated
 @ImplementedBy(ContextProvider.class)
 public interface IContextProvider {
+
+	/**
+	 * @deprecated use {@link IContextPDAProvider#getAllContexts(Grammar)}
+	 */
+	@Deprecated
 	public List<EObject> getAllContexts(Grammar grammar);
 
-	public Set<EClass> getTypesForContext(EObject context);
+	/**
+	 * @deprecated use {@link IContextTypePDAProvider#getTypesForContext(Grammar, EObject)}
+	 */
+	@Deprecated
+	public Set<EClass> getTypesForContext(Grammar grammar, EObject context);
 }

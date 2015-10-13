@@ -21,12 +21,15 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElemen
 import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElement_03;
 import org.eclipse.xtext.metamodelreferencing.tests.services.EcoreReferenceTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -205,7 +208,14 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	 *     name=ValidID
 	 */
 	protected void sequence_Unused_01(EObject context, MyNamedElement_01 semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EcorePerNsURIPackage.Literals.EXTENDS_NS_URIE_OBJECT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EcorePerNsURIPackage.Literals.EXTENDS_NS_URIE_OBJECT__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnused_01Access().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -214,7 +224,14 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	 *     name=ValidID
 	 */
 	protected void sequence_Unused_02(EObject context, MyNamedElement_02 semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EcorePerPlatformResourcePackage.Literals.EXTENDS_RESOURCE_EOBJECT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EcorePerPlatformResourcePackage.Literals.EXTENDS_RESOURCE_EOBJECT__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnused_02Access().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -223,6 +240,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	 *     name=ValidID
 	 */
 	protected void sequence_Unused_03(EObject context, MyNamedElement_03 semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EcorePerPlatformPluginPackage.Literals.EXTENDS_PLUGIN_EOBJECT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EcorePerPlatformPluginPackage.Literals.EXTENDS_PLUGIN_EOBJECT__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnused_03Access().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 }

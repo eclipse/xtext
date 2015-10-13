@@ -8,13 +8,18 @@
 package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
@@ -25,6 +30,7 @@ import org.eclipse.xtext.util.formallang.PdaUtil;
 import org.eclipse.xtext.util.formallang.Traverser;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -33,6 +39,68 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ContextTypePDAProvider implements IContextTypePDAProvider {
+
+	protected static abstract class AbstractTypeTraverser
+			implements Traverser<Pda<ISerState, RuleCall>, ISerState, FilterState> {
+
+		@Override
+		public FilterState enter(Pda<ISerState, RuleCall> pda, ISerState state, FilterState previous) {
+			switch (state.getType()) {
+				case ELEMENT:
+					if (previous.type == null) {
+						EClass cls = getInstantiatedType(state.getGrammarElement());
+						if (cls != null)
+							return enterType(state, previous, previous.stack, cls);
+					} else if (state.getGrammarElement() instanceof Action)
+						return null;
+					return new FilterState(previous, previous.type, previous.stack, state);
+				case POP:
+					if (previous.stack != null && state.getGrammarElement() == previous.stack.rc)
+						return new FilterState(previous, previous.type, previous.stack.parent, state);
+					return null;
+				case PUSH:
+					RuleCall rc = (RuleCall) state.getGrammarElement();
+					EClass cls = getInstantiatedType(rc);
+					if (cls != null)
+						return enterType(state, previous, new StackItem(previous.stack, rc), cls);
+					return new FilterState(previous, previous.type, new StackItem(previous.stack, rc), state);
+				case START:
+					return new FilterState(previous, null, null, state);
+				case STOP:
+					if (previous.stack == null)
+						return previous;
+					return null;
+			}
+			return null;
+		}
+
+		protected abstract FilterState enterType(ISerState state, FilterState previous, StackItem stack,
+				EClass newType);
+
+		protected EClass getInstantiatedType(AbstractElement element) {
+			Assignment ass = GrammarUtil.containingAssignment(element);
+			AbstractRule rule = element instanceof RuleCall ? ((RuleCall) element).getRule() : null;
+			TypeRef type = null;
+			if (ass != null || (rule instanceof ParserRule && ((ParserRule) rule).isFragment())) {
+				type = GrammarUtil.containingRule(element).getType();
+			} else if (element instanceof Action) {
+				type = ((Action) element).getType();
+			}
+			if (type != null) {
+				EClassifier classifier = type.getClassifier();
+				if (classifier instanceof EClass && !classifier.eIsProxy()) {
+					return (EClass) classifier;
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public boolean isSolution(FilterState result) {
+			return true;
+		}
+
+	}
 
 	protected static class FilterState {
 		final protected FilterState previous;
@@ -112,7 +180,28 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 		}
 	}
 
-	protected static class TypeFilter implements Traverser<Pda<ISerState, RuleCall>, ISerState, FilterState> {
+	protected static class TypeCollector extends AbstractTypeTraverser {
+		final protected Set<EClass> types = Sets.newLinkedHashSet();
+
+		@Override
+		protected FilterState enterType(ISerState state, FilterState previous, StackItem stack, EClass newType) {
+			types.add(newType);
+			return null;
+		}
+
+		public Set<EClass> getTypes() {
+			return types;
+		}
+
+		@Override
+		public boolean isSolution(FilterState result) {
+			types.add(null);
+			return false;
+		}
+
+	}
+
+	protected static class TypeFilter extends AbstractTypeTraverser {
 		final protected EClass type;
 
 		public TypeFilter(EClass type) {
@@ -121,77 +210,58 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 		}
 
 		@Override
-		public FilterState enter(Pda<ISerState, RuleCall> pda, ISerState state, FilterState previous) {
-			switch (state.getType()) {
-				case ELEMENT:
-					if (previous.type == null) {
-						Assignment ass = GrammarUtil.containingAssignment(state.getGrammarElement());
-						if (ass != null) {
-							TypeRef returnType = GrammarUtil.containingRule(ass).getType();
-							EClassifier cls = returnType != null ? returnType.getClassifier() : null;
-							if (cls == type)
-								return new FilterState(previous, type, previous.stack, state);
-							return null;
-						}
-						if (state.getGrammarElement() instanceof Action) {
-							EClassifier cls = ((Action) state.getGrammarElement()).getType().getClassifier();
-							if (cls == type)
-								return new FilterState(previous, type, previous.stack, state);
-							return null;
-						}
-					} else if (state.getGrammarElement() instanceof Action)
-						return null;
-					return new FilterState(previous, previous.type, previous.stack, state);
-				case POP:
-					if (previous.stack != null && state.getGrammarElement() == previous.stack.rc)
-						return new FilterState(previous, previous.type, previous.stack.parent, state);
-					return null;
-				case PUSH:
-					RuleCall rc = (RuleCall) state.getGrammarElement();
-					return new FilterState(previous, previous.type, new StackItem(previous.stack, rc), state);
-				case START:
-					return new FilterState(previous, null, null, state);
-				case STOP:
-					if (previous.type == type && previous.stack == null)
-						return previous;
-					return null;
-			}
+		protected FilterState enterType(ISerState state, FilterState previous, StackItem stack, EClass newType) {
+			if (newType == type)
+				return new FilterState(previous, type, stack, state);
 			return null;
 		}
 
 		@Override
 		public boolean isSolution(FilterState result) {
-			return true;
+			return result.type == type;
 		}
 
 	}
 
 	protected Map<Pair<EObject, EClass>, Pda<ISerState, RuleCall>> cache = Maps.newHashMap();
-	@Inject
-	protected IContextProvider contextProvider;
 
 	@Inject
 	protected IContextPDAProvider pdaProvider;
 
-	protected Pda<ISerState, RuleCall> createPDA(EObject context, EClass type) {
-		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(context);
+	@Inject
+	protected PdaUtil pdaUtil;
+
+	protected Pda<ISerState, RuleCall> createPDA(Grammar grammar, EObject context, EClass type) {
+		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(grammar, context);
 		Pda<ISerState, RuleCall> contextTypePda = null;
-		if (contextProvider.getTypesForContext(context).size() > 1) {
+		if (getTypesForContext(grammar, context).size() > 1) {
 			TypeFilter typeFilter = newTypeFilter(type);
 			SerializerPDACloneFactory factory = new SerializerPDACloneFactory();
-			contextTypePda = new PdaUtil().filterEdges(contextPda, typeFilter, factory);
+			contextTypePda = pdaUtil.filterEdges(contextPda, typeFilter, factory);
 		} else
 			contextTypePda = contextPda;
 		return contextTypePda;
 	}
 
 	@Override
-	public Pda<ISerState, RuleCall> getContextTypePDA(EObject context, EClass type) {
+	public Pda<ISerState, RuleCall> getContextTypePDA(Grammar grammar, EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
 		Pda<ISerState, RuleCall> result = cache.get(key);
 		if (result == null)
-			cache.put(key, result = createPDA(context, type));
+			cache.put(key, result = createPDA(grammar, context, type));
 		return result;
+	}
+
+	@Override
+	public Set<EClass> getTypesForContext(Grammar grammar, EObject context) {
+		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(grammar, context);
+		TypeCollector collector = newTypeCollector();
+		pdaUtil.filterEdges(contextPda, collector, null);
+		return collector.getTypes();
+	}
+
+	protected TypeCollector newTypeCollector() {
+		return new TypeCollector();
 	}
 
 	protected TypeFilter newTypeFilter(EClass type) {

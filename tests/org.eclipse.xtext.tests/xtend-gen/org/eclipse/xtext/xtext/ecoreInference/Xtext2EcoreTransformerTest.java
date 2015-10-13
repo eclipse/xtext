@@ -577,6 +577,46 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   }
   
   @Test
+  public void testParserRuleFragment_08() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate test \'http://test\'");
+    _builder.newLine();
+    _builder.append("RuleA: feature=Fragment;");
+    _builder.newLine();
+    _builder.append("fragment Fragment * Fragment: name=ID;");
+    _builder.newLine();
+    final String grammar = _builder.toString();
+    this.errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall, 
+      TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
+    EPackage result = this.getEPackageFromGrammar(grammar, 2);
+    EList<EClassifier> _eClassifiers = result.getEClassifiers();
+    int _size = _eClassifiers.size();
+    Assert.assertEquals(1, _size);
+  }
+  
+  @Test
+  public void testParserRuleFragment_09() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate test \'http://test\'");
+    _builder.newLine();
+    _builder.append("RuleA: feature=(Fragment|Fragment);");
+    _builder.newLine();
+    _builder.append("fragment Fragment returns Fragment: name=ID;");
+    _builder.newLine();
+    final String grammar = _builder.toString();
+    this.errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall, 
+      TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
+    EPackage result = this.getEPackageFromGrammar(grammar, 1);
+    EList<EClassifier> _eClassifiers = result.getEClassifiers();
+    int _size = _eClassifiers.size();
+    Assert.assertEquals(2, _size);
+  }
+  
+  @Test
   public void testTypesOfImplicitSuperGrammar() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals");

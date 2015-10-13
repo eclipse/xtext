@@ -22,7 +22,7 @@ public interface XtendHighlightingStyles extends XbaseHighlightingStyles {
   
   public final static String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
   
-  public final static String TEMPLATE_LINE_BREAK = "xtend.template.line.break";
+  public final static String SEMANTIC_LINE_BREAK = "xtend.template.line.break";
   
   public final static String ACTIVE_ANNOTATION = "xtend.active.annotation";
 }

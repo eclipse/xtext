@@ -52,7 +52,11 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 		composedChecks += composedCheckValidator
 	}
 	
-	protected def TypeReference getValidatorClass(Grammar grammar) {
+	/**
+	 * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
+	 */
+	public def TypeReference getValidatorClass(Grammar grammar) {
+		// is public for being callable by QuickFixProviderFragement2
 		new TypeReference(grammar.runtimeBasePackage + '.validation.' + getSimpleName(grammar) + 'Validator')
 	}
 	
@@ -88,10 +92,10 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 		}
 		generateAbstractValidator()
 		
-		if (projectConfig.runtimeManifest !== null)
-			projectConfig.runtimeManifest.exportedPackages += grammar.validatorClass.packageName
+		if (projectConfig.runtime.manifest !== null)
+			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
 		
-		if (projectConfig.eclipsePluginPluginXml !== null)
+		if (projectConfig.eclipsePlugin.pluginXml !== null)
 			contributeEclipsePluginExtensions()
 	}
 	
@@ -118,7 +122,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 			//	}
 				
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def generateJavaValidatorStub() {
@@ -140,7 +144,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 			//	}
 				
 			}
-		''').writeTo(projectConfig.runtimeSrc)
+		''').writeTo(projectConfig.runtime.src)
 	}
 	
 	protected def generateAbstractValidator() {
@@ -165,7 +169,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 				
 			}
 		'''
-		javaFile.writeTo(projectConfig.runtimeSrcGen)
+		javaFile.writeTo(projectConfig.runtime.srcGen)
 	}
 	
 	protected def getGeneratedPackagesToValidate() {
@@ -184,7 +188,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def contributeEclipsePluginExtensions() {
 		val simpleName = getSimpleName(grammar)
-		projectConfig.eclipsePluginPluginXml.entries += '''
+		projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<!-- marker definitions for «grammar.name» -->
 			<extension
 					id="«simpleName.toLowerCase».check.fast"

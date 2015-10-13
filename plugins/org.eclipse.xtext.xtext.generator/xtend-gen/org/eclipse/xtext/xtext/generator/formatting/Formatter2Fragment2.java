@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -163,8 +164,9 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
     };
     xtendFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
-    xtendFile.writeTo(_runtimeSrc);
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    xtendFile.writeTo(_src);
   }
   
   protected StringConcatenationClient generateFormatMethod(final EClass clazz, final Collection<EReference> containmentRefs, final boolean isOverriding) {

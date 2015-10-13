@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -33,9 +34,6 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 @SuppressWarnings("all")
 public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
   @Inject
-  private IXtextProjectConfig projectConfig;
-  
-  @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
@@ -44,10 +42,14 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-    boolean _notEquals = (!Objects.equal(_runtimeTestManifest, null));
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
+    ManifestAccess _manifest = _runtimeTest.getManifest();
+    boolean _notEquals = (!Objects.equal(_manifest, null));
     if (_notEquals) {
-      ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
+      ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
       final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
         @Override
         public void apply(final ManifestAccess it) {
@@ -61,12 +63,16 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _exportedPackages.add(_runtimeTestBasePackage);
         }
       };
-      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_runtimeTestManifest_1, _function);
+      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
-    ManifestAccess _eclipsePluginTestManifest = this.projectConfig.getEclipsePluginTestManifest();
-    boolean _notEquals_1 = (!Objects.equal(_eclipsePluginTestManifest, null));
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePluginTest = _projectConfig_2.getEclipsePluginTest();
+    ManifestAccess _manifest_2 = _eclipsePluginTest.getManifest();
+    boolean _notEquals_1 = (!Objects.equal(_manifest_2, null));
     if (_notEquals_1) {
-      ManifestAccess _eclipsePluginTestManifest_1 = this.projectConfig.getEclipsePluginTestManifest();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePluginTest_1 = _projectConfig_3.getEclipsePluginTest();
+      ManifestAccess _manifest_3 = _eclipsePluginTest_1.getManifest();
       final Procedure1<ManifestAccess> _function_1 = new Procedure1<ManifestAccess>() {
         @Override
         public void apply(final ManifestAccess it) {
@@ -80,21 +86,29 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _exportedPackages.add(_eclipsePluginTestBasePackage);
         }
       };
-      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_eclipsePluginTestManifest_1, _function_1);
+      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_3, _function_1);
     }
-    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    boolean _notEquals_2 = (!Objects.equal(_eclipsePluginManifest, null));
+    IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
+    ManifestAccess _manifest_4 = _eclipsePlugin.getManifest();
+    boolean _notEquals_2 = (!Objects.equal(_manifest_4, null));
     if (_notEquals_2) {
-      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
-      Set<String> _exportedPackages = _eclipsePluginManifest_1.getExportedPackages();
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
+      ManifestAccess _manifest_5 = _eclipsePlugin_1.getManifest();
+      Set<String> _exportedPackages = _manifest_5.getExportedPackages();
       Grammar _grammar = this.getGrammar();
       TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
       String _packageName = _eclipsePluginActivator.getPackageName();
       _exportedPackages.add(_packageName);
     }
-    ManifestAccess _runtimeTestManifest_2 = this.projectConfig.getRuntimeTestManifest();
-    ManifestAccess _eclipsePluginTestManifest_2 = this.projectConfig.getEclipsePluginTestManifest();
-    Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_runtimeTestManifest_2, _eclipsePluginTestManifest_2)));
+    IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest_2 = _projectConfig_6.getRuntimeTest();
+    ManifestAccess _manifest_6 = _runtimeTest_2.getManifest();
+    IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePluginTest_2 = _projectConfig_7.getEclipsePluginTest();
+    ManifestAccess _manifest_7 = _eclipsePluginTest_2.getManifest();
+    Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_manifest_6, _manifest_7)));
     final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
       @Override
       public void apply(final ManifestAccess it) {
@@ -111,14 +125,20 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
     };
     IterableExtensions.<ManifestAccess>forEach(_filterNull, _function_2);
     JavaFileAccess _generateInjectorProvider = this.generateInjectorProvider();
-    IXtextGeneratorFileSystemAccess _runtimeTestSrcGen = this.projectConfig.getRuntimeTestSrcGen();
-    _generateInjectorProvider.writeTo(_runtimeTestSrcGen);
+    IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtimeTest_3.getSrcGen();
+    _generateInjectorProvider.writeTo(_srcGen);
     JavaFileAccess _generateExampleRuntimeTest = this.generateExampleRuntimeTest();
-    IXtextGeneratorFileSystemAccess _runtimeTestSrc = this.projectConfig.getRuntimeTestSrc();
-    _generateExampleRuntimeTest.writeTo(_runtimeTestSrc);
+    IXtextProjectConfig _projectConfig_9 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest_4 = _projectConfig_9.getRuntimeTest();
+    IXtextGeneratorFileSystemAccess _src = _runtimeTest_4.getSrc();
+    _generateExampleRuntimeTest.writeTo(_src);
     JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
-    IXtextGeneratorFileSystemAccess _eclipsePluginTestSrcGen = this.projectConfig.getEclipsePluginTestSrcGen();
-    _generateUiInjectorProvider.writeTo(_eclipsePluginTestSrcGen);
+    IXtextProjectConfig _projectConfig_10 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePluginTest_3 = _projectConfig_10.getEclipsePluginTest();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePluginTest_3.getSrcGen();
+    _generateUiInjectorProvider.writeTo(_srcGen_1);
   }
   
   public JavaFileAccess generateExampleRuntimeTest() {

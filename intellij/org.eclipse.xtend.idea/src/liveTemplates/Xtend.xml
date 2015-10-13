@@ -21,7 +21,7 @@
       <option name="xtend.member" value="true" />
     </context>
   </template>
-  <template name="main" value="def static void main(String[] args) {&#10;    $END$&#10;}" description="main method" toReformat="true" toShortenFQNames="true">
+  <template name="psvm" value="def static void main(String[] args) {&#10;    $END$&#10;}" description="main method" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="xtend.member" value="true" />
     </context>

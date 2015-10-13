@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.FragmentFakingEcoreResource;
@@ -110,12 +111,14 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
     GuiceModuleAccess _runtimeGenModule = _language_2.getRuntimeGenModule();
     _addTypeToType.contributeTo(_runtimeGenModule);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    ManifestAccess _runtimeManifest = _projectConfig.getRuntimeManifest();
-    boolean _tripleNotEquals = (_runtimeManifest != null);
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    ManifestAccess _manifest = _runtime.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _runtimeManifest_1 = _projectConfig_1.getRuntimeManifest();
-      Set<String> _exportedPackages = _runtimeManifest_1.getExportedPackages();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_1.getManifest();
+      Set<String> _exportedPackages = _manifest_1.getExportedPackages();
       Grammar _grammar_2 = this.getGrammar();
       String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(_grammar_2);
       Grammar _grammar_3 = this.getGrammar();
@@ -173,8 +176,9 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
     }
     final String path = _xifexpression;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrcGen = _projectConfig.getRuntimeSrcGen();
-    final URI uri = _runtimeSrcGen.getURI(path);
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    final URI uri = _srcGen.getURI(path);
     final Resource resource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
     HashSet<Grammar> _hashSet = new HashSet<Grammar>();
     this.addAllGrammarsToResource(resource, copy, _hashSet);
@@ -593,8 +597,9 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
     };
     javaFile.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeSrcGen = _projectConfig.getRuntimeSrcGen();
-    javaFile.writeTo(_runtimeSrcGen);
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    javaFile.writeTo(_srcGen);
   }
   
   protected StringConcatenationClient parserRuleClasses(final ParserRule it) {

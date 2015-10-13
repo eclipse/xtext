@@ -22,11 +22,11 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
   @Override
   public void configure(final IHighlightingConfiguration.IHighlightingStyleAcceptor it) {
     super.configure(it);
-    it.addStyle(XtendHighlightingStyles.RICH_TEXT_ID, "Template text", EditorColors.INJECTED_LANGUAGE_FRAGMENT);
-    it.addStyle(XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID, "Template guillemets", DefaultLanguageHighlighterColors.PARENTHESES);
-    it.addStyle(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant template text", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
-    it.addStyle(XtendHighlightingStyles.POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
-    it.addStyle(XtendHighlightingStyles.TEMPLATE_LINE_BREAK, "Template Line Break", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+    it.addStyle(XtendHighlightingStyles.RICH_TEXT_ID, "Template Text", EditorColors.INJECTED_LANGUAGE_FRAGMENT);
+    it.addStyle(XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID, "Template Terminals", DefaultLanguageHighlighterColors.PARENTHESES);
+    it.addStyle(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Whitespace", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+    it.addRedirect(XtendHighlightingStyles.POTENTIAL_LINE_BREAK, XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT);
+    it.addRedirect(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT);
     it.addStyle(XtendHighlightingStyles.ACTIVE_ANNOTATION, "Active Annotation", JavaHighlightingColors.VALID_STRING_ESCAPE);
   }
 }

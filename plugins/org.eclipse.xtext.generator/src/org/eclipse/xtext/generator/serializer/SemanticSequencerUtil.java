@@ -17,11 +17,11 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -29,7 +29,8 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.util.formallang.Nfa;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -116,25 +117,25 @@ public class SemanticSequencerUtil {
 		return result;
 	}
 
-	public boolean canGenerate(IConstraint constraint) {
-		if (constraint.getAssignments().length != constraint.getFeatures().length)
-			return false;
-		IConstraintElement body = constraint.getBody();
-		if (body == null)
-			return false;
-		if (body.getFeatureInfo() != null && !body.isOptional() && !body.isMany()
-				&& !body.getFeatureInfo().getFeature().isMany())
-			return true;
-		if (body.getType() == ConstraintElementType.GROUP) {
-			if (body.getGrammarElement() instanceof UnorderedGroup)
-				return false;
-			for (IConstraintElement child : body.getChildren())
-				if (child.getFeatureInfo() == null || child.isOptional() || child.isMany()
-						|| child.getFeatureInfo().getFeature().isMany())
-					return false;
-			return true;
+	public List<ISemState> getLinearListOfMandatoryAssignments(IConstraint constraint) {
+		Nfa<ISemState> nfa = constraint.getNfa();
+		ISemState state = nfa.getStart();
+		List<ISemState> result = Lists.newArrayList();
+		Set<EStructuralFeature> features = Sets.newHashSet();
+		while (state != null) {
+			if (state == nfa.getStop())
+				return result.isEmpty() ? null : result;
+			if (state.getFollowers().size() != 1)
+				return null;
+			if (state != nfa.getStart()) {
+				EStructuralFeature feature = state.getFeature();
+				if (feature == null || feature.isMany() || !features.add(feature))
+					return null;
+				result.add(state);
+			}
+			state = state.getFollowers().get(0);
 		}
-		return false;
+		return null;
 	}
 
 	public String toAcceptMethod(ConstraintElementType type) {

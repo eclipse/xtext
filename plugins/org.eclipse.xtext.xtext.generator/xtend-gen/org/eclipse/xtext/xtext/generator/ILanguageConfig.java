@@ -10,15 +10,12 @@ package org.eclipse.xtext.xtext.generator;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 
 @SuppressWarnings("all")
 public interface ILanguageConfig {
   public abstract Grammar getGrammar();
-  
-  public abstract XtextGeneratorNaming getNaming();
   
   public abstract List<String> getFileExtensions();
   

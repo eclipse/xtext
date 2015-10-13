@@ -58,6 +58,7 @@ class ExternalDependency {
 			version = parts.get(2)
 		}
 		Scope scope = Scope.COMPILE
+		boolean optional = false
 	}
 
 	@Accessors

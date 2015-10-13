@@ -49,16 +49,18 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX13LongAlternativeParserRuleCall_12_0 = (RuleCall)cX13Assignment_12.eContents().get(0);
 		private final Assignment cX14Assignment_13 = (Assignment)cAlternatives.eContents().get(13);
 		private final RuleCall cX14ActionOnlyParserRuleCall_13_0 = (RuleCall)cX14Assignment_13.eContents().get(0);
+		private final Assignment cX15Assignment_14 = (Assignment)cAlternatives.eContents().get(14);
+		private final RuleCall cX15FragmentCallerParserRuleCall_14_0 = (RuleCall)cX15Assignment_14.eContents().get(0);
 		
 		//Model:
 		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly;
+		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller;
 		@Override public ParserRule getRule() { return rule; }
 
 		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly
+		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=MandatoryKeywords
@@ -144,6 +146,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//ActionOnly
 		public RuleCall getX14ActionOnlyParserRuleCall_13_0() { return cX14ActionOnlyParserRuleCall_13_0; }
+
+		//x15=FragmentCaller
+		public Assignment getX15Assignment_14() { return cX15Assignment_14; }
+
+		//FragmentCaller
+		public RuleCall getX15FragmentCallerParserRuleCall_14_0() { return cX15FragmentCallerParserRuleCall_14_0; }
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
@@ -1137,6 +1145,58 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID?
 		public RuleCall getIDTerminalRuleCall_5() { return cIDTerminalRuleCall_5; }
 	}
+
+	public class FragmentCallerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.FragmentCaller");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_1_0 = (RuleCall)cVal1Assignment_1.eContents().get(0);
+		private final RuleCall cFragment1ParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cValAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValIDTerminalRuleCall_3_0 = (RuleCall)cValAssignment_3.eContents().get(0);
+		
+		//FragmentCaller FragmentCallerType:
+		//	"#15" val1=ID Fragment1 val=ID
+		@Override public ParserRule getRule() { return rule; }
+
+		//"#15" val1=ID Fragment1 val=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#15"
+		public Keyword getNumberSignDigitOneDigitFiveKeyword_0() { return cNumberSignDigitOneDigitFiveKeyword_0; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1() { return cVal1Assignment_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_0() { return cVal1IDTerminalRuleCall_1_0; }
+
+		//Fragment1
+		public RuleCall getFragment1ParserRuleCall_2() { return cFragment1ParserRuleCall_2; }
+
+		//val=ID
+		public Assignment getValAssignment_3() { return cValAssignment_3; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_3_0() { return cValIDTerminalRuleCall_3_0; }
+	}
+
+	public class Fragment1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Fragment1");
+		private final Assignment cFragValAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cFragValIDTerminalRuleCall_0 = (RuleCall)cFragValAssignment.eContents().get(0);
+		
+		//fragment Fragment1 returns FragmentCallerType:
+		//	fragVal=ID;
+		@Override public ParserRule getRule() { return rule; }
+
+		//fragVal=ID
+		public Assignment getFragValAssignment() { return cFragValAssignment; }
+
+		//ID
+		public RuleCall getFragValIDTerminalRuleCall_0() { return cFragValIDTerminalRuleCall_0; }
+	}
 	
 	
 	private final ModelElements pModel;
@@ -1167,6 +1227,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private final BooleanValuesElements pBooleanValues;
 	private final LongAlternativeElements pLongAlternative;
 	private final ActionOnlyElements pActionOnly;
+	private final FragmentCallerElements pFragmentCaller;
+	private final Fragment1Elements pFragment1;
 	
 	private final Grammar grammar;
 
@@ -1205,6 +1267,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		this.pBooleanValues = new BooleanValuesElements();
 		this.pLongAlternative = new LongAlternativeElements();
 		this.pActionOnly = new ActionOnlyElements();
+		this.pFragmentCaller = new FragmentCallerElements();
+		this.pFragment1 = new Fragment1Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1237,7 +1301,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 	//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly;
+	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1515,6 +1579,26 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getActionOnlyRule() {
 		return getActionOnlyAccess().getRule();
+	}
+
+	//FragmentCaller FragmentCallerType:
+	//	"#15" val1=ID Fragment1 val=ID
+	public FragmentCallerElements getFragmentCallerAccess() {
+		return pFragmentCaller;
+	}
+	
+	public ParserRule getFragmentCallerRule() {
+		return getFragmentCallerAccess().getRule();
+	}
+
+	//fragment Fragment1 returns FragmentCallerType:
+	//	fragVal=ID;
+	public Fragment1Elements getFragment1Access() {
+		return pFragment1;
+	}
+	
+	public ParserRule getFragment1Rule() {
+		return getFragment1Access().getRule();
 	}
 
 	//terminal ID:

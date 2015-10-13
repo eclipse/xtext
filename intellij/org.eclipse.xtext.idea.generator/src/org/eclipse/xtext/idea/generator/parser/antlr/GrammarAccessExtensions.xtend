@@ -27,11 +27,11 @@ import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
+import org.eclipse.xtext.xtext.RuleNames
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.eclipse.xtext.RuleNames
 
 @Singleton
 class GrammarAccessExtensions {

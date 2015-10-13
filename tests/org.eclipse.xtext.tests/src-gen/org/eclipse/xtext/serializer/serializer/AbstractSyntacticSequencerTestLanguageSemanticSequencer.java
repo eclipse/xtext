@@ -25,6 +25,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
+import org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
@@ -71,6 +72,9 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 				return; 
 			case SyntacticsequencertestPackage.BOOLEAN_VALUES:
 				sequence_BooleanValues(context, (BooleanValues) semanticObject); 
+				return; 
+			case SyntacticsequencertestPackage.FRAGMENT_CALLER_TYPE:
+				sequence_Fragment1_FragmentCaller(context, (FragmentCallerType) semanticObject); 
 				return; 
 			case SyntacticsequencertestPackage.LONG_ALTERNATIVE:
 				sequence_LongAlternative(context, (LongAlternative) semanticObject); 
@@ -196,7 +200,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	/**
 	 * Constraint:
-	 *     (isTrue?='kw2'?)
+	 *     isTrue?='kw2'?
 	 */
 	protected void sequence_BooleanAlternativeLiteral(EObject context, BooleanAlternativeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -230,17 +234,39 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	/**
 	 * Constraint:
+	 *     (val1=ID fragVal=ID val=ID)
+	 */
+	protected void sequence_Fragment1_FragmentCaller(EObject context, FragmentCallerType semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL1));
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__FRAG_VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__FRAG_VAL));
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getFragmentCallerAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		feeder.accept(grammarAccess.getFragment1Access().getFragValIDTerminalRuleCall_0(), semanticObject.getFragVal());
+		feeder.accept(grammarAccess.getFragmentCallerAccess().getValIDTerminalRuleCall_3_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (
 	 *         foo=ID 
 	 *         (
-	 *             val1+=ID? | 
-	 *             val2+=ID? | 
-	 *             val3+=ID? | 
-	 *             val4+=ID? | 
-	 *             val5+=ID? | 
-	 *             val6+=ID? | 
-	 *             val7+=ID? | 
-	 *             val8+=ID?
+	 *             val1+=ID | 
+	 *             val2+=ID | 
+	 *             val3+=ID | 
+	 *             val4+=ID | 
+	 *             val5+=ID | 
+	 *             val6+=ID | 
+	 *             val7+=ID | 
+	 *             val8+=ID
 	 *         )*
 	 *     )
 	 */
@@ -303,7 +329,8 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *         x11=AlternativeTransition | 
 	 *         x12=BooleanValues | 
 	 *         x13=LongAlternative | 
-	 *         x14=ActionOnly
+	 *         x14=ActionOnly | 
+	 *         x15=FragmentCaller
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {

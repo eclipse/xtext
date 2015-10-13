@@ -2,20 +2,13 @@ package org.eclipse.xtext.xbase;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
-import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.adapter.FragmentAdapter;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.generator.parser.antlr.DebugAntlrGeneratorFragment;
-import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
-import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
-import org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment;
-import org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
@@ -24,8 +17,13 @@ import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
+import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2;
+import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2;
+import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
+import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
@@ -39,9 +37,9 @@ final class GenerateXbase {
 	 * Can't use MWE2 because of circular dependencies
 	 */
 	public static void main(String[] args) {
+		final String root = "..";
 		final String projectName = "org.eclipse.xtext.xbase";
-		final String runtimeProject = "../" + projectName;
-		final String uiProject = runtimeProject + ".ui";
+		final String runtimeProject = root + "/" + projectName;
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
@@ -52,38 +50,8 @@ final class GenerateXbase {
 			" * which accompanies this distribution, and is available at\n" +
 			" * http://www.eclipse.org/legal/epl-v10.html\n" +
 			" *******************************************************************************/";
+		final String xbaseGenModel = "platform:/resource/" + projectName + "/model/Xbase.genmodel";
 		
-		new StandaloneSetup() {{
-			// the maven archetype contains a template file called .project
-			setIgnoreBrokenProjectFiles(true);
-			setPlatformUri(runtimeProject + "/../..");
-			setScanClassPath(true);
-		}};
-		
-		final XtextResourceSet xtypeResourceSet = new XtextResourceSet();
-		new StandaloneSetup() {{
-			setResourceSet(xtypeResourceSet);
-			addRegisterEcoreFile("platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xtype.ecore");
-		}};
-
-		final XtextResourceSet xbaseResourceSet = new XtextResourceSet();
-		new StandaloneSetup() {{
-			setResourceSet(xbaseResourceSet);
-			addRegisterEcoreFile("platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xtype.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xbase.ecore");
-		}};
-		
-		final XtextResourceSet xannotationsResourceSet = new XtextResourceSet();
-		new StandaloneSetup() {{
-			setResourceSet(xannotationsResourceSet);
-			addRegisterEcoreFile("platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xtype.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/Xbase.ecore");
-			addRegisterEcoreFile("platform:/resource/" + projectName + "/model/XAnnotations.ecore");
-		}};
-
 		final AntlrOptions antlrOptions = new AntlrOptions();
 		antlrOptions.setBacktrack(backtrack);
 		antlrOptions.setMemoize(memoize);
@@ -91,8 +59,9 @@ final class GenerateXbase {
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
 				setProject(new WizardConfig() {{
-					setRuntimeRoot(runtimeProject);
-					setEclipseEditor(true);
+					setRootPath(root);
+					setBaseName(projectName);
+					getEclipsePlugin().setEnabled(true);
 				}});
 				setCode(new CodeConfig() {{
 					setEncoding("ISO-8859-1");
@@ -105,33 +74,33 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xtype";
 				
-				setResourceSet(xtypeResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
+				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
 				addFragment(new Formatter2Fragment2());
-				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
-				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
+				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
+				addFragment(new ContentAssistFragment2());
 				antlr.setOptions(antlrOptions);
-				addFragment(new FragmentAdapter(antlr));
+				addFragment(antlr);
 			}});
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbase";
 				
-				setResourceSet(xbaseResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
+				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
 				resourceFactory.setFileExtensions(fileExtensions);
 				addFragment(new FragmentAdapter(resourceFactory));
-				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
+				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setOptions(antlrOptions);
 				antlr.addAntlrParam("-Xconversiontimeout");
 				antlr.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlr));
+				addFragment(antlr);
 				DebugAntlrGeneratorFragment antlrDebug = new DebugAntlrGeneratorFragment();
 				antlrDebug.setOptions(antlrOptions);
 				addFragment(new FragmentAdapter(antlrDebug));
@@ -147,12 +116,12 @@ final class GenerateXbase {
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new Formatter2Fragment2());
-				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
-				LabelProviderFragment label = new LabelProviderFragment();
+				addFragment(new QuickfixProviderFragment2());
+				LabelProviderFragment2 label = new LabelProviderFragment2();
 				label.setGenerateStub(false);
-				addFragment(new FragmentAdapter(label));
-				addFragment(new FragmentAdapter(new OutlineTreeProviderFragment()));
-				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
+				addFragment(label);
+				addFragment(new OutlineTreeProviderFragment2());
+				addFragment(new ContentAssistFragment2());
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
 				antlrUI.setOptions(antlrOptions);
 				antlrUI.addAntlrParam("-Xconversiontimeout");
@@ -162,19 +131,19 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbasewithannotations";
 				
-				setResourceSet(xannotationsResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
+				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
 				resourceFactory.setFileExtensions(fileExtensions);
 				addFragment(new FragmentAdapter(resourceFactory));
-				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
+				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setOptions(antlrOptions);
 				antlr.addAntlrParam("-Xconversiontimeout");
 				antlr.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlr));
+				addFragment(antlr);
 				DebugAntlrGeneratorFragment antlrDebug = new DebugAntlrGeneratorFragment();
 				antlrDebug.setOptions(antlrOptions);
 				addFragment(new FragmentAdapter(antlrDebug));
@@ -188,12 +157,12 @@ final class GenerateXbase {
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new Formatter2Fragment2());
-				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
-				LabelProviderFragment label = new LabelProviderFragment();
-				label.setGenerateXtendStub(true);
-				addFragment(new FragmentAdapter(label));
-				addFragment(new FragmentAdapter(new OutlineTreeProviderFragment()));
-				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
+				addFragment(new QuickfixProviderFragment2());
+				LabelProviderFragment2 label = new LabelProviderFragment2();
+				label.setGenerateStub(false);
+				addFragment(label);
+				addFragment(new OutlineTreeProviderFragment2());
+				addFragment(new ContentAssistFragment2());
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
 				antlrUI.setOptions(antlrOptions);
 				antlrUI.addAntlrParam("-Xconversiontimeout");
@@ -209,18 +178,10 @@ final class GenerateXbase {
 		}}.invoke(null);
 		
 		new EcoreGenerator() {{
-			setGenModel("platform:/resource/" + projectName + "/model/Xbase.genmodel");
+			setGenModel(xbaseGenModel);
 			addSrcPath("platform:/resource/" + projectName + "/src");
 			addSrcPath("platform:/resource/org.eclipse.xtext.common.types/src");
 			setLineDelimiter(lineDelimiter);
-		}}.invoke(null);
-		
-		new DirectoryCleaner() {{
-			setDirectory(uiProject + "/src-gen");
-		}}.invoke(null);
-		
-		new DirectoryCleaner() {{
-			setDirectory(runtimeProject + "/src-gen");
 		}}.invoke(null);
 		
 		generator.invoke(null);

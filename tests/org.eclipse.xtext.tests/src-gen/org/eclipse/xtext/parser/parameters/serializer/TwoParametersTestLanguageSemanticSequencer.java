@@ -12,11 +12,14 @@ import org.eclipse.xtext.parser.parameters.parametersTestLanguage.Scenario;
 import org.eclipse.xtext.parser.parameters.serializer.ParametersTestLanguageSemanticSequencer;
 import org.eclipse.xtext.parser.parameters.services.TwoParametersTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLanguageSemanticSequencer {
@@ -108,7 +111,14 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *     first=IdOrKeyword2
 	 */
 	protected void sequence_Scenario6(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario6Access().getFirstIdOrKeyword2ParserRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
@@ -126,6 +136,13 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *     second=IdOrKeyword2
 	 */
 	protected void sequence_Scenario8(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario8Access().getSecondIdOrKeyword2ParserRuleCall_0_0(), semanticObject.getSecond());
+		feeder.finish();
 	}
 }

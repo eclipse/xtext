@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.IParseResult;
 
 /**
  * Used by the {@link AbstractPartialContentAssistParser} to find the node at which to start parsing.
+ * @since 2.9
  */
 public class EntryPointFinder {
 	public ICompositeNode findEntryPoint(IParseResult parseResult, int offset) {

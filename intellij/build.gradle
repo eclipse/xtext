@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.23"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
 	}
 }
 
@@ -48,6 +48,7 @@ configure(subprojects - eclipsePluginProjects) {
 		// Eclipse produced. They are immediately available and
 		// contain debug information.
 		compileJava.enabled = false
+		processResources.enabled = false
 
 		task copyFromBin(type: Sync) {
 		    from 'bin'

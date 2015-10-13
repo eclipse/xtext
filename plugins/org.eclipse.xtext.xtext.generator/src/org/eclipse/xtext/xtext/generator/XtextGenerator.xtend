@@ -27,6 +27,7 @@ import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
@@ -49,11 +50,19 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	@Accessors
 	val List<LanguageConfig2> languageConfigs = newArrayList
 	
+	@Accessors
+	XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner
+	
+	@Accessors
+	XtextGeneratorStandaloneSetup standaloneSetup = new XtextGeneratorStandaloneSetup
+	
 	Injector injector
 	
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject XtextGeneratorTemplates templates
+	
+	@Inject XtextGeneratorNaming naming
 	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
@@ -93,6 +102,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			injector.injectMembers(this)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
 			projectConfig.initialize(injector)
+			cleaner.initialize(injector)
+			standaloneSetup.initialize(injector)
 			for (language : languageConfigs) {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)
@@ -110,6 +121,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, org.eclipse.emf.mwe.core.issues.Issues issues) {
 		initialize
+		cleaner.clean
 		for (language : languageConfigs) {
 			LOG.info('Generating ' + language.grammar.name)
 			language.generate
@@ -124,47 +136,37 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	}
 	
 	protected def generateSetups(ILanguageConfig language) {
-		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
-		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
-		templates.createWebSetup(language).writeTo(projectConfig.webSrc)
+		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtime.srcGen)
+		templates.createRuntimeSetup(language).writeTo(projectConfig.runtime.src)
+		templates.createWebSetup(language).writeTo(projectConfig.web.src)
 	}
 	
 	protected def generateModules(ILanguageConfig language) {
-		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtimeSrcGen)
-		templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
-		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
-		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
-		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPluginSrcGen)
-		templates.createIdeaModule(language).writeTo(projectConfig.ideaPluginSrc)
-		templates.createWebGenModule(language).writeTo(projectConfig.webSrcGen)
-		templates.createWebModule(language).writeTo(projectConfig.webSrc)
+		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtime.srcGen)
+		templates.createRuntimeModule(language).writeTo(projectConfig.runtime.src)
+		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePlugin.srcGen)
+		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePlugin.src)
+		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPlugin.srcGen)
+		templates.createIdeaModule(language).writeTo(projectConfig.ideaPlugin.src)
+		templates.createWebGenModule(language).writeTo(projectConfig.web.srcGen)
+		templates.createWebModule(language).writeTo(projectConfig.web.src)
 	}
 	
 	protected def generateExecutableExtensionFactory(ILanguageConfig language) {
-		if (projectConfig.eclipsePluginSrcGen !== null)
-			templates.createEclipsePluginExecutableExtensionFactory(language, languageConfigs.head).writeTo(projectConfig.eclipsePluginSrcGen)
+		if (projectConfig.eclipsePlugin.srcGen !== null)
+			templates.createEclipsePluginExecutableExtensionFactory(language, languageConfigs.head).writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
 	
 	protected def generateManifests() {
-		val manifests = newLinkedList(
-			projectConfig.runtimeManifest -> projectConfig.runtimeMetaInf,
-			projectConfig.runtimeTestManifest -> projectConfig.runtimeTestMetaInf,
-			projectConfig.genericIdeManifest -> projectConfig.genericIdeMetaInf,
-			projectConfig.genericIdeTestManifest -> projectConfig.genericIdeTestMetaInf,
-			projectConfig.eclipsePluginManifest -> projectConfig.eclipsePluginMetaInf,
-			projectConfig.eclipsePluginTestManifest -> projectConfig.eclipsePluginTestMetaInf,
-			projectConfig.ideaPluginManifest -> projectConfig.ideaPluginMetaInf,
-			projectConfig.ideaPluginTestManifest -> projectConfig.ideaPluginTestMetaInf,
-			projectConfig.webManifest -> projectConfig.webMetaInf,
-			projectConfig.webTestManifest -> projectConfig.webTestMetaInf
-		)
+		val manifests = projectConfig.enabledProjects.filter(BundleProjectConfig)
+			.map[Tuples.create(manifest, metaInf, name)].toList
 		// Filter null values and merge duplicate entries
 		val uri2Manifest = Maps.<URI, ManifestAccess>newHashMapWithExpectedSize(manifests.size)
 		val manifestIter = manifests.listIterator
 		while (manifestIter.hasNext) {
 			val entry = manifestIter.next
-			val manifest = entry.key
-			val metaInf = entry.value
+			val manifest = entry.first
+			val metaInf = entry.second
 			if (manifest === null || metaInf === null) {
 				manifestIter.remove()
 			} else {
@@ -179,16 +181,14 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 		
 		for (entry : manifests) {
-			val manifest = entry.key
-			val metaInf = entry.value
+			val manifest = entry.first
+			val metaInf = entry.second
 			if (manifest.bundleName === null) {
-				/*TODO add explicit project names to XtextProjectConfig
-				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
-					manifest.bundleName = segments.get(segments.length - 3)*/
+				manifest.bundleName = entry.third
 			}
-			if (manifest === projectConfig.eclipsePluginManifest) {
+			if (manifest === projectConfig.eclipsePlugin.manifest) {
 				val firstLanguage = languageConfigs.head
-				manifest.activator = firstLanguage?.naming?.getEclipsePluginActivator(firstLanguage.grammar)
+				manifest.activator = naming?.getEclipsePluginActivator(firstLanguage.grammar)
 			}
 			if (metaInf.isFile(manifest.path)) {
 				if (manifest.merge) {
@@ -226,19 +226,12 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	}
 	
 	protected def generateActivator() {
-		if (projectConfig.eclipsePluginSrcGen !== null && !languageConfigs.empty)
-			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePluginSrcGen)
+		if (projectConfig.eclipsePlugin.srcGen !== null && !languageConfigs.empty)
+			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
 	
 	protected def generatePluginXmls() {
-		val pluginXmls = newLinkedList(
-			projectConfig.runtimePluginXml -> projectConfig.runtimeRoot,
-			projectConfig.runtimeTestPluginXml -> projectConfig.runtimeTestRoot,
-			projectConfig.genericIdePluginXml -> projectConfig.genericIdeRoot,
-			projectConfig.genericIdeTestPluginXml -> projectConfig.genericIdeTestRoot,
-			projectConfig.eclipsePluginPluginXml -> projectConfig.eclipsePluginRoot,
-			projectConfig.eclipsePluginTestPluginXml -> projectConfig.eclipsePluginTestRoot
-		)
+		val pluginXmls = projectConfig.enabledProjects.filter(BundleProjectConfig).map[pluginXml -> root].toList
 		// Filter null values and merge duplicate entries
 		val uri2PluginXml = Maps.<URI, PluginXmlAccess>newHashMapWithExpectedSize(pluginXmls.size)
 		val pluginXmlIter = pluginXmls.listIterator

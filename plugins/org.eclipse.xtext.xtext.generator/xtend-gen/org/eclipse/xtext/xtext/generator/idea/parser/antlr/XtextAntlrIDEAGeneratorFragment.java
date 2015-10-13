@@ -12,8 +12,10 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiAntlrGrammarGenerator;
+import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiGrammarNaming;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2;
@@ -23,25 +25,27 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
 @SuppressWarnings("all")
 public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
   @Inject
-  @Extension
-  private PsiAntlrGrammarGenerator _psiAntlrGrammarGenerator;
+  private PsiAntlrGrammarGenerator generator;
   
   @Inject
   private CodeConfig codeConfig;
   
   @Inject
-  private IXtextProjectConfig projectConfig;
+  @Extension
+  private PsiGrammarNaming _psiGrammarNaming;
   
   @Override
   protected void doGenerate() {
-    final IXtextGeneratorFileSystemAccess fsa = this.projectConfig.getIdeaPluginSrcGen();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
+    final IXtextGeneratorFileSystemAccess fsa = _ideaPlugin.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
-    this._psiAntlrGrammarGenerator.generate(_grammar, _options, fsa);
+    this.generator.generate(_grammar, _options, fsa);
     final String encoding = this.codeConfig.getEncoding();
     StringConcatenation _builder = new StringConcatenation();
     Grammar _grammar_1 = this.getGrammar();
-    TypeReference _grammarClass = this._psiAntlrGrammarGenerator.getGrammarClass(_grammar_1);
+    TypeReference _grammarClass = this._psiGrammarNaming.getGrammarClass(_grammar_1);
     String _path = _grammarClass.getPath();
     _builder.append(_path, "");
     _builder.append(".g");

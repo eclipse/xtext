@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -33,12 +34,14 @@ public class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
     this.addRuntimeGuiceBindings();
     this.addEclipsePluginGuiceBindings();
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    ManifestAccess _eclipsePluginManifest = _projectConfig.getEclipsePluginManifest();
-    boolean _tripleNotEquals = (_eclipsePluginManifest != null);
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    ManifestAccess _manifest = _eclipsePlugin.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_1.getEclipsePluginManifest();
-      Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
+      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.builder", "org.eclipse.xtext.ui")));
     }

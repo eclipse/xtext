@@ -87,11 +87,23 @@ public class Xtext2EcoreInterpretationContext {
 			if (terminal == null) {
 				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot derive type from incomplete assignment.", assignment);
 			}
+			checkNoFragmentRuleCall(terminal);
 			EClassifier type = getTerminalType(terminal);
 			isContainment = isContainmentAssignment(assignment);
 			featureTypeInfo = getEClassifierInfoOrThrowException(type, assignment);
 		}
 		addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, assignment);
+	}
+
+	private void checkNoFragmentRuleCall(AbstractElement terminal) throws TransformationException {
+		if (GrammarUtil.isEObjectFragmentRuleCall(terminal)) {
+			throw new TransformationException(TransformationErrorCode.InvalidFragmentCall, "Cannot call a fragment from an assignment", terminal);
+		}
+		if (terminal instanceof Alternatives) {
+			for(AbstractElement child: ((Alternatives) terminal).getElements()) {
+				checkNoFragmentRuleCall(child);
+			}
+		}
 	}
 
 	public boolean isContainmentAssignment(Assignment assignment) {

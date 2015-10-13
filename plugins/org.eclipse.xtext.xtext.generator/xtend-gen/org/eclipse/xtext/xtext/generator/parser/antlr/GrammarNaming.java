@@ -27,28 +27,54 @@ public class GrammarNaming {
     StringConcatenation _builder = new StringConcatenation();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
     _builder.append(_runtimeBasePackage, "");
-    _builder.append(".idea.parser.antlr.internal");
+    _builder.append(".parser.antlr");
     return _builder.toString();
   }
   
-  public TypeReference getGrammarClass(final Grammar it, final String prefix) {
-    String _parserPackage = this.getParserPackage(it);
+  public String getInternalParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(prefix, "");
+    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
+    _builder.append(_runtimeBasePackage, "");
+    _builder.append(".parser.antlr.internal");
+    return _builder.toString();
+  }
+  
+  public TypeReference getGrammarClass(final Grammar it) {
+    String _internalParserPackage = this.getInternalParserPackage(it);
+    StringConcatenation _builder = new StringConcatenation();
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
+    return new TypeReference(_internalParserPackage, _builder.toString());
+  }
+  
+  public TypeReference getLexerClass(final Grammar it) {
+    String _internalParserPackage = this.getInternalParserPackage(it);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Internal");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "");
+    _builder.append("Lexer");
+    return new TypeReference(_internalParserPackage, _builder.toString());
+  }
+  
+  public TypeReference getParserClass(final Grammar it) {
+    String _parserPackage = this.getParserPackage(it);
+    StringConcatenation _builder = new StringConcatenation();
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "");
+    _builder.append("Parser");
     return new TypeReference(_parserPackage, _builder.toString());
   }
   
   public TypeReference getInternalParserClass(final Grammar it) {
-    String _parserPackage = this.getParserPackage(it);
+    String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
     _builder.append("Parser");
-    return new TypeReference(_parserPackage, _builder.toString());
+    return new TypeReference(_internalParserPackage, _builder.toString());
   }
   
   public TypeReference getContentAssistParserClass(final Grammar it) {
@@ -74,5 +100,23 @@ public class GrammarNaming {
     _builder_1.append(_simpleName, "");
     _builder_1.append("Lexer");
     return new TypeReference(_builder.toString(), _builder_1.toString());
+  }
+  
+  public TypeReference getAntlrTokenFileProviderClass(final Grammar it) {
+    String _parserPackage = this.getParserPackage(it);
+    StringConcatenation _builder = new StringConcatenation();
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "");
+    _builder.append("AntlrTokenFileProvider");
+    return new TypeReference(_parserPackage, _builder.toString());
+  }
+  
+  public String getTokenFileName(final Grammar it) {
+    String _internalParserPackage = this.getInternalParserPackage(it);
+    String _replace = _internalParserPackage.replace(".", "/");
+    String _plus = (_replace + "/Internal");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + ".tokens");
   }
 }

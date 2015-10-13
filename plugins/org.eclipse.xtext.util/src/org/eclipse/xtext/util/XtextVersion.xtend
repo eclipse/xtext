@@ -53,7 +53,7 @@ class XtextVersion {
 	}
 	
 	def getXtextGradlePluginVersion() {
-		'0.3.23'
+		'0.3.25'
 	}
 	
 	override toString() {

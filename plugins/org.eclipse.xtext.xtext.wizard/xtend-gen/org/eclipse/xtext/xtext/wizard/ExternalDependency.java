@@ -42,6 +42,8 @@ public class ExternalDependency {
     
     private Scope scope = Scope.COMPILE;
     
+    private boolean optional = false;
+    
     @Pure
     public String getGroupId() {
       return this.groupId;
@@ -76,6 +78,15 @@ public class ExternalDependency {
     
     public void setScope(final Scope scope) {
       this.scope = scope;
+    }
+    
+    @Pure
+    public boolean isOptional() {
+      return this.optional;
+    }
+    
+    public void setOptional(final boolean optional) {
+      this.optional = optional;
     }
   }
   

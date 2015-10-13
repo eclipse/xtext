@@ -11,12 +11,15 @@ import org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParserRulePara
 import org.eclipse.xtext.parser.parameters.parametersTestLanguage.Scenario;
 import org.eclipse.xtext.parser.parameters.services.ParametersTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -92,7 +95,14 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	 *     first=IdOrKeyword
 	 */
 	protected void sequence_Scenario2(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario2Access().getFirstIdOrKeywordParserRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
@@ -110,6 +120,13 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	 *     second=IdOrKeyword
 	 */
 	protected void sequence_Scenario4(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getScenario4Access().getSecondIdOrKeywordParserRuleCall_0_0(), semanticObject.getSecond());
+		feeder.finish();
 	}
 }

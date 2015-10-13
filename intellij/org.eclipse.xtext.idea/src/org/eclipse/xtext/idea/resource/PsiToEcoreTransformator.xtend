@@ -15,25 +15,25 @@ import com.intellij.psi.impl.source.tree.LeafElement
 import java.io.Reader
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.EnumLiteralDeclaration
 import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
+import org.eclipse.xtext.idea.lang.GrammarAwarePsiErrorElement
 import org.eclipse.xtext.parser.IParseResult
 import org.eclipse.xtext.parser.IParser
 import org.eclipse.xtext.parser.ParseResult
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.util.ReplaceRegion
+import org.eclipse.xtext.xtext.RuleNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.EnumLiteralDeclaration
-import org.eclipse.xtext.idea.lang.GrammarAwarePsiErrorElement
-import org.eclipse.xtext.RuleNames
-import org.eclipse.xtext.AbstractElement
 
 class PsiToEcoreTransformator implements IParser {
 

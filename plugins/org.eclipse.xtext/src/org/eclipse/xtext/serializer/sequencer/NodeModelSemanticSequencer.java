@@ -14,7 +14,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.inject.Inject;
 

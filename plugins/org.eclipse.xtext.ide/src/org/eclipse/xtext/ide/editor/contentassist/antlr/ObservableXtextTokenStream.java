@@ -12,6 +12,9 @@ import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
+/**
+ * @since 2.9
+ */
 public class ObservableXtextTokenStream extends XtextTokenStream {
 
 	public interface StreamListener {

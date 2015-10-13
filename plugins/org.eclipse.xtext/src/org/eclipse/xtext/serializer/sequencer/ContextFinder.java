@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEOb
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
@@ -62,10 +62,10 @@ public class ContextFinder implements IContextFinder {
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
-	
+
 	@Inject
 	protected ITransientValueService transientValues;
-	
+
 	@Inject
 	protected ISemanticNodeProvider nodesProvider;
 
@@ -208,7 +208,8 @@ public class ContextFinder implements IContextFinder {
 		return result;
 	}
 
-	protected Map<IConstraint, List<EObject>> getConstraints(EObject semanticObject, Iterable<EObject> contextCandidates) {
+	protected Map<IConstraint, List<EObject>> getConstraints(EObject semanticObject,
+			Iterable<EObject> contextCandidates) {
 		Map<IConstraint, List<EObject>> result = Maps.newLinkedHashMap();
 		for (EObject ctx : contextCandidates) {
 			IConstraint constraint = constraints.get(Tuples.create(ctx, semanticObject.eClass()));
@@ -248,26 +249,30 @@ public class ContextFinder implements IContextFinder {
 		return false;
 	}
 
-	protected boolean isMandatory(IFeatureInfo feature) {
-		if (feature == null)
-			return false;
-		for (IConstraintElement ce : feature.getAssignments())
-			if (!ce.isOptionalRecursive(null))
-				return true;
-		return false;
-	}
-
 	protected boolean isValidValueQuantity(IConstraint constraint, EObject semanicObj) {
 		if (constraint == null)
 			return false;
 		for (int featureID = 0; featureID < semanicObj.eClass().getFeatureCount(); featureID++) {
 			IFeatureInfo featureInfo = constraint.getFeatures()[featureID];
 			EStructuralFeature structuralFeature = semanicObj.eClass().getEStructuralFeature(featureID);
+			// TODO  validated bounds of lists properly
 			ValueTransient trans = transientValueUtil.isTransient(semanicObj, structuralFeature);
-			if (trans == ValueTransient.NO && featureInfo == null)
-				return false;
-			if (trans == ValueTransient.YES && isMandatory(featureInfo))
-				return false;
+			switch (trans) {
+				case NO:
+					if (featureInfo == null)
+						return false;
+					if (featureInfo.getUpperBound() <= 0)
+						return false;
+					break;
+				case YES:
+					if (featureInfo == null)
+						break;
+					if (featureInfo.getLowerBound() > 0)
+						return false;
+					break;
+				case PREFERABLY:
+					break;
+			}
 		}
 		return true;
 	}

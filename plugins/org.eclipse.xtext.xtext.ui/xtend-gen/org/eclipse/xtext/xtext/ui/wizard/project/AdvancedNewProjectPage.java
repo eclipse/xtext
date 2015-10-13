@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import com.google.common.base.Objects;
+import java.util.List;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -19,6 +20,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
@@ -115,7 +119,15 @@ public class AdvancedNewProjectPage extends WizardPage {
               @Override
               public void apply(final Combo it) {
                 it.setEnabled(true);
-                it.setItems(new String[] { "Eclipse", "Maven", "Gradle" });
+                BuildSystem[] _values = BuildSystem.values();
+                final Function1<BuildSystem, String> _function = new Function1<BuildSystem, String>() {
+                  @Override
+                  public String apply(final BuildSystem it) {
+                    return it.toString();
+                  }
+                };
+                List<String> _map = ListExtensions.<BuildSystem, String>map(((List<BuildSystem>)Conversions.doWrapArray(_values)), _function);
+                it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
               }
             };
             Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
@@ -131,7 +143,15 @@ public class AdvancedNewProjectPage extends WizardPage {
               @Override
               public void apply(final Combo it) {
                 it.setEnabled(true);
-                it.setItems(new String[] { "Plain", "Maven/Gradle" });
+                SourceLayout[] _values = SourceLayout.values();
+                final Function1<SourceLayout, String> _function = new Function1<SourceLayout, String>() {
+                  @Override
+                  public String apply(final SourceLayout it) {
+                    return it.toString();
+                  }
+                };
+                List<String> _map = ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(_values)), _function);
+                it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
               }
             };
             Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
@@ -143,9 +163,11 @@ public class AdvancedNewProjectPage extends WizardPage {
     };
     Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
     this.setControl(_doubleArrow);
+    this.require(this.createUiProject, this.createIdeProject);
     this.require(this.createIdeaProject, this.createIdeProject);
     this.require(this.createWebProject, this.createIdeProject);
     this.makeUiProjectRequirePlainLayout();
+    this.makeWebProjectRequireMavenOrGradle();
     this.setDefaults();
   }
   
@@ -199,10 +221,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   protected void setDefaults() {
     this.createUiProject.setSelection(true);
+    this.createIdeProject.setSelection(true);
+    this.createTestProject.setSelection(true);
     this.createIdeaProject.setSelection(false);
     this.createWebProject.setSelection(false);
-    this.createIdeProject.setSelection(false);
-    this.createTestProject.setSelection(false);
     this.preferredBuildSystem.select(0);
     this.sourceLayout.select(0);
   }
@@ -305,5 +327,39 @@ public class AdvancedNewProjectPage extends WizardPage {
     };
     this.createUiProject.addSelectionListener(selectionControl);
     this.sourceLayout.addSelectionListener(selectionControl);
+  }
+  
+  public void makeWebProjectRequireMavenOrGradle() {
+    final SelectionAdapter selectionControl = new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        boolean _and = false;
+        boolean _equals = Objects.equal(e.widget, AdvancedNewProjectPage.this.createWebProject);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _selection = AdvancedNewProjectPage.this.createWebProject.getSelection();
+          _and = _selection;
+        }
+        if (_and) {
+          AdvancedNewProjectPage.this.preferredBuildSystem.select(2);
+        } else {
+          boolean _and_1 = false;
+          boolean _equals_1 = Objects.equal(e.widget, AdvancedNewProjectPage.this.preferredBuildSystem);
+          if (!_equals_1) {
+            _and_1 = false;
+          } else {
+            int _selectionIndex = AdvancedNewProjectPage.this.preferredBuildSystem.getSelectionIndex();
+            boolean _equals_2 = (_selectionIndex == 0);
+            _and_1 = _equals_2;
+          }
+          if (_and_1) {
+            AdvancedNewProjectPage.this.createWebProject.setSelection(false);
+          }
+        }
+      }
+    };
+    this.createWebProject.addSelectionListener(selectionControl);
+    this.preferredBuildSystem.addSelectionListener(selectionControl);
   }
 }

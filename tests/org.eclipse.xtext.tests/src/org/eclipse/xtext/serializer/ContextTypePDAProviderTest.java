@@ -20,7 +20,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
-import org.eclipse.xtext.serializer.analysis.IContextProvider;
+import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.util.Triple;
@@ -60,10 +60,11 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 
 	private List<Triple<EClass, EObject, String>> getContexts(Grammar grammar) {
 		final Context2NameFunction ctx2name = get(Context2NameFunction.class);
-		final IContextProvider contextProvider = get(IContextProvider.class);
+		final IContextPDAProvider contextProvider = get(IContextPDAProvider.class);
+		final IContextTypePDAProvider typeProvider = get(IContextTypePDAProvider.class);
 		List<Triple<EClass, EObject, String>> result = Lists.newArrayList();
 		for (EObject ctx : contextProvider.getAllContexts(grammar))
-			for (EClass type : contextProvider.getTypesForContext(ctx))
+			for (EClass type : typeProvider.getTypesForContext(grammar, ctx))
 				result.add(Tuples.create(type, ctx, ctx2name.getContextName(grammar, ctx)));
 		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
 			@Override
@@ -93,7 +94,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
 			//			System.out.println(t + "_" + ctx.getThird() + ":");
 			result.add(t + "_" + ctx.getThird() + ":");
-			Pda<? extends ISerState, RuleCall> pda = get(IContextTypePDAProvider.class).getContextTypePDA(
+			Pda<? extends ISerState, RuleCall> pda = get(IContextTypePDAProvider.class).getContextTypePDA(grammar, 
 					ctx.getSecond(), ctx.getFirst());
 			result.add("  " + formatter.format((Pda<ISerState, RuleCall>) pda).replace("\n", "\n  "));
 		}
@@ -369,6 +370,41 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		expected.append("  start -> {Model}\n");
 		expected.append("  'kw1' -> stop\n");
 		expected.append("  {Model} -> 'kw1'");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test
+	public void testUnorderedGroup() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: 'model' '{' (greetings1+=ID+ & greetings2+=ID*) '}';");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model_Model:\n");
+		expected.append("  start -> 'model'\n");
+		expected.append("  'model' -> '{'\n");
+		expected.append("  '{' -> greetings1+=ID, greetings2+=ID\n");
+		expected.append("  '}' -> stop\n");
+		expected.append("  greetings1+=ID -> '}', greetings1+=ID, greetings2+=ID\n");
+		expected.append("  greetings2+=ID -> '}', greetings1+=ID, greetings2+=ID\n");
+		expected.append("null_Model:\n");
+		expected.append("  start -> 'model'\n");
+		expected.append("  'model' -> '{'\n");
+		expected.append("  '{' -> '}'\n");
+		expected.append("  '}' -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test
+	public void testWildcardFragment() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: F; fragment F*:name=ID;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule_Rule:\n");
+		expected.append("  start -> >>F\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> name=ID\n");
+		expected.append("  name=ID -> <<F");
 		assertEquals(expected.toString(), actual);
 	}
 }

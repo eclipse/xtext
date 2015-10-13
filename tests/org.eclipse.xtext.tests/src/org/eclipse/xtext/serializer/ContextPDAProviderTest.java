@@ -20,13 +20,11 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
-import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -60,7 +58,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 
 	private List<Pair<EObject, String>> getContexts(Grammar grammar) {
 		final Context2NameFunction ctx2name = get(Context2NameFunction.class);
-		final IContextProvider contextProvider = get(IContextProvider.class);
+		final IContextPDAProvider contextProvider = get(IContextPDAProvider.class);
 		List<Pair<EObject, String>> result = Lists.newArrayList();
 		for (EObject ctx : contextProvider.getAllContexts(grammar))
 			result.add(Tuples.create(ctx, ctx2name.getContextName(grammar, ctx)));
@@ -81,13 +79,15 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		formatter.setStackitemFormatter(new GrammarElementTitleSwitch().showAssignments().hideCardinality());
 		formatter.sortFollowers();
 		IContextPDAProvider pdaProvider = get(IContextPDAProvider.class);
-		for (Pair<EObject, String> ctx : getContexts(grammar)) {
+		List<Pair<EObject, String>> contexts = getContexts(grammar);
+		for (Pair<EObject, String> ctx : contexts) {
 			result.add(ctx.getSecond() + ":");
-			Pda<ISerState, RuleCall> pda = pdaProvider.getContextPDA(ctx.getFirst());
+			Pda<ISerState, RuleCall> pda = pdaProvider.getContextPDA(grammar, ctx.getFirst());
 			result.add("  " + formatter.format(pda).replace("\n", "\n  "));
-			//			StackTraceElement ele = Thread.currentThread().getStackTrace()[2];
-			//			String name = getClass().getSimpleName() + "_" + ele.getMethodName() + "_" + ctx.getSecond() + ".pdf";
-			//			new PdaToDot<ISerState, RuleCall>().draw(pda, name, "-T pdf");
+
+			// StackTraceElement ele = Thread.currentThread().getStackTrace()[2];
+			// String name = getClass().getSimpleName() + "_" + ele.getMethodName() + "_" + ctx.getSecond() + ".pdf";
+			// new PdaToDot<ISerState, RuleCall>().draw(pda, "dot/" + name, "-T pdf");
 		}
 		return Joiner.on("\n").join(result);
 	}
@@ -97,61 +97,83 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
-	
+
 	@Test
-	@Ignore("TODO implement me, expectation is not correct so far")
 	public void testFragmentWithAction() throws Exception {
-		String actual = getParserRule("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID;");
+		String actual = getParserRule("R: 'kw1' F; fragment F returns R: f1=ID {A.prev=current} f2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
-		expected.append("  start -> {Act.val2=}\n");
-		expected.append("  val3=ID -> stop\n");
-		expected.append("  {Act.val2=} -> val3=ID\n");
-		expected.append("Rule_Act_1:\n");
-		expected.append("  start -> val1=ID\n");
-		expected.append("  val1=ID -> stop");
+		expected.append("F_A_1:\n");
+		expected.append("  start -> f1=ID\n");
+		expected.append("  f1=ID -> stop\n");
+		expected.append("R:\n");
+		expected.append("  start -> 'kw1'\n");
+		expected.append("  'kw1' -> >>F\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> {A.prev=}\n");
+		expected.append("  f2=ID -> <<F\n");
+		expected.append("  {A.prev=} -> f2=ID");
 		assertEquals(expected.toString(), actual);
 	}
-	
+
 	@Test
-	@Ignore("TODO implement me, expectation is not correct so far")
 	public void testFragmentWithActionRecursive() throws Exception {
-		String actual = getParserRule("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID F?;");
+		String actual = getParserRule("R: 'kw1' F; fragment F returns R: 'kw2' F? f1=ID {A.prev=current} f2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
-		expected.append("  start -> a1=ID\n");
-		expected.append("  'kw1' -> a2=ID\n");
-		expected.append("  'kw2' -> a2=ID\n");
-		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
-		expected.append("  a2=ID -> stop");
+		expected.append("F_A_3:\n");
+		expected.append("  start -> 'kw2'\n");
+		expected.append("  'kw2' -> >>F, f1=ID\n");
+		expected.append("  <<F -> f1=ID\n");
+		expected.append("  >>F -> {A.prev=}\n");
+		expected.append("  f1=ID -> stop\n");
+		expected.append("  f2=ID -> <<F\n");
+		expected.append("  {A.prev=} -> f2=ID\n");
+		expected.append("R:\n");
+		expected.append("  start -> 'kw1'\n");
+		expected.append("  'kw1' -> >>F\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> {A.prev=}\n");
+		expected.append("  f2=ID -> <<F\n");
+		expected.append("  {A.prev=} -> f2=ID");
 		assertEquals(expected.toString(), actual);
 	}
-	
+
 	@Test
-	@Ignore("TODO implement me, expectation is not correct so far")
 	public void testFragmentWithActionTwice() throws Exception {
-		String actual = getParserRule("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID {A.prev=current} f2=ID;");
+		String g = "R: 'kw1' F; fragment F returns R: f1=ID {A.prev=current} f2=ID {B.prev=current} f3=ID;";
+		String actual = getParserRule(g);
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
-		expected.append("  start -> a1=ID\n");
-		expected.append("  'kw1' -> a2=ID\n");
-		expected.append("  'kw2' -> a2=ID\n");
-		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
-		expected.append("  a2=ID -> stop");
+		expected.append("F_A_1:\n");
+		expected.append("  start -> f1=ID\n");
+		expected.append("  f1=ID -> stop\n");
+		expected.append("F_B_3:\n");
+		expected.append("  start -> {A.prev=}\n");
+		expected.append("  f2=ID -> stop\n");
+		expected.append("  {A.prev=} -> f2=ID\n");
+		expected.append("R:\n");
+		expected.append("  start -> 'kw1'\n");
+		expected.append("  'kw1' -> >>F\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> {B.prev=}\n");
+		expected.append("  f3=ID -> <<F\n");
+		expected.append("  {B.prev=} -> f3=ID");
 		assertEquals(expected.toString(), actual);
 	}
-	
+
 	@Test
-	@Ignore("TODO implement me, expectation is not correct so far")
 	public void testFragmentWithActionLoop() throws Exception {
 		String actual = getParserRule("R: f1=ID F; fragment F returns R: ({A.prev=current} f2=ID)*;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
-		expected.append("  start -> a1=ID\n");
-		expected.append("  'kw1' -> a2=ID\n");
-		expected.append("  'kw2' -> a2=ID\n");
-		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
-		expected.append("  a2=ID -> stop");
+		expected.append("F_A_0:\n");
+		expected.append("  start -> stop, {A.prev=}\n");
+		expected.append("  f2=ID -> stop\n");
+		expected.append("  {A.prev=} -> f2=ID\n");
+		expected.append("R:\n");
+		expected.append("  start -> f1=ID\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> <<F, {A.prev=}\n");
+		expected.append("  f1=ID -> >>F\n");
+		expected.append("  f2=ID -> <<F\n");
+		expected.append("  {A.prev=} -> f2=ID");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -165,6 +187,34 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  'kw2' -> a2=ID\n");
 		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
 		expected.append("  a2=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testAssignedEObjectRuleCall() throws Exception {
+		String actual = getParserRule("Rule: foo=Sub; Sub: id='id';");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule:\n");
+		expected.append("  start -> foo=Sub\n");
+		expected.append("  foo=Sub -> stop\n");
+		expected.append("Sub:\n");
+		expected.append("  start -> id='id'\n");
+		expected.append("  id='id' -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testTwoAssignedEObjectRuleCalls() throws Exception {
+		String actual = getParserRule("Rule: foo1=Sub 'x' foo2=Sub; Sub: id='id';");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule:\n");
+		expected.append("  start -> foo1=Sub\n");
+		expected.append("  'x' -> foo2=Sub\n");
+		expected.append("  foo1=Sub -> 'x'\n");
+		expected.append("  foo2=Sub -> stop\n");
+		expected.append("Sub:\n");
+		expected.append("  start -> id='id'\n");
+		expected.append("  id='id' -> stop");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -185,7 +235,8 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 
 	@Test
 	public void testDelegation2() throws Exception {
-		String actual = getParserRule("Rule: Foo | Delegate1; Delegate1: 'del' Delegate2 bar=ID; Delegate2: val=ID; Foo: val2=ID;");
+		String actual = getParserRule(
+				"Rule: Foo | Delegate1; Delegate1: 'del' Delegate2 bar=ID; Delegate2: val=ID; Foo: val2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Delegate1:\n");
 		expected.append("  start -> 'del'\n");
@@ -278,6 +329,35 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 	}
 
 	@Test
+	public void testDualDelegation() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: foo=AbstractRule;\n");
+		grammar.append("AbstractRule: Rule1 | Rule2;\n");
+		grammar.append("Rule1: foo1=ID;\n");
+		grammar.append("Rule2: foo2=ID;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("AbstractRule:\n");
+		expected.append("  start -> >>Rule1, >>Rule2\n");
+		expected.append("  <<Rule1 -> stop\n");
+		expected.append("  <<Rule2 -> stop\n");
+		expected.append("  >>Rule1 -> foo1=ID\n");
+		expected.append("  >>Rule2 -> foo2=ID\n");
+		expected.append("  foo1=ID -> <<Rule1\n");
+		expected.append("  foo2=ID -> <<Rule2\n");
+		expected.append("Model:\n");
+		expected.append("  start -> foo=AbstractRule\n");
+		expected.append("  foo=AbstractRule -> stop\n");
+		expected.append("Rule1:\n");
+		expected.append("  start -> foo1=ID\n");
+		expected.append("  foo1=ID -> stop\n");
+		expected.append("Rule2:\n");
+		expected.append("  start -> foo2=ID\n");
+		expected.append("  foo2=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
 	public void testOptionalEnd() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Model: 'model' foo=AbstractRule;\n");
@@ -358,7 +438,8 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 
 	@Test
 	public void testExpression1() throws Exception {
-		String actual = getParserRule("Exp: 'kw' Addit; Addit returns Exp: Prim ({Add.left=current} '+' right=Prim)*; Prim returns Exp: {Val} val=ID;");
+		String actual = getParserRule(
+				"Exp: 'kw' Addit; Addit returns Exp: Prim ({Add.left=current} '+' right=Prim)*; Prim returns Exp: {Val} val=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Addit:\n");
 		expected.append("  start -> >>Prim, {Add.left=}\n");

@@ -22,6 +22,7 @@ import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.List1;
 import org.eclipse.xtext.serializer.sequencertest.List2;
@@ -85,6 +86,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case SequencertestPackage.FLOAT:
 				sequence_Float(context, (org.eclipse.xtext.serializer.sequencertest.Float) semanticObject); 
+				return; 
+			case SequencertestPackage.FRAGMENT_CALLER_TYPE:
+				sequence_Fragment1_FragmentCaller(context, (FragmentCallerType) semanticObject); 
 				return; 
 			case SequencertestPackage.GROUP_MULTIPLICITIES:
 				sequence_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
@@ -217,7 +221,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ (val6+=ID | val7+=ID)*)
+	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ val7+=ID? (val6+=ID? val7+=ID?)*)
 	 */
 	protected void sequence_AlternativeMultiplicities(EObject context, AlternativeMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -262,6 +266,28 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
+	 *     (val1=ID fragVal=ID val=ID)
+	 */
+	protected void sequence_Fragment1_FragmentCaller(EObject context, FragmentCallerType semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL1) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL1));
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__FRAG_VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__FRAG_VAL));
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.FRAGMENT_CALLER_TYPE__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getFragmentCallerAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		feeder.accept(grammarAccess.getFragment1Access().getFragValIDTerminalRuleCall_0(), semanticObject.getFragVal());
+		feeder.accept(grammarAccess.getFragmentCallerAccess().getValIDTerminalRuleCall_3_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (val1=ID (val2=ID val3=ID)? (val4+=ID val5+=ID)+ (val6+=ID val7+=ID)*)
 	 */
 	protected void sequence_GroupMultiplicities(EObject context, GroupMultiplicities semanticObject) {
@@ -280,7 +306,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     ((val1+=ID val1+=ID*)?)
+	 *     (val1+=ID val1+=ID*)?
 	 */
 	protected void sequence_List2(EObject context, List2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -321,7 +347,8 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         x29=NullValueGenerated | 
 	 *         x30=NullValueInterpreted | 
 	 *         x31=NullCrossRefGenerated | 
-	 *         x32=NullCrossRefInterpreted
+	 *         x32=NullCrossRefInterpreted | 
+	 *         x33=FragmentCaller
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
@@ -361,7 +388,14 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     ref=[EObject|ID]
 	 */
 	protected void sequence_NullCrossRefGenerated(EObject context, NullCrossRef semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.NULL_CROSS_REF__REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.NULL_CROSS_REF__REF));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getNullCrossRefGeneratedAccess().getRefEObjectIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
+		feeder.finish();
 	}
 	
 	
@@ -379,7 +413,14 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     value=NULL_STRING
 	 */
 	protected void sequence_NullValueGenerated(EObject context, NullValue semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.NULL_VALUE__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.NULL_VALUE__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getNullValueGeneratedAccess().getValueNULL_STRINGParserRuleCall_1_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
@@ -583,7 +624,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     ((val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*)
+	 *     (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*
 	 */
 	protected void sequence_UnorderedAlternative(EObject context, UnorderedAlternative semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -592,7 +633,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (val1?='kw1'? val2?='kw2'? val3?='kw3'?)
+	 *     (val1?='kw1' | val2?='kw2' | val3?='kw3')*
 	 */
 	protected void sequence_UnorderedGroupBoolean(EObject context, UnorderedGroupBoolean semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -601,7 +642,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (val1=ID? va2=ID? val3=ID?)
+	 *     (val1=ID | va2=ID | val3=ID)*
 	 */
 	protected void sequence_UnorderedGroupOptional(EObject context, UnorderedGroupOptional semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -642,7 +683,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (val1=ID val2=INT val3=UnorderedGroupVal val4=UnorderedGroupValDelegate)
+	 *     (val1=ID | val2=INT | val3=UnorderedGroupVal | val4=UnorderedGroupValDelegate)+
 	 */
 	protected void sequence_UnorderedGroup(EObject context, UnorderedGroup semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

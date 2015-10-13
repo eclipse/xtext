@@ -39,7 +39,7 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (ids+=ID*)
+	 *     ids+=ID*
 	 */
 	protected void sequence_IDList(EObject context, IDList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

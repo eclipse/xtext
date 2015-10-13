@@ -18,6 +18,10 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
 import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -30,8 +34,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
@@ -40,15 +43,18 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.XbaseWithAnnotationsParser;
+import org.eclipse.xtext.xbase.annotations.parser.antlr.internal.InternalXbaseWithAnnotationsLexer;
 import org.eclipse.xtext.xbase.annotations.ui.contentassist.XbaseWithAnnotationsProposalProvider;
-import org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr.XbaseWithAnnotationsParser;
-import org.eclipse.xtext.xbase.annotations.ui.labeling.XbaseWithAnnotationsLabelProvider;
 import org.eclipse.xtext.xbase.annotations.ui.outline.XbaseWithAnnotationsOutlineTreeProvider;
 import org.eclipse.xtext.xbase.annotations.ui.quickfix.XbaseWithAnnotationsQuickfixProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes;
 import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection;
 import org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy;
@@ -63,39 +69,43 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		super(plugin);
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Provider<IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextEditor> bindXtextEditor() {
 		return XbaseEditor.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
 		return XbaseDocumentProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.xtext.generator.LanguageConfig2
+	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Class<? extends OpenGeneratedFileHandler> bindOpenGeneratedFileHandler() {
 		return XbaseOpenGeneratedFileHandler.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
 		return AntlrProposalConflictHelper.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.xbase.annotations.parser.antlr.internal.InternalXbaseWithAnnotationsLexer.class);
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.to(InternalXbaseWithAnnotationsLexer.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
+		binder.bind(ITokenDefProvider.class)
+			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.to(AntlrTokenDefProvider.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
@@ -143,39 +153,39 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 		return ContentFormatterFactory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XbaseWithAnnotationsQuickfixProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 	public Class<? extends ILabelProvider> bindILabelProvider() {
-		return XbaseWithAnnotationsLabelProvider.class;
+		return XbaseLabelProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 	public void configureResourceUIServiceLabelProvider(Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.annotations.ui.labeling.XbaseWithAnnotationsDescriptionLabelProvider.class);
+		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(XbaseDescriptionLabelProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return XbaseWithAnnotationsOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
 		return XbaseWithAnnotationsOutlineTreeProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 	public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 		return XbaseWithAnnotationsProposalProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends ContentAssistContext.Factory> bindContentAssistContext$Factory() {
-		return ParserBasedContentAssistContextFactory.class;
+		return DelegatingContentAssistContextFactory.class;
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
@@ -185,12 +195,12 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(Binder binder) {
-		binder.bind(org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class));
+		binder.bind(org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class));
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class);
+		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class);
 	}
 	
 }

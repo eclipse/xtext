@@ -69,7 +69,7 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (prefix=STRING? terms+=SimpleTerm* postfix=STRING?)
+	 *     (prefix=STRING* terms+=SimpleTerm* postfix=STRING*)
 	 */
 	protected void sequence_Expression(EObject context, Expression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

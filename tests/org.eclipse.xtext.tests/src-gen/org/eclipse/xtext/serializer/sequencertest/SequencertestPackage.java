@@ -329,13 +329,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X32 = 28;
 
   /**
+   * The feature id for the '<em><b>X33</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X33 = 29;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 29;
+  int MODEL_FEATURE_COUNT = 30;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1808,6 +1817,52 @@ public interface SequencertestPackage extends EPackage
   int NULL_CROSS_REF_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.FragmentCallerTypeImpl <em>Fragment Caller Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.FragmentCallerTypeImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getFragmentCallerType()
+   * @generated
+   */
+  int FRAGMENT_CALLER_TYPE = 40;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE__VAL = 1;
+
+  /**
+   * The feature id for the '<em><b>Frag Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE__FRAG_VAL = 2;
+
+  /**
+   * The number of structural features of the '<em>Fragment Caller Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FRAGMENT_CALLER_TYPE_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1815,7 +1870,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 40;
+  int DEF_ENUM = 41;
 
 
   /**
@@ -2146,6 +2201,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X32();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX33 <em>X33</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X33</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX33()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X33();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -3429,6 +3495,49 @@ public interface SequencertestPackage extends EPackage
   EAttribute getNullCrossRef_Foo();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.FragmentCallerType <em>Fragment Caller Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fragment Caller Type</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.FragmentCallerType
+   * @generated
+   */
+  EClass getFragmentCallerType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.FragmentCallerType#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.FragmentCallerType#getVal1()
+   * @see #getFragmentCallerType()
+   * @generated
+   */
+  EAttribute getFragmentCallerType_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.FragmentCallerType#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.FragmentCallerType#getVal()
+   * @see #getFragmentCallerType()
+   * @generated
+   */
+  EAttribute getFragmentCallerType_Val();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.FragmentCallerType#getFragVal <em>Frag Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Frag Val</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.FragmentCallerType#getFragVal()
+   * @see #getFragmentCallerType()
+   * @generated
+   */
+  EAttribute getFragmentCallerType_FragVal();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3702,6 +3811,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X32 = eINSTANCE.getModel_X32();
+
+    /**
+     * The meta object literal for the '<em><b>X33</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X33 = eINSTANCE.getModel_X33();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4740,6 +4857,40 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute NULL_CROSS_REF__FOO = eINSTANCE.getNullCrossRef_Foo();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.FragmentCallerTypeImpl <em>Fragment Caller Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.FragmentCallerTypeImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getFragmentCallerType()
+     * @generated
+     */
+    EClass FRAGMENT_CALLER_TYPE = eINSTANCE.getFragmentCallerType();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FRAGMENT_CALLER_TYPE__VAL1 = eINSTANCE.getFragmentCallerType_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FRAGMENT_CALLER_TYPE__VAL = eINSTANCE.getFragmentCallerType_Val();
+
+    /**
+     * The meta object literal for the '<em><b>Frag Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FRAGMENT_CALLER_TYPE__FRAG_VAL = eINSTANCE.getFragmentCallerType_FragVal();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

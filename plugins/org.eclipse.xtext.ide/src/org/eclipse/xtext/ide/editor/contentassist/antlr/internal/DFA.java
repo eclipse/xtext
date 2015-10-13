@@ -14,6 +14,9 @@ import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
+/**
+ * @since 2.9
+ */
 public class DFA extends org.antlr.runtime.DFA {
 	
 	@Override

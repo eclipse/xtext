@@ -12,6 +12,7 @@ import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -33,14 +34,16 @@ public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _and = false;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest = _projectConfig.getEclipsePluginManifest();
-      boolean _tripleNotEquals = (_eclipsePluginManifest != null);
+      IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      ManifestAccess _manifest = _eclipsePlugin.getManifest();
+      boolean _tripleNotEquals = (_manifest != null);
       _and = _tripleNotEquals;
     }
     if (_and) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_1.getEclipsePluginManifest();
-      Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
+      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.xbase.ui");
     }
   }

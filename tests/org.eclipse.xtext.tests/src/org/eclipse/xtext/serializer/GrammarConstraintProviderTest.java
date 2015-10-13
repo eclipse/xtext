@@ -140,16 +140,32 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		String actual = getParserRule("Rule: (x1=ID | x2=ID) | (x3=ID | x4=ID)* | (x5=ID | x6=ID)? | (x7=ID | x8=ID)+;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Rule | Rule_null;\n");
-		expected.append("  Rule_Rule returns Rule: (x1=ID | x2=ID | (x3=ID | x4=ID)* | (x5=ID | x6=ID)? | (x7=ID | x8=ID)+);\n");
+		expected.append("  Rule_Rule returns Rule: (\n");
+		expected.append("    x1=ID | \n");
+		expected.append("    x2=ID | \n");
+		expected.append("    (x3=ID | x4=ID)+ | \n");
+		expected.append("    x5=ID | \n");
+		expected.append("    x6=ID | \n");
+		expected.append("    (x7=ID | x8=ID)+\n");
+		expected.append(");\n");
 		expected.append("  Rule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
 	}
 
-	@Test public void testEmptyAlternatives() throws Exception {
+	@Test @Ignore public void testEmptyAlternatives() throws Exception {
 		String actual = getParserRule("Rule: (x1=ID | x2=ID | 'foo') (x3=ID | x4=ID | 'foo' | 'bar');");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Rule | Rule_null;\n");
 		expected.append("  Rule_Rule returns Rule: ((x1=ID | x2=ID)? (x3=ID | x4=ID)?);\n");
+		expected.append("  Rule_null returns null: {null};");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test @Ignore public void testDoubleMulti() throws Exception {
+		String actual = getParserRule("Rule: x1=ID* x2=ID*;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_Rule | Rule_null;\n");
+		expected.append("  Rule_Rule returns Rule: ((x1=ID+ x2=ID+) | x1=ID+ | x2=ID+);\n");
 		expected.append("  Rule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
 	}
@@ -172,7 +188,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		expected.append("    a2=ID | \n");
 		expected.append("    a2=STRING | \n");
 		expected.append("    a2='bar' | \n");
-		expected.append("    (a3+=ID | a3+=STRING | a3+='bar')*\n");
+		expected.append("    (a3+=ID | a3+=STRING | a3+='bar')+\n");
 		expected.append(");\n");
 		expected.append("  Rule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
@@ -182,7 +198,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		String actual = getParserRule("Rule: {Rule} ('false' | isTrue?='true');");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Rule;\n");
-		expected.append("  Rule_Rule returns Rule: (isTrue?='true'?);");
+		expected.append("  Rule_Rule returns Rule: isTrue?='true'?;");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -341,18 +357,32 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 	}
 
 	@Test
-	@Ignore
 	public void testReturnsNullAlways() throws Exception {
 		String actual = getParserRule("Rule: val1=NullRule val2=ID; NullRule: 'kw1';");
 		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_Rule;\n");
+		expected.append("  Rule_Rule returns Rule: (val1=NullRule val2=ID);");
 		assertEquals(expected.toString(), actual);
 	}
 
 	@Test
-	@Ignore
 	public void testReturnsNullSometimes() throws Exception {
 		String actual = getParserRule("Rule: val1=NullRule val2=ID; NullRule: 'kw1' | 'kw2' {NullRule};");
 		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_Rule;\n");
+		expected.append("  Rule_Rule returns Rule: (val1=NullRule val2=ID);\n");
+		expected.append("NullRule: NullRule_NullRule | NullRule_null;\n");
+		expected.append("  NullRule_NullRule returns NullRule: {NullRule};\n");
+		expected.append("  NullRule_null returns null: {null};");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test
+	public void testWildcardFragment() throws Exception {
+		String actual = getParserRule("Rule: F; fragment F*:name=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: F_Rule;\n");
+		expected.append("  F_Rule returns Rule: name=ID;");
 		assertEquals(expected.toString(), actual);
 	}
 }

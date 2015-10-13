@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
@@ -93,13 +94,19 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		return factory.createProject(monitor, null);
 	}
 
-	private void configureJavaProject(ProjectDescriptor descritpor, JavaProjectFactory factory) {
-		configurePlainProject(descritpor, factory);
+	private void configureJavaProject(ProjectDescriptor descriptor, JavaProjectFactory factory) {
+		configurePlainProject(descriptor, factory);
 		factory.addProjectNatures(XtextProjectHelper.NATURE_ID);
 		factory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
 		factory.addProjectNatures(JavaCore.NATURE_ID);
 		factory.addBuilderIds(JavaCore.BUILDER_ID);
-		factory.addFolders(Lists.newArrayList(descritpor.getSourceFolders()));
+		factory.addFolders(Lists.newArrayList(descriptor.getSourceFolders()));
+		if (needsM2eIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
+			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER")));
+		}
+		if (needsBuildshipIntegration(descriptor) && ! descriptor.isEclipsePluginProject()) {
+			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
+		}
 	}
 	
 	private IProject createPlainProject(ProjectDescriptor descriptor, SubMonitor monitor) {
@@ -114,8 +121,17 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.setProjectDefaultCharset(projectInfo.getEncoding().toString());
 		factory.addWorkingSets(Lists.newArrayList(projectInfo.getWorkingSets()));
 		factory.addContributor(new DescriptorBasedContributor(descriptor));
+		if (needsM2eIntegration(descriptor)) {
+			factory.addProjectNatures("org.eclipse.m2e.core.maven2Nature");
+			factory.addBuilderIds("org.eclipse.m2e.core.maven2Builder");
+		}
+		if (needsBuildshipIntegration(descriptor)) {
+			factory.addProjectNatures("org.eclipse.buildship.core.gradleprojectnature");
+			factory.addBuilderIds("org.eclipse.buildship.core.gradleprojectbuilder");
+			factory.addContributor(new GradleContributor(descriptor));
+		}
 	}
-	
+
 	private class DescriptorBasedContributor implements IProjectFactoryContributor {
 		private ProjectDescriptor descriptor;
 		
@@ -141,12 +157,51 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		}
 	}
 	
+	private static class GradleContributor implements IProjectFactoryContributor {
+
+		private ProjectDescriptor descriptor;
+
+		public GradleContributor(ProjectDescriptor descriptor) {
+			this.descriptor = descriptor;
+		}
+
+		@Override
+		public void contributeFiles(IProject project, IFileCreator fileWriter) {
+			fileWriter.writeToFile(
+				"{\n" +
+				"	\"1.0\": {\n" +
+				"		\"project_path\": \""+ getLogicalPath() + "\",\n" +
+				"		\"project_dir\": \""+ descriptor.getLocation() + "\",\n" +
+				"		\"connection_project_dir\": \""+ descriptor.getConfig().getParentProject().getLocation() + "\",\n" +
+				"		\"connection_gradle_distribution\": \"GRADLE_DISTRIBUTION(WRAPPER)\"\n" +
+				"	}\n" +
+				"}\n",
+			".settings/gradle.prefs");
+		}
+
+		private String getLogicalPath() {
+			if (descriptor instanceof ParentProjectDescriptor) {
+				return ":";
+			} else {
+				return ":" + descriptor.getName();
+			}
+		}
+	}
+	
 	private boolean isPluginProject(ProjectDescriptor descriptor) {
 		return descriptor.isEclipsePluginProject();
 	}
 	
 	private boolean isJavaProject(ProjectDescriptor descriptor) {
 		return !descriptor.getSourceFolders().isEmpty();
+	}
+	
+	private boolean needsM2eIntegration(ProjectDescriptor descriptor) {
+		return descriptor.isPartOfMavenBuild() && descriptor.getConfig().needsMavenBuild();
+	}
+
+	private boolean needsBuildshipIntegration(ProjectDescriptor descriptor) {
+		return descriptor.isPartOfGradleBuild() && descriptor.getConfig().needsGradleBuild();
 	}
 	
 	private int getMonitorTicks() {

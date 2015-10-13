@@ -44,11 +44,6 @@
 						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
 						<version>${xtextVersion}</version>
 					</dependency>
-					<dependency>
-						<groupId>org.eclipse.xtext</groupId>
-						<artifactId>org.eclipse.xtext.xbase</artifactId>
-						<version>${xtextVersion}</version>
-					</dependency>
 				</dependencies>
 			</plugin>
 			<plugin>
@@ -59,20 +54,22 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
 				<configuration>
 					<filesets combine.children="append">
 						<fileset>
-							<directory>${basedir}/src/main/xtext-gen/</directory>
+							<directory>${basedir}/../org.xtext.example.plainMaven/src/main/xtext-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.plainMaven/src/test/xtext-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.plainMaven.ide/src/main/xtext-gen/</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/../org.xtext.example.plainMaven.web/src/main/xtext-gen/</directory>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.ide/src/main/xtext-gen/</directory>
-						</fileset>
-						<fileset>
-							<directory>${basedir}/../${project.artifactId}.web/src/main/xtext-gen/</directory>
 						</fileset>
 					</filesets>
 				</configuration>
@@ -147,6 +144,40 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											exec-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.2.1,)
+										</versionRange>
+										<goals>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<dependencies>
@@ -171,6 +202,18 @@
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase</artifactId>
 			<version>${xtextVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext</artifactId>
+			<version>${xtextVersion}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+			<version>${xtextVersion}</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 </project>

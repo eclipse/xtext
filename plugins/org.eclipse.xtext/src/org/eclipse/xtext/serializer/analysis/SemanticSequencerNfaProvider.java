@@ -23,10 +23,8 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
@@ -35,6 +33,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaFactory;
+import org.eclipse.xtext.util.formallang.NfaGraphFormatter;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 
 import com.google.common.collect.HashMultimap;
@@ -55,11 +54,28 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 		protected final ISemState start;
 		protected final ISemState stop;
+		protected int hashCode = -1;
 
 		public SemNfa(ISemState starts, ISemState stops) {
 			super();
 			this.start = starts;
 			this.stop = stops;
+		}
+
+		@Override
+		public int hashCode() {
+			if (hashCode == -1)
+				hashCode = new NfaUtil().hashCodeIgnoreOrder(this, GET_ASSIGNED_GRAMMAR_ELEMENT);
+			return hashCode;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null || obj.getClass() != getClass())
+				return false;
+			if (obj == this)
+				return true;
+			return new NfaUtil().equalsIgnoreOrder(this, (SemNfa) obj, GET_ASSIGNED_GRAMMAR_ELEMENT);
 		}
 
 		@Override
@@ -75,6 +91,11 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		@Override
 		public ISemState getStop() {
 			return stop;
+		}
+
+		@Override
+		public String toString() {
+			return new NfaGraphFormatter().format(this);
 		}
 
 	}
@@ -176,11 +197,6 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	}
 
-	protected Map<AbstractElement, Integer> elementIDCache;
-
-	@Inject
-	protected RuleNames ruleNames;
-
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
@@ -194,17 +210,6 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			return false;
 		to.or(bits);
 		return true;
-	}
-
-	protected int getElementID(AbstractElement ele) {
-		if (elementIDCache == null) {
-			elementIDCache = Maps.newHashMap();
-			int counter = 0;
-			for (ParserRule pr : ruleNames.getAllParserRules())
-				for (AbstractElement e : EcoreUtil2.getAllContentsOfType(pr, AbstractElement.class))
-					elementIDCache.put(e, counter++);
-		}
-		return elementIDCache.get(ele);
 	}
 
 	@Override
@@ -222,7 +227,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		if (type != null)
 			initContentValidationNeeded(type, nfa);
 		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState> newHashSet());
-		initOrderIDs(nfa);
+		initOrderIDs(GrammarUtil.getGrammar(context), nfa);
 		//		System.out.println(new NfaFormatter().format(nfa));
 		resultCache.put(key, nfa);
 		return nfa;
@@ -244,10 +249,11 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 				((SemState) state).contentValidationNeeded = Collections.emptyList();
 	}
 
-	protected void initOrderIDs(Nfa<ISemState> nfa) {
+	protected void initOrderIDs(Grammar grammar, Nfa<ISemState> nfa) {
+		GrammarElementDeclarationOrder order = GrammarElementDeclarationOrder.get(grammar);
 		for (ISemState state : new NfaUtil().collect(nfa))
 			if (state.getAssignedGrammarElement() != null)
-				((SemState) state).orderID = getElementID(state.getAssignedGrammarElement());
+				((SemState) state).orderID = order.getElementID((state.getAssignedGrammarElement()));
 	}
 
 	protected void initRemainingFeatures(ISemState state, Nfa<ISemState> inverseNfa, Set<ISemState> visited) {

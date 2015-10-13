@@ -92,6 +92,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -238,8 +239,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _elvis = this.javaModelDirectory;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _runtimeSrcGen = _projectConfig.getRuntimeSrcGen();
-      String _path = _runtimeSrcGen.getPath();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+      String _path = _srcGen.getPath();
       _elvis = _path;
     }
     return _elvis;
@@ -269,8 +271,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   
   protected String getEcoreFilePath(final Grammar grammar) {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IXtextGeneratorFileSystemAccess _runtimeModelGen = _projectConfig.getRuntimeModelGen();
-    String _path = _runtimeModelGen.getPath();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
+    String _path = _ecoreModel.getPath();
     String _plus = (_path + "/");
     String _modelName = this.getModelName(grammar);
     String _plus_1 = (_plus + _modelName);
@@ -289,8 +292,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _elvis = this.genModel;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _runtimeModelGen = _projectConfig.getRuntimeModelGen();
-      String _path = _runtimeModelGen.getPath();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
+      String _path = _ecoreModel.getPath();
       String _plus = (_path + "/");
       String _modelName = this.getModelName(grammar);
       String _plus_1 = (_plus + _modelName);
@@ -310,8 +314,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     String _xblockexpression = null;
     {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _runtimeRoot = _projectConfig.getRuntimeRoot();
-      final String projectRoot = _runtimeRoot.getPath();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
+      final String projectRoot = _root.getPath();
       String _xifexpression = null;
       boolean _startsWith = pathInRoot.startsWith(projectRoot);
       if (_startsWith) {
@@ -375,8 +380,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       String _xblockexpression = null;
       {
         IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        IXtextGeneratorFileSystemAccess _runtimeRoot = _projectConfig.getRuntimeRoot();
-        final String path = _runtimeRoot.getPath();
+        IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+        IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
+        final String path = _root.getPath();
         int _lastIndexOf = path.lastIndexOf("/");
         int _plus = (_lastIndexOf + 1);
         _xblockexpression = path.substring(_plus);
@@ -392,8 +398,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _elvis = this.editDirectory;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _runtimeRoot = _projectConfig.getRuntimeRoot();
-      String _path = _runtimeRoot.getPath();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
+      String _path = _root.getPath();
       String _plus = (_path + ".edit/src");
       _elvis = _plus;
     }
@@ -406,8 +413,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _elvis = this.editorDirectory;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _runtimeRoot = _projectConfig.getRuntimeRoot();
-      String _path = _runtimeRoot.getPath();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
+      String _path = _root.getPath();
       String _plus = (_path + ".editor/src");
       _elvis = _plus;
     }
@@ -530,12 +538,14 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   
   protected void addProjectContributions(final Grammar grammar, final List<EPackage> generatedPackages, final ResourceSet rs) {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    PluginXmlAccess _runtimePluginXml = _projectConfig.getRuntimePluginXml();
-    boolean _tripleNotEquals = (_runtimePluginXml != null);
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    PluginXmlAccess _pluginXml = _runtime.getPluginXml();
+    boolean _tripleNotEquals = (_pluginXml != null);
     if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      PluginXmlAccess _runtimePluginXml_1 = _projectConfig_1.getRuntimePluginXml();
-      List<CharSequence> _entries = _runtimePluginXml_1.getEntries();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      PluginXmlAccess _pluginXml_1 = _runtime_1.getPluginXml();
+      List<CharSequence> _entries = _pluginXml_1.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<extension point=\"org.eclipse.emf.ecore.generated_package\">");
       _builder.newLine();
@@ -574,12 +584,14 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _entries.add(_builder.toString());
     }
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    ManifestAccess _runtimeManifest = _projectConfig_2.getRuntimeManifest();
-    boolean _tripleNotEquals_1 = (_runtimeManifest != null);
+    IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
+    ManifestAccess _manifest = _runtime_2.getManifest();
+    boolean _tripleNotEquals_1 = (_manifest != null);
     if (_tripleNotEquals_1) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      ManifestAccess _runtimeManifest_1 = _projectConfig_3.getRuntimeManifest();
-      Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
+      IRuntimeProjectConfig _runtime_3 = _projectConfig_3.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_3.getManifest();
+      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       CollectionExtensions.<String>addAll(_requiredBundles, "org.eclipse.emf.ecore", "org.eclipse.emf.common");
     }
     for (final EPackage pack_1 : generatedPackages) {
@@ -587,8 +599,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         final GenPackage genPackage = GenModelUtil2.getGenPackage(pack_1, rs);
         boolean _and = false;
         IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-        ManifestAccess _runtimeManifest_2 = _projectConfig_4.getRuntimeManifest();
-        boolean _tripleNotEquals_2 = (_runtimeManifest_2 != null);
+        IRuntimeProjectConfig _runtime_4 = _projectConfig_4.getRuntime();
+        ManifestAccess _manifest_2 = _runtime_4.getManifest();
+        boolean _tripleNotEquals_2 = (_manifest_2 != null);
         if (!_tripleNotEquals_2) {
           _and = false;
         } else {
@@ -597,8 +610,9 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         }
         if (_and) {
           IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-          ManifestAccess _runtimeManifest_3 = _projectConfig_5.getRuntimeManifest();
-          Set<String> _exportedPackages = _runtimeManifest_3.getExportedPackages();
+          IRuntimeProjectConfig _runtime_5 = _projectConfig_5.getRuntime();
+          ManifestAccess _manifest_3 = _runtime_5.getManifest();
+          Set<String> _exportedPackages = _manifest_3.getExportedPackages();
           String _interfacePackageName = genPackage.getInterfacePackageName();
           String _classPackageName = genPackage.getClassPackageName();
           String _utilitiesPackageName = genPackage.getUtilitiesPackageName();
@@ -1188,24 +1202,13 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         return;
       }
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      final IXtextGeneratorFileSystemAccess rootOutlet = _projectConfig.getRuntimeRoot();
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      final IXtextGeneratorFileSystemAccess modelOutlet = _projectConfig_1.getRuntimeModelGen();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      final IXtextGeneratorFileSystemAccess rootOutlet = _runtime.getRoot();
       String _path = rootOutlet.getPath();
       final String buildPropertiesPath = (_path + "/build.properties");
-      String _path_1 = modelOutlet.getPath();
-      String _path_2 = rootOutlet.getPath();
-      int _length = _path_2.length();
-      int _plus = (_length + 1);
-      final String modelPath = _path_1.substring(_plus);
-      final int modelContainerEnd = modelPath.indexOf("/");
-      String _xifexpression = null;
-      if ((modelContainerEnd > 0)) {
-        _xifexpression = modelPath.substring(0, modelContainerEnd);
-      } else {
-        _xifexpression = modelPath;
-      }
-      final String modelContainer = _xifexpression;
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      final String modelContainer = _runtime_1.getEcoreModelFolder();
       final Properties buildProperties = new Properties();
       File _file = new File(buildPropertiesPath);
       FileInputStream _fileInputStream = new FileInputStream(_file);
@@ -1221,18 +1224,18 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         if ((binIncludes == null)) {
           String _existingContent = existingContent;
           String _newLine = Strings.newLine();
-          String _plus_1 = (("bin.includes = " + modelContainer) + _newLine);
-          String _plus_2 = (_plus_1 + "               ");
-          existingContent = (_existingContent + _plus_2);
+          String _plus = (("bin.includes = " + modelContainer) + _newLine);
+          String _plus_1 = (_plus + "               ");
+          existingContent = (_existingContent + _plus_1);
           changed = true;
         } else {
           boolean _contains = binIncludes.contains(modelContainer);
           boolean _not = (!_contains);
           if (_not) {
             String _newLine_1 = Strings.newLine();
-            String _plus_3 = ((("bin.includes = " + modelContainer) + ",\\") + _newLine_1);
-            String _plus_4 = (_plus_3 + "               ");
-            String _replace = existingContent.replace("bin.includes = ", _plus_4);
+            String _plus_2 = ((("bin.includes = " + modelContainer) + ",\\") + _newLine_1);
+            String _plus_3 = (_plus_2 + "               ");
+            String _replace = existingContent.replace("bin.includes = ", _plus_3);
             existingContent = _replace;
             changed = true;
           }

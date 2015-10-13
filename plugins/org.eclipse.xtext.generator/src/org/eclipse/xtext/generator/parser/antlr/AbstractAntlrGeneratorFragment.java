@@ -19,13 +19,15 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
+import org.eclipse.xtext.xtext.RuleFilter;
+import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
@@ -33,8 +35,6 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuar
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
-import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess;
-import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;

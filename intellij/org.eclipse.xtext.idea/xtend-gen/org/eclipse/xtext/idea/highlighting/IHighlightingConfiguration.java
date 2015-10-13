@@ -34,6 +34,12 @@ public interface IHighlightingConfiguration {
      * @see HighlightingStyles
      */
     public abstract TextAttributesKey addStyle(final String xtextStyleId, final String displayName, final TextAttributesKey fallbackKey);
+    
+    /**
+     * Redirects xtextStyles.
+     * Useful if you don't want to expose certain styles to the user.
+     */
+    public abstract void addRedirect(final String fromXtextStyleId, final String toXtextStyleId);
   }
   
   public abstract void configure(final IHighlightingConfiguration.IHighlightingStyleAcceptor it);

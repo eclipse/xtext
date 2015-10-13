@@ -278,7 +278,8 @@ public class PdaUtil {
 
 	public final long UNREACHABLE = Long.MAX_VALUE;
 
-	public <S, P> boolean canReach(Pda<S, P> pda, S state, Iterator<P> stack, Predicate<S> matches, Predicate<S> canPass) {
+	public <S, P> boolean canReach(Pda<S, P> pda, S state, Iterator<P> stack, Predicate<S> matches,
+			Predicate<S> canPass) {
 		return distanceTo(pda, Collections.singleton(state), stack, matches, canPass) != UNREACHABLE;
 	}
 
@@ -426,7 +427,7 @@ public class PdaUtil {
 		HashStack<TraversalItem<S, R>> trace = new HashStack<TraversalItem<S, R>>();
 		R previous = traverser.enter(pda, pda.getStart(), null);
 		if (previous == null)
-			return factory.create(pda.getStart(), pda.getStop());
+			return factory == null ? null : factory.create(pda.getStart(), pda.getStop());
 		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
 		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
 		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous));
@@ -460,6 +461,8 @@ public class PdaUtil {
 			}
 			trace.pop();
 		}
+		if (factory == null)
+			return null;
 		D result = factory.create(pda.getStart(), pda.getStop());
 		Map<S, S> old2new = Maps.newLinkedHashMap();
 		old2new.put(pda.getStart(), result.getStart());
@@ -594,6 +597,26 @@ public class PdaUtil {
 		return null;
 	}
 
+	public <S, P, R> List<R> collectReachable(Pda<S, P> pda, final Function<S, R> function) {
+		final List<R> result = Lists.newArrayList();
+		Iterator<P> stack = Collections.<P> emptyList().iterator();
+		Predicate<S> matches = Predicates.<S> alwaysFalse();
+		Predicate<S> canPass = new Predicate<S>() {
+			@Override
+			public boolean apply(S input) {
+				R r = function.apply(input);
+				if (r != null) {
+					result.add(r);
+					return false;
+				} else {
+					return true;
+				}
+			}
+		};
+		trace(pda, Collections.singleton(pda.getStart()), stack, matches, canPass);
+		return result;
+	}
+
 	protected <S, P> TraceItem<S, P> trace(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
 			Predicate<S> canPass) {
 		StackItem<P> stackItem = createStack(stack);
@@ -693,75 +716,36 @@ public class PdaUtil {
 		return filterEdges(pda, traverser, factory);
 	}
 
-	//	public  IPdaAdapter<String, String, String> parse(String pda) {
-	//		Pattern node = Pattern.compile("([a-z-A-Z0-9]*)\\[([a-z-A-Z0-9,= ]*)\\]");
-	//		Pattern transition = Pattern.compile("([a-z-A-Z0-9]*) -> ([a-z-A-Z0-9]*)");
-	//		final Set<String> starts = Sets.newLinkedHashSet();
-	//		final Set<String> finals = Sets.newLinkedHashSet();
-	//		final Multimap<String, String> followers = HashMultimap.create();
-	//		final Map<String, String> pushs = Maps.newLinkedHashMap();
-	//		final Map<String, String> pops = Maps.newLinkedHashMap();
-	//		for (String line : pda.split("\\n")) {
-	//			line = line.trim();
-	//			Matcher nodeMatcher = node.matcher(line);
-	//			if (nodeMatcher.find()) {
-	//				String name = nodeMatcher.group(1);
-	//				String[] args = nodeMatcher.group(2).split(",");
-	//				for (String arg : args) {
-	//					String[] a = arg.split("=");
-	//					String argKey, argValue;
-	//					if (a.length > 1) {
-	//						argKey = a[0];
-	//						argValue = a[1];
-	//					} else {
-	//						argKey = arg;
-	//						argValue = null;
-	//					}
-	//					if ("start".equals(argKey))
-	//						starts.add(name);
-	//					else if ("final".equals(argKey))
-	//						finals.add(name);
-	//					else if ("push".equals(argKey))
-	//						pushs.put(name, argValue);
-	//					else if ("pop".equals(argKey))
-	//						pops.put(name, argValue);
-	//					else
-	//						throw new RuntimeException("unknown state argument key: '" + argKey + "'");
-	//				}
-	//			} else {
-	//				Matcher transitionMatcher = transition.matcher(line);
-	//				if (transitionMatcher.find())
-	//					followers.put(transitionMatcher.group(1), transitionMatcher.group(2));
-	//				else
-	//					throw new RuntimeException("Could not parse line: '" + line + "'");
-	//			}
-	//
-	//		}
-	//		return new IPdaAdapter<String, String, String>() {
-	//
-	//			public String getToken(String owner) {
-	//				return null;
-	//			}
-	//
-	//			public Iterable<String> getStartStates() {
-	//				return starts;
-	//			}
-	//
-	//			public Iterable<String> getFollowers(String node) {
-	//				return followers.get(node);
-	//			}
-	//
-	//			public Iterable<String> getFinalStates() {
-	//				return finals;
-	//			}
-	//
-	//			public String getPush(String state) {
-	//				return pushs.get(state);
-	//			}
-	//
-	//			public String getPop(String state) {
-	//				return pops.get(state);
-	//			}
-	//		};
-	//	}
+	public <S, P, D extends Pda<S, P>> Map<P, Pair<S, S>> collectPopsAndPushs(Pda<S, P> pda) {
+		Map<P, Pair<S, S>> result = Maps.newLinkedHashMap();
+		for (S s : nfaUtil.collect(pda)) {
+			P push = pda.getPush(s);
+			if (push != null) {
+				Pair<S, S> o = result.get(push);
+				Pair<S, S> n = Tuples.create(s, o == null ? null : o.getSecond());
+				result.put(push, n);
+			}
+			P pop = pda.getPop(s);
+			if (pop != null) {
+				Pair<S, S> o = result.get(pop);
+				Pair<S, S> n = Tuples.create(o == null ? null : o.getFirst(), s);
+				result.put(pop, n);
+			}
+		}
+		return result;
+	}
+
+	public <S, P, D extends Pda<S, P>> Map<S, S> mapPopAndPush(Pda<S, P> pda) {
+		Map<P, Pair<S, S>> popsAndPushs = collectPopsAndPushs(pda);
+		Map<S, S> result = Maps.newLinkedHashMap();
+		for (Pair<S, S> p : popsAndPushs.values()) {
+			S push = p.getFirst();
+			S pop = p.getSecond();
+			if (push != null && pop != null) {
+				result.put(push, pop);
+				result.put(pop, push);
+			}
+		}
+		return result;
+	}
 }

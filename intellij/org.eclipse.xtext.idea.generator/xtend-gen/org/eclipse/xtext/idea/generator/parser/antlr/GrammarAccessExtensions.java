@@ -31,7 +31,6 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
@@ -41,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xtext.RuleNames;
 
 @Singleton
 @SuppressWarnings("all")

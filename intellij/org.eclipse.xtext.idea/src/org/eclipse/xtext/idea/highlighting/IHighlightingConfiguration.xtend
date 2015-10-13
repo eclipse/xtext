@@ -35,5 +35,12 @@ interface IHighlightingConfiguration {
 		 * @see HighlightingStyles 
 		 */
 		def TextAttributesKey addStyle(String xtextStyleId, String displayName, TextAttributesKey fallbackKey)
+		
+		
+		/**
+		 * Redirects xtextStyles.
+		 * Useful if you don't want to expose certain styles to the user.
+		 */
+		def void addRedirect(String fromXtextStyleId, String toXtextStyleId);
 	}
 }

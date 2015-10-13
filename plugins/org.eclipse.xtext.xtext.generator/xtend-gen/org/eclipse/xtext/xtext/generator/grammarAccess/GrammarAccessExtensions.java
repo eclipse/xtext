@@ -43,7 +43,6 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextRuntimeModule;
@@ -58,6 +57,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -965,13 +965,7 @@ public class GrammarAccessExtensions {
         boolean _notEquals = (!Objects.equal(_rule, null));
         if (_notEquals) {
           _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("\"");
-          AbstractRule _rule_1 = ((RuleCall)it).getRule();
-          String _name = _rule_1.getName();
-          _builder.append(_name, "");
-          _builder.append("\"");
-          _switchResult = _builder;
+          _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
         }
       }
     }

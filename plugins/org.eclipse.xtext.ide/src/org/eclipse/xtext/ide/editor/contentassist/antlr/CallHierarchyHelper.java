@@ -30,6 +30,9 @@ import org.eclipse.xtext.util.XtextSwitch;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+/**
+ * @since 2.9
+ */
 public class CallHierarchyHelper extends XtextSwitch<Boolean> {
 	private final EObject nextGrammarElement;
 	private Set<AbstractRule> visiting = new HashSet<AbstractRule>();

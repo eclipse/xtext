@@ -24,7 +24,6 @@ import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
-import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
@@ -40,10 +39,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class DebugGraphGenerator {
-  @Inject
-  @Extension
-  private IContextProvider contextProvider;
-  
   @Inject
   private Grammar grammar;
   
@@ -81,19 +76,19 @@ public class DebugGraphGenerator {
   
   public Iterable<Pair<String, String>> generateDebugGraphs() {
     final ArrayList<Pair<String, String>> result = CollectionLiterals.<Pair<String, String>>newArrayList();
-    List<EObject> _allContexts = this.contextProvider.getAllContexts(this.grammar);
+    Set<EObject> _allContexts = this.contextPDAProvider.getAllContexts(this.grammar);
     for (final EObject context : _allContexts) {
       try {
         String _file = this.file("context", context);
-        Pda<ISerState, RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(context);
+        Pda<ISerState, RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(this.grammar, context);
         String _draw = this.pdaToDot.draw(_contextPDA);
         Pair<String, String> _mappedTo = Pair.<String, String>of(_file, _draw);
         result.add(_mappedTo);
-        Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(context);
+        Set<EClass> _typesForContext = this.contextTypePDAProvider.getTypesForContext(this.grammar, context);
         for (final EClass type : _typesForContext) {
           try {
             String _file_1 = this.file("context_type", context, type);
-            Pda<ISerState, RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(context, type);
+            Pda<ISerState, RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(this.grammar, context, type);
             String _draw_1 = this.pdaToDot.draw(_contextTypePDA);
             Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_file_1, _draw_1);
             result.add(_mappedTo_1);

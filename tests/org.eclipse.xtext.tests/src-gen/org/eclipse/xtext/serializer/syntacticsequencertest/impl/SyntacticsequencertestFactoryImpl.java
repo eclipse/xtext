@@ -80,6 +80,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
       case SyntacticsequencertestPackage.BOOLEAN_VALUES: return createBooleanValues();
       case SyntacticsequencertestPackage.LONG_ALTERNATIVE: return createLongAlternative();
       case SyntacticsequencertestPackage.ACTION_ONLY: return createActionOnly();
+      case SyntacticsequencertestPackage.FRAGMENT_CALLER_TYPE: return createFragmentCallerType();
       case SyntacticsequencertestPackage.ADD0: return createAdd0();
       case SyntacticsequencertestPackage.VAL0: return createVal0();
       case SyntacticsequencertestPackage.ADD1: return createAdd1();
@@ -266,6 +267,17 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
   {
     ActionOnlyImpl actionOnly = new ActionOnlyImpl();
     return actionOnly;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FragmentCallerType createFragmentCallerType()
+  {
+    FragmentCallerTypeImpl fragmentCallerType = new FragmentCallerTypeImpl();
+    return fragmentCallerType;
   }
 
   /**

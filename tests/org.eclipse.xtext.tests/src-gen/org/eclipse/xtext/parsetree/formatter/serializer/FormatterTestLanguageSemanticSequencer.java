@@ -245,7 +245,7 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     ((vals+=SuppressedHiddenSub vals+=SuppressedHiddenSub*)?)
+	 *     (vals+=SuppressedHiddenSub vals+=SuppressedHiddenSub*)?
 	 */
 	protected void sequence_SuppressedHidden(EObject context, SuppressedHidden semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -263,7 +263,7 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (items+=Line*)
+	 *     items+=Line*
 	 */
 	protected void sequence_TestLinewrapMinMax(EObject context, TestLinewrapMinMax semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -272,7 +272,7 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Constraint:
-	 *     (items+=Line*)
+	 *     items+=Line*
 	 */
 	protected void sequence_TestLinewrap(EObject context, TestLinewrap semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

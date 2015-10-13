@@ -21,22 +21,40 @@ class GrammarNaming {
 	@Inject
 	extension XtextGeneratorNaming
 
-	def String getParserPackage(Grammar it) '''«runtimeBasePackage».idea.parser.antlr.internal'''
+	def String getParserPackage(Grammar it) '''«runtimeBasePackage».parser.antlr'''
 
-	def TypeReference getGrammarClass(Grammar it, String prefix) {
-		new TypeReference(parserPackage, '''«prefix»Internal«simpleName»''')
+	def String getInternalParserPackage(Grammar it) '''«runtimeBasePackage».parser.antlr.internal'''
+
+	def TypeReference getGrammarClass(Grammar it) {
+		new TypeReference(internalParserPackage, '''Internal«simpleName»''')
+	}
+
+	def TypeReference getLexerClass(Grammar it) {
+		new TypeReference(internalParserPackage, '''Internal«simpleName»Lexer''')
+	}
+
+	def TypeReference getParserClass(Grammar it) {
+		new TypeReference(parserPackage, '''«simpleName»Parser''')
 	}
 
 	def TypeReference getInternalParserClass(Grammar it) {
-		new TypeReference(parserPackage, '''Internal«simpleName»Parser''')
+		new TypeReference(internalParserPackage, '''Internal«simpleName»Parser''')
 	}
 
 	def TypeReference getContentAssistParserClass(Grammar it) {
 		new TypeReference('''«genericIdeBasePackage».contentassist.antlr''', '''«simpleName»Parser''')
 	}
-	
+
 	def TypeReference getInternalContentAssistLexerClass(Grammar it) {
 		new TypeReference('''«genericIdeBasePackage».contentassist.antlr.internal''', '''Internal«simpleName»Lexer''')
+	}
+
+	def TypeReference getAntlrTokenFileProviderClass(Grammar it) {
+		new TypeReference(parserPackage, '''«simpleName»AntlrTokenFileProvider''')
+	}
+	
+	def String getTokenFileName(Grammar it) {
+		internalParserPackage.replace('.', '/') + "/Internal" + simpleName + ".tokens"
 	}
 
 }

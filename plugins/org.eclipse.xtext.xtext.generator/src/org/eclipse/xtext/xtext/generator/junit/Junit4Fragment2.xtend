@@ -2,7 +2,6 @@ package org.eclipse.xtext.xtext.generator.junit
 
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -12,13 +11,12 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 class Junit4Fragment2 extends AbstractGeneratorFragment2 {
-	@Inject IXtextProjectConfig projectConfig
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 
 	override generate() {
-		if (projectConfig.runtimeTestManifest != null) {
-			projectConfig.runtimeTestManifest => [
+		if (projectConfig.runtimeTest.manifest != null) {
+			projectConfig.runtimeTest.manifest => [
 				requiredBundles.addAll(
 					"org.eclipse.xtext.junit4",
 					"org.eclipse.xtext.xbase.lib"
@@ -26,8 +24,8 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 				exportedPackages.add(grammar.runtimeTestBasePackage)
 			]
 		}
-		if (projectConfig.eclipsePluginTestManifest != null) {
-			projectConfig.eclipsePluginTestManifest => [
+		if (projectConfig.eclipsePluginTest.manifest != null) {
+			projectConfig.eclipsePluginTest.manifest => [
 				requiredBundles.addAll(
 					"org.eclipse.core.runtime",
 					"org.eclipse.ui.workbench;resolution:=optional"
@@ -35,13 +33,13 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 				exportedPackages.add(grammar.eclipsePluginTestBasePackage)
 			]
 		}
-		if (projectConfig.eclipsePluginManifest != null) {
-			projectConfig.eclipsePluginManifest.exportedPackages.add(grammar.eclipsePluginActivator.packageName)
+		if (projectConfig.eclipsePlugin.manifest != null) {
+			projectConfig.eclipsePlugin.manifest.exportedPackages.add(grammar.eclipsePluginActivator.packageName)
 		}
 		
 		#[
-			projectConfig.runtimeTestManifest,
-			projectConfig.eclipsePluginTestManifest
+			projectConfig.runtimeTest.manifest,
+			projectConfig.eclipsePluginTest.manifest
 		].filterNull.forEach [
 			importedPackages.addAll(
 				"org.junit;version=\"4.5.0\"",
@@ -53,9 +51,9 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 				"org.hamcrest.core"
 			)
 		]
-		generateInjectorProvider.writeTo(projectConfig.runtimeTestSrcGen)
-		generateExampleRuntimeTest.writeTo(projectConfig.runtimeTestSrc)
-		generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTestSrcGen)
+		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
+		generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
+		generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
 	}
 	
 	def JavaFileAccess generateExampleRuntimeTest() {

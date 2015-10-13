@@ -7,10 +7,10 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
+import org.eclipse.xtext.xtext.RuleNames;
 
 /**
  * This API can be used by other templates to generate code
