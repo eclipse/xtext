@@ -51,18 +51,19 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.LanguageModule;
 import org.eclipse.xtext.xtext.generator.MweIssues;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.SubProjectConfig;
-import org.eclipse.xtext.xtext.generator.WebProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextDirectoryCleaner;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -93,7 +94,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   private Injector injector;
   
   @Inject
-  private XtextProjectConfig projectConfig;
+  private IXtextProjectConfig projectConfig;
   
   @Inject
   private XtextGeneratorTemplates templates;
@@ -210,62 +211,62 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   protected void generateSetups(final ILanguageConfig language) {
     JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
-    RuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+    IRuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
     _createRuntimeGenSetup.writeTo(_srcGen);
     JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
-    RuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
+    IRuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime_1.getSrc();
     _createRuntimeSetup.writeTo(_src);
     JavaFileAccess _createWebSetup = this.templates.createWebSetup(language);
-    WebProjectConfig _web = this.projectConfig.getWeb();
+    IWebProjectConfig _web = this.projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _src_1 = _web.getSrc();
     _createWebSetup.writeTo(_src_1);
   }
   
   protected void generateModules(final ILanguageConfig language) {
     JavaFileAccess _createRuntimeGenModule = this.templates.createRuntimeGenModule(language);
-    RuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+    IRuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
     _createRuntimeGenModule.writeTo(_srcGen);
     JavaFileAccess _createRuntimeModule = this.templates.createRuntimeModule(language);
-    RuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
+    IRuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime_1.getSrc();
     _createRuntimeModule.writeTo(_src);
     JavaFileAccess _createEclipsePluginGenModule = this.templates.createEclipsePluginGenModule(language);
-    BundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
+    IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin.getSrcGen();
     _createEclipsePluginGenModule.writeTo(_srcGen_1);
     JavaFileAccess _createEclipsePluginModule = this.templates.createEclipsePluginModule(language);
-    BundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
+    IBundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src_1 = _eclipsePlugin_1.getSrc();
     _createEclipsePluginModule.writeTo(_src_1);
     JavaFileAccess _createIdeaGenModule = this.templates.createIdeaGenModule(language);
-    SubProjectConfig _ideaPlugin = this.projectConfig.getIdeaPlugin();
+    ISubProjectConfig _ideaPlugin = this.projectConfig.getIdeaPlugin();
     IXtextGeneratorFileSystemAccess _srcGen_2 = _ideaPlugin.getSrcGen();
     _createIdeaGenModule.writeTo(_srcGen_2);
     JavaFileAccess _createIdeaModule = this.templates.createIdeaModule(language);
-    SubProjectConfig _ideaPlugin_1 = this.projectConfig.getIdeaPlugin();
+    ISubProjectConfig _ideaPlugin_1 = this.projectConfig.getIdeaPlugin();
     IXtextGeneratorFileSystemAccess _src_2 = _ideaPlugin_1.getSrc();
     _createIdeaModule.writeTo(_src_2);
     JavaFileAccess _createWebGenModule = this.templates.createWebGenModule(language);
-    WebProjectConfig _web = this.projectConfig.getWeb();
+    IWebProjectConfig _web = this.projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _srcGen_3 = _web.getSrcGen();
     _createWebGenModule.writeTo(_srcGen_3);
     JavaFileAccess _createWebModule = this.templates.createWebModule(language);
-    WebProjectConfig _web_1 = this.projectConfig.getWeb();
+    IWebProjectConfig _web_1 = this.projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _src_3 = _web_1.getSrc();
     _createWebModule.writeTo(_src_3);
   }
   
   protected void generateExecutableExtensionFactory(final ILanguageConfig language) {
-    BundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
+    IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
     boolean _tripleNotEquals = (_srcGen != null);
     if (_tripleNotEquals) {
       LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
       JavaFileAccess _createEclipsePluginExecutableExtensionFactory = this.templates.createEclipsePluginExecutableExtensionFactory(language, _head);
-      BundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
+      IBundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
       IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_1.getSrcGen();
       _createEclipsePluginExecutableExtensionFactory.writeTo(_srcGen_1);
     }
@@ -273,7 +274,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   protected void generateManifests() {
     try {
-      List<? extends SubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
+      List<? extends ISubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
       Iterable<BundleProjectConfig> _filter = Iterables.<BundleProjectConfig>filter(_enabledProjects, BundleProjectConfig.class);
       final Function1<BundleProjectConfig, Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>> _function = new Function1<BundleProjectConfig, Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>>() {
         @Override
@@ -320,7 +321,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
             String _third = entry.getThird();
             manifest.setBundleName(_third);
           }
-          BundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
+          IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
           ManifestAccess _manifest = _eclipsePlugin.getManifest();
           boolean _tripleEquals_1 = (manifest == _manifest);
           if (_tripleEquals_1) {
@@ -407,7 +408,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   protected void generateActivator() {
     boolean _and = false;
-    BundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
+    IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
     boolean _tripleNotEquals = (_srcGen != null);
     if (!_tripleNotEquals) {
@@ -419,14 +420,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     }
     if (_and) {
       JavaFileAccess _createEclipsePluginActivator = this.templates.createEclipsePluginActivator(this.languageConfigs);
-      BundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
+      IBundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
       IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_1.getSrcGen();
       _createEclipsePluginActivator.writeTo(_srcGen_1);
     }
   }
   
   protected void generatePluginXmls() {
-    List<? extends SubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
+    List<? extends ISubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
     Iterable<BundleProjectConfig> _filter = Iterables.<BundleProjectConfig>filter(_enabledProjects, BundleProjectConfig.class);
     final Function1<BundleProjectConfig, Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> _function = new Function1<BundleProjectConfig, Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>() {
       @Override

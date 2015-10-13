@@ -150,7 +150,6 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		val processedNames = newHashSet()
 
 		// determine all assignments within the grammar that are not excluded and not handled yet
-		//  (fold evaluates eager!)
 		val assignments = grammar.containedAssignments().fold(<Assignment>newArrayList()) [ candidates, assignment |
 			val fqFeatureName = assignment.FQFeatureName
 			if (!processedNames.contains(fqFeatureName) && !excludedFqnFeatureNames.contains(fqFeatureName)) {
@@ -170,29 +169,34 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 			candidates
 		]
 		
-		val superClass = grammar.getGenProposalProviderSuperClass
-		fileAccessFactory.createJavaFile(grammar.getGenProposalProviderClass, '''
-			/**
-			 * Represents a generated, default implementation of superclass {@link «superClass»}.
-			 * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
-			 * with a more concrete subtype. 
-			 */
-			@SuppressWarnings("all")
-			public class «grammar.getGenProposalProviderClass.simpleName» extends «superClass» {
-			
-				«FOR assignment : assignments»
-					«assignment.handleAssignment»
-			  	«ENDFOR»
-				
-				«FOR rule : remainingRules»
-					public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
-							contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
-						// subclasses may override
-					}
-		    	«ENDFOR»
-			}
-		''').writeTo(projectConfig.eclipsePlugin.srcGen)	
+		fileAccessFactory.createGeneratedJavaFile(grammar.getGenProposalProviderClass) => [
+			val superClass = grammar.getGenProposalProviderSuperClass
 
+			typeComment = '''
+				/**
+				 * Represents a generated, default implementation of superclass {@link «superClass»}.
+				 * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
+				 * with a more concrete subtype. 
+				 */
+			'''
+
+			content = '''
+				public class «grammar.getGenProposalProviderClass.simpleName» extends «superClass» {
+				
+					«FOR assignment : assignments»
+						«assignment.handleAssignment»
+				  	«ENDFOR»
+					
+					«FOR rule : remainingRules»
+						public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
+								contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
+							// subclasses may override
+						}
+			    	«ENDFOR»
+				}
+			'''
+			writeTo(projectConfig.eclipsePlugin.srcGen)	
+		]
 	}
 
 	private def StringConcatenationClient handleAssignment(Assignment assignment) {
@@ -222,8 +226,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	private def StringConcatenationClient handleAssignmentOptions(Iterable<AbstractElement> terminals) {
 		val processedTerminals = newHashSet();
 		
-		// for each type of terminal occurring in 'terminals' (fold evaluates eager!) ...
-		val candidates = terminals.fold(<AbstractElement>newHashSet) [ candidates, terminal |
+		// for each type of terminal occurring in 'terminals' ...
+		val candidates = terminals.fold(<AbstractElement>newArrayList()) [ candidates, terminal |
 			if (!processedTerminals.contains(terminal.eClass)) {
 				processedTerminals += terminal.eClass
 				candidates += terminal

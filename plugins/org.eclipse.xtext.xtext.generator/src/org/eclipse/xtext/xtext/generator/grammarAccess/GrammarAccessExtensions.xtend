@@ -501,7 +501,7 @@ class GrammarAccessExtensions {
 
 	def toStringLiteral(AbstractElement it) {
 		switch it {
-			RuleCall case rule != null: '''"«rule.name»"'''
+			RuleCall case rule != null: qualifiedNameAsString
 			Keyword: '''"«value.toStringInAntlrAction»"'''
 			default:
 				"null"

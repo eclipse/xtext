@@ -7,19 +7,21 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
-public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
-  @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PACKAGE_SETTER })
+public class SubProjectConfig implements ISubProjectConfig {
+  @Inject
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private XtextProjectConfig owner;
   
   @Accessors
@@ -29,35 +31,43 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
   private String name;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
+  private String rootPath;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess root;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private String metaInfPath;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess metaInf;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
+  private String srcPath;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess src;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private String srcGenPath;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess srcGen;
   
   public void setRoot(final String path) {
-    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, true);
-    this.root = _newFileSystemAccess;
+    this.rootPath = path;
   }
   
   public void setMetaInf(final String path) {
-    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, true);
-    this.metaInf = _newFileSystemAccess;
+    this.metaInfPath = path;
   }
   
   public void setSrc(final String path) {
-    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, false);
-    this.src = _newFileSystemAccess;
+    this.srcPath = path;
   }
   
   public void setSrcGen(final String path) {
-    XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(path, true);
-    this.srcGen = _newFileSystemAccess;
+    this.srcGenPath = path;
   }
   
   public void checkConfiguration(final Issues issues) {
@@ -66,16 +76,24 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
-    if (this.root!=null) {
+    if ((this.rootPath != null)) {
+      XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(this.rootPath, true);
+      this.root = _newFileSystemAccess;
       this.root.initialize(injector);
     }
-    if (this.metaInf!=null) {
+    if ((this.metaInfPath != null)) {
+      XtextGeneratorFileSystemAccess _newFileSystemAccess_1 = this.owner.newFileSystemAccess(this.metaInfPath, true);
+      this.metaInf = _newFileSystemAccess_1;
       this.metaInf.initialize(injector);
     }
-    if (this.src!=null) {
+    if ((this.srcPath != null)) {
+      XtextGeneratorFileSystemAccess _newFileSystemAccess_2 = this.owner.newFileSystemAccess(this.srcPath, false);
+      this.src = _newFileSystemAccess_2;
       this.src.initialize(injector);
     }
-    if (this.srcGen!=null) {
+    if ((this.srcGenPath != null)) {
+      XtextGeneratorFileSystemAccess _newFileSystemAccess_3 = this.owner.newFileSystemAccess(this.srcGenPath, true);
+      this.srcGen = _newFileSystemAccess_3;
       this.srcGen.initialize(injector);
     }
   }
@@ -83,10 +101,6 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
   @Pure
   public XtextProjectConfig getOwner() {
     return this.owner;
-  }
-  
-  void setOwner(final XtextProjectConfig owner) {
-    this.owner = owner;
   }
   
   @Pure
@@ -108,8 +122,18 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
   }
   
   @Pure
+  public String getRootPath() {
+    return this.rootPath;
+  }
+  
+  @Pure
   public IXtextGeneratorFileSystemAccess getRoot() {
     return this.root;
+  }
+  
+  @Pure
+  public String getMetaInfPath() {
+    return this.metaInfPath;
   }
   
   @Pure
@@ -118,8 +142,18 @@ public class SubProjectConfig implements IGuiceAwareGeneratorComponent {
   }
   
   @Pure
+  public String getSrcPath() {
+    return this.srcPath;
+  }
+  
+  @Pure
   public IXtextGeneratorFileSystemAccess getSrc() {
     return this.src;
+  }
+  
+  @Pure
+  public String getSrcGenPath() {
+    return this.srcGenPath;
   }
   
   @Pure

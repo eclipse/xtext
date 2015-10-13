@@ -25,6 +25,8 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -100,39 +102,41 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 		return Serializer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IParser> bindIParser() {
 		return XbaseParser.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
 		return AntlrTokenToStringConverter.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return XbaseAntlrTokenFileProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends Lexer> bindLexer() {
 		return InternalXbaseLexer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Provider<InternalXbaseLexer> provideInternalXbaseLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.xbase.parser.antlr.internal.InternalXbaseLexer.class);
-	}
-	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.xbase.parser.antlr.internal.InternalXbaseLexer.class);
-	}
-	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return AntlrTokenDefProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Provider<InternalXbaseLexer> provideInternalXbaseLexer() {
+		return LexerProvider.create(InternalXbaseLexer.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalXbaseLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2

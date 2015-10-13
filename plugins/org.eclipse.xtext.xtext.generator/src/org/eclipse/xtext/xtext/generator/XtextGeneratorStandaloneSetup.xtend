@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.internal.Log
 
 @Log
 class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
-	@Inject XtextProjectConfig projectConfig
+	@Inject IXtextProjectConfig projectConfig
 
 	@Accessors boolean scanClasspath = true
 

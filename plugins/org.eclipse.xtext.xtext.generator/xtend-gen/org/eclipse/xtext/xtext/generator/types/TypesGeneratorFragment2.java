@@ -11,10 +11,10 @@ import java.util.Set;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -45,38 +45,38 @@ public class TypesGeneratorFragment2 extends AbstractGeneratorFragment2 {
     GuiceModuleAccess _eclipsePluginGenModule_1 = _language_3.getEclipsePluginGenModule();
     TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule");
     _eclipsePluginGenModule_1.setSuperClass(_typeRef_5);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      RuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       CollectionExtensions.<String>addAll(_requiredBundles, 
         "org.eclipse.xtext.common.types", 
         "org.objectweb.asm;bundle-version=\"[5.0.1,6.0.0)\";resolution:=optional");
     }
-    XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    BundleProjectConfig _runtimeTest = _projectConfig_2.getRuntimeTest();
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest = _projectConfig_2.getRuntimeTest();
     ManifestAccess _manifest_2 = _runtimeTest.getManifest();
     boolean _tripleNotEquals_1 = (_manifest_2 != null);
     if (_tripleNotEquals_1) {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      BundleProjectConfig _runtimeTest_1 = _projectConfig_3.getRuntimeTest();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IBundleProjectConfig _runtimeTest_1 = _projectConfig_3.getRuntimeTest();
       ManifestAccess _manifest_3 = _runtimeTest_1.getManifest();
       Set<String> _requiredBundles_1 = _manifest_3.getRequiredBundles();
       _requiredBundles_1.add(
         "org.objectweb.asm;bundle-version=\"[5.0.1,6.0.0)\";resolution:=optional");
     }
-    XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
     ManifestAccess _manifest_4 = _eclipsePlugin.getManifest();
     boolean _tripleNotEquals_2 = (_manifest_4 != null);
     if (_tripleNotEquals_2) {
-      XtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_5 = _eclipsePlugin_1.getManifest();
       Set<String> _requiredBundles_2 = _manifest_5.getRequiredBundles();
       _requiredBundles_2.add(

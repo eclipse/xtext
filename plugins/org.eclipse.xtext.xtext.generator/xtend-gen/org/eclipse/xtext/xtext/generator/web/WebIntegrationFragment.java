@@ -39,10 +39,10 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.WebProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -239,8 +239,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateJsHighlighting) {
       _and = false;
     } else {
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      WebProjectConfig _web = _projectConfig.getWeb();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IWebProjectConfig _web = _projectConfig.getWeb();
       IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
       boolean _tripleEquals = (_assets == null);
       _and = _tripleEquals;
@@ -252,8 +252,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateServlet) {
       _and_1 = false;
     } else {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
       IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
       boolean _tripleEquals_1 = (_src == null);
       _and_1 = _tripleEquals_1;
@@ -265,8 +265,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateJettyLauncher) {
       _and_2 = false;
     } else {
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      WebProjectConfig _web_2 = _projectConfig_2.getWeb();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
       IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
       boolean _tripleEquals_2 = (_src_1 == null);
       _and_2 = _tripleEquals_2;
@@ -278,8 +278,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateHtmlExample) {
       _and_3 = false;
     } else {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      WebProjectConfig _web_3 = _projectConfig_3.getWeb();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
       IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
       boolean _tripleEquals_3 = (_assets_1 == null);
       _and_3 = _tripleEquals_3;
@@ -305,8 +305,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateJsHighlighting) {
       _and = false;
     } else {
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      WebProjectConfig _web = _projectConfig.getWeb();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IWebProjectConfig _web = _projectConfig.getWeb();
       IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
       boolean _tripleNotEquals = (_assets != null);
       _and = _tripleNotEquals;
@@ -352,8 +352,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateServlet) {
       _and_1 = false;
     } else {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
       IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
       boolean _tripleNotEquals_1 = (_src != null);
       _and_1 = _tripleNotEquals_1;
@@ -365,8 +365,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateJettyLauncher) {
       _and_2 = false;
     } else {
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      WebProjectConfig _web_2 = _projectConfig_2.getWeb();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
       IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
       boolean _tripleNotEquals_2 = (_src_1 != null);
       _and_2 = _tripleNotEquals_2;
@@ -378,8 +378,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateHtmlExample) {
       _and_3 = false;
     } else {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      WebProjectConfig _web_3 = _projectConfig_3.getWeb();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
       IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
       boolean _tripleNotEquals_3 = (_assets_1 != null);
       _and_3 = _tripleNotEquals_3;
@@ -392,8 +392,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateWebXml) {
       _and_4 = false;
     } else {
-      XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-      WebProjectConfig _web_4 = _projectConfig_4.getWeb();
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      IWebProjectConfig _web_4 = _projectConfig_4.getWeb();
       IXtextGeneratorFileSystemAccess _assets_2 = _web_4.getAssets();
       boolean _tripleNotEquals_4 = (_assets_2 != null);
       _and_4 = _tripleNotEquals_4;
@@ -886,8 +886,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           break;
       }
     }
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     jsFile.writeTo(_assets);
   }
@@ -1445,8 +1445,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   }
   
   protected void generateIndexDoc() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     boolean _isFile = _assets.isFile("index.html");
     if (_isFile) {
@@ -1843,15 +1843,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     indexFile.setContent(_client);
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     indexFile.writeTo(_assets_1);
   }
   
   protected void generateStyleSheet() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     boolean _isFile = _assets.isFile("style.css");
     if (_isFile) {
@@ -2049,8 +2049,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     styleFile.setContent(_client);
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     styleFile.writeTo(_assets_1);
   }
@@ -2099,12 +2099,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("resourceBase = \'");
-        XtextProjectConfig _projectConfig = WebIntegrationFragment.this.getProjectConfig();
-        WebProjectConfig _web = _projectConfig.getWeb();
+        IXtextProjectConfig _projectConfig = WebIntegrationFragment.this.getProjectConfig();
+        IWebProjectConfig _web = _projectConfig.getWeb();
         IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
         String _path = _assets.getPath();
-        XtextProjectConfig _projectConfig_1 = WebIntegrationFragment.this.getProjectConfig();
-        WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+        IXtextProjectConfig _projectConfig_1 = WebIntegrationFragment.this.getProjectConfig();
+        IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
         IXtextGeneratorFileSystemAccess _root = _web_1.getRoot();
         String _path_1 = _root.getPath();
         String _plus = (_path_1 + "/");
@@ -2152,8 +2152,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.jetty.webapp.WebInfConfiguration");
         _builder.append(_typeRef_7, "\t\t\t");
         _builder.append(".CONTAINER_JAR_PATTERN, \'.*/");
-        XtextProjectConfig _projectConfig_2 = WebIntegrationFragment.this.getProjectConfig();
-        WebProjectConfig _web_2 = _projectConfig_2.getWeb();
+        IXtextProjectConfig _projectConfig_2 = WebIntegrationFragment.this.getProjectConfig();
+        IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
         String _name = _web_2.getName();
         String _replace_1 = _name.replace(".", "\\\\.");
         _builder.append(_replace_1, "\t\t\t");
@@ -2232,8 +2232,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_serverLauncherClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _src = _web.getSrc();
     _createXtendFile.writeTo(_src);
   }
@@ -2331,15 +2331,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_servletClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _src = _web.getSrc();
     _createXtendFile.writeTo(_src);
   }
   
   protected void generateWebXml() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     boolean _isFile = _assets.isFile("WEB-INF/web.xml");
     if (_isFile) {
@@ -2526,8 +2526,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     xmlFile.setContent(_client);
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     xmlFile.writeTo(_assets_1);
   }

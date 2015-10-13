@@ -23,15 +23,15 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.SubProjectConfig;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 @Log
 @SuppressWarnings("all")
 public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
   @Inject
-  private XtextProjectConfig projectConfig;
+  private IXtextProjectConfig projectConfig;
   
   @Accessors
   private boolean scanClasspath = true;
@@ -67,10 +67,10 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
   }
   
   private Iterable<Pair<String, String>> getProjectMappings() {
-    List<? extends SubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
-    final Function1<SubProjectConfig, Boolean> _function = new Function1<SubProjectConfig, Boolean>() {
+    List<? extends ISubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
+    final Function1<ISubProjectConfig, Boolean> _function = new Function1<ISubProjectConfig, Boolean>() {
       @Override
-      public Boolean apply(final SubProjectConfig it) {
+      public Boolean apply(final ISubProjectConfig it) {
         boolean _and = false;
         String _name = it.getName();
         boolean _notEquals = (!Objects.equal(_name, null));
@@ -84,10 +84,10 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
         return Boolean.valueOf(_and);
       }
     };
-    Iterable<? extends SubProjectConfig> _filter = IterableExtensions.filter(_enabledProjects, _function);
-    final Function1<SubProjectConfig, Pair<String, String>> _function_1 = new Function1<SubProjectConfig, Pair<String, String>>() {
+    Iterable<? extends ISubProjectConfig> _filter = IterableExtensions.filter(_enabledProjects, _function);
+    final Function1<ISubProjectConfig, Pair<String, String>> _function_1 = new Function1<ISubProjectConfig, Pair<String, String>>() {
       @Override
-      public Pair<String, String> apply(final SubProjectConfig it) {
+      public Pair<String, String> apply(final ISubProjectConfig it) {
         String _name = it.getName();
         IXtextGeneratorFileSystemAccess _root = it.getRoot();
         String _path = _root.getPath();

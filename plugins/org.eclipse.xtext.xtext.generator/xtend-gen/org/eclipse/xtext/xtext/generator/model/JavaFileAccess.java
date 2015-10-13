@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -214,9 +212,6 @@ public class JavaFileAccess extends TextFileAccess {
   
   @Override
   public CharSequence getContent() {
-    Collection<String> _values = this.imports.values();
-    final ArrayList<String> sortedImports = Lists.<String>newArrayList(_values);
-    Collections.<String>sort(sortedImports);
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
     _builder.append(_fileHeader, "");
@@ -233,7 +228,10 @@ public class JavaFileAccess extends TextFileAccess {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
-      for(final String importName : sortedImports) {
+      Collection<String> _values = this.imports.values();
+      Set<String> _set = IterableExtensions.<String>toSet(_values);
+      List<String> _sort = IterableExtensions.<String>sort(_set);
+      for(final String importName : _sort) {
         _builder.append("import ");
         _builder.append(importName, "");
         {
@@ -246,9 +244,14 @@ public class JavaFileAccess extends TextFileAccess {
       }
     }
     _builder.newLine();
-    _builder.append(this.internalContents, "");
+    CharSequence _internalContent = this.getInternalContent();
+    _builder.append(_internalContent, "");
     _builder.newLineIfNotEmpty();
     return _builder;
+  }
+  
+  protected CharSequence getInternalContent() {
+    return this.internalContents;
   }
   
   @Pure

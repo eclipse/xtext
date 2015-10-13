@@ -12,7 +12,6 @@ import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -20,7 +19,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.SubProjectConfig;
@@ -29,74 +28,22 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 
-@Accessors(AccessorType.PUBLIC_GETTER)
+@Accessors
 @SuppressWarnings("all")
-public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
-  private RuntimeProjectConfig runtime;
+public class XtextProjectConfig implements IXtextProjectConfig {
+  private RuntimeProjectConfig runtime = new RuntimeProjectConfig();
   
-  private BundleProjectConfig runtimeTest;
+  private BundleProjectConfig runtimeTest = new BundleProjectConfig();
   
-  private BundleProjectConfig genericIde;
+  private BundleProjectConfig genericIde = new BundleProjectConfig();
   
-  private BundleProjectConfig eclipsePlugin;
+  private BundleProjectConfig eclipsePlugin = new BundleProjectConfig();
   
-  private BundleProjectConfig eclipsePluginTest;
+  private BundleProjectConfig eclipsePluginTest = new BundleProjectConfig();
   
-  private SubProjectConfig ideaPlugin;
+  private SubProjectConfig ideaPlugin = new SubProjectConfig();
   
-  private WebProjectConfig web;
-  
-  public XtextProjectConfig() {
-    RuntimeProjectConfig _runtimeProjectConfig = new RuntimeProjectConfig();
-    this.setRuntime(_runtimeProjectConfig);
-    BundleProjectConfig _bundleProjectConfig = new BundleProjectConfig();
-    this.setRuntimeTest(_bundleProjectConfig);
-    BundleProjectConfig _bundleProjectConfig_1 = new BundleProjectConfig();
-    this.setGenericIde(_bundleProjectConfig_1);
-    BundleProjectConfig _bundleProjectConfig_2 = new BundleProjectConfig();
-    this.setEclipsePlugin(_bundleProjectConfig_2);
-    BundleProjectConfig _bundleProjectConfig_3 = new BundleProjectConfig();
-    this.setEclipsePluginTest(_bundleProjectConfig_3);
-    SubProjectConfig _subProjectConfig = new SubProjectConfig();
-    this.setIdeaPlugin(_subProjectConfig);
-    WebProjectConfig _webProjectConfig = new WebProjectConfig();
-    this.setWeb(_webProjectConfig);
-  }
-  
-  public void setRuntime(final RuntimeProjectConfig config) {
-    this.runtime = config;
-    config.setOwner(this);
-  }
-  
-  public void setRuntimeTest(final BundleProjectConfig config) {
-    this.runtimeTest = config;
-    config.setOwner(this);
-  }
-  
-  public void setGenericIde(final BundleProjectConfig config) {
-    this.genericIde = config;
-    config.setOwner(this);
-  }
-  
-  public void setEclipsePlugin(final BundleProjectConfig config) {
-    this.eclipsePlugin = config;
-    config.setOwner(this);
-  }
-  
-  public void setEclipsePluginTest(final BundleProjectConfig config) {
-    this.eclipsePluginTest = config;
-    config.setOwner(this);
-  }
-  
-  public void setIdeaPlugin(final SubProjectConfig config) {
-    this.ideaPlugin = config;
-    config.setOwner(this);
-  }
-  
-  public void setWeb(final WebProjectConfig config) {
-    this.web = config;
-    config.setOwner(this);
-  }
+  private WebProjectConfig web = new WebProjectConfig();
   
   public void checkConfiguration(final Issues issues) {
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
@@ -119,6 +66,7 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return _xblockexpression;
   }
   
+  @Override
   public List<? extends SubProjectConfig> getTestProjects() {
     ArrayList<BundleProjectConfig> _xblockexpression = null;
     {
@@ -129,6 +77,7 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return _xblockexpression;
   }
   
+  @Override
   public List<? extends SubProjectConfig> getEnabledProjects() {
     ArrayList<SubProjectConfig> _xblockexpression = null;
     {
@@ -192,9 +141,17 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return this.runtime;
   }
   
+  public void setRuntime(final RuntimeProjectConfig runtime) {
+    this.runtime = runtime;
+  }
+  
   @Pure
   public BundleProjectConfig getRuntimeTest() {
     return this.runtimeTest;
+  }
+  
+  public void setRuntimeTest(final BundleProjectConfig runtimeTest) {
+    this.runtimeTest = runtimeTest;
   }
   
   @Pure
@@ -202,9 +159,17 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return this.genericIde;
   }
   
+  public void setGenericIde(final BundleProjectConfig genericIde) {
+    this.genericIde = genericIde;
+  }
+  
   @Pure
   public BundleProjectConfig getEclipsePlugin() {
     return this.eclipsePlugin;
+  }
+  
+  public void setEclipsePlugin(final BundleProjectConfig eclipsePlugin) {
+    this.eclipsePlugin = eclipsePlugin;
   }
   
   @Pure
@@ -212,13 +177,25 @@ public class XtextProjectConfig implements IGuiceAwareGeneratorComponent {
     return this.eclipsePluginTest;
   }
   
+  public void setEclipsePluginTest(final BundleProjectConfig eclipsePluginTest) {
+    this.eclipsePluginTest = eclipsePluginTest;
+  }
+  
   @Pure
   public SubProjectConfig getIdeaPlugin() {
     return this.ideaPlugin;
   }
   
+  public void setIdeaPlugin(final SubProjectConfig ideaPlugin) {
+    this.ideaPlugin = ideaPlugin;
+  }
+  
   @Pure
   public WebProjectConfig getWeb() {
     return this.web;
+  }
+  
+  public void setWeb(final WebProjectConfig web) {
+    this.web = web;
   }
 }
