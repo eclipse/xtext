@@ -88,7 +88,9 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator");
+        _builder.append(_typeRef, "");
+        _builder.append(".getTemplatesLanguageConfigurationProvider()");
       }
     };
     GuiceModuleAccess.BindingFactory _addTypeToProviderInstance = _bindingFactory.addTypeToProviderInstance(_typeRef, _client);
@@ -96,7 +98,9 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry()");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator");
+        _builder.append(_typeRef, "");
+        _builder.append(".getLanguageRegistry()");
       }
     };
     GuiceModuleAccess.BindingFactory _addTypeToProviderInstance_1 = _addTypeToProviderInstance.addTypeToProviderInstance(_typeRef_1, _client_1);
@@ -130,8 +134,8 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
       final Procedure1<GeneratedJavaFileAccess> _function = new Procedure1<GeneratedJavaFileAccess>() {
         @Override
         public void apply(final GeneratedJavaFileAccess it) {
-          StringConcatenationClient _genJavaProposalProvider = CodetemplatesGeneratorFragment2.this.getGenJavaProposalProvider();
-          it.setContent(_genJavaProposalProvider);
+          StringConcatenationClient _genPartialContentAssistParser = CodetemplatesGeneratorFragment2.this.getGenPartialContentAssistParser();
+          it.setContent(_genPartialContentAssistParser);
           IXtextProjectConfig _projectConfig = CodetemplatesGeneratorFragment2.this.getProjectConfig();
           IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
           IXtextGeneratorFileSystemAccess _srcGen = _genericIde.getSrcGen();
@@ -142,7 +146,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
     }
   }
   
-  private StringConcatenationClient getGenJavaProposalProvider() {
+  private StringConcatenationClient getGenPartialContentAssistParser() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -154,8 +158,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
         _builder.append(" extends ");
         Grammar _grammar_1 = CodetemplatesGeneratorFragment2.this.getGrammar();
         TypeReference _contentAssistParserClass = CodetemplatesGeneratorFragment2.this._grammarNaming.getContentAssistParserClass(_grammar_1);
-        String _simpleName_1 = _contentAssistParserClass.getSimpleName();
-        _builder.append(_simpleName_1, "");
+        _builder.append(_contentAssistParserClass, "");
         _builder.append(" implements ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser");
         _builder.append(_typeRef, "");
