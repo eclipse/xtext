@@ -8,15 +8,12 @@
 package org.eclipse.xtext.xtext.generator.idea.parser.antlr
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2
 
 class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 
 	@Inject
 	PsiAntlrGrammarGenerator generator
-
-	@Inject CodeConfig codeConfig
 
 	@Inject extension PsiGrammarNaming
 
@@ -25,7 +22,7 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 		generator.generate(grammar, options, fsa)
 
 		val encoding = codeConfig.encoding
-		val grammarFileName = '''«grammar.grammarClass.path».g'''
+		val grammarFileName = grammar.parserGrammar.grammarFileName
 		val absoluteGrammarFileName = '''«fsa.path»/«grammarFileName»'''
 		addAntlrParam('-fo')
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')))
@@ -33,7 +30,7 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
 		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
-		normalizeTokens(fsa, grammar.tokenFileName)
+		normalizeTokens(fsa, grammar.lexerGrammar.tokensFileName)
 		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
 		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
 	}

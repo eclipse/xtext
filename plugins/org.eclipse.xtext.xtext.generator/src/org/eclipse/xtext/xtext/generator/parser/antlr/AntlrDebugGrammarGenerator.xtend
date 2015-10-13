@@ -22,7 +22,7 @@ class AntlrDebugGrammarGenerator extends AbstractAntlrGrammarGenerator {
 		null
 	}
 
-	override protected compileOptions(Grammar it, AntlrOptions options) {
+	override protected compileParserOptions(Grammar it, AntlrOptions options) {
 		""
 	}
 

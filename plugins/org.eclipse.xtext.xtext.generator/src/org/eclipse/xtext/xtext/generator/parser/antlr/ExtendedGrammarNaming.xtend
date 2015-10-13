@@ -10,11 +10,24 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import org.eclipse.xtext.Grammar
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
-class DebugGrammarNaming extends GrammarNaming {
-	
+class ExtendedGrammarNaming extends GrammarNaming {
+
 	override getParserGrammar(Grammar it) {
-		new AntlrGrammar(internalParserPackage, '''DebugInternal«simpleName»''')
+		new AntlrGrammar(internalParserPackage, '''Internal«simpleName»Parser''')
+	}
+
+	override getLexerGrammar(Grammar it) {
+		new AntlrGrammar(internalParserPackage, '''Internal«simpleName»Lexer''')
 	}
 	
+	override TypeReference getLexerClass(Grammar it) {
+		new TypeReference(lexerGrammar.packageName, lexerGrammar.simpleName)
+	}
+
+	override TypeReference getParserClass(Grammar it) {
+		new TypeReference(parserGrammar.packageName, parserGrammar.simpleName)
+	}
+
 }

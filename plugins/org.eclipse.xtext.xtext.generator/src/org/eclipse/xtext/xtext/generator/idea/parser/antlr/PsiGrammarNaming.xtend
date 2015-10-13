@@ -11,8 +11,9 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
-import org.eclipse.xtext.xtext.generator.model.TypeReference
+
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 @Singleton
@@ -24,7 +25,7 @@ class PsiGrammarNaming extends GrammarNaming {
 	
 	override String getInternalParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr.internal'''
 
-	override getGrammarClass(Grammar it) {
-		new TypeReference(internalParserPackage, '''PsiInternal«simpleName»''')
+	override getParserGrammar(Grammar it) {
+		new AntlrGrammar(internalParserPackage, '''PsiInternal«simpleName»''')
 	}
 }
