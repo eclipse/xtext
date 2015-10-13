@@ -46,11 +46,15 @@ abstract class AbstractIdeaTestCase extends IdeaTestCase {
 			val model = mnr.modifiableModel
 			val entry = model.addContentEntry(project.baseDir)
 			srcFolder = VfsUtil.createDirectoryIfMissing(project.baseDir, "src")
-			entry.addSourceFolder(srcFolder, false)
+			entry.addSourceFolder(srcFolder, srcFolder.testSource)
 			configureModule(module, model, entry)
 			model.commit
 			return null;
 		]
+	}
+	
+	protected def isTestSource(VirtualFile srcFolder) {
+		false
 	}
 
 	protected def void assertNoCompileErrors(VirtualFile file) {

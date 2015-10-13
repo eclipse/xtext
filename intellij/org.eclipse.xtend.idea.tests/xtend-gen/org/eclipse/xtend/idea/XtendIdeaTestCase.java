@@ -31,7 +31,8 @@ public abstract class XtendIdeaTestCase extends AbstractIdeaTestCase {
       Project _project = this.getProject();
       VirtualFile _baseDir = _project.getBaseDir();
       final VirtualFile srcGenFolder = VfsUtil.createDirectoryIfMissing(_baseDir, "xtend-gen");
-      entry.addSourceFolder(srcGenFolder, false);
+      boolean _isTestSource = this.isTestSource(srcGenFolder);
+      entry.addSourceFolder(srcGenFolder, _isTestSource);
       String _iD = XtendLanguage.INSTANCE.getID();
       LightToolingTest.addFacetToModule(module, _iD);
     } catch (Throwable _e) {

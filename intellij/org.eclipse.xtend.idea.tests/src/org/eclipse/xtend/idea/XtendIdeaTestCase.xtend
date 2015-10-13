@@ -23,7 +23,7 @@ abstract class XtendIdeaTestCase extends AbstractIdeaTestCase {
 	override configureModule(Module module, ModifiableRootModel model, ContentEntry entry) {
 		LibraryUtil.addXtendLibrary(model)
 		val srcGenFolder = VfsUtil.createDirectoryIfMissing(project.baseDir, "xtend-gen")
-		entry.addSourceFolder(srcGenFolder, false)
+		entry.addSourceFolder(srcGenFolder, srcGenFolder.testSource)
 		LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
 	}
 

@@ -85,7 +85,8 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
           VirtualFile _baseDir_1 = _project_1.getBaseDir();
           VirtualFile _createDirectoryIfMissing = VfsUtil.createDirectoryIfMissing(_baseDir_1, "src");
           AbstractIdeaTestCase.this.srcFolder = _createDirectoryIfMissing;
-          entry.addSourceFolder(AbstractIdeaTestCase.this.srcFolder, false);
+          boolean _isTestSource = AbstractIdeaTestCase.this.isTestSource(AbstractIdeaTestCase.this.srcFolder);
+          entry.addSourceFolder(AbstractIdeaTestCase.this.srcFolder, _isTestSource);
           Module _module_1 = AbstractIdeaTestCase.this.getModule();
           AbstractIdeaTestCase.this.configureModule(_module_1, model, entry);
           model.commit();
@@ -96,6 +97,10 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
       }
     };
     this.<Object>write(_function);
+  }
+  
+  protected boolean isTestSource(final VirtualFile srcFolder) {
+    return false;
   }
   
   protected void assertNoCompileErrors(final VirtualFile file) {

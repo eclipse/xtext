@@ -39,11 +39,16 @@ import org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProduc
 import org.eclipse.xtend.idea.XtendIdeaTestCase
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.jetbrains.annotations.NotNull
+import com.intellij.openapi.vfs.VirtualFile
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
+	
+	override protected isTestSource(VirtualFile srcFolder) {
+		true
+	}
 
 	def void testApplicationConfiguration_1() {
 		var code = '''
