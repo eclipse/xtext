@@ -407,4 +407,29 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		expected.append("  name=ID -> <<F");
 		assertEquals(expected.toString(), actual);
 	}
+	
+	@Test
+	public void testActionFragment() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: val1=ID ('kw1' {A.c=current})? F; fragment F:val2=ID;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("A_Rule:\n");
+		expected.append("  start -> {A.c=}\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> val2=ID\n");
+		expected.append("  val2=ID -> <<F\n");
+		expected.append("  {A.c=} -> >>F\n");
+		expected.append("Rule_Rule:\n");
+		expected.append("  start -> val1=ID\n");
+		expected.append("  <<F -> stop\n");
+		expected.append("  >>F -> val2=ID\n");
+		expected.append("  val1=ID -> >>F\n");
+		expected.append("  val2=ID -> <<F\n");
+		expected.append("Rule_Rule_A_1_1:\n");
+		expected.append("  start -> val1=ID\n");
+		expected.append("  'kw1' -> stop\n");
+		expected.append("  val1=ID -> 'kw1'");
+		assertEquals(expected.toString(), actual);
+	}
 }
