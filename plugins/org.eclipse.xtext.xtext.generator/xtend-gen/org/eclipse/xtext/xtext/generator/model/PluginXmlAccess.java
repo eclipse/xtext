@@ -37,7 +37,7 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
   private final List<CharSequence> entries = CollectionLiterals.<CharSequence>newArrayList();
   
   @Override
-  public CharSequence setContent(final StringConcatenationClient content) {
+  public void setContent(final StringConcatenationClient content) {
     throw new UnsupportedOperationException("cannot directly set contents on a plugin.xml. Use entries property instead");
   }
   

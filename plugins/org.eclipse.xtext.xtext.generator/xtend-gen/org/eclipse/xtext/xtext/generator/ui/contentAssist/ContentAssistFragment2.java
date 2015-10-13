@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -365,25 +364,29 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
         public void apply(final GeneratedJavaFileAccess it) {
           Grammar _grammar = ContentAssistFragment2.this.getGrammar();
           final TypeReference superClass = ContentAssistFragment2.this.getGenProposalProviderSuperClass(_grammar);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("/**");
-          _builder.newLine();
-          _builder.append(" ");
-          _builder.append("* Represents a generated, default implementation of superclass {@link ");
-          _builder.append(superClass, " ");
-          _builder.append("}.");
-          _builder.newLineIfNotEmpty();
-          _builder.append(" ");
-          _builder.append("* Methods are dynamically dispatched on the first parameter, i.e., you can override them ");
-          _builder.newLine();
-          _builder.append(" ");
-          _builder.append("* with a more concrete subtype. ");
-          _builder.newLine();
-          _builder.append(" ");
-          _builder.append("*/");
-          _builder.newLine();
-          it.setTypeComment(_builder);
           StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("/**");
+              _builder.newLine();
+              _builder.append(" ");
+              _builder.append("* Represents a generated, default implementation of superclass {@link ");
+              _builder.append(superClass, " ");
+              _builder.append("}.");
+              _builder.newLineIfNotEmpty();
+              _builder.append(" ");
+              _builder.append("* Methods are dynamically dispatched on the first parameter, i.e., you can override them ");
+              _builder.newLine();
+              _builder.append(" ");
+              _builder.append("* with a more concrete subtype. ");
+              _builder.newLine();
+              _builder.append(" ");
+              _builder.append("*/");
+              _builder.newLine();
+            }
+          };
+          it.setTypeComment(_client);
+          StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("public class ");
@@ -437,7 +440,7 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
               _builder.newLine();
             }
           };
-          it.setContent(_client);
+          it.setContent(_client_1);
           IXtextProjectConfig _projectConfig = ContentAssistFragment2.this.getProjectConfig();
           IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
           IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();

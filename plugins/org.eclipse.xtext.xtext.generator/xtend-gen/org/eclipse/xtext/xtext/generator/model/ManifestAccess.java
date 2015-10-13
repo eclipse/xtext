@@ -132,7 +132,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
   }
   
   @Override
-  public CharSequence setContent(final StringConcatenationClient content) {
+  public void setContent(final StringConcatenationClient content) {
     throw new UnsupportedOperationException("cannot directly set \'content\' on a manifest.mf. Use the individual properties instead.");
   }
   
