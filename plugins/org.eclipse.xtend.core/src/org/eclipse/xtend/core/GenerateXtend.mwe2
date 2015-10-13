@@ -15,24 +15,17 @@ import org.eclipse.xtext.generator.parser.antlr.*
 import org.eclipse.xtext.resource.XtextResourceSet 
 
 var rootPath = ".."
-var baseName = "org.eclipse.xtend.core"
-var projectPath = "${rootPath}/${baseName}"
+var baseName = "org.eclipse.xtend"
+var runtimeProjectName = "org.eclipse.xtend.core"
+var projectPath = "${rootPath}/${runtimeProjectName}"
 
-var grammarURI = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 var file.extensions = "xtend"
 
 var lineDelimiter = "\n"
-var uiProjectName = "org.eclipse.xtend.ide"
-var uiProjectPath = "../${uiProjectName}"
-var ideProjectName = "org.eclipse.xtend.ide.common"
-var ideProjectPath = "../${ideProjectName}"
 var backtrack = false
 var memoize = false
 var skipUnusedRules = true
 var stripAllComments = true
-
-var ideaProjectName = "org.eclipse.xtend.idea"
-var ideaProjectPath = "../../intellij/${ideaProjectName}"
 
 var fileHeader = "/*******************************************************************************
  * Copyright (c) 2010-\${year} itemis AG (http://www.itemis.eu) and others.
@@ -43,68 +36,27 @@ var fileHeader = "/*************************************************************
  *******************************************************************************/"
 
 Workflow {
-	bean = StandaloneSetup {
-		ignoreBrokenProjectFiles = true
-		scanClassPath = true
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-	}
-	
-	bean = StandaloneSetup {
-		resourceSet = XtextResourceSet : resourceSet {}
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
-		registerEcoreFile = "platform:/resource/${baseName}/model/Xtend.ecore"
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${projectPath}/emf-gen"
-	}
 
-	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${baseName}/model/Xtend.genmodel"
-		srcPath ="platform:/resource/${baseName}/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
-		lineDelimiter = lineDelimiter
-	}
-	
-	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/${baseName}/model/RichStrings.genmodel"
-		srcPath ="platform:/resource/${baseName}/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
-		lineDelimiter = lineDelimiter
-	}
-
-	component = DirectoryCleaner {
-		directory = "${projectPath}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${uiProjectPath}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${ideProjectPath}/src-gen"
-	}
-
-	component = DirectoryCleaner {
-		directory = "${ideaProjectPath}/src-gen"
-	}
-	
 	component = parser.JFlexLoader : jFlexMain {}
 
 	component = XtextGenerator auto-inject {
-		configuration =  {
+		configuration = parser.XtendGeneratorModule {
 			project = WizardConfig auto-inject {
-				eclipseEditor = true
-				eclipsePluginRoot = uiProjectPath
-				genericIdeSupport = true
-				genericIdeRoot = ideProjectPath
-				ideaEditor = true
-				ideaPluginRoot = ideaProjectPath
+				runtime = {
+					name = runtimeProjectName
+				}
+				eclipsePlugin = {
+					enabled = true
+					name = "org.eclipse.xtend.ide"
+				}
+				genericIde = {
+					enabled = true
+					name = "org.eclipse.xtend.ide.common"
+				}
+				ideaPlugin = {
+					enabled = true
+					root = "../../intellij/org.eclipse.xtend.idea" 
+				}
 			}
 			code = {
 				encoding = "ISO-8859-1"
@@ -114,14 +66,14 @@ Workflow {
 			}
 		}
 		language = {
-			resourceSet = resourceSet
-			uri = grammarURI
+			resourceSet = XtextResourceSet : resourceSet {}
+			standaloneSetup = {
+				loadedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+				loadedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+			}
+			uri = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
-			naming = {
-				eclipsePluginBasePackage = uiProjectName
-				genericIdeBasePackage = ideProjectName
-			}
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = adapter.FragmentAdapter {
@@ -149,28 +101,20 @@ Workflow {
 			fragment = generator.GeneratorFragment2 {}
 			fragment = scoping.ImportNamespacesScopingFragment2 {}
 			fragment = builder.BuilderIntegrationFragment2 {}
-			fragment = adapter.FragmentAdapter {
-				fragment = quickfix.QuickfixProviderFragment {}
+
+			fragment = ui.quickfix.QuickfixProviderFragment2 {}
+
+			fragment = ui.labeling.LabelProviderFragment2 {
+				generateStub = false
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = labeling.LabelProviderFragment {
-					generateStub = false
-				}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = outline.OutlineTreeProviderFragment {}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = outline.QuickOutlineFragment {}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = compare.CompareFragment {
-					fileExtensions = file.extensions
-				}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = contentAssist.JavaBasedContentAssistFragment {}
-			}
+
+			fragment = ui.outline.OutlineTreeProviderFragment2 {}
+
+			fragment = ui.outline.QuickOutlineFragment2 {}
+
+			fragment = ui.compare.CompareFragment2 {}
+			
+			fragment = ui.contentAssist.ContentAssistFragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ContentAssistParserGenerator auto-inject {
 					removeBacktrackingGuards = true
@@ -179,10 +123,8 @@ Workflow {
 					partialParsing = true
 				}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = refactoring.RefactorElementNameFragment {
-					useJdtRefactoring = true
-				}
+			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
+				useJdtRefactoring = true
 			}
 			fragment = types.TypesGeneratorFragment2 {}
 			fragment = xbase.XbaseGeneratorFragment2 {
@@ -211,5 +153,23 @@ Workflow {
 			}
 			fragment = org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator auto-inject {}
 		}
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${projectPath}/emf-gen"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator auto-inject {
+		genModel = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+		srcPath ="platform:/resource/${runtimeProjectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator auto-inject {
+		genModel = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+		srcPath ="platform:/resource/${runtimeProjectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
 	}
 }
