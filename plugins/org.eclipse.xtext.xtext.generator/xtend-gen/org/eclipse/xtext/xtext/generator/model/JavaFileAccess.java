@@ -31,7 +31,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class JavaFileAccess extends TextFileAccess {
-  private static class JavaTypeAwareStringConcatenation extends StringConcatenation {
+  protected static class JavaTypeAwareStringConcatenation extends StringConcatenation {
     private final JavaFileAccess access;
     
     public JavaTypeAwareStringConcatenation(final JavaFileAccess access) {

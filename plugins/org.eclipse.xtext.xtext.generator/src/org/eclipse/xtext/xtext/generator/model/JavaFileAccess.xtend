@@ -118,7 +118,7 @@ class JavaFileAccess extends TextFileAccess {
 		internalContents
 	}
 	
-	private static class JavaTypeAwareStringConcatenation extends StringConcatenation {
+	protected static class JavaTypeAwareStringConcatenation extends StringConcatenation {
 		
 		val JavaFileAccess access
 		
