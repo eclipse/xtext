@@ -65,6 +65,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 
 	protected def doGenerateStubFile() {
 		val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
+		xtendFile.resourceSet = language.resourceSet
 		
 		val type2ref = LinkedHashMultimap.<EClass, EReference>create
 		getLocallyAssignedContainmentReferences(language.grammar, type2ref)
@@ -85,11 +86,11 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''
-		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz.typeRef(language)» «clazz.toVarName», extension «IFormattableDocument» document) {
+		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz» «clazz.toVarName», extension «IFormattableDocument» document) {
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
-					for («ref.EReferenceType.typeRef(language)» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
+					for («ref.EReferenceType» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
 						format(«ref.toVarName», document);
 					}
 				«ELSE»

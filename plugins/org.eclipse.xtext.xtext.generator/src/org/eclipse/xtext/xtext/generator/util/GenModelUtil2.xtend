@@ -61,17 +61,6 @@ class GenModelUtil2 {
 		throw new RuntimeException('''No GenFeature named '«feature.name»' found in GenClass '«genCls»' from GenModel«genCls.eResource.URI»''')
 	}
 
-	def static String getGenIntLiteral(EClass clazz, EStructuralFeature feature, ResourceSet resourceSet) {
-		val genFeature = getGenFeature(feature, resourceSet)
-		val genClass = getGenClass(clazz, resourceSet)
-		return genClass.genPackage.packageInterfaceName + '.' + genClass.getFeatureID(genFeature)
-	}
-
-	def static String getGenIntLiteral(EClassifier classifier, ResourceSet resourceSet) {
-		val genClassifier = getGenClassifier(classifier, resourceSet)
-		return genClassifier.genPackage.packageInterfaceName + '.' + genClassifier.classifierID
-	}
-
 	def static GenPackage getGenPackage(EPackage pkg, ResourceSet resourceSet) {
 		val nsURI = pkg.nsURI
 		var String location
@@ -129,28 +118,32 @@ class GenModelUtil2 {
 		return genModelResource
 	}
 
-	def static String getGenTypeLiteral(EClassifier classifier, ResourceSet resourceSet) {
-		// inspired by org.eclipse.emf.codegen.ecore.genmodel.impl.GenClassifierImpl.getQualifiedClassifierAccessor()
+	def static String getPackageLiteral() {
+		'eINSTANCE'
+	}
+
+	def static String getIntLiteral(EClass clazz, EStructuralFeature feature, ResourceSet resourceSet) {
+		getGenClass(clazz, resourceSet).getFeatureID(getGenFeature(feature, resourceSet))
+	}
+
+	def static String getIntLiteral(EClassifier classifier, ResourceSet resourceSet) {
+		getGenClassifier(classifier, resourceSet).classifierID
+	}
+
+	def static String getTypeLiteral(EClassifier classifier, ResourceSet resourceSet) {
 		val genClassifier = getGenClassifier(classifier, resourceSet)
-		var String pkg = genClassifier.genPackage.packageInterfaceName
 		if (genClassifier.genPackage.isLiteralsInterface)
-			return pkg + '.Literals.' + genClassifier.classifierID
+			return 'Literals.' + genClassifier.classifierID
 		else
-			return pkg + '.eINSTANCE.get' + genClassifier.classifierAccessorName + '()'
+			return 'eINSTANCE.get' + genClassifier.classifierAccessorName + '()'
 	}
 
-	def static String getGenTypeLiteral(EPackage pkg, ResourceSet resourceSet) {
-		return getGenPackage(pkg, resourceSet).packageInterfaceName + '.eINSTANCE'
-	}
-
-	def static String getGenTypeLiteral(EStructuralFeature feature, ResourceSet resourceSet) {
-		// inspired by org.eclipse.emf.codegen.ecore.genmodel.impl.GenFeatureImpl.getQualifiedFeatureAccessor()
+	def static String getFeatureLiteral(EStructuralFeature feature, ResourceSet resourceSet) {
 		val genFeature = getGenFeature(feature, resourceSet)
-		val pkg = genFeature.genPackage.packageInterfaceName
 		if (genFeature.genPackage.isLiteralsInterface)
-			return pkg + '.Literals.' + genFeature.genClass.getFeatureID(genFeature)
+			return 'Literals.' + genFeature.genClass.getFeatureID(genFeature)
 		else
-			return pkg + '.eINSTANCE.get' + genFeature.featureAccessorName + '()'
+			return 'eINSTANCE.get' + genFeature.featureAccessorName + '()'
 	}
 
 	def static String getJavaTypeName(EClassifier classifier, ResourceSet resourceSet) {
@@ -159,6 +152,18 @@ class GenModelUtil2 {
 			return genClassifier.qualifiedInterfaceName
 		else
 			return (genClassifier as GenDataType).qualifiedInstanceClassName
+	}
+	
+	def static String getGetAccessor(EStructuralFeature feature, ResourceSet resourceSet) {
+		val genFeature = getGenFeature(feature, resourceSet)
+		val genClass = genFeature.genClass
+		if (genClass.isMapEntry) {
+			if (genFeature == genClass.mapEntryKeyFeature)
+				return 'getKey'
+			if (genFeature == genClass.mapEntryValueFeature)
+				return 'getValue'
+		}
+		return genFeature.getAccessor
 	}
 
 }
