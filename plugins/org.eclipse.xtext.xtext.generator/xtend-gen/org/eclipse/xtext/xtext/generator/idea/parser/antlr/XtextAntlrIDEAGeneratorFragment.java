@@ -8,13 +8,9 @@
 package org.eclipse.xtext.xtext.generator.idea.parser.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
@@ -77,19 +73,17 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
     TypeReference _lexerClass = this._psiGrammarNaming.getLexerClass(_grammar_5);
     this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
     Grammar _grammar_6 = this.getGrammar();
-    TypeReference _internalParserClass_2 = this._psiGrammarNaming.getInternalParserClass(_grammar_6);
-    Grammar _grammar_7 = this.getGrammar();
-    TypeReference _lexerClass_1 = this._psiGrammarNaming.getLexerClass(_grammar_7);
-    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
-      @Override
-      public void apply(final TypeReference it) {
-        XtextAntlrIDEAGeneratorFragment.this.suppressWarnings(fsa, it);
-        XtextAntlrIDEAGeneratorFragment.this.normalizeLineDelimiters(fsa, it);
-      }
-    };
-    IterableExtensions.<TypeReference>forEach(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_internalParserClass_2, _lexerClass_1)), _function);
-    Grammar _grammar_8 = this.getGrammar();
-    String _tokenFileName = this._psiGrammarNaming.getTokenFileName(_grammar_8);
+    String _tokenFileName = this._psiGrammarNaming.getTokenFileName(_grammar_6);
     this.normalizeTokens(fsa, _tokenFileName);
+    Grammar _grammar_7 = this.getGrammar();
+    TypeReference _internalParserClass_2 = this._psiGrammarNaming.getInternalParserClass(_grammar_7);
+    Grammar _grammar_8 = this.getGrammar();
+    TypeReference _lexerClass_1 = this._psiGrammarNaming.getLexerClass(_grammar_8);
+    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
+    Grammar _grammar_9 = this.getGrammar();
+    TypeReference _internalParserClass_3 = this._psiGrammarNaming.getInternalParserClass(_grammar_9);
+    Grammar _grammar_10 = this.getGrammar();
+    TypeReference _lexerClass_2 = this._psiGrammarNaming.getLexerClass(_grammar_10);
+    this.normalizeLineDelimiters(fsa, _internalParserClass_3, _lexerClass_2);
   }
 }

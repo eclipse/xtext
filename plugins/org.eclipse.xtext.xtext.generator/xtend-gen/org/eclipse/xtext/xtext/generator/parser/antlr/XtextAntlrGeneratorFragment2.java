@@ -148,14 +148,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     TypeReference _internalParserClass_2 = this.productionNaming.getInternalParserClass(_grammar_7);
     Grammar _grammar_8 = this.getGrammar();
     TypeReference _lexerClass_1 = this.productionNaming.getLexerClass(_grammar_8);
-    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
-      @Override
-      public void apply(final TypeReference it) {
-        XtextAntlrGeneratorFragment2.this.suppressWarnings(fsa, it);
-        XtextAntlrGeneratorFragment2.this.normalizeLineDelimiters(fsa, it);
-      }
-    };
-    IterableExtensions.<TypeReference>forEach(Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_internalParserClass_2, _lexerClass_1)), _function);
+    this.suppressWarnings(fsa, _internalParserClass_2, _lexerClass_1);
+    Grammar _grammar_9 = this.getGrammar();
+    TypeReference _internalParserClass_3 = this.productionNaming.getInternalParserClass(_grammar_9);
+    Grammar _grammar_10 = this.getGrammar();
+    TypeReference _lexerClass_2 = this.productionNaming.getLexerClass(_grammar_10);
+    this.normalizeLineDelimiters(fsa, _internalParserClass_3, _lexerClass_2);
   }
   
   protected void generateDebugGrammar() {

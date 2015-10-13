@@ -30,6 +30,8 @@ import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -204,6 +206,16 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     fsa.generateFile(_javaPath_1, newContent);
   }
   
+  protected void suppressWarnings(final IXtextGeneratorFileSystemAccess fsa, final TypeReference... types) {
+    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
+      @Override
+      public void apply(final TypeReference it) {
+        AbstractAntlrGeneratorFragment2.this.suppressWarnings(fsa, it);
+      }
+    };
+    IterableExtensions.<TypeReference>forEach(((Iterable<TypeReference>)Conversions.doWrapArray(types)), _function);
+  }
+  
   protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final TypeReference type) {
     String _javaPath = type.getJavaPath();
     CharSequence _readTextFile = fsa.readTextFile(_javaPath);
@@ -217,6 +229,16 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     content = _replaceAll;
     String _javaPath_2 = type.getJavaPath();
     fsa.generateFile(_javaPath_2, content);
+  }
+  
+  protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final TypeReference... types) {
+    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
+      @Override
+      public void apply(final TypeReference it) {
+        AbstractAntlrGeneratorFragment2.this.normalizeLineDelimiters(fsa, it);
+      }
+    };
+    IterableExtensions.<TypeReference>forEach(((Iterable<TypeReference>)Conversions.doWrapArray(types)), _function);
   }
   
   protected void normalizeTokens(final IXtextGeneratorFileSystemAccess fsa, final String tokenFile) {

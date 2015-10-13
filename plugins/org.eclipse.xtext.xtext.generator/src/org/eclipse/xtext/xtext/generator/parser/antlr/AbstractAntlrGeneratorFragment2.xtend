@@ -128,6 +128,9 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		val newContent = new SuppressWarningsProcessor().process(content)
 		fsa.generateFile(type.javaPath, newContent)
 	}
+	def protected void suppressWarnings(IXtextGeneratorFileSystemAccess fsa, TypeReference... types) {
+		types.forEach[suppressWarnings(fsa, it)]
+	}
 
 	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, TypeReference type) {
 		var String content = fsa.readTextFile(type.javaPath).toString
@@ -138,6 +141,10 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		// Here we join these lines again.
 		content = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "")
 		fsa.generateFile(type.javaPath, content)
+	}
+	
+	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, TypeReference... types) {
+		types.forEach[normalizeLineDelimiters(fsa, it)]
 	}
 
 	def protected void normalizeTokens(IXtextGeneratorFileSystemAccess fsa, String tokenFile) {
