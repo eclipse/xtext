@@ -14,63 +14,39 @@ import org.eclipse.xtext.xtext.generator.*
 
 var rootPath = ".."
 var baseName = "org.eclipse.xtext.web.example.statemachine"
-var runtimeProject = "${rootPath}/${baseName}"
 
-var grammarURI = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
-var fileExtensions = "statemachine"
-
-var generateXtendStub = true
-var encoding = "UTF-8"
-var fileHeader = "/*******************************************************************************
+Workflow {
+	
+	component = XtextGenerator auto-inject {
+		configuration = StateMachineGeneratorModule {
+			project = WizardConfig auto-inject {
+				genericIde = {
+					enabled = true
+				}
+				web = {
+					enabled = true
+					root = "../org.eclipse.xtext.web.example.jetty"
+					src = "../org.eclipse.xtext.web.example.jetty/src/main/java"
+					srcGen = "../org.eclipse.xtext.web.example.jetty/src/main/xtext-gen"
+					assets = "../org.eclipse.xtext.web.example.jetty/src/main/webapp"
+				}
+			}
+			code = auto-inject {
+				encoding = "UTF-8"
+				fileHeader = 
+"/*******************************************************************************
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/"
-
-Workflow {
-    bean = StandaloneSetup {
-		scanClassPath = true
-		platformUri = "${runtimeProject}/.."
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen"
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/model/generated"
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}.ide/src-gen"
-	}
-	
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}.web/src/main/xtext-gen"
-	}
-	
-	component = XtextGenerator auto-inject {
-		configuration = {
-			project = WizardConfig auto-inject {
-				runtimeRoot = runtimeProject
-				genericIdeSupport = true
-				eclipseEditor = false
-				webSupport = true
-				webRoot = "../org.eclipse.xtext.web.example.jetty"
-				webSrc = "../org.eclipse.xtext.web.example.jetty/src/main/java"
-				webSrcGen = "../org.eclipse.xtext.web.example.jetty/src/main/xtext-gen"
-				webApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp"
 			}
-			code = auto-inject {}
 		}
 		language = auto-inject {
-			uri = grammarURI
-			naming = {
-				webBasePackage = "org.eclipse.xtext.web.example.jetty"
-			}
-
+			uri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
+			fileExtensions = "statemachine"
+			
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 
@@ -89,9 +65,7 @@ Workflow {
 			}
 
 			// The antlr parser generator fragment.
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-				}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
 			}
 
 			// Xtend-based API for validation
