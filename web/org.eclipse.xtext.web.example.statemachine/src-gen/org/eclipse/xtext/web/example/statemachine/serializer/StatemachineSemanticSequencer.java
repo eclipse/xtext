@@ -8,17 +8,11 @@
 package org.eclipse.xtext.web.example.statemachine.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
@@ -39,7 +33,9 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == StatemachinePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		if (epackage == StatemachinePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case StatemachinePackage.COMMAND:
 				sequence_Command(context, (Command) semanticObject); 
 				return; 
@@ -50,21 +46,21 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 				sequence_Event(context, (Event) semanticObject); 
 				return; 
 			case StatemachinePackage.INPUT_SIGNAL:
-				if(context == grammarAccess.getInputSignalRule()) {
+				if (context == grammarAccess.getInputSignalRule()) {
 					sequence_InputSignal(context, (InputSignal) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getSignalRule()) {
+				else if (context == grammarAccess.getSignalRule()) {
 					sequence_Signal(context, (InputSignal) semanticObject); 
 					return; 
 				}
 				else break;
 			case StatemachinePackage.OUTPUT_SIGNAL:
-				if(context == grammarAccess.getOutputSignalRule()) {
+				if (context == grammarAccess.getOutputSignalRule()) {
 					sequence_OutputSignal(context, (OutputSignal) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getSignalRule()) {
+				else if (context == grammarAccess.getSignalRule()) {
 					sequence_Signal(context, (OutputSignal) semanticObject); 
 					return; 
 				}
@@ -79,7 +75,8 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 				sequence_Transition(context, (Transition) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
@@ -87,10 +84,10 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     (signal=[Signal|ID] newValue=BOOLEAN)
 	 */
 	protected void sequence_Command(EObject context, Command semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.COMMAND__SIGNAL) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.COMMAND__SIGNAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.COMMAND__SIGNAL));
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.COMMAND__NEW_VALUE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.COMMAND__NEW_VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.COMMAND__NEW_VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -100,7 +97,6 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		feeder.finish();
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (events+=Event events+=Event*)
@@ -109,16 +105,15 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (signal=[Signal|ID] value=BOOLEAN)
 	 */
 	protected void sequence_Event(EObject context, Event semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.EVENT__SIGNAL) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.EVENT__SIGNAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.EVENT__SIGNAL));
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.EVENT__VALUE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.EVENT__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.EVENT__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -128,7 +123,6 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		feeder.finish();
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     {InputSignal}
@@ -136,7 +130,6 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	protected void sequence_InputSignal(EObject context, InputSignal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -146,14 +139,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     name=ID
 	 */
 	protected void sequence_Signal(EObject context, InputSignal semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.SIGNAL__NAME) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.SIGNAL__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.SIGNAL__NAME));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -161,15 +153,14 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		feeder.accept(grammarAccess.getSignalAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.finish();
 	}
-	
 	
 	/**
 	 * Constraint:
 	 *     name=ID
 	 */
 	protected void sequence_Signal(EObject context, OutputSignal semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.SIGNAL__NAME) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.SIGNAL__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.SIGNAL__NAME));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -177,7 +168,6 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		feeder.accept(grammarAccess.getSignalAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.finish();
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -187,7 +177,6 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (signals+=Signal* states+=State*)
@@ -196,16 +185,15 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (condition=Condition state=[State|ID])
 	 */
 	protected void sequence_Transition(EObject context, Transition semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.TRANSITION__CONDITION) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.TRANSITION__CONDITION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.TRANSITION__CONDITION));
-			if(transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.TRANSITION__STATE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, StatemachinePackage.Literals.TRANSITION__STATE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.TRANSITION__STATE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -214,4 +202,5 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		feeder.accept(grammarAccess.getTransitionAccess().getStateStateIDTerminalRuleCall_3_0_1(), semanticObject.getState());
 		feeder.finish();
 	}
+	
 }

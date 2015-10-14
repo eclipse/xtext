@@ -76,10 +76,8 @@ Workflow {
 			guiceModule = parser.XtendLanguageGeneratorModule {}
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
-			fragment = adapter.FragmentAdapter {
-				fragment = serializer.SerializerFragment {
-					// generateDebugData = true
-				}
+			fragment = serializer.SerializerFragment2 {
+				// generateDebugData = true
 			}
 			fragment = adapter.FragmentAdapter {
 				fragment = resourceFactory.ResourceFactoryFragment {
