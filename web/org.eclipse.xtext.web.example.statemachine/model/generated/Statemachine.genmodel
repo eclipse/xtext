@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.web.example.statemachine/src-gen"
-    editDirectory="/org.eclipse.xtext.web.example.statemachine.edit/src" editorDirectory="/org.eclipse.xtext.web.example.statemachine.editor/src"
     modelPluginID="org.eclipse.xtext.web.example.statemachine" forceOverwrite="true"
     modelName="Statemachine" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.web.example.statemachine.edit"
-    editorPluginID="org.eclipse.xtext.web.example.statemachine.editor" runtimeVersion="2.11">
+    complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.11">
   <genPackages prefix="Statemachine" basePackage="org.eclipse.xtext.web.example.statemachine"
       disposableProviderFactory="true" fileExtensions="statemachine" ecorePackage="Statemachine.ecore#/">
     <genClasses ecoreClass="Statemachine.ecore#//Statemachine">
