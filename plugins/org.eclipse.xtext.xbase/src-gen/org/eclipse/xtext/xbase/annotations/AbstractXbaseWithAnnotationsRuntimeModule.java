@@ -87,17 +87,17 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 		return XbaseWithAnnotationsGrammarAccess.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return XbaseWithAnnotationsSemanticSequencer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
 		return XbaseWithAnnotationsSyntacticSequencer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}

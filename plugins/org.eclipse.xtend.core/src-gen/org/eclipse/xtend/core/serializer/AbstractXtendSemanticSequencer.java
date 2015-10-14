@@ -8,8 +8,8 @@
 package org.eclipse.xtend.core.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
@@ -41,14 +41,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -98,77 +92,79 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		if (epackage == TypesPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+				if (context == grammarAccess.getJvmArgumentTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_JvmTypeReference(context, (JvmGenericArrayTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeReferenceWithTypeArgsRule()) {
+				else if (context == grammarAccess.getTypeReferenceWithTypeArgsRule()) {
 					sequence_TypeReferenceWithTypeArgs(context, (JvmGenericArrayTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+				else if (context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0(context, (JvmGenericArrayTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0()) {
+				else if (context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0()) {
 					sequence_TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0(context, (JvmGenericArrayTypeReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_INNER_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() ||
-				   context == grammarAccess.getJvmSuperTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+				if (context == grammarAccess.getJvmArgumentTypeReferenceRule()
+						|| context == grammarAccess.getJvmParameterizedTypeReferenceRule()
+						|| context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()
+						|| context == grammarAccess.getJvmSuperTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_JvmParameterizedTypeReference(context, (JvmInnerTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsRule() ||
-				   context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() ||
-				   context == grammarAccess.getTypeReferenceWithTypeArgsRule() ||
-				   context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+				else if (context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsRule()
+						|| context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()
+						|| context == grammarAccess.getTypeReferenceWithTypeArgsRule()
+						|| context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_ParameterizedTypeReferenceWithTypeArgs(context, (JvmInnerTypeReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_LOWER_BOUND:
-				if(context == grammarAccess.getJvmLowerBoundAndedRule()) {
+				if (context == grammarAccess.getJvmLowerBoundAndedRule()) {
 					sequence_JvmLowerBoundAnded(context, (JvmLowerBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmLowerBoundRule()) {
+				else if (context == grammarAccess.getJvmLowerBoundRule()) {
 					sequence_JvmLowerBound(context, (JvmLowerBound) semanticObject); 
 					return; 
 				}
 				else break;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()) {
+				if (context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()) {
 					sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
-				   context == grammarAccess.getJvmSuperTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+				else if (context == grammarAccess.getJvmArgumentTypeReferenceRule()
+						|| context == grammarAccess.getJvmParameterizedTypeReferenceRule()
+						|| context == grammarAccess.getJvmSuperTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsRule() ||
-				   context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() ||
-				   context == grammarAccess.getTypeReferenceWithTypeArgsRule() ||
-				   context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
+				else if (context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsRule()
+						|| context == grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0()
+						|| context == grammarAccess.getTypeReferenceWithTypeArgsRule()
+						|| context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_ParameterizedTypeReferenceWithTypeArgs(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeReferenceNoTypeArgsRule() ||
-				   context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0()) {
+				else if (context == grammarAccess.getTypeReferenceNoTypeArgsRule()
+						|| context == grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0()) {
 					sequence_TypeReferenceNoTypeArgs(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
@@ -177,11 +173,11 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
 				return; 
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+				if (context == grammarAccess.getJvmUpperBoundAndedRule()) {
 					sequence_JvmUpperBoundAnded(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+				else if (context == grammarAccess.getJvmUpperBoundRule()) {
 					sequence_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
@@ -190,7 +186,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_JvmWildcardTypeReference(context, (JvmWildcardTypeReference) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == XAnnotationsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == XAnnotationsPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case XAnnotationsPackage.XANNOTATION:
 				sequence_XAnnotation(context, (XAnnotation) semanticObject); 
 				return; 
@@ -198,7 +195,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XAnnotationElementValuePair(context, (XAnnotationElementValuePair) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == XbasePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == XbasePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case XbasePackage.XASSIGNMENT:
 				sequence_XAssignment_XMemberFeatureCall(context, (XAssignment) semanticObject); 
 				return; 
@@ -209,46 +207,46 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(context, (XBinaryOperation) semanticObject); 
 				return; 
 			case XbasePackage.XBLOCK_EXPRESSION:
-				if(context == grammarAccess.getRichStringPartRule() ||
-				   context == grammarAccess.getXAdditiveExpressionRule() ||
-				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAndExpressionRule() ||
-				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListRule() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0() ||
-				   context == grammarAccess.getXAnnotationOrExpressionRule() ||
-				   context == grammarAccess.getXAssignmentRule() ||
-				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXBlockExpressionRule() ||
-				   context == grammarAccess.getXCastedExpressionRule() ||
-				   context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0() ||
-				   context == grammarAccess.getXEqualityExpressionRule() ||
-				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXExpressionRule() ||
-				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
-				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
-				   context == grammarAccess.getXMemberFeatureCallRule() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOrExpressionRule() ||
-				   context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOtherOperatorExpressionRule() ||
-				   context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXParenthesizedExpressionRule() ||
-				   context == grammarAccess.getXPostfixOperationRule() ||
-				   context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0() ||
-				   context == grammarAccess.getXPrimaryExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXUnaryOperationRule()) {
+				if (context == grammarAccess.getRichStringPartRule()
+						|| context == grammarAccess.getXAdditiveExpressionRule()
+						|| context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAndExpressionRule()
+						|| context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAnnotationElementValueRule()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListRule()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0()
+						|| context == grammarAccess.getXAnnotationOrExpressionRule()
+						|| context == grammarAccess.getXAssignmentRule()
+						|| context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXBlockExpressionRule()
+						|| context == grammarAccess.getXCastedExpressionRule()
+						|| context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0()
+						|| context == grammarAccess.getXEqualityExpressionRule()
+						|| context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXExpressionRule()
+						|| context == grammarAccess.getXExpressionOrSimpleConstructorCallRule()
+						|| context == grammarAccess.getXExpressionOrVarDeclarationRule()
+						|| context == grammarAccess.getXMemberFeatureCallRule()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0()
+						|| context == grammarAccess.getXMultiplicativeExpressionRule()
+						|| context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOrExpressionRule()
+						|| context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOtherOperatorExpressionRule()
+						|| context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXParenthesizedExpressionRule()
+						|| context == grammarAccess.getXPostfixOperationRule()
+						|| context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0()
+						|| context == grammarAccess.getXPrimaryExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0()
+						|| context == grammarAccess.getXUnaryOperationRule()) {
 					sequence_XBlockExpression(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getXExpressionInClosureRule()) {
+				else if (context == grammarAccess.getXExpressionInClosureRule()) {
 					sequence_XExpressionInClosure(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
@@ -266,47 +264,47 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XCatchClause(context, (XCatchClause) semanticObject); 
 				return; 
 			case XbasePackage.XCLOSURE:
-				if(context == grammarAccess.getRichStringPartRule() ||
-				   context == grammarAccess.getXAdditiveExpressionRule() ||
-				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAndExpressionRule() ||
-				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListRule() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0() ||
-				   context == grammarAccess.getXAnnotationOrExpressionRule() ||
-				   context == grammarAccess.getXAssignmentRule() ||
-				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXCastedExpressionRule() ||
-				   context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0() ||
-				   context == grammarAccess.getXClosureRule() ||
-				   context == grammarAccess.getXEqualityExpressionRule() ||
-				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXExpressionRule() ||
-				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
-				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
-				   context == grammarAccess.getXLiteralRule() ||
-				   context == grammarAccess.getXMemberFeatureCallRule() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOrExpressionRule() ||
-				   context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOtherOperatorExpressionRule() ||
-				   context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXParenthesizedExpressionRule() ||
-				   context == grammarAccess.getXPostfixOperationRule() ||
-				   context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0() ||
-				   context == grammarAccess.getXPrimaryExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXUnaryOperationRule()) {
+				if (context == grammarAccess.getRichStringPartRule()
+						|| context == grammarAccess.getXAdditiveExpressionRule()
+						|| context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAndExpressionRule()
+						|| context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAnnotationElementValueRule()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListRule()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0()
+						|| context == grammarAccess.getXAnnotationOrExpressionRule()
+						|| context == grammarAccess.getXAssignmentRule()
+						|| context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXCastedExpressionRule()
+						|| context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0()
+						|| context == grammarAccess.getXClosureRule()
+						|| context == grammarAccess.getXEqualityExpressionRule()
+						|| context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXExpressionRule()
+						|| context == grammarAccess.getXExpressionOrSimpleConstructorCallRule()
+						|| context == grammarAccess.getXExpressionOrVarDeclarationRule()
+						|| context == grammarAccess.getXLiteralRule()
+						|| context == grammarAccess.getXMemberFeatureCallRule()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0()
+						|| context == grammarAccess.getXMultiplicativeExpressionRule()
+						|| context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOrExpressionRule()
+						|| context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOtherOperatorExpressionRule()
+						|| context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXParenthesizedExpressionRule()
+						|| context == grammarAccess.getXPostfixOperationRule()
+						|| context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0()
+						|| context == grammarAccess.getXPrimaryExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0()
+						|| context == grammarAccess.getXUnaryOperationRule()) {
 					sequence_XClosure(context, (XClosure) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getXShortClosureRule()) {
+				else if (context == grammarAccess.getXShortClosureRule()) {
 					sequence_XShortClosure(context, (XClosure) semanticObject); 
 					return; 
 				}
@@ -330,50 +328,50 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XRelationalExpression(context, (XInstanceOfExpression) semanticObject); 
 				return; 
 			case XbasePackage.XLIST_LITERAL:
-				if(context == grammarAccess.getXAnnotationElementValueOrCommaListRule()) {
+				if (context == grammarAccess.getXAnnotationElementValueOrCommaListRule()) {
 					sequence_XAnnotationElementValueOrCommaList_XListLiteral(context, (XListLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getXAnnotationElementValueRule()) {
+				else if (context == grammarAccess.getXAnnotationElementValueRule()) {
 					sequence_XAnnotationElementValue_XListLiteral(context, (XListLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringPartRule() ||
-				   context == grammarAccess.getXAdditiveExpressionRule() ||
-				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAndExpressionRule() ||
-				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0() ||
-				   context == grammarAccess.getXAnnotationOrExpressionRule() ||
-				   context == grammarAccess.getXAssignmentRule() ||
-				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXCastedExpressionRule() ||
-				   context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0() ||
-				   context == grammarAccess.getXCollectionLiteralRule() ||
-				   context == grammarAccess.getXEqualityExpressionRule() ||
-				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXExpressionRule() ||
-				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
-				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
-				   context == grammarAccess.getXListLiteralRule() ||
-				   context == grammarAccess.getXLiteralRule() ||
-				   context == grammarAccess.getXMemberFeatureCallRule() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOrExpressionRule() ||
-				   context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOtherOperatorExpressionRule() ||
-				   context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXParenthesizedExpressionRule() ||
-				   context == grammarAccess.getXPostfixOperationRule() ||
-				   context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0() ||
-				   context == grammarAccess.getXPrimaryExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXUnaryOperationRule()) {
+				else if (context == grammarAccess.getRichStringPartRule()
+						|| context == grammarAccess.getXAdditiveExpressionRule()
+						|| context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAndExpressionRule()
+						|| context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0()
+						|| context == grammarAccess.getXAnnotationOrExpressionRule()
+						|| context == grammarAccess.getXAssignmentRule()
+						|| context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXCastedExpressionRule()
+						|| context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0()
+						|| context == grammarAccess.getXCollectionLiteralRule()
+						|| context == grammarAccess.getXEqualityExpressionRule()
+						|| context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXExpressionRule()
+						|| context == grammarAccess.getXExpressionOrSimpleConstructorCallRule()
+						|| context == grammarAccess.getXExpressionOrVarDeclarationRule()
+						|| context == grammarAccess.getXListLiteralRule()
+						|| context == grammarAccess.getXLiteralRule()
+						|| context == grammarAccess.getXMemberFeatureCallRule()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0()
+						|| context == grammarAccess.getXMultiplicativeExpressionRule()
+						|| context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOrExpressionRule()
+						|| context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOtherOperatorExpressionRule()
+						|| context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXParenthesizedExpressionRule()
+						|| context == grammarAccess.getXPostfixOperationRule()
+						|| context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0()
+						|| context == grammarAccess.getXPrimaryExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0()
+						|| context == grammarAccess.getXUnaryOperationRule()) {
 					sequence_XListLiteral(context, (XListLiteral) semanticObject); 
 					return; 
 				}
@@ -421,7 +419,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XWhileExpression(context, (XWhileExpression) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == XtendPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == XtendPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case XtendPackage.ANONYMOUS_CLASS:
 				sequence_XConstructorCall(context, (AnonymousClass) semanticObject); 
 				return; 
@@ -429,48 +428,48 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_CreateExtensionInfo(context, (CreateExtensionInfo) semanticObject); 
 				return; 
 			case XtendPackage.RICH_STRING:
-				if(context == grammarAccess.getInternalRichStringRule()) {
+				if (context == grammarAccess.getInternalRichStringRule()) {
 					sequence_InternalRichString(context, (RichString) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringRule() ||
-				   context == grammarAccess.getRichStringPartRule() ||
-				   context == grammarAccess.getXAdditiveExpressionRule() ||
-				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAndExpressionRule() ||
-				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListRule() ||
-				   context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0() ||
-				   context == grammarAccess.getXAnnotationOrExpressionRule() ||
-				   context == grammarAccess.getXAssignmentRule() ||
-				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXCastedExpressionRule() ||
-				   context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0() ||
-				   context == grammarAccess.getXEqualityExpressionRule() ||
-				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXExpressionRule() ||
-				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
-				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
-				   context == grammarAccess.getXLiteralRule() ||
-				   context == grammarAccess.getXMemberFeatureCallRule() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOrExpressionRule() ||
-				   context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXOtherOperatorExpressionRule() ||
-				   context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXParenthesizedExpressionRule() ||
-				   context == grammarAccess.getXPostfixOperationRule() ||
-				   context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0() ||
-				   context == grammarAccess.getXPrimaryExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionRule() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
-				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
-				   context == grammarAccess.getXStringLiteralRule() ||
-				   context == grammarAccess.getXUnaryOperationRule()) {
+				else if (context == grammarAccess.getRichStringRule()
+						|| context == grammarAccess.getRichStringPartRule()
+						|| context == grammarAccess.getXAdditiveExpressionRule()
+						|| context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAndExpressionRule()
+						|| context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXAnnotationElementValueRule()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListRule()
+						|| context == grammarAccess.getXAnnotationElementValueOrCommaListAccess().getXListLiteralElementsAction_1_1_0()
+						|| context == grammarAccess.getXAnnotationOrExpressionRule()
+						|| context == grammarAccess.getXAssignmentRule()
+						|| context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXCastedExpressionRule()
+						|| context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0()
+						|| context == grammarAccess.getXEqualityExpressionRule()
+						|| context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXExpressionRule()
+						|| context == grammarAccess.getXExpressionOrSimpleConstructorCallRule()
+						|| context == grammarAccess.getXExpressionOrVarDeclarationRule()
+						|| context == grammarAccess.getXLiteralRule()
+						|| context == grammarAccess.getXMemberFeatureCallRule()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0()
+						|| context == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0()
+						|| context == grammarAccess.getXMultiplicativeExpressionRule()
+						|| context == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOrExpressionRule()
+						|| context == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXOtherOperatorExpressionRule()
+						|| context == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| context == grammarAccess.getXParenthesizedExpressionRule()
+						|| context == grammarAccess.getXPostfixOperationRule()
+						|| context == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0()
+						|| context == grammarAccess.getXPrimaryExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionRule()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0()
+						|| context == grammarAccess.getXStringLiteralRule()
+						|| context == grammarAccess.getXUnaryOperationRule()) {
 					sequence_RichString(context, (RichString) semanticObject); 
 					return; 
 				}
@@ -485,47 +484,47 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_RichStringIf(context, (RichStringIf) semanticObject); 
 				return; 
 			case XtendPackage.RICH_STRING_LITERAL:
-				if(context == grammarAccess.getRichStringLiteralEndRule()) {
+				if (context == grammarAccess.getRichStringLiteralEndRule()) {
 					sequence_RichStringLiteralEnd(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
+				else if (context == grammarAccess.getRichStringLiteralInbetweenRule()) {
 					sequence_RichStringLiteralInbetween(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
+				else if (context == grammarAccess.getRichStringLiteralStartRule()) {
 					sequence_RichStringLiteralStart(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralRule()) {
+				else if (context == grammarAccess.getRichStringLiteralRule()) {
 					sequence_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else break;
 			case XtendPackage.XTEND_ANNOTATION_TYPE:
-				if(context == grammarAccess.getAnnotationFieldRule()) {
+				if (context == grammarAccess.getAnnotationFieldRule()) {
 					sequence_AnnotationField(context, (XtendAnnotationType) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMemberRule()) {
+				else if (context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendAnnotationType) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeRule()) {
+				else if (context == grammarAccess.getTypeRule()) {
 					sequence_Type(context, (XtendAnnotationType) semanticObject); 
 					return; 
 				}
 				else break;
 			case XtendPackage.XTEND_CLASS:
-				if(context == grammarAccess.getAnnotationFieldRule()) {
+				if (context == grammarAccess.getAnnotationFieldRule()) {
 					sequence_AnnotationField(context, (XtendClass) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMemberRule()) {
+				else if (context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendClass) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeRule()) {
+				else if (context == grammarAccess.getTypeRule()) {
 					sequence_Type(context, (XtendClass) semanticObject); 
 					return; 
 				}
@@ -534,15 +533,15 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_Member(context, (XtendConstructor) semanticObject); 
 				return; 
 			case XtendPackage.XTEND_ENUM:
-				if(context == grammarAccess.getAnnotationFieldRule()) {
+				if (context == grammarAccess.getAnnotationFieldRule()) {
 					sequence_AnnotationField(context, (XtendEnum) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMemberRule()) {
+				else if (context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendEnum) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeRule()) {
+				else if (context == grammarAccess.getTypeRule()) {
 					sequence_Type(context, (XtendEnum) semanticObject); 
 					return; 
 				}
@@ -551,11 +550,11 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XtendEnumLiteral(context, (XtendEnumLiteral) semanticObject); 
 				return; 
 			case XtendPackage.XTEND_FIELD:
-				if(context == grammarAccess.getAnnotationFieldRule()) {
+				if (context == grammarAccess.getAnnotationFieldRule()) {
 					sequence_AnnotationField(context, (XtendField) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMemberRule()) {
+				else if (context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendField) semanticObject); 
 					return; 
 				}
@@ -564,11 +563,11 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_File(context, (XtendFile) semanticObject); 
 				return; 
 			case XtendPackage.XTEND_FORMAL_PARAMETER:
-				if(context == grammarAccess.getFullJvmFormalParameterRule()) {
+				if (context == grammarAccess.getFullJvmFormalParameterRule()) {
 					sequence_FullJvmFormalParameter(context, (XtendFormalParameter) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmFormalParameterRule()) {
+				else if (context == grammarAccess.getJvmFormalParameterRule()) {
 					sequence_JvmFormalParameter(context, (XtendFormalParameter) semanticObject); 
 					return; 
 				}
@@ -577,36 +576,36 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_Member(context, (XtendFunction) semanticObject); 
 				return; 
 			case XtendPackage.XTEND_INTERFACE:
-				if(context == grammarAccess.getAnnotationFieldRule()) {
+				if (context == grammarAccess.getAnnotationFieldRule()) {
 					sequence_AnnotationField(context, (XtendInterface) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMemberRule()) {
+				else if (context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendInterface) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeRule()) {
+				else if (context == grammarAccess.getTypeRule()) {
 					sequence_Type(context, (XtendInterface) semanticObject); 
 					return; 
 				}
 				else break;
 			case XtendPackage.XTEND_MEMBER:
-				if(context == grammarAccess.getAnnotationFieldAccess().getXtendAnnotationTypeAnnotationInfoAction_2_4_0() ||
-				   context == grammarAccess.getAnnotationFieldAccess().getXtendClassAnnotationInfoAction_2_1_0() ||
-				   context == grammarAccess.getAnnotationFieldAccess().getXtendEnumAnnotationInfoAction_2_3_0() ||
-				   context == grammarAccess.getAnnotationFieldAccess().getXtendFieldAnnotationInfoAction_2_0_0_0_0() ||
-				   context == grammarAccess.getAnnotationFieldAccess().getXtendFieldAnnotationInfoAction_2_0_0_1_0() ||
-				   context == grammarAccess.getAnnotationFieldAccess().getXtendInterfaceAnnotationInfoAction_2_2_0()) {
+				if (context == grammarAccess.getAnnotationFieldAccess().getXtendAnnotationTypeAnnotationInfoAction_2_4_0()
+						|| context == grammarAccess.getAnnotationFieldAccess().getXtendClassAnnotationInfoAction_2_1_0()
+						|| context == grammarAccess.getAnnotationFieldAccess().getXtendEnumAnnotationInfoAction_2_3_0()
+						|| context == grammarAccess.getAnnotationFieldAccess().getXtendFieldAnnotationInfoAction_2_0_0_0_0()
+						|| context == grammarAccess.getAnnotationFieldAccess().getXtendFieldAnnotationInfoAction_2_0_0_1_0()
+						|| context == grammarAccess.getAnnotationFieldAccess().getXtendInterfaceAnnotationInfoAction_2_2_0()) {
 					sequence_AnnotationField_XtendAnnotationType_2_4_0_XtendClass_2_1_0_XtendEnum_2_3_0_XtendField_2_0_0_0_0_XtendField_2_0_0_1_0_XtendInterface_2_2_0(context, (XtendMember) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMemberAccess().getXtendAnnotationTypeAnnotationInfoAction_2_6_0() ||
-				   context == grammarAccess.getMemberAccess().getXtendClassAnnotationInfoAction_2_3_0() ||
-				   context == grammarAccess.getMemberAccess().getXtendConstructorAnnotationInfoAction_2_2_0() ||
-				   context == grammarAccess.getMemberAccess().getXtendEnumAnnotationInfoAction_2_5_0() ||
-				   context == grammarAccess.getMemberAccess().getXtendFieldAnnotationInfoAction_2_0_0() ||
-				   context == grammarAccess.getMemberAccess().getXtendFunctionAnnotationInfoAction_2_1_0() ||
-				   context == grammarAccess.getMemberAccess().getXtendInterfaceAnnotationInfoAction_2_4_0()) {
+				else if (context == grammarAccess.getMemberAccess().getXtendAnnotationTypeAnnotationInfoAction_2_6_0()
+						|| context == grammarAccess.getMemberAccess().getXtendClassAnnotationInfoAction_2_3_0()
+						|| context == grammarAccess.getMemberAccess().getXtendConstructorAnnotationInfoAction_2_2_0()
+						|| context == grammarAccess.getMemberAccess().getXtendEnumAnnotationInfoAction_2_5_0()
+						|| context == grammarAccess.getMemberAccess().getXtendFieldAnnotationInfoAction_2_0_0()
+						|| context == grammarAccess.getMemberAccess().getXtendFunctionAnnotationInfoAction_2_1_0()
+						|| context == grammarAccess.getMemberAccess().getXtendInterfaceAnnotationInfoAction_2_4_0()) {
 					sequence_Member_XtendAnnotationType_2_6_0_XtendClass_2_3_0_XtendConstructor_2_2_0_XtendEnum_2_5_0_XtendField_2_0_0_XtendFunction_2_1_0_XtendInterface_2_4_0(context, (XtendMember) semanticObject); 
 					return; 
 				}
@@ -621,17 +620,18 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XVariableDeclaration(context, (XtendVariableDeclaration) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == XtypePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == XtypePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case XtypePackage.XFUNCTION_TYPE_REF:
-				if(context == grammarAccess.getJvmSuperTypeReferenceRule() ||
-				   context == grammarAccess.getXFunctionSuperTypeRefRule()) {
+				if (context == grammarAccess.getJvmSuperTypeReferenceRule()
+						|| context == grammarAccess.getXFunctionSuperTypeRefRule()) {
 					sequence_XFunctionSuperTypeRef(context, (XFunctionTypeRef) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getTypeReferenceWithTypeArgsRule() ||
-				   context == grammarAccess.getXFunctionTypeRefRule()) {
+				else if (context == grammarAccess.getJvmArgumentTypeReferenceRule()
+						|| context == grammarAccess.getJvmTypeReferenceRule()
+						|| context == grammarAccess.getTypeReferenceWithTypeArgsRule()
+						|| context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
 					return; 
 				}
@@ -643,7 +643,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				sequence_XImportSection(context, (XImportSection) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
@@ -654,7 +655,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     annotations+=XAnnotation*
@@ -662,7 +662,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_AnnotationField_XtendAnnotationType_2_4_0_XtendClass_2_1_0_XtendEnum_2_3_0_XtendField_2_0_0_0_0_XtendField_2_0_0_1_0_XtendInterface_2_2_0(EObject context, XtendMember semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -680,7 +679,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (annotationInfo=AnnotationField_XtendEnum_2_3_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
@@ -688,7 +686,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_AnnotationField(EObject context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -711,7 +708,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (
@@ -727,7 +723,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (name=ValidID? createExpression=XExpression)
@@ -735,7 +730,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_CreateExtensionInfo(EObject context, CreateExtensionInfo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -745,7 +739,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (extension?='extension'? parameterType=JvmTypeReference name=InnerVarID)
@@ -753,7 +746,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_FullJvmFormalParameter(EObject context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -763,7 +755,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (extension?='extension'? parameterType=JvmTypeReference? name=InnerVarID)
@@ -771,7 +762,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_JvmFormalParameter(EObject context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -781,7 +771,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     annotations+=XAnnotation*
@@ -789,7 +778,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_Member_XtendAnnotationType_2_6_0_XtendClass_2_3_0_XtendConstructor_2_2_0_XtendEnum_2_5_0_XtendField_2_0_0_XtendFunction_2_1_0_XtendInterface_2_4_0(EObject context, XtendMember semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -807,7 +795,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (
@@ -823,7 +810,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (annotationInfo=Member_XtendEnum_2_5_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
@@ -831,7 +817,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_Member(EObject context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -858,7 +843,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (
@@ -883,7 +867,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (
@@ -899,7 +882,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)? parameterType=JvmTypeReference varArg?='...'? name=ValidID)
@@ -907,7 +889,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_Parameter(EObject context, XtendParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -921,7 +902,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
@@ -930,16 +910,15 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (if=XExpression then=InternalRichString)
 	 */
 	protected void sequence_RichStringElseIf(EObject context, RichStringElseIf semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XtendPackage.Literals.RICH_STRING_ELSE_IF__IF) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, XtendPackage.Literals.RICH_STRING_ELSE_IF__IF) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtendPackage.Literals.RICH_STRING_ELSE_IF__IF));
-			if(transientValues.isValueTransient(semanticObject, XtendPackage.Literals.RICH_STRING_ELSE_IF__THEN) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, XtendPackage.Literals.RICH_STRING_ELSE_IF__THEN) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtendPackage.Literals.RICH_STRING_ELSE_IF__THEN));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -948,7 +927,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.accept(grammarAccess.getRichStringElseIfAccess().getThenInternalRichStringParserRuleCall_2_0(), semanticObject.getThen());
 		feeder.finish();
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -965,7 +943,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (if=XExpression then=InternalRichString elseIfs+=RichStringElseIf* else=InternalRichString?)
@@ -973,7 +950,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_RichStringIf(EObject context, RichStringIf semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -983,7 +959,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN)
@@ -992,14 +967,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     value=RICH_TEXT_START
 	 */
 	protected void sequence_RichStringLiteralStart(EObject context, RichStringLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1008,14 +982,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.finish();
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     value=RICH_TEXT
 	 */
 	protected void sequence_RichStringLiteral(EObject context, RichStringLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1023,7 +996,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.accept(grammarAccess.getRichStringLiteralAccess().getValueRICH_TEXTTerminalRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1041,14 +1013,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     value=STRING
 	 */
 	protected void sequence_SimpleStringLiteral(EObject context, XStringLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1057,14 +1028,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.finish();
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     type=[JvmType|QualifiedName]
 	 */
 	protected void sequence_TypeReferenceNoTypeArgs(EObject context, JvmParameterizedTypeReference semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1072,7 +1042,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.accept(grammarAccess.getTypeReferenceNoTypeArgsAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1(), semanticObject.getType());
 		feeder.finish();
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1085,14 +1054,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0
 	 */
 	protected void sequence_TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0(EObject context, JvmGenericArrayTypeReference semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1101,14 +1069,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.finish();
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0
 	 */
 	protected void sequence_TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0(EObject context, JvmGenericArrayTypeReference semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1116,7 +1083,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.accept(grammarAccess.getTypeReferenceWithTypeArgsAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_1_1_0_0(), semanticObject.getComponentType());
 		feeder.finish();
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1126,7 +1092,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     annotations+=XAnnotation*
@@ -1134,7 +1099,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_Type_XtendAnnotationType_2_3_0_XtendClass_2_0_0_XtendEnum_2_2_0_XtendInterface_2_1_0(EObject context, XtendTypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1152,7 +1116,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (annotationInfo=Type_XtendEnum_2_2_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
@@ -1160,7 +1123,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_Type(EObject context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1177,7 +1139,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*)
@@ -1186,7 +1147,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     ((instanceContext?='(' (paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)?)? returnType=JvmTypeReference)
@@ -1194,7 +1154,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_XFunctionSuperTypeRef(EObject context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1208,7 +1167,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     (
@@ -1220,7 +1178,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	protected void sequence_XVariableDeclaration(EObject context, XtendVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
 	
 	/**
 	 * Constraint:
@@ -1235,14 +1192,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
-	
 	/**
 	 * Constraint:
 	 *     name=ValidID
 	 */
 	protected void sequence_XtendEnumLiteral(EObject context, XtendEnumLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME) == ValueTransient.YES)
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
@@ -1250,4 +1206,5 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		feeder.accept(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
+	
 }

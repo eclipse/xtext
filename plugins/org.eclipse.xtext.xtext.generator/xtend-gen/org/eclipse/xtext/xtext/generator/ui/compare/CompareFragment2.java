@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -37,26 +36,20 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  */
 @SuppressWarnings("all")
 public class CompareFragment2 extends AbstractGeneratorFragment2 {
-  private final static Logger log = Logger.getLogger(CompareFragment2.class);
-  
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Override
   public void generate() {
-    boolean _isInfoEnabled = CompareFragment2.log.isInfoEnabled();
-    if (_isInfoEnabled) {
-      CompareFragment2.log.info("generating Compare Framework infrastructure");
-    }
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = null;
     if (_eclipsePlugin!=null) {
       _manifest=_eclipsePlugin.getManifest();
     }
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
@@ -76,8 +69,8 @@ public class CompareFragment2 extends AbstractGeneratorFragment2 {
     if (_eclipsePlugin_2!=null) {
       _pluginXml=_eclipsePlugin_2.getPluginXml();
     }
-    boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
-    if (_notEquals_1) {
+    boolean _notEquals = (!Objects.equal(_pluginXml, null));
+    if (_notEquals) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
