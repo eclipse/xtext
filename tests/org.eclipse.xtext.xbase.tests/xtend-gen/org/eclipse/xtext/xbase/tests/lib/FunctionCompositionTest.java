@@ -79,7 +79,7 @@ public class FunctionCompositionTest {
         Assert.assertEquals(2, _incrementAndGet);
       }
     };
-    Procedure1<? super AtomicInteger> _andThen = FunctionExtensions.<AtomicInteger>andThen(incrementer, _function_1);
+    Procedure1<AtomicInteger> _andThen = FunctionExtensions.<AtomicInteger>andThen(incrementer, _function_1);
     _andThen.apply(counter);
     int _incrementAndGet = counter.incrementAndGet();
     Assert.assertEquals(3, _incrementAndGet);
