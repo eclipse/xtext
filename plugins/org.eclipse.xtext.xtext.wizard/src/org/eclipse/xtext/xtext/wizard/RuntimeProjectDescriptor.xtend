@@ -249,9 +249,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						}
 			
 						// a custom ResourceFactory for use with EMF
-						fragment = adapter.FragmentAdapter {
-							fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
-						}
+						fragment = resourceFactory.ResourceFactoryFragment2 auto-inject {}
 			
 						// The antlr parser generator fragment.
 						fragment = adapter.FragmentAdapter {
