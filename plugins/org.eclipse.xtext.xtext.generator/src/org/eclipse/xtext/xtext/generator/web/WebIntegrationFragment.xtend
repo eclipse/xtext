@@ -222,7 +222,6 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			generateWebXml()
 		}
 		
-		// TODO move this configuration to an IDE module?
 		val StringConcatenationClient lexerStatement =
 			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«grammar.internalContentAssistLexerClass».class);'''
 		new GuiceModuleAccess.BindingFactory()
