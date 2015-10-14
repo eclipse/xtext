@@ -370,33 +370,33 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return XbaseTemplateContextType.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
 	public Provider<TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider();
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
 	public Provider<LanguageRegistry> provideLanguageRegistry() {
 		return org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry();
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
 	@SingletonBinding(eager=true)
 	public Class<? extends LanguageRegistrar> bindLanguageRegistrar() {
 		return LanguageRegistrar.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
 	public Class<? extends XtextTemplatePreferencePage> bindXtextTemplatePreferencePage() {
 		return AdvancedTemplatesPreferencePage.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
 	public Class<? extends IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
 		return PartialXtendContentAssistParser.class;
 	}
 	
-	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
 	public Class<? extends IPartialEditingContentAssistContextFactory> bindIPartialEditingContentAssistContextFactory() {
 		return PartialEditingContentAssistContextFactory.class;
 	}

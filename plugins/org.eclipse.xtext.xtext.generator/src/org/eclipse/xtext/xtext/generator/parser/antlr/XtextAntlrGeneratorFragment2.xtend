@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import com.google.inject.Inject
 import com.google.inject.name.Names
 import java.io.InputStream
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.IParser
 import org.eclipse.xtext.parser.ITokenToStringConverter
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser
@@ -35,35 +36,51 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
+	
+	@Accessors
+	boolean debugGrammar
 
-	@Inject AntlrGrammarGenerator generator
+	@Inject AntlrGrammarGenerator productionGenerator
+	@Inject AntlrDebugGrammarGenerator debugGenerator
 
 	@Inject CodeConfig codeConfig
 	
 	@Inject FileAccessFactory fileFactory
 
-	@Inject extension GrammarNaming
+	@Inject extension GrammarNaming productionNaming
 	@Inject extension GrammarAccessExtensions
 
 	override protected doGenerate() {
+		generateProductionGrammar
+		if (debugGrammar) {
+			generateDebugGrammar
+		}
+		generateXtextParser.writeTo(projectConfig.runtime.srcGen)
+		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
+		addBindingsAndImports
+	}
+	
+	protected def generateProductionGrammar() {
 		val fsa = projectConfig.runtime.srcGen
-		generator.generate(grammar, options, fsa)
-
+		productionGenerator.generate(grammar, options, fsa)
+		
 		val encoding = codeConfig.encoding
-		val grammarFileName = '''«grammar.grammarClass.path».g'''
+		val grammarFileName = '''«productionNaming.getGrammarClass(grammar).path».g'''
 		val absoluteGrammarFileName = '''«fsa.path»/«grammarFileName»'''
 		addAntlrParam('-fo')
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')))
 		antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, antlrParams)
-
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammarFileName)
-		splitParserAndLexerIfEnabled(fsa, grammarFileName)
-		suppressWarnings(fsa, grammarFileName)
-		normalizeLineDelimiters(fsa, grammarFileName)
-		normalizeTokens(fsa, grammarFileName)
-		generateXtextParser.writeTo(projectConfig.runtime.srcGen)
-		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
-		addBindingsAndImports()
+		
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
+		splitParserAndLexerIfEnabled(fsa, grammar.lexerClass, grammar.internalParserClass)
+		normalizeTokens(fsa, grammar.tokenFileName)
+		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
+		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
+	}
+	
+	protected def generateDebugGrammar() {
+		val fsa = projectConfig.runtime.srcGen
+		debugGenerator.generate(grammar, options, fsa)
 	}
 	
 	def JavaFileAccess generateXtextParser() {

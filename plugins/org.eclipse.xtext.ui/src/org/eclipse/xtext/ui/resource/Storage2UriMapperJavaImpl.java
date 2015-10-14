@@ -246,14 +246,32 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			if (root.exists()) {
 				IResource resource = root.getUnderlyingResource();
 				if (resource != null) {
-					return resource.getLocation().toFile().lastModified();
+					Object result = getLastModified(resource);
+					if (result != null) {
+						return result;
+					}
 				}
 				return root.getPath().toFile().lastModified();
 			}
-		} catch (JavaModelException e) {
+		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 		}
 		return new Object();
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected Object getLastModified(IResource resource) throws CoreException {
+		IPath location = resource.getLocation();
+		if (location != null) {
+			return location.toFile().lastModified();
+		}
+		long timestamp = resource.getLocalTimeStamp();
+		if (timestamp == IResource.NULL_STAMP) {
+			return null;
+		}
+		return timestamp;
 	}
 
 	/**

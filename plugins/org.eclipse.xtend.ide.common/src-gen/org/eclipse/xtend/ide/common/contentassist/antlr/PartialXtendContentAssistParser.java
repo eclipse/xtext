@@ -9,16 +9,12 @@ package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import java.util.Collection;
 import java.util.Collections;
-
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
-/*
- * Template CodetemplatesGeneratorFragment.xpt
- */
 public class PartialXtendContentAssistParser extends XtendParser implements IPartialEditingContentAssistParser {
 
 	private AbstractRule rule;
@@ -27,7 +23,7 @@ public class PartialXtendContentAssistParser extends XtendParser implements IPar
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}
-	
+
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		if (rule == null || rule.eIsProxy())

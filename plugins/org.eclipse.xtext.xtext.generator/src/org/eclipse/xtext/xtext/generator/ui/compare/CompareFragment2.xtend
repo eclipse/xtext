@@ -33,8 +33,10 @@ class CompareFragment2 extends AbstractGeneratorFragment2 {
 			log.info("generating Compare Framework infrastructure");
 		}
 
-		if (projectConfig.eclipsePlugin.manifest != null) {
-			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
+		if (projectConfig.eclipsePlugin?.manifest != null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles += #[
+				"org.eclipse.compare", "org.eclipse.xtext.ui"
+			]
 		}
 
 		new GuiceModuleAccess.BindingFactory()
@@ -43,7 +45,7 @@ class CompareFragment2 extends AbstractGeneratorFragment2 {
 					new TypeReference("org.eclipse.xtext.ui.compare.DefaultViewerCreator")
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (projectConfig.eclipsePlugin.pluginXml != null) {
+		if (projectConfig.eclipsePlugin?.pluginXml != null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<extension point="org.eclipse.compare.contentViewers">
 				<viewer id="«grammar.name».compare.contentViewers"

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -88,7 +89,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append(_simpleName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    String _compileOptions = this.compileOptions(it, options);
+    CharSequence _compileOptions = this.compileOptions(it, options);
     _builder.append(_compileOptions, "");
     _builder.newLineIfNotEmpty();
     String _compileTokens = this.compileTokens(it, options);
@@ -112,8 +113,77 @@ public abstract class AbstractAntlrGrammarGenerator {
     return _builder;
   }
   
-  protected String compileOptions(final Grammar it, final AntlrOptions options) {
-    return "";
+  protected CharSequence compileOptions(final Grammar it, final AntlrOptions options) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("options {");
+    _builder.newLine();
+    {
+      String _internalParserSuperClass = this.getInternalParserSuperClass();
+      boolean _notEquals = (!Objects.equal(_internalParserSuperClass, null));
+      if (_notEquals) {
+        _builder.append("\t");
+        _builder.append("superClass=");
+        String _internalParserSuperClass_1 = this.getInternalParserSuperClass();
+        _builder.append(_internalParserSuperClass_1, "\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _isBacktrack = options.isBacktrack();
+      if (_isBacktrack) {
+        _or_1 = true;
+      } else {
+        boolean _isMemoize = options.isMemoize();
+        _or_1 = _isMemoize;
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        int _k = options.getK();
+        boolean _greaterEqualsThan = (_k >= 0);
+        _or = _greaterEqualsThan;
+      }
+      if (_or) {
+        {
+          boolean _isBacktrack_1 = options.isBacktrack();
+          if (_isBacktrack_1) {
+            _builder.append("\t");
+            _builder.append("backtrack=true;");
+            _builder.newLine();
+          }
+        }
+        {
+          boolean _isMemoize_1 = options.isMemoize();
+          if (_isMemoize_1) {
+            _builder.append("\t");
+            _builder.append("memoize=true;");
+            _builder.newLine();
+          }
+        }
+        {
+          int _k_1 = options.getK();
+          boolean _greaterEqualsThan_1 = (_k_1 >= 0);
+          if (_greaterEqualsThan_1) {
+            _builder.append("\t");
+            _builder.append("memoize=");
+            int _k_2 = options.getK();
+            _builder.append(_k_2, "\t");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  protected String getInternalParserSuperClass() {
+    return null;
   }
   
   protected String compileTokens(final Grammar it, final AntlrOptions options) {
@@ -322,7 +392,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String ebnf(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _mustBeParenthesized = this._grammarAccessExtensions.mustBeParenthesized(it);
+      boolean _mustBeParenthesized = this.mustBeParenthesized(it);
       if (_mustBeParenthesized) {
         _builder.append("(");
         _builder.newLineIfNotEmpty();
@@ -389,7 +459,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String dataTypeEbnf(final AbstractElement it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _mustBeParenthesized = this._grammarAccessExtensions.mustBeParenthesized(it);
+      boolean _mustBeParenthesized = this.mustBeParenthesized(it);
       if (_mustBeParenthesized) {
         _builder.append("(");
         _builder.newLineIfNotEmpty();
@@ -593,15 +663,10 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected String _ebnf2(final Assignment it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    _builder.newLine();
-    _builder.append("\t");
     AbstractElement _terminal = it.getTerminal();
     String _assignmentEbnf = this.assignmentEbnf(_terminal, it, options, supportActions);
-    _builder.append(_assignmentEbnf, "\t");
+    _builder.append(_assignmentEbnf, "");
     _builder.newLineIfNotEmpty();
-    _builder.append(")");
-    _builder.newLine();
     return _builder.toString();
   }
   
@@ -710,9 +775,6 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected String _assignmentEbnf(final Alternatives it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    _builder.newLine();
-    _builder.append("\t");
     {
       EList<AbstractElement> _elements = it.getElements();
       boolean _hasElements = false;
@@ -720,15 +782,13 @@ public abstract class AbstractAntlrGrammarGenerator {
         if (!_hasElements) {
           _hasElements = true;
         } else {
-          _builder.appendImmediate("\n    |", "\t");
+          _builder.appendImmediate("\n    |", "");
         }
         String _assignmentEbnf = this.assignmentEbnf(element, assignment, options, supportActions);
-        _builder.append(_assignmentEbnf, "\t");
+        _builder.append(_assignmentEbnf, "");
       }
     }
     _builder.newLineIfNotEmpty();
-    _builder.append(")");
-    _builder.newLine();
     return _builder.toString();
   }
   
@@ -768,6 +828,58 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected String _assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     return this.ebnf(it, options, supportActions);
+  }
+  
+  protected boolean _mustBeParenthesized(final AbstractElement it) {
+    boolean _or = false;
+    boolean _predicated = this._grammarAccessExtensions.predicated(it);
+    if (_predicated) {
+      _or = true;
+    } else {
+      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
+      _or = _isFirstSetPredicated;
+    }
+    return _or;
+  }
+  
+  protected boolean _mustBeParenthesized(final Group it) {
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _predicated = this._grammarAccessExtensions.predicated(it);
+    if (_predicated) {
+      _or_1 = true;
+    } else {
+      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
+      _or_1 = _isFirstSetPredicated;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      String _cardinality = it.getCardinality();
+      boolean _notEquals = (!Objects.equal(_cardinality, null));
+      _or = _notEquals;
+    }
+    return _or;
+  }
+  
+  protected boolean _mustBeParenthesized(final Alternatives it) {
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _predicated = this._grammarAccessExtensions.predicated(it);
+    if (_predicated) {
+      _or_1 = true;
+    } else {
+      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
+      _or_1 = _isFirstSetPredicated;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      String _cardinality = it.getCardinality();
+      boolean _notEquals = (!Objects.equal(_cardinality, null));
+      _or = _notEquals;
+    }
+    return _or;
   }
   
   protected String dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
@@ -845,6 +957,19 @@ public abstract class AbstractAntlrGrammarGenerator {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, assignment, options, supportActions).toString());
+    }
+  }
+  
+  public boolean mustBeParenthesized(final AbstractElement it) {
+    if (it instanceof Alternatives) {
+      return _mustBeParenthesized((Alternatives)it);
+    } else if (it instanceof Group) {
+      return _mustBeParenthesized((Group)it);
+    } else if (it != null) {
+      return _mustBeParenthesized(it);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
     }
   }
 }

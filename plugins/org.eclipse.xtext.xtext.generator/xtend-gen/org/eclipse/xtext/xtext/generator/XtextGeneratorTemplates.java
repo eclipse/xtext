@@ -599,24 +599,28 @@ public class XtextGeneratorTemplates {
     TypeReference _runtimeGenModule_1 = this.naming.getRuntimeGenModule(it);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_runtimeGenModule_1);
     file.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Manual modifications go to {@link ");
-    TypeReference _runtimeModule = this.naming.getRuntimeModule(it);
-    String _simpleName = _runtimeModule.getSimpleName();
-    _builder.append(_simpleName, " ");
-    _builder.append("}.");
-    _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    file.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Manual modifications go to {@link ");
+        TypeReference _runtimeModule = XtextGeneratorTemplates.this.naming.getRuntimeModule(it);
+        String _simpleName = _runtimeModule.getSimpleName();
+        _builder.append(_simpleName, " ");
+        _builder.append("}.");
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+      }
+    };
+    file.setTypeComment(_client);
     List<IClassAnnotation> _annotations = file.getAnnotations();
     SuppressWarningsAnnotation _suppressWarningsAnnotation = new SuppressWarningsAnnotation();
     _annotations.add(_suppressWarningsAnnotation);
-    StringConcatenationClient _client = new StringConcatenationClient() {
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public abstract class ");
@@ -719,7 +723,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
       }
     };
-    file.setContent(_client);
+    file.setContent(_client_1);
     file.setMarkedAsGenerated(true);
     return file;
   }
@@ -771,24 +775,28 @@ public class XtextGeneratorTemplates {
     TypeReference _eclipsePluginGenModule_1 = this.naming.getEclipsePluginGenModule(it);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_eclipsePluginGenModule_1);
     file.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Manual modifications go to {@link ");
-    TypeReference _eclipsePluginModule = this.naming.getEclipsePluginModule(it);
-    String _simpleName = _eclipsePluginModule.getSimpleName();
-    _builder.append(_simpleName, " ");
-    _builder.append("}.");
-    _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    file.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Manual modifications go to {@link ");
+        TypeReference _eclipsePluginModule = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(it);
+        String _simpleName = _eclipsePluginModule.getSimpleName();
+        _builder.append(_simpleName, " ");
+        _builder.append("}.");
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+      }
+    };
+    file.setTypeComment(_client);
     List<IClassAnnotation> _annotations = file.getAnnotations();
     SuppressWarningsAnnotation _suppressWarningsAnnotation = new SuppressWarningsAnnotation();
     _annotations.add(_suppressWarningsAnnotation);
-    StringConcatenationClient _client = new StringConcatenationClient() {
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public abstract class ");
@@ -834,7 +842,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
       }
     };
-    file.setContent(_client);
+    file.setContent(_client_1);
     file.setMarkedAsGenerated(true);
     return file;
   }
@@ -884,24 +892,28 @@ public class XtextGeneratorTemplates {
     TypeReference _ideaGenModule_1 = this.naming.getIdeaGenModule(it);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_ideaGenModule_1);
     file.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Manual modifications go to {@link ");
-    TypeReference _ideaModule = this.naming.getIdeaModule(it);
-    String _simpleName = _ideaModule.getSimpleName();
-    _builder.append(_simpleName, " ");
-    _builder.append("}.");
-    _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    file.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Manual modifications go to {@link ");
+        TypeReference _ideaModule = XtextGeneratorTemplates.this.naming.getIdeaModule(it);
+        String _simpleName = _ideaModule.getSimpleName();
+        _builder.append(_simpleName, " ");
+        _builder.append("}.");
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+      }
+    };
+    file.setTypeComment(_client);
     List<IClassAnnotation> _annotations = file.getAnnotations();
     SuppressWarningsAnnotation _suppressWarningsAnnotation = new SuppressWarningsAnnotation();
     _annotations.add(_suppressWarningsAnnotation);
-    StringConcatenationClient _client = new StringConcatenationClient() {
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public abstract class ");
@@ -930,7 +942,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
       }
     };
-    file.setContent(_client);
+    file.setContent(_client_1);
     return file;
   }
   
@@ -981,24 +993,28 @@ public class XtextGeneratorTemplates {
     TypeReference _webGenModule_1 = this.naming.getWebGenModule(it);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_webGenModule_1);
     file.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Manual modifications go to {@link ");
-    TypeReference _webModule = this.naming.getWebModule(it);
-    String _simpleName = _webModule.getSimpleName();
-    _builder.append(_simpleName, " ");
-    _builder.append("}.");
-    _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    file.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Manual modifications go to {@link ");
+        TypeReference _webModule = XtextGeneratorTemplates.this.naming.getWebModule(it);
+        String _simpleName = _webModule.getSimpleName();
+        _builder.append(_simpleName, " ");
+        _builder.append("}.");
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+      }
+    };
+    file.setTypeComment(_client);
     List<IClassAnnotation> _annotations = file.getAnnotations();
     SuppressWarningsAnnotation _suppressWarningsAnnotation = new SuppressWarningsAnnotation();
     _annotations.add(_suppressWarningsAnnotation);
-    StringConcatenationClient _client = new StringConcatenationClient() {
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public abstract class ");
@@ -1045,7 +1061,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
       }
     };
-    file.setContent(_client);
+    file.setContent(_client_1);
     file.setMarkedAsGenerated(true);
     return file;
   }
@@ -1127,20 +1143,24 @@ public class XtextGeneratorTemplates {
     final Grammar activatorGrammar = activatorLanguage.getGrammar();
     TypeReference _eclipsePluginExecutableExtensionFactory = this.naming.getEclipsePluginExecutableExtensionFactory(grammar);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_eclipsePluginExecutableExtensionFactory);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* This class was generated. Customizations should only happen in a newly");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* introduced subclass. ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    file.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* This class was generated. Customizations should only happen in a newly");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* introduced subclass. ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+      }
+    };
+    file.setTypeComment(_client);
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
@@ -1205,7 +1225,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
       }
     };
-    file.setContent(_client);
+    file.setContent(_client_1);
     return file;
   }
   
@@ -1214,20 +1234,24 @@ public class XtextGeneratorTemplates {
     Grammar _grammar = _head.getGrammar();
     final TypeReference activator = this.naming.getEclipsePluginActivator(_grammar);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(activator);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* This class was generated. Customizations should only happen in a newly");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* introduced subclass. ");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    file.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* This class was generated. Customizations should only happen in a newly");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* introduced subclass. ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+      }
+    };
+    file.setTypeComment(_client);
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
@@ -1524,7 +1548,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
       }
     };
-    file.setContent(_client);
+    file.setContent(_client_1);
     return file;
   }
 }
