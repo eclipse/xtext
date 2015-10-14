@@ -37,6 +37,11 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 
+/**
+ * @see SelfElementInfo An intitially copied class
+ * 
+ * @author kosyakov - Initial contribution and API
+ */
 public class XtextSelfElementInfo extends SmartPointerElementInfo {
   private static final FileDocumentManager ourFileDocManager = FileDocumentManager.getInstance();
   protected volatile IElementType myType;
@@ -188,54 +193,12 @@ public class XtextSelfElementInfo extends SmartPointerElementInfo {
 
   @Nullable
   public static PsiFile restoreFileFromVirtual(@NotNull final VirtualFile virtualFile, @NotNull final Project project, @Nullable final Language language) {
-    return ApplicationManager.getApplication().runReadAction(new NullableComputable<PsiFile>() {
-      @Override
-      public PsiFile compute() {
-        if (project.isDisposed()) return null;
-        VirtualFile child;
-        if (virtualFile.isValid()) {
-          child = virtualFile;
-        }
-        else {
-          VirtualFile vParent = virtualFile.getParent();
-          if (vParent == null || !vParent.isDirectory()) return null;
-          String name = virtualFile.getName();
-          child = vParent.findChild(name);
-        }
-        if (child == null || !child.isValid()) return null;
-        PsiFile file = PsiManager.getInstance(project).findFile(child);
-        if (file != null && language != null) {
-          return file.getViewProvider().getPsi(language);
-        }
-
-        return file;
-      }
-    });
+	  return SelfElementInfo.restoreFileFromVirtual(virtualFile, project, language);
   }
 
   @Nullable
   public static PsiDirectory restoreDirectoryFromVirtual(final VirtualFile virtualFile, @NotNull final Project project) {
-    if (virtualFile == null) return null;
-
-    return ApplicationManager.getApplication().runReadAction(new Computable<PsiDirectory>() {
-      @Override
-      public PsiDirectory compute() {
-        VirtualFile child;
-        if (virtualFile.isValid()) {
-          child = virtualFile;
-        }
-        else {
-          VirtualFile vParent = virtualFile.getParent();
-          if (vParent == null || !vParent.isDirectory()) return null;
-          String name = virtualFile.getName();
-          child = vParent.findChild(name);
-        }
-        if (child == null || !child.isValid()) return null;
-        PsiDirectory file = PsiManager.getInstance(project).findDirectory(child);
-        if (file == null || !file.isValid()) return null;
-        return file;
-      }
-    });
+	  return SelfElementInfo.restoreDirectoryFromVirtual(virtualFile, project);
   }
 
   @Override
