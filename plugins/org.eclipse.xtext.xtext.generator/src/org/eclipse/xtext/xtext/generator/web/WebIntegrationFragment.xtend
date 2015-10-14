@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.regex.Pattern
 import org.eclipse.emf.mwe2.runtime.Mandatory
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
@@ -49,11 +50,11 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		ORION, ACE, CODEMIRROR
 	}
 	
-	static val REQUIREJS_VERSION = '2.1.17'
-	static val REQUIREJS_TEXT_VERSION = '2.0.10-3'
+	static val REQUIREJS_VERSION = '2.1.20'
+	static val REQUIREJS_TEXT_VERSION = '2.0.14'
 	static val JQUERY_VERSION = '2.1.4'
-	static val ACE_VERSION = '1.1.9'
-	static val CODEMIRROR_VERSION = '5.5'
+	static val ACE_VERSION = '1.2.0'
+	static val CODEMIRROR_VERSION = '5.7'
 	
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
@@ -74,6 +75,21 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	boolean useServlet3Api = true
 	boolean generateJettyLauncher = false
 	boolean generateHtmlExample = false
+	
+	@Accessors(PUBLIC_SETTER)
+	String requireJsVersion = REQUIREJS_VERSION
+	
+	@Accessors(PUBLIC_SETTER)
+	String requireJsTextVersion = REQUIREJS_TEXT_VERSION
+	
+	@Accessors(PUBLIC_SETTER)
+	String jQueryVersion = JQUERY_VERSION
+	
+	@Accessors(PUBLIC_SETTER)
+	String aceVersion = ACE_VERSION
+	
+	@Accessors(PUBLIC_SETTER)
+	String codeMirrorVersion = CODEMIRROR_VERSION
 	
 	/**
 	 * Choose one of the supported frameworks: {@code "Orion"}, {@code "Ace"}, or {@code "CodeMirror"}
@@ -478,12 +494,12 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				«ELSEIF framework == Framework.ACE»
 					<link rel="stylesheet" type="text/css" href="xtext/«codeConfig.xtextVersion»/xtext-ace.css"/>
 				«ELSEIF framework == Framework.CODEMIRROR»
-					<link rel="stylesheet" type="text/css" href="webjars/codemirror/«CODEMIRROR_VERSION»/lib/codemirror.css"/>
-					<link rel="stylesheet" type="text/css" href="webjars/codemirror/«CODEMIRROR_VERSION»/addon/hint/show-hint.css"/>
+					<link rel="stylesheet" type="text/css" href="webjars/codemirror/«codeMirrorVersion»/lib/codemirror.css"/>
+					<link rel="stylesheet" type="text/css" href="webjars/codemirror/«codeMirrorVersion»/addon/hint/show-hint.css"/>
 					<link rel="stylesheet" type="text/css" href="xtext/«codeConfig.xtextVersion»/xtext-codemirror.css"/>
 				«ENDIF»
 				<link rel="stylesheet" type="text/css" href="style.css"/>
-				<script src="webjars/requirejs/«REQUIREJS_VERSION»/require.min.js"></script>
+				<script src="webjars/requirejs/«requireJsVersion»/require.min.js"></script>
 				<script type="text/javascript">
 					var baseUrl = window.location.pathname;
 					var fileIndex = baseUrl.indexOf("index.html");
@@ -493,8 +509,8 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 						require.config({
 							baseUrl: baseUrl,
 							paths: {
-								"text": "webjars/requirejs-text/«REQUIREJS_TEXT_VERSION»/text",
-								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
+								"text": "webjars/requirejs-text/«requireJsTextVersion»/text",
+								"jquery": "webjars/jquery/«jQueryVersion»/jquery.min",
 								"xtext/xtext-orion": "xtext/«codeConfig.xtextVersion»/xtext-orion"
 							}
 						});
@@ -510,12 +526,12 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 						require.config({
 							baseUrl: baseUrl,
 							paths: {
-								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
-								"ace/ext/language_tools": "webjars/ace/«ACE_VERSION»/src/ext-language_tools",
+								"jquery": "webjars/jquery/«jQueryVersion»/jquery.min",
+								"ace/ext/language_tools": "webjars/ace/«aceVersion»/src/ext-language_tools",
 								"xtext/xtext-ace": "xtext/«codeConfig.xtextVersion»/xtext-ace"
 							}
 						});
-						require(["webjars/ace/«ACE_VERSION»/src/ace"], function() {
+						require(["webjars/ace/«aceVersion»/src/ace"], function() {
 							require(["xtext/xtext-ace"], function(xtext) {
 								xtext.createEditor({
 									baseUrl: baseUrl,
@@ -527,12 +543,12 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 						require.config({
 							baseUrl: baseUrl,
 							paths: {
-								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
+								"jquery": "webjars/jquery/«jQueryVersion»/jquery.min",
 								"xtext/xtext-codemirror": "xtext/«codeConfig.xtextVersion»/xtext-codemirror"
 							},
 							packages: [{
 								name: "codemirror",
-								location: "webjars/codemirror/«CODEMIRROR_VERSION»",
+								location: "webjars/codemirror/«codeMirrorVersion»",
 								main: "lib/codemirror"
 							}]
 						});
