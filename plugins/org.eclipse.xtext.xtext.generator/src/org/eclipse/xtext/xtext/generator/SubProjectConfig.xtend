@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import com.google.inject.Inject
 
 interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
+	def boolean isEnabled()
 	def String getName()
 	def IXtextGeneratorFileSystemAccess getRoot()
 	def IXtextGeneratorFileSystemAccess getMetaInf()

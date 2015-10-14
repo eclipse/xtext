@@ -36,6 +36,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	
@@ -44,11 +45,15 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension GrammarAccessExtensions
 	
+	@Accessors boolean generateStub
+	
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + getSimpleName(grammar) + 'Formatter')
 	}
 	
 	override generate() {
+		if (!generateStub) 
+			return;
 		val StringConcatenationClient statement =
 			'''binder.bind(«IPreferenceValuesProvider».class).annotatedWith(«FormatterPreferences».class).to(«FormatterPreferenceValuesProvider».class);'''
 		new GuiceModuleAccess.BindingFactory()
