@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.model
 import java.util.Map
 import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
@@ -47,7 +48,7 @@ class JavaFileAccess extends TextFileAccess {
 	@Accessors
 	boolean markedAsGenerated
 	
-	@Accessors(PROTECTED_SETTER)
+	@Accessors(PUBLIC_SETTER)
 	ResourceSet resourceSet
 	
 	protected new(TypeReference typeRef, CodeConfig codeConfig) {
@@ -134,6 +135,8 @@ class JavaFileAccess extends TextFileAccess {
 				access.importType(new TypeReference(object))
 			else if (object instanceof EClass && access.resourceSet !== null)
 				access.importType(new TypeReference(object as EClass, access.resourceSet))
+			else if (object instanceof EPackage && access.resourceSet !== null)
+				access.importType(new TypeReference(object as EPackage, access.resourceSet))
 			else
 				object.toString
 		}

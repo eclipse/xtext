@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.serializer
 
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext
 
 class GrammarConstraints extends GeneratedFile {
 	
@@ -25,7 +26,7 @@ class GrammarConstraints extends GeneratedFile {
 		
 		// ******** constraint contexts ********
 		«FOR gcc:grammar.grammarConstraintContexts SEPARATOR "\n"»
-			«gcc.name» returns «gcc.commonType?.name»:
+			«gcc.name»«IF gcc.safeType !== null» returns «gcc.safeType»«ENDIF»:
 				«FOR constraint:gcc.constraints SEPARATOR " | "»«constraint.name»«ENDFOR»;
 		«ENDFOR»
 		
@@ -33,7 +34,7 @@ class GrammarConstraints extends GeneratedFile {
 		
 		// ******** constraints ********
 		«FOR constraint:grammar.grammarConstraints SEPARATOR "\n"»
-			«constraint.name» returns «constraint.type?.name»:
+			«constraint.name»«IF constraint.type !== null» returns «constraint.type.name»«ENDIF»:
 				«IF constraint.body == null»
 					{«constraint.type?.name»};
 				«ELSE»
@@ -41,4 +42,13 @@ class GrammarConstraints extends GeneratedFile {
 				«ENDIF»
 		«ENDFOR»
 	'''
+	
+	private def getSafeType(IConstraintContext context) {
+		try {
+			context.commonType?.name
+		} catch (UnsupportedOperationException e) {
+			return null
+		}
+	}
+	
 }

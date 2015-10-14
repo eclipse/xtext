@@ -19,6 +19,7 @@ import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
@@ -72,13 +73,15 @@ public class GrammarConstraints extends GeneratedFile {
         }
         String _name_3 = gcc.getName();
         _builder.append(_name_3, "");
-        _builder.append(" returns ");
-        EClass _commonType = gcc.getCommonType();
-        String _name_4 = null;
-        if (_commonType!=null) {
-          _name_4=_commonType.getName();
+        {
+          String _safeType = this.getSafeType(gcc);
+          boolean _tripleNotEquals = (_safeType != null);
+          if (_tripleNotEquals) {
+            _builder.append(" returns ");
+            String _safeType_1 = this.getSafeType(gcc);
+            _builder.append(_safeType_1, "");
+          }
         }
-        _builder.append(_name_4, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -91,8 +94,8 @@ public class GrammarConstraints extends GeneratedFile {
             } else {
               _builder.appendImmediate(" | ", "\t");
             }
-            String _name_5 = constraint.getName();
-            _builder.append(_name_5, "\t");
+            String _name_4 = constraint.getName();
+            _builder.append(_name_4, "\t");
           }
         }
         _builder.append(";");
@@ -113,15 +116,18 @@ public class GrammarConstraints extends GeneratedFile {
         } else {
           _builder.appendImmediate("\n", "");
         }
-        String _name_6 = constraint_1.getName();
-        _builder.append(_name_6, "");
-        _builder.append(" returns ");
-        EClass _type = constraint_1.getType();
-        String _name_7 = null;
-        if (_type!=null) {
-          _name_7=_type.getName();
+        String _name_5 = constraint_1.getName();
+        _builder.append(_name_5, "");
+        {
+          EClass _type = constraint_1.getType();
+          boolean _tripleNotEquals_1 = (_type != null);
+          if (_tripleNotEquals_1) {
+            _builder.append(" returns ");
+            EClass _type_1 = constraint_1.getType();
+            String _name_6 = _type_1.getName();
+            _builder.append(_name_6, "");
+          }
         }
-        _builder.append(_name_7, "");
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         {
@@ -130,12 +136,12 @@ public class GrammarConstraints extends GeneratedFile {
           if (_equals) {
             _builder.append("\t");
             _builder.append("{");
-            EClass _type_1 = constraint_1.getType();
-            String _name_8 = null;
-            if (_type_1!=null) {
-              _name_8=_type_1.getName();
+            EClass _type_2 = constraint_1.getType();
+            String _name_7 = null;
+            if (_type_2!=null) {
+              _name_7=_type_2.getName();
             }
-            _builder.append(_name_8, "\t");
+            _builder.append(_name_7, "\t");
             _builder.append("};");
             _builder.newLineIfNotEmpty();
           } else {
@@ -149,5 +155,25 @@ public class GrammarConstraints extends GeneratedFile {
       }
     }
     return _builder;
+  }
+  
+  private String getSafeType(final IGrammarConstraintProvider.IConstraintContext context) {
+    String _xtrycatchfinallyexpression = null;
+    try {
+      EClass _commonType = context.getCommonType();
+      String _name = null;
+      if (_commonType!=null) {
+        _name=_commonType.getName();
+      }
+      _xtrycatchfinallyexpression = _name;
+    } catch (final Throwable _t) {
+      if (_t instanceof UnsupportedOperationException) {
+        final UnsupportedOperationException e = (UnsupportedOperationException)_t;
+        return null;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return _xtrycatchfinallyexpression;
   }
 }

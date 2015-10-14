@@ -85,17 +85,17 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 		return StatemachineGrammarAccess.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return StatemachineSemanticSequencer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
 		return StatemachineSyntacticSequencer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}
@@ -133,8 +133,8 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureRuntimeLexer(Binder binder) {
 		binder.bind(Lexer.class)
-		.annotatedWith(Names.named(LexerBindings.RUNTIME))
-		.to(InternalStatemachineLexer.class);
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalStatemachineLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
