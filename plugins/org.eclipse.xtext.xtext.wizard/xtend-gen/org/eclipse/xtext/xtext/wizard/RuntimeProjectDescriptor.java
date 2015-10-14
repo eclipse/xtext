@@ -673,13 +673,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("// a custom ResourceFactory for use with EMF");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = resourceFactory.ResourceFactoryFragment auto-inject {}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
+    _builder.append("fragment = resourceFactory.ResourceFactoryFragment2 auto-inject {}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");
