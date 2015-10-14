@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -67,7 +66,6 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
 import org.eclipse.emf.mwe2.ecore.CvsIdFilteringGeneratorAdapterFactoryDescriptor;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -114,46 +112,10 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   private String basePackage;
   
   /**
-   * Whether EMF edit code shall be generated.
+   * Sets the ID of the generated EMF model plug-in. Only needed if you want to generate the EMF code into a separate plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private boolean generateEdit = false;
-  
-  /**
-   * The target directory for the generated EMF edit code. Only needed if you want to generate an EMF edit plug-in.
-   */
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String editDirectory;
-  
-  /**
-   * The plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
-   */
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String editPluginID;
-  
-  /**
-   * Whether EMF editor code shall be generated.
-   */
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private boolean generateEditor = false;
-  
-  /**
-   * The target directory for the generated EMF editor code. Only needed if you want to generate an EMF editor plug-in.
-   */
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String editorDirectory;
-  
-  /**
-   * The plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
-   */
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String editorPluginID;
-  
-  /**
-   * If an existing EMF GenModel should be used, set the path to that file in this property.
-   */
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String genModel;
+  private String modelPluginID;
   
   /**
    * Sets the target directory for the generated EMF model code. Only needed if you want to generate the EMF code into
@@ -163,10 +125,46 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   private String javaModelDirectory;
   
   /**
-   * Sets the ID of the generated EMF model plug-in. Only needed if you want to generate the EMF code into a separate plug-in.
+   * Whether EMF edit code shall be generated.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private String modelPluginID;
+  private boolean generateEdit = false;
+  
+  /**
+   * The plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
+   */
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String editPluginID;
+  
+  /**
+   * The target directory for the generated EMF edit code. Only needed if you want to generate an EMF edit plug-in.
+   */
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String editDirectory;
+  
+  /**
+   * Whether EMF editor code shall be generated.
+   */
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private boolean generateEditor = false;
+  
+  /**
+   * The plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
+   */
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String editorPluginID;
+  
+  /**
+   * The target directory for the generated EMF editor code. Only needed if you want to generate an EMF editor plug-in.
+   */
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String editorDirectory;
+  
+  /**
+   * If an existing EMF GenModel should be used, set the path to that file in this property.
+   */
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String genModel;
   
   /**
    * Whether the Java class generation should be skipped. If <code>true</code> only the ecore file is generated.
@@ -175,13 +173,11 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   private boolean skipGenerate = false;
   
   /**
-   * Whether the build.properties should be updated.
+   * Whether the build.properties should be updated. Skipped if the model code is generated into a separate
+   * plugin or if no manifest is configured for the runtime project (see {@code WizardConfig#createEclipseMetaData}).
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean updateBuildProperties = true;
-  
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String fileExtensions;
   
   /**
    * Whether to use a qualified name for the xmi files, e.g.
@@ -233,18 +229,49 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     }
   }
   
-  protected String getJavaModelDirectory() {
+  protected String getModelPluginID() {
     String _elvis = null;
-    if (this.javaModelDirectory != null) {
-      _elvis = this.javaModelDirectory;
+    if (this.modelPluginID != null) {
+      _elvis = this.modelPluginID;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
-      String _path = _srcGen.getPath();
-      _elvis = _path;
+      String _name = _runtime.getName();
+      _elvis = _name;
     }
     return _elvis;
+  }
+  
+  protected String getJavaModelDirectory() {
+    if ((this.javaModelDirectory != null)) {
+      return this.javaModelDirectory;
+    }
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    final String srcGenPath = _srcGen.getPath();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+    IXtextGeneratorFileSystemAccess _root = _runtime_1.getRoot();
+    final String rootPath = _root.getPath();
+    boolean _and = false;
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(rootPath);
+    boolean _not = (!_isNullOrEmpty);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _startsWith = srcGenPath.startsWith(rootPath);
+      _and = _startsWith;
+    }
+    if (_and) {
+      String _modelPluginID = this.getModelPluginID();
+      String _plus = ("/" + _modelPluginID);
+      int _length = rootPath.length();
+      String _substring = srcGenPath.substring(_length);
+      return (_plus + _substring);
+    }
+    throw new RuntimeException(
+      "Could not derive the Java model directory from the project configuration. Please set the property \'javaModelDirectory\' explicitly.");
   }
   
   protected String getModelName(final Grammar grammar) {
@@ -258,32 +285,27 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     return _xifexpression;
   }
   
-  protected String getBasePackage(final Grammar grammar) {
-    String _elvis = null;
-    if (this.basePackage != null) {
-      _elvis = this.basePackage;
-    } else {
-      String _namespace = GrammarUtil.getNamespace(grammar);
-      _elvis = _namespace;
-    }
-    return _elvis;
-  }
-  
   protected String getEcoreFilePath(final Grammar grammar) {
-    IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
-    String _path = _ecoreModel.getPath();
-    String _plus = (_path + "/");
-    String _modelName = this.getModelName(grammar);
-    String _plus_1 = (_plus + _modelName);
-    return (_plus_1 + ".ecore");
+    String _xblockexpression = null;
+    {
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      final String ecoreModelFolder = _runtime.getEcoreModelFolder();
+      String _modelPluginID = this.getModelPluginID();
+      String _plus = ("/" + _modelPluginID);
+      String _plus_1 = (_plus + "/");
+      String _plus_2 = (_plus_1 + ecoreModelFolder);
+      String _plus_3 = (_plus_2 + "/");
+      String _modelName = this.getModelName(grammar);
+      String _plus_4 = (_plus_3 + _modelName);
+      _xblockexpression = (_plus_4 + ".ecore");
+    }
+    return _xblockexpression;
   }
   
   protected URI getEcoreFileUri(final Grammar grammar) {
     String _ecoreFilePath = this.getEcoreFilePath(grammar);
-    String _canonicalPath = this.getCanonicalPath(_ecoreFilePath);
-    return URI.createPlatformResourceURI(_canonicalPath, true);
+    return URI.createPlatformResourceURI(_ecoreFilePath, true);
   }
   
   protected String getGenModelPath(final Grammar grammar) {
@@ -291,23 +313,28 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     if (this.genModel != null) {
       _elvis = this.genModel;
     } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
-      String _path = _ecoreModel.getPath();
-      String _plus = (_path + "/");
-      String _modelName = this.getModelName(grammar);
-      String _plus_1 = (_plus + _modelName);
-      String _plus_2 = (_plus_1 + ".genmodel");
-      _elvis = _plus_2;
+      String _xblockexpression = null;
+      {
+        IXtextProjectConfig _projectConfig = this.getProjectConfig();
+        IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+        final String ecoreModelFolder = _runtime.getEcoreModelFolder();
+        String _modelPluginID = this.getModelPluginID();
+        String _plus = ("/" + _modelPluginID);
+        String _plus_1 = (_plus + "/");
+        String _plus_2 = (_plus_1 + ecoreModelFolder);
+        String _plus_3 = (_plus_2 + "/");
+        String _modelName = this.getModelName(grammar);
+        String _plus_4 = (_plus_3 + _modelName);
+        _xblockexpression = (_plus_4 + ".genmodel");
+      }
+      _elvis = _xblockexpression;
     }
     return _elvis;
   }
   
   protected URI getGenModelUri(final Grammar grammar) {
     String _genModelPath = this.getGenModelPath(grammar);
-    String _canonicalPath = this.getCanonicalPath(_genModelPath);
-    return URI.createPlatformResourceURI(_canonicalPath, true);
+    return URI.createPlatformResourceURI(_genModelPath, true);
   }
   
   protected String getRelativePath(final String pathInRoot) {
@@ -315,12 +342,12 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
-      final String projectRoot = _root.getPath();
+      String _name = _runtime.getName();
+      final String projectPath = ("/" + _name);
       String _xifexpression = null;
-      boolean _startsWith = pathInRoot.startsWith(projectRoot);
+      boolean _startsWith = pathInRoot.startsWith(projectPath);
       if (_startsWith) {
-        int _length = projectRoot.length();
+        int _length = projectPath.length();
         int _plus = (_length + 1);
         _xifexpression = pathInRoot.substring(_plus);
       } else {
@@ -329,97 +356,6 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
-  }
-  
-  protected String getCanonicalPath(final String path) {
-    final LinkedList<String> result = CollectionLiterals.<String>newLinkedList();
-    boolean isAbsolute = path.startsWith("/");
-    String[] _split = path.split("[/\\\\]");
-    for (final String segment : _split) {
-      boolean _equals = Objects.equal(segment, "..");
-      if (_equals) {
-        boolean _isEmpty = result.isEmpty();
-        if (_isEmpty) {
-          isAbsolute = true;
-        } else {
-          result.removeLast();
-        }
-      } else {
-        boolean _and = false;
-        int _length = segment.length();
-        boolean _greaterThan = (_length > 0);
-        if (!_greaterThan) {
-          _and = false;
-        } else {
-          boolean _notEquals = (!Objects.equal(segment, "."));
-          _and = _notEquals;
-        }
-        if (_and) {
-          result.addLast(segment);
-        }
-      }
-    }
-    if (isAbsolute) {
-      final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
-        @Override
-        public CharSequence apply(final String it) {
-          return it;
-        }
-      };
-      return IterableExtensions.<String>join(result, "/", "/", null, _function);
-    } else {
-      return IterableExtensions.join(result, "/");
-    }
-  }
-  
-  protected String getModelPluginID() {
-    String _elvis = null;
-    if (this.modelPluginID != null) {
-      _elvis = this.modelPluginID;
-    } else {
-      String _xblockexpression = null;
-      {
-        IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-        IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
-        final String path = _root.getPath();
-        int _lastIndexOf = path.lastIndexOf("/");
-        int _plus = (_lastIndexOf + 1);
-        _xblockexpression = path.substring(_plus);
-      }
-      _elvis = _xblockexpression;
-    }
-    return _elvis;
-  }
-  
-  protected String getEditDirectory() {
-    String _elvis = null;
-    if (this.editDirectory != null) {
-      _elvis = this.editDirectory;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
-      String _path = _root.getPath();
-      String _plus = (_path + ".edit/src");
-      _elvis = _plus;
-    }
-    return _elvis;
-  }
-  
-  protected String getEditorDirectory() {
-    String _elvis = null;
-    if (this.editorDirectory != null) {
-      _elvis = this.editorDirectory;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
-      String _path = _root.getPath();
-      String _plus = (_path + ".editor/src");
-      _elvis = _plus;
-    }
-    return _elvis;
   }
   
   protected String getEditPluginID() {
@@ -434,6 +370,19 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     return _elvis;
   }
   
+  protected String getEditDirectory() {
+    String _elvis = null;
+    if (this.editDirectory != null) {
+      _elvis = this.editDirectory;
+    } else {
+      String _editPluginID = this.getEditPluginID();
+      String _plus = ("/" + _editPluginID);
+      String _plus_1 = (_plus + "/src");
+      _elvis = _plus_1;
+    }
+    return _elvis;
+  }
+  
   protected String getEditorPluginID() {
     String _elvis = null;
     if (this.editorPluginID != null) {
@@ -442,6 +391,29 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
       String _modelPluginID = this.getModelPluginID();
       String _plus = (_modelPluginID + ".editor");
       _elvis = _plus;
+    }
+    return _elvis;
+  }
+  
+  protected String getEditorDirectory() {
+    String _elvis = null;
+    if (this.editorDirectory != null) {
+      _elvis = this.editorDirectory;
+    } else {
+      String _editorPluginID = this.getEditorPluginID();
+      String _plus = (_editorPluginID + "/src");
+      _elvis = _plus;
+    }
+    return _elvis;
+  }
+  
+  protected String getBasePackage(final Grammar grammar) {
+    String _elvis = null;
+    if (this.basePackage != null) {
+      _elvis = this.basePackage;
+    } else {
+      String _namespace = GrammarUtil.getNamespace(grammar);
+      _elvis = _namespace;
     }
     return _elvis;
   }
@@ -675,10 +647,7 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         XtextResourceSet _xtextResourceSet = new XtextResourceSet();
         _genModelHelper.registerGenModel(_xtextResourceSet, genModelUri);
       } catch (final Throwable _t) {
-        if (_t instanceof ConfigurationException) {
-          final ConfigurationException ce = (ConfigurationException)_t;
-          throw ce;
-        } else if (_t instanceof Exception) {
+        if (_t instanceof Exception) {
           final Exception e = (Exception)_t;
           EMFGeneratorFragment2.LOG.error("Failed to register GenModel", e);
         } else {
@@ -894,16 +863,13 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         if (this.suppressLoadInitialization) {
           genPackage.setLoadInitialization(false);
         }
-        boolean _and = false;
-        if (!(this.fileExtensions != null)) {
-          _and = false;
-        } else {
-          EPackage _ecorePackage = genPackage.getEcorePackage();
-          boolean _contains = packs.contains(_ecorePackage);
-          _and = _contains;
-        }
-        if (_and) {
-          genPackage.setFileExtensions(this.fileExtensions);
+        EPackage _ecorePackage = genPackage.getEcorePackage();
+        boolean _contains = packs.contains(_ecorePackage);
+        if (_contains) {
+          ILanguageConfig _language = this.getLanguage();
+          List<String> _fileExtensions = _language.getFileExtensions();
+          String _join = IterableExtensions.join(_fileExtensions, ",");
+          genPackage.setFileExtensions(_join);
         }
       }
     }
@@ -976,24 +942,24 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         };
         String _modelName = this.getModelName(grammar);
         genModel.setModelName(_modelName);
-        String _javaModelDirectory = this.getJavaModelDirectory();
-        String _genModelProjectPath = this.toGenModelProjectPath(_javaModelDirectory);
-        genModel.setModelDirectory(_genModelProjectPath);
         String _modelPluginID = this.getModelPluginID();
         genModel.setModelPluginID(_modelPluginID);
-        String _editDirectory = this.getEditDirectory();
-        String _genModelProjectPath_1 = this.toGenModelProjectPath(_editDirectory);
-        genModel.setEditDirectory(_genModelProjectPath_1);
-        String _editPluginID = this.getEditPluginID();
-        genModel.setEditPluginID(_editPluginID);
-        String _editorDirectory = this.getEditorDirectory();
-        String _genModelProjectPath_2 = this.toGenModelProjectPath(_editorDirectory);
-        genModel.setEditorDirectory(_genModelProjectPath_2);
-        String _editorPluginID = this.getEditorPluginID();
-        genModel.setEditorPluginID(_editorPluginID);
+        String _javaModelDirectory = this.getJavaModelDirectory();
+        genModel.setModelDirectory(_javaModelDirectory);
+        if (this.generateEdit) {
+          String _editPluginID = this.getEditPluginID();
+          genModel.setEditPluginID(_editPluginID);
+          String _editDirectory = this.getEditDirectory();
+          genModel.setEditDirectory(_editDirectory);
+        }
+        if (this.generateEditor) {
+          String _editorPluginID = this.getEditorPluginID();
+          genModel.setEditorPluginID(_editorPluginID);
+          String _editorDirectory = this.getEditorDirectory();
+          genModel.setEditorDirectory(_editorDirectory);
+        }
         genModel.setValidateModel(false);
         genModel.setForceOverwrite(true);
-        genModel.setCanGenerate(true);
         genModel.setFacadeHelperClass(null);
         genModel.setBundleManifest(true);
         genModel.setUpdateClasspath(false);
@@ -1009,36 +975,6 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  /**
-   * Required to match the path format as expected from {@link GenModelImpl#getProjectPath}.
-   */
-  protected String toGenModelProjectPath(final String path) {
-    String _xifexpression = null;
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(path);
-    if (_isNullOrEmpty) {
-      _or_1 = true;
-    } else {
-      boolean _startsWith = path.startsWith("/");
-      _or_1 = _startsWith;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      boolean _contains = path.contains("/");
-      boolean _not = (!_contains);
-      _or = _not;
-    }
-    if (_or) {
-      _xifexpression = path;
-    } else {
-      int _indexOf = path.indexOf("/");
-      _xifexpression = path.substring(_indexOf);
-    }
-    return _xifexpression;
   }
   
   protected Set<EPackage> getReferencedEPackages(final List<EPackage> packs) {
@@ -1198,17 +1134,27 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   
   private void updateBuildProperties() {
     try {
+      boolean _or = false;
       if (((!this.updateBuildProperties) || (this.modelPluginID != null))) {
+        _or = true;
+      } else {
+        IXtextProjectConfig _projectConfig = this.getProjectConfig();
+        IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+        ManifestAccess _manifest = _runtime.getManifest();
+        boolean _tripleEquals = (_manifest == null);
+        _or = _tripleEquals;
+      }
+      if (_or) {
         return;
       }
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-      final IXtextGeneratorFileSystemAccess rootOutlet = _runtime.getRoot();
-      String _path = rootOutlet.getPath();
-      final String buildPropertiesPath = (_path + "/build.properties");
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-      final String modelContainer = _runtime_1.getEcoreModelFolder();
+      final IXtextGeneratorFileSystemAccess rootOutlet = _runtime_1.getRoot();
+      String _path = rootOutlet.getPath();
+      final String buildPropertiesPath = (_path + "/build.properties");
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
+      final String modelContainer = _runtime_2.getEcoreModelFolder();
       final Properties buildProperties = new Properties();
       File _file = new File(buildPropertiesPath);
       FileInputStream _fileInputStream = new FileInputStream(_file);
@@ -1224,7 +1170,7 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         if ((binIncludes == null)) {
           String _existingContent = existingContent;
           String _newLine = Strings.newLine();
-          String _plus = (("bin.includes = " + modelContainer) + _newLine);
+          String _plus = ((("bin.includes = " + modelContainer) + "/") + _newLine);
           String _plus_1 = (_plus + "               ");
           existingContent = (_existingContent + _plus_1);
           changed = true;
@@ -1233,7 +1179,7 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
           boolean _not = (!_contains);
           if (_not) {
             String _newLine_1 = Strings.newLine();
-            String _plus_2 = ((("bin.includes = " + modelContainer) + ",\\") + _newLine_1);
+            String _plus_2 = ((("bin.includes = " + modelContainer) + "/,\\") + _newLine_1);
             String _plus_3 = (_plus_2 + "               ");
             String _replace = existingContent.replace("bin.includes = ", _plus_3);
             existingContent = _replace;
@@ -1263,40 +1209,40 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
     this.basePackage = basePackage;
   }
   
-  public void setGenerateEdit(final boolean generateEdit) {
-    this.generateEdit = generateEdit;
-  }
-  
-  public void setEditDirectory(final String editDirectory) {
-    this.editDirectory = editDirectory;
-  }
-  
-  public void setEditPluginID(final String editPluginID) {
-    this.editPluginID = editPluginID;
-  }
-  
-  public void setGenerateEditor(final boolean generateEditor) {
-    this.generateEditor = generateEditor;
-  }
-  
-  public void setEditorDirectory(final String editorDirectory) {
-    this.editorDirectory = editorDirectory;
-  }
-  
-  public void setEditorPluginID(final String editorPluginID) {
-    this.editorPluginID = editorPluginID;
-  }
-  
-  public void setGenModel(final String genModel) {
-    this.genModel = genModel;
+  public void setModelPluginID(final String modelPluginID) {
+    this.modelPluginID = modelPluginID;
   }
   
   public void setJavaModelDirectory(final String javaModelDirectory) {
     this.javaModelDirectory = javaModelDirectory;
   }
   
-  public void setModelPluginID(final String modelPluginID) {
-    this.modelPluginID = modelPluginID;
+  public void setGenerateEdit(final boolean generateEdit) {
+    this.generateEdit = generateEdit;
+  }
+  
+  public void setEditPluginID(final String editPluginID) {
+    this.editPluginID = editPluginID;
+  }
+  
+  public void setEditDirectory(final String editDirectory) {
+    this.editDirectory = editDirectory;
+  }
+  
+  public void setGenerateEditor(final boolean generateEditor) {
+    this.generateEditor = generateEditor;
+  }
+  
+  public void setEditorPluginID(final String editorPluginID) {
+    this.editorPluginID = editorPluginID;
+  }
+  
+  public void setEditorDirectory(final String editorDirectory) {
+    this.editorDirectory = editorDirectory;
+  }
+  
+  public void setGenModel(final String genModel) {
+    this.genModel = genModel;
   }
   
   public void setSkipGenerate(final boolean skipGenerate) {
@@ -1305,10 +1251,6 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
   
   public void setUpdateBuildProperties(final boolean updateBuildProperties) {
     this.updateBuildProperties = updateBuildProperties;
-  }
-  
-  public void setFileExtensions(final String fileExtensions) {
-    this.fileExtensions = fileExtensions;
   }
   
   public void setLongFileNames(final boolean longFileNames) {
