@@ -263,7 +263,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @throws NullPointerException if {@code before} or {@code after} is null
 	 * @since 2.9
 	 */
-	public static <T> Procedure1<? super T> andThen(final Procedure1<? super T> before, final Procedure1<? super T> after) {
+	public static <T> Procedure1<T> andThen(final Procedure1<? super T> before, final Procedure1<? super T> after) {
 		if (after == null)
 			throw new NullPointerException("after");
 		if (before == null)
