@@ -21,6 +21,8 @@
 		<referencesSearch implementation="org.eclipse.xtext.idea.findusages.XtextPsiElementReferenceSearcher"/>
 		<generatedSourcesFilter	implementation="org.eclipse.xtext.idea.trace.TraceBasedGeneratedSourcesFilter"/>
 		<exceptionFilter implementation="org.eclipse.xtext.idea.execution.TraceBasedExceptionFilterFactory" order="first"/>
+		
+		<smartPointerElementInfoFactory implementation="com.intellij.psi.impl.smartPointers.XtextSmartPointerElementInfoFactory" />
    	</extensions>
 
 	<project-components>
