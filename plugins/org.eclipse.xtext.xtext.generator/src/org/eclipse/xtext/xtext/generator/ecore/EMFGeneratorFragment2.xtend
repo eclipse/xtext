@@ -54,7 +54,6 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage
-import org.eclipse.emf.mwe.core.ConfigurationException
 import org.eclipse.emf.mwe.utils.GenModelHelper
 import org.eclipse.emf.mwe2.ecore.CvsIdFilteringGeneratorAdapterFactoryDescriptor
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -85,46 +84,10 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	String basePackage
 	
 	/**
-	 * Whether EMF edit code shall be generated.
+	 * Sets the ID of the generated EMF model plug-in. Only needed if you want to generate the EMF code into a separate plug-in.
 	 */
 	@Accessors(PUBLIC_SETTER)
-	boolean generateEdit = false
-	
-	/**
-	 * The target directory for the generated EMF edit code. Only needed if you want to generate an EMF edit plug-in.
-	 */
-	@Accessors(PUBLIC_SETTER)
-	String editDirectory
-	
-	/**
-	 * The plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
-	 */
-	@Accessors(PUBLIC_SETTER)
-	String editPluginID
-	
-	/**
-	 * Whether EMF editor code shall be generated.
-	 */
-	@Accessors(PUBLIC_SETTER)
-	boolean generateEditor = false
-	
-	/**
-	 * The target directory for the generated EMF editor code. Only needed if you want to generate an EMF editor plug-in.
-	 */
-	@Accessors(PUBLIC_SETTER)
-	String editorDirectory
-	
-	/**
-	 * The plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
-	 */
-	@Accessors(PUBLIC_SETTER)
-	String editorPluginID
-	
-	/**
-	 * If an existing EMF GenModel should be used, set the path to that file in this property.
-	 */
-	@Accessors(PUBLIC_SETTER)
-	String genModel
+	String modelPluginID
 	
 	/**
 	 * Sets the target directory for the generated EMF model code. Only needed if you want to generate the EMF code into
@@ -134,10 +97,46 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	String javaModelDirectory
 	
 	/**
-	 * Sets the ID of the generated EMF model plug-in. Only needed if you want to generate the EMF code into a separate plug-in.
+	 * Whether EMF edit code shall be generated.
 	 */
 	@Accessors(PUBLIC_SETTER)
-	String modelPluginID
+	boolean generateEdit = false
+	
+	/**
+	 * The plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editPluginID
+	
+	/**
+	 * The target directory for the generated EMF edit code. Only needed if you want to generate an EMF edit plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editDirectory
+	
+	/**
+	 * Whether EMF editor code shall be generated.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	boolean generateEditor = false
+	
+	/**
+	 * The plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editorPluginID
+	
+	/**
+	 * The target directory for the generated EMF editor code. Only needed if you want to generate an EMF editor plug-in.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String editorDirectory
+	
+	/**
+	 * If an existing EMF GenModel should be used, set the path to that file in this property.
+	 */
+	@Accessors(PUBLIC_SETTER)
+	String genModel
 	
 	/**
 	 * Whether the Java class generation should be skipped. If <code>true</code> only the ecore file is generated.
@@ -146,13 +145,11 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	boolean skipGenerate = false
 
 	/**
-	 * Whether the build.properties should be updated.
+	 * Whether the build.properties should be updated. Skipped if the model code is generated into a separate
+	 * plugin or if no manifest is configured for the runtime project (see {@code WizardConfig#createEclipseMetaData}).
 	 */
 	@Accessors(PUBLIC_SETTER)
 	boolean updateBuildProperties = true
-	
-	@Accessors(PUBLIC_SETTER)
-	String fileExtensions
 	
 	/**
 	 * Whether to use a qualified name for the xmi files, e.g.
@@ -199,8 +196,19 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			LOG.warn('Illegal JDK level: ' + jdkLevel)
 	}
 	
+	protected def String getModelPluginID() {
+		modelPluginID ?: projectConfig.runtime.name
+	}
+	
 	protected def String getJavaModelDirectory() {
-		javaModelDirectory ?: projectConfig.runtime.srcGen.path
+		if (javaModelDirectory !== null)
+			return javaModelDirectory
+		val srcGenPath = projectConfig.runtime.srcGen.path
+		val rootPath = projectConfig.runtime.root.path
+		if (!rootPath.nullOrEmpty && srcGenPath.startsWith(rootPath))
+			return '/' + getModelPluginID + srcGenPath.substring(rootPath.length)
+		throw new RuntimeException(
+			'Could not derive the Java model directory from the project configuration. Please set the property \'javaModelDirectory\' explicitly.')
 	}
 
 	protected def String getModelName(Grammar grammar) {
@@ -210,73 +218,52 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			getSimpleName(grammar)
 	}
 	
-	protected def String getBasePackage(Grammar grammar) {
-		basePackage ?: getNamespace(grammar)
-	}
-	
 	protected def String getEcoreFilePath(Grammar grammar) {
-		projectConfig.runtime.ecoreModel.path + '/' + grammar.modelName + '.ecore'
+		val ecoreModelFolder = projectConfig.runtime.ecoreModelFolder
+		'/' + getModelPluginID + '/' + ecoreModelFolder + '/' + grammar.modelName + '.ecore'
 	}
 	
 	protected def URI getEcoreFileUri(Grammar grammar) {
-		URI.createPlatformResourceURI(grammar.ecoreFilePath.canonicalPath, true)
+		URI.createPlatformResourceURI(grammar.ecoreFilePath, true)
 	}
 	
 	protected def String getGenModelPath(Grammar grammar) {
-		genModel ?: projectConfig.runtime.ecoreModel.path + '/' + grammar.modelName + '.genmodel'
+		genModel ?: {
+			val ecoreModelFolder = projectConfig.runtime.ecoreModelFolder
+			'/' + getModelPluginID + '/' + ecoreModelFolder + '/' + grammar.modelName + '.genmodel'
+		}
 	}
 
 	protected def URI getGenModelUri(Grammar grammar) {
-		URI.createPlatformResourceURI(grammar.genModelPath.canonicalPath, true)
+		URI.createPlatformResourceURI(grammar.genModelPath, true)
 	}
 	
 	protected def String getRelativePath(String pathInRoot) {
-		val projectRoot = projectConfig.runtime.root.path
-		if (pathInRoot.startsWith(projectRoot))
-			pathInRoot.substring(projectRoot.length + 1)
+		val projectPath = '/' + projectConfig.runtime.name
+		if (pathInRoot.startsWith(projectPath))
+			pathInRoot.substring(projectPath.length + 1)
 		else
 			pathInRoot
-	}
-	
-	protected def String getCanonicalPath(String path) {
-		val result = <String>newLinkedList
-		var isAbsolute = path.startsWith('/')
-		for (segment : path.split('[/\\\\]')) {
-			if (segment == '..') {
-				if (result.empty)
-					isAbsolute = true
-				else
-					result.removeLast()
-			} else if (segment.length > 0 && segment != '.')
-				result.addLast(segment)
-		}
-		if (isAbsolute)
-			return result.join('/', '/', null, [it])
-		else
-			return result.join('/')
-	}
-
-	protected def String getModelPluginID() {
-		modelPluginID ?: {
-			val path = projectConfig.runtime.root.path
-			path.substring(path.lastIndexOf('/') + 1)
-		}
-	}
-	
-	protected def String getEditDirectory() {
-		editDirectory ?: projectConfig.runtime.root.path + '.edit/src'
-	}
-
-	protected def String getEditorDirectory() {
-		editorDirectory ?: projectConfig.runtime.root.path + '.editor/src'
 	}
 
 	protected def String getEditPluginID() {
 		editPluginID ?: getModelPluginID + '.edit'
 	}
+	
+	protected def String getEditDirectory() {
+		editDirectory ?:  '/' + getEditPluginID + '/src'
+	}
 
 	protected def String getEditorPluginID() {
 		editorPluginID ?: getModelPluginID + '.editor'
+	}
+
+	protected def String getEditorDirectory() {
+		editorDirectory ?: getEditorPluginID + '/src'
+	}
+	
+	protected def String getBasePackage(Grammar grammar) {
+		basePackage ?: getNamespace(grammar)
 	}
 	
 	override initialize(Injector injector) {
@@ -393,8 +380,6 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		if (converter.exists(genModelUri, null)) {
 			try {
 				new GenModelHelper().registerGenModel(new XtextResourceSet, genModelUri)
-			} catch (ConfigurationException ce) {
-				throw ce
 			} catch (Exception e) {
 				LOG.error('Failed to register GenModel', e);
 			}
@@ -518,8 +503,8 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			genPackage.basePackage = grammar.basePackage
 			if (suppressLoadInitialization)
 				genPackage.loadInitialization = false
-			if (fileExtensions !== null && packs.contains(genPackage.getEcorePackage))
-				genPackage.fileExtensions = fileExtensions
+			if (packs.contains(genPackage.getEcorePackage))
+				genPackage.fileExtensions = language.fileExtensions.join(',')
 		}
 		val referencedEPackages = getReferencedEPackages(packs)
 		val usedGenPackages = getGenPackagesForPackages(genModel, referencedEPackages)
@@ -571,15 +556,18 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 				}
 			}
 			genModel.modelName = grammar.modelName
-			genModel.modelDirectory = getJavaModelDirectory.toGenModelProjectPath
 			genModel.modelPluginID = getModelPluginID
-			genModel.editDirectory = getEditDirectory.toGenModelProjectPath
-			genModel.editPluginID = getEditPluginID
-			genModel.editorDirectory = getEditorDirectory.toGenModelProjectPath
-			genModel.editorPluginID = getEditorPluginID
+			genModel.modelDirectory = getJavaModelDirectory
+			if (generateEdit) {
+				genModel.editPluginID = getEditPluginID
+				genModel.editDirectory = getEditDirectory
+			}
+			if (generateEditor) {
+				genModel.editorPluginID = getEditorPluginID
+				genModel.editorDirectory = getEditorDirectory
+			}
 			genModel.validateModel = false
 			genModel.forceOverwrite = true
-			genModel.canGenerate = true
 			genModel.facadeHelperClass = null
 			genModel.bundleManifest = true
 			genModel.updateClasspath = false
@@ -592,16 +580,6 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		return genModel
 	}
 
-	/**
-	 * Required to match the path format as expected from {@link GenModelImpl#getProjectPath}.
-	 */
-	protected def String toGenModelProjectPath(String path) {
-		if (path.nullOrEmpty || path.startsWith('/') || !path.contains('/'))
-			path
-		else
-			path.substring(path.indexOf('/'))
-	}
-	
 	protected def Set<EPackage> getReferencedEPackages(List<EPackage> packs) {
 		val result = newHashSet
 		for (pkg : packs) {
@@ -692,7 +670,7 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	private def void updateBuildProperties() {
-		if (!updateBuildProperties || modelPluginID !== null)
+		if (!updateBuildProperties || modelPluginID !== null || projectConfig.runtime.manifest === null)
 			return;
 		val rootOutlet = projectConfig.runtime.root
 		val buildPropertiesPath = rootOutlet.path + '/build.properties'
@@ -705,10 +683,11 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			val binIncludes = buildProperties.getProperty('bin.includes')
 			var changed = false
 			if (binIncludes === null) {
-				existingContent += 'bin.includes = ' + modelContainer + Strings.newLine + '               '
+				existingContent += 'bin.includes = ' + modelContainer + '/' + Strings.newLine + '               '
 				changed = true
 			} else if (!binIncludes.contains(modelContainer)) {
-				existingContent = existingContent.replace('bin.includes = ', 'bin.includes = ' + modelContainer + ',\\' + Strings.newLine + '               ')
+				existingContent = existingContent.replace('bin.includes = ',
+					'bin.includes = ' + modelContainer + '/,\\' + Strings.newLine + '               ')
 				changed = true
 			}
 			if (changed) {
