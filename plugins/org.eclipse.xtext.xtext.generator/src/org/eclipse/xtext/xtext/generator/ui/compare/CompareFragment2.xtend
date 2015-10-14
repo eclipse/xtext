@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.ui.compare
 
 import com.google.inject.Inject
-import org.apache.log4j.Logger
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -23,17 +22,11 @@ import static extension org.eclipse.xtext.GrammarUtil.*
  */
 class CompareFragment2 extends AbstractGeneratorFragment2 {
 
-	private static final Logger log = Logger.getLogger(CompareFragment2);
-	
 	@Inject
 	extension XtextGeneratorNaming
 
 	override generate() {
-		if (log.isInfoEnabled()) {
-			log.info("generating Compare Framework infrastructure");
-		}
-
-		if (projectConfig.eclipsePlugin?.manifest != null) {
+		if (projectConfig.eclipsePlugin?.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.requiredBundles += #[
 				"org.eclipse.compare", "org.eclipse.xtext.ui"
 			]
