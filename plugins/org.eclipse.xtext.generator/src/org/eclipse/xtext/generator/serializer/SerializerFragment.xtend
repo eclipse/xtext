@@ -8,43 +8,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.serializer
 
+import com.google.inject.Binder
 import com.google.inject.Inject
+import com.google.inject.name.Names
 import java.util.Set
+import org.eclipse.xpand2.XpandExecutionContext
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Binding
-import org.eclipse.xtext.generator.Generator
+import org.eclipse.xtext.generator.IStubGenerating
+import org.eclipse.xtext.generator.LanguageConfig
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
+import org.eclipse.xtext.generator.adapter.Generator2AdapterSetup
+import org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper
+import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
-import com.google.inject.Binder
-import com.google.inject.name.Names
-import org.eclipse.xtext.generator.IStubGenerating
+import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
+
 import static java.util.Collections.*
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper
-import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
-import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
 
 /**
  * @author Moritz Eyshold - Initial contribution and API
  */
 class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
-	
-	@Inject AbstractSemanticSequencer abstractSemanticSequencer
-	
-	@Inject SemanticSequencer semanticSequencer
-	
-	@Inject AbstractSyntacticSequencer abstractSyntacticSequencer
-	
-	@Inject SyntacticSequencer syntacticSequencer
-	
-	@Inject GrammarConstraints grammarConstraints
-	
-	@Inject DebugGraphGenerator debugGraphGenerator
 	
 	@Inject SerializerGenFileNames names
 	
@@ -63,6 +55,8 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	@Accessors SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector()
 	
 	@Accessors boolean generateXtendStub
+	
+	Generator2AdapterSetup adapterSetup
 	
 	override protected addLocalBindings(Binder binder) {
 		binder
@@ -112,25 +106,19 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 		return bf.bindings;
 	}
 	
+	override generate(LanguageConfig config, XpandExecutionContext ctx) {
+		adapterSetup = new Generator2AdapterSetup(config, ctx, naming)
+		super.generate(config, ctx)
+	}
+	
 	override generate(Xtend2ExecutionContext ctx) {
-		abstractSyntacticSequencer.detectSyntheticTerminals = detectSyntheticTerminals
-		abstractSyntacticSequencer.syntheticTerminalDetector = syntheticTerminalDetector;
-		if(srcGenOnly) {
-			ctx.writeFile(Generator.SRC_GEN, names.semanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.semanticSequencer));
-			ctx.writeFile(Generator.SRC_GEN, names.syntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.syntacticSequencer));
-		} else {
-			syntacticSequencer.detectSyntheticTerminals = detectSyntheticTerminals
-			syntacticSequencer.syntheticTerminalDetector = syntheticTerminalDetector;
-			ctx.writeFile(Generator.SRC, names.semanticSequencer.fileName, semanticSequencer.getFileContents(names.semanticSequencer));
-			ctx.writeFile(Generator.SRC, names.syntacticSequencer.fileName, syntacticSequencer.getFileContents(names.syntacticSequencer));
-			ctx.writeFile(Generator.SRC_GEN, names.abstractSemanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.abstractSemanticSequencer));
-			ctx.writeFile(Generator.SRC_GEN, names.abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.abstractSyntacticSequencer));
-		}
-		if(generateDebugData) {
-			ctx.writeFile(Generator.SRC_GEN, names.grammarConstraints.fileName, grammarConstraints.getFileContents(names.grammarConstraints));
-			for(obj:debugGraphGenerator.generateDebugGraphs) 
-				ctx.writeFile(Generator.SRC_GEN, obj.key, obj.value);
-		}
+		val delegate = new SerializerFragment2
+		delegate.generateStub = isGenerateStub
+		delegate.detectSyntheticTerminals = detectSyntheticTerminals
+		delegate.syntheticTerminalDetector = syntheticTerminalDetector
+		delegate.generateDebugData = generateDebugData
+		delegate.initialize(adapterSetup.injector)
+		delegate.generate()
 	}
 	
 	override getExportedPackagesRtList(Grammar grammar) {
