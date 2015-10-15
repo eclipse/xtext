@@ -14,7 +14,6 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -24,36 +23,37 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.serializer.analysis.IContext
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState
 
 class SemanticSequencerExtensions {
 	
 	@Inject IGrammarConstraintProvider gcp
 
-	def Map<IConstraint, List<EObject>> getGrammarConstraints(Grammar grammar, EClass clazz) {
-		val Map<IConstraint, List<EObject>> result = newLinkedHashMap
-		for (ctx : gcp.getConstraints(grammar)) {
-			for (c : ctx.constraints) {
-				if (c.type === clazz) {
-					var contexts = result.get(c)
-					if (contexts === null) {
-						contexts = newArrayList
-						result.put(c, contexts)
-					}
-					contexts.add(ctx.context)
+	def Map<IConstraint, List<IContext>> getGrammarConstraints(Grammar grammar, EClass clazz) {
+		val Map<IConstraint, List<IContext>> result = newLinkedHashMap
+		val constraints = gcp.getConstraints(grammar)
+		for (e : constraints.entrySet) {
+			val context = e.key
+			val constraint = e.value
+			if (constraint.type === clazz) {
+				var contexts = result.get(constraint)
+				if (contexts === null) {
+					contexts = newArrayList
+					result.put(constraint, contexts)
 				}
+				contexts.add(context)
 			}
 		}
 		return result
 	}
 
-	def List<IConstraintContext> getGrammarConstraintContexts(Grammar grammar) {
-		return gcp.getConstraints(grammar)
-	}
+//	def List<IConstraintContext> getGrammarConstraintContexts(Grammar grammar) {
+//		return gcp.getConstraints(grammar)
+//	}
 
 	@FinalFieldsConstructor
 	@Accessors
@@ -95,12 +95,7 @@ class SemanticSequencerExtensions {
 	def Collection<IConstraint> getGrammarConstraints(Grammar grammar) {
 		if (grammar === null)
 			return emptySet
-		val Set<IConstraint> result = newLinkedHashSet
-		val constraints = gcp.getConstraints(grammar)
-		for (ctx : constraints) {
-			result.addAll(ctx.constraints)
-		}
-		return result
+		return gcp.getConstraints(grammar).values
 	}
 
 	def List<ISemState> getLinearListOfMandatoryAssignments(IConstraint constraint) {

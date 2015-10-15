@@ -7,23 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.serializer
 
-import com.google.inject.Inject
 import java.util.Set
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState
 import org.eclipse.xtext.util.GraphvizDotBuilder
 
 class SyntacticSequencerPDA2ExtendedDot extends GraphvizDotBuilder {
-	
-	@Inject protected ISyntacticSequencerPDAProvider pdaProvider
 
 	override protected Props drawObject(Object obj) {
-		if (obj instanceof Pair<?, ?>)
-			drawGrammar(pdaProvider.getPDA(obj.key as EObject, obj.value as EClass))
-		else if (obj instanceof ISynState)
+		if (obj instanceof ISynState)
 			drawGrammar(obj)
 	}
 

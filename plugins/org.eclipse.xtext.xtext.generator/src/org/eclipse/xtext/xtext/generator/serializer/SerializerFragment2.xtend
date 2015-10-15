@@ -33,11 +33,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
-import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition
 import org.eclipse.xtext.serializer.impl.Serializer
@@ -59,6 +57,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
@@ -76,16 +75,13 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension SemanticSequencerExtensions
 	@Inject extension SyntacticSequencerExtensions
 	@Inject extension GrammarAccessExtensions
-	@Inject extension Context2NameFunction
+	@Inject extension IGrammarConstraintProvider
 	@Inject DebugGraphGenerator debugGraphGenerator
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
 	
-	@Accessors
-	boolean generateDebugData = false
-	
-	@Accessors
-	boolean generateStub = true
+	@Accessors boolean generateDebugData = false
+	@Accessors boolean generateStub = true
 	
 	boolean detectSyntheticTerminals = true
 	
@@ -122,7 +118,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	}
 		
 	protected def String getGrammarConstraintsPath(Grammar grammar) {
-		grammar.serializerBasePackage.replace('.', '/') + '/' + GrammarUtil.getSimpleName(grammar) + 'GrammarConstraints.xtext'
+		grammar.serializerBasePackage.replace('.', '/') + '/' + GrammarUtil.getSimpleName(grammar) + 'GrammarConstraints.txt'
 	}
 	
 	override generate() {
@@ -210,7 +206,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	protected def generateAbstractSemanticSequencer() {
 		val localConstraints = grammar.grammarConstraints
 		val superConstraints = grammar.superGrammar.grammarConstraints
-		val newLocalConstraints = localConstraints.filter[type !== null && !superConstraints.contains(it)].toList
+		val newLocalConstraints = localConstraints.filter[type !== null && !superConstraints.contains(it)].toSet
 		val clazz = if (generateStub) grammar.abstractSemanticSequencerClass else grammar.semanticSequencerClass
 		val superClazz = if (localConstraints.exists[superConstraints.contains(it)]) 
 				grammar.usedGrammars.head.semanticSequencerClass
@@ -271,8 +267,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		'''
 			«IF contexts.size > 1»
 				«FOR ctx : contexts.indexed»
-					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sortBy[e | getContextName(grammar, e)]
-							SEPARATOR "\n\t\t|| "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
+					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»context == grammarAccess.«c.actionOrRule.gaAccessor»«ENDFOR») {
 						«genMethodCreateSequenceCall(superConstraints, type, ctx.value.key)»
 					}
 				«ENDFOR»
@@ -464,37 +459,14 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def generateGrammarConstraints() {
 		fileAccessFactory.createTextFile(grammar.grammarConstraintsPath, '''
-			grammar «grammar.name»«FOR ug:grammar.usedGrammars BEFORE ' with ' SEPARATOR ', '»«ug.name»«ENDFOR»
-			
-			generate model "http://«grammar.name»"
-			
-			
-			// ******** constraint contexts ********
-			«FOR gcc : grammar.grammarConstraintContexts SEPARATOR '\n'»
-				«gcc.name»«IF gcc.safeType !== null» returns «gcc.safeType»«ENDIF»:
-					«FOR constraint : gcc.constraints SEPARATOR ' | '»«constraint.name»«ENDFOR»;
-			«ENDFOR»
-			
-			
-			
-			// ******** constraints ********
-			«FOR constraint : grammar.grammarConstraints SEPARATOR '\n'»
-				«constraint.name»«IF constraint.type !== null» returns «constraint.type.name»«ENDIF»:
-					«IF constraint.body == null»
-						{«constraint.type?.name»};
+			«FOR e : grammar.constraints.groupByEqualityAndSort SEPARATOR '\n'»
+				«e.first»:
+					«IF e.second.body == null»
+						{«e.second.type?.name»};
 					«ELSE»
-						«constraint.body»;
+						«e.second.body»;
 					«ENDIF»
 			«ENDFOR»
 		''').writeTo(projectConfig.runtime.srcGen)
 	}
-	
-	private def getSafeType(IConstraintContext context) {
-		try {
-			context.commonType?.name
-		} catch (UnsupportedOperationException e) {
-			return null
-		}
-	}
-	
 }
