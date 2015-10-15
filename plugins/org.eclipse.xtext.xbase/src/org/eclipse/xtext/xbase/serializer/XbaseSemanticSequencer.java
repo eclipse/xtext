@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
@@ -84,9 +85,9 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *     )
 	 */
 	@Override
-	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(EObject context, XBinaryOperation operation) {
+	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(IContext context, XBinaryOperation operation) {
 		INodesForEObjectProvider nodes = createNodeProvider(operation);
-		SequenceFeeder acceptor = createSequencerFeeder(operation, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(context, operation, nodes);
 		XAdditiveExpressionElements opAdd = grammarAccess.getXAdditiveExpressionAccess();
 		XMultiplicativeExpressionElements opMulti = grammarAccess.getXMultiplicativeExpressionAccess();
 		XOtherOperatorExpressionElements opOther = grammarAccess.getXOtherOperatorExpressionAccess();
@@ -180,9 +181,9 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *    declaringType[0, 1]
 	 */
 	@Override
-	protected void sequence_XFeatureCall(EObject context, XFeatureCall featureCall) {
+	protected void sequence_XFeatureCall(IContext context, XFeatureCall featureCall) {
 		INodesForEObjectProvider nodes = createNodeProvider(featureCall);
-		SequenceFeeder acceptor = createSequencerFeeder(featureCall, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(context, featureCall, nodes);
 		XFeatureCallElements featureCallElements = grammarAccess.getXFeatureCallAccess();
 
 		// (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
@@ -315,9 +316,9 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *         EXCLUDE_IF_SET spreading
 	 */
 	@Override
-	protected void sequence_XMemberFeatureCall(EObject context, XMemberFeatureCall featureCall) {
+	protected void sequence_XMemberFeatureCall(IContext context, XMemberFeatureCall featureCall) {
 		INodesForEObjectProvider nodes = createNodeProvider(featureCall);
-		SequenceFeeder acceptor = createSequencerFeeder(featureCall, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(context, featureCall, nodes);
 		XMemberFeatureCallElements memberFeatureCallElements= grammarAccess.getXMemberFeatureCallAccess();
 
 		// memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0
@@ -382,9 +383,9 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	 *     )
 	 */
 	@Override
-	protected void sequence_XConstructorCall(EObject context, XConstructorCall constructorCall) {
+	protected void sequence_XConstructorCall(IContext context, XConstructorCall constructorCall) {
 		INodesForEObjectProvider nodes = createNodeProvider(constructorCall);
-		SequenceFeeder acceptor = createSequencerFeeder(constructorCall, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(context, constructorCall, nodes);
 		XConstructorCallElements constructorCallElements = grammarAccess.getXConstructorCallAccess();
 
 		// constructor=[types::JvmConstructor|QualifiedName]
