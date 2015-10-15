@@ -64,6 +64,13 @@ public class AntlrGrammarGenUtil {
 		return ruleNames.getAntlrRuleName(rule);
 	}
 	
+	public static String getContentAssistRuleName(AbstractRule rule) {
+		String ruleName = getRuleName(rule);
+		if (ruleName.startsWith("rule"))
+			return "rule__" + Strings.toFirstUpper(ruleName.substring(4, ruleName.length()));
+		return ruleName;
+	}
+	
 	/**
 	 * @since 2.9
 	 */

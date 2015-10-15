@@ -37,10 +37,6 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		naming
 	}
 	
-	override protected getInternalParserSuperClass() {
-		"AbstractInternalAntlrParser"
-	}
-	
 	protected override compileParserImports(Grammar it, AntlrOptions options) '''
 
 		import org.eclipse.xtext.*;
@@ -51,7 +47,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		«IF !allEnumRules.empty»
 		import org.eclipse.emf.common.util.Enumerator;
 		«ENDIF»
-		import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+		import «grammarNaming.getInternalParserSuperClass(it).name»;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 		«IF !allParserRules.map[eAllContentsAsList].flatten.filter(UnorderedGroup).empty && options.backtrack»
@@ -108,7 +104,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		false
 	}
 	
-	protected override compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
+	protected override dispatch compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
 		«IF !it.isFragment»
 			«compileEntryRule(grammar, options)»
 		«ENDIF»

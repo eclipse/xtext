@@ -34,9 +34,9 @@ public class GrammarNaming {
   
   protected String getInternalParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
-    _builder.append(_runtimeBasePackage, "");
-    _builder.append(".parser.antlr.internal");
+    String _parserPackage = this.getParserPackage(it);
+    _builder.append(_parserPackage, "");
+    _builder.append(".internal");
     return _builder.toString();
   }
   
@@ -64,6 +64,10 @@ public class GrammarNaming {
     return new TypeReference(_packageName, _builder.toString());
   }
   
+  public TypeReference getLexerSuperClass(final Grammar it) {
+    return new TypeReference("org.eclipse.xtext.parser.antlr.Lexer");
+  }
+  
   public TypeReference getParserClass(final Grammar it) {
     String _parserPackage = this.getParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
@@ -71,6 +75,10 @@ public class GrammarNaming {
     _builder.append(_simpleName, "");
     _builder.append("Parser");
     return new TypeReference(_parserPackage, _builder.toString());
+  }
+  
+  public TypeReference getParserSuperClass(final Grammar it, final boolean partialParsing) {
+    return new TypeReference("org.eclipse.xtext.parser.antlr.AbstractAntlrParser");
   }
   
   public TypeReference getInternalParserClass(final Grammar it) {
@@ -84,29 +92,8 @@ public class GrammarNaming {
     return new TypeReference(_packageName, _builder.toString());
   }
   
-  public TypeReference getContentAssistParserClass(final Grammar it) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(it);
-    _builder.append(_genericIdeBasePackage, "");
-    _builder.append(".contentassist.antlr");
-    StringConcatenation _builder_1 = new StringConcatenation();
-    String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder_1.append(_simpleName, "");
-    _builder_1.append("Parser");
-    return new TypeReference(_builder.toString(), _builder_1.toString());
-  }
-  
-  public TypeReference getInternalContentAssistLexerClass(final Grammar it) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(it);
-    _builder.append(_genericIdeBasePackage, "");
-    _builder.append(".contentassist.antlr.internal");
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Internal");
-    String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder_1.append(_simpleName, "");
-    _builder_1.append("Lexer");
-    return new TypeReference(_builder.toString(), _builder_1.toString());
+  public TypeReference getInternalParserSuperClass(final Grammar it) {
+    return new TypeReference("org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser");
   }
   
   public TypeReference getAntlrTokenFileProviderClass(final Grammar it) {

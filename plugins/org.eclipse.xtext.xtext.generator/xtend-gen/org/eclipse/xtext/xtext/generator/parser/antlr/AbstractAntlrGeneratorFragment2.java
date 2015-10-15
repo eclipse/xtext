@@ -58,6 +58,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQuality
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
@@ -272,7 +273,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     fsa.generateFile(tokenFile, content);
   }
   
-  protected void splitParserAndLexerIfEnabled(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer, final TypeReference parser) {
+  protected void splitParserAndLexerIfEnabled(final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser, final TypeReference lexer) {
     this.improveCodeQuality(fsa, lexer, parser);
     AntlrOptions _options = this.getOptions();
     boolean _isClassSplitting = _options.isClassSplitting();
@@ -400,6 +401,16 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected void removeBackTrackingGuards(final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser, final int lookaheadThreshold) {
+    String _javaPath = parser.getJavaPath();
+    CharSequence _readTextFile = fsa.readTextFile(_javaPath);
+    final String content = _readTextFile.toString();
+    final BacktrackingGuardRemover remover = new BacktrackingGuardRemover(content, lookaheadThreshold);
+    final String newContent = remover.transform();
+    String _javaPath_1 = parser.getJavaPath();
+    fsa.generateFile(_javaPath_1, newContent);
   }
   
   protected boolean containsUnorderedGroup(final Grammar grammar) {

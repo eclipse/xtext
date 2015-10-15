@@ -35,6 +35,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuar
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover
 
 abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	@Inject @Accessors(PROTECTED_GETTER) AntlrToolFacade antlrTool
@@ -159,7 +160,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		fsa.generateFile(tokenFile, content)
 	}
 
-	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer, TypeReference parser) {
+	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, TypeReference parser, TypeReference lexer) {
 		improveCodeQuality(fsa, lexer, parser)
 		if (getOptions().isClassSplitting()) {
 			splitLexerClassFile(fsa, lexer)
@@ -214,6 +215,13 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		val writer = new CharArrayWriter
 		provider.writeTokenFile(new PrintWriter(writer))
 		fsa.generateFile(parserGrammar.tokensFileName, new String(writer.toCharArray))
+	}
+	
+	def protected void removeBackTrackingGuards(IXtextGeneratorFileSystemAccess fsa, TypeReference parser, int lookaheadThreshold) {
+		val content = fsa.readTextFile(parser.javaPath).toString
+		val remover = new BacktrackingGuardRemover(content, lookaheadThreshold)
+		val newContent = remover.transform
+		fsa.generateFile(parser.javaPath, newContent)
 	}
 
 	def protected boolean containsUnorderedGroup(Grammar grammar) {

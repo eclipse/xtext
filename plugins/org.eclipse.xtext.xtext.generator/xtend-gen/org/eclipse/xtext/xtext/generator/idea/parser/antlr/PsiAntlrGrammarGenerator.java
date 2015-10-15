@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.idea.parser.antlr;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -54,16 +55,16 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   }
   
   @Override
-  protected String getInternalParserSuperClass() {
-    return "AbstractPsiAntlrParser";
-  }
-  
-  @Override
   protected String compileParserImports(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;");
-    _builder.newLine();
+    _builder.append("import ");
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    TypeReference _internalParserSuperClass = _grammarNaming.getInternalParserSuperClass(it);
+    String _name = _internalParserSuperClass.getName();
+    _builder.append(_name, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
     _builder.append("import ");
     Grammar _grammar = GrammarUtil.getGrammar(it);
     TypeReference _elementTypeProvider = this._ideaPluginClassNames.getElementTypeProvider(_grammar);
@@ -103,8 +104,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     }
     _builder.append("import ");
     TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(it);
-    String _name = _grammarAccess.getName();
-    _builder.append(_name, "");
+    String _name_1 = _grammarAccess.getName();
+    _builder.append(_name_1, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -216,7 +217,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   }
   
   @Override
-  protected String compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
+  protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _isValidEntryRule = AntlrGrammarGenUtil.isValidEntryRule(it);
@@ -255,7 +256,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     String _compileEBNF = this.compileEBNF(it, options);
     _builder.append(_compileEBNF, "");
     _builder.newLineIfNotEmpty();
-    return _builder.toString();
+    return _builder;
   }
   
   @Override
@@ -862,5 +863,20 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");
     return _builder;
+  }
+  
+  protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
+    if (it instanceof EnumRule) {
+      return _compileRule((EnumRule)it, grammar, options);
+    } else if (it instanceof ParserRule) {
+      return _compileRule((ParserRule)it, grammar, options);
+    } else if (it instanceof TerminalRule) {
+      return _compileRule((TerminalRule)it, grammar, options);
+    } else if (it instanceof String) {
+      return _compileRule((String)it, grammar, options);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, grammar, options).toString());
+    }
   }
 }

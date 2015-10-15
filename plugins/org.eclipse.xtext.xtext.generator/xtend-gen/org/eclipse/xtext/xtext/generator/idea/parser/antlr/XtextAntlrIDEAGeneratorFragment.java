@@ -63,10 +63,10 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
     TypeReference _internalParserClass = this._psiGrammarNaming.getInternalParserClass(_grammar_3);
     this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_2, fsa, _internalParserClass);
     Grammar _grammar_4 = this.getGrammar();
-    TypeReference _lexerClass = this._psiGrammarNaming.getLexerClass(_grammar_4);
+    TypeReference _internalParserClass_1 = this._psiGrammarNaming.getInternalParserClass(_grammar_4);
     Grammar _grammar_5 = this.getGrammar();
-    TypeReference _internalParserClass_1 = this._psiGrammarNaming.getInternalParserClass(_grammar_5);
-    this.splitParserAndLexerIfEnabled(fsa, _lexerClass, _internalParserClass_1);
+    TypeReference _lexerClass = this._psiGrammarNaming.getLexerClass(_grammar_5);
+    this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
     Grammar _grammar_6 = this.getGrammar();
     AntlrGrammar _lexerGrammar = this._psiGrammarNaming.getLexerGrammar(_grammar_6);
     String _tokensFileName = _lexerGrammar.getTokensFileName();

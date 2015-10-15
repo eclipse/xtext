@@ -5,7 +5,6 @@ import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.adapter.FragmentAdapter;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -119,11 +118,6 @@ final class GenerateXbase {
 				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
-				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
-				antlrUI.setOptions(antlrOptions);
-				antlrUI.addAntlrParam("-Xconversiontimeout");
-				antlrUI.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlrUI));
 			}});
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbasewithannotations";
@@ -158,11 +152,6 @@ final class GenerateXbase {
 				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
-				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
-				antlrUI.setOptions(antlrOptions);
-				antlrUI.addAntlrParam("-Xconversiontimeout");
-				antlrUI.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlrUI));
 			}});
 		}};
 		

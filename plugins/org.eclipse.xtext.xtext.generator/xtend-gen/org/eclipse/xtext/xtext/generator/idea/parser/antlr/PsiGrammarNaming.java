@@ -14,6 +14,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
@@ -34,15 +35,6 @@ public class PsiGrammarNaming extends GrammarNaming {
   }
   
   @Override
-  public String getInternalParserPackage(final Grammar it) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
-    _builder.append(_ideaBasePackage, "");
-    _builder.append(".parser.antlr.internal");
-    return _builder.toString();
-  }
-  
-  @Override
   public AntlrGrammar getParserGrammar(final Grammar it) {
     String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
@@ -50,5 +42,10 @@ public class PsiGrammarNaming extends GrammarNaming {
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
     return new AntlrGrammar(_internalParserPackage, _builder.toString());
+  }
+  
+  @Override
+  public TypeReference getInternalParserSuperClass(final Grammar it) {
+    return new TypeReference("org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser");
   }
 }
