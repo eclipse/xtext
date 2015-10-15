@@ -19,9 +19,11 @@ import org.eclipse.xtext.GrammarUtil;
 public class RuleFilter {
 
 	private boolean discardUnreachableRules;
-	
+
 	private boolean discardTerminalRules;
-	
+
+	private boolean discardRuleTypeRef = true;
+
 	public List<AbstractRule> getRules(Grammar grammar) {
 		return GrammarUtil.allRules(grammar);
 	}
@@ -29,7 +31,7 @@ public class RuleFilter {
 	public boolean isDiscardUnreachableRules() {
 		return discardUnreachableRules;
 	}
-	
+
 	public void setDiscardUnreachableRules(boolean discardUnreachableRules) {
 		this.discardUnreachableRules = discardUnreachableRules;
 	}
@@ -41,5 +43,13 @@ public class RuleFilter {
 	public void setDiscardTerminalRules(boolean discardTerminalRules) {
 		this.discardTerminalRules = discardTerminalRules;
 	}
-	
+
+	public boolean isDiscardRuleTypeRef() {
+		return discardRuleTypeRef;
+	}
+
+	public void setDiscardRuleTypeRef(boolean discardRuleTypeRef) {
+		this.discardRuleTypeRef = discardRuleTypeRef;
+	}
+
 }

@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 
 /**
@@ -17,11 +20,13 @@ import org.eclipse.xtext.ParserRule;
  */
 public interface IContext extends Comparable<IContext> {
 
-	IContext getParent();
+	EObject getActionOrRule();
 
 	Action getAssignedAction();
 
-	EObject getActionOrRule();
+	Set<Parameter> getParameterValues();
+
+	IContext getParent();
 
 	ParserRule getParserRule();
 
