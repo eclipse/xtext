@@ -429,12 +429,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def queueAllResources() {
-		val baseFile = project.baseDir
-		baseFile.visitFileTree[ file |
-			if (!file.isDirectory && file.exists) {
-				queue.put(new BuildEvent(BuildEvent.Type.ADDED, file))
-			}
-		]
+		val moduleManager = ModuleManager.getInstance(project)
+		for (module : ApplicationManager.application.<Module[]>runReadAction[moduleManager.modules]) {
+			module.queueAllResources
+		}
 	}
 	
 	def void visitFileTree(VirtualFile file, (VirtualFile)=>void handler) {

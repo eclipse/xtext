@@ -733,30 +733,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected void queueAllResources() {
-    final VirtualFile baseFile = this.project.getBaseDir();
-    final Procedure1<VirtualFile> _function = new Procedure1<VirtualFile>() {
+    final ModuleManager moduleManager = ModuleManager.getInstance(this.project);
+    Application _application = ApplicationManager.getApplication();
+    final Computable<Module[]> _function = new Computable<Module[]>() {
       @Override
-      public void apply(final VirtualFile file) {
-        try {
-          boolean _and = false;
-          boolean _isDirectory = file.isDirectory();
-          boolean _not = (!_isDirectory);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _exists = file.exists();
-            _and = _exists;
-          }
-          if (_and) {
-            BuildEvent _buildEvent = new BuildEvent(BuildEvent.Type.ADDED, file);
-            XtextAutoBuilderComponent.this.queue.put(_buildEvent);
-          }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+      public Module[] compute() {
+        return moduleManager.getModules();
       }
     };
-    this.visitFileTree(baseFile, _function);
+    Module[] _runReadAction = _application.<Module[]>runReadAction(_function);
+    for (final Module module : _runReadAction) {
+      this.queueAllResources(module);
+    }
   }
   
   public void visitFileTree(final VirtualFile file, final Procedure1<? super VirtualFile> handler) {
