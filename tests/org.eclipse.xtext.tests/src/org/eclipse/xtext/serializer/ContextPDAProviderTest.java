@@ -524,4 +524,23 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  opt=ID -> stop");
 		assertEquals(expected.toString(), actual);
 	}
+	
+	@Test
+	public void testParameters() throws Exception {
+		String actual = getParserRule("M: 'kw1' s=S<true> | 'kw2' s=S<false>; S <P>: <P> v1=ID | <!P> v2=ID;  ");
+		StringBuilder expected = new StringBuilder();
+		expected.append("M:\n");
+		expected.append("  start -> 'kw1', 'kw2'\n");
+		expected.append("  'kw1' -> (s=S|)\n");
+		expected.append("  'kw2' -> (|s=S)\n");
+		expected.append("  (s=S|) -> stop\n");
+		expected.append("  (|s=S) -> stop\n");
+		expected.append("S_P:\n");
+		expected.append("  start -> v1=ID\n");
+		expected.append("  v1=ID -> stop\n");
+		expected.append("S:\n");
+		expected.append("  start -> v2=ID\n");
+		expected.append("  v2=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
 }

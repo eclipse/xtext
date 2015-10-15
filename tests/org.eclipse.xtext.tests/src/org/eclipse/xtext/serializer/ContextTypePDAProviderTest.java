@@ -349,7 +349,7 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		expected.append("  name=ID -> <<F");
 		assertEquals(expected.toString(), actual);
 	}
-	
+
 	@Test
 	public void testActionFragment() throws Exception {
 		StringBuilder grammar = new StringBuilder();
@@ -372,6 +372,25 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 		expected.append("  start -> val1=ID\n");
 		expected.append("  'kw1' -> stop\n");
 		expected.append("  val1=ID -> 'kw1'");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testParameters() throws Exception {
+		String actual = getParserRule("M: 'kw1' s=S<true> | 'kw2' s=S<false>; S <P>: <P> v1=ID | <!P> v2=ID;  ");
+		StringBuilder expected = new StringBuilder();
+		expected.append("M_M:\n");
+		expected.append("  start -> 'kw1', 'kw2'\n");
+		expected.append("  'kw1' -> (s=S|)\n");
+		expected.append("  'kw2' -> (|s=S)\n");
+		expected.append("  (s=S|) -> stop\n");
+		expected.append("  (|s=S) -> stop\n");
+		expected.append("S_P_S:\n");
+		expected.append("  start -> v1=ID\n");
+		expected.append("  v1=ID -> stop\n");
+		expected.append("S_S:\n");
+		expected.append("  start -> v2=ID\n");
+		expected.append("  v2=ID -> stop");
 		assertEquals(expected.toString(), actual);
 	}
 }
