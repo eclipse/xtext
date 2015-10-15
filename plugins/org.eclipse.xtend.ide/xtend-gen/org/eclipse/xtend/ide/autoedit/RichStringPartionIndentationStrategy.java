@@ -6,8 +6,8 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -32,7 +32,7 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
     }
     if (_and) {
       try {
-        String lineIndentation = this.getLineIndentation(d, c.offset);
+        final String lineIndentation = this.getLineIndentation(d, c.offset);
         String[] _legalLineDelimiters_1 = d.getLegalLineDelimiters();
         final Function1<String, Integer> _function = new Function1<String, Integer>() {
           @Override
@@ -41,33 +41,28 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
           }
         };
         List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(((Iterable<String>)Conversions.doWrapArray(_legalLineDelimiters_1)), _function);
-        List<String> legalLineDelimiters = ListExtensions.<String>reverseView(_sortBy);
-        String _get = legalLineDelimiters.get(0);
-        String _quote = Pattern.quote(_get);
-        StringBuilder regex = new StringBuilder(_quote);
-        Iterable<String> _tail = IterableExtensions.<String>tail(legalLineDelimiters);
-        for (final String delimiter : _tail) {
-          String _quote_1 = Pattern.quote(delimiter);
-          String _plus = ("|(" + _quote_1);
-          String _plus_1 = (_plus + ")");
-          regex.append(_plus_1);
-        }
-        String _string = regex.toString();
-        String[] lines = c.text.split(_string);
-        String defaultLineDelimiter = ((IDocumentExtension4) d).getDefaultLineDelimiter();
+        final List<String> legalLineDelimiters = ListExtensions.<String>reverseView(_sortBy);
+        final Function1<String, CharSequence> _function_1 = new Function1<String, CharSequence>() {
+          @Override
+          public CharSequence apply(final String delimiter) {
+            return Pattern.quote(delimiter);
+          }
+        };
+        final String regex = IterableExtensions.<String>join(legalLineDelimiters, "(", ")|(", ")", _function_1);
+        final String[] lines = c.text.split(regex);
+        final String defaultLineDelimiter = TextUtilities.getDefaultLineDelimiter(d);
         StringConcatenation _builder = new StringConcatenation();
+        String _head = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(lines)));
+        _builder.append(_head, "");
         {
-          boolean _hasElements = false;
-          for(final String l : lines) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate((defaultLineDelimiter + lineIndentation), "");
-            }
-            _builder.append(l, "");
+          Iterable<String> _tail = IterableExtensions.<String>tail(((Iterable<String>)Conversions.doWrapArray(lines)));
+          for(final String line : _tail) {
+            _builder.append(defaultLineDelimiter, "");
+            _builder.append(lineIndentation, "");
+            _builder.append(line, "");
           }
         }
-        String convertedText = _builder.toString();
+        final String convertedText = _builder.toString();
         c.text = convertedText;
       } catch (final Throwable _t) {
         if (_t instanceof BadLocationException) {
