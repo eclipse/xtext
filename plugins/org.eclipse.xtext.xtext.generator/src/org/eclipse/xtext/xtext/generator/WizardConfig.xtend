@@ -71,10 +71,10 @@ class WizardConfig extends XtextProjectConfig {
 	protected def computeName(SubProjectConfig project) {
 		switch project {
 			case runtime: baseName
-			case runtimeTest: baseName + '.tests'
+			case runtimeTest: if (!mavenLayout) baseName + '.tests' else baseName
 			case genericIde: baseName + '.ide'
 			case eclipsePlugin: baseName + '.ui'
-			case eclipsePluginTest: baseName + '.ui.tests'
+			case eclipsePluginTest: if (!mavenLayout) baseName + '.ui.tests' else baseName + '.ui'
 			case ideaPlugin: baseName + '.idea'
 			case web: baseName + '.web'
 		}
