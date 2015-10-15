@@ -15,6 +15,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 @Singleton
 class PsiGrammarNaming extends GrammarNaming {
@@ -23,9 +24,12 @@ class PsiGrammarNaming extends GrammarNaming {
 	
 	override String getParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr'''
 	
-	override String getInternalParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr.internal'''
-
 	override getParserGrammar(Grammar it) {
 		new AntlrGrammar(internalParserPackage, '''PsiInternal«simpleName»''')
 	}
+	
+	override getInternalParserSuperClass(Grammar it) {
+		new TypeReference("org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser")
+	}
+	
 }

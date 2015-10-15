@@ -42,16 +42,16 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess.BindingFactory
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 
 class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector
-	@Inject extension GrammarNaming
+	@Inject ContentAssistGrammarNaming caNaming
 	
 	@Inject
 	extension IdeaPluginExtension
@@ -92,9 +92,9 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider'.typeRef, grammar.elementTypeProvider)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration'.typeRef, grammar.facetConfiguration)
 		bindFactory.addTypeToInstance('com.intellij.facet.FacetTypeId'.typeRef, '''«grammar.facetType».TYPEID''')
-		bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, grammar.contentAssistParserClass)
+		bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, caNaming.getParserClass(grammar))
 		bindFactory.addConfiguredBinding('ContentAssistLexer',
-			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«grammar.internalContentAssistLexerClass».class);''')
+			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«caNaming.getLexerClass(grammar)».class);''')
 		if (grammar.inheritsXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider'.typeRef, 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider'.typeRef, 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider'.typeRef)

@@ -10,9 +10,16 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import com.google.inject.Inject
 import com.google.inject.name.Names
 import java.io.InputStream
+import java.util.Collection
+import java.util.HashMap
+import java.util.Map
 import org.antlr.runtime.CharStream
+import org.antlr.runtime.RecognitionException
+import org.antlr.runtime.Token
 import org.antlr.runtime.TokenSource
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.Group
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter
 import org.eclipse.xtext.conversion.impl.IgnoreCaseIDValueConverter
 import org.eclipse.xtext.parser.IParser
@@ -41,7 +48,6 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.antlr.runtime.Token
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Accessors
@@ -49,30 +55,52 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	@Accessors
 	Boolean combinedGrammar = null
+	
+	@Accessors
+	boolean removeBacktrackingGuards
+	
+	@Accessors
+	int lookaheadThreshold
+	
+	@Accessors
+	boolean partialParsing
 
-	@Inject AntlrGrammarGenerator combinedGenerator
-	@Inject ExtendedAntlrGrammarGenerator extendedGenerator
+	@Inject AntlrGrammarGenerator combinedProductionGenerator
+	@Inject ExtendedAntlrGrammarGenerator extendedProductionGenerator
+	
+	@Inject AntlrContentAssistGrammarGenerator combinedContentAssistGenerator
+	@Inject ExtendedAntlrContentAssistGrammarGenerator extendedContentAssistGenerator
+	
 	@Inject AntlrDebugGrammarGenerator debugGenerator
 
 	@Inject FileAccessFactory fileFactory
 
-	@Inject GrammarNaming combinedNaming
-	@Inject ExtendedGrammarNaming extendedNaming
+	@Inject GrammarNaming combinedProductionNaming
+	@Inject ExtendedGrammarNaming extendedProductionNaming
+
+	@Inject ContentAssistGrammarNaming combinedContentAssistNaming
+	@Inject ExtendedContentAssistGrammarNaming extendedContentAssistNaming
+	
 	@Inject extension GrammarAccessExtensions grammarUtil
 
 	override protected doGenerate() {
 		val keywordHelper = new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
 		try {
 			generateProductionGrammar
-			if (debugGrammar) {
+			if (projectConfig.genericIde.srcGen != null)
+				generateContentAssistGrammar
+			if (debugGrammar)
 				generateDebugGrammar
-			}
-			generateXtextParser.writeTo(projectConfig.runtime.srcGen)
+			
+			generateProductionParser.writeTo(projectConfig.runtime.srcGen)
 			generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
+			generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
 			if (!isCombinedGrammar) {
-				generateTokenSource.writeTo(projectConfig.runtime.srcGen)
+				generateProductionTokenSource.writeTo(projectConfig.runtime.srcGen)
+				generateContentAssistTokenSource.writeTo(projectConfig.genericIde.srcGen)
 			}
-			addBindingsAndImports
+			addRuntimeBindingsAndImports
+			addUiBindingsAndImports
 		} finally {
 			keywordHelper.discardHelper(grammar)
 		}
@@ -80,8 +108,24 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	protected def generateProductionGrammar() {
 		val extension naming = productionNaming
-		val generator = if (isCombinedGrammar) combinedGenerator else extendedGenerator
+		val generator = if (isCombinedGrammar) combinedProductionGenerator else extendedProductionGenerator
 		val fsa = projectConfig.runtime.srcGen
+		
+		generator.generate(grammar, options, fsa)
+		
+		runAntlr(grammar.parserGrammar, grammar.lexerGrammar, fsa)
+		
+		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
+		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
+		normalizeTokens(fsa, grammar.lexerGrammar.tokensFileName)
+		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
+		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
+	}
+	
+	protected def generateContentAssistGrammar() {
+		val extension naming = contentAssistNaming
+		val generator = if (isCombinedGrammar) combinedContentAssistGenerator else extendedContentAssistGenerator
+		val fsa = projectConfig.genericIde.srcGen
 		
 		generator.generate(grammar, options, fsa)
 		
@@ -91,7 +135,10 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		splitParserAndLexerIfEnabled(fsa, grammar.lexerClass, grammar.internalParserClass)
 		normalizeTokens(fsa, grammar.lexerGrammar.tokensFileName)
 		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
-		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
+		normalizeLineDelimiters(fsa, grammar.lexerClass, grammar.internalParserClass)
+		if (removeBacktrackingGuards) {
+			removeBackTrackingGuards(fsa, grammar.internalParserClass, lookaheadThreshold)
+		}
 	}
 	
 	protected def runAntlr(AntlrGrammar parserGrammar, AntlrGrammar lexerGrammar, IXtextGeneratorFileSystemAccess fsa) {
@@ -125,7 +172,11 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	}
 	
 	protected def getProductionNaming() {
-		if (isCombinedGrammar) combinedNaming else extendedNaming
+		if (isCombinedGrammar) combinedProductionNaming else extendedProductionNaming
+	}
+	
+	protected def getContentAssistNaming() {
+		if (isCombinedGrammar) combinedContentAssistNaming else extendedContentAssistNaming
 	}
 	
 	protected def generateDebugGrammar() {
@@ -133,7 +184,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		debugGenerator.generate(grammar, options, fsa)
 	}
 	
-	def JavaFileAccess generateXtextParser() {
+	def JavaFileAccess generateProductionParser() {
 		val extension naming = productionNaming
 		val file = fileFactory.createGeneratedJavaFile(grammar.parserClass)
 		file.content = '''
@@ -201,7 +252,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		file
 	}
 	
-	def JavaFileAccess generateTokenSource() {
+	def JavaFileAccess generateProductionTokenSource() {
 		val extension naming = productionNaming
 		val file = fileFactory.createGeneratedJavaFile(grammar.tokenSourceClass)
 		val open = grammar.allTerminalRules.filter[#{"BEGIN", "INDENT", "OPEN"}.contains(name.toUpperCase)]
@@ -251,6 +302,128 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		file
 	}
 	
+	def JavaFileAccess generateContentAssistParser() {
+		val extension naming = contentAssistNaming
+		val file = fileFactory.createGeneratedJavaFile(grammar.parserClass)
+		file.content = '''
+			public class «grammar.parserClass.simpleName» extends «grammar.getParserSuperClass(partialParsing)» {
+			
+				@«Inject»
+				private «grammar.grammarAccess» grammarAccess;
+			
+				private «Map»<«AbstractElement», String> nameMappings;
+			
+				@Override
+				protected «grammar.internalParserClass» createParser() {
+					«grammar.internalParserClass» result = new «grammar.internalParserClass»(null);
+					result.setGrammarAccess(grammarAccess);
+					return result;
+				}
+			
+				«IF grammar.allTerminalRules.exists[isSyntheticTerminalRule]»
+					@Override
+					protected «TokenSource» createLexer(CharStream stream) {
+						return new «grammar.tokenSourceClass»(super.createLexer(stream));
+					}
+					
+				«ENDIF»
+				@Override
+				protected String getRuleName(«AbstractElement» element) {
+					if (nameMappings == null) {
+						nameMappings = new «HashMap»<«AbstractElement», String>() {
+							private static final long serialVersionUID = 1L;
+							{
+								«FOR element : (grammar.allAlternatives + grammar.allGroups + grammar.allAssignments + grammar.allUnorderedGroups).filter(AbstractElement)»
+									put(grammarAccess.«element.grammarElementAccess», "«element.containingRule.contentAssistRuleName»__«element.gaElementIdentifier»«IF element instanceof Group»__0«ENDIF»");
+								«ENDFOR»
+							}
+						};
+					}
+					return nameMappings.get(element);
+				}
+			
+				@Override
+				protected «Collection»<«"org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement".typeRef»> getFollowElements(«grammar.internalParserSuperClass» parser) {
+					try {
+						«grammar.internalParserClass» typedParser = («grammar.internalParserClass») parser;
+						typedParser.«grammar.allParserRules.head.originalElement.entryRuleName»();
+						return typedParser.getFollowElements();
+					} catch(«RecognitionException» ex) {
+						throw new RuntimeException(ex);
+					}
+				}
+			
+				@Override
+				protected String[] getInitialHiddenTokens() {
+					return new String[] { «FOR hidden : grammar.initialHiddenTokens SEPARATOR ", "»"«hidden»"«ENDFOR» };
+				}
+			
+				public «grammar.grammarAccess» getGrammarAccess() {
+					return this.grammarAccess;
+				}
+			
+				public void setGrammarAccess(«grammar.grammarAccess» grammarAccess) {
+					this.grammarAccess = grammarAccess;
+				}
+			}
+		'''
+		file
+	}
+	
+	def JavaFileAccess generateContentAssistTokenSource() {
+		val extension naming = contentAssistNaming
+		val file = fileFactory.createGeneratedJavaFile(grammar.tokenSourceClass)
+		val open = grammar.allTerminalRules.filter[#{"BEGIN", "INDENT", "OPEN"}.contains(name.toUpperCase)]
+		val close = grammar.allTerminalRules.filter[#{"END", "DEDENT", "CLOSE"}.contains(name.toUpperCase)]
+		file.content = '''
+			public class «grammar.tokenSourceClass.simpleName» extends «AbstractIndentationTokenSource» {
+			
+				public «grammar.tokenSourceClass.simpleName»(«TokenSource» delegate) {
+					super(delegate);
+				}
+			
+				@Override
+				protected boolean shouldSplitTokenImpl(Token token) {
+					«IF grammar.allTerminalRules.map[originalElement].exists[name.toUpperCase == "WS"]»
+						// TODO Review assumption
+						return token.getType() == «grammar.internalParserClass».RULE_WS;
+					«ELSE»
+						// TODO Implement me
+						throw new UnsupportedOperationException("Implement me");
+					«ENDIF»
+				}
+			
+				@Override
+				protected int getBeginTokenType() {
+					«IF open.size == 1»
+						// TODO Review assumption
+						return «grammar.internalParserClass».«open.head.ruleName»;
+					«ELSE»
+						// TODO Implement me
+						throw new UnsupportedOperationException("Implement me");
+					«ENDIF»
+				}
+			
+				@Override
+				protected int getEndTokenType() {
+					«IF close.size == 1»
+						// TODO Review assumption
+						return «grammar.internalParserClass».«close.head.ruleName»;
+					«ELSE»
+						// TODO Implement me
+						throw new UnsupportedOperationException("Implement me");
+					«ENDIF»
+				}
+			
+				@Override
+				protected boolean shouldEmitPendingEndTokens() {
+					return false;
+				}
+			}
+		'''
+		file
+	}
+	
 	override checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues)
 		if (options.isBacktrackLexer && isCombinedGrammar)
@@ -261,7 +434,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			issues.addError("Backtracking lexer and ignorecase cannot be combined for now.")
 	}
 	
-	def addBindingsAndImports() {
+	def addRuntimeBindingsAndImports() {
 		val extension naming = productionNaming
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest=>[
@@ -277,7 +450,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			.addTypeToType(IParser.typeRef, grammar.parserClass)
 			.addTypeToType(ITokenToStringConverter.typeRef,AntlrTokenToStringConverter.typeRef)
 			.addTypeToType(IAntlrTokenFileProvider.typeRef, grammar.antlrTokenFileProviderClass)
-			.addTypeToType(Lexer.typeRef, grammar.lexerClass)
+			.addTypeToType(grammar.lexerSuperClass, grammar.lexerClass)
 			.addTypeToType(ITokenDefProvider.typeRef, AntlrTokenDefProvider.typeRef)
 			.addTypeToProviderInstance(grammar.lexerClass, '''«LexerProvider».create(«grammar.lexerClass».class)''')
 			.addConfiguredBinding("RuntimeLexer", '''
@@ -294,8 +467,21 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				.addTypeToType(AbstractIDValueConverter.typeRef, IgnoreCaseIDValueConverter.typeRef)
 		}
 		rtBindings.contributeTo(language.runtimeGenModule)
-		
-		new GuiceModuleAccess.BindingFactory()
+	
+	}
+	
+	def addUiBindingsAndImports() {
+		val extension naming = contentAssistNaming
+		if (projectConfig.eclipsePlugin.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest=>[
+				exportedPackages += #[
+					grammar.lexerClass.packageName,
+					grammar.parserClass.packageName,
+					grammar.internalParserClass.packageName
+				]
+			]
+		}
+		val uiBindings = new GuiceModuleAccess.BindingFactory()
 			.addTypeToType(
 				"org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper".typeRef, 
 				"org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper".typeRef
@@ -303,6 +489,11 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			.addConfiguredBinding("HighlightingLexer", '''
 				binder.bind(«Lexer».class)
 					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+					.to(«productionNaming.getLexerClass(grammar)».class);
+			''')
+			.addConfiguredBinding("ContentAssistLexer", '''
+				binder.bind(«grammar.lexerSuperClass».class)
+					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
 					.to(«grammar.lexerClass».class);
 			''')
 			.addConfiguredBinding("HighlightingTokenDefProvider", '''
@@ -310,7 +501,25 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
 					.to(«AntlrTokenDefProvider».class);
 			''')
-			.contributeTo(language.eclipsePluginGenModule)
+			.addTypeToType(
+				"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory".typeRef,
+				"org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory".typeRef
+			)
+			.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser".typeRef,
+				grammar.parserClass
+			)
+			.addConfiguredBinding("ContentAssistLexerProvider", '''
+				binder.bind(«grammar.lexerClass».class)
+					.toProvider(«LexerProvider».create(«grammar.lexerClass».class));
+			''')
+		if (partialParsing) {
+			uiBindings.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory".typeRef, 
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory".typeRef
+			)
+		}
+		uiBindings.contributeTo(language.eclipsePluginGenModule)
 	}
 
 }

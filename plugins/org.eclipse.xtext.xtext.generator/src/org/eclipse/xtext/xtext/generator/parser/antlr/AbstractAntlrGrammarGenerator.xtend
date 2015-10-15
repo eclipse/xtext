@@ -45,7 +45,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	@Inject CodeConfig codeConfig
 	
-	KeywordHelper keyWordHelper
+	protected KeywordHelper keyWordHelper
 	
 	def generate(Grammar it, AntlrOptions options, IXtextGeneratorFileSystemAccess fsa) {
 		this.keyWordHelper = KeywordHelper.getHelper(it)
@@ -71,8 +71,6 @@ abstract class AbstractAntlrGrammarGenerator {
 		«compileParserOptions(options)»
 		«IF isCombinedGrammar»
 			«compileTokens(options)»
-		«ENDIF»
-		«IF isCombinedGrammar»
 			«compileLexerHeader(options)»
 		«ENDIF»
 		«compileParserHeader(options)»
@@ -96,11 +94,11 @@ abstract class AbstractAntlrGrammarGenerator {
 			«IF !isCombinedGrammar»
 				tokenVocab=«grammarNaming.getLexerGrammar(it).simpleName»;
 			«ENDIF»
-			«IF internalParserSuperClass != null»
-				superClass=«internalParserSuperClass»;
+			«IF grammarNaming.getInternalParserSuperClass(it) != null»
+				superClass=«grammarNaming.getInternalParserSuperClass(it).simpleName»;
 			«ENDIF»
-			«IF options.backtrack || options.memoize || options.k >= 0»
-				«IF options.backtrack»
+			«IF isParserBackTracking(options) || options.memoize || options.k >= 0»
+				«IF isParserBackTracking(options)»
 					backtrack=true;
 				«ENDIF»
 				«IF options.memoize»
@@ -112,6 +110,11 @@ abstract class AbstractAntlrGrammarGenerator {
 			«ENDIF»
 		}
 	'''
+	
+	protected def isParserBackTracking(Grammar it, AntlrOptions options) {
+		options.backtrack
+	}
+	
 	protected def compileLexerOptions(Grammar it, AntlrOptions options) '''
 		«IF options.backtrackLexer»
 			options {
@@ -120,10 +123,6 @@ abstract class AbstractAntlrGrammarGenerator {
 			}
 		«ENDIF»
 	'''
-	
-	protected def String getInternalParserSuperClass() {
-		null
-	}
 	
 	protected def compileTokens(Grammar it, AntlrOptions options) '''
 		«IF options.isBacktrackLexer»
@@ -150,7 +149,7 @@ abstract class AbstractAntlrGrammarGenerator {
 		
 		// Hack: Use our own Lexer superclass by means of import. 
 		// Currently there is no other way to specify the superclass for the lexer.
-		import org.eclipse.xtext.parser.antlr.Lexer;
+		import «grammarNaming.getLexerSuperClass(it)»;
 	'''
 	
 	protected def compileParserHeader(Grammar it, AntlrOptions options) '''
@@ -174,11 +173,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected def compileRules(Grammar it, AntlrOptions options) '''
-		«FOR rule:allParserRules.filter[rule | rule.isCalled(it)]»
-			
-			«rule.compileRule(it, options)»
-		«ENDFOR»
-		«FOR rule:allEnumRules.filter[rule | rule.isCalled(it)]»
+		«FOR rule: (allParserRules + allEnumRules).filter[rule | rule.isCalled(it)]»
 			
 			«rule.compileRule(it, options)»
 		«ENDFOR»
@@ -211,60 +206,54 @@ abstract class AbstractAntlrGrammarGenerator {
 			«ELSE»
 				«FOR rule:allKeywords»
 					
-					«rule.compileKeyword(it, options)»
+					«rule.compileRule(it, options)»
 				«ENDFOR»
 			«ENDIF»
 		'''
 	}
 	
 	protected def compileTerminalRules(Grammar it, AntlrOptions options) '''
+		«FOR rule:allTerminalRules»
+			
+			«rule.compileRule(it, options)»
+		«ENDFOR»
+	'''
+	
+	protected def dispatch compileRule(EnumRule it, Grammar grammar, AntlrOptions options) {
+		compileEBNF(options)
+	}
+	
+	protected def dispatch compileRule(ParserRule it, Grammar grammar, AntlrOptions options) {
+		compileEBNF(options)
+	}
+	
+	protected def dispatch compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
 		«IF options.isBacktrackLexer»
-			«FOR rule:allTerminalRules»
-				
-				«rule.compileBacktrackingRule(it, options)»
-			«ENDFOR»
+			«IF !isSyntheticTerminalRule(it)»
+				«IF fragment»
+					fragment «ruleName» : «toLexerBody»;
+				«ELSE»
+					fragment «ruleName» : FRAGMENT_«ruleName»;
+					fragment FRAGMENT_«ruleName» : «toLexerBody»;
+				«ENDIF»
+			«ENDIF»
 		«ELSE»
-			«FOR rule:allTerminalRules»
-				
-				«rule.compileRule(it, options)»
-			«ENDFOR»
-		«ENDIF»
-	'''
-	
-	protected def compileRule(EnumRule it, Grammar grammar, AntlrOptions options) {
-		compileEBNF(options)
-	}
-	
-	protected def compileRule(ParserRule it, Grammar grammar, AntlrOptions options) {
-		compileEBNF(options)
-	}
-	
-	protected def compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
-		«IF isSyntheticTerminalRule(it)»
-			fragment «ruleName» : ;
-		«ELSE»
-			«IF fragment»fragment «ENDIF»«ruleName» : «toLexerBody»«IF shouldBeSkipped(grammar)» {skip();}«ENDIF»;
-		«ENDIF»
-	'''
-	
-	protected def compileBacktrackingRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
-		«IF !isSyntheticTerminalRule(it)»
-			«IF fragment»
-				fragment «ruleName» : «toLexerBody»;
+			«IF isSyntheticTerminalRule(it)»
+				fragment «ruleName» : ;
 			«ELSE»
-				fragment «ruleName» : FRAGMENT_«ruleName»;
-				fragment FRAGMENT_«ruleName» : «toLexerBody»;
+				«IF fragment»fragment «ENDIF»«ruleName» : «toLexerBody»«IF shouldBeSkipped(grammar)» {skip();}«ENDIF»;
 			«ENDIF»
 		«ENDIF»
 	'''
 	
-	protected def compileKeyword(String keyWord, Grammar grammar, AntlrOptions options) '''
+	protected def dispatch compileRule(String keyWord, Grammar grammar, AntlrOptions options) '''
 		«keyWordHelper.getRuleName(keyWord)» : «keyWord.toAntlrKeyWordRule(options)»;
 	'''
 		
 	protected def toAntlrKeyWordRule(String keyWord, AntlrOptions options) {
 		 "'" + if (options.ignoreCase) keyWord.toAntlrStringIgnoreCase else keyWord.toAntlrString + "'"
 	}
+	
 	protected def shouldBeSkipped(TerminalRule it, Grammar grammar) {
 		grammar.initialHiddenTokens.contains(ruleName) && isCombinedGrammar
 	}
@@ -362,7 +351,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def String ebnf2(EnumLiteralDeclaration it, AntlrOptions options, boolean supportActions) {
-		"'" + literal.value.toAntlrString + "'"
+		if (combinedGrammar) "'" + literal.value.toAntlrString + "'" else keyWordHelper.getRuleName(literal.value)
 	}
 	
 	protected dispatch def String crossrefEbnf(AbstractElement it, CrossReference ref, boolean supportActions) {

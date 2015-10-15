@@ -40,13 +40,9 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		naming
 	}
 	
-	override protected getInternalParserSuperClass() {
-		"AbstractPsiAntlrParser"
-	}
-	
 	override protected compileParserImports(Grammar it, AntlrOptions options) '''
 
-		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+		import «grammarNaming.getInternalParserSuperClass(it).name»;
 		import «grammar.elementTypeProvider»;
 		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -93,7 +89,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		false
 	}
 	
-	override protected compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
+	override protected dispatch compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
 		«IF isValidEntryRule»
 			//Entry rule «entryRuleName»
 			«entryRuleName»«compileEntryInit(options)»:
