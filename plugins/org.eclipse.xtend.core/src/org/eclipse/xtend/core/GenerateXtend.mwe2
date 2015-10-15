@@ -79,11 +79,7 @@ Workflow {
 			fragment = serializer.SerializerFragment2 {
 				// generateDebugData = true
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = resourceFactory.ResourceFactoryFragment {
-					fileExtensions = file.extensions
-				}
-			}
+			fragment = resourceFactory.ResourceFactoryFragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ParserGenerator auto-inject {
 					options = auto-inject {}
