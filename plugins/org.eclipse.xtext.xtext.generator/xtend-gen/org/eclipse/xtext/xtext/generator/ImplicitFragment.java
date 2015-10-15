@@ -71,15 +71,20 @@ class ImplicitFragment extends AbstractGeneratorFragment2 {
       Set<String> _requiredBundles_1 = _manifest_4.getRequiredBundles();
       _requiredBundles_1.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui", "org.eclipse.xtend.lib")));
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_5.getEclipsePlugin();
+      ManifestAccess _manifest_5 = _eclipsePlugin_2.getManifest();
+      Set<String> _importedPackages_1 = _manifest_5.getImportedPackages();
+      _importedPackages_1.add("org.apache.log4j");
     }
-    IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_5.getEclipsePlugin();
-    PluginXmlAccess _pluginXml = _eclipsePlugin_2.getPluginXml();
+    IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_6.getEclipsePlugin();
+    PluginXmlAccess _pluginXml = _eclipsePlugin_3.getPluginXml();
     boolean _tripleNotEquals_2 = (_pluginXml != null);
     if (_tripleNotEquals_2) {
-      IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_6.getEclipsePlugin();
-      PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
+      IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_7.getEclipsePlugin();
+      PluginXmlAccess _pluginXml_1 = _eclipsePlugin_4.getPluginXml();
       List<CharSequence> _entries = _pluginXml_1.getEntries();
       Grammar _grammar = this.getGrammar();
       CharSequence _implicitPluginXmlEnties = this.getImplicitPluginXmlEnties(_grammar);
