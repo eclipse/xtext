@@ -23,10 +23,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
@@ -451,15 +453,28 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		List<String> actions = Lists.newArrayList();
 		List<String> rules = Lists.newArrayList();
+		List<String> params = Lists.newArrayList();
 		for (Action a : relevantActions)
 			actions.add(context2Name.getUniqueActionName(a));
 		for (ParserRule a : relevantRules)
 			rules.add(context2Name.getContextName(grammar, a));
-		Collections.sort(rules);
+		for (IContext ctx : constraint.getContexts()) {
+			Set<Parameter> values = ctx.getParameterValues();
+			if (values != null)
+				for (Parameter param : values) {
+					AbstractRule rule = GrammarUtil.containingRule(param);
+					params.add(rule.getName() + "$" + param.getName());
+				}
+			Collections.sort(rules);
+		}
 		String result = Joiner.on("_").join(rules);
 		if (!actions.isEmpty()) {
 			Collections.sort(actions);
 			result += "_" + Joiner.on('_').join(actions);
+		}
+		if (!params.isEmpty()) {
+			Collections.sort(params);
+			result += "_" + Joiner.on('_').join(params);
 		}
 		return result;
 	}

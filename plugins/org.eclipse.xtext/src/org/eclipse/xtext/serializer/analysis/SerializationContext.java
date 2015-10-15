@@ -14,12 +14,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.Pair;
@@ -28,6 +30,7 @@ import org.eclipse.xtext.util.Tuples;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
@@ -55,6 +58,30 @@ public abstract class SerializationContext implements IContext {
 		protected String toStringInternal() {
 			return new Context2NameFunction().getUniqueActionName(action);
 		}
+	}
+
+	public static class ParameterValueContext extends SerializationContext {
+
+		private final Set<Parameter> parameters;
+
+		public ParameterValueContext(IContext parent, Set<Parameter> parameters) {
+			super(parent);
+			this.parameters = ImmutableSet.copyOf(parameters);
+		}
+
+		@Override
+		protected String toStringInternal() {
+			List<String> names = Lists.newArrayList();
+			for (Parameter p : parameters)
+				names.add(p.getName());
+			return Joiner.on("_").join(names);
+		}
+
+		@Override
+		public Set<Parameter> getParameterValues() {
+			return parameters;
+		}
+
 	}
 
 	public static class RuleContext extends SerializationContext {
@@ -227,6 +254,8 @@ public abstract class SerializationContext implements IContext {
 			return false;
 		if (!Objects.equal(getAssignedAction(), other.getAssignedAction()))
 			return false;
+		if (!Objects.equal(getParameterValues(), other.getParameterValues()))
+			return false;
 		if (!Objects.equal(getType(), other.getType()))
 			return false;
 		return true;
@@ -259,9 +288,15 @@ public abstract class SerializationContext implements IContext {
 	}
 
 	@Override
+	public Set<Parameter> getParameterValues() {
+		return parent != null ? parent.getParameterValues() : null;
+	}
+
+	@Override
 	public int hashCode() {
 		ParserRule rule = getParserRule();
 		Action action = getAssignedAction();
+		Set<Parameter> parameterValues = getParameterValues();
 		EClass type = getType();
 		int result = 1;
 		if (rule != null)
@@ -269,7 +304,9 @@ public abstract class SerializationContext implements IContext {
 		if (action != null)
 			result *= action.hashCode() * 7;
 		if (type != null)
-			result *= type.hashCode() * 31;
+			result *= type.hashCode() * 19;
+		if (parameterValues != null)
+			result *= parameterValues.hashCode() * 31;
 		return result;
 	}
 
