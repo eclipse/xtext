@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
-import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
@@ -36,7 +36,6 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
-import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -117,36 +116,38 @@ import org.eclipse.xtext.util.internal.Log
 	}
 	
 	override initialize(Injector injector) {
-		val configuredFragments = new ArrayList(fragments)
-		fragments.clear
-		addFragment(grammarAccess)
-		addFragment(emfGenerator)
-		addFragment(resourceFactoryFragment)
-		addFragment(serializer)
-		addFragment(parserGenerator)
-		addFragment(validator)
-		addFragment(formatter)
-		addFragment(generator)
-		addFragment(builder)
-		addFragment(scopeProvider)
-		addFragment(qualifiedNamesProvider)
-		addFragment(commonTypesSupport)
-		addFragment(xtypeSupport)
-		addFragment(xbaseSupport)
-		addFragment(junitSupport)
-		addFragment(quickFixProvider)
-		addFragment(labelProvider)
-		addFragment(outline)
-		addFragment(quickOutline)
-		addFragment(compareEditor)
-		addFragment(contentAssist)
-		addFragment(renameRefactoring)
-		addFragment(codeTemplates)
-		addFragment(ideaParser)
-		addFragment(ideaPlugin)
-		addFragment(webSupport)
-		fragments.addAll(configuredFragments)
+		prependStandardFragments()
 		super.initialize(injector)
+	}
+	
+	protected def prependStandardFragments() {
+		var i = 0
+		fragments.add(i++,grammarAccess)
+		fragments.add(i++,emfGenerator)
+		fragments.add(i++,resourceFactoryFragment)
+		fragments.add(i++,serializer)
+		fragments.add(i++,parserGenerator)
+		fragments.add(i++,validator)
+		fragments.add(i++,formatter)
+		fragments.add(i++,generator)
+		fragments.add(i++,builder)
+		fragments.add(i++,scopeProvider)
+		fragments.add(i++,qualifiedNamesProvider)
+		fragments.add(i++,commonTypesSupport)
+		fragments.add(i++,xtypeSupport)
+		fragments.add(i++,xbaseSupport)
+		fragments.add(i++,junitSupport)
+		fragments.add(i++,quickFixProvider)
+		fragments.add(i++,labelProvider)
+		fragments.add(i++,outline)
+		fragments.add(i++,quickOutline)
+		fragments.add(i++,compareEditor)
+		fragments.add(i++,contentAssist)
+		fragments.add(i++,renameRefactoring)
+		fragments.add(i++,codeTemplates)
+		fragments.add(i++,ideaParser)
+		fragments.add(i++,ideaPlugin)
+		fragments.add(i++,webSupport)
 	}
 	
 }
