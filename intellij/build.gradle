@@ -22,7 +22,7 @@ allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
 	ideaDevelopment {
-		ideaVersion = "142.5047.6"
+		ideaVersion = "143.116.4"
 		pluginDependencies {
 			id 'junit'
 		}
