@@ -29,7 +29,7 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 		antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, antlrParams)
 
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
-		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
+		splitParserAndLexerIfEnabled(fsa, grammar.lexerClass, grammar.internalParserClass)
 		normalizeTokens(fsa, grammar.lexerGrammar.tokensFileName)
 		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
 		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
