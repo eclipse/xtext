@@ -25,6 +25,9 @@ import org.junit.Assert
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.util.formallang.NfaUtil
+import org.eclipse.xtext.GrammarUtil
+import org.eclipse.xtext.util.EmfFormatter
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -165,6 +168,34 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
+	
+	@Test def void testUnassignedDatatypeRule() {
+		val actual = '''
+			Rule: val=ID Called;
+			Called: 'kw1';
+		'''.toPda
+		val expected = '''
+			Rule:
+				start -> val=ID
+				Called -> stop
+				val=ID -> Called
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+	
+	@Test def void testUnassignedTerminalRule() {
+		val actual = '''
+			Rule: val=ID Called;
+			terminal Called: 'kw1';
+		'''.toPda
+		val expected = '''
+			Rule:
+				start -> val=ID
+				Called -> stop
+				val=ID -> Called
+		'''
+		Assert.assertEquals(expected, actual)
+	}
 
 	@Test def void testUnassignedParserRuleCall() {
 		val actual = '''
@@ -243,7 +274,7 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
-	
+
 	@Test def void testUnorderedGroup2() {
 		val actual = '''
 			Rule: {Rule} ('a' & 'b'? & 'c'* & 'd'+);
@@ -259,7 +290,7 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
-	
+
 	@Test def void testTwoAssignedEObjectRuleCalls() {
 		val actual = '''
 			Rule: foo1=Sub foo2=Sub; Sub: id='id';
@@ -374,21 +405,25 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
-	
-	@Test @Ignore def void testParameter1() {
+
+	@Test def void testParameter1() {
 		val actual = '''
 			M: "kw1" s=S<true> | "kw2" s=S<false>;
 			S <P>: <P> v1=ID | <!P> v2=ID;  
 		'''.toPda
 		val expected = '''
-			Greeting:
-				start -> '(', val=ID
-				'(' -> >>Greeting
-				')' -> {Foo.child=}
-				<<Greeting -> ')'
-				>>Greeting -> '(', val=ID
-				val=ID -> <<Greeting, stop
-				{Foo.child=} -> <<Greeting, stop
+			M:
+				start -> 'kw1', 'kw2'
+				'kw1' -> (s=S|)
+				'kw2' -> (|s=S)
+				(s=S|) -> stop
+				(|s=S) -> stop
+			S_P:
+				start -> v1=ID
+				v1=ID -> stop
+			S:
+				start -> v2=ID
+				v2=ID -> stop
 		'''
 		Assert.assertEquals(expected, actual)
 	}
@@ -403,6 +438,8 @@ class GrammarPDAProviderTest {
 		''')
 		validator.assertNoErrors(grammar)
 		val pdas = pdaProvider.getGrammarPDAs(grammar)
+		pdas.values.forEach[assertNoLeakedGrammarElements(grammar, it)]
+
 //		pdas.forEach[p1, p2|p2.toDot(p1.name)]
 		return pdas.keySet.sort.map [
 			'''
@@ -410,6 +447,15 @@ class GrammarPDAProviderTest {
 					«pdas.get(it).toListString»
 			'''
 		].join
+	}
+
+	def private void assertNoLeakedGrammarElements(Grammar grammar, Pda<ISerState, RuleCall> pda) {
+		for (ele : new NfaUtil().collect(pda).map[grammarElement].filterNull) {
+			val actual = GrammarUtil.getGrammar(ele)
+			if (actual !== grammar) {
+				Assert.fail("Element " + EmfFormatter.objPath(ele) + " leaked!")
+			}
+		}
 	}
 
 	def protected toDot(Pda<ISerState, RuleCall> pda, String name) {

@@ -431,4 +431,17 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		expected.append("  F_Rule returns Rule: name=ID;");
 		assertEquals(expected.toString(), actual);
 	}
+
+	@Test
+	public void testParameters() throws Exception {
+		String actual = getParserRule("M: 'kw1' s=S<true> | 'kw2' s=S<false>; S <P>: <P> v1=ID | <!P> v2=ID;  ");
+		StringBuilder expected = new StringBuilder();
+		expected.append("M_M:\n");
+		expected.append("  M_M returns M: (s=S | s=S);\n");
+		expected.append("S_P_S:\n");
+		expected.append("  S_S$P_S returns S: v1=ID;\n");
+		expected.append("S_S:\n");
+		expected.append("  S_S returns S: v2=ID;");
+		assertEquals(expected.toString(), actual);
+	}
 }
