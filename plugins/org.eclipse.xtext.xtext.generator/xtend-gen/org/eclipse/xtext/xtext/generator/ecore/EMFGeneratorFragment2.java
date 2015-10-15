@@ -863,12 +863,22 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
         if (this.suppressLoadInitialization) {
           genPackage.setLoadInitialization(false);
         }
-        EPackage _ecorePackage = genPackage.getEcorePackage();
-        boolean _contains = packs.contains(_ecorePackage);
-        if (_contains) {
-          ILanguageConfig _language = this.getLanguage();
-          List<String> _fileExtensions = _language.getFileExtensions();
-          String _join = IterableExtensions.join(_fileExtensions, ",");
+        boolean _and = false;
+        ILanguageConfig _language = this.getLanguage();
+        List<String> _fileExtensions = _language.getFileExtensions();
+        boolean _isEmpty = _fileExtensions.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (!_not) {
+          _and = false;
+        } else {
+          EPackage _ecorePackage = genPackage.getEcorePackage();
+          boolean _contains = packs.contains(_ecorePackage);
+          _and = _contains;
+        }
+        if (_and) {
+          ILanguageConfig _language_1 = this.getLanguage();
+          List<String> _fileExtensions_1 = _language_1.getFileExtensions();
+          String _join = IterableExtensions.join(_fileExtensions_1, ",");
           genPackage.setFileExtensions(_join);
         }
       }

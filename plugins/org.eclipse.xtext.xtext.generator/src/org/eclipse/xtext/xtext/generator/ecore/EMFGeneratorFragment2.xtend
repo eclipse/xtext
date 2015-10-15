@@ -503,7 +503,7 @@ class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			genPackage.basePackage = grammar.basePackage
 			if (suppressLoadInitialization)
 				genPackage.loadInitialization = false
-			if (packs.contains(genPackage.getEcorePackage))
+			if (!language.fileExtensions.isEmpty && packs.contains(genPackage.getEcorePackage))
 				genPackage.fileExtensions = language.fileExtensions.join(',')
 		}
 		val referencedEPackages = getReferencedEPackages(packs)
