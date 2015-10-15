@@ -14,12 +14,12 @@ import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 @FinalFieldsConstructor
 class WebProjectDescriptor extends ProjectDescriptor {
 	
-	static val REQUIREJS_VERSION = '2.1.17'
-//	static val REQUIREJS_TEXT_VERSION = '2.0.10-3'
+	static val REQUIREJS_VERSION = '2.1.20'
+//	static val REQUIREJS_TEXT_VERSION = '2.0.14'
 	static val JQUERY_VERSION = '2.1.4'
 	static val JETTY_VERSION = '9.2.11.v20150529'
 	static val SLF4J_VERSION = '1.7.12'
-	static val ACE_VERSION = '1.1.9'
+	static val ACE_VERSION = '1.2.0'
 	
 	override getUpstreamProjects() {
 		newLinkedHashSet(config.runtimeProject, config.ideProject)

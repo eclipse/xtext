@@ -128,9 +128,9 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     }
     if (_or) {
       String _simpleName = GrammarUtil.getSimpleName(this.grammar);
-      final String lowerCase = _simpleName.toLowerCase();
-      LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + lowerCase) + "\'."));
-      return Collections.<String>singletonList(lowerCase);
+      String _lowerCase = _simpleName.toLowerCase();
+      this.setFileExtensions(_lowerCase);
+      LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + this.fileExtensions) + "\'."));
     }
     return this.fileExtensions;
   }

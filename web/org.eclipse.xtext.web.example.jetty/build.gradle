@@ -5,11 +5,11 @@ dependencies {
     compile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
 	compile project(':web:org.eclipse.xtext.xbase.web')
 	compile project(':intellij:org.eclipse.xtext.idea.example.entities.ide')
-	compile group: 'org.webjars', name: 'requirejs', version: '2.1.17'
-	compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.10-3'
+	compile group: 'org.webjars', name: 'requirejs', version: '2.1.20'
+	compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.14'
 	compile group: 'org.webjars', name: 'jquery', version: '2.1.4'
-	compile group: 'org.webjars', name: 'ace', version: '1.1.9'
-	compile group: 'org.webjars', name: 'codemirror', version: '5.5'
+	compile group: 'org.webjars', name: 'ace', version: '1.2.0'
+	compile group: 'org.webjars', name: 'codemirror', version: '5.7'
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
 	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }
@@ -21,7 +21,6 @@ dependencies {
 
 def orionDir = file('src/main/webapp/orion')
 def orionZip = file("$buildDir/orion/built-codeEdit.zip")
-// http://download.eclipse.org/orion/drops/S20150928-1242/download.php?dropFile=built-codeEdit.zip
 def orionUrl = 'http://download.eclipse.org/orion/drops/S20150928-1242/built-codeEdit.zip'
 
 task downloadOrion {

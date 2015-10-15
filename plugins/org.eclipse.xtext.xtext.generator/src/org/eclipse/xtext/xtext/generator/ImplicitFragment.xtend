@@ -34,6 +34,7 @@ package class ImplicitFragment extends AbstractGeneratorFragment2 {
 			projectConfig.eclipsePlugin.manifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui', 'org.eclipse.xtend.lib'
 			])
+			projectConfig.eclipsePlugin.manifest.importedPackages.add('org.apache.log4j')
 		}
 		if (projectConfig.eclipsePlugin.pluginXml !== null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += grammar.implicitPluginXmlEnties

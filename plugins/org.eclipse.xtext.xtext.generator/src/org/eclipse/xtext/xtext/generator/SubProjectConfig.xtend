@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import com.google.inject.Inject
 
 interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
+	def boolean isEnabled()
 	def String getName()
 	def IXtextGeneratorFileSystemAccess getRoot()
 	def IXtextGeneratorFileSystemAccess getMetaInf()
@@ -151,12 +152,14 @@ class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjec
 	
 	/**
 	 * Returns the root-relative path of the folder where the generated .ecore and .genmodel can be found.
-	 * The path is delimited by and ends with '/'
+	 * The path is delimited by '/', but does not begin or end with a separator.
 	 */
 	override String getEcoreModelFolder() {
-		val ecoreModelFolder = ecoreModelPath.replace(root.path, "").replace('\\', '/')
-		val slashes = CharMatcher.is('/')
-		slashes.trimFrom(ecoreModelFolder) + "/"
+		if (ecoreModel.path.startsWith(root.path)) {
+			val relativePath = ecoreModel.path.substring(root.path.length).replace('\\', '/')
+			return CharMatcher.is('/').trimFrom(relativePath)
+		}
+		throw new RuntimeException('Could not derive the Ecore model folder from the project configuration. Please make sure that \'root\' is a prefix of \'ecoreModel\'.')
 	}
 	
 	override initialize(Injector injector) {

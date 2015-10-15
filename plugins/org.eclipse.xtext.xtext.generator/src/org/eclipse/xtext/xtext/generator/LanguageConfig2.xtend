@@ -90,9 +90,8 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	
 	override getFileExtensions() {
 		if (fileExtensions === null || fileExtensions.empty) {
-			val lowerCase = GrammarUtil.getSimpleName(grammar).toLowerCase
-			LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
-			return Collections.singletonList(lowerCase)
+			fileExtensions = GrammarUtil.getSimpleName(grammar).toLowerCase
+			LOG.info("No explicit fileExtensions configured. Using '*." + fileExtensions + "'.")
 		}
 		return fileExtensions
 	}

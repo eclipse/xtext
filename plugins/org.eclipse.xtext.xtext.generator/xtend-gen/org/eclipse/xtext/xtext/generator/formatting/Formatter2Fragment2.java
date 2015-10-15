@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
@@ -65,6 +67,9 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
   
+  @Accessors
+  private boolean generateStub;
+  
   protected TypeReference getFormatter2Stub(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".formatting2.");
@@ -76,6 +81,9 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
+    if ((!this.generateStub)) {
+      return;
+    }
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -340,5 +348,14 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
     ResourceSet _resourceSet = _language.getResourceSet();
     GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, _resourceSet);
     return _genFeature.getGetAccessor();
+  }
+  
+  @Pure
+  public boolean isGenerateStub() {
+    return this.generateStub;
+  }
+  
+  public void setGenerateStub(final boolean generateStub) {
+    this.generateStub = generateStub;
   }
 }

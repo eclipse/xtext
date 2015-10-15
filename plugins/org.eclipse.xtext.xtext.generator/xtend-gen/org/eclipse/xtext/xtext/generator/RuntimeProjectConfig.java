@@ -32,21 +32,25 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
   
   /**
    * Returns the root-relative path of the folder where the generated .ecore and .genmodel can be found.
-   * The path is delimited by and ends with '/'
+   * The path is delimited by '/', but does not begin or end with a separator.
    */
   @Override
   public String getEcoreModelFolder() {
-    String _xblockexpression = null;
-    {
-      IXtextGeneratorFileSystemAccess _root = this.getRoot();
-      String _path = _root.getPath();
-      String _replace = this.ecoreModelPath.replace(_path, "");
-      final String ecoreModelFolder = _replace.replace("\\", "/");
-      final CharMatcher slashes = CharMatcher.is('/');
-      String _trimFrom = slashes.trimFrom(ecoreModelFolder);
-      _xblockexpression = (_trimFrom + "/");
+    String _path = this.ecoreModel.getPath();
+    IXtextGeneratorFileSystemAccess _root = this.getRoot();
+    String _path_1 = _root.getPath();
+    boolean _startsWith = _path.startsWith(_path_1);
+    if (_startsWith) {
+      String _path_2 = this.ecoreModel.getPath();
+      IXtextGeneratorFileSystemAccess _root_1 = this.getRoot();
+      String _path_3 = _root_1.getPath();
+      int _length = _path_3.length();
+      String _substring = _path_2.substring(_length);
+      final String relativePath = _substring.replace("\\", "/");
+      CharMatcher _is = CharMatcher.is('/');
+      return _is.trimFrom(relativePath);
     }
-    return _xblockexpression;
+    throw new RuntimeException("Could not derive the Ecore model folder from the project configuration. Please make sure that \'root\' is a prefix of \'ecoreModel\'.");
   }
   
   @Override
