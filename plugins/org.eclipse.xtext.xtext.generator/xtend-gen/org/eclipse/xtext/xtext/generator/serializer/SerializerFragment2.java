@@ -45,11 +45,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
@@ -78,6 +79,7 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
@@ -123,7 +125,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   @Extension
-  private Context2NameFunction _context2NameFunction;
+  private IGrammarConstraintProvider _iGrammarConstraintProvider;
   
   @Inject
   private DebugGraphGenerator debugGraphGenerator;
@@ -196,7 +198,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     String _plus = (_replace + "/");
     String _simpleName = GrammarUtil.getSimpleName(grammar);
     String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "GrammarConstraints.xtext");
+    return (_plus_1 + "GrammarConstraints.txt");
   }
   
   @Override
@@ -765,16 +767,16 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     StringConcatenationClient _xblockexpression = null;
     {
       Grammar _grammar = this.getGrammar();
-      Map<IGrammarConstraintProvider.IConstraint, List<EObject>> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar, type);
-      Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> _entrySet = _grammarConstraints.entrySet();
-      final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String> _function = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>() {
+      Map<IGrammarConstraintProvider.IConstraint, List<IContext>> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar, type);
+      Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>> _entrySet = _grammarConstraints.entrySet();
+      final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>, String> _function = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>, String>() {
         @Override
-        public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> it) {
+        public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>> it) {
           IGrammarConstraintProvider.IConstraint _key = it.getKey();
           return _key.getName();
         }
       };
-      final List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>sortBy(_entrySet, _function);
+      final List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>, String>sortBy(_entrySet, _function);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -783,8 +785,8 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
             boolean _greaterThan = (_size > 1);
             if (_greaterThan) {
               {
-                Iterable<Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>> _indexed = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>indexed(contexts);
-                for(final Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> ctx : _indexed) {
+                Iterable<Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>>> _indexed = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>>indexed(contexts);
+                for(final Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>> ctx : _indexed) {
                   {
                     Integer _key = ctx.getKey();
                     boolean _greaterThan_1 = ((_key).intValue() > 0);
@@ -794,32 +796,26 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
                   }
                   _builder.append("if (");
                   {
-                    Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _value = ctx.getValue();
-                    List<EObject> _value_1 = _value.getValue();
-                    final Function1<EObject, String> _function = new Function1<EObject, String>() {
-                      @Override
-                      public String apply(final EObject e) {
-                        Grammar _grammar = SerializerFragment2.this.getGrammar();
-                        return SerializerFragment2.this._context2NameFunction.getContextName(_grammar, e);
-                      }
-                    };
-                    List<EObject> _sortBy = IterableExtensions.<EObject, String>sortBy(_value_1, _function);
+                    Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>> _value = ctx.getValue();
+                    List<IContext> _value_1 = _value.getValue();
+                    List<IContext> _sort = IterableExtensions.<IContext>sort(_value_1);
                     boolean _hasElements = false;
-                    for(final EObject c : _sortBy) {
+                    for(final IContext c : _sort) {
                       if (!_hasElements) {
                         _hasElements = true;
                       } else {
                         _builder.appendImmediate("\n\t\t|| ", "");
                       }
                       _builder.append("context == grammarAccess.");
-                      String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(c);
+                      EObject _actionOrRule = c.getActionOrRule();
+                      String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(_actionOrRule);
                       _builder.append(_gaAccessor, "");
                     }
                   }
                   _builder.append(") {");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
-                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _value_2 = ctx.getValue();
+                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>> _value_2 = ctx.getValue();
                   IGrammarConstraintProvider.IConstraint _key_1 = _value_2.getKey();
                   StringConcatenationClient _genMethodCreateSequenceCall = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_1);
                   _builder.append(_genMethodCreateSequenceCall, "\t");
@@ -834,7 +830,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
               int _size_1 = contexts.size();
               boolean _equals = (_size_1 == 1);
               if (_equals) {
-                Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>head(contexts);
+                Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<IContext>>>head(contexts);
                 IGrammarConstraintProvider.IConstraint _key_2 = _head.getKey();
                 StringConcatenationClient _genMethodCreateSequenceCall_1 = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_2);
                 _builder.append(_genMethodCreateSequenceCall_1, "");
@@ -1657,19 +1653,60 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   }
   
   protected void generateGrammarConstraints() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nname cannot be resolved"
-      + "\nsafeType cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nsafeType cannot be resolved"
-      + "\nconstraints cannot be resolved"
-      + "\nname cannot be resolved");
-  }
-  
-  private Object getSafeType(final /* IConstraintContext */Object context) {
-    throw new Error("Unresolved compilation problems:"
-      + "\ncommonType cannot be resolved"
-      + "\nname cannot be resolved");
+    Grammar _grammar = this.getGrammar();
+    String _grammarConstraintsPath = this.getGrammarConstraintsPath(_grammar);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          Grammar _grammar = SerializerFragment2.this.getGrammar();
+          Map<IContext, IGrammarConstraintProvider.IConstraint> _constraints = SerializerFragment2.this._iGrammarConstraintProvider.getConstraints(_grammar);
+          List<org.eclipse.xtext.util.Pair<List<IContext>, IGrammarConstraintProvider.IConstraint>> _groupByEqualityAndSort = SerializationContext.<IGrammarConstraintProvider.IConstraint>groupByEqualityAndSort(_constraints);
+          boolean _hasElements = false;
+          for(final org.eclipse.xtext.util.Pair<List<IContext>, IGrammarConstraintProvider.IConstraint> e : _groupByEqualityAndSort) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate("\n", "");
+            }
+            List<IContext> _first = e.getFirst();
+            _builder.append(_first, "");
+            _builder.append(":");
+            _builder.newLineIfNotEmpty();
+            {
+              IGrammarConstraintProvider.IConstraint _second = e.getSecond();
+              IGrammarConstraintProvider.IConstraintElement _body = _second.getBody();
+              boolean _equals = Objects.equal(_body, null);
+              if (_equals) {
+                _builder.append("\t");
+                _builder.append("{");
+                IGrammarConstraintProvider.IConstraint _second_1 = e.getSecond();
+                EClass _type = _second_1.getType();
+                String _name = null;
+                if (_type!=null) {
+                  _name=_type.getName();
+                }
+                _builder.append(_name, "\t");
+                _builder.append("};");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("\t");
+                IGrammarConstraintProvider.IConstraint _second_2 = e.getSecond();
+                IGrammarConstraintProvider.IConstraintElement _body_1 = _second_2.getBody();
+                _builder.append(_body_1, "\t");
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+      }
+    };
+    TextFileAccess _createTextFile = this.fileAccessFactory.createTextFile(_grammarConstraintsPath, _client);
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    _createTextFile.writeTo(_srcGen);
   }
   
   @Pure

@@ -21,8 +21,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
-import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
-import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -36,12 +35,6 @@ import org.eclipse.xtext.xtext.generator.serializer.InjectableRuleNames;
 
 @SuppressWarnings("all")
 public class SyntacticSequencerExtensions {
-  @Inject
-  private IContextPDAProvider contextPDAProvider;
-  
-  @Inject
-  private IContextTypePDAProvider contextTypePDAProvider;
-  
   @Inject
   private ISyntacticSequencerPDAProvider pdaProvider;
   
@@ -58,10 +51,9 @@ public class SyntacticSequencerExtensions {
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
   
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method getAllContexts(Grammar) is undefined for the type IContextPDAProvider"
-      + "\nThe method getTypesForContext(Grammar, Object) is undefined for the type IContextTypePDAProvider"
-      + "\nThe method getPDA(Object, Object) is undefined for the type ISyntacticSequencerPDAProvider");
+    Map<IContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
+    Collection<ISyntacticSequencerPDAProvider.ISynAbsorberState> _values = _syntacticSequencerPDAs.values();
+    return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(_values, ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
   }
   
   protected void collectAllAmbiguousTransitions(final ISyntacticSequencerPDAProvider.ISynFollowerOwner state, final Set<ISyntacticSequencerPDAProvider.ISynTransition> result, final Set<Object> visited) {

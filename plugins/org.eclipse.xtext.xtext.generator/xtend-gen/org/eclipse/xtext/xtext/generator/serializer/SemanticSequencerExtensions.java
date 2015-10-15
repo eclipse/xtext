@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -64,18 +66,28 @@ public class SemanticSequencerExtensions {
   @Inject
   private IGrammarConstraintProvider gcp;
   
-  public Map<IGrammarConstraintProvider.IConstraint, List<EObject>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field constraints is undefined for the type Object"
-      + "\nThe method or field context is undefined for the type Object"
-      + "\nType mismatch: cannot convert from Map<IContext, IConstraint> to Iterable<?>"
-      + "\ntype cannot be resolved"
-      + "\n=== cannot be resolved");
-  }
-  
-  public /* List<IConstraintContext> */Object getGrammarConstraintContexts(final Grammar grammar) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from Map<IContext, IConstraint> to List<IConstraintContext>");
+  public Map<IGrammarConstraintProvider.IConstraint, List<IContext>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
+    final Map<IGrammarConstraintProvider.IConstraint, List<IContext>> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint, List<IContext>>newLinkedHashMap();
+    final Map<IContext, IGrammarConstraintProvider.IConstraint> constraints = this.gcp.getConstraints(grammar);
+    Set<Map.Entry<IContext, IGrammarConstraintProvider.IConstraint>> _entrySet = constraints.entrySet();
+    for (final Map.Entry<IContext, IGrammarConstraintProvider.IConstraint> e : _entrySet) {
+      {
+        final IContext context = e.getKey();
+        final IGrammarConstraintProvider.IConstraint constraint = e.getValue();
+        EClass _type = constraint.getType();
+        boolean _tripleEquals = (_type == clazz);
+        if (_tripleEquals) {
+          List<IContext> contexts = result.get(constraint);
+          if ((contexts == null)) {
+            ArrayList<IContext> _newArrayList = CollectionLiterals.<IContext>newArrayList();
+            contexts = _newArrayList;
+            result.put(constraint, contexts);
+          }
+          contexts.add(context);
+        }
+      }
+    }
+    return result;
   }
   
   protected ResourceSet cloneResourceSet(final ResourceSet rs) {
@@ -124,9 +136,11 @@ public class SemanticSequencerExtensions {
   }
   
   public Collection<IGrammarConstraintProvider.IConstraint> getGrammarConstraints(final Grammar grammar) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field constraints is undefined for the type Object"
-      + "\nType mismatch: cannot convert from Map<IContext, IConstraint> to Iterable<?>");
+    if ((grammar == null)) {
+      return CollectionLiterals.<IGrammarConstraintProvider.IConstraint>emptySet();
+    }
+    Map<IContext, IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
+    return _constraints.values();
   }
   
   public List<ISemanticSequencerNfaProvider.ISemState> getLinearListOfMandatoryAssignments(final IGrammarConstraintProvider.IConstraint constraint) {
