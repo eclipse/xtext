@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.ProductionStringFactory;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 import org.junit.Test;
 
 import com.google.common.base.Function;
