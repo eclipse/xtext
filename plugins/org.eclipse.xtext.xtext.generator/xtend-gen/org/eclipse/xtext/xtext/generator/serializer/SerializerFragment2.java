@@ -28,6 +28,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.BidiIterable;
@@ -54,7 +56,6 @@ import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
@@ -141,6 +142,9 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   @Accessors
   private boolean generateStub = true;
+  
+  @Accessors
+  private boolean generateSupportForDeprecatedContextObject = false;
   
   private boolean detectSyntheticTerminals = true;
   
@@ -684,8 +688,8 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("@Override");
           _builder.newLine();
-          _builder.append("public void createSequence(");
-          _builder.append(EObject.class, "");
+          _builder.append("public void sequence(");
+          _builder.append(IContext.class, "");
           _builder.append(" context, ");
           _builder.append(EObject.class, "");
           _builder.append(" semanticObject) {");
@@ -693,6 +697,14 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           _builder.append("\t");
           _builder.append(EPackage.class, "\t");
           _builder.append(" epackage = semanticObject.eClass().getEPackage();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(ParserRule.class, "\t");
+          _builder.append(" rule = context.getParserRule();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(Action.class, "\t");
+          _builder.append(" action = context.getAssignedAction();");
           _builder.newLineIfNotEmpty();
           {
             Iterable<EPackage> _accessedPackages = SerializerFragment2.this.getAccessedPackages();
@@ -763,6 +775,47 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     return _xblockexpression;
   }
   
+  private StringConcatenationClient genContextCondition(final IContext context) {
+    StringConcatenationClient _switchResult = null;
+    final IContext it = context;
+    boolean _matched = false;
+    if (!_matched) {
+      Action _assignedAction = it.getAssignedAction();
+      boolean _tripleNotEquals = (_assignedAction != null);
+      if (_tripleNotEquals) {
+        _matched=true;
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("action == grammarAccess.");
+            Action _assignedAction = it.getAssignedAction();
+            String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(_assignedAction);
+            _builder.append(_gaAccessor, "");
+          }
+        };
+        _switchResult = _client;
+      }
+    }
+    if (!_matched) {
+      ParserRule _parserRule = it.getParserRule();
+      boolean _tripleNotEquals_1 = (_parserRule != null);
+      if (_tripleNotEquals_1) {
+        _matched=true;
+        StringConcatenationClient _client_1 = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("rule == grammarAccess.");
+            ParserRule _parserRule = it.getParserRule();
+            String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(_parserRule);
+            _builder.append(_gaAccessor, "");
+          }
+        };
+        _switchResult = _client_1;
+      }
+    }
+    return _switchResult;
+  }
+  
   private StringConcatenationClient genMethodCreateSequenceCaseBody(final Map<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> superConstraints, final EClass type) {
     StringConcatenationClient _xblockexpression = null;
     {
@@ -806,10 +859,8 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
                       } else {
                         _builder.appendImmediate("\n\t\t|| ", "");
                       }
-                      _builder.append("context == grammarAccess.");
-                      EObject _actionOrRule = c.getActionOrRule();
-                      String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(_actionOrRule);
-                      _builder.append(_gaAccessor, "");
+                      StringConcatenationClient _genContextCondition = SerializerFragment2.this.genContextCondition(c);
+                      _builder.append(_genContextCondition, "");
                     }
                   }
                   _builder.append(") {");
@@ -941,7 +992,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           String _simpleName = c.getSimpleName();
           _builder.append(_simpleName, "");
           _builder.append("(");
-          _builder.append(EObject.class, "");
+          _builder.append(IContext.class, "");
           _builder.append(" context, ");
           EClass _type_1 = c.getType();
           _builder.append(_type_1, "");
@@ -993,16 +1044,10 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
               _builder.append("}");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append(ISemanticNodeProvider.INodesForEObjectProvider.class, "\t");
-              _builder.append(" nodes = createNodeProvider(");
+              _builder.append(SequenceFeeder.class, "\t");
+              _builder.append(" feeder = createSequencerFeeder(context, ");
               _builder.append(cast, "\t");
               _builder.append("semanticObject);");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append(SequenceFeeder.class, "\t");
-              _builder.append(" feeder = createSequencerFeeder(");
-              _builder.append(cast, "\t");
-              _builder.append("semanticObject, nodes);");
               _builder.newLineIfNotEmpty();
               {
                 for(final ISemanticSequencerNfaProvider.ISemState f : states) {
@@ -1032,6 +1077,31 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           }
           _builder.append("}");
           _builder.newLine();
+          _builder.newLine();
+          {
+            if (SerializerFragment2.this.generateSupportForDeprecatedContextObject) {
+              _builder.append("@Deprecated");
+              _builder.newLine();
+              _builder.append("protected void sequence_");
+              String _simpleName_1 = c.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append("(");
+              _builder.append(EObject.class, "");
+              _builder.append(" context, ");
+              EClass _type_2 = c.getType();
+              _builder.append(_type_2, "");
+              _builder.append(" semanticObject) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("sequence_");
+              String _simpleName_2 = c.getSimpleName();
+              _builder.append(_simpleName_2, "\t");
+              _builder.append("(createContext(context, semanticObject), semanticObject);");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
         }
       };
       _xblockexpression = _client_2;

@@ -18,12 +18,14 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.Alternatives
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.nodemodel.ICompositeNode
@@ -34,6 +36,7 @@ import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias
+import org.eclipse.xtext.serializer.analysis.IContext
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
@@ -41,7 +44,6 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
@@ -82,6 +84,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Accessors boolean generateDebugData = false
 	@Accessors boolean generateStub = true
+	@Accessors boolean generateSupportForDeprecatedContextObject = false
 	
 	boolean detectSyntheticTerminals = true
 	
@@ -245,8 +248,10 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		val superConstraints = grammar.superGrammar.grammarConstraints.map[it->it].toMap
 		'''
 			@Override
-			public void createSequence(«EObject» context, «EObject» semanticObject) {
+			public void sequence(«IContext» context, «EObject» semanticObject) {
 				«EPackage» epackage = semanticObject.eClass().getEPackage();
+				«ParserRule» rule = context.getParserRule();
+				«Action» action = context.getAssignedAction();
 				«FOR pkg : accessedPackages.indexed»
 					«IF pkg.key > 0»else «ENDIF»if (epackage == «pkg.value».«packageLiteral»)
 						switch (semanticObject.eClass().getClassifierID()) {
@@ -262,12 +267,19 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		'''
 	}
 	
+	private def StringConcatenationClient genContextCondition(IContext context) {
+		switch it:context {
+			case assignedAction !== null: '''action == grammarAccess.«assignedAction.gaAccessor»'''
+			case parserRule !== null: '''rule == grammarAccess.«parserRule.gaAccessor»'''
+		}
+	}
+	
 	private def StringConcatenationClient genMethodCreateSequenceCaseBody(Map<IConstraint, IConstraint> superConstraints, EClass type) {
 		val contexts = grammar.getGrammarConstraints(type).entrySet.sortBy[key.name]
 		'''
 			«IF contexts.size > 1»
 				«FOR ctx : contexts.indexed»
-					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»context == grammarAccess.«c.actionOrRule.gaAccessor»«ENDFOR») {
+					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»«c.genContextCondition»«ENDFOR») {
 						«genMethodCreateSequenceCall(superConstraints, type, ctx.value.key)»
 					}
 				«ENDFOR»
@@ -302,7 +314,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 			 * Constraint:
 			 *     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n*     ")»«ENDIF»
 			 */
-			protected void sequence_«c.simpleName»(«EObject» context, «c.type» semanticObject) {
+			protected void sequence_«c.simpleName»(«IContext» context, «c.type» semanticObject) {
 				«IF states !== null»
 					if (errorAcceptor != null) {
 						«FOR s : states»
@@ -310,8 +322,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 								errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(«cast»semanticObject, «s.feature.EContainingClass.EPackage».«s.feature.getFeatureLiteral(rs)»));
 						«ENDFOR»
 					}
-					«ISemanticNodeProvider.INodesForEObjectProvider» nodes = createNodeProvider(«cast»semanticObject);
-					«SequenceFeeder» feeder = createSequencerFeeder(«cast»semanticObject, nodes);
+					«SequenceFeeder» feeder = createSequencerFeeder(context, «cast»semanticObject);
 					«FOR f: states»
 						feeder.accept(grammarAccess.«f.assignedGrammarElement.gaAccessor()», semanticObject.«f.feature.getGetAccessor(rs)»());
 					«ENDFOR»
@@ -320,6 +331,13 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 					genericSequencer.createSequence(context, «cast»semanticObject);
 				«ENDIF»
 			}
+			
+			«IF generateSupportForDeprecatedContextObject»
+				@Deprecated
+				protected void sequence_«c.simpleName»(«EObject» context, «c.type» semanticObject) {
+					sequence_«c.simpleName»(createContext(context, semanticObject), semanticObject);
+				}
+			«ENDIF»
 		'''
 	}
 	
