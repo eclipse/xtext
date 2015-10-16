@@ -50,6 +50,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.idea.completion.XbaseLookupElementWeigher;
 import org.eclipse.xtext.xbase.idea.completion.XtypeCompletionContributor;
+import org.eclipse.xtext.xbase.idea.imports.DocumentAwareRewritableImportSectionFactory;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -60,7 +61,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
 public class XbaseCompletionContributor extends XtypeCompletionContributor {
   public static class ImportAddingInsertHandler implements InsertHandler<JavaPsiClassReferenceElement> {
     @Inject
-    private RewritableImportSection.Factory factory;
+    private DocumentAwareRewritableImportSectionFactory factory;
     
     @Override
     public void handleInsert(final InsertionContext context, final JavaPsiClassReferenceElement item) {
