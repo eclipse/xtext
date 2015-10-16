@@ -21,16 +21,16 @@ public class AntlrCodeQualityHelper {
 
 	protected String stripMachineDependentPaths(String fileContent) {
 		fileContent = fileContent.replaceAll(
-				"(?m)^(\\s+)// .*/(\\w+\\.g:.*)$",
+				"(?m)^(\\s*)// .*/(\\w+\\.g:.*)$",
 				"$1// $2");
 		fileContent = fileContent.replaceAll(
-				"(public String getGrammarFileName\\(\\) \\{ return \").*/(\\w+\\.g)(\"; \\})",
-				"$1$2$3");
+				"(public String getGrammarFileName\\(\\) \\{ return \").*(/|\\\\)(\\w+\\.g)(\"; \\})",
+				"$1$3$4");
 		return fileContent;
 	}
 
 	protected String stripAllComments(String fileContent) {
-		fileContent = fileContent.replaceAll("(?m)^\\s+//.*$\\n", "");
+		fileContent = fileContent.replaceAll("(?m)^\\s*//.*$\\r?\\n", "");
 		return fileContent;
 	}
 
@@ -41,9 +41,10 @@ public class AntlrCodeQualityHelper {
 		if (!options.isOptimizeCodeQuality()) {
 			return javaContent;
 		}
-		javaContent = stripMachineDependentPaths(javaContent);
 		if (options.isStripAllComments()) {
 			javaContent = stripAllComments(javaContent);
+		} else {
+			javaContent = stripMachineDependentPaths(javaContent);
 		}
 		return javaContent;
 	}
