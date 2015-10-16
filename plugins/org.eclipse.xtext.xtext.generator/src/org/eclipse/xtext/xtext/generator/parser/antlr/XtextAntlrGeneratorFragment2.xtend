@@ -48,6 +48,7 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Accessors
@@ -75,6 +76,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Inject ContentAssistGrammarNaming contentAssistNaming
 	
 	@Inject extension GrammarAccessExtensions grammarUtil
+	@Inject extension SyntheticTerminalDetector
 
 	override protected doGenerate() {
 		new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
