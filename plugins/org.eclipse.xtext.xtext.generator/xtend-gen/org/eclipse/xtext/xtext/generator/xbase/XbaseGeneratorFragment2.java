@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.xbase;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,8 +26,6 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -86,18 +83,6 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     String _plus_1 = (_plus + _simpleName);
     String _plus_2 = (_plus_1 + "JvmModelInferrer");
     return new TypeReference(_plus_2);
-  }
-  
-  protected TypeReference getImportScopeProvider(final ILanguageConfig langConfig) {
-    TypeReference _xifexpression = null;
-    Grammar _grammar = langConfig.getGrammar();
-    boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
-    if (_usesXImportSection) {
-      _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider");
-    } else {
-      _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider");
-    }
-    return _xifexpression;
   }
   
   @Override
@@ -190,45 +175,19 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       bindingFactory.addTypeToType(_typeRef_15, _typeRef_16);
     }
     ILanguageConfig _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
-    if (_usesXImportSection) {
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("binder.bind(");
-          _builder.append(IScopeProvider.class, "");
-          _builder.append(".class).annotatedWith(");
-          _builder.append(Names.class, "");
-          _builder.append(".named(");
-          _builder.append(AbstractDeclarativeScopeProvider.class, "");
-          _builder.append(".NAMED_DELEGATE)).to(");
-          ILanguageConfig _language = XbaseGeneratorFragment2.this.getLanguage();
-          TypeReference _importScopeProvider = XbaseGeneratorFragment2.this.getImportScopeProvider(_language);
-          _builder.append(_importScopeProvider, "");
-          _builder.append(".class);");
-          _builder.newLineIfNotEmpty();
-        }
-      };
-      final StringConcatenationClient statement = _client;
-      String _simpleName = IScopeProvider.class.getSimpleName();
-      String _plus = (_simpleName + "Delegate");
-      bindingFactory.addConfiguredBinding(_plus, statement);
-    }
-    ILanguageConfig _language_1 = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language_1.getRuntimeGenModule();
+    GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     bindingFactory.contributeTo(_runtimeGenModule);
-    ILanguageConfig _language_2 = this.getLanguage();
-    Grammar _grammar_1 = _language_2.getGrammar();
-    boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(_grammar_1);
+    ILanguageConfig _language_1 = this.getLanguage();
+    Grammar _grammar = _language_1.getGrammar();
+    boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(_grammar);
     if (_inheritsXbaseWithAnnotations) {
-      ILanguageConfig _language_3 = this.getLanguage();
-      GuiceModuleAccess _runtimeGenModule_1 = _language_3.getRuntimeGenModule();
+      ILanguageConfig _language_2 = this.getLanguage();
+      GuiceModuleAccess _runtimeGenModule_1 = _language_2.getRuntimeGenModule();
       TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.DefaultXbaseWithAnnotationsRuntimeModule");
       _runtimeGenModule_1.setSuperClass(_typeRef_17);
     } else {
-      ILanguageConfig _language_4 = this.getLanguage();
-      GuiceModuleAccess _runtimeGenModule_2 = _language_4.getRuntimeGenModule();
+      ILanguageConfig _language_3 = this.getLanguage();
+      GuiceModuleAccess _runtimeGenModule_2 = _language_3.getRuntimeGenModule();
       TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule");
       _runtimeGenModule_2.setSuperClass(_typeRef_18);
     }
