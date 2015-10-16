@@ -99,7 +99,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   @Accessors
   private boolean removeBacktrackingGuards;
   
-  @Accessors
   private int lookaheadThreshold;
   
   @Accessors
@@ -183,6 +182,11 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     this.addRuntimeBindingsAndImports();
     this.addUiBindingsAndImports();
+  }
+  
+  public void setLookaheadThreshold(final String lookaheadThreshold) {
+    int _parseInt = Integer.parseInt(lookaheadThreshold);
+    this.lookaheadThreshold = _parseInt;
   }
   
   protected void generateProductionGrammar() {
@@ -1637,15 +1641,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   public void setRemoveBacktrackingGuards(final boolean removeBacktrackingGuards) {
     this.removeBacktrackingGuards = removeBacktrackingGuards;
-  }
-  
-  @Pure
-  public int getLookaheadThreshold() {
-    return this.lookaheadThreshold;
-  }
-  
-  public void setLookaheadThreshold(final int lookaheadThreshold) {
-    this.lookaheadThreshold = lookaheadThreshold;
   }
   
   @Pure
