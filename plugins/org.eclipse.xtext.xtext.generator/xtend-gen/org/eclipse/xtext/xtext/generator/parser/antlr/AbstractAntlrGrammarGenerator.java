@@ -51,6 +51,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 import org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
 @SuppressWarnings("all")
 public abstract class AbstractAntlrGrammarGenerator {
@@ -61,6 +62,10 @@ public abstract class AbstractAntlrGrammarGenerator {
   @Inject
   @Extension
   protected GrammarAccessExtensions _grammarAccessExtensions;
+  
+  @Inject
+  @Extension
+  protected SyntheticTerminalDetector _syntheticTerminalDetector;
   
   @Inject
   private CodeConfig codeConfig;
@@ -511,7 +516,7 @@ public abstract class AbstractAntlrGrammarGenerator {
               {
                 boolean _and = false;
                 TerminalRule _value_3 = rule.getValue();
-                boolean _isSyntheticTerminalRule = this._grammarAccessExtensions.isSyntheticTerminalRule(_value_3);
+                boolean _isSyntheticTerminalRule = this._syntheticTerminalDetector.isSyntheticTerminalRule(_value_3);
                 boolean _not_1 = (!_isSyntheticTerminalRule);
                 if (!_not_1) {
                   _and = false;
@@ -607,7 +612,7 @@ public abstract class AbstractAntlrGrammarGenerator {
       boolean _isBacktrackLexer = options.isBacktrackLexer();
       if (_isBacktrackLexer) {
         {
-          boolean _isSyntheticTerminalRule = this._grammarAccessExtensions.isSyntheticTerminalRule(it);
+          boolean _isSyntheticTerminalRule = this._syntheticTerminalDetector.isSyntheticTerminalRule(it);
           boolean _not = (!_isSyntheticTerminalRule);
           if (_not) {
             {
@@ -644,7 +649,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         }
       } else {
         {
-          boolean _isSyntheticTerminalRule_1 = this._grammarAccessExtensions.isSyntheticTerminalRule(it);
+          boolean _isSyntheticTerminalRule_1 = this._syntheticTerminalDetector.isSyntheticTerminalRule(it);
           if (_isSyntheticTerminalRule_1) {
             _builder.append("fragment ");
             String _ruleName_4 = this._grammarAccessExtensions.ruleName(it);

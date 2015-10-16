@@ -19,10 +19,10 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.typeRef
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 
 /**
  * Contributes the 'Partial...ContentAssisParser' and performs further
@@ -34,7 +34,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
 class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 {
 
 	@Inject
-	extension GrammarNaming
+	ContentAssistGrammarNaming caNaming
 
 	@Inject
 	extension XtextGeneratorNaming
@@ -89,7 +89,7 @@ class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	private def StringConcatenationClient getGenPartialContentAssistParser() '''
-		public class «grammar.partialContentAssistParserClass.simpleName» extends «grammar.contentAssistParserClass» implements «
+		public class «grammar.partialContentAssistParserClass.simpleName» extends «caNaming.getParserClass(grammar)» implements «
 				"org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser".typeRef()» {
 		
 			private «AbstractRule» rule;

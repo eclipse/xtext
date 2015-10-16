@@ -128,6 +128,10 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   private Context2NameFunction _context2NameFunction;
   
   @Inject
+  @Extension
+  private SyntheticTerminalDetector syntheticTerminalDetector;
+  
+  @Inject
   private DebugGraphGenerator debugGraphGenerator;
   
   @Inject
@@ -143,10 +147,6 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   private boolean generateStub = true;
   
   private boolean detectSyntheticTerminals = true;
-  
-  @Accessors
-  @Extension
-  private SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector();
   
   /**
    * Set to false if synthetic terminal should be ignored. Synthetic terminals
@@ -1834,14 +1834,5 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   public void setGenerateStub(final boolean generateStub) {
     this.generateStub = generateStub;
-  }
-  
-  @Pure
-  public SyntheticTerminalDetector getSyntheticTerminalDetector() {
-    return this.syntheticTerminalDetector;
-  }
-  
-  public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
-    this.syntheticTerminalDetector = syntheticTerminalDetector;
   }
 }

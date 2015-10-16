@@ -77,6 +77,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension SyntacticSequencerExtensions
 	@Inject extension GrammarAccessExtensions
 	@Inject extension Context2NameFunction
+	@Inject extension SyntheticTerminalDetector syntheticTerminalDetector
 	@Inject DebugGraphGenerator debugGraphGenerator
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
@@ -88,9 +89,6 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	boolean generateStub = true
 	
 	boolean detectSyntheticTerminals = true
-	
-	@Accessors
-	extension SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector
 	
 	/**
 	 * Set to false if synthetic terminal should be ignored. Synthetic terminals

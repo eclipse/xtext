@@ -86,6 +86,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
 @SuppressWarnings("all")
 public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
@@ -125,6 +126,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   @Inject
   @Extension
   private GrammarAccessExtensions grammarUtil;
+  
+  @Inject
+  @Extension
+  private SyntheticTerminalDetector _syntheticTerminalDetector;
   
   @Override
   protected void doGenerate() {
@@ -428,7 +433,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
             final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
               @Override
               public Boolean apply(final TerminalRule it) {
-                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this.grammarUtil.isSyntheticTerminalRule(it));
+                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
               }
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
@@ -888,7 +893,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
             final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
               @Override
               public Boolean apply(final TerminalRule it) {
-                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this.grammarUtil.isSyntheticTerminalRule(it));
+                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
               }
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);

@@ -34,6 +34,7 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 abstract class AbstractAntlrGrammarGenerator {
 	
@@ -42,6 +43,9 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	@Inject
 	protected extension GrammarAccessExtensions
+	
+	@Inject
+	protected extension SyntheticTerminalDetector
 	
 	@Inject CodeConfig codeConfig
 	
