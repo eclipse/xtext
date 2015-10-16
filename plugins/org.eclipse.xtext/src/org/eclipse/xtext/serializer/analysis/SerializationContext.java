@@ -171,13 +171,14 @@ public abstract class SerializationContext implements ISerializationContext {
 			return null;
 		List<EObject> result = Lists.newArrayList();
 		for (ISerializationContext ctx : ctxs)
-			result.add(ctx.getActionOrRule());
+			result.add(((SerializationContext) ctx).getActionOrRule());
 		return result;
 	}
 
 	public static <T> List<Pair<List<ISerializationContext>, T>> groupByEqualityAndSort(Map<ISerializationContext, T> items) {
 		SetMultimap<ISerializationContext, T> byContext = Multimaps.forMap(items);
-		ArrayListMultimap<T, ISerializationContext> byT = Multimaps.invertFrom(byContext, ArrayListMultimap.<T, ISerializationContext> create());
+		ArrayListMultimap<T, ISerializationContext> byT = Multimaps.invertFrom(byContext,
+				ArrayListMultimap.<T, ISerializationContext> create());
 		List<Pair<List<ISerializationContext>, T>> result = Lists.newArrayList();
 		for (Entry<T, Collection<ISerializationContext>> e : byT.asMap().entrySet()) {
 			T t = e.getKey();
@@ -211,7 +212,7 @@ public abstract class SerializationContext implements ISerializationContext {
 	@Override
 	public int compareTo(ISerializationContext o) {
 		EObject o1 = getActionOrRule();
-		EObject o2 = o.getActionOrRule();
+		EObject o2 = ((SerializationContext) o).getActionOrRule();
 		if (o1 != o2) {
 			GrammarElementDeclarationOrder order = GrammarElementDeclarationOrder.get(GrammarUtil.getGrammar(o1));
 			int compare = order.compare(o1, o2);
@@ -232,7 +233,7 @@ public abstract class SerializationContext implements ISerializationContext {
 				return 1;
 		}
 		ISerializationContext p1 = getParent();
-		ISerializationContext p2 = o.getParent();
+		ISerializationContext p2 = ((SerializationContext) o).getParent();
 		if (p1 != p2) {
 			if (p1 != null && p2 != null)
 				return p1.compareTo(p2);
@@ -262,7 +263,6 @@ public abstract class SerializationContext implements ISerializationContext {
 		return true;
 	}
 
-	@Override
 	public EObject getActionOrRule() {
 		Action action = getAssignedAction();
 		return action != null ? action : getParserRule();
@@ -273,7 +273,6 @@ public abstract class SerializationContext implements ISerializationContext {
 		return parent != null ? parent.getAssignedAction() : null;
 	}
 
-	@Override
 	public ISerializationContext getParent() {
 		return parent;
 	}

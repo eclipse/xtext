@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -105,7 +106,7 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	@Override
 	@Deprecated
 	public EObject getContext() {
-		return context.getActionOrRule();
+		return ((SerializationContext) context).getActionOrRule();
 	}
 
 	@Override

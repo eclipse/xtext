@@ -62,7 +62,7 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	@Override
 	public void createSequence(ISerializationContext context, EObject semanticObject) {
 		if (USES_EOBJECT_AS_CONTEXT) {
-			createSequence(context.getActionOrRule(), semanticObject);
+			createSequence(((SerializationContext) context).getActionOrRule(), semanticObject);
 		} else {
 			sequence(context, semanticObject);
 		}
@@ -83,14 +83,12 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
 	protected SequenceFeeder createSequencerFeeder(ISerializationContext context, EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
-		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
-				errorAcceptor);
+		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor, errorAcceptor);
 	}
 
 	protected SequenceFeeder createSequencerFeeder(ISerializationContext context, EObject semanticObject,
 			INodesForEObjectProvider nodeProvider) {
-		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
-				errorAcceptor);
+		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor, errorAcceptor);
 	}
 
 	@Override
