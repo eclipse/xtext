@@ -56,8 +56,8 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 
 	@Override
 	@Deprecated
-	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject,
-			EObject context, Nfa<ISemState> nfa) {
+	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject, EObject context,
+			Nfa<ISemState> nfa) {
 		ISerializationContext ctx = SerializationContext.fromEObject(context, semanticObject.getEObject());
 		Map<ISerializationContext, IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
 		return createBacktrackingFailedDiagnostic(semanticObject, ctx, constraints.get(ctx));
@@ -70,8 +70,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		msg.append("Could not serialize EObject via backtracking.\n");
 		msg.append("Constraint: " + constraint + "\n");
 		msg.append(sem.getValuesString());
-		return new SerializationDiagnostic(BACKTRACKING_FAILED, sem.getEObject(), ctx, grammarAccess.getGrammar(),
-				msg.toString());
+		return new SerializationDiagnostic(BACKTRACKING_FAILED, sem.getEObject(), ctx, grammarAccess.getGrammar(), msg.toString());
 	}
 
 	@Override
@@ -123,7 +122,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		Map<ISerializationContext, IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
 		Set<EClass> result = Sets.newLinkedHashSet();
 		for (ISerializationContext ctx : constraints.keySet())
-			if (ctx.getActionOrRule() == context.getActionOrRule()) {
+			if (((SerializationContext) ctx).getActionOrRule() == ((SerializationContext) context).getActionOrRule()) {
 				result.add(ctx.getType());
 			}
 		return result;

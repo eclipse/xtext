@@ -10,7 +10,6 @@ package org.eclipse.xtext.serializer;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
@@ -24,13 +23,9 @@ import org.eclipse.xtext.ParserRule;
  */
 public interface ISerializationContext extends Comparable<ISerializationContext> {
 
-	EObject getActionOrRule();
-
 	Action getAssignedAction();
 
 	Set<Parameter> getParameterValues();
-
-	ISerializationContext getParent();
 
 	ParserRule getParserRule();
 
