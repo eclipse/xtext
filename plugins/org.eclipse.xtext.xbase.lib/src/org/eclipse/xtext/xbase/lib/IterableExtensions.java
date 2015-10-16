@@ -796,7 +796,7 @@ public class IterableExtensions {
 
 	/**
 	 * Finds the element that yields the minimum value when passed to <code>compareBy</code>. If there are several
-	 * maxima, the first one will be returned.
+	 * minima, the first one will be returned.
 	 * 
 	 * @param iterable
 	 *            the elements to find the minimum of. May not be <code>null</code>.
