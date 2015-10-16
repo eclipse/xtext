@@ -22,6 +22,7 @@ public class XtypeParser extends AbstractAntlrParser {
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
+	
 
 	@Override
 	protected InternalXtypeParser createParser(XtextTokenStream stream) {
