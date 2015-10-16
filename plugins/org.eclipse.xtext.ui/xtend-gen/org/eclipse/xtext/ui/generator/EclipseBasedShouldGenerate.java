@@ -8,11 +8,12 @@
 package org.eclipse.xtext.ui.generator;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,9 +26,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class EclipseBasedShouldGenerate implements IShouldGenerate {
-  @Inject
-  private IWorkspaceRoot workspace;
-  
   @Override
   public boolean shouldGenerate(final Resource resource, final String projectName, final CancelIndicator cancelIndicator) {
     try {
@@ -43,9 +41,11 @@ public class EclipseBasedShouldGenerate implements IShouldGenerate {
       if (_or) {
         return false;
       }
+      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+      IWorkspaceRoot _root = _workspace.getRoot();
       String _platformString = uri.toPlatformString(true);
       Path _path = new Path(_platformString);
-      final IResource member = this.workspace.findMember(_path);
+      final IResource member = _root.findMember(_path);
       boolean _and = false;
       boolean _and_1 = false;
       if (!(member != null)) {
