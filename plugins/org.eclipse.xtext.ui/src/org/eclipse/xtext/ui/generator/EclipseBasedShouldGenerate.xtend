@@ -7,45 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator
 
-import com.google.inject.Inject
-import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IMarker
-import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResource
-import org.eclipse.core.resources.IStorage
 import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.runtime.CoreException
-import org.eclipse.emf.common.util.WrappedException
+import org.eclipse.core.runtime.Path
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IShouldGenerate
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.Pair
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class EclipseBasedShouldGenerate implements IShouldGenerate {
 
-	@Inject IStorage2UriMapper storage2UriMapper
-
-	override shouldGenerate(Resource resource, CancelIndicator cancelIndicator) {
-		val uri = resource?.resourceSet?.resources?.head?.URI
-		if (uri == null || !uri.isPlatformResource)
+	override shouldGenerate(Resource resource, String projectName, CancelIndicator cancelIndicator) {
+		val uri = resource.URI
+		if (uri === null || !uri.isPlatformResource)
 			return false
-		val project = ResourcesPlugin.workspace.root.getProject(uri.segment(1))
-		try {
-			var Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(resource.getURI())
-			for (Pair<IStorage, IProject> pair : storages) {
-				if (pair.getFirst() instanceof IFile && pair.getSecond().equals(project)) {
-					var IFile file = pair.getFirst() as IFile
-					return file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) !== IMarker.SEVERITY_ERROR
-				}
-			}
-			return false
-		} catch (CoreException exc) {
-			throw new WrappedException(exc)
+		val member = ResourcesPlugin.workspace.root.findMember(new Path(uri.toPlatformString(true)))
+		if (member !== null && member.type === IResource.FILE && member.project.name == projectName) {
+			return member.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) !== IMarker.SEVERITY_ERROR
 		}
+		return false
 	}
 
 }

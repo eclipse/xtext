@@ -40,9 +40,10 @@ public class VirtualFileURIUtil {
    * @return a VirtualFile for the given EMF URI, or <code>null</code> if no VirtualFile exists.
    */
   public static VirtualFile getVirtualFile(final URI uri) {
-    VirtualFileManager _instance = VirtualFileManager.getInstance();
     String _string = uri.toString();
-    return _instance.findFileByUrl(_string);
+    final String url = VfsUtil.fixURLforIDEA(_string);
+    VirtualFileManager _instance = VirtualFileManager.getInstance();
+    return _instance.findFileByUrl(url);
   }
   
   /**

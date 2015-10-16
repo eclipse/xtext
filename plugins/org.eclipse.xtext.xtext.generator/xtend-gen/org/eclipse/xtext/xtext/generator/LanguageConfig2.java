@@ -213,13 +213,17 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     EObject _get_1 = _contents_1.get(0);
     final Grammar grammar = ((Grammar) _get_1);
     this.validateGrammar(grammar);
-    this.grammar = grammar;
-    RuleNames _ruleNames = RuleNames.getRuleNames(grammar, true);
-    this.ruleNames = _ruleNames;
+    this.initialize(grammar);
     List<IGeneratorFragment2> _fragments_1 = this.getFragments();
     for (final IGeneratorFragment2 fragment : _fragments_1) {
       fragment.initialize(injector);
     }
+  }
+  
+  public void initialize(final Grammar grammar) {
+    this.grammar = grammar;
+    RuleNames _ruleNames = RuleNames.getRuleNames(grammar, true);
+    this.ruleNames = _ruleNames;
   }
   
   private void installIndex() {

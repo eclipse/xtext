@@ -113,10 +113,6 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   @Extension
-  private SyntheticTerminalDetector _syntheticTerminalDetector;
-  
-  @Inject
-  @Extension
   private SemanticSequencerExtensions _semanticSequencerExtensions;
   
   @Inject
@@ -147,6 +143,10 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   private boolean generateStub = true;
   
   private boolean detectSyntheticTerminals = true;
+  
+  @Accessors
+  @Extension
+  private SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector();
   
   /**
    * Set to false if synthetic terminal should be ignored. Synthetic terminals
@@ -349,7 +349,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
                 final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
                   @Override
                   public Boolean apply(final TerminalRule it) {
-                    return Boolean.valueOf(SerializerFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+                    return Boolean.valueOf(SerializerFragment2.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
                   }
                 };
                 Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
@@ -427,7 +427,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
                 final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
                   @Override
                   public Boolean apply(final TerminalRule it) {
-                    return Boolean.valueOf(SerializerFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+                    return Boolean.valueOf(SerializerFragment2.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
                   }
                 };
                 Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
@@ -1474,7 +1474,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
       if (!this.detectSyntheticTerminals) {
         _and = false;
       } else {
-        boolean _isSyntheticTerminalRule = this._syntheticTerminalDetector.isSyntheticTerminalRule(((TerminalRule)rule));
+        boolean _isSyntheticTerminalRule = this.syntheticTerminalDetector.isSyntheticTerminalRule(((TerminalRule)rule));
         _and = _isSyntheticTerminalRule;
       }
       if (_and) {
@@ -1834,5 +1834,14 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   public void setGenerateStub(final boolean generateStub) {
     this.generateStub = generateStub;
+  }
+  
+  @Pure
+  public SyntheticTerminalDetector getSyntheticTerminalDetector() {
+    return this.syntheticTerminalDetector;
+  }
+  
+  public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
+    this.syntheticTerminalDetector = syntheticTerminalDetector;
   }
 }
