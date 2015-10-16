@@ -431,6 +431,52 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"", editor);
 	}
 	
+	@Test 
+	public void testBug434717_07() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''\n" + 
+				"			|\n" + 
+				"		'''" + 
+				"");
+		pasteText(editor, "aaa\n" +
+						  "  \n" + 
+						  "  bbb\n"+
+						  " \n" + 
+						  " ccc\n");
+		assertState(
+				"genPlainText(Object this){\n" + 
+						"		'''\n" + 
+						"			aaa\n" + 
+						"			  \n" + 
+						"			  bbb\n" + 
+						"			 \n" + 
+						"			 ccc|\n" + 
+						"		'''" + 
+						"", editor);
+	}
+	
+	@Test 
+	public void testBug434717_08() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''|'''" + 
+				"");
+		pasteText(editor, "aaa\n" +
+						  "  \n" + 
+						  "  bbb\n"+
+						  " \n" + 
+						  " ccc\n");
+		assertState(
+				"genPlainText(Object this){\n" + 
+						"		'''aaa\n" + 
+						"		  \n" + 
+						"		  bbb\n" + 
+						"		 \n" + 
+						"		 ccc|'''" + 
+						"", editor);
+	}
+	
 	@Test
 	public void testWindowsLineDelimiter() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");

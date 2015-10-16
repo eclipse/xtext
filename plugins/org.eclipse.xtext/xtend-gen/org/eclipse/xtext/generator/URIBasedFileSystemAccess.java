@@ -12,6 +12,7 @@ import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -108,7 +109,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
     if (_equals) {
       throw new IllegalArgumentException((("A slot with name \'" + outputConfiguration) + "\' has not been configured."));
     }
-    final URI uri = URI.createURI(((outlet + "/") + path));
+    final URI uri = URI.createFileURI(((outlet + File.separator) + path));
     boolean _notEquals = (!Objects.equal(this.baseDir, null));
     if (_notEquals) {
       final URI resolved = uri.resolve(this.baseDir);

@@ -24,6 +24,8 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
@@ -67,15 +69,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     CODEMIRROR;
   }
   
-  private final static String REQUIREJS_VERSION = "2.1.17";
+  private final static String REQUIREJS_VERSION = "2.1.20";
   
-  private final static String REQUIREJS_TEXT_VERSION = "2.0.10-3";
+  private final static String REQUIREJS_TEXT_VERSION = "2.0.14";
   
   private final static String JQUERY_VERSION = "2.1.4";
   
-  private final static String ACE_VERSION = "1.1.9";
+  private final static String ACE_VERSION = "1.2.0";
   
-  private final static String CODEMIRROR_VERSION = "5.5";
+  private final static String CODEMIRROR_VERSION = "5.7";
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -117,6 +119,21 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   private boolean generateJettyLauncher = false;
   
   private boolean generateHtmlExample = false;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String requireJsVersion = WebIntegrationFragment.REQUIREJS_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String requireJsTextVersion = WebIntegrationFragment.REQUIREJS_TEXT_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String jQueryVersion = WebIntegrationFragment.JQUERY_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String aceVersion = WebIntegrationFragment.ACE_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String codeMirrorVersion = WebIntegrationFragment.CODEMIRROR_VERSION;
   
   /**
    * Choose one of the supported frameworks: {@code "Orion"}, {@code "Ace"}, or {@code "CodeMirror"}
@@ -1495,12 +1512,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               if (_equals_2) {
                 _builder.append("\t");
                 _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
-                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+                _builder.append(WebIntegrationFragment.this.codeMirrorVersion, "\t");
                 _builder.append("/lib/codemirror.css\"/>");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
-                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+                _builder.append(WebIntegrationFragment.this.codeMirrorVersion, "\t");
                 _builder.append("/addon/hint/show-hint.css\"/>");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -1518,7 +1535,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("<script src=\"webjars/requirejs/");
-        _builder.append(WebIntegrationFragment.REQUIREJS_VERSION, "\t");
+        _builder.append(WebIntegrationFragment.this.requireJsVersion, "\t");
         _builder.append("/require.min.js\"></script>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1553,13 +1570,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("\"text\": \"webjars/requirejs-text/");
-            _builder.append(WebIntegrationFragment.REQUIREJS_TEXT_VERSION, "\t\t\t\t");
+            _builder.append(WebIntegrationFragment.this.requireJsTextVersion, "\t\t\t\t");
             _builder.append("/text\",");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("\"jquery\": \"webjars/jquery/");
-            _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+            _builder.append(WebIntegrationFragment.this.jQueryVersion, "\t\t\t\t");
             _builder.append("/jquery.min\",");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
@@ -1631,13 +1648,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.append("\t\t");
               _builder.append("\t\t");
               _builder.append("\"jquery\": \"webjars/jquery/");
-              _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+              _builder.append(WebIntegrationFragment.this.jQueryVersion, "\t\t\t\t");
               _builder.append("/jquery.min\",");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("\t\t");
               _builder.append("\"ace/ext/language_tools\": \"webjars/ace/");
-              _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t\t\t");
+              _builder.append(WebIntegrationFragment.this.aceVersion, "\t\t\t\t");
               _builder.append("/src/ext-language_tools\",");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -1656,7 +1673,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("require([\"webjars/ace/");
-              _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t");
+              _builder.append(WebIntegrationFragment.this.aceVersion, "\t\t");
               _builder.append("/src/ace\"], function() {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -1711,7 +1728,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.append("\t\t");
                 _builder.append("\t\t");
                 _builder.append("\"jquery\": \"webjars/jquery/");
-                _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+                _builder.append(WebIntegrationFragment.this.jQueryVersion, "\t\t\t\t");
                 _builder.append("/jquery.min\",");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
@@ -1736,7 +1753,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.append("\t\t");
                 _builder.append("\t\t");
                 _builder.append("location: \"webjars/codemirror/");
-                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t\t\t\t");
+                _builder.append(WebIntegrationFragment.this.codeMirrorVersion, "\t\t\t\t");
                 _builder.append("\",");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
@@ -2529,5 +2546,25 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     xmlFile.writeTo(_assets_1);
+  }
+  
+  public void setRequireJsVersion(final String requireJsVersion) {
+    this.requireJsVersion = requireJsVersion;
+  }
+  
+  public void setRequireJsTextVersion(final String requireJsTextVersion) {
+    this.requireJsTextVersion = requireJsTextVersion;
+  }
+  
+  public void setJQueryVersion(final String jQueryVersion) {
+    this.jQueryVersion = jQueryVersion;
+  }
+  
+  public void setAceVersion(final String aceVersion) {
+    this.aceVersion = aceVersion;
+  }
+  
+  public void setCodeMirrorVersion(final String codeMirrorVersion) {
+    this.codeMirrorVersion = codeMirrorVersion;
   }
 }

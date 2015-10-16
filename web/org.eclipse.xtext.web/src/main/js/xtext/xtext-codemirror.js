@@ -253,7 +253,6 @@ define([
 		var editorContext = services.editorContext;
 		var editor = this.editor;
 		services.computeHighlighting().always(function() {
-			editor.clearGutter('annotations-gutter');
 			var highlightingMarkers = editorContext._highlightingMarkers;
 			if (highlightingMarkers) {
 				for (var i = 0; i < highlightingMarkers.length; i++) {
@@ -274,6 +273,42 @@ define([
 		});
 	}
 	
+	var annotationWeight = {
+		error: 30,
+		warning: 20,
+		info: 10
+	};
+	CodeMirrorServiceBuilder.prototype._getAnnotationWeight = function(annotation) {
+		if (annotationWeight[annotation] !== undefined)
+			return annotationWeight[annotation];
+		else
+			return 0;
+	}
+	
+	CodeMirrorServiceBuilder.prototype._clearAnnotations = function(annotations) {
+		var editor = this.editor;
+		for (var i = 0; i < annotations.length; i++) {
+			var annotation = annotations[i];
+			if (annotation) {
+				editor.setGutterMarker(i, 'annotations-gutter', null);
+				annotations[i] = undefined;
+			}
+		}
+	}
+	
+	CodeMirrorServiceBuilder.prototype._refreshAnnotations = function(annotations) {
+		var editor = this.editor;
+		for (var i = 0; i < annotations.length; i++) {
+			var annotation = annotations[i];
+			if (annotation) {
+				var classProp = ' class="xtext-annotation_' + annotation.type + '"';
+				var titleProp = annotation.description ? ' title="' + annotation.description.replace(/"/g, '&quot;') + '"' : '';
+				var element = jQuery('<div' + classProp + titleProp + '></div>').get(0);
+				editor.setGutterMarker(i, 'annotations-gutter', element);
+			}
+		}
+	}
+	
 	/**
 	 * Validation service.
 	 */
@@ -281,8 +316,12 @@ define([
 		var services = this.services;
 		var editorContext = services.editorContext;
 		var editor = this.editor;
+		var self = this;
 		services.validate().always(function() {
-			editor.clearGutter('annotations-gutter');
+			if (editorContext._validationAnnotations)
+				self._clearAnnotations(editorContext._validationAnnotations);
+			else
+				editorContext._validationAnnotations = [];
 			var validationMarkers = editorContext._validationMarkers;
 			if (validationMarkers) {
 				for (var i = 0; i < validationMarkers.length; i++) {
@@ -291,11 +330,27 @@ define([
 			}
 			editorContext._validationMarkers = [];
 		}).done(function(result) {
+			var validationAnnotations = editorContext._validationAnnotations;
 			for (var i = 0; i < result.issues.length; i++) {
 				var entry = result.issues[i];
-				var element = jQuery('<div class="xtext-annotation_' + entry.severity
-						+ '" title="' + entry.description + '"></div>').get(0);
-				editor.setGutterMarker(entry.line - 1, 'annotations-gutter', element);
+				var annotation = validationAnnotations[entry.line - 1];
+				var weight = self._getAnnotationWeight(entry.severity);
+				if (annotation) {
+					if (annotation.weight < weight) {
+						annotation.type = entry.severity;
+						annotation.weight = weight;
+					}
+					if (annotation.description)
+						annotation.description += '\n' + entry.description;
+					else
+						annotation.description = entry.description;
+				} else {
+					validationAnnotations[entry.line - 1] = {
+						type: entry.severity,
+						weight: weight,
+						description: entry.description
+					};
+				}
 				var from = editor.posFromIndex(entry.offset);
 				var to = editor.posFromIndex(entry.offset + entry.length);
 				var marker =  editor.markText(from, to, {
@@ -304,6 +359,7 @@ define([
 				});
 				editorContext._validationMarkers.push(marker);
 			}
+			self._refreshAnnotations(validationAnnotations);
 		});
 	}
 		

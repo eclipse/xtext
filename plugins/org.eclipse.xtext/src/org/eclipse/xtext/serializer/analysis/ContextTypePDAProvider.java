@@ -14,12 +14,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
@@ -60,9 +57,11 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 					return null;
 				case PUSH:
 					RuleCall rc = (RuleCall) state.getGrammarElement();
-					EClass cls = getInstantiatedType(rc);
-					if (cls != null)
-						return enterType(state, previous, new StackItem(previous.stack, rc), cls);
+					if (previous.type == null) {
+						EClass cls = getInstantiatedType(rc);
+						if (cls != null)
+							return enterType(state, previous, new StackItem(previous.stack, rc), cls);
+					}
 					return new FilterState(previous, previous.type, new StackItem(previous.stack, rc), state);
 				case START:
 					return new FilterState(previous, null, null, state);
@@ -78,10 +77,8 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 				EClass newType);
 
 		protected EClass getInstantiatedType(AbstractElement element) {
-			Assignment ass = GrammarUtil.containingAssignment(element);
-			AbstractRule rule = element instanceof RuleCall ? ((RuleCall) element).getRule() : null;
 			TypeRef type = null;
-			if (ass != null || (rule instanceof ParserRule && ((ParserRule) rule).isFragment())) {
+			if (GrammarUtil.isAssigned(element) || GrammarUtil.isEObjectFragmentRuleCall(element)) {
 				type = GrammarUtil.containingRule(element).getType();
 			} else if (element instanceof Action) {
 				type = ((Action) element).getType();

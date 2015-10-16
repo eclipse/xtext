@@ -5,23 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.generator.serializer;
+package org.eclipse.xtext.xtext.generator.serializer
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.xtext.RuleNames;
+import com.google.inject.Inject
+import com.google.inject.Singleton
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.xtext.RuleNames
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
-/**
+/** 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Singleton
-public class InjectableRuleNames extends RuleNames {
-
+@Singleton class InjectableRuleNames extends RuleNames {
+	
 	@Inject
-	public InjectableRuleNames(Grammar grammar) {
-		super(grammar, false);
+	new(Grammar grammar) {
+		super(grammar, false)
 	}
 	
 }

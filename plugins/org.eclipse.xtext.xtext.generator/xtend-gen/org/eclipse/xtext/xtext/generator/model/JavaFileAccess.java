@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -31,7 +32,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class JavaFileAccess extends TextFileAccess {
-  private static class JavaTypeAwareStringConcatenation extends StringConcatenation {
+  protected static class JavaTypeAwareStringConcatenation extends StringConcatenation {
     private final JavaFileAccess access;
     
     public JavaTypeAwareStringConcatenation(final JavaFileAccess access) {
@@ -61,7 +62,20 @@ public class JavaFileAccess extends TextFileAccess {
             TypeReference _typeReference_1 = new TypeReference(((EClass) object), this.access.resourceSet);
             _xifexpression_2 = this.access.importType(_typeReference_1);
           } else {
-            _xifexpression_2 = object.toString();
+            String _xifexpression_3 = null;
+            boolean _and_1 = false;
+            if (!(object instanceof EPackage)) {
+              _and_1 = false;
+            } else {
+              _and_1 = (this.access.resourceSet != null);
+            }
+            if (_and_1) {
+              TypeReference _typeReference_2 = new TypeReference(((EPackage) object), this.access.resourceSet);
+              _xifexpression_3 = this.access.importType(_typeReference_2);
+            } else {
+              _xifexpression_3 = object.toString();
+            }
+            _xifexpression_2 = _xifexpression_3;
           }
           _xifexpression_1 = _xifexpression_2;
         }
@@ -93,7 +107,7 @@ public class JavaFileAccess extends TextFileAccess {
   @Accessors
   private boolean markedAsGenerated;
   
-  @Accessors(AccessorType.PROTECTED_SETTER)
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private ResourceSet resourceSet;
   
   protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
@@ -196,14 +210,10 @@ public class JavaFileAccess extends TextFileAccess {
   }
   
   @Override
-  public CharSequence setContent(final StringConcatenationClient javaContent) {
-    CharSequence _xblockexpression = null;
-    {
-      final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
-      javaStringConcat.append(javaContent);
-      _xblockexpression = this.internalContents = javaStringConcat;
-    }
-    return _xblockexpression;
+  public void setContent(final StringConcatenationClient javaContent) {
+    final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
+    javaStringConcat.append(javaContent);
+    this.internalContents = javaStringConcat;
   }
   
   protected boolean appendSemicolons() {
@@ -272,7 +282,7 @@ public class JavaFileAccess extends TextFileAccess {
     this.markedAsGenerated = markedAsGenerated;
   }
   
-  protected void setResourceSet(final ResourceSet resourceSet) {
+  public void setResourceSet(final ResourceSet resourceSet) {
     this.resourceSet = resourceSet;
   }
 }

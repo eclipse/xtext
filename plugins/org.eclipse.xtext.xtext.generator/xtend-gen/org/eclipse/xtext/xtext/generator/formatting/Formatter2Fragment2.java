@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
@@ -65,6 +67,9 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
   
+  @Accessors
+  private boolean generateStub;
+  
   protected TypeReference getFormatter2Stub(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".formatting2.");
@@ -76,6 +81,9 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
+    if ((!this.generateStub)) {
+      return;
+    }
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -114,13 +122,16 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
     Grammar _grammar = this.getGrammar();
     TypeReference _formatter2Stub = this.getFormatter2Stub(_grammar);
     final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_formatter2Stub);
-    final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
     ILanguageConfig _language = this.getLanguage();
-    Grammar _grammar_1 = _language.getGrammar();
+    ResourceSet _resourceSet = _language.getResourceSet();
+    xtendFile.setResourceSet(_resourceSet);
+    final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
+    ILanguageConfig _language_1 = this.getLanguage();
+    Grammar _grammar_1 = _language_1.getGrammar();
     this.getLocallyAssignedContainmentReferences(_grammar_1, type2ref);
     final LinkedHashMultimap<EClass, EReference> inheritedTypes = LinkedHashMultimap.<EClass, EReference>create();
-    ILanguageConfig _language_1 = this.getLanguage();
-    Grammar _grammar_2 = _language_1.getGrammar();
+    ILanguageConfig _language_2 = this.getLanguage();
+    Grammar _grammar_2 = _language_2.getGrammar();
     HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
     this.getInheritedContainmentReferences(_grammar_2, inheritedTypes, _newHashSet);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -181,9 +192,7 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
           }
         }
         _builder.append(" dispatch void format(");
-        ILanguageConfig _language = Formatter2Fragment2.this.getLanguage();
-        TypeReference _typeRef = TypeReference.typeRef(clazz, _language);
-        _builder.append(_typeRef, "");
+        _builder.append(clazz, "");
         _builder.append(" ");
         String _varName = Formatter2Fragment2.this.toVarName(clazz);
         _builder.append(_varName, "");
@@ -202,9 +211,7 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
                 _builder.append("\t");
                 _builder.append("for (");
                 EClass _eReferenceType = ref.getEReferenceType();
-                ILanguageConfig _language_1 = Formatter2Fragment2.this.getLanguage();
-                TypeReference _typeRef_1 = TypeReference.typeRef(_eReferenceType, _language_1);
-                _builder.append(_typeRef_1, "\t");
+                _builder.append(_eReferenceType, "\t");
                 _builder.append(" ");
                 String _varName_1 = Formatter2Fragment2.this.toVarName(ref);
                 _builder.append(_varName_1, "\t");
@@ -341,5 +348,14 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
     ResourceSet _resourceSet = _language.getResourceSet();
     GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, _resourceSet);
     return _genFeature.getGetAccessor();
+  }
+  
+  @Pure
+  public boolean isGenerateStub() {
+    return this.generateStub;
+  }
+  
+  public void setGenerateStub(final boolean generateStub) {
+    this.generateStub = generateStub;
   }
 }

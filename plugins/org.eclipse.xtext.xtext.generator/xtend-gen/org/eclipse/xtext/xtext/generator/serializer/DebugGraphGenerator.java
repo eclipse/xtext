@@ -1,11 +1,11 @@
 /**
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator.serializer;
+package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -16,11 +16,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.generator.serializer.EqualAmbiguousTransitions;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
-import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
@@ -36,6 +33,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.serializer.EqualAmbiguousTransitions;
+import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerExtensions;
+import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 
 @SuppressWarnings("all")
 public class DebugGraphGenerator {
@@ -44,11 +45,11 @@ public class DebugGraphGenerator {
   
   @Inject
   @Extension
-  private Naming naming;
+  private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
   @Extension
-  private Context2NameFunction nameFunction;
+  private Context2NameFunction _context2NameFunction;
   
   @Inject
   private IContextPDAProvider contextPDAProvider;
@@ -66,7 +67,7 @@ public class DebugGraphGenerator {
   private SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot;
   
   @Inject
-  private SyntacticSequencerUtil syntacticSequencerUtil;
+  private SyntacticSequencerExtensions syntacticSequencerUtil;
   
   @Inject
   private PdaToDot<?, ?> pdaToDot;
@@ -103,9 +104,9 @@ public class DebugGraphGenerator {
             Pair<String, String> _mappedTo_3 = Pair.<String, String>of(_file_3, _draw_3);
             result.add(_mappedTo_3);
           } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable t = (Throwable)_t;
-              String _contextName = this.nameFunction.getContextName(this.grammar, context);
+            if (_t instanceof Exception) {
+              final Exception e = (Exception)_t;
+              String _contextName = this._context2NameFunction.getContextName(this.grammar, context);
               String _plus = ("Context: " + _contextName);
               String _plus_1 = (_plus + " Type:");
               String _name = null;
@@ -114,19 +115,19 @@ public class DebugGraphGenerator {
               }
               String _plus_2 = (_plus_1 + _name);
               System.out.println(_plus_2);
-              t.printStackTrace();
+              e.printStackTrace();
             } else {
               throw Exceptions.sneakyThrow(_t);
             }
           }
         }
       } catch (final Throwable _t_1) {
-        if (_t_1 instanceof Throwable) {
-          final Throwable t_1 = (Throwable)_t_1;
-          String _contextName_1 = this.nameFunction.getContextName(this.grammar, context);
+        if (_t_1 instanceof Exception) {
+          final Exception e_1 = (Exception)_t_1;
+          String _contextName_1 = this._context2NameFunction.getContextName(this.grammar, context);
           String _plus_3 = ("Context: " + _contextName_1);
           System.out.println(_plus_3);
-          t_1.printStackTrace();
+          e_1.printStackTrace();
         } else {
           throw Exceptions.sneakyThrow(_t_1);
         }
@@ -155,8 +156,8 @@ public class DebugGraphGenerator {
       for (final EqualAmbiguousTransitions group : _allAmbiguousTransitionsBySyntax) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("id: ");
-        String _identifyer = group.getIdentifyer();
-        _builder.append(_identifyer, "");
+        String _identifier = group.getIdentifier();
+        _builder.append(_identifier, "");
         _builder.newLineIfNotEmpty();
         _builder.append("    ");
         _builder.append("Ambiguous syntax:»:");
@@ -197,9 +198,9 @@ public class DebugGraphGenerator {
       Pair<String, String> _mappedTo_4 = Pair.<String, String>of(_plus_4, _string_1);
       result.add(_mappedTo_4);
     } catch (final Throwable _t_2) {
-      if (_t_2 instanceof Throwable) {
-        final Throwable t_2 = (Throwable)_t_2;
-        t_2.printStackTrace();
+      if (_t_2 instanceof Exception) {
+        final Exception e_2 = (Exception)_t_2;
+        e_2.printStackTrace();
       } else {
         throw Exceptions.sneakyThrow(_t_2);
       }
@@ -207,12 +208,11 @@ public class DebugGraphGenerator {
     return result;
   }
   
-  public String directory(final String name) {
-    String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
-    String _asPath = this.naming.asPath(_basePackageRuntime);
-    String _plus = (_asPath + "/serializer/");
-    String _name = this.grammar.getName();
-    String _simpleName = this.naming.toSimpleName(_name);
+  private String directory(final String name) {
+    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.grammar);
+    String _replace = _runtimeBasePackage.replace(".", "/");
+    String _plus = (_replace + "/serializer/");
+    String _simpleName = GrammarUtil.getSimpleName(this.grammar);
     String _lowerCase = _simpleName.toLowerCase();
     String _plus_1 = (_plus + _lowerCase);
     String _plus_2 = (_plus_1 + "_");
@@ -220,9 +220,9 @@ public class DebugGraphGenerator {
     return (_plus_3 + "/");
   }
   
-  public String file(final String name, final EObject ctx, final EClass type) {
+  private String file(final String name, final EObject ctx, final EClass type) {
     String _directory = this.directory(name);
-    String _contextName = this.nameFunction.getContextName(this.grammar, ctx);
+    String _contextName = this._context2NameFunction.getContextName(this.grammar, ctx);
     String _plus = (_directory + _contextName);
     String _plus_1 = (_plus + "_");
     String _name = null;
@@ -233,9 +233,9 @@ public class DebugGraphGenerator {
     return (_plus_2 + ".dot");
   }
   
-  public String file(final String name, final EObject ctx) {
+  private String file(final String name, final EObject ctx) {
     String _directory = this.directory(name);
-    String _contextName = this.nameFunction.getContextName(this.grammar, ctx);
+    String _contextName = this._context2NameFunction.getContextName(this.grammar, ctx);
     String _plus = (_directory + _contextName);
     return (_plus + ".dot");
   }

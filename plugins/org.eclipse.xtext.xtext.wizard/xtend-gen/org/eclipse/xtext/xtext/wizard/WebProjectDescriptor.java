@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class WebProjectDescriptor extends ProjectDescriptor {
-  private final static String REQUIREJS_VERSION = "2.1.17";
+  private final static String REQUIREJS_VERSION = "2.1.20";
   
   private final static String JQUERY_VERSION = "2.1.4";
   
@@ -40,7 +40,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   private final static String SLF4J_VERSION = "1.7.12";
   
-  private final static String ACE_VERSION = "1.1.9";
+  private final static String ACE_VERSION = "1.2.0";
   
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {

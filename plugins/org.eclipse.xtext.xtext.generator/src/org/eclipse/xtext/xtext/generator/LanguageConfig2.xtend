@@ -90,9 +90,8 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	
 	override getFileExtensions() {
 		if (fileExtensions === null || fileExtensions.empty) {
-			val lowerCase = GrammarUtil.getSimpleName(grammar).toLowerCase
-			LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
-			return Collections.singletonList(lowerCase)
+			fileExtensions = GrammarUtil.getSimpleName(grammar).toLowerCase
+			LOG.info("No explicit fileExtensions configured. Using '*." + fileExtensions + "'.")
 		}
 		return fileExtensions
 	}
@@ -126,11 +125,15 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 
 		val grammar = resource.contents.get(0) as Grammar
 		validateGrammar(grammar)
-		this.grammar = grammar
-		this.ruleNames = RuleNames.getRuleNames(grammar, true)
+		initialize(grammar)
 		for (fragment : fragments) {
 			fragment.initialize(injector)
 		}
+	}
+	
+	def void initialize(Grammar grammar) {
+		this.grammar = grammar
+		this.ruleNames = RuleNames.getRuleNames(grammar, true)
 	}
 	
 	private def void installIndex() {

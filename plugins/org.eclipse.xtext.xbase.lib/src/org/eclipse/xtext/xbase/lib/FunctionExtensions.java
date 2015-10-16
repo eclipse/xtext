@@ -14,6 +14,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function3;
 import org.eclipse.xtext.xbase.lib.Functions.Function4;
 import org.eclipse.xtext.xbase.lib.Functions.Function5;
 import org.eclipse.xtext.xbase.lib.Functions.Function6;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.annotations.GwtCompatible;
 
@@ -155,4 +157,152 @@ import com.google.common.annotations.GwtCompatible;
 			}
 		};
 	}
+	
+	
+	/**
+	 * Returns a composed function that first applies the {@code before}
+	 * function to its input, and then applies the {@code after} function to the result.
+	 * If evaluation of either function throws an exception, it is relayed to
+	 * the caller of the composed function.
+	 *
+	 * @param <V> the type of input to the {@code before} function, and to the
+	 *        composed function
+	 * @param <T> the type of output of the {@code before} function, and input to the
+	 *        {@code after} function
+	 * @param <R> the type of output to the {@code after} function, and to the
+	 *        composed function
+	 * @param after the function to apply after the before function is applied
+	 * @param before the function to apply before the after function is applied
+	 * @return a composed function that first applies the {@code before}
+	 * function and then applies the {@code after} function
+	 * @throws NullPointerException if {@code before} or {@code after} is <code>null</code>
+	 *
+	 * @see #andThen(Function1, Function1)
+	 * @since 2.9
+	 */
+	public static <V,T,R> Function1<V, R> compose(final Function1<? super T, ? extends R> after, final Function1<? super V, ? extends T> before) {
+		if (after == null)
+			throw new NullPointerException("after");
+		if (before == null)
+			throw new NullPointerException("before");
+		return new Function1<V,R>() {
+			@Override
+			public R apply(V v) {
+				return after.apply(before.apply(v));
+			}
+		};
+	}
+	
+	/**
+	 * Returns a composed function that first applies the {@code before}
+	 * function to its input, and then applies the {@code after} function to the result.
+	 * If evaluation of either function throws an exception, it is relayed to
+	 * the caller of the composed function.
+	 *
+	 * @param <V> the type of input to the {@code before} function, and to the composed function
+	 * @param <T> the type of output of the {@code before} function, and input to the {@code after} function
+	 * @param <R> the type of output to the {@code after} function, and to the composed function
+	 * @param before the function to apply before the after function is applied
+	 * @param after the function to apply after the before function is applied
+	 * @return a composed function that first applies the {@code before}
+	 * function and then applies the {@code after} function
+	 * @throws NullPointerException if {@code before} or {@code after} is <code>null</code>
+	 *
+	 * @see #compose(Function1, Function1)
+	 * @since 2.9
+	 */
+	public static <V,T,R> Function1<V, R> andThen(final Function1<? super V, ? extends T> before, final Function1<? super T, ? extends R> after) {
+		return compose(after, before);
+	}
+	
+	/**
+	 * Returns a composed function that first applies the {@code before}
+	 * function to its input, and then applies the {@code after} function to the result.
+	 * If evaluation of either function throws an exception, it is relayed to
+	 * the caller of the composed function.
+	 *
+	 * @param <V1> the type of the first parameter to the {@code before} function, and to the composed function
+	 * @param <V2> the type of the second parameter to the {@code before} function, and to the composed function
+	 * @param <T> the type of output of the {@code before} function, and input to the {@code after} function
+	 * @param <R> the type of output to the {@code after} function, and to the composed function
+	 * @param before the function to apply before the {@code after} function is applied
+	 * @param after the function to apply after the {@code before} function is applied
+	 * @return a composed function that first applies the {@code before}
+	 * function and then applies the {@code after} function
+	 * @throws NullPointerException if {@code before} or {@code after} is null
+	 *
+	 * @see #compose(Function1, Function1)
+	 * @since 2.9
+	 */
+	public static <V1,V2,T,R> Function2<V1, V2, R> andThen(final Function2<? super V1,? super V2, ? extends T> before, final Function1<? super T, ? extends R> after) {
+		if (after == null)
+			throw new NullPointerException("after");
+		if (before == null)
+			throw new NullPointerException("before");
+		return new Function2<V1, V2, R>() {
+			@Override
+			public R apply(V1 v1, V2 v2) {
+				return after.apply(before.apply(v1, v2));
+			}
+		};
+	}
+	
+	
+	/**
+	 * Returns a composed {@code Procedure1} that performs, in sequence, the {@code before}
+	 * operation followed by the {@code after} operation. If performing either
+	 * operation throws an exception, it is relayed to the caller of the
+	 * composed operation. If performing the {@code before} operation throws an exception,
+	 * the {@code after} operation will not be performed.
+	 *
+	 * @param <T> the type of input for the {@code before} operation
+	 * @param before the operation to perform first
+	 * @param after the operation to perform afterwards
+	 * @return a composed {@code Procedure1} that performs in sequence the {@code before}
+	 * operation followed by the {@code after} operation
+	 * @throws NullPointerException if {@code before} or {@code after} is null
+	 * @since 2.9
+	 */
+	public static <T> Procedure1<T> andThen(final Procedure1<? super T> before, final Procedure1<? super T> after) {
+		if (after == null)
+			throw new NullPointerException("after");
+		if (before == null)
+			throw new NullPointerException("before");
+		return new Procedures.Procedure1<T>() {
+			@Override
+			public void apply(T p) {
+				before.apply(p);
+				after.apply(p);
+			}
+		};
+	}
+	
+	/**
+	 * Returns a composed {@code Procedure1} that performs, in sequence, the {@code before}
+	 * operation followed by the {@code after} operation. If performing either
+	 * operation throws an exception, it is relayed to the caller of the
+	 * composed operation. If performing the {@code before} operation throws an exception,
+	 * the {@code after} operation will not be performed.
+	 *
+	 * @param before the operation to perform first
+	 * @param after the operation to perform afterwards
+	 * @return a composed {@code Procedure1} that performs in sequence the {@code before}
+	 * operation followed by the {@code after} operation
+	 * @throws NullPointerException if {@code before} or {@code after} is null
+	 * @since 2.9
+	 */
+	public static Procedure0 andThen(final Procedure0 before, final Procedure0 after) {
+		if (after == null)
+			throw new NullPointerException("after");
+		if (before == null)
+			throw new NullPointerException("before");
+		return new Procedures.Procedure0() {
+			@Override
+			public void apply() {
+				before.apply();
+				after.apply();
+			}
+		};
+	}
+	
 }

@@ -76,16 +76,10 @@ Workflow {
 			guiceModule = parser.XtendLanguageGeneratorModule {}
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
-			fragment = adapter.FragmentAdapter {
-				fragment = serializer.SerializerFragment {
-					// generateDebugData = true
-				}
+			fragment = serializer.SerializerFragment2 {
+				// generateDebugData = true
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = resourceFactory.ResourceFactoryFragment {
-					fileExtensions = file.extensions
-				}
-			}
+			fragment = resourceFactory.ResourceFactoryFragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.ParserGenerator auto-inject {
 					options = auto-inject {}
@@ -130,11 +124,9 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment2 {
 				generateXtendInferrer = false
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = templates.CodetemplatesGeneratorFragment {
-					suppressRestriction = false
-				}
-			}
+
+			fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
+
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.JFlexGeneratorFragment auto-inject {
 					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"

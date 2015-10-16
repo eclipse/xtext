@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -23,7 +24,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
@@ -40,17 +40,14 @@ public class TypeReference {
     return new TypeReference(clazz, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
-  public static TypeReference typeRef(final EClass clazz, final ILanguageConfig language, final EClass... arguments) {
+  public static TypeReference typeRef(final EClass clazz, final ILanguageConfig language) {
     ResourceSet _resourceSet = language.getResourceSet();
-    final Function1<EClass, TypeReference> _function = new Function1<EClass, TypeReference>() {
-      @Override
-      public TypeReference apply(final EClass it) {
-        ResourceSet _resourceSet = language.getResourceSet();
-        return new TypeReference(it, _resourceSet);
-      }
-    };
-    List<TypeReference> _map = ListExtensions.<EClass, TypeReference>map(((List<EClass>)Conversions.doWrapArray(arguments)), _function);
-    return new TypeReference(clazz, _resourceSet, _map);
+    return new TypeReference(clazz, _resourceSet);
+  }
+  
+  public static TypeReference typeRef(final EPackage epackage, final ILanguageConfig language) {
+    ResourceSet _resourceSet = language.getResourceSet();
+    return new TypeReference(epackage, _resourceSet);
   }
   
   private final static Pattern PACKAGE_MATCHER = Pattern.compile("[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*");
@@ -161,11 +158,11 @@ public class TypeReference {
   }
   
   public TypeReference(final EClass clazz, final ResourceSet resourceSet) {
-    this(clazz, resourceSet, null);
+    this(TypeReference.getQualifiedName(clazz, resourceSet));
   }
   
-  public TypeReference(final EClass clazz, final ResourceSet resourceSet, final List<TypeReference> arguments) {
-    this(TypeReference.getQualifiedName(clazz, resourceSet), arguments);
+  public TypeReference(final EPackage epackage, final ResourceSet resourceSet) {
+    this(TypeReference.getQualifiedName(epackage, resourceSet));
   }
   
   private static String getPackageName(final String qualifiedName) {
@@ -217,6 +214,11 @@ public class TypeReference {
       _xifexpression = _genClass.getQualifiedInterfaceName();
     }
     return _xifexpression;
+  }
+  
+  private static String getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
+    GenPackage _genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet);
+    return _genPackage.getQualifiedPackageInterfaceName();
   }
   
   private static boolean matches(final char c1, final char c2) {

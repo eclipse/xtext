@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -16,7 +17,6 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 @SuppressWarnings("all")
 public class GeneratedJavaFileAccess extends JavaFileAccess {
-  @Accessors
   private CharSequence typeComment;
   
   @Accessors
@@ -38,8 +38,16 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     }
   }
   
+  public void setTypeComment(final StringConcatenationClient javaContent) {
+    final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
+    javaStringConcat.append(javaContent);
+    this.typeComment = javaStringConcat;
+  }
+  
   /**
-   * prepends the addition of required imports of the employed annotations
+   * Prepends the addition of required imports of the employed annotations.
+   * Since the 'typeComment' is a {@link JavaFileAccess.JavaTypeAwareStringConcatenation}
+   * any optionally required imports are already processed and tracked in {@link #imports}.
    */
   @Override
   public CharSequence getContent() {
@@ -88,15 +96,6 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     _builder.append(_internalContent, "");
     _builder.newLineIfNotEmpty();
     return _builder;
-  }
-  
-  @Pure
-  public CharSequence getTypeComment() {
-    return this.typeComment;
-  }
-  
-  public void setTypeComment(final CharSequence typeComment) {
-    this.typeComment = typeComment;
   }
   
   @Pure

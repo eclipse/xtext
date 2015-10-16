@@ -8,13 +8,15 @@
 package org.eclipse.xtext.xtext.generator.ui.compare;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
@@ -34,28 +36,25 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  */
 @SuppressWarnings("all")
 public class CompareFragment2 extends AbstractGeneratorFragment2 {
-  private final static Logger log = Logger.getLogger(CompareFragment2.class);
-  
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Override
   public void generate() {
-    boolean _isInfoEnabled = CompareFragment2.log.isInfoEnabled();
-    if (_isInfoEnabled) {
-      CompareFragment2.log.info("generating Compare Framework infrastructure");
-    }
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    ManifestAccess _manifest = _eclipsePlugin.getManifest();
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
+    ManifestAccess _manifest = null;
+    if (_eclipsePlugin!=null) {
+      _manifest=_eclipsePlugin.getManifest();
+    }
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
-      _requiredBundles.add("org.eclipse.xtext.ui");
+      Iterables.<String>addAll(_requiredBundles, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.compare", "org.eclipse.xtext.ui")));
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.compare.IViewerCreator");
@@ -66,9 +65,12 @@ public class CompareFragment2 extends AbstractGeneratorFragment2 {
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
-    PluginXmlAccess _pluginXml = _eclipsePlugin_2.getPluginXml();
-    boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
-    if (_notEquals_1) {
+    PluginXmlAccess _pluginXml = null;
+    if (_eclipsePlugin_2!=null) {
+      _pluginXml=_eclipsePlugin_2.getPluginXml();
+    }
+    boolean _notEquals = (!Objects.equal(_pluginXml, null));
+    if (_notEquals) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();

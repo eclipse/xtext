@@ -143,7 +143,13 @@ public class WizardConfig extends XtextProjectConfig {
       BundleProjectConfig _runtimeTest = this.getRuntimeTest();
       if (Objects.equal(project, _runtimeTest)) {
         _matched=true;
-        _switchResult = (this.baseName + ".tests");
+        String _xifexpression = null;
+        if ((!this.mavenLayout)) {
+          _xifexpression = (this.baseName + ".tests");
+        } else {
+          _xifexpression = this.baseName;
+        }
+        _switchResult = _xifexpression;
       }
     }
     if (!_matched) {
@@ -164,7 +170,13 @@ public class WizardConfig extends XtextProjectConfig {
       BundleProjectConfig _eclipsePluginTest = this.getEclipsePluginTest();
       if (Objects.equal(project, _eclipsePluginTest)) {
         _matched=true;
-        _switchResult = (this.baseName + ".ui.tests");
+        String _xifexpression_1 = null;
+        if ((!this.mavenLayout)) {
+          _xifexpression_1 = (this.baseName + ".ui.tests");
+        } else {
+          _xifexpression_1 = (this.baseName + ".ui");
+        }
+        _switchResult = _xifexpression_1;
       }
     }
     if (!_matched) {

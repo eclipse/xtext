@@ -36,7 +36,14 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
   protected void doGenerate() {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
-    final IXtextGeneratorFileSystemAccess fsa = _ideaPlugin.getSrcGen();
+    boolean _isEnabled = _ideaPlugin.isEnabled();
+    boolean _not = (!_isEnabled);
+    if (_not) {
+      return;
+    }
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
+    final IXtextGeneratorFileSystemAccess fsa = _ideaPlugin_1.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     this.generator.generate(_grammar, _options, fsa);

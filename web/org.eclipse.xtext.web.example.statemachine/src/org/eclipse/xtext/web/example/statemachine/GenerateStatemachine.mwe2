@@ -53,16 +53,12 @@ Workflow {
 			// generates Java API for the generated EPackages
 			fragment = ecore.EMFGeneratorFragment2 auto-inject {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = serializer.SerializerFragment auto-inject {
-					generateStub = false
-				}
+			fragment = serializer.SerializerFragment2 auto-inject {
+				generateStub = false
 			}
 
 			// a custom ResourceFactory for use with EMF
-			fragment = adapter.FragmentAdapter {
-				fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
-			}
+			fragment = resourceFactory.ResourceFactoryFragment2 auto-inject {}
 
 			// The antlr parser generator fragment.
 			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {

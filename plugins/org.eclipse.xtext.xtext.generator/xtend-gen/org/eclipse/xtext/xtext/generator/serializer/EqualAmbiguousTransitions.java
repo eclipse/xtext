@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator.serializer;
+package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.common.base.Objects;
 import java.util.List;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTransitions> {
-  private final String identifyer;
+  private final String identifier;
   
   private final List<ISyntacticSequencerPDAProvider.ISynTransition> transitions = CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynTransition>newArrayList();
   
@@ -37,7 +37,7 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
   
   @Override
   public int compareTo(final EqualAmbiguousTransitions o) {
-    return this.identifyer.compareTo(o.identifyer);
+    return this.identifier.compareTo(o.identifier);
   }
   
   public String ambiguityInsideTransition(final ISyntacticSequencerPDAProvider.ISynTransition trans) {
@@ -89,9 +89,9 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
       GrammarAlias.AbstractElementAlias _root = adapter.getRoot();
       return formatter.format(adapter, _root, false);
     } catch (final Throwable _t) {
-      if (_t instanceof Throwable) {
-        final Throwable t = (Throwable)_t;
-        t.printStackTrace();
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+        e.printStackTrace();
         return "";
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -145,15 +145,15 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
     return _and;
   }
   
-  public EqualAmbiguousTransitions(final String identifyer, final GrammarAlias.AbstractElementAlias elementAlias) {
+  public EqualAmbiguousTransitions(final String identifier, final GrammarAlias.AbstractElementAlias elementAlias) {
     super();
-    this.identifyer = identifyer;
+    this.identifier = identifier;
     this.elementAlias = elementAlias;
   }
   
   @Pure
-  public String getIdentifyer() {
-    return this.identifyer;
+  public String getIdentifier() {
+    return this.identifier;
   }
   
   @Pure

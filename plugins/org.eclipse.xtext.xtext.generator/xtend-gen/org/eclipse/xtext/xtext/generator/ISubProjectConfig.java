@@ -12,6 +12,8 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
 public interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
+  public abstract boolean isEnabled();
+  
   public abstract String getName();
   
   public abstract IXtextGeneratorFileSystemAccess getRoot();

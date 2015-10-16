@@ -75,6 +75,8 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	}
 
 	override generate() {
+		if (!projectConfig.ideaPlugin.enabled)
+			return;
 		val fileExtension = language.getFileExtensions().head
 		val grammar = language.grammar
 
