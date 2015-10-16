@@ -23,13 +23,13 @@ import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 import org.eclipse.xtext.generator.adapter.Generator2AdapterSetup
 import org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
-import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 import static java.util.Collections.*
 
