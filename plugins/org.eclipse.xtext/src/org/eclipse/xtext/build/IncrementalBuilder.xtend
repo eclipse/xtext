@@ -90,7 +90,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
                     val copiedDescription = SerializableResourceDescription.createCopy(description);
                     result.newIndex.addDescription(resource.getURI, copiedDescription)
                     request.cancelIndicator.checkCanceled
-					if (resource.validate && serviceProvider.get(IShouldGenerate).shouldGenerate(resource, CancelIndicator.NullImpl)) {
+					if (resource.validate && serviceProvider.get(IShouldGenerate).shouldGenerate(resource, null, CancelIndicator.NullImpl)) {
 						request.cancelIndicator.checkCanceled
 						resource.generate(request, newSource2GeneratedMapping)
 					}

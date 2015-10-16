@@ -25,16 +25,19 @@ import com.google.common.annotations.Beta
 interface IShouldGenerate {
 	
 	/**
-	 * whether code should be generated for this resource
+	 * whether code should be generated for this resource.
+	 * 
+	 * @param projectName the name of the currently built project. May be null which indicates that the given resource
+	 * 	is located in the source tree of the currently built project.
 	 */
-	def boolean shouldGenerate(Resource resource, CancelIndicator cancelIndicator);
+	def boolean shouldGenerate(Resource resource, String projectName, CancelIndicator cancelIndicator);
 	
 	@Beta
 	static class OnlyWithoutErrors implements IShouldGenerate {
 		
 		@Inject IResourceValidator resourceValidator
 		
-		override shouldGenerate(Resource resource, CancelIndicator cancelIndicator) {
+		override shouldGenerate(Resource resource, String projectName, CancelIndicator cancelIndicator) {
 			return resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator).empty
 		}
 		
@@ -42,7 +45,7 @@ interface IShouldGenerate {
 	@Beta
 	static class Always implements IShouldGenerate {
 		
-		override shouldGenerate(Resource resource, CancelIndicator cancelIndicator) {
+		override shouldGenerate(Resource resource, String projectName, CancelIndicator cancelIndicator) {
 			return true
 		}
 		

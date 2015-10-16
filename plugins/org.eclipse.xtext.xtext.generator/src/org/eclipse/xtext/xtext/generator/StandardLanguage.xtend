@@ -67,13 +67,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2
 	
-	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2 => [
-		onlyEnabledIfGrammarIsUsed = true
-	]
-	
-	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
-	
-	XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2
 	
 	Junit4Fragment2 junitSupport = new Junit4Fragment2
 	
@@ -94,6 +87,14 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2
 	 
 	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
+	
+	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2 => [
+		onlyEnabledIfGrammarIsUsed = true
+	]
+	
+	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
+	
+	XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2
 	
 	IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator
 	
