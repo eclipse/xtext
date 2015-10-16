@@ -80,17 +80,6 @@ public class StandardLanguage extends LanguageConfig2 {
   
   private QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2();
   
-  private TypesGeneratorFragment2 commonTypesSupport = ObjectExtensions.<TypesGeneratorFragment2>operator_doubleArrow(new TypesGeneratorFragment2(), new Procedure1<TypesGeneratorFragment2>() {
-    @Override
-    public void apply(final TypesGeneratorFragment2 it) {
-      it.setOnlyEnabledIfGrammarIsUsed(true);
-    }
-  });
-  
-  private XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2();
-  
-  private XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2();
-  
   private Junit4Fragment2 junitSupport = new Junit4Fragment2();
   
   private QuickfixProviderFragment2 quickFixProvider = new QuickfixProviderFragment2();
@@ -110,6 +99,17 @@ public class StandardLanguage extends LanguageConfig2 {
   private CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2();
   
   private XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment();
+  
+  private TypesGeneratorFragment2 commonTypesSupport = ObjectExtensions.<TypesGeneratorFragment2>operator_doubleArrow(new TypesGeneratorFragment2(), new Procedure1<TypesGeneratorFragment2>() {
+    @Override
+    public void apply(final TypesGeneratorFragment2 it) {
+      it.setOnlyEnabledIfGrammarIsUsed(true);
+    }
+  });
+  
+  private XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2();
+  
+  private XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2();
   
   private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
   
@@ -279,18 +279,6 @@ public class StandardLanguage extends LanguageConfig2 {
     this.qualifiedNamesProvider = qualifiedNamesProvider;
   }
   
-  public void setCommonTypesSupport(final TypesGeneratorFragment2 commonTypesSupport) {
-    this.commonTypesSupport = commonTypesSupport;
-  }
-  
-  public void setXtypeSupport(final XtypeGeneratorFragment2 xtypeSupport) {
-    this.xtypeSupport = xtypeSupport;
-  }
-  
-  public void setXbaseSupport(final XbaseGeneratorFragment2 xbaseSupport) {
-    this.xbaseSupport = xbaseSupport;
-  }
-  
   public void setJunitSupport(final Junit4Fragment2 junitSupport) {
     this.junitSupport = junitSupport;
   }
@@ -329,6 +317,18 @@ public class StandardLanguage extends LanguageConfig2 {
   
   public void setIdeaParser(final XtextAntlrIDEAGeneratorFragment ideaParser) {
     this.ideaParser = ideaParser;
+  }
+  
+  public void setCommonTypesSupport(final TypesGeneratorFragment2 commonTypesSupport) {
+    this.commonTypesSupport = commonTypesSupport;
+  }
+  
+  public void setXtypeSupport(final XtypeGeneratorFragment2 xtypeSupport) {
+    this.xtypeSupport = xtypeSupport;
+  }
+  
+  public void setXbaseSupport(final XbaseGeneratorFragment2 xbaseSupport) {
+    this.xbaseSupport = xbaseSupport;
   }
   
   public void setIdeaPlugin(final IdeaPluginGenerator ideaPlugin) {
