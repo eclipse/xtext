@@ -17,7 +17,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
@@ -54,9 +53,9 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 
 		ISyntacticSequencerPDAProvider pdaProvider = get(ISyntacticSequencerPDAProvider.class);
-		Map<IContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
-		for (Entry<IContext, ISynAbsorberState> s : pdas.entrySet()) {
-			IContext context = s.getKey();
+		Map<ISerializationContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		for (Entry<ISerializationContext, ISynAbsorberState> s : pdas.entrySet()) {
+			ISerializationContext context = s.getKey();
 			if (context.getAssignedAction() != null)
 				continue;
 			ISynAbsorberState pda = s.getValue();

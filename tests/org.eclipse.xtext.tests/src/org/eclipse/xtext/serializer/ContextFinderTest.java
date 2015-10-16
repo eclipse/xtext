@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
 import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
@@ -58,9 +57,9 @@ public class ContextFinderTest extends AbstractXtextTests {
 		return contexts2names(finder.findByContentsAndContainer(obj, null));
 	}
 
-	private String contexts2names(Iterable<IContext> contexts) {
+	private String contexts2names(Iterable<ISerializationContext> contexts) {
 		List<String> result = Lists.newArrayList();
-		for (IContext ctx : contexts)
+		for (ISerializationContext ctx : contexts)
 			result.add(context2name.toFunction(getGrammarAccess().getGrammar()).apply(ctx.getActionOrRule()));
 		Collections.sort(result);
 		return Joiner.on(", ").join(result);
