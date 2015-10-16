@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.serializer
 
+import com.google.common.collect.ImmutableSet
 import com.google.inject.Inject
 import java.util.List
 import java.util.Map
@@ -25,6 +26,7 @@ import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.Parameter
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
@@ -62,6 +64,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.serializer.analysis.SerializationContext
 
 class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	
@@ -252,6 +255,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 				«EPackage» epackage = semanticObject.eClass().getEPackage();
 				«ParserRule» rule = context.getParserRule();
 				«Action» action = context.getAssignedAction();
+				«Set»<«Parameter»> parameters = context.getEnabledBooleanParameters();
 				«FOR pkg : accessedPackages.indexed»
 					«IF pkg.key > 0»else «ENDIF»if (epackage == «pkg.value».«packageLiteral»)
 						switch (semanticObject.eClass().getClassifierID()) {
@@ -267,10 +271,18 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		'''
 	}
 	
-	private def StringConcatenationClient genContextCondition(ISerializationContext context) {
-		switch it:context {
+	private def StringConcatenationClient genContextCondition(ISerializationContext context, IConstraint constraint) {
+		val StringConcatenationClient cond = switch it:context {
 			case assignedAction !== null: '''action == grammarAccess.«assignedAction.gaAccessor»'''
 			case parserRule !== null: '''rule == grammarAccess.«parserRule.gaAccessor»'''
+		}
+		val values = context.enabledBooleanParameters
+		if (!values.isEmpty) {
+			'''(«cond» && «ImmutableSet».of(«values.map["grammarAccess."+gaAccessor].join(", ")»).equals(parameters))'''
+		} else if (!constraint.contexts.forall[(it as SerializationContext).declaredParameters.isEmpty]) {
+			'''(«cond» && parameters.isEmpty())'''
+		} else {
+			cond
 		}
 	}
 	
@@ -279,7 +291,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		'''
 			«IF contexts.size > 1»
 				«FOR ctx : contexts.indexed»
-					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»«c.genContextCondition»«ENDFOR») {
+					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»«c.genContextCondition(ctx.value.key)»«ENDFOR») {
 						«genMethodCreateSequenceCall(superConstraints, type, ctx.value.key)»
 					}
 				«ENDFOR»

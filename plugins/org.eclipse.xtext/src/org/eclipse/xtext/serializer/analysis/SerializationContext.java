@@ -16,17 +16,20 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.NamedArgument;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xtext.ConditionEvaluator;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -35,6 +38,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -71,16 +75,16 @@ public abstract class SerializationContext implements ISerializationContext {
 		}
 
 		@Override
+		protected Set<Parameter> getEnabledBooleanParametersInternal() {
+			return parameters;
+		}
+
+		@Override
 		protected String toStringInternal() {
 			List<String> names = Lists.newArrayList();
 			for (Parameter p : parameters)
 				names.add(p.getName());
 			return Joiner.on("_").join(names);
-		}
-
-		@Override
-		public Set<Parameter> getParameterValues() {
-			return parameters;
 		}
 
 	}
@@ -143,7 +147,19 @@ public abstract class SerializationContext implements ISerializationContext {
 
 	public static ISerializationContext forChild(ISerializationContext container, RuleCall ruleCall, EObject sem) {
 		EClass type = sem == null ? null : sem.eClass();
-		return new TypeContext(new RuleContext(null, (ParserRule) ruleCall.getRule()), type);
+		ISerializationContext result = new TypeContext(new RuleContext(null, (ParserRule) ruleCall.getRule()), type);
+		EList<NamedArgument> arguments = ruleCall.getArguments();
+		if (!arguments.isEmpty()) {
+			Set<Parameter> params = Sets.newLinkedHashSet();
+			ConditionEvaluator evaluator = new ConditionEvaluator(params);
+			for (NamedArgument argument : arguments) {
+				if (evaluator.evaluate(argument.getValue())) {
+					params.add(argument.getParameter());
+				}
+			}
+			result = new SerializationContext.ParameterValueContext(result, params);
+		}
+		return result;
 	}
 
 	public static ISerializationContext fromEObject(EObject ctx, EObject sem) {
@@ -232,6 +248,22 @@ public abstract class SerializationContext implements ISerializationContext {
 			if (t2 != null)
 				return 1;
 		}
+		List<Parameter> params = getDeclaredParameters();
+		if (params.equals(((SerializationContext) o).getDeclaredParameters())) {
+			Set<Parameter> v1 = getEnabledBooleanParameters();
+			Set<Parameter> v2 = o.getEnabledBooleanParameters();
+			if (v1 == null || v2 == null) {
+				return v1 != null ? -1 : 1;
+			} else {
+				for (Parameter param : params) {
+					boolean b1 = v1.contains(param);
+					boolean b2 = v2.contains(param);
+					if (b1 != b2) {
+						return b1 ? -1 : 1;
+					}
+				}
+			}
+		}
 		ISerializationContext p1 = getParent();
 		ISerializationContext p2 = ((SerializationContext) o).getParent();
 		if (p1 != p2) {
@@ -256,7 +288,7 @@ public abstract class SerializationContext implements ISerializationContext {
 			return false;
 		if (!Objects.equal(getAssignedAction(), other.getAssignedAction()))
 			return false;
-		if (!Objects.equal(getParameterValues(), other.getParameterValues()))
+		if (!Objects.equal(getEnabledBooleanParameters(), other.getEnabledBooleanParameters()))
 			return false;
 		if (!Objects.equal(getType(), other.getType()))
 			return false;
@@ -271,6 +303,33 @@ public abstract class SerializationContext implements ISerializationContext {
 	@Override
 	public Action getAssignedAction() {
 		return parent != null ? parent.getAssignedAction() : null;
+	}
+
+	public List<Parameter> getDeclaredParameters() {
+		ParserRule declarator = getParameterDeclarator();
+		return declarator == null ? Collections.<Parameter> emptyList() : declarator.getParameters();
+	}
+
+	@Override
+	public final Set<Parameter> getEnabledBooleanParameters() {
+		Set<Parameter> parameters = getEnabledBooleanParametersInternal();
+		return parameters != null ? parameters : Collections.<Parameter> emptySet();
+	}
+
+	protected Set<Parameter> getEnabledBooleanParametersInternal() {
+		return parent != null ? ((SerializationContext) parent).getEnabledBooleanParametersInternal() : null;
+	}
+
+	public ParserRule getParameterDeclarator() {
+		Action action = getAssignedAction();
+		if (action != null) {
+			return GrammarUtil.containingParserRule(action);
+		}
+		ParserRule rule = getParserRule();
+		if (rule != null) {
+			return rule;
+		}
+		return null;
 	}
 
 	public ISerializationContext getParent() {
@@ -288,15 +347,10 @@ public abstract class SerializationContext implements ISerializationContext {
 	}
 
 	@Override
-	public Set<Parameter> getParameterValues() {
-		return parent != null ? parent.getParameterValues() : null;
-	}
-
-	@Override
 	public int hashCode() {
 		ParserRule rule = getParserRule();
 		Action action = getAssignedAction();
-		Set<Parameter> parameterValues = getParameterValues();
+		Set<Parameter> parameterValues = getEnabledBooleanParameters();
 		EClass type = getType();
 		int result = 1;
 		if (rule != null)
