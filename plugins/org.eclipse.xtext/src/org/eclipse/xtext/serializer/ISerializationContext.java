@@ -25,7 +25,7 @@ public interface ISerializationContext extends Comparable<ISerializationContext>
 
 	Action getAssignedAction();
 
-	Set<Parameter> getParameterValues();
+	Set<Parameter> getEnabledBooleanParameters();
 
 	ParserRule getParserRule();
 

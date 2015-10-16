@@ -22,7 +22,7 @@ Model:
 	x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional |
 	x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | 
 	x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted |
-	x33=FragmentCaller;
+	x33=FragmentCaller | x34=ParameterCaller;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -177,3 +177,11 @@ FragmentCaller returns FragmentCallerType:
 	
 fragment Fragment1 returns FragmentCallerType:
 	fragVal=ID;
+	
+ParameterCaller:
+	"#34" ("kw1" p=Parameterized<true, true> | "kw2" p=Parameterized<true, false> | "kw3" p=Parameterized<false, true> | "kw4" p=Parameterized<false, false>);
+
+Parameterized<P, Q>:
+	 <P> "kwp1" v1=ID | <!P> "kwp2" v2=ID (<Q> "kwp3" v3=ID)?;
+	 
+	 
