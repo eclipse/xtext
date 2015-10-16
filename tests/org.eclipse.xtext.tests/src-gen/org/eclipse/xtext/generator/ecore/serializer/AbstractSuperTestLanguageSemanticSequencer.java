@@ -4,21 +4,19 @@
 package org.eclipse.xtext.generator.ecore.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess;
 import org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain;
 import org.eclipse.xtext.generator.ecore.superPackage.SuperMain;
 import org.eclipse.xtext.generator.ecore.superPackage.SuperPackagePackage;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -28,8 +26,13 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	private SuperTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == SuperPackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == SuperPackagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case SuperPackagePackage.ANOTHER_SUPER_MAIN:
 				sequence_AnotherSuperMain(context, (AnotherSuperMain) semanticObject); 
 				return; 
@@ -37,20 +40,20 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 				sequence_SuperMain(context, (SuperMain) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_AnotherSuperMain(EObject context, AnotherSuperMain semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, SuperPackagePackage.Literals.ANOTHER_SUPER_MAIN__NAME) == ValueTransient.YES)
+	protected void sequence_AnotherSuperMain(ISerializationContext context, AnotherSuperMain semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SuperPackagePackage.Literals.ANOTHER_SUPER_MAIN__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SuperPackagePackage.Literals.ANOTHER_SUPER_MAIN__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -60,14 +63,15 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_SuperMain(EObject context, SuperMain semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, SuperPackagePackage.Literals.SUPER_MAIN__NAME) == ValueTransient.YES)
+	protected void sequence_SuperMain(ISerializationContext context, SuperMain semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SuperPackagePackage.Literals.SUPER_MAIN__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SuperPackagePackage.Literals.SUPER_MAIN__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
+	
+	
 }

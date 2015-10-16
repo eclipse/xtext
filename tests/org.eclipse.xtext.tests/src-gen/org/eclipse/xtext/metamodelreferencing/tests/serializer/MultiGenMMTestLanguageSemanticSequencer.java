@@ -4,22 +4,20 @@
 package org.eclipse.xtext.metamodelreferencing.tests.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.metamodelreferencing.tests.otherTest.FooBar;
 import org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.simpleTest.Foo;
 import org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestPackage;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -29,25 +27,32 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == OtherTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == OtherTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case OtherTestPackage.FOO_BAR:
 				sequence_NameRef(context, (FooBar) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == SimpleTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == SimpleTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case SimpleTestPackage.FOO:
 				sequence_Foo(context, (Foo) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
 	 */
-	protected void sequence_Foo(EObject context, Foo semanticObject) {
+	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -56,14 +61,15 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     name=STRING
 	 */
-	protected void sequence_NameRef(EObject context, FooBar semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, OtherTestPackage.Literals.FOO_BAR__NAME) == ValueTransient.YES)
+	protected void sequence_NameRef(ISerializationContext context, FooBar semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OtherTestPackage.Literals.FOO_BAR__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OtherTestPackage.Literals.FOO_BAR__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getNameRefAccess().getNameSTRINGTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
+	
+	
 }

@@ -26,9 +26,9 @@ public class Bug378967TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getAfterRule())
+		if (ruleCall.getRule() == grammarAccess.getAfterRule())
 			return getAfterToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getSRule())
+		else if (ruleCall.getRule() == grammarAccess.getSRule())
 			return getSToken(semanticObject, ruleCall, node);
 		return "";
 	}

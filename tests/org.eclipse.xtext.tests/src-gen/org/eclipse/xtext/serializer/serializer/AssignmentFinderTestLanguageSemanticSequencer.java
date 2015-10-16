@@ -4,9 +4,13 @@
 package org.eclipse.xtext.serializer.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage;
 import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRef;
@@ -21,13 +25,7 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.MixedValue;
 import org.eclipse.xtext.serializer.assignmentFinderTest.Model;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalBool;
 import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalVal;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess;
 
@@ -38,17 +36,22 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	private AssignmentFinderTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == AssignmentFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == AssignmentFinderTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case AssignmentFinderTestPackage.CONTAINMENT_REF:
 				sequence_ContainmentRef(context, (ContainmentRef) semanticObject); 
 				return; 
 			case AssignmentFinderTestPackage.CONTAINMENT_REF_N:
-				if(context == grammarAccess.getContainmentRef1Rule()) {
+				if (rule == grammarAccess.getContainmentRef1Rule()) {
 					sequence_ContainmentRef1(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getContainmentRef2Rule()) {
+				else if (rule == grammarAccess.getContainmentRef2Rule()) {
 					sequence_ContainmentRef2(context, (ContainmentRefN) semanticObject); 
 					return; 
 				}
@@ -84,20 +87,20 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 				sequence_TerminalVal(context, (TerminalVal) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     val1=ID
 	 */
-	protected void sequence_ContainmentRef1(EObject context, ContainmentRefN semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL1) == ValueTransient.YES)
+	protected void sequence_ContainmentRef1(ISerializationContext context, ContainmentRefN semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL1) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL1));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getContainmentRef1Access().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
 		feeder.finish();
 	}
@@ -107,13 +110,12 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     val2=ID
 	 */
-	protected void sequence_ContainmentRef2(EObject context, ContainmentRefN semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL2) == ValueTransient.YES)
+	protected void sequence_ContainmentRef2(ISerializationContext context, ContainmentRefN semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL2) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AssignmentFinderTestPackage.Literals.CONTAINMENT_REF_N__VAL2));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getContainmentRef2Access().getVal2IDTerminalRuleCall_1_0(), semanticObject.getVal2());
 		feeder.finish();
 	}
@@ -123,7 +125,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (ctx=ContainmentRef1 | ctx=ContainmentRef2)
 	 */
-	protected void sequence_ContainmentRef(EObject context, ContainmentRef semanticObject) {
+	protected void sequence_ContainmentRef(ISerializationContext context, ContainmentRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -132,7 +134,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     ((name=Terminal1 | name=Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]))
 	 */
-	protected void sequence_CrossRef(EObject context, CrossRef semanticObject) {
+	protected void sequence_CrossRef(ISerializationContext context, CrossRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -141,7 +143,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (en?=Enum1 | en?=Enum2)
 	 */
-	protected void sequence_EnumBool(EObject context, EnumBool semanticObject) {
+	protected void sequence_EnumBool(ISerializationContext context, EnumBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -150,7 +152,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (en=Enum1 | en=Enum2)
 	 */
-	protected void sequence_EnumVal(EObject context, EnumVal semanticObject) {
+	protected void sequence_EnumVal(ISerializationContext context, EnumVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -159,7 +161,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (kw?='kw1' | kw?='kw2')
 	 */
-	protected void sequence_KeywordBool(EObject context, KeywordBool semanticObject) {
+	protected void sequence_KeywordBool(ISerializationContext context, KeywordBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -168,7 +170,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (kw='kw1' | kw='kw2')
 	 */
-	protected void sequence_KeywordVal(EObject context, KeywordVal semanticObject) {
+	protected void sequence_KeywordVal(ISerializationContext context, KeywordVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -177,7 +179,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (val?='kw1' | val=Boolean)
 	 */
-	protected void sequence_MixedBool(EObject context, MixedBool semanticObject) {
+	protected void sequence_MixedBool(ISerializationContext context, MixedBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -186,7 +188,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (val=Enum1 | val=DatEnum)
 	 */
-	protected void sequence_MixedValue(EObject context, MixedValue semanticObject) {
+	protected void sequence_MixedValue(ISerializationContext context, MixedValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -206,7 +208,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 *         crossRef=CrossRef
 	 *     )
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -215,7 +217,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (term?=Terminal1 | term?=Terminal2 | term?='%foo')
 	 */
-	protected void sequence_TerminalBool(EObject context, TerminalBool semanticObject) {
+	protected void sequence_TerminalBool(ISerializationContext context, TerminalBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -224,7 +226,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (term=Terminal1 | term=Terminal2 | term='%foo')
 	 */
-	protected void sequence_TerminalVal(EObject context, TerminalVal semanticObject) {
+	protected void sequence_TerminalVal(ISerializationContext context, TerminalVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

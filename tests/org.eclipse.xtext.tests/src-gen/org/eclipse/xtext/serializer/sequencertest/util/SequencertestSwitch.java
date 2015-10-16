@@ -25,6 +25,8 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
+import org.eclipse.xtext.serializer.sequencertest.ParameterCaller;
+import org.eclipse.xtext.serializer.sequencertest.Parameterized;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
 import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
@@ -398,6 +400,20 @@ public class SequencertestSwitch<T> extends Switch<T>
       {
         FragmentCallerType fragmentCallerType = (FragmentCallerType)theEObject;
         T result = caseFragmentCallerType(fragmentCallerType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.PARAMETER_CALLER:
+      {
+        ParameterCaller parameterCaller = (ParameterCaller)theEObject;
+        T result = caseParameterCaller(parameterCaller);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.PARAMETERIZED:
+      {
+        Parameterized parameterized = (Parameterized)theEObject;
+        T result = caseParameterized(parameterized);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1057,6 +1073,38 @@ public class SequencertestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseFragmentCallerType(FragmentCallerType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Caller</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Caller</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterCaller(ParameterCaller object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterized(Parameterized object)
   {
     return null;
   }

@@ -4,22 +4,20 @@
 package org.eclipse.xtext.parser.fragments.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.FragmentTestLanguagePackage;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamed;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamedWithAction;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.ParserRuleFragments;
 import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -29,23 +27,28 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	private FragmentTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == FragmentTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == FragmentTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case FragmentTestLanguagePackage.PRF_NAMED:
-				if(context == grammarAccess.getPRFNamedRefFirstRule()) {
+				if (rule == grammarAccess.getPRFNamedRefFirstRule()) {
 					sequence_PRFNamedFragment_PRFNamedRefFirst(context, (PRFNamed) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getPRFWithPredicateRule()) {
+				else if (rule == grammarAccess.getPRFWithPredicateRule()) {
 					sequence_PRFNamedFragment_PRFNamedRef(context, (PRFNamed) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getPRFNamedWithFQNRule()) {
+				else if (rule == grammarAccess.getPRFNamedWithFQNRule()) {
 					sequence_PRFNamedWithFQN(context, (PRFNamed) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getPRFNamedRule() ||
-				   context == grammarAccess.getPRFNamedWithActionAccess().getPRFNamedWithActionPrevAction_1()) {
+				else if (rule == grammarAccess.getPRFNamedRule()
+						|| action == grammarAccess.getPRFNamedWithActionAccess().getPRFNamedWithActionPrevAction_1()) {
 					sequence_PRFNamed_PRFNamedFragment_PRFNamedRef(context, (PRFNamed) semanticObject); 
 					return; 
 				}
@@ -57,22 +60,22 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 				sequence_ParserRuleFragments(context, (ParserRuleFragments) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (ref=[PRFNamed|ID] name=ID)
 	 */
-	protected void sequence_PRFNamedFragment_PRFNamedRefFirst(EObject context, PRFNamed semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__REF) == ValueTransient.YES)
+	protected void sequence_PRFNamedFragment_PRFNamedRefFirst(ISerializationContext context, PRFNamed semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__REF) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__REF));
-			if(transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPRFNamedRefFirstAccess().getRefPRFNamedIDTerminalRuleCall_0_0_1(), semanticObject.getRef());
 		feeder.accept(grammarAccess.getPRFNamedFragmentAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
@@ -83,7 +86,7 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 * Constraint:
 	 *     (name=ID ref=[PRFNamed|ID]?)
 	 */
-	protected void sequence_PRFNamedFragment_PRFNamedRef(EObject context, PRFNamed semanticObject) {
+	protected void sequence_PRFNamedFragment_PRFNamedRef(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -92,7 +95,7 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 * Constraint:
 	 *     (prev=PRFNamedWithAction_PRFNamedWithAction_1 name=ID (ref=[PRFNamed|ID] ref2=[PRFNamed|ID])?)
 	 */
-	protected void sequence_PRFNamedWithAction(EObject context, PRFNamedWithAction semanticObject) {
+	protected void sequence_PRFNamedWithAction(ISerializationContext context, PRFNamedWithAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -101,7 +104,7 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 * Constraint:
 	 *     (name=FQN ref=[PRFNamed|FQN2]?)
 	 */
-	protected void sequence_PRFNamedWithFQN(EObject context, PRFNamed semanticObject) {
+	protected void sequence_PRFNamedWithFQN(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -110,7 +113,7 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 * Constraint:
 	 *     (name=ID (ref=[PRFNamed|ID] | ref=[PRFNamed|ID])?)
 	 */
-	protected void sequence_PRFNamed_PRFNamedFragment_PRFNamedRef(EObject context, PRFNamed semanticObject) {
+	protected void sequence_PRFNamed_PRFNamedFragment_PRFNamedRef(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -126,7 +129,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 *         element=PRFWithPredicate
 	 *     )
 	 */
-	protected void sequence_ParserRuleFragments(EObject context, ParserRuleFragments semanticObject) {
+	protected void sequence_ParserRuleFragments(ISerializationContext context, ParserRuleFragments semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

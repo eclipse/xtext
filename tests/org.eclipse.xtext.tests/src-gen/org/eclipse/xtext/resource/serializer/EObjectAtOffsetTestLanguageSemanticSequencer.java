@@ -4,23 +4,21 @@
 package org.eclipse.xtext.resource.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Bar;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.EObjectAtOffsetTestLanguagePackage;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Foo;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.FooBar;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Model;
 import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -30,15 +28,20 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	private EObjectAtOffsetTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == EObjectAtOffsetTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == EObjectAtOffsetTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case EObjectAtOffsetTestLanguagePackage.BAR:
-				if(context == grammarAccess.getAbstractBarRule()) {
+				if (rule == grammarAccess.getAbstractBarRule()) {
 					sequence_AbstractBar_Bar(context, (Bar) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0() ||
-				   context == grammarAccess.getBarRule()) {
+				else if (action == grammarAccess.getAbstractBarAccess().getFooBarBarAction_3_0()
+						|| rule == grammarAccess.getBarRule()) {
 					sequence_Bar(context, (Bar) semanticObject); 
 					return; 
 				}
@@ -53,14 +56,15 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]* foo+=[Foo|QualifiedNameWithOtherDelim]?)
 	 */
-	protected void sequence_AbstractBar_Bar(EObject context, Bar semanticObject) {
+	protected void sequence_AbstractBar_Bar(ISerializationContext context, Bar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -69,7 +73,7 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	 * Constraint:
 	 *     (bar=AbstractBar_FooBar_3_0 foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]?)
 	 */
-	protected void sequence_AbstractBar(EObject context, FooBar semanticObject) {
+	protected void sequence_AbstractBar(ISerializationContext context, FooBar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -78,7 +82,7 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]*)
 	 */
-	protected void sequence_Bar(EObject context, Bar semanticObject) {
+	protected void sequence_Bar(ISerializationContext context, Bar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -87,13 +91,12 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	 * Constraint:
 	 *     name=QualifiedNameWithOtherDelim
 	 */
-	protected void sequence_Foo(EObject context, Foo semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, EObjectAtOffsetTestLanguagePackage.Literals.FOO__NAME) == ValueTransient.YES)
+	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, EObjectAtOffsetTestLanguagePackage.Literals.FOO__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EObjectAtOffsetTestLanguagePackage.Literals.FOO__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getFooAccess().getNameQualifiedNameWithOtherDelimParserRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -103,7 +106,9 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	 * Constraint:
 	 *     (foos+=Foo | bars+=AbstractBar)+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

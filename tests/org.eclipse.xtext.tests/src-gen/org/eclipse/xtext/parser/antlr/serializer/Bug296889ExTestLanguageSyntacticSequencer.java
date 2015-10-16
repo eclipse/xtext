@@ -41,7 +41,7 @@ public class Bug296889ExTestLanguageSyntacticSequencer extends AbstractSyntactic
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Model_DataTypeKeyword_1_0_or_ModelKeyword_0_0.equals(syntax))
+			if (match_Model_DataTypeKeyword_1_0_or_ModelKeyword_0_0.equals(syntax))
 				emit_Model_DataTypeKeyword_1_0_or_ModelKeyword_0_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

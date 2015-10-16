@@ -30,6 +30,8 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
+import org.eclipse.xtext.serializer.sequencertest.ParameterCaller;
+import org.eclipse.xtext.serializer.sequencertest.Parameterized;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
@@ -148,6 +150,8 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.NULL_VALUE: return createNullValue();
       case SequencertestPackage.NULL_CROSS_REF: return createNullCrossRef();
       case SequencertestPackage.FRAGMENT_CALLER_TYPE: return createFragmentCallerType();
+      case SequencertestPackage.PARAMETER_CALLER: return createParameterCaller();
+      case SequencertestPackage.PARAMETERIZED: return createParameterized();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -636,6 +640,28 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     FragmentCallerTypeImpl fragmentCallerType = new FragmentCallerTypeImpl();
     return fragmentCallerType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterCaller createParameterCaller()
+  {
+    ParameterCallerImpl parameterCaller = new ParameterCallerImpl();
+    return parameterCaller;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameterized createParameterized()
+  {
+    ParameterizedImpl parameterized = new ParameterizedImpl();
+    return parameterized;
   }
 
   /**

@@ -31,9 +31,9 @@ public abstract class AbstractIndentationAwareTestLanguageSyntacticSequencer ext
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getDEDENTRule())
+		if (ruleCall.getRule() == grammarAccess.getDEDENTRule())
 			return getDEDENTToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getINDENTRule())
+		else if (ruleCall.getRule() == grammarAccess.getINDENTRule())
 			return getINDENTToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -54,7 +54,7 @@ public abstract class AbstractIndentationAwareTestLanguageSyntacticSequencer ext
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_TreeNode___INDENTTerminalRuleCall_1_0_DEDENTTerminalRuleCall_1_2__q.equals(syntax))
+			if (match_TreeNode___INDENTTerminalRuleCall_1_0_DEDENTTerminalRuleCall_1_2__q.equals(syntax))
 				emit_TreeNode___INDENTTerminalRuleCall_1_0_DEDENTTerminalRuleCall_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

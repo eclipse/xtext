@@ -26,11 +26,11 @@ public class IndentationAwareTestLanguageSyntacticSequencer extends AbstractSynt
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getBEGINRule())
+		if (ruleCall.getRule() == grammarAccess.getBEGINRule())
 			return getBEGINToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getENDRule())
+		else if (ruleCall.getRule() == grammarAccess.getENDRule())
 			return getENDToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getNLRule())
+		else if (ruleCall.getRule() == grammarAccess.getNLRule())
 			return getNLToken(semanticObject, ruleCall, node);
 		return "";
 	}

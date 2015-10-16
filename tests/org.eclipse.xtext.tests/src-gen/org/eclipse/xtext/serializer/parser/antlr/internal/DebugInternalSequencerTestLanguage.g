@@ -37,7 +37,8 @@ ruleModel :
 	ruleNullValueInterpreted |
 	ruleNullCrossRefGenerated |
 	ruleNullCrossRefInterpreted |
-	ruleFragmentCaller
+	ruleFragmentCaller |
+	ruleParameterCaller
 ;
 
 // Rule SimpleGroup
@@ -381,6 +382,38 @@ ruleFragmentCaller :
 // Rule Fragment1
 ruleFragment1 :
 	RULE_ID
+;
+
+// Rule ParameterCaller
+ruleParameterCaller :
+	'#34' (
+		'kw1' norm3_Parameterized |
+		'kw2' norm1_Parameterized |
+		'kw3' norm2_Parameterized |
+		'kw4' ruleParameterized
+	)
+;
+
+// Rule Parameterized
+ruleParameterized :
+	'kwp2' RULE_ID
+;
+
+// Rule Parameterized
+norm1_Parameterized :
+	'kwp1' RULE_ID
+;
+
+// Rule Parameterized
+norm2_Parameterized :
+	'kwp2' RULE_ID (
+		'kwp3' RULE_ID
+	)?
+;
+
+// Rule Parameterized
+norm3_Parameterized :
+	'kwp1' RULE_ID
 ;
 
 // Rule DefEnum1
