@@ -60,7 +60,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Accessors
 	boolean removeBacktrackingGuards
 	
-	@Accessors
 	int lookaheadThreshold
 	
 	@Accessors
@@ -96,6 +95,10 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		}
 		addRuntimeBindingsAndImports
 		addUiBindingsAndImports
+	}
+	
+	def void setLookaheadThreshold(String lookaheadThreshold) {
+		this.lookaheadThreshold = Integer.parseInt(lookaheadThreshold)
 	}
 	
 	protected def generateProductionGrammar() {
