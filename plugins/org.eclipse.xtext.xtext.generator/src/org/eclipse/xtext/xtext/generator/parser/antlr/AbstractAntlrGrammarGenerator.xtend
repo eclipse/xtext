@@ -47,12 +47,16 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	protected KeywordHelper keyWordHelper
 	
+	Grammar originalGrammar
+	
 	def generate(Grammar it, AntlrOptions options, IXtextGeneratorFileSystemAccess fsa) {
 		this.keyWordHelper = KeywordHelper.getHelper(it)
+		this.originalGrammar = it
 		val RuleFilter filter = new RuleFilter();
 		filter.discardUnreachableRules = options.skipUnusedRules
 		val RuleNames ruleNames = RuleNames.getRuleNames(it, true);
 		val Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+		new CombinedGrammarMarker(combinedGrammar).attachToEmfObject(flattened)
 		fsa.generateFile(grammarNaming.getParserGrammar(it).grammarFileName, flattened.compileParser(options))
 		if (!isCombinedGrammar) {
 			fsa.generateFile(grammarNaming.getLexerGrammar(it).grammarFileName, flattened.compileLexer(options))
@@ -60,7 +64,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected def isCombinedGrammar() {
-		true
+		grammarNaming.isCombinedGrammar(originalGrammar)
 	}
 	
 	protected abstract def GrammarNaming getGrammarNaming()

@@ -47,6 +47,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
+import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 import org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
@@ -66,22 +67,28 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected KeywordHelper keyWordHelper;
   
+  private Grammar originalGrammar;
+  
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
     KeywordHelper _helper = KeywordHelper.getHelper(it);
     this.keyWordHelper = _helper;
+    this.originalGrammar = it;
     final RuleFilter filter = new RuleFilter();
     boolean _isSkipUnusedRules = options.isSkipUnusedRules();
     filter.setDiscardUnreachableRules(_isSkipUnusedRules);
     final RuleNames ruleNames = RuleNames.getRuleNames(it, true);
     FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
     final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(_isCombinedGrammar);
+    _combinedGrammarMarker.attachToEmfObject(flattened);
     GrammarNaming _grammarNaming = this.getGrammarNaming();
     AntlrGrammar _parserGrammar = _grammarNaming.getParserGrammar(it);
     String _grammarFileName = _parserGrammar.getGrammarFileName();
     CharSequence _compileParser = this.compileParser(flattened, options);
     fsa.generateFile(_grammarFileName, _compileParser);
-    boolean _isCombinedGrammar = this.isCombinedGrammar();
-    boolean _not = (!_isCombinedGrammar);
+    boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
+    boolean _not = (!_isCombinedGrammar_1);
     if (_not) {
       GrammarNaming _grammarNaming_1 = this.getGrammarNaming();
       AntlrGrammar _lexerGrammar = _grammarNaming_1.getLexerGrammar(it);
@@ -92,7 +99,8 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected boolean isCombinedGrammar() {
-    return true;
+    GrammarNaming _grammarNaming = this.getGrammarNaming();
+    return _grammarNaming.isCombinedGrammar(this.originalGrammar);
   }
   
   protected abstract GrammarNaming getGrammarNaming();

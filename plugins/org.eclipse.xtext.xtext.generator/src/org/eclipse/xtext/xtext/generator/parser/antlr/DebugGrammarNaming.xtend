@@ -9,16 +9,18 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 
 import org.eclipse.xtext.Grammar
 
-import static extension org.eclipse.xtext.GrammarUtil.*
-
 class DebugGrammarNaming extends GrammarNaming {
-	
-	override getParserGrammar(Grammar it) {
-		new AntlrGrammar(internalParserPackage, '''DebugInternal«simpleName»''')
-	}
-	
+
 	override getInternalParserSuperClass(Grammar it) {
 		null
+	}
+	
+	override isCombinedGrammar(Grammar it) {
+		true
+	}
+	
+	override protected getGrammarNamePrefix(Grammar it) {
+		"Debug"
 	}
 	
 }

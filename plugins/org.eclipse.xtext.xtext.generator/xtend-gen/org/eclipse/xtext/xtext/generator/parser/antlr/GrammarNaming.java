@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
+import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 
 @Singleton
 @SuppressWarnings("all")
@@ -24,33 +25,59 @@ public class GrammarNaming {
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
+  public boolean isCombinedGrammar(final Grammar it) {
+    CombinedGrammarMarker _findInEmfObject = CombinedGrammarMarker.findInEmfObject(it);
+    return _findInEmfObject.isCombinedGrammar();
+  }
+  
   protected String getParserPackage(final Grammar it) {
-    StringConcatenation _builder = new StringConcatenation();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
-    _builder.append(_runtimeBasePackage, "");
-    _builder.append(".parser.antlr");
-    return _builder.toString();
+    return (_runtimeBasePackage + ".parser.antlr");
   }
   
   protected String getInternalParserPackage(final Grammar it) {
-    StringConcatenation _builder = new StringConcatenation();
     String _parserPackage = this.getParserPackage(it);
-    _builder.append(_parserPackage, "");
-    _builder.append(".internal");
-    return _builder.toString();
+    return (_parserPackage + ".internal");
   }
   
   public AntlrGrammar getParserGrammar(final Grammar it) {
     String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
+    String _grammarNamePrefix = this.getGrammarNamePrefix(it);
+    _builder.append(_grammarNamePrefix, "");
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
     _builder.append(_simpleName, "");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar(it);
+      boolean _not = (!_isCombinedGrammar);
+      if (_not) {
+        _builder.append("Parser");
+      }
+    }
     return new AntlrGrammar(_internalParserPackage, _builder.toString());
   }
   
   public AntlrGrammar getLexerGrammar(final Grammar it) {
-    return this.getParserGrammar(it);
+    String _internalParserPackage = this.getInternalParserPackage(it);
+    StringConcatenation _builder = new StringConcatenation();
+    String _grammarNamePrefix = this.getGrammarNamePrefix(it);
+    _builder.append(_grammarNamePrefix, "");
+    _builder.append("Internal");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar(it);
+      boolean _not = (!_isCombinedGrammar);
+      if (_not) {
+        _builder.append("Lexer");
+      }
+    }
+    return new AntlrGrammar(_internalParserPackage, _builder.toString());
+  }
+  
+  protected String getGrammarNamePrefix(final Grammar it) {
+    return "";
   }
   
   public TypeReference getLexerClass(final Grammar it) {
@@ -60,7 +87,12 @@ public class GrammarNaming {
     AntlrGrammar _lexerGrammar_1 = this.getLexerGrammar(it);
     String _simpleName = _lexerGrammar_1.getSimpleName();
     _builder.append(_simpleName, "");
-    _builder.append("Lexer");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar(it);
+      if (_isCombinedGrammar) {
+        _builder.append("Lexer");
+      }
+    }
     return new TypeReference(_packageName, _builder.toString());
   }
   
@@ -88,7 +120,12 @@ public class GrammarNaming {
     AntlrGrammar _parserGrammar_1 = this.getParserGrammar(it);
     String _simpleName = _parserGrammar_1.getSimpleName();
     _builder.append(_simpleName, "");
-    _builder.append("Parser");
+    {
+      boolean _isCombinedGrammar = this.isCombinedGrammar(it);
+      if (_isCombinedGrammar) {
+        _builder.append("Parser");
+      }
+    }
     return new TypeReference(_packageName, _builder.toString());
   }
   

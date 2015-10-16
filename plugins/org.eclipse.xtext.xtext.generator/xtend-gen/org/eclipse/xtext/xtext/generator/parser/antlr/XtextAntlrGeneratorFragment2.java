@@ -82,11 +82,8 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
+import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ExtendedAntlrContentAssistGrammarGenerator;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ExtendedAntlrGrammarGenerator;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ExtendedContentAssistGrammarNaming;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ExtendedGrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 
@@ -108,16 +105,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   private boolean partialParsing;
   
   @Inject
-  private AntlrGrammarGenerator combinedProductionGenerator;
+  private AntlrGrammarGenerator productionGenerator;
   
   @Inject
-  private ExtendedAntlrGrammarGenerator extendedProductionGenerator;
-  
-  @Inject
-  private AntlrContentAssistGrammarGenerator combinedContentAssistGenerator;
-  
-  @Inject
-  private ExtendedAntlrContentAssistGrammarGenerator extendedContentAssistGenerator;
+  private AntlrContentAssistGrammarGenerator contentAssistGenerator;
   
   @Inject
   private AntlrDebugGrammarGenerator debugGenerator;
@@ -126,16 +117,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   private FileAccessFactory fileFactory;
   
   @Inject
-  private GrammarNaming combinedProductionNaming;
+  private GrammarNaming productionNaming;
   
   @Inject
-  private ExtendedGrammarNaming extendedProductionNaming;
-  
-  @Inject
-  private ContentAssistGrammarNaming combinedContentAssistNaming;
-  
-  @Inject
-  private ExtendedContentAssistGrammarNaming extendedContentAssistNaming;
+  private ContentAssistGrammarNaming contentAssistNaming;
   
   @Inject
   @Extension
@@ -146,73 +131,64 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     boolean _isIgnoreCase = _options.isIgnoreCase();
-    final KeywordHelper keywordHelper = new KeywordHelper(_grammar, _isIgnoreCase, this.grammarUtil);
-    try {
-      this.generateProductionGrammar();
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
-      IXtextGeneratorFileSystemAccess _srcGen = _genericIde.getSrcGen();
-      boolean _notEquals = (!Objects.equal(_srcGen, null));
-      if (_notEquals) {
-        this.generateContentAssistGrammar();
-      }
-      if (this.debugGrammar) {
-        this.generateDebugGrammar();
-      }
-      JavaFileAccess _generateProductionParser = this.generateProductionParser();
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime = _projectConfig_1.getRuntime();
-      IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime.getSrcGen();
-      _generateProductionParser.writeTo(_srcGen_1);
-      JavaFileAccess _generateAntlrTokenFileProvider = this.generateAntlrTokenFileProvider();
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_1 = _projectConfig_2.getRuntime();
-      IXtextGeneratorFileSystemAccess _srcGen_2 = _runtime_1.getSrcGen();
-      _generateAntlrTokenFileProvider.writeTo(_srcGen_2);
-      JavaFileAccess _generateContentAssistParser = this.generateContentAssistParser();
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
-      IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
-      _generateContentAssistParser.writeTo(_srcGen_3);
-      boolean _isCombinedGrammar = this.isCombinedGrammar();
-      boolean _not = (!_isCombinedGrammar);
-      if (_not) {
-        JavaFileAccess _generateProductionTokenSource = this.generateProductionTokenSource();
-        IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_2 = _projectConfig_4.getRuntime();
-        IXtextGeneratorFileSystemAccess _srcGen_4 = _runtime_2.getSrcGen();
-        _generateProductionTokenSource.writeTo(_srcGen_4);
-        JavaFileAccess _generateContentAssistTokenSource = this.generateContentAssistTokenSource();
-        IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-        IBundleProjectConfig _genericIde_2 = _projectConfig_5.getGenericIde();
-        IXtextGeneratorFileSystemAccess _srcGen_5 = _genericIde_2.getSrcGen();
-        _generateContentAssistTokenSource.writeTo(_srcGen_5);
-      }
-      this.addRuntimeBindingsAndImports();
-      this.addUiBindingsAndImports();
-    } finally {
-      Grammar _grammar_1 = this.getGrammar();
-      keywordHelper.discardHelper(_grammar_1);
+    new KeywordHelper(_grammar, _isIgnoreCase, this.grammarUtil);
+    boolean _isCombinedGrammar = this.isCombinedGrammar();
+    CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(_isCombinedGrammar);
+    Grammar _grammar_1 = this.getGrammar();
+    _combinedGrammarMarker.attachToEmfObject(_grammar_1);
+    this.generateProductionGrammar();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
+    IXtextGeneratorFileSystemAccess _srcGen = _genericIde.getSrcGen();
+    boolean _notEquals = (!Objects.equal(_srcGen, null));
+    if (_notEquals) {
+      this.generateContentAssistGrammar();
     }
+    if (this.debugGrammar) {
+      this.generateDebugGrammar();
+    }
+    JavaFileAccess _generateProductionParser = this.generateProductionParser();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig_1.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime.getSrcGen();
+    _generateProductionParser.writeTo(_srcGen_1);
+    JavaFileAccess _generateAntlrTokenFileProvider = this.generateAntlrTokenFileProvider();
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime_1 = _projectConfig_2.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen_2 = _runtime_1.getSrcGen();
+    _generateAntlrTokenFileProvider.writeTo(_srcGen_2);
+    JavaFileAccess _generateContentAssistParser = this.generateContentAssistParser();
+    IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+    IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
+    IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
+    _generateContentAssistParser.writeTo(_srcGen_3);
+    boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
+    boolean _not = (!_isCombinedGrammar_1);
+    if (_not) {
+      JavaFileAccess _generateProductionTokenSource = this.generateProductionTokenSource();
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_2 = _projectConfig_4.getRuntime();
+      IXtextGeneratorFileSystemAccess _srcGen_4 = _runtime_2.getSrcGen();
+      _generateProductionTokenSource.writeTo(_srcGen_4);
+      JavaFileAccess _generateContentAssistTokenSource = this.generateContentAssistTokenSource();
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _genericIde_2 = _projectConfig_5.getGenericIde();
+      IXtextGeneratorFileSystemAccess _srcGen_5 = _genericIde_2.getSrcGen();
+      _generateContentAssistTokenSource.writeTo(_srcGen_5);
+    }
+    this.addRuntimeBindingsAndImports();
+    this.addUiBindingsAndImports();
   }
   
   protected void generateProductionGrammar() {
     @Extension
-    final GrammarNaming naming = this.getProductionNaming();
-    AntlrGrammarGenerator _xifexpression = null;
-    boolean _isCombinedGrammar = this.isCombinedGrammar();
-    if (_isCombinedGrammar) {
-      _xifexpression = this.combinedProductionGenerator;
-    } else {
-      _xifexpression = this.extendedProductionGenerator;
-    }
-    final AntlrGrammarGenerator generator = _xifexpression;
+    final GrammarNaming naming = this.productionNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     final IXtextGeneratorFileSystemAccess fsa = _runtime.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
-    generator.generate(_grammar, _options, fsa);
+    this.productionGenerator.generate(_grammar, _options, fsa);
     Grammar _grammar_1 = this.getGrammar();
     AntlrGrammar _parserGrammar = naming.getParserGrammar(_grammar_1);
     Grammar _grammar_2 = this.getGrammar();
@@ -245,21 +221,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   protected void generateContentAssistGrammar() {
     @Extension
-    final ContentAssistGrammarNaming naming = this.getContentAssistNaming();
-    AntlrContentAssistGrammarGenerator _xifexpression = null;
-    boolean _isCombinedGrammar = this.isCombinedGrammar();
-    if (_isCombinedGrammar) {
-      _xifexpression = this.combinedContentAssistGenerator;
-    } else {
-      _xifexpression = this.extendedContentAssistGenerator;
-    }
-    final AntlrContentAssistGrammarGenerator generator = _xifexpression;
+    final ContentAssistGrammarNaming naming = this.contentAssistNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
     final IXtextGeneratorFileSystemAccess fsa = _genericIde.getSrcGen();
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
-    generator.generate(_grammar, _options, fsa);
+    this.contentAssistGenerator.generate(_grammar, _options, fsa);
     Grammar _grammar_1 = this.getGrammar();
     AntlrGrammar _parserGrammar = naming.getParserGrammar(_grammar_1);
     Grammar _grammar_2 = this.getGrammar();
@@ -270,10 +238,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_4);
     this.simplifyUnorderedGroupPredicatesIfRequired(_grammar_3, fsa, _internalParserClass);
     Grammar _grammar_5 = this.getGrammar();
-    TypeReference _lexerClass = naming.getLexerClass(_grammar_5);
+    TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_5);
     Grammar _grammar_6 = this.getGrammar();
-    TypeReference _internalParserClass_1 = naming.getInternalParserClass(_grammar_6);
-    this.splitParserAndLexerIfEnabled(fsa, _lexerClass, _internalParserClass_1);
+    TypeReference _lexerClass = naming.getLexerClass(_grammar_6);
+    this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
     Grammar _grammar_7 = this.getGrammar();
     AntlrGrammar _lexerGrammar_1 = naming.getLexerGrammar(_grammar_7);
     String _tokensFileName = _lexerGrammar_1.getTokensFileName();
@@ -380,28 +348,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     return _or;
   }
   
-  protected GrammarNaming getProductionNaming() {
-    GrammarNaming _xifexpression = null;
-    boolean _isCombinedGrammar = this.isCombinedGrammar();
-    if (_isCombinedGrammar) {
-      _xifexpression = this.combinedProductionNaming;
-    } else {
-      _xifexpression = this.extendedProductionNaming;
-    }
-    return _xifexpression;
-  }
-  
-  protected ContentAssistGrammarNaming getContentAssistNaming() {
-    ContentAssistGrammarNaming _xifexpression = null;
-    boolean _isCombinedGrammar = this.isCombinedGrammar();
-    if (_isCombinedGrammar) {
-      _xifexpression = this.combinedContentAssistNaming;
-    } else {
-      _xifexpression = this.extendedContentAssistNaming;
-    }
-    return _xifexpression;
-  }
-  
   protected void generateDebugGrammar() {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
@@ -415,7 +361,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       @Extension
-      final GrammarNaming naming = this.getProductionNaming();
+      final GrammarNaming naming = this.productionNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _parserClass = naming.getParserClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_parserClass);
@@ -625,7 +571,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       @Extension
-      final GrammarNaming naming = this.getProductionNaming();
+      final GrammarNaming naming = this.productionNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _antlrTokenFileProviderClass = naming.getAntlrTokenFileProviderClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_antlrTokenFileProviderClass);
@@ -679,7 +625,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       @Extension
-      final GrammarNaming naming = this.getProductionNaming();
+      final GrammarNaming naming = this.productionNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_tokenSourceClass);
@@ -867,7 +813,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       @Extension
-      final ContentAssistGrammarNaming naming = this.getContentAssistNaming();
+      final ContentAssistGrammarNaming naming = this.contentAssistNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _parserClass = naming.getParserClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_parserClass);
@@ -1170,7 +1116,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       @Extension
-      final ContentAssistGrammarNaming naming = this.getContentAssistNaming();
+      final ContentAssistGrammarNaming naming = this.contentAssistNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
       final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_tokenSourceClass);
@@ -1415,7 +1361,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   public void addRuntimeBindingsAndImports() {
     @Extension
-    final GrammarNaming naming = this.getProductionNaming();
+    final GrammarNaming naming = this.productionNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
@@ -1526,7 +1472,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   
   public void addUiBindingsAndImports() {
     @Extension
-    final ContentAssistGrammarNaming naming = this.getContentAssistNaming();
+    final ContentAssistGrammarNaming naming = this.contentAssistNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = _eclipsePlugin.getManifest();
@@ -1571,9 +1517,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append(".to(");
-        GrammarNaming _productionNaming = XtextAntlrGeneratorFragment2.this.getProductionNaming();
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass = _productionNaming.getLexerClass(_grammar);
+        TypeReference _lexerClass = XtextAntlrGeneratorFragment2.this.productionNaming.getLexerClass(_grammar);
         _builder.append(_lexerClass, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
