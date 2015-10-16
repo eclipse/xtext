@@ -20,8 +20,8 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -51,7 +51,7 @@ public class SyntacticSequencerExtensions {
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
   
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
-    Map<IContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
+    Map<ISerializationContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
     Collection<ISyntacticSequencerPDAProvider.ISynAbsorberState> _values = _syntacticSequencerPDAs.values();
     return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(_values, ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
   }

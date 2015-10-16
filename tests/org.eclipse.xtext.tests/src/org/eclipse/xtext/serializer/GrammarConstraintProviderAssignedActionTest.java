@@ -20,7 +20,6 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
@@ -90,10 +89,10 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		//				log.debug(e.getMessage(), e);
 		//		}
 
-		Map<IContext, IConstraint> constraints = gcp.getConstraints(grammar);
+		Map<ISerializationContext, IConstraint> constraints = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();
-		List<Pair<List<IContext>, IConstraint>> groups = SerializationContext.groupByEqualityAndSort(constraints);
-		for (Pair<List<IContext>, IConstraint> r : groups) {
+		List<Pair<List<ISerializationContext>, IConstraint>> groups = SerializationContext.groupByEqualityAndSort(constraints);
+		for (Pair<List<ISerializationContext>, IConstraint> r : groups) {
 			result.add(r.getFirst() + ":");
 			result.add("  " + r.getSecond());
 		}
@@ -110,11 +109,11 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		//			if (log.isDebugEnabled())
 		//				log.debug(e.getMessage(), e);
 		//		}
-		Map<IContext, IConstraint> constraints = gcp.getConstraints(grammar);
+		Map<ISerializationContext, IConstraint> constraints = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();
 		Set<IConstraint> visited = Sets.newHashSet();
-		for (Entry<IContext, IConstraint> r : constraints.entrySet()) {
-			IContext context = r.getKey();
+		for (Entry<ISerializationContext, IConstraint> r : constraints.entrySet()) {
+			ISerializationContext context = r.getKey();
 			IConstraint constraint = r.getValue();
 			result.add(context.toString());
 			if (visited.add(constraint))

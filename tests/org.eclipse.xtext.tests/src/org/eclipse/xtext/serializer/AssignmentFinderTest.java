@@ -18,7 +18,6 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.analysis.GrammarElementDeclarationOrder;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRef;
 import org.eclipse.xtext.serializer.assignmentFinderTest.CrossRef;
@@ -74,8 +73,8 @@ public class AssignmentFinderTest extends AbstractXtextTests {
 
 	private String findAssignments(EObject obj, Object value, AbstractElement... assignments) {
 		AbstractElement element = (AbstractElement) NodeModelUtils.getNode(obj).getGrammarElement();
-		IContext ctx = SerializationContext.forChild(null, element, obj);
-		Multimap<AbstractElement, IContext> ass = ArrayListMultimap.create();
+		ISerializationContext ctx = SerializationContext.forChild(null, element, obj);
+		Multimap<AbstractElement, ISerializationContext> ass = ArrayListMultimap.create();
 		for (AbstractElement e : assignments)
 			ass.put(e, ctx);
 		List<AbstractElement> found = Lists.newArrayList(finder.findAssignmentsByValue(obj, ass, value, null));

@@ -21,8 +21,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -73,7 +73,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	private XbaseWithAnnotationsGrammarAccess grammarAccess;
 	
 	@Override
-	public void sequence(IContext context, EObject semanticObject) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
 		EPackage epackage = semanticObject.eClass().getEPackage();
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
@@ -389,7 +389,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 *         (elements+=XExpression elements+=XExpression*)
 	 *     )?
 	 */
-	protected void sequence_XAnnotationElementValueOrCommaList_XListLiteral(IContext context, XListLiteral semanticObject) {
+	protected void sequence_XAnnotationElementValueOrCommaList_XListLiteral(ISerializationContext context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -402,7 +402,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 * Constraint:
 	 *     (element=[JvmOperation|ValidID] value=XAnnotationElementValue)
 	 */
-	protected void sequence_XAnnotationElementValuePair(IContext context, XAnnotationElementValuePair semanticObject) {
+	protected void sequence_XAnnotationElementValuePair(ISerializationContext context, XAnnotationElementValuePair semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT));
@@ -424,7 +424,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 * Constraint:
 	 *     ((elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*) | (elements+=XExpression elements+=XExpression*))?
 	 */
-	protected void sequence_XAnnotationElementValue_XListLiteral(IContext context, XListLiteral semanticObject) {
+	protected void sequence_XAnnotationElementValue_XListLiteral(ISerializationContext context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -440,7 +440,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 *         ((elementValuePairs+=XAnnotationElementValuePair elementValuePairs+=XAnnotationElementValuePair*) | value=XAnnotationElementValueOrCommaList)?
 	 *     )
 	 */
-	protected void sequence_XAnnotation(IContext context, XAnnotation semanticObject) {
+	protected void sequence_XAnnotation(ISerializationContext context, XAnnotation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

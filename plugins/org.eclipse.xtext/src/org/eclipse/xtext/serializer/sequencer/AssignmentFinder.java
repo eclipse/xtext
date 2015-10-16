@@ -25,7 +25,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
@@ -61,7 +61,7 @@ public class AssignmentFinder implements IAssignmentFinder {
 
 	@Override
 	public Set<AbstractElement> findAssignmentsByValue(EObject semanticObj,
-			Multimap<AbstractElement, IContext> assignments, Object value, INode node) {
+			Multimap<AbstractElement, ISerializationContext> assignments, Object value, INode node) {
 		List<AbstractElement> assignedElements = Lists.newArrayList(assignments.keySet());
 		EStructuralFeature feature = FeatureFinderUtil.getFeature(assignedElements.iterator().next(),
 				semanticObj.eClass());
@@ -82,25 +82,25 @@ public class AssignmentFinder implements IAssignmentFinder {
 	}
 
 	protected Set<AbstractElement> findValidAssignmentsForContainmentRef(EObject semanticObj,
-			Multimap<AbstractElement, IContext> assignments, EObject value) {
-		Multimap<IContext, AbstractElement> children = ArrayListMultimap.create();
-		for (Entry<AbstractElement, Collection<IContext>> e : assignments.asMap().entrySet()) {
+			Multimap<AbstractElement, ISerializationContext> assignments, EObject value) {
+		Multimap<ISerializationContext, AbstractElement> children = ArrayListMultimap.create();
+		for (Entry<AbstractElement, Collection<ISerializationContext>> e : assignments.asMap().entrySet()) {
 			AbstractElement ele = e.getKey();
 			if (ele instanceof RuleCall) {
 				EClassifier classifier = ((RuleCall) ele).getRule().getType().getClassifier();
 				if (!classifier.isInstance(value))
 					continue;
 			}
-			for (IContext container : e.getValue()) {
-				IContext child = SerializationContext.forChild(container, ele, value);
+			for (ISerializationContext container : e.getValue()) {
+				ISerializationContext child = SerializationContext.forChild(container, ele, value);
 				children.put(child, ele);
 			}
 		}
 		if (children.size() < 2)
 			return Sets.newHashSet(children.values());
-		Set<IContext> found = contextFinder.findByContents(value, children.keySet());
+		Set<ISerializationContext> found = contextFinder.findByContents(value, children.keySet());
 		Set<AbstractElement> result = Sets.newLinkedHashSet();
-		for (IContext ctx : children.keySet())
+		for (ISerializationContext ctx : children.keySet())
 			if (found.contains(ctx))
 				result.addAll(children.get(ctx));
 		return result;

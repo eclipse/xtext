@@ -11,7 +11,7 @@ import com.google.common.base.Throwables
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.serializer.analysis.IContext
+import org.eclipse.xtext.serializer.ISerializationContext
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider
@@ -82,7 +82,7 @@ class DebugGraphGenerator {
 		return result
 	}
 
-	private def String drawSafe(GraphvizDotBuilder builder, Iterable<IContext> contexts, Object graph) {
+	private def String drawSafe(GraphvizDotBuilder builder, Iterable<ISerializationContext> contexts, Object graph) {
 		try {
 			builder.draw(graph)
 		} catch (Exception e) {
@@ -97,7 +97,7 @@ class DebugGraphGenerator {
 			'_' + name + '/'
 	}
 
-	private def String file(String name, Iterable<IContext> contexts) {
+	private def String file(String name, Iterable<ISerializationContext> contexts) {
 		directory(name) + contexts.sort.join("_") + '.dot';
 	}
 }

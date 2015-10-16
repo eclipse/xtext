@@ -24,6 +24,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -38,13 +39,13 @@ import com.google.common.collect.SetMultimap;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class SerializationContext implements IContext {
+public abstract class SerializationContext implements ISerializationContext {
 
 	public static class ActionContext extends SerializationContext {
 
 		private final Action action;
 
-		public ActionContext(IContext parent, Action action) {
+		public ActionContext(ISerializationContext parent, Action action) {
 			super(parent);
 			this.action = action;
 		}
@@ -64,7 +65,7 @@ public abstract class SerializationContext implements IContext {
 
 		private final Set<Parameter> parameters;
 
-		public ParameterValueContext(IContext parent, Set<Parameter> parameters) {
+		public ParameterValueContext(ISerializationContext parent, Set<Parameter> parameters) {
 			super(parent);
 			this.parameters = ImmutableSet.copyOf(parameters);
 		}
@@ -88,7 +89,7 @@ public abstract class SerializationContext implements IContext {
 
 		private final ParserRule rule;
 
-		public RuleContext(IContext parent, ParserRule rule) {
+		public RuleContext(ISerializationContext parent, ParserRule rule) {
 			super(parent);
 			this.rule = rule;
 		}
@@ -109,7 +110,7 @@ public abstract class SerializationContext implements IContext {
 
 		private final EClass type;
 
-		protected TypeContext(IContext parent, EClass type) {
+		protected TypeContext(ISerializationContext parent, EClass type) {
 			super(parent);
 			this.type = type;
 		}
@@ -126,7 +127,7 @@ public abstract class SerializationContext implements IContext {
 
 	}
 
-	public static IContext forChild(IContext container, AbstractElement assignedElement, EObject sem) {
+	public static ISerializationContext forChild(ISerializationContext container, AbstractElement assignedElement, EObject sem) {
 		if (assignedElement instanceof Action)
 			return forChild(container, (Action) assignedElement, sem);
 		if (assignedElement instanceof RuleCall)
@@ -134,18 +135,18 @@ public abstract class SerializationContext implements IContext {
 		throw new IllegalStateException("Invalid Element:" + assignedElement);
 	}
 
-	public static IContext forChild(IContext container, Action assignedAction, EObject sem) {
+	public static ISerializationContext forChild(ISerializationContext container, Action assignedAction, EObject sem) {
 		EClass type = sem == null ? null : sem.eClass();
 		//		RuleContext ruleContext = new RuleContext(null, container.getParserRule());
 		return new TypeContext(new ActionContext(/*ruleContext*/null, assignedAction), type);
 	}
 
-	public static IContext forChild(IContext container, RuleCall ruleCall, EObject sem) {
+	public static ISerializationContext forChild(ISerializationContext container, RuleCall ruleCall, EObject sem) {
 		EClass type = sem == null ? null : sem.eClass();
 		return new TypeContext(new RuleContext(null, (ParserRule) ruleCall.getRule()), type);
 	}
 
-	public static IContext fromEObject(EObject ctx, EObject sem) {
+	public static ISerializationContext fromEObject(EObject ctx, EObject sem) {
 		EClass type = sem == null ? null : sem.eClass();
 		if (ctx instanceof ParserRule)
 			return new TypeContext(new RuleContext(null, (ParserRule) ctx), type);
@@ -156,32 +157,32 @@ public abstract class SerializationContext implements IContext {
 		throw new IllegalStateException("Unknonwn context type:" + ctx.eClass().getName());
 	}
 
-	public static List<IContext> fromEObjects(Iterable<EObject> objects, EObject sem) {
+	public static List<ISerializationContext> fromEObjects(Iterable<EObject> objects, EObject sem) {
 		if (objects == null)
 			return null;
-		List<IContext> result = Lists.newArrayList();
+		List<ISerializationContext> result = Lists.newArrayList();
 		for (EObject ctx : objects)
 			result.add(fromEObject(ctx, sem));
 		return result;
 	}
 
-	public static List<EObject> fromIContexts(Iterable<IContext> ctxs) {
+	public static List<EObject> fromIContexts(Iterable<ISerializationContext> ctxs) {
 		if (ctxs == null)
 			return null;
 		List<EObject> result = Lists.newArrayList();
-		for (IContext ctx : ctxs)
+		for (ISerializationContext ctx : ctxs)
 			result.add(ctx.getActionOrRule());
 		return result;
 	}
 
-	public static <T> List<Pair<List<IContext>, T>> groupByEqualityAndSort(Map<IContext, T> items) {
-		SetMultimap<IContext, T> byContext = Multimaps.forMap(items);
-		ArrayListMultimap<T, IContext> byT = Multimaps.invertFrom(byContext, ArrayListMultimap.<T, IContext> create());
-		List<Pair<List<IContext>, T>> result = Lists.newArrayList();
-		for (Entry<T, Collection<IContext>> e : byT.asMap().entrySet()) {
+	public static <T> List<Pair<List<ISerializationContext>, T>> groupByEqualityAndSort(Map<ISerializationContext, T> items) {
+		SetMultimap<ISerializationContext, T> byContext = Multimaps.forMap(items);
+		ArrayListMultimap<T, ISerializationContext> byT = Multimaps.invertFrom(byContext, ArrayListMultimap.<T, ISerializationContext> create());
+		List<Pair<List<ISerializationContext>, T>> result = Lists.newArrayList();
+		for (Entry<T, Collection<ISerializationContext>> e : byT.asMap().entrySet()) {
 			T t = e.getKey();
 			@SuppressWarnings("serial")
-			List<IContext> contexts = new ArrayList<IContext>() {
+			List<ISerializationContext> contexts = new ArrayList<ISerializationContext>() {
 				@Override
 				public String toString() {
 					return Joiner.on(", ").join(this);
@@ -191,24 +192,24 @@ public abstract class SerializationContext implements IContext {
 			Collections.sort(contexts);
 			result.add(Tuples.create(contexts, t));
 		}
-		Collections.sort(result, new Comparator<Pair<List<IContext>, T>>() {
+		Collections.sort(result, new Comparator<Pair<List<ISerializationContext>, T>>() {
 			@Override
-			public int compare(Pair<List<IContext>, T> o1, Pair<List<IContext>, T> o2) {
+			public int compare(Pair<List<ISerializationContext>, T> o1, Pair<List<ISerializationContext>, T> o2) {
 				return o1.getFirst().get(0).compareTo(o2.getFirst().get(0));
 			}
 		});
 		return result;
 	}
 
-	private final IContext parent;
+	private final ISerializationContext parent;
 
-	protected SerializationContext(IContext parent) {
+	protected SerializationContext(ISerializationContext parent) {
 		super();
 		this.parent = parent;
 	}
 
 	@Override
-	public int compareTo(IContext o) {
+	public int compareTo(ISerializationContext o) {
 		EObject o1 = getActionOrRule();
 		EObject o2 = o.getActionOrRule();
 		if (o1 != o2) {
@@ -230,8 +231,8 @@ public abstract class SerializationContext implements IContext {
 			if (t2 != null)
 				return 1;
 		}
-		IContext p1 = getParent();
-		IContext p2 = o.getParent();
+		ISerializationContext p1 = getParent();
+		ISerializationContext p2 = o.getParent();
 		if (p1 != p2) {
 			if (p1 != null && p2 != null)
 				return p1.compareTo(p2);
@@ -245,11 +246,11 @@ public abstract class SerializationContext implements IContext {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof IContext))
+		if (obj == null || !(obj instanceof ISerializationContext))
 			return false;
 		if (obj == this)
 			return true;
-		IContext other = (IContext) obj;
+		ISerializationContext other = (ISerializationContext) obj;
 		if (!Objects.equal(getParserRule(), other.getParserRule()))
 			return false;
 		if (!Objects.equal(getAssignedAction(), other.getAssignedAction()))
@@ -273,7 +274,7 @@ public abstract class SerializationContext implements IContext {
 	}
 
 	@Override
-	public IContext getParent() {
+	public ISerializationContext getParent() {
 		return parent;
 	}
 

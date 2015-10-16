@@ -10,7 +10,7 @@ package org.eclipse.xtext.serializer.sequencer;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 
 import com.google.inject.ImplementedBy;
 
@@ -19,9 +19,9 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(ContextFinder.class)
 public interface IContextFinder {
-	Set<IContext> findByContents(EObject semanticObject, Iterable<IContext> contextCandidates);
+	Set<ISerializationContext> findByContents(EObject semanticObject, Iterable<ISerializationContext> contextCandidates);
 
-	Set<IContext> findByContentsAndContainer(EObject semanticObject, Iterable<IContext> contextCandidates);
+	Set<ISerializationContext> findByContentsAndContainer(EObject semanticObject, Iterable<ISerializationContext> contextCandidates);
 
 	/**
 	 * @deprecated use {@link #findByContents(EObject, Iterable)}.

@@ -18,6 +18,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -136,7 +137,7 @@ public interface IGrammarConstraintProvider {
 		 */
 		EClass getType();
 
-		List<IContext> getContexts();
+		List<ISerializationContext> getContexts();
 
 		Nfa<ISemState> getNfa();
 	}
@@ -243,6 +244,6 @@ public interface IGrammarConstraintProvider {
 	 * Returns all constraints form this grammar. If a constraint belongs to multiple ConstraintContexts, it is
 	 * important to call this method to ensure there is inly one instance fo this constraint.
 	 */
-	public Map<IContext, IConstraint> getConstraints(Grammar context);
+	public Map<ISerializationContext, IConstraint> getConstraints(Grammar context);
 
 }

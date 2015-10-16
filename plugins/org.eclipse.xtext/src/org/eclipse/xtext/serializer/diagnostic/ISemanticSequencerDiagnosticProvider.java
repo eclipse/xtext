@@ -9,7 +9,7 @@ package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer.SerializableObject;
@@ -28,22 +28,22 @@ public interface ISemanticSequencerDiagnosticProvider {
 	String BACKTRACKING_FAILED = "backtracking failed";
 
 	/**
-	 * @deprecated use {@link #createInvalidContextOrTypeDiagnostic(EObject, IContext)}
+	 * @deprecated use {@link #createInvalidContextOrTypeDiagnostic(EObject, ISerializationContext)}
 	 */
 	@Deprecated
 	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context);
 
-	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, IContext context);
+	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, ISerializationContext context);
 
 	ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature);
 
 	/**
-	 * @deprecated use {@link #createBacktrackingFailedDiagnostic(SerializableObject, IContext, IConstraint)}
+	 * @deprecated use {@link #createBacktrackingFailedDiagnostic(SerializableObject, ISerializationContext, IConstraint)}
 	 */
 	@Deprecated
 	ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject, EObject context,
 			Nfa<ISemState> nfa);
 
-	ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject obj, IContext ctx,
+	ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject obj, ISerializationContext ctx,
 			IConstraint constraint);
 }

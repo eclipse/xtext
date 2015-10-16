@@ -32,7 +32,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -66,20 +66,20 @@ public class SemanticSequencerExtensions {
   @Inject
   private IGrammarConstraintProvider gcp;
   
-  public Map<IGrammarConstraintProvider.IConstraint, List<IContext>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
-    final Map<IGrammarConstraintProvider.IConstraint, List<IContext>> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint, List<IContext>>newLinkedHashMap();
-    final Map<IContext, IGrammarConstraintProvider.IConstraint> constraints = this.gcp.getConstraints(grammar);
-    Set<Map.Entry<IContext, IGrammarConstraintProvider.IConstraint>> _entrySet = constraints.entrySet();
-    for (final Map.Entry<IContext, IGrammarConstraintProvider.IConstraint> e : _entrySet) {
+  public Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
+    final Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>newLinkedHashMap();
+    final Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> constraints = this.gcp.getConstraints(grammar);
+    Set<Map.Entry<ISerializationContext, IGrammarConstraintProvider.IConstraint>> _entrySet = constraints.entrySet();
+    for (final Map.Entry<ISerializationContext, IGrammarConstraintProvider.IConstraint> e : _entrySet) {
       {
-        final IContext context = e.getKey();
+        final ISerializationContext context = e.getKey();
         final IGrammarConstraintProvider.IConstraint constraint = e.getValue();
         EClass _type = constraint.getType();
         boolean _tripleEquals = (_type == clazz);
         if (_tripleEquals) {
-          List<IContext> contexts = result.get(constraint);
+          List<ISerializationContext> contexts = result.get(constraint);
           if ((contexts == null)) {
-            ArrayList<IContext> _newArrayList = CollectionLiterals.<IContext>newArrayList();
+            ArrayList<ISerializationContext> _newArrayList = CollectionLiterals.<ISerializationContext>newArrayList();
             contexts = _newArrayList;
             result.put(constraint, contexts);
           }
@@ -139,7 +139,7 @@ public class SemanticSequencerExtensions {
     if ((grammar == null)) {
       return CollectionLiterals.<IGrammarConstraintProvider.IConstraint>emptySet();
     }
-    Map<IContext, IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
+    Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
     return _constraints.values();
   }
   

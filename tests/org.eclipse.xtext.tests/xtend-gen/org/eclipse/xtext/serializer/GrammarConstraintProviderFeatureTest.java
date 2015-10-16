@@ -19,7 +19,6 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.XtextInjectorProvider;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -149,7 +148,7 @@ public class GrammarConstraintProviderFeatureTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      Map<IContext, IGrammarConstraintProvider.IConstraint> _constraints = this.constraintProvider.getConstraints(grammar);
+      Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = this.constraintProvider.getConstraints(grammar);
       final Collection<IGrammarConstraintProvider.IConstraint> constraints = _constraints.values();
       final Function1<IGrammarConstraintProvider.IConstraint, String> _function = new Function1<IGrammarConstraintProvider.IConstraint, String>() {
         @Override

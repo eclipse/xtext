@@ -19,6 +19,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.TypeContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
 import org.eclipse.xtext.util.formallang.Pda;
@@ -241,11 +242,11 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	}
 
 	@Override
-	public Map<IContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar) {
-		Map<IContext, Pda<ISerState, RuleCall>> result = Maps.newHashMap();
-		Map<IContext, Pda<ISerState, RuleCall>> contextPDAs = pdaProvider.getContextPDAs(grammar);
-		for (Entry<IContext, Pda<ISerState, RuleCall>> e : contextPDAs.entrySet()) {
-			IContext parent = e.getKey();
+	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar) {
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newHashMap();
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> contextPDAs = pdaProvider.getContextPDAs(grammar);
+		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : contextPDAs.entrySet()) {
+			ISerializationContext parent = e.getKey();
 			Pda<ISerState, RuleCall> contextPDA = e.getValue();
 			Set<EClass> types = collectTypes(contextPDA);
 			if (types.size() == 1) {

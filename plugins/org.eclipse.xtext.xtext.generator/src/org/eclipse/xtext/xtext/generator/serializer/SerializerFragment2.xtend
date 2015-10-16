@@ -33,10 +33,10 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
+import org.eclipse.xtext.serializer.ISerializationContext
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias
-import org.eclipse.xtext.serializer.analysis.IContext
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
@@ -248,7 +248,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		val superConstraints = grammar.superGrammar.grammarConstraints.map[it->it].toMap
 		'''
 			@Override
-			public void sequence(«IContext» context, «EObject» semanticObject) {
+			public void sequence(«ISerializationContext» context, «EObject» semanticObject) {
 				«EPackage» epackage = semanticObject.eClass().getEPackage();
 				«ParserRule» rule = context.getParserRule();
 				«Action» action = context.getAssignedAction();
@@ -267,7 +267,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		'''
 	}
 	
-	private def StringConcatenationClient genContextCondition(IContext context) {
+	private def StringConcatenationClient genContextCondition(ISerializationContext context) {
 		switch it:context {
 			case assignedAction !== null: '''action == grammarAccess.«assignedAction.gaAccessor»'''
 			case parserRule !== null: '''rule == grammarAccess.«parserRule.gaAccessor»'''
@@ -314,7 +314,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 			 * Constraint:
 			 *     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n*     ")»«ENDIF»
 			 */
-			protected void sequence_«c.simpleName»(«IContext» context, «c.type» semanticObject) {
+			protected void sequence_«c.simpleName»(«ISerializationContext» context, «c.type» semanticObject) {
 				«IF states !== null»
 					if (errorAcceptor != null) {
 						«FOR s : states»

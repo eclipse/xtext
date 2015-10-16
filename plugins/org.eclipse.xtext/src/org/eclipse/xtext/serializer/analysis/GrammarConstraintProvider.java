@@ -31,6 +31,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -58,7 +59,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		private IConstraintElement body = UNINITIALIZED;
 
-		private final List<IContext> contexts = Lists.newArrayList();
+		private final List<ISerializationContext> contexts = Lists.newArrayList();
 
 		private IFeatureInfo[] features = null;
 
@@ -129,7 +130,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		@Override
-		public List<IContext> getContexts() {
+		public List<ISerializationContext> getContexts() {
 			return contexts;
 		}
 
@@ -410,7 +411,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
 		Set<Action> relevantActions = Sets.newLinkedHashSet();
 		Set<ParserRule> contextRules = Sets.newLinkedHashSet();
-		for (IContext ctx : constraint.getContexts()) {
+		for (ISerializationContext ctx : constraint.getContexts()) {
 			ParserRule rule = ctx.getParserRule();
 			if (rule != null)
 				contextRules.add(rule);
@@ -423,7 +424,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		if (relevantRules.isEmpty()) {
 			Set<ParserRule> allRules = Sets.newHashSet(contextRules);
-			for (IContext ctx : constraint.getContexts()) {
+			for (ISerializationContext ctx : constraint.getContexts()) {
 				Action action = ctx.getAssignedAction();
 				if (action != null)
 					allRules.add(GrammarUtil.containingParserRule(action));
@@ -442,7 +443,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				relevantRules.addAll(allRules);
 			}
 		}
-		for (IContext ctx : constraint.getContexts()) {
+		for (ISerializationContext ctx : constraint.getContexts()) {
 			Action action = ctx.getAssignedAction();
 			if (action != null) {
 				ParserRule rule = GrammarUtil.containingParserRule(action);
@@ -458,7 +459,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			actions.add(context2Name.getUniqueActionName(a));
 		for (ParserRule a : relevantRules)
 			rules.add(context2Name.getContextName(grammar, a));
-		for (IContext ctx : constraint.getContexts()) {
+		for (ISerializationContext ctx : constraint.getContexts()) {
 			Set<Parameter> values = ctx.getParameterValues();
 			if (values != null)
 				for (Parameter param : values) {
@@ -479,21 +480,21 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return result;
 	}
 
-	private Map<Grammar, Map<IContext, IConstraint>> cache = Maps.newHashMap();
+	private Map<Grammar, Map<ISerializationContext, IConstraint>> cache = Maps.newHashMap();
 
 	@Override
-	public Map<IContext, IConstraint> getConstraints(Grammar grammar) {
-		Map<IContext, IConstraint> result = cache.get(grammar);
+	public Map<ISerializationContext, IConstraint> getConstraints(Grammar grammar) {
+		Map<ISerializationContext, IConstraint> result = cache.get(grammar);
 		if (result != null)
 			return result;
 		result = Maps.newLinkedHashMap();
 		cache.put(grammar, result);
 		GrammarElementDeclarationOrder.get(grammar);
-		Map<IContext, Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
-		ArrayList<IContext> contexts = Lists.newArrayList(nfas.keySet());
+		Map<ISerializationContext, Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
+		ArrayList<ISerializationContext> contexts = Lists.newArrayList(nfas.keySet());
 		Collections.sort(contexts);
 		Map<Pair<EClass, Nfa<ISemState>>, Constraint> constraints = Maps.newHashMap();
-		for (IContext context : contexts) {
+		for (ISerializationContext context : contexts) {
 			Nfa<ISemState> nfa = nfas.get(context);
 			EClass type = context.getType();
 			Pair<EClass, Nfa<ISemState>> key = Tuples.create(type, nfa);

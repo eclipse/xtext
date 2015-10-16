@@ -24,7 +24,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.XtextInjectorProvider;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -842,7 +842,7 @@ public class GrammarPDAProviderTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      final Map<IContext, Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
+      final Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
       Collection<Pda<ISerState, RuleCall>> _values = pdas.values();
       final Procedure1<Pda<ISerState, RuleCall>> _function = new Procedure1<Pda<ISerState, RuleCall>>() {
         @Override
@@ -851,11 +851,11 @@ public class GrammarPDAProviderTest {
         }
       };
       IterableExtensions.<Pda<ISerState, RuleCall>>forEach(_values, _function);
-      Set<IContext> _keySet = pdas.keySet();
-      List<IContext> _sort = IterableExtensions.<IContext>sort(_keySet);
-      final Function1<IContext, String> _function_1 = new Function1<IContext, String>() {
+      Set<ISerializationContext> _keySet = pdas.keySet();
+      List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_keySet);
+      final Function1<ISerializationContext, String> _function_1 = new Function1<ISerializationContext, String>() {
         @Override
-        public String apply(final IContext it) {
+        public String apply(final ISerializationContext it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append(it, "");
           _builder.append(":");
@@ -868,7 +868,7 @@ public class GrammarPDAProviderTest {
           return _builder.toString();
         }
       };
-      List<String> _map = ListExtensions.<IContext, String>map(_sort, _function_1);
+      List<String> _map = ListExtensions.<ISerializationContext, String>map(_sort, _function_1);
       return IterableExtensions.join(_map);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

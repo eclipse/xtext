@@ -10,7 +10,6 @@ package org.eclipse.xtext.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
@@ -59,7 +58,7 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		nmSequencer.init(expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
 
 		EObject model = getModel(stringModel).eContents().get(0);
-		IContext context = nmSequencer.findContexts(model, true, null).iterator().next();
+		ISerializationContext context = nmSequencer.findContexts(model, true, null).iterator().next();
 
 		generatedSequencer.createSequence(context, model);
 		genericSequencer.createSequence(context, model);

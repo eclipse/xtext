@@ -18,6 +18,7 @@ import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.CfgAdapter;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.ParameterValueContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.RuleContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAElementFactory;
@@ -120,8 +121,8 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 	@Inject
 	protected PdaUtil pdaUtil;
 
-	protected IContext createContext(ParserRule original, Set<Parameter> params) {
-		IContext context = new RuleContext(null, original);
+	protected ISerializationContext createContext(ParserRule original, Set<Parameter> params) {
+		ISerializationContext context = new RuleContext(null, original);
 		if (params != null && !params.isEmpty())
 			context = new ParameterValueContext(context, params);
 		return context;
@@ -135,19 +136,19 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 	}
 
 	@Override
-	public Map<IContext, Pda<ISerState, RuleCall>> getGrammarPDAs(Grammar grammar) {
+	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getGrammarPDAs(Grammar grammar) {
 		RuleNames names = RuleNames.getRuleNames(grammar, true);
 		RuleFilter filter = new RuleFilter();
 		filter.setDiscardTerminalRules(true);
 		filter.setDiscardUnreachableRules(false);
 		filter.setDiscardRuleTypeRef(false);
 		Grammar flattened = new FlattenedGrammarAccess(names, filter).getFlattenedGrammar();
-		Map<IContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
 		for (ParserRule rule : GrammarUtil.allParserRules(flattened)) {
 			RuleWithParameterValues withParams = RuleWithParameterValues.findInEmfObject(rule);
 			AbstractRule original = withParams.getOriginal();
 			if (original instanceof ParserRule && isValidRule((ParserRule) original)) {
-				IContext context = createContext((ParserRule) original, withParams.getParamValues());
+				ISerializationContext context = createContext((ParserRule) original, withParams.getParamValues());
 				Pda<ISerState, RuleCall> pda = createPDA(grammar, rule);
 				result.put(context, pda);
 			}

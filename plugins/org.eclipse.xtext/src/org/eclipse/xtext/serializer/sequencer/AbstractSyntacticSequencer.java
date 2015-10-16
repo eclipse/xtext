@@ -28,12 +28,12 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.CompoundAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
@@ -58,7 +58,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	protected static class SyntacticalContext {
 
-		protected IContext context;
+		protected ISerializationContext context;
 
 		protected INode lastNode;
 
@@ -70,7 +70,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 		protected RuleCallStack stack;
 
-		public SyntacticalContext(IContext context, EObject semanticObject, ISynAbsorberState previousState,
+		public SyntacticalContext(ISerializationContext context, EObject semanticObject, ISynAbsorberState previousState,
 				INode previousNode) {
 			this.context = context;
 			this.semanticObject = semanticObject;
@@ -330,7 +330,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		navigateToAbsorber(action, node);
 		boolean shouldEnter = delegate.enterAssignedAction(action, semanticChild, node);
 		if (shouldEnter) {
-			IContext child = SerializationContext.forChild(contexts.peek().context, action, semanticChild);
+			ISerializationContext child = SerializationContext.forChild(contexts.peek().context, action, semanticChild);
 			ISynAbsorberState pda = syntacticSequencerPDAs.get(child);
 			if (pda == null)
 				throw new IllegalStateException();
@@ -345,7 +345,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		navigateToAbsorber(rc, node);
 		boolean shouldEnter = delegate.enterAssignedParserRuleCall(rc, semanticChild, node);
 		if (shouldEnter) {
-			IContext child = SerializationContext.forChild(contexts.peek().context, rc, semanticChild);
+			ISerializationContext child = SerializationContext.forChild(contexts.peek().context, rc, semanticChild);
 			ISynAbsorberState pda = syntacticSequencerPDAs.get(child);
 			if (pda == null)
 				throw new IllegalStateException();
@@ -355,7 +355,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return shouldEnter;
 	}
 
-	protected ISynTransition findTransition(IContext context, EObject semanticObject, ISynFollowerOwner fromState,
+	protected ISynTransition findTransition(ISerializationContext context, EObject semanticObject, ISynFollowerOwner fromState,
 			INode fromNode, AbstractElement toEle, INode toNode, RuleCallStack stack) {
 		if (fromState == null)
 			return null;
@@ -422,17 +422,17 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	@Deprecated
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {
-		IContext ctx = SerializationContext.fromEObject(context, semanticObject);
+		ISerializationContext ctx = SerializationContext.fromEObject(context, semanticObject);
 		init(ctx, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 
 	@Inject
 	private IGrammarAccess grammar;
 
-	private Map<IContext, ISynAbsorberState> syntacticSequencerPDAs;
+	private Map<ISerializationContext, ISynAbsorberState> syntacticSequencerPDAs;
 
 	@Override
-	public void init(IContext context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
+	public void init(ISerializationContext context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {
 		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
 		syntacticSequencerPDAs = pdaProvider.getSyntacticSequencerPDAs(grammar.getGrammar());

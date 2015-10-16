@@ -26,6 +26,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GrammarAliasFactory;
@@ -496,7 +497,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	}
 
-	protected Map<Grammar, Map<IContext, ISynAbsorberState>> cache = Maps.newHashMap();
+	protected Map<Grammar, Map<ISerializationContext, ISynAbsorberState>> cache = Maps.newHashMap();
 
 	//	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
 	@Inject
@@ -590,23 +591,23 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	@Override
-	public Map<IContext, ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar) {
-		Map<IContext, ISynAbsorberState> result = cache.get(grammar);
+	public Map<ISerializationContext, ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar) {
+		Map<ISerializationContext, ISynAbsorberState> result = cache.get(grammar);
 		if (result != null)
 			return result;
 		result = Maps.newLinkedHashMap();
 		cache.put(grammar, result);
-		Map<IContext, Pda<ISerState, RuleCall>> typePDAs = pdaProvider.getContextTypePDAs(grammar);
-		List<Pair<List<IContext>, Pda<ISerState, RuleCall>>> grouped = SerializationContext
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs = pdaProvider.getContextTypePDAs(grammar);
+		List<Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> grouped = SerializationContext
 				.groupByEqualityAndSort(typePDAs);
-		for (Pair<List<IContext>, Pda<ISerState, RuleCall>> e : grouped) {
+		for (Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> e : grouped) {
 			Pda<ISerState, RuleCall> pda = e.getSecond();
-			List<IContext> contexts = e.getFirst();
+			List<ISerializationContext> contexts = e.getFirst();
 			EClass type = contexts.get(0).getType();
 			Map<ISerState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newHashMap();
 			SynAbsorberState state = createAbsorberState(pda.getStart(), absorbers, emitters, type);
-			for (IContext ctx : contexts) {
+			for (ISerializationContext ctx : contexts) {
 				result.put(ctx, state);
 			}
 		}

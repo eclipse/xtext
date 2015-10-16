@@ -16,7 +16,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
@@ -62,9 +61,9 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		formatter.setStackitemFormatter(new GrammarElementTitleSwitch().showAssignments().hideCardinality());
 		formatter.sortFollowers();
 		IContextPDAProvider pdaProvider = get(IContextPDAProvider.class);
-		Map<IContext, Pda<ISerState, RuleCall>> pdas = pdaProvider.getContextPDAs(grammar);
-		List<Pair<List<IContext>, Pda<ISerState, RuleCall>>> items = SerializationContext.groupByEqualityAndSort(pdas);
-		for (Pair<List<IContext>, Pda<ISerState, RuleCall>> ctx : items) {
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = pdaProvider.getContextPDAs(grammar);
+		List<Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> items = SerializationContext.groupByEqualityAndSort(pdas);
+		for (Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> ctx : items) {
 			result.add(ctx.getFirst() + ":");
 			Pda<ISerState, RuleCall> pda = ctx.getSecond();
 			result.add("  " + formatter.format(pda).replace("\n", "\n  "));

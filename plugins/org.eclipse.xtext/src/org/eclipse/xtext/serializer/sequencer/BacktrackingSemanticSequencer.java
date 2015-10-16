@@ -25,8 +25,8 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
@@ -98,14 +98,14 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 
 	public class SerializableObject {
 		protected final EObject eObject;
-		protected final IContext context;
+		protected final ISerializationContext context;
 		protected List<INode>[] nodes;
 		protected boolean[] optional;
 		protected Map<Pair<AbstractElement, Integer>, Boolean> valid = Maps.newHashMap();
 		protected Object[] values;
 
 		@SuppressWarnings("unchecked")
-		public SerializableObject(IContext context, EObject eObject, INodesForEObjectProvider nodeProvider) {
+		public SerializableObject(ISerializationContext context, EObject eObject, INodesForEObjectProvider nodeProvider) {
 			super();
 			this.eObject = eObject;
 			this.context = context;
@@ -223,7 +223,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				return true;
 
 			INode node = getNode(state.getFeatureID(), index);
-			Multimap<AbstractElement, IContext> assignments = ArrayListMultimap.create();
+			Multimap<AbstractElement, ISerializationContext> assignments = ArrayListMultimap.create();
 			for (AbstractElement ele : candidates)
 				assignments.put(ele, context);
 			Set<AbstractElement> found = assignmentFinder.findAssignmentsByValue(eObject, assignments, value, node);
@@ -438,9 +438,9 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	private IGrammarAccess grammar;
 
 	@Override
-	public void createSequence(IContext context, EObject obj) {
+	public void createSequence(ISerializationContext context, EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
-		Map<IContext, IConstraint> constraints = constraintProvider.getConstraints(grammar.getGrammar());
+		Map<ISerializationContext, IConstraint> constraints = constraintProvider.getConstraints(grammar.getGrammar());
 		IConstraint constraint = constraints.get(context);
 		if (constraint == null)
 			throw new IllegalStateException("Invalid context: " + context);

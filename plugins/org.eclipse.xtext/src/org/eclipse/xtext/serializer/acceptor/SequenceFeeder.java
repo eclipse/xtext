@@ -24,7 +24,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -56,7 +56,7 @@ public class SequenceFeeder {
 		protected IValueSerializer valueSerializer;
 
 		/**
-		 * @deprecated use {@link #create(IContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
+		 * @deprecated use {@link #create(ISerializationContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
 		 */
 		@Deprecated
 		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes,
@@ -64,7 +64,7 @@ public class SequenceFeeder {
 			return new SequenceFeeder(this, null, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
 		
-		public SequenceFeeder create(IContext context, EObject semanticObject, INodesForEObjectProvider nodes,
+		public SequenceFeeder create(ISerializationContext context, EObject semanticObject, INodesForEObjectProvider nodes,
 				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 			return new SequenceFeeder(this, context, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
@@ -82,9 +82,9 @@ public class SequenceFeeder {
 
 	protected final ISemanticSequenceAcceptor sequenceAcceptor;
 	
-	protected final IContext context;
+	protected final ISerializationContext context;
 
-	protected SequenceFeeder(Provider provider, IContext context, EObject semanticObject, INodesForEObjectProvider nodes,
+	protected SequenceFeeder(Provider provider, ISerializationContext context, EObject semanticObject, INodesForEObjectProvider nodes,
 			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super();
 		if (semanticObject == null || nodes == null || sequenceAcceptor == null)
@@ -304,7 +304,7 @@ public class SequenceFeeder {
 
 	protected void acceptAction(Action action, EObject semanticChild, ICompositeNode node) {
 		if (sequenceAcceptor.enterAssignedAction(action, semanticChild, node)) {
-			IContext child = SerializationContext.forChild(context, action, semanticChild);
+			ISerializationContext child = SerializationContext.forChild(context, action, semanticChild);
 			masterSequencer.createSequence(child, semanticChild);
 			sequenceAcceptor.leaveAssignedAction(action, semanticChild);
 		}
@@ -312,7 +312,7 @@ public class SequenceFeeder {
 
 	protected void acceptEObjectRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
 		if (sequenceAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild, node)) {
-			IContext child = SerializationContext.forChild(context, ruleCall, semanticChild);
+			ISerializationContext child = SerializationContext.forChild(context, ruleCall, semanticChild);
 			masterSequencer.createSequence(child, semanticChild);
 			sequenceAcceptor.leaveAssignedParserRuleCall(ruleCall, semanticChild);
 		}

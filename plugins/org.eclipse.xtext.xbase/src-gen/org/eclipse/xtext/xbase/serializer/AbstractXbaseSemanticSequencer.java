@@ -21,8 +21,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -69,7 +69,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	private XbaseGrammarAccess grammarAccess;
 	
 	@Override
-	public void sequence(IContext context, EObject semanticObject) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
 		EPackage epackage = semanticObject.eClass().getEPackage();
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
@@ -320,7 +320,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (parameterType=JvmTypeReference name=ValidID)
 	 */
-	protected void sequence_FullJvmFormalParameter(IContext context, JvmFormalParameter semanticObject) {
+	protected void sequence_FullJvmFormalParameter(ISerializationContext context, JvmFormalParameter semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE));
@@ -342,7 +342,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (parameterType=JvmTypeReference? name=ValidID)
 	 */
-	protected void sequence_JvmFormalParameter(IContext context, JvmFormalParameter semanticObject) {
+	protected void sequence_JvmFormalParameter(ISerializationContext context, JvmFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -364,7 +364,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (leftOperand=XMultiplicativeExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpMulti] rightOperand=XUnaryOperation)
 	 *     )
 	 */
-	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(IContext context, XBinaryOperation semanticObject) {
+	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(ISerializationContext context, XBinaryOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -380,7 +380,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
 	 *     )
 	 */
-	protected void sequence_XAssignment_XMemberFeatureCall(IContext context, XAssignment semanticObject) {
+	protected void sequence_XAssignment_XMemberFeatureCall(ISerializationContext context, XAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -398,7 +398,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         eachExpression=XExpression
 	 *     )
 	 */
-	protected void sequence_XBasicForLoopExpression(IContext context, XBasicForLoopExpression semanticObject) {
+	protected void sequence_XBasicForLoopExpression(ISerializationContext context, XBasicForLoopExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -411,7 +411,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
 	 */
-	protected void sequence_XBlockExpression(IContext context, XBlockExpression semanticObject) {
+	protected void sequence_XBlockExpression(ISerializationContext context, XBlockExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -424,7 +424,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     isTrue?='true'?
 	 */
-	protected void sequence_XBooleanLiteral(IContext context, XBooleanLiteral semanticObject) {
+	protected void sequence_XBooleanLiteral(ISerializationContext context, XBooleanLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -437,7 +437,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (typeGuard=JvmTypeReference? case=XExpression? (then=XExpression | fallThrough?=','))
 	 */
-	protected void sequence_XCasePart(IContext context, XCasePart semanticObject) {
+	protected void sequence_XCasePart(ISerializationContext context, XCasePart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -450,7 +450,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (target=XCastedExpression_XCastedExpression_1_0_0_0 type=JvmTypeReference)
 	 */
-	protected void sequence_XCastedExpression(IContext context, XCastedExpression semanticObject) {
+	protected void sequence_XCastedExpression(ISerializationContext context, XCastedExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XCASTED_EXPRESSION__TARGET) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XCASTED_EXPRESSION__TARGET));
@@ -472,7 +472,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (declaredParam=FullJvmFormalParameter expression=XExpression)
 	 */
-	protected void sequence_XCatchClause(IContext context, XCatchClause semanticObject) {
+	protected void sequence_XCatchClause(ISerializationContext context, XCatchClause semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XCATCH_CLAUSE__DECLARED_PARAM) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XCATCH_CLAUSE__DECLARED_PARAM));
@@ -497,7 +497,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         expression=XExpressionInClosure
 	 *     )
 	 */
-	protected void sequence_XClosure(IContext context, XClosure semanticObject) {
+	protected void sequence_XClosure(ISerializationContext context, XClosure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -515,7 +515,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         arguments+=XClosure?
 	 *     )
 	 */
-	protected void sequence_XConstructorCall(IContext context, XConstructorCall semanticObject) {
+	protected void sequence_XConstructorCall(ISerializationContext context, XConstructorCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -528,7 +528,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (body=XExpression predicate=XExpression)
 	 */
-	protected void sequence_XDoWhileExpression(IContext context, XDoWhileExpression semanticObject) {
+	protected void sequence_XDoWhileExpression(ISerializationContext context, XDoWhileExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__BODY) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__BODY));
@@ -550,7 +550,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
 	 */
-	protected void sequence_XExpressionInClosure(IContext context, XBlockExpression semanticObject) {
+	protected void sequence_XExpressionInClosure(ISerializationContext context, XBlockExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -568,7 +568,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         featureCallArguments+=XClosure?
 	 *     )
 	 */
-	protected void sequence_XFeatureCall(IContext context, XFeatureCall semanticObject) {
+	protected void sequence_XFeatureCall(ISerializationContext context, XFeatureCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -581,7 +581,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (declaredParam=JvmFormalParameter forExpression=XExpression eachExpression=XExpression)
 	 */
-	protected void sequence_XForLoopExpression(IContext context, XForLoopExpression semanticObject) {
+	protected void sequence_XForLoopExpression(ISerializationContext context, XForLoopExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XFOR_LOOP_EXPRESSION__DECLARED_PARAM) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XFOR_LOOP_EXPRESSION__DECLARED_PARAM));
@@ -606,7 +606,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (if=XExpression then=XExpression else=XExpression?)
 	 */
-	protected void sequence_XIfExpression(IContext context, XIfExpression semanticObject) {
+	protected void sequence_XIfExpression(ISerializationContext context, XIfExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -619,7 +619,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (elements+=XExpression elements+=XExpression*)?
 	 */
-	protected void sequence_XListLiteral(IContext context, XListLiteral semanticObject) {
+	protected void sequence_XListLiteral(ISerializationContext context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -639,7 +639,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         memberCallArguments+=XClosure?
 	 *     )
 	 */
-	protected void sequence_XMemberFeatureCall(IContext context, XMemberFeatureCall semanticObject) {
+	protected void sequence_XMemberFeatureCall(ISerializationContext context, XMemberFeatureCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -652,7 +652,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     {XNullLiteral}
 	 */
-	protected void sequence_XNullLiteral(IContext context, XNullLiteral semanticObject) {
+	protected void sequence_XNullLiteral(ISerializationContext context, XNullLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -665,7 +665,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     value=Number
 	 */
-	protected void sequence_XNumberLiteral(IContext context, XNumberLiteral semanticObject) {
+	protected void sequence_XNumberLiteral(ISerializationContext context, XNumberLiteral semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XNUMBER_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XNUMBER_LITERAL__VALUE));
@@ -684,7 +684,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (operand=XPostfixOperation_XPostfixOperation_1_0_0 feature=[JvmIdentifiableElement|OpPostfix])
 	 */
-	protected void sequence_XPostfixOperation(IContext context, XPostfixOperation semanticObject) {
+	protected void sequence_XPostfixOperation(ISerializationContext context, XPostfixOperation semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XPOSTFIX_OPERATION__OPERAND) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XPOSTFIX_OPERATION__OPERAND));
@@ -706,7 +706,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (expression=XRelationalExpression_XInstanceOfExpression_1_0_0_0_0 type=JvmTypeReference)
 	 */
-	protected void sequence_XRelationalExpression(IContext context, XInstanceOfExpression semanticObject) {
+	protected void sequence_XRelationalExpression(ISerializationContext context, XInstanceOfExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION__EXPRESSION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION__EXPRESSION));
@@ -728,7 +728,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     expression=XExpression?
 	 */
-	protected void sequence_XReturnExpression(IContext context, XReturnExpression semanticObject) {
+	protected void sequence_XReturnExpression(ISerializationContext context, XReturnExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -741,7 +741,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (elements+=XExpression elements+=XExpression*)?
 	 */
-	protected void sequence_XSetLiteral(IContext context, XSetLiteral semanticObject) {
+	protected void sequence_XSetLiteral(ISerializationContext context, XSetLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -754,7 +754,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|' expression=XExpression)
 	 */
-	protected void sequence_XShortClosure(IContext context, XClosure semanticObject) {
+	protected void sequence_XShortClosure(ISerializationContext context, XClosure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -767,7 +767,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     value=STRING
 	 */
-	protected void sequence_XStringLiteral(IContext context, XStringLiteral semanticObject) {
+	protected void sequence_XStringLiteral(ISerializationContext context, XStringLiteral semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
@@ -790,7 +790,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         default=XExpression?
 	 *     )
 	 */
-	protected void sequence_XSwitchExpression(IContext context, XSwitchExpression semanticObject) {
+	protected void sequence_XSwitchExpression(ISerializationContext context, XSwitchExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -803,7 +803,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (param=XExpression expression=XExpression)
 	 */
-	protected void sequence_XSynchronizedExpression(IContext context, XSynchronizedExpression semanticObject) {
+	protected void sequence_XSynchronizedExpression(ISerializationContext context, XSynchronizedExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSYNCHRONIZED_EXPRESSION__PARAM) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSYNCHRONIZED_EXPRESSION__PARAM));
@@ -825,7 +825,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     expression=XExpression
 	 */
-	protected void sequence_XThrowExpression(IContext context, XThrowExpression semanticObject) {
+	protected void sequence_XThrowExpression(ISerializationContext context, XThrowExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION));
@@ -844,7 +844,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (expression=XExpression ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression))
 	 */
-	protected void sequence_XTryCatchFinallyExpression(IContext context, XTryCatchFinallyExpression semanticObject) {
+	protected void sequence_XTryCatchFinallyExpression(ISerializationContext context, XTryCatchFinallyExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -857,7 +857,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arrayDimensions+=ArrayBrackets*)
 	 */
-	protected void sequence_XTypeLiteral(IContext context, XTypeLiteral semanticObject) {
+	protected void sequence_XTypeLiteral(ISerializationContext context, XTypeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -870,7 +870,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (feature=[JvmIdentifiableElement|OpUnary] operand=XUnaryOperation)
 	 */
-	protected void sequence_XUnaryOperation(IContext context, XUnaryOperation semanticObject) {
+	protected void sequence_XUnaryOperation(ISerializationContext context, XUnaryOperation semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE));
@@ -892,7 +892,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression?)
 	 */
-	protected void sequence_XVariableDeclaration(IContext context, XVariableDeclaration semanticObject) {
+	protected void sequence_XVariableDeclaration(ISerializationContext context, XVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -905,7 +905,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 * Constraint:
 	 *     (predicate=XExpression body=XExpression)
 	 */
-	protected void sequence_XWhileExpression(IContext context, XWhileExpression semanticObject) {
+	protected void sequence_XWhileExpression(ISerializationContext context, XWhileExpression semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE));

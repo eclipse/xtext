@@ -20,8 +20,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
@@ -37,7 +37,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	private XtypeGrammarAccess grammarAccess;
 	
 	@Override
-	public void sequence(IContext context, EObject semanticObject) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
 		EPackage epackage = semanticObject.eClass().getEPackage();
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
@@ -109,7 +109,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
-	protected void sequence_JvmLowerBoundAnded(IContext context, JvmLowerBound semanticObject) {
+	protected void sequence_JvmLowerBoundAnded(ISerializationContext context, JvmLowerBound semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
@@ -128,7 +128,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
-	protected void sequence_JvmLowerBound(IContext context, JvmLowerBound semanticObject) {
+	protected void sequence_JvmLowerBound(ISerializationContext context, JvmLowerBound semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
@@ -151,7 +151,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *         (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?
 	 *     )
 	 */
-	protected void sequence_JvmParameterizedTypeReference(IContext context, JvmInnerTypeReference semanticObject) {
+	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmInnerTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -164,7 +164,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
 	 */
-	protected void sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(IContext context, JvmParameterizedTypeReference semanticObject) {
+	protected void sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -177,7 +177,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
 	 */
-	protected void sequence_JvmParameterizedTypeReference(IContext context, JvmParameterizedTypeReference semanticObject) {
+	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -190,7 +190,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     (name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?)
 	 */
-	protected void sequence_JvmTypeParameter(IContext context, JvmTypeParameter semanticObject) {
+	protected void sequence_JvmTypeParameter(ISerializationContext context, JvmTypeParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -203,7 +203,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
 	 */
-	protected void sequence_JvmTypeReference(IContext context, JvmGenericArrayTypeReference semanticObject) {
+	protected void sequence_JvmTypeReference(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE));
@@ -222,7 +222,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
-	protected void sequence_JvmUpperBoundAnded(IContext context, JvmUpperBound semanticObject) {
+	protected void sequence_JvmUpperBoundAnded(ISerializationContext context, JvmUpperBound semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
@@ -241,7 +241,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
-	protected void sequence_JvmUpperBound(IContext context, JvmUpperBound semanticObject) {
+	protected void sequence_JvmUpperBound(ISerializationContext context, JvmUpperBound semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE));
@@ -260,7 +260,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?
 	 */
-	protected void sequence_JvmWildcardTypeReference(IContext context, JvmWildcardTypeReference semanticObject) {
+	protected void sequence_JvmWildcardTypeReference(ISerializationContext context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -273,7 +273,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
 	 */
-	protected void sequence_XFunctionTypeRef(IContext context, XFunctionTypeRef semanticObject) {
+	protected void sequence_XFunctionTypeRef(ISerializationContext context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -290,7 +290,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *         importedNamespace=QualifiedNameWithWildcard
 	 *     )
 	 */
-	protected void sequence_XImportDeclaration(IContext context, XImportDeclaration semanticObject) {
+	protected void sequence_XImportDeclaration(ISerializationContext context, XImportDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -303,7 +303,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     importDeclarations+=XImportDeclaration+
 	 */
-	protected void sequence_XImportSection(IContext context, XImportSection semanticObject) {
+	protected void sequence_XImportSection(ISerializationContext context, XImportSection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
