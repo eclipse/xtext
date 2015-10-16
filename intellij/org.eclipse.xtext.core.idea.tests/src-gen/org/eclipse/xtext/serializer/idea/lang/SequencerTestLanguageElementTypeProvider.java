@@ -225,6 +225,12 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 		public static IGrammarAwareElementType createModel_X32NullCrossRefInterpretedParserRuleCall_31_0ElementType() {
 			return new IGrammarAwareElementType("Model_X32NullCrossRefInterpretedParserRuleCall_31_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX32NullCrossRefInterpretedParserRuleCall_31_0());
 		}
+		public static IGrammarAwareElementType createModel_X33Assignment_32ElementType() {
+			return new IGrammarAwareElementType("Model_X33Assignment_32_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX33Assignment_32());
+		}
+		public static IGrammarAwareElementType createModel_X33FragmentCallerParserRuleCall_32_0ElementType() {
+			return new IGrammarAwareElementType("Model_X33FragmentCallerParserRuleCall_32_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX33FragmentCallerParserRuleCall_32_0());
+		}
 	}
 
 	public static final IGrammarAwareElementType Model_ELEMENT_TYPE = associate(ModelFactory.createModelElementType());
@@ -358,6 +364,10 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 	public static final IGrammarAwareElementType Model_X32Assignment_31_ELEMENT_TYPE = associate(ModelFactory.createModel_X32Assignment_31ElementType());
 
 	public static final IGrammarAwareElementType Model_X32NullCrossRefInterpretedParserRuleCall_31_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X32NullCrossRefInterpretedParserRuleCall_31_0ElementType());
+
+	public static final IGrammarAwareElementType Model_X33Assignment_32_ELEMENT_TYPE = associate(ModelFactory.createModel_X33Assignment_32ElementType());
+
+	public static final IGrammarAwareElementType Model_X33FragmentCallerParserRuleCall_32_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X33FragmentCallerParserRuleCall_32_0ElementType());
 
 	private static class SimpleGroupFactory {
 		public static IGrammarAwareElementType createSimpleGroupElementType() {
@@ -2657,6 +2667,67 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType NullCrossRefInterpreted_FooIDTerminalRuleCall_2_0_ELEMENT_TYPE = associate(NullCrossRefInterpretedFactory.createNullCrossRefInterpreted_FooIDTerminalRuleCall_2_0ElementType());
 
+	private static class FragmentCallerFactory {
+		public static IGrammarAwareElementType createFragmentCallerElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerRule());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_GroupElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_Group_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0ElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getNumberSignDigitThreeDigitThreeKeyword_0());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_Val1Assignment_1ElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_Val1Assignment_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getVal1Assignment_1());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_Val1IDTerminalRuleCall_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getVal1IDTerminalRuleCall_1_0());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_Fragment1ParserRuleCall_2ElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_Fragment1ParserRuleCall_2_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getFragment1ParserRuleCall_2());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_ValAssignment_3ElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_ValAssignment_3_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getValAssignment_3());
+		}
+		public static IGrammarAwareElementType createFragmentCaller_ValIDTerminalRuleCall_3_0ElementType() {
+			return new IGrammarAwareElementType("FragmentCaller_ValIDTerminalRuleCall_3_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragmentCallerAccess().getValIDTerminalRuleCall_3_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType FragmentCaller_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCallerElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_Group_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_GroupElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0ElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_Val1Assignment_1_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_Val1Assignment_1ElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_Val1IDTerminalRuleCall_1_0_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_Fragment1ParserRuleCall_2_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_Fragment1ParserRuleCall_2ElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_ValAssignment_3_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_ValAssignment_3ElementType());
+
+	public static final IGrammarAwareElementType FragmentCaller_ValIDTerminalRuleCall_3_0_ELEMENT_TYPE = associate(FragmentCallerFactory.createFragmentCaller_ValIDTerminalRuleCall_3_0ElementType());
+
+	private static class Fragment1Factory {
+		public static IGrammarAwareElementType createFragment1ElementType() {
+			return new IGrammarAwareElementType("Fragment1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragment1Rule());
+		}
+		public static IGrammarAwareElementType createFragment1_FragValAssignmentElementType() {
+			return new IGrammarAwareElementType("Fragment1_FragValAssignment_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragment1Access().getFragValAssignment());
+		}
+		public static IGrammarAwareElementType createFragment1_FragValIDTerminalRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Fragment1_FragValIDTerminalRuleCall_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFragment1Access().getFragValIDTerminalRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Fragment1_ELEMENT_TYPE = associate(Fragment1Factory.createFragment1ElementType());
+
+	public static final IGrammarAwareElementType Fragment1_FragValAssignment_ELEMENT_TYPE = associate(Fragment1Factory.createFragment1_FragValAssignmentElementType());
+
+	public static final IGrammarAwareElementType Fragment1_FragValIDTerminalRuleCall_0_ELEMENT_TYPE = associate(Fragment1Factory.createFragment1_FragValIDTerminalRuleCall_0ElementType());
+
 	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
@@ -2929,6 +3000,14 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public IGrammarAwareElementType getModel_X32NullCrossRefInterpretedParserRuleCall_31_0ElementType() {
 		return Model_X32NullCrossRefInterpretedParserRuleCall_31_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getModel_X33Assignment_32ElementType() {
+		return Model_X33Assignment_32_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getModel_X33FragmentCallerParserRuleCall_32_0ElementType() {
+		return Model_X33FragmentCallerParserRuleCall_32_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getSimpleGroupElementType() {
@@ -4657,6 +4736,50 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public IGrammarAwareElementType getNullCrossRefInterpreted_FooIDTerminalRuleCall_2_0ElementType() {
 		return NullCrossRefInterpreted_FooIDTerminalRuleCall_2_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCallerElementType() {
+		return FragmentCaller_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_GroupElementType() {
+		return FragmentCaller_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0ElementType() {
+		return FragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_Val1Assignment_1ElementType() {
+		return FragmentCaller_Val1Assignment_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType() {
+		return FragmentCaller_Val1IDTerminalRuleCall_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_Fragment1ParserRuleCall_2ElementType() {
+		return FragmentCaller_Fragment1ParserRuleCall_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_ValAssignment_3ElementType() {
+		return FragmentCaller_ValAssignment_3_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType() {
+		return FragmentCaller_ValIDTerminalRuleCall_3_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragment1ElementType() {
+		return Fragment1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragment1_FragValAssignmentElementType() {
+		return Fragment1_FragValAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getFragment1_FragValIDTerminalRuleCall_0ElementType() {
+		return Fragment1_FragValIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
 
 }

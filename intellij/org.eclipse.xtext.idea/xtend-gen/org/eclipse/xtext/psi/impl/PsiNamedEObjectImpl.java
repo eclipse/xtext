@@ -123,4 +123,14 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
     ASTNode _node = this.getNode();
     return _node.findChildByType(this.nameType);
   }
+  
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+    StringBuilder _append = builder.append("(");
+    IStubElementType _elementType = this.getElementType();
+    StringBuilder _append_1 = _append.append(_elementType);
+    _append_1.append(")");
+    return builder.toString();
+  }
 }

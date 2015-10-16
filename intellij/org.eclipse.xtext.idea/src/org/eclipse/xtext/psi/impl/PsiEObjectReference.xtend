@@ -27,4 +27,10 @@ class PsiEObjectReference<PsiE extends PsiElement, T extends StubElement<PsiE>> 
 		new XtextPsiReferenceImpl(this)
 	}
 
+	override String toString() {
+		var StringBuilder builder = new StringBuilder('org.eclipse.xtext.psi.impl.PsiEObjectReference')
+		builder.append("(").append(elementType).append(")")
+		return builder.toString()
+	}
+
 }

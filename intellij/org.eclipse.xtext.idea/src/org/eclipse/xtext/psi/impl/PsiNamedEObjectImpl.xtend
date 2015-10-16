@@ -80,4 +80,10 @@ class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjec
 		node.findChildByType(nameType)
 	}
 
+	override String toString() {
+		var StringBuilder builder = new StringBuilder('org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl')
+		builder.append("(").append(elementType).append(")")
+		return builder.toString()
+	}
+
 }

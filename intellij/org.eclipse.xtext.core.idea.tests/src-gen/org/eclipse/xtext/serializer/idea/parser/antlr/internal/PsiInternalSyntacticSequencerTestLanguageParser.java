@@ -19,10 +19,11 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_TERMINAL_ID", "RULE_INT", "RULE_BOOLEAN_TERMINAL_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'kw1'", "'kw2'", "'kw3'", "'kw4'", "'#2'", "'+'", "'#3'", "'('", "')'", "'#4'", "'*'", "'#5'", "'#6'", "'#7'", "'matched'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'kw5'", "'kw6'", "'kw7'", "'kw8'", "'!'", "'#14'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_TERMINAL_ID", "RULE_INT", "RULE_BOOLEAN_TERMINAL_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'kw1'", "'kw2'", "'kw3'", "'kw4'", "'#2'", "'+'", "'#3'", "'('", "')'", "'#4'", "'*'", "'#5'", "'#6'", "'#7'", "'matched'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'kw5'", "'kw6'", "'kw7'", "'kw8'", "'!'", "'#14'", "'#15'"
     };
     public static final int RULE_ID=4;
     public static final int T__40=40;
+    public static final int T__41=41;
     public static final int T__29=29;
     public static final int T__28=28;
     public static final int T__27=27;
@@ -129,14 +130,14 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalSyntacticSequencerTestLanguage.g:58:1: ruleModel : ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:58:1: ruleModel : ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) | ( (lv_x15_14_0= ruleFragmentCaller ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:58:10: ( ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:58:10: ( ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) | ( (lv_x15_14_0= ruleFragmentCaller ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) | ( (lv_x15_14_0= ruleFragmentCaller ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) )
-            int alt1=14;
+            // PsiInternalSyntacticSequencerTestLanguage.g:59:2: ( ( (lv_x1_0_0= ruleMandatoryKeywords ) ) | ( (lv_x2_1_0= ruleExp0 ) ) | ( (lv_x3_2_0= ruleExp1 ) ) | ( (lv_x4_3_0= ruleExp2 ) ) | ( (lv_x5_4_0= ruleSingleCrossReference ) ) | ( (lv_x6_5_0= ruleBooleanAlternative ) ) | ( (lv_x7_6_0= ruleUnassignedDatatype ) ) | ( (lv_x8_7_0= ruleOptionalSingleTransition ) ) | ( (lv_x9_8_0= ruleOptionalManyTransition ) ) | ( (lv_x10_9_0= ruleMandatoryManyTransition ) ) | ( (lv_x11_10_0= ruleAlternativeTransition ) ) | ( (lv_x12_11_0= ruleBooleanValues ) ) | ( (lv_x13_12_0= ruleLongAlternative ) ) | ( (lv_x14_13_0= ruleActionOnly ) ) | ( (lv_x15_14_0= ruleFragmentCaller ) ) )
+            int alt1=15;
             switch ( input.LA(1) ) {
             case 13:
                 {
@@ -206,6 +207,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             case 40:
                 {
                 alt1=14;
+                }
+                break;
+            case 41:
+                {
+                alt1=15;
                 }
                 break;
             default:
@@ -679,6 +685,39 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     }
                     break;
+                case 15 :
+                    // PsiInternalSyntacticSequencerTestLanguage.g:228:3: ( (lv_x15_14_0= ruleFragmentCaller ) )
+                    {
+                    // PsiInternalSyntacticSequencerTestLanguage.g:228:3: ( (lv_x15_14_0= ruleFragmentCaller ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:229:4: (lv_x15_14_0= ruleFragmentCaller )
+                    {
+                    // PsiInternalSyntacticSequencerTestLanguage.g:229:4: (lv_x15_14_0= ruleFragmentCaller )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:230:5: lv_x15_14_0= ruleFragmentCaller
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					markComposite(elementTypeProvider.getModel_X15FragmentCallerParserRuleCall_14_0ElementType());
+                      				
+                    }
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    ruleFragmentCaller();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
+
+                      					doneComposite();
+                      				
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -698,11 +737,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleMandatoryKeywords"
-    // PsiInternalSyntacticSequencerTestLanguage.g:231:1: entryRuleMandatoryKeywords : ruleMandatoryKeywords EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:243:1: entryRuleMandatoryKeywords : ruleMandatoryKeywords EOF ;
     public final void entryRuleMandatoryKeywords() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:231:27: ( ruleMandatoryKeywords EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:232:2: ruleMandatoryKeywords EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:243:27: ( ruleMandatoryKeywords EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:244:2: ruleMandatoryKeywords EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getMandatoryKeywordsElementType()); 
@@ -729,7 +768,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleMandatoryKeywords"
-    // PsiInternalSyntacticSequencerTestLanguage.g:237:1: ruleMandatoryKeywords : (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:249:1: ruleMandatoryKeywords : (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) ;
     public final void ruleMandatoryKeywords() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val1_1_0=null;
@@ -741,11 +780,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token otherlv_7=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:237:22: ( (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:238:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
+            // PsiInternalSyntacticSequencerTestLanguage.g:249:22: ( (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:250:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:238:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
-            // PsiInternalSyntacticSequencerTestLanguage.g:239:3: otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4'
+            // PsiInternalSyntacticSequencerTestLanguage.g:250:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
+            // PsiInternalSyntacticSequencerTestLanguage.g:251:3: otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4'
             {
             if ( state.backtracking==0 ) {
 
@@ -758,11 +797,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:246:3: ( (lv_val1_1_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:247:4: (lv_val1_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:258:3: ( (lv_val1_1_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:259:4: (lv_val1_1_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:247:4: (lv_val1_1_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:248:5: lv_val1_1_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:259:4: (lv_val1_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:260:5: lv_val1_1_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -792,11 +831,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_2);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:264:3: ( (lv_val2_3_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:265:4: (lv_val2_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:276:3: ( (lv_val2_3_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:277:4: (lv_val2_3_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:265:4: (lv_val2_3_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:266:5: lv_val2_3_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:277:4: (lv_val2_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:278:5: lv_val2_3_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -837,11 +876,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_5);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:289:3: ( (lv_val3_6_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:290:4: (lv_val3_6_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:301:3: ( (lv_val3_6_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:302:4: (lv_val3_6_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:290:4: (lv_val3_6_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:291:5: lv_val3_6_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:302:4: (lv_val3_6_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:303:5: lv_val3_6_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -890,11 +929,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleExp0"
-    // PsiInternalSyntacticSequencerTestLanguage.g:311:1: entryRuleExp0 : ruleExp0 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:323:1: entryRuleExp0 : ruleExp0 EOF ;
     public final void entryRuleExp0() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:311:14: ( ruleExp0 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:312:2: ruleExp0 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:323:14: ( ruleExp0 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:324:2: ruleExp0 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getExp0ElementType()); 
@@ -921,16 +960,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleExp0"
-    // PsiInternalSyntacticSequencerTestLanguage.g:317:1: ruleExp0 : (otherlv_0= '#2' ruleAddition0 ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:329:1: ruleExp0 : (otherlv_0= '#2' ruleAddition0 ) ;
     public final void ruleExp0() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:317:9: ( (otherlv_0= '#2' ruleAddition0 ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:318:2: (otherlv_0= '#2' ruleAddition0 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:329:9: ( (otherlv_0= '#2' ruleAddition0 ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:330:2: (otherlv_0= '#2' ruleAddition0 )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:318:2: (otherlv_0= '#2' ruleAddition0 )
-            // PsiInternalSyntacticSequencerTestLanguage.g:319:3: otherlv_0= '#2' ruleAddition0
+            // PsiInternalSyntacticSequencerTestLanguage.g:330:2: (otherlv_0= '#2' ruleAddition0 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:331:3: otherlv_0= '#2' ruleAddition0
             {
             if ( state.backtracking==0 ) {
 
@@ -977,11 +1016,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAddition0"
-    // PsiInternalSyntacticSequencerTestLanguage.g:337:1: entryRuleAddition0 : ruleAddition0 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:349:1: entryRuleAddition0 : ruleAddition0 EOF ;
     public final void entryRuleAddition0() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:337:19: ( ruleAddition0 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:338:2: ruleAddition0 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:349:19: ( ruleAddition0 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:350:2: ruleAddition0 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAddition0ElementType()); 
@@ -1008,16 +1047,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAddition0"
-    // PsiInternalSyntacticSequencerTestLanguage.g:343:1: ruleAddition0 : ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:355:1: ruleAddition0 : ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) ;
     public final void ruleAddition0() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:343:14: ( ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:344:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:355:14: ( ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:356:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:344:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
-            // PsiInternalSyntacticSequencerTestLanguage.g:345:3: rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:356:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:357:3: rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1034,7 +1073,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneComposite();
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:352:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:364:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -1047,10 +1086,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:353:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:365:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:353:4: ()
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:354:5: 
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:365:4: ()
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:366:5: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1072,11 +1111,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      				doneLeaf(otherlv_2);
             	      			
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:366:4: ( (lv_right_3_0= rulePrim0 ) )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:367:5: (lv_right_3_0= rulePrim0 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:378:4: ( (lv_right_3_0= rulePrim0 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:379:5: (lv_right_3_0= rulePrim0 )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:367:5: (lv_right_3_0= rulePrim0 )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:368:6: lv_right_3_0= rulePrim0
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:379:5: (lv_right_3_0= rulePrim0 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:380:6: lv_right_3_0= rulePrim0
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1127,11 +1166,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRulePrim0"
-    // PsiInternalSyntacticSequencerTestLanguage.g:382:1: entryRulePrim0 : rulePrim0 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:394:1: entryRulePrim0 : rulePrim0 EOF ;
     public final void entryRulePrim0() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:382:15: ( rulePrim0 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:383:2: rulePrim0 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:394:15: ( rulePrim0 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:395:2: rulePrim0 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPrim0ElementType()); 
@@ -1158,19 +1197,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "rulePrim0"
-    // PsiInternalSyntacticSequencerTestLanguage.g:388:1: rulePrim0 : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:400:1: rulePrim0 : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void rulePrim0() throws RecognitionException {
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:388:10: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:389:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:400:10: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:401:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:389:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:390:3: () ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:401:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:402:3: () ( (lv_name_1_0= RULE_ID ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:390:3: ()
-            // PsiInternalSyntacticSequencerTestLanguage.g:391:4: 
+            // PsiInternalSyntacticSequencerTestLanguage.g:402:3: ()
+            // PsiInternalSyntacticSequencerTestLanguage.g:403:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -1181,11 +1220,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:396:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:397:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:408:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:409:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:397:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:398:5: lv_name_1_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:409:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:410:5: lv_name_1_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1223,11 +1262,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleExp1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:411:1: entryRuleExp1 : ruleExp1 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:423:1: entryRuleExp1 : ruleExp1 EOF ;
     public final void entryRuleExp1() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:411:14: ( ruleExp1 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:412:2: ruleExp1 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:423:14: ( ruleExp1 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:424:2: ruleExp1 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getExp1ElementType()); 
@@ -1254,16 +1293,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleExp1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:417:1: ruleExp1 : (otherlv_0= '#3' ruleAddition1 ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:429:1: ruleExp1 : (otherlv_0= '#3' ruleAddition1 ) ;
     public final void ruleExp1() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:417:9: ( (otherlv_0= '#3' ruleAddition1 ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:418:2: (otherlv_0= '#3' ruleAddition1 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:429:9: ( (otherlv_0= '#3' ruleAddition1 ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:430:2: (otherlv_0= '#3' ruleAddition1 )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:418:2: (otherlv_0= '#3' ruleAddition1 )
-            // PsiInternalSyntacticSequencerTestLanguage.g:419:3: otherlv_0= '#3' ruleAddition1
+            // PsiInternalSyntacticSequencerTestLanguage.g:430:2: (otherlv_0= '#3' ruleAddition1 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:431:3: otherlv_0= '#3' ruleAddition1
             {
             if ( state.backtracking==0 ) {
 
@@ -1310,11 +1349,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAddition1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:437:1: entryRuleAddition1 : ruleAddition1 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:449:1: entryRuleAddition1 : ruleAddition1 EOF ;
     public final void entryRuleAddition1() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:437:19: ( ruleAddition1 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:438:2: ruleAddition1 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:449:19: ( ruleAddition1 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:450:2: ruleAddition1 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAddition1ElementType()); 
@@ -1341,16 +1380,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAddition1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:443:1: ruleAddition1 : ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:455:1: ruleAddition1 : ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) ;
     public final void ruleAddition1() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:443:14: ( ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:444:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:455:14: ( ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:456:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:444:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
-            // PsiInternalSyntacticSequencerTestLanguage.g:445:3: rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:456:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:457:3: rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1367,7 +1406,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneComposite();
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:452:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:464:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -1380,10 +1419,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:453:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:465:4: () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:453:4: ()
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:454:5: 
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:465:4: ()
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:466:5: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1405,11 +1444,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      				doneLeaf(otherlv_2);
             	      			
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:466:4: ( (lv_right_3_0= rulePrim1 ) )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:467:5: (lv_right_3_0= rulePrim1 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:478:4: ( (lv_right_3_0= rulePrim1 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:479:5: (lv_right_3_0= rulePrim1 )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:467:5: (lv_right_3_0= rulePrim1 )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:468:6: lv_right_3_0= rulePrim1
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:479:5: (lv_right_3_0= rulePrim1 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:480:6: lv_right_3_0= rulePrim1
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1460,11 +1499,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRulePrim1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:482:1: entryRulePrim1 : rulePrim1 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:494:1: entryRulePrim1 : rulePrim1 EOF ;
     public final void entryRulePrim1() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:482:15: ( rulePrim1 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:483:2: rulePrim1 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:494:15: ( rulePrim1 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:495:2: rulePrim1 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPrim1ElementType()); 
@@ -1491,17 +1530,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "rulePrim1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:488:1: rulePrim1 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:500:1: rulePrim1 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) ;
     public final void rulePrim1() throws RecognitionException {
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:488:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:489:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:500:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:501:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:489:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:501:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition1 otherlv_4= ')' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1520,13 +1559,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:490:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:502:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:490:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:491:4: () ( (lv_name_1_0= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:502:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:503:4: () ( (lv_name_1_0= RULE_ID ) )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:491:4: ()
-                    // PsiInternalSyntacticSequencerTestLanguage.g:492:5: 
+                    // PsiInternalSyntacticSequencerTestLanguage.g:503:4: ()
+                    // PsiInternalSyntacticSequencerTestLanguage.g:504:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1537,11 +1576,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     }
 
-                    // PsiInternalSyntacticSequencerTestLanguage.g:497:4: ( (lv_name_1_0= RULE_ID ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:498:5: (lv_name_1_0= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:509:4: ( (lv_name_1_0= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:510:5: (lv_name_1_0= RULE_ID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:498:5: (lv_name_1_0= RULE_ID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:499:6: lv_name_1_0= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:510:5: (lv_name_1_0= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:511:6: lv_name_1_0= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1567,10 +1606,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:510:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:522:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:510:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:511:4: otherlv_2= '(' ruleAddition1 otherlv_4= ')'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:522:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:523:4: otherlv_2= '(' ruleAddition1 otherlv_4= ')'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1634,11 +1673,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleExp2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:537:1: entryRuleExp2 : ruleExp2 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:549:1: entryRuleExp2 : ruleExp2 EOF ;
     public final void entryRuleExp2() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:537:14: ( ruleExp2 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:538:2: ruleExp2 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:549:14: ( ruleExp2 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:550:2: ruleExp2 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getExp2ElementType()); 
@@ -1665,16 +1704,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleExp2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:543:1: ruleExp2 : (otherlv_0= '#4' ruleAddition2 ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:555:1: ruleExp2 : (otherlv_0= '#4' ruleAddition2 ) ;
     public final void ruleExp2() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:543:9: ( (otherlv_0= '#4' ruleAddition2 ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:544:2: (otherlv_0= '#4' ruleAddition2 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:555:9: ( (otherlv_0= '#4' ruleAddition2 ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:556:2: (otherlv_0= '#4' ruleAddition2 )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:544:2: (otherlv_0= '#4' ruleAddition2 )
-            // PsiInternalSyntacticSequencerTestLanguage.g:545:3: otherlv_0= '#4' ruleAddition2
+            // PsiInternalSyntacticSequencerTestLanguage.g:556:2: (otherlv_0= '#4' ruleAddition2 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:557:3: otherlv_0= '#4' ruleAddition2
             {
             if ( state.backtracking==0 ) {
 
@@ -1721,11 +1760,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAddition2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:563:1: entryRuleAddition2 : ruleAddition2 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:575:1: entryRuleAddition2 : ruleAddition2 EOF ;
     public final void entryRuleAddition2() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:563:19: ( ruleAddition2 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:564:2: ruleAddition2 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:575:19: ( ruleAddition2 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:576:2: ruleAddition2 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAddition2ElementType()); 
@@ -1752,16 +1791,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAddition2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:569:1: ruleAddition2 : ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:581:1: ruleAddition2 : ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) ;
     public final void ruleAddition2() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:569:14: ( ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:570:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:581:14: ( ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:582:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:570:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
-            // PsiInternalSyntacticSequencerTestLanguage.g:571:3: ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:582:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:583:3: ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1778,7 +1817,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneComposite();
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:578:3: ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:590:3: ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             loop5:
             do {
                 int alt5=2;
@@ -1791,10 +1830,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:579:4: () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:591:4: () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:579:4: ()
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:580:5: 
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:591:4: ()
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:592:5: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1816,11 +1855,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      				doneLeaf(otherlv_2);
             	      			
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:592:4: ( (lv_right_3_0= ruleMultiplication2 ) )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:593:5: (lv_right_3_0= ruleMultiplication2 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:604:4: ( (lv_right_3_0= ruleMultiplication2 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:605:5: (lv_right_3_0= ruleMultiplication2 )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:593:5: (lv_right_3_0= ruleMultiplication2 )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:594:6: lv_right_3_0= ruleMultiplication2
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:605:5: (lv_right_3_0= ruleMultiplication2 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:606:6: lv_right_3_0= ruleMultiplication2
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1871,11 +1910,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleMultiplication2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:608:1: entryRuleMultiplication2 : ruleMultiplication2 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:620:1: entryRuleMultiplication2 : ruleMultiplication2 EOF ;
     public final void entryRuleMultiplication2() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:608:25: ( ruleMultiplication2 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:609:2: ruleMultiplication2 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:620:25: ( ruleMultiplication2 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:621:2: ruleMultiplication2 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getMultiplication2ElementType()); 
@@ -1902,16 +1941,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleMultiplication2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:614:1: ruleMultiplication2 : ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:626:1: ruleMultiplication2 : ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) ;
     public final void ruleMultiplication2() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:614:20: ( ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:615:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:626:20: ( ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:627:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:615:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
-            // PsiInternalSyntacticSequencerTestLanguage.g:616:3: rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:627:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
+            // PsiInternalSyntacticSequencerTestLanguage.g:628:3: rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1928,7 +1967,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneComposite();
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:623:3: ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:635:3: ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             loop6:
             do {
                 int alt6=2;
@@ -1941,10 +1980,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt6) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:624:4: () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:636:4: () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:624:4: ()
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:625:5: 
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:636:4: ()
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:637:5: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1966,11 +2005,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      				doneLeaf(otherlv_2);
             	      			
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:637:4: ( (lv_right_3_0= rulePrim2 ) )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:638:5: (lv_right_3_0= rulePrim2 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:649:4: ( (lv_right_3_0= rulePrim2 ) )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:650:5: (lv_right_3_0= rulePrim2 )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:638:5: (lv_right_3_0= rulePrim2 )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:639:6: lv_right_3_0= rulePrim2
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:650:5: (lv_right_3_0= rulePrim2 )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:651:6: lv_right_3_0= rulePrim2
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2021,11 +2060,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRulePrim2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:653:1: entryRulePrim2 : rulePrim2 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:665:1: entryRulePrim2 : rulePrim2 EOF ;
     public final void entryRulePrim2() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:653:15: ( rulePrim2 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:654:2: rulePrim2 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:665:15: ( rulePrim2 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:666:2: rulePrim2 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPrim2ElementType()); 
@@ -2052,17 +2091,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "rulePrim2"
-    // PsiInternalSyntacticSequencerTestLanguage.g:659:1: rulePrim2 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:671:1: rulePrim2 : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) ;
     public final void rulePrim2() throws RecognitionException {
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:659:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:660:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:671:10: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:672:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:660:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:672:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | (otherlv_2= '(' ruleAddition2 otherlv_4= ')' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2081,13 +2120,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt7) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:661:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:673:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:661:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:662:4: () ( (lv_name_1_0= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:673:3: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:674:4: () ( (lv_name_1_0= RULE_ID ) )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:662:4: ()
-                    // PsiInternalSyntacticSequencerTestLanguage.g:663:5: 
+                    // PsiInternalSyntacticSequencerTestLanguage.g:674:4: ()
+                    // PsiInternalSyntacticSequencerTestLanguage.g:675:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2098,11 +2137,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                     }
 
-                    // PsiInternalSyntacticSequencerTestLanguage.g:668:4: ( (lv_name_1_0= RULE_ID ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:669:5: (lv_name_1_0= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:680:4: ( (lv_name_1_0= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:681:5: (lv_name_1_0= RULE_ID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:669:5: (lv_name_1_0= RULE_ID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:670:6: lv_name_1_0= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:681:5: (lv_name_1_0= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:682:6: lv_name_1_0= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2128,10 +2167,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:681:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:693:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:681:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:682:4: otherlv_2= '(' ruleAddition2 otherlv_4= ')'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:693:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:694:4: otherlv_2= '(' ruleAddition2 otherlv_4= ')'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2195,11 +2234,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleDatatypeID"
-    // PsiInternalSyntacticSequencerTestLanguage.g:708:1: entryRuleDatatypeID : ruleDatatypeID EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:720:1: entryRuleDatatypeID : ruleDatatypeID EOF ;
     public final void entryRuleDatatypeID() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:708:20: ( ruleDatatypeID EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:709:2: ruleDatatypeID EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:720:20: ( ruleDatatypeID EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:721:2: ruleDatatypeID EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getDatatypeIDElementType()); 
@@ -2226,13 +2265,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleDatatypeID"
-    // PsiInternalSyntacticSequencerTestLanguage.g:714:1: ruleDatatypeID : this_ID_0= RULE_ID ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:726:1: ruleDatatypeID : this_ID_0= RULE_ID ;
     public final void ruleDatatypeID() throws RecognitionException {
         Token this_ID_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:714:15: (this_ID_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:715:2: this_ID_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:726:15: (this_ID_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:727:2: this_ID_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -2261,11 +2300,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleSingleCrossReference"
-    // PsiInternalSyntacticSequencerTestLanguage.g:725:1: entryRuleSingleCrossReference : ruleSingleCrossReference EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:737:1: entryRuleSingleCrossReference : ruleSingleCrossReference EOF ;
     public final void entryRuleSingleCrossReference() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:725:30: ( ruleSingleCrossReference EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:726:2: ruleSingleCrossReference EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:737:30: ( ruleSingleCrossReference EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:738:2: ruleSingleCrossReference EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getSingleCrossReferenceElementType()); 
@@ -2292,7 +2331,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleSingleCrossReference"
-    // PsiInternalSyntacticSequencerTestLanguage.g:731:1: ruleSingleCrossReference : (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:743:1: ruleSingleCrossReference : (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) ;
     public final void ruleSingleCrossReference() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_1=null;
@@ -2306,11 +2345,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token otherlv_9=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:731:25: ( (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:732:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
+            // PsiInternalSyntacticSequencerTestLanguage.g:743:25: ( (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:744:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:732:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
-            // PsiInternalSyntacticSequencerTestLanguage.g:733:3: otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:744:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
+            // PsiInternalSyntacticSequencerTestLanguage.g:745:3: otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
             {
             if ( state.backtracking==0 ) {
 
@@ -2323,13 +2362,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:740:3: ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:741:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:752:3: ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:753:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:741:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:742:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:753:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:754:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:742:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:754:5: (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -2348,7 +2387,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt8) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:743:6: lv_name_1_1= RULE_TERMINAL_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:755:6: lv_name_1_1= RULE_TERMINAL_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2365,7 +2404,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:751:6: lv_name_1_2= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:763:6: lv_name_1_2= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2390,7 +2429,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:761:3: (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:773:3: (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2399,7 +2438,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt9) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:762:4: otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:774:4: otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2412,11 +2451,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       				doneLeaf(otherlv_2);
                       			
                     }
-                    // PsiInternalSyntacticSequencerTestLanguage.g:769:4: ( (otherlv_3= RULE_TERMINAL_ID ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:770:5: (otherlv_3= RULE_TERMINAL_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:781:4: ( (otherlv_3= RULE_TERMINAL_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:782:5: (otherlv_3= RULE_TERMINAL_ID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:770:5: (otherlv_3= RULE_TERMINAL_ID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:771:6: otherlv_3= RULE_TERMINAL_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:782:5: (otherlv_3= RULE_TERMINAL_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:783:6: otherlv_3= RULE_TERMINAL_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2441,7 +2480,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:781:3: (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:793:3: (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2450,7 +2489,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:782:4: otherlv_4= 'kw2' ( ( ruleDatatypeID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:794:4: otherlv_4= 'kw2' ( ( ruleDatatypeID ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2463,11 +2502,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       				doneLeaf(otherlv_4);
                       			
                     }
-                    // PsiInternalSyntacticSequencerTestLanguage.g:789:4: ( ( ruleDatatypeID ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:790:5: ( ruleDatatypeID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:801:4: ( ( ruleDatatypeID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:802:5: ( ruleDatatypeID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:790:5: ( ruleDatatypeID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:791:6: ruleDatatypeID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:802:5: ( ruleDatatypeID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:803:6: ruleDatatypeID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2496,7 +2535,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:801:3: (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:813:3: (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2505,7 +2544,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt11) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:802:4: otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:814:4: otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2518,11 +2557,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       				doneLeaf(otherlv_6);
                       			
                     }
-                    // PsiInternalSyntacticSequencerTestLanguage.g:809:4: ( (otherlv_7= RULE_ID ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:810:5: (otherlv_7= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:821:4: ( (otherlv_7= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:822:5: (otherlv_7= RULE_ID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:810:5: (otherlv_7= RULE_ID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:811:6: otherlv_7= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:822:5: (otherlv_7= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:823:6: otherlv_7= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2547,7 +2586,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:821:3: (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:833:3: (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2556,7 +2595,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt12) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:822:4: otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:834:4: otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2569,11 +2608,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       				doneLeaf(otherlv_8);
                       			
                     }
-                    // PsiInternalSyntacticSequencerTestLanguage.g:829:4: ( (otherlv_9= RULE_ID ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:830:5: (otherlv_9= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:841:4: ( (otherlv_9= RULE_ID ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:842:5: (otherlv_9= RULE_ID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:830:5: (otherlv_9= RULE_ID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:831:6: otherlv_9= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:842:5: (otherlv_9= RULE_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:843:6: otherlv_9= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2617,11 +2656,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanAlternative"
-    // PsiInternalSyntacticSequencerTestLanguage.g:845:1: entryRuleBooleanAlternative : ruleBooleanAlternative EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:857:1: entryRuleBooleanAlternative : ruleBooleanAlternative EOF ;
     public final void entryRuleBooleanAlternative() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:845:28: ( ruleBooleanAlternative EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:846:2: ruleBooleanAlternative EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:857:28: ( ruleBooleanAlternative EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:858:2: ruleBooleanAlternative EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getBooleanAlternativeElementType()); 
@@ -2648,16 +2687,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanAlternative"
-    // PsiInternalSyntacticSequencerTestLanguage.g:851:1: ruleBooleanAlternative : (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:863:1: ruleBooleanAlternative : (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) ;
     public final void ruleBooleanAlternative() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:851:23: ( (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:852:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:863:23: ( (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:864:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:852:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:853:3: otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:864:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:865:3: otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -2670,11 +2709,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:860:3: ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:861:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
+            // PsiInternalSyntacticSequencerTestLanguage.g:872:3: ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:873:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:861:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
-            // PsiInternalSyntacticSequencerTestLanguage.g:862:5: lv_bool_1_0= ruleBooleanAlternativeLiteral
+            // PsiInternalSyntacticSequencerTestLanguage.g:873:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
+            // PsiInternalSyntacticSequencerTestLanguage.g:874:5: lv_bool_1_0= ruleBooleanAlternativeLiteral
             {
             if ( state.backtracking==0 ) {
 
@@ -2716,11 +2755,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanAlternativeLiteral"
-    // PsiInternalSyntacticSequencerTestLanguage.g:875:1: entryRuleBooleanAlternativeLiteral : ruleBooleanAlternativeLiteral EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:887:1: entryRuleBooleanAlternativeLiteral : ruleBooleanAlternativeLiteral EOF ;
     public final void entryRuleBooleanAlternativeLiteral() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:875:35: ( ruleBooleanAlternativeLiteral EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:876:2: ruleBooleanAlternativeLiteral EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:887:35: ( ruleBooleanAlternativeLiteral EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:888:2: ruleBooleanAlternativeLiteral EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getBooleanAlternativeLiteralElementType()); 
@@ -2747,20 +2786,20 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanAlternativeLiteral"
-    // PsiInternalSyntacticSequencerTestLanguage.g:881:1: ruleBooleanAlternativeLiteral : ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:893:1: ruleBooleanAlternativeLiteral : ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) ;
     public final void ruleBooleanAlternativeLiteral() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_isTrue_2_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:881:30: ( ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:882:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:893:30: ( ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:894:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:882:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:883:3: () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:894:2: ( () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:895:3: () (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:883:3: ()
-            // PsiInternalSyntacticSequencerTestLanguage.g:884:4: 
+            // PsiInternalSyntacticSequencerTestLanguage.g:895:3: ()
+            // PsiInternalSyntacticSequencerTestLanguage.g:896:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -2771,7 +2810,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:889:3: (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:901:3: (otherlv_1= 'kw1' | ( (lv_isTrue_2_0= 'kw2' ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2790,7 +2829,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt13) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:890:4: otherlv_1= 'kw1'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:902:4: otherlv_1= 'kw1'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2807,13 +2846,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:898:4: ( (lv_isTrue_2_0= 'kw2' ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:910:4: ( (lv_isTrue_2_0= 'kw2' ) )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:898:4: ( (lv_isTrue_2_0= 'kw2' ) )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:899:5: (lv_isTrue_2_0= 'kw2' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:910:4: ( (lv_isTrue_2_0= 'kw2' ) )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:911:5: (lv_isTrue_2_0= 'kw2' )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:899:5: (lv_isTrue_2_0= 'kw2' )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:900:6: lv_isTrue_2_0= 'kw2'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:911:5: (lv_isTrue_2_0= 'kw2' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:912:6: lv_isTrue_2_0= 'kw2'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2857,11 +2896,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleUnassignedDatatype"
-    // PsiInternalSyntacticSequencerTestLanguage.g:914:1: entryRuleUnassignedDatatype : ruleUnassignedDatatype EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:926:1: entryRuleUnassignedDatatype : ruleUnassignedDatatype EOF ;
     public final void entryRuleUnassignedDatatype() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:914:28: ( ruleUnassignedDatatype EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:915:2: ruleUnassignedDatatype EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:926:28: ( ruleUnassignedDatatype EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:927:2: ruleUnassignedDatatype EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getUnassignedDatatypeElementType()); 
@@ -2888,17 +2927,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleUnassignedDatatype"
-    // PsiInternalSyntacticSequencerTestLanguage.g:920:1: ruleUnassignedDatatype : (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:932:1: ruleUnassignedDatatype : (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) ;
     public final void ruleUnassignedDatatype() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:920:23: ( (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:921:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:932:23: ( (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:933:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:921:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
-            // PsiInternalSyntacticSequencerTestLanguage.g:922:3: otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1
+            // PsiInternalSyntacticSequencerTestLanguage.g:933:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
+            // PsiInternalSyntacticSequencerTestLanguage.g:934:3: otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1
             {
             if ( state.backtracking==0 ) {
 
@@ -2911,11 +2950,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:929:3: ( (lv_val_1_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:930:4: (lv_val_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:941:3: ( (lv_val_1_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:942:4: (lv_val_1_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:930:4: (lv_val_1_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:931:5: lv_val_1_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:942:4: (lv_val_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:943:5: lv_val_1_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -2968,11 +3007,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleKW1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:951:1: entryRuleKW1 : ruleKW1 EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:963:1: entryRuleKW1 : ruleKW1 EOF ;
     public final void entryRuleKW1() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:951:13: ( ruleKW1 EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:952:2: ruleKW1 EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:963:13: ( ruleKW1 EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:964:2: ruleKW1 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getKW1ElementType()); 
@@ -2999,16 +3038,16 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleKW1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:957:1: ruleKW1 : (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:969:1: ruleKW1 : (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) ;
     public final void ruleKW1() throws RecognitionException {
         Token kw=null;
         Token this_INT_2=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:957:8: ( (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:958:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:969:8: ( (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:970:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:958:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:970:2: (kw= 'kw1' | (kw= 'matched' (this_INT_2= RULE_INT )? ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -3027,7 +3066,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt15) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:959:3: kw= 'kw1'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:971:3: kw= 'kw1'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3044,10 +3083,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:967:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:979:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:967:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:968:4: kw= 'matched' (this_INT_2= RULE_INT )?
+                    // PsiInternalSyntacticSequencerTestLanguage.g:979:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:980:4: kw= 'matched' (this_INT_2= RULE_INT )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3060,7 +3099,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       				doneLeaf(kw);
                       			
                     }
-                    // PsiInternalSyntacticSequencerTestLanguage.g:975:4: (this_INT_2= RULE_INT )?
+                    // PsiInternalSyntacticSequencerTestLanguage.g:987:4: (this_INT_2= RULE_INT )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -3069,7 +3108,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     switch (alt14) {
                         case 1 :
-                            // PsiInternalSyntacticSequencerTestLanguage.g:976:5: this_INT_2= RULE_INT
+                            // PsiInternalSyntacticSequencerTestLanguage.g:988:5: this_INT_2= RULE_INT
                             {
                             if ( state.backtracking==0 ) {
 
@@ -3113,11 +3152,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleOptionalSingleTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:989:1: entryRuleOptionalSingleTransition : ruleOptionalSingleTransition EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1001:1: entryRuleOptionalSingleTransition : ruleOptionalSingleTransition EOF ;
     public final void entryRuleOptionalSingleTransition() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:989:34: ( ruleOptionalSingleTransition EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:990:2: ruleOptionalSingleTransition EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1001:34: ( ruleOptionalSingleTransition EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1002:2: ruleOptionalSingleTransition EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOptionalSingleTransitionElementType()); 
@@ -3144,17 +3183,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleOptionalSingleTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:995:1: ruleOptionalSingleTransition : (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1007:1: ruleOptionalSingleTransition : (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) ;
     public final void ruleOptionalSingleTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_2_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:995:29: ( (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:996:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1007:29: ( (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1008:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:996:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:997:3: otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1008:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1009:3: otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -3167,7 +3206,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1004:3: ( ruleKW1 )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1016:3: ( ruleKW1 )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -3176,7 +3215,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt16) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1005:4: ruleKW1
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1017:4: ruleKW1
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3199,11 +3238,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1013:3: ( (lv_val_2_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1014:4: (lv_val_2_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1025:3: ( (lv_val_2_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1026:4: (lv_val_2_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1014:4: (lv_val_2_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1015:5: lv_val_2_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1026:4: (lv_val_2_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1027:5: lv_val_2_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -3241,11 +3280,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleOptionalManyTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1028:1: entryRuleOptionalManyTransition : ruleOptionalManyTransition EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1040:1: entryRuleOptionalManyTransition : ruleOptionalManyTransition EOF ;
     public final void entryRuleOptionalManyTransition() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1028:32: ( ruleOptionalManyTransition EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1029:2: ruleOptionalManyTransition EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1040:32: ( ruleOptionalManyTransition EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1041:2: ruleOptionalManyTransition EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getOptionalManyTransitionElementType()); 
@@ -3272,17 +3311,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleOptionalManyTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1034:1: ruleOptionalManyTransition : (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1046:1: ruleOptionalManyTransition : (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) ;
     public final void ruleOptionalManyTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_2_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1034:27: ( (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1035:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1046:27: ( (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1047:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1035:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1036:3: otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1047:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1048:3: otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -3295,7 +3334,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1043:3: ( ruleKW1 )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:1055:3: ( ruleKW1 )*
             loop17:
             do {
                 int alt17=2;
@@ -3308,7 +3347,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt17) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1044:4: ruleKW1
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1056:4: ruleKW1
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3334,11 +3373,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 }
             } while (true);
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1052:3: ( (lv_val_2_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1053:4: (lv_val_2_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1064:3: ( (lv_val_2_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1065:4: (lv_val_2_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1053:4: (lv_val_2_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1054:5: lv_val_2_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1065:4: (lv_val_2_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1066:5: lv_val_2_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -3376,11 +3415,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleMandatoryManyTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1067:1: entryRuleMandatoryManyTransition : ruleMandatoryManyTransition EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1079:1: entryRuleMandatoryManyTransition : ruleMandatoryManyTransition EOF ;
     public final void entryRuleMandatoryManyTransition() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1067:33: ( ruleMandatoryManyTransition EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1068:2: ruleMandatoryManyTransition EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1079:33: ( ruleMandatoryManyTransition EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1080:2: ruleMandatoryManyTransition EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getMandatoryManyTransitionElementType()); 
@@ -3407,17 +3446,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleMandatoryManyTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1073:1: ruleMandatoryManyTransition : (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1085:1: ruleMandatoryManyTransition : (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) ;
     public final void ruleMandatoryManyTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_val_2_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1073:28: ( (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1074:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1085:28: ( (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1086:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1074:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1075:3: otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1086:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1087:3: otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -3430,7 +3469,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1082:3: ( ruleKW1 )+
+            // PsiInternalSyntacticSequencerTestLanguage.g:1094:3: ( ruleKW1 )+
             int cnt18=0;
             loop18:
             do {
@@ -3444,7 +3483,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt18) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1083:4: ruleKW1
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1095:4: ruleKW1
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3475,11 +3514,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 cnt18++;
             } while (true);
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1091:3: ( (lv_val_2_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1092:4: (lv_val_2_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1103:3: ( (lv_val_2_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1104:4: (lv_val_2_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1092:4: (lv_val_2_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1093:5: lv_val_2_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1104:4: (lv_val_2_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1105:5: lv_val_2_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -3517,11 +3556,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleAlternativeTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1106:1: entryRuleAlternativeTransition : ruleAlternativeTransition EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1118:1: entryRuleAlternativeTransition : ruleAlternativeTransition EOF ;
     public final void entryRuleAlternativeTransition() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1106:31: ( ruleAlternativeTransition EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1107:2: ruleAlternativeTransition EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1118:31: ( ruleAlternativeTransition EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1119:2: ruleAlternativeTransition EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAlternativeTransitionElementType()); 
@@ -3548,18 +3587,18 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleAlternativeTransition"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1112:1: ruleAlternativeTransition : (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1124:1: ruleAlternativeTransition : (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) ;
     public final void ruleAlternativeTransition() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token lv_val_3_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1112:26: ( (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1113:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1124:26: ( (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1125:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1113:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1114:3: otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1125:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1126:3: otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) )
             {
             if ( state.backtracking==0 ) {
 
@@ -3572,7 +3611,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1121:3: ( ruleKW1 | otherlv_2= 'kw2' )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1133:3: ( ruleKW1 | otherlv_2= 'kw2' )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -3591,7 +3630,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt19) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1122:4: ruleKW1
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1134:4: ruleKW1
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3612,7 +3651,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1130:4: otherlv_2= 'kw2'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1142:4: otherlv_2= 'kw2'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3631,11 +3670,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1138:3: ( (lv_val_3_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1139:4: (lv_val_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1150:3: ( (lv_val_3_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1151:4: (lv_val_3_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1139:4: (lv_val_3_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1140:5: lv_val_3_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1151:4: (lv_val_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1152:5: lv_val_3_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -3673,11 +3712,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanDatatypeID"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1153:1: entryRuleBooleanDatatypeID : ruleBooleanDatatypeID EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1165:1: entryRuleBooleanDatatypeID : ruleBooleanDatatypeID EOF ;
     public final void entryRuleBooleanDatatypeID() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1153:27: ( ruleBooleanDatatypeID EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1154:2: ruleBooleanDatatypeID EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1165:27: ( ruleBooleanDatatypeID EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1166:2: ruleBooleanDatatypeID EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getBooleanDatatypeIDElementType()); 
@@ -3704,13 +3743,13 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanDatatypeID"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1159:1: ruleBooleanDatatypeID : this_ID_0= RULE_ID ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1171:1: ruleBooleanDatatypeID : this_ID_0= RULE_ID ;
     public final void ruleBooleanDatatypeID() throws RecognitionException {
         Token this_ID_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1159:22: (this_ID_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1160:2: this_ID_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1171:22: (this_ID_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1172:2: this_ID_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -3739,11 +3778,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleBooleanValues"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1170:1: entryRuleBooleanValues : ruleBooleanValues EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1182:1: entryRuleBooleanValues : ruleBooleanValues EOF ;
     public final void entryRuleBooleanValues() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1170:23: ( ruleBooleanValues EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1171:2: ruleBooleanValues EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1182:23: ( ruleBooleanValues EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1183:2: ruleBooleanValues EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getBooleanValuesElementType()); 
@@ -3770,21 +3809,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleBooleanValues"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1176:1: ruleBooleanValues : ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1188:1: ruleBooleanValues : ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) ;
     public final void ruleBooleanValues() throws RecognitionException {
         Token otherlv_1=null;
         Token lv_val1_2_0=null;
         Token lv_val2_3_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1176:18: ( ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1177:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1188:18: ( ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1189:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1177:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1178:3: () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1189:2: ( () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )? )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1190:3: () otherlv_1= '#12' ( (lv_val1_2_0= 'kw1' ) )? ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )? ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1178:3: ()
-            // PsiInternalSyntacticSequencerTestLanguage.g:1179:4: 
+            // PsiInternalSyntacticSequencerTestLanguage.g:1190:3: ()
+            // PsiInternalSyntacticSequencerTestLanguage.g:1191:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -3806,7 +3845,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_1);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1191:3: ( (lv_val1_2_0= 'kw1' ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1203:3: ( (lv_val1_2_0= 'kw1' ) )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -3815,10 +3854,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt20) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1192:4: (lv_val1_2_0= 'kw1' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1204:4: (lv_val1_2_0= 'kw1' )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1192:4: (lv_val1_2_0= 'kw1' )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1193:5: lv_val1_2_0= 'kw1'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1204:4: (lv_val1_2_0= 'kw1' )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1205:5: lv_val1_2_0= 'kw1'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3840,7 +3879,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1202:3: ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1214:3: ( (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID ) )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -3849,10 +3888,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt21) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1203:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1215:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1203:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1204:5: lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1215:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1216:5: lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3874,7 +3913,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1213:3: ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1225:3: ( (lv_val3_4_0= ruleBooleanDatatypeID ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -3883,10 +3922,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt22) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1214:4: (lv_val3_4_0= ruleBooleanDatatypeID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1226:4: (lv_val3_4_0= ruleBooleanDatatypeID )
                     {
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1214:4: (lv_val3_4_0= ruleBooleanDatatypeID )
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1215:5: lv_val3_4_0= ruleBooleanDatatypeID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1226:4: (lv_val3_4_0= ruleBooleanDatatypeID )
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1227:5: lv_val3_4_0= ruleBooleanDatatypeID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3931,11 +3970,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleLongAlternative"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1228:1: entryRuleLongAlternative : ruleLongAlternative EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1240:1: entryRuleLongAlternative : ruleLongAlternative EOF ;
     public final void entryRuleLongAlternative() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1228:25: ( ruleLongAlternative EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1229:2: ruleLongAlternative EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1240:25: ( ruleLongAlternative EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1241:2: ruleLongAlternative EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getLongAlternativeElementType()); 
@@ -3962,7 +4001,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleLongAlternative"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1234:1: ruleLongAlternative : (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1246:1: ruleLongAlternative : (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) ;
     public final void ruleLongAlternative() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_foo_1_0=null;
@@ -3985,11 +4024,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token otherlv_18=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1234:20: ( (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1235:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1246:20: ( (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1247:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1235:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1236:3: otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!'
+            // PsiInternalSyntacticSequencerTestLanguage.g:1247:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1248:3: otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!'
             {
             if ( state.backtracking==0 ) {
 
@@ -4002,11 +4041,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1243:3: ( (lv_foo_1_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1244:4: (lv_foo_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1255:3: ( (lv_foo_1_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1256:4: (lv_foo_1_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1244:4: (lv_foo_1_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1245:5: lv_foo_1_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1256:4: (lv_foo_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1257:5: lv_foo_1_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -4025,7 +4064,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1254:3: ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )*
+            // PsiInternalSyntacticSequencerTestLanguage.g:1266:3: ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )*
             loop31:
             do {
                 int alt31=9;
@@ -4075,10 +4114,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
                 switch (alt31) {
             	case 1 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1255:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1267:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1255:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1256:5: otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1267:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1268:5: otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4091,7 +4130,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_2);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1263:5: ( (lv_val1_3_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1275:5: ( (lv_val1_3_0= RULE_ID ) )?
             	    int alt23=2;
             	    int LA23_0 = input.LA(1);
 
@@ -4100,10 +4139,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt23) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1264:6: (lv_val1_3_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1276:6: (lv_val1_3_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1264:6: (lv_val1_3_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1265:7: lv_val1_3_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1276:6: (lv_val1_3_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1277:7: lv_val1_3_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4132,10 +4171,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 2 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1276:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1288:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1276:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1277:5: otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1288:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1289:5: otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4148,7 +4187,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_4);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1284:5: ( (lv_val2_5_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1296:5: ( (lv_val2_5_0= RULE_ID ) )?
             	    int alt24=2;
             	    int LA24_0 = input.LA(1);
 
@@ -4157,10 +4196,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt24) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1285:6: (lv_val2_5_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1297:6: (lv_val2_5_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1285:6: (lv_val2_5_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1286:7: lv_val2_5_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1297:6: (lv_val2_5_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1298:7: lv_val2_5_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4189,10 +4228,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 3 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1297:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1309:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1297:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1298:5: otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1309:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1310:5: otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4205,7 +4244,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_6);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1305:5: ( (lv_val3_7_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1317:5: ( (lv_val3_7_0= RULE_ID ) )?
             	    int alt25=2;
             	    int LA25_0 = input.LA(1);
 
@@ -4214,10 +4253,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt25) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1306:6: (lv_val3_7_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1318:6: (lv_val3_7_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1306:6: (lv_val3_7_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1307:7: lv_val3_7_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1318:6: (lv_val3_7_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1319:7: lv_val3_7_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4246,10 +4285,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 4 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1318:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1330:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1318:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1319:5: otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1330:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1331:5: otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4262,7 +4301,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_8);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1326:5: ( (lv_val4_9_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1338:5: ( (lv_val4_9_0= RULE_ID ) )?
             	    int alt26=2;
             	    int LA26_0 = input.LA(1);
 
@@ -4271,10 +4310,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt26) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1327:6: (lv_val4_9_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1339:6: (lv_val4_9_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1327:6: (lv_val4_9_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1328:7: lv_val4_9_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1339:6: (lv_val4_9_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1340:7: lv_val4_9_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4303,10 +4342,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 5 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1339:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1351:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1339:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1340:5: otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1351:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1352:5: otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4319,7 +4358,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_10);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1347:5: ( (lv_val5_11_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1359:5: ( (lv_val5_11_0= RULE_ID ) )?
             	    int alt27=2;
             	    int LA27_0 = input.LA(1);
 
@@ -4328,10 +4367,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt27) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1348:6: (lv_val5_11_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1360:6: (lv_val5_11_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1348:6: (lv_val5_11_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1349:7: lv_val5_11_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1360:6: (lv_val5_11_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1361:7: lv_val5_11_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4360,10 +4399,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 6 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1360:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1372:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1360:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1361:5: otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1372:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1373:5: otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4376,7 +4415,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_12);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1368:5: ( (lv_val6_13_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1380:5: ( (lv_val6_13_0= RULE_ID ) )?
             	    int alt28=2;
             	    int LA28_0 = input.LA(1);
 
@@ -4385,10 +4424,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt28) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1369:6: (lv_val6_13_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1381:6: (lv_val6_13_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1369:6: (lv_val6_13_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1370:7: lv_val6_13_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1381:6: (lv_val6_13_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1382:7: lv_val6_13_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4417,10 +4456,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 7 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1381:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1393:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1381:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1382:5: otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1393:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1394:5: otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4433,7 +4472,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_14);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1389:5: ( (lv_val7_15_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1401:5: ( (lv_val7_15_0= RULE_ID ) )?
             	    int alt29=2;
             	    int LA29_0 = input.LA(1);
 
@@ -4442,10 +4481,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt29) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1390:6: (lv_val7_15_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1402:6: (lv_val7_15_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1390:6: (lv_val7_15_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1391:7: lv_val7_15_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1402:6: (lv_val7_15_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1403:7: lv_val7_15_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4474,10 +4513,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    break;
             	case 8 :
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1402:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1414:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
             	    {
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1402:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1403:5: otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1414:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1415:5: otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )?
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4490,7 +4529,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	      					doneLeaf(otherlv_16);
             	      				
             	    }
-            	    // PsiInternalSyntacticSequencerTestLanguage.g:1410:5: ( (lv_val8_17_0= RULE_ID ) )?
+            	    // PsiInternalSyntacticSequencerTestLanguage.g:1422:5: ( (lv_val8_17_0= RULE_ID ) )?
             	    int alt30=2;
             	    int LA30_0 = input.LA(1);
 
@@ -4499,10 +4538,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    }
             	    switch (alt30) {
             	        case 1 :
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1411:6: (lv_val8_17_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1423:6: (lv_val8_17_0= RULE_ID )
             	            {
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1411:6: (lv_val8_17_0= RULE_ID )
-            	            // PsiInternalSyntacticSequencerTestLanguage.g:1412:7: lv_val8_17_0= RULE_ID
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1423:6: (lv_val8_17_0= RULE_ID )
+            	            // PsiInternalSyntacticSequencerTestLanguage.g:1424:7: lv_val8_17_0= RULE_ID
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -4566,11 +4605,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleActionOnly"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1434:1: entryRuleActionOnly : ruleActionOnly EOF ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1446:1: entryRuleActionOnly : ruleActionOnly EOF ;
     public final void entryRuleActionOnly() throws RecognitionException {
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1434:20: ( ruleActionOnly EOF )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1435:2: ruleActionOnly EOF
+            // PsiInternalSyntacticSequencerTestLanguage.g:1446:20: ( ruleActionOnly EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1447:2: ruleActionOnly EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getActionOnlyElementType()); 
@@ -4597,7 +4636,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleActionOnly"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1440:1: ruleActionOnly : (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1452:1: ruleActionOnly : (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
     public final void ruleActionOnly() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_1=null;
@@ -4606,11 +4645,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token this_ID_5=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1440:15: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1452:15: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1453:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1442:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1453:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1454:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
             {
             if ( state.backtracking==0 ) {
 
@@ -4623,7 +4662,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneLeaf(otherlv_0);
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1449:3: (otherlv_1= 'kw1' )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1461:3: (otherlv_1= 'kw1' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -4632,7 +4671,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt32) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1450:4: otherlv_1= 'kw1'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1462:4: otherlv_1= 'kw1'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4651,7 +4690,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1458:3: ( ( RULE_ID )=>this_ID_2= RULE_ID )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1470:3: ( ( RULE_ID )=>this_ID_2= RULE_ID )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -4664,7 +4703,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt33) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1459:4: ( RULE_ID )=>this_ID_2= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1471:4: ( RULE_ID )=>this_ID_2= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4683,8 +4722,8 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1468:3: ()
-            // PsiInternalSyntacticSequencerTestLanguage.g:1469:4: 
+            // PsiInternalSyntacticSequencerTestLanguage.g:1480:3: ()
+            // PsiInternalSyntacticSequencerTestLanguage.g:1481:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -4695,7 +4734,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1474:3: (otherlv_4= 'kw2' )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1486:3: (otherlv_4= 'kw2' )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -4704,7 +4743,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt34) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1475:4: otherlv_4= 'kw2'
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1487:4: otherlv_4= 'kw2'
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4723,7 +4762,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSyntacticSequencerTestLanguage.g:1483:3: (this_ID_5= RULE_ID )?
+            // PsiInternalSyntacticSequencerTestLanguage.g:1495:3: (this_ID_5= RULE_ID )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -4732,7 +4771,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt35) {
                 case 1 :
-                    // PsiInternalSyntacticSequencerTestLanguage.g:1484:4: this_ID_5= RULE_ID
+                    // PsiInternalSyntacticSequencerTestLanguage.g:1496:4: this_ID_5= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4768,10 +4807,192 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
     }
     // $ANTLR end "ruleActionOnly"
 
+
+    // $ANTLR start "entryRuleFragmentCaller"
+    // PsiInternalSyntacticSequencerTestLanguage.g:1508:1: entryRuleFragmentCaller : ruleFragmentCaller EOF ;
+    public final void entryRuleFragmentCaller() throws RecognitionException {
+        try {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1508:24: ( ruleFragmentCaller EOF )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1509:2: ruleFragmentCaller EOF
+            {
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getFragmentCallerElementType()); 
+            }
+            pushFollow(FollowSets000.FOLLOW_1);
+            ruleFragmentCaller();
+
+            state._fsp--;
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleFragmentCaller"
+
+
+    // $ANTLR start "ruleFragmentCaller"
+    // PsiInternalSyntacticSequencerTestLanguage.g:1514:1: ruleFragmentCaller : (otherlv_0= '#15' ( (lv_val1_1_0= RULE_ID ) ) ruleFragment1 ( (lv_val_3_0= RULE_ID ) ) ) ;
+    public final void ruleFragmentCaller() throws RecognitionException {
+        Token otherlv_0=null;
+        Token lv_val1_1_0=null;
+        Token lv_val_3_0=null;
+
+        try {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1514:19: ( (otherlv_0= '#15' ( (lv_val1_1_0= RULE_ID ) ) ruleFragment1 ( (lv_val_3_0= RULE_ID ) ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1515:2: (otherlv_0= '#15' ( (lv_val1_1_0= RULE_ID ) ) ruleFragment1 ( (lv_val_3_0= RULE_ID ) ) )
+            {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1515:2: (otherlv_0= '#15' ( (lv_val1_1_0= RULE_ID ) ) ruleFragment1 ( (lv_val_3_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1516:3: otherlv_0= '#15' ( (lv_val1_1_0= RULE_ID ) ) ruleFragment1 ( (lv_val_3_0= RULE_ID ) )
+            {
+            if ( state.backtracking==0 ) {
+
+              			markLeaf(elementTypeProvider.getFragmentCaller_NumberSignDigitOneDigitFiveKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,41,FollowSets000.FOLLOW_3); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              			doneLeaf(otherlv_0);
+              		
+            }
+            // PsiInternalSyntacticSequencerTestLanguage.g:1523:3: ( (lv_val1_1_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1524:4: (lv_val1_1_0= RULE_ID )
+            {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1524:4: (lv_val1_1_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1525:5: lv_val1_1_0= RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+
+              					markLeaf(elementTypeProvider.getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType());
+              				
+            }
+            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              					doneLeaf(lv_val1_1_0);
+              				
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
+              		
+            }
+            pushFollow(FollowSets000.FOLLOW_3);
+            ruleFragment1();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              			doneComposite();
+              		
+            }
+            // PsiInternalSyntacticSequencerTestLanguage.g:1541:3: ( (lv_val_3_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1542:4: (lv_val_3_0= RULE_ID )
+            {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1542:4: (lv_val_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1543:5: lv_val_3_0= RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+
+              					markLeaf(elementTypeProvider.getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType());
+              				
+            }
+            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              					doneLeaf(lv_val_3_0);
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "ruleFragmentCaller"
+
+
+    // $ANTLR start "ruleFragment1"
+    // PsiInternalSyntacticSequencerTestLanguage.g:1557:1: ruleFragment1 : ( (lv_fragVal_0_0= RULE_ID ) ) ;
+    public final void ruleFragment1() throws RecognitionException {
+        Token lv_fragVal_0_0=null;
+
+        try {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1557:14: ( ( (lv_fragVal_0_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1558:2: ( (lv_fragVal_0_0= RULE_ID ) )
+            {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1558:2: ( (lv_fragVal_0_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1559:3: (lv_fragVal_0_0= RULE_ID )
+            {
+            // PsiInternalSyntacticSequencerTestLanguage.g:1559:3: (lv_fragVal_0_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1560:4: lv_fragVal_0_0= RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+
+              				markLeaf(elementTypeProvider.getFragment1_FragValIDTerminalRuleCall_0ElementType());
+              			
+            }
+            lv_fragVal_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              				doneLeaf(lv_fragVal_0_0);
+              			
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "ruleFragment1"
+
     // $ANTLR start synpred1_PsiInternalSyntacticSequencerTestLanguage
     public final void synpred1_PsiInternalSyntacticSequencerTestLanguage_fragment() throws RecognitionException {   
-        // PsiInternalSyntacticSequencerTestLanguage.g:1459:4: ( RULE_ID )
-        // PsiInternalSyntacticSequencerTestLanguage.g:1459:5: RULE_ID
+        // PsiInternalSyntacticSequencerTestLanguage.g:1471:4: ( RULE_ID )
+        // PsiInternalSyntacticSequencerTestLanguage.g:1471:5: RULE_ID
         {
         match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return ;
 

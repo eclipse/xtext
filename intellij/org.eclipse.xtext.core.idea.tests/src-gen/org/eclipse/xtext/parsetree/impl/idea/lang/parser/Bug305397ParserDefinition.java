@@ -1,5 +1,6 @@
 package org.eclipse.xtext.parsetree.impl.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397ElementTypeProvider;
 import org.eclipse.xtext.parsetree.impl.idea.lang.psi.impl.Bug305397FileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -41,7 +42,40 @@ public class Bug305397ParserDefinition extends AbstractXtextParserDefinition {
 				elementTypeProvider.getElement_NameIDTerminalRuleCall_3_0ElementType()
 			);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getModelElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ElementsAssignmentElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElementElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_AAssignment_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_AAKeyword_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_ElementKeyword_2ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_NameAssignment_3ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_NameIDTerminalRuleCall_3_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_ElementsAssignment_4ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getElement_EndKeyword_5ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }
