@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
 import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
@@ -60,7 +61,7 @@ public class ContextFinderTest extends AbstractXtextTests {
 	private String contexts2names(Iterable<ISerializationContext> contexts) {
 		List<String> result = Lists.newArrayList();
 		for (ISerializationContext ctx : contexts)
-			result.add(context2name.toFunction(getGrammarAccess().getGrammar()).apply(ctx.getActionOrRule()));
+			result.add(context2name.toFunction(getGrammarAccess().getGrammar()).apply(((SerializationContext) ctx).getActionOrRule()));
 		Collections.sort(result);
 		return Joiner.on(", ").join(result);
 	}
@@ -153,8 +154,7 @@ public class ContextFinderTest extends AbstractXtextTests {
 	@Test
 	public void testQuantityExclusionTest3() throws Exception {
 		Model model = parseHelper.parse("#5 kw2 bar baz");
-		assertEquals("QuantityExclusionTest1, QuantityExclusionTest2",
-				findContextsByContents(model.getQuantityExclusion()));
+		assertEquals("QuantityExclusionTest1, QuantityExclusionTest2", findContextsByContents(model.getQuantityExclusion()));
 	}
 
 	@Test
