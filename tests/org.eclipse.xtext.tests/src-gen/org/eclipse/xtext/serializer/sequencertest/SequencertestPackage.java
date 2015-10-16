@@ -338,13 +338,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X33 = 29;
 
   /**
+   * The feature id for the '<em><b>X34</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X34 = 30;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 30;
+  int MODEL_FEATURE_COUNT = 31;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1863,6 +1872,80 @@ public interface SequencertestPackage extends EPackage
   int FRAGMENT_CALLER_TYPE_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.ParameterCallerImpl <em>Parameter Caller</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.ParameterCallerImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getParameterCaller()
+   * @generated
+   */
+  int PARAMETER_CALLER = 41;
+
+  /**
+   * The feature id for the '<em><b>P</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_CALLER__P = 0;
+
+  /**
+   * The number of structural features of the '<em>Parameter Caller</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_CALLER_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.ParameterizedImpl <em>Parameterized</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.ParameterizedImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getParameterized()
+   * @generated
+   */
+  int PARAMETERIZED = 42;
+
+  /**
+   * The feature id for the '<em><b>V1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETERIZED__V1 = 0;
+
+  /**
+   * The feature id for the '<em><b>V2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETERIZED__V2 = 1;
+
+  /**
+   * The feature id for the '<em><b>V3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETERIZED__V3 = 2;
+
+  /**
+   * The number of structural features of the '<em>Parameterized</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETERIZED_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1870,7 +1953,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 41;
+  int DEF_ENUM = 43;
 
 
   /**
@@ -2212,6 +2295,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X33();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX34 <em>X34</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X34</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX34()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X34();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -3538,6 +3632,70 @@ public interface SequencertestPackage extends EPackage
   EAttribute getFragmentCallerType_FragVal();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.ParameterCaller <em>Parameter Caller</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter Caller</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.ParameterCaller
+   * @generated
+   */
+  EClass getParameterCaller();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.ParameterCaller#getP <em>P</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>P</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.ParameterCaller#getP()
+   * @see #getParameterCaller()
+   * @generated
+   */
+  EReference getParameterCaller_P();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.Parameterized <em>Parameterized</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameterized</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Parameterized
+   * @generated
+   */
+  EClass getParameterized();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Parameterized#getV1 <em>V1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>V1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Parameterized#getV1()
+   * @see #getParameterized()
+   * @generated
+   */
+  EAttribute getParameterized_V1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Parameterized#getV2 <em>V2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>V2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Parameterized#getV2()
+   * @see #getParameterized()
+   * @generated
+   */
+  EAttribute getParameterized_V2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Parameterized#getV3 <em>V3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>V3</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Parameterized#getV3()
+   * @see #getParameterized()
+   * @generated
+   */
+  EAttribute getParameterized_V3();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3819,6 +3977,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X33 = eINSTANCE.getModel_X33();
+
+    /**
+     * The meta object literal for the '<em><b>X34</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X34 = eINSTANCE.getModel_X34();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4891,6 +5057,58 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute FRAGMENT_CALLER_TYPE__FRAG_VAL = eINSTANCE.getFragmentCallerType_FragVal();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.ParameterCallerImpl <em>Parameter Caller</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.ParameterCallerImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getParameterCaller()
+     * @generated
+     */
+    EClass PARAMETER_CALLER = eINSTANCE.getParameterCaller();
+
+    /**
+     * The meta object literal for the '<em><b>P</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARAMETER_CALLER__P = eINSTANCE.getParameterCaller_P();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.ParameterizedImpl <em>Parameterized</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.ParameterizedImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getParameterized()
+     * @generated
+     */
+    EClass PARAMETERIZED = eINSTANCE.getParameterized();
+
+    /**
+     * The meta object literal for the '<em><b>V1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETERIZED__V1 = eINSTANCE.getParameterized_V1();
+
+    /**
+     * The meta object literal for the '<em><b>V2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETERIZED__V2 = eINSTANCE.getParameterized_V2();
+
+    /**
+     * The meta object literal for the '<em><b>V3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETERIZED__V3 = eINSTANCE.getParameterized_V3();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

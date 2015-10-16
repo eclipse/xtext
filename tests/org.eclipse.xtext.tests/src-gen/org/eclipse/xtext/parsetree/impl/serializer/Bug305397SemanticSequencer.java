@@ -4,19 +4,18 @@
 package org.eclipse.xtext.parsetree.impl.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Package;
 import org.eclipse.xtext.parsetree.impl.bug305397.Element;
 import org.eclipse.xtext.parsetree.impl.bug305397.Model;
 import org.eclipse.xtext.parsetree.impl.services.Bug305397GrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
 public class Bug305397SemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -25,8 +24,13 @@ public class Bug305397SemanticSequencer extends AbstractDelegatingSemanticSequen
 	private Bug305397GrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug305397Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug305397Package.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug305397Package.ELEMENT:
 				sequence_Element(context, (Element) semanticObject); 
 				return; 
@@ -34,14 +38,15 @@ public class Bug305397SemanticSequencer extends AbstractDelegatingSemanticSequen
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (a?='a'? name=ID? elements+=Element*)
 	 */
-	protected void sequence_Element(EObject context, Element semanticObject) {
+	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -50,7 +55,9 @@ public class Bug305397SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 * Constraint:
 	 *     elements+=Element+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

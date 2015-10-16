@@ -50,17 +50,17 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Expression_LeftSquareBracketKeyword_1_0_a.equals(syntax))
+			if (match_Expression_LeftSquareBracketKeyword_1_0_a.equals(syntax))
 				emit_Expression_LeftSquareBracketKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Expression_LeftSquareBracketKeyword_2_0_q.equals(syntax))
+			else if (match_Expression_LeftSquareBracketKeyword_2_0_q.equals(syntax))
 				emit_Expression_LeftSquareBracketKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Expression_RightSquareBracketKeyword_2_2_q.equals(syntax))
+			else if (match_Expression_RightSquareBracketKeyword_2_2_q.equals(syntax))
 				emit_Expression_RightSquareBracketKeyword_2_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Expression_RightSquareBracketKeyword_3_0_a.equals(syntax))
+			else if (match_Expression_RightSquareBracketKeyword_3_0_a.equals(syntax))
 				emit_Expression_RightSquareBracketKeyword_3_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SimpleTerm_AsteriskKeyword_0_1_q.equals(syntax))
+			else if (match_SimpleTerm_AsteriskKeyword_0_1_q.equals(syntax))
 				emit_SimpleTerm_AsteriskKeyword_0_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SimpleTerm_ExclamationMarkKeyword_0_3_q.equals(syntax))
+			else if (match_SimpleTerm_ExclamationMarkKeyword_0_3_q.equals(syntax))
 				emit_SimpleTerm_ExclamationMarkKeyword_0_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

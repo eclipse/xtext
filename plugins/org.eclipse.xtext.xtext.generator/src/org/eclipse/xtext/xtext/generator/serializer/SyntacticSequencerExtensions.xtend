@@ -18,8 +18,6 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias
-import org.eclipse.xtext.serializer.analysis.IContextPDAProvider
-import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner
@@ -28,8 +26,6 @@ import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 
 class SyntacticSequencerExtensions {
 	
-	@Inject IContextPDAProvider contextPDAProvider
-	@Inject IContextTypePDAProvider contextTypePDAProvider
 	@Inject ISyntacticSequencerPDAProvider pdaProvider
 	@Inject extension GrammarAccessExtensions
 	@Inject Grammar grammar
@@ -38,13 +34,7 @@ class SyntacticSequencerExtensions {
 	List<EqualAmbiguousTransitions> ambiguousTransitions
 
 	def protected List<ISynAbsorberState> getAllPDAs() {
-		var List<ISynAbsorberState> result = newArrayList
-		for (context : contextPDAProvider.getAllContexts(grammar)) {
-			for (type : contextTypePDAProvider.getTypesForContext(grammar, context)) {
-				result.add(pdaProvider.getPDA(context, type))
-			}
-		}
-		return result
+		return newArrayList(pdaProvider.getSyntacticSequencerPDAs(grammar).values)
 	}
 
 	def protected void collectAllAmbiguousTransitions(ISynFollowerOwner state, Set<ISynTransition> result,

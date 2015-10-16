@@ -29,4 +29,5 @@ public abstract class AbstractDelegatingSemanticSequencer extends AbstractSemant
 		this.genericSequencer = genericSequencerProvider.get();
 		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 	}
+
 }

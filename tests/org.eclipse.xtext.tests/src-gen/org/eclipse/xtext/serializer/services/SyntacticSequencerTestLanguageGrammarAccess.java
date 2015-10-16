@@ -250,7 +250,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//Prim0
 		public RuleCall getPrim0ParserRuleCall_0() { return cPrim0ParserRuleCall_0; }
 
-		//({Add0.left=current} '+' right=Prim0)*
+		//{Add0.left=current} '+' right=Prim0*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add0.left=current}
@@ -330,7 +330,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//Prim1
 		public RuleCall getPrim1ParserRuleCall_0() { return cPrim1ParserRuleCall_0; }
 
-		//({Add1.left=current} '+' right=Prim1)*
+		//{Add1.left=current} '+' right=Prim1*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add1.left=current}
@@ -430,7 +430,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//Multiplication2
 		public RuleCall getMultiplication2ParserRuleCall_0() { return cMultiplication2ParserRuleCall_0; }
 
-		//({Add2.left=current} '+' right=Multiplication2)*
+		//{Add2.left=current} '+' right=Multiplication2*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add2.left=current}
@@ -466,7 +466,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//Prim2
 		public RuleCall getPrim2ParserRuleCall_0() { return cPrim2ParserRuleCall_0; }
 
-		//({Mult2.left=current} '*' right=Prim2)*
+		//{Mult2.left=current} '*' right=Prim2*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Mult2.left=current}
@@ -591,7 +591,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0_1() { return cNameIDTerminalRuleCall_1_0_1; }
 
-		//("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
+		//"kw1" ref1=[SingleCrossReference|TERMINAL_ID]?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"kw1"
@@ -606,7 +606,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//TERMINAL_ID
 		public RuleCall getRef1SingleCrossReferenceTERMINAL_IDTerminalRuleCall_2_1_0_1() { return cRef1SingleCrossReferenceTERMINAL_IDTerminalRuleCall_2_1_0_1; }
 
-		//("kw2" ref2=[SingleCrossReference|DatatypeID])?
+		//"kw2" ref2=[SingleCrossReference|DatatypeID]?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"kw2"
@@ -621,7 +621,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//DatatypeID
 		public RuleCall getRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1() { return cRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1; }
 
-		//("kw3" ref3=[SingleCrossReference])?
+		//"kw3" ref3=[SingleCrossReference]?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"kw3"
@@ -636,7 +636,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getRef3SingleCrossReferenceIDTerminalRuleCall_4_1_0_1() { return cRef3SingleCrossReferenceIDTerminalRuleCall_4_1_0_1; }
 
-		//("kw4" ref4=[SingleCrossReference])?
+		//"kw4" ref4=[SingleCrossReference]?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"kw4"
@@ -695,7 +695,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//{BooleanAlternativeLiteral}
 		public Action getBooleanAlternativeLiteralAction_0() { return cBooleanAlternativeLiteralAction_0; }
 
-		//("kw1" | isTrue?="kw2")
+		//"kw1" | isTrue?="kw2"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1"
@@ -868,7 +868,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//"#11"
 		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
 
-		//(KW1 | "kw2")
+		//KW1 | "kw2"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//KW1
@@ -1006,8 +1006,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getFooIDTerminalRuleCall_1_0() { return cFooIDTerminalRuleCall_1_0; }
 
-		//("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID? | "kw7"
-		//val7+=ID? | "kw8" val8+=ID?)*
+		//"kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID? | "kw7"
+		//val7+=ID? | "kw8" val8+=ID?*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"kw1" val1+=ID?
@@ -1420,8 +1420,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getPrim2Access().getRule();
 	}
 
-	//terminal TERMINAL_ID:
-	//	'$1' ID;
+	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
+	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
+	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
+	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage'.rules[12]->TerminalRule'TERMINAL_ID'.alternatives->Group
+	//URI: classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext
+	//Context: TerminalAlternatives_Group
 	public TerminalRule getTERMINAL_IDRule() {
 		return tTERMINAL_ID;
 	} 
@@ -1527,8 +1531,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getAlternativeTransitionAccess().getRule();
 	}
 
-	//terminal BOOLEAN_TERMINAL_ID:
-	//	'%1' ID;
+	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
+	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
+	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
+	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage'.rules[23]->TerminalRule'BOOLEAN_TERMINAL_ID'.alternatives->Group
+	//URI: classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext
+	//Context: TerminalAlternatives_Group
 	public TerminalRule getBOOLEAN_TERMINAL_IDRule() {
 		return tBOOLEAN_TERMINAL_ID;
 	} 

@@ -19,14 +19,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
@@ -36,9 +40,10 @@ import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -92,16 +97,18 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	}
 
 	public class SerializableObject {
-		protected EObject eObject;
+		protected final EObject eObject;
+		protected final ISerializationContext context;
 		protected List<INode>[] nodes;
 		protected boolean[] optional;
 		protected Map<Pair<AbstractElement, Integer>, Boolean> valid = Maps.newHashMap();
 		protected Object[] values;
 
 		@SuppressWarnings("unchecked")
-		public SerializableObject(EObject eObject, INodesForEObjectProvider nodeProvider) {
+		public SerializableObject(ISerializationContext context, EObject eObject, INodesForEObjectProvider nodeProvider) {
 			super();
 			this.eObject = eObject;
+			this.context = context;
 			EClass clazz = eObject.eClass();
 			values = new Object[clazz.getFeatureCount()];
 			nodes = new List[clazz.getFeatureCount()];
@@ -141,14 +148,14 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 							optional[featureID] = true;
 							Object value1 = eObject.eGet(feature);
 							values[featureID] = value1;
-							nodes[featureID] = Collections.singletonList(nodeProvider.getNodeForSingelValue(feature,
-									value1));
+							nodes[featureID] = Collections
+									.singletonList(nodeProvider.getNodeForSingelValue(feature, value1));
 							break;
 						case NO:
 							Object value2 = eObject.eGet(feature);
 							values[featureID] = value2;
-							nodes[featureID] = Collections.singletonList(nodeProvider.getNodeForSingelValue(feature,
-									value2));
+							nodes[featureID] = Collections
+									.singletonList(nodeProvider.getNodeForSingelValue(feature, value2));
 							break;
 						case YES:
 							values[featureID] = INVALID;
@@ -207,16 +214,20 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		protected boolean isValueValid(ISemState state, int index, Object value) {
-			if (state.getToBeValidatedAssignedElements().isEmpty())
+			List<AbstractElement> candidates = state.getToBeValidatedAssignedElements();
+			if (candidates.isEmpty())
 				return true;
 
 			Pair<AbstractElement, Integer> key = Tuples.create(state.getAssignedGrammarElement(), index);
 			if (valid.get(key) == Boolean.TRUE)
 				return true;
 
-			Set<AbstractElement> validAssignments = Sets.newHashSet(assignmentFinder.findAssignmentsByValue(eObject,
-					state.getToBeValidatedAssignedElements(), value, getNode(state.getFeatureID(), index)));
-			boolean result = validAssignments.contains(state.getAssignedGrammarElement());
+			INode node = getNode(state.getFeatureID(), index);
+			Multimap<AbstractElement, ISerializationContext> assignments = ArrayListMultimap.create();
+			for (AbstractElement ele : candidates)
+				assignments.put(ele, context);
+			Set<AbstractElement> found = assignmentFinder.findAssignmentsByValue(eObject, assignments, value, node);
+			boolean result = found.contains(state.getAssignedGrammarElement());
 			valid.put(key, result);
 			return result;
 		}
@@ -389,7 +400,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	protected IAssignmentFinder assignmentFinder;
 
 	@Inject
-	protected ISemanticSequencerNfaProvider nfaProvider;
+	private IGrammarConstraintProvider constraintProvider;
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
@@ -418,10 +429,23 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	}
 
 	@Override
+	@Deprecated
 	public void createSequence(EObject context, final EObject obj) {
+		createSequence(SerializationContext.fromEObject(context, obj), obj);
+	}
+
+	@Inject
+	private IGrammarAccess grammar;
+
+	@Override
+	public void createSequence(ISerializationContext context, EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
-		Nfa<ISemState> nfa = nfaProvider.getNFA(context, obj.eClass());
-		final SerializableObject object = new SerializableObject(obj, nodes);
+		Map<ISerializationContext, IConstraint> constraints = constraintProvider.getConstraints(grammar.getGrammar());
+		IConstraint constraint = constraints.get(context);
+		if (constraint == null)
+			throw new IllegalStateException("Invalid context: " + context);
+		Nfa<ISemState> nfa = constraint.getNfa();
+		final SerializableObject object = new SerializableObject(context, obj, nodes);
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {
 			@Override
@@ -447,13 +471,13 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				return r;
 			}
 		});
-		SequenceFeeder feeder = feederProvider.create(obj, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+		SequenceFeeder feeder = feederProvider.create(context, obj, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		if (trace != null) {
 			for (TraceItem ti : trace)
 				if (ti.getState() != null && ti.getState().getFeature() != null)
 					accept(ti, feeder);
 		} else if (errorAcceptor != null)
-			errorAcceptor.accept(diagnosticProvider.createBacktrackingFailedDiagnostic(object, context, nfa));
+			errorAcceptor.accept(diagnosticProvider.createBacktrackingFailedDiagnostic(object, context, constraint));
 		feeder.finish();
 	}
 

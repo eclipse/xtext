@@ -26,13 +26,13 @@ public class AssignmentFinderTestLanguageSyntacticSequencer extends AbstractSynt
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getEnum1Rule())
+		if (ruleCall.getRule() == grammarAccess.getEnum1Rule())
 			return getEnum1Token(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getEnum2Rule())
+		else if (ruleCall.getRule() == grammarAccess.getEnum2Rule())
 			return getEnum2Token(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getTerminal1Rule())
+		else if (ruleCall.getRule() == grammarAccess.getTerminal1Rule())
 			return getTerminal1Token(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getTerminal2Rule())
+		else if (ruleCall.getRule() == grammarAccess.getTerminal2Rule())
 			return getTerminal2Token(semanticObject, ruleCall, node);
 		return "";
 	}

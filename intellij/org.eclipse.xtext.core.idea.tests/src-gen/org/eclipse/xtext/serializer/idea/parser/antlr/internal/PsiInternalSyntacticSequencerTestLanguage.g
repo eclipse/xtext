@@ -224,6 +224,18 @@ ruleModel:
 				}
 			)
 		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X15FragmentCallerParserRuleCall_14_0ElementType());
+				}
+				lv_x15_14_0=ruleFragmentCaller
+				{
+					doneComposite();
+				}
+			)
+		)
 	)
 ;
 
@@ -1489,6 +1501,70 @@ ruleActionOnly:
 				doneLeaf(this_ID_5);
 			}
 		)?
+	)
+;
+
+//Entry rule entryRuleFragmentCaller
+entryRuleFragmentCaller:
+	{ markComposite(elementTypeProvider.getFragmentCallerElementType()); }
+	ruleFragmentCaller
+	EOF;
+
+// Rule FragmentCaller
+ruleFragmentCaller:
+	(
+		{
+			markLeaf(elementTypeProvider.getFragmentCaller_NumberSignDigitOneDigitFiveKeyword_0ElementType());
+		}
+		otherlv_0='#15'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType());
+				}
+				lv_val1_1_0=RULE_ID
+				{
+					doneLeaf(lv_val1_1_0);
+				}
+			)
+		)
+		{
+			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
+		}
+		ruleFragment1
+		{
+			doneComposite();
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType());
+				}
+				lv_val_3_0=RULE_ID
+				{
+					doneLeaf(lv_val_3_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Fragment1
+ruleFragment1:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getFragment1_FragValIDTerminalRuleCall_0ElementType());
+			}
+			lv_fragVal_0_0=RULE_ID
+			{
+				doneLeaf(lv_fragVal_0_0);
+			}
+		)
 	)
 ;
 

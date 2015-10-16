@@ -20,6 +20,7 @@ import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
@@ -84,6 +85,7 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
 			((SerializerPDA.SerializerPDAState) owner).followers = Lists.newArrayList(followers);
 			for (ISerState follower : followers) {
+				Preconditions.checkNotNull(follower);
 				((SerializerPDA.SerializerPDAState) follower).precedents.add(owner);
 			}
 		}
