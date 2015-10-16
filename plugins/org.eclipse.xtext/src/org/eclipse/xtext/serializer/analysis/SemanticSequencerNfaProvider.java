@@ -26,6 +26,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
 import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
@@ -195,7 +196,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	}
 
-	protected Map<Grammar, Map<IContext, Nfa<ISemState>>> cache = Maps.newHashMap();
+	protected Map<Grammar, Map<ISerializationContext, Nfa<ISemState>>> cache = Maps.newHashMap();
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
@@ -213,7 +214,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		return true;
 	}
 
-	protected SemNfa createNfa(Grammar grammar, ISynAbsorberState synState, IContext context) {
+	protected SemNfa createNfa(Grammar grammar, ISynAbsorberState synState, ISerializationContext context) {
 		EClass type = context.getType();
 		SynAbsorberNfaAdapter synNfa = new SynAbsorberNfaAdapter(synState);
 		//		System.out.println(new NfaFormatter().format(synNfa));
@@ -229,16 +230,16 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 	}
 
 	@Override
-	public Map<IContext, Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar) {
-		Map<IContext, Nfa<ISemState>> result = cache.get(grammar);
+	public Map<ISerializationContext, Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar) {
+		Map<ISerializationContext, Nfa<ISemState>> result = cache.get(grammar);
 		if (result != null)
 			return result;
 		result = Maps.newLinkedHashMap();
 		cache.put(grammar, result);
-		Map<IContext, ISynAbsorberState> PDAs = pdaProvider.getSyntacticSequencerPDAs(grammar);
-		for (Entry<IContext, ISynAbsorberState> e : PDAs.entrySet()) {
+		Map<ISerializationContext, ISynAbsorberState> PDAs = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		for (Entry<ISerializationContext, ISynAbsorberState> e : PDAs.entrySet()) {
 			ISynAbsorberState synState = e.getValue();
-			IContext context = e.getKey();
+			ISerializationContext context = e.getKey();
 			SemNfa nfa = createNfa(grammar, synState, context);
 			result.put(context, nfa);
 		}

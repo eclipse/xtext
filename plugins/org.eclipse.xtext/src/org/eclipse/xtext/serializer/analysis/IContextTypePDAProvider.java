@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.formallang.Pda;
 
 import com.google.inject.ImplementedBy;
@@ -21,6 +22,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ContextTypePDAProvider.class)
 public interface IContextTypePDAProvider {
 
-	Map<IContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar);
+	Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar);
 
 }

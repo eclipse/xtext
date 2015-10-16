@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -28,7 +28,7 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 
 	protected Grammar grammar;
 
-	protected IContext context;
+	protected ISerializationContext context;
 
 	private String id;
 
@@ -62,14 +62,14 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	}
 
 	/**
-	 * @deprecated use {@link #SerializationDiagnostic(String, EObject, IContext, Grammar, String)}.
+	 * @deprecated use {@link #SerializationDiagnostic(String, EObject, ISerializationContext, Grammar, String)}.
 	 */
 	@Deprecated
 	public SerializationDiagnostic(String id, EObject sem, EObject context, Grammar grammar, String message) {
 
 	}
 
-	public SerializationDiagnostic(String id, EObject sem, IContext context, Grammar grammar, String message) {
+	public SerializationDiagnostic(String id, EObject sem, ISerializationContext context, Grammar grammar, String message) {
 		super();
 		this.id = id;
 		this.semanticObject = sem;
@@ -109,7 +109,7 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	}
 
 	@Override
-	public IContext getIContext() {
+	public ISerializationContext getIContext() {
 		return context;
 	}
 

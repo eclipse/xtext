@@ -10,7 +10,7 @@ package org.eclipse.xtext.serializer.diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
@@ -30,13 +30,13 @@ public interface ISyntacticSequencerDiagnosticProvider {
 	String UNEXPECTED_EMITTER_DIAGNOSTIC = "unexepcted emitter diagnostic";
 
 	/**
-	 * @deprecated {@link #createInvalidFollowingAbsorberDiagnostic(IContext, EObject, ISynAbsorberState, AbstractElement)}
+	 * @deprecated {@link #createInvalidFollowingAbsorberDiagnostic(ISerializationContext, EObject, ISynAbsorberState, AbstractElement)}
 	 */
 	@Deprecated
 	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to);
 
-	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(IContext context, EObject semanticObject,
+	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(ISerializationContext context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to);
 
 	ISerializationDiagnostic createUnexpectedStackStateDiagnostic(EObject semanticObject, RuleCallStack stack,

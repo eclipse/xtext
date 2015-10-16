@@ -23,7 +23,7 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.serializer.analysis.IContext
+import org.eclipse.xtext.serializer.ISerializationContext
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
@@ -33,8 +33,8 @@ class SemanticSequencerExtensions {
 	
 	@Inject IGrammarConstraintProvider gcp
 
-	def Map<IConstraint, List<IContext>> getGrammarConstraints(Grammar grammar, EClass clazz) {
-		val Map<IConstraint, List<IContext>> result = newLinkedHashMap
+	def Map<IConstraint, List<ISerializationContext>> getGrammarConstraints(Grammar grammar, EClass clazz) {
+		val Map<IConstraint, List<ISerializationContext>> result = newLinkedHashMap
 		val constraints = gcp.getConstraints(grammar)
 		for (e : constraints.entrySet) {
 			val context = e.key

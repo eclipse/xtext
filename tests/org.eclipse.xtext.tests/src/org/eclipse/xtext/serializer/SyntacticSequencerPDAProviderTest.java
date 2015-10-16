@@ -18,7 +18,6 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
@@ -84,10 +83,10 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		//		StackTraceElement ele = Thread.currentThread().getStackTrace()[2];
 		//		drawGrammar("pdf/" + ele.getMethodName(), grammar);
 		ISyntacticSequencerPDAProvider pdaProvider = get(ISyntacticSequencerPDAProvider.class);
-		Map<IContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
-		List<Pair<List<IContext>, ISynAbsorberState>> grouped = SerializationContext.groupByEqualityAndSort(pdas);
+		Map<ISerializationContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		List<Pair<List<ISerializationContext>, ISynAbsorberState>> grouped = SerializationContext.groupByEqualityAndSort(pdas);
 		List<String> result = Lists.newArrayList();
-		for (Pair<List<IContext>, ISynAbsorberState> e : grouped) {
+		for (Pair<List<ISerializationContext>, ISynAbsorberState> e : grouped) {
 			result.add(e.getFirst() + ":");
 			result.addAll(pda2lines2(e.getSecond()));
 		}

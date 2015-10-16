@@ -14,11 +14,11 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
@@ -42,7 +42,7 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 	}
 
 	@Override
-	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(IContext context, EObject semanticObject,
+	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(ISerializationContext context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to) {
 		GrammarElementTitleSwitch fmt = new GrammarElementTitleSwitch().showAssignments().showQualified();
 		String fromName = from.toString(fmt);
@@ -75,7 +75,7 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		buf.append("Found on top of the stack: " + poppedStr + "\n");
 		buf.append("Expected: " + toConsume + "\n");
 		buf.append("Rest of the stack: " + stack + "\n");
-		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, (IContext) null,
+		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, (ISerializationContext) null,
 				grammarAccess.getGrammar(), buf.toString());
 	}
 }

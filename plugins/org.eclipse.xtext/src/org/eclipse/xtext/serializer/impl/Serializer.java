@@ -30,12 +30,12 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
@@ -89,7 +89,7 @@ public class Serializer implements ISerializer {
 	protected IConcreteSyntaxValidator validator;
 
 	/**
-	 * @deprecated use {@link #serialize(IContext, EObject, ISequenceAcceptor, ISerializationDiagnostic.Acceptor)}
+	 * @deprecated use {@link #serialize(ISerializationContext, EObject, ISequenceAcceptor, ISerializationDiagnostic.Acceptor)}
 	 */
 	@Deprecated
 	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens,
@@ -105,7 +105,7 @@ public class Serializer implements ISerializer {
 		semantic.createSequence(context, semanticObject);
 	}
 
-	protected void serialize(IContext context, EObject semanticObject, ISequenceAcceptor tokens,
+	protected void serialize(ISerializationContext context, EObject semanticObject, ISequenceAcceptor tokens,
 			ISerializationDiagnostic.Acceptor errors) {
 		ISemanticSequencer semantic = semanticSequencerProvider.get();
 		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
@@ -137,14 +137,14 @@ public class Serializer implements ISerializer {
 					!options.isFormatting());
 		else
 			formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
-		IContext context = getIContext(obj);
+		ISerializationContext context = getIContext(obj);
 		ISequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, grammar.getGrammar(), errors);
 		serialize(context, obj, acceptor, errors);
 		formatterTokenStream.flush();
 	}
 
 	public ITextRegionAccess serializeToRegions(EObject obj) {
-		IContext context = getIContext(obj);
+		ISerializationContext context = getIContext(obj);
 		TextRegionAccessBuilder builder = textRegionBuilderProvider.get();
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
 		serialize(context, obj, builder.forSequence(context, obj), errors);
@@ -173,8 +173,8 @@ public class Serializer implements ISerializer {
 		return contexts.next();
 	}
 
-	protected IContext getIContext(EObject semanticObject) {
-		Iterator<IContext> contexts = contextFinder.findByContentsAndContainer(semanticObject, null).iterator();
+	protected ISerializationContext getIContext(EObject semanticObject) {
+		Iterator<ISerializationContext> contexts = contextFinder.findByContentsAndContainer(semanticObject, null).iterator();
 		if (!contexts.hasNext())
 			throw new RuntimeException("No Context for " + EmfFormatter.objPath(semanticObject) + " could be found");
 		return contexts.next();

@@ -22,7 +22,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 import org.eclipse.xtext.util.Triple;
@@ -121,7 +121,7 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 	}
 
 	@Override
-	public void createSequence(IContext context, EObject semanticObject) {
+	public void createSequence(ISerializationContext context, EObject semanticObject) {
 		SemanticNodeIterator ni = new SemanticNodeIterator(semanticObject);
 		while (ni.hasNext()) {
 			Triple<INode, AbstractElement, EObject> node = ni.next();
@@ -164,7 +164,7 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 		throw new RuntimeException("no context found");
 	}
 
-	public Iterable<IContext> findContexts(EObject semanticObject, boolean consultContainer, Iterable<IContext> contextCandidates) {
+	public Iterable<ISerializationContext> findContexts(EObject semanticObject, boolean consultContainer, Iterable<ISerializationContext> contextCandidates) {
 		EObject ctx = findContextNode(semanticObject).getGrammarElement();
 		if (ctx instanceof RuleCall)
 			ctx = ((RuleCall) ctx).getRule();

@@ -23,6 +23,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.ActionContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAElementFactory;
@@ -185,13 +186,13 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	}
 
 	@Override
-	public Map<IContext, Pda<ISerState, RuleCall>> getContextPDAs(Grammar grammar) {
-		Map<IContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
-		Map<IContext, Pda<ISerState, RuleCall>> grammarPDAs = grammarPdaProvider.getGrammarPDAs(grammar);
+	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextPDAs(Grammar grammar) {
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> grammarPDAs = grammarPdaProvider.getGrammarPDAs(grammar);
 		Multimap<Action, SerializerPDA> actionPdas = HashMultimap.create();
-		Multimap<Action, IContext> actionContexts = HashMultimap.create();
-		for (Entry<IContext, Pda<ISerState, RuleCall>> e : grammarPDAs.entrySet()) {
-			IContext context = e.getKey();
+		Multimap<Action, ISerializationContext> actionContexts = HashMultimap.create();
+		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : grammarPDAs.entrySet()) {
+			ISerializationContext context = e.getKey();
 			Pda<ISerState, RuleCall> pda = e.getValue();
 			List<ISerState> actions = Lists.newArrayList();
 			for (ISerState state : nfaUtil.collect(pda)) {
@@ -222,7 +223,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		return result;
 	}
 
-	protected SerializerPDA merge(IContext context, Collection<SerializerPDA> pdas) {
+	protected SerializerPDA merge(ISerializationContext context, Collection<SerializerPDA> pdas) {
 		if (pdas.isEmpty())
 			throw new IllegalStateException();
 		if (pdas.size() == 1)

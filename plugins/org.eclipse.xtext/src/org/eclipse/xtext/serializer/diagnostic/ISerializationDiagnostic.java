@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
@@ -84,7 +84,7 @@ public interface ISerializationDiagnostic {
 		}
 
 		@Override
-		public IContext getIContext() {
+		public ISerializationContext getIContext() {
 			return null;
 		}
 	}
@@ -104,7 +104,7 @@ public interface ISerializationDiagnostic {
 				if (eObject.eResource() != null && eObject.eResource().getURI() != null)
 					result.add("URI: " + eObject.eResource().getURI());
 			}
-			IContext context = diagnostic.getIContext();
+			ISerializationContext context = diagnostic.getIContext();
 			if (context != null)
 				result.add("Context: " + context);
 			if (diagnostic.getEStructuralFeature() != null) {
@@ -161,7 +161,7 @@ public interface ISerializationDiagnostic {
 	@Deprecated
 	EObject getContext();
 
-	IContext getIContext();
+	ISerializationContext getIContext();
 
 	Grammar getGrammar();
 

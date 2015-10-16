@@ -8,9 +8,9 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
@@ -45,7 +45,7 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	private final boolean USES_EOBJECT_AS_CONTEXT = usesEObjectAsContext();
 
 	// TODO: deprecate this method
-	protected IContext createContext(EObject deprecatedContext, EObject semanticObject) {
+	protected ISerializationContext createContext(EObject deprecatedContext, EObject semanticObject) {
 		return SerializationContext.fromEObject(deprecatedContext, semanticObject);
 	}
 
@@ -60,7 +60,7 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	}
 
 	@Override
-	public void createSequence(IContext context, EObject semanticObject) {
+	public void createSequence(ISerializationContext context, EObject semanticObject) {
 		if (USES_EOBJECT_AS_CONTEXT) {
 			createSequence(context.getActionOrRule(), semanticObject);
 		} else {
@@ -81,13 +81,13 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor, errorAcceptor);
 	}
 
-	protected SequenceFeeder createSequencerFeeder(IContext context, EObject semanticObject) {
+	protected SequenceFeeder createSequencerFeeder(ISerializationContext context, EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
 		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
-	protected SequenceFeeder createSequencerFeeder(IContext context, EObject semanticObject,
+	protected SequenceFeeder createSequencerFeeder(ISerializationContext context, EObject semanticObject,
 			INodesForEObjectProvider nodeProvider) {
 		return feederProvider.create(context, semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
@@ -106,7 +106,7 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 		this.errorAcceptor = errorAcceptor;
 	}
 
-	public void sequence(IContext context, EObject semanticObject) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
 	}
 
 	public void setMasterSequencer(ISemanticSequencer sequencer) {
@@ -124,7 +124,7 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 		}
 		Class<?> iContext = null;
 		try {
-			iContext = getClass().getMethod("sequence", IContext.class, EObject.class).getDeclaringClass();
+			iContext = getClass().getMethod("sequence", ISerializationContext.class, EObject.class).getDeclaringClass();
 		} catch (NoSuchMethodException e) {
 			return true;
 		} catch (SecurityException e) {

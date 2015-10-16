@@ -12,7 +12,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.analysis.IContext;
+import org.eclipse.xtext.serializer.ISerializationContext;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.ImplementedBy;
@@ -23,6 +23,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(AssignmentFinder.class)
 public interface IAssignmentFinder {
 
-	Set<AbstractElement> findAssignmentsByValue(EObject semanticObject, Multimap<AbstractElement, IContext> assignments,
+	Set<AbstractElement> findAssignmentsByValue(EObject semanticObject, Multimap<AbstractElement, ISerializationContext> assignments,
 			Object value, INode node);
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.analysis;
+package org.eclipse.xtext.serializer;
 
 import java.util.Set;
 
@@ -17,8 +17,12 @@ import org.eclipse.xtext.ParserRule;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.9
+ * 
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
-public interface IContext extends Comparable<IContext> {
+public interface ISerializationContext extends Comparable<ISerializationContext> {
 
 	EObject getActionOrRule();
 
@@ -26,7 +30,7 @@ public interface IContext extends Comparable<IContext> {
 
 	Set<Parameter> getParameterValues();
 
-	IContext getParent();
+	ISerializationContext getParent();
 
 	ParserRule getParserRule();
 
