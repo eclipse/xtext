@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator
 
-import com.google.inject.Inject
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
-import org.eclipse.core.resources.IWorkspaceRoot
+import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IShouldGenerate
@@ -21,13 +20,11 @@ import org.eclipse.xtext.util.CancelIndicator
  */
 class EclipseBasedShouldGenerate implements IShouldGenerate {
 
-	@Inject IWorkspaceRoot workspace
-
 	override shouldGenerate(Resource resource, String projectName, CancelIndicator cancelIndicator) {
 		val uri = resource.URI
 		if (uri === null || !uri.isPlatformResource)
 			return false
-		val member = workspace.findMember(new Path(uri.toPlatformString(true)))
+		val member = ResourcesPlugin.workspace.root.findMember(new Path(uri.toPlatformString(true)))
 		if (member !== null && member.type === IResource.FILE && member.project.name == projectName) {
 			return member.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) !== IMarker.SEVERITY_ERROR
 		}
