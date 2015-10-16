@@ -11,6 +11,7 @@ import java.util.Collections
 import java.util.List
 import java.util.regex.Pattern
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
@@ -29,8 +30,12 @@ class TypeReference {
 		new TypeReference(clazz, arguments)
 	}
 	
-	static def TypeReference typeRef(EClass clazz, ILanguageConfig language, EClass... arguments) {
-		new TypeReference(clazz, language.resourceSet, arguments.map[new TypeReference(it, language.resourceSet)])
+	static def TypeReference typeRef(EClass clazz, ILanguageConfig language) {
+		new TypeReference(clazz, language.resourceSet)
+	}
+	
+	static def TypeReference typeRef(EPackage epackage, ILanguageConfig language) {
+		new TypeReference(epackage, language.resourceSet)
 	}
 	
 	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')
@@ -86,11 +91,11 @@ class TypeReference {
 	}
 	
 	new(EClass clazz, ResourceSet resourceSet) {
-		this(clazz, resourceSet, null)
+		this(getQualifiedName(clazz, resourceSet))
 	}
 	
-	new(EClass clazz, ResourceSet resourceSet, List<TypeReference> arguments) {
-		this(getQualifiedName(clazz, resourceSet), arguments)
+	new(EPackage epackage, ResourceSet resourceSet) {
+		this(getQualifiedName(epackage, resourceSet))
 	}
 	
 	private static def getPackageName(String qualifiedName) {
@@ -122,6 +127,10 @@ class TypeReference {
 			'org.eclipse.xtext.' + clazz.name
 		else
 			GenModelUtil2.getGenClass(clazz, resourceSet).qualifiedInterfaceName
+	}
+	
+	private static def getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
+		GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageInterfaceName
 	}
 	
 	private static def matches(char c1, char c2) {

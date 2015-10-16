@@ -36,6 +36,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	
@@ -44,11 +45,15 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension GrammarAccessExtensions
 	
+	@Accessors boolean generateStub
+	
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + getSimpleName(grammar) + 'Formatter')
 	}
 	
 	override generate() {
+		if (!generateStub) 
+			return;
 		val StringConcatenationClient statement =
 			'''binder.bind(«IPreferenceValuesProvider».class).annotatedWith(«FormatterPreferences».class).to(«FormatterPreferenceValuesProvider».class);'''
 		new GuiceModuleAccess.BindingFactory()
@@ -65,6 +70,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 
 	protected def doGenerateStubFile() {
 		val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
+		xtendFile.resourceSet = language.resourceSet
 		
 		val type2ref = LinkedHashMultimap.<EClass, EReference>create
 		getLocallyAssignedContainmentReferences(language.grammar, type2ref)
@@ -85,11 +91,11 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''
-		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz.typeRef(language)» «clazz.toVarName», extension «IFormattableDocument» document) {
+		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz» «clazz.toVarName», extension «IFormattableDocument» document) {
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
-					for («ref.EReferenceType.typeRef(language)» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
+					for («ref.EReferenceType» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
 						format(«ref.toVarName», document);
 					}
 				«ELSE»

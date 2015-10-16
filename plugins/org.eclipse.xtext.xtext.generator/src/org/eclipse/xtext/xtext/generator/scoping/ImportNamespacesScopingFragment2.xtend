@@ -10,13 +10,13 @@ package org.eclipse.xtext.xtext.generator.scoping
 import com.google.inject.Inject
 import com.google.inject.name.Names
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.IgnoreCaseLinking
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider
+import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
@@ -48,25 +48,46 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 	boolean inheritImplementation = true
 	
 	protected def TypeReference getScopeProviderClass(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage + '.scoping.' + getSimpleName(grammar) + 'ScopeProvider')
+		if (grammar.name == 'org.eclipse.xtext.xbase.Xbase')
+			return 'org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider'.typeRef
+		if (grammar.name == 'org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations')
+			return 'org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider'.typeRef
+		return new TypeReference(grammar.runtimeBasePackage + '.scoping.' + getSimpleName(grammar) + 'ScopeProvider')
+	}
+	
+	protected def TypeReference getAbstractScopeProviderClass(Grammar grammar) {
+		return new TypeReference(grammar.runtimeBasePackage + '.scoping.' + 'Abstract'+ getSimpleName(grammar) + 'ScopeProvider')
 	}
 	
 	protected def TypeReference getScopeProviderSuperClass(Grammar grammar) {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
 		if (inheritImplementation && superGrammar !== null) 
-			superGrammar.scopeProviderClass
+			return superGrammar.scopeProviderClass
 		else 
-			defaultScopeProviderSuperClass
+			return defaultScopeProviderSuperClass
 	}
 
 	protected def TypeReference getDefaultScopeProviderSuperClass() {
-		new TypeReference(AbstractDeclarativeScopeProvider)
+		if (language.grammar.inheritsXbase) {
+			"org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider".typeRef
+		} else {
+			DelegatingScopeProvider.typeRef
+		}
+	}
+	
+	def TypeReference getDelegateScopeProvider() {
+		if (language.grammar.usesXImportSection)
+			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
+		else
+			ImportedNamespaceAwareLocalScopeProvider.typeRef 
 	}
 	
 	override generate() {
 		contributeRuntimeGuiceBindings()
 		
-		if (generateStub && !grammar.inheritsXbase) {
+		if (generateStub) {
+			generateAbstractScopeProvider()
+			
 			if (codeConfig.preferXtendStubs)
 				generateXtendScopeProvider()
 			else
@@ -80,22 +101,29 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 		}
 	}
 	
+	
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
-		if (!grammar.inheritsXbase) {
-			if (generateStub)
-				bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
-			else
-				bindingFactory.addTypeToType(IScopeProvider.typeRef, ImportedNamespaceAwareLocalScopeProvider.typeRef)
-			val StringConcatenationClient statement =
-				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«ImportedNamespaceAwareLocalScopeProvider».class);'''
-			bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', statement)
-			bindingFactory.addTypeToType(IGlobalScopeProvider.typeRef(), DefaultGlobalScopeProvider.typeRef)
-		}
-		val StringConcatenationClient statement =
-			'''binder.bindConstant().annotatedWith(«IgnoreCaseLinking».class).to(«ignoreCase»);'''
-		bindingFactory.addConfiguredBinding(IgnoreCaseLinking.simpleName, statement)
+		if (generateStub)
+			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
+		else
+			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderSuperClass)
+		
+		bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', 
+				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«getDelegateScopeProvider».class);''')
+		bindingFactory.addTypeToType(IGlobalScopeProvider.typeRef, DefaultGlobalScopeProvider.typeRef)
+		bindingFactory.addConfiguredBinding(IgnoreCaseLinking.simpleName, 
+				'''binder.bindConstant().annotatedWith(«IgnoreCaseLinking».class).to(«ignoreCase»);''')
 		bindingFactory.contributeTo(language.runtimeGenModule)
+	}
+	
+	def generateAbstractScopeProvider() {
+		val file = fileAccessFactory.createGeneratedJavaFile(grammar.abstractScopeProviderClass)
+		file.content = '''
+			public class «grammar.abstractScopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			}
+		'''
+		file.writeTo(projectConfig.runtime.srcGen)
 	}
 	
 	protected def generateJavaScopeProvider() {
@@ -106,7 +134,7 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
 			 * on how and when to use it.
 			 */
-			public class «grammar.scopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			public class «grammar.scopeProviderClass.simpleName» extends «grammar.abstractScopeProviderClass» {
 			
 			}
 		''').writeTo(projectConfig.runtime.src)
@@ -120,7 +148,7 @@ class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
 			 * on how and when to use it.
 			 */
-			class «grammar.scopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			class «grammar.scopeProviderClass.simpleName» extends «grammar.abstractScopeProviderClass» {
 			
 			}
 		''').writeTo(projectConfig.runtime.src)

@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.RuntimeIOException
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 /**
  * A file system access implementation that is based on EMF URIs and URIConverter
@@ -62,7 +63,7 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 		val outlet = pathes.get(outputConfiguration)
 		if (outlet == null)
 			throw new IllegalArgumentException("A slot with name '" + outputConfiguration + "' has not been configured.");
-		val uri = URI.createURI(outlet + "/" + path)
+		val uri = URI.createFileURI(outlet + File.separator + path)
 		if (baseDir != null) {
 			val resolved = uri.resolve(baseDir);
 			return resolved
