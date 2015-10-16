@@ -65,53 +65,42 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Accessors
 	boolean partialParsing
 
-	@Inject AntlrGrammarGenerator combinedProductionGenerator
-	@Inject ExtendedAntlrGrammarGenerator extendedProductionGenerator
-	
-	@Inject AntlrContentAssistGrammarGenerator combinedContentAssistGenerator
-	@Inject ExtendedAntlrContentAssistGrammarGenerator extendedContentAssistGenerator
-	
+	@Inject AntlrGrammarGenerator productionGenerator
+	@Inject AntlrContentAssistGrammarGenerator contentAssistGenerator
 	@Inject AntlrDebugGrammarGenerator debugGenerator
 
 	@Inject FileAccessFactory fileFactory
 
-	@Inject GrammarNaming combinedProductionNaming
-	@Inject ExtendedGrammarNaming extendedProductionNaming
-
-	@Inject ContentAssistGrammarNaming combinedContentAssistNaming
-	@Inject ExtendedContentAssistGrammarNaming extendedContentAssistNaming
+	@Inject GrammarNaming productionNaming
+	@Inject ContentAssistGrammarNaming contentAssistNaming
 	
 	@Inject extension GrammarAccessExtensions grammarUtil
 
 	override protected doGenerate() {
-		val keywordHelper = new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
-		try {
-			generateProductionGrammar
-			if (projectConfig.genericIde.srcGen != null)
-				generateContentAssistGrammar
-			if (debugGrammar)
-				generateDebugGrammar
-			
-			generateProductionParser.writeTo(projectConfig.runtime.srcGen)
-			generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
-			generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
-			if (!isCombinedGrammar) {
-				generateProductionTokenSource.writeTo(projectConfig.runtime.srcGen)
-				generateContentAssistTokenSource.writeTo(projectConfig.genericIde.srcGen)
-			}
-			addRuntimeBindingsAndImports
-			addUiBindingsAndImports
-		} finally {
-			keywordHelper.discardHelper(grammar)
+		new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
+		new CombinedGrammarMarker(isCombinedGrammar).attachToEmfObject(grammar)
+		generateProductionGrammar
+		if (projectConfig.genericIde.srcGen != null)
+			generateContentAssistGrammar
+		if (debugGrammar)
+			generateDebugGrammar
+		
+		generateProductionParser.writeTo(projectConfig.runtime.srcGen)
+		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
+		generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
+		if (!isCombinedGrammar) {
+			generateProductionTokenSource.writeTo(projectConfig.runtime.srcGen)
+			generateContentAssistTokenSource.writeTo(projectConfig.genericIde.srcGen)
 		}
+		addRuntimeBindingsAndImports
+		addUiBindingsAndImports
 	}
 	
 	protected def generateProductionGrammar() {
 		val extension naming = productionNaming
-		val generator = if (isCombinedGrammar) combinedProductionGenerator else extendedProductionGenerator
 		val fsa = projectConfig.runtime.srcGen
 		
-		generator.generate(grammar, options, fsa)
+		productionGenerator.generate(grammar, options, fsa)
 		
 		runAntlr(grammar.parserGrammar, grammar.lexerGrammar, fsa)
 		
@@ -124,15 +113,14 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	protected def generateContentAssistGrammar() {
 		val extension naming = contentAssistNaming
-		val generator = if (isCombinedGrammar) combinedContentAssistGenerator else extendedContentAssistGenerator
 		val fsa = projectConfig.genericIde.srcGen
 		
-		generator.generate(grammar, options, fsa)
+		contentAssistGenerator.generate(grammar, options, fsa)
 		
 		runAntlr(grammar.parserGrammar, grammar.lexerGrammar, fsa)
 		
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
-		splitParserAndLexerIfEnabled(fsa, grammar.lexerClass, grammar.internalParserClass)
+		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
 		normalizeTokens(fsa, grammar.lexerGrammar.tokensFileName)
 		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
 		normalizeLineDelimiters(fsa, grammar.lexerClass, grammar.internalParserClass)
@@ -169,14 +157,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	def isCombinedGrammar() {
 		combinedGrammar == null && !options.backtrackLexer && !options.ignoreCase || combinedGrammar == Boolean.TRUE
-	}
-	
-	protected def getProductionNaming() {
-		if (isCombinedGrammar) combinedProductionNaming else extendedProductionNaming
-	}
-	
-	protected def getContentAssistNaming() {
-		if (isCombinedGrammar) combinedContentAssistNaming else extendedContentAssistNaming
 	}
 	
 	protected def generateDebugGrammar() {

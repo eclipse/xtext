@@ -20,21 +20,33 @@ class GrammarNaming {
 
 	@Inject
 	extension XtextGeneratorNaming
+	
+	def isCombinedGrammar(Grammar it) {
+		CombinedGrammarMarker.findInEmfObject(it).isCombinedGrammar
+	}
 
-	protected def String getParserPackage(Grammar it) '''«runtimeBasePackage».parser.antlr'''
+	protected def String getParserPackage(Grammar it) {
+		runtimeBasePackage + ".parser.antlr"
+	}
 
-	protected def String getInternalParserPackage(Grammar it) '''«parserPackage».internal'''
+	protected def String getInternalParserPackage(Grammar it) {
+		parserPackage + ".internal"
+	}
 
 	def AntlrGrammar getParserGrammar(Grammar it) {
-		new AntlrGrammar(internalParserPackage, '''Internal«simpleName»''')
+		new AntlrGrammar(internalParserPackage, '''«grammarNamePrefix»Internal«simpleName»«IF !combinedGrammar»Parser«ENDIF»''')
 	}
 
 	def AntlrGrammar getLexerGrammar(Grammar it) {
-		parserGrammar
+		new AntlrGrammar(internalParserPackage, '''«grammarNamePrefix»Internal«simpleName»«IF !combinedGrammar»Lexer«ENDIF»''')
+	}
+	
+	protected def String getGrammarNamePrefix(Grammar it) {
+		""
 	}
 
 	def TypeReference getLexerClass(Grammar it) {
-		new TypeReference(lexerGrammar.packageName, '''«lexerGrammar.simpleName»Lexer''')
+		new TypeReference(lexerGrammar.packageName, '''«lexerGrammar.simpleName»«IF combinedGrammar»Lexer«ENDIF»''')
 	}
 	
 	def TypeReference getLexerSuperClass(Grammar it) {
@@ -50,7 +62,7 @@ class GrammarNaming {
 	}
 
 	def TypeReference getInternalParserClass(Grammar it) {
-		new TypeReference(parserGrammar.packageName, '''«parserGrammar.simpleName»Parser''')
+		new TypeReference(parserGrammar.packageName, '''«parserGrammar.simpleName»«IF combinedGrammar»Parser«ENDIF»''')
 	}
 
 	def TypeReference getInternalParserSuperClass(Grammar it) {

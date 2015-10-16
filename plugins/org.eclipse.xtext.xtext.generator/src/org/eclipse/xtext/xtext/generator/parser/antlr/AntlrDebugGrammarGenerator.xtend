@@ -17,7 +17,7 @@ class AntlrDebugGrammarGenerator extends AbstractAntlrGrammarGenerator {
 	override protected getGrammarNaming() {
 		naming
 	}
-
+	
 	override protected compileParserOptions(Grammar it, AntlrOptions options) {
 		""
 	}

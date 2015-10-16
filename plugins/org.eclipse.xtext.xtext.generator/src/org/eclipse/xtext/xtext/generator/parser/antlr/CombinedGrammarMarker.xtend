@@ -7,18 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import com.google.inject.Inject
+import org.eclipse.xtext.util.internal.EmfAdaptable
+import org.eclipse.xtend.lib.annotations.Data
 
-class ExtendedAntlrGrammarGenerator extends AntlrGrammarGenerator {
-	
-	@Inject ExtendedGrammarNaming naming
-	
-	override protected getGrammarNaming() {
-		naming
-	}
-	
-	override protected isCombinedGrammar() {
-		false
-	}
-	
+@EmfAdaptable
+@Data
+class CombinedGrammarMarker {
+	boolean isCombinedGrammar
 }
