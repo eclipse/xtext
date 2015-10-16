@@ -639,7 +639,13 @@ public class IterableExtensions {
 	 * @see ListExtensions#sortInplace(List)
 	 */
 	public static <T extends Comparable<? super T>> List<T> sort(Iterable<T> iterable) {
-		return ListExtensions.sortInplace(Lists.newArrayList(iterable));
+		List<T> asList = Lists.newArrayList(iterable);
+		if (iterable instanceof SortedSet<?>) {
+			if (((SortedSet<T>) iterable).comparator() == null) {
+				return asList;
+			}
+		}
+		return ListExtensions.sortInplace(asList);
 	}
 
 	/**
@@ -791,6 +797,12 @@ public class IterableExtensions {
 	 * @since 2.7
 	 */
 	public static <T extends Comparable<? super T>> T min(final Iterable<T> iterable) {
+		if (iterable instanceof SortedSet<?>) {
+			SortedSet<T> asSet = (SortedSet<T>) iterable;
+			// only use the set-semantic if we can be absolutely sure that the set uses the natural order
+			if (asSet.comparator() == null)
+				return asSet.first();
+		}
 		return IteratorExtensions.min(iterable.iterator());
 	}
 
@@ -841,6 +853,8 @@ public class IterableExtensions {
 	 * @since 2.7
 	 */
 	public static <T extends Comparable<? super T>> T max(final Iterable<T> iterable) {
+		// cannot special-case for SortedSet since we want to find the first one that is a maximum
+		// where Set.last would return the last of the seemingly equal maximum elements
 		return IteratorExtensions.max(iterable.iterator());
 	}
 
