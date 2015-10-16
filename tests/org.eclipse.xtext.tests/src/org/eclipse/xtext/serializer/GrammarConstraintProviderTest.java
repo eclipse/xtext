@@ -13,7 +13,6 @@ import java.util.Map;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
@@ -43,10 +42,10 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
-		Map<IContext, IConstraint> constraints = gcp.getConstraints(grammar);
-		List<Pair<List<IContext>, IConstraint>> grouped = SerializationContext.groupByEqualityAndSort(constraints);
+		Map<ISerializationContext, IConstraint> constraints = gcp.getConstraints(grammar);
+		List<Pair<List<ISerializationContext>, IConstraint>> grouped = SerializationContext.groupByEqualityAndSort(constraints);
 		List<String> result = Lists.newArrayList();
-		for (Pair<List<IContext>, IConstraint> r : grouped) {
+		for (Pair<List<ISerializationContext>, IConstraint> r : grouped) {
 			result.add(r.getFirst() + ":");
 			result.add("  " + r.getSecond());
 		}

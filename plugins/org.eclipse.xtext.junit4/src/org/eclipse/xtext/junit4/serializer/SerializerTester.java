@@ -20,13 +20,13 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.StringBufferSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.WhitespaceAddingSequenceAcceptor;
-import org.eclipse.xtext.serializer.analysis.IContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ContextFinder;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
@@ -169,8 +169,8 @@ public class SerializerTester {
 		return result;
 	}
 
-	protected IContext getContext(EObject semanticObject) {
-		Iterable<IContext> contexts = contextFinder.findByContentsAndContainer(semanticObject, null);
+	protected ISerializationContext getContext(EObject semanticObject) {
+		Iterable<ISerializationContext> contexts = contextFinder.findByContentsAndContainer(semanticObject, null);
 		if (Iterables.size(contexts) != 1) {
 			StringBuilder msg = new StringBuilder();
 			msg.append("One context is expected, but " + Iterables.size(contexts) + " have been found\n");
@@ -213,7 +213,7 @@ public class SerializerTester {
 			}
 			out = debug = new DebugSequenceAcceptor(out);
 			semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
-			IContext context = getContext(semanticObject);
+			ISerializationContext context = getContext(semanticObject);
 			syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
 			hidden.init(context, semanticObject, out, errors);
 			semantic.createSequence(context, semanticObject);
