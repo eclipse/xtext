@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import org.eclipse.emf.common.util.URI;
@@ -39,9 +40,10 @@ public class VirtualFileURIUtil {
    * @return a VirtualFile for the given EMF URI, or <code>null</code> if no VirtualFile exists.
    */
   public static VirtualFile getVirtualFile(final URI uri) {
-    VirtualFileManager _instance = VirtualFileManager.getInstance();
     String _string = uri.toString();
-    return _instance.findFileByUrl(_string);
+    final String url = VfsUtilCore.fixURLforIDEA(_string);
+    VirtualFileManager _instance = VirtualFileManager.getInstance();
+    return _instance.findFileByUrl(url);
   }
   
   /**
