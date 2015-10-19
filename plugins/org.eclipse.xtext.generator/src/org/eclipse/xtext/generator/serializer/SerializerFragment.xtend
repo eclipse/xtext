@@ -32,6 +32,7 @@ import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 
 import static java.util.Collections.*
+import org.eclipse.xtext.xtext.generator.CodeConfig
 
 /**
  * @author Moritz Eyshold - Initial contribution and API
@@ -120,6 +121,7 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 		delegate.generateStub = isGenerateStub
 		delegate.detectSyntheticTerminals = detectSyntheticTerminals
 		delegate.generateDebugData = generateDebugData
+		adapterSetup.injector.getInstance(CodeConfig).preferXtendStubs = isGenerateXtendStub
 		delegate.initialize(adapterSetup.injector)
 		delegate.generate()
 	}

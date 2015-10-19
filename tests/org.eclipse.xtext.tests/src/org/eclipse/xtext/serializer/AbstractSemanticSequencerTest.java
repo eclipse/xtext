@@ -58,7 +58,7 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		nmSequencer.init(expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
 
 		EObject model = getModel(stringModel).eContents().get(0);
-		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
+		ISerializationContext context = nmSequencer.findContexts(model, true, null).iterator().next();
 
 		generatedSequencer.createSequence(context, model);
 		genericSequencer.createSequence(context, model);
@@ -543,7 +543,7 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		EObject model = testSequence("#29 ''");
 		Assert.assertNull(((NullValue) model).getValue());
 	}
-	
+
 	@Test
 	public void testNullValueGenerated() throws Exception {
 		EObject model = testSequence("#30 ''");
@@ -555,17 +555,36 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		EObject model = testSequence("#31 null");
 		Assert.assertNull(((NullCrossRef) model).getRef());
 	}
-	
+
 	@Test
 	public void testNullCrossReferenceInterpreted() throws Exception {
 		EObject model = testSequence("#32 null");
 		Assert.assertNull(((NullCrossRef) model).getRef());
 	}
-	
+
 	@Test
 	public void testFragment() throws Exception {
 		testSequence("#33 foo bar baz");
 	}
 
-	
+	@Test
+	public void testParameterized1() throws Exception {
+		testSequence("#34 kw1 kwp1 foo");
+	}
+
+	@Test
+	public void testParameterized2() throws Exception {
+		testSequence("#34 kw2 kwp1 foo");
+	}
+
+	@Test
+	public void testParameterized3() throws Exception {
+		testSequence("#34 kw3 kwp2 foo kwp3 bar");
+	}
+
+	@Test
+	public void testParameterized4() throws Exception {
+		testSequence("#34 kw4 kwp2 foo");
+	}
+
 }

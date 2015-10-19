@@ -14,6 +14,8 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -52,5 +54,13 @@ public class XtextSerializerTest extends AbstractXtextTests {
 	public void testXtextXtextWithoutNM() throws Exception {
 		Grammar grammar = load(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"));
 		tester.assertSerializeWithoutNodeModel(grammar);
+	}
+
+	@Test
+	@Ignore
+	public void testGroup() {
+		XtextGrammarAccess grammarAccess = get(XtextGrammarAccess.class);
+		String string = get(ISerializer.class).serialize(grammarAccess.getGrammarAccess().getGroup_2());
+		Assert.assertEquals("(\"with\" usedGrammars+=[Grammar|GrammarID] (\",\" usedGrammars+=[Grammar|GrammarID])*)?", string);
 	}
 }

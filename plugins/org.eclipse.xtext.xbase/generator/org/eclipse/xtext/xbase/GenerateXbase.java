@@ -75,7 +75,7 @@ final class GenerateXbase {
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2());
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new Formatter2Fragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				addFragment(new ContentAssistFragment2());
@@ -89,7 +89,7 @@ final class GenerateXbase {
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2());
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setDebugGrammar(true);
@@ -123,7 +123,7 @@ final class GenerateXbase {
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2());
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setOptions(antlrOptions);
