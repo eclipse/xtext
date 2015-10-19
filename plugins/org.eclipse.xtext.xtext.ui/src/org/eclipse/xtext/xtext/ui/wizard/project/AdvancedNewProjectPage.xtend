@@ -11,8 +11,10 @@ import org.eclipse.jface.fieldassist.ControlDecoration
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
+import org.eclipse.swt.custom.ScrolledComposite
 import org.eclipse.swt.events.SelectionAdapter
 import org.eclipse.swt.events.SelectionEvent
+import org.eclipse.swt.layout.FillLayout
 import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Button
@@ -44,52 +46,58 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	override createControl(Composite parent) {
-		control = new Composite(parent, SWT.NONE) =>
+		control = new ScrolledComposite(parent, SWT.V_SCROLL) =>
 			[
-				layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
-				layout = new GridLayout(1, false)
-				Group [
-					text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-					createUiProject = CheckBox [
-						text = "Eclipse Plugin"
-					]
-					createIdeaProject = CheckBox [
-						text = "IntelliJ IDEA Plugin"
-						enabled = true
-					]
-					createWebProject = CheckBox [
-						text = "Web Integration"
-						enabled = true
-					]
-					createIdeProject = CheckBox [
-						text = "Generic IDE Support"
-						enabled = true
-					].decorate(
-						INFORMATION, '''Generic IDE Support is requiered for front end projects like Eclipse, Idea or Web.''')
+				layout = new FillLayout
+				expandHorizontal = true
+				expandVertical = true
 
-					createTestProject = CheckBox [
-						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
-					]
-				]
-				Group [
-					text = "Preferred Build System"
-					preferredBuildSystem = DropDown[
-						enabled = true
-						items = BuildSystem.values.map[toString]
-					]
-				]
-				Group [
-					text = "Source Layout"
-					sourceLayout = DropDown[
-						enabled = true
-						items = SourceLayout.values.map[toString]
-					].decorate(INFORMATION, "Info about layout")
+				content = new Composite(it, SWT.NONE) =>
+					[
+						layout = new GridLayout(1, false)
+						Group [
+							text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+							createUiProject = CheckBox [
+								text = "Eclipse Plugin"
+							]
+							createIdeaProject = CheckBox [
+								text = "IntelliJ IDEA Plugin"
+								enabled = true
+							]
+							createWebProject = CheckBox [
+								text = "Web Integration"
+								enabled = true
+							]
+							createIdeProject = CheckBox [
+								text = "Generic IDE Support"
+								enabled = true
+							].decorate(
+								INFORMATION, '''Generic IDE Support is requiered for front end projects like Eclipse, Idea or Web.''')
 
-				]
+							createTestProject = CheckBox [
+								text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+							]
+						]
+						Group [
+							text = "Preferred Build System"
+							preferredBuildSystem = DropDown[
+								enabled = true
+								items = BuildSystem.values.map[toString]
+							]
+						]
+						Group [
+							text = "Source Layout"
+							sourceLayout = DropDown[
+								enabled = true
+								items = SourceLayout.values.map[toString]
+							].decorate(INFORMATION, "Info about layout")
 
-				statusWidget = new StatusWidget(it, SWT.NONE) => [
-					layoutData = new GridData(SWT.FILL, SWT.BOTTOM, true, true)
-				]
+						]
+						statusWidget = new StatusWidget(it, SWT.NONE) => [
+							layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+						]
+					]
+				minSize = content.computeSize(SWT.DEFAULT, SWT.DEFAULT)
 			]
 
 		val selectionControl = new SelectionAdapter() {
@@ -97,6 +105,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				validate(e)
 			}
 		}
+
 		createUiProject.addSelectionListener(selectionControl)
 		sourceLayout.addSelectionListener(selectionControl)
 		createWebProject.addSelectionListener(selectionControl)
