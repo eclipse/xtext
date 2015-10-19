@@ -189,7 +189,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
-		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
+		ISerializationContext context = nmSequencer.findContexts(model, true, null).iterator().next();
 		Acceptor actual = new Acceptor();
 		ISemanticSequencer semanticSeq = semanticSequencerProvider.get();
 		ISyntacticSequencer syntacticSeq = syntacticSequencerProvider.get();
@@ -206,7 +206,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	private void testSequence(EObject inObj, String outModel) throws Exception {
 		EObject outObj = getModel(outModel);
-		EObject context = nmSequencer.findContexts(inObj, true, null).iterator().next();
+		ISerializationContext context = nmSequencer.findContexts(inObj, true, null).iterator().next();
 		Acceptor actual = new Acceptor();
 		ISemanticSequencer semanticSeq = semanticSequencerProvider.get();
 		ISyntacticSequencer syntacticSeq = syntacticSequencerProvider.get();
