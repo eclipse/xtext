@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
@@ -59,7 +59,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
 	@Inject extension XtextGeneratorNaming
-	@Inject extension GrammarNaming
+	@Inject ContentAssistGrammarNaming caNaming
 	@Inject extension XbaseUsageDetector
 	
 	val enabledPatterns = new HashSet<String>
@@ -239,11 +239,11 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		}
 		
 		val StringConcatenationClient lexerStatement =
-			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«grammar.internalContentAssistLexerClass».class);'''
+			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«caNaming.getLexerClass(grammar)».class);'''
 		new GuiceModuleAccess.BindingFactory()
 			.addConfiguredBinding('ContentAssistLexer', lexerStatement)
 			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef,
-				grammar.contentAssistParserClass)
+				caNaming.getParserClass(grammar))
 			.contributeTo(language.webGenModule)
 	}
 	

@@ -19,6 +19,7 @@ import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiGrammarNaming;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
 
@@ -26,9 +27,6 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrToolFacade;
 public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
   @Inject
   private PsiAntlrGrammarGenerator generator;
-  
-  @Inject
-  private CodeConfig codeConfig;
   
   @Inject
   @Extension
@@ -49,20 +47,17 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
     Grammar _grammar = this.getGrammar();
     AntlrOptions _options = this.getOptions();
     this.generator.generate(_grammar, _options, fsa);
-    final String encoding = this.codeConfig.getEncoding();
-    StringConcatenation _builder = new StringConcatenation();
+    CodeConfig _codeConfig = this.getCodeConfig();
+    final String encoding = _codeConfig.getEncoding();
     Grammar _grammar_1 = this.getGrammar();
-    TypeReference _grammarClass = this._psiGrammarNaming.getGrammarClass(_grammar_1);
-    String _path = _grammarClass.getPath();
+    AntlrGrammar _parserGrammar = this._psiGrammarNaming.getParserGrammar(_grammar_1);
+    final String grammarFileName = _parserGrammar.getGrammarFileName();
+    StringConcatenation _builder = new StringConcatenation();
+    String _path = fsa.getPath();
     _builder.append(_path, "");
-    _builder.append(".g");
-    final String grammarFileName = _builder.toString();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    String _path_1 = fsa.getPath();
-    _builder_1.append(_path_1, "");
-    _builder_1.append("/");
-    _builder_1.append(grammarFileName, "");
-    final String absoluteGrammarFileName = _builder_1.toString();
+    _builder.append("/");
+    _builder.append(grammarFileName, "");
+    final String absoluteGrammarFileName = _builder.toString();
     this.addAntlrParam("-fo");
     int _lastIndexOf = absoluteGrammarFileName.lastIndexOf("/");
     String _substring = absoluteGrammarFileName.substring(0, _lastIndexOf);
@@ -80,8 +75,9 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
     TypeReference _lexerClass = this._psiGrammarNaming.getLexerClass(_grammar_5);
     this.splitParserAndLexerIfEnabled(fsa, _internalParserClass_1, _lexerClass);
     Grammar _grammar_6 = this.getGrammar();
-    String _tokenFileName = this._psiGrammarNaming.getTokenFileName(_grammar_6);
-    this.normalizeTokens(fsa, _tokenFileName);
+    AntlrGrammar _lexerGrammar = this._psiGrammarNaming.getLexerGrammar(_grammar_6);
+    String _tokensFileName = _lexerGrammar.getTokensFileName();
+    this.normalizeTokens(fsa, _tokensFileName);
     Grammar _grammar_7 = this.getGrammar();
     TypeReference _internalParserClass_2 = this._psiGrammarNaming.getInternalParserClass(_grammar_7);
     Grammar _grammar_8 = this.getGrammar();

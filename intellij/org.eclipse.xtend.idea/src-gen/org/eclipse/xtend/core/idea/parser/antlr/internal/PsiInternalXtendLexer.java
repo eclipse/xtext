@@ -1,5 +1,4 @@
 package org.eclipse.xtend.core.idea.parser.antlr.internal;
-// Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.parser.antlr.Lexer;
 
 

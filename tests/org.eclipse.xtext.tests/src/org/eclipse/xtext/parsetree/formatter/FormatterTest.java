@@ -21,9 +21,11 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Formattertest
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -109,7 +111,7 @@ public class FormatterTest extends AbstractXtextTests {
 		IHiddenTokenSequencer hidden = get(IHiddenTokenSequencer.class);
 		TokenStreamSequenceAdapter tokenstream = new TokenStreamSequenceAdapter(out, getGrammarAccess().getGrammar(), errors);
 		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
-		EObject context = get(IGrammarAccess.class).getGrammar().getRules().get(0);
+		ISerializationContext context = new SerializationContext.RuleContext(null, (ParserRule) get(IGrammarAccess.class).getGrammar().getRules().get(0));
 		syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
 		hidden.init(context, semanticObject, tokenstream, errors);
 		tokenstream.init(context);

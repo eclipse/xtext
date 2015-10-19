@@ -38,9 +38,9 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getDatatypeRule())
+		if (ruleCall.getRule() == grammarAccess.getDatatypeRule())
 			return getDatatypeToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getIDRule())
+		else if (ruleCall.getRule() == grammarAccess.getIDRule())
 			return getIDToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -70,13 +70,13 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a.equals(syntax))
+			if (match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a.equals(syntax))
 				emit_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p.equals(syntax))
+			else if (match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p.equals(syntax))
 				emit_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Parenthesized_LeftParenthesisKeyword_0_a.equals(syntax))
+			else if (match_Parenthesized_LeftParenthesisKeyword_0_a.equals(syntax))
 				emit_Parenthesized_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Parenthesized_LeftParenthesisKeyword_0_p.equals(syntax))
+			else if (match_Parenthesized_LeftParenthesisKeyword_0_p.equals(syntax))
 				emit_Parenthesized_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

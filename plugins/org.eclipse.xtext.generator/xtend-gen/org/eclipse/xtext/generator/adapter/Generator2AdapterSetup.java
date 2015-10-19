@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.generator.adapter;
 
+import com.google.common.base.Objects;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.Generator;
@@ -28,7 +30,6 @@ import org.eclipse.xtext.generator.adapter.NamingAdapter;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
@@ -50,19 +51,42 @@ public class Generator2AdapterSetup {
   
   private final Naming naming;
   
-  @Accessors
-  private final Injector injector;
+  private Injector injector;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private Module additionalGeneratorBindings = new Module() {
+    @Override
+    public void configure(final Binder it) {
+    }
+  };
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private Module additionalLanguageBindings = new Module() {
+    @Override
+    public void configure(final Binder it) {
+    }
+  };
   
   public Generator2AdapterSetup(final LanguageConfig languageConfig, final XpandExecutionContext xpandContext, final Naming naming) {
     this.languageConfig = languageConfig;
     this.xpandContext = xpandContext;
     this.naming = naming;
-    Injector _createInjector = this.createInjector();
-    this.injector = _createInjector;
+  }
+  
+  public Injector getInjector() {
+    Injector _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(this.injector, null);
+      if (_equals) {
+        Injector _createInjector = this.createInjector();
+        this.injector = _createInjector;
+      }
+      _xblockexpression = this.injector;
+    }
+    return _xblockexpression;
   }
   
   private Injector createInjector() {
-    DefaultGeneratorModule _defaultGeneratorModule = new DefaultGeneratorModule();
     final Procedure1<DefaultGeneratorModule> _function = new Procedure1<DefaultGeneratorModule>() {
       @Override
       public void apply(final DefaultGeneratorModule it) {
@@ -72,7 +96,13 @@ public class Generator2AdapterSetup {
         it.setCode(_createCodeConfig);
       }
     };
-    final DefaultGeneratorModule generatorModule = ObjectExtensions.<DefaultGeneratorModule>operator_doubleArrow(_defaultGeneratorModule, _function);
+    final DefaultGeneratorModule generatorModule = ObjectExtensions.<DefaultGeneratorModule>operator_doubleArrow(new DefaultGeneratorModule() {
+      @Override
+      public void configure(final Binder binder) {
+        super.configure(binder);
+        binder.install(Generator2AdapterSetup.this.additionalGeneratorBindings);
+      }
+    }, _function);
     final Injector generatorInjector = Guice.createInjector(generatorModule);
     XtextProjectConfig _project = generatorModule.getProject();
     _project.initialize(generatorInjector);
@@ -90,6 +120,7 @@ public class Generator2AdapterSetup {
         AnnotatedBindingBuilder<XtextGeneratorNaming> _bind_2 = it.<XtextGeneratorNaming>bind(XtextGeneratorNaming.class);
         NamingAdapter _namingAdapter = new NamingAdapter(Generator2AdapterSetup.this.naming);
         _bind_2.toInstance(_namingAdapter);
+        it.install(Generator2AdapterSetup.this.additionalLanguageBindings);
       }
     };
     final Module languageModule = _function_1;
@@ -220,8 +251,11 @@ public class Generator2AdapterSetup {
     return ObjectExtensions.<LanguageConfig2>operator_doubleArrow(_languageConfig2, _function);
   }
   
-  @Pure
-  public Injector getInjector() {
-    return this.injector;
+  public void setAdditionalGeneratorBindings(final Module additionalGeneratorBindings) {
+    this.additionalGeneratorBindings = additionalGeneratorBindings;
+  }
+  
+  public void setAdditionalLanguageBindings(final Module additionalLanguageBindings) {
+    this.additionalLanguageBindings = additionalLanguageBindings;
   }
 }

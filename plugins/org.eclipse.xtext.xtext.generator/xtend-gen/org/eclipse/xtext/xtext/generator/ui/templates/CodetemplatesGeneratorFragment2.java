@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 
 /**
  * Contributes the 'Partial...ContentAssisParser' and performs further
@@ -45,8 +45,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 @SuppressWarnings("all")
 public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 {
   @Inject
-  @Extension
-  private GrammarNaming _grammarNaming;
+  private ContentAssistGrammarNaming caNaming;
   
   @Inject
   @Extension
@@ -157,8 +156,8 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
         Grammar _grammar_1 = CodetemplatesGeneratorFragment2.this.getGrammar();
-        TypeReference _contentAssistParserClass = CodetemplatesGeneratorFragment2.this._grammarNaming.getContentAssistParserClass(_grammar_1);
-        _builder.append(_contentAssistParserClass, "");
+        TypeReference _parserClass = CodetemplatesGeneratorFragment2.this.caNaming.getParserClass(_grammar_1);
+        _builder.append(_parserClass, "");
         _builder.append(" implements ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser");
         _builder.append(_typeRef, "");

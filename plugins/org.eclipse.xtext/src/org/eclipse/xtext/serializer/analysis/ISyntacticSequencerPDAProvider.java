@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -51,7 +52,6 @@ public interface ISyntacticSequencerPDAProvider {
 	}
 
 	public interface ISynFollowerOwner {
-		EObject getContext();
 
 		EClass getEClass();
 
@@ -262,5 +262,5 @@ public interface ISyntacticSequencerPDAProvider {
 
 	}
 
-	ISynAbsorberState getPDA(EObject context, EClass type);
+	Map<ISerializationContext, ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar);
 }

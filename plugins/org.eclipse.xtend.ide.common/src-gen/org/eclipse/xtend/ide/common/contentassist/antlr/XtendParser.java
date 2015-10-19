@@ -7,34 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.common.contentassist.antlr;
 
+import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.Map;
 import java.util.HashMap;
-
+import java.util.Map;
 import org.antlr.runtime.RecognitionException;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractPartialContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
-import com.google.inject.Inject;
-
-import org.eclipse.xtend.core.services.XtendGrammarAccess;
-
 public class XtendParser extends AbstractPartialContentAssistParser {
-	
+
 	@Inject
 	private XtendGrammarAccess grammarAccess;
-	
+
 	private Map<AbstractElement, String> nameMappings;
-	
+
 	@Override
-	protected org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser createParser() {
-		org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser result = new org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser(null);
+	protected InternalXtendParser createParser() {
+		InternalXtendParser result = new InternalXtendParser(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
-	
+
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
@@ -782,27 +780,27 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-	
+
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
-			org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser typedParser = (org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser) parser;
+			InternalXtendParser typedParser = (InternalXtendParser) parser;
 			typedParser.entryRuleFile();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
-		}		
+		}
 	}
-	
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
 	}
-	
+
 	public XtendGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(XtendGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}

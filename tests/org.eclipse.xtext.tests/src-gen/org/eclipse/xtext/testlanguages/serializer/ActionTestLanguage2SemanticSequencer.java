@@ -4,17 +4,15 @@
 package org.eclipse.xtext.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.actionLang2.ActionLang2Package;
 import org.eclipse.xtext.testlanguages.actionLang2.ORing;
@@ -28,8 +26,13 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	private ActionTestLanguage2GrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ActionLang2Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ActionLang2Package.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ActionLang2Package.ORING:
 				sequence_ORing(context, (ORing) semanticObject); 
 				return; 
@@ -37,14 +40,15 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 				sequence_Value(context, (Value) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (disjuncts+=ORing_ORing_1_0 disjuncts+=Value)
 	 */
-	protected void sequence_ORing(EObject context, ORing semanticObject) {
+	protected void sequence_ORing(ISerializationContext context, ORing semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -53,14 +57,15 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     value='a'
 	 */
-	protected void sequence_Value(EObject context, Value semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ActionLang2Package.Literals.VALUE__VALUE) == ValueTransient.YES)
+	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ActionLang2Package.Literals.VALUE__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ActionLang2Package.Literals.VALUE__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getValueAccess().getValueAKeyword_0(), semanticObject.getValue());
 		feeder.finish();
 	}
+	
+	
 }

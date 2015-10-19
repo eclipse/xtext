@@ -11,7 +11,6 @@ import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
 import org.eclipse.xpand2.XpandExecutionContext
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.LanguageConfig
 import org.eclipse.xtext.generator.Naming
@@ -24,6 +23,8 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig
 
 import static org.eclipse.xtext.generator.Generator.*
+import com.google.inject.Binder
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @since 2.9
@@ -34,20 +35,37 @@ class Generator2AdapterSetup {
 	val XpandExecutionContext xpandContext
 	val Naming naming
 	
-	@Accessors
-	val Injector injector
+	Injector injector
+	
+	@Accessors(PUBLIC_SETTER)
+	Module additionalGeneratorBindings = []
+	
+	@Accessors(PUBLIC_SETTER)
+	Module additionalLanguageBindings = []
 	
 	new(LanguageConfig languageConfig, XpandExecutionContext xpandContext, Naming naming) {
 		this.languageConfig = languageConfig
 		this.xpandContext = xpandContext
 		this.naming = naming
-		this.injector = createInjector()
+	}
+	
+	public def getInjector() {
+		if (injector == null) {
+			injector = createInjector
+		}
+		injector
 	}
 	
 	private def Injector createInjector() {
-		val generatorModule = new DefaultGeneratorModule => [
+		val generatorModule = new DefaultGeneratorModule() {
+			override configure(Binder binder) {
+				super.configure(binder)
+				binder.install(additionalGeneratorBindings)
+			}
+		} => [
 			project = createProjectConfig()
 			code = createCodeConfig()
+			
 		]
 		val generatorInjector = Guice.createInjector(generatorModule)
 		generatorModule.project.initialize(generatorInjector)
@@ -57,6 +75,7 @@ class Generator2AdapterSetup {
 			bind(ILanguageConfig).toInstance(language)
 			bind(Grammar).toInstance(language.grammar)
 			bind(XtextGeneratorNaming).toInstance(new NamingAdapter(naming))
+			install(additionalLanguageBindings)
 		]
 		return generatorInjector.createChildInjector(languageModule)
 	}

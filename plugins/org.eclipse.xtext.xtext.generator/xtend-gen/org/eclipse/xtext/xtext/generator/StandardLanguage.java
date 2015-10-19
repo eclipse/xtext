@@ -70,7 +70,12 @@ public class StandardLanguage extends LanguageConfig2 {
     }
   });
   
-  private Formatter2Fragment2 formatter = new Formatter2Fragment2();
+  private Formatter2Fragment2 formatter = ObjectExtensions.<Formatter2Fragment2>operator_doubleArrow(new Formatter2Fragment2(), new Procedure1<Formatter2Fragment2>() {
+    @Override
+    public void apply(final Formatter2Fragment2 it) {
+      it.setGenerateStub(false);
+    }
+  });
   
   private GeneratorFragment2 generator = new GeneratorFragment2();
   

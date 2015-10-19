@@ -22,11 +22,6 @@ public class XtendAntlrGrammarGenerator extends AntlrGrammarGenerator {
 	XtendAntlrGrammarGeneratorHelper helper;
 
 	@Override
-	protected String compileOptions(Grammar grammar, AntlrOptions options) {
-		return helper.compileOptions(grammar, options);
-	}
-
-	@Override
 	protected String compileTokens(Grammar grammar, AntlrOptions options) {
 		return helper.compileTokens(grammar, options);
 	}

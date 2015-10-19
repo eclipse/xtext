@@ -4,8 +4,12 @@
 package org.eclipse.xtext.resource.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.locationprovidertest.Bus;
 import org.eclipse.xtext.resource.locationprovidertest.Data;
 import org.eclipse.xtext.resource.locationprovidertest.Element;
@@ -16,15 +20,9 @@ import org.eclipse.xtext.resource.locationprovidertest.Port;
 import org.eclipse.xtext.resource.locationprovidertest.Processor;
 import org.eclipse.xtext.resource.locationprovidertest.Transition;
 import org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -34,14 +32,19 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	private LocationProviderTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == LocationprovidertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == LocationprovidertestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case LocationprovidertestPackage.BUS:
-				if(context == grammarAccess.getBusRule()) {
+				if (rule == grammarAccess.getBusRule()) {
 					sequence_Bus(context, (Bus) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getComponentRule()) {
+				else if (rule == grammarAccess.getComponentRule()) {
 					sequence_Bus_Component(context, (Bus) semanticObject); 
 					return; 
 				}
@@ -62,11 +65,11 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 				sequence_Port(context, (Port) semanticObject); 
 				return; 
 			case LocationprovidertestPackage.PROCESSOR:
-				if(context == grammarAccess.getComponentRule()) {
+				if (rule == grammarAccess.getComponentRule()) {
 					sequence_Component_Processor(context, (Processor) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getProcessorRule()) {
+				else if (rule == grammarAccess.getProcessorRule()) {
 					sequence_Processor(context, (Processor) semanticObject); 
 					return; 
 				}
@@ -75,14 +78,15 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 				sequence_Transition(context, (Transition) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (name=ID port+=Port*)
 	 */
-	protected void sequence_Bus(EObject context, Bus semanticObject) {
+	protected void sequence_Bus(ISerializationContext context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -91,7 +95,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID port+=Port* (mode+=Mode | transition+=Transition)*)
 	 */
-	protected void sequence_Bus_Component(EObject context, Bus semanticObject) {
+	protected void sequence_Bus_Component(ISerializationContext context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -100,7 +104,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID data+=Data* (mode+=Mode | transition+=Transition)*)
 	 */
-	protected void sequence_Component_Processor(EObject context, Processor semanticObject) {
+	protected void sequence_Component_Processor(ISerializationContext context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -109,13 +113,12 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Data(EObject context, Data semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.DATA__NAME) == ValueTransient.YES)
+	protected void sequence_Data(ISerializationContext context, Data semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.DATA__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LocationprovidertestPackage.Literals.DATA__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDataAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -125,7 +128,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID singleref=[Element|ID]? multirefs+=[Element|ID]*)
 	 */
-	protected void sequence_Element(EObject context, Element semanticObject) {
+	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -134,13 +137,12 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Mode(EObject context, Mode semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.MODE__NAME) == ValueTransient.YES)
+	protected void sequence_Mode(ISerializationContext context, Mode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.MODE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LocationprovidertestPackage.Literals.MODE__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getModeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -150,7 +152,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     ((elements+=Element+ components+=Component+) | components+=Component+)?
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -159,13 +161,12 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Port(EObject context, Port semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.PORT__NAME) == ValueTransient.YES)
+	protected void sequence_Port(ISerializationContext context, Port semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.PORT__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LocationprovidertestPackage.Literals.PORT__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPortAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -175,7 +176,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID data+=Data*)
 	 */
-	protected void sequence_Processor(EObject context, Processor semanticObject) {
+	protected void sequence_Processor(ISerializationContext context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -184,20 +185,21 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	 * Constraint:
 	 *     (name=ID source=[Mode|ID] destination=[Mode|ID])
 	 */
-	protected void sequence_Transition(EObject context, Transition semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__NAME) == ValueTransient.YES)
+	protected void sequence_Transition(ISerializationContext context, Transition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__NAME));
-			if(transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__SOURCE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__SOURCE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__SOURCE));
-			if(transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__DESTINATION) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__DESTINATION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LocationprovidertestPackage.Literals.TRANSITION__DESTINATION));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTransitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getTransitionAccess().getSourceModeIDTerminalRuleCall_2_0_1(), semanticObject.getSource());
 		feeder.accept(grammarAccess.getTransitionAccess().getDestinationModeIDTerminalRuleCall_4_0_1(), semanticObject.getDestination());
 		feeder.finish();
 	}
+	
+	
 }

@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -427,7 +428,19 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	@Override
+	@Deprecated
 	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		this.delegate = sequenceAcceptor;
+		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);
+		this.rootNode = lastNode;
+		if (rootNode != null) {
+			this.rootOffset = rootNode.getTotalOffset();
+			this.rootEndOffset = rootNode.getTotalEndOffset();
+		}
+	}
+	
+	@Override
+	public void init(ISerializationContext context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		this.delegate = sequenceAcceptor;
 		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);
 		this.rootNode = lastNode;

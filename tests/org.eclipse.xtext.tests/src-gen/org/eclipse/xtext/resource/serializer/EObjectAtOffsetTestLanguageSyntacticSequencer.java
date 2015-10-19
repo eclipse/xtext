@@ -32,7 +32,7 @@ public class EObjectAtOffsetTestLanguageSyntacticSequencer extends AbstractSynta
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getINTRule())
+		if (ruleCall.getRule() == grammarAccess.getINTRule())
 			return getINTToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -52,9 +52,9 @@ public class EObjectAtOffsetTestLanguageSyntacticSequencer extends AbstractSynta
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_AbstractBar_INTTerminalRuleCall_1_q.equals(syntax))
+			if (match_AbstractBar_INTTerminalRuleCall_1_q.equals(syntax))
 				emit_AbstractBar_INTTerminalRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_AbstractBar_ZonkKeyword_0_q.equals(syntax))
+			else if (match_AbstractBar_ZonkKeyword_0_q.equals(syntax))
 				emit_AbstractBar_ZonkKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

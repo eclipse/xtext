@@ -6,7 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 grammar InternalXbase;
-
 options {
 	superClass=AbstractInternalAntlrParser;
 }

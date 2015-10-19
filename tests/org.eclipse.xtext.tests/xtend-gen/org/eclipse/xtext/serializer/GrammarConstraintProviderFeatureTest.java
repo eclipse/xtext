@@ -7,10 +7,10 @@
  */
 package org.eclipse.xtext.serializer;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
@@ -19,6 +19,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.XtextInjectorProvider;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -148,17 +149,9 @@ public class GrammarConstraintProviderFeatureTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      List<IGrammarConstraintProvider.IConstraintContext> _constraints = this.constraintProvider.getConstraints(grammar);
-      final Function1<IGrammarConstraintProvider.IConstraintContext, List<IGrammarConstraintProvider.IConstraint>> _function = new Function1<IGrammarConstraintProvider.IConstraintContext, List<IGrammarConstraintProvider.IConstraint>>() {
-        @Override
-        public List<IGrammarConstraintProvider.IConstraint> apply(final IGrammarConstraintProvider.IConstraintContext it) {
-          return it.getConstraints();
-        }
-      };
-      List<List<IGrammarConstraintProvider.IConstraint>> _map = ListExtensions.<IGrammarConstraintProvider.IConstraintContext, List<IGrammarConstraintProvider.IConstraint>>map(_constraints, _function);
-      Iterable<IGrammarConstraintProvider.IConstraint> _flatten = Iterables.<IGrammarConstraintProvider.IConstraint>concat(_map);
-      final Set<IGrammarConstraintProvider.IConstraint> constraints = IterableExtensions.<IGrammarConstraintProvider.IConstraint>toSet(_flatten);
-      final Function1<IGrammarConstraintProvider.IConstraint, String> _function_1 = new Function1<IGrammarConstraintProvider.IConstraint, String>() {
+      Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = this.constraintProvider.getConstraints(grammar);
+      final Collection<IGrammarConstraintProvider.IConstraint> constraints = _constraints.values();
+      final Function1<IGrammarConstraintProvider.IConstraint, String> _function = new Function1<IGrammarConstraintProvider.IConstraint, String>() {
         @Override
         public String apply(final IGrammarConstraintProvider.IConstraint it) {
           String _name = it.getName();
@@ -176,8 +169,8 @@ public class GrammarConstraintProviderFeatureTest {
           return (_plus_1 + "\n}");
         }
       };
-      Iterable<String> _map_1 = IterableExtensions.<IGrammarConstraintProvider.IConstraint, String>map(constraints, _function_1);
-      String _join = IterableExtensions.join(_map_1, "\n");
+      Iterable<String> _map = IterableExtensions.<IGrammarConstraintProvider.IConstraint, String>map(constraints, _function);
+      String _join = IterableExtensions.join(_map, "\n");
       return (_join + "\n");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

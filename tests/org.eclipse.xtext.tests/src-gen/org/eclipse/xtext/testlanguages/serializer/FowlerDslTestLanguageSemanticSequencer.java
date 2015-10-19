@@ -4,17 +4,15 @@
 package org.eclipse.xtext.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.fowlerdsl.Command;
 import org.eclipse.xtext.testlanguages.fowlerdsl.Event;
@@ -31,8 +29,13 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private FowlerDslTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == FowlerdslPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == FowlerdslPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case FowlerdslPackage.COMMAND:
 				sequence_Command(context, (Command) semanticObject); 
 				return; 
@@ -49,22 +52,22 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Transition(context, (Transition) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (name=ID code=ID)
 	 */
-	protected void sequence_Command(EObject context, Command semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.COMMAND__NAME) == ValueTransient.YES)
+	protected void sequence_Command(ISerializationContext context, Command semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.COMMAND__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FowlerdslPackage.Literals.COMMAND__NAME));
-			if(transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.COMMAND__CODE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.COMMAND__CODE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FowlerdslPackage.Literals.COMMAND__CODE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0(), semanticObject.getCode());
 		feeder.finish();
@@ -75,7 +78,7 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 * Constraint:
 	 *     (resetting?='resetting'? name=ID code=ID)
 	 */
-	protected void sequence_Event(EObject context, Event semanticObject) {
+	protected void sequence_Event(ISerializationContext context, Event semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -84,7 +87,7 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 * Constraint:
 	 *     (name=ID actions+=[Command|ID]* transitions+=Transition*)
 	 */
-	protected void sequence_State(EObject context, State semanticObject) {
+	protected void sequence_State(ISerializationContext context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -93,7 +96,7 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 * Constraint:
 	 *     (events+=Event* commands+=Command* states+=State*)
 	 */
-	protected void sequence_Statemachine(EObject context, Statemachine semanticObject) {
+	protected void sequence_Statemachine(ISerializationContext context, Statemachine semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -102,17 +105,18 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 * Constraint:
 	 *     (event=[Event|ID] state=[State|ID])
 	 */
-	protected void sequence_Transition(EObject context, Transition semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.TRANSITION__EVENT) == ValueTransient.YES)
+	protected void sequence_Transition(ISerializationContext context, Transition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.TRANSITION__EVENT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FowlerdslPackage.Literals.TRANSITION__EVENT));
-			if(transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.TRANSITION__STATE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, FowlerdslPackage.Literals.TRANSITION__STATE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FowlerdslPackage.Literals.TRANSITION__STATE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTransitionAccess().getEventEventIDTerminalRuleCall_0_0_1(), semanticObject.getEvent());
 		feeder.accept(grammarAccess.getTransitionAccess().getStateStateIDTerminalRuleCall_2_0_1(), semanticObject.getState());
 		feeder.finish();
 	}
+	
+	
 }

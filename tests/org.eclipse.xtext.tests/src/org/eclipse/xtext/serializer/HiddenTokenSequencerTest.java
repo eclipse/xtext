@@ -92,7 +92,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
-		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
+		ISerializationContext context = nmSequencer.findContexts(model, true, null).iterator().next();
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
 		ISemanticSequencer semanticSequencer = semanticSequencerProvider.get();
 		ISyntacticSequencer syntacticSequencer = syntacticSequencerProvider.get();

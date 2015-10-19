@@ -72,7 +72,7 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
@@ -86,8 +86,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   private XbaseUsageDetector _xbaseUsageDetector;
   
   @Inject
-  @Extension
-  private GrammarNaming _grammarNaming;
+  private ContentAssistGrammarNaming caNaming;
   
   @Inject
   @Extension
@@ -183,8 +182,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     };
     bindFactory.addTypeToInstance(_typeRef_7, _client_1);
     TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
-    TypeReference _contentAssistParserClass = this._grammarNaming.getContentAssistParserClass(grammar);
-    bindFactory.addTypeToType(_typeRef_8, _contentAssistParserClass);
+    TypeReference _parserClass = this.caNaming.getParserClass(grammar);
+    bindFactory.addTypeToType(_typeRef_8, _parserClass);
     StringConcatenationClient _client_2 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -197,8 +196,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
         _builder.append(_typeRef_1, "");
         _builder.append(".CONTENT_ASSIST)).to(");
-        TypeReference _internalContentAssistLexerClass = IdeaPluginGenerator.this._grammarNaming.getInternalContentAssistLexerClass(grammar);
-        _builder.append(_internalContentAssistLexerClass, "");
+        TypeReference _lexerClass = IdeaPluginGenerator.this.caNaming.getLexerClass(grammar);
+        _builder.append(_lexerClass, "");
         _builder.append(".class);");
       }
     };

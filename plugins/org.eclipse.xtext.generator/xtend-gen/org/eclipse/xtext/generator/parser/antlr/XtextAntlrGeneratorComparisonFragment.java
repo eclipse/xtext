@@ -38,7 +38,6 @@ import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -51,7 +50,8 @@ import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
 /**
@@ -113,8 +113,10 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   private final static String ENCODING = "ISO-8859-1";
   
   @Inject
-  @Extension
-  private GrammarNaming _grammarNaming;
+  private GrammarNaming productionNaming;
+  
+  @Inject
+  private ContentAssistGrammarNaming contentAssistNaming;
   
   @Inject
   private AntlrGrammarComparator comparator;
@@ -163,13 +165,11 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime_1.getSrcGen();
-      StringConcatenation _builder = new StringConcatenation();
       Grammar _grammar = this.getGrammar();
-      TypeReference _grammarClass = this._grammarNaming.getGrammarClass(_grammar);
-      String _path = _grammarClass.getPath();
-      _builder.append(_path, "");
-      _builder.append(".g");
-      this.loadAndCompareGrammars(_srcGen_1, Generator.SRC_GEN, _builder.toString(), errorHandler);
+      AntlrGrammar _parserGrammar = this.productionNaming.getParserGrammar(_grammar);
+      String _grammarFileName = _parserGrammar.getGrammarFileName();
+      this.loadAndCompareGrammars(_srcGen_1, 
+        Generator.SRC_GEN, _grammarFileName, errorHandler);
     }
     boolean _and = false;
     if (!(!this.skipContentAssistGrammarComparison)) {
@@ -188,14 +188,11 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
       IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
-      StringConcatenation _builder_1 = new StringConcatenation();
       Grammar _grammar_1 = this.getGrammar();
-      TypeReference _internalContentAssistLexerClass = this._grammarNaming.getInternalContentAssistLexerClass(_grammar_1);
-      String _path_1 = _internalContentAssistLexerClass.getPath();
-      String _replaceFirst = _path_1.replaceFirst("Lexer$", "");
-      _builder_1.append(_replaceFirst, "");
-      _builder_1.append(".g");
-      this.loadAndCompareGrammars(_srcGen_3, Generator.SRC_GEN_IDE, _builder_1.toString(), errorHandler);
+      AntlrGrammar _parserGrammar_1 = this.contentAssistNaming.getParserGrammar(_grammar_1);
+      String _grammarFileName_1 = _parserGrammar_1.getGrammarFileName();
+      this.loadAndCompareGrammars(_srcGen_3, 
+        Generator.SRC_GEN_IDE, _grammarFileName_1, errorHandler);
     }
     File _tmpFolder_1 = this.getTmpFolder();
     XtextAntlrGeneratorComparisonFragment.deleteDir(_tmpFolder_1);

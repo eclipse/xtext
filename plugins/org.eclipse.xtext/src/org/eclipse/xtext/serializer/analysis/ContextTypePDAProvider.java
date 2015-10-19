@@ -8,20 +8,20 @@
 package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContext.TypeContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaUtil;
 import org.eclipse.xtext.util.formallang.Traverser;
@@ -220,7 +220,8 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 
 	}
 
-	protected Map<Pair<EObject, EClass>, Pda<ISerState, RuleCall>> cache = Maps.newHashMap();
+	@Inject
+	protected SerializerPDACloneFactory factory;
 
 	@Inject
 	protected IContextPDAProvider pdaProvider;
@@ -228,33 +229,38 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	@Inject
 	protected PdaUtil pdaUtil;
 
-	protected Pda<ISerState, RuleCall> createPDA(Grammar grammar, EObject context, EClass type) {
-		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(grammar, context);
-		Pda<ISerState, RuleCall> contextTypePda = null;
-		if (getTypesForContext(grammar, context).size() > 1) {
-			TypeFilter typeFilter = newTypeFilter(type);
-			SerializerPDACloneFactory factory = new SerializerPDACloneFactory();
-			contextTypePda = pdaUtil.filterEdges(contextPda, typeFilter, factory);
-		} else
-			contextTypePda = contextPda;
-		return contextTypePda;
-	}
-
-	@Override
-	public Pda<ISerState, RuleCall> getContextTypePDA(Grammar grammar, EObject context, EClass type) {
-		Pair<EObject, EClass> key = Tuples.create(context, type);
-		Pda<ISerState, RuleCall> result = cache.get(key);
-		if (result == null)
-			cache.put(key, result = createPDA(grammar, context, type));
-		return result;
-	}
-
-	@Override
-	public Set<EClass> getTypesForContext(Grammar grammar, EObject context) {
-		Pda<ISerState, RuleCall> contextPda = pdaProvider.getContextPDA(grammar, context);
+	protected Set<EClass> collectTypes(Pda<ISerState, RuleCall> contextPda) {
 		TypeCollector collector = newTypeCollector();
 		pdaUtil.filterEdges(contextPda, collector, null);
 		return collector.getTypes();
+	}
+
+	protected Pda<ISerState, RuleCall> filterByType(Pda<ISerState, RuleCall> contextPda, EClass type) {
+		TypeFilter typeFilter = newTypeFilter(type);
+		SerializerPDA pda = pdaUtil.filterEdges(contextPda, typeFilter, factory);
+		return pda;
+	}
+
+	@Override
+	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar) {
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newHashMap();
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> contextPDAs = pdaProvider.getContextPDAs(grammar);
+		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : contextPDAs.entrySet()) {
+			ISerializationContext parent = e.getKey();
+			Pda<ISerState, RuleCall> contextPDA = e.getValue();
+			Set<EClass> types = collectTypes(contextPDA);
+			if (types.size() == 1) {
+				TypeContext ctx = new TypeContext(parent, types.iterator().next());
+				result.put(ctx, contextPDA);
+			} else {
+				for (EClass type : types) {
+					TypeContext typeContext = new TypeContext(parent, type);
+					Pda<ISerState, RuleCall> filtered = filterByType(contextPDA, type);
+					result.put(typeContext, filtered);
+				}
+			}
+		}
+		return result;
 	}
 
 	protected TypeCollector newTypeCollector() {

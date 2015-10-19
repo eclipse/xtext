@@ -37,7 +37,10 @@ import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IgnoreCaseLinking;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -49,6 +52,7 @@ import org.eclipse.xtext.xbase.parser.antlr.XbaseParser;
 import org.eclipse.xtext.xbase.parser.antlr.internal.InternalXbaseLexer;
 import org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xbase.serializer.XbaseSyntacticSequencer;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
@@ -78,6 +82,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	@Override
 	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
@@ -88,6 +93,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	@Override
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return XbaseSemanticSequencer.class;
 	}
@@ -98,6 +104,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	@Override
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}
@@ -108,6 +115,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	@Override
 	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
 		return AntlrTokenToStringConverter.class;
 	}
@@ -123,6 +131,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	@Override
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return AntlrTokenDefProvider.class;
 	}
@@ -151,21 +160,25 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
+	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return TypesAwareDefaultGlobalScopeProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return XbaseQualifiedNameProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XbaseLocationInFileProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	@Override
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return StateBasedContainerManager.class;
 	}
@@ -176,6 +189,7 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	@Override
 	public void configureIResourceDescriptions(Binder binder) {
 		binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
 	}
