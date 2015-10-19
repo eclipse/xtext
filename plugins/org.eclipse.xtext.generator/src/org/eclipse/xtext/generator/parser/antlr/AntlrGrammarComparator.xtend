@@ -20,11 +20,13 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class AntlrGrammarComparator {
 
-	public abstract static class ErrorHandler {
+	public abstract static class AbstractErrorHandler {
 
-		private int lineNumber
+		@Accessors(PUBLIC_GETTER)
+		private int lineNumber = 1
 		
-		private int lineNumberReference
+		@Accessors(PUBLIC_GETTER)
+		private int lineNumberReference = 1
 		
 		@Accessors
 		private String absoluteGrammarFileName
@@ -32,10 +34,10 @@ class AntlrGrammarComparator {
 		@Accessors
 		private String absoluteGrammarFileNameReference
 		
-		private boolean treatingReference = false;
+		private boolean treatingReferenceGrammar = false;
 		
 		private def void handleUnexpectedCharSequence(int lineCount) {
-			if (treatingReference) {
+			if (treatingReferenceGrammar) {
 				handleUnexpectedCharSequence(absoluteGrammarFileNameReference, lineNumberReference + lineCount)
 			} else {				
 				handleUnexpectedCharSequence(absoluteGrammarFileName, lineNumber + lineCount)
@@ -43,10 +45,11 @@ class AntlrGrammarComparator {
 		}
 		
 		def void handleUnexpectedCharSequence(String absoluteGrammarFileName, int lineNo);
-	
-		def void handleMismatch(String match, String matchReference, int lineNo, int lineNoReference);
+		
+		def void handleMismatch(String match, String matchReference);
 	}
-
+	
+	
 	private static val SINGLE_CHAR_TOKENS = #[
 		'\\(', '\\)', '\\[', '\\]', '\\{', '\\}', '\\|', '=', '\\?', '\\*', '\\+', ':', ';'
 	]
@@ -81,42 +84,50 @@ class AntlrGrammarComparator {
 	 * 			and the referenced grammar (value) for logging purposes
 	 */
 	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
-			ErrorHandler errorHandler) {
+			AbstractErrorHandler errorHandler) {
 
 		val compoundMatcher = compoundPattern.matcher(grammar)
 		val compoundMatcherReference = compoundPattern.matcher(grammarReference)
-		
-		var newlineCounter = 1
-		var newlineCounterReference = 1
 		
 		// these values are used to check whether any character sequences have not been matched
 		var previousEnd = 0;
 		var previousEndReference = 0;
 		
-		var continue = compoundMatcher.find && compoundMatcherReference.find 
+		var continue = true
+		var continueReference = true 
 		
-		while (continue) {
-			errorHandler.lineNumber += compoundMatcher.nextToken(previousEnd, errorHandler)
-			if (!compoundMatcher.hitEnd) {
-				previousEnd = compoundMatcher.end
+		while (continue || continueReference) {
+			if (continue) {
+				errorHandler.treatingReferenceGrammar = false
+				
+				val res = compoundMatcher.nextToken(previousEnd, errorHandler)
+				continue = res.key
+				errorHandler.lineNumber += res.value
+				
+				if (continue) {
+					previousEnd = compoundMatcher.end
+				}
 			}
-			 
-			errorHandler.lineNumberReference = compoundMatcherReference.nextToken(previousEndReference, errorHandler)	
-			if (!compoundMatcherReference.hitEnd) {
-				previousEndReference = compoundMatcherReference.end
-			}
+			val match = if (continue) compoundMatcher.group else "««eof»»"
 			
-			var match = if (compoundMatcher.hitEnd) "««eof»»" else compoundMatcher.group
-			var matchReference = if (compoundMatcherReference.hitEnd) "««eof»»" else compoundMatcherReference.group
+			if (continueReference) {
+				errorHandler.treatingReferenceGrammar = true
+				
+				val res = compoundMatcherReference.nextToken(previousEndReference, errorHandler)
+				continueReference = res.key
+				errorHandler.lineNumberReference += res.value
+				
+				if (continueReference) {
+					previousEndReference = compoundMatcherReference.end
+				}
+			}			 
+			
+			val matchReference = if (continueReference) compoundMatcherReference.group else "««eof»»"
 			
 			if (matchReference != match) {
-				errorHandler.handleMismatch(match, matchReference, newlineCounter, newlineCounterReference)
+				errorHandler.handleMismatch(match, matchReference)
 			}
-			
-			continue = continue && compoundMatcherReference.find && compoundMatcher.find
 		}
-		
-		return Pair.of(newlineCounter, newlineCounterReference)
 	}
 	
 	/**
@@ -124,12 +135,11 @@ class AntlrGrammarComparator {
 	 * 
 	 * @return the number of newlines passed while searching 
 	 */
-	def private nextToken(Matcher matcher, int previousEnd, ErrorHandler errorHandler) {
-		var continue = true;
+	def private nextToken(Matcher matcher, int previousEnd, AbstractErrorHandler errorHandler) {
 		var newlineCounter = 0;
 		var thePreviousEnd = previousEnd
 		
-		while (continue) {
+		while (matcher.find()) {
 			if (matcher.start() != thePreviousEnd) {
 				errorHandler.handleUnexpectedCharSequence(newlineCounter)
 			}
@@ -146,12 +156,10 @@ class AntlrGrammarComparator {
 				
 			} else if (p_token.matcher(match).matches()) {
 				// in case a valid token has been found stop here
-				return newlineCounter
+				return Pair.of(true, newlineCounter)
 			}
-			
-			continue = matcher.find()
 		}
 		
-		return newlineCounter
+		return Pair.of(false, newlineCounter)
 	}
 }

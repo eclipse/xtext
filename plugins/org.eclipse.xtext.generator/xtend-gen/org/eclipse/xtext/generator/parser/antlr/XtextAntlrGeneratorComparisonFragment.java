@@ -39,7 +39,6 @@ import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
@@ -67,7 +66,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 @Log
 @SuppressWarnings("all")
 public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
-  public static class ErrorHandler extends AntlrGrammarComparator.ErrorHandler {
+  public static class ErrorHandler extends AntlrGrammarComparator.AbstractErrorHandler {
     private File tmpFolder;
     
     public ErrorHandler(final File tmpFolder) {
@@ -83,12 +82,11 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append(" in/before line ");
       _builder.append(lineNo, "");
       _builder.append(".");
-      _builder.newLineIfNotEmpty();
       throw new RuntimeException(_builder.toString());
     }
     
     @Override
-    public void handleMismatch(final String match, final String matchReference, final int lineNo, final int lineNoReference) {
+    public void handleMismatch(final String match, final String matchReference) {
       String _absoluteGrammarFileNameReference = this.getAbsoluteGrammarFileNameReference();
       String _absoluteGrammarFileName = this.getAbsoluteGrammarFileName();
       XtextAntlrGeneratorComparisonFragment.copyFile(_absoluteGrammarFileNameReference, _absoluteGrammarFileName);
@@ -100,11 +98,13 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append(" differs at token ");
       _builder.append(match, "");
       _builder.append(" (line ");
-      _builder.append(lineNo, "");
+      int _lineNumber = this.getLineNumber();
+      _builder.append(_lineNumber, "");
       _builder.append("), expected token ");
       _builder.append(matchReference, "");
       _builder.append(" (line ");
-      _builder.append(lineNoReference, "");
+      int _lineNumberReference = this.getLineNumberReference();
+      _builder.append(_lineNumberReference, "");
       _builder.append(").");
       throw new RuntimeException(_builder.toString());
     }
@@ -220,7 +220,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       File _file = new File(absoluteGrammarFileNameReference);
       Charset _forName = Charset.forName(XtextAntlrGeneratorComparisonFragment.ENCODING);
       final String grammarReference = Files.toString(_file, _forName);
-      final Pair<Integer, Integer> lines = this.comparator.compareGrammars(grammar, grammarReference, errorHandler);
+      this.comparator.compareGrammars(grammar, grammarReference, errorHandler);
       final long time = stopWatch.elapsed(TimeUnit.MILLISECONDS);
       String _xifexpression = null;
       if ((outlet == Generator.SRC_GEN)) {
@@ -233,11 +233,11 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder_2.append("Generated ");
       _builder_2.append(type, "");
       _builder_2.append(" grammar of ");
-      Integer _key = lines.getKey();
-      _builder_2.append(_key, "");
+      int _lineNumber = errorHandler.getLineNumber();
+      _builder_2.append(_lineNumber, "");
       _builder_2.append(" lines matches expected one of ");
-      Integer _value = lines.getValue();
-      _builder_2.append(_value, "");
+      int _lineNumberReference = errorHandler.getLineNumberReference();
+      _builder_2.append(_lineNumberReference, "");
       _builder_2.append(" (");
       _builder_2.append(time, "");
       _builder_2.append(" ms).");

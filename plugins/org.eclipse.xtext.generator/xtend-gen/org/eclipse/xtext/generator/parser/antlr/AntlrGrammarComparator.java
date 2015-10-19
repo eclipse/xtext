@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -29,10 +30,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class AntlrGrammarComparator {
-  public static abstract class ErrorHandler {
-    private int lineNumber;
+  public static abstract class AbstractErrorHandler {
+    @Accessors(AccessorType.PUBLIC_GETTER)
+    private int lineNumber = 1;
     
-    private int lineNumberReference;
+    @Accessors(AccessorType.PUBLIC_GETTER)
+    private int lineNumberReference = 1;
     
     @Accessors
     private String absoluteGrammarFileName;
@@ -40,10 +43,10 @@ public class AntlrGrammarComparator {
     @Accessors
     private String absoluteGrammarFileNameReference;
     
-    private boolean treatingReference = false;
+    private boolean treatingReferenceGrammar = false;
     
     private void handleUnexpectedCharSequence(final int lineCount) {
-      if (this.treatingReference) {
+      if (this.treatingReferenceGrammar) {
         this.handleUnexpectedCharSequence(this.absoluteGrammarFileNameReference, (this.lineNumberReference + lineCount));
       } else {
         this.handleUnexpectedCharSequence(this.absoluteGrammarFileName, (this.lineNumber + lineCount));
@@ -52,7 +55,17 @@ public class AntlrGrammarComparator {
     
     public abstract void handleUnexpectedCharSequence(final String absoluteGrammarFileName, final int lineNo);
     
-    public abstract void handleMismatch(final String match, final String matchReference, final int lineNo, final int lineNoReference);
+    public abstract void handleMismatch(final String match, final String matchReference);
+    
+    @Pure
+    public int getLineNumber() {
+      return this.lineNumber;
+    }
+    
+    @Pure
+    public int getLineNumberReference() {
+      return this.lineNumberReference;
+    }
     
     @Pure
     public String getAbsoluteGrammarFileName() {
@@ -123,79 +136,61 @@ public class AntlrGrammarComparator {
    * @return {@link Pair} containing the number of lines of the tested grammar (key)
    * 			and the referenced grammar (value) for logging purposes
    */
-  public Pair<Integer, Integer> compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.ErrorHandler errorHandler) {
+  public void compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.AbstractErrorHandler errorHandler) {
     final Matcher compoundMatcher = this.compoundPattern.matcher(grammar);
     final Matcher compoundMatcherReference = this.compoundPattern.matcher(grammarReference);
-    int newlineCounter = 1;
-    int newlineCounterReference = 1;
     int previousEnd = 0;
     int previousEndReference = 0;
-    boolean _and = false;
-    boolean _find = compoundMatcher.find();
-    if (!_find) {
-      _and = false;
-    } else {
-      boolean _find_1 = compoundMatcherReference.find();
-      _and = _find_1;
-    }
-    boolean continue_ = _and;
-    while (continue_) {
+    boolean continue_ = true;
+    boolean continueReference = true;
+    while ((continue_ || continueReference)) {
       {
-        int _lineNumber = errorHandler.lineNumber;
-        int _nextToken = this.nextToken(compoundMatcher, previousEnd, errorHandler);
-        errorHandler.lineNumber = (_lineNumber + _nextToken);
-        boolean _hitEnd = compoundMatcher.hitEnd();
-        boolean _not = (!_hitEnd);
-        if (_not) {
-          int _end = compoundMatcher.end();
-          previousEnd = _end;
-        }
-        int _nextToken_1 = this.nextToken(compoundMatcherReference, previousEndReference, errorHandler);
-        errorHandler.lineNumberReference = _nextToken_1;
-        boolean _hitEnd_1 = compoundMatcherReference.hitEnd();
-        boolean _not_1 = (!_hitEnd_1);
-        if (_not_1) {
-          int _end_1 = compoundMatcherReference.end();
-          previousEndReference = _end_1;
+        if (continue_) {
+          errorHandler.treatingReferenceGrammar = false;
+          final Pair<Boolean, Integer> res = this.nextToken(compoundMatcher, previousEnd, errorHandler);
+          Boolean _key = res.getKey();
+          continue_ = (_key).booleanValue();
+          int _lineNumber = errorHandler.lineNumber;
+          Integer _value = res.getValue();
+          errorHandler.lineNumber = (_lineNumber + (_value).intValue());
+          if (continue_) {
+            int _end = compoundMatcher.end();
+            previousEnd = _end;
+          }
         }
         String _xifexpression = null;
-        boolean _hitEnd_2 = compoundMatcher.hitEnd();
-        if (_hitEnd_2) {
-          _xifexpression = "««eof»»";
-        } else {
+        if (continue_) {
           _xifexpression = compoundMatcher.group();
-        }
-        String match = _xifexpression;
-        String _xifexpression_1 = null;
-        boolean _hitEnd_3 = compoundMatcherReference.hitEnd();
-        if (_hitEnd_3) {
-          _xifexpression_1 = "««eof»»";
         } else {
-          _xifexpression_1 = compoundMatcherReference.group();
+          _xifexpression = "««eof»»";
         }
-        String matchReference = _xifexpression_1;
+        final String match = _xifexpression;
+        if (continueReference) {
+          errorHandler.treatingReferenceGrammar = true;
+          final Pair<Boolean, Integer> res_1 = this.nextToken(compoundMatcherReference, previousEndReference, errorHandler);
+          Boolean _key_1 = res_1.getKey();
+          continueReference = (_key_1).booleanValue();
+          int _lineNumberReference = errorHandler.lineNumberReference;
+          Integer _value_1 = res_1.getValue();
+          errorHandler.lineNumberReference = (_lineNumberReference + (_value_1).intValue());
+          if (continueReference) {
+            int _end_1 = compoundMatcherReference.end();
+            previousEndReference = _end_1;
+          }
+        }
+        String _xifexpression_1 = null;
+        if (continueReference) {
+          _xifexpression_1 = compoundMatcherReference.group();
+        } else {
+          _xifexpression_1 = "««eof»»";
+        }
+        final String matchReference = _xifexpression_1;
         boolean _notEquals = (!Objects.equal(matchReference, match));
         if (_notEquals) {
-          errorHandler.handleMismatch(match, matchReference, newlineCounter, newlineCounterReference);
+          errorHandler.handleMismatch(match, matchReference);
         }
-        boolean _and_1 = false;
-        boolean _and_2 = false;
-        if (!continue_) {
-          _and_2 = false;
-        } else {
-          boolean _find_2 = compoundMatcherReference.find();
-          _and_2 = _find_2;
-        }
-        if (!_and_2) {
-          _and_1 = false;
-        } else {
-          boolean _find_3 = compoundMatcher.find();
-          _and_1 = _find_3;
-        }
-        continue_ = _and_1;
       }
     }
-    return Pair.<Integer, Integer>of(Integer.valueOf(newlineCounter), Integer.valueOf(newlineCounterReference));
   }
   
   /**
@@ -203,11 +198,10 @@ public class AntlrGrammarComparator {
    * 
    * @return the number of newlines passed while searching
    */
-  private int nextToken(final Matcher matcher, final int previousEnd, final AntlrGrammarComparator.ErrorHandler errorHandler) {
-    boolean continue_ = true;
+  private Pair<Boolean, Integer> nextToken(final Matcher matcher, final int previousEnd, final AntlrGrammarComparator.AbstractErrorHandler errorHandler) {
     int newlineCounter = 0;
     int thePreviousEnd = previousEnd;
-    while (continue_) {
+    while (matcher.find()) {
       {
         int _start = matcher.start();
         boolean _notEquals = (_start != thePreviousEnd);
@@ -231,14 +225,12 @@ public class AntlrGrammarComparator {
             Matcher _matcher_2 = this.p_token.matcher(match);
             boolean _matches_2 = _matcher_2.matches();
             if (_matches_2) {
-              return newlineCounter;
+              return Pair.<Boolean, Integer>of(Boolean.valueOf(true), Integer.valueOf(newlineCounter));
             }
           }
         }
-        boolean _find = matcher.find();
-        continue_ = _find;
       }
     }
-    return newlineCounter;
+    return Pair.<Boolean, Integer>of(Boolean.valueOf(false), Integer.valueOf(newlineCounter));
   }
 }
