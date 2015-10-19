@@ -16,8 +16,9 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 
+import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 /**
@@ -34,7 +35,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 	extension CodeConfig
 	
 	@Inject
-	extension ValidatorFragment2
+	extension ValidatorNaming
 
 	@Inject
 	FileAccessFactory fileAccessFactory
