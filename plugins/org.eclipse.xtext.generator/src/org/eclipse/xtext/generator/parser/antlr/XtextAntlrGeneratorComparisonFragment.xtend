@@ -71,7 +71,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 	override checkConfiguration(Issues issues) {
 	}
 
-	static class ErrorHandler extends AntlrGrammarComparator.ErrorHandler {
+	static class ErrorHandler extends AntlrGrammarComparator.AbstractErrorHandler {
 
 		private File tmpFolder;
 
@@ -83,18 +83,17 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			deleteDir(tmpFolder)
 			
 			throw new RuntimeException('''
-				Noticed an unmatched character sequence in file «absoluteGrammarFileName» in/before line «lineNo».
-			''')
+				Noticed an unmatched character sequence in file «absoluteGrammarFileName» in/before line «lineNo».''')
 		}
 		
-		override handleMismatch(String match, String matchReference, int lineNo, int lineNoReference) {
+		override handleMismatch(String match, String matchReference) {
 			copyFile(absoluteGrammarFileNameReference, absoluteGrammarFileName)
 			
 			deleteDir(tmpFolder)
 			
 			throw new RuntimeException('''
-				Generated grammar «absoluteGrammarFileName» differs at token «match» (line «lineNo
-					»), expected token «matchReference» (line «lineNoReference»).''')
+				Generated grammar «absoluteGrammarFileName» differs at token «match» (line «lineNumber
+					»), expected token «matchReference» (line «lineNumberReference»).''')
 		}
 	}
 
@@ -137,13 +136,14 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		val grammar = fsa.readTextFile(grammarFileName)
 		val grammarReference = Files.toString(new File(absoluteGrammarFileNameReference), Charset.forName(ENCODING))
 		
-		val lines = comparator.compareGrammars(grammar, grammarReference, errorHandler)
+		comparator.compareGrammars(grammar, grammarReference, errorHandler)
 		
 		val time = stopWatch.elapsed(TimeUnit.MILLISECONDS)
 		
 		val type = if (outlet === Generator.SRC_GEN) "parser" else "content assist" 
 		
-		LOG.info('''Generated «type» grammar of «lines.key» lines matches expected one of «lines.value» («time» ms).''')
+		LOG.info('''Generated «type» grammar of «errorHandler.lineNumber
+				» lines matches expected one of «errorHandler.lineNumberReference» («time» ms).''')
 	}
 
 	def protected void performXpandBasedGeneration(String outlet) { 
