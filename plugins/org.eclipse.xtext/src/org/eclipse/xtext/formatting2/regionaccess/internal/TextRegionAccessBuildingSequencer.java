@@ -18,7 +18,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.util.Strings;
 
 public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
@@ -27,14 +29,12 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	private final LinkedList<AbstractEObjectRegion> stack = new LinkedList<AbstractEObjectRegion>();
 
 	@Override
-	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index,
-			ICompositeNode node) {
+	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
 		appendSemantic(rc, token);
 	}
 
 	@Override
-	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index,
-			ICompositeNode node) {
+	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		appendSemantic(enumRC, token);
 	}
 
@@ -49,8 +49,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	@Override
-	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index,
-			ICompositeNode node) {
+	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
 		appendSemantic(datatypeRC, token);
 	}
 
@@ -136,8 +135,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		return new StringHiddenRegion(regionAccess);
 	}
 
-	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token, EObject obj,
-			int offset) {
+	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token, EObject obj, int offset) {
 		return new StringSemanticRegion(regionAccess, obj, element, offset, token.length());
 	}
 
@@ -201,10 +199,10 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		// not relevant
 	}
 
-	public TextRegionAccessBuildingSequencer withRoot(EObject ctx, EObject root) {
+	public TextRegionAccessBuildingSequencer withRoot(ISerializationContext ctx, EObject root) {
 		this.regionAccess = new StringBasedRegionAccess((XtextResource) root.eResource());
 		this.last = createHiddenRegion();
-		this.regionAccess.setRootEObject(enterEObject(ctx, root));
+		this.regionAccess.setRootEObject(enterEObject(((SerializationContext) ctx).getActionOrRule(), root));
 		return this;
 	}
 

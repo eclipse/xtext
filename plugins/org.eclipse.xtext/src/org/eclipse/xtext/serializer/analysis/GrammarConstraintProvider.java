@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.analysis;
 import static org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType.*;
 import static org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -27,9 +27,10 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -41,11 +42,12 @@ import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -58,7 +60,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		private IConstraintElement body = UNINITIALIZED;
 
-		private final List<IConstraintContext> contexts = Lists.newArrayList();
+		private final List<ISerializationContext> contexts = Lists.newArrayList();
 
 		private IFeatureInfo[] features = null;
 
@@ -129,7 +131,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		@Override
-		public List<IConstraintContext> getContexts() {
+		public List<ISerializationContext> getContexts() {
 			return contexts;
 		}
 
@@ -211,50 +213,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	}
 
-	protected static class ConstraintContext implements IConstraintContext {
-
-		private final List<IConstraint> constraints = Lists.newArrayList();
-		private final EObject context;
-		private final String name;
-
-		public ConstraintContext(EObject context, String name) {
-			super();
-			this.context = context;
-			this.name = name;
-		}
-
-		@Override
-		public EClass getCommonType() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public List<IConstraint> getConstraints() {
-			return constraints;
-		}
-
-		@Override
-		public EObject getContext() {
-			return context;
-		}
-
-		@Override
-		public String getName() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			Iterable<String> constraintNames = Iterables.transform(constraints, new Function<IConstraint, String>() {
-				@Override
-				public String apply(IConstraint from) {
-					return from.getName();
-				}
-			});
-			return getName() + ": " + Joiner.on(" | ").join(constraintNames) + ";";
-		}
-	}
-
 	protected static class ConstraintElement implements IGrammarConstraintProvider.IConstraintElement {
 
 		private final Collection<IConstraintElement> children;
@@ -268,8 +226,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		private IConstraintElement parent;
 		private final ConstraintElementType type;
 
-		public ConstraintElement(IConstraint constraint, ConstraintElementType type, AbstractElement element,
-				boolean many, boolean optional) {
+		public ConstraintElement(IConstraint constraint, ConstraintElementType type, AbstractElement element, boolean many,
+				boolean optional) {
 			super();
 			this.constraint = constraint;
 			this.type = type;
@@ -279,8 +237,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			this.optional = optional;
 		}
 
-		public ConstraintElement(IConstraint constraint, ConstraintElementType type,
-				Collection<IConstraintElement> children, boolean many, boolean optional) {
+		public ConstraintElement(IConstraint constraint, ConstraintElementType type, Collection<IConstraintElement> children, boolean many,
+				boolean optional) {
 			super();
 			this.constraint = constraint;
 			this.type = type;
@@ -290,18 +248,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			this.optional = optional;
 			for (IConstraintElement child : children)
 				((ConstraintElement) child).parent = this;
-		}
-
-		@Override
-		public EObject getCallContext() {
-			switch (type) {
-				case ASSIGNED_ACTION_CALL:
-					return element;
-				case ASSIGNED_PARSER_RULE_CALL:
-					return ((RuleCall) element).getRule();
-				default:
-					return null;
-			}
 		}
 
 		@Override
@@ -350,8 +296,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		@Override
 		public String toString() {
-			GrammarElementTitleSwitch t2s = new GrammarElementTitleSwitch().hideCardinality().showActionsAsRuleCalls()
-					.showAssignments();
+			GrammarElementTitleSwitch t2s = new GrammarElementTitleSwitch().hideCardinality().showActionsAsRuleCalls().showAssignments();
 			ProductionFormatter<IConstraintElement, AbstractElement> formatter = new ProductionFormatter<IConstraintElement, AbstractElement>();
 			formatter.setTokenToString(t2s);
 			return formatter.format(new ConstraintElementProduction(getContainingConstraint()), this, true);
@@ -428,17 +373,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		@Override
-		public List<EObject> getCalledContexts() {
-			List<EObject> result = Lists.newArrayList();
-			for (IConstraintElement ass : getAssignments()) {
-				EObject ctx = ass.getCallContext();
-				if (ctx != null)
-					result.add(ctx);
-			}
-			return result;
-		}
-
-		@Override
 		public IConstraint getContainingConstraint() {
 			return constraint;
 		}
@@ -460,8 +394,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	}
 
-	private final static IConstraintElement UNINITIALIZED = new ConstraintElement(null, null, (AbstractElement) null,
-			false, false);
+	private final static IConstraintElement UNINITIALIZED = new ConstraintElement(null, null, (AbstractElement) null, false, false);
+
+	private Map<Grammar, Map<ISerializationContext, IConstraint>> cache = Maps.newHashMap();
 
 	@Inject
 	protected Context2NameFunction context2Name;
@@ -472,21 +407,30 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	@Inject
 	private NfaUtil nfaUtil;
 
-	@Inject
-	private IContextPDAProvider pdaProvider;
-
-	@Inject
-	private IContextTypePDAProvider typeProvider;
+	protected Multimap<Parameter, Boolean> collectAllParameterValues(IConstraint constraint) {
+		Set<Parameter> all = Sets.newHashSet();
+		List<ISerializationContext> contexts = constraint.getContexts();
+		for (ISerializationContext context : contexts) {
+			all.addAll(((SerializationContext) context).getDeclaredParameters());
+		}
+		HashMultimap<Parameter, Boolean> values = HashMultimap.create();
+		for (ISerializationContext ctx : contexts) {
+			Set<Parameter> params = ctx.getEnabledBooleanParameters();
+			for (Parameter param : all)
+				values.put(param, params != null && params.contains(param));
+		}
+		return values;
+	}
 
 	protected String findBestConstraintName(Grammar grammar, IConstraint constraint) {
 		EClass type = constraint.getType();
 		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
 		Set<Action> relevantActions = Sets.newLinkedHashSet();
 		Set<ParserRule> contextRules = Sets.newLinkedHashSet();
-		for (IConstraintContext ctx : constraint.getContexts()) {
-			EObject obj = ctx.getContext();
-			if (obj instanceof ParserRule)
-				contextRules.add((ParserRule) obj);
+		for (ISerializationContext ctx : constraint.getContexts()) {
+			ParserRule rule = ctx.getParserRule();
+			if (rule != null)
+				contextRules.add(rule);
 		}
 		// 1. find relevant rules based on assignments 
 		for (ISemState s : nfaUtil.collect(constraint.getNfa())) {
@@ -496,10 +440,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		if (relevantRules.isEmpty()) {
 			Set<ParserRule> allRules = Sets.newHashSet(contextRules);
-			for (IConstraintContext ctx : constraint.getContexts()) {
-				EObject obj = ctx.getContext();
-				if (obj instanceof Action)
-					allRules.add(GrammarUtil.containingParserRule(obj));
+			for (ISerializationContext ctx : constraint.getContexts()) {
+				Action action = ctx.getAssignedAction();
+				if (action != null)
+					allRules.add(GrammarUtil.containingParserRule(action));
 			}
 			if (type != null) {
 				// 2a. find relevant rules based on unassigned actions
@@ -515,10 +459,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				relevantRules.addAll(allRules);
 			}
 		}
-		for (IConstraintContext ctx : constraint.getContexts()) {
-			EObject obj = ctx.getContext();
-			if (obj instanceof Action) {
-				Action action = (Action) obj;
+		for (ISerializationContext ctx : constraint.getContexts()) {
+			Action action = ctx.getAssignedAction();
+			if (action != null) {
 				ParserRule rule = GrammarUtil.containingParserRule(action);
 				if (!contextRules.contains(rule) && relevantRules.contains(rule)) {
 					relevantActions.add(action);
@@ -527,10 +470,23 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 		List<String> actions = Lists.newArrayList();
 		List<String> rules = Lists.newArrayList();
+		Multimap<Parameter, Boolean> parameterValues = collectAllParameterValues(constraint);
 		for (Action a : relevantActions)
 			actions.add(context2Name.getUniqueActionName(a));
-		for (ParserRule a : relevantRules)
-			rules.add(context2Name.getContextName(grammar, a));
+		for (ParserRule rule : relevantRules) {
+			StringBuilder segments = new StringBuilder();
+			for (Parameter param : rule.getParameters()) {
+				Collection<Boolean> values = parameterValues.get(param);
+				if (values.size() == 1) {
+					segments.append(param.getName() + "$" + values.iterator().next() + "$");
+				}
+			}
+			if (segments.length() == 0) {
+				rules.add(rule.getName());
+			} else {
+				rules.add(rule.getName() + "$" + segments);
+			}
+		}
 		Collections.sort(rules);
 		String result = Joiner.on("_").join(rules);
 		if (!actions.isEmpty()) {
@@ -541,37 +497,31 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	@Override
-	public List<IConstraintContext> getConstraints(Grammar grammar) {
+	public Map<ISerializationContext, IConstraint> getConstraints(Grammar grammar) {
+		Map<ISerializationContext, IConstraint> result = cache.get(grammar);
+		if (result != null)
+			return result;
+		result = Maps.newLinkedHashMap();
+		cache.put(grammar, result);
 		GrammarElementDeclarationOrder.get(grammar);
-		List<IConstraintContext> result = Lists.newArrayList();
+		Map<ISerializationContext, Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
+		ArrayList<ISerializationContext> contexts = Lists.newArrayList(nfas.keySet());
+		Collections.sort(contexts);
 		Map<Pair<EClass, Nfa<ISemState>>, Constraint> constraints = Maps.newHashMap();
-		for (EObject context : pdaProvider.getAllContexts(grammar)) {
-			String contextName = context2Name.getContextName(grammar, context);
-			ConstraintContext constraintContext = new ConstraintContext(context, contextName);
-			for (EClass type : typeProvider.getTypesForContext(grammar, context)) {
-				Nfa<ISemState> nfa = nfaProvider.getNFA(context, type);
-				Pair<EClass, Nfa<ISemState>> key = Tuples.create(type, nfa);
-				Constraint constraint = constraints.get(key);
-				if (constraint == null) {
-					constraint = new Constraint(grammar, type, nfa);
-					constraints.put(key, constraint);
-				}
-				constraintContext.constraints.add(constraint);
-				constraint.contexts.add(constraintContext);
+		for (ISerializationContext context : contexts) {
+			Nfa<ISemState> nfa = nfas.get(context);
+			EClass type = context.getType();
+			Pair<EClass, Nfa<ISemState>> key = Tuples.create(type, nfa);
+			Constraint constraint = constraints.get(key);
+			if (constraint == null) {
+				constraint = new Constraint(grammar, type, nfa);
+				constraints.put(key, constraint);
 			}
-			result.add(constraintContext);
+			constraint.contexts.add(context);
+			result.put(context, constraint);
 		}
 		for (Constraint constraint : constraints.values())
 			constraint.setName(findBestConstraintName(grammar, constraint));
-		for (IConstraintContext ctx : result)
-			Collections.sort(ctx.getConstraints());
-		Function<IConstraintContext, EObject> function = new Function<IConstraintContext, EObject>() {
-			@Override
-			public EObject apply(IConstraintContext input) {
-				return input.getContext();
-			}
-		};
-		Collections.sort(result, GrammarElementDeclarationOrder.get(grammar).toComparator(function));
 		return result;
 	}
 

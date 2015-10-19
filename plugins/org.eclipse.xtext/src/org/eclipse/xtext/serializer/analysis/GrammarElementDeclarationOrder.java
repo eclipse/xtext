@@ -70,6 +70,12 @@ public class GrammarElementDeclarationOrder extends AdapterImpl implements Compa
 
 	@Override
 	public int compare(EObject o1, EObject o2) {
+		if (o1 == null && o2 == null)
+			return 0;
+		if (o1 == null)
+			return 1;
+		if (o2 == null)
+			return -1;
 		Integer i1 = elementIDCache.get(o1);
 		Integer i2 = elementIDCache.get(o2);
 		return i1.compareTo(i2);
