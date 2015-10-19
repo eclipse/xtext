@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.vfs.VfsUtil
 
 abstract class LightXtendTest extends LightToolingTest {
 
@@ -33,7 +34,7 @@ abstract class LightXtendTest extends LightToolingTest {
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 		model.addXtendLibrary
 		
-		val xtendGenFolder = contentEntry.file.createChildDirectory(null, "xtend-gen")
+		val xtendGenFolder = VfsUtil.createDirectoryIfMissing(contentEntry.file, "xtend-gen") 
 		contentEntry.addSourceFolder(xtendGenFolder, false)
 	}
 
