@@ -82,6 +82,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	@Override
 	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
@@ -92,6 +93,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	@Override
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return XbaseWithAnnotationsSemanticSequencer.class;
 	}
@@ -102,6 +104,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	@Override
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}
@@ -112,6 +115,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	@Override
 	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
 		return AntlrTokenToStringConverter.class;
 	}
@@ -127,6 +131,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	@Override
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return AntlrTokenDefProvider.class;
 	}
@@ -150,36 +155,30 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	public Class<? extends IScopeProvider> bindIScopeProvider() {
-		return XbaseWithAnnotationsBatchScopeProvider.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ImportedNamespaceAwareLocalScopeProvider.class);
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
 		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
+	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return TypesAwareDefaultGlobalScopeProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return XbaseQualifiedNameProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XbaseLocationInFileProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	@Override
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return StateBasedContainerManager.class;
 	}
@@ -190,6 +189,7 @@ public abstract class AbstractXbaseWithAnnotationsRuntimeModule extends DefaultX
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	@Override
 	public void configureIResourceDescriptions(Binder binder) {
 		binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
 	}
