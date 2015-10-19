@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser
 
+import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarComparator
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment
 import org.junit.Test
 
@@ -17,8 +18,16 @@ import static org.junit.Assert.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class XtextAntlrGeneratorComparisonFragmentTest extends XtextAntlrGeneratorComparisonFragment {
+class XtextAntlrGeneratorComparisonFragmentTest {
 
+	AntlrGrammarComparator comparator = new AntlrGrammarComparator
+
+	TestErrorHandler errorHandler = new TestErrorHandler
+	
+	private def compare(CharSequence grammar, CharSequence grammarReference) {
+		return comparator.compareGrammars(grammar, grammarReference, errorHandler);
+	}
+	
 	@Test
 	def void match_test01() {
 		val expected = '''
@@ -52,6 +61,45 @@ class XtextAntlrGeneratorComparisonFragmentTest extends XtextAntlrGeneratorCompa
 		val testee = '''
 			(
 				('abstract' | 'annotation' | 'class' | '(' | RULE_ID | RULE_HEX )
+ 		'''
+		
+		testee.compare(expected)
+	}
+
+	@Test
+	def void match_test03() {
+		val expected = '''
+			RULE_IN_RICH_STRING?
+		'''
+		
+		val testee = '''
+			RULE_IN_RICH_STRING ?
+ 		'''
+		
+		testee.compare(expected)
+	}
+
+	@Test
+	def void match_test04() {
+		val expected = '''
+			RULE_IN_RICH_STRING*
+		'''
+		
+		val testee = '''
+			RULE_IN_RICH_STRING *
+ 		'''
+		
+		testee.compare(expected)
+	}
+
+	@Test
+	def void match_test05() {
+		val expected = '''
+			RULE_IN_RICH_STRING+
+		'''
+		
+		val testee = '''
+			RULE_IN_RICH_STRING +
  		'''
 		
 		testee.compare(expected)
@@ -149,28 +197,18 @@ class XtextAntlrGeneratorComparisonFragmentTest extends XtextAntlrGeneratorCompa
 		testee.compare(expected)		
 	}
 	
-	
-	protected def compare(CharSequence grammar, CharSequence grammarReference) {
-		return super.compareGrammars(grammar, grammarReference, "", "");
-	}
-	
-	// change error indication
-	
-	@Override
-	override void handleMismatch(String absoluteGrammarFileName, String absoluteGrammarFileNameReference, String match,
-			String matchReference, int lineNo, int lineNoReference) {
-		fail('''
-			Inputs differs at token «match» (line «lineNo»), expected token «matchReference» (line «lineNoReference» ).
-		''')
-	}
-	
-	override handleUnexpectedCharSequence(String absoluteGrammarFileName, int lineNo) {
-		fail('''
-			Noticed an unmatched character sequence in/before line «lineNo».
-		''')
-	}
-	
-	override copyFile(String from, String to) {
-		// to nothing
+	private static class TestErrorHandler extends AntlrGrammarComparator.ErrorHandler {
+		
+		override handleMismatch(String match, String matchReference, int lineNo, int lineNoReference) {
+			fail('''
+				Inputs differs at token «match» (line «lineNo»), expected token «matchReference» (line «lineNoReference» ).
+			''')
+		}
+		
+		override handleUnexpectedCharSequence(String absoluteGrammarFileName, int lineNo) {
+			fail('''
+				Noticed an unmatched character sequence in/before line «lineNo».
+			''')
+		}
 	}
 }
