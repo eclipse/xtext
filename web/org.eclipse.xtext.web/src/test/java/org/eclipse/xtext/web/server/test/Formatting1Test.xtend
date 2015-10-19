@@ -16,6 +16,9 @@ class Formatting1Test extends AbstractWebServerTest {
 	
 	override protected getRuntimeModule() {
 		new StatemachineRuntimeModule {
+			override bindIFormatter2() {
+				null
+			}
 			override bindIFormatter() {
 				StatemachineFormatter
 			}
