@@ -231,6 +231,12 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 		public static IGrammarAwareElementType createModel_X33FragmentCallerParserRuleCall_32_0ElementType() {
 			return new IGrammarAwareElementType("Model_X33FragmentCallerParserRuleCall_32_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX33FragmentCallerParserRuleCall_32_0());
 		}
+		public static IGrammarAwareElementType createModel_X34Assignment_33ElementType() {
+			return new IGrammarAwareElementType("Model_X34Assignment_33_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX34Assignment_33());
+		}
+		public static IGrammarAwareElementType createModel_X34ParameterCallerParserRuleCall_33_0ElementType() {
+			return new IGrammarAwareElementType("Model_X34ParameterCallerParserRuleCall_33_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX34ParameterCallerParserRuleCall_33_0());
+		}
 	}
 
 	public static final IGrammarAwareElementType Model_ELEMENT_TYPE = associate(ModelFactory.createModelElementType());
@@ -368,6 +374,10 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 	public static final IGrammarAwareElementType Model_X33Assignment_32_ELEMENT_TYPE = associate(ModelFactory.createModel_X33Assignment_32ElementType());
 
 	public static final IGrammarAwareElementType Model_X33FragmentCallerParserRuleCall_32_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X33FragmentCallerParserRuleCall_32_0ElementType());
+
+	public static final IGrammarAwareElementType Model_X34Assignment_33_ELEMENT_TYPE = associate(ModelFactory.createModel_X34Assignment_33ElementType());
+
+	public static final IGrammarAwareElementType Model_X34ParameterCallerParserRuleCall_33_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X34ParameterCallerParserRuleCall_33_0ElementType());
 
 	private static class SimpleGroupFactory {
 		public static IGrammarAwareElementType createSimpleGroupElementType() {
@@ -2728,6 +2738,182 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Fragment1_FragValIDTerminalRuleCall_0_ELEMENT_TYPE = associate(Fragment1Factory.createFragment1_FragValIDTerminalRuleCall_0ElementType());
 
+	private static class ParameterCallerFactory {
+		public static IGrammarAwareElementType createParameterCallerElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerRule());
+		}
+		public static IGrammarAwareElementType createParameterCaller_GroupElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Group_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createParameterCaller_NumberSignDigitThreeDigitFourKeyword_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_NumberSignDigitThreeDigitFourKeyword_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getNumberSignDigitThreeDigitFourKeyword_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Alternatives_1ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Alternatives_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getAlternatives_1());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Group_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Group_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getGroup_1_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Kw1Keyword_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Kw1Keyword_1_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getKw1Keyword_1_0_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PAssignment_1_0_1ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PAssignment_1_0_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPAssignment_1_0_1());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PParameterizedParserRuleCall_1_0_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PParameterizedParserRuleCall_1_0_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPParameterizedParserRuleCall_1_0_1_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Group_1_1ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Group_1_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getGroup_1_1());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Kw2Keyword_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Kw2Keyword_1_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getKw2Keyword_1_1_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PAssignment_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PAssignment_1_1_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPAssignment_1_1_1());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PParameterizedParserRuleCall_1_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PParameterizedParserRuleCall_1_1_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPParameterizedParserRuleCall_1_1_1_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Group_1_2ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Group_1_2_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getGroup_1_2());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Kw3Keyword_1_2_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Kw3Keyword_1_2_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getKw3Keyword_1_2_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PAssignment_1_2_1ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PAssignment_1_2_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPAssignment_1_2_1());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PParameterizedParserRuleCall_1_2_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PParameterizedParserRuleCall_1_2_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPParameterizedParserRuleCall_1_2_1_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Group_1_3ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Group_1_3_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getGroup_1_3());
+		}
+		public static IGrammarAwareElementType createParameterCaller_Kw4Keyword_1_3_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_Kw4Keyword_1_3_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getKw4Keyword_1_3_0());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PAssignment_1_3_1ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PAssignment_1_3_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPAssignment_1_3_1());
+		}
+		public static IGrammarAwareElementType createParameterCaller_PParameterizedParserRuleCall_1_3_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterCaller_PParameterizedParserRuleCall_1_3_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterCallerAccess().getPParameterizedParserRuleCall_1_3_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType ParameterCaller_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCallerElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Group_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_GroupElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_NumberSignDigitThreeDigitFourKeyword_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_NumberSignDigitThreeDigitFourKeyword_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Alternatives_1_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Alternatives_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Group_1_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Group_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Kw1Keyword_1_0_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Kw1Keyword_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PAssignment_1_0_1_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PAssignment_1_0_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PParameterizedParserRuleCall_1_0_1_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PParameterizedParserRuleCall_1_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Group_1_1_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Group_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Kw2Keyword_1_1_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Kw2Keyword_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PAssignment_1_1_1_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PAssignment_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PParameterizedParserRuleCall_1_1_1_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PParameterizedParserRuleCall_1_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Group_1_2_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Group_1_2ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Kw3Keyword_1_2_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Kw3Keyword_1_2_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PAssignment_1_2_1_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PAssignment_1_2_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PParameterizedParserRuleCall_1_2_1_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PParameterizedParserRuleCall_1_2_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Group_1_3_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Group_1_3ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_Kw4Keyword_1_3_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_Kw4Keyword_1_3_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PAssignment_1_3_1_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PAssignment_1_3_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterCaller_PParameterizedParserRuleCall_1_3_1_0_ELEMENT_TYPE = associate(ParameterCallerFactory.createParameterCaller_PParameterizedParserRuleCall_1_3_1_0ElementType());
+
+	private static class ParameterizedFactory {
+		public static IGrammarAwareElementType createParameterizedElementType() {
+			return new IGrammarAwareElementType("Parameterized_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedRule());
+		}
+		public static IGrammarAwareElementType createParameterized_AlternativesElementType() {
+			return new IGrammarAwareElementType("Parameterized_Alternatives_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createParameterized_Group_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_Group_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getGroup_0());
+		}
+		public static IGrammarAwareElementType createParameterized_Kwp1Keyword_0_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_Kwp1Keyword_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getKwp1Keyword_0_0());
+		}
+		public static IGrammarAwareElementType createParameterized_V1Assignment_0_1ElementType() {
+			return new IGrammarAwareElementType("Parameterized_V1Assignment_0_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getV1Assignment_0_1());
+		}
+		public static IGrammarAwareElementType createParameterized_V1IDTerminalRuleCall_0_1_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_V1IDTerminalRuleCall_0_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getV1IDTerminalRuleCall_0_1_0());
+		}
+		public static IGrammarAwareElementType createParameterized_Group_1ElementType() {
+			return new IGrammarAwareElementType("Parameterized_Group_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getGroup_1());
+		}
+		public static IGrammarAwareElementType createParameterized_Kwp2Keyword_1_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_Kwp2Keyword_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getKwp2Keyword_1_0());
+		}
+		public static IGrammarAwareElementType createParameterized_V2Assignment_1_1ElementType() {
+			return new IGrammarAwareElementType("Parameterized_V2Assignment_1_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getV2Assignment_1_1());
+		}
+		public static IGrammarAwareElementType createParameterized_V2IDTerminalRuleCall_1_1_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_V2IDTerminalRuleCall_1_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getV2IDTerminalRuleCall_1_1_0());
+		}
+		public static IGrammarAwareElementType createParameterized_Group_1_2ElementType() {
+			return new IGrammarAwareElementType("Parameterized_Group_1_2_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getGroup_1_2());
+		}
+		public static IGrammarAwareElementType createParameterized_Kwp3Keyword_1_2_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_Kwp3Keyword_1_2_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getKwp3Keyword_1_2_0());
+		}
+		public static IGrammarAwareElementType createParameterized_V3Assignment_1_2_1ElementType() {
+			return new IGrammarAwareElementType("Parameterized_V3Assignment_1_2_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getV3Assignment_1_2_1());
+		}
+		public static IGrammarAwareElementType createParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType() {
+			return new IGrammarAwareElementType("Parameterized_V3IDTerminalRuleCall_1_2_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterizedAccess().getV3IDTerminalRuleCall_1_2_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Parameterized_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterizedElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Alternatives_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_AlternativesElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Group_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_Group_0ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Kwp1Keyword_0_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_Kwp1Keyword_0_0ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_V1Assignment_0_1_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V1Assignment_0_1ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_V1IDTerminalRuleCall_0_1_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V1IDTerminalRuleCall_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Group_1_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_Group_1ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Kwp2Keyword_1_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_Kwp2Keyword_1_0ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_V2Assignment_1_1_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V2Assignment_1_1ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_V2IDTerminalRuleCall_1_1_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V2IDTerminalRuleCall_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Group_1_2_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_Group_1_2ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_Kwp3Keyword_1_2_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_Kwp3Keyword_1_2_0ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_V3Assignment_1_2_1_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V3Assignment_1_2_1ElementType());
+
+	public static final IGrammarAwareElementType Parameterized_V3IDTerminalRuleCall_1_2_1_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType());
+
 	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
@@ -3008,6 +3194,14 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public IGrammarAwareElementType getModel_X33FragmentCallerParserRuleCall_32_0ElementType() {
 		return Model_X33FragmentCallerParserRuleCall_32_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getModel_X34Assignment_33ElementType() {
+		return Model_X34Assignment_33_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getModel_X34ParameterCallerParserRuleCall_33_0ElementType() {
+		return Model_X34ParameterCallerParserRuleCall_33_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getSimpleGroupElementType() {
@@ -4780,6 +4974,142 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public IGrammarAwareElementType getFragment1_FragValIDTerminalRuleCall_0ElementType() {
 		return Fragment1_FragValIDTerminalRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCallerElementType() {
+		return ParameterCaller_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_GroupElementType() {
+		return ParameterCaller_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_NumberSignDigitThreeDigitFourKeyword_0ElementType() {
+		return ParameterCaller_NumberSignDigitThreeDigitFourKeyword_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Alternatives_1ElementType() {
+		return ParameterCaller_Alternatives_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Group_1_0ElementType() {
+		return ParameterCaller_Group_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Kw1Keyword_1_0_0ElementType() {
+		return ParameterCaller_Kw1Keyword_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PAssignment_1_0_1ElementType() {
+		return ParameterCaller_PAssignment_1_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PParameterizedParserRuleCall_1_0_1_0ElementType() {
+		return ParameterCaller_PParameterizedParserRuleCall_1_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Group_1_1ElementType() {
+		return ParameterCaller_Group_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Kw2Keyword_1_1_0ElementType() {
+		return ParameterCaller_Kw2Keyword_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PAssignment_1_1_1ElementType() {
+		return ParameterCaller_PAssignment_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PParameterizedParserRuleCall_1_1_1_0ElementType() {
+		return ParameterCaller_PParameterizedParserRuleCall_1_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Group_1_2ElementType() {
+		return ParameterCaller_Group_1_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Kw3Keyword_1_2_0ElementType() {
+		return ParameterCaller_Kw3Keyword_1_2_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PAssignment_1_2_1ElementType() {
+		return ParameterCaller_PAssignment_1_2_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PParameterizedParserRuleCall_1_2_1_0ElementType() {
+		return ParameterCaller_PParameterizedParserRuleCall_1_2_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Group_1_3ElementType() {
+		return ParameterCaller_Group_1_3_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_Kw4Keyword_1_3_0ElementType() {
+		return ParameterCaller_Kw4Keyword_1_3_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PAssignment_1_3_1ElementType() {
+		return ParameterCaller_PAssignment_1_3_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterCaller_PParameterizedParserRuleCall_1_3_1_0ElementType() {
+		return ParameterCaller_PParameterizedParserRuleCall_1_3_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterizedElementType() {
+		return Parameterized_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_AlternativesElementType() {
+		return Parameterized_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_Group_0ElementType() {
+		return Parameterized_Group_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_Kwp1Keyword_0_0ElementType() {
+		return Parameterized_Kwp1Keyword_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_V1Assignment_0_1ElementType() {
+		return Parameterized_V1Assignment_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_V1IDTerminalRuleCall_0_1_0ElementType() {
+		return Parameterized_V1IDTerminalRuleCall_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_Group_1ElementType() {
+		return Parameterized_Group_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_Kwp2Keyword_1_0ElementType() {
+		return Parameterized_Kwp2Keyword_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_V2Assignment_1_1ElementType() {
+		return Parameterized_V2Assignment_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_V2IDTerminalRuleCall_1_1_0ElementType() {
+		return Parameterized_V2IDTerminalRuleCall_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_Group_1_2ElementType() {
+		return Parameterized_Group_1_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_Kwp3Keyword_1_2_0ElementType() {
+		return Parameterized_Kwp3Keyword_1_2_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_V3Assignment_1_2_1ElementType() {
+		return Parameterized_V3Assignment_1_2_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType() {
+		return Parameterized_V3IDTerminalRuleCall_1_2_1_0_ELEMENT_TYPE;
 	}
 
 }

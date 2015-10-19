@@ -80,10 +80,8 @@ Workflow {
 				// generateDebugData = true
 			}
 			fragment = resourceFactory.ResourceFactoryFragment2 {}
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.ParserGenerator auto-inject {
-					options = auto-inject {}
-				}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+				options = auto-inject {}
 			}
 			fragment = adapter.FragmentAdapter {
 				fragment = DebugAntlrGeneratorFragment auto-inject {

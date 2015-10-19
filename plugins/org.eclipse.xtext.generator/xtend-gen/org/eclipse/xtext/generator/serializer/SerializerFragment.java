@@ -39,6 +39,7 @@ import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
 
 /**
@@ -155,7 +156,11 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     delegate.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
     delegate.setGenerateDebugData(this.generateDebugData);
     Injector _injector = this.adapterSetup.getInjector();
-    delegate.initialize(_injector);
+    CodeConfig _instance = _injector.<CodeConfig>getInstance(CodeConfig.class);
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    _instance.setPreferXtendStubs(_isGenerateXtendStub);
+    Injector _injector_1 = this.adapterSetup.getInjector();
+    delegate.initialize(_injector_1);
     delegate.generate();
   }
   

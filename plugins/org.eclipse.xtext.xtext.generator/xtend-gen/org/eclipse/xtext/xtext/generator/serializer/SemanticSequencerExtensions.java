@@ -32,6 +32,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -65,31 +66,28 @@ public class SemanticSequencerExtensions {
   @Inject
   private IGrammarConstraintProvider gcp;
   
-  public Map<IGrammarConstraintProvider.IConstraint, List<EObject>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
-    final Map<IGrammarConstraintProvider.IConstraint, List<EObject>> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint, List<EObject>>newLinkedHashMap();
-    List<IGrammarConstraintProvider.IConstraintContext> _constraints = this.gcp.getConstraints(grammar);
-    for (final IGrammarConstraintProvider.IConstraintContext ctx : _constraints) {
-      List<IGrammarConstraintProvider.IConstraint> _constraints_1 = ctx.getConstraints();
-      for (final IGrammarConstraintProvider.IConstraint c : _constraints_1) {
-        EClass _type = c.getType();
+  public Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
+    final Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>newLinkedHashMap();
+    final Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> constraints = this.gcp.getConstraints(grammar);
+    Set<Map.Entry<ISerializationContext, IGrammarConstraintProvider.IConstraint>> _entrySet = constraints.entrySet();
+    for (final Map.Entry<ISerializationContext, IGrammarConstraintProvider.IConstraint> e : _entrySet) {
+      {
+        final ISerializationContext context = e.getKey();
+        final IGrammarConstraintProvider.IConstraint constraint = e.getValue();
+        EClass _type = constraint.getType();
         boolean _tripleEquals = (_type == clazz);
         if (_tripleEquals) {
-          List<EObject> contexts = result.get(c);
+          List<ISerializationContext> contexts = result.get(constraint);
           if ((contexts == null)) {
-            ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList();
+            ArrayList<ISerializationContext> _newArrayList = CollectionLiterals.<ISerializationContext>newArrayList();
             contexts = _newArrayList;
-            result.put(c, contexts);
+            result.put(constraint, contexts);
           }
-          EObject _context = ctx.getContext();
-          contexts.add(_context);
+          contexts.add(context);
         }
       }
     }
     return result;
-  }
-  
-  public List<IGrammarConstraintProvider.IConstraintContext> getGrammarConstraintContexts(final Grammar grammar) {
-    return this.gcp.getConstraints(grammar);
   }
   
   protected ResourceSet cloneResourceSet(final ResourceSet rs) {
@@ -141,13 +139,8 @@ public class SemanticSequencerExtensions {
     if ((grammar == null)) {
       return CollectionLiterals.<IGrammarConstraintProvider.IConstraint>emptySet();
     }
-    final Set<IGrammarConstraintProvider.IConstraint> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint>newLinkedHashSet();
-    final List<IGrammarConstraintProvider.IConstraintContext> constraints = this.gcp.getConstraints(grammar);
-    for (final IGrammarConstraintProvider.IConstraintContext ctx : constraints) {
-      List<IGrammarConstraintProvider.IConstraint> _constraints = ctx.getConstraints();
-      result.addAll(_constraints);
-    }
-    return result;
+    Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
+    return _constraints.values();
   }
   
   public List<ISemanticSequencerNfaProvider.ISemState> getLinearListOfMandatoryAssignments(final IGrammarConstraintProvider.IConstraint constraint) {

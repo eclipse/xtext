@@ -4,8 +4,12 @@
 package org.eclipse.xtext.parser.unorderedGroups.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.BacktrackingBug325745TestLanguagePackage;
 import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.DataType;
 import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.Element;
@@ -13,13 +17,8 @@ import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguag
 import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.SimpleTerm;
 import org.eclipse.xtext.parser.unorderedGroups.services.BacktrackingBug325745TestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
 public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -28,8 +27,13 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	private BacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == BacktrackingBug325745TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == BacktrackingBug325745TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case BacktrackingBug325745TestLanguagePackage.DATA_TYPE:
 				sequence_DataType(context, (DataType) semanticObject); 
 				return; 
@@ -46,14 +50,15 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 				sequence_SimpleTerm(context, (SimpleTerm) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (baseType=ID defaultValue=STRING?)
 	 */
-	protected void sequence_DataType(EObject context, DataType semanticObject) {
+	protected void sequence_DataType(ISerializationContext context, DataType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -62,7 +67,7 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	 * Constraint:
 	 *     (name=ID dataType=DataType? expression=Expression)
 	 */
-	protected void sequence_Element(EObject context, Element semanticObject) {
+	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -71,7 +76,7 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	 * Constraint:
 	 *     (prefix=STRING* terms+=SimpleTerm* postfix=STRING*)
 	 */
-	protected void sequence_Expression(EObject context, Expression semanticObject) {
+	protected void sequence_Expression(ISerializationContext context, Expression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -80,7 +85,7 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	 * Constraint:
 	 *     fields+=Element+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -89,7 +94,9 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	 * Constraint:
 	 *     ((lineCount=INT charCount=INT? charSet=ID?) | refChar=ID)
 	 */
-	protected void sequence_SimpleTerm(EObject context, SimpleTerm semanticObject) {
+	protected void sequence_SimpleTerm(ISerializationContext context, SimpleTerm semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

@@ -4,22 +4,20 @@
 package org.eclipse.xtext.linking.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.linking.bug313089.Bar;
 import org.eclipse.xtext.linking.bug313089.Baz;
 import org.eclipse.xtext.linking.bug313089.Bug313089Package;
 import org.eclipse.xtext.linking.bug313089.Foo;
 import org.eclipse.xtext.linking.services.Bug313089TestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -29,8 +27,13 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug313089TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug313089Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug313089Package.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug313089Package.BAR:
 				sequence_Bar(context, (Bar) semanticObject); 
 				return; 
@@ -41,20 +44,20 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Foo(context, (Foo) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Bar(EObject context, Bar semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug313089Package.Literals.BAR__NAME) == ValueTransient.YES)
+	protected void sequence_Bar(ISerializationContext context, Bar semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug313089Package.Literals.BAR__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug313089Package.Literals.BAR__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -64,7 +67,7 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 * Constraint:
 	 *     (name=ID | (child=Baz_Baz_2_0 name=ID))
 	 */
-	protected void sequence_Baz(EObject context, Baz semanticObject) {
+	protected void sequence_Baz(ISerializationContext context, Baz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -73,7 +76,9 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 * Constraint:
 	 *     (name=ID (bar=Bar | baz=Baz) ref=[Foo|ID])
 	 */
-	protected void sequence_Foo(EObject context, Foo semanticObject) {
+	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

@@ -4,17 +4,15 @@
 package org.eclipse.xtext.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.eclipse.xtext.testlanguages.simpleExpressions.Atom;
@@ -29,8 +27,13 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == SimpleExpressionsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == SimpleExpressionsPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case SimpleExpressionsPackage.ATOM:
 				sequence_Atom(context, (Atom) semanticObject); 
 				return; 
@@ -41,7 +44,8 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 				sequence_Sequence(context, (Sequence) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
@@ -51,7 +55,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	 *         (values+=Multiplication_Op_1_0 (operator='*' | operator='/') values+=Term)
 	 *     )
 	 */
-	protected void sequence_Addition_Multiplication(EObject context, Op semanticObject) {
+	protected void sequence_Addition_Multiplication(ISerializationContext context, Op semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -60,13 +64,12 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Atom(EObject context, Atom semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, SimpleExpressionsPackage.Literals.ATOM__NAME) == ValueTransient.YES)
+	protected void sequence_Atom(ISerializationContext context, Atom semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SimpleExpressionsPackage.Literals.ATOM__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimpleExpressionsPackage.Literals.ATOM__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -76,7 +79,9 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	 * Constraint:
 	 *     (expressions+=Sequence_Sequence_1_0 expressions+=Addition)
 	 */
-	protected void sequence_Sequence(EObject context, Sequence semanticObject) {
+	protected void sequence_Sequence(ISerializationContext context, Sequence semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

@@ -256,8 +256,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     final Procedure1<CompletionResult> filteredConsumer = _function;
     CompletionService _completionService = CompletionService.getCompletionService();
     final CompletionResultSet filteredResult = _completionService.createResultSet(parameters, new Consumer<CompletionResult>() {
-        public void consume(CompletionResult t) {
-          filteredConsumer.apply(t);
+        public void consume(CompletionResult arg0) {
+          filteredConsumer.apply(arg0);
         }
     }, this);
     this.createMatcherBasedProposals(parameters, filteredResult);

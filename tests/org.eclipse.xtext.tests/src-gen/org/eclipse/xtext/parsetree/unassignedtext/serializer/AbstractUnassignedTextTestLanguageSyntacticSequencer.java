@@ -26,19 +26,19 @@ public abstract class AbstractUnassignedTextTestLanguageSyntacticSequencer exten
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getCaseInsensitiveKeywordRule())
+		if (ruleCall.getRule() == grammarAccess.getCaseInsensitiveKeywordRule())
 			return getCaseInsensitiveKeywordToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getDatatypeRule())
+		else if (ruleCall.getRule() == grammarAccess.getDatatypeRule())
 			return getDatatypeToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getIDRule())
+		else if (ruleCall.getRule() == grammarAccess.getIDRule())
 			return getIDToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getINTRule())
+		else if (ruleCall.getRule() == grammarAccess.getINTRule())
 			return getINTToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getMultiRule())
+		else if (ruleCall.getRule() == grammarAccess.getMultiRule())
 			return getMultiToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getPluralRule())
+		else if (ruleCall.getRule() == grammarAccess.getPluralRule())
 			return getPluralToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getSTRINGRule())
+		else if (ruleCall.getRule() == grammarAccess.getSTRINGRule())
 			return getSTRINGToken(semanticObject, ruleCall, node);
 		return "";
 	}

@@ -44,11 +44,11 @@ public class Bug292245TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Model_ERRORKeyword_1_0_q.equals(syntax))
+			if (match_Model_ERRORKeyword_1_0_q.equals(syntax))
 				emit_Model_ERRORKeyword_1_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Model_FIXKeyword_0_0_q.equals(syntax))
+			else if (match_Model_FIXKeyword_0_0_q.equals(syntax))
 				emit_Model_FIXKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Model_TICKKeyword_2_0_q.equals(syntax))
+			else if (match_Model_TICKKeyword_2_0_q.equals(syntax))
 				emit_Model_TICKKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

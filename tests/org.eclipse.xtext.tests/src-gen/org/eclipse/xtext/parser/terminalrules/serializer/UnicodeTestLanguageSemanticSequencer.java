@@ -4,22 +4,20 @@
 package org.eclipse.xtext.parser.terminalrules.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.terminalrules.services.UnicodeTestLanguageGrammarAccess;
 import org.eclipse.xtext.parser.terminalrules.unicode.GString;
 import org.eclipse.xtext.parser.terminalrules.unicode.Model;
 import org.eclipse.xtext.parser.terminalrules.unicode.QuotedString;
 import org.eclipse.xtext.parser.terminalrules.unicode.UnicodePackage;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -29,8 +27,13 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	private UnicodeTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == UnicodePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == UnicodePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case UnicodePackage.GSTRING:
 				sequence_GString(context, (GString) semanticObject); 
 				return; 
@@ -41,20 +44,20 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_QuotedString(context, (QuotedString) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     name=GERMAN_STRING
 	 */
-	protected void sequence_GString(EObject context, GString semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnicodePackage.Literals.ABSTRACT_STRING__NAME) == ValueTransient.YES)
+	protected void sequence_GString(ISerializationContext context, GString semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnicodePackage.Literals.ABSTRACT_STRING__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnicodePackage.Literals.ABSTRACT_STRING__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getGStringAccess().getNameGERMAN_STRINGTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -64,7 +67,7 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     strings+=AbstractString+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -73,14 +76,15 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     name=STRING
 	 */
-	protected void sequence_QuotedString(EObject context, QuotedString semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnicodePackage.Literals.ABSTRACT_STRING__NAME) == ValueTransient.YES)
+	protected void sequence_QuotedString(ISerializationContext context, QuotedString semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnicodePackage.Literals.ABSTRACT_STRING__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnicodePackage.Literals.ABSTRACT_STRING__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getQuotedStringAccess().getNameSTRINGTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
+	
+	
 }

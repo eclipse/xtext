@@ -44,6 +44,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x31"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x32"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x33"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//Model/x34"/>
     </genClasses>
     <genClasses ecoreClass="SequencerTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -205,6 +206,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//FragmentCallerType/val1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//FragmentCallerType/val"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//FragmentCallerType/fragVal"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//ParameterCaller">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SequencerTestLanguage.ecore#//ParameterCaller/p"/>
+    </genClasses>
+    <genClasses ecoreClass="SequencerTestLanguage.ecore#//Parameterized">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Parameterized/v1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Parameterized/v2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SequencerTestLanguage.ecore#//Parameterized/v3"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

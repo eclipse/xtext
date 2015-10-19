@@ -40,7 +40,7 @@ public class Bug250313SyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Model_DigitOneKeyword_0_0_q.equals(syntax))
+			if (match_Model_DigitOneKeyword_0_0_q.equals(syntax))
 				emit_Model_DigitOneKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

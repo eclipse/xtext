@@ -48,6 +48,7 @@ import static extension java.lang.Character.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.Parameter
 
 /**
  * This API can be used by other templates to generate code
@@ -294,6 +295,15 @@ class GrammarAccessExtensions {
 	def String gaRuleAccessor(AbstractRule rule) {
 		rule.gaRuleAccessMethodName + '()'
 	}
+
+	/**
+	 * Returns the invocation of a ParserRule Parameter as Java expression. 
+	 */	
+	def String gaRuleParameterAccessor(Parameter parameter) {
+		val rule = parameter.containingParserRule
+		val index = rule.parameters.indexOf(parameter)
+		return rule.gaRuleAccessor + ".getParameters().get(" + index + "/*" + parameter.name + "*/)"
+	}
 	
 	/**
 	 * Returns the invocation of the rule accessor method as Java statement.
@@ -355,6 +365,7 @@ class GrammarAccessExtensions {
 		switch ele {
 			AbstractElement: ele.gaRuleElementAccessor
 			AbstractRule: ele.gaRuleAccessor
+			Parameter: ele.gaRuleParameterAccessor
 			default: '<error: unknown type ' + ele.eClass.name + '>'
 		}
 	}

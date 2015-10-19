@@ -30,9 +30,9 @@ public class UnassignedRuleCallTestLanguageSyntacticSequencer extends AbstractSy
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getDataTypeRuleRule())
+		if (ruleCall.getRule() == grammarAccess.getDataTypeRuleRule())
 			return getDataTypeRuleToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getINTRule())
+		else if (ruleCall.getRule() == grammarAccess.getINTRule())
 			return getINTToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -63,7 +63,7 @@ public class UnassignedRuleCallTestLanguageSyntacticSequencer extends AbstractSy
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Model_INTTerminalRuleCall_1_p.equals(syntax))
+			if (match_Model_INTTerminalRuleCall_1_p.equals(syntax))
 				emit_Model_INTTerminalRuleCall_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

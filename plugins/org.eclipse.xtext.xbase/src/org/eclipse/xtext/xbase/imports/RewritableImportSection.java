@@ -66,16 +66,18 @@ public class RewritableImportSection {
 
 		public RewritableImportSection parse(XtextResource resource) {
 			RewritableImportSection rewritableImportSection = new RewritableImportSection(resource, importsConfiguration,
-					importsConfiguration.getImportSection(resource), whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI())
-							.getLineSeparator(), regionUtil, nameValueConverter);
+					importsConfiguration.getImportSection(resource), getLineSeparator(resource), regionUtil, nameValueConverter);
 			return rewritableImportSection;
 		}
 
 		public RewritableImportSection createNewEmpty(XtextResource resource) {
-			RewritableImportSection rewritableImportSection = new RewritableImportSection(resource, importsConfiguration, null, whitespaceInformationProvider
-					.getLineSeparatorInformation(resource.getURI()).getLineSeparator(), regionUtil, nameValueConverter);
+			RewritableImportSection rewritableImportSection = new RewritableImportSection(resource, importsConfiguration, null, getLineSeparator(resource), regionUtil, nameValueConverter);
 			rewritableImportSection.setSort(true);
 			return rewritableImportSection;
+		}
+
+		protected String getLineSeparator(XtextResource resource) {
+			return whitespaceInformationProvider.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
 		}
 	}
 

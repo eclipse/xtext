@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -17,6 +18,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
@@ -38,10 +41,12 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -53,10 +58,10 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	protected static class SyntacticalContext {
 
-		protected EObject context;
+		protected ISerializationContext context;
 
 		protected INode lastNode;
-		
+
 		protected INode rootNode;
 
 		protected ISynFollowerOwner lastState;
@@ -65,7 +70,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 		protected RuleCallStack stack;
 
-		public SyntacticalContext(EObject context, EObject semanticObject, ISynAbsorberState previousState,
+		public SyntacticalContext(ISerializationContext context, EObject semanticObject, ISynAbsorberState previousState,
 				INode previousNode) {
 			this.context = context;
 			this.semanticObject = semanticObject;
@@ -86,7 +91,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		protected void setLastNode(INode lastNode) {
 			this.lastNode = lastNode;
 		}
-		
+
 	}
 
 	protected Stack<SyntacticalContext> contexts = new Stack<SyntacticalContext>();
@@ -174,7 +179,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	@Override
-	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
+	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index,
+			ICompositeNode node) {
 		navigateToAbsorber(enumRC, node);
 		delegate.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
@@ -193,7 +199,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	@Override
-	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
+	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index,
+			ICompositeNode node) {
 		navigateToAbsorber(datatypeRC, node);
 		if (token == null)
 			token = getUnassignedRuleCallToken(datatypeRC, node);
@@ -323,8 +330,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		navigateToAbsorber(action, node);
 		boolean shouldEnter = delegate.enterAssignedAction(action, semanticChild, node);
 		if (shouldEnter) {
-			ISynAbsorberState pda = pdaProvider.getPDA(action, semanticChild.eClass());
-			SyntacticalContext j = new SyntacticalContext(action, semanticChild, pda, node);
+			ISerializationContext child = SerializationContext.forChild(contexts.peek().context, action, semanticChild);
+			ISynAbsorberState pda = syntacticSequencerPDAs.get(child);
+			if (pda == null)
+				throw new IllegalStateException();
+			SyntacticalContext j = new SyntacticalContext(child, semanticChild, pda, node);
 			contexts.push(j);
 		}
 		return shouldEnter;
@@ -335,14 +345,17 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		navigateToAbsorber(rc, node);
 		boolean shouldEnter = delegate.enterAssignedParserRuleCall(rc, semanticChild, node);
 		if (shouldEnter) {
-			ISynAbsorberState pda = pdaProvider.getPDA(rc.getRule(), semanticChild.eClass());
-			SyntacticalContext j = new SyntacticalContext(rc.getRule(), semanticChild, pda, node);
+			ISerializationContext child = SerializationContext.forChild(contexts.peek().context, rc, semanticChild);
+			ISynAbsorberState pda = syntacticSequencerPDAs.get(child);
+			if (pda == null)
+				throw new IllegalStateException();
+			SyntacticalContext j = new SyntacticalContext(child, semanticChild, pda, node);
 			contexts.push(j);
 		}
 		return shouldEnter;
 	}
 
-	protected ISynTransition findTransition(EObject context, EObject semanticObject, ISynFollowerOwner fromState,
+	protected ISynTransition findTransition(ISerializationContext context, EObject semanticObject, ISynFollowerOwner fromState,
 			INode fromNode, AbstractElement toEle, INode toNode, RuleCallStack stack) {
 		if (fromState == null)
 			return null;
@@ -357,7 +370,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			}
 			return transition;
 		}
-		return null;
+		throw new IllegalStateException();
 	}
 
 	@Override
@@ -406,11 +419,26 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	@Override
+	@Deprecated
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {
+		ISerializationContext ctx = SerializationContext.fromEObject(context, semanticObject);
+		init(ctx, semanticObject, sequenceAcceptor, errorAcceptor);
+	}
+
+	@Inject
+	private IGrammarAccess grammar;
+
+	private Map<ISerializationContext, ISynAbsorberState> syntacticSequencerPDAs;
+
+	@Override
+	public void init(ISerializationContext context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
+			Acceptor errorAcceptor) {
 		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
-		SyntacticalContext acceptor = new SyntacticalContext(context, semanticObject, pdaProvider.getPDA(context,
-				semanticObject.eClass()), node);
+		syntacticSequencerPDAs = pdaProvider.getSyntacticSequencerPDAs(grammar.getGrammar());
+		ISynAbsorberState state = syntacticSequencerPDAs.get(context);
+		Preconditions.checkNotNull(state, "Invalid context: " + context);
+		SyntacticalContext acceptor = new SyntacticalContext(context, semanticObject, state, node);
 		contexts.push(acceptor);
 		delegate = sequenceAcceptor;
 		this.errorAcceptor = errorAcceptor;
@@ -450,7 +478,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			}
 			return fromEmitter.getTarget();
 		}
-		return null;
+		throw new IllegalStateException();
 	}
 
 	protected void navigateToEmitter(AbstractElement ele, INode node) {
@@ -470,15 +498,15 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			List<ISynState> pathAndElement = fromEmitter.getShortestPathTo(toEle, stack);
 			if (pathAndElement == null) {
 				if (errorAcceptor != null)
-					errorAcceptor.accept(diagnosticProvider
-							.createUnexpectedEmitterDiagnostic(fromEmitter, toEle, stack));
+					errorAcceptor
+							.accept(diagnosticProvider.createUnexpectedEmitterDiagnostic(fromEmitter, toEle, stack));
 				return null;
 			}
 			List<ISynState> path = pathAndElement.subList(0, pathAndElement.size() - 1);
 			accept(fromNode, path, stack);
 			return pathAndElement.get(pathAndElement.size() - 1);
 		}
-		return null;
+		throw new IllegalStateException();
 	}
 
 }
