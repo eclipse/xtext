@@ -1,5 +1,4 @@
 package org.eclipse.xtend.core.parser.antlr.internal;
-// Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.parser.antlr.Lexer;
 
 
@@ -146,7 +145,7 @@ public class InternalXtendLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "InternalXtend.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g"; }
     public final void mKW_Package() throws RecognitionException {
         try {
             int _type = KW_Package;

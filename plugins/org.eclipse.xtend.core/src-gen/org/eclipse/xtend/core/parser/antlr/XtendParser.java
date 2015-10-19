@@ -8,36 +8,37 @@
 package org.eclipse.xtend.core.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendParser;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class XtendParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class XtendParser extends AbstractAntlrParser {
+
 	@Inject
 	private XtendGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtend.core.parser.antlr.internal.InternalXtendParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtend.core.parser.antlr.internal.InternalXtendParser(stream, getGrammarAccess());
+	protected InternalXtendParser createParser(XtextTokenStream stream) {
+		return new InternalXtendParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "File";
 	}
-	
+
 	public XtendGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(XtendGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }
