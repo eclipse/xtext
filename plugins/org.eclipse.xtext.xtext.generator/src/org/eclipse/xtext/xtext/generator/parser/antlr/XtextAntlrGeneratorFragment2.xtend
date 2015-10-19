@@ -457,8 +457,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	def addUiBindingsAndImports() {
 		val extension naming = contentAssistNaming
-		if (projectConfig.eclipsePlugin.manifest !== null) {
-			projectConfig.eclipsePlugin.manifest=>[
+		if (projectConfig.genericIde.manifest !== null) {
+			projectConfig.genericIde.manifest=>[
 				exportedPackages += #[
 					grammar.lexerClass.packageName,
 					grammar.parserClass.packageName,
