@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.parser;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarComparator;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
@@ -19,7 +20,43 @@ import org.junit.Test;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtextAntlrGeneratorComparisonFragmentTest extends XtextAntlrGeneratorComparisonFragment {
+public class XtextAntlrGeneratorComparisonFragmentTest {
+  private static class TestErrorHandler extends AntlrGrammarComparator.ErrorHandler {
+    @Override
+    public void handleMismatch(final String match, final String matchReference, final int lineNo, final int lineNoReference) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Inputs differs at token ");
+      _builder.append(match, "");
+      _builder.append(" (line ");
+      _builder.append(lineNo, "");
+      _builder.append("), expected token ");
+      _builder.append(matchReference, "");
+      _builder.append(" (line ");
+      _builder.append(lineNoReference, "");
+      _builder.append(" ).");
+      _builder.newLineIfNotEmpty();
+      Assert.fail(_builder.toString());
+    }
+    
+    @Override
+    public void handleUnexpectedCharSequence(final String absoluteGrammarFileName, final int lineNo) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Noticed an unmatched character sequence in/before line ");
+      _builder.append(lineNo, "");
+      _builder.append(".");
+      _builder.newLineIfNotEmpty();
+      Assert.fail(_builder.toString());
+    }
+  }
+  
+  private AntlrGrammarComparator comparator = new AntlrGrammarComparator();
+  
+  private XtextAntlrGeneratorComparisonFragmentTest.TestErrorHandler errorHandler = new XtextAntlrGeneratorComparisonFragmentTest.TestErrorHandler();
+  
+  private Pair<Integer, Integer> compare(final CharSequence grammar, final CharSequence grammarReference) {
+    return this.comparator.compareGrammars(grammar, grammarReference, this.errorHandler);
+  }
+  
   @Test
   public void match_test01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -73,6 +110,45 @@ public class XtextAntlrGeneratorComparisonFragmentTest extends XtextAntlrGenerat
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("(\'abstract\' | \'annotation\' | \'class\' | \'(\' | RULE_ID | RULE_HEX )");
+    _builder_1.newLine();
+    final String testee = _builder_1.toString();
+    this.compare(testee, expected);
+  }
+  
+  @Test
+  public void match_test03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("RULE_IN_RICH_STRING?");
+    _builder.newLine();
+    final String expected = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("RULE_IN_RICH_STRING ?");
+    _builder_1.newLine();
+    final String testee = _builder_1.toString();
+    this.compare(testee, expected);
+  }
+  
+  @Test
+  public void match_test04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("RULE_IN_RICH_STRING*");
+    _builder.newLine();
+    final String expected = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("RULE_IN_RICH_STRING *");
+    _builder_1.newLine();
+    final String testee = _builder_1.toString();
+    this.compare(testee, expected);
+  }
+  
+  @Test
+  public void match_test05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("RULE_IN_RICH_STRING+");
+    _builder.newLine();
+    final String expected = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("RULE_IN_RICH_STRING +");
     _builder_1.newLine();
     final String testee = _builder_1.toString();
     this.compare(testee, expected);
@@ -171,39 +247,5 @@ public class XtextAntlrGeneratorComparisonFragmentTest extends XtextAntlrGenerat
     _builder_1.newLine();
     final String expected = _builder_1.toString();
     this.compare(testee, expected);
-  }
-  
-  protected Pair<Integer, Integer> compare(final CharSequence grammar, final CharSequence grammarReference) {
-    return super.compareGrammars(grammar, grammarReference, "", "");
-  }
-  
-  @Override
-  public void handleMismatch(final String absoluteGrammarFileName, final String absoluteGrammarFileNameReference, final String match, final String matchReference, final int lineNo, final int lineNoReference) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Inputs differs at token ");
-    _builder.append(match, "");
-    _builder.append(" (line ");
-    _builder.append(lineNo, "");
-    _builder.append("), expected token ");
-    _builder.append(matchReference, "");
-    _builder.append(" (line ");
-    _builder.append(lineNoReference, "");
-    _builder.append(" ).");
-    _builder.newLineIfNotEmpty();
-    Assert.fail(_builder.toString());
-  }
-  
-  @Override
-  public void handleUnexpectedCharSequence(final String absoluteGrammarFileName, final int lineNo) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Noticed an unmatched character sequence in/before line ");
-    _builder.append(lineNo, "");
-    _builder.append(".");
-    _builder.newLineIfNotEmpty();
-    Assert.fail(_builder.toString());
-  }
-  
-  @Override
-  public void copyFile(final String from, final String to) {
   }
 }
