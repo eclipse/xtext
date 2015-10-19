@@ -7,18 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
-import java.util.regex.Pattern
-import org.eclipse.jface.dialogs.Dialog
-import org.eclipse.jface.dialogs.IMessageProvider
 import org.eclipse.jface.fieldassist.ControlDecoration
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry
-import org.eclipse.jface.resource.JFaceResources
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
 import org.eclipse.swt.events.SelectionEvent
-import org.eclipse.swt.events.SelectionListener
-import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Button
@@ -26,10 +20,10 @@ import org.eclipse.swt.widgets.Combo
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Group
-import org.eclipse.swt.widgets.Label
-import org.eclipse.swt.widgets.Link
+import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
+import org.osgi.framework.Bundle
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -50,58 +44,56 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	override createControl(Composite parent) {
-		control = new Composite(parent, SWT.NONE) => [
-			layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
-			layout = new GridLayout(1, false)
-			Group [
-				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-				createUiProject = CheckBox [
-					text = "Eclipse Plugin"
-				]
-				createIdeaProject = CheckBox [
-					text = "IntelliJ IDEA Plugin"
-					enabled = true
-				]
-				createWebProject = CheckBox [
-					text = "Web Integration"
-					enabled = true
-				]
-				createIdeProject = CheckBox [
-					text = "Generic IDE Support"
-					enabled = true
-				].decorate(INFORMATION, "Info about Generic IDE Support")
+		control = new Composite(parent, SWT.NONE) =>
+			[
+				layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+				layout = new GridLayout(1, false)
+				Group [
+					text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+					createUiProject = CheckBox [
+						text = "Eclipse Plugin"
+					]
+					createIdeaProject = CheckBox [
+						text = "IntelliJ IDEA Plugin"
+						enabled = true
+					]
+					createWebProject = CheckBox [
+						text = "Web Integration"
+						enabled = true
+					]
+					createIdeProject = CheckBox [
+						text = "Generic IDE Support"
+						enabled = true
+					].decorate(
+						INFORMATION, '''Generic IDE Support is requiered for front end projects like Eclipse, Idea or Web.''')
 
-				createTestProject = CheckBox [
-					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+					createTestProject = CheckBox [
+						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+					]
+				]
+				Group [
+					text = "Preferred Build System"
+					preferredBuildSystem = DropDown[
+						enabled = true
+						items = BuildSystem.values.map[toString]
+					]
+				]
+				Group [
+					text = "Source Layout"
+					sourceLayout = DropDown[
+						enabled = true
+						items = SourceLayout.values.map[toString]
+					].decorate(INFORMATION, "Info about layout")
+
+				]
+
+				statusWidget = new StatusWidget(it, SWT.NONE) => [
+					layoutData = new GridData(SWT.FILL, SWT.BOTTOM, true, true)
 				]
 			]
-			Group [
-				text = "Preferred Build System"
-				preferredBuildSystem = DropDown[
-					enabled = true
-					items = BuildSystem.values.map[toString]
-				]
-			]
-			Group [
-				text = "Source Layout"
-				sourceLayout = DropDown[
-					enabled = true
-					items = SourceLayout.values.map[toString]
-				].decorate(INFORMATION, "Info about layout")
 
-			]
-
-			statusWidget = new StatusWidget(it, SWT.NONE) => [
-				layoutData = new GridData(SWT.FILL, SWT.BOTTOM, true, true)
-			]
-		]
-
-		val selectionControl = new SelectionListener() {
+		val selectionControl = new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
-				validate(e)
-			}
-
-			override widgetDefaultSelected(SelectionEvent e) {
 				validate(e)
 			}
 		}
@@ -118,6 +110,7 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def void validate(SelectionEvent e) {
 		statusWidget.clearStatus
+		message = null
 		checkWidgets(e)
 		pageComplete = statusWidget.severtity !== ERROR
 	}
@@ -127,13 +120,13 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (createUiProject.selection && sourceLayout.selectionIndex != 0) {
 			if (createUiProject === source) {
 				reportIssue(ERROR, '''
-				'«createUiProject.text»' requier Flat source layout.
-				Please <a>select 'Flat'</a> source layout.''', [
+				'«createUiProject.text»' requiers «SourceLayout.PLAIN» source layout.
+				Please <a>select '«SourceLayout.PLAIN»'</a> source layout.''', [
 					sourceLayout.select(0)
 				])
 			} else {
 				reportIssue(ERROR, '''
-				Flat source layout is not supported bei the '«createUiProject.text»' project.
+				«SourceLayout.PLAIN» source layout is not supported by the '«createUiProject.text»' project.
 				Please <a>deselect '«createUiProject.text»'</a>.''', [
 					createUiProject.selection = false
 				])
@@ -142,7 +135,7 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		if (createWebProject.selection && preferredBuildSystem.selectionIndex == 0) {
 			if (preferredBuildSystem === source) {
-				reportIssue(ERROR, '''
+				reportIssue(WARNING, '''
 				The '«createWebProject.text»' project can not be build using Eclipse-PDE build.
 				Please <a>deselect '«createWebProject.text»'</a>.''', [
 					createWebProject.selection = false
@@ -150,8 +143,8 @@ class AdvancedNewProjectPage extends WizardPage {
 			} else {
 				reportIssue(WARNING, '''
 				To build the '«createWebProject.text»' project, you need to choose maven or gradle build system.
-				Select <a>maven</a> build.''', [
-					preferredBuildSystem.select(1)
+				Select <a>gradle</a> build.''', [
+					preferredBuildSystem.select(2)
 				])
 			}
 		}
@@ -161,7 +154,7 @@ class AdvancedNewProjectPage extends WizardPage {
 			val affectedProjects = dependend.filter[selection].join(', ', [text])
 			if (createIdeProject === source) {
 				reportIssue(ERROR, '''
-				Projects like '«affectedProjects»' depends on '«createIdeProject.text»' project.
+				Frontend projects like '«affectedProjects»' depends on '«createIdeProject.text»' project.
 				Please <a>deselect</a> these.''', [
 					dependend.forEach[selection = false]
 				])
@@ -173,10 +166,26 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			}
 		}
+
+		if (BuildSystem.MAVEN.toString == preferredBuildSystem.text &&
+			!isBundleResolved("org.eclipse.m2e.maven.runtime")) {
+			setMessage('Maven integration for eclipse is not installed. Consider to install M2e.', WARNING)
+		}
+		if (BuildSystem.GRADLE.toString == preferredBuildSystem.text &&
+			!isBundleResolved("org.eclipse.buildship.core")) {
+			setMessage('Gradle integration for eclipse is not installed. Consider to install Buildship.', WARNING)
+		}
 	}
 
 	def protected <T extends Control> reportIssue(int severity, String text, ()=>void fix) {
-		statusWidget.addMessage(severity, text, fix, [validate(null)])
+		statusWidget.setStatus(severity, text, fix, [
+			validate(null)
+		])
+	}
+
+	def protected boolean isBundleResolved(String bundleId) {
+		val bundle = Activator.instance.bundle.bundleContext.bundles.findFirst[bundleId == it.symbolicName]
+		return bundle !== null && bundle.state === Bundle.RESOLVED
 	}
 
 	def private <T extends Control> T decorate(T control, int severity, String text) {
@@ -257,73 +266,6 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def SourceLayout getSourceLayout() {
 		SourceLayout.values.get(sourceLayout.selectionIndex)
-	}
-
-	static class StatusWidget extends Composite {
-		Link link
-		Label imageLabel
-		()=>void quickFix = []
-
-		int severity = NONE
-
-		new(Composite parent, int style) {
-			super(parent, style)
-			createControls()
-			visible = false
-		}
-
-		def createControls() {
-			layout = new GridLayout(2, false)
-			imageLabel = new Label(this, SWT.NONE)
-			imageLabel.text = "   "
-			imageLabel.layoutData = new GridData(GridData.VERTICAL_ALIGN_BEGINNING)
-			link = new Link(this, SWT.NONE)
-			link.layoutData = new GridData(GridData.FILL_HORIZONTAL)
-			link.setFont(this.getFont())
-			link.text = '\n\n\n'
-			link.addSelectionListener(new SelectionAdapter() {
-				override widgetSelected(SelectionEvent e) {
-					super.widgetSelected(e)
-					quickFix.apply
-				}
-			})
-		}
-
-		def clearStatus() {
-			addMessage(NONE, '   ', [], [])
-		}
-
-		def addMessage(int severity, String text, ()=>void quickFix, ()=>void callback) {
-			visible = severity !== NONE
-			imageLabel.image = imageFor(severity)
-			link.text = text
-			val matcher = Pattern.compile('<a>(.*)</a>').matcher(text)
-			link.toolTipText = matcher.replaceAll('$1')
-			this.quickFix = [quickFix.apply callback.apply]
-			this.severity = severity
-		}
-
-		def getSevertity() {
-			severity
-		}
-
-		def private Image imageFor(int type) {
-			switch (type) {
-				case IMessageProvider.NONE: {
-					null
-				}
-				case IMessageProvider.INFORMATION: {
-					JFaceResources.getImage(Dialog.DLG_IMG_MESSAGE_INFO)
-				}
-				case IMessageProvider.WARNING: {
-					JFaceResources.getImage(Dialog.DLG_IMG_MESSAGE_WARNING);
-				}
-				case IMessageProvider.ERROR: {
-					JFaceResources.getImage(Dialog.DLG_IMG_MESSAGE_ERROR);
-				}
-			}
-		}
-
 	}
 
 }
