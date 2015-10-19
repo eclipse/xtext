@@ -79,11 +79,6 @@ Workflow {
 			// formatter API
 			fragment = formatting.Formatter2Fragment2 auto-inject {}
 			
-			// a light-weight parser used for content assist
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
-			}
-			
 			// JavaScript-based syntax highlighting
 			fragment = web.WebIntegrationFragment auto-inject {
 				framework = "Orion"
