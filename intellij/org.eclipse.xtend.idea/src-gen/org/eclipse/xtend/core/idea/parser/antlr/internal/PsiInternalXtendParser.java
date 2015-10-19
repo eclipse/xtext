@@ -167,7 +167,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
         
 
     public String[] getTokenNames() { return PsiInternalXtendParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g"; }
+    public String getGrammarFileName() { return "PsiInternalXtend.g"; }
 
 
 

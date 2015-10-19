@@ -170,7 +170,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         
 
     public String[] getTokenNames() { return InternalXtendParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g"; }
+    public String getGrammarFileName() { return "InternalXtend.g"; }
 
 
 

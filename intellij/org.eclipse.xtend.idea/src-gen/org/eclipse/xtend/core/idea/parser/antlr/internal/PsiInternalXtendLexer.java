@@ -145,7 +145,7 @@ public class PsiInternalXtendLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g"; }
+    public String getGrammarFileName() { return "PsiInternalXtend.g"; }
     public final void mKW_Package() throws RecognitionException {
         try {
             int _type = KW_Package;

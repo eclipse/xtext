@@ -174,7 +174,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         
 
     public String[] getTokenNames() { return InternalXtendParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtend.ide.common/src-gen/org/eclipse/xtend/ide/common/contentassist/antlr/internal/InternalXtend.g"; }
+    public String getGrammarFileName() { return "InternalXtend.g"; }
 
 
     	private XtendGrammarAccess grammarAccess;

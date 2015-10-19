@@ -145,7 +145,7 @@ public class InternalXtendLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtend.ide.common/src-gen/org/eclipse/xtend/ide/common/contentassist/antlr/internal/InternalXtend.g"; }
+    public String getGrammarFileName() { return "InternalXtend.g"; }
     public final void mKW_Package() throws RecognitionException {
         try {
             int _type = KW_Package;
