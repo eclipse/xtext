@@ -334,18 +334,25 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								</arguments>
 								<includePluginDependencies>true</includePluginDependencies>
 							</configuration>
-							<dependencies>
-								<dependency>
-									<groupId>org.eclipse.xtext</groupId>
-									<artifactId>org.eclipse.xtext.xtext</artifactId>
-									<version>${xtextVersion}</version>
-								</dependency>
-								<dependency>
-									<groupId>org.eclipse.xtext</groupId>
-									<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-									<version>${xtextVersion}</version>
-								</dependency>
-							</dependencies>
+							«IF config.needsTychoBuild»
+								<dependencies>
+									<dependency>
+										<groupId>org.eclipse.xtext</groupId>
+										<artifactId>org.eclipse.xtext.xtext</artifactId>
+										<version>${xtextVersion}</version>
+									</dependency>
+									<dependency>
+										<groupId>org.eclipse.xtext</groupId>
+										<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+										<version>${xtextVersion}</version>
+									</dependency>
+									<dependency>
+										<groupId>org.eclipse.xtext</groupId>
+										<artifactId>org.eclipse.xtext.xbase</artifactId>
+										<version>${xtextVersion}</version>
+									</dependency>
+								</dependencies>
+							«ENDIF»
 						</plugin>
 						<plugin>
 							<groupId>org.eclipse.xtend</groupId>
