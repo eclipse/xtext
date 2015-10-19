@@ -84,6 +84,7 @@ Workflow {
 				removeBacktrackingGuards = true
 				lookaheadThreshold = '5'
 				partialParsing = true
+				debugGrammar = true
 				options = auto-inject {}
 			}
 			fragment = validation.ValidatorFragment2 {}
