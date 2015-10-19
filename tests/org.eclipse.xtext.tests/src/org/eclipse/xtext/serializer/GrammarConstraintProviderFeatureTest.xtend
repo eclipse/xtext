@@ -100,7 +100,7 @@ class GrammarConstraintProviderFeatureTest {
 			«grammarString»
 		''')
 		validator.assertNoErrors(grammar)
-		val constraints = constraintProvider.getConstraints(grammar).map[constraints].flatten.toSet
+		val constraints = constraintProvider.getConstraints(grammar).values
 		return constraints.map[name + "{\n  " + features.map[asString].join("\n  ") + "\n}"].join("\n") + "\n"
 	}
 
