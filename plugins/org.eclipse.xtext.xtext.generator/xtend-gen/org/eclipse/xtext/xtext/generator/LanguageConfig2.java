@@ -15,6 +15,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
+import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +26,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -32,7 +33,6 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -54,16 +54,20 @@ import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
 import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 
 @Log
 @SuppressWarnings("all")
 public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
-  @Accessors(AccessorType.PUBLIC_GETTER)
-  private String uri;
+  private String grammarUri;
+  
+  private String name;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Grammar grammar;
@@ -105,9 +109,33 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
   
-  @Mandatory
-  public void setUri(final String uri) {
-    this.uri = uri;
+  @Inject
+  private IXtextProjectConfig projectConfig;
+  
+  public void setGrammarUri(final String uri) {
+    this.grammarUri = uri;
+  }
+  
+  public String getGrammarUri() {
+    String _elvis = null;
+    if (this.grammarUri != null) {
+      _elvis = this.grammarUri;
+    } else {
+      IRuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+      String _path = _src.getPath();
+      String _replace = this.name.replace(".", "/");
+      String _plus = (_replace + ".xtext");
+      File _file = new File(_path, _plus);
+      URI _uRI = _file.toURI();
+      String _string = _uRI.toString();
+      _elvis = _string;
+    }
+    return _elvis;
+  }
+  
+  public void setName(final String name) {
+    this.name = name;
   }
   
   public void setFileExtensions(final String fileExtensions) {
@@ -163,7 +191,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
             EList<EObject> _contents = res.getContents();
             boolean _isEmpty_1 = _contents.isEmpty();
             if (_isEmpty_1) {
-              URI _uRI = res.getURI();
+              org.eclipse.emf.common.util.URI _uRI = res.getURI();
               String _plus = ("Error loading \'" + _uRI);
               String _plus_1 = (_plus + "\'");
               LanguageConfig2.LOG.error(_plus_1);
@@ -172,7 +200,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
               boolean _isEmpty_2 = _errors.isEmpty();
               boolean _not_1 = (!_isEmpty_2);
               if (_not_1) {
-                URI _uRI_1 = res.getURI();
+                org.eclipse.emf.common.util.URI _uRI_1 = res.getURI();
                 String _plus_2 = ("Error loading \'" + _uRI_1);
                 String _plus_3 = (_plus_2 + "\':\n");
                 Joiner _on = Joiner.on("\n");
@@ -189,13 +217,22 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       }
       EcoreUtil.resolveAll(this.resourceSet);
     }
-    URI _createURI = URI.createURI(this.uri);
+    String _grammarUri = this.getGrammarUri();
+    boolean _equals = Objects.equal(_grammarUri, null);
+    if (_equals) {
+      throw new IllegalStateException("No grammarUri or language name given");
+    }
+    String _grammarUri_1 = this.getGrammarUri();
+    org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI(_grammarUri_1);
     Resource _resource = this.resourceSet.getResource(_createURI, true);
     final XtextResource resource = ((XtextResource) _resource);
     EList<EObject> _contents = resource.getContents();
     boolean _isEmpty_1 = _contents.isEmpty();
     if (_isEmpty_1) {
-      throw new IllegalArgumentException((("Couldn\'t load grammar for \'" + this.uri) + "\'."));
+      String _grammarUri_2 = this.getGrammarUri();
+      String _plus = ("Couldn\'t load grammar for \'" + _grammarUri_2);
+      String _plus_1 = (_plus + "\'.");
+      throw new IllegalArgumentException(_plus_1);
     }
     EList<Resource.Diagnostic> _errors = resource.getErrors();
     boolean _isEmpty_2 = _errors.isEmpty();
@@ -203,11 +240,14 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     if (_not_1) {
       EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
       LanguageConfig2.LOG.error(_errors_1);
+      String _grammarUri_3 = this.getGrammarUri();
+      String _plus_2 = ("Problem parsing \'" + _grammarUri_3);
+      String _plus_3 = (_plus_2 + "\':\n");
       Joiner _on = Joiner.on("\n");
       EList<Resource.Diagnostic> _errors_2 = resource.getErrors();
       String _join = _on.join(_errors_2);
-      String _plus = ((("Problem parsing \'" + this.uri) + "\':\n") + _join);
-      throw new IllegalStateException(_plus);
+      String _plus_4 = (_plus_3 + _join);
+      throw new IllegalStateException(_plus_4);
     }
     EList<EObject> _contents_1 = resource.getContents();
     EObject _get_1 = _contents_1.get(0);
@@ -232,13 +272,13 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     EList<Resource> _resources = this.resourceSet.getResources();
     final ArrayList<Resource> resources = Lists.<Resource>newArrayList(_resources);
     for (final Resource resource : resources) {
-      URI _uRI = resource.getURI();
+      org.eclipse.emf.common.util.URI _uRI = resource.getURI();
       this.index(resource, _uRI, index);
     }
     ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(this.resourceSet, index);
   }
   
-  private void index(final Resource resource, final URI uri, final ResourceDescriptionsData index) {
+  private void index(final Resource resource, final org.eclipse.emf.common.util.URI uri, final ResourceDescriptionsData index) {
     final IResourceServiceProvider serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
     boolean _notEquals = (!Objects.equal(serviceProvider, null));
     if (_notEquals) {
@@ -336,11 +376,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   }
   
   private final static Logger LOG = Logger.getLogger(LanguageConfig2.class);
-  
-  @Pure
-  public String getUri() {
-    return this.uri;
-  }
   
   @Pure
   public Grammar getGrammar() {

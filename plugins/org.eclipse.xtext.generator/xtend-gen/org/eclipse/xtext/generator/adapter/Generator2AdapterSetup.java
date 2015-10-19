@@ -234,7 +234,7 @@ public class Generator2AdapterSetup {
         Resource _eResource = _grammar.eResource();
         URI _uRI = _eResource.getURI();
         String _string = _uRI.toString();
-        it.setUri(_string);
+        it.setGrammarUri(_string);
         Grammar _grammar_1 = Generator2AdapterSetup.this.languageConfig.getGrammar();
         Resource _eResource_1 = _grammar_1.eResource();
         ResourceSet _resourceSet = _eResource_1.getResourceSet();

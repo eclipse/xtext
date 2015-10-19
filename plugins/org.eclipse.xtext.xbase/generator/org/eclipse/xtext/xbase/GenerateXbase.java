@@ -71,7 +71,7 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xtype";
 				
-				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
+				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
@@ -85,7 +85,7 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbase";
 				
-				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
+				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());
@@ -119,7 +119,7 @@ final class GenerateXbase {
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbasewithannotations";
 				
-				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
+				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment2());

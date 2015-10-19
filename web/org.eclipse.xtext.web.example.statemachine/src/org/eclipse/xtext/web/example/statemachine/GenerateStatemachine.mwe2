@@ -44,7 +44,7 @@ Workflow {
 			}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
 			fileExtensions = "statemachine"
 			
 			// Java API to access grammar elements (required by several other fragments)

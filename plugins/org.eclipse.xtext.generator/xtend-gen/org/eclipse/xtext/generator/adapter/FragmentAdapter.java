@@ -643,8 +643,8 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
     List<String> _fileExtensions = config2.getFileExtensions();
     String _join = IterableExtensions.join(_fileExtensions, ",");
     config.setFileExtensions(_join);
-    String _uri = config2.getUri();
-    config.setUri(_uri);
+    String _grammarUri = config2.getGrammarUri();
+    config.setUri(_grammarUri);
     config.registerNaming(this.naming);
     return config;
   }

@@ -117,7 +117,7 @@ class Generator2AdapterSetup {
 	
 	private def ILanguageConfig createLanguage(Injector generatorInjector) {
 		new LanguageConfig2 => [
-			uri = languageConfig.grammar.eResource.URI.toString
+			grammarUri = languageConfig.grammar.eResource.URI.toString
 			resourceSet = languageConfig.grammar.eResource.resourceSet
 			fileExtensions = languageConfig.getFileExtensions(languageConfig.grammar).join(',')
 			generatorInjector.injectMembers(it)
