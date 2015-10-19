@@ -115,6 +115,10 @@ Workflow {
 					partialParsing = true
 				}
 			}
+			fragment = parser.antlr.XtextAntlrGeneratorComparisonFragment auto-inject {
+				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
+				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
+			}
 			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
 				useJdtRefactoring = true
 			}
