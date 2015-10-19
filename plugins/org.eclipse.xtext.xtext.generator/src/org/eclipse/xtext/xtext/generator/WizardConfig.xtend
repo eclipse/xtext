@@ -97,7 +97,7 @@ class WizardConfig extends XtextProjectConfig {
 	}
 
 	protected def computeEcoreModel(RuntimeProjectConfig project) {
-		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/ecore/generated' else 'model/generated'
+		project.rootPath + '/' + 'model/generated'
 	}
 
 	protected def computeAssets(WebProjectConfig project) {

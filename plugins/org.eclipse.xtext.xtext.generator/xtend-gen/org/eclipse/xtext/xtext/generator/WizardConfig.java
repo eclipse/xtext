@@ -246,15 +246,7 @@ public class WizardConfig extends XtextProjectConfig {
   protected String computeEcoreModel(final RuntimeProjectConfig project) {
     String _rootPath = project.getRootPath();
     String _plus = (_rootPath + "/");
-    String _xifexpression = null;
-    if (this.mavenLayout) {
-      String _computeSourceSet = this.computeSourceSet(project);
-      String _plus_1 = ("src/" + _computeSourceSet);
-      _xifexpression = (_plus_1 + "/ecore/generated");
-    } else {
-      _xifexpression = "model/generated";
-    }
-    return (_plus + _xifexpression);
+    return (_plus + "model/generated");
   }
   
   protected String computeAssets(final WebProjectConfig project) {
