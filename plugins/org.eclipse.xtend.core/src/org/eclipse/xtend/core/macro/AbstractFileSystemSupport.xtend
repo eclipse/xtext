@@ -30,7 +30,7 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 
 	@Inject @Accessors IEncodingProvider encodingProvider
 	@Inject(optional=true) @Accessors IFilePostProcessor postProcessor
-	@Inject @Accessors extension IProjectConfigProvider workspaceConfigProvider
+	@Inject @Accessors extension IProjectConfigProvider projectConfigProvider
 	@Accessors ResourceSet context
 	
 	override CharSequence getContents(Path path) {
