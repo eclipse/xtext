@@ -7,27 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import com.google.inject.Inject
-import org.eclipse.xtext.Grammar
+import org.eclipse.xtend.lib.annotations.Data
 
-class AntlrDebugGrammarGenerator extends AbstractAntlrGrammarGenerator {
-
-	@Inject DebugGrammarNaming naming
-
-	override protected getGrammarNaming() {
-		naming
+@Data
+class AntlrGrammar {
+	String packageName
+	String simpleName
+	
+	def String getName() {
+		packageName + "." + simpleName
 	}
 	
-	override protected compileParserOptions(Grammar it, AntlrOptions options) {
-		""
+	def String getGrammarFileName() {
+		name.replace('.', '/') + ".g"
 	}
-
-	override protected compileParserHeader(Grammar it, AntlrOptions options) {
-		""
+	
+	def String getTokensFileName() {
+		name.replace('.', '/') + ".tokens"
 	}
-
-	override protected compileLexerHeader(Grammar it, AntlrOptions options) {
-		""
+	
+	override def toString() {
+		name
 	}
-
 }

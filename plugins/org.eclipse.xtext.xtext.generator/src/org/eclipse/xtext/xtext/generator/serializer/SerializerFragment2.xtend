@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.serializer
 
+import com.google.common.collect.ImmutableSet
 import com.google.inject.Inject
 import java.util.List
 import java.util.Map
@@ -18,12 +19,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.Alternatives
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.Parameter
+import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.nodemodel.ICompositeNode
@@ -31,19 +35,17 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
+import org.eclipse.xtext.serializer.ISerializationContext
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
-import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
-import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
@@ -59,8 +61,10 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.serializer.analysis.SerializationContext
 
 class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	
@@ -76,21 +80,17 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension SemanticSequencerExtensions
 	@Inject extension SyntacticSequencerExtensions
 	@Inject extension GrammarAccessExtensions
-	@Inject extension Context2NameFunction
+	@Inject extension SyntheticTerminalDetector syntheticTerminalDetector
+	@Inject extension IGrammarConstraintProvider
 	@Inject DebugGraphGenerator debugGraphGenerator
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
 	
-	@Accessors
-	boolean generateDebugData = false
-	
-	@Accessors
-	boolean generateStub = true
+	@Accessors boolean generateDebugData = false
+	@Accessors boolean generateStub = true
+	@Accessors boolean generateSupportForDeprecatedContextObject = false
 	
 	boolean detectSyntheticTerminals = true
-	
-	@Accessors
-	extension SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector
 	
 	/**
 	 * Set to false if synthetic terminal should be ignored. Synthetic terminals
@@ -122,7 +122,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	}
 		
 	protected def String getGrammarConstraintsPath(Grammar grammar) {
-		grammar.serializerBasePackage.replace('.', '/') + '/' + GrammarUtil.getSimpleName(grammar) + 'GrammarConstraints.xtext'
+		grammar.serializerBasePackage.replace('.', '/') + '/' + GrammarUtil.getSimpleName(grammar) + 'GrammarConstraints.txt'
 	}
 	
 	override generate() {
@@ -210,7 +210,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	protected def generateAbstractSemanticSequencer() {
 		val localConstraints = grammar.grammarConstraints
 		val superConstraints = grammar.superGrammar.grammarConstraints
-		val newLocalConstraints = localConstraints.filter[type !== null && !superConstraints.contains(it)].toList
+		val newLocalConstraints = localConstraints.filter[type !== null && !superConstraints.contains(it)].toSet
 		val clazz = if (generateStub) grammar.abstractSemanticSequencerClass else grammar.semanticSequencerClass
 		val superClazz = if (localConstraints.exists[superConstraints.contains(it)]) 
 				grammar.usedGrammars.head.semanticSequencerClass
@@ -249,8 +249,11 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		val superConstraints = grammar.superGrammar.grammarConstraints.map[it->it].toMap
 		'''
 			@Override
-			public void createSequence(«EObject» context, «EObject» semanticObject) {
+			public void sequence(«ISerializationContext» context, «EObject» semanticObject) {
 				«EPackage» epackage = semanticObject.eClass().getEPackage();
+				«ParserRule» rule = context.getParserRule();
+				«Action» action = context.getAssignedAction();
+				«Set»<«Parameter»> parameters = context.getEnabledBooleanParameters();
 				«FOR pkg : accessedPackages.indexed»
 					«IF pkg.key > 0»else «ENDIF»if (epackage == «pkg.value».«packageLiteral»)
 						switch (semanticObject.eClass().getClassifierID()) {
@@ -266,13 +269,27 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		'''
 	}
 	
+	private def StringConcatenationClient genContextCondition(ISerializationContext context, IConstraint constraint) {
+		val StringConcatenationClient cond = switch it:context {
+			case assignedAction !== null: '''action == grammarAccess.«assignedAction.gaAccessor»'''
+			case parserRule !== null: '''rule == grammarAccess.«parserRule.gaAccessor»'''
+		}
+		val values = context.enabledBooleanParameters
+		if (!values.isEmpty) {
+			'''(«cond» && «ImmutableSet».of(«values.map["grammarAccess."+gaAccessor].join(", ")»).equals(parameters))'''
+		} else if (!constraint.contexts.forall[(it as SerializationContext).declaredParameters.isEmpty]) {
+			'''(«cond» && parameters.isEmpty())'''
+		} else {
+			cond
+		}
+	}
+	
 	private def StringConcatenationClient genMethodCreateSequenceCaseBody(Map<IConstraint, IConstraint> superConstraints, EClass type) {
 		val contexts = grammar.getGrammarConstraints(type).entrySet.sortBy[key.name]
 		'''
 			«IF contexts.size > 1»
 				«FOR ctx : contexts.indexed»
-					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sortBy[e | getContextName(grammar, e)]
-							SEPARATOR "\n\t\t|| "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
+					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»«c.genContextCondition(ctx.value.key)»«ENDFOR») {
 						«genMethodCreateSequenceCall(superConstraints, type, ctx.value.key)»
 					}
 				«ENDFOR»
@@ -307,7 +324,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 			 * Constraint:
 			 *     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n*     ")»«ENDIF»
 			 */
-			protected void sequence_«c.simpleName»(«EObject» context, «c.type» semanticObject) {
+			protected void sequence_«c.simpleName»(«ISerializationContext» context, «c.type» semanticObject) {
 				«IF states !== null»
 					if (errorAcceptor != null) {
 						«FOR s : states»
@@ -315,8 +332,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 								errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(«cast»semanticObject, «s.feature.EContainingClass.EPackage».«s.feature.getFeatureLiteral(rs)»));
 						«ENDFOR»
 					}
-					«ISemanticNodeProvider.INodesForEObjectProvider» nodes = createNodeProvider(«cast»semanticObject);
-					«SequenceFeeder» feeder = createSequencerFeeder(«cast»semanticObject, nodes);
+					«SequenceFeeder» feeder = createSequencerFeeder(context, «cast»semanticObject);
 					«FOR f: states»
 						feeder.accept(grammarAccess.«f.assignedGrammarElement.gaAccessor()», semanticObject.«f.feature.getGetAccessor(rs)»());
 					«ENDFOR»
@@ -325,6 +341,13 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 					genericSequencer.createSequence(context, «cast»semanticObject);
 				«ENDIF»
 			}
+			
+			«IF generateSupportForDeprecatedContextObject»
+				@Deprecated
+				protected void sequence_«c.simpleName»(«EObject» context, «c.type» semanticObject) {
+					sequence_«c.simpleName»(createContext(context, semanticObject), semanticObject);
+				}
+			«ENDIF»
 		'''
 	}
 	
@@ -464,37 +487,14 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def generateGrammarConstraints() {
 		fileAccessFactory.createTextFile(grammar.grammarConstraintsPath, '''
-			grammar «grammar.name»«FOR ug:grammar.usedGrammars BEFORE ' with ' SEPARATOR ', '»«ug.name»«ENDFOR»
-			
-			generate model "http://«grammar.name»"
-			
-			
-			// ******** constraint contexts ********
-			«FOR gcc : grammar.grammarConstraintContexts SEPARATOR '\n'»
-				«gcc.name»«IF gcc.safeType !== null» returns «gcc.safeType»«ENDIF»:
-					«FOR constraint : gcc.constraints SEPARATOR ' | '»«constraint.name»«ENDFOR»;
-			«ENDFOR»
-			
-			
-			
-			// ******** constraints ********
-			«FOR constraint : grammar.grammarConstraints SEPARATOR '\n'»
-				«constraint.name»«IF constraint.type !== null» returns «constraint.type.name»«ENDIF»:
-					«IF constraint.body == null»
-						{«constraint.type?.name»};
+			«FOR e : grammar.constraints.groupByEqualityAndSort SEPARATOR '\n'»
+				«e.first»:
+					«IF e.second.body == null»
+						{«e.second.type?.name»};
 					«ELSE»
-						«constraint.body»;
+						«e.second.body»;
 					«ENDIF»
 			«ENDFOR»
 		''').writeTo(projectConfig.runtime.srcGen)
 	}
-	
-	private def getSafeType(IConstraintContext context) {
-		try {
-			context.commonType?.name
-		} catch (UnsupportedOperationException e) {
-			return null
-		}
-	}
-	
 }

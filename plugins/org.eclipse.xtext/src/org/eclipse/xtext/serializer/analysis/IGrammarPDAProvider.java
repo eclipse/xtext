@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.Set;
+import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.formallang.Pda;
 
 import com.google.inject.ImplementedBy;
@@ -22,7 +22,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(GrammarPDAProvider.class)
 public interface IGrammarPDAProvider {
 
-	Pda<ISerState, RuleCall> getGrammarPDA(Grammar grammar, ParserRule entryRule);
+	Map<ISerializationContext, Pda<ISerState, RuleCall>> getGrammarPDAs(Grammar grammar);
 
-	Set<ParserRule> getAllRules(Grammar grammar);
 }

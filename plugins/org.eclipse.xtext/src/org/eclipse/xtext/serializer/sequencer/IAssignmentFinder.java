@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.sequencer;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.ISerializationContext;
 
+import com.google.common.collect.Multimap;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -19,6 +23,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(AssignmentFinder.class)
 public interface IAssignmentFinder {
 
-	Iterable<AbstractElement> findAssignmentsByValue(EObject semanticObject,
-			Iterable<AbstractElement> assignedElements, Object value, INode node);
+	Set<AbstractElement> findAssignmentsByValue(EObject semanticObject, Multimap<AbstractElement, ISerializationContext> assignments,
+			Object value, INode node);
 }
