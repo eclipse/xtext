@@ -62,6 +62,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x34" eType="#//ParameterCaller"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x35" eType="#//ParameterDelegation"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -265,5 +267,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="v1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="v2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="v3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDelegation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="p" eType="#//Delegation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Delegation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="p" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="np" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DelegationA" eSuperTypes="#//Delegation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Delegation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rc2" eType="#//Delegation"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -21,8 +21,6 @@ import org.eclipse.xtext.util.formallang.NfaToDot
 import org.eclipse.xtext.util.formallang.PdaToDot
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 
-import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
-
 class DebugGraphGenerator {
 
 	@Inject Grammar grammar
@@ -38,17 +36,17 @@ class DebugGraphGenerator {
 
 	def Iterable<Pair<String, String>> generateDebugGraphs() {
 		val result = <Pair<String, String>>newArrayList
-		for (e : contextPDAProvider.getContextPDAs(grammar).groupByEqualityAndSort) {
-			result.add(file('context', e.first) -> pdaToDot.drawSafe(e.first, e.second))
+		for (e : contextPDAProvider.getContextPDAs(grammar).entrySet) {
+			result.add(file('context', e.key) -> pdaToDot.drawSafe(e.key, e.value))
 		}
-		for (e : contextTypePDAProvider.getContextTypePDAs(grammar).groupByEqualityAndSort) {
-			result.add(file('context_type', e.first) -> pdaToDot.drawSafe(e.first, e.second))
+		for (e : contextTypePDAProvider.getContextTypePDAs(grammar).entrySet) {
+			result.add(file('context_type', e.key) -> pdaToDot.drawSafe(e.key, e.value))
 		}
-		for (e : syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(grammar).groupByEqualityAndSort) {
-			result.add(file('syntactic_sequencer', e.first) -> syntacticSequencerPDA2Dot.drawSafe(e.first, e.second))
+		for (e : syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(grammar).entrySet) {
+			result.add(file('syntactic_sequencer', e.key) -> syntacticSequencerPDA2Dot.drawSafe(e.key, e.value))
 		}
-		for (e : semanticSequencerNFAProvider.getSemanticSequencerNFAs(grammar).groupByEqualityAndSort) {
-			result.add(file('semantic_sequencer', e.first) -> nfaToDot.drawSafe(e.first, e.second))
+		for (e : semanticSequencerNFAProvider.getSemanticSequencerNFAs(grammar).entrySet) {
+			result.add(file('semantic_sequencer', e.key) -> nfaToDot.drawSafe(e.key, e.value))
 		}
 
 		try {
@@ -82,11 +80,11 @@ class DebugGraphGenerator {
 		return result
 	}
 
-	private def String drawSafe(GraphvizDotBuilder builder, Iterable<ISerializationContext> contexts, Object graph) {
+	private def String drawSafe(GraphvizDotBuilder builder, ISerializationContext context, Object graph) {
 		try {
 			builder.draw(graph)
 		} catch (Exception e) {
-			println("Error rendering " + contexts.join(","))
+			println("Error rendering " + context)
 			e.printStackTrace
 			return Throwables.getStackTraceAsString(e)
 		}
@@ -97,8 +95,8 @@ class DebugGraphGenerator {
 			'_' + name + '/'
 	}
 
-	private def String file(String name, Iterable<ISerializationContext> contexts) {
-		directory(name) + contexts.sort.join("_") + '.dot';
+	private def String file(String name, ISerializationContext contexts) {
+		directory(name) + contexts + '.dot';
 	}
 }
 					

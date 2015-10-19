@@ -1425,7 +1425,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
 	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage'.rules[12]->TerminalRule'TERMINAL_ID'.alternatives->Group
 	//URI: classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext
-	//Context: TerminalAlternatives_Group
+	//Context: TerminalAlternatives returns Group
 	public TerminalRule getTERMINAL_IDRule() {
 		return tTERMINAL_ID;
 	} 
@@ -1536,7 +1536,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
 	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage'.rules[23]->TerminalRule'BOOLEAN_TERMINAL_ID'.alternatives->Group
 	//URI: classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext
-	//Context: TerminalAlternatives_Group
+	//Context: TerminalAlternatives returns Group
 	public TerminalRule getBOOLEAN_TERMINAL_IDRule() {
 		return tBOOLEAN_TERMINAL_ID;
 	} 

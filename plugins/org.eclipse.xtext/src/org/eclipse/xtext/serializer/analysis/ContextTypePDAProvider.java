@@ -37,8 +37,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContextTypePDAProvider implements IContextTypePDAProvider {
 
-	protected static abstract class AbstractTypeTraverser
-			implements Traverser<Pda<ISerState, RuleCall>, ISerState, FilterState> {
+	protected static abstract class AbstractTypeTraverser implements Traverser<Pda<ISerState, RuleCall>, ISerState, FilterState> {
 
 		@Override
 		public FilterState enter(Pda<ISerState, RuleCall> pda, ISerState state, FilterState previous) {
@@ -73,8 +72,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 			return null;
 		}
 
-		protected abstract FilterState enterType(ISerState state, FilterState previous, StackItem stack,
-				EClass newType);
+		protected abstract FilterState enterType(ISerState state, FilterState previous, StackItem stack, EClass newType);
 
 		protected EClass getInstantiatedType(AbstractElement element) {
 			TypeRef type = null;
@@ -229,6 +227,8 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	@Inject
 	protected PdaUtil pdaUtil;
 
+	private Map<Grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>>> cache = Maps.newHashMap();
+
 	protected Set<EClass> collectTypes(Pda<ISerState, RuleCall> contextPda) {
 		TypeCollector collector = newTypeCollector();
 		pdaUtil.filterEdges(contextPda, collector, null);
@@ -243,7 +243,11 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 
 	@Override
 	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar) {
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newHashMap();
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = cache.get(grammar);
+		if (result != null)
+			return result;
+		result = Maps.newLinkedHashMap();
+		cache.put(grammar, result);
 		Map<ISerializationContext, Pda<ISerState, RuleCall>> contextPDAs = pdaProvider.getContextPDAs(grammar);
 		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : contextPDAs.entrySet()) {
 			ISerializationContext parent = e.getKey();

@@ -1033,6 +1033,20 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           _builder.append("/**");
           _builder.newLine();
           _builder.append(" ");
+          _builder.append("* Contexts:");
+          _builder.newLine();
+          _builder.append(" ");
+          _builder.append("*     ");
+          List<ISerializationContext> _contexts = c.getContexts();
+          List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_contexts);
+          String _join = IterableExtensions.join(_sort, "\n");
+          String _replaceAll = _join.replaceAll("\\n", "\n*     ");
+          _builder.append(_replaceAll, " ");
+          _builder.newLineIfNotEmpty();
+          _builder.append(" ");
+          _builder.append("*");
+          _builder.newLine();
+          _builder.append(" ");
           _builder.append("* Constraint:");
           _builder.newLine();
           _builder.append(" ");
@@ -1049,8 +1063,8 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
             } else {
               IGrammarConstraintProvider.IConstraintElement _body_1 = c.getBody();
               String _string = _body_1.toString();
-              String _replaceAll = _string.replaceAll("\\n", "\n*     ");
-              _builder.append(_replaceAll, " ");
+              String _replaceAll_1 = _string.replaceAll("\\n", "\n*     ");
+              _builder.append(_replaceAll_1, " ");
             }
           }
           _builder.newLineIfNotEmpty();

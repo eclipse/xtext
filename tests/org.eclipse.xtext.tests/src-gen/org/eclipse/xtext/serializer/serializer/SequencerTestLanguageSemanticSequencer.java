@@ -19,6 +19,8 @@ import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.Complex1;
+import org.eclipse.xtext.serializer.sequencertest.Delegation;
+import org.eclipse.xtext.serializer.sequencertest.DelegationA;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.ParameterCaller;
+import org.eclipse.xtext.serializer.sequencertest.ParameterDelegation;
 import org.eclipse.xtext.serializer.sequencertest.Parameterized;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
@@ -83,6 +86,26 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case SequencertestPackage.COMPLEX1:
 				sequence_Complex1(context, (Complex1) semanticObject); 
+				return; 
+			case SequencertestPackage.DELEGATION:
+				if ((action == grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/), grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))
+						|| (action == grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/)).equals(parameters))) {
+					sequence_Delegation$D$true$_DelegationA_1_2_0(context, (Delegation) semanticObject); 
+					return; 
+				}
+				else if ((rule == grammarAccess.getDelegationRule() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/)).equals(parameters))
+						|| (rule == grammarAccess.getDelegationRule() && parameters.isEmpty())) {
+					sequence_Delegation$P$false$(context, (Delegation) semanticObject); 
+					return; 
+				}
+				else if ((rule == grammarAccess.getDelegationRule() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/), grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))
+						|| (rule == grammarAccess.getDelegationRule() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))) {
+					sequence_Delegation$P$true$(context, (Delegation) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.DELEGATION_A:
+				sequence_Delegation$D$true$(context, (DelegationA) semanticObject); 
 				return; 
 			case SequencertestPackage.DEPENDENT_ALTERNATIVE1:
 				sequence_DependentAlternative1(context, (DependentAlternative1) semanticObject); 
@@ -145,6 +168,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case SequencertestPackage.PARAMETER_CALLER:
 				sequence_ParameterCaller(context, (ParameterCaller) semanticObject); 
+				return; 
+			case SequencertestPackage.PARAMETER_DELEGATION:
+				sequence_ParameterDelegation(context, (ParameterDelegation) semanticObject); 
 				return; 
 			case SequencertestPackage.PARAMETERIZED:
 				if ((rule == grammarAccess.getParameterizedRule() && parameters.isEmpty())) {
@@ -227,6 +253,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     AltList1 returns AltList1
+	 *
 	 * Constraint:
 	 *     ((val1=ID val2=ID) | (val1=ID val3=ID) | (val1=ID val4=ID?))
 	 */
@@ -236,6 +265,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     AltList2 returns AltList2
+	 *
 	 * Constraint:
 	 *     ((val1+=ID val2=ID) | (val1+=ID val1+=ID* val3=ID))
 	 */
@@ -245,6 +277,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     AlternativeMultiplicities returns AlternativeMultiplicities
+	 *
 	 * Constraint:
 	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ val7+=ID? (val6+=ID? val7+=ID?)*)
 	 */
@@ -254,6 +289,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Complex1 returns Complex1
+	 *
 	 * Constraint:
 	 *     (val1=ID? val2=ID? (val3+=ID | val4+=ID | val5+=ID | val6+=ID)*)
 	 */
@@ -263,6 +301,82 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Delegation<D,P> returns DelegationA
+	 *     Delegation<D> returns DelegationA
+	 *
+	 * Constraint:
+	 *     (left=Delegation_DelegationA_1_2_0 rc2=Delegation)
+	 */
+	protected void sequence_Delegation$D$true$(ISerializationContext context, DelegationA semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.DELEGATION_A__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.DELEGATION_A__LEFT));
+			if (transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.DELEGATION_A__RC2) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.DELEGATION_A__RC2));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getDelegationAccess().getRc2DelegationParserRuleCall_1_2_1_0(), semanticObject.getRc2());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Delegation.DelegationA_1_2_0<D,P> returns Delegation
+	 *     Delegation.DelegationA_1_2_0<D> returns Delegation
+	 *
+	 * Constraint:
+	 *     (p=ID | np=INT)
+	 */
+	protected void sequence_Delegation$D$true$_DelegationA_1_2_0(ISerializationContext context, Delegation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Delegation<D> returns Delegation
+	 *     Delegation returns Delegation
+	 *
+	 * Constraint:
+	 *     np=INT
+	 */
+	protected void sequence_Delegation$P$false$(ISerializationContext context, Delegation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.DELEGATION__NP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.DELEGATION__NP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDelegationAccess().getNpINTTerminalRuleCall_0_0_1_0_0(), semanticObject.getNp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Delegation<D,P> returns Delegation
+	 *     Delegation<P> returns Delegation
+	 *
+	 * Constraint:
+	 *     p=ID
+	 */
+	protected void sequence_Delegation$P$true$(ISerializationContext context, Delegation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.DELEGATION__P) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.DELEGATION__P));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDelegationAccess().getPIDTerminalRuleCall_0_0_0_0_0(), semanticObject.getP());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     DependentAlternative1 returns DependentAlternative1
+	 *
 	 * Constraint:
 	 *     (val=ID | (val=ID flag?='kw1'))
 	 */
@@ -272,6 +386,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     DependentAlternative2 returns DependentAlternative2
+	 *
 	 * Constraint:
 	 *     ((val+=ID val+=ID+) | (val+=ID+ flag?='kw1'))
 	 */
@@ -281,6 +398,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Float returns Float
+	 *
 	 * Constraint:
 	 *     {Float}
 	 */
@@ -290,6 +410,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     FragmentCaller returns FragmentCallerType
+	 *
 	 * Constraint:
 	 *     (val1=ID fragVal=ID val=ID)
 	 */
@@ -311,6 +434,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     GroupMultiplicities returns GroupMultiplicities
+	 *
 	 * Constraint:
 	 *     (val1=ID (val2=ID val3=ID)? (val4+=ID val5+=ID)+ (val6+=ID val7+=ID)*)
 	 */
@@ -320,6 +446,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     List1 returns List1
+	 *
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)
 	 */
@@ -329,6 +458,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     List2 returns List2
+	 *
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)?
 	 */
@@ -338,6 +470,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         x1=SimpleGroup | 
@@ -373,7 +508,8 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         x31=NullCrossRefGenerated | 
 	 *         x32=NullCrossRefInterpreted | 
 	 *         x33=FragmentCaller | 
-	 *         x34=ParameterCaller
+	 *         x34=ParameterCaller | 
+	 *         x35=ParameterDelegation
 	 *     )
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
@@ -382,6 +518,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     MultiKeywordsOrID returns MultiKeywordsOrID
+	 *
 	 * Constraint:
 	 *     (val+='kw1' | val+='kw2' | val+='kw3' | val+=ID)
 	 */
@@ -391,6 +530,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     MultiKeywords returns MultiKeywords
+	 *
 	 * Constraint:
 	 *     (val+='kw1' | val+='kw2' | val+='kw3')
 	 */
@@ -400,6 +542,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     MultiTerminals returns MultiTerminals
+	 *
 	 * Constraint:
 	 *     (val+=ID1 | val+=ID2)
 	 */
@@ -409,6 +554,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     NullCrossRefGenerated returns NullCrossRef
+	 *
 	 * Constraint:
 	 *     ref=[EObject|ID]
 	 */
@@ -424,6 +572,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     NullCrossRefInterpreted returns NullCrossRef
+	 *
 	 * Constraint:
 	 *     (ref=[EObject|ID] foo=ID?)
 	 */
@@ -433,6 +584,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     NullValueGenerated returns NullValue
+	 *
 	 * Constraint:
 	 *     value=NULL_STRING
 	 */
@@ -448,6 +602,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     NullValueInterpreted returns NullValue
+	 *
 	 * Constraint:
 	 *     (value=NULL_STRING foo=ID?)
 	 */
@@ -457,6 +614,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     OptionalDouble returns OptionalDouble
+	 *
 	 * Constraint:
 	 *     (double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?)
 	 */
@@ -466,6 +626,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Optional returns Optional
+	 *
 	 * Constraint:
 	 *     (int0=INT (int1=INT int2=INT)?)
 	 */
@@ -475,6 +638,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterCaller returns ParameterCaller
+	 *
 	 * Constraint:
 	 *     (p=Parameterized | p=Parameterized | p=Parameterized | p=Parameterized)
 	 */
@@ -484,6 +650,21 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterDelegation returns ParameterDelegation
+	 *
+	 * Constraint:
+	 *     (p=Delegation | p=Delegation)
+	 */
+	protected void sequence_ParameterDelegation(ISerializationContext context, ParameterDelegation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Parameterized returns Parameterized
+	 *
 	 * Constraint:
 	 *     v2=ID
 	 */
@@ -499,6 +680,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Parameterized<Q> returns Parameterized
+	 *
 	 * Constraint:
 	 *     (v2=ID v3=ID?)
 	 */
@@ -508,6 +692,10 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Parameterized<P,Q> returns Parameterized
+	 *     Parameterized<P> returns Parameterized
+	 *
 	 * Constraint:
 	 *     v1=ID
 	 */
@@ -523,6 +711,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleAlternative returns SimpleAlternative
+	 *
 	 * Constraint:
 	 *     (val1=ID | val2=ID)
 	 */
@@ -532,6 +723,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleGroup returns SimpleGroup
+	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID)
 	 */
@@ -550,6 +744,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleMultiplicities returns SimpleMultiplicities
+	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID? val3+=ID+ val4+=ID*)
 	 */
@@ -559,6 +756,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleContainmentReferenceChild1 returns SingleContainmentReferenceChild1
+	 *
 	 * Constraint:
 	 *     val='kw1'
 	 */
@@ -574,6 +774,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleContainmentReferenceChild2 returns SingleContainmentReferenceChild2
+	 *
 	 * Constraint:
 	 *     val='kw2'
 	 */
@@ -589,6 +792,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleContainmentReferenceChild3 returns SingleContainmentReferenceChild3
+	 *
 	 * Constraint:
 	 *     val='kw3'
 	 */
@@ -604,6 +810,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleContainmentReference returns SingleContainmentReference
+	 *
 	 * Constraint:
 	 *     (child=SingleContainmentReferenceChild1 | child=SingleContainmentReferenceChild2 | child=SingleContainmentReferenceChild3)
 	 */
@@ -613,6 +822,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleCrossReference returns SingleCrossReference
+	 *
 	 * Constraint:
 	 *     ((name=ID1 | name=ID2 | name=ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3]))
 	 */
@@ -622,6 +834,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleEnum returns SingleEnum
+	 *
 	 * Constraint:
 	 *     (val=DefEnum1 | val=DefEnum2 | val=DefEnum3)
 	 */
@@ -631,6 +846,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleKeywordsOrID returns SingleKeywordsOrID
+	 *
 	 * Constraint:
 	 *     (val='kw1' | val='kw2' | val='kw3' | val=ID)
 	 */
@@ -640,6 +858,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleKeywords returns SingleKeywords
+	 *
 	 * Constraint:
 	 *     (val='kw1' | val='kw2' | val='kw3')
 	 */
@@ -649,6 +870,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleTerminals returns SingleTerminals
+	 *
 	 * Constraint:
 	 *     (val=ID1 | val=ID2)
 	 */
@@ -658,6 +882,10 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedAlternativeValDelegate returns UnorderedAlternativeVal2
+	 *     UnorderedAlternativeVal2 returns UnorderedAlternativeVal2
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -673,6 +901,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedAlternativeVal returns UnorderedAlternativeVal
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -688,6 +919,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedAlternative returns UnorderedAlternative
+	 *
 	 * Constraint:
 	 *     (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*
 	 */
@@ -697,6 +931,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedGroupBoolean returns UnorderedGroupBoolean
+	 *
 	 * Constraint:
 	 *     (val1?='kw1' | val2?='kw2' | val3?='kw3')*
 	 */
@@ -706,6 +943,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedGroupOptional returns UnorderedGroupOptional
+	 *
 	 * Constraint:
 	 *     (val1=ID | va2=ID | val3=ID)*
 	 */
@@ -715,6 +955,10 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedGroupValDelegate returns UnorderedGroupVal2
+	 *     UnorderedGroupVal2 returns UnorderedGroupVal2
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -730,6 +974,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedGroupVal returns UnorderedGroupVal
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -745,6 +992,9 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedGroup returns UnorderedGroup
+	 *
 	 * Constraint:
 	 *     (val1=ID | val2=INT | val3=UnorderedGroupVal | val4=UnorderedGroupValDelegate)+
 	 */

@@ -262,6 +262,20 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	}
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Action
+	 *     Alternatives.Alternatives_1_0 returns Action
+	 *     ConditionalBranch returns Action
+	 *     UnorderedGroup returns Action
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns Action
+	 *     Group returns Action
+	 *     Group.Group_1_0 returns Action
+	 *     AbstractToken returns Action
+	 *     AbstractTokenWithCardinality returns Action
+	 *     Action returns Action
+	 *     AbstractTerminal returns Action
+	 *     ParenthesizedElement returns Action
+	 *
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))?)
 	 */
@@ -271,6 +285,19 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Alternatives
+	 *     Alternatives.Alternatives_1_0 returns Alternatives
+	 *     ConditionalBranch returns Alternatives
+	 *     UnorderedGroup returns Alternatives
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns Alternatives
+	 *     Group returns Alternatives
+	 *     Group.Group_1_0 returns Alternatives
+	 *     AbstractToken returns Alternatives
+	 *     AbstractTokenWithCardinality returns Alternatives
+	 *     AbstractTerminal returns Alternatives
+	 *     ParenthesizedElement returns Alternatives
+	 *
 	 * Constraint:
 	 *     (elements+=Alternatives_Alternatives_1_0 elements+=ConditionalBranch+)
 	 */
@@ -280,6 +307,12 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AssignableTerminal returns Alternatives
+	 *     ParenthesizedAssignableElement returns Alternatives
+	 *     AssignableAlternatives returns Alternatives
+	 *     AssignableAlternatives.Alternatives_1_0 returns Alternatives
+	 *
 	 * Constraint:
 	 *     (elements+=AssignableAlternatives_Alternatives_1_0 elements+=AssignableTerminal+)
 	 */
@@ -289,6 +322,20 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Assignment
+	 *     Alternatives.Alternatives_1_0 returns Assignment
+	 *     ConditionalBranch returns Assignment
+	 *     UnorderedGroup returns Assignment
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns Assignment
+	 *     Group returns Assignment
+	 *     Group.Group_1_0 returns Assignment
+	 *     AbstractToken returns Assignment
+	 *     AbstractTokenWithCardinality returns Assignment
+	 *     AbstractTerminal returns Assignment
+	 *     Assignment returns Assignment
+	 *     ParenthesizedElement returns Assignment
+	 *
 	 * Constraint:
 	 *     ((predicated?='=>' | firstSetPredicated?='->')? feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
 	 */
@@ -298,6 +345,16 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns CharacterRange
+	 *     TerminalAlternatives.Alternatives_1_0 returns CharacterRange
+	 *     TerminalGroup returns CharacterRange
+	 *     TerminalGroup.Group_1_0 returns CharacterRange
+	 *     TerminalToken returns CharacterRange
+	 *     TerminalTokenElement returns CharacterRange
+	 *     ParenthesizedTerminalElement returns CharacterRange
+	 *     CharacterRange returns CharacterRange
+	 *
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword)
 	 */
@@ -316,6 +373,19 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns ConditionalBranch
+	 *     Alternatives.Alternatives_1_0 returns ConditionalBranch
+	 *     ConditionalBranch returns ConditionalBranch
+	 *     UnorderedGroup returns ConditionalBranch
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns ConditionalBranch
+	 *     Group returns ConditionalBranch
+	 *     Group.Group_1_0 returns ConditionalBranch
+	 *     AbstractToken returns ConditionalBranch
+	 *     AbstractTokenWithCardinality returns ConditionalBranch
+	 *     AbstractTerminal returns ConditionalBranch
+	 *     ParenthesizedElement returns ConditionalBranch
+	 *
 	 * Constraint:
 	 *     (filtered=InverseLiteralValue parameter=[Parameter|ID] guardedElement=UnorderedGroup)
 	 */
@@ -337,6 +407,13 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AssignableTerminal returns CrossReference
+	 *     ParenthesizedAssignableElement returns CrossReference
+	 *     AssignableAlternatives returns CrossReference
+	 *     AssignableAlternatives.Alternatives_1_0 returns CrossReference
+	 *     CrossReference returns CrossReference
+	 *
 	 * Constraint:
 	 *     (type=TypeRef terminal=CrossReferenceableTerminal?)
 	 */
@@ -346,6 +423,16 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns EOF
+	 *     TerminalAlternatives.Alternatives_1_0 returns EOF
+	 *     TerminalGroup returns EOF
+	 *     TerminalGroup.Group_1_0 returns EOF
+	 *     TerminalToken returns EOF
+	 *     TerminalTokenElement returns EOF
+	 *     ParenthesizedTerminalElement returns EOF
+	 *     EOF returns EOF
+	 *
 	 * Constraint:
 	 *     {EOF}
 	 */
@@ -355,6 +442,11 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     EnumLiterals returns EnumLiteralDeclaration
+	 *     EnumLiterals.Alternatives_1_0 returns EnumLiteralDeclaration
+	 *     EnumLiteralDeclaration returns EnumLiteralDeclaration
+	 *
 	 * Constraint:
 	 *     (enumLiteral=[EEnumLiteral|ID] literal=Keyword?)
 	 */
@@ -364,6 +456,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     EnumLiterals returns Alternatives
+	 *
 	 * Constraint:
 	 *     (elements+=EnumLiterals_Alternatives_1_0 elements+=EnumLiteralDeclaration+)
 	 */
@@ -373,6 +468,10 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns EnumRule
+	 *     EnumRule returns EnumRule
+	 *
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=EnumLiterals)
 	 */
@@ -382,6 +481,10 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractMetamodelDeclaration returns GeneratedMetamodel
+	 *     GeneratedMetamodel returns GeneratedMetamodel
+	 *
 	 * Constraint:
 	 *     (name=ID ePackage=[EPackage|STRING] alias=ID?)
 	 */
@@ -391,6 +494,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Grammar returns Grammar
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=GrammarID 
@@ -406,6 +512,19 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Group
+	 *     Alternatives.Alternatives_1_0 returns Group
+	 *     ConditionalBranch returns Group
+	 *     UnorderedGroup returns Group
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns Group
+	 *     Group returns Group
+	 *     Group.Group_1_0 returns Group
+	 *     AbstractToken returns Group
+	 *     AbstractTokenWithCardinality returns Group
+	 *     AbstractTerminal returns Group
+	 *     ParenthesizedElement returns Group
+	 *
 	 * Constraint:
 	 *     ((elements+=Group_Group_1_0 elements+=AbstractToken+) | ((predicated?='=>' | firstSetPredicated?='->') elements+=Alternatives))
 	 */
@@ -415,6 +534,10 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns ParserRule
+	 *     ParserRule returns ParserRule
+	 *
 	 * Constraint:
 	 *     (
 	 *         fragment?='fragment'? 
@@ -431,6 +554,23 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Keyword returns Keyword
+	 *     AssignableTerminal returns Keyword
+	 *     ParenthesizedAssignableElement returns Keyword
+	 *     AssignableAlternatives returns Keyword
+	 *     AssignableAlternatives.Alternatives_1_0 returns Keyword
+	 *     CrossReferenceableTerminal returns Keyword
+	 *     TerminalAlternatives returns Keyword
+	 *     TerminalAlternatives.Alternatives_1_0 returns Keyword
+	 *     TerminalGroup returns Keyword
+	 *     TerminalGroup.Group_1_0 returns Keyword
+	 *     TerminalToken returns Keyword
+	 *     TerminalTokenElement returns Keyword
+	 *     ParenthesizedTerminalElement returns Keyword
+	 *     CharacterRange returns Keyword
+	 *     CharacterRange.CharacterRange_1_0 returns Keyword
+	 *
 	 * Constraint:
 	 *     value=STRING
 	 */
@@ -446,6 +586,19 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Keyword
+	 *     Alternatives.Alternatives_1_0 returns Keyword
+	 *     ConditionalBranch returns Keyword
+	 *     UnorderedGroup returns Keyword
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns Keyword
+	 *     Group returns Keyword
+	 *     Group.Group_1_0 returns Keyword
+	 *     AbstractToken returns Keyword
+	 *     AbstractTokenWithCardinality returns Keyword
+	 *     AbstractTerminal returns Keyword
+	 *     ParenthesizedElement returns Keyword
+	 *
 	 * Constraint:
 	 *     (value=STRING | ((predicated?='=>' | firstSetPredicated?='->') value=STRING))
 	 */
@@ -455,6 +608,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     NamedArgument returns NamedArgument
+	 *
 	 * Constraint:
 	 *     ((literalValue=LiteralValue? parameter=[Parameter|ID]) | (parameter=[Parameter|ID] value=[Parameter|ID]))
 	 */
@@ -464,6 +620,17 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns NegatedToken
+	 *     TerminalAlternatives.Alternatives_1_0 returns NegatedToken
+	 *     TerminalGroup returns NegatedToken
+	 *     TerminalGroup.Group_1_0 returns NegatedToken
+	 *     TerminalToken returns NegatedToken
+	 *     TerminalTokenElement returns NegatedToken
+	 *     ParenthesizedTerminalElement returns NegatedToken
+	 *     AbstractNegatedToken returns NegatedToken
+	 *     NegatedToken returns NegatedToken
+	 *
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
 	 */
@@ -479,6 +646,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Parameter returns Parameter
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -494,6 +664,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     PredicatedGroup returns Group
+	 *
 	 * Constraint:
 	 *     ((predicated?='=>' | firstSetPredicated?='->') elements+=Alternatives)
 	 */
@@ -503,6 +676,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     PredicatedKeyword returns Keyword
+	 *
 	 * Constraint:
 	 *     ((predicated?='=>' | firstSetPredicated?='->') value=STRING)
 	 */
@@ -512,6 +688,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     PredicatedRuleCall returns RuleCall
+	 *
 	 * Constraint:
 	 *     ((predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|ID])
 	 */
@@ -521,6 +700,19 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns RuleCall
+	 *     Alternatives.Alternatives_1_0 returns RuleCall
+	 *     ConditionalBranch returns RuleCall
+	 *     UnorderedGroup returns RuleCall
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns RuleCall
+	 *     Group returns RuleCall
+	 *     Group.Group_1_0 returns RuleCall
+	 *     AbstractToken returns RuleCall
+	 *     AbstractTokenWithCardinality returns RuleCall
+	 *     AbstractTerminal returns RuleCall
+	 *     ParenthesizedElement returns RuleCall
+	 *
 	 * Constraint:
 	 *     (
 	 *         (rule=[AbstractRule|RuleID] (arguments+=NamedArgument arguments+=NamedArgument*)?) | 
@@ -533,6 +725,10 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractMetamodelDeclaration returns ReferencedMetamodel
+	 *     ReferencedMetamodel returns ReferencedMetamodel
+	 *
 	 * Constraint:
 	 *     (ePackage=[EPackage|STRING] alias=ID?)
 	 */
@@ -542,6 +738,10 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns TerminalRule
+	 *     TerminalRule returns TerminalRule
+	 *
 	 * Constraint:
 	 *     (((fragment?='fragment' name=ID) | (name=ID type=TypeRef?)) alternatives=TerminalAlternatives)
 	 */
@@ -551,6 +751,14 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     RuleCall returns RuleCall
+	 *     AssignableTerminal returns RuleCall
+	 *     ParenthesizedAssignableElement returns RuleCall
+	 *     AssignableAlternatives returns RuleCall
+	 *     AssignableAlternatives.Alternatives_1_0 returns RuleCall
+	 *     CrossReferenceableTerminal returns RuleCall
+	 *
 	 * Constraint:
 	 *     (rule=[AbstractRule|RuleID] (arguments+=NamedArgument arguments+=NamedArgument*)?)
 	 */
@@ -560,6 +768,15 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Alternatives
+	 *     TerminalAlternatives.Alternatives_1_0 returns Alternatives
+	 *     TerminalGroup returns Alternatives
+	 *     TerminalGroup.Group_1_0 returns Alternatives
+	 *     TerminalToken returns Alternatives
+	 *     TerminalTokenElement returns Alternatives
+	 *     ParenthesizedTerminalElement returns Alternatives
+	 *
 	 * Constraint:
 	 *     (elements+=TerminalAlternatives_Alternatives_1_0 elements+=TerminalGroup+)
 	 */
@@ -569,6 +786,15 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Group
+	 *     TerminalAlternatives.Alternatives_1_0 returns Group
+	 *     TerminalGroup returns Group
+	 *     TerminalGroup.Group_1_0 returns Group
+	 *     TerminalToken returns Group
+	 *     TerminalTokenElement returns Group
+	 *     ParenthesizedTerminalElement returns Group
+	 *
 	 * Constraint:
 	 *     (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+)
 	 */
@@ -578,6 +804,16 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalRuleCall returns RuleCall
+	 *     TerminalAlternatives returns RuleCall
+	 *     TerminalAlternatives.Alternatives_1_0 returns RuleCall
+	 *     TerminalGroup returns RuleCall
+	 *     TerminalGroup.Group_1_0 returns RuleCall
+	 *     TerminalToken returns RuleCall
+	 *     TerminalTokenElement returns RuleCall
+	 *     ParenthesizedTerminalElement returns RuleCall
+	 *
 	 * Constraint:
 	 *     rule=[AbstractRule|RuleID]
 	 */
@@ -593,6 +829,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeRef returns TypeRef
+	 *
 	 * Constraint:
 	 *     (metamodel=[AbstractMetamodelDeclaration|ID]? classifier=[EClassifier|ID])
 	 */
@@ -602,6 +841,19 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns UnorderedGroup
+	 *     Alternatives.Alternatives_1_0 returns UnorderedGroup
+	 *     ConditionalBranch returns UnorderedGroup
+	 *     UnorderedGroup returns UnorderedGroup
+	 *     UnorderedGroup.UnorderedGroup_1_0 returns UnorderedGroup
+	 *     Group returns UnorderedGroup
+	 *     Group.Group_1_0 returns UnorderedGroup
+	 *     AbstractToken returns UnorderedGroup
+	 *     AbstractTokenWithCardinality returns UnorderedGroup
+	 *     AbstractTerminal returns UnorderedGroup
+	 *     ParenthesizedElement returns UnorderedGroup
+	 *
 	 * Constraint:
 	 *     (elements+=UnorderedGroup_UnorderedGroup_1_0 elements+=Group+)
 	 */
@@ -611,6 +863,17 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns UntilToken
+	 *     TerminalAlternatives.Alternatives_1_0 returns UntilToken
+	 *     TerminalGroup returns UntilToken
+	 *     TerminalGroup.Group_1_0 returns UntilToken
+	 *     TerminalToken returns UntilToken
+	 *     TerminalTokenElement returns UntilToken
+	 *     ParenthesizedTerminalElement returns UntilToken
+	 *     AbstractNegatedToken returns UntilToken
+	 *     UntilToken returns UntilToken
+	 *
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
 	 */
@@ -626,6 +889,16 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Wildcard
+	 *     TerminalAlternatives.Alternatives_1_0 returns Wildcard
+	 *     TerminalGroup returns Wildcard
+	 *     TerminalGroup.Group_1_0 returns Wildcard
+	 *     TerminalToken returns Wildcard
+	 *     TerminalTokenElement returns Wildcard
+	 *     ParenthesizedTerminalElement returns Wildcard
+	 *     Wildcard returns Wildcard
+	 *
 	 * Constraint:
 	 *     {Wildcard}
 	 */
