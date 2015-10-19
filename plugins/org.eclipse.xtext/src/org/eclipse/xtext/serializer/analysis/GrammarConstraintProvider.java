@@ -29,6 +29,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
+import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.ProductionFactory;
 import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
@@ -405,6 +407,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	private ISemanticSequencerNfaProvider nfaProvider;
 
 	@Inject
+	private IContextTypePDAProvider typeProvider;
+
+	@Inject
 	private NfaUtil nfaUtil;
 
 	protected Multimap<Parameter, Boolean> collectAllParameterValues(IConstraint constraint) {
@@ -422,21 +427,30 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return values;
 	}
 
-	protected String findBestConstraintName(Grammar grammar, IConstraint constraint) {
-		EClass type = constraint.getType();
+	protected String findBestConstraintName(Grammar grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs,
+			IConstraint constraint) {
 		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
 		Set<Action> relevantActions = Sets.newLinkedHashSet();
 		Set<ParserRule> contextRules = Sets.newLinkedHashSet();
 		for (ISerializationContext ctx : constraint.getContexts()) {
 			ParserRule rule = ctx.getParserRule();
-			if (rule != null)
+			if (rule != null) {
 				contextRules.add(rule);
+			}
 		}
 		// 1. find relevant rules based on assignments 
 		for (ISemState s : nfaUtil.collect(constraint.getNfa())) {
 			AbstractElement element = s.getAssignedGrammarElement();
 			if (element != null)
 				relevantRules.add(GrammarUtil.containingParserRule(element));
+		}
+		// 2. find relevant rules based on unassigned actions
+		for (ISerializationContext ctx : constraint.getContexts()) {
+			for (ISerState s : nfaUtil.collect(typePDAs.get(ctx))) {
+				AbstractElement element = s.getGrammarElement();
+				if (element instanceof Action && ((Action) element).getFeature() == null)
+					relevantRules.add(GrammarUtil.containingParserRule(element));
+			}
 		}
 		if (relevantRules.isEmpty()) {
 			Set<ParserRule> allRules = Sets.newHashSet(contextRules);
@@ -445,19 +459,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				if (action != null)
 					allRules.add(GrammarUtil.containingParserRule(action));
 			}
-			if (type != null) {
-				// 2a. find relevant rules based on unassigned actions
-				for (ParserRule context : allRules) {
-					for (Action a : GrammarUtil.containedActions(context)) {
-						if (a.getFeature() == null && a.getType().getClassifier() == type) {
-							relevantRules.add(context);
-						}
-					}
-				}
-			} else {
-				// 2b. use all rules, because the constraint returns null.
-				relevantRules.addAll(allRules);
-			}
+			// 3. use all rules, because the constraint returns null.
+			relevantRules.addAll(allRules);
 		}
 		for (ISerializationContext ctx : constraint.getContexts()) {
 			Action action = ctx.getAssignedAction();
@@ -520,8 +523,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			constraint.contexts.add(context);
 			result.put(context, constraint);
 		}
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs = typeProvider.getContextTypePDAs(grammar);
 		for (Constraint constraint : constraints.values())
-			constraint.setName(findBestConstraintName(grammar, constraint));
+			constraint.setName(findBestConstraintName(grammar, typePDAs, constraint));
 		return result;
 	}
 

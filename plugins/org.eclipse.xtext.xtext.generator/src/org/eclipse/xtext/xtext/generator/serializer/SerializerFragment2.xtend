@@ -321,6 +321,9 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 		val states = c.linearListOfMandatoryAssignments
 		'''
 			/**
+			 * Contexts:
+			 *     «c.contexts.sort.join("\n").replaceAll("\\n","\n*     ")»
+			 *
 			 * Constraint:
 			 *     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n*     ")»«ENDIF»
 			 */

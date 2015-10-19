@@ -21,6 +21,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.ISerializationContext;
@@ -83,8 +84,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	protected PdaUtil pdaUtil;
 
 	protected void collectExtracted(ISerState orig, Collection<? extends ISerState> precedents, SerializerPDAState copy,
-			Map<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew, final CallStack inTop,
-			SerializerPDAState start) {
+			Map<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew, final CallStack inTop, SerializerPDAState start) {
 		for (ISerState pre : precedents) {
 			CallStack top = inTop;
 			AbstractElement element = pre.getGrammarElement();
@@ -134,8 +134,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		return result;
 	}
 
-	protected void collectPushForAction(ISerState state, ParserRule rule, Set<ISerState> result,
-			Set<ISerState> visited) {
+	protected void collectPushForAction(ISerState state, ParserRule rule, Set<ISerState> result, Set<ISerState> visited) {
 		if (!visited.add(state))
 			return;
 		switch (state.getType()) {
@@ -215,9 +214,17 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		}
 		for (Map.Entry<Action, Collection<SerializerPDA>> action : actionPdas.asMap().entrySet()) {
 			SerializerPDA merged = merge(new ActionContext(null, action.getKey()), action.getValue());
+			Set<Set<Parameter>> parameterPermutations = Sets.newHashSet();
+			for (ISerializationContext container : actionContexts.get(action.getKey())) {
+				parameterPermutations.add(container.getEnabledBooleanParameters());
+			}
 			//			for (IContext container : actionContexts.get(action.getKey())) {
-			ActionContext context = new ActionContext( /*container */ null, action.getKey());
-			result.put(context, merged);
+			for (Set<Parameter> parameters : parameterPermutations) {
+				ISerializationContext context = new ActionContext( /*container */ null, action.getKey());
+				if (!parameters.isEmpty())
+					context = new SerializationContext.ParameterValueContext(context, parameters);
+				result.put(context, merged);
+			}
 			//			}
 		}
 		return result;
