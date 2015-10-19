@@ -26,10 +26,10 @@ class FileLocationsImpl implements FileLocations {
 	@Accessors Resource context
 	
 	protected def IProjectConfig getProjectConfig(Path path) {
-		val string = path.getSegments().get(0)
+		val firstSegment = path.getSegments().get(0)
 		val projectConfig = projectInformationProvider.getProjectConfig(context.resourceSet)
-		if (projectConfig == null) {
-			throw new IllegalArgumentException("The project '"+string+"' has not been configured.")
+		if (projectConfig === null || projectConfig.name != firstSegment) {
+			throw new IllegalArgumentException("The project '"+firstSegment+"' has not been configured.")
 		}
 		return projectConfig
 	}

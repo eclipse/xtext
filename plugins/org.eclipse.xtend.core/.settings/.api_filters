@@ -78,9 +78,9 @@
         </filter>
         <filter id="643842064">
             <message_arguments>
-                <message_argument value="FileWorkspaceConfig"/>
+                <message_argument value="FileProjectConfig"/>
                 <message_argument value="XtendBatchCompiler"/>
-                <message_argument value="getWorkspaceConfig()"/>
+                <message_argument value="getProjectConfig()"/>
             </message_arguments>
         </filter>
         <filter id="643842064">

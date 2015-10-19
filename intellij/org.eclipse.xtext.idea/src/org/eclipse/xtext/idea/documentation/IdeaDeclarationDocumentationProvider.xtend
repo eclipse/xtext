@@ -8,8 +8,8 @@
 package org.eclipse.xtext.idea.documentation
 
 import com.google.inject.Inject
+import com.intellij.openapi.module.ModuleUtilCore
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
-import org.eclipse.xtext.idea.filesystem.IdeaProjectConfigProvider
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.psi.PsiEObject
 
@@ -20,7 +20,6 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
  */
 class IdeaDeclarationDocumentationProvider {
 
-	@Inject IdeaProjectConfigProvider projectConfigProvider
 	@Inject IQualifiedNameProvider qNameProvider
 	@Inject IEObjectDocumentationProvider eObjectDocProvider
 
@@ -37,14 +36,11 @@ class IdeaDeclarationDocumentationProvider {
 
 	def protected getFileInfo(PsiEObject element) {
 		val resource = element.EObject.eResource
-		val projectConfig = projectConfigProvider.getProjectConfig(resource.resourceSet)
-		if (projectConfig !== null) {
-			val uri = resource.URI.deresolve(projectConfig.path) 
-			return '''[«projectConfig.name»] «uri»'''
-		} else {
-			// object resolved through importURI (or similar), might not live in a module
-			return resource.URI.lastSegment
-		}
+		val module = ModuleUtilCore.findModuleForPsiElement(element)
+		if (module !== null ) {
+			return '''[«module.name»] «resource.URI.lastSegment»'''
+		} 
+		return resource.URI.lastSegment
 	}
 
 	def String getQuickNavigateInfo(PsiEObject element) '''

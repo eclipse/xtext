@@ -43,12 +43,19 @@ public class FileLocationsImpl implements FileLocations {
   
   protected IProjectConfig getProjectConfig(final Path path) {
     List<String> _segments = path.getSegments();
-    final String string = _segments.get(0);
+    final String firstSegment = _segments.get(0);
     ResourceSet _resourceSet = this.context.getResourceSet();
     final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(_resourceSet);
-    boolean _equals = Objects.equal(projectConfig, null);
-    if (_equals) {
-      throw new IllegalArgumentException((("The project \'" + string) + "\' has not been configured."));
+    boolean _or = false;
+    if ((projectConfig == null)) {
+      _or = true;
+    } else {
+      String _name = projectConfig.getName();
+      boolean _notEquals = (!Objects.equal(_name, firstSegment));
+      _or = _notEquals;
+    }
+    if (_or) {
+      throw new IllegalArgumentException((("The project \'" + firstSegment) + "\' has not been configured."));
     }
     return projectConfig;
   }

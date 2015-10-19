@@ -218,7 +218,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigMultipleSourceDirs1() {
+  public void testProjectConfigMultipleSourceDirs1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/src");
     _builder.append(File.pathSeparator, "");
@@ -269,7 +269,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigMultipleSourceDirs2AbsPaths() {
+  public void testProjectConfigMultipleSourceDirs2AbsPaths() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/tmp/ws/prj1/src");
     _builder.append(File.pathSeparator, "");
@@ -318,7 +318,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigMultipleSourceDirs3() {
+  public void testProjectConfigMultipleSourceDirs3() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/dir1/src");
     _builder.append(File.pathSeparator, "");
@@ -367,7 +367,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigMultipleSourceDirs4() {
+  public void testProjectConfigMultipleSourceDirs4() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/src");
     _builder.append(File.pathSeparator, "");
@@ -416,7 +416,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigMultipleSourceDirs5() {
+  public void testProjectConfigMultipleSourceDirs5() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/dir1/dir1a/src");
     _builder.append(File.pathSeparator, "");
@@ -465,7 +465,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigMultipleSourceDirs6() {
+  public void testProjectConfigMultipleSourceDirs6() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("dir1/ws/prj1/dir2/dir3/dir4/src1");
     _builder.append(File.pathSeparator, "");
@@ -538,7 +538,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigSameDir() {
+  public void testProjectConfigSameDir() {
     this.batchCompiler.setSourcePath("ws/prj1");
     this.batchCompiler.setOutputPath("ws/prj1");
     boolean _compile = this.batchCompiler.compile();
@@ -548,7 +548,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigWithoutCommonProjectDir() {
+  public void testProjectConfigWithoutCommonProjectDir() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/tmp/ws/prj1/src");
     this.batchCompiler.setSourcePath(_builder.toString());
@@ -563,7 +563,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigWithoutCommonWorkspaceDir() {
+  public void testProjectConfigWithoutCommonWorkspaceDir() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/some_non_existing_folder/src");
     this.batchCompiler.setSourcePath(_builder.toString());
@@ -578,7 +578,7 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testprojectConfigWithTopLevelCommonWorkspaceDir() {
+  public void testProjectConfigWithTopLevelCommonWorkspaceDir() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/tmp/prj/src");
     this.batchCompiler.setSourcePath(_builder.toString());
