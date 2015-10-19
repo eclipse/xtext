@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EValidator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
@@ -37,12 +36,14 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
+import java.io.File
 
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
 	
-	@Accessors(PUBLIC_GETTER)
-	String uri
+	String grammarUri
+	
+	String name
 	
 	@Accessors(PUBLIC_GETTER)
 	Grammar grammar
@@ -79,9 +80,18 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
-	@Mandatory
-	def void setUri(String uri) {
-		this.uri = uri
+	@Inject IXtextProjectConfig projectConfig
+	
+	def void setGrammarUri(String uri) {
+		this.grammarUri = uri
+	}
+	
+	def String getGrammarUri() {
+		grammarUri ?: new File(projectConfig.runtime.src.path, name.replace('.', '/') + ".xtext").toURI.toString
+	}
+	
+	def void setName(String name) {
+		this.name = name
 	}
 	
 	def void setFileExtensions(String fileExtensions) {
@@ -114,13 +124,16 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 			}
 			EcoreUtil.resolveAll(resourceSet)
 		}
-		val resource = resourceSet.getResource(URI.createURI(uri), true) as XtextResource
+		if (getGrammarUri == null) {
+			throw new IllegalStateException("No grammarUri or language name given")
+		}
+		val resource = resourceSet.getResource(URI.createURI(getGrammarUri), true) as XtextResource
 		if (resource.contents.isEmpty) {
-			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.")
+			throw new IllegalArgumentException("Couldn't load grammar for '" + getGrammarUri + "'.")
 		}
 		if (!resource.errors.isEmpty) {
 			LOG.error(resource.errors)
-			throw new IllegalStateException("Problem parsing '" + uri + "':\n" + Joiner.on('\n').join(resource.getErrors()))
+			throw new IllegalStateException("Problem parsing '" + getGrammarUri + "':\n" + Joiner.on('\n').join(resource.getErrors()))
 		}
 
 		val grammar = resource.contents.get(0) as Grammar
