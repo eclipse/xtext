@@ -110,8 +110,8 @@ import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
 import org.eclipse.xtext.ui.validation.ConfigurableIssueCodesPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
-import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -433,7 +433,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	/**
 	 * @since 2.9
 	 */
-	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
-		return EclipseWorkspaceConfigProvider.class;
+	public Class<? extends IProjectConfigProvider> bindWorkspaceConfigProvider() {
+		return EclipseProjectConfigProvider.class;
 	}
 }

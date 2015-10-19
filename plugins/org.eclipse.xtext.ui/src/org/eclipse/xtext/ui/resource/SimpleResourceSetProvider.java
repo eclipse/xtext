@@ -10,6 +10,9 @@ package org.eclipse.xtext.ui.resource;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -22,9 +25,14 @@ public class SimpleResourceSetProvider implements IResourceSetProvider {
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 	
+	@Inject 
+	private EclipseProjectConfigProvider projectConfigProvider;
+	
 	@Override
 	public ResourceSet get(IProject project) {
-		return resourceSetProvider.get();
+		XtextResourceSet xtextResourceSet = resourceSetProvider.get();
+		ProjectConfigAdapter.install(xtextResourceSet, projectConfigProvider.createProjectConfig(project));
+		return xtextResourceSet;
 	}
 
 }
