@@ -8,15 +8,12 @@
 package org.eclipse.xtend.core.parser;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenerator;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrContentAssistGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 
 import com.google.inject.Inject;
 
-/**
- * @author Christian Schneider - Initial contribution and API
- */
-public class XtendAntlrGrammarGenerator extends AntlrGrammarGenerator {
+public class XtendContentAssistAntlrGrammarGenerator extends AntlrContentAssistGrammarGenerator {
 
 	@Inject
 	XtendAntlrGrammarGeneratorHelper helper;

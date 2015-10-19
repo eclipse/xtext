@@ -40,19 +40,6 @@ public class XtendAntlrGrammarGeneratorHelper {
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
   
-  public String compileOptions(final Grammar it, final AntlrOptions options) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
-    _builder.append("options {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("superClass=AbstractInternalAntlrParser;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder.toString();
-  }
-  
   public String compileTokens(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();

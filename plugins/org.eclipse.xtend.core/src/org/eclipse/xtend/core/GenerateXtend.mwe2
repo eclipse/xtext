@@ -81,12 +81,15 @@ Workflow {
 			}
 			fragment = resourceFactory.ResourceFactoryFragment2 {}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+				removeBacktrackingGuards = true
+				lookaheadThreshold = '5'
+				partialParsing = true
+				debugGrammar = true
 				options = auto-inject {}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = DebugAntlrGeneratorFragment auto-inject {
-					options = auto-inject {}
-				}
+			fragment = parser.antlr.XtextAntlrGeneratorComparisonFragment auto-inject {
+				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
+				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
 			}
 			fragment = validation.ValidatorFragment2 {}
 			fragment = formatting.Formatter2Fragment2 {}
@@ -105,20 +108,9 @@ Workflow {
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
 			fragment = ui.compare.CompareFragment2 {}
-			
+
 			fragment = ui.contentAssist.ContentAssistFragment2 {}
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.ContentAssistParserGenerator auto-inject {
-					removeBacktrackingGuards = true
-					lookaheadThreshold = '5'
-					options = auto-inject {}
-					partialParsing = true
-				}
-			}
-			fragment = parser.antlr.XtextAntlrGeneratorComparisonFragment auto-inject {
-				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
-				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
-			}
+
 			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
 				useJdtRefactoring = true
 			}
