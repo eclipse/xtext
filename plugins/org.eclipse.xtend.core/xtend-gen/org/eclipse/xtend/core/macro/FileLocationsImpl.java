@@ -19,9 +19,8 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -33,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class FileLocationsImpl implements FileLocations {
   @Inject
   @Accessors
-  private IWorkspaceConfigProvider projectInformationProvider;
+  private IProjectConfigProvider projectInformationProvider;
   
   @Inject
   @Accessors
@@ -46,8 +45,7 @@ public class FileLocationsImpl implements FileLocations {
     List<String> _segments = path.getSegments();
     final String string = _segments.get(0);
     ResourceSet _resourceSet = this.context.getResourceSet();
-    IWorkspaceConfig _workspaceConfig = this.projectInformationProvider.getWorkspaceConfig(_resourceSet);
-    final IProjectConfig projectConfig = _workspaceConfig.findProjectByName(string);
+    final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(_resourceSet);
     boolean _equals = Objects.equal(projectConfig, null);
     if (_equals) {
       throw new IllegalArgumentException((("The project \'" + string) + "\' has not been configured."));
@@ -123,11 +121,11 @@ public class FileLocationsImpl implements FileLocations {
   }
   
   @Pure
-  public IWorkspaceConfigProvider getProjectInformationProvider() {
+  public IProjectConfigProvider getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
   
-  public void setProjectInformationProvider(final IWorkspaceConfigProvider projectInformationProvider) {
+  public void setProjectInformationProvider(final IProjectConfigProvider projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
   

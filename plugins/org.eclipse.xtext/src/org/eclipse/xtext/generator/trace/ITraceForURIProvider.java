@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 /**
  * Provides read access to the available trace information for generated resources or input resources.
@@ -27,10 +26,10 @@ public interface ITraceForURIProvider {
 	 * @param absoluteDerivedResource
 	 *            the resource whose source trace is requested. May not be <code>null</code>.
 	 * @param context
-	 *            the workspace config for the workspace with the given resource. May not be <code>null</code>.
+	 *            the project that contains the derived resource. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context);
+	ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource, IProjectConfig context);
 
 	/**
 	 * Returns the trace information to the sources that were used as input for the given derived resource. May return
@@ -51,10 +50,10 @@ public interface ITraceForURIProvider {
 	 * @param absoluteSourceResource
 	 *            the resource whose target trace is requested. May not be <code>null</code>.
 	 * @param context
-	 *            the workspace config for the workspace with the given resource. May not be <code>null</code>.
+	 *            the project that contains the derived resource. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource, IWorkspaceConfig context);
+	ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource, IProjectConfig context);
 
 	/**
 	 * Returns the trace information to the targets that were generated from the given source. May return

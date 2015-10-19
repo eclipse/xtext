@@ -8,13 +8,13 @@
 package org.eclipse.xtext.workspace;
 
 import com.google.common.base.Objects;
+import java.io.File;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileSourceFolder;
-import org.eclipse.xtext.workspace.FileWorkspaceConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -23,11 +23,17 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class FileProjectConfig implements IProjectConfig {
-  private final FileWorkspaceConfig parent;
+  private final File root;
   
   private final String name;
   
   private final Set<FileSourceFolder> sourceFolders = CollectionLiterals.<FileSourceFolder>newHashSet();
+  
+  public FileProjectConfig(final File file) {
+    this.root = file;
+    String _name = this.root.getName();
+    this.name = _name;
+  }
   
   public FileSourceFolder addSourceFolder(final String relativePath) {
     FileSourceFolder _xblockexpression = null;
@@ -58,10 +64,7 @@ public class FileProjectConfig implements IProjectConfig {
   
   @Override
   public URI getPath() {
-    URI _createFileURI = URI.createFileURI(this.name);
-    URI _path = this.parent.getPath();
-    URI _resolve = _createFileURI.resolve(_path);
-    return _resolve.appendSegment("");
+    return UriUtil.createFolderURI(this.root);
   }
   
   @Override
@@ -97,9 +100,9 @@ public class FileProjectConfig implements IProjectConfig {
     return _builder.toString();
   }
   
-  public FileProjectConfig(final FileWorkspaceConfig parent, final String name) {
+  public FileProjectConfig(final File root, final String name) {
     super();
-    this.parent = parent;
+    this.root = root;
     this.name = name;
   }
 }

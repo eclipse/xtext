@@ -9,9 +9,8 @@ package org.eclipse.xtext.generator.trace
 
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.workspace.ISourceFolder
 import org.eclipse.xtext.workspace.IProjectConfig
-import org.eclipse.xtext.workspace.IWorkspaceConfig
+import org.eclipse.xtext.workspace.ISourceFolder
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,7 +55,7 @@ class SourceRelativeURI extends AbstractURIWrapper {
 }
 
 /**
- * An absolute URI that allows to obtain a resource in a {@link IWorkspaceConfig workspace}.
+ * An absolute URI that allows to obtain a resource in a {@link IProjectConfig project}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -88,11 +87,6 @@ class AbsoluteURI extends AbstractURIWrapper {
 	def deresolve(IProjectConfig projectConfig) {
 		val sourceFolder = projectConfig.findSourceFolderContaining(URI);
 		return sourceFolder?.deresolve
-	}
-	
-	def deresolve(IWorkspaceConfig workspaceConfig) {
-		val project = workspaceConfig.findProjectContaining(URI);
-		return project?.deresolve
 	}
 	
 	override equals(Object obj) {

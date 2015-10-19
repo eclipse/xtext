@@ -13,11 +13,10 @@ import org.eclipse.xtext.generator.trace.AbstractURIWrapper;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
- * An absolute URI that allows to obtain a resource in a {@link IWorkspaceConfig workspace}.
+ * An absolute URI that allows to obtain a resource in a {@link IProjectConfig project}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -72,16 +71,6 @@ public class AbsoluteURI extends AbstractURIWrapper {
     SourceRelativeURI _deresolve = null;
     if (sourceFolder!=null) {
       _deresolve=this.deresolve(sourceFolder);
-    }
-    return _deresolve;
-  }
-  
-  public SourceRelativeURI deresolve(final IWorkspaceConfig workspaceConfig) {
-    URI _uRI = this.getURI();
-    final IProjectConfig project = workspaceConfig.findProjectContaining(_uRI);
-    SourceRelativeURI _deresolve = null;
-    if (project!=null) {
-      _deresolve=this.deresolve(project);
     }
     return _deresolve;
   }

@@ -30,7 +30,6 @@ import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -148,14 +147,6 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	/**
 	 * Obtain the file representation from the given URI.
 	 */
-	protected SomeFile asFile(AbsoluteURI absoluteURI, IWorkspaceConfig context) {
-		IProjectConfig project = context.findProjectContaining(absoluteURI.getURI());
-		return asFile(absoluteURI, project);
-	}
-	
-	/**
-	 * Obtain the file representation from the given URI.
-	 */
 	protected abstract SomeFile asFile(AbsoluteURI absoluteURI, IProjectConfig project);
 	
 	/**
@@ -192,8 +183,8 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	protected abstract IProjectConfig getProjectConfig(SomeFile sourceFile);
 
 	@Override
-	public Trace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context) {
-		final SomeFile generatedFile = asFile(absoluteDerivedResource, context);
+	public Trace getTraceToSource(AbsoluteURI absoluteDerivedResource, IProjectConfig project) {
+		final SomeFile generatedFile = asFile(absoluteDerivedResource, project);
 		return getTraceToSource(generatedFile);
 	}
 	
@@ -221,8 +212,8 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	}
 
 	@Override
-	public Trace getTraceToTarget(final AbsoluteURI absoluteSourceResource, IWorkspaceConfig context) {
-		final SomeFile sourceFile = asFile(absoluteSourceResource, context);
+	public Trace getTraceToTarget(final AbsoluteURI absoluteSourceResource, IProjectConfig project) {
+		final SomeFile sourceFile = asFile(absoluteSourceResource, project);
 		return getTraceToTarget(sourceFile, absoluteSourceResource, getProjectConfig(sourceFile));
 	}
 

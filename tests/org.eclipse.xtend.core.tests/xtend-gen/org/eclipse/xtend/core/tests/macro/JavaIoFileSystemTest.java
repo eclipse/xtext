@@ -21,9 +21,8 @@ import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.workspace.FileProjectConfig;
-import org.eclipse.xtext.workspace.FileWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -54,32 +53,18 @@ public class JavaIoFileSystemTest {
       final Procedure1<JavaIOFileSystemSupport> _function = new Procedure1<JavaIOFileSystemSupport>() {
         @Override
         public void apply(final JavaIOFileSystemSupport it) {
-          final IWorkspaceConfigProvider _function = new IWorkspaceConfigProvider() {
+          final IProjectConfigProvider _function = new IProjectConfigProvider() {
             @Override
-            public IWorkspaceConfig getWorkspaceConfig(final ResourceSet context) {
-              FileWorkspaceConfig _fileWorkspaceConfig = new FileWorkspaceConfig(tempDir);
-              final Procedure1<FileWorkspaceConfig> _function = new Procedure1<FileWorkspaceConfig>() {
+            public IProjectConfig getProjectConfig(final ResourceSet context) {
+              File _file = new File(tempDir, "foo");
+              FileProjectConfig _fileProjectConfig = new FileProjectConfig(_file);
+              final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
                 @Override
-                public void apply(final FileWorkspaceConfig it) {
-                  FileProjectConfig _addProject = it.addProject("foo");
-                  final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
-                    @Override
-                    public void apply(final FileProjectConfig it) {
-                      it.addSourceFolder("src");
-                    }
-                  };
-                  ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_addProject, _function);
-                  FileProjectConfig _addProject_1 = it.addProject("bar");
-                  final Procedure1<FileProjectConfig> _function_1 = new Procedure1<FileProjectConfig>() {
-                    @Override
-                    public void apply(final FileProjectConfig it) {
-                      it.addSourceFolder("src");
-                    }
-                  };
-                  ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_addProject_1, _function_1);
+                public void apply(final FileProjectConfig it) {
+                  it.addSourceFolder("src");
                 }
               };
-              return ObjectExtensions.<FileWorkspaceConfig>operator_doubleArrow(_fileWorkspaceConfig, _function);
+              return ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig, _function);
             }
           };
           it.setWorkspaceConfigProvider(_function);
@@ -98,15 +83,11 @@ public class JavaIoFileSystemTest {
   }
   
   protected Object createProject(final String name) {
-    File _xblockexpression = null;
-    {
-      Path _path = new Path(name);
-      URI _uRI = this.fs.toURI(_path);
-      final File file = new File(_uRI);
-      file.mkdirs();
-      _xblockexpression = file;
-    }
-    return _xblockexpression;
+    Path _path = new Path(name);
+    URI _uRI = this.fs.toURI(_path);
+    final File file = new File(_uRI);
+    file.mkdirs();
+    return file;
   }
   
   @Test
@@ -215,19 +196,6 @@ public class JavaIoFileSystemTest {
     Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
     int _size = IterableExtensions.size(_children_1);
     Assert.assertEquals(_join, 1, _size);
-    this.createProject("bar");
-    Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
-    final Function1<Path, CharSequence> _function_1 = new Function1<Path, CharSequence>() {
-      @Override
-      public CharSequence apply(final Path it) {
-        List<String> _segments = it.getSegments();
-        return IterableExtensions.join(_segments, ".");
-      }
-    };
-    String _join_1 = IterableExtensions.join(_children_2, "[", ", ", "]", _function_1);
-    Iterable<? extends Path> _children_3 = this.fs.getChildren(Path.ROOT);
-    int _size_1 = IterableExtensions.size(_children_3);
-    Assert.assertEquals(_join_1, 2, _size_1);
   }
   
   @Test
@@ -331,22 +299,19 @@ public class JavaIoFileSystemTest {
   @Test
   public void testWorkspaceIsFolder() {
     boolean _isFolder = this.fs.isFolder(Path.ROOT);
-    Assert.assertFalse(_isFolder);
+    Assert.assertTrue(_isFolder);
   }
   
   @Test
   public void testWorkspaceIsFile() {
-    boolean _isFolder = this.fs.isFolder(Path.ROOT);
-    Assert.assertFalse(_isFolder);
+    boolean _isFile = this.fs.isFile(Path.ROOT);
+    Assert.assertFalse(_isFile);
   }
   
   @Test
   public void testGetWorkspaceLastModification() {
     long _lastModification = this.fs.getLastModification(Path.ROOT);
     Assert.assertEquals(0L, _lastModification);
-    this.createProject("bar");
-    long _lastModification_1 = this.fs.getLastModification(Path.ROOT);
-    Assert.assertEquals(0L, _lastModification_1);
   }
   
   @Test

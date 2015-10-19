@@ -12,6 +12,8 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiElement
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.psi.XtextPsiUtils
+import com.intellij.openapi.module.Module
+import com.intellij.openapi.module.ModuleUtilCore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,6 +27,10 @@ class VirtualFileInProject {
 			return null
 
 		return new VirtualFileInProject(virtualFile, element.project)
+	}
+	
+	def Module getModule() {
+		return ModuleUtilCore.findModuleForFile(file, project)
 	}
 	
 	VirtualFile file

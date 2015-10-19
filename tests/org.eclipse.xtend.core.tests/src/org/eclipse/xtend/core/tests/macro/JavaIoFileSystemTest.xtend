@@ -16,7 +16,7 @@ import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.workspace.FileWorkspaceConfig
+import org.eclipse.xtext.workspace.FileProjectConfig
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -37,13 +37,8 @@ class JavaIoFileSystemTest {
 		val tempDir = temporaryFolder.newFolder()
 		fs = new JavaIOFileSystemSupport => [
 			workspaceConfigProvider = [ context |
-				new FileWorkspaceConfig(tempDir) => [
-					addProject("foo") => [
-						addSourceFolder("src")
-					]
-					addProject("bar") => [
-						addSourceFolder("src")
-					]
+				new FileProjectConfig(new File(tempDir,"foo")) => [
+					addSourceFolder("src")
 				]
 			]
 			encodingProvider = new IEncodingProvider.Runtime()
@@ -55,7 +50,7 @@ class JavaIoFileSystemTest {
 	protected def Object createProject(String name) {
 		val file = new File(new Path(name).toURI)
 		file.mkdirs
-		file
+		return file
 	}
 
 	@Test def void testMakeAndDeleteFolder() {
@@ -121,10 +116,6 @@ class JavaIoFileSystemTest {
 
 	@Test def void testGetWorkspaceChildren() {
 		assertEquals(Path.ROOT.children.join('[', ', ', ']')[it.segments.join('.')], 1, Path.ROOT.children.size)
-
-		createProject('bar')
-
-		assertEquals(Path.ROOT.children.join('[', ', ', ']')[it.segments.join('.')], 2, Path.ROOT.children.size)
 	}
 
 	@Test def void testGetProjectChildren() {
@@ -195,17 +186,14 @@ class JavaIoFileSystemTest {
 	}
 
 	@Test def void testWorkspaceIsFolder() {
-		assertFalse(Path.ROOT.folder)
+		assertTrue(Path.ROOT.folder)
 	}
 
 	@Test def void testWorkspaceIsFile() {
-		assertFalse(Path.ROOT.folder)
+		assertFalse(Path.ROOT.file)
 	}
 
 	@Test def void testGetWorkspaceLastModification() {
-		assertEquals(0L, Path.ROOT.lastModification)
-
-		createProject('bar')
 		assertEquals(0L, Path.ROOT.lastModification)
 	}
 

@@ -8,31 +8,25 @@
 package org.eclipse.xtext.idea.filesystem;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig;
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfig;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 
 @SuppressWarnings("all")
-public class IdeaWorkspaceConfigProvider implements IWorkspaceConfigProvider {
+public class IdeaProjectConfigProvider implements IProjectConfigProvider {
   @Override
-  public IdeaWorkspaceConfig getWorkspaceConfig(final ResourceSet context) {
+  public IdeaProjectConfig getProjectConfig(final ResourceSet context) {
     if ((context instanceof XtextResourceSet)) {
       final Object uriContext = ((XtextResourceSet)context).getClasspathURIContext();
       if ((uriContext instanceof Module)) {
-        return this.getWorkspaceConfig(((Module)uriContext));
+        return this.getProjectConfig(((Module)uriContext));
       }
     }
     throw new IllegalArgumentException("Could not determine the project");
   }
   
-  public IdeaWorkspaceConfig getWorkspaceConfig(final Module module) {
-    Project _project = module.getProject();
-    return this.getWorkspaceConfig(_project);
-  }
-  
-  public IdeaWorkspaceConfig getWorkspaceConfig(final Project project) {
-    return new IdeaWorkspaceConfig(project);
+  public IdeaProjectConfig getProjectConfig(final Module module) {
+    return new IdeaProjectConfig(module);
   }
 }

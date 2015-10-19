@@ -1,12 +1,19 @@
 package org.eclipse.xtend.core.compiler.batch;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.addAll;
+import static com.google.common.collect.Iterables.concat;
+import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.util.Strings.concat;
+import static org.eclipse.xtext.util.Strings.isEmpty;
 
 import java.io.CharArrayWriter;
 import java.io.Closeable;
@@ -31,7 +38,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
-import org.eclipse.xtext.util.internal.AlternateJdkLoader;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.Constants;
@@ -59,12 +65,12 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.UriUtil;
+import org.eclipse.xtext.util.internal.AlternateJdkLoader;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.FileProjectConfig;
-import org.eclipse.xtext.workspace.FileWorkspaceConfig;
-import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
@@ -165,7 +171,7 @@ public class XtendBatchCompiler {
 
 	private ClassLoader annotationProcessingClassLoader;
 
-	private FileWorkspaceConfig workspaceConfig;
+	private FileProjectConfig projectConfig;
 
 	private OutputConfiguration outputConfiguration;
 
@@ -347,8 +353,8 @@ public class XtendBatchCompiler {
 	/**
 	 * @noreference Only for testing
 	 */
-	public FileWorkspaceConfig getWorkspaceConfig() {
-		return workspaceConfig;
+	public FileProjectConfig getProjectConfig() {
+		return projectConfig;
 	}
 
 	private boolean configureWorkspace(ResourceSet resourceSet) {
@@ -370,8 +376,7 @@ public class XtendBatchCompiler {
 			log.error("(Output folder: '" + outputFile + "')");
 			return false;
 		}
-		workspaceConfig = new FileWorkspaceConfig(commonRoot.getParentFile());
-		FileProjectConfig projectConfig = workspaceConfig.addProject(commonRoot.getName());
+		projectConfig = new FileProjectConfig(commonRoot, commonRoot.getName());
 
 		java.net.URI commonURI = commonRoot.toURI();
 		java.net.URI relativizedTarget = commonURI.relativize(outputFile.toURI());
@@ -393,7 +398,7 @@ public class XtendBatchCompiler {
 		}
 		Map<String, Set<OutputConfiguration>> outputConfigurations = newHashMap();
 		outputConfigurations.put(languageName, newHashSet(outputConfiguration));
-		resourceSet.eAdapters().add(new WorkspaceConfigAdapter(workspaceConfig));
+		new ProjectConfigAdapter(projectConfig).attachToEmfObject(resourceSet);
 		resourceSet.eAdapters().add(new OutputConfigurationAdapter(outputConfigurations));
 		return true;
 	}

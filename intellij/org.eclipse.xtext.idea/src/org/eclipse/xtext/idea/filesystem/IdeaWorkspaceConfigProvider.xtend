@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.filesystem
 
-import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
-import com.intellij.openapi.module.ModuleManager
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.SourceFolder
@@ -22,94 +19,41 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.workspace.IProjectConfigProvider
 import org.eclipse.xtext.workspace.ISourceFolder
-import org.eclipse.xtext.workspace.IWorkspaceConfig
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 import static extension com.intellij.ide.projectView.impl.ProjectRootsUtil.*
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
 import static extension org.eclipse.xtext.util.UriUtil.*
-import com.intellij.openapi.diagnostic.Logger
+import org.eclipse.xtend.lib.annotations.Accessors
 
-class IdeaWorkspaceConfigProvider implements IWorkspaceConfigProvider {
+class IdeaProjectConfigProvider implements IProjectConfigProvider {
 
-	override IdeaWorkspaceConfig getWorkspaceConfig(ResourceSet context) {
+	override IdeaProjectConfig getProjectConfig(ResourceSet context) {
 		if (context instanceof XtextResourceSet) {
 			val uriContext = context.classpathURIContext
 			if (uriContext instanceof Module)
-				return uriContext.workspaceConfig
+				return uriContext.projectConfig
 		}
 		throw new IllegalArgumentException("Could not determine the project")
 	}
 	
-	def IdeaWorkspaceConfig getWorkspaceConfig(Module module) {
-		module.project.workspaceConfig
-	}
-	
-	def IdeaWorkspaceConfig getWorkspaceConfig(Project project) {
-		new IdeaWorkspaceConfig(project)
-	}
-
-}
-
-@Data
-class IdeaWorkspaceConfig implements IWorkspaceConfig {
-	
-	static val LOGGER = Logger.getInstance(IdeaWorkspaceConfig)
-
-	val Project project
-	
-	override getProjects() {
-		ApplicationManager.application.<Module[]>runReadAction[
-			ModuleManager.getInstance(project).modules
-		].map[toIdeaModuleConfig].toSet
-	}
-
-	override IdeaModuleConfig findProjectByName(String name) {
-		ApplicationManager.application.<Module>runReadAction[
-			ModuleManager.getInstance(project).findModuleByName(name)	
-		].toIdeaModuleConfig
-	}
-	
-	protected def toIdeaModuleConfig(Module module) {
-		if (module == null) return null
-
-		val contentRoot = module.defaultContentRoot
-		if (contentRoot == null) return null
-
-		return new IdeaModuleConfig(module, contentRoot)
-	}
-
-	override IdeaModuleConfig findProjectContaining(URI member) {
-		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
-		if (file == null) return null
-			
-		val fileIndex = ProjectRootManager.getInstance(project).fileIndex
-		val module = fileIndex.getModuleForFile(file, false)
-		if (module == null) return null
-		
-		val contentRoot = fileIndex.getContentRootForFile(file, false)
-		if (contentRoot == null) return null
-		
-		val defaultContentRoot = module.defaultContentRoot
-		if (contentRoot != defaultContentRoot)
-			LOGGER.error('''The file («member») should belong to the first content root («defaultContentRoot») but belongs to «contentRoot».''')
-			
-		return new IdeaModuleConfig(module, contentRoot)
-	}
-	
-	protected def getDefaultContentRoot(Module module) {
-		ModuleRootManager.getInstance(module).contentRoots.head
+	def IdeaProjectConfig getProjectConfig(Module module) {
+		return new IdeaProjectConfig(module)
 	}
 	
 }
 
-@Data
-class IdeaModuleConfig implements IProjectConfig {
+@Accessors class IdeaProjectConfig implements IProjectConfig {
 
 	val Module module
 	
 	val VirtualFile contentRoot
+	
+	new (Module module) {
+		this.module = module
+		this.contentRoot = ModuleRootManager.getInstance(module).contentRoots.head
+	}
 
 	override IdeaSourceFolder findSourceFolderContaining(URI member) {
 		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
