@@ -362,11 +362,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("import org.eclipse.xtext.ui.generator.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("var baseName = \"");
-    String _name = this.getName();
-    _builder.append(_name, "");
-    _builder.append("\"");
-    _builder.newLineIfNotEmpty();
     _builder.append("var rootPath = \"..\"");
     _builder.newLine();
     _builder.newLine();
@@ -381,7 +376,16 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("configuration = {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("project = WizardConfig auto-inject {");
+    _builder.append("project = WizardConfig {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("baseName = \"");
+    String _name = this.getName();
+    _builder.append(_name, "\t\t\t\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
+    _builder.append("rootPath = rootPath");
     _builder.newLine();
     {
       boolean _isEnabled = this.testProject.isEnabled();
@@ -551,25 +555,24 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("language = StandardLanguage {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("uri = \"platform:/resource/${baseName}/");
-    String _sourceFolder = this.sourceFolder(Outlet.MAIN_JAVA);
-    _builder.append(_sourceFolder, "\t\t\t");
-    _builder.append("/");
-    String _grammarFilePath = this.getGrammarFilePath();
-    _builder.append(_grammarFilePath, "\t\t\t");
+    _builder.append("name = \"");
+    WizardConfiguration _config_12 = this.getConfig();
+    LanguageDescriptor _language_2 = _config_12.getLanguage();
+    String _name_1 = _language_2.getName();
+    _builder.append(_name_1, "\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("fileExtensions = \"");
-    WizardConfiguration _config_12 = this.getConfig();
-    LanguageDescriptor _language_2 = _config_12.getLanguage();
-    LanguageDescriptor.FileExtensions _fileExtensions = _language_2.getFileExtensions();
+    WizardConfiguration _config_13 = this.getConfig();
+    LanguageDescriptor _language_3 = _config_13.getLanguage();
+    LanguageDescriptor.FileExtensions _fileExtensions = _language_3.getFileExtensions();
     _builder.append(_fileExtensions, "\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     {
-      WizardConfiguration _config_13 = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext = _config_13.getEcore2Xtext();
+      WizardConfiguration _config_14 = this.getConfig();
+      Ecore2XtextConfiguration _ecore2Xtext = _config_14.getEcore2Xtext();
       Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
       boolean _isEmpty = _ePackageInfos.isEmpty();
       boolean _not_1 = (!_isEmpty);
@@ -580,8 +583,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("standaloneSetup = {");
         _builder.newLine();
         {
-          WizardConfiguration _config_14 = this.getConfig();
-          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_14.getEcore2Xtext();
+          WizardConfiguration _config_15 = this.getConfig();
+          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_15.getEcore2Xtext();
           Set<EPackageInfo> _ePackageInfos_1 = _ecore2Xtext_1.getEPackageInfos();
           final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
             @Override
@@ -633,27 +636,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
       }
     }
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// generates Java API for the generated EPackages");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("emfGenerator = {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("javaModelDirectory = \"/${baseName}/");
-    String _sourceFolder_1 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
-    _builder.append(_sourceFolder_1, "\t\t\t\t");
-    _builder.append("\"");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t");
-    _builder.append("updateBuildProperties = ");
-    boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
-    _builder.append(_isEclipsePluginProject_1, "\t\t\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("serializer = {");

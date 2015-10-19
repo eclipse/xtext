@@ -155,14 +155,15 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			import org.eclipse.xtext.generator.*
 			import org.eclipse.xtext.ui.generator.*
 			
-			var baseName = "«name»"
 			var rootPath = ".."
 			
 			Workflow {
 				
 				component = XtextGenerator {
 					configuration = {
-						project = WizardConfig auto-inject {
+						project = WizardConfig {
+							baseName = "«name»"
+							rootPath = rootPath
 							«IF testProject.enabled»
 								runtimeTest = {
 									enabled = true
@@ -208,7 +209,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						}
 					}
 					language = StandardLanguage {
-						uri = "platform:/resource/${baseName}/«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
+						name = "«config.language.name»"
 						fileExtensions = "«config.language.fileExtensions»"
 						«IF !config.ecore2Xtext.EPackageInfos.empty»
 							
@@ -228,12 +229,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							}
 						«ENDIF»
 
-						// generates Java API for the generated EPackages
-						emfGenerator = {
-							javaModelDirectory = "/${baseName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
-							updateBuildProperties = «isEclipsePluginProject»
-						}
-			
 						serializer = {
 							generateStub = false
 						}
