@@ -119,12 +119,9 @@ public class ClasspathScanner {
       final Function1<String, Iterable<ITypeDescriptor>> _function = new Function1<String, Iterable<ITypeDescriptor>>() {
         @Override
         public Iterable<ITypeDescriptor> apply(final String path) {
-          try {
-            URI _uRI = new URI("file", null, path, null);
-            return ClasspathScanner.this.getDescriptors(_uRI, packagePrefixes);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+          File _file = new File(path);
+          URI _uRI = _file.toURI();
+          return ClasspathScanner.this.getDescriptors(_uRI, packagePrefixes);
         }
       };
       Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<String, Iterable<ITypeDescriptor>>map(_split, _function);

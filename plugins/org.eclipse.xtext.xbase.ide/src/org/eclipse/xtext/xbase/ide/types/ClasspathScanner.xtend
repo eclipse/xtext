@@ -77,7 +77,7 @@ class ClasspathScanner {
 		if (classpath === null)
 			return Collections.emptyList
 		PROPERTY_CLASSPATH_SPLITTER.split(classpath).map[ path |
-			getDescriptors(new URI('file', null, path, null), packagePrefixes)
+			getDescriptors(new File(path).toURI, packagePrefixes)
 		].flatten
 	}
 	
