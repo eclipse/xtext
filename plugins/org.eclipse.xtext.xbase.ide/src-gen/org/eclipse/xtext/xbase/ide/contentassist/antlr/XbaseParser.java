@@ -7,34 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ide.contentassist.antlr;
 
+import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.Map;
 import java.util.HashMap;
-
+import java.util.Map;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-
-import com.google.inject.Inject;
-
+import org.eclipse.xtext.xbase.ide.contentassist.antlr.internal.InternalXbaseParser;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 public class XbaseParser extends AbstractContentAssistParser {
-	
+
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
-	
+
 	private Map<AbstractElement, String> nameMappings;
-	
+
 	@Override
-	protected org.eclipse.xtext.xbase.ide.contentassist.antlr.internal.InternalXbaseParser createParser() {
-		org.eclipse.xtext.xbase.ide.contentassist.antlr.internal.InternalXbaseParser result = new org.eclipse.xtext.xbase.ide.contentassist.antlr.internal.InternalXbaseParser(null);
+	protected InternalXbaseParser createParser() {
+		InternalXbaseParser result = new InternalXbaseParser(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
-	
+
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
@@ -408,27 +406,27 @@ public class XbaseParser extends AbstractContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-	
+
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
-			org.eclipse.xtext.xbase.ide.contentassist.antlr.internal.InternalXbaseParser typedParser = (org.eclipse.xtext.xbase.ide.contentassist.antlr.internal.InternalXbaseParser) parser;
+			InternalXbaseParser typedParser = (InternalXbaseParser) parser;
 			typedParser.entryRuleXExpression();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
-		}		
+		}
 	}
-	
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
 	}
-	
+
 	public XbaseGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(XbaseGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}

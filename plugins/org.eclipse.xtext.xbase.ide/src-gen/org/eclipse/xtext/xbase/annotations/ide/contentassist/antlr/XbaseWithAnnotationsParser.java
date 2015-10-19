@@ -7,34 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr;
 
+import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.Map;
 import java.util.HashMap;
-
+import java.util.Map;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-
-import com.google.inject.Inject;
-
+import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsParser;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 
 public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
-	
+
 	@Inject
 	private XbaseWithAnnotationsGrammarAccess grammarAccess;
-	
+
 	private Map<AbstractElement, String> nameMappings;
-	
+
 	@Override
-	protected org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsParser createParser() {
-		org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsParser result = new org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsParser(null);
+	protected InternalXbaseWithAnnotationsParser createParser() {
+		InternalXbaseWithAnnotationsParser result = new InternalXbaseWithAnnotationsParser(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
-	
+
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
@@ -443,27 +441,27 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-	
+
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
-			org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsParser typedParser = (org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsParser) parser;
+			InternalXbaseWithAnnotationsParser typedParser = (InternalXbaseWithAnnotationsParser) parser;
 			typedParser.entryRuleXAnnotation();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
-		}		
+		}
 	}
-	
+
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
 	}
-	
+
 	public XbaseWithAnnotationsGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(XbaseWithAnnotationsGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}

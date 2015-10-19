@@ -80,6 +80,7 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension SemanticSequencerExtensions
 	@Inject extension SyntacticSequencerExtensions
 	@Inject extension GrammarAccessExtensions
+	@Inject extension SyntheticTerminalDetector syntheticTerminalDetector
 	@Inject extension IGrammarConstraintProvider
 	@Inject DebugGraphGenerator debugGraphGenerator
 	@Inject FileAccessFactory fileAccessFactory
@@ -90,9 +91,6 @@ class SerializerFragment2 extends AbstractGeneratorFragment2 {
 	@Accessors boolean generateSupportForDeprecatedContextObject = false
 	
 	boolean detectSyntheticTerminals = true
-	
-	@Accessors
-	extension SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector
 	
 	/**
 	 * Set to false if synthetic terminal should be ignored. Synthetic terminals

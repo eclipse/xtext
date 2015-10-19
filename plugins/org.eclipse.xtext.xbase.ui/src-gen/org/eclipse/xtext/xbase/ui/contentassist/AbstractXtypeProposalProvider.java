@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-@SuppressWarnings("all")
 public class AbstractXtypeProposalProvider extends AbstractJavaBasedContentProposalProvider {
 
 	public void completeXFunctionTypeRef_ParamTypes(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

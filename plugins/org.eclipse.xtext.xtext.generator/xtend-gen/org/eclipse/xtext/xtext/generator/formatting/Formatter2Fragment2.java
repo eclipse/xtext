@@ -68,7 +68,7 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
   private GrammarAccessExtensions _grammarAccessExtensions;
   
   @Accessors
-  private boolean generateStub;
+  private boolean generateStub = true;
   
   protected TypeReference getFormatter2Stub(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);

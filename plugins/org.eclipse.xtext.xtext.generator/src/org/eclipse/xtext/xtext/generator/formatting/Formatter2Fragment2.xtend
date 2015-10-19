@@ -45,7 +45,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension GrammarAccessExtensions
 	
-	@Accessors boolean generateStub
+	@Accessors boolean generateStub = true
 	
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + getSimpleName(grammar) + 'Formatter')

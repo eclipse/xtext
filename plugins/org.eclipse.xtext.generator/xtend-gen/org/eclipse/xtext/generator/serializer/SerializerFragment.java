@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.serializer;
 import com.google.inject.Binder;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
@@ -144,6 +145,14 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     Naming _naming = this.getNaming();
     Generator2AdapterSetup _generator2AdapterSetup = new Generator2AdapterSetup(config, ctx, _naming);
     this.adapterSetup = _generator2AdapterSetup;
+    final Module _function = new Module() {
+      @Override
+      public void configure(final Binder it) {
+        AnnotatedBindingBuilder<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector> _bind = it.<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector>bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector.class);
+        _bind.toInstance(SerializerFragment.this.syntheticTerminalDetector);
+      }
+    };
+    this.adapterSetup.setAdditionalLanguageBindings(_function);
     super.generate(config, ctx);
   }
   
@@ -153,7 +162,6 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     boolean _isGenerateStub = this.isGenerateStub();
     delegate.setGenerateStub(_isGenerateStub);
     delegate.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
-    delegate.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
     delegate.setGenerateDebugData(this.generateDebugData);
     Injector _injector = this.adapterSetup.getInjector();
     CodeConfig _instance = _injector.<CodeConfig>getInstance(CodeConfig.class);

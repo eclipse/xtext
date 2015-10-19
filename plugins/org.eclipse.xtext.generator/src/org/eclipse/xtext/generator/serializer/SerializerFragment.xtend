@@ -109,6 +109,10 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	
 	override generate(LanguageConfig config, XpandExecutionContext ctx) {
 		adapterSetup = new Generator2AdapterSetup(config, ctx, naming)
+		adapterSetup.additionalLanguageBindings = [
+			bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector)
+				.toInstance(syntheticTerminalDetector)
+		]
 		super.generate(config, ctx)
 	}
 	
@@ -116,7 +120,6 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 		val delegate = new SerializerFragment2
 		delegate.generateStub = isGenerateStub
 		delegate.detectSyntheticTerminals = detectSyntheticTerminals
-		delegate.syntheticTerminalDetector = syntheticTerminalDetector
 		delegate.generateDebugData = generateDebugData
 		adapterSetup.injector.getInstance(CodeConfig).preferXtendStubs = isGenerateXtendStub
 		delegate.initialize(adapterSetup.injector)

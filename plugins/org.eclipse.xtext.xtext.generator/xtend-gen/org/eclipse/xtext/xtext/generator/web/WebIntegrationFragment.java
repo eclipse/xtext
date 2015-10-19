@@ -51,7 +51,7 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.web.RegexpExtensions;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
@@ -90,8 +90,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
-  @Extension
-  private GrammarNaming _grammarNaming;
+  private ContentAssistGrammarNaming caNaming;
   
   @Inject
   @Extension
@@ -431,8 +430,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append(_typeRef_1, "");
         _builder.append(".CONTENT_ASSIST)).to(");
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        TypeReference _internalContentAssistLexerClass = WebIntegrationFragment.this._grammarNaming.getInternalContentAssistLexerClass(_grammar);
-        _builder.append(_internalContentAssistLexerClass, "");
+        TypeReference _lexerClass = WebIntegrationFragment.this.caNaming.getLexerClass(_grammar);
+        _builder.append(_lexerClass, "");
         _builder.append(".class);");
       }
     };
@@ -441,8 +440,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     GuiceModuleAccess.BindingFactory _addConfiguredBinding = _bindingFactory.addConfiguredBinding("ContentAssistLexer", lexerStatement);
     TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
     Grammar _grammar = this.getGrammar();
-    TypeReference _contentAssistParserClass = this._grammarNaming.getContentAssistParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _contentAssistParserClass);
+    TypeReference _parserClass = this.caNaming.getParserClass(_grammar);
+    GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
     ILanguageConfig _language_1 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
     _addTypeToType.contributeTo(_webGenModule);

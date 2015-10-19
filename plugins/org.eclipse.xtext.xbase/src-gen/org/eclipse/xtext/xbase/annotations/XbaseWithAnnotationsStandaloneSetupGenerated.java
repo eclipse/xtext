@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.annotations;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.IResourceFactory;

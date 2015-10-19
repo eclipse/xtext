@@ -57,7 +57,9 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		addComposedCheck("org.eclipse.xtext.validation.NamesAreUniqueValidator")
 	]
 	
-	Formatter2Fragment2 formatter = new Formatter2Fragment2 
+	Formatter2Fragment2 formatter = new Formatter2Fragment2  => [
+		generateStub = false
+	]
 	
 	GeneratorFragment2 generator = new GeneratorFragment2 
 	

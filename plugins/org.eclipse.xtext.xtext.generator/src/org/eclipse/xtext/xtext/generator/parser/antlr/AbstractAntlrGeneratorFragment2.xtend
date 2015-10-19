@@ -10,6 +10,9 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import com.google.common.collect.Iterators
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import java.io.CharArrayWriter
+import java.io.PrintWriter
+import java.nio.charset.Charset
 import java.util.Collections
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractRule
@@ -32,6 +35,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuar
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover
 
 abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	@Inject @Accessors(PROTECTED_GETTER) AntlrToolFacade antlrTool
@@ -156,7 +160,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		fsa.generateFile(tokenFile, content)
 	}
 
-	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer, TypeReference parser) {
+	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, TypeReference parser, TypeReference lexer) {
 		improveCodeQuality(fsa, lexer, parser)
 		if (getOptions().isClassSplitting()) {
 			splitLexerClassFile(fsa, lexer)
@@ -174,6 +178,50 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, options)
 		fsa.generateFile(parser.javaPath, parserContent)
+	}
+	
+	def protected void cleanupLexerTokensFile(AntlrGrammar lexerGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
+		if (options.backtrackLexer) {
+			val provider = createLexerTokensProvider(lexerGrammar, helper, fsa)
+			val entries = provider.tokenDefMap.entrySet.iterator
+			while (entries.hasNext) {
+				val value = entries.next.value
+				if(!helper.isKeywordRule(value) && !value.startsWith("RULE_") && !value.startsWith("SUPER_")) 
+					entries.remove
+			}
+			val writer = new CharArrayWriter
+			provider.writeTokenFile(new PrintWriter(writer))
+			fsa.generateFile(lexerGrammar.tokensFileName, new String(writer.toCharArray))
+		}
+	}
+
+	def protected MutableTokenDefProvider createLexerTokensProvider(AntlrGrammar lexerGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
+		val provider = new MutableTokenDefProvider(helper, Charset.forName(codeConfig.encoding))
+		provider.antlrTokenFileProvider = [fsa.readBinaryFile(lexerGrammar.tokensFileName)]
+		return provider
+	}
+	
+	def protected void cleanupParserTokensFile(AntlrGrammar lexerGrammar, AntlrGrammar parserGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
+		val provider= createLexerTokensProvider(lexerGrammar, helper, fsa) 
+		for (entry : provider.tokenDefMap.entrySet) {
+			val value = entry.value 
+			if (helper.isKeywordRule(value)) {
+				val keywordAsAntlrString = AntlrGrammarGenUtil.toAntlrString(helper.getKeywordValue(value)) 
+				entry.setValue("'" + keywordAsAntlrString + "'") 
+			} else if (value.startsWith("'")) {
+				entry.setValue("'" + AntlrGrammarGenUtil.toAntlrString(value) + "'") 
+			}
+		}
+		val writer = new CharArrayWriter
+		provider.writeTokenFile(new PrintWriter(writer))
+		fsa.generateFile(parserGrammar.tokensFileName, new String(writer.toCharArray))
+	}
+	
+	def protected void removeBackTrackingGuards(IXtextGeneratorFileSystemAccess fsa, TypeReference parser, int lookaheadThreshold) {
+		val content = fsa.readTextFile(parser.javaPath).toString
+		val remover = new BacktrackingGuardRemover(content, lookaheadThreshold)
+		val newContent = remover.transform
+		fsa.generateFile(parser.javaPath, newContent)
 	}
 
 	def protected boolean containsUnorderedGroup(Grammar grammar) {

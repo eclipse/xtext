@@ -26,13 +26,6 @@ class XtendAntlrGrammarGeneratorHelper {
 	
 	@Inject
 	extension GrammarAccessExtensions
-	
-	def String compileOptions(Grammar it, AntlrOptions options) '''
-		
-		options {
-			superClass=AbstractInternalAntlrParser;
-		}
-	'''
 
 	def String compileTokens(Grammar it, AntlrOptions options) '''
 		

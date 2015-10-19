@@ -7,16 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.parser.antlr
 
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.model.TypeReference
-
-import static extension org.eclipse.xtext.GrammarUtil.*
 
 class DebugGrammarNaming extends GrammarNaming {
+
+	override getInternalParserSuperClass(Grammar it) {
+		null
+	}
 	
-	override getGrammarClass(Grammar it) {
-		new TypeReference(internalParserPackage, '''DebugInternal«simpleName»''')
+	override isCombinedGrammar(Grammar it) {
+		true
+	}
+	
+	override protected getGrammarNamePrefix(Grammar it) {
+		"Debug"
 	}
 	
 }

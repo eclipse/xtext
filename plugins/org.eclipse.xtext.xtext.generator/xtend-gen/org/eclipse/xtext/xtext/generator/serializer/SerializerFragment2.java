@@ -128,6 +128,10 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   @Extension
+  private SyntheticTerminalDetector syntheticTerminalDetector;
+  
+  @Inject
+  @Extension
   private IGrammarConstraintProvider _iGrammarConstraintProvider;
   
   @Inject
@@ -149,10 +153,6 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   private boolean generateSupportForDeprecatedContextObject = false;
   
   private boolean detectSyntheticTerminals = true;
-  
-  @Accessors
-  @Extension
-  private SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector();
   
   /**
    * Set to false if synthetic terminal should be ignored. Synthetic terminals
@@ -1873,14 +1873,5 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   public void setGenerateSupportForDeprecatedContextObject(final boolean generateSupportForDeprecatedContextObject) {
     this.generateSupportForDeprecatedContextObject = generateSupportForDeprecatedContextObject;
-  }
-  
-  @Pure
-  public SyntheticTerminalDetector getSyntheticTerminalDetector() {
-    return this.syntheticTerminalDetector;
-  }
-  
-  public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
-    this.syntheticTerminalDetector = syntheticTerminalDetector;
   }
 }
