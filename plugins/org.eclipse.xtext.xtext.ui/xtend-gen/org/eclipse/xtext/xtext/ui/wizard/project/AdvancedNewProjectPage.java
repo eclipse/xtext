@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
@@ -248,9 +249,9 @@ public class AdvancedNewProjectPage extends WizardPage {
     if (!_selection) {
       _and = false;
     } else {
-      int _selectionIndex = this.sourceLayout.getSelectionIndex();
-      boolean _notEquals = (_selectionIndex != 0);
-      _and = _notEquals;
+      boolean _isSelected = this.isSelected(this.sourceLayout, SourceLayout.PLAIN);
+      boolean _not = (!_isSelected);
+      _and = _not;
     }
     if (_and) {
       if ((this.createUiProject == source)) {
@@ -268,7 +269,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure0 _function = new Procedure0() {
           @Override
           public void apply() {
-            AdvancedNewProjectPage.this.sourceLayout.select(0);
+            AdvancedNewProjectPage.this.select(AdvancedNewProjectPage.this.sourceLayout, SourceLayout.PLAIN);
           }
         };
         this.<Control>reportIssue(IMessageProvider.ERROR, _builder.toString(), _function);
@@ -298,9 +299,8 @@ public class AdvancedNewProjectPage extends WizardPage {
     if (!_selection_1) {
       _and_1 = false;
     } else {
-      int _selectionIndex_1 = this.preferredBuildSystem.getSelectionIndex();
-      boolean _equals = (_selectionIndex_1 == 0);
-      _and_1 = _equals;
+      boolean _isSelected_1 = this.isSelected(this.preferredBuildSystem, BuildSystem.ECLIPSE);
+      _and_1 = _isSelected_1;
     }
     if (_and_1) {
       if ((this.preferredBuildSystem == source)) {
@@ -332,7 +332,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure0 _function_3 = new Procedure0() {
           @Override
           public void apply() {
-            AdvancedNewProjectPage.this.preferredBuildSystem.select(2);
+            AdvancedNewProjectPage.this.select(AdvancedNewProjectPage.this.preferredBuildSystem, BuildSystem.GRADLE);
           }
         };
         this.<Control>reportIssue(IMessageProvider.WARNING, _builder_3.toString(), _function_3);
@@ -341,8 +341,8 @@ public class AdvancedNewProjectPage extends WizardPage {
     final List<Button> dependend = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
     boolean _and_2 = false;
     boolean _selection_2 = this.createIdeProject.getSelection();
-    boolean _not = (!_selection_2);
-    if (!_not) {
+    boolean _not_1 = (!_selection_2);
+    if (!_not_1) {
       _and_2 = false;
     } else {
       final Function1<Button, Boolean> _function_4 = new Function1<Button, Boolean>() {
@@ -415,33 +415,51 @@ public class AdvancedNewProjectPage extends WizardPage {
       }
     }
     boolean _and_3 = false;
-    String _string = BuildSystem.MAVEN.toString();
-    String _text_9 = this.preferredBuildSystem.getText();
-    boolean _equals_1 = Objects.equal(_string, _text_9);
-    if (!_equals_1) {
+    boolean _isSelected_2 = this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN);
+    if (!_isSelected_2) {
       _and_3 = false;
     } else {
       boolean _isBundleResolved = this.isBundleResolved("org.eclipse.m2e.maven.runtime");
-      boolean _not_1 = (!_isBundleResolved);
-      _and_3 = _not_1;
+      boolean _not_2 = (!_isBundleResolved);
+      _and_3 = _not_2;
     }
     if (_and_3) {
       this.setMessage("Maven integration for eclipse is not installed. Consider to install M2e.", IMessageProvider.WARNING);
     }
     boolean _and_4 = false;
-    String _string_1 = BuildSystem.GRADLE.toString();
-    String _text_10 = this.preferredBuildSystem.getText();
-    boolean _equals_2 = Objects.equal(_string_1, _text_10);
-    if (!_equals_2) {
+    boolean _isSelected_3 = this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE);
+    if (!_isSelected_3) {
       _and_4 = false;
     } else {
       boolean _isBundleResolved_1 = this.isBundleResolved("org.eclipse.buildship.core");
-      boolean _not_2 = (!_isBundleResolved_1);
-      _and_4 = _not_2;
+      boolean _not_3 = (!_isBundleResolved_1);
+      _and_4 = _not_3;
     }
     if (_and_4) {
       this.setMessage("Gradle integration for eclipse is not installed. Consider to install Buildship.", IMessageProvider.WARNING);
     }
+  }
+  
+  protected void select(final Combo combo, final Enum<?> enu) {
+    String[] _items = combo.getItems();
+    Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(((Iterable<? extends String>)Conversions.doWrapArray(_items)));
+    final Function1<Pair<Integer, String>, Boolean> _function = new Function1<Pair<Integer, String>, Boolean>() {
+      @Override
+      public Boolean apply(final Pair<Integer, String> it) {
+        String _value = it.getValue();
+        String _string = enu.toString();
+        return Boolean.valueOf(Objects.equal(_value, _string));
+      }
+    };
+    Pair<Integer, String> _findFirst = IterableExtensions.<Pair<Integer, String>>findFirst(_indexed, _function);
+    Integer _key = _findFirst.getKey();
+    combo.select((_key).intValue());
+  }
+  
+  protected boolean isSelected(final Combo combo, final Enum<?> enu) {
+    String _string = enu.toString();
+    String _text = combo.getText();
+    return Objects.equal(_string, _text);
   }
   
   protected <T extends Control> int reportIssue(final int severity, final String text, final Procedure0 fix) {
@@ -563,8 +581,12 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createTestProject.setSelection(true);
     this.createIdeaProject.setSelection(false);
     this.createWebProject.setSelection(false);
-    this.preferredBuildSystem.select(0);
-    this.sourceLayout.select(0);
+    BuildSystem[] _values = BuildSystem.values();
+    Enum<?> _head = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values)));
+    this.select(this.preferredBuildSystem, _head);
+    SourceLayout[] _values_1 = SourceLayout.values();
+    Enum<?> _head_1 = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values_1)));
+    this.select(this.sourceLayout, _head_1);
   }
   
   public boolean isCreateUiProject() {

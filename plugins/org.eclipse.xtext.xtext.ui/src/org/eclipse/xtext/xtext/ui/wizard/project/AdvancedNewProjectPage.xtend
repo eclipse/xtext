@@ -126,12 +126,12 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def checkWidgets(SelectionEvent e) {
 		val source = e?.source
-		if (createUiProject.selection && sourceLayout.selectionIndex != 0) {
+		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
 			if (createUiProject === source) {
 				reportIssue(ERROR, '''
 				'«createUiProject.text»' requiers «SourceLayout.PLAIN» source layout.
 				Please <a>select '«SourceLayout.PLAIN»'</a> source layout.''', [
-					sourceLayout.select(0)
+					sourceLayout.select(SourceLayout.PLAIN)
 				])
 			} else {
 				reportIssue(ERROR, '''
@@ -142,7 +142,7 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		}
 
-		if (createWebProject.selection && preferredBuildSystem.selectionIndex == 0) {
+		if (createWebProject.selection && preferredBuildSystem.isSelected(BuildSystem.ECLIPSE)) {
 			if (preferredBuildSystem === source) {
 				reportIssue(WARNING, '''
 				The '«createWebProject.text»' project can not be build using Eclipse-PDE build.
@@ -153,7 +153,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				reportIssue(WARNING, '''
 				To build the '«createWebProject.text»' project, you need to choose maven or gradle build system.
 				Select <a>gradle</a> build.''', [
-					preferredBuildSystem.select(2)
+					preferredBuildSystem.select(BuildSystem.GRADLE)
 				])
 			}
 		}
@@ -176,14 +176,20 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		}
 
-		if (BuildSystem.MAVEN.toString == preferredBuildSystem.text &&
-			!isBundleResolved("org.eclipse.m2e.maven.runtime")) {
+		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && !isBundleResolved("org.eclipse.m2e.maven.runtime")) {
 			setMessage('Maven integration for eclipse is not installed. Consider to install M2e.', WARNING)
 		}
-		if (BuildSystem.GRADLE.toString == preferredBuildSystem.text &&
-			!isBundleResolved("org.eclipse.buildship.core")) {
+		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && !isBundleResolved("org.eclipse.buildship.core")) {
 			setMessage('Gradle integration for eclipse is not installed. Consider to install Buildship.', WARNING)
 		}
+	}
+
+	def protected select(Combo combo, Enum<?> enu) {
+		combo.select(combo.items.indexed.findFirst[value == enu.toString].key)
+	}
+
+	def protected boolean isSelected(Combo combo, Enum<?> enu) {
+		return enu.toString == combo.text
 	}
 
 	def protected <T extends Control> reportIssue(int severity, String text, ()=>void fix) {
@@ -245,8 +251,8 @@ class AdvancedNewProjectPage extends WizardPage {
 		createTestProject.selection = true
 		createIdeaProject.selection = false
 		createWebProject.selection = false
-		preferredBuildSystem.select(0)
-		sourceLayout.select(0)
+		preferredBuildSystem.select(BuildSystem.values.head)
+		sourceLayout.select(SourceLayout.values.head)
 	}
 
 	def boolean isCreateUiProject() {
