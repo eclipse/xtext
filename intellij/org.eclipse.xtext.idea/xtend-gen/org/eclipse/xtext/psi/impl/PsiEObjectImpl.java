@@ -145,9 +145,7 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   
   @Override
   public String toString() {
-    Class<? extends PsiEObjectImpl> _class = this.getClass();
-    String _name = _class.getName();
-    StringBuilder builder = new StringBuilder(_name);
+    StringBuilder builder = new StringBuilder("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
     StringBuilder _append = builder.append("(");
     StringBuilder _append_1 = _append.append(this.elementType);
     _append_1.append(")");

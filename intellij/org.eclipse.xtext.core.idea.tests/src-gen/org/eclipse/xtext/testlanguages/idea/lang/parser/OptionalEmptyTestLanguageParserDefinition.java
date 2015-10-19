@@ -1,5 +1,6 @@
 package org.eclipse.xtext.testlanguages.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.testlanguages.idea.lang.OptionalEmptyTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.OptionalEmptyTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -31,7 +32,28 @@ public class OptionalEmptyTestLanguageParserDefinition extends AbstractXtextPars
 				elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType()
 			);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getModelElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ChildAssignmentElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getGreetingElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getGreeting_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getGreeting_HalloKeyword_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getGreeting_NameAssignment_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }

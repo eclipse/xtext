@@ -1,5 +1,6 @@
 package org.eclipse.xtext.generator.ecore.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageElementTypeProvider;
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.EcoreFragmentTestLanguageFileImpl;
@@ -29,7 +30,28 @@ public class EcoreFragmentTestLanguageParserDefinition extends AbstractXtextPars
 		if (elementType == elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getSecondElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getSecond_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getSecond_NameAssignment_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getSecond_FirstKeyword_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getSecond_FirstAssignment_2ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getSecond_FirstFirstIDTerminalRuleCall_2_0_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }

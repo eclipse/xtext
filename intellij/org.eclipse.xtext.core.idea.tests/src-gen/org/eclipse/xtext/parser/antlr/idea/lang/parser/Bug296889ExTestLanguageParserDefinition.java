@@ -1,5 +1,6 @@
 package org.eclipse.xtext.parser.antlr.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889ExTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889ExTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -41,7 +42,139 @@ public class Bug296889ExTestLanguageParserDefinition extends AbstractXtextParser
 				elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType()
 			);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getModelElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_AlternativesElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_Group_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ModelKeyword_0_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ExpressionsAssignment_0_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ExpressionsExpressionParserRuleCall_0_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_Group_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_DataTypeKeyword_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ValuesAssignment_1_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_ValuesDataTypeExpressionParserRuleCall_1_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getExpressionElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getExpression_AlternativesElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getExpression_PostopParserRuleCall_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getExpression_PreopParserRuleCall_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPreopElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPreop_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPreop_PreopAction_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPreop_FunctionNameAssignment_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPreop_FunctionNameHyphenMinusHyphenMinusKeyword_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPreop_ExprAssignment_2ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPostopElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPostop_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPostop_Group_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPostop_PostopExprAction_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPostop_FunctionNameAssignment_1_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getPostop_FunctionNameHyphenMinusHyphenMinusKeyword_1_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getVariableElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getVariable_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getVariable_NameAssignment_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypeExpressionElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypeExpression_AlternativesElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypeExpression_DataTypePostopParserRuleCall_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypeExpression_DataTypePreopParserRuleCall_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePreopElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePreop_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePreop_HyphenMinusHyphenMinusKeyword_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePreop_DataTypeVariableParserRuleCall_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePostopElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePostop_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePostop_DataTypeVariableParserRuleCall_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypePostop_HyphenMinusHyphenMinusKeyword_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypeVariableElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDataTypeVariable_IDTerminalRuleCallElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }

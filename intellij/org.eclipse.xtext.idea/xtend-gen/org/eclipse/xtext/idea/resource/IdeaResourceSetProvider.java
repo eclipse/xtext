@@ -141,8 +141,10 @@ public class IdeaResourceSetProvider {
         @Override
         public void run() {
           try {
-            FileDocumentManager _instance = FileDocumentManager.getInstance();
-            _instance.saveAllDocuments();
+            if ((!XtextAutoBuilderComponent.TEST_MODE)) {
+              FileDocumentManager _instance = FileDocumentManager.getInstance();
+              _instance.saveAllDocuments();
+            }
             Set<URI> _keySet = localWritten.keySet();
             for (final URI uri : _keySet) {
               {

@@ -29,4 +29,14 @@ public class PsiEObjectReference<PsiE extends PsiElement, T extends StubElement<
   public XtextPsiReference getReference() {
     return new XtextPsiReferenceImpl(this);
   }
+  
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder("org.eclipse.xtext.psi.impl.PsiEObjectReference");
+    StringBuilder _append = builder.append("(");
+    IStubElementType _elementType = this.getElementType();
+    StringBuilder _append_1 = _append.append(_elementType);
+    _append_1.append(")");
+    return builder.toString();
+  }
 }

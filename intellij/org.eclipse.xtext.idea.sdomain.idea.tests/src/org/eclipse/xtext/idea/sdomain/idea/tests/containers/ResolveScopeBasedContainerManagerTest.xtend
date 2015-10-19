@@ -10,12 +10,11 @@ package org.eclipse.xtext.idea.sdomain.idea.tests.containers
 import com.google.inject.Inject
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.testFramework.PlatformTestCase
-import com.intellij.testFramework.builders.EmptyModuleFixtureBuilder
-import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory
-import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
-import com.intellij.testFramework.fixtures.JavaTestFixtureFactory
+import com.intellij.testFramework.PsiTestUtil
 import java.io.File
+import java.util.List
 import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
@@ -29,51 +28,38 @@ class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 	@Inject
 	ResourceDescriptionsProvider resourceDescriptionsProvider
 	
-	BaseXtextFile[] files
-
-	JavaCodeInsightTestFixture myFixture
+	List<BaseXtextFile> files
 	
 	protected def String getTestDataPath() '''./testData/containers'''
 
 	override protected setUp() throws Exception {
 		super.setUp
+		
+		val module = createModule('module')
+		PsiTestUtil.addSourceRoot(module, refreshAndFindFile(new File('''«testDataPath»/module''')))
+		
+		val module2 = createModule('module2')
+		PsiTestUtil.addSourceRoot(module2, refreshAndFindFile(new File('''«testDataPath»/module2''')))
 
-		val projectBuilder = IdeaTestFixtureFactory.getFixtureFactory.createFixtureBuilder(name)
-		
-		myFixture = JavaTestFixtureFactory.fixtureFactory.createCodeInsightFixture(projectBuilder.fixture)
-		myFixture.testDataPath = testDataPath
-		
-		val tempDirPath = myFixture.tempDirPath
-
-		val moduleFixtureBuilder = projectBuilder.addModule(EmptyModuleFixtureBuilder)
-		new File('''«tempDirPath»/module''').mkdir
-		moduleFixtureBuilder.addSourceContentRoot('''«tempDirPath»/module''')
-		
-		val module2FixtureBuilder = projectBuilder.addModule(EmptyModuleFixtureBuilder)
-		new File('''«tempDirPath»/module2''').mkdir
-		module2FixtureBuilder.addSourceContentRoot('''«tempDirPath»/module2''')
-		
-		myFixture.setUp
-		
-		val module = moduleFixtureBuilder.fixture.module
-		val module2 = module2FixtureBuilder.fixture.module
 		LightToolingTest.addFacetToModule(module, SDomainFileType.INSTANCE.language.ID)
 		LightToolingTest.addFacetToModule(module2, SDomainFileType.INSTANCE.language.ID)
 		ModuleRootModificationUtil.addDependency(module, module2)
 		
-		files = myFixture.configureByFiles(
+		files = #[
 			'/module/file1.sdomain',
 			'/module/file2.sdomain',
 			'/module2/file3.sdomain'
-		).filter(BaseXtextFile)
-		
-		files.head.xtextLanguage.injectMembers(this)
+		].map [ path |
+			val file = new File('''«testDataPath»/«path»''')
+			val virtualFile = refreshAndFindFile(file)
+			psiManager.findFile(virtualFile)
+		].filter(BaseXtextFile).toList
+
+		SDomainLanguage.INSTANCE.injectMembers(this)
 	}
 	
 	override protected tearDown() throws Exception {
 		files = null
-		myFixture.tearDown
-		myFixture = null
 		super.tearDown
 	}
 	

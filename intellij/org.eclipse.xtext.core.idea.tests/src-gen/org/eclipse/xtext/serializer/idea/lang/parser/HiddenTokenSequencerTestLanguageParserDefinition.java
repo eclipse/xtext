@@ -1,5 +1,6 @@
 package org.eclipse.xtext.serializer.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.serializer.idea.lang.psi.impl.HiddenTokenSequencerTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -31,7 +32,49 @@ public class HiddenTokenSequencerTestLanguageParserDefinition extends AbstractXt
 				elementTypeProvider.getEntity_NameIDTerminalRuleCall_0_0ElementType()
 			);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getModelElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_DomainModelAssignmentElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getModel_DomainModelDomainModelParserRuleCall_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDomainModelElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDomainModel_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDomainModel_EntitiesKeyword_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDomainModel_EntitiesAssignment_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getDomainModel_EndKeyword_2ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEntityElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEntity_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEntity_NameAssignment_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEntity_NameIDTerminalRuleCall_0_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEntity_DescriptionAssignment_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEntity_DescriptionSTRINGTerminalRuleCall_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }

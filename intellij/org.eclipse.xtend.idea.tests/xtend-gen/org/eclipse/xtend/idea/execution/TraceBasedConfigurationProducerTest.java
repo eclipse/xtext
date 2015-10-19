@@ -65,6 +65,11 @@ import org.jetbrains.annotations.NotNull;
  */
 @SuppressWarnings("all")
 public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
+  @Override
+  protected boolean isTestSource(final VirtualFile srcFolder) {
+    return true;
+  }
+  
   public void testApplicationConfiguration_1() {
     try {
       StringConcatenation _builder = new StringConcatenation();

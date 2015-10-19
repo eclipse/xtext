@@ -112,7 +112,7 @@ class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>> exten
 	}
 
 	override String toString() {
-		var StringBuilder builder = new StringBuilder(getClass().getName())
+		var StringBuilder builder = new StringBuilder('org.eclipse.xtext.psi.impl.PsiEObjectImpl')
 		builder.append("(").append(elementType).append(")")
 		return builder.toString()
 	}

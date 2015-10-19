@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtext.idea.tests.LightToolingTest
 
 import static extension com.intellij.codeInsight.documentation.DocumentationManager.*
+import com.intellij.openapi.vfs.VfsUtil
 
 /**
  * 
@@ -37,8 +38,8 @@ class XtendDocumentationTest extends PsiTestCase {
 			val myTempDirectory = FileUtil.createTempDirectory(getTestName(true), "test", false);
 			myFilesToDelete.add(myTempDirectory)
 			val root = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(myTempDirectory)
-			src = root.createChildDirectory(this, "src")
-			xtendgen = root.createChildDirectory(this, "xtend-gen")
+			src = VfsUtil.createDirectoryIfMissing(root, "src")
+			xtendgen = VfsUtil.createDirectoryIfMissing(root, "xtend-gen")
 			myModule = createModule("myModule")
 			LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
 			PsiTestUtil.addContentRoot(myModule, root);

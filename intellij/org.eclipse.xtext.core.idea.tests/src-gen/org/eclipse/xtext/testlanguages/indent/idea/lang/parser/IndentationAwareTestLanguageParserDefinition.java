@@ -1,5 +1,6 @@
 package org.eclipse.xtext.testlanguages.indent.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.indent.idea.lang.psi.impl.IndentationAwareTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -36,7 +37,61 @@ public class IndentationAwareTestLanguageParserDefinition extends AbstractXtextP
 				elementTypeProvider.getNode_NameStringParserRuleCall_0_0ElementType()
 			);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getNodeListElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNodeList_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNodeList_ChildrenAssignment_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNodeList_Group_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNodeList_NLTerminalRuleCall_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNodeList_ChildrenAssignment_1_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNodeElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_GroupElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_NameAssignment_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_NameStringParserRuleCall_0_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_Group_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_NLTerminalRuleCall_1_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_BEGINTerminalRuleCall_1_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_ChildrenAssignment_1_2ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_ChildrenNodeListParserRuleCall_1_2_0ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getNode_ENDTerminalRuleCall_1_3ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getStringElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getString_OTHERTerminalRuleCallElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }

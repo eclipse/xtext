@@ -1,5 +1,6 @@
 package org.eclipse.xtext.parser.bug419429.idea.lang.parser;
 
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429ElementTypeProvider;
 import org.eclipse.xtext.parser.bug419429.idea.lang.psi.impl.Bug419429FileImpl;
@@ -29,7 +30,16 @@ public class Bug419429ParserDefinition extends AbstractXtextParserDefinition {
 		if (elementType == elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
-		return super.createElement(node);
+		if (elementType == elementTypeProvider.getEReferenceElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEReference_ETypeAssignmentElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		if (elementType == elementTypeProvider.getEReference_ETypeEClassifierIDTerminalRuleCall_0_1ElementType()) {
+			return new PsiEObjectImpl(node) {};
+		}
+		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
 	}
 
 }
