@@ -4,20 +4,19 @@
 package org.eclipse.xtext.parser.assignments.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.AssignmentsTestLanguagePackage;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.Model;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.MultiValue;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.SingleValue;
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
 public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -26,33 +25,39 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	private AssignmentsTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == AssignmentsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == AssignmentsTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case AssignmentsTestLanguagePackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			case AssignmentsTestLanguagePackage.MULTI_VALUE:
-				if(context == grammarAccess.getMultiDatatypeRule()) {
+				if (rule == grammarAccess.getMultiDatatypeRule()) {
 					sequence_MultiDatatype(context, (MultiValue) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getMultiValueRule()) {
+				else if (rule == grammarAccess.getMultiValueRule()) {
 					sequence_MultiValue(context, (MultiValue) semanticObject); 
 					return; 
 				}
 				else break;
 			case AssignmentsTestLanguagePackage.SINGLE_VALUE:
-				if(context == grammarAccess.getSingleDatatypeRule()) {
+				if (rule == grammarAccess.getSingleDatatypeRule()) {
 					sequence_SingleDatatype(context, (SingleValue) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getSingleValueRule()) {
+				else if (rule == grammarAccess.getSingleValueRule()) {
 					sequence_SingleValue(context, (SingleValue) semanticObject); 
 					return; 
 				}
 				else break;
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
@@ -68,7 +73,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	 *         object=MultiDatatype
 	 *     )
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -77,7 +82,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (value+=IdDatatype | value+=IdDatatype | value+=StringDatatype | value+=StringDatatype)
 	 */
-	protected void sequence_MultiDatatype(EObject context, MultiValue semanticObject) {
+	protected void sequence_MultiDatatype(ISerializationContext context, MultiValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -86,7 +91,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (value+=ID | value+=ID | value+=STRING | value+=STRING)
 	 */
-	protected void sequence_MultiValue(EObject context, MultiValue semanticObject) {
+	protected void sequence_MultiValue(ISerializationContext context, MultiValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -95,7 +100,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (value=IdDatatype | value=IdDatatype | value=StringDatatype | value=StringDatatype)
 	 */
-	protected void sequence_SingleDatatype(EObject context, SingleValue semanticObject) {
+	protected void sequence_SingleDatatype(ISerializationContext context, SingleValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -104,7 +109,9 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	 * Constraint:
 	 *     (value=ID | value=ID | value=STRING | value=STRING)
 	 */
-	protected void sequence_SingleValue(EObject context, SingleValue semanticObject) {
+	protected void sequence_SingleValue(ISerializationContext context, SingleValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

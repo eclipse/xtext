@@ -14,17 +14,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
-import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
-import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -38,12 +35,6 @@ import org.eclipse.xtext.xtext.generator.serializer.InjectableRuleNames;
 
 @SuppressWarnings("all")
 public class SyntacticSequencerExtensions {
-  @Inject
-  private IContextPDAProvider contextPDAProvider;
-  
-  @Inject
-  private IContextTypePDAProvider contextTypePDAProvider;
-  
   @Inject
   private ISyntacticSequencerPDAProvider pdaProvider;
   
@@ -60,16 +51,9 @@ public class SyntacticSequencerExtensions {
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
   
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
-    List<ISyntacticSequencerPDAProvider.ISynAbsorberState> result = CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList();
-    Set<EObject> _allContexts = this.contextPDAProvider.getAllContexts(this.grammar);
-    for (final EObject context : _allContexts) {
-      Set<EClass> _typesForContext = this.contextTypePDAProvider.getTypesForContext(this.grammar, context);
-      for (final EClass type : _typesForContext) {
-        ISyntacticSequencerPDAProvider.ISynAbsorberState _pDA = this.pdaProvider.getPDA(context, type);
-        result.add(_pDA);
-      }
-    }
-    return result;
+    Map<ISerializationContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
+    Collection<ISyntacticSequencerPDAProvider.ISynAbsorberState> _values = _syntacticSequencerPDAs.values();
+    return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(_values, ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
   }
   
   protected void collectAllAmbiguousTransitions(final ISyntacticSequencerPDAProvider.ISynFollowerOwner state, final Set<ISyntacticSequencerPDAProvider.ISynTransition> result, final Set<Object> visited) {

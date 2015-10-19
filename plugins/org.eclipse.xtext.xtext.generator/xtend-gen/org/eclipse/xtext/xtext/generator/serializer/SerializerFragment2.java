@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collection;
@@ -28,6 +29,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
@@ -35,6 +37,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.BidiIterable;
@@ -43,23 +47,22 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -125,11 +128,11 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   @Extension
-  private Context2NameFunction _context2NameFunction;
+  private SyntheticTerminalDetector syntheticTerminalDetector;
   
   @Inject
   @Extension
-  private SyntheticTerminalDetector syntheticTerminalDetector;
+  private IGrammarConstraintProvider _iGrammarConstraintProvider;
   
   @Inject
   private DebugGraphGenerator debugGraphGenerator;
@@ -145,6 +148,9 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   @Accessors
   private boolean generateStub = true;
+  
+  @Accessors
+  private boolean generateSupportForDeprecatedContextObject = false;
   
   private boolean detectSyntheticTerminals = true;
   
@@ -198,7 +204,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     String _plus = (_replace + "/");
     String _simpleName = GrammarUtil.getSimpleName(grammar);
     String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "GrammarConstraints.xtext");
+    return (_plus_1 + "GrammarConstraints.txt");
   }
   
   @Override
@@ -509,7 +515,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function);
-    final List<IGrammarConstraintProvider.IConstraint> newLocalConstraints = IterableExtensions.<IGrammarConstraintProvider.IConstraint>toList(_filter);
+    final Set<IGrammarConstraintProvider.IConstraint> newLocalConstraints = IterableExtensions.<IGrammarConstraintProvider.IConstraint>toSet(_filter);
     TypeReference _xifexpression = null;
     if (this.generateStub) {
       Grammar _grammar_2 = this.getGrammar();
@@ -684,8 +690,8 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("@Override");
           _builder.newLine();
-          _builder.append("public void createSequence(");
-          _builder.append(EObject.class, "");
+          _builder.append("public void sequence(");
+          _builder.append(ISerializationContext.class, "");
           _builder.append(" context, ");
           _builder.append(EObject.class, "");
           _builder.append(" semanticObject) {");
@@ -693,6 +699,20 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           _builder.append("\t");
           _builder.append(EPackage.class, "\t");
           _builder.append(" epackage = semanticObject.eClass().getEPackage();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(ParserRule.class, "\t");
+          _builder.append(" rule = context.getParserRule();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(Action.class, "\t");
+          _builder.append(" action = context.getAssignedAction();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(Set.class, "\t");
+          _builder.append("<");
+          _builder.append(Parameter.class, "\t");
+          _builder.append("> parameters = context.getEnabledBooleanParameters();");
           _builder.newLineIfNotEmpty();
           {
             Iterable<EPackage> _accessedPackages = SerializerFragment2.this.getAccessedPackages();
@@ -763,20 +783,120 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     return _xblockexpression;
   }
   
+  private StringConcatenationClient genContextCondition(final ISerializationContext context, final IGrammarConstraintProvider.IConstraint constraint) {
+    StringConcatenationClient _xblockexpression = null;
+    {
+      StringConcatenationClient _switchResult = null;
+      final ISerializationContext it = context;
+      boolean _matched = false;
+      if (!_matched) {
+        Action _assignedAction = it.getAssignedAction();
+        boolean _tripleNotEquals = (_assignedAction != null);
+        if (_tripleNotEquals) {
+          _matched=true;
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("action == grammarAccess.");
+              Action _assignedAction = it.getAssignedAction();
+              String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(_assignedAction);
+              _builder.append(_gaAccessor, "");
+            }
+          };
+          _switchResult = _client;
+        }
+      }
+      if (!_matched) {
+        ParserRule _parserRule = it.getParserRule();
+        boolean _tripleNotEquals_1 = (_parserRule != null);
+        if (_tripleNotEquals_1) {
+          _matched=true;
+          StringConcatenationClient _client_1 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("rule == grammarAccess.");
+              ParserRule _parserRule = it.getParserRule();
+              String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(_parserRule);
+              _builder.append(_gaAccessor, "");
+            }
+          };
+          _switchResult = _client_1;
+        }
+      }
+      final StringConcatenationClient cond = _switchResult;
+      final Set<Parameter> values = context.getEnabledBooleanParameters();
+      StringConcatenationClient _xifexpression = null;
+      boolean _isEmpty = values.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        StringConcatenationClient _client_2 = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("(");
+            _builder.append(cond, "");
+            _builder.append(" && ");
+            _builder.append(ImmutableSet.class, "");
+            _builder.append(".of(");
+            final Function1<Parameter, String> _function = new Function1<Parameter, String>() {
+              @Override
+              public String apply(final Parameter it) {
+                String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(it);
+                return ("grammarAccess." + _gaAccessor);
+              }
+            };
+            Iterable<String> _map = IterableExtensions.<Parameter, String>map(values, _function);
+            String _join = IterableExtensions.join(_map, ", ");
+            _builder.append(_join, "");
+            _builder.append(").equals(parameters))");
+          }
+        };
+        _xifexpression = _client_2;
+      } else {
+        StringConcatenationClient _xifexpression_1 = null;
+        List<ISerializationContext> _contexts = constraint.getContexts();
+        final Function1<ISerializationContext, Boolean> _function = new Function1<ISerializationContext, Boolean>() {
+          @Override
+          public Boolean apply(final ISerializationContext it) {
+            List<Parameter> _declaredParameters = ((SerializationContext) it).getDeclaredParameters();
+            return Boolean.valueOf(_declaredParameters.isEmpty());
+          }
+        };
+        boolean _forall = IterableExtensions.<ISerializationContext>forall(_contexts, _function);
+        boolean _not_1 = (!_forall);
+        if (_not_1) {
+          StringConcatenationClient _client_3 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("(");
+              _builder.append(cond, "");
+              _builder.append(" && parameters.isEmpty())");
+            }
+          };
+          _xifexpression_1 = _client_3;
+        } else {
+          _xifexpression_1 = cond;
+        }
+        _xifexpression = _xifexpression_1;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
   private StringConcatenationClient genMethodCreateSequenceCaseBody(final Map<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> superConstraints, final EClass type) {
     StringConcatenationClient _xblockexpression = null;
     {
       Grammar _grammar = this.getGrammar();
-      Map<IGrammarConstraintProvider.IConstraint, List<EObject>> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar, type);
-      Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> _entrySet = _grammarConstraints.entrySet();
-      final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String> _function = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>() {
+      Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar, type);
+      Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>> _entrySet = _grammarConstraints.entrySet();
+      final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String> _function = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String>() {
         @Override
-        public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> it) {
+        public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> it) {
           IGrammarConstraintProvider.IConstraint _key = it.getKey();
           return _key.getName();
         }
       };
-      final List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>sortBy(_entrySet, _function);
+      final List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String>sortBy(_entrySet, _function);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -785,8 +905,8 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
             boolean _greaterThan = (_size > 1);
             if (_greaterThan) {
               {
-                Iterable<Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>> _indexed = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>indexed(contexts);
-                for(final Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> ctx : _indexed) {
+                Iterable<Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>>> _indexed = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>>indexed(contexts);
+                for(final Pair<Integer, Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>> ctx : _indexed) {
                   {
                     Integer _key = ctx.getKey();
                     boolean _greaterThan_1 = ((_key).intValue() > 0);
@@ -796,34 +916,28 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
                   }
                   _builder.append("if (");
                   {
-                    Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _value = ctx.getValue();
-                    List<EObject> _value_1 = _value.getValue();
-                    final Function1<EObject, String> _function = new Function1<EObject, String>() {
-                      @Override
-                      public String apply(final EObject e) {
-                        Grammar _grammar = SerializerFragment2.this.getGrammar();
-                        return SerializerFragment2.this._context2NameFunction.getContextName(_grammar, e);
-                      }
-                    };
-                    List<EObject> _sortBy = IterableExtensions.<EObject, String>sortBy(_value_1, _function);
+                    Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value = ctx.getValue();
+                    List<ISerializationContext> _value_1 = _value.getValue();
+                    List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_value_1);
                     boolean _hasElements = false;
-                    for(final EObject c : _sortBy) {
+                    for(final ISerializationContext c : _sort) {
                       if (!_hasElements) {
                         _hasElements = true;
                       } else {
                         _builder.appendImmediate("\n\t\t|| ", "");
                       }
-                      _builder.append("context == grammarAccess.");
-                      String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(c);
-                      _builder.append(_gaAccessor, "");
+                      Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value_2 = ctx.getValue();
+                      IGrammarConstraintProvider.IConstraint _key_1 = _value_2.getKey();
+                      StringConcatenationClient _genContextCondition = SerializerFragment2.this.genContextCondition(c, _key_1);
+                      _builder.append(_genContextCondition, "");
                     }
                   }
                   _builder.append(") {");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
-                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _value_2 = ctx.getValue();
-                  IGrammarConstraintProvider.IConstraint _key_1 = _value_2.getKey();
-                  StringConcatenationClient _genMethodCreateSequenceCall = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_1);
+                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value_3 = ctx.getValue();
+                  IGrammarConstraintProvider.IConstraint _key_2 = _value_3.getKey();
+                  StringConcatenationClient _genMethodCreateSequenceCall = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_2);
                   _builder.append(_genMethodCreateSequenceCall, "\t");
                   _builder.newLineIfNotEmpty();
                   _builder.append("}");
@@ -836,9 +950,9 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
               int _size_1 = contexts.size();
               boolean _equals = (_size_1 == 1);
               if (_equals) {
-                Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>head(contexts);
-                IGrammarConstraintProvider.IConstraint _key_2 = _head.getKey();
-                StringConcatenationClient _genMethodCreateSequenceCall_1 = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_2);
+                Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>>head(contexts);
+                IGrammarConstraintProvider.IConstraint _key_3 = _head.getKey();
+                StringConcatenationClient _genMethodCreateSequenceCall_1 = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_3);
                 _builder.append(_genMethodCreateSequenceCall_1, "");
                 _builder.newLineIfNotEmpty();
               } else {
@@ -947,7 +1061,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           String _simpleName = c.getSimpleName();
           _builder.append(_simpleName, "");
           _builder.append("(");
-          _builder.append(EObject.class, "");
+          _builder.append(ISerializationContext.class, "");
           _builder.append(" context, ");
           EClass _type_1 = c.getType();
           _builder.append(_type_1, "");
@@ -999,16 +1113,10 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
               _builder.append("}");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append(ISemanticNodeProvider.INodesForEObjectProvider.class, "\t");
-              _builder.append(" nodes = createNodeProvider(");
+              _builder.append(SequenceFeeder.class, "\t");
+              _builder.append(" feeder = createSequencerFeeder(context, ");
               _builder.append(cast, "\t");
               _builder.append("semanticObject);");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append(SequenceFeeder.class, "\t");
-              _builder.append(" feeder = createSequencerFeeder(");
-              _builder.append(cast, "\t");
-              _builder.append("semanticObject, nodes);");
               _builder.newLineIfNotEmpty();
               {
                 for(final ISemanticSequencerNfaProvider.ISemState f : states) {
@@ -1038,6 +1146,31 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
           }
           _builder.append("}");
           _builder.newLine();
+          _builder.newLine();
+          {
+            if (SerializerFragment2.this.generateSupportForDeprecatedContextObject) {
+              _builder.append("@Deprecated");
+              _builder.newLine();
+              _builder.append("protected void sequence_");
+              String _simpleName_1 = c.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append("(");
+              _builder.append(EObject.class, "");
+              _builder.append(" context, ");
+              EClass _type_2 = c.getType();
+              _builder.append(_type_2, "");
+              _builder.append(" semanticObject) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("sequence_");
+              String _simpleName_2 = c.getSimpleName();
+              _builder.append(_simpleName_2, "\t");
+              _builder.append("(createContext(context, semanticObject), semanticObject);");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
         }
       };
       _xblockexpression = _client_2;
@@ -1664,124 +1797,41 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("grammar ");
-        Grammar _grammar = SerializerFragment2.this.getGrammar();
-        String _name = _grammar.getName();
-        _builder.append(_name, "");
         {
-          Grammar _grammar_1 = SerializerFragment2.this.getGrammar();
-          EList<Grammar> _usedGrammars = _grammar_1.getUsedGrammars();
+          Grammar _grammar = SerializerFragment2.this.getGrammar();
+          Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = SerializerFragment2.this._iGrammarConstraintProvider.getConstraints(_grammar);
+          List<org.eclipse.xtext.util.Pair<List<ISerializationContext>, IGrammarConstraintProvider.IConstraint>> _groupByEqualityAndSort = SerializationContext.<IGrammarConstraintProvider.IConstraint>groupByEqualityAndSort(_constraints);
           boolean _hasElements = false;
-          for(final Grammar ug : _usedGrammars) {
+          for(final org.eclipse.xtext.util.Pair<List<ISerializationContext>, IGrammarConstraintProvider.IConstraint> e : _groupByEqualityAndSort) {
             if (!_hasElements) {
               _hasElements = true;
-              _builder.append(" with ", "");
-            } else {
-              _builder.appendImmediate(", ", "");
-            }
-            String _name_1 = ug.getName();
-            _builder.append(_name_1, "");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("generate model \"http://");
-        Grammar _grammar_2 = SerializerFragment2.this.getGrammar();
-        String _name_2 = _grammar_2.getName();
-        _builder.append(_name_2, "");
-        _builder.append("\"");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("// ******** constraint contexts ********");
-        _builder.newLine();
-        {
-          Grammar _grammar_3 = SerializerFragment2.this.getGrammar();
-          List<IGrammarConstraintProvider.IConstraintContext> _grammarConstraintContexts = SerializerFragment2.this._semanticSequencerExtensions.getGrammarConstraintContexts(_grammar_3);
-          boolean _hasElements_1 = false;
-          for(final IGrammarConstraintProvider.IConstraintContext gcc : _grammarConstraintContexts) {
-            if (!_hasElements_1) {
-              _hasElements_1 = true;
             } else {
               _builder.appendImmediate("\n", "");
             }
-            String _name_3 = gcc.getName();
-            _builder.append(_name_3, "");
-            {
-              String _safeType = SerializerFragment2.this.getSafeType(gcc);
-              boolean _tripleNotEquals = (_safeType != null);
-              if (_tripleNotEquals) {
-                _builder.append(" returns ");
-                String _safeType_1 = SerializerFragment2.this.getSafeType(gcc);
-                _builder.append(_safeType_1, "");
-              }
-            }
-            _builder.append(":");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            {
-              List<IGrammarConstraintProvider.IConstraint> _constraints = gcc.getConstraints();
-              boolean _hasElements_2 = false;
-              for(final IGrammarConstraintProvider.IConstraint constraint : _constraints) {
-                if (!_hasElements_2) {
-                  _hasElements_2 = true;
-                } else {
-                  _builder.appendImmediate(" | ", "\t");
-                }
-                String _name_4 = constraint.getName();
-                _builder.append(_name_4, "\t");
-              }
-            }
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.newLine();
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("// ******** constraints ********");
-        _builder.newLine();
-        {
-          Grammar _grammar_4 = SerializerFragment2.this.getGrammar();
-          Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = SerializerFragment2.this._semanticSequencerExtensions.getGrammarConstraints(_grammar_4);
-          boolean _hasElements_3 = false;
-          for(final IGrammarConstraintProvider.IConstraint constraint_1 : _grammarConstraints) {
-            if (!_hasElements_3) {
-              _hasElements_3 = true;
-            } else {
-              _builder.appendImmediate("\n", "");
-            }
-            String _name_5 = constraint_1.getName();
-            _builder.append(_name_5, "");
-            {
-              EClass _type = constraint_1.getType();
-              boolean _tripleNotEquals_1 = (_type != null);
-              if (_tripleNotEquals_1) {
-                _builder.append(" returns ");
-                EClass _type_1 = constraint_1.getType();
-                String _name_6 = _type_1.getName();
-                _builder.append(_name_6, "");
-              }
-            }
+            List<ISerializationContext> _first = e.getFirst();
+            _builder.append(_first, "");
             _builder.append(":");
             _builder.newLineIfNotEmpty();
             {
-              IGrammarConstraintProvider.IConstraintElement _body = constraint_1.getBody();
+              IGrammarConstraintProvider.IConstraint _second = e.getSecond();
+              IGrammarConstraintProvider.IConstraintElement _body = _second.getBody();
               boolean _equals = Objects.equal(_body, null);
               if (_equals) {
                 _builder.append("\t");
                 _builder.append("{");
-                EClass _type_2 = constraint_1.getType();
-                String _name_7 = null;
-                if (_type_2!=null) {
-                  _name_7=_type_2.getName();
+                IGrammarConstraintProvider.IConstraint _second_1 = e.getSecond();
+                EClass _type = _second_1.getType();
+                String _name = null;
+                if (_type!=null) {
+                  _name=_type.getName();
                 }
-                _builder.append(_name_7, "\t");
+                _builder.append(_name, "\t");
                 _builder.append("};");
                 _builder.newLineIfNotEmpty();
               } else {
                 _builder.append("\t");
-                IGrammarConstraintProvider.IConstraintElement _body_1 = constraint_1.getBody();
+                IGrammarConstraintProvider.IConstraint _second_2 = e.getSecond();
+                IGrammarConstraintProvider.IConstraintElement _body_1 = _second_2.getBody();
                 _builder.append(_body_1, "\t");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
@@ -1796,26 +1846,6 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
     _createTextFile.writeTo(_srcGen);
-  }
-  
-  private String getSafeType(final IGrammarConstraintProvider.IConstraintContext context) {
-    String _xtrycatchfinallyexpression = null;
-    try {
-      EClass _commonType = context.getCommonType();
-      String _name = null;
-      if (_commonType!=null) {
-        _name=_commonType.getName();
-      }
-      _xtrycatchfinallyexpression = _name;
-    } catch (final Throwable _t) {
-      if (_t instanceof UnsupportedOperationException) {
-        final UnsupportedOperationException e = (UnsupportedOperationException)_t;
-        return null;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
-    return _xtrycatchfinallyexpression;
   }
   
   @Pure
@@ -1834,5 +1864,14 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   
   public void setGenerateStub(final boolean generateStub) {
     this.generateStub = generateStub;
+  }
+  
+  @Pure
+  public boolean isGenerateSupportForDeprecatedContextObject() {
+    return this.generateSupportForDeprecatedContextObject;
+  }
+  
+  public void setGenerateSupportForDeprecatedContextObject(final boolean generateSupportForDeprecatedContextObject) {
+    this.generateSupportForDeprecatedContextObject = generateSupportForDeprecatedContextObject;
   }
 }

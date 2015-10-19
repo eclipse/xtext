@@ -27,6 +27,7 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
+import org.eclipse.xtext.serializer.sequencertest.ParameterCaller;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
 import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
@@ -77,6 +78,7 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX31 <em>X31</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX32 <em>X32</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX33 <em>X33</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX34 <em>X34</em>}</li>
  * </ul>
  *
  * @generated
@@ -382,6 +384,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected FragmentCallerType x33;
+
+  /**
+   * The cached value of the '{@link #getX34() <em>X34</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX34()
+   * @generated
+   * @ordered
+   */
+  protected ParameterCaller x34;
 
   /**
    * <!-- begin-user-doc -->
@@ -1849,6 +1861,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public ParameterCaller getX34()
+  {
+    return x34;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX34(ParameterCaller newX34, NotificationChain msgs)
+  {
+    ParameterCaller oldX34 = x34;
+    x34 = newX34;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X34, oldX34, newX34);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX34(ParameterCaller newX34)
+  {
+    if (newX34 != x34)
+    {
+      NotificationChain msgs = null;
+      if (x34 != null)
+        msgs = ((InternalEObject)x34).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X34, null, msgs);
+      if (newX34 != null)
+        msgs = ((InternalEObject)newX34).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X34, null, msgs);
+      msgs = basicSetX34(newX34, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X34, newX34, newX34));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1914,6 +1974,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX32(null, msgs);
       case SequencertestPackage.MODEL__X33:
         return basicSetX33(null, msgs);
+      case SequencertestPackage.MODEL__X34:
+        return basicSetX34(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1988,6 +2050,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX32();
       case SequencertestPackage.MODEL__X33:
         return getX33();
+      case SequencertestPackage.MODEL__X34:
+        return getX34();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -2091,6 +2155,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SequencertestPackage.MODEL__X33:
         setX33((FragmentCallerType)newValue);
+        return;
+      case SequencertestPackage.MODEL__X34:
+        setX34((ParameterCaller)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -2196,6 +2263,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SequencertestPackage.MODEL__X33:
         setX33((FragmentCallerType)null);
         return;
+      case SequencertestPackage.MODEL__X34:
+        setX34((ParameterCaller)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -2270,6 +2340,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x32 != null;
       case SequencertestPackage.MODEL__X33:
         return x33 != null;
+      case SequencertestPackage.MODEL__X34:
+        return x34 != null;
     }
     return super.eIsSet(featureID);
   }

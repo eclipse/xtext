@@ -46,13 +46,13 @@ public class NoParametersTestLanguageSyntacticSequencer extends AbstractSyntacti
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q.equals(syntax))
+			if (match_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q.equals(syntax))
+			else if (match_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q.equals(syntax))
+			else if (match_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q.equals(syntax))
+			else if (match_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

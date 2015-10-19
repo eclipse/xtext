@@ -72,13 +72,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getBOOLEAN_TERMINAL_IDRule())
+		if (ruleCall.getRule() == grammarAccess.getBOOLEAN_TERMINAL_IDRule())
 			return getBOOLEAN_TERMINAL_IDToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getBooleanDatatypeIDRule())
+		else if (ruleCall.getRule() == grammarAccess.getBooleanDatatypeIDRule())
 			return getBooleanDatatypeIDToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getIDRule())
+		else if (ruleCall.getRule() == grammarAccess.getIDRule())
 			return getIDToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getKW1Rule())
+		else if (ruleCall.getRule() == grammarAccess.getKW1Rule())
 			return getKW1Token(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -128,47 +128,47 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ActionOnly_IDTerminalRuleCall_2_q.equals(syntax))
+			if (match_ActionOnly_IDTerminalRuleCall_2_q.equals(syntax))
 				emit_ActionOnly_IDTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ActionOnly_IDTerminalRuleCall_5_q.equals(syntax))
+			else if (match_ActionOnly_IDTerminalRuleCall_5_q.equals(syntax))
 				emit_ActionOnly_IDTerminalRuleCall_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ActionOnly_Kw1Keyword_1_q.equals(syntax))
+			else if (match_ActionOnly_Kw1Keyword_1_q.equals(syntax))
 				emit_ActionOnly_Kw1Keyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ActionOnly_Kw2Keyword_4_q.equals(syntax))
+			else if (match_ActionOnly_Kw2Keyword_4_q.equals(syntax))
 				emit_ActionOnly_Kw2Keyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1.equals(syntax))
+			else if (match_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1.equals(syntax))
 				emit_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a.equals(syntax))
+			else if (match_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a.equals(syntax))
 				emit_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw8Keyword_2_7_0__a_Kw7Keyword_2_6_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw8Keyword_2_7_0__a_Kw7Keyword_2_6_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw8Keyword_2_7_0__a_Kw7Keyword_2_6_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw6Keyword_2_5_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw6Keyword_2_5_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw6Keyword_2_5_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw5Keyword_2_4_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw5Keyword_2_4_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw5Keyword_2_4_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw4Keyword_2_3_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw4Keyword_2_3_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw4Keyword_2_3_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw3Keyword_2_2_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw3Keyword_2_2_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw3Keyword_2_2_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw2Keyword_2_1_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw1Keyword_2_0_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw2Keyword_2_1_0__p.equals(syntax))
 				emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw2Keyword_2_1_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LongAlternative_____Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw1Keyword_2_0_0__p.equals(syntax))
+			else if (match_LongAlternative_____Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw1Keyword_2_0_0__p.equals(syntax))
 				emit_LongAlternative_____Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw1Keyword_2_0_0__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MandatoryManyTransition_KW1ParserRuleCall_1_p.equals(syntax))
+			else if (match_MandatoryManyTransition_KW1ParserRuleCall_1_p.equals(syntax))
 				emit_MandatoryManyTransition_KW1ParserRuleCall_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_OptionalManyTransition_KW1ParserRuleCall_1_a.equals(syntax))
+			else if (match_OptionalManyTransition_KW1ParserRuleCall_1_a.equals(syntax))
 				emit_OptionalManyTransition_KW1ParserRuleCall_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_OptionalSingleTransition_KW1ParserRuleCall_1_q.equals(syntax))
+			else if (match_OptionalSingleTransition_KW1ParserRuleCall_1_q.equals(syntax))
 				emit_OptionalSingleTransition_KW1ParserRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Prim1_LeftParenthesisKeyword_1_0_a.equals(syntax))
+			else if (match_Prim1_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Prim1_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Prim1_LeftParenthesisKeyword_1_0_p.equals(syntax))
+			else if (match_Prim1_LeftParenthesisKeyword_1_0_p.equals(syntax))
 				emit_Prim1_LeftParenthesisKeyword_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Prim2_LeftParenthesisKeyword_1_0_a.equals(syntax))
+			else if (match_Prim2_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Prim2_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Prim2_LeftParenthesisKeyword_1_0_p.equals(syntax))
+			else if (match_Prim2_LeftParenthesisKeyword_1_0_p.equals(syntax))
 				emit_Prim2_LeftParenthesisKeyword_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

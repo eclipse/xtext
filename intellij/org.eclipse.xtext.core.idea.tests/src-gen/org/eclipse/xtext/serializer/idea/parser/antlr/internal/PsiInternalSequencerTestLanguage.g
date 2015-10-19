@@ -440,6 +440,30 @@ ruleModel:
 				}
 			)
 		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X33FragmentCallerParserRuleCall_32_0ElementType());
+				}
+				lv_x33_32_0=ruleFragmentCaller
+				{
+					doneComposite();
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X34ParameterCallerParserRuleCall_33_0ElementType());
+				}
+				lv_x34_33_0=ruleParameterCaller
+				{
+					doneComposite();
+				}
+			)
+		)
 	)
 ;
 
@@ -2909,6 +2933,299 @@ ruleNullCrossRefInterpreted:
 				}
 			)
 		)?
+	)
+;
+
+//Entry rule entryRuleFragmentCaller
+entryRuleFragmentCaller:
+	{ markComposite(elementTypeProvider.getFragmentCallerElementType()); }
+	ruleFragmentCaller
+	EOF;
+
+// Rule FragmentCaller
+ruleFragmentCaller:
+	(
+		{
+			markLeaf(elementTypeProvider.getFragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0ElementType());
+		}
+		otherlv_0='#33'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType());
+				}
+				lv_val1_1_0=RULE_ID
+				{
+					doneLeaf(lv_val1_1_0);
+				}
+			)
+		)
+		{
+			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
+		}
+		ruleFragment1
+		{
+			doneComposite();
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType());
+				}
+				lv_val_3_0=RULE_ID
+				{
+					doneLeaf(lv_val_3_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Fragment1
+ruleFragment1:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getFragment1_FragValIDTerminalRuleCall_0ElementType());
+			}
+			lv_fragVal_0_0=RULE_ID
+			{
+				doneLeaf(lv_fragVal_0_0);
+			}
+		)
+	)
+;
+
+//Entry rule entryRuleParameterCaller
+entryRuleParameterCaller:
+	{ markComposite(elementTypeProvider.getParameterCallerElementType()); }
+	ruleParameterCaller
+	EOF;
+
+// Rule ParameterCaller
+ruleParameterCaller:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterCaller_NumberSignDigitThreeDigitFourKeyword_0ElementType());
+		}
+		otherlv_0='#34'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw1Keyword_1_0_0ElementType());
+				}
+				otherlv_1='kw1'
+				{
+					doneLeaf(otherlv_1);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_0_1_0ElementType());
+						}
+						lv_p_2_0=norm3_Parameterized
+						{
+							doneComposite();
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw2Keyword_1_1_0ElementType());
+				}
+				otherlv_3='kw2'
+				{
+					doneLeaf(otherlv_3);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_1_1_0ElementType());
+						}
+						lv_p_4_0=norm1_Parameterized
+						{
+							doneComposite();
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw3Keyword_1_2_0ElementType());
+				}
+				otherlv_5='kw3'
+				{
+					doneLeaf(otherlv_5);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_2_1_0ElementType());
+						}
+						lv_p_6_0=norm2_Parameterized
+						{
+							doneComposite();
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw4Keyword_1_3_0ElementType());
+				}
+				otherlv_7='kw4'
+				{
+					doneLeaf(otherlv_7);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_3_1_0ElementType());
+						}
+						lv_p_8_0=ruleParameterized
+						{
+							doneComposite();
+						}
+					)
+				)
+			)
+		)
+	)
+;
+
+//Entry rule entryRuleParameterized
+entryRuleParameterized:
+	{ markComposite(elementTypeProvider.getParameterizedElementType()); }
+	ruleParameterized
+	EOF;
+
+// Rule Parameterized
+ruleParameterized:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp2Keyword_1_0ElementType());
+		}
+		otherlv_0='kwp2'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V2IDTerminalRuleCall_1_1_0ElementType());
+				}
+				lv_v2_1_0=RULE_ID
+				{
+					doneLeaf(lv_v2_1_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Parameterized
+norm1_Parameterized:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp1Keyword_0_0ElementType());
+		}
+		otherlv_0='kwp1'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V1IDTerminalRuleCall_0_1_0ElementType());
+				}
+				lv_v1_1_0=RULE_ID
+				{
+					doneLeaf(lv_v1_1_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Parameterized
+norm2_Parameterized:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp2Keyword_1_0ElementType());
+		}
+		otherlv_0='kwp2'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V2IDTerminalRuleCall_1_1_0ElementType());
+				}
+				lv_v2_1_0=RULE_ID
+				{
+					doneLeaf(lv_v2_1_0);
+				}
+			)
+		)
+		(
+			{
+				markLeaf(elementTypeProvider.getParameterized_Kwp3Keyword_1_2_0ElementType());
+			}
+			otherlv_2='kwp3'
+			{
+				doneLeaf(otherlv_2);
+			}
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType());
+					}
+					lv_v3_3_0=RULE_ID
+					{
+						doneLeaf(lv_v3_3_0);
+					}
+				)
+			)
+		)?
+	)
+;
+
+
+// Rule Parameterized
+norm3_Parameterized:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp1Keyword_0_0ElementType());
+		}
+		otherlv_0='kwp1'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V1IDTerminalRuleCall_0_1_0ElementType());
+				}
+				lv_v1_1_0=RULE_ID
+				{
+					doneLeaf(lv_v1_1_0);
+				}
+			)
+		)
 	)
 ;
 

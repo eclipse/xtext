@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.Set;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.formallang.Pda;
 
 import com.google.inject.ImplementedBy;
@@ -23,7 +22,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ContextTypePDAProvider.class)
 public interface IContextTypePDAProvider {
 
-	Pda<ISerState, RuleCall> getContextTypePDA(Grammar grammar, EObject context, EClass type);
+	Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar);
 
-	public Set<EClass> getTypesForContext(Grammar grammar, EObject context);
 }

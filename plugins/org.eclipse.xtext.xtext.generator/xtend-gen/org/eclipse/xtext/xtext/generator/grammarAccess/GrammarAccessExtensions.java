@@ -41,6 +41,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
@@ -493,6 +494,22 @@ public class GrammarAccessExtensions {
   }
   
   /**
+   * Returns the invocation of a ParserRule Parameter as Java expression.
+   */
+  public String gaRuleParameterAccessor(final Parameter parameter) {
+    final ParserRule rule = GrammarUtil.containingParserRule(parameter);
+    EList<Parameter> _parameters = rule.getParameters();
+    final int index = _parameters.indexOf(parameter);
+    String _gaRuleAccessor = this.gaRuleAccessor(rule);
+    String _plus = (_gaRuleAccessor + ".getParameters().get(");
+    String _plus_1 = (_plus + Integer.valueOf(index));
+    String _plus_2 = (_plus_1 + "/*");
+    String _name = parameter.getName();
+    String _plus_3 = (_plus_2 + _name);
+    return (_plus_3 + "*/)");
+  }
+  
+  /**
    * Returns the invocation of the rule accessor method as Java statement.
    */
   public String gaBaseRuleAccessor(final AbstractRule rule) {
@@ -591,6 +608,12 @@ public class GrammarAccessExtensions {
       if (ele instanceof AbstractRule) {
         _matched=true;
         _switchResult = this.gaRuleAccessor(((AbstractRule)ele));
+      }
+    }
+    if (!_matched) {
+      if (ele instanceof Parameter) {
+        _matched=true;
+        _switchResult = this.gaRuleParameterAccessor(((Parameter)ele));
       }
     }
     if (!_matched) {
