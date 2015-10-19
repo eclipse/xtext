@@ -375,7 +375,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("component = XtextGenerator auto-inject {");
+    _builder.append("component = XtextGenerator {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("configuration = {");
@@ -526,7 +526,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("code = auto-inject {");
+    _builder.append("code = {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("encoding = \"");
@@ -616,7 +616,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment auto-inject {}");
+        _builder.append("fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");
@@ -626,7 +626,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("fragment = ecore2xtext.FormatterFragment auto-inject {}");
+        _builder.append("fragment = ecore2xtext.FormatterFragment {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");
@@ -664,36 +664,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.newLine();
-    {
-      boolean _or = false;
-      WizardConfiguration _config_15 = this.getConfig();
-      UiProjectDescriptor _uiProject_3 = _config_15.getUiProject();
-      boolean _isEnabled_6 = _uiProject_3.isEnabled();
-      if (_isEnabled_6) {
-        _or = true;
-      } else {
-        WizardConfiguration _config_16 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_16.getIdeProject();
-        boolean _isEnabled_7 = _ideProject_1.isEnabled();
-        _or = _isEnabled_7;
-      }
-      if (_or) {
-        _builder.append("\t\t\t");
-        _builder.append("// generates a more lightweight Antlr parser and lexer tailored for content assist");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
     _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
