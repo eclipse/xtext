@@ -80,6 +80,9 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 	@Accessors
 	boolean partialParsing;
 
+	@Accessors
+	boolean skipContentAssistGrammarComparison = false
+
 	private List<String> advices = newArrayList()
 
 	public def void addRegisterAdvice(String advice) {
@@ -102,7 +105,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			)
 		}
 		
-		if (projectConfig.genericIde?.srcGen != null) {
+		if (!skipContentAssistGrammarComparison && projectConfig.genericIde?.srcGen != null) {
 			projectConfig.genericIde.srcGen.loadAndCompareGrammars(Generator.SRC_GEN_IDE,
 				// TODO to be updated once the new content assist grammar generator is available
 				'''«grammar.getInternalContentAssistLexerClass.path.replaceFirst("Lexer$","")».g'''
