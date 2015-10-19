@@ -135,7 +135,7 @@ public class GrammarAccessExtensions {
   }
   
   /**
-   * Converts an arbitary string to a valid Java identifier.
+   * Converts an arbitary string to a valid Java identifier that is valid in an Antlr grammar action context, too.
    * The string is split up along the the characters that are not valid as java
    * identifier. The first character of each segments is made upper case which
    * leads to a camel-case style.
@@ -213,30 +213,24 @@ public class GrammarAccessExtensions {
     char[] _charArray = text.toCharArray();
     for (final char c : _charArray) {
       {
-        boolean _xifexpression = false;
-        if (start) {
-          _xifexpression = Character.isJavaIdentifierStart(c);
-        } else {
-          _xifexpression = Character.isJavaIdentifierPart(c);
-        }
-        final boolean valid = _xifexpression;
+        final boolean valid = this.isValidJavaLatinIdentifier(c, start);
         if (valid) {
           if (start) {
-            char _xifexpression_1 = (char) 0;
+            char _xifexpression = (char) 0;
             if (uppercaseFirst) {
+              _xifexpression = Character.toUpperCase(c);
+            } else {
+              _xifexpression = Character.toLowerCase(c);
+            }
+            builder.append(_xifexpression);
+          } else {
+            char _xifexpression_1 = (char) 0;
+            if (up) {
               _xifexpression_1 = Character.toUpperCase(c);
             } else {
-              _xifexpression_1 = Character.toLowerCase(c);
+              _xifexpression_1 = c;
             }
             builder.append(_xifexpression_1);
-          } else {
-            char _xifexpression_2 = (char) 0;
-            if (up) {
-              _xifexpression_2 = Character.toUpperCase(c);
-            } else {
-              _xifexpression_2 = c;
-            }
-            builder.append(_xifexpression_2);
           }
           up = false;
           start = false;
@@ -246,6 +240,70 @@ public class GrammarAccessExtensions {
       }
     }
     return builder.toString();
+  }
+  
+  public boolean isValidJavaLatinIdentifier(final char c, final boolean start) {
+    boolean valid = ((c >= 'A') && (c <= 'Z'));
+    valid = (valid || ((c >= 'a') && (c <= 'z')));
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _or_2 = false;
+    boolean _or_3 = false;
+    boolean _or_4 = false;
+    boolean _or_5 = false;
+    if (valid) {
+      _or_5 = true;
+    } else {
+      boolean _eq = GrammarAccessExtensions.eq(c, 'ä');
+      _or_5 = _eq;
+    }
+    if (_or_5) {
+      _or_4 = true;
+    } else {
+      boolean _eq_1 = GrammarAccessExtensions.eq(c, 'ö');
+      _or_4 = _eq_1;
+    }
+    if (_or_4) {
+      _or_3 = true;
+    } else {
+      boolean _eq_2 = GrammarAccessExtensions.eq(c, 'ü');
+      _or_3 = _eq_2;
+    }
+    if (_or_3) {
+      _or_2 = true;
+    } else {
+      boolean _eq_3 = GrammarAccessExtensions.eq(c, 'Ä');
+      _or_2 = _eq_3;
+    }
+    if (_or_2) {
+      _or_1 = true;
+    } else {
+      boolean _eq_4 = GrammarAccessExtensions.eq(c, 'Ö');
+      _or_1 = _eq_4;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      boolean _eq_5 = GrammarAccessExtensions.eq(c, 'Ü');
+      _or = _eq_5;
+    }
+    valid = _or;
+    boolean _or_6 = false;
+    if (valid) {
+      _or_6 = true;
+    } else {
+      boolean _eq_6 = GrammarAccessExtensions.eq(c, '_');
+      _or_6 = _eq_6;
+    }
+    valid = _or_6;
+    if ((!start)) {
+      valid = (valid || ((c >= '0') && (c <= '9')));
+    }
+    return valid;
+  }
+  
+  private static boolean eq(final char c1, final char c2) {
+    return (c1 == c2);
   }
   
   /**
