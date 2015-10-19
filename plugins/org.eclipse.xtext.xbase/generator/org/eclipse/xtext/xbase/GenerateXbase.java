@@ -5,6 +5,7 @@ import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.adapter.FragmentAdapter;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
+import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
@@ -83,6 +84,10 @@ final class GenerateXbase {
 				addFragment(new ContentAssistFragment2());
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				comparison.setSkipContentAssistGrammarComparison(true);
+				addFragment(comparison);
 			}});
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbase";
@@ -122,6 +127,9 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
 				addFragment(new FragmentAdapter(antlrUI));
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
 			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbasewithannotations";
@@ -159,6 +167,9 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
 				addFragment(new FragmentAdapter(antlrUI));
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
 		}};
 		

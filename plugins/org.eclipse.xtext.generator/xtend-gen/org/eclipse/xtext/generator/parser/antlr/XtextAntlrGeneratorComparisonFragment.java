@@ -128,6 +128,9 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   @Accessors
   private boolean partialParsing;
   
+  @Accessors
+  private boolean skipContentAssistGrammarComparison = false;
+  
   private List<String> advices = CollectionLiterals.<String>newArrayList();
   
   public void addRegisterAdvice(final String advice) {
@@ -169,14 +172,20 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append(".g");
       this.loadAndCompareGrammars(_srcGen_1, Generator.SRC_GEN, _builder.toString());
     }
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IBundleProjectConfig _genericIde = _projectConfig_2.getGenericIde();
-    IXtextGeneratorFileSystemAccess _srcGen_2 = null;
-    if (_genericIde!=null) {
-      _srcGen_2=_genericIde.getSrcGen();
+    boolean _and = false;
+    if (!(!this.skipContentAssistGrammarComparison)) {
+      _and = false;
+    } else {
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IBundleProjectConfig _genericIde = _projectConfig_2.getGenericIde();
+      IXtextGeneratorFileSystemAccess _srcGen_2 = null;
+      if (_genericIde!=null) {
+        _srcGen_2=_genericIde.getSrcGen();
+      }
+      boolean _notEquals_1 = (!Objects.equal(_srcGen_2, null));
+      _and = _notEquals_1;
     }
-    boolean _notEquals_1 = (!Objects.equal(_srcGen_2, null));
-    if (_notEquals_1) {
+    if (_and) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
       IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
@@ -582,5 +591,14 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   
   public void setPartialParsing(final boolean partialParsing) {
     this.partialParsing = partialParsing;
+  }
+  
+  @Pure
+  public boolean isSkipContentAssistGrammarComparison() {
+    return this.skipContentAssistGrammarComparison;
+  }
+  
+  public void setSkipContentAssistGrammarComparison(final boolean skipContentAssistGrammarComparison) {
+    this.skipContentAssistGrammarComparison = skipContentAssistGrammarComparison;
   }
 }
