@@ -293,7 +293,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		val config = new LanguageConfig
 		config.forcedResourceSet = config2.resourceSet
 		config.fileExtensions = config2.fileExtensions.join(',')
-		config.uri = config2.uri
+		config.uri = config2.grammarUri
 		config.registerNaming(naming)
 		return config
 	}
