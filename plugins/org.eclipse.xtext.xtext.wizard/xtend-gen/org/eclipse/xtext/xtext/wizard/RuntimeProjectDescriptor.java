@@ -608,14 +608,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("\t\t\t");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter { ");
+        _builder.append("fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}");
         _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("fragment = adapter.FragmentAdapter {");
