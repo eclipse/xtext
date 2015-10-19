@@ -9,13 +9,25 @@ package org.eclipse.xtext.idea.tests.parsing;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.intellij.lang.ASTFactory;
 import com.intellij.lang.Language;
+import com.intellij.lang.LanguageASTFactory;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.mock.MockApplicationEx;
+import com.intellij.mock.MockEditorFactory;
+import com.intellij.mock.MockFileDocumentManagerImpl;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.EditorFactory;
+import com.intellij.openapi.editor.impl.DocumentImpl;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.ParsingTestCase;
+import com.intellij.testFramework.PlatformLiteFixture;
+import com.intellij.util.Function;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -29,9 +41,11 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.lang.LanguageSetup;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
 import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
@@ -47,6 +61,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.picocontainer.MutablePicoContainer;
 
 @SuppressWarnings("all")
 public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
@@ -82,8 +97,34 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   
   @Override
   protected void setUp() throws Exception {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method configureFromParserDefinition(ParserDefinition, String) is undefined");
+    super.setUp();
+    ISetup _setup = this.getSetup();
+    this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, _setup);
+    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
+    _xtextLanguage.injectMembers(this);
+    this.configureFromParserDefinition(this.parserDefinition, this.myFileExt);
+    this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
+    MockApplicationEx _application = PlatformLiteFixture.getApplication();
+    final MutablePicoContainer appContainer = _application.getPicoContainer();
+    appContainer.unregisterComponent(EditorFactory.class);
+    appContainer.unregisterComponent(FileDocumentManager.class);
+    final MockEditorFactory editorFactory = new MockEditorFactory() {
+      @Override
+      public Document createDocument(final CharSequence text) {
+        return new DocumentImpl(text, true, false);
+      }
+    };
+    appContainer.registerComponentInstance(EditorFactory.class, editorFactory);
+    final Function<CharSequence, Document> _function = new Function<CharSequence, Document>() {
+      @Override
+      public Document fun(final CharSequence charSequence) {
+        return editorFactory.createDocument(charSequence);
+      }
+    };
+    MockFileDocumentManagerImpl _mockFileDocumentManagerImpl = new MockFileDocumentManagerImpl(_function, FileDocumentManagerImpl.HARD_REF_TO_DOCUMENT_KEY);
+    appContainer.registerComponentInstance(FileDocumentManager.class, _mockFileDocumentManagerImpl);
+    NodeModelPrinter _nodeModelPrinter = this.xtextResourceAsserts.getNodeModelPrinter();
+    _nodeModelPrinter.setIgnoreSyntaxErrors(false);
   }
   
   @Override
