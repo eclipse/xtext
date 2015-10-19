@@ -774,6 +774,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/generator/parser/antlr/ex/common/KeywordHelper.java" type="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="getHelper(EObject)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/generator/parser/antlr/ex/wsAware/SyntheticTerminalAwareFragmentHelper.java" type="org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper">
         <filter id="643842064">
             <message_arguments>
