@@ -18,6 +18,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.common.base.Joiner;
@@ -31,9 +33,16 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 
 	@Inject
 	private IGrammarAccess grammarAccess;
-	
+
 	@Override
-	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
+	@Deprecated
+	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject sem,
+			ISynAbsorberState from, AbstractElement to) {
+		return createInvalidFollowingAbsorberDiagnostic(SerializationContext.fromEObject(context, sem), sem, from, to);
+	}
+
+	@Override
+	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(ISerializationContext context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to) {
 		GrammarElementTitleSwitch fmt = new GrammarElementTitleSwitch().showAssignments().showQualified();
 		String fromName = from.toString(fmt);
@@ -47,13 +56,14 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		msg.append("State '" + toName + "' may not follow '" + fromName + "'.\n");
 		msg.append("Valid followers are: " + Joiner.on(", ").join(targets));
 
-		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context, grammarAccess.getGrammar(), msg.toString());
+		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context,
+				grammarAccess.getGrammar(), msg.toString());
 	}
 
 	@Override
 	public ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState,
 			AbstractElement target, RuleCallStack stack) {
-		return null;
+		return new SerializationDiagnostic(UNEXPECTED_EMITTER_DIAGNOSTIC, null, target, null, null);
 	}
 
 	@Override
@@ -65,6 +75,7 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		buf.append("Found on top of the stack: " + poppedStr + "\n");
 		buf.append("Expected: " + toConsume + "\n");
 		buf.append("Rest of the stack: " + stack + "\n");
-		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, toConsume.getContext(), grammarAccess.getGrammar(), buf.toString());
+		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, (ISerializationContext) null,
+				grammarAccess.getGrammar(), buf.toString());
 	}
 }
