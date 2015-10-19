@@ -603,7 +603,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	}
 	
 	def compileParserDefinition(Grammar grammar) {
-		val crossReferences = grammar.crossReferences
+		val crossReferences = grammar.crossReferences.toList
 		val namedGrammarElement = grammar.namedGrammarElements
 		return fileAccessFactory.createJavaFile(grammar.parserDefinition, '''
 			public class «grammar.parserDefinition.simpleName» extends «grammar.superParserDefinition» {
@@ -626,15 +626,32 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 							«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
 							elementTypeProvider.get«nameType»ElementType()
 							«ENDFOR»
-						);
+						) {};
 					}
 					«ENDFOR»
 					«FOR crossReference : crossReferences»
 					if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
-						return new «"org.eclipse.xtext.psi.impl.PsiEObjectReference".typeRef»(node);
+						return new «"org.eclipse.xtext.psi.impl.PsiEObjectReference".typeRef»(node) {};
 					}
 					«ENDFOR»
-					return super.createElement(node);
+««« FIXME: get rid of code above and delegate to super when https://youtrack.jetbrains.com/issue/IDEA-146362 is fixed
+					«FOR rule : grammar.allNonTerminalRules»
+					if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {
+						return new «"org.eclipse.xtext.psi.impl.PsiEObjectImpl".typeRef»(node) {};
+					}
+					«FOR grammarElementIdentifier : rule.eAllContents.filter(AbstractElement).filter[element|
+						!crossReferences.contains(element)
+					].map[
+						grammarElementIdentifier
+					].filter[identifier|
+						!namedGrammarElement.keySet.contains(identifier)
+					].toIterable»
+					if (elementType == elementTypeProvider.get«grammarElementIdentifier»ElementType()) {
+						return new «"org.eclipse.xtext.psi.impl.PsiEObjectImpl".typeRef»(node) {};
+					}
+					«ENDFOR»
+					«ENDFOR»
+					throw new «"java.lang.IllegalStateException".typeRef»("Unexpected element type: " + elementType);
 				}
 			
 			}
