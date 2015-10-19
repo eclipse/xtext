@@ -1483,13 +1483,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-    ManifestAccess _manifest = _eclipsePlugin.getManifest();
+    IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
+    ManifestAccess _manifest = _genericIde.getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
+      IBundleProjectConfig _genericIde_1 = _projectConfig_1.getGenericIde();
+      ManifestAccess _manifest_1 = _genericIde_1.getManifest();
       final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
         @Override
         public void apply(final ManifestAccess it) {
