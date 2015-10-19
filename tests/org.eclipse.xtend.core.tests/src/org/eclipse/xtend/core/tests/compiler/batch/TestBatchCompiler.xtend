@@ -128,7 +128,7 @@ class TestBatchCompiler {
 		assertEquals("test-result", target.toString)
 	}
 
-	@Test def void testprojectConfigMultipleSourceDirs1() {
+	@Test def void testProjectConfigMultipleSourceDirs1() {
 		batchCompiler.sourcePath = '''ws/prj1/src«File.pathSeparator»ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/bin'''
 		batchCompiler.compile
@@ -147,7 +147,7 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testprojectConfigMultipleSourceDirs2AbsPaths() {
+	@Test def void testProjectConfigMultipleSourceDirs2AbsPaths() {
 		batchCompiler.sourcePath = '''/tmp/ws/prj1/src«File.pathSeparator»/tmp/ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''/tmp/ws/prj1/bin'''
 
@@ -167,7 +167,7 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testprojectConfigMultipleSourceDirs3() {
+	@Test def void testProjectConfigMultipleSourceDirs3() {
 		batchCompiler.sourcePath = '''ws/prj1/dir1/src«File.pathSeparator»ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/dir2/bin'''
 
@@ -187,7 +187,7 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testprojectConfigMultipleSourceDirs4() {
+	@Test def void testProjectConfigMultipleSourceDirs4() {
 		batchCompiler.sourcePath = '''ws/prj1/src«File.pathSeparator»ws/prj1/dir1/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/bin'''
 
@@ -208,7 +208,7 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testprojectConfigMultipleSourceDirs5() {
+	@Test def void testProjectConfigMultipleSourceDirs5() {
 		batchCompiler.sourcePath = '''ws/prj1/dir1/dir1a/src«File.pathSeparator»ws/prj1/dir3/dir3a/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/dir2/dir2a/bin'''
 
@@ -228,7 +228,7 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testprojectConfigMultipleSourceDirs6() {
+	@Test def void testProjectConfigMultipleSourceDirs6() {
 		batchCompiler.sourcePath = '''dir1/ws/prj1/dir2/dir3/dir4/src1«File.pathSeparator»dir1/ws/prj1/dir2/dir3/src2«File.
 			pathSeparator»dir1/ws/prj1/dir2/src3«File.pathSeparator»dir1/ws/prj1/src4'''
 		batchCompiler.outputPath = '''dir1/ws/prj1/dir2/dir3/dir4/dir5/bin'''
@@ -258,7 +258,7 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testprojectConfigSameDir() {
+	@Test def void testProjectConfigSameDir() {
 		batchCompiler.sourcePath = "ws/prj1"
 		batchCompiler.outputPath = "ws/prj1"
 
@@ -266,7 +266,7 @@ class TestBatchCompiler {
 		assertNull(batchCompiler.projectConfig)
 	}
 
-	@Test def void testprojectConfigWithoutCommonProjectDir() {
+	@Test def void testProjectConfigWithoutCommonProjectDir() {
 		batchCompiler.sourcePath = '''/tmp/ws/prj1/src'''
 		batchCompiler.outputPath = '''/usr/local/tmp/ws/prj1/bin'''
 
@@ -275,7 +275,7 @@ class TestBatchCompiler {
 		assertNull(batchCompiler.outputConfiguration)
 	}
 
-	@Test def void testprojectConfigWithoutCommonWorkspaceDir() {
+	@Test def void testProjectConfigWithoutCommonWorkspaceDir() {
 		batchCompiler.sourcePath = '''/some_non_existing_folder/src'''
 		batchCompiler.outputPath = '''/some_non_existing_folder/bin'''
 
@@ -284,7 +284,7 @@ class TestBatchCompiler {
 		assertNull(batchCompiler.outputConfiguration)
 	}
 
-	@Test def void testprojectConfigWithTopLevelCommonWorkspaceDir() {
+	@Test def void testProjectConfigWithTopLevelCommonWorkspaceDir() {
 		batchCompiler.sourcePath = '''/tmp/prj/src'''
 		batchCompiler.outputPath = '''/tmp/prj/bin'''
 		batchCompiler.compile
