@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
@@ -29,6 +30,11 @@ public class Formatting1Test extends AbstractWebServerTest {
   @Override
   protected Module getRuntimeModule() {
     return new StatemachineRuntimeModule() {
+      @Override
+      public Class<? extends IFormatter2> bindIFormatter2() {
+        return null;
+      }
+      
       @Override
       public Class<? extends IFormatter> bindIFormatter() {
         return StatemachineFormatter.class;
