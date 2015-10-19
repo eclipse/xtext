@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
-import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
+import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
 /**
  * Contributes the Quickfix provider stub, either in Xtend or Java language.
@@ -52,7 +52,7 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   @Extension
-  private ValidatorFragment2 _validatorFragment2;
+  private ValidatorNaming _validatorNaming;
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -193,7 +193,7 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("//\t@Fix(");
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorFragment2.getValidatorClass(_grammar_2);
+        TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
         _builder.append(_validatorClass, "");
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
@@ -258,7 +258,7 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("//\t@Fix(");
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
-        TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorFragment2.getValidatorClass(_grammar_2);
+        TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
         _builder.append(_validatorClass, "");
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
