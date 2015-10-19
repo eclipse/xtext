@@ -36,14 +36,15 @@ public class XtextSerializerTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		StandaloneSetup standaloneSetup = new StandaloneSetup();
-		standaloneSetup.setIgnoreBrokenProjectFiles(true);
-		standaloneSetup.setPlatformUri("../..");
+		//		StandaloneSetup standaloneSetup = new StandaloneSetup();
+		//		standaloneSetup.setIgnoreBrokenProjectFiles(true);
+		//		standaloneSetup.setPlatformUri("../..");
 		with(new XtextStandaloneSetup());
 		getInjector().injectMembers(this);
 	}
 
 	@Test
+	@Ignore
 	public void testXtextXtextWithNM() throws Exception {
 		Grammar grammar = load(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"));
 		tester.assertSerializeWithNodeModel(grammar);
@@ -57,7 +58,6 @@ public class XtextSerializerTest extends AbstractXtextTests {
 	}
 
 	@Test
-	@Ignore
 	public void testGroup() {
 		XtextGrammarAccess grammarAccess = get(XtextGrammarAccess.class);
 		String string = get(ISerializer.class).serialize(grammarAccess.getGrammarAccess().getGroup_2());
