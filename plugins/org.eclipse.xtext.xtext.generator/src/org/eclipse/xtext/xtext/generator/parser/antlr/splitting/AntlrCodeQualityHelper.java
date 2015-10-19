@@ -41,10 +41,9 @@ public class AntlrCodeQualityHelper {
 		if (!options.isOptimizeCodeQuality()) {
 			return javaContent;
 		}
+		javaContent = stripMachineDependentPaths(javaContent);
 		if (options.isStripAllComments()) {
 			javaContent = stripAllComments(javaContent);
-		} else {
-			javaContent = stripMachineDependentPaths(javaContent);
 		}
 		return javaContent;
 	}
