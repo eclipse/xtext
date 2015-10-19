@@ -50,7 +50,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Inject
   @Accessors
   @Extension
-  private IProjectConfigProvider workspaceConfigProvider;
+  private IProjectConfigProvider projectConfigProvider;
   
   @Accessors
   private ResourceSet context;
@@ -219,7 +219,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   public Iterable<? extends Path> getChildren(final Path path) {
     boolean _equals = Objects.equal(path, Path.ROOT);
     if (_equals) {
-      IProjectConfig _projectConfig = this.workspaceConfigProvider.getProjectConfig(this.context);
+      IProjectConfig _projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
       String _name = _projectConfig.getName();
       Path _absolutePath = path.getAbsolutePath(_name);
       return Collections.<Path>unmodifiableList(CollectionLiterals.<Path>newArrayList(_absolutePath));
@@ -475,7 +475,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     if (_or) {
       return null;
     }
-    final IProjectConfig projectConfig = this.workspaceConfigProvider.getProjectConfig(this.context);
+    final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
     if ((projectConfig == null)) {
       return null;
     }
@@ -531,7 +531,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   protected Path getPath(final URI uri, final ResourceSet context) {
-    final IProjectConfig projectConfig = this.workspaceConfigProvider.getProjectConfig(context);
+    final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(context);
     if ((projectConfig == null)) {
       return null;
     }
@@ -581,12 +581,12 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   @Pure
-  public IProjectConfigProvider getWorkspaceConfigProvider() {
-    return this.workspaceConfigProvider;
+  public IProjectConfigProvider getProjectConfigProvider() {
+    return this.projectConfigProvider;
   }
   
-  public void setWorkspaceConfigProvider(final IProjectConfigProvider workspaceConfigProvider) {
-    this.workspaceConfigProvider = workspaceConfigProvider;
+  public void setProjectConfigProvider(final IProjectConfigProvider projectConfigProvider) {
+    this.projectConfigProvider = projectConfigProvider;
   }
   
   @Pure

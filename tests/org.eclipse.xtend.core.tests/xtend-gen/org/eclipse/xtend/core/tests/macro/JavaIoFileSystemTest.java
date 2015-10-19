@@ -55,7 +55,7 @@ public class JavaIoFileSystemTest {
         public void apply(final JavaIOFileSystemSupport it) {
           final IProjectConfigProvider _function = new IProjectConfigProvider() {
             @Override
-            public IProjectConfig getProjectConfig(final ResourceSet context) {
+            public IProjectConfig getProjectConfig(final ResourceSet it) {
               File _file = new File(tempDir, "foo");
               FileProjectConfig _fileProjectConfig = new FileProjectConfig(_file);
               final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
@@ -67,7 +67,7 @@ public class JavaIoFileSystemTest {
               return ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig, _function);
             }
           };
-          it.setWorkspaceConfigProvider(_function);
+          it.setProjectConfigProvider(_function);
           IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
           it.setEncodingProvider(_runtime);
           XtextResourceSet _xtextResourceSet = new XtextResourceSet();

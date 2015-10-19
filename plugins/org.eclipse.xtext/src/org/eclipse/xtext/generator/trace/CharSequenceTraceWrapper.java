@@ -26,12 +26,12 @@ public class CharSequenceTraceWrapper {
 	private ILocationInFileProvider locationInFileProvider;
 	
 	@Inject
-	private IProjectConfigProvider workspaceConfigProvider;
+	private IProjectConfigProvider projectConfigProvider;
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, EObject origin) {
 		ITextRegionWithLineInformation location = (ITextRegionWithLineInformation) locationInFileProvider.getSignificantTextRegion(origin);
 		AbsoluteURI absoluteURI = new AbsoluteURI(origin.eResource().getURI());
-		IProjectConfig projectConfig = workspaceConfigProvider.getProjectConfig(EcoreUtil2.getResourceSet(origin));
+		IProjectConfig projectConfig = projectConfigProvider.getProjectConfig(EcoreUtil2.getResourceSet(origin));
 		SourceRelativeURI sourceRelativeURI = absoluteURI.deresolve(projectConfig);
 		return wrapWithTraceData(sequence, sourceRelativeURI, location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber());
 	}

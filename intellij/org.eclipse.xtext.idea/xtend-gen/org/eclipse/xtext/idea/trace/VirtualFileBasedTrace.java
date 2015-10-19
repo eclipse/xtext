@@ -52,7 +52,7 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   private IdeaOutputConfigurationProvider outputConfigurationProvider;
   
-  private IdeaProjectConfigProvider workspaceConfigProvider;
+  private IdeaProjectConfigProvider projectConfigProvider;
   
   @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PUBLIC_GETTER })
   private IdeaProjectConfig localProjectConfig;
@@ -82,8 +82,8 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
     this.outputConfigurationProvider = outputConfigurationProvider;
   }
   
-  protected void setProjectConfigProvider(final IdeaProjectConfigProvider workspaceConfigProvider) {
-    this.workspaceConfigProvider = workspaceConfigProvider;
+  protected void setProjectConfigProvider(final IdeaProjectConfigProvider projectConfigProvider) {
+    this.projectConfigProvider = projectConfigProvider;
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFile virtualFile) {

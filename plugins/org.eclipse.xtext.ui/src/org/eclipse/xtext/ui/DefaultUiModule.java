@@ -433,7 +433,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	/**
 	 * @since 2.9
 	 */
-	public Class<? extends IProjectConfigProvider> bindWorkspaceConfigProvider() {
+	public Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
 		return EclipseProjectConfigProvider.class;
 	}
 }

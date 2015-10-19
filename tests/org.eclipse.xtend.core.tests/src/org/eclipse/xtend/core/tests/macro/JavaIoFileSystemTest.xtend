@@ -36,11 +36,9 @@ class JavaIoFileSystemTest {
 	@Before def void setUp() {
 		val tempDir = temporaryFolder.newFolder()
 		fs = new JavaIOFileSystemSupport => [
-			workspaceConfigProvider = [ context |
-				new FileProjectConfig(new File(tempDir,"foo")) => [
-					addSourceFolder("src")
-				]
-			]
+			projectConfigProvider = [new FileProjectConfig(new File(tempDir,"foo")) => [
+				addSourceFolder("src")
+			]]
 			encodingProvider = new IEncodingProvider.Runtime()
 			context = new XtextResourceSet
 		]
