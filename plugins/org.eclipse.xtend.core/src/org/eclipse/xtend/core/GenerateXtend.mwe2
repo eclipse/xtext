@@ -71,7 +71,7 @@ Workflow {
 				loadedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
 				loadedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
 			}
-			uri = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
+			name = "org.eclipse.xtend.core.Xtend"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
 			
