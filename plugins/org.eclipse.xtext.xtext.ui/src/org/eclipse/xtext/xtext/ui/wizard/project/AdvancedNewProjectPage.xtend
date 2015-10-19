@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
-import org.eclipse.jface.fieldassist.ControlDecoration
-import org.eclipse.jface.fieldassist.FieldDecorationRegistry
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.custom.ScrolledComposite
@@ -22,6 +20,7 @@ import org.eclipse.swt.widgets.Combo
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Group
+import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
@@ -46,59 +45,56 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	override createControl(Composite parent) {
-		control = new ScrolledComposite(parent, SWT.V_SCROLL) =>
-			[
-				layout = new FillLayout
-				expandHorizontal = true
-				expandVertical = true
+		control = new ScrolledComposite(parent, SWT.V_SCROLL) => [
+			layout = new FillLayout
+			expandHorizontal = true
+			expandVertical = true
 
-				content = new Composite(it, SWT.NONE) =>
-					[
-						layout = new GridLayout(1, false)
-						Group [
-							text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-							createUiProject = CheckBox [
-								text = "Eclipse Plugin"
-							]
-							createIdeaProject = CheckBox [
-								text = "IntelliJ IDEA Plugin"
-								enabled = true
-							]
-							createWebProject = CheckBox [
-								text = "Web Integration"
-								enabled = true
-							]
-							createIdeProject = CheckBox [
-								text = "Generic IDE Support"
-								enabled = true
-							].decorate(
-								INFORMATION, '''Generic IDE Support is requiered for front end projects like Eclipse, Idea or Web.''')
-
-							createTestProject = CheckBox [
-								text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
-							]
-						]
-						Group [
-							text = "Preferred Build System"
-							preferredBuildSystem = DropDown[
-								enabled = true
-								items = BuildSystem.values.map[toString]
-							]
-						]
-						Group [
-							text = "Source Layout"
-							sourceLayout = DropDown[
-								enabled = true
-								items = SourceLayout.values.map[toString]
-							].decorate(INFORMATION, "Info about layout")
-
-						]
-						statusWidget = new StatusWidget(it, SWT.NONE) => [
-							layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
-						]
+			content = new Composite(it, SWT.NONE) => [
+				layout = new GridLayout(1, false)
+				Group [
+					text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+					createUiProject = CheckBox [
+						text = "Eclipse Plugin"
 					]
-				minSize = content.computeSize(SWT.DEFAULT, SWT.DEFAULT)
+					createIdeaProject = CheckBox [
+						text = "IntelliJ IDEA Plugin"
+						enabled = true
+					]
+					createWebProject = CheckBox [
+						text = "Web Integration"
+						enabled = true
+					]
+					createIdeProject = CheckBox [
+						text = "Generic IDE Support"
+						enabled = true
+					]
+					createTestProject = CheckBox [
+						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+					]
+				]
+				Group [
+					text = "Preferred Build System"
+					preferredBuildSystem = DropDown[
+						enabled = true
+						items = BuildSystem.values.map[toString]
+					]
+				]
+				Group [
+					text = "Source Layout"
+					sourceLayout = DropDown[
+						enabled = true
+						items = SourceLayout.values.map[toString]
+					]
+
+				]
+				statusWidget = new StatusWidget(it, SWT.NONE) => [
+					layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+				]
 			]
+			minSize = content.computeSize(SWT.DEFAULT, SWT.DEFAULT)
+
+		]
 
 		val selectionControl = new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
@@ -115,16 +111,25 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.addSelectionListener(selectionControl)
 		createIdeProject.addSelectionListener(selectionControl)
 		setDefaults
+
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
 	}
 
 	def void validate(SelectionEvent e) {
 		statusWidget.clearStatus
-		message = null
 		checkWidgets(e)
 		pageComplete = statusWidget.severtity !== ERROR
 	}
 
 	def checkWidgets(SelectionEvent e) {
+
+		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && !isBundleResolved("org.eclipse.m2e.maven.runtime")) {
+			reportIssue(WARNING, 'Maven integration for eclipse is not installed. Consider to install M2e.')
+		}
+		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && !isBundleResolved("org.eclipse.buildship.core")) {
+			reportIssue(WARNING, 'Gradle integration for eclipse is not installed. Consider to install Buildship.')
+		}
+
 		val source = e?.source
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
 			if (createUiProject === source) {
@@ -175,13 +180,6 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			}
 		}
-
-		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && !isBundleResolved("org.eclipse.m2e.maven.runtime")) {
-			setMessage('Maven integration for eclipse is not installed. Consider to install M2e.', WARNING)
-		}
-		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && !isBundleResolved("org.eclipse.buildship.core")) {
-			setMessage('Gradle integration for eclipse is not installed. Consider to install Buildship.', WARNING)
-		}
 	}
 
 	def protected select(Combo combo, Enum<?> enu) {
@@ -190,6 +188,10 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def protected boolean isSelected(Combo combo, Enum<?> enu) {
 		return enu.toString == combo.text
+	}
+
+	def protected <T extends Control> reportIssue(int severity, String text) {
+		reportIssue(severity, text, [])
 	}
 
 	def protected <T extends Control> reportIssue(int severity, String text, ()=>void fix) {
@@ -201,23 +203,6 @@ class AdvancedNewProjectPage extends WizardPage {
 	def protected boolean isBundleResolved(String bundleId) {
 		val bundle = Activator.instance.bundle.bundleContext.bundles.findFirst[bundleId == it.symbolicName]
 		return bundle !== null && bundle.state === Bundle.RESOLVED
-	}
-
-	def private <T extends Control> T decorate(T control, int severity, String text) {
-		val vertical = if(severity === INFORMATION) SWT.DOWN else SWT.UP
-		var dec = new ControlDecoration(control, vertical.bitwiseOr(SWT.LEFT), control.parent)
-		val decoration = switch (severity) {
-			case WARNING:
-				FieldDecorationRegistry.DEC_WARNING
-			case ERROR:
-				FieldDecorationRegistry.DEC_ERROR
-			default:
-				FieldDecorationRegistry.DEC_INFORMATION
-		}
-		var infoIndication = FieldDecorationRegistry.getDefault().getFieldDecoration(decoration)
-		dec.setImage(infoIndication.getImage())
-		dec.descriptionText = text
-		return control
 	}
 
 	def protected Group(Composite parent, (Group)=>void config) {
