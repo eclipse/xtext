@@ -30,6 +30,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	
+	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
@@ -50,18 +51,6 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	 */
 	def void addComposedCheck(String composedCheckValidator) {
 		composedChecks += composedCheckValidator
-	}
-	
-	/**
-	 * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
-	 */
-	public def TypeReference getValidatorClass(Grammar grammar) {
-		// is public for being callable by QuickFixProviderFragement2
-		new TypeReference(grammar.runtimeBasePackage + '.validation.' + getSimpleName(grammar) + 'Validator')
-	}
-	
-	protected def TypeReference getAbstractValidatorClass(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage + '.validation.Abstract' + getSimpleName(grammar) + 'Validator')
 	}
 	
 	protected def TypeReference getValidatorSuperClass(Grammar grammar) {
