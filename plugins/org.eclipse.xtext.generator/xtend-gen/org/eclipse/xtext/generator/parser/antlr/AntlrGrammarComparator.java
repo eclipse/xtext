@@ -47,13 +47,13 @@ public class AntlrGrammarComparator {
     
     private void handleUnexpectedCharSequence(final int lineCount) {
       if (this.treatingReferenceGrammar) {
-        this.handleUnexpectedCharSequence(this.absoluteGrammarFileNameReference, (this.lineNumberReference + lineCount));
+        this.handleInvalidGrammarFile(this.absoluteGrammarFileNameReference, (this.lineNumberReference + lineCount));
       } else {
-        this.handleUnexpectedCharSequence(this.absoluteGrammarFileName, (this.lineNumber + lineCount));
+        this.handleInvalidGrammarFile(this.absoluteGrammarFileName, (this.lineNumber + lineCount));
       }
     }
     
-    public abstract void handleUnexpectedCharSequence(final String absoluteGrammarFileName, final int lineNo);
+    public abstract void handleInvalidGrammarFile(final String absoluteGrammarFileName, final int lineNo);
     
     public abstract void handleMismatch(final String match, final String matchReference);
     

@@ -44,9 +44,11 @@ public class AntlrGrammarComparatorTest {
     }
     
     @Override
-    public void handleUnexpectedCharSequence(final String absoluteGrammarFileName, final int lineNo) {
+    public void handleInvalidGrammarFile(final String testeeOrExpected, final int lineNo) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Noticed an unmatched character sequence in/before line ");
+      _builder.append("Noticed an unmatched character sequence in ");
+      _builder.append(testeeOrExpected, "");
+      _builder.append(" in/before line ");
       _builder.append(lineNo, "");
       _builder.append(".");
       _builder.newLineIfNotEmpty();

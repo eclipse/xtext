@@ -74,7 +74,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     }
     
     @Override
-    public void handleUnexpectedCharSequence(final String absoluteGrammarFileName, final int lineNo) {
+    public void handleInvalidGrammarFile(final String absoluteGrammarFileName, final int lineNo) {
       XtextAntlrGeneratorComparisonFragment.deleteDir(this.tmpFolder);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Noticed an unmatched character sequence in file ");
