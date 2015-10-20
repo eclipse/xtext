@@ -592,7 +592,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	protected boolean shouldGenerate(Resource resource, IBuildContext context) {
-		return shouldGenerate.shouldGenerate(resource, context.getBuiltProject().getName(), CancelIndicator.NullImpl);
+		return shouldGenerate.shouldGenerate(resource, CancelIndicator.NullImpl);
 	}
 
 	protected Map<String, OutputConfiguration> getOutputConfigurations(IBuildContext context) {
