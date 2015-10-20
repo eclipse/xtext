@@ -30,8 +30,8 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
+import org.eclipse.xtext.workspace.ProjectConfigProvider;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
@@ -197,8 +197,8 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	/**
 	 * @since 2.9
 	 */
-	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
-		return RuntimeWorkspaceConfigProvider.class;
+	public Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
+		return ProjectConfigProvider.class;
 	}
 	
 	/**
