@@ -249,10 +249,10 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	}
 	
 	@Override
-	public void discardDerivedState() {
+	protected void doDiscardDerivedState() {
 		this.jvmMemberInitializers = null;
 		this.hasJvmMemberInitializers = false;
-		super.discardDerivedState();
+		super.doDiscardDerivedState();
 	}
 	
 	/**
