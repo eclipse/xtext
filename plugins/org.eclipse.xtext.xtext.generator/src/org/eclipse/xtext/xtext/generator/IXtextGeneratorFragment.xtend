@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator
 
 /**
  * A fragment that contributes to the {@link XtextGenerator}.
+ * @noimplement
  */
 interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {
 	

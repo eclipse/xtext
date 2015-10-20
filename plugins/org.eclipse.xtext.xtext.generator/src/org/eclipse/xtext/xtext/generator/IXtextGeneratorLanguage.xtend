@@ -13,6 +13,9 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 
+/**
+ * @noimplement
+ */
 interface IXtextGeneratorLanguage {
 	
 	def Grammar getGrammar()

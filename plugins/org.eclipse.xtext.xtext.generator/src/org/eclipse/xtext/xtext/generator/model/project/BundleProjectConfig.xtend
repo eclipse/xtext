@@ -13,6 +13,9 @@ import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
+/**
+ * @noextend
+ */
 @Accessors
 class BundleProjectConfig extends SubProjectConfig implements IBundleProjectConfig{
 	ManifestAccess manifest

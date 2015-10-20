@@ -11,6 +11,9 @@ import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.Issues
 
+/**
+ * @noextend
+ */
 @Accessors
 class StandardProjectConfig extends XtextProjectConfig {
 

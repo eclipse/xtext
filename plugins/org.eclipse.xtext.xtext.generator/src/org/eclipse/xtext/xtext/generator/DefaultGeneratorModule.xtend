@@ -17,6 +17,9 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig
 
+/**
+ * @noextend
+ */
 class DefaultGeneratorModule extends AbstractGenericModule {
 	
 	@Accessors

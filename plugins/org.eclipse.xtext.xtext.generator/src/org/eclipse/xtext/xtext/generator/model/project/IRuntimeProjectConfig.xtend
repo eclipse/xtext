@@ -9,6 +9,9 @@ package org.eclipse.xtext.xtext.generator.model.project
 
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
+/**
+ * @noimplement
+ */
 interface IRuntimeProjectConfig extends IBundleProjectConfig {
 	def IXtextGeneratorFileSystemAccess getEcoreModel()
 	def String getEcoreModelFolder()

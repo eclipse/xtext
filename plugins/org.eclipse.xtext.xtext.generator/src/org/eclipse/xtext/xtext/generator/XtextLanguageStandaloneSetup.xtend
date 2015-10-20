@@ -23,6 +23,9 @@ import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
 
+/**
+ * @noextend
+ */
 @Log
 class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
 	@Accessors List<String> loadedResources = newArrayList

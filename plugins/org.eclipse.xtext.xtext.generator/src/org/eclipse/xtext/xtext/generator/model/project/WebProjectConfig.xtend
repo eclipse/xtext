@@ -11,6 +11,9 @@ import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
+/**
+ * @noextend
+ */
 class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {
 	@Accessors(PUBLIC_GETTER)
 	String assetsPath

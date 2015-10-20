@@ -39,6 +39,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @noextend
  */
 @Accessors(PUBLIC_SETTER)
 @Log class StandardLanguage extends XtextGeneratorLanguage {
