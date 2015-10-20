@@ -11,6 +11,7 @@ import com.google.inject.Binder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.AbstractGenericModule;
@@ -51,6 +52,17 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
   public void configureResourceSet(final Binder binder) {
     AnnotatedBindingBuilder<ResourceSet> _bind = binder.<ResourceSet>bind(ResourceSet.class);
     _bind.to(XtextResourceSet.class);
+  }
+  
+  public void configureLineSeparatorInformation(final Binder binder) {
+    AnnotatedBindingBuilder<ILineSeparatorInformation> _bind = binder.<ILineSeparatorInformation>bind(ILineSeparatorInformation.class);
+    final ILineSeparatorInformation _function = new ILineSeparatorInformation() {
+      @Override
+      public String getLineSeparator() {
+        return DefaultGeneratorModule.this.code.getLineDelimiter();
+      }
+    };
+    _bind.toInstance(_function);
   }
   
   public void configureIEncodingProvider(final Binder binder) {
