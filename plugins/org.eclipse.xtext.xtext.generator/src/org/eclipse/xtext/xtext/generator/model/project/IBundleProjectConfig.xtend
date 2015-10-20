@@ -5,15 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator
+package org.eclipse.xtext.xtext.generator.model.project
+
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
 /**
- * A fragment that contributes to the {@link XtextGenerator}.
+ * @noimplement
  */
-interface IGeneratorFragment2 extends IGuiceAwareGeneratorComponent {
-	
-	def void checkConfiguration(Issues issues)
-	
-	def void generate()
-	
+interface IBundleProjectConfig extends ISubProjectConfig {
+	def ManifestAccess getManifest()
+	def PluginXmlAccess getPluginXml()
 }

@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xtext.generator.xbase
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
+class XtypeGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject extension XbaseUsageDetector
 	

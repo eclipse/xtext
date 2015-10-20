@@ -8,15 +8,15 @@
 package org.eclipse.xtext.xtext.generator.types
 
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import com.google.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class TypesGeneratorFragment2 extends AbstractGeneratorFragment2 {
+class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Inject XbaseUsageDetector xbaseUsageDetector
 	

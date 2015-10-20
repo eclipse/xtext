@@ -22,10 +22,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
@@ -33,6 +31,8 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 
 /**
@@ -43,7 +43,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 {
+public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   private ContentAssistGrammarNaming caNaming;
   
@@ -116,7 +116,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractGeneratorFragment2 
     TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory");
     TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory");
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_7, _typeRef_8);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();

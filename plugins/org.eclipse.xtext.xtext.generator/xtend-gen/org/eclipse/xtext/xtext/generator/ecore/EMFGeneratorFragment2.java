@@ -87,21 +87,21 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @Log
 @SuppressWarnings("all")
-public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
+public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   private CodeConfig codeConfig;
   
@@ -590,7 +590,7 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
           String _utilitiesPackageName = genPackage.getUtilitiesPackageName();
           CollectionExtensions.<String>addAll(_exportedPackages, _interfacePackageName, _classPackageName, _utilitiesPackageName);
         }
-        ILanguageConfig _language = this.getLanguage();
+        IXtextGeneratorLanguage _language = this.getLanguage();
         StandaloneSetupAccess _runtimeGenSetup = _language.getRuntimeGenSetup();
         List<StringConcatenationClient> _registrations = _runtimeGenSetup.getRegistrations();
         StringConcatenationClient _client = new StringConcatenationClient() {
@@ -864,7 +864,7 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
           genPackage.setLoadInitialization(false);
         }
         boolean _and = false;
-        ILanguageConfig _language = this.getLanguage();
+        IXtextGeneratorLanguage _language = this.getLanguage();
         List<String> _fileExtensions = _language.getFileExtensions();
         boolean _isEmpty = _fileExtensions.isEmpty();
         boolean _not = (!_isEmpty);
@@ -876,7 +876,7 @@ public class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
           _and = _contains;
         }
         if (_and) {
-          ILanguageConfig _language_1 = this.getLanguage();
+          IXtextGeneratorLanguage _language_1 = this.getLanguage();
           List<String> _fileExtensions_1 = _language_1.getFileExtensions();
           String _join = IterableExtensions.join(_fileExtensions_1, ",");
           genPackage.setFileExtensions(_join);

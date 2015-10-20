@@ -30,15 +30,15 @@ import org.eclipse.xtext.generator.adapter.NamingAdapter;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.WizardConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 /**
  * @since 2.9
@@ -108,11 +108,11 @@ public class Generator2AdapterSetup {
     _project.initialize(generatorInjector);
     CodeConfig _code = generatorModule.getCode();
     _code.initialize(generatorInjector);
-    final ILanguageConfig language = this.createLanguage(generatorInjector);
+    final IXtextGeneratorLanguage language = this.createLanguage(generatorInjector);
     final Module _function_1 = new Module() {
       @Override
       public void configure(final Binder it) {
-        AnnotatedBindingBuilder<ILanguageConfig> _bind = it.<ILanguageConfig>bind(ILanguageConfig.class);
+        AnnotatedBindingBuilder<IXtextGeneratorLanguage> _bind = it.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class);
         _bind.toInstance(language);
         AnnotatedBindingBuilder<Grammar> _bind_1 = it.<Grammar>bind(Grammar.class);
         Grammar _grammar = language.getGrammar();
@@ -128,10 +128,10 @@ public class Generator2AdapterSetup {
   }
   
   private XtextProjectConfig createProjectConfig() {
-    WizardConfig _wizardConfig = new WizardConfig();
-    final Procedure1<WizardConfig> _function = new Procedure1<WizardConfig>() {
+    StandardProjectConfig _standardProjectConfig = new StandardProjectConfig();
+    final Procedure1<StandardProjectConfig> _function = new Procedure1<StandardProjectConfig>() {
       @Override
-      public void apply(final WizardConfig it) {
+      public void apply(final StandardProjectConfig it) {
         it.setCreateEclipseMetaData(true);
         String _projectNameRt = Generator2AdapterSetup.this.naming.getProjectNameRt();
         it.setBaseName(_projectNameRt);
@@ -208,7 +208,7 @@ public class Generator2AdapterSetup {
         _genericIde_4.setSrcGen(_path_8);
       }
     };
-    return ObjectExtensions.<WizardConfig>operator_doubleArrow(_wizardConfig, _function);
+    return ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
   }
   
   private CodeConfig createCodeConfig() {
@@ -225,11 +225,11 @@ public class Generator2AdapterSetup {
     return ObjectExtensions.<CodeConfig>operator_doubleArrow(_codeConfig, _function);
   }
   
-  private ILanguageConfig createLanguage(final Injector generatorInjector) {
-    LanguageConfig2 _languageConfig2 = new LanguageConfig2();
-    final Procedure1<LanguageConfig2> _function = new Procedure1<LanguageConfig2>() {
+  private IXtextGeneratorLanguage createLanguage(final Injector generatorInjector) {
+    XtextGeneratorLanguage _xtextGeneratorLanguage = new XtextGeneratorLanguage();
+    final Procedure1<XtextGeneratorLanguage> _function = new Procedure1<XtextGeneratorLanguage>() {
       @Override
-      public void apply(final LanguageConfig2 it) {
+      public void apply(final XtextGeneratorLanguage it) {
         Grammar _grammar = Generator2AdapterSetup.this.languageConfig.getGrammar();
         Resource _eResource = _grammar.eResource();
         URI _uRI = _eResource.getURI();
@@ -248,7 +248,7 @@ public class Generator2AdapterSetup {
         it.initialize(_grammar_3);
       }
     };
-    return ObjectExtensions.<LanguageConfig2>operator_doubleArrow(_languageConfig2, _function);
+    return ObjectExtensions.<XtextGeneratorLanguage>operator_doubleArrow(_xtextGeneratorLanguage, _function);
   }
   
   public void setAdditionalGeneratorBindings(final Module additionalGeneratorBindings) {

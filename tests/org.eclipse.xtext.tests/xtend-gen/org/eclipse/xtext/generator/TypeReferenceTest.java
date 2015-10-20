@@ -1,0 +1,79 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.xtext.generator;
+
+import java.util.Collections;
+import java.util.List;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.junit.Assert;
+import org.junit.Test;
+
+@SuppressWarnings("all")
+public class TypeReferenceTest {
+  /**
+   * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=480196
+   */
+  @Test
+  public void testDefaultPackage() {
+    final TypeReference ref = TypeReference.typeRef("EString");
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("", _packageName);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("EString", _simpleName);
+  }
+  
+  @Test
+  public void testPackageName() {
+    final TypeReference ref = TypeReference.typeRef("org.example.MyType");
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("MyType", _simpleName);
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("org.example", _packageName);
+  }
+  
+  @Test
+  public void testParametrizedType() {
+    TypeReference _typeRef = TypeReference.typeRef("String");
+    final TypeReference ref = TypeReference.typeRef("java.util.List", _typeRef);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("List", _simpleName);
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("java.util", _packageName);
+    List<TypeReference> _typeArguments = ref.getTypeArguments();
+    TypeReference _head = IterableExtensions.<TypeReference>head(_typeArguments);
+    String _simpleName_1 = _head.getSimpleName();
+    Assert.assertEquals("String", _simpleName_1);
+  }
+  
+  @Test
+  public void testNestedType() {
+    final TypeReference ref = TypeReference.typeRef("java.util.Map.Entry");
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("java.util", _packageName);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("Entry", _simpleName);
+    List<String> _simpleNames = ref.getSimpleNames();
+    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), _simpleNames);
+  }
+  
+  @Test
+  public void testJavaPath() {
+    final TypeReference ref = TypeReference.typeRef("org.example.MyType");
+    String _javaPath = ref.getJavaPath();
+    Assert.assertEquals("org/example/MyType.java", _javaPath);
+  }
+  
+  @Test
+  public void testXtendPath() {
+    final TypeReference ref = TypeReference.typeRef("org.example.MyType");
+    String _xtendPath = ref.getXtendPath();
+    Assert.assertEquals("org/example/MyType.xtend", _xtendPath);
+  }
+}

@@ -19,16 +19,16 @@ import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 @SuppressWarnings("all")
-public class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
+public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
     this.addRuntimeGuiceBindings();
@@ -86,7 +86,7 @@ public class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
     String _simpleName_1 = IResourceDescriptions.class.getSimpleName();
     String _plus = (_simpleName_1 + "Persisted");
     GuiceModuleAccess.BindingFactory _addConfiguredBinding_1 = _addConfiguredBinding.addConfiguredBinding(_plus, statement2);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     _addConfiguredBinding_1.contributeTo(_runtimeGenModule);
   }
@@ -140,7 +140,7 @@ public class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
     TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource");
     TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource");
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addConfiguredBinding_1.addTypeToType(_typeRef_4, _typeRef_5);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
   }

@@ -5,19 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.model.project;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @SuppressWarnings("all")
 public class SubProjectConfig implements ISubProjectConfig {
   @Inject

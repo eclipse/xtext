@@ -14,12 +14,12 @@ import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.xtext.RuleNames
 
 @FinalFieldsConstructor
-class LanguageModule extends AbstractGenericModule {
+package class LanguageModule extends AbstractGenericModule {
 	
-	val LanguageConfig2 language
+	val XtextGeneratorLanguage language
 	
 	def configureLanguage(Binder binder) {
-		binder.bind(ILanguageConfig).toInstance(language)
+		binder.bind(IXtextGeneratorLanguage).toInstance(language)
 	}
 	
 	def configureGrammar(Binder binder) {

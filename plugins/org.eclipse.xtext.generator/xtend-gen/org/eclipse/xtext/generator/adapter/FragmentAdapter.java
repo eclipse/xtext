@@ -54,15 +54,12 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.MweIssues;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -70,12 +67,15 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * @since 2.9
  */
 @SuppressWarnings("all")
-public class FragmentAdapter extends AbstractGeneratorFragment2 {
+public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   @Inject
   private CodeConfig codeConfig;
   
@@ -148,7 +148,7 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
     Output _output = ctx.getOutput();
     _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
     try {
-      final ILanguageConfig config2 = this.getLanguage();
+      final IXtextGeneratorLanguage config2 = this.getLanguage();
       if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
         ((IGeneratorFragmentExtension2)this.fragment).addToStandaloneSetup(config1, ctx);
       } else {
@@ -183,7 +183,7 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
   }
   
   private void generateGuiceModuleRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    final ILanguageConfig config2 = this.getLanguage();
+    final IXtextGeneratorLanguage config2 = this.getLanguage();
     Grammar _grammar = config1.getGrammar();
     final Set<Binding> bindings = this.fragment.getGuiceBindingsRt(_grammar);
     if ((bindings != null)) {
@@ -209,7 +209,7 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
   }
   
   private void generateGuiceModuleUi(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    final ILanguageConfig config2 = this.getLanguage();
+    final IXtextGeneratorLanguage config2 = this.getLanguage();
     Grammar _grammar = config1.getGrammar();
     final Set<Binding> bindings = this.fragment.getGuiceBindingsUi(_grammar);
     if ((bindings != null)) {
@@ -558,7 +558,7 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
   }
   
   protected Naming createNaming() {
-    final ILanguageConfig config2 = this.getLanguage();
+    final IXtextGeneratorLanguage config2 = this.getLanguage();
     Naming _naming = new Naming();
     final Procedure1<Naming> _function = new Procedure1<Naming>() {
       @Override
@@ -635,8 +635,8 @@ public class FragmentAdapter extends AbstractGeneratorFragment2 {
   }
   
   protected LanguageConfig createLanguageConfig() {
-    ILanguageConfig _language = this.getLanguage();
-    final LanguageConfig2 config2 = ((LanguageConfig2) _language);
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    final XtextGeneratorLanguage config2 = ((XtextGeneratorLanguage) _language);
     final LanguageConfig config = new LanguageConfig();
     ResourceSet _resourceSet = config2.getResourceSet();
     config.setForcedResourceSet(_resourceSet);

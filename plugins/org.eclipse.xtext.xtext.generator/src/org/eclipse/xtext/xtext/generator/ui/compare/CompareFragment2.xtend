@@ -8,19 +8,19 @@
 package org.eclipse.xtext.xtext.generator.ui.compare
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the registration of compare infrastructure. 
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class CompareFragment2 extends AbstractGeneratorFragment2 {
+class CompareFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject
 	extension XtextGeneratorNaming

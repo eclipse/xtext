@@ -13,11 +13,17 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig
 
+/**
+ * @noextend
+ */
 class DefaultGeneratorModule extends AbstractGenericModule {
 	
 	@Accessors
-	XtextProjectConfig project = new WizardConfig
+	XtextProjectConfig project = new StandardProjectConfig
 	
 	@Accessors
 	CodeConfig code = new CodeConfig

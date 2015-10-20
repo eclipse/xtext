@@ -18,15 +18,18 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.WizardConfig;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @SuppressWarnings("all")
 public class DefaultGeneratorModule extends AbstractGenericModule {
   @Accessors
-  private XtextProjectConfig project = new WizardConfig();
+  private XtextProjectConfig project = new StandardProjectConfig();
   
   @Accessors
   private CodeConfig code = new CodeConfig();

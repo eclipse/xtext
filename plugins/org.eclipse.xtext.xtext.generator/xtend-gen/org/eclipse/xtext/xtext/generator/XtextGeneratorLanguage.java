@@ -47,24 +47,28 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.RuleNames;
-import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
+import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @Log
 @SuppressWarnings("all")
-public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
+public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {
   private String grammarUri;
   
   private String name;
@@ -105,6 +109,9 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   
   @Accessors
   private final GuiceModuleAccess webGenModule = new GuiceModuleAccess();
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  private final List<IXtextGeneratorFragment> fragments = CollectionLiterals.<IXtextGeneratorFragment>newArrayList();
   
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
@@ -158,17 +165,37 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
       String _simpleName = GrammarUtil.getSimpleName(this.grammar);
       String _lowerCase = _simpleName.toLowerCase();
       this.setFileExtensions(_lowerCase);
-      LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + this.fileExtensions) + "\'."));
+      XtextGeneratorLanguage.LOG.info((("No explicit fileExtensions configured. Using \'*." + this.fileExtensions) + "\'."));
     }
     return this.fileExtensions;
   }
   
+  public void addFragment(final IXtextGeneratorFragment fragment) {
+    if ((fragment == this)) {
+      throw new IllegalArgumentException();
+    }
+    this.fragments.add(fragment);
+  }
+  
+  @Override
+  public void checkConfiguration(final Issues issues) {
+    for (final IXtextGeneratorFragment fragment : this.fragments) {
+      fragment.checkConfiguration(issues);
+    }
+  }
+  
+  @Override
+  public void generate() {
+    for (final IXtextGeneratorFragment fragment : this.fragments) {
+      fragment.generate();
+    }
+  }
+  
   @Override
   public void initialize(final Injector injector) {
-    List<IGeneratorFragment2> _fragments = this.getFragments();
     ImplicitFragment _implicitFragment = new ImplicitFragment();
-    _fragments.add(0, _implicitFragment);
-    injector.injectMembers(this);
+    this.fragments.add(0, _implicitFragment);
+    injector.injectMembers(XtextGeneratorLanguage.class);
     if ((this.resourceSet == null)) {
       ResourceSet _get = this.resourceSetProvider.get();
       this.resourceSet = _get;
@@ -194,7 +221,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
               org.eclipse.emf.common.util.URI _uRI = res.getURI();
               String _plus = ("Error loading \'" + _uRI);
               String _plus_1 = (_plus + "\'");
-              LanguageConfig2.LOG.error(_plus_1);
+              XtextGeneratorLanguage.LOG.error(_plus_1);
             } else {
               EList<Resource.Diagnostic> _errors = res.getErrors();
               boolean _isEmpty_2 = _errors.isEmpty();
@@ -207,7 +234,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
                 EList<Resource.Diagnostic> _errors_1 = res.getErrors();
                 String _join = _on.join(_errors_1);
                 String _plus_4 = (_plus_3 + _join);
-                LanguageConfig2.LOG.error(_plus_4);
+                XtextGeneratorLanguage.LOG.error(_plus_4);
               }
             }
           }
@@ -239,7 +266,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     boolean _not_1 = (!_isEmpty_2);
     if (_not_1) {
       EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-      LanguageConfig2.LOG.error(_errors_1);
+      XtextGeneratorLanguage.LOG.error(_errors_1);
       String _grammarUri_3 = this.getGrammarUri();
       String _plus_2 = ("Problem parsing \'" + _grammarUri_3);
       String _plus_3 = (_plus_2 + "\':\n");
@@ -254,8 +281,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     final Grammar grammar = ((Grammar) _get_1);
     this.validateGrammar(grammar);
     this.initialize(grammar);
-    List<IGeneratorFragment2> _fragments_1 = this.getFragments();
-    for (final IGeneratorFragment2 fragment : _fragments_1) {
+    for (final IXtextGeneratorFragment fragment : this.fragments) {
       fragment.initialize(injector);
     }
   }
@@ -375,7 +401,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
     throw new IllegalStateException(msg);
   }
   
-  private final static Logger LOG = Logger.getLogger(LanguageConfig2.class);
+  private final static Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
   
   @Pure
   public Grammar getGrammar() {
@@ -437,5 +463,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Pure
   public GuiceModuleAccess getWebGenModule() {
     return this.webGenModule;
+  }
+  
+  @Pure
+  protected List<IXtextGeneratorFragment> getFragments() {
+    return this.fragments;
   }
 }

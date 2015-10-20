@@ -24,6 +24,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 /**
  * Configuration object for generated code.
+ * @noextend
  */
 @SuppressWarnings("all")
 public class CodeConfig implements IGuiceAwareGeneratorComponent {

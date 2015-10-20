@@ -9,6 +9,7 @@ module org.eclipse.xtend.core.GenerateXtend
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
@@ -41,7 +42,7 @@ Workflow {
 
 	component = XtextGenerator auto-inject {
 		configuration = parser.XtendGeneratorModule {
-			project = WizardConfig auto-inject {
+			project = StandardProjectConfig auto-inject {
 				runtime = {
 					name = runtimeProjectName
 				}

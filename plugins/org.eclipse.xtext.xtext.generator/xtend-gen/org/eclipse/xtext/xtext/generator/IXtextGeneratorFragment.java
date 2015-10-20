@@ -7,12 +7,16 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.Issues;
 
+/**
+ * A fragment that contributes to the {@link XtextGenerator}.
+ * @noimplement
+ */
 @SuppressWarnings("all")
-public interface IRuntimeProjectConfig extends IBundleProjectConfig {
-  public abstract IXtextGeneratorFileSystemAccess getEcoreModel();
+public interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {
+  public abstract void checkConfiguration(final Issues issues);
   
-  public abstract String getEcoreModelFolder();
+  public abstract void generate();
 }

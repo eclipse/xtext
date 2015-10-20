@@ -12,6 +12,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
+/**
+ * @noreference
+ */
 class XtextGeneratorNaming {
 	
 	def getRuntimeBasePackage(Grammar grammar) {

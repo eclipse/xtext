@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.generator.junit
 
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
@@ -9,8 +8,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import com.google.inject.Injector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class Junit4Fragment2 extends AbstractGeneratorFragment2 {
+class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 

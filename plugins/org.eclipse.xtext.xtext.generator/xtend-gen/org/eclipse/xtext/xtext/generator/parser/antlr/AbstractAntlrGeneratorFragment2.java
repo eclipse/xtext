@@ -42,7 +42,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -64,7 +64,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredica
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 
 @SuppressWarnings("all")
-public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment2 {
+public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   private AntlrToolFacade antlrTool;
