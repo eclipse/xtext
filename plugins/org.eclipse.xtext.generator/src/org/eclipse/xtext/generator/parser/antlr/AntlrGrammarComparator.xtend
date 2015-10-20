@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.parser.antlr
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * Compares two charSequences of ANTLR grammars token by token.
@@ -29,13 +28,20 @@ class AntlrGrammarComparator {
 		def void handleMismatch(String matched, String expected, ErrorContext context);
 	}
 	
-	@Data
 	public static final class ErrorContext {
-		private TraversationState testedGrammar = new TraversationState()
-		private TraversationState referenceGrammar = new TraversationState()
+		@Accessors
+		private AntlrGrammarComparator.MatchState testedGrammar = new MatchState()
+
+		@Accessors
+		private AntlrGrammarComparator.MatchState referenceGrammar = new MatchState()
+		
+		def reset() {
+			testedGrammar = new MatchState()
+			referenceGrammar = new MatchState()
+		}
 	}
 	
-	public static final class TraversationState {
+	public static final class MatchState {
 		@Accessors
 		private String absoluteFileName;
 		
@@ -44,6 +50,12 @@ class AntlrGrammarComparator {
 		
 		// this value is used to check whether any character sequences have not been matched
 		private int position = 0	
+		
+		@Accessors
+		private String previousToken
+		
+		@Accessors
+		private String currentToken
 	}
 	
 	
@@ -99,6 +111,8 @@ class AntlrGrammarComparator {
 	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
 			IErrorHandler errorHandler) {
 
+		errorContext.reset()
+
 		val compoundMatcher = compoundPattern.matcher(grammar)
 		val compoundMatcherReference = compoundPattern.matcher(grammarReference)
 		
@@ -129,14 +143,19 @@ class AntlrGrammarComparator {
 	 * 
 	 * @return the number of newlines passed while searching 
 	 */
-	def private nextToken(Matcher matcher, TraversationState state, IErrorHandler errorHandler) {
+	def private nextToken(Matcher matcher, AntlrGrammarComparator.MatchState state, IErrorHandler errorHandler) {
 		
 		while (matcher.find()) {
-			if (matcher.start() != state.position) {
+			
+			// available in error messages in case the test below is evaluates to 'true'
+			state.currentToken = matcher.group
+			
+			if (matcher.start() != state.position) {				
 				errorHandler.handleInvalidGrammarFile(state)
 			}
 			
 			val match = matcher.group()
+			state.previousToken = match
 			
 			if (p_newline.matcher(match).matches()) {
 				state.position = matcher.end
@@ -147,7 +166,7 @@ class AntlrGrammarComparator {
 				
 			} else if (p_token.matcher(match).matches()) {
 				state.position = matcher.end
-
+			
 				// in case a valid token has been found stop here
 				return true
 			}
@@ -156,7 +175,7 @@ class AntlrGrammarComparator {
 		return false
 	}
 	
-	private def handleInvalidGrammarFile(IErrorHandler errorHandler, TraversationState state) {
+	private def handleInvalidGrammarFile(IErrorHandler errorHandler, AntlrGrammarComparator.MatchState state) {
 		if (state === errorContext.testedGrammar) {
 			errorHandler.handleInvalidGeneratedGrammarFile(errorContext)
 		} else {				
