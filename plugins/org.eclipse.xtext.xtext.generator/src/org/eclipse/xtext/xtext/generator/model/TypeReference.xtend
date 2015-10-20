@@ -38,7 +38,7 @@ class TypeReference {
 		new TypeReference(epackage, language.resourceSet)
 	}
 	
-	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')
+	static val PACKAGE_MATCHER = Pattern.compile('([a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*)?')
 	static val CLASS_MATCHER = Pattern.compile('[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*')
 	
 	val String packageName
@@ -108,6 +108,7 @@ class TypeReference {
 					packageEnd = i
 			}
 		}
+		return ""
 	}
 	
 	private static def getClassName(String qualifiedName) {
@@ -120,6 +121,7 @@ class TypeReference {
 					classStart = i + 1
 			}
 		}
+		return qualifiedName
 	}
 	
 	private static def getQualifiedName(EClass clazz, ResourceSet resourceSet) {
