@@ -336,7 +336,7 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 	'''
 	
 	protected def paramConfig(AbstractElement it) '''
-		«IF containingRule.alternatives == this && ParserRule.isInstance(containingRule) && !(containingRule.originalElement as ParserRule).parameters.isEmpty»
+		«IF containingRule.alternatives === it && ParserRule.isInstance(containingRule) && !(containingRule.originalElement as ParserRule).parameters.isEmpty»
 			, «(containingRule as ParserRule).parameterConfig»
 		«ENDIF»
 	'''
