@@ -319,7 +319,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#2"
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 
-		//("kw1" val1=ID | "kw2" val2=ID)
+		//"kw1" val1=ID | "kw2" val2=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" val1=ID
@@ -785,7 +785,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#10"
 		public Keyword getNumberSignDigitOneDigitZeroKeyword_0() { return cNumberSignDigitOneDigitZeroKeyword_0; }
 
-		//("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2})
+		//"kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" {UnassignedAction2Sub1}
@@ -949,7 +949,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_1_0() { return cVal2IDTerminalRuleCall_2_1_0; }
 
-		//("kw2" val3=ID | val4=ID)
+		//"kw2" val3=ID | val4=ID
 		public Alternatives getAlternatives_2_2() { return cAlternatives_2_2; }
 
 		//"kw2" val3=ID
@@ -989,10 +989,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cVal4IDTerminalRuleCall_2_1_1_0 = (RuleCall)cVal4Assignment_2_1_1.eContents().get(0);
 		
 		//Combination2:
-		//	"#14" val1=ID ("kw1" val2=ID | val3+=ID val4+=ID*);
+		//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#14" val1=ID ("kw1" val2=ID | val3+=ID val4+=ID*)
+		//"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*)
 		public Group getGroup() { return cGroup; }
 
 		//"#14"
@@ -1004,7 +1004,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_0() { return cVal1IDTerminalRuleCall_1_0; }
 
-		//("kw1" val2=ID | val3+=ID val4+=ID*)
+		//"kw1" val2=ID | (val3+=ID val4+=ID)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"kw1" val2=ID
@@ -1019,7 +1019,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_0_1_0() { return cVal2IDTerminalRuleCall_2_0_1_0; }
 
-		//val3+=ID val4+=ID*
+		//(val3+=ID val4+=ID)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//val3+=ID
@@ -1241,7 +1241,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0_0() { return cNumberSignDigitOneDigitNineKeyword_0_0; }
 
-		//(val1+=ID ("," val1+=ID)*)
+		//val1+=ID ("," val1+=ID)*
 		public Group getGroup_0_1() { return cGroup_0_1; }
 
 		//val1+=ID
@@ -1355,7 +1355,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#21"
 		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
 
-		//(val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID)
+		//val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1+=ID ("," val1+=ID)* "kw3" val2=ID
@@ -1428,7 +1428,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#22"
 		public Keyword getNumberSignDigitTwoDigitTwoKeyword_0() { return cNumberSignDigitTwoDigitTwoKeyword_0; }
 
-		//(val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
+		//val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1=ID val2=ID
@@ -1514,7 +1514,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#23"
 		public Keyword getNumberSignDigitTwoDigitThreeKeyword_0() { return cNumberSignDigitTwoDigitThreeKeyword_0; }
 
-		//(val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
+		//val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1+=ID val2=ID
@@ -1713,7 +1713,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#26"
 		public Keyword getNumberSignDigitTwoDigitSixKeyword_0() { return cNumberSignDigitTwoDigitSixKeyword_0; }
 
-		//("kw1" | {EmptyAlternativeSub} | val1=ID)
+		//"kw1" | {EmptyAlternativeSub} | val1=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1"
@@ -1728,7 +1728,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_2_0() { return cVal1IDTerminalRuleCall_1_2_0; }
 
-		//("kw2" | val2=ID)
+		//"kw2" | val2=ID
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"kw2"
@@ -1740,7 +1740,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_1_0() { return cVal2IDTerminalRuleCall_2_1_0; }
 
-		//("kw3" ("kw4" val3=ID+)?)
+		//"kw3" ("kw4" val3=ID+)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"kw3"
@@ -1777,7 +1777,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#27"
 		public Keyword getNumberSignDigitTwoDigitSevenKeyword_0() { return cNumberSignDigitTwoDigitSevenKeyword_0; }
 
-		//(TwoVersionNo1 | TwoVersionNo2)
+		//TwoVersionNo1 | TwoVersionNo2
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TwoVersionNo1
@@ -2348,7 +2348,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//Combination2:
-	//	"#14" val1=ID ("kw1" val2=ID | val3+=ID val4+=ID*);
+	//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
 	public Combination2Elements getCombination2Access() {
 		return pCombination2;
 	}

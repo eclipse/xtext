@@ -49,6 +49,10 @@ public class Bug287184TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     AbstractDetail returns AssociatedDetail
+	 *     AssociatedDetail returns AssociatedDetail
+	 *
 	 * Constraint:
 	 *     detailClass=[Model|FQN]
 	 */
@@ -64,6 +68,10 @@ public class Bug287184TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractDetail returns Detail
+	 *     Detail returns Detail
+	 *
 	 * Constraint:
 	 *     ((visibility='private' | visibility='protected' | visibility='public')? detailClass=[Model|FQN])
 	 */
@@ -73,6 +81,9 @@ public class Bug287184TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (name=FQN (detail+=Detail | detail+=AssociatedDetail)+)
 	 */

@@ -52,6 +52,9 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	}
 	
 	/**
+	 * Contexts:
+	 *     Foo returns Foo
+	 *
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
 	 */
@@ -61,6 +64,9 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     MyRule returns ParserRule
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -76,6 +82,9 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     NameRef returns RuleCall
+	 *
 	 * Constraint:
 	 *     rule=[ParserRule|ID]
 	 */

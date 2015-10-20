@@ -164,7 +164,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'.'
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
 
-		//(EXT_INT | INT)
+		//EXT_INT | INT
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//EXT_INT

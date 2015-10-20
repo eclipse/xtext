@@ -511,7 +511,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw1"
 		public Keyword getKw1Keyword_2() { return cKw1Keyword_2; }
 
-		//val2=ID val3=ID?
+		//(val2=ID val3=ID)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//val2=ID
@@ -529,7 +529,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw2"
 		public Keyword getKw2Keyword_4() { return cKw2Keyword_4; }
 
-		//val4+=ID val5+=ID+
+		//(val4+=ID val5+=ID)+
 		public Group getGroup_5() { return cGroup_5; }
 
 		//val4+=ID
@@ -547,7 +547,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw3"
 		public Keyword getKw3Keyword_6() { return cKw3Keyword_6; }
 
-		//val6+=ID val7+=ID*
+		//(val6+=ID val7+=ID)*
 		public Group getGroup_7() { return cGroup_7; }
 
 		//val6+=ID
@@ -601,7 +601,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#5"
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 
-		//val2=ID | "kw1" val3=ID?
+		//(val2=ID | "kw1" val3=ID)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val2=ID
@@ -625,7 +625,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw2"
 		public Keyword getKw2Keyword_2() { return cKw2Keyword_2; }
 
-		//val4+=ID | "kw3" val5+=ID+
+		//(val4+=ID | "kw3" val5+=ID)+
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//val4+=ID
@@ -649,7 +649,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw4"
 		public Keyword getKw4Keyword_4() { return cKw4Keyword_4; }
 
-		//val6+=ID | "kw5" val7+=ID*
+		//(val6+=ID | "kw5" val7+=ID)*
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
 		//val6+=ID
@@ -698,7 +698,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_0() { return cVal1IDTerminalRuleCall_1_0; }
 
-		//"," val1+=ID*
+		//("," val1+=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//","
@@ -737,7 +737,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{List2}
 		public Action getList2Action_1() { return cList2Action_1; }
 
-		//val1+=ID ("," val1+=ID)*?
+		//(val1+=ID ("," val1+=ID)*)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//val1+=ID
@@ -746,7 +746,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_2_0_0() { return cVal1IDTerminalRuleCall_2_0_0; }
 
-		//"," val1+=ID*
+		//("," val1+=ID)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//","
@@ -908,7 +908,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_1_1_0() { return cVal1IDTerminalRuleCall_1_1_1_0; }
 
-		//"," val1+=ID*
+		//("," val1+=ID)*
 		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
 
 		//","
@@ -1477,7 +1477,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getInt0INTTerminalRuleCall_1_0() { return cInt0INTTerminalRuleCall_1_0; }
 
-		//int1=INT int2=INT?
+		//(int1=INT int2=INT)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//int1=INT
@@ -1547,7 +1547,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{UnorderedAlternative}
 		public Action getUnorderedAlternativeAction_1() { return cUnorderedAlternativeAction_1; }
 
-		//val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate*
+		//(val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal | val4+=UnorderedAlternativeValDelegate)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//val1+=ID
@@ -1767,10 +1767,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cVal3IDTerminalRuleCall_2_2_1_0 = (RuleCall)cVal3Assignment_2_2_1.eContents().get(0);
 		
 		//UnorderedGroupOptional:
-		//	"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?);
+		//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?)
+		//"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
 		public Group getGroup() { return cGroup; }
 
 		//"#25"
@@ -1779,10 +1779,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{UnorderedGroupOptional}
 		public Action getUnorderedGroupOptionalAction_1() { return cUnorderedGroupOptionalAction_1; }
 
-		//"kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?
+		//("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//"kw1" val1=ID?
+		//("kw1" val1=ID)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//"kw1"
@@ -1794,7 +1794,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_2_0_1_0() { return cVal1IDTerminalRuleCall_2_0_1_0; }
 
-		//"kw2" va2=ID?
+		//("kw2" va2=ID)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"kw2"
@@ -1806,7 +1806,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVa2IDTerminalRuleCall_2_1_1_0() { return cVa2IDTerminalRuleCall_2_1_1_0; }
 
-		//"kw3" val3=ID?
+		//("kw3" val3=ID)?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//"kw3"
@@ -1912,7 +1912,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{Complex1}
 		public Action getComplex1Action_1() { return cComplex1Action_1; }
 
-		//"kw1" val1=ID?
+		//("kw1" val1=ID)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"kw1"
@@ -1924,7 +1924,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_2_1_0() { return cVal1IDTerminalRuleCall_2_1_0; }
 
-		//"kw2" val2=ID?
+		//("kw2" val2=ID)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"kw2"
@@ -1936,7 +1936,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_3_1_0() { return cVal2IDTerminalRuleCall_3_1_0; }
 
-		//"kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID*
+		//("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//"kw3" val3+=ID
@@ -2016,7 +2016,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//DOUBLE
 		public RuleCall getDouble0DOUBLEParserRuleCall_1_0() { return cDouble0DOUBLEParserRuleCall_1_0; }
 
-		//double1=DOUBLE double2=DOUBLE?
+		//(double1=DOUBLE double2=DOUBLE)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//double1=DOUBLE
@@ -2050,7 +2050,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		//"." INT?
+		//("." INT)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
@@ -2378,7 +2378,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getV2IDTerminalRuleCall_1_1_0() { return cV2IDTerminalRuleCall_1_1_0; }
 
-		//<Q> "kwp3" v3=ID?
+		//(<Q> "kwp3" v3=ID)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//"kwp3"
@@ -2502,7 +2502,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Delegation<false,P>
 		public RuleCall getDelegationParserRuleCall_1_1() { return cDelegationParserRuleCall_1_1; }
 
-		//{DelegationA.left=current} rc2=Delegation<false,P>?
+		//({DelegationA.left=current} rc2=Delegation<false,P>)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//{DelegationA.left=current}
@@ -2852,32 +2852,20 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getSingleTerminalsAccess().getRule();
 	}
 
-	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
-	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
-	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
-	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SequencerTestLanguage'.rules[13]->TerminalRule'ID1'.alternatives->Group
-	//URI: classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext
-	//Context: TerminalAlternatives returns Group
+	//terminal ID1:
+	//	'$1' ID;
 	public TerminalRule getID1Rule() {
 		return tID1;
 	} 
 
-	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
-	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
-	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
-	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SequencerTestLanguage'.rules[14]->TerminalRule'ID2'.alternatives->Group
-	//URI: classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext
-	//Context: TerminalAlternatives returns Group
+	//terminal ID2:
+	//	'$2' ID;
 	public TerminalRule getID2Rule() {
 		return tID2;
 	} 
 
-	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
-	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
-	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
-	//Semantic Object: Grammar'org.eclipse.xtext.serializer.SequencerTestLanguage'.rules[15]->TerminalRule'ID3'.alternatives->Group
-	//URI: classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext
-	//Context: TerminalAlternatives returns Group
+	//terminal ID3:
+	//	'$3' ID;
 	public TerminalRule getID3Rule() {
 		return tID3;
 	} 
@@ -3125,7 +3113,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//UnorderedGroupOptional:
-	//	"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?);
+	//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
 	public UnorderedGroupOptionalElements getUnorderedGroupOptionalAccess() {
 		return pUnorderedGroupOptional;
 	}

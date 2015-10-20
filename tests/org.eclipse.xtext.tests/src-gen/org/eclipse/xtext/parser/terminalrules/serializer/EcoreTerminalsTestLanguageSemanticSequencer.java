@@ -39,6 +39,9 @@ public class EcoreTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (intValues+=EINT | doubleValues+=EDOUBLE | dateValues+=EDATE)+
 	 */

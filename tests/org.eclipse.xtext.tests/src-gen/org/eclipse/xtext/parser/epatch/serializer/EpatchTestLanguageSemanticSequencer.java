@@ -146,6 +146,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	}
 	
 	/**
+	 * Contexts:
+	 *     AssignmentValue returns AssignmentValue
+	 *
 	 * Constraint:
 	 *     (value=STRING | (refObject=[NamedObject|ID] (refFeature=ID refIndex=INT?)?) | newObject=CreatedObject | (import=[Import|ID] impFrag=FRAGMENT))
 	 */
@@ -155,6 +158,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     BiListAssignment returns ListAssignment
+	 *
 	 * Constraint:
 	 *     (
 	 *         feature=ID 
@@ -168,6 +174,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Assignment returns ListAssignment
+	 *
 	 * Constraint:
 	 *     (
 	 *         (
@@ -184,6 +193,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Assignment returns SingleAssignment
+	 *
 	 * Constraint:
 	 *     ((feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue) | (feature=ID leftValue=SingleAssignmentValue))
 	 */
@@ -193,6 +205,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     BiSingleAssignment returns SingleAssignment
+	 *
 	 * Constraint:
 	 *     (feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue)
 	 */
@@ -214,6 +229,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     NamedObject returns ObjectCopy
+	 *     CreatedObject returns ObjectCopy
+	 *
 	 * Constraint:
 	 *     (
 	 *         resource=[NamedResource|ID] 
@@ -228,6 +247,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     NamedObject returns ObjectNew
+	 *     CreatedObject returns ObjectNew
+	 *
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT name=ID? ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?)
 	 */
@@ -237,6 +260,11 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns EPackageImport
+	 *     ModelImport returns EPackageImport
+	 *     EPackageImport returns EPackageImport
+	 *
 	 * Constraint:
 	 *     (name=ID nsURI=STRING)
 	 */
@@ -255,6 +283,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     EPatch returns EPatch
+	 *
 	 * Constraint:
 	 *     (name=ID imports+=Import* resources+=NamedResource* objects+=ObjectRef*)
 	 */
@@ -264,6 +295,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Executable returns ExpressionExecutable
+	 *     ExpressionExecutable returns ExpressionExecutable
+	 *
 	 * Constraint:
 	 *     exprstr=STRING
 	 */
@@ -279,6 +314,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns ExtensionImport
+	 *     ExtensionImport returns ExtensionImport
+	 *
 	 * Constraint:
 	 *     (path+=ID path+=ID*)
 	 */
@@ -288,6 +327,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Executable returns JavaExecutable
+	 *     JavaExecutable returns JavaExecutable
+	 *
 	 * Constraint:
 	 *     method=ID
 	 */
@@ -303,6 +346,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns JavaImport
+	 *     JavaImport returns JavaImport
+	 *
 	 * Constraint:
 	 *     (path+=ID path+=ID*)
 	 */
@@ -312,6 +359,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     ListAssignmentValue returns AssignmentValue
+	 *
 	 * Constraint:
 	 *     (
 	 *         index=INT 
@@ -330,6 +380,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Migration returns Migration
+	 *
 	 * Constraint:
 	 *     (first=Executable? (asOp=Executable | eachOp=Executable)?)
 	 */
@@ -339,6 +392,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     MonoListAssignment returns ListAssignment
+	 *
 	 * Constraint:
 	 *     (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
 	 */
@@ -348,6 +404,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     MonoSingleAssignment returns SingleAssignment
+	 *
 	 * Constraint:
 	 *     (feature=ID leftValue=SingleAssignmentValue)
 	 */
@@ -366,6 +425,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     NamedResource returns NamedResource
+	 *
 	 * Constraint:
 	 *     (name=ID (leftUri=STRING | leftRoot=CreatedObject) (rightUri=STRING | rightRoot=CreatedObject))
 	 */
@@ -375,6 +437,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     ObjectCopy returns ObjectCopy
+	 *
 	 * Constraint:
 	 *     (resource=[NamedResource|ID] fragment=FRAGMENT)
 	 */
@@ -393,6 +458,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     ObjectNew returns ObjectNew
+	 *
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT)
 	 */
@@ -411,6 +479,10 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     NamedObject returns ObjectRef
+	 *     ObjectRef returns ObjectRef
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID? 
@@ -424,6 +496,11 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns ResourceImport
+	 *     ModelImport returns ResourceImport
+	 *     ResourceImport returns ResourceImport
+	 *
 	 * Constraint:
 	 *     (name=ID uri=STRING)
 	 */
@@ -442,6 +519,9 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleAssignmentValue returns AssignmentValue
+	 *
 	 * Constraint:
 	 *     (
 	 *         keyword='null' | 

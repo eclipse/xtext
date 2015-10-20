@@ -38,26 +38,23 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 				sequence_ParserRuleParameters(context, (ParserRuleParameters) semanticObject); 
 				return; 
 			case ParametersTestLanguagePackage.SCENARIO:
-				if ((rule == grammarAccess.getScenario1Rule() && parameters.isEmpty())) {
+				if (rule == grammarAccess.getScenario1Rule() && (parameters.isEmpty())) {
 					sequence_Scenario1$Param$false$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario1Rule() && ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getScenario1Rule() && (ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
 					sequence_Scenario1$Param$true$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario2Rule() && ImmutableSet.of(grammarAccess.getScenario2Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario2Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario2Rule()) {
 					sequence_Scenario2(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario3Rule() && ImmutableSet.of(grammarAccess.getScenario3Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario3Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario3Rule()) {
 					sequence_Scenario3(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario4Rule() && ImmutableSet.of(grammarAccess.getScenario4Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario4Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario4Rule()) {
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -68,6 +65,9 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     ParserRuleParameters returns ParserRuleParameters
+	 *
 	 * Constraint:
 	 *     (
 	 *         scenario=Scenario1 | 
@@ -94,6 +94,9 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario1 returns Scenario
+	 *
 	 * Constraint:
 	 *     second=ID
 	 */
@@ -109,6 +112,9 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario1<Param> returns Scenario
+	 *
 	 * Constraint:
 	 *     first=ID
 	 */
@@ -124,6 +130,10 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario2<AllowKeyword> returns Scenario
+	 *     Scenario2 returns Scenario
+	 *
 	 * Constraint:
 	 *     first=IdOrKeyword
 	 */
@@ -139,6 +149,10 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario3<AllowKeyword> returns Scenario
+	 *     Scenario3 returns Scenario
+	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword | second='keyword')
 	 */
@@ -148,6 +162,10 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario4<AllowKeyword> returns Scenario
+	 *     Scenario4 returns Scenario
+	 *
 	 * Constraint:
 	 *     second=IdOrKeyword
 	 */

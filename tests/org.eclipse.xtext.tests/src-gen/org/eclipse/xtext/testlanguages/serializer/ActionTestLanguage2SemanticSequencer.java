@@ -45,6 +45,10 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * Contexts:
+	 *     ORing returns ORing
+	 *     ORing.ORing_1_0 returns ORing
+	 *
 	 * Constraint:
 	 *     (disjuncts+=ORing_ORing_1_0 disjuncts+=Value)
 	 */
@@ -54,6 +58,11 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     ORing returns Value
+	 *     ORing.ORing_1_0 returns Value
+	 *     Value returns Value
+	 *
 	 * Constraint:
 	 *     value='a'
 	 */

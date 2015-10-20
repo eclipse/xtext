@@ -41,6 +41,9 @@ public class EnumAndReferenceTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * Contexts:
+	 *     EntityWithEnumAndReference returns EntityWithEnumAndReference
+	 *
 	 * Constraint:
 	 *     (type=KindOfKeyword name=ID ref=[EntityWithEnumAndReference|ID])
 	 */

@@ -38,7 +38,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//(TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
+		//TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestLinewrap
@@ -78,7 +78,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";"
 		public Group getGroup() { return cGroup; }
 
-		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes)
+		//Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl

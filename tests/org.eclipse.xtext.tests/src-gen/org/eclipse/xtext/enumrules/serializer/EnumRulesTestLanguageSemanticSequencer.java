@@ -39,6 +39,9 @@ public class EnumRulesTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     ((existing=ExistingEnum generated=GeneratedEnum?) | generated=GeneratedEnum)
 	 */

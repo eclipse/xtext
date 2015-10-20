@@ -88,18 +88,17 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Complex1(context, (Complex1) semanticObject); 
 				return; 
 			case SequencertestPackage.DELEGATION:
-				if ((action == grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/), grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))
-						|| (action == grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/)).equals(parameters))) {
+				if (action == grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0()) {
 					sequence_Delegation$D$true$_DelegationA_1_2_0(context, (Delegation) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getDelegationRule() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/)).equals(parameters))
-						|| (rule == grammarAccess.getDelegationRule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getDelegationRule() && (ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/)).equals(parameters)
+				 			|| parameters.isEmpty())) {
 					sequence_Delegation$P$false$(context, (Delegation) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getDelegationRule() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/), grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))
-						|| (rule == grammarAccess.getDelegationRule() && ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getDelegationRule() && (ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(0/*D*/), grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters)
+				 			|| ImmutableSet.of(grammarAccess.getDelegationRule().getParameters().get(1/*P*/)).equals(parameters))) {
 					sequence_Delegation$P$true$(context, (Delegation) semanticObject); 
 					return; 
 				}
@@ -173,16 +172,16 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_ParameterDelegation(context, (ParameterDelegation) semanticObject); 
 				return; 
 			case SequencertestPackage.PARAMETERIZED:
-				if ((rule == grammarAccess.getParameterizedRule() && parameters.isEmpty())) {
+				if (rule == grammarAccess.getParameterizedRule() && (parameters.isEmpty())) {
 					sequence_Parameterized$P$false$Q$false$(context, (Parameterized) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getParameterizedRule() && ImmutableSet.of(grammarAccess.getParameterizedRule().getParameters().get(1/*Q*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getParameterizedRule() && (ImmutableSet.of(grammarAccess.getParameterizedRule().getParameters().get(1/*Q*/)).equals(parameters))) {
 					sequence_Parameterized$P$false$Q$true$(context, (Parameterized) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getParameterizedRule() && ImmutableSet.of(grammarAccess.getParameterizedRule().getParameters().get(0/*P*/), grammarAccess.getParameterizedRule().getParameters().get(1/*Q*/)).equals(parameters))
-						|| (rule == grammarAccess.getParameterizedRule() && ImmutableSet.of(grammarAccess.getParameterizedRule().getParameters().get(0/*P*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getParameterizedRule() && (ImmutableSet.of(grammarAccess.getParameterizedRule().getParameters().get(0/*P*/), grammarAccess.getParameterizedRule().getParameters().get(1/*Q*/)).equals(parameters)
+				 			|| ImmutableSet.of(grammarAccess.getParameterizedRule().getParameters().get(0/*P*/)).equals(parameters))) {
 					sequence_Parameterized$P$true$(context, (Parameterized) semanticObject); 
 					return; 
 				}

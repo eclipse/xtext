@@ -61,6 +61,9 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         single=SingleValue | 
@@ -79,6 +82,9 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     MultiDatatype returns MultiValue
+	 *
 	 * Constraint:
 	 *     (value+=IdDatatype | value+=IdDatatype | value+=StringDatatype | value+=StringDatatype)
 	 */
@@ -88,6 +94,9 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     MultiValue returns MultiValue
+	 *
 	 * Constraint:
 	 *     (value+=ID | value+=ID | value+=STRING | value+=STRING)
 	 */
@@ -97,6 +106,9 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleDatatype returns SingleValue
+	 *
 	 * Constraint:
 	 *     (value=IdDatatype | value=IdDatatype | value=StringDatatype | value=StringDatatype)
 	 */
@@ -106,6 +118,9 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     SingleValue returns SingleValue
+	 *
 	 * Constraint:
 	 *     (value=ID | value=ID | value=STRING | value=STRING)
 	 */

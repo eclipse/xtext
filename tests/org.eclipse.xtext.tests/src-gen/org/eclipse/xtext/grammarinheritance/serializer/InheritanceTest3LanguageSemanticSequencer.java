@@ -49,6 +49,9 @@ public class InheritanceTest3LanguageSemanticSequencer extends InheritanceTestLa
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (name=ID | name=STRING | name=ID)
 	 */

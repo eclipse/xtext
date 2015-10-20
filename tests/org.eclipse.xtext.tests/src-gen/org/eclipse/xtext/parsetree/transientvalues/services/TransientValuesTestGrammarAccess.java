@@ -37,7 +37,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//(TestRequired | TestOptional | TestList)
+		//TestRequired | TestOptional | TestList
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestRequired

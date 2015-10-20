@@ -135,7 +135,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)? 'end' ';'
 		public Group getGroup() { return cGroup; }
 
-		//(Bus | Processor)
+		//Bus | Processor
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Bus

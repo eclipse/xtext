@@ -83,6 +83,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * Contexts:
+	 *     Bus returns Bus
+	 *
 	 * Constraint:
 	 *     (name=ID port+=Port*)
 	 */
@@ -92,6 +95,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Component returns Bus
+	 *
 	 * Constraint:
 	 *     (name=ID port+=Port* (mode+=Mode | transition+=Transition)*)
 	 */
@@ -101,6 +107,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Component returns Processor
+	 *
 	 * Constraint:
 	 *     (name=ID data+=Data* (mode+=Mode | transition+=Transition)*)
 	 */
@@ -110,6 +119,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Data returns Data
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -125,6 +137,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (name=ID singleref=[Element|ID]? multirefs+=[Element|ID]*)
 	 */
@@ -134,6 +149,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Mode returns Mode
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -149,6 +167,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     ((elements+=Element+ components+=Component+) | components+=Component+)?
 	 */
@@ -158,6 +179,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Port returns Port
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -173,6 +197,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Processor returns Processor
+	 *
 	 * Constraint:
 	 *     (name=ID data+=Data*)
 	 */
@@ -182,6 +209,9 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Transition returns Transition
+	 *
 	 * Constraint:
 	 *     (name=ID source=[Mode|ID] destination=[Mode|ID])
 	 */

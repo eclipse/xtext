@@ -65,6 +65,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	}
 	
 	/**
+	 * Contexts:
+	 *     PRFNamedRefFirst returns PRFNamed
+	 *
 	 * Constraint:
 	 *     (ref=[PRFNamed|ID] name=ID)
 	 */
@@ -83,6 +86,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	
 	/**
+	 * Contexts:
+	 *     PRFWithPredicate returns PRFNamed
+	 *
 	 * Constraint:
 	 *     (name=ID ref=[PRFNamed|ID]?)
 	 */
@@ -92,6 +98,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	
 	/**
+	 * Contexts:
+	 *     PRFNamedWithAction returns PRFNamedWithAction
+	 *
 	 * Constraint:
 	 *     (prev=PRFNamedWithAction_PRFNamedWithAction_1 name=ID (ref=[PRFNamed|ID] ref2=[PRFNamed|ID])?)
 	 */
@@ -101,6 +110,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	
 	/**
+	 * Contexts:
+	 *     PRFNamedWithFQN returns PRFNamed
+	 *
 	 * Constraint:
 	 *     (name=FQN ref=[PRFNamed|FQN2]?)
 	 */
@@ -110,6 +122,10 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	
 	/**
+	 * Contexts:
+	 *     PRFNamed returns PRFNamed
+	 *     PRFNamedWithAction.PRFNamedWithAction_1 returns PRFNamed
+	 *
 	 * Constraint:
 	 *     (name=ID (ref=[PRFNamed|ID] | ref=[PRFNamed|ID])?)
 	 */
@@ -119,6 +135,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	
 	/**
+	 * Contexts:
+	 *     ParserRuleFragments returns ParserRuleFragments
+	 *
 	 * Constraint:
 	 *     (
 	 *         element=PRFNamed | 

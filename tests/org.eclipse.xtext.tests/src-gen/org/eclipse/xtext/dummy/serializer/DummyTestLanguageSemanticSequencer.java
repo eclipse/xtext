@@ -43,6 +43,9 @@ public class DummyTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (optional?='optional'? name=ID descriptions+=STRING*)
 	 */
@@ -52,6 +55,9 @@ public class DummyTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     elements+=Element+
 	 */

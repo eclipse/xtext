@@ -76,6 +76,12 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	}
 	
 	/**
+	 * Contexts:
+	 *     Root returns Delegate
+	 *     Unassigned returns Delegate
+	 *     PrefixedDelegate returns Delegate
+	 *     Delegate returns Delegate
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -91,6 +97,10 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Delegation
+	 *     Delegation returns Delegation
+	 *
 	 * Constraint:
 	 *     delegate=Delegate
 	 */
@@ -106,6 +116,13 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Add
+	 *     Expression returns Add
+	 *     Expression.Add_1_0 returns Add
+	 *     Primary returns Add
+	 *     Parenthesized returns Add
+	 *
 	 * Constraint:
 	 *     (left=Expression_Add_1_0 right=Primary)
 	 */
@@ -124,6 +141,11 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Action
+	 *     Mixed returns Action
+	 *     Mixed.AssignedAction_4_0 returns Action
+	 *
 	 * Constraint:
 	 *     {Action}
 	 */
@@ -133,6 +155,11 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns AssignedAction
+	 *     Mixed returns AssignedAction
+	 *     Mixed.AssignedAction_4_0 returns AssignedAction
+	 *
 	 * Constraint:
 	 *     (child=Mixed_AssignedAction_4_0 body=Mixed?)
 	 */
@@ -142,6 +169,11 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Mixed
+	 *     Mixed returns Mixed
+	 *     Mixed.AssignedAction_4_0 returns Mixed
+	 *
 	 * Constraint:
 	 *     (name=ID | eobj=Mixed | datatype=Datatype | ref=[Mixed|ID] | lit=Enum)
 	 */
@@ -151,6 +183,10 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns PrefixedUnassigned
+	 *     PrefixedUnassigned returns PrefixedUnassigned
+	 *
 	 * Constraint:
 	 *     delegate=PrefixedDelegate
 	 */
@@ -166,6 +202,13 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Named
+	 *     Expression returns Named
+	 *     Expression.Add_1_0 returns Named
+	 *     Primary returns Named
+	 *     Parenthesized returns Named
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -181,6 +224,9 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Root
+	 *
 	 * Constraint:
 	 *     mixed=Mixed
 	 */
@@ -196,6 +242,10 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Simple
+	 *     Simple returns Simple
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */

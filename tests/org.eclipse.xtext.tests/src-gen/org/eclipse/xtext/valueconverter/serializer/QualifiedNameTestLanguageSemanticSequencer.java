@@ -41,6 +41,9 @@ public class QualifiedNameTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     qualifiedName=QualifiedName
 	 */

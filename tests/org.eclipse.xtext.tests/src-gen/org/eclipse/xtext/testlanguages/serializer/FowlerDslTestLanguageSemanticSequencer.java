@@ -57,6 +57,9 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Command returns Command
+	 *
 	 * Constraint:
 	 *     (name=ID code=ID)
 	 */
@@ -75,6 +78,9 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Event returns Event
+	 *
 	 * Constraint:
 	 *     (resetting?='resetting'? name=ID code=ID)
 	 */
@@ -84,6 +90,9 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     State returns State
+	 *
 	 * Constraint:
 	 *     (name=ID actions+=[Command|ID]* transitions+=Transition*)
 	 */
@@ -93,6 +102,9 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Statemachine returns Statemachine
+	 *
 	 * Constraint:
 	 *     (events+=Event* commands+=Command* states+=State*)
 	 */
@@ -102,6 +114,9 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Transition returns Transition
+	 *
 	 * Constraint:
 	 *     (event=[Event|ID] state=[State|ID])
 	 */

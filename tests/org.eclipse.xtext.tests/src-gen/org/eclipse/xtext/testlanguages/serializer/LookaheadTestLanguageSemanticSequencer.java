@@ -61,6 +61,9 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Entry returns Entry
+	 *
 	 * Constraint:
 	 *     contents+=Alts+
 	 */
@@ -70,6 +73,10 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Alts returns LookAhead0
+	 *     LookAhead0 returns LookAhead0
+	 *
 	 * Constraint:
 	 *     x='a'
 	 */
@@ -85,6 +92,10 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Alts returns LookAhead1
+	 *     LookAhead1 returns LookAhead1
+	 *
 	 * Constraint:
 	 *     (y=LookAhead2 x='b' z='d')
 	 */
@@ -106,6 +117,9 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     LookAhead2 returns LookAhead2
+	 *
 	 * Constraint:
 	 *     (z='foo' | z='bar')
 	 */
@@ -115,6 +129,10 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Alts returns LookAhead3
+	 *     LookAhead3 returns LookAhead3
+	 *
 	 * Constraint:
 	 *     (x='b' z=LookAhead4)
 	 */
@@ -133,6 +151,9 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     LookAhead4 returns LookAhead4
+	 *
 	 * Constraint:
 	 *     (x='c' | x='d')
 	 */

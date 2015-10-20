@@ -148,7 +148,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//{Expression}
 		public Action getExpressionAction_0() { return cExpressionAction_0; }
 
-		//('['? & prefix=STRING?)
+		//'['? & prefix=STRING?
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
 		//'['?
@@ -175,7 +175,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//']'?
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 
-		//(']'? & postfix=STRING?)
+		//']'? & postfix=STRING?
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//']'?

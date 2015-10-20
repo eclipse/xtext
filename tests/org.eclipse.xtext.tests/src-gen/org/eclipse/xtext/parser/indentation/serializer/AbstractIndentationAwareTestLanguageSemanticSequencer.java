@@ -43,6 +43,9 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 	}
 	
 	/**
+	 * Contexts:
+	 *     TreeNode returns TreeNode
+	 *
 	 * Constraint:
 	 *     (name=ID children+=TreeNode*)
 	 */
@@ -52,6 +55,9 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 	
 	
 	/**
+	 * Contexts:
+	 *     Tree returns Tree
+	 *
 	 * Constraint:
 	 *     nodes+=TreeNode*
 	 */

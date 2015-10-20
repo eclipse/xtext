@@ -34,12 +34,12 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDateValuesEDATETerminalRuleCall_2_1_0 = (RuleCall)cDateValuesAssignment_2_1.eContents().get(0);
 		
 		//Model:
-		//	'int' intValues+=EINT
+		//	('int' intValues+=EINT
 		//	| 'double' doubleValues+=EDOUBLE
-		//	| 'date' dateValues+=EDATE*;
+		//	| 'date' dateValues+=EDATE)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//'int' intValues+=EINT | 'double' doubleValues+=EDOUBLE | 'date' dateValues+=EDATE*
+		//('int' intValues+=EINT | 'double' doubleValues+=EDOUBLE | 'date' dateValues+=EDATE)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'int' intValues+=EINT
@@ -122,9 +122,9 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//	'int' intValues+=EINT
+	//	('int' intValues+=EINT
 	//	| 'double' doubleValues+=EDOUBLE
-	//	| 'date' dateValues+=EDATE*;
+	//	| 'date' dateValues+=EDATE)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

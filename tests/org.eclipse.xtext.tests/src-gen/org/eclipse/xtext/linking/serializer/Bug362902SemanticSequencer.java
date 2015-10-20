@@ -45,6 +45,9 @@ public class Bug362902SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     Greeting returns Greeting
+	 *
 	 * Constraint:
 	 *     name=MyId
 	 */
@@ -60,6 +63,9 @@ public class Bug362902SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (greetings+=Greeting* favourite=[Greeting|MyId])
 	 */

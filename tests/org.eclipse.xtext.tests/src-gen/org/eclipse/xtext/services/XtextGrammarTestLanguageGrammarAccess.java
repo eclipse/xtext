@@ -374,7 +374,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//HiddenClause? ':' alternatives=Alternatives ';'
 		public Group getGroup() { return cGroup; }
 
-		//(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) | RuleNameAndParams ReturnsClause?)
+		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) | RuleNameAndParams ReturnsClause?
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?)
@@ -389,7 +389,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//RuleNameAndParams
 		public RuleCall getRuleNameAndParamsParserRuleCall_0_0_1() { return cRuleNameAndParamsParserRuleCall_0_0_1; }
 
-		//(wildcard?='*' | ReturnsClause?)
+		//wildcard?='*' | ReturnsClause?
 		public Alternatives getAlternatives_0_0_2() { return cAlternatives_0_0_2; }
 
 		//wildcard?='*'
@@ -780,7 +780,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//(Assignment | AbstractTerminal) Cardinalities?
 		public Group getGroup() { return cGroup; }
 
-		//(Assignment | AbstractTerminal)
+		//Assignment | AbstractTerminal
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Assignment
@@ -1068,7 +1068,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//{NamedArgument}
 		public Action getNamedArgumentAction_0() { return cNamedArgumentAction_0; }
 
-		//(literalValue=LiteralValue? parameter=[Parameter] | parameter=[Parameter] '=' value=[Parameter])
+		//literalValue=LiteralValue? parameter=[Parameter] | parameter=[Parameter] '=' value=[Parameter]
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//literalValue=LiteralValue? parameter=[Parameter]
@@ -1537,7 +1537,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'terminal'
 		public Keyword getTerminalKeyword_0() { return cTerminalKeyword_0; }
 
-		//(^fragment?='fragment' name=ID | name=ID ReturnsClause?)
+		//^fragment?='fragment' name=ID | name=ID ReturnsClause?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//^fragment?='fragment' name=ID

@@ -290,7 +290,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 						|| rule == grammarAccess.getTerminalTokenRule()
 						|| rule == grammarAccess.getTerminalTokenElementRule()
 						|| rule == grammarAccess.getParenthesizedTerminalElementRule()) {
-					sequence_TerminalToken(context, (Wildcard) semanticObject); 
+					sequence_TerminalToken_Wildcard(context, (Wildcard) semanticObject); 
 					return; 
 				}
 				else if (rule == grammarAccess.getWildcardRule()) {
@@ -304,6 +304,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	}
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Action
+	 *     Alternatives.Alternatives_1_0 returns Action
+	 *     Group returns Action
+	 *     Group.Group_1_0 returns Action
+	 *     AbstractToken returns Action
+	 *     AbstractTokenWithCardinality returns Action
+	 *     AbstractTerminal returns Action
+	 *     ParenthesizedElement returns Action
+	 *
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))? (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -313,6 +323,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Alternatives
+	 *     Alternatives.Alternatives_1_0 returns Alternatives
+	 *     Group returns Alternatives
+	 *     Group.Group_1_0 returns Alternatives
+	 *     AbstractToken returns Alternatives
+	 *     AbstractTokenWithCardinality returns Alternatives
+	 *     AbstractTerminal returns Alternatives
+	 *     ParenthesizedElement returns Alternatives
+	 *
 	 * Constraint:
 	 *     (groups+=Alternatives_Alternatives_1_0 groups+=Group+ (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -322,6 +342,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Assignment
+	 *     Alternatives.Alternatives_1_0 returns Assignment
+	 *     Group returns Assignment
+	 *     Group.Group_1_0 returns Assignment
+	 *     AbstractToken returns Assignment
+	 *     AbstractTokenWithCardinality returns Assignment
+	 *     AbstractTerminal returns Assignment
+	 *     ParenthesizedElement returns Assignment
+	 *
 	 * Constraint:
 	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -331,6 +361,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Group
+	 *     Alternatives.Alternatives_1_0 returns Group
+	 *     Group returns Group
+	 *     Group.Group_1_0 returns Group
+	 *     AbstractToken returns Group
+	 *     AbstractTokenWithCardinality returns Group
+	 *     AbstractTerminal returns Group
+	 *     ParenthesizedElement returns Group
+	 *
 	 * Constraint:
 	 *     (tokens+=Group_Group_1_0 tokens+=AbstractToken+ (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -340,6 +380,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns Keyword
+	 *     Alternatives.Alternatives_1_0 returns Keyword
+	 *     Group returns Keyword
+	 *     Group.Group_1_0 returns Keyword
+	 *     AbstractToken returns Keyword
+	 *     AbstractTokenWithCardinality returns Keyword
+	 *     AbstractTerminal returns Keyword
+	 *     ParenthesizedElement returns Keyword
+	 *
 	 * Constraint:
 	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -349,6 +399,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternatives returns RuleCall
+	 *     Alternatives.Alternatives_1_0 returns RuleCall
+	 *     Group returns RuleCall
+	 *     Group.Group_1_0 returns RuleCall
+	 *     AbstractToken returns RuleCall
+	 *     AbstractTokenWithCardinality returns RuleCall
+	 *     AbstractTerminal returns RuleCall
+	 *     ParenthesizedElement returns RuleCall
+	 *
 	 * Constraint:
 	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -358,6 +418,9 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Action returns Action
+	 *
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))?)
 	 */
@@ -367,6 +430,12 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AssignableTerminal returns Alternatives
+	 *     ParenthesizedAssignableElement returns Alternatives
+	 *     AssignableAlternatives returns Alternatives
+	 *     AssignableAlternatives.Alternatives_1_0 returns Alternatives
+	 *
 	 * Constraint:
 	 *     (groups+=AssignableAlternatives_Alternatives_1_0 groups+=AssignableTerminal+)
 	 */
@@ -376,6 +445,9 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Assignment returns Assignment
+	 *
 	 * Constraint:
 	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
 	 */
@@ -385,6 +457,9 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     CharacterRange returns CharacterRange
+	 *
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword)
 	 */
@@ -403,6 +478,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns CharacterRange
+	 *     TerminalAlternatives.Alternatives_1_0 returns CharacterRange
+	 *     TerminalGroup returns CharacterRange
+	 *     TerminalGroup.Group_1_0 returns CharacterRange
+	 *     TerminalToken returns CharacterRange
+	 *     TerminalTokenElement returns CharacterRange
+	 *     ParenthesizedTerminalElement returns CharacterRange
+	 *
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -412,6 +496,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AssignableTerminal returns CrossReference
+	 *     ParenthesizedAssignableElement returns CrossReference
+	 *     AssignableAlternatives returns CrossReference
+	 *     AssignableAlternatives.Alternatives_1_0 returns CrossReference
+	 *     CrossReference returns CrossReference
+	 *
 	 * Constraint:
 	 *     (type=TypeRef terminal=CrossReferenceableTerminal?)
 	 */
@@ -421,6 +512,11 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     EnumLiterals returns EnumLiteralDeclaration
+	 *     EnumLiterals.Alternatives_1_0 returns EnumLiteralDeclaration
+	 *     EnumLiteralDeclaration returns EnumLiteralDeclaration
+	 *
 	 * Constraint:
 	 *     (enumLiteral=[EEnumLiteral|ID] literal=Keyword?)
 	 */
@@ -430,6 +526,9 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     EnumLiterals returns Alternatives
+	 *
 	 * Constraint:
 	 *     (groups+=EnumLiterals_Alternatives_1_0 groups+=EnumLiteralDeclaration+)
 	 */
@@ -439,6 +538,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns EnumRule
+	 *     EnumRule returns EnumRule
+	 *
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=EnumLiterals)
 	 */
@@ -448,6 +551,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractMetamodelDeclaration returns GeneratedMetamodel
+	 *     GeneratedMetamodel returns GeneratedMetamodel
+	 *
 	 * Constraint:
 	 *     (name=ID ePackage=[EPackage|STRING] alias=ID?)
 	 */
@@ -457,6 +564,9 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Grammar returns Grammar
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=GrammarID 
@@ -472,6 +582,16 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Keyword returns Keyword
+	 *     AssignableTerminal returns Keyword
+	 *     ParenthesizedAssignableElement returns Keyword
+	 *     AssignableAlternatives returns Keyword
+	 *     AssignableAlternatives.Alternatives_1_0 returns Keyword
+	 *     CrossReferenceableTerminal returns Keyword
+	 *     CharacterRange returns Keyword
+	 *     CharacterRange.CharacterRange_1_0 returns Keyword
+	 *
 	 * Constraint:
 	 *     value=STRING
 	 */
@@ -487,6 +607,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Keyword
+	 *     TerminalAlternatives.Alternatives_1_0 returns Keyword
+	 *     TerminalGroup returns Keyword
+	 *     TerminalGroup.Group_1_0 returns Keyword
+	 *     TerminalToken returns Keyword
+	 *     TerminalTokenElement returns Keyword
+	 *     ParenthesizedTerminalElement returns Keyword
+	 *
 	 * Constraint:
 	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -496,6 +625,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractNegatedToken returns NegatedToken
+	 *     NegatedToken returns NegatedToken
+	 *
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
 	 */
@@ -511,6 +644,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns NegatedToken
+	 *     TerminalAlternatives.Alternatives_1_0 returns NegatedToken
+	 *     TerminalGroup returns NegatedToken
+	 *     TerminalGroup.Group_1_0 returns NegatedToken
+	 *     TerminalToken returns NegatedToken
+	 *     TerminalTokenElement returns NegatedToken
+	 *     ParenthesizedTerminalElement returns NegatedToken
+	 *
 	 * Constraint:
 	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -520,6 +662,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns ParserRule
+	 *     ParserRule returns ParserRule
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID 
@@ -534,6 +680,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractMetamodelDeclaration returns ReferencedMetamodel
+	 *     ReferencedMetamodel returns ReferencedMetamodel
+	 *
 	 * Constraint:
 	 *     (ePackage=[EPackage|STRING] alias=ID?)
 	 */
@@ -543,6 +693,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     RuleCall returns RuleCall
+	 *     AssignableTerminal returns RuleCall
+	 *     ParenthesizedAssignableElement returns RuleCall
+	 *     AssignableAlternatives returns RuleCall
+	 *     AssignableAlternatives.Alternatives_1_0 returns RuleCall
+	 *     CrossReferenceableTerminal returns RuleCall
+	 *
 	 * Constraint:
 	 *     rule=[AbstractRule|ID]
 	 */
@@ -558,6 +716,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns RuleCall
+	 *     TerminalAlternatives.Alternatives_1_0 returns RuleCall
+	 *     TerminalGroup returns RuleCall
+	 *     TerminalGroup.Group_1_0 returns RuleCall
+	 *     TerminalToken returns RuleCall
+	 *     TerminalTokenElement returns RuleCall
+	 *     ParenthesizedTerminalElement returns RuleCall
+	 *
 	 * Constraint:
 	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -567,6 +734,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Alternatives
+	 *     TerminalAlternatives.Alternatives_1_0 returns Alternatives
+	 *     TerminalGroup returns Alternatives
+	 *     TerminalGroup.Group_1_0 returns Alternatives
+	 *     TerminalToken returns Alternatives
+	 *     TerminalTokenElement returns Alternatives
+	 *     ParenthesizedTerminalElement returns Alternatives
+	 *
 	 * Constraint:
 	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -576,6 +752,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Group
+	 *     TerminalAlternatives.Alternatives_1_0 returns Group
+	 *     TerminalGroup returns Group
+	 *     TerminalGroup.Group_1_0 returns Group
+	 *     TerminalToken returns Group
+	 *     TerminalTokenElement returns Group
+	 *     ParenthesizedTerminalElement returns Group
+	 *
 	 * Constraint:
 	 *     (tokens+=TerminalGroup_Group_1_0 tokens+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -585,6 +770,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns TerminalRule
+	 *     TerminalRule returns TerminalRule
+	 *
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=TerminalAlternatives)
 	 */
@@ -594,6 +783,15 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns UntilToken
+	 *     TerminalAlternatives.Alternatives_1_0 returns UntilToken
+	 *     TerminalGroup returns UntilToken
+	 *     TerminalGroup.Group_1_0 returns UntilToken
+	 *     TerminalToken returns UntilToken
+	 *     TerminalTokenElement returns UntilToken
+	 *     ParenthesizedTerminalElement returns UntilToken
+	 *
 	 * Constraint:
 	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')*)
 	 */
@@ -603,15 +801,27 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalAlternatives returns Wildcard
+	 *     TerminalAlternatives.Alternatives_1_0 returns Wildcard
+	 *     TerminalGroup returns Wildcard
+	 *     TerminalGroup.Group_1_0 returns Wildcard
+	 *     TerminalToken returns Wildcard
+	 *     TerminalTokenElement returns Wildcard
+	 *     ParenthesizedTerminalElement returns Wildcard
+	 *
 	 * Constraint:
 	 *     (cardinality='?' | cardinality='*' | cardinality='+')*
 	 */
-	protected void sequence_TerminalToken(ISerializationContext context, Wildcard semanticObject) {
+	protected void sequence_TerminalToken_Wildcard(ISerializationContext context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeRef returns TypeRef
+	 *
 	 * Constraint:
 	 *     (metamodel=[AbstractMetamodelDeclaration|ID]? classifier=[EClassifier|ID])
 	 */
@@ -621,6 +831,10 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractNegatedToken returns UntilToken
+	 *     UntilToken returns UntilToken
+	 *
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
 	 */
@@ -636,6 +850,9 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Wildcard returns Wildcard
+	 *
 	 * Constraint:
 	 *     {Wildcard}
 	 */

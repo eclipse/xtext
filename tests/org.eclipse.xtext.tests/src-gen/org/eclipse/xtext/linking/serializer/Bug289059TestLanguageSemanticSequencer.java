@@ -43,6 +43,9 @@ public class Bug289059TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (name=ID enabled=UnassignedAction? reference=[Model|ID]?)
 	 */
@@ -52,6 +55,9 @@ public class Bug289059TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     UnassignedAction returns UnassignedAction
+	 *
 	 * Constraint:
 	 *     {UnassignedAction}
 	 */

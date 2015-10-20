@@ -139,7 +139,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//(z='foo' | z='bar') 'c'
 		public Group getGroup() { return cGroup; }
 
-		//(z='foo' | z='bar')
+		//z='foo' | z='bar'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//z='foo'

@@ -61,6 +61,10 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * Contexts:
+	 *     Person returns Erwachsener
+	 *     Erwachsener returns Erwachsener
+	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
 	 */
@@ -79,6 +83,9 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Familie returns Familie
+	 *
 	 * Constraint:
 	 *     ((name='keyword' | name=STRING | name=ID) mutter=[Erwachsener|ID] vater=[Erwachsener|ID] kinder+=[Kind|ID] kinder+=[Kind|ID]*)
 	 */
@@ -88,6 +95,9 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Farbe returns Farbe
+	 *
 	 * Constraint:
 	 *     (wert='ROT' | wert='BLAU' | wert='GELB' | wert='GRÜN')
 	 */
@@ -97,6 +107,10 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Person returns Kind
+	 *     Kind returns Kind
+	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
 	 */
@@ -115,6 +129,9 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Spielplatz returns Spielplatz
+	 *
 	 * Constraint:
 	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)
 	 */
@@ -124,6 +141,9 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Spielzeug returns Spielzeug
+	 *
 	 * Constraint:
 	 *     (name=ID farbe=Farbe)
 	 */

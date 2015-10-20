@@ -85,6 +85,9 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     DefineVariable returns DefineVariable
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -100,6 +103,9 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     DefineVariables returns DefineVariables
+	 *
 	 * Constraint:
 	 *     variables+=DefineVariable+
 	 */
@@ -109,6 +115,17 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_VariableName
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_VariableName
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_VariableName
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_VariableName
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_VariableName
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_VariableName
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_VariableName
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_VariableName
+	 *     Expression_VariableName returns Expression_VariableName
+	 *
 	 * Constraint:
 	 *     variable=NVariableAccess
 	 */
@@ -124,6 +141,9 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     NVariableAccess returns NVariableAccess
+	 *
 	 * Constraint:
 	 *     variable=[DefineVariable|ID]
 	 */
@@ -139,6 +159,9 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Program returns Program
+	 *
 	 * Constraint:
 	 *     (define=DefineVariables statements+=Statement*)
 	 */
@@ -148,6 +171,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Equal
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Equal
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Equal
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Equal
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Equal
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Equal
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Equal
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Equal
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Equal_1_3_1 right=Expression_VariableName)
 	 */
@@ -166,6 +199,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Larger_Equal
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Larger_Equal
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Larger_Equal
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Larger_Equal
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Larger_Equal
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Larger_Equal
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Larger_Equal
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Larger_Equal
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Larger_Equal_1_0_1 right=Expression_VariableName)
 	 */
@@ -184,6 +227,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Not_Equal
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Not_Equal
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Not_Equal
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Not_Equal
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Not_Equal
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Not_Equal
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Not_Equal
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Not_Equal
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Equal_1_4_1 right=Expression_VariableName)
 	 */
@@ -202,6 +255,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Not_Greater
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Not_Greater
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Not_Greater
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Not_Greater
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Not_Greater
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Not_Greater
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Not_Greater
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Not_Greater
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Greater_1_6_1 right=Expression_VariableName)
 	 */
@@ -220,6 +283,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Not_Less
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Not_Less
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Not_Less
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Not_Less
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Not_Less
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Not_Less
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Not_Less
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Not_Less
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Less_1_5_1 right=Expression_VariableName)
 	 */
@@ -238,6 +311,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Smaller
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Smaller
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Smaller
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Smaller
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Smaller
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Smaller
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Smaller
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Smaller
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Smaller_1_1_1 right=Expression_VariableName)
 	 */
@@ -256,6 +339,16 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Statement returns Expression_Smaller_Equal
+	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Smaller_Equal
+	 *     Statement.Expression_Smaller_1_1_1 returns Expression_Smaller_Equal
+	 *     Statement.Expression_Smaller_Equal_1_2_1 returns Expression_Smaller_Equal
+	 *     Statement.Expression_Equal_1_3_1 returns Expression_Smaller_Equal
+	 *     Statement.Expression_Not_Equal_1_4_1 returns Expression_Smaller_Equal
+	 *     Statement.Expression_Not_Less_1_5_1 returns Expression_Smaller_Equal
+	 *     Statement.Expression_Not_Greater_1_6_1 returns Expression_Smaller_Equal
+	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Smaller_Equal_1_2_1 right=Expression_VariableName)
 	 */

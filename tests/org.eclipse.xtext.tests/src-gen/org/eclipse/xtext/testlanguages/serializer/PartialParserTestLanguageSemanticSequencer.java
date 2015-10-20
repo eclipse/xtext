@@ -69,6 +69,10 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     Content returns AbstractChildren
+	 *     AbstractChildren returns AbstractChildren
+	 *
 	 * Constraint:
 	 *     abstractChildren+=AbstractChild+
 	 */
@@ -78,6 +82,9 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Child returns Child
+	 *
 	 * Constraint:
 	 *     value=Named
 	 */
@@ -93,6 +100,10 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Content returns Children
+	 *     Children returns Children
+	 *
 	 * Constraint:
 	 *     (children+=Child children+=Child*)
 	 */
@@ -102,6 +113,10 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractChild returns FirstConcrete
+	 *     FirstConcrete returns FirstConcrete
+	 *
 	 * Constraint:
 	 *     (value=Named referencedContainer=[SomeContainer|ID]?)
 	 */
@@ -111,6 +126,9 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Named returns Named
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -126,6 +144,9 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Nested returns Nested
+	 *
 	 * Constraint:
 	 *     nested+=SomeContainer+
 	 */
@@ -135,6 +156,10 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractChild returns SecondConcrete
+	 *     SecondConcrete returns SecondConcrete
+	 *
 	 * Constraint:
 	 *     (value=Named referencedChildren+=[Child|ID]?)
 	 */
@@ -144,6 +169,9 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     SomeContainer returns SomeContainer
+	 *
 	 * Constraint:
 	 *     (name=ID (nested+=Nested | content+=Content)*)
 	 */

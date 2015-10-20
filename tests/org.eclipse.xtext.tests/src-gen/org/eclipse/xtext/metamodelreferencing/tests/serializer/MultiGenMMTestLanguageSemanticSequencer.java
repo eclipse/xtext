@@ -49,6 +49,9 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     Foo returns Foo
+	 *
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
 	 */
@@ -58,6 +61,9 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * Contexts:
+	 *     NameRef returns FooBar
+	 *
 	 * Constraint:
 	 *     name=STRING
 	 */

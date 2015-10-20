@@ -43,6 +43,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Root returns IDList
+	 *     IDList returns IDList
+	 *
 	 * Constraint:
 	 *     ids+=ID*
 	 */
@@ -52,6 +56,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns KWList
+	 *     KWList returns KWList
+	 *
 	 * Constraint:
 	 *     (kw1?='kw1'? kw2?='kw2'? kw3?='kw3'? kw4?='kw4'? kw5?='kw5'?)
 	 */

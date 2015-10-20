@@ -52,6 +52,9 @@ public class IgnoreCaseNamespacesTestLanguageSemanticSequencer extends AbstractI
 	}
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importedNamespace=STRING
 	 */
@@ -67,6 +70,9 @@ public class IgnoreCaseNamespacesTestLanguageSemanticSequencer extends AbstractI
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (imports+=Import* elements+=Element+)
 	 */

@@ -101,6 +101,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Line returns Assign
+	 *     Assign returns Assign
+	 *
 	 * Constraint:
 	 *     (var=ID (op='=' | op='+=') (val+=INT val+=INT*)?)
 	 */
@@ -110,6 +114,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns Datatypes
+	 *     Datatypes returns Datatypes
+	 *
 	 * Constraint:
 	 *     (val1=Datatype1 val2=Datatype2 val3=Datatype3)
 	 */
@@ -131,6 +139,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns Decl
+	 *     Decl returns Decl
+	 *
 	 * Constraint:
 	 *     (type+=ID name+=ID)
 	 */
@@ -140,6 +152,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns Enumeration
+	 *     Enumeration returns Enumeration
+	 *
 	 * Constraint:
 	 *     (val+=Enum1+ val+=Enum1*)
 	 */
@@ -149,6 +165,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns FqnObj
+	 *     FqnObj returns FqnObj
+	 *
 	 * Constraint:
 	 *     name=FQN
 	 */
@@ -164,6 +184,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns FqnRef
+	 *     FqnRef returns FqnRef
+	 *
 	 * Constraint:
 	 *     ref=[FqnObj|FQN]
 	 */
@@ -179,6 +203,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns Meth
+	 *     Meth returns Meth
+	 *
 	 * Constraint:
 	 *     (name=ID (param+=Param param+=Param*)?)
 	 */
@@ -188,6 +216,9 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Param returns Param
+	 *
 	 * Constraint:
 	 *     (name+=ID type+=ID)
 	 */
@@ -197,6 +228,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns Space
+	 *     Space returns Space
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -212,6 +247,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SuppressedHiddenSub returns SuppressedHiddenSubID
+	 *     SuppressedHiddenSubID returns SuppressedHiddenSubID
+	 *
 	 * Constraint:
 	 *     idval=ID
 	 */
@@ -227,6 +266,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SuppressedHiddenSub returns SuppressedHiddenSubSub
+	 *     SuppressedHiddenSubSub returns SuppressedHiddenSubSub
+	 *
 	 * Constraint:
 	 *     idval=ID
 	 */
@@ -242,6 +285,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Line returns SuppressedHidden
+	 *     SuppressedHidden returns SuppressedHidden
+	 *
 	 * Constraint:
 	 *     (vals+=SuppressedHiddenSub vals+=SuppressedHiddenSub*)?
 	 */
@@ -251,6 +298,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns TestIndentation
+	 *     TestIndentation returns TestIndentation
+	 *
 	 * Constraint:
 	 *     ((items+=Line | items+=TestIndentation)* semi?=';'?)
 	 */
@@ -260,6 +311,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns TestLinewrapMinMax
+	 *     TestLinewrapMinMax returns TestLinewrapMinMax
+	 *
 	 * Constraint:
 	 *     items+=Line*
 	 */
@@ -269,6 +324,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns TestLinewrap
+	 *     TestLinewrap returns TestLinewrap
+	 *
 	 * Constraint:
 	 *     items+=Line*
 	 */
@@ -278,6 +337,10 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns WrappingDataTypeTest
+	 *     WrappingDataTypeTest returns WrappingDataTypeTest
+	 *
 	 * Constraint:
 	 *     datatype=WrappingDataType
 	 */
