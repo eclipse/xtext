@@ -632,43 +632,6 @@ classpathScope{stuff from bin/}
 
 Please find the motivation behind this and some additional details in [this blog post](http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html) .
 
-#### Declarative Scoping
-
-If you have to define scopes for certain contexts, the base class [AbstractDeclarativeScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java) allows to do that in a declarative way. It looks up methods which have either of the following two signatures:
-
-```java
-IScope scope_<RefDeclaringEClass>_<Reference>(
-    <ContextType> ctx, EReference ref)
-
-IScope scope_<TypeToReturn>(<ContextType> ctx, EReference ref)
-```
-
-The former is used when evaluating the scope for a specific cross-reference. Here `<Reference>` corresponds to the name of this reference and `<RefDeclaringEClass>` is the declaring type of the reference. The *ref* parameter represents this cross-reference.
-
-The latter method signature is used when computing the scope for a given element type and is applicable to all cross-references of that type. Here `<TypeToReturn>` is the name of that type.
-
-For example, if you have a state machine with a *Transition* object owned by its source *State* and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross-reference is declared by the *Transition* type and is called *target*):
-
-```java
-IScope scope_Transition_target(Transition this, EReference ref)
-```
-
-If such a method does not exist, the implementation tries to find one for the context object's container. Thus in the example this would match a method with the same name but *State* as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. It may also make the method easier to implement, as the elements comprising the scope are quite often owned or referenced by a container of the context object. For instance, the *State* objects could be owned by a containing *StateMachine* object.
-
-If no method specific to the cross-reference in question has been found for any of the objects in the containment hierarchy, the implementation starts looking for methods matching the other signature. Again it first attempts to match the context object. Thus in the example the first matched signature would be:
-
-```java
-IScope scope_State(Transition this, EReference ref)
-```
-
-If no such method exists, the implementation again tries to find a method matching the context object's container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:
-
-```java
-IScope scope_State(StateMachine this, EReference ref)
-```
-
-This scope can now be used for any cross-references of type *State* for context objects owned by the state machine.
-
 ### Imported Namespace Aware Scoping {#namespace-imports}
 
 The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace support to your language, which is comparable and similar to namespaces in Scala and C#. Scala and C# both allow to have multiple nested packages within one file, and you can put imports per namespace, such that imported names are only visible within that namespace. See the domain model example: its scope provider extends [ImportedNamespaceAwareLocalScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java).
