@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class PomFile extends TextFile {
 	@Accessors String packaging = "jar"
 	@Accessors String buildSection = ""
+	@Accessors String profileSection = ""
 
 	new(ProjectDescriptor project) {
 		super(Outlet.ROOT, "pom.xml", project)
@@ -63,6 +64,7 @@ class PomFile extends TextFile {
 				«ENDFOR»
 			</dependencies>
 			«ENDIF»
+			«profileSection»
 		</project>
 	'''
 }

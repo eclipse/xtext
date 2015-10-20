@@ -109,6 +109,23 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 					</plugins>
 				</build>
 			'''
+			if (isEclipsePluginProject && needsUiHarness) {
+				profileSection = '''
+					<profiles>
+						<profile>
+							<id>testing-on-mac</id>
+							<activation>
+								<os>
+									<family>mac</family>
+								</os>
+							</activation>
+							<properties>
+								<argLine>-XstartOnFirstThread</argLine>
+							</properties>
+						</profile>
+					</profiles>
+				'''
+			}
 		]
 	}
 	

@@ -31,6 +31,9 @@ public class PomFile extends TextFile {
   @Accessors
   private String buildSection = "";
   
+  @Accessors
+  private String profileSection = "";
+  
   public PomFile(final ProjectDescriptor project) {
     super(Outlet.ROOT, "pom.xml", project);
   }
@@ -254,6 +257,9 @@ public class PomFile extends TextFile {
         _builder.newLine();
       }
     }
+    _builder.append("\t");
+    _builder.append(this.profileSection, "\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("</project>");
     _builder.newLine();
     return _builder.toString();
@@ -275,5 +281,14 @@ public class PomFile extends TextFile {
   
   public void setBuildSection(final String buildSection) {
     this.buildSection = buildSection;
+  }
+  
+  @Pure
+  public String getProfileSection() {
+    return this.profileSection;
+  }
+  
+  public void setProfileSection(final String profileSection) {
+    this.profileSection = profileSection;
   }
 }

@@ -355,6 +355,55 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.append("</build>");
         _builder.newLine();
         it.setBuildSection(_builder.toString());
+        boolean _and_1 = false;
+        boolean _isEclipsePluginProject_4 = TestProjectDescriptor.this.isEclipsePluginProject();
+        if (!_isEclipsePluginProject_4) {
+          _and_1 = false;
+        } else {
+          boolean _needsUiHarness_1 = TestProjectDescriptor.this.needsUiHarness();
+          _and_1 = _needsUiHarness_1;
+        }
+        if (_and_1) {
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("<profiles>");
+          _builder_1.newLine();
+          _builder_1.append("\t");
+          _builder_1.append("<profile>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t");
+          _builder_1.append("<id>testing-on-mac</id>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t");
+          _builder_1.append("<activation>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t\t");
+          _builder_1.append("<os>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t\t\t");
+          _builder_1.append("<family>mac</family>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t\t");
+          _builder_1.append("</os>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t");
+          _builder_1.append("</activation>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t");
+          _builder_1.append("<properties>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t\t");
+          _builder_1.append("<argLine>-XstartOnFirstThread</argLine>");
+          _builder_1.newLine();
+          _builder_1.append("\t\t");
+          _builder_1.append("</properties>");
+          _builder_1.newLine();
+          _builder_1.append("\t");
+          _builder_1.append("</profile>");
+          _builder_1.newLine();
+          _builder_1.append("</profiles>");
+          _builder_1.newLine();
+          it.setProfileSection(_builder_1.toString());
+        }
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
