@@ -65,7 +65,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	def protected TypeReference getGenProposalProviderSuperClass(Grammar g) {
-		val superGrammar = g.nonTerminalsSuperGrammar
+		val superGrammar = g.usedGrammars.head
 		if(inheritImplementation && superGrammar != null)
 			superGrammar.proposalProviderClass
 		else getDefaultGenProposalProviderSuperClass
@@ -77,7 +77,6 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	def protected TypeReference getDefaultGenProposalProviderSuperClass() {
 		new TypeReference("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider")
 	}
-
 
 	override generate() {
 		val chosenClass = 
