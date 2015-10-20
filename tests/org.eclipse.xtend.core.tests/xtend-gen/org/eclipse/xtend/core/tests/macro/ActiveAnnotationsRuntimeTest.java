@@ -181,15 +181,13 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     };
     final FileProjectConfig clientProjectConfig = ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig_1, _function_1);
     final XtextResourceSet macroResourceSet = this.resourceSetProvider.get();
-    ProjectConfigAdapter _projectConfigAdapter = new ProjectConfigAdapter(macroProjectConfig);
-    _projectConfigAdapter.attachToEmfObject(macroResourceSet);
+    ProjectConfigAdapter.install(macroResourceSet, macroProjectConfig);
     Class<? extends ActiveAnnotationsRuntimeTest> _class = this.getClass();
     ClassLoader _classLoader = _class.getClassLoader();
     macroResourceSet.setClasspathURIContext(_classLoader);
     macroResourceSet.createResource(macroURI);
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-    ProjectConfigAdapter _projectConfigAdapter_1 = new ProjectConfigAdapter(clientProjectConfig);
-    _projectConfigAdapter_1.attachToEmfObject(resourceSet);
+    ProjectConfigAdapter.install(resourceSet, clientProjectConfig);
     resourceSet.createResource(clientURI);
     final IAcceptor<CompilationTestHelper.Result> _function_2 = new IAcceptor<CompilationTestHelper.Result>() {
       @Override
