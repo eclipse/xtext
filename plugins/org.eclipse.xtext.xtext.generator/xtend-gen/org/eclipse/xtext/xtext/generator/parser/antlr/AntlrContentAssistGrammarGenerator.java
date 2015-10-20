@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
@@ -1190,8 +1189,8 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       boolean _and_1 = false;
       AbstractRule _containingRule = GrammarUtil.containingRule(it);
       AbstractElement _alternatives = _containingRule.getAlternatives();
-      boolean _equals = Objects.equal(_alternatives, this);
-      if (!_equals) {
+      boolean _tripleEquals = (_alternatives == it);
+      if (!_tripleEquals) {
         _and_1 = false;
       } else {
         AbstractRule _containingRule_1 = GrammarUtil.containingRule(it);
