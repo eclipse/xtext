@@ -327,22 +327,24 @@ class AntlrGrammarComparatorTest {
 
 
 
-	private static class TestErrorHandler extends AntlrGrammarComparator.AbstractErrorHandler {
+	private static class TestErrorHandler implements AntlrGrammarComparator.IErrorHandler {
 		
-		new() {
-			absoluteGrammarFileName = "testee"
-			absoluteGrammarFileNameReference = "expected"
-		}
-		
-		override handleMismatch(String match, String matchReference) {
+		override handleMismatch(String match, String matchReference, AntlrGrammarComparator.ErrorContext context) {
 			fail('''
-				Inputs differs at token «match» (line «lineNumber»), expected token «matchReference» (line «lineNumberReference» ).
+				Inputs differs at token «match» (line «context.testedGrammar.lineNumber»), expected token «
+					matchReference» (line «context.referenceGrammar.lineNumber» ).
 			''')
 		}
 		
-		override handleInvalidGrammarFile(String testeeOrExpected, int lineNo) {
+		override handleInvalidGeneratedGrammarFile(AntlrGrammarComparator.ErrorContext context) {
 			fail('''
-				Noticed an unmatched character sequence in «testeeOrExpected» in/before line «lineNo».
+				Noticed an unmatched character sequence in 'testee' in/before line «context.testedGrammar.lineNumber».
+			''')
+		}
+		
+		override handleInvalidReferenceGrammarFile(AntlrGrammarComparator.ErrorContext context) {
+			fail('''
+				Noticed an unmatched character sequence in 'expected' in/before line «context.referenceGrammar.lineNumber».
 			''')
 		}
 	}
