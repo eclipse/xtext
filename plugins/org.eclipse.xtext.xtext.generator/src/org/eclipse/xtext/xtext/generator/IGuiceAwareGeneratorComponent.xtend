@@ -9,6 +9,9 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
 
+/**
+ * @noreference
+ */
 interface IGuiceAwareGeneratorComponent {
 	
 	def void initialize(Injector injector)

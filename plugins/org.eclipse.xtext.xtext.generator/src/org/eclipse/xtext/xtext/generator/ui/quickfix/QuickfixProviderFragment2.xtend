@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.quickfix
 import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -20,13 +19,14 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the Quickfix provider stub, either in Xtend or Java language.
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
+class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject
 	extension XtextGeneratorNaming

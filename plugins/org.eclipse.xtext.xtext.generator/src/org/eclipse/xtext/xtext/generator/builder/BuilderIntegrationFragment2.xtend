@@ -16,12 +16,12 @@ import org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateP
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
+class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment {
 	
 	override generate() {
 		addRuntimeGuiceBindings

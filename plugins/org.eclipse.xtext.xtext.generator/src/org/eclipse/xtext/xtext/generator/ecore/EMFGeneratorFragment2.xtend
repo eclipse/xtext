@@ -64,16 +64,16 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.internal.Log
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 @Log
-class EMFGeneratorFragment2 extends AbstractGeneratorFragment2 {
+class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Inject CodeConfig codeConfig
 	

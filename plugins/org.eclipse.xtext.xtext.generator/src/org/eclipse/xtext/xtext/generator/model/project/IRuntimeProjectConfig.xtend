@@ -5,18 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator.xbase
+package org.eclipse.xtext.xtext.generator.model.project
 
-import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
-class XtypeGeneratorFragment2 extends AbstractXtextGeneratorFragment {
-
-	@Inject extension XbaseUsageDetector
-	
-	override generate() {
-		if (language.grammar.inheritsXtype && projectConfig.eclipsePlugin.manifest !== null)
-			projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtext.xbase.ui'
-	}
-	
+/**
+ * @noimplement
+ */
+interface IRuntimeProjectConfig extends IBundleProjectConfig {
+	def IXtextGeneratorFileSystemAccess getEcoreModel()
+	def String getEcoreModelFolder()
 }
