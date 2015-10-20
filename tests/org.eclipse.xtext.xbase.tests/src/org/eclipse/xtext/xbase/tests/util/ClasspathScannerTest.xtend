@@ -24,7 +24,7 @@ class ClasspathScannerTest {
 	
 	@Test
 	def testClasspathScanning() {
-		val bootstrapJar = new File("../org.eclipse.xtext.bootstrap/lastversion.jar")
+		val bootstrapJar = new File("../../devtools/org.eclipse.xtext.bootstrap/lastversion.jar")
 		val classloader = new URLClassLoader(#[bootstrapJar.toURI.toURL])
 		val utilPackage = scanner.getDescriptors(classloader, #["org.eclipse.xtext.util"])
 		Assert.assertTrue(utilPackage.exists[name == "org.eclipse.xtext.util.Arrays"])
