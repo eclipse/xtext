@@ -26,13 +26,13 @@ public class AntlrGrammarComparatorTest {
       _builder.append("Inputs differs at token ");
       _builder.append(match, "");
       _builder.append(" (line ");
-      AntlrGrammarComparator.TraversationState _testedGrammar = context.getTestedGrammar();
+      AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
       int _lineNumber = _testedGrammar.getLineNumber();
       _builder.append(_lineNumber, "");
       _builder.append("), expected token ");
       _builder.append(matchReference, "");
       _builder.append(" (line ");
-      AntlrGrammarComparator.TraversationState _referenceGrammar = context.getReferenceGrammar();
+      AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
       int _lineNumber_1 = _referenceGrammar.getLineNumber();
       _builder.append(_lineNumber_1, "");
       _builder.append(" ).");
@@ -44,7 +44,7 @@ public class AntlrGrammarComparatorTest {
     public void handleInvalidGeneratedGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Noticed an unmatched character sequence in \'testee\' in/before line ");
-      AntlrGrammarComparator.TraversationState _testedGrammar = context.getTestedGrammar();
+      AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
       int _lineNumber = _testedGrammar.getLineNumber();
       _builder.append(_lineNumber, "");
       _builder.append(".");
@@ -56,7 +56,7 @@ public class AntlrGrammarComparatorTest {
     public void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Noticed an unmatched character sequence in \'expected\' in/before line ");
-      AntlrGrammarComparator.TraversationState _referenceGrammar = context.getReferenceGrammar();
+      AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
       int _lineNumber = _referenceGrammar.getLineNumber();
       _builder.append(_lineNumber, "");
       _builder.append(".");

@@ -13,14 +13,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * Compares two charSequences of ANTLR grammars token by token.
@@ -39,66 +37,44 @@ public class AntlrGrammarComparator {
     public abstract void handleMismatch(final String matched, final String expected, final AntlrGrammarComparator.ErrorContext context);
   }
   
-  @Data
   public static final class ErrorContext {
-    private final AntlrGrammarComparator.TraversationState testedGrammar = new AntlrGrammarComparator.TraversationState();
+    @Accessors
+    private AntlrGrammarComparator.MatchState testedGrammar = new AntlrGrammarComparator.MatchState();
     
-    private final AntlrGrammarComparator.TraversationState referenceGrammar = new AntlrGrammarComparator.TraversationState();
+    @Accessors
+    private AntlrGrammarComparator.MatchState referenceGrammar = new AntlrGrammarComparator.MatchState();
     
-    @Override
-    @Pure
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.testedGrammar== null) ? 0 : this.testedGrammar.hashCode());
-      result = prime * result + ((this.referenceGrammar== null) ? 0 : this.referenceGrammar.hashCode());
-      return result;
-    }
-    
-    @Override
-    @Pure
-    public boolean equals(final Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      AntlrGrammarComparator.ErrorContext other = (AntlrGrammarComparator.ErrorContext) obj;
-      if (this.testedGrammar == null) {
-        if (other.testedGrammar != null)
-          return false;
-      } else if (!this.testedGrammar.equals(other.testedGrammar))
-        return false;
-      if (this.referenceGrammar == null) {
-        if (other.referenceGrammar != null)
-          return false;
-      } else if (!this.referenceGrammar.equals(other.referenceGrammar))
-        return false;
-      return true;
-    }
-    
-    @Override
-    @Pure
-    public String toString() {
-      ToStringBuilder b = new ToStringBuilder(this);
-      b.add("testedGrammar", this.testedGrammar);
-      b.add("referenceGrammar", this.referenceGrammar);
-      return b.toString();
+    public AntlrGrammarComparator.MatchState reset() {
+      AntlrGrammarComparator.MatchState _xblockexpression = null;
+      {
+        AntlrGrammarComparator.MatchState _matchState = new AntlrGrammarComparator.MatchState();
+        this.testedGrammar = _matchState;
+        AntlrGrammarComparator.MatchState _matchState_1 = new AntlrGrammarComparator.MatchState();
+        _xblockexpression = this.referenceGrammar = _matchState_1;
+      }
+      return _xblockexpression;
     }
     
     @Pure
-    public AntlrGrammarComparator.TraversationState getTestedGrammar() {
+    public AntlrGrammarComparator.MatchState getTestedGrammar() {
       return this.testedGrammar;
     }
     
+    public void setTestedGrammar(final AntlrGrammarComparator.MatchState testedGrammar) {
+      this.testedGrammar = testedGrammar;
+    }
+    
     @Pure
-    public AntlrGrammarComparator.TraversationState getReferenceGrammar() {
+    public AntlrGrammarComparator.MatchState getReferenceGrammar() {
       return this.referenceGrammar;
+    }
+    
+    public void setReferenceGrammar(final AntlrGrammarComparator.MatchState referenceGrammar) {
+      this.referenceGrammar = referenceGrammar;
     }
   }
   
-  public static final class TraversationState {
+  public static final class MatchState {
     @Accessors
     private String absoluteFileName;
     
@@ -106,6 +82,12 @@ public class AntlrGrammarComparator {
     private int lineNumber = 1;
     
     private int position = 0;
+    
+    @Accessors
+    private String previousToken;
+    
+    @Accessors
+    private String currentToken;
     
     @Pure
     public String getAbsoluteFileName() {
@@ -123,6 +105,24 @@ public class AntlrGrammarComparator {
     
     public void setLineNumber(final int lineNumber) {
       this.lineNumber = lineNumber;
+    }
+    
+    @Pure
+    public String getPreviousToken() {
+      return this.previousToken;
+    }
+    
+    public void setPreviousToken(final String previousToken) {
+      this.previousToken = previousToken;
+    }
+    
+    @Pure
+    public String getCurrentToken() {
+      return this.currentToken;
+    }
+    
+    public void setCurrentToken(final String currentToken) {
+      this.currentToken = currentToken;
     }
   }
   
@@ -191,6 +191,7 @@ public class AntlrGrammarComparator {
    * 			and the referenced grammar (value) for logging purposes
    */
   public AntlrGrammarComparator.ErrorContext compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.IErrorHandler errorHandler) {
+    this.errorContext.reset();
     final Matcher compoundMatcher = this.compoundPattern.matcher(grammar);
     final Matcher compoundMatcherReference = this.compoundPattern.matcher(grammarReference);
     boolean continue_ = true;
@@ -233,15 +234,18 @@ public class AntlrGrammarComparator {
    * 
    * @return the number of newlines passed while searching
    */
-  private boolean nextToken(final Matcher matcher, final AntlrGrammarComparator.TraversationState state, final AntlrGrammarComparator.IErrorHandler errorHandler) {
+  private boolean nextToken(final Matcher matcher, final AntlrGrammarComparator.MatchState state, final AntlrGrammarComparator.IErrorHandler errorHandler) {
     while (matcher.find()) {
       {
+        String _group = matcher.group();
+        state.currentToken = _group;
         int _start = matcher.start();
         boolean _notEquals = (_start != state.position);
         if (_notEquals) {
           this.handleInvalidGrammarFile(errorHandler, state);
         }
         final String match = matcher.group();
+        state.previousToken = match;
         Matcher _matcher = this.p_newline.matcher(match);
         boolean _matches = _matcher.matches();
         if (_matches) {
@@ -269,7 +273,7 @@ public class AntlrGrammarComparator {
     return false;
   }
   
-  private void handleInvalidGrammarFile(final AntlrGrammarComparator.IErrorHandler errorHandler, final AntlrGrammarComparator.TraversationState state) {
+  private void handleInvalidGrammarFile(final AntlrGrammarComparator.IErrorHandler errorHandler, final AntlrGrammarComparator.MatchState state) {
     if ((state == this.errorContext.testedGrammar)) {
       errorHandler.handleInvalidGeneratedGrammarFile(this.errorContext);
     } else {
