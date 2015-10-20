@@ -11,11 +11,11 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -862,6 +862,15 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
         }
       };
       final List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String>sortBy(_entrySet, _function);
+      final LinkedHashMultimap<EObject, IGrammarConstraintProvider.IConstraint> context2constraint = LinkedHashMultimap.<EObject, IGrammarConstraintProvider.IConstraint>create();
+      for (final Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> e : contexts) {
+        List<ISerializationContext> _value = e.getValue();
+        for (final ISerializationContext ctx : _value) {
+          EObject _actionOrRule = ((SerializationContext) ctx).getActionOrRule();
+          IGrammarConstraintProvider.IConstraint _key = e.getKey();
+          context2constraint.put(_actionOrRule, _key);
+        }
+      }
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -884,7 +893,7 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
                   List<ISerializationContext> _value_1 = _value.getValue();
                   Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value_2 = ctx.getValue();
                   IGrammarConstraintProvider.IConstraint _key_1 = _value_2.getKey();
-                  StringConcatenationClient _genCondition = SerializerFragment2.this.genCondition(_value_1, _key_1);
+                  StringConcatenationClient _genCondition = SerializerFragment2.this.genCondition(_value_1, _key_1, context2constraint);
                   _builder.append(_genCondition, "");
                   _builder.append(") {");
                   _builder.newLineIfNotEmpty();
@@ -922,7 +931,7 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
     return _xblockexpression;
   }
   
-  private StringConcatenationClient genCondition(final List<ISerializationContext> contexts, final IGrammarConstraintProvider.IConstraint constraint) {
+  private StringConcatenationClient genCondition(final List<ISerializationContext> contexts, final IGrammarConstraintProvider.IConstraint constraint, final Multimap<EObject, IGrammarConstraintProvider.IConstraint> ctx2ctr) {
     StringConcatenationClient _xblockexpression = null;
     {
       final List<ISerializationContext> sorted = IterableExtensions.<ISerializationContext>sort(contexts);
@@ -949,9 +958,16 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
               }
               StringConcatenationClient _genObjectSelector = SerializerFragment2.this.genObjectSelector(obj);
               _builder.append(_genObjectSelector, "");
-              Set<ISerializationContext> _get = index.get(obj);
-              StringConcatenationClient _genParameterSelector = SerializerFragment2.this.genParameterSelector(obj, _get, constraint);
-              _builder.append(_genParameterSelector, "");
+              {
+                Collection<IGrammarConstraintProvider.IConstraint> _get = ctx2ctr.get(obj);
+                int _size = _get.size();
+                boolean _greaterThan = (_size > 1);
+                if (_greaterThan) {
+                  Set<ISerializationContext> _get_1 = index.get(obj);
+                  StringConcatenationClient _genParameterSelector = SerializerFragment2.this.genParameterSelector(obj, _get_1, constraint);
+                  _builder.append(_genParameterSelector, "");
+                }
+              }
             }
           }
         }
@@ -996,91 +1012,14 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   private StringConcatenationClient genParameterSelector(final EObject obj, final Set<ISerializationContext> contexts, final IGrammarConstraintProvider.IConstraint constraint) {
-    final ParserRule rule = GrammarUtil.containingParserRule(obj);
-    boolean _or = false;
-    EList<Parameter> _parameters = rule.getParameters();
-    boolean _isEmpty = _parameters.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      List<ISerializationContext> _contexts = constraint.getContexts();
-      final Function1<ISerializationContext, Boolean> _function = new Function1<ISerializationContext, Boolean>() {
-        @Override
-        public Boolean apply(final ISerializationContext it) {
-          List<Parameter> _declaredParameters = ((SerializationContext) it).getDeclaredParameters();
-          boolean _isEmpty = _declaredParameters.isEmpty();
-          return Boolean.valueOf((!_isEmpty));
-        }
-      };
-      boolean _exists = IterableExtensions.<ISerializationContext>exists(_contexts, _function);
-      boolean _not = (!_exists);
-      _or = _not;
-    }
-    if (_or) {
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        }
-      };
-      return _client;
-    }
-    final LinkedHashMultimap<ParserRule, ISerializationContext> withParamsByRule = LinkedHashMultimap.<ParserRule, ISerializationContext>create();
-    final Procedure1<ISerializationContext> _function_1 = new Procedure1<ISerializationContext>() {
-      @Override
-      public void apply(final ISerializationContext it) {
-        Set<Parameter> _enabledBooleanParameters = it.getEnabledBooleanParameters();
-        final Parameter param = IterableExtensions.<Parameter>head(_enabledBooleanParameters);
-        if ((param != null)) {
-          ParserRule _containingParserRule = GrammarUtil.containingParserRule(param);
-          withParamsByRule.put(_containingParserRule, it);
-        }
-      }
-    };
-    IterableExtensions.<ISerializationContext>forEach(contexts, _function_1);
-    final LinkedHashSet<ISerializationContext> copy = CollectionLiterals.<ISerializationContext>newLinkedHashSet();
-    copy.addAll(contexts);
-    Set<ParserRule> _keySet = withParamsByRule.keySet();
-    final Procedure1<ParserRule> _function_2 = new Procedure1<ParserRule>() {
-      @Override
-      public void apply(final ParserRule it) {
-        final Set<ISerializationContext> entries = withParamsByRule.get(it);
-        int _size = entries.size();
-        EList<Parameter> _parameters = it.getParameters();
-        int _size_1 = _parameters.size();
-        int _doubleLessThan = (1 << _size_1);
-        int _minus = (_doubleLessThan - 1);
-        boolean _tripleEquals = (_size == _minus);
-        if (_tripleEquals) {
-          copy.removeAll(entries);
-        }
-      }
-    };
-    IterableExtensions.<ParserRule>forEach(_keySet, _function_2);
-    final Function1<ISerializationContext, Boolean> _function_3 = new Function1<ISerializationContext, Boolean>() {
-      @Override
-      public Boolean apply(final ISerializationContext it) {
-        Set<Parameter> _enabledBooleanParameters = it.getEnabledBooleanParameters();
-        boolean _isEmpty = _enabledBooleanParameters.isEmpty();
-        return Boolean.valueOf((!_isEmpty));
-      }
-    };
-    boolean _exists_1 = IterableExtensions.<ISerializationContext>exists(copy, _function_3);
-    if (_exists_1) {
-      StringConcatenationClient _client_1 = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        }
-      };
-      return _client_1;
-    }
-    StringConcatenationClient _client_2 = new StringConcatenationClient() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append(" ");
         _builder.append("&& (");
         {
           boolean _hasElements = false;
-          for(final ISerializationContext context : copy) {
+          for(final ISerializationContext context : contexts) {
             if (!_hasElements) {
               _hasElements = true;
             } else {
@@ -1093,7 +1032,7 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append(")");
       }
     };
-    return _client_2;
+    return _client;
   }
   
   private EObject getContextObject(final ISerializationContext context) {
