@@ -30,7 +30,7 @@ class EclipseProjectConfigProvider implements IProjectConfigProvider {
 	
 	def void installProjectConfig(IProject eclipseProject, ResourceSet resourceSet) {
 		val config = createProjectConfig(eclipseProject)
-		new ProjectConfigAdapter(config).attachToEmfObject(resourceSet)
+		ProjectConfigAdapter.install(resourceSet, config)
 	}
 	
 	def createProjectConfig(IProject eclipseProject) {
