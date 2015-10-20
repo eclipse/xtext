@@ -10,6 +10,9 @@ package org.eclipse.xtext.xtext.generator.model.project;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
 public interface IWebProjectConfig extends ISubProjectConfig {
   public abstract IXtextGeneratorFileSystemAccess getAssets();

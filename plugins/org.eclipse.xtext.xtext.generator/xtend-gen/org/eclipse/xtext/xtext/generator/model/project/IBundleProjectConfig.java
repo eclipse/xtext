@@ -11,6 +11,9 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
 public interface IBundleProjectConfig extends ISubProjectConfig {
   public abstract ManifestAccess getManifest();

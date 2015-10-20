@@ -12,6 +12,9 @@ import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
+/**
+ * @noextend
+ */
 class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjectConfig {
 	@Accessors(PUBLIC_GETTER)
 	String ecoreModelPath

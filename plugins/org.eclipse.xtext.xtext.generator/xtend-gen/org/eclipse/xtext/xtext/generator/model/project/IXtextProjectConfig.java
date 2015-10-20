@@ -14,6 +14,9 @@ import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
 public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
   public abstract IRuntimeProjectConfig getRuntime();

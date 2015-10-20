@@ -39,6 +39,9 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
+/**
+ * @noextend
+ */
 @Log
 class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {
 	

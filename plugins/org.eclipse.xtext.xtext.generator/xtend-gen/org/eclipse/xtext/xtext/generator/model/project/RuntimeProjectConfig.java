@@ -18,6 +18,9 @@ import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @SuppressWarnings("all")
 public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjectConfig {
   @Accessors(AccessorType.PUBLIC_GETTER)

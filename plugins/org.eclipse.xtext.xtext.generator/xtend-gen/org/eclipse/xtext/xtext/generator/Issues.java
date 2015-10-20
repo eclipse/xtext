@@ -7,6 +7,9 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+/**
+ * @noreference
+ */
 @SuppressWarnings("all")
 public interface Issues {
   public abstract void addError(final String message);

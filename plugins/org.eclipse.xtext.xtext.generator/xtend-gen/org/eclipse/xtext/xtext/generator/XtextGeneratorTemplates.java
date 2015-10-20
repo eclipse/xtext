@@ -50,6 +50,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
 
+/**
+ * @noreference
+ */
 @Singleton
 @SuppressWarnings("all")
 public class XtextGeneratorTemplates {

@@ -7,17 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model.project
 
+import java.util.List
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
 /**
  * @noimplement
  */
-interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
-	def boolean isEnabled()
-	def String getName()
-	def IXtextGeneratorFileSystemAccess getRoot()
-	def IXtextGeneratorFileSystemAccess getMetaInf()
-	def IXtextGeneratorFileSystemAccess getSrc()
-	def IXtextGeneratorFileSystemAccess getSrcGen()
+interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
+	def IRuntimeProjectConfig getRuntime()
+	def IBundleProjectConfig getRuntimeTest()
+	def IBundleProjectConfig getGenericIde()
+	def IBundleProjectConfig getEclipsePlugin()
+	def IBundleProjectConfig getEclipsePluginTest()
+	def ISubProjectConfig getIdeaPlugin()
+	def IWebProjectConfig getWeb()
+	def List<? extends ISubProjectConfig> getEnabledProjects()
+	def List<? extends ISubProjectConfig> getTestProjects()
 }

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+/**
+ * @noreference
+ */
 interface Issues {
 	def void addError(String message)
 	def void addError(String message, Object source)

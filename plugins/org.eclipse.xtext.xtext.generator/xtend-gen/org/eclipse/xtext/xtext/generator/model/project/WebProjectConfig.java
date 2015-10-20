@@ -17,6 +17,9 @@ import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @SuppressWarnings("all")
 public class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {
   @Accessors(AccessorType.PUBLIC_GETTER)

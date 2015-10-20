@@ -63,6 +63,9 @@ import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @Log
 @SuppressWarnings("all")
 public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {

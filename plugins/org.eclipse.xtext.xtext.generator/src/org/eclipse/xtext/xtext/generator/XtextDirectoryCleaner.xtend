@@ -15,6 +15,9 @@ import org.eclipse.emf.mwe.utils.DirectoryCleaner
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
+/**
+ * @noextend
+ */
 class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
 	@Inject IXtextProjectConfig config
 

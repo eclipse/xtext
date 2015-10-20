@@ -28,6 +28,9 @@ import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.WebProjectConfig;
 
+/**
+ * @noextend
+ */
 @Accessors
 @SuppressWarnings("all")
 public class XtextProjectConfig implements IXtextProjectConfig {

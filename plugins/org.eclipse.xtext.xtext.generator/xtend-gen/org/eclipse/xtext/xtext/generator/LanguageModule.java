@@ -21,7 +21,7 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class LanguageModule extends AbstractGenericModule {
+class LanguageModule extends AbstractGenericModule {
   private final XtextGeneratorLanguage language;
   
   public void configureLanguage(final Binder binder) {

@@ -13,6 +13,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
+/**
+ * @noextend
+ */
 class SubProjectConfig implements ISubProjectConfig {
 	@Inject
 	@Accessors(PUBLIC_GETTER)

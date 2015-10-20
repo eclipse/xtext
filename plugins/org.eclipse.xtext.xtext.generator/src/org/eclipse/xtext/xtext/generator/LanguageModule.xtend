@@ -14,7 +14,7 @@ import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.xtext.RuleNames
 
 @FinalFieldsConstructor
-class LanguageModule extends AbstractGenericModule {
+package class LanguageModule extends AbstractGenericModule {
 	
 	val XtextGeneratorLanguage language
 	

@@ -39,7 +39,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
  * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
  * instances as well as with some properties declared via setter or adder methods.
  * 
- * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
+ * @noextend
  */
  //TODO make Generator independent of mwe and add a thin wrapper (GeneratorComponent)
  //TODO only implement mwe2.IWorkflowComponent, get rid of "Issues", just logging/exceptions?

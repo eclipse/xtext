@@ -12,6 +12,7 @@ import org.eclipse.xtext.xtext.generator.Issues;
 
 /**
  * A fragment that contributes to the {@link XtextGenerator}.
+ * @noimplement
  */
 @SuppressWarnings("all")
 public interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {

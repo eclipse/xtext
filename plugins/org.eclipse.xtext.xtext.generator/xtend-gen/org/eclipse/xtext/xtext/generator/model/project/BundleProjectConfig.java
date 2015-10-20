@@ -17,6 +17,9 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 
+/**
+ * @noextend
+ */
 @Accessors
 @SuppressWarnings("all")
 public class BundleProjectConfig extends SubProjectConfig implements IBundleProjectConfig {

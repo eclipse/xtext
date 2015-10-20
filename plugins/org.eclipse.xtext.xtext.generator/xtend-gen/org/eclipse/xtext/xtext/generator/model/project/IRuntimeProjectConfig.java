@@ -10,6 +10,9 @@ package org.eclipse.xtext.xtext.generator.model.project;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
 public interface IRuntimeProjectConfig extends IBundleProjectConfig {
   public abstract IXtextGeneratorFileSystemAccess getEcoreModel();

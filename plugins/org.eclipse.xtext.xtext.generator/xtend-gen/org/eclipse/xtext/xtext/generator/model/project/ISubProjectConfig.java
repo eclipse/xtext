@@ -10,6 +10,9 @@ package org.eclipse.xtext.xtext.generator.model.project;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
 public interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
   public abstract boolean isEnabled();

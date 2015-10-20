@@ -13,12 +13,9 @@ import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
-/**
- * @since 2.9
- */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class NamingAdapter extends XtextGeneratorNaming {
+class NamingAdapter extends XtextGeneratorNaming {
   private final Naming naming;
   
   @Override

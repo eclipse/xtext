@@ -10,8 +10,11 @@ package org.eclipse.xtext.xtext.generator
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
+/**
+ * @noreference
+ */
 @FinalFieldsConstructor
-package class MweIssues implements Issues {
+class MweIssues implements Issues {
 	
 	@Accessors val XtextGenerator owner
 	@Accessors val org.eclipse.emf.mwe.core.issues.Issues delegate

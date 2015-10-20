@@ -10,6 +10,9 @@ package org.eclipse.xtext.xtext.generator.model.project
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
+/**
+ * @noimplement
+ */
 interface IBundleProjectConfig extends ISubProjectConfig {
 	def ManifestAccess getManifest()
 	def PluginXmlAccess getPluginXml()

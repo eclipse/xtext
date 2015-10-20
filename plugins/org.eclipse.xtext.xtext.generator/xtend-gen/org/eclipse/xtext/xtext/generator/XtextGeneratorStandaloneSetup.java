@@ -27,6 +27,9 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @Log
 @SuppressWarnings("all")
 public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
