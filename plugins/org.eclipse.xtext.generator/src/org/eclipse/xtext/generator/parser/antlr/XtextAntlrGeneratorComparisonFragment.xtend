@@ -79,7 +79,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			this.tmpFolder = tmpFolder
 		}
 
-		override handleUnexpectedCharSequence(String absoluteGrammarFileName, int lineNo) {
+		override handleInvalidGrammarFile(String absoluteGrammarFileName, int lineNo) {
 			deleteDir(tmpFolder)
 			
 			throw new RuntimeException('''

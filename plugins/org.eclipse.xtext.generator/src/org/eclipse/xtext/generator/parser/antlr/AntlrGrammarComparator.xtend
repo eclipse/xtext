@@ -38,13 +38,13 @@ class AntlrGrammarComparator {
 		
 		private def void handleUnexpectedCharSequence(int lineCount) {
 			if (treatingReferenceGrammar) {
-				handleUnexpectedCharSequence(absoluteGrammarFileNameReference, lineNumberReference + lineCount)
+				handleInvalidGrammarFile(absoluteGrammarFileNameReference, lineNumberReference + lineCount)
 			} else {				
-				handleUnexpectedCharSequence(absoluteGrammarFileName, lineNumber + lineCount)
+				handleInvalidGrammarFile(absoluteGrammarFileName, lineNumber + lineCount)
 			}
 		}
 		
-		def void handleUnexpectedCharSequence(String absoluteGrammarFileName, int lineNo);
+		def void handleInvalidGrammarFile(String absoluteGrammarFileName, int lineNo);
 		
 		def void handleMismatch(String match, String matchReference);
 	}
