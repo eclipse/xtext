@@ -11,18 +11,18 @@ import com.google.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.typeRef
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * @author Christian Schneider - Initial contribution and API
  */
-class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
+class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject CodeConfig codeConfig
 	@Inject FileAccessFactory fileAccessFactory

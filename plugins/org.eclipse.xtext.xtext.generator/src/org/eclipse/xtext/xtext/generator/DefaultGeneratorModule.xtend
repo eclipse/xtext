@@ -10,14 +10,21 @@ package org.eclipse.xtext.xtext.generator
 import com.google.inject.Binder
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig
 
+/**
+ * @noextend
+ */
 class DefaultGeneratorModule extends AbstractGenericModule {
 	
 	@Accessors
-	XtextProjectConfig project = new WizardConfig
+	XtextProjectConfig project = new StandardProjectConfig
 	
 	@Accessors
 	CodeConfig code = new CodeConfig
@@ -36,6 +43,10 @@ class DefaultGeneratorModule extends AbstractGenericModule {
 	
 	def void configureResourceSet(Binder binder) {
 		binder.bind(ResourceSet).to(XtextResourceSet)
+	}
+	
+	def void configureLineSeparatorInformation(Binder binder) {
+		binder.bind(ILineSeparatorInformation).toInstance[code.lineDelimiter]
 	}
 	
 	def void configureIEncodingProvider(Binder binder) {

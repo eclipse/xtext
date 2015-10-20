@@ -7,41 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Inject
 import com.google.inject.Injector
-import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
-/**
- * A composite generator fragment delegates to its contained fragments.
- */
-class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
+abstract class AbstractXtextGeneratorFragment implements IXtextGeneratorFragment {
 	
 	@Accessors(PROTECTED_GETTER)
-	val List<IGeneratorFragment2> fragments = newArrayList
+	@Inject IXtextProjectConfig projectConfig
 	
-	def void addFragment(IGeneratorFragment2 fragment) {
-		if (fragment === this)
-			throw new IllegalArgumentException
-		this.fragments.add(fragment)
-	}
+	@Accessors(PROTECTED_GETTER)
+	@Inject IXtextGeneratorLanguage language
+	
+	@Accessors(PROTECTED_GETTER)
+	@Inject Grammar grammar
 	
 	override checkConfiguration(Issues issues) {
-		for (fragment : fragments) {
-			fragment.checkConfiguration(issues)
-		}
 	}
 	
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
-		for (fragment : fragments) {
-			fragment.initialize(injector)
-		}
-	}
-	
-	override generate() {
-		for (fragment : fragments) {
-			fragment.generate()
-		}
 	}
 	
 }

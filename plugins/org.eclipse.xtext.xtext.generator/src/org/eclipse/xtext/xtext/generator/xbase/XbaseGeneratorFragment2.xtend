@@ -15,7 +15,6 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -23,8 +22,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
+class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Accessors(PUBLIC_SETTER)
 	boolean generateXtendInferrer = true

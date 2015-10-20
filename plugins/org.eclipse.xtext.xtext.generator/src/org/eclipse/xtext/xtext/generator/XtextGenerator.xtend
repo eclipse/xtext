@@ -32,12 +32,14 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
- * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment2}
+ * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
  * instances as well as with some properties declared via setter or adder methods.
  * 
- * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
+ * @noextend
  */
  //TODO make Generator independent of mwe and add a thin wrapper (GeneratorComponent)
  //TODO only implement mwe2.IWorkflowComponent, get rid of "Issues", just logging/exceptions?
@@ -48,7 +50,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	DefaultGeneratorModule configuration = new DefaultGeneratorModule
 	
 	@Accessors
-	val List<LanguageConfig2> languageConfigs = newArrayList
+	val List<XtextGeneratorLanguage> languageConfigs = newArrayList
 	
 	@Accessors
 	XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner
@@ -71,7 +73,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	/**
 	 * Add a language configuration to be included in the code generation process.
 	 */
-	def void addLanguage(LanguageConfig2 language) {
+	def void addLanguage(XtextGeneratorLanguage language) {
 		this.languageConfigs.add(language)
 	}
 	
@@ -115,7 +117,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		Guice.createInjector(configuration)
 	}
 	
-	protected def Injector createLanguageInjector(Injector parent, LanguageConfig2 language) {
+	protected def Injector createLanguageInjector(Injector parent, XtextGeneratorLanguage language) {
 		parent.createChildInjector(new LanguageModule(language))
 	}
 	
@@ -135,13 +137,13 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		generateActivator
 	}
 	
-	protected def generateSetups(ILanguageConfig language) {
+	protected def generateSetups(IXtextGeneratorLanguage language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtime.srcGen)
 		templates.createRuntimeSetup(language).writeTo(projectConfig.runtime.src)
 		templates.createWebSetup(language).writeTo(projectConfig.web.src)
 	}
 	
-	protected def generateModules(ILanguageConfig language) {
+	protected def generateModules(IXtextGeneratorLanguage language) {
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtime.srcGen)
 		templates.createRuntimeModule(language).writeTo(projectConfig.runtime.src)
 		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePlugin.srcGen)
@@ -152,7 +154,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		templates.createWebModule(language).writeTo(projectConfig.web.src)
 	}
 	
-	protected def generateExecutableExtensionFactory(ILanguageConfig language) {
+	protected def generateExecutableExtensionFactory(IXtextGeneratorLanguage language) {
 		if (projectConfig.eclipsePlugin.srcGen !== null)
 			templates.createEclipsePluginExecutableExtensionFactory(language, languageConfigs.head).writeTo(projectConfig.eclipsePlugin.srcGen)
 	}

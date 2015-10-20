@@ -34,8 +34,7 @@ public class EclipseProjectConfigProvider implements IProjectConfigProvider {
   
   public void installProjectConfig(final IProject eclipseProject, final ResourceSet resourceSet) {
     final EclipseProjectConfig config = this.createProjectConfig(eclipseProject);
-    ProjectConfigAdapter _projectConfigAdapter = new ProjectConfigAdapter(config);
-    _projectConfigAdapter.attachToEmfObject(resourceSet);
+    ProjectConfigAdapter.install(resourceSet, config);
   }
   
   public EclipseProjectConfig createProjectConfig(final IProject eclipseProject) {

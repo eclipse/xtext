@@ -13,8 +13,11 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
-public interface ILanguageConfig {
+public interface IXtextGeneratorLanguage {
   public abstract Grammar getGrammar();
   
   public abstract List<String> getFileExtensions();

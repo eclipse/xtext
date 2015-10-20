@@ -5,12 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.model.project;
 
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 
+/**
+ * @noimplement
+ */
 @SuppressWarnings("all")
 public interface IBundleProjectConfig extends ISubProjectConfig {
   public abstract ManifestAccess getManifest();

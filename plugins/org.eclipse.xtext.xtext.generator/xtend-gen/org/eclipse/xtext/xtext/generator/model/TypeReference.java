@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @Accessors
@@ -40,17 +40,17 @@ public class TypeReference {
     return new TypeReference(clazz, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
-  public static TypeReference typeRef(final EClass clazz, final ILanguageConfig language) {
+  public static TypeReference typeRef(final EClass clazz, final IXtextGeneratorLanguage language) {
     ResourceSet _resourceSet = language.getResourceSet();
     return new TypeReference(clazz, _resourceSet);
   }
   
-  public static TypeReference typeRef(final EPackage epackage, final ILanguageConfig language) {
+  public static TypeReference typeRef(final EPackage epackage, final IXtextGeneratorLanguage language) {
     ResourceSet _resourceSet = language.getResourceSet();
     return new TypeReference(epackage, _resourceSet);
   }
   
-  private final static Pattern PACKAGE_MATCHER = Pattern.compile("[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*");
+  private final static Pattern PACKAGE_MATCHER = Pattern.compile("([a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*)?");
   
   private final static Pattern CLASS_MATCHER = Pattern.compile("[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*");
   
@@ -180,7 +180,7 @@ public class TypeReference {
         }
       }
     }
-    return null;
+    return "";
   }
   
   private static String getClassName(final String qualifiedName) {
@@ -198,7 +198,7 @@ public class TypeReference {
         }
       }
     }
-    return null;
+    return qualifiedName;
   }
   
   private static String getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {

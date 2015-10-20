@@ -11,6 +11,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+/**
+ * @noreference
+ */
 @SuppressWarnings("all")
 public class XtextGeneratorNaming {
   public String getRuntimeBasePackage(final Grammar grammar) {

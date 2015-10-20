@@ -16,8 +16,8 @@ import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
@@ -48,11 +48,12 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @noextend
  */
 @Accessors(AccessorType.PUBLIC_SETTER)
 @Log
 @SuppressWarnings("all")
-public class StandardLanguage extends LanguageConfig2 {
+public class StandardLanguage extends XtextGeneratorLanguage {
   private GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2();
   
   private SerializerFragment2 serializer = new SerializerFragment2();
@@ -160,82 +161,82 @@ public class StandardLanguage extends LanguageConfig2 {
   
   protected void prependStandardFragments() {
     int i = 0;
-    List<IGeneratorFragment2> _fragments = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments = this.getFragments();
     int _plusPlus = i++;
     _fragments.add(_plusPlus, this.grammarAccess);
-    List<IGeneratorFragment2> _fragments_1 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_1 = this.getFragments();
     int _plusPlus_1 = i++;
     _fragments_1.add(_plusPlus_1, this.emfGenerator);
-    List<IGeneratorFragment2> _fragments_2 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_2 = this.getFragments();
     int _plusPlus_2 = i++;
     _fragments_2.add(_plusPlus_2, this.resourceFactoryFragment);
-    List<IGeneratorFragment2> _fragments_3 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_3 = this.getFragments();
     int _plusPlus_3 = i++;
     _fragments_3.add(_plusPlus_3, this.serializer);
-    List<IGeneratorFragment2> _fragments_4 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_4 = this.getFragments();
     int _plusPlus_4 = i++;
     _fragments_4.add(_plusPlus_4, this.parserGenerator);
-    List<IGeneratorFragment2> _fragments_5 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_5 = this.getFragments();
     int _plusPlus_5 = i++;
     _fragments_5.add(_plusPlus_5, this.validator);
-    List<IGeneratorFragment2> _fragments_6 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_6 = this.getFragments();
     int _plusPlus_6 = i++;
     _fragments_6.add(_plusPlus_6, this.formatter);
-    List<IGeneratorFragment2> _fragments_7 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_7 = this.getFragments();
     int _plusPlus_7 = i++;
     _fragments_7.add(_plusPlus_7, this.generator);
-    List<IGeneratorFragment2> _fragments_8 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_8 = this.getFragments();
     int _plusPlus_8 = i++;
     _fragments_8.add(_plusPlus_8, this.builder);
-    List<IGeneratorFragment2> _fragments_9 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_9 = this.getFragments();
     int _plusPlus_9 = i++;
     _fragments_9.add(_plusPlus_9, this.scopeProvider);
-    List<IGeneratorFragment2> _fragments_10 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_10 = this.getFragments();
     int _plusPlus_10 = i++;
     _fragments_10.add(_plusPlus_10, this.qualifiedNamesProvider);
-    List<IGeneratorFragment2> _fragments_11 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_11 = this.getFragments();
     int _plusPlus_11 = i++;
     _fragments_11.add(_plusPlus_11, this.commonTypesSupport);
-    List<IGeneratorFragment2> _fragments_12 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_12 = this.getFragments();
     int _plusPlus_12 = i++;
     _fragments_12.add(_plusPlus_12, this.xtypeSupport);
-    List<IGeneratorFragment2> _fragments_13 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_13 = this.getFragments();
     int _plusPlus_13 = i++;
     _fragments_13.add(_plusPlus_13, this.xbaseSupport);
-    List<IGeneratorFragment2> _fragments_14 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_14 = this.getFragments();
     int _plusPlus_14 = i++;
     _fragments_14.add(_plusPlus_14, this.junitSupport);
-    List<IGeneratorFragment2> _fragments_15 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_15 = this.getFragments();
     int _plusPlus_15 = i++;
     _fragments_15.add(_plusPlus_15, this.quickFixProvider);
-    List<IGeneratorFragment2> _fragments_16 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_16 = this.getFragments();
     int _plusPlus_16 = i++;
     _fragments_16.add(_plusPlus_16, this.labelProvider);
-    List<IGeneratorFragment2> _fragments_17 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_17 = this.getFragments();
     int _plusPlus_17 = i++;
     _fragments_17.add(_plusPlus_17, this.outline);
-    List<IGeneratorFragment2> _fragments_18 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_18 = this.getFragments();
     int _plusPlus_18 = i++;
     _fragments_18.add(_plusPlus_18, this.quickOutline);
-    List<IGeneratorFragment2> _fragments_19 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_19 = this.getFragments();
     int _plusPlus_19 = i++;
     _fragments_19.add(_plusPlus_19, this.compareEditor);
-    List<IGeneratorFragment2> _fragments_20 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_20 = this.getFragments();
     int _plusPlus_20 = i++;
     _fragments_20.add(_plusPlus_20, this.contentAssist);
-    List<IGeneratorFragment2> _fragments_21 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_21 = this.getFragments();
     int _plusPlus_21 = i++;
     _fragments_21.add(_plusPlus_21, this.renameRefactoring);
-    List<IGeneratorFragment2> _fragments_22 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_22 = this.getFragments();
     int _plusPlus_22 = i++;
     _fragments_22.add(_plusPlus_22, this.codeTemplates);
-    List<IGeneratorFragment2> _fragments_23 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_23 = this.getFragments();
     int _plusPlus_23 = i++;
     _fragments_23.add(_plusPlus_23, this.ideaParser);
-    List<IGeneratorFragment2> _fragments_24 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_24 = this.getFragments();
     int _plusPlus_24 = i++;
     _fragments_24.add(_plusPlus_24, this.ideaPlugin);
-    List<IGeneratorFragment2> _fragments_25 = this.getFragments();
+    List<IXtextGeneratorFragment> _fragments_25 = this.getFragments();
     int _plusPlus_25 = i++;
     _fragments_25.add(_plusPlus_25, this.webSupport);
   }

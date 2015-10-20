@@ -5,29 +5,30 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator
+package org.eclipse.xtext.xtext.generator.model.project
 
-import com.google.inject.Inject
 import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 
-abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
+/**
+ * @noextend
+ */
+class WebProjectConfig extends SubProjectConfig implements IWebProjectConfig {
+	@Accessors(PUBLIC_GETTER)
+	String assetsPath
+	@Accessors(PUBLIC_GETTER)
+	IXtextGeneratorFileSystemAccess assets
 	
-	@Accessors(PROTECTED_GETTER)
-	@Inject IXtextProjectConfig projectConfig
-	
-	@Accessors(PROTECTED_GETTER)
-	@Inject ILanguageConfig language
-	
-	@Accessors(PROTECTED_GETTER)
-	@Inject Grammar grammar
-	
-	override checkConfiguration(Issues issues) {
+	def void setAssets(String path) {
+		assetsPath = path
 	}
 	
 	override initialize(Injector injector) {
-		injector.injectMembers(this)
+		super.initialize(injector)
+		if (assetsPath !== null) {
+			assets = owner.newFileSystemAccess(assetsPath, true)
+			assets.initialize(injector)
+		}
 	}
-	
 }

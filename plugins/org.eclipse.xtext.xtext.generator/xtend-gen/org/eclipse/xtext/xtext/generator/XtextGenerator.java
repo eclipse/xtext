@@ -48,19 +48,13 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
-import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.LanguageModule;
 import org.eclipse.xtext.xtext.generator.MweIssues;
 import org.eclipse.xtext.xtext.generator.XtextDirectoryCleaner;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
@@ -69,12 +63,18 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
- * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment2}
+ * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
  * instances as well as with some properties declared via setter or adder methods.
  * 
- * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
+ * @noextend
  */
 @Log
 @SuppressWarnings("all")
@@ -83,7 +83,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   private DefaultGeneratorModule configuration = new DefaultGeneratorModule();
   
   @Accessors
-  private final List<LanguageConfig2> languageConfigs = CollectionLiterals.<LanguageConfig2>newArrayList();
+  private final List<XtextGeneratorLanguage> languageConfigs = CollectionLiterals.<XtextGeneratorLanguage>newArrayList();
   
   @Accessors
   private XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner();
@@ -110,7 +110,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   /**
    * Add a language configuration to be included in the code generation process.
    */
-  public void addLanguage(final LanguageConfig2 language) {
+  public void addLanguage(final XtextGeneratorLanguage language) {
     this.languageConfigs.add(language);
   }
   
@@ -120,7 +120,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     final MweIssues generatorIssues = new MweIssues(this, issues);
     this.configuration.checkConfiguration(generatorIssues);
     final HashMap<String, Grammar> uris = new HashMap<String, Grammar>();
-    for (final LanguageConfig2 language : this.languageConfigs) {
+    for (final XtextGeneratorLanguage language : this.languageConfigs) {
       {
         language.checkConfiguration(generatorIssues);
         Grammar _grammar = language.getGrammar();
@@ -169,7 +169,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       this.projectConfig.initialize(this.injector);
       this.cleaner.initialize(this.injector);
       this.standaloneSetup.initialize(this.injector);
-      for (final LanguageConfig2 language : this.languageConfigs) {
+      for (final XtextGeneratorLanguage language : this.languageConfigs) {
         {
           final Injector languageInjector = this.createLanguageInjector(this.injector, language);
           language.initialize(languageInjector);
@@ -182,7 +182,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     return Guice.createInjector(this.configuration);
   }
   
-  protected Injector createLanguageInjector(final Injector parent, final LanguageConfig2 language) {
+  protected Injector createLanguageInjector(final Injector parent, final XtextGeneratorLanguage language) {
     LanguageModule _languageModule = new LanguageModule(language);
     return parent.createChildInjector(_languageModule);
   }
@@ -191,7 +191,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   protected void invokeInternal(final WorkflowContext ctx, final ProgressMonitor monitor, final Issues issues) {
     this.initialize();
     this.cleaner.clean();
-    for (final LanguageConfig2 language : this.languageConfigs) {
+    for (final XtextGeneratorLanguage language : this.languageConfigs) {
       {
         Grammar _grammar = language.getGrammar();
         String _name = _grammar.getName();
@@ -209,7 +209,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     this.generateActivator();
   }
   
-  protected void generateSetups(final ILanguageConfig language) {
+  protected void generateSetups(final IXtextGeneratorLanguage language) {
     JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
     IRuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
@@ -224,7 +224,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     _createWebSetup.writeTo(_src_1);
   }
   
-  protected void generateModules(final ILanguageConfig language) {
+  protected void generateModules(final IXtextGeneratorLanguage language) {
     JavaFileAccess _createRuntimeGenModule = this.templates.createRuntimeGenModule(language);
     IRuntimeProjectConfig _runtime = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
@@ -259,12 +259,12 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     _createWebModule.writeTo(_src_3);
   }
   
-  protected void generateExecutableExtensionFactory(final ILanguageConfig language) {
+  protected void generateExecutableExtensionFactory(final IXtextGeneratorLanguage language) {
     IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
     boolean _tripleNotEquals = (_srcGen != null);
     if (_tripleNotEquals) {
-      LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
+      XtextGeneratorLanguage _head = IterableExtensions.<XtextGeneratorLanguage>head(this.languageConfigs);
       JavaFileAccess _createEclipsePluginExecutableExtensionFactory = this.templates.createEclipsePluginExecutableExtensionFactory(language, _head);
       IBundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
       IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_1.getSrcGen();
@@ -325,7 +325,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           ManifestAccess _manifest = _eclipsePlugin.getManifest();
           boolean _tripleEquals_1 = (manifest == _manifest);
           if (_tripleEquals_1) {
-            final LanguageConfig2 firstLanguage = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
+            final XtextGeneratorLanguage firstLanguage = IterableExtensions.<XtextGeneratorLanguage>head(this.languageConfigs);
             TypeReference _eclipsePluginActivator = null;
             if (this.naming!=null) {
               Grammar _grammar = firstLanguage.getGrammar();
@@ -516,7 +516,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   }
   
   @Pure
-  public List<LanguageConfig2> getLanguageConfigs() {
+  public List<XtextGeneratorLanguage> getLanguageConfigs() {
     return this.languageConfigs;
   }
   

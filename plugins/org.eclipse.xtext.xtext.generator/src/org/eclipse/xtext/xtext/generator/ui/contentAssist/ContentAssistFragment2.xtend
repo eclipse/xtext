@@ -19,7 +19,6 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -28,6 +27,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the 'Abstract...ProposalProvider' and '...ProposalProvider' stub,
@@ -35,7 +35,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
+class ContentAssistFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject
 	extension XtextGeneratorNaming

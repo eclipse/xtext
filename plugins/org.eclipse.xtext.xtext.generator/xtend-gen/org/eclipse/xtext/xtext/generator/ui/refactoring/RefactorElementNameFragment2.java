@@ -20,15 +20,15 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 /**
@@ -37,7 +37,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class RefactorElementNameFragment2 extends AbstractGeneratorFragment2 {
+public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -145,7 +145,7 @@ public class RefactorElementNameFragment2 extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory");
       _addTypeToType_6.addTypeToType(_typeRef_16, _typeRef_17);
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     bindings.contributeTo(_eclipsePluginGenModule);
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();

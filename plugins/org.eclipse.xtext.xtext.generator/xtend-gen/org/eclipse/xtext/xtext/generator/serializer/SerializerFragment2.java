@@ -69,11 +69,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -87,6 +85,8 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.serializer.DebugGraphGenerator;
 import org.eclipse.xtext.xtext.generator.serializer.EqualAmbiguousTransitions;
 import org.eclipse.xtext.xtext.generator.serializer.SemanticSequencerExtensions;
@@ -95,7 +95,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
 @SuppressWarnings("all")
-public class SerializerFragment2 extends AbstractGeneratorFragment2 {
+public class SerializerFragment2 extends AbstractXtextGeneratorFragment {
   private static <K extends Object, V extends Object> Map<K, V> toMap(final Iterable<Pair<K, V>> items) {
     LinkedHashMap<K, V> _xblockexpression = null;
     {
@@ -221,7 +221,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     TypeReference _typeRef_2 = TypeReference.typeRef(ISerializer.class);
     TypeReference _typeRef_3 = TypeReference.typeRef(Serializer.class);
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_2, _typeRef_3);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     _addTypeToType_2.contributeTo(_runtimeGenModule);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
@@ -543,7 +543,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     }
     final TypeReference superClazz = _xifexpression_1;
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(clazz);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     ResourceSet _resourceSet = _language.getResourceSet();
     javaFile.setResourceSet(_resourceSet);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -748,7 +748,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
                   EPackage _value_2 = pkg.getValue();
                   _builder.append(_value_2, "\t\t");
                   _builder.append(".");
-                  ILanguageConfig _language = SerializerFragment2.this.getLanguage();
+                  IXtextGeneratorLanguage _language = SerializerFragment2.this.getLanguage();
                   ResourceSet _resourceSet = _language.getResourceSet();
                   String _intLiteral = GenModelUtil2.getIntLiteral(type, _resourceSet);
                   _builder.append(_intLiteral, "\t\t");
@@ -1001,7 +1001,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
   private StringConcatenationClient genMethodSequence(final IGrammarConstraintProvider.IConstraint c) {
     StringConcatenationClient _xblockexpression = null;
     {
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       final ResourceSet rs = _language.getResourceSet();
       StringConcatenationClient _xifexpression = null;
       EClass _type = c.getType();
@@ -1203,7 +1203,7 @@ public class SerializerFragment2 extends AbstractGeneratorFragment2 {
     }
     final TypeReference clazz = _xifexpression;
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(clazz);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     ResourceSet _resourceSet = _language.getResourceSet();
     javaFile.setResourceSet(_resourceSet);
     StringConcatenationClient _client = new StringConcatenationClient() {

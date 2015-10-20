@@ -13,6 +13,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 
+/**
+ * @noreference
+ */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class MweIssues implements Issues {

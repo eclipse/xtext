@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.workspace
 
-import org.eclipse.xtext.util.internal.EmfAdaptable
-import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.internal.EmfAdaptable
 
 @EmfAdaptable
-@Data
+@Accessors
 class ProjectConfigAdapter {
-	IProjectConfig projectConfig
+	val IProjectConfig projectConfig
+	
+	protected new (IProjectConfig projectConfig) {
+		this.projectConfig = projectConfig
+	}
 	
 	def static void install(ResourceSet resourceSet, IProjectConfig config) {
 		new ProjectConfigAdapter(config).attachToEmfObject(resourceSet)

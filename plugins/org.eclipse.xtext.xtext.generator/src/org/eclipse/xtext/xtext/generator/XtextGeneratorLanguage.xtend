@@ -13,6 +13,7 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Module
 import com.google.inject.Provider
+import java.io.File
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
@@ -36,10 +37,13 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
-import java.io.File
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
+/**
+ * @noextend
+ */
 @Log
-class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
+class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {
 	
 	String grammarUri
 	
@@ -78,6 +82,9 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	@Accessors
 	val webGenModule = new GuiceModuleAccess
 	
+	@Accessors(PROTECTED_GETTER)
+	val List<IXtextGeneratorFragment> fragments = newArrayList
+	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Inject IXtextProjectConfig projectConfig
@@ -106,9 +113,27 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 		return fileExtensions
 	}
 	
+	def void addFragment(IXtextGeneratorFragment fragment) {
+		if (fragment === this)
+			throw new IllegalArgumentException
+		this.fragments.add(fragment)
+	}
+	
+	override checkConfiguration(Issues issues) {
+		for (fragment : fragments) {
+			fragment.checkConfiguration(issues)
+		}
+	}
+	
+	override generate() {
+		for (fragment : fragments) {
+			fragment.generate()
+		}
+	}
+	
 	override initialize(Injector injector) {
 		fragments.add(0, new ImplicitFragment)
-		injector.injectMembers(this)
+		injector.injectMembers(XtextGeneratorLanguage)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
 		standaloneSetup.initialize(injector)
@@ -118,9 +143,9 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 			for (var i = 0, var size = resourceSet.resources.size; i < size; i++) {
 				val res = resourceSet.resources.get(i)
 				if (res.getContents().isEmpty())
-					LOG.error("Error loading '" + res.getURI() + "'")
+					XtextGeneratorLanguage.LOG.error("Error loading '" + res.getURI() + "'")
 				else if (!res.getErrors().isEmpty())
-					LOG.error("Error loading '" + res.getURI() + "':\n" + Joiner.on('\n').join(res.getErrors()))	
+					XtextGeneratorLanguage.LOG.error("Error loading '" + res.getURI() + "':\n" + Joiner.on('\n').join(res.getErrors()))	
 			}
 			EcoreUtil.resolveAll(resourceSet)
 		}
@@ -132,7 +157,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 			throw new IllegalArgumentException("Couldn't load grammar for '" + getGrammarUri + "'.")
 		}
 		if (!resource.errors.isEmpty) {
-			LOG.error(resource.errors)
+			XtextGeneratorLanguage.LOG.error(resource.errors)
 			throw new IllegalStateException("Problem parsing '" + getGrammarUri + "':\n" + Joiner.on('\n').join(resource.getErrors()))
 		}
 
