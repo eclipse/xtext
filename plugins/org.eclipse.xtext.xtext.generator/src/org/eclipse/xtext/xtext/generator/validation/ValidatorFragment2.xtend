@@ -101,8 +101,6 @@ class ValidatorFragment2 extends AbstractXtextGeneratorFragment {
 	
 	protected def generateXtendValidatorStub() {
 		fileAccessFactory.createXtendFile(grammar.validatorClass, '''
-			//import org.eclipse.xtext.validation.Check
-			
 			/**
 			 * This class contains custom validation rules. 
 			 *
@@ -127,8 +125,6 @@ class ValidatorFragment2 extends AbstractXtextGeneratorFragment {
 	
 	protected def generateJavaValidatorStub() {
 		fileAccessFactory.createJavaFile(grammar.validatorClass, '''
-			//import org.eclipse.xtext.validation.Check;
-			
 			/**
 			 * This class contains custom validation rules. 
 			 *
