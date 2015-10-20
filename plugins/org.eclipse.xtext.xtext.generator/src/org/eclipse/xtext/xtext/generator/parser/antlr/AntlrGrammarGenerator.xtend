@@ -105,7 +105,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	}
 	
 	protected override dispatch compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		«IF !it.isFragment»
+		«IF isValidEntryRule()»
 			«compileEntryRule(grammar, options)»
 		«ENDIF»
 		
@@ -116,8 +116,8 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		// Entry rule «originalElement.entryRuleName»
 		«originalElement.entryRuleName» returns «compileEntryReturns(options)»«compileEntryInit(options)»:
 			{ «newCompositeNode» }
-			iv_«originalElement.ruleName»=«originalElement.ruleName»«defaultArgumentList»
-			{ $current=$iv_«originalElement.ruleName».current«IF originalElement.datatypeRule».getText()«ENDIF»; }
+			iv_«originalElement.ruleName»=«ruleName»«defaultArgumentList»
+			{ $current=$iv_«ruleName».current«IF originalElement.datatypeRule».getText()«ENDIF»; }
 			EOF;
 		«compileEntryFinally(options)»
 	'''
@@ -145,7 +145,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	protected def compileReturns(AbstractRule it, AntlrOptions options) {
 		switch it {
 			EnumRule:
-				'returns [Enumerator current=null]'
+				'[Enumerator current=null]'
 			ParserRule case originalElement.datatypeRule:
 				'[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]'
 			ParserRule case originalElement.isEObjectFragmentRule:
@@ -244,6 +244,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		else '''
 			«localVar»=«super._ebnf2(it, options, supportActions)»
 			{
+				$current = grammarAccess.«grammarElementAccess(originalElement)».getEnumLiteral().getInstance();
 				«newLeafNode(localVar)»
 			}
 		'''
@@ -265,11 +266,6 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					}
 					«ENDIF»
 					{
-						«IF isEObjectFragmentRuleCall»
-							if ($current==null) {
-								$current = «it.createModelElement»;
-							}
-						«ENDIF»
 						«newCompositeNode»
 					}
 					«super._ebnf2(it, options, supportActions)»
@@ -284,6 +280,11 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					}
 					«ENDIF»
 					{
+						«IF isEObjectFragmentRuleCall»
+							if ($current==null) {
+								$current = «it.createModelElement»;
+							}
+						«ENDIF»
 						«newCompositeNode»
 					}
 					«localVar»=«super._ebnf2(it, options, supportActions)»
@@ -311,13 +312,13 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					{
 						«ref.newCompositeNode»
 					}
-					«originalElement.ruleName»«call.getArgumentList(isPassCurrentIntoFragment, !supportActions)»
+					«ruleName»«call.getArgumentList(isPassCurrentIntoFragment, !supportActions)»
 					{
 						afterParserOrEnumRuleCall();
 					}
 				'''
 				TerminalRule: '''
-					«ref.containingAssignment.localVar»=«originalElement.ruleName»
+					«ref.containingAssignment.localVar»=«ruleName»
 					{
 						«ref.newLeafNode(ref.containingAssignment.localVar)»
 					}
