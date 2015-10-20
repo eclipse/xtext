@@ -15,7 +15,7 @@ import org.eclipse.xtext.xtext.generator.XtextGenerator;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class MweIssues implements Issues {
+class MweIssues implements Issues {
   @Accessors
   private final XtextGenerator owner;
   
