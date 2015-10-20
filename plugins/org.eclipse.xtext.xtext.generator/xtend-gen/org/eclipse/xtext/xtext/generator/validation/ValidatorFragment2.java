@@ -47,9 +47,14 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
+import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
 @SuppressWarnings("all")
 public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
+  @Inject
+  @Extension
+  private ValidatorNaming _validatorNaming;
+  
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -78,27 +83,6 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
     this.composedChecks.add(composedCheckValidator);
   }
   
-  /**
-   * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
-   */
-  public TypeReference getValidatorClass(final Grammar grammar) {
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
-    String _plus = (_runtimeBasePackage + ".validation.");
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus_1 = (_plus + _simpleName);
-    String _plus_2 = (_plus_1 + "Validator");
-    return new TypeReference(_plus_2);
-  }
-  
-  protected TypeReference getAbstractValidatorClass(final Grammar grammar) {
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
-    String _plus = (_runtimeBasePackage + ".validation.Abstract");
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus_1 = (_plus + _simpleName);
-    String _plus_2 = (_plus_1 + "Validator");
-    return new TypeReference(_plus_2);
-  }
-  
   protected TypeReference getValidatorSuperClass(final Grammar grammar) {
     TypeReference _xblockexpression = null;
     {
@@ -111,7 +95,7 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _and = (superGrammar != null);
       }
       if (_and) {
-        _xifexpression = this.getValidatorClass(superGrammar);
+        _xifexpression = this._validatorNaming.getValidatorClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultValidatorSuperClass();
       }
@@ -129,15 +113,15 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     if (this.generateStub) {
       Grammar _grammar = this.getGrammar();
-      TypeReference _validatorClass = this.getValidatorClass(_grammar);
+      TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
       Grammar _grammar_1 = this.getGrammar();
-      TypeReference _validatorClass_1 = this.getValidatorClass(_grammar_1);
+      TypeReference _validatorClass_1 = this._validatorNaming.getValidatorClass(_grammar_1);
       bindingFactory.addTypeToTypeEagerSingleton(_validatorClass, _validatorClass_1);
     } else {
       Grammar _grammar_2 = this.getGrammar();
-      TypeReference _abstractValidatorClass = this.getAbstractValidatorClass(_grammar_2);
+      TypeReference _abstractValidatorClass = this._validatorNaming.getAbstractValidatorClass(_grammar_2);
       Grammar _grammar_3 = this.getGrammar();
-      TypeReference _abstractValidatorClass_1 = this.getAbstractValidatorClass(_grammar_3);
+      TypeReference _abstractValidatorClass_1 = this._validatorNaming.getAbstractValidatorClass(_grammar_3);
       bindingFactory.addTypeToTypeEagerSingleton(_abstractValidatorClass, _abstractValidatorClass_1);
     }
     ILanguageConfig _language = this.getLanguage();
@@ -162,7 +146,7 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
       Set<String> _exportedPackages = _manifest_1.getExportedPackages();
       Grammar _grammar_4 = this.getGrammar();
-      TypeReference _validatorClass_2 = this.getValidatorClass(_grammar_4);
+      TypeReference _validatorClass_2 = this._validatorNaming.getValidatorClass(_grammar_4);
       String _packageName = _validatorClass_2.getPackageName();
       _exportedPackages.add(_packageName);
     }
@@ -177,7 +161,7 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
   
   protected void generateXtendValidatorStub() {
     Grammar _grammar = this.getGrammar();
-    TypeReference _validatorClass = this.getValidatorClass(_grammar);
+    TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -200,12 +184,12 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("class ");
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _validatorClass = ValidatorFragment2.this.getValidatorClass(_grammar);
+        TypeReference _validatorClass = ValidatorFragment2.this._validatorNaming.getValidatorClass(_grammar);
         String _simpleName = _validatorClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
         Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this.getAbstractValidatorClass(_grammar_1);
+        TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar_1);
         _builder.append(_abstractValidatorClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -246,7 +230,7 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
   
   protected void generateJavaValidatorStub() {
     Grammar _grammar = this.getGrammar();
-    TypeReference _validatorClass = this.getValidatorClass(_grammar);
+    TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -269,12 +253,12 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("public class ");
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _validatorClass = ValidatorFragment2.this.getValidatorClass(_grammar);
+        TypeReference _validatorClass = ValidatorFragment2.this._validatorNaming.getValidatorClass(_grammar);
         String _simpleName = _validatorClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
         Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this.getAbstractValidatorClass(_grammar_1);
+        TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar_1);
         _builder.append(_abstractValidatorClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -307,7 +291,7 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
   
   protected void generateAbstractValidator() {
     Grammar _grammar = this.getGrammar();
-    TypeReference _abstractValidatorClass = this.getAbstractValidatorClass(_grammar);
+    TypeReference _abstractValidatorClass = this._validatorNaming.getAbstractValidatorClass(_grammar);
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(_abstractValidatorClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -344,7 +328,7 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         }
         _builder.append("class ");
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this.getAbstractValidatorClass(_grammar);
+        TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar);
         String _simpleName = _abstractValidatorClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
