@@ -11,6 +11,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -30,6 +32,9 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
+	
+	@Inject 
+	private EclipseProjectConfigProvider projectConfigProvider;
 
 	private ImmutableList<? extends IResourceSetInitializer> initializers = ImmutableList.of();
 
@@ -41,6 +46,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	@Override
 	public ResourceSet get(IProject project) {
 		XtextResourceSet set = resourceSetProvider.get();
+		ProjectConfigAdapter.install(set, projectConfigProvider.createProjectConfig(project));
 		for(int i = 0; i < initializers.size(); i++) {
 			initializers.get(i).initialize(set, project);
 		}

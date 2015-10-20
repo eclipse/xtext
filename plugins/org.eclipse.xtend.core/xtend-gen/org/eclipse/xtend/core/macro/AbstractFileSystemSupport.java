@@ -29,13 +29,11 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -52,7 +50,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Inject
   @Accessors
   @Extension
-  private IWorkspaceConfigProvider workspaceConfigProvider;
+  private IProjectConfigProvider projectConfigProvider;
   
   @Accessors
   private ResourceSet context;
@@ -221,23 +219,10 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   public Iterable<? extends Path> getChildren(final Path path) {
     boolean _equals = Objects.equal(path, Path.ROOT);
     if (_equals) {
-      IWorkspaceConfig _workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(this.context);
-      Set<? extends IProjectConfig> _projects = _workspaceConfig.getProjects();
-      final Function1<IProjectConfig, Path> _function = new Function1<IProjectConfig, Path>() {
-        @Override
-        public Path apply(final IProjectConfig it) {
-          String _name = it.getName();
-          return path.getAbsolutePath(_name);
-        }
-      };
-      Iterable<Path> _map = IterableExtensions.map(_projects, _function);
-      final Function1<Path, Boolean> _function_1 = new Function1<Path, Boolean>() {
-        @Override
-        public Boolean apply(final Path it) {
-          return Boolean.valueOf(AbstractFileSystemSupport.this.exists(it));
-        }
-      };
-      return IterableExtensions.<Path>filter(_map, _function_1);
+      IProjectConfig _projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
+      String _name = _projectConfig.getName();
+      Path _absolutePath = path.getAbsolutePath(_name);
+      return Collections.<Path>unmodifiableList(CollectionLiterals.<Path>newArrayList(_absolutePath));
     }
     final URI uri = this.getURI(path);
     boolean _or = false;
@@ -416,8 +401,16 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   @Override
   public boolean isFolder(final Path path) {
-    URI _uRI = this.getURI(path);
-    return (this.isFolder(_uRI)).booleanValue();
+    Boolean _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(path, Path.ROOT);
+      if (_equals) {
+        return true;
+      }
+      URI _uRI = this.getURI(path);
+      _xblockexpression = this.isFolder(_uRI);
+    }
+    return (_xblockexpression).booleanValue();
   }
   
   protected Boolean isFolder(final URI uri) {
@@ -472,23 +465,28 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   protected URI getURI(final Path path) {
+    boolean _or = false;
     if ((path == null)) {
+      _or = true;
+    } else {
+      boolean _equals = Objects.equal(path, Path.ROOT);
+      _or = _equals;
+    }
+    if (_or) {
       return null;
     }
-    final IWorkspaceConfig workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(this.context);
-    if ((workspaceConfig == null)) {
-      return null;
-    }
-    List<String> _segments = path.getSegments();
-    final String moduleName = IterableExtensions.<String>head(_segments);
-    if ((moduleName == null)) {
-      return null;
-    }
-    final IProjectConfig projectConfig = workspaceConfig.findProjectByName(moduleName);
+    final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
     if ((projectConfig == null)) {
       return null;
     }
     final URI projectURI = projectConfig.getPath();
+    List<String> _segments = path.getSegments();
+    final String projectName = IterableExtensions.<String>head(_segments);
+    String _name = projectConfig.getName();
+    boolean _notEquals = (!Objects.equal(projectName, _name));
+    if (_notEquals) {
+      return null;
+    }
     List<String> _segments_1 = path.getSegments();
     final Iterable<String> segments = IterableExtensions.<String>tail(_segments_1);
     boolean _isEmpty = IterableExtensions.isEmpty(segments);
@@ -533,11 +531,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   protected Path getPath(final URI uri, final ResourceSet context) {
-    final IWorkspaceConfig workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(context);
-    if ((workspaceConfig == null)) {
-      return null;
-    }
-    final IProjectConfig projectConfig = workspaceConfig.findProjectContaining(uri);
+    final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(context);
     if ((projectConfig == null)) {
       return null;
     }
@@ -587,12 +581,12 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   @Pure
-  public IWorkspaceConfigProvider getWorkspaceConfigProvider() {
-    return this.workspaceConfigProvider;
+  public IProjectConfigProvider getProjectConfigProvider() {
+    return this.projectConfigProvider;
   }
   
-  public void setWorkspaceConfigProvider(final IWorkspaceConfigProvider workspaceConfigProvider) {
-    this.workspaceConfigProvider = workspaceConfigProvider;
+  public void setProjectConfigProvider(final IProjectConfigProvider projectConfigProvider) {
+    this.projectConfigProvider = projectConfigProvider;
   }
   
   @Pure

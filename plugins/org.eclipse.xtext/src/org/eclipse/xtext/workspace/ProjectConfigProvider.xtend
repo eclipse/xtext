@@ -7,21 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.workspace
 
-import org.eclipse.xtext.workspace.IWorkspaceConfig
-import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
 
-class NullWorkspaceConfig implements IWorkspaceConfig {
-	
-	override getProjects() {
-		emptySet
+class ProjectConfigProvider implements IProjectConfigProvider {
+
+	override getProjectConfig(ResourceSet context) {
+		return ProjectConfigAdapter.findInEmfObject(context)?.projectConfig
 	}
-	
-	override findProjectByName(String name) {
-		null
-	}
-	
-	override findProjectContaining(URI member) {
-		null
-	}
-	
+
 }

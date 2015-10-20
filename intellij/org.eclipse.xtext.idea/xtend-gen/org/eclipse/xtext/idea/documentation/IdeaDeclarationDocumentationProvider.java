@@ -8,17 +8,15 @@
 package org.eclipse.xtext.idea.documentation;
 
 import com.google.inject.Inject;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
-import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig;
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.PsiEObject;
@@ -30,9 +28,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class IdeaDeclarationDocumentationProvider {
-  @Inject
-  private IdeaWorkspaceConfigProvider workspaceCfgProvider;
-  
   @Inject
   private IQualifiedNameProvider qNameProvider;
   
@@ -83,25 +78,20 @@ public class IdeaDeclarationDocumentationProvider {
   protected String getFileInfo(final PsiEObject element) {
     EObject _eObject = element.getEObject();
     final Resource resource = _eObject.eResource();
-    ResourceSet _resourceSet = resource.getResourceSet();
-    IdeaWorkspaceConfig _workspaceConfig = this.workspaceCfgProvider.getWorkspaceConfig(_resourceSet);
-    URI _uRI = resource.getURI();
-    final IdeaModuleConfig module = _workspaceConfig.findProjectContaining(_uRI);
+    final Module module = ModuleUtilCore.findModuleForPsiElement(element);
     if ((module != null)) {
-      URI _uRI_1 = resource.getURI();
-      URI _path = module.getPath();
-      final URI uri = _uRI_1.deresolve(_path);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("[");
       String _name = module.getName();
       _builder.append(_name, "");
       _builder.append("] ");
-      _builder.append(uri, "");
+      URI _uRI = resource.getURI();
+      String _lastSegment = _uRI.lastSegment();
+      _builder.append(_lastSegment, "");
       return _builder.toString();
-    } else {
-      URI _uRI_2 = resource.getURI();
-      return _uRI_2.lastSegment();
     }
+    URI _uRI_1 = resource.getURI();
+    return _uRI_1.lastSegment();
   }
   
   public String getQuickNavigateInfo(final PsiEObject element) {

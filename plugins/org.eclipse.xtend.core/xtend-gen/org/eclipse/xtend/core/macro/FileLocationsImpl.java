@@ -19,9 +19,8 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -33,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class FileLocationsImpl implements FileLocations {
   @Inject
   @Accessors
-  private IWorkspaceConfigProvider projectInformationProvider;
+  private IProjectConfigProvider projectInformationProvider;
   
   @Inject
   @Accessors
@@ -44,13 +43,19 @@ public class FileLocationsImpl implements FileLocations {
   
   protected IProjectConfig getProjectConfig(final Path path) {
     List<String> _segments = path.getSegments();
-    final String string = _segments.get(0);
+    final String firstSegment = _segments.get(0);
     ResourceSet _resourceSet = this.context.getResourceSet();
-    IWorkspaceConfig _workspaceConfig = this.projectInformationProvider.getWorkspaceConfig(_resourceSet);
-    final IProjectConfig projectConfig = _workspaceConfig.findProjectByName(string);
-    boolean _equals = Objects.equal(projectConfig, null);
-    if (_equals) {
-      throw new IllegalArgumentException((("The project \'" + string) + "\' has not been configured."));
+    final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(_resourceSet);
+    boolean _or = false;
+    if ((projectConfig == null)) {
+      _or = true;
+    } else {
+      String _name = projectConfig.getName();
+      boolean _notEquals = (!Objects.equal(_name, firstSegment));
+      _or = _notEquals;
+    }
+    if (_or) {
+      throw new IllegalArgumentException((("The project \'" + firstSegment) + "\' has not been configured."));
     }
     return projectConfig;
   }
@@ -123,11 +128,11 @@ public class FileLocationsImpl implements FileLocations {
   }
   
   @Pure
-  public IWorkspaceConfigProvider getProjectInformationProvider() {
+  public IProjectConfigProvider getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
   
-  public void setProjectInformationProvider(final IWorkspaceConfigProvider projectInformationProvider) {
+  public void setProjectInformationProvider(final IProjectConfigProvider projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
   

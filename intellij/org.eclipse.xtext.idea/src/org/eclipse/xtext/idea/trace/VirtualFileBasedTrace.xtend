@@ -22,8 +22,8 @@ import org.eclipse.xtext.generator.trace.AbsoluteURI
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
-import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfig
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfigProvider
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
@@ -38,8 +38,9 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	
 	VirtualFileInProject localVirtualFile
 	IdeaOutputConfigurationProvider outputConfigurationProvider
-	IdeaWorkspaceConfigProvider workspaceConfigProvider
-	@Accessors(PROTECTED_SETTER, PUBLIC_GETTER) IdeaModuleConfig localProjectConfig
+	IdeaProjectConfigProvider projectConfigProvider
+	
+	@Accessors(PROTECTED_SETTER, PUBLIC_GETTER) IdeaProjectConfig localProjectConfig
 	@Accessors VirtualFile jarRoot
 	
 	override getLocalURI() {
@@ -62,8 +63,8 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 		this.outputConfigurationProvider = outputConfigurationProvider
 	}
 	
-	def protected void setWorkspaceConfigProvider(IdeaWorkspaceConfigProvider workspaceConfigProvider) {
-		this.workspaceConfigProvider = workspaceConfigProvider
+	def protected void setProjectConfigProvider(IdeaProjectConfigProvider projectConfigProvider) {
+		this.projectConfigProvider = projectConfigProvider
 	}
 	
 	def protected AbsoluteURI getURIForVirtualFile(VirtualFile virtualFile) {
@@ -109,7 +110,7 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	}
 	
 	override InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
-		return getContents(uri, (projectConfig as IdeaModuleConfig).module);
+		return getContents(uri, (projectConfig as IdeaProjectConfig).module);
 	}
 	
 	
@@ -119,7 +120,7 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	}
 	
 	override getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
-		return getContentsAsText(uri, (projectConfig as IdeaModuleConfig).module);
+		return getContentsAsText(uri, (projectConfig as IdeaProjectConfig).module);
 	}
 	
 	def Reader getContentsAsText(SourceRelativeURI uri, Module project) throws IOException {

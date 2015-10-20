@@ -29,9 +29,9 @@ import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
-import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfig;
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfigProvider;
 import org.eclipse.xtext.idea.filesystem.IdeaSourceFolder;
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
@@ -52,10 +52,10 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   private IdeaOutputConfigurationProvider outputConfigurationProvider;
   
-  private IdeaWorkspaceConfigProvider workspaceConfigProvider;
+  private IdeaProjectConfigProvider projectConfigProvider;
   
   @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PUBLIC_GETTER })
-  private IdeaModuleConfig localProjectConfig;
+  private IdeaProjectConfig localProjectConfig;
   
   @Accessors
   private VirtualFile jarRoot;
@@ -82,8 +82,8 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
     this.outputConfigurationProvider = outputConfigurationProvider;
   }
   
-  protected void setWorkspaceConfigProvider(final IdeaWorkspaceConfigProvider workspaceConfigProvider) {
-    this.workspaceConfigProvider = workspaceConfigProvider;
+  protected void setProjectConfigProvider(final IdeaProjectConfigProvider projectConfigProvider) {
+    this.projectConfigProvider = projectConfigProvider;
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFile virtualFile) {
@@ -161,7 +161,7 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   @Override
   public InputStream getContents(final SourceRelativeURI uri, final IProjectConfig projectConfig) throws IOException {
-    Module _module = ((IdeaModuleConfig) projectConfig).getModule();
+    Module _module = ((IdeaProjectConfig) projectConfig).getModule();
     return this.getContents(uri, _module);
   }
   
@@ -174,7 +174,7 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   @Override
   public Reader getContentsAsText(final SourceRelativeURI uri, final IProjectConfig projectConfig) throws IOException {
-    Module _module = ((IdeaModuleConfig) projectConfig).getModule();
+    Module _module = ((IdeaProjectConfig) projectConfig).getModule();
     return this.getContentsAsText(uri, _module);
   }
   
@@ -265,11 +265,11 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   @Pure
-  public IdeaModuleConfig getLocalProjectConfig() {
+  public IdeaProjectConfig getLocalProjectConfig() {
     return this.localProjectConfig;
   }
   
-  protected void setLocalProjectConfig(final IdeaModuleConfig localProjectConfig) {
+  protected void setLocalProjectConfig(final IdeaProjectConfig localProjectConfig) {
     this.localProjectConfig = localProjectConfig;
   }
   

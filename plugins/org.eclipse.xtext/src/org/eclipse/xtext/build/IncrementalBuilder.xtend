@@ -34,7 +34,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.workspace.IProjectConfigProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -150,9 +150,9 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 		}
 	
 		protected def createFileSystemAccess(IResourceServiceProvider serviceProvider, Resource resource) {
-			val workspaceConfigProvider = serviceProvider.get(IWorkspaceConfigProvider)
-			val workspaceConfig = workspaceConfigProvider?.getWorkspaceConfig(resource.resourceSet)
-			val sourceFolder = workspaceConfig?.findProjectContaining(resource.getURI)?.findSourceFolderContaining(resource.getURI)
+			val projectConfigProvider = serviceProvider.get(IProjectConfigProvider)
+			val projectConfig = projectConfigProvider?.getProjectConfig(resource.resourceSet)
+			val sourceFolder = projectConfig?.findSourceFolderContaining(resource.getURI)
 			new URIBasedFileSystemAccess() => [
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]

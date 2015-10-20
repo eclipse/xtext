@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.internal.AbstractTraceForURIProvider;
-import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 
 import com.google.common.collect.Lists;
@@ -139,8 +139,8 @@ public class TraceForStorageProvider extends AbstractTraceForURIProvider<IFile, 
 	@Override
 	protected IProjectConfig getProjectConfig(IFile sourceFile) {
 		AbsoluteURI location = getAbsoluteLocation(sourceFile);
-		EclipseWorkspaceConfigProvider workspaceConfig = getServiceProvider(location).get(EclipseWorkspaceConfigProvider.class);
-		return workspaceConfig.getProjectConfig(sourceFile.getProject());
+		EclipseProjectConfigProvider projectConfigProvider = getServiceProvider(location).get(EclipseProjectConfigProvider.class);
+		return projectConfigProvider.createProjectConfig(sourceFile.getProject());
 	}
 	
 	@Override
