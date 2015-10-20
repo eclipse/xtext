@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.tests.util
 import org.eclipse.xtext.xbase.ide.types.ClasspathScanner
 import org.junit.Assert
 import org.junit.Test
+import java.io.File
+import java.net.URLClassLoader
 
 class ClasspathScannerTest {
 	val ClasspathScanner scanner = new ClasspathScanner
@@ -22,7 +24,9 @@ class ClasspathScannerTest {
 	
 	@Test
 	def testClasspathScanning() {
-		val thisPackage = scanner.getDescriptors(class.classLoader, #["org.eclipse.xtext.xbase.tests.util"])
-		Assert.assertTrue(thisPackage.exists[simpleName == "ClasspathScannerTest"])
+		val bootstrapJar = new File("../org.eclipse.xtext.bootstrap/lastversion.jar")
+		val classloader = new URLClassLoader(#[bootstrapJar.toURI.toURL])
+		val utilPackage = scanner.getDescriptors(classloader, #["org.eclipse.xtext.util"])
+		Assert.assertTrue(utilPackage.exists[name == "org.eclipse.xtext.util.Arrays"])
 	}
 }
