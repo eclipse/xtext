@@ -26,6 +26,7 @@ public class GrammarAccessUtilTest extends Assert {
 		assertEquals("Semicolon",toJavaIdentifier(";", false));
 		assertEquals("CommercialAtApostrophe",toJavaIdentifier("@'", false));
 		assertEquals("Grün",toJavaIdentifier("Grün", true));
+		assertEquals("DollarSign",toJavaIdentifier("$", true));
 	}
 	
 	/**
