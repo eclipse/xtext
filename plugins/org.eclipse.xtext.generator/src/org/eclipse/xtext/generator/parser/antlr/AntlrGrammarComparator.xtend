@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.parser.antlr
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * Compares two charSequences of ANTLR grammars token by token.
@@ -20,33 +21,29 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class AntlrGrammarComparator {
 
-	public abstract static class AbstractErrorHandler {
-
-		@Accessors(PUBLIC_GETTER)
+	public interface IErrorHandler {
+		def void handleInvalidGeneratedGrammarFile(ErrorContext context);
+		
+		def void handleInvalidReferenceGrammarFile(ErrorContext context);
+		
+		def void handleMismatch(String matched, String expected, ErrorContext context);
+	}
+	
+	@Data
+	public static final class ErrorContext {
+		private TraversationState testedGrammar = new TraversationState()
+		private TraversationState referenceGrammar = new TraversationState()
+	}
+	
+	public static final class TraversationState {
+		@Accessors
+		private String absoluteFileName;
+		
+		@Accessors
 		private int lineNumber = 1
 		
-		@Accessors(PUBLIC_GETTER)
-		private int lineNumberReference = 1
-		
-		@Accessors
-		private String absoluteGrammarFileName
-		
-		@Accessors
-		private String absoluteGrammarFileNameReference
-		
-		private boolean treatingReferenceGrammar = false;
-		
-		private def void handleUnexpectedCharSequence(int lineCount) {
-			if (treatingReferenceGrammar) {
-				handleInvalidGrammarFile(absoluteGrammarFileNameReference, lineNumberReference + lineCount)
-			} else {				
-				handleInvalidGrammarFile(absoluteGrammarFileName, lineNumber + lineCount)
-			}
-		}
-		
-		def void handleInvalidGrammarFile(String absoluteGrammarFileName, int lineNo);
-		
-		def void handleMismatch(String match, String matchReference);
+		// this value is used to check whether any character sequences have not been matched
+		private int position = 0	
 	}
 	
 	
@@ -75,7 +72,23 @@ class AntlrGrammarComparator {
 	private val p_newline = Pattern.compile(NEWLINE)
 	private val p_ws = Pattern.compile(WS)
 	private val compoundPattern = Pattern.compile('''(«TOKEN»)|(«NEWLINE»)|(«WS»)''', Pattern.MULTILINE) 		
+	
+	private val errorContext = new ErrorContext()
 
+	/**
+	 * Performs the actual comparison of given and expected grammar.
+	 * 
+	 * @return {@link Pair} containing the number of lines of the tested grammar (key)
+	 * 			and the referenced grammar (value) for logging purposes
+	 */
+	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
+			String absoluteGrammarFileName, String absoluteGrammarFileNameReference, IErrorHandler errorHandler) {
+		
+		errorContext.testedGrammar.absoluteFileName = absoluteGrammarFileName
+		errorContext.referenceGrammar.absoluteFileName = absoluteGrammarFileNameReference
+		
+		return compareGrammars(grammar, grammar, errorHandler)
+	}
 	
 	/**
 	 * Performs the actual comparison of given and expected grammar.
@@ -84,50 +97,31 @@ class AntlrGrammarComparator {
 	 * 			and the referenced grammar (value) for logging purposes
 	 */
 	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
-			AbstractErrorHandler errorHandler) {
+			IErrorHandler errorHandler) {
 
 		val compoundMatcher = compoundPattern.matcher(grammar)
 		val compoundMatcherReference = compoundPattern.matcher(grammarReference)
-		
-		// these values are used to check whether any character sequences have not been matched
-		var previousEnd = 0;
-		var previousEndReference = 0;
 		
 		var continue = true
 		var continueReference = true 
 		
 		while (continue || continueReference) {
 			if (continue) {
-				errorHandler.treatingReferenceGrammar = false
-				
-				val res = compoundMatcher.nextToken(previousEnd, errorHandler)
-				continue = res.key
-				errorHandler.lineNumber += res.value
-				
-				if (continue) {
-					previousEnd = compoundMatcher.end
-				}
+				continue = compoundMatcher.nextToken(errorContext.testedGrammar, errorHandler)
 			}
 			val match = if (continue) compoundMatcher.group else "««eof»»"
 			
 			if (continueReference) {
-				errorHandler.treatingReferenceGrammar = true
-				
-				val res = compoundMatcherReference.nextToken(previousEndReference, errorHandler)
-				continueReference = res.key
-				errorHandler.lineNumberReference += res.value
-				
-				if (continueReference) {
-					previousEndReference = compoundMatcherReference.end
-				}
+				continueReference = compoundMatcherReference.nextToken(errorContext.referenceGrammar, errorHandler)
 			}			 
-			
 			val matchReference = if (continueReference) compoundMatcherReference.group else "««eof»»"
 			
 			if (matchReference != match) {
-				errorHandler.handleMismatch(match, matchReference)
+				errorHandler.handleMismatch(match, matchReference, errorContext)
 			}
 		}
+		
+		return errorContext
 	}
 	
 	/**
@@ -135,31 +129,38 @@ class AntlrGrammarComparator {
 	 * 
 	 * @return the number of newlines passed while searching 
 	 */
-	def private nextToken(Matcher matcher, int previousEnd, AbstractErrorHandler errorHandler) {
-		var newlineCounter = 0;
-		var thePreviousEnd = previousEnd
+	def private nextToken(Matcher matcher, TraversationState state, IErrorHandler errorHandler) {
 		
 		while (matcher.find()) {
-			if (matcher.start() != thePreviousEnd) {
-				errorHandler.handleUnexpectedCharSequence(newlineCounter)
+			if (matcher.start() != state.position) {
+				errorHandler.handleInvalidGrammarFile(state)
 			}
 			
 			val match = matcher.group()
 			
 			if (p_newline.matcher(match).matches()) {
-				// in case the 'newline' pattern matches the found 'match' ...
-				newlineCounter++
-				thePreviousEnd = matcher.end
-				
+				state.position = matcher.end
+				state.lineNumber++
+			
 			} else if (p_ws.matcher(match).matches) {
-				thePreviousEnd = matcher.end
+				state.position = matcher.end
 				
 			} else if (p_token.matcher(match).matches()) {
+				state.position = matcher.end
+
 				// in case a valid token has been found stop here
-				return Pair.of(true, newlineCounter)
+				return true
 			}
 		}
 		
-		return Pair.of(false, newlineCounter)
+		return false
+	}
+	
+	private def handleInvalidGrammarFile(IErrorHandler errorHandler, TraversationState state) {
+		if (state === errorContext.testedGrammar) {
+			errorHandler.handleInvalidGeneratedGrammarFile(errorContext)
+		} else {				
+			errorHandler.handleInvalidReferenceGrammarFile(errorContext)
+		}
 	}
 }
