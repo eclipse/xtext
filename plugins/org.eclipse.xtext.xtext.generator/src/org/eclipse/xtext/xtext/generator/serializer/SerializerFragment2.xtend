@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.serializer
 
 import com.google.common.collect.ImmutableSet
+import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Inject
 import java.util.List
 import java.util.Map
@@ -43,6 +44,7 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition
+import org.eclipse.xtext.serializer.analysis.SerializationContext
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer
@@ -50,6 +52,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
@@ -63,8 +66,6 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
-import org.eclipse.xtext.serializer.analysis.SerializationContext
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 class SerializerFragment2 extends AbstractXtextGeneratorFragment {
 	
@@ -269,18 +270,14 @@ class SerializerFragment2 extends AbstractXtextGeneratorFragment {
 		'''
 	}
 	
-	private def StringConcatenationClient genContextCondition(ISerializationContext context, IConstraint constraint) {
-		val StringConcatenationClient cond = switch it:context {
-			case assignedAction !== null: '''action == grammarAccess.«assignedAction.gaAccessor»'''
-			case parserRule !== null: '''rule == grammarAccess.«parserRule.gaAccessor»'''
-		}
+	private def StringConcatenationClient genParameterCondition(ISerializationContext context, IConstraint constraint) {
 		val values = context.enabledBooleanParameters
 		if (!values.isEmpty) {
-			'''(«cond» && «ImmutableSet».of(«values.map["grammarAccess."+gaAccessor].join(", ")»).equals(parameters))'''
-		} else if (!constraint.contexts.forall[(it as SerializationContext).declaredParameters.isEmpty]) {
-			'''(«cond» && parameters.isEmpty())'''
+			'''«ImmutableSet».of(«values.map["grammarAccess."+gaAccessor].join(", ")»).equals(parameters)'''
+		} else if (constraint.contexts.exists[!(it as SerializationContext).declaredParameters.isEmpty]) {
+			'''parameters.isEmpty()'''
 		} else {
-			cond
+			''''''
 		}
 	}
 	
@@ -289,7 +286,7 @@ class SerializerFragment2 extends AbstractXtextGeneratorFragment {
 		'''
 			«IF contexts.size > 1»
 				«FOR ctx : contexts.indexed»
-					«IF ctx.key > 0»else «ENDIF»if («FOR c : ctx.value.value.sort SEPARATOR "\n\t\t|| "»«c.genContextCondition(ctx.value.key)»«ENDFOR») {
+					«IF ctx.key > 0»else «ENDIF»if («genCondition(ctx.value.value, ctx.value.key)») {
 						«genMethodCreateSequenceCall(superConstraints, type, ctx.value.key)»
 					}
 				«ENDFOR»
@@ -300,6 +297,58 @@ class SerializerFragment2 extends AbstractXtextGeneratorFragment {
 				// error, no contexts. 
 			«ENDIF»
 		'''
+	}
+	
+	private def StringConcatenationClient genCondition(List<ISerializationContext> contexts, IConstraint constraint) {
+		val sorted = contexts.sort
+		val index = LinkedHashMultimap.create
+		sorted.forEach [
+			index.put(contextObject, it)
+		]
+		'''«FOR obj : index.keySet SEPARATOR "\n\t\t|| "»«obj.genObjectSelector»«obj.genParameterSelector(index.get(obj), constraint)»«ENDFOR»'''
+	}
+	
+	private def StringConcatenationClient genObjectSelector(EObject obj) {
+		switch obj {
+			Action: '''action == grammarAccess.«obj.gaAccessor»'''
+			ParserRule: '''rule == grammarAccess.«obj.gaAccessor»'''
+		}
+	}
+	
+	private def StringConcatenationClient genParameterSelector(EObject obj, Set<ISerializationContext> contexts, IConstraint constraint) {
+		val rule = GrammarUtil.containingParserRule(obj)
+		if (rule.parameters.isEmpty || !constraint.contexts.exists[!(it as SerializationContext).declaredParameters.isEmpty]) {
+			return ''''''
+		}
+		// figure out which scenarios are independent from the parameter values
+		val withParamsByRule = LinkedHashMultimap.create
+		contexts.forEach [
+			val param = enabledBooleanParameters.head
+			if (param !== null) {
+				withParamsByRule.put(GrammarUtil.containingParserRule(param), it)
+			}
+		]
+		val copy = newLinkedHashSet
+		copy.addAll(contexts)
+
+		// and remove these
+		withParamsByRule.keySet.forEach [
+			val entries = withParamsByRule.get(it)
+			if (entries.size === (1 << it.parameters.size) - 1) {
+				copy.removeAll(entries)
+			} 
+		]
+		
+		if (copy.exists [ !enabledBooleanParameters.isEmpty ]) {
+			// param configuration doesn't matter
+			return ''''''
+		}
+		return ''' && («FOR context : copy SEPARATOR "\n\t\t\t|| "»«context.genParameterCondition(constraint)»«ENDFOR»)'''
+		
+	}
+	
+	private def EObject getContextObject(ISerializationContext context) {
+		context.assignedAction ?: context.parserRule
 	}
 	
 	private def StringConcatenationClient genMethodCreateSequenceCall(Map<IConstraint, IConstraint> superConstraints, EClass type, IConstraint key) {
