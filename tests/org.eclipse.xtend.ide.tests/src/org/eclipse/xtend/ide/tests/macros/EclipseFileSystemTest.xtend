@@ -9,10 +9,9 @@ package org.eclipse.xtend.ide.tests.macros
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.File
-import java.io.FileInputStream
 import java.util.Set
 import org.eclipse.core.internal.resources.ProjectDescription
+import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
@@ -28,7 +27,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.core.resources.IProject
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -99,23 +97,15 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 
 		val file = new Path("/bar/Foo.text")
 		assertFalse(file.exists)
-		assertNotNull(file.toURI)
-
-		file.contents = "Hello Foo"
-		assertTrue(file.exists)
-		val uri = file.toURI
-		assertNotNull(uri)
-		assertTrue('' + uri, uri.toString.endsWith('/foo/bar/Foo.text'))
-
-		val javaIoFile = new File(uri)
-		assertTrue(javaIoFile.exists)
-
-		val data = newByteArrayOfSize(javaIoFile.length as int)
-		val fis = new FileInputStream(javaIoFile)
-		fis.read(data)
-		fis.close
-
-		assertEquals("Hello Foo", new String(data))
+		assertNull(file.toURI)
+		
+		try {
+			file.contents = "Hello Foo"
+			fail()
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
+		assertFalse(file.exists)
 	}
 
 }

@@ -14,22 +14,22 @@ import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
 import org.eclipse.xtext.workspace.IProjectConfig
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.workspace.IProjectConfigProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class FileLocationsImpl implements FileLocations {
 	
-	@Inject @Accessors IWorkspaceConfigProvider projectInformationProvider
+	@Inject @Accessors IProjectConfigProvider projectInformationProvider
 	@Inject @Accessors IContextualOutputConfigurationProvider outputConfigurationProvider
 	@Accessors Resource context
 	
 	protected def IProjectConfig getProjectConfig(Path path) {
-		val string = path.getSegments().get(0)
-		val projectConfig = projectInformationProvider.getWorkspaceConfig(context.resourceSet).findProjectByName(string)
-		if (projectConfig == null) {
-			throw new IllegalArgumentException("The project '"+string+"' has not been configured.")
+		val firstSegment = path.getSegments().get(0)
+		val projectConfig = projectInformationProvider.getProjectConfig(context.resourceSet)
+		if (projectConfig === null || projectConfig.name != firstSegment) {
+			throw new IllegalArgumentException("The project '"+firstSegment+"' has not been configured.")
 		}
 		return projectConfig
 	}
