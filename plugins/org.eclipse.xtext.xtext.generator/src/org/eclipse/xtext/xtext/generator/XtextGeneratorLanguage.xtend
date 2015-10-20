@@ -13,6 +13,7 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.Module
 import com.google.inject.Provider
+import java.io.File
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
@@ -36,7 +37,7 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
-import java.io.File
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 @Log
 class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {
@@ -129,7 +130,7 @@ class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGenerator
 	
 	override initialize(Injector injector) {
 		fragments.add(0, new ImplicitFragment)
-		injector.injectMembers(org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage)
+		injector.injectMembers(XtextGeneratorLanguage)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
 		standaloneSetup.initialize(injector)
@@ -139,9 +140,9 @@ class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGenerator
 			for (var i = 0, var size = resourceSet.resources.size; i < size; i++) {
 				val res = resourceSet.resources.get(i)
 				if (res.getContents().isEmpty())
-					org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage.LOG.error("Error loading '" + res.getURI() + "'")
+					XtextGeneratorLanguage.LOG.error("Error loading '" + res.getURI() + "'")
 				else if (!res.getErrors().isEmpty())
-					org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage.LOG.error("Error loading '" + res.getURI() + "':\n" + Joiner.on('\n').join(res.getErrors()))	
+					XtextGeneratorLanguage.LOG.error("Error loading '" + res.getURI() + "':\n" + Joiner.on('\n').join(res.getErrors()))	
 			}
 			EcoreUtil.resolveAll(resourceSet)
 		}
@@ -153,7 +154,7 @@ class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGenerator
 			throw new IllegalArgumentException("Couldn't load grammar for '" + getGrammarUri + "'.")
 		}
 		if (!resource.errors.isEmpty) {
-			org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage.LOG.error(resource.errors)
+			XtextGeneratorLanguage.LOG.error(resource.errors)
 			throw new IllegalStateException("Problem parsing '" + getGrammarUri + "':\n" + Joiner.on('\n').join(resource.getErrors()))
 		}
 

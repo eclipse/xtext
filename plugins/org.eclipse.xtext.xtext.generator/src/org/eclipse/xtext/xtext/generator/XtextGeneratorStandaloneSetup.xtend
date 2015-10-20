@@ -13,6 +13,7 @@ import org.eclipse.emf.mwe.utils.ProjectMapping
 import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 @Log
 class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {

@@ -150,10 +150,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		''' 
 			module «(config.language.basePackagePath+"/Generate"+config.language.simpleName).replaceAll("/", ".")»
 			
-			import org.eclipse.emf.mwe.utils.*
 			import org.eclipse.xtext.xtext.generator.*
-			import org.eclipse.xtext.generator.*
-			import org.eclipse.xtext.ui.generator.*
+			import org.eclipse.xtext.xtext.generator.model.project.*
 			
 			var rootPath = ".."
 			

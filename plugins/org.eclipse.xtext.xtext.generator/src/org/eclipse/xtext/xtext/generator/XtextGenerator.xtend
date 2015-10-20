@@ -32,6 +32,8 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}

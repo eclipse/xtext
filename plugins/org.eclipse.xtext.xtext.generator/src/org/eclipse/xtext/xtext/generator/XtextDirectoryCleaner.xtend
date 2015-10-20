@@ -9,10 +9,11 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Inject
 import com.google.inject.Injector
+import java.io.File
 import java.util.List
 import org.eclipse.emf.mwe.utils.DirectoryCleaner
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.io.File
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
 	@Inject IXtextProjectConfig config
