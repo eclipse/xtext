@@ -104,12 +104,12 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 		]
 		
 		val macroResourceSet = resourceSetProvider.get
-		new ProjectConfigAdapter(macroProjectConfig).attachToEmfObject(macroResourceSet)
+		ProjectConfigAdapter.install(macroResourceSet, macroProjectConfig)
 		macroResourceSet.classpathURIContext = getClass.classLoader
 		macroResourceSet.createResource(macroURI)
 		
 		val resourceSet = resourceSetProvider.get
-		new ProjectConfigAdapter(clientProjectConfig).attachToEmfObject(resourceSet)
+		ProjectConfigAdapter.install(resourceSet, clientProjectConfig)
 		resourceSet.createResource(clientURI)
 		
 		compiler.compile(macroResourceSet) [ result |
