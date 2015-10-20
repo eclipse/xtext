@@ -340,9 +340,9 @@ class AntlrGrammarComparatorTest {
 			''')
 		}
 		
-		override handleUnexpectedCharSequence(String absoluteGrammarFileName, int lineNo) {
+		override handleInvalidGrammarFile(String testeeOrExpected, int lineNo) {
 			fail('''
-				Noticed an unmatched character sequence in/before line «lineNo».
+				Noticed an unmatched character sequence in «testeeOrExpected» in/before line «lineNo».
 			''')
 		}
 	}
