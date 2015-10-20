@@ -165,9 +165,6 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("//import org.eclipse.xtext.validation.Check");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
@@ -234,9 +231,6 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("//import org.eclipse.xtext.validation.Check;");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
