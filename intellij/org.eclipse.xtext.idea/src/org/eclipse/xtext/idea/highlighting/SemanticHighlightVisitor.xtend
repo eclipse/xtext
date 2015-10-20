@@ -19,11 +19,11 @@ import com.intellij.psi.PsiFile
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.idea.util.CancelProgressIndicator
 import org.eclipse.xtext.psi.XtextPsiUtils
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.service.OperationCanceledManager
-import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -78,7 +78,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 			if (element instanceof BaseXtextFile) {
 				val resource = element.resource
 				lastRun = resource.modificationStamp
-				highlightCalculator.provideHighlightingFor(resource, acceptor, CancelIndicator.NullImpl)
+				highlightCalculator.provideHighlightingFor(resource, acceptor, new CancelProgressIndicator())
 			}
 		} catch (OperationCanceledError error) {
 			operationCanceledManager.propagateIfCancelException(error)
