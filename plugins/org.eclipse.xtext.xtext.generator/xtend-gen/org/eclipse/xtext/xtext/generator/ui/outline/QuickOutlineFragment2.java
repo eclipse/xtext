@@ -15,12 +15,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * Contributes the 'Quick Outline' entry to the language editor's context menu.

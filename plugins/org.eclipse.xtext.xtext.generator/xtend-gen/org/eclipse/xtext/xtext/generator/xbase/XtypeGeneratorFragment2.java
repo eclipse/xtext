@@ -12,10 +12,10 @@ import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")

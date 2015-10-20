@@ -53,9 +53,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.FragmentFakingEcoreResource;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -67,6 +65,8 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotation;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 @Log
 @SuppressWarnings("all")

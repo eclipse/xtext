@@ -15,13 +15,13 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")

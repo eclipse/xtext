@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.junit.Test
-import org.junit.Before
 import com.google.inject.Guice
 import com.google.inject.Injector
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
 import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

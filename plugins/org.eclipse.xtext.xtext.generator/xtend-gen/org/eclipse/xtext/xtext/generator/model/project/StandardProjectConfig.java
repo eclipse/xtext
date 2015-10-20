@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.model.project;
 
 import com.google.common.base.Objects;
 import java.util.List;
@@ -14,14 +14,14 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.SubProjectConfig;
-import org.eclipse.xtext.xtext.generator.WebProjectConfig;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.WebProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 @Accessors
 @SuppressWarnings("all")

@@ -30,15 +30,15 @@ import org.eclipse.xtext.generator.adapter.NamingAdapter;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.StandardProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 /**
  * @since 2.9

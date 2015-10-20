@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Inject
 import com.google.inject.Injector
 import java.util.List
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
@@ -21,7 +22,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
-import com.google.inject.Inject
 
 @Log
 class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {

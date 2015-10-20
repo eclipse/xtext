@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.model.project;
 
 import java.util.List;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
-import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 
 @SuppressWarnings("all")
 public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {

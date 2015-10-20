@@ -5,14 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.model.project;
 
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 
 @SuppressWarnings("all")
-public interface IRuntimeProjectConfig extends IBundleProjectConfig {
-  public abstract IXtextGeneratorFileSystemAccess getEcoreModel();
-  
-  public abstract String getEcoreModelFolder();
+public interface IWebProjectConfig extends ISubProjectConfig {
+  public abstract IXtextGeneratorFileSystemAccess getAssets();
 }

@@ -353,13 +353,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(_replaceAll, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import org.eclipse.emf.mwe.utils.*");
-    _builder.newLine();
     _builder.append("import org.eclipse.xtext.xtext.generator.*");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.generator.*");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.ui.generator.*");
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.project.*");
     _builder.newLine();
     _builder.newLine();
     _builder.append("var rootPath = \"..\"");

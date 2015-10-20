@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 abstract class AbstractXtextGeneratorFragment implements IXtextGeneratorFragment {
 	

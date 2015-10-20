@@ -15,8 +15,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 @SuppressWarnings("all")
 public abstract class AbstractXtextGeneratorFragment implements IXtextGeneratorFragment {
