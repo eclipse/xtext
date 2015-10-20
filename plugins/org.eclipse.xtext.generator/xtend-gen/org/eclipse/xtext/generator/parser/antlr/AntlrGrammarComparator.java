@@ -12,14 +12,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * Compares two charSequences of ANTLR grammars token by token.
@@ -30,59 +31,98 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class AntlrGrammarComparator {
-  public static abstract class AbstractErrorHandler {
-    @Accessors(AccessorType.PUBLIC_GETTER)
-    private int lineNumber = 1;
+  public interface IErrorHandler {
+    public abstract void handleInvalidGeneratedGrammarFile(final AntlrGrammarComparator.ErrorContext context);
     
-    @Accessors(AccessorType.PUBLIC_GETTER)
-    private int lineNumberReference = 1;
+    public abstract void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context);
     
-    @Accessors
-    private String absoluteGrammarFileName;
+    public abstract void handleMismatch(final String matched, final String expected, final AntlrGrammarComparator.ErrorContext context);
+  }
+  
+  @Data
+  public static final class ErrorContext {
+    private final AntlrGrammarComparator.TraversationState testedGrammar = new AntlrGrammarComparator.TraversationState();
     
-    @Accessors
-    private String absoluteGrammarFileNameReference;
+    private final AntlrGrammarComparator.TraversationState referenceGrammar = new AntlrGrammarComparator.TraversationState();
     
-    private boolean treatingReferenceGrammar = false;
-    
-    private void handleUnexpectedCharSequence(final int lineCount) {
-      if (this.treatingReferenceGrammar) {
-        this.handleInvalidGrammarFile(this.absoluteGrammarFileNameReference, (this.lineNumberReference + lineCount));
-      } else {
-        this.handleInvalidGrammarFile(this.absoluteGrammarFileName, (this.lineNumber + lineCount));
-      }
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.testedGrammar== null) ? 0 : this.testedGrammar.hashCode());
+      result = prime * result + ((this.referenceGrammar== null) ? 0 : this.referenceGrammar.hashCode());
+      return result;
     }
     
-    public abstract void handleInvalidGrammarFile(final String absoluteGrammarFileName, final int lineNo);
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      AntlrGrammarComparator.ErrorContext other = (AntlrGrammarComparator.ErrorContext) obj;
+      if (this.testedGrammar == null) {
+        if (other.testedGrammar != null)
+          return false;
+      } else if (!this.testedGrammar.equals(other.testedGrammar))
+        return false;
+      if (this.referenceGrammar == null) {
+        if (other.referenceGrammar != null)
+          return false;
+      } else if (!this.referenceGrammar.equals(other.referenceGrammar))
+        return false;
+      return true;
+    }
     
-    public abstract void handleMismatch(final String match, final String matchReference);
+    @Override
+    @Pure
+    public String toString() {
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("testedGrammar", this.testedGrammar);
+      b.add("referenceGrammar", this.referenceGrammar);
+      return b.toString();
+    }
+    
+    @Pure
+    public AntlrGrammarComparator.TraversationState getTestedGrammar() {
+      return this.testedGrammar;
+    }
+    
+    @Pure
+    public AntlrGrammarComparator.TraversationState getReferenceGrammar() {
+      return this.referenceGrammar;
+    }
+  }
+  
+  public static final class TraversationState {
+    @Accessors
+    private String absoluteFileName;
+    
+    @Accessors
+    private int lineNumber = 1;
+    
+    private int position = 0;
+    
+    @Pure
+    public String getAbsoluteFileName() {
+      return this.absoluteFileName;
+    }
+    
+    public void setAbsoluteFileName(final String absoluteFileName) {
+      this.absoluteFileName = absoluteFileName;
+    }
     
     @Pure
     public int getLineNumber() {
       return this.lineNumber;
     }
     
-    @Pure
-    public int getLineNumberReference() {
-      return this.lineNumberReference;
-    }
-    
-    @Pure
-    public String getAbsoluteGrammarFileName() {
-      return this.absoluteGrammarFileName;
-    }
-    
-    public void setAbsoluteGrammarFileName(final String absoluteGrammarFileName) {
-      this.absoluteGrammarFileName = absoluteGrammarFileName;
-    }
-    
-    @Pure
-    public String getAbsoluteGrammarFileNameReference() {
-      return this.absoluteGrammarFileNameReference;
-    }
-    
-    public void setAbsoluteGrammarFileNameReference(final String absoluteGrammarFileNameReference) {
-      this.absoluteGrammarFileNameReference = absoluteGrammarFileNameReference;
+    public void setLineNumber(final int lineNumber) {
+      this.lineNumber = lineNumber;
     }
   }
   
@@ -130,33 +170,36 @@ public class AntlrGrammarComparator {
     }
   }.apply();
   
+  private final AntlrGrammarComparator.ErrorContext errorContext = new AntlrGrammarComparator.ErrorContext();
+  
   /**
    * Performs the actual comparison of given and expected grammar.
    * 
    * @return {@link Pair} containing the number of lines of the tested grammar (key)
    * 			and the referenced grammar (value) for logging purposes
    */
-  public void compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.AbstractErrorHandler errorHandler) {
+  public AntlrGrammarComparator.ErrorContext compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final String absoluteGrammarFileName, final String absoluteGrammarFileNameReference, final AntlrGrammarComparator.IErrorHandler errorHandler) {
+    this.errorContext.testedGrammar.absoluteFileName = absoluteGrammarFileName;
+    this.errorContext.referenceGrammar.absoluteFileName = absoluteGrammarFileNameReference;
+    return this.compareGrammars(grammar, grammar, errorHandler);
+  }
+  
+  /**
+   * Performs the actual comparison of given and expected grammar.
+   * 
+   * @return {@link Pair} containing the number of lines of the tested grammar (key)
+   * 			and the referenced grammar (value) for logging purposes
+   */
+  public AntlrGrammarComparator.ErrorContext compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.IErrorHandler errorHandler) {
     final Matcher compoundMatcher = this.compoundPattern.matcher(grammar);
     final Matcher compoundMatcherReference = this.compoundPattern.matcher(grammarReference);
-    int previousEnd = 0;
-    int previousEndReference = 0;
     boolean continue_ = true;
     boolean continueReference = true;
     while ((continue_ || continueReference)) {
       {
         if (continue_) {
-          errorHandler.treatingReferenceGrammar = false;
-          final Pair<Boolean, Integer> res = this.nextToken(compoundMatcher, previousEnd, errorHandler);
-          Boolean _key = res.getKey();
-          continue_ = (_key).booleanValue();
-          int _lineNumber = errorHandler.lineNumber;
-          Integer _value = res.getValue();
-          errorHandler.lineNumber = (_lineNumber + (_value).intValue());
-          if (continue_) {
-            int _end = compoundMatcher.end();
-            previousEnd = _end;
-          }
+          boolean _nextToken = this.nextToken(compoundMatcher, this.errorContext.testedGrammar, errorHandler);
+          continue_ = _nextToken;
         }
         String _xifexpression = null;
         if (continue_) {
@@ -166,17 +209,8 @@ public class AntlrGrammarComparator {
         }
         final String match = _xifexpression;
         if (continueReference) {
-          errorHandler.treatingReferenceGrammar = true;
-          final Pair<Boolean, Integer> res_1 = this.nextToken(compoundMatcherReference, previousEndReference, errorHandler);
-          Boolean _key_1 = res_1.getKey();
-          continueReference = (_key_1).booleanValue();
-          int _lineNumberReference = errorHandler.lineNumberReference;
-          Integer _value_1 = res_1.getValue();
-          errorHandler.lineNumberReference = (_lineNumberReference + (_value_1).intValue());
-          if (continueReference) {
-            int _end_1 = compoundMatcherReference.end();
-            previousEndReference = _end_1;
-          }
+          boolean _nextToken_1 = this.nextToken(compoundMatcherReference, this.errorContext.referenceGrammar, errorHandler);
+          continueReference = _nextToken_1;
         }
         String _xifexpression_1 = null;
         if (continueReference) {
@@ -187,10 +221,11 @@ public class AntlrGrammarComparator {
         final String matchReference = _xifexpression_1;
         boolean _notEquals = (!Objects.equal(matchReference, match));
         if (_notEquals) {
-          errorHandler.handleMismatch(match, matchReference);
+          errorHandler.handleMismatch(match, matchReference, this.errorContext);
         }
       }
     }
+    return this.errorContext;
   }
   
   /**
@@ -198,39 +233,47 @@ public class AntlrGrammarComparator {
    * 
    * @return the number of newlines passed while searching
    */
-  private Pair<Boolean, Integer> nextToken(final Matcher matcher, final int previousEnd, final AntlrGrammarComparator.AbstractErrorHandler errorHandler) {
-    int newlineCounter = 0;
-    int thePreviousEnd = previousEnd;
+  private boolean nextToken(final Matcher matcher, final AntlrGrammarComparator.TraversationState state, final AntlrGrammarComparator.IErrorHandler errorHandler) {
     while (matcher.find()) {
       {
         int _start = matcher.start();
-        boolean _notEquals = (_start != thePreviousEnd);
+        boolean _notEquals = (_start != state.position);
         if (_notEquals) {
-          errorHandler.handleUnexpectedCharSequence(newlineCounter);
+          this.handleInvalidGrammarFile(errorHandler, state);
         }
         final String match = matcher.group();
         Matcher _matcher = this.p_newline.matcher(match);
         boolean _matches = _matcher.matches();
         if (_matches) {
-          newlineCounter++;
           int _end = matcher.end();
-          thePreviousEnd = _end;
+          state.position = _end;
+          state.lineNumber++;
         } else {
           Matcher _matcher_1 = this.p_ws.matcher(match);
           boolean _matches_1 = _matcher_1.matches();
           if (_matches_1) {
             int _end_1 = matcher.end();
-            thePreviousEnd = _end_1;
+            state.position = _end_1;
           } else {
             Matcher _matcher_2 = this.p_token.matcher(match);
             boolean _matches_2 = _matcher_2.matches();
             if (_matches_2) {
-              return Pair.<Boolean, Integer>of(Boolean.valueOf(true), Integer.valueOf(newlineCounter));
+              int _end_2 = matcher.end();
+              state.position = _end_2;
+              return true;
             }
           }
         }
       }
     }
-    return Pair.<Boolean, Integer>of(Boolean.valueOf(false), Integer.valueOf(newlineCounter));
+    return false;
+  }
+  
+  private void handleInvalidGrammarFile(final AntlrGrammarComparator.IErrorHandler errorHandler, final AntlrGrammarComparator.TraversationState state) {
+    if ((state == this.errorContext.testedGrammar)) {
+      errorHandler.handleInvalidGeneratedGrammarFile(this.errorContext);
+    } else {
+      errorHandler.handleInvalidReferenceGrammarFile(this.errorContext);
+    }
   }
 }

@@ -68,10 +68,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		advices += advice;
 	}
 
-	override checkConfiguration(Issues issues) {
-	}
-
-	static class ErrorHandler extends AntlrGrammarComparator.AbstractErrorHandler {
+	static class ErrorHandler implements AntlrGrammarComparator.IErrorHandler {
 
 		private File tmpFolder;
 
@@ -79,21 +76,48 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			this.tmpFolder = tmpFolder
 		}
 
-		override handleInvalidGrammarFile(String absoluteGrammarFileName, int lineNo) {
+		override handleInvalidGeneratedGrammarFile(AntlrGrammarComparator.ErrorContext context) {
 			deleteDir(tmpFolder)
 			
 			throw new RuntimeException('''
-				Noticed an unmatched character sequence in file «absoluteGrammarFileName» in/before line «lineNo».''')
+				Noticed an unexpectect character sequence in file «context.testedGrammar.absoluteFileName
+					» in/before line «context.testedGrammar.lineNumber».''')
 		}
 		
-		override handleMismatch(String match, String matchReference) {
-			copyFile(absoluteGrammarFileNameReference, absoluteGrammarFileName)
-			
+		override handleInvalidReferenceGrammarFile(AntlrGrammarComparator.ErrorContext context) {
+			copyFile(context.referenceGrammar.absoluteFileName, context.testedGrammar.absoluteFileName)
 			deleteDir(tmpFolder)
 			
 			throw new RuntimeException('''
-				Generated grammar «absoluteGrammarFileName» differs at token «match» (line «lineNumber
-					»), expected token «matchReference» (line «lineNumberReference»).''')
+				Noticed an unexpectect character sequence in file «context.referenceGrammar.absoluteFileName
+					» in/before line «context.referenceGrammar.lineNumber».''')
+		}
+		
+		override handleMismatch(String match, String matchReference, AntlrGrammarComparator.ErrorContext context) {
+			copyFile(context.referenceGrammar.absoluteFileName, context.testedGrammar.absoluteFileName)
+			deleteDir(tmpFolder)
+			
+			throw new RuntimeException('''
+				Generated grammar «context.testedGrammar.absoluteFileName» differs at token «match» (line «
+					context.testedGrammar.lineNumber»), expected token «matchReference» (line «context.referenceGrammar.lineNumber»).''')
+		}
+	}
+
+	/** 
+	 * Deactivate the super class' initialization check.
+	 */
+	override checkConfiguration(Issues issues) {
+	}
+
+	/**
+	 * Tweaks the generation of the {@link Generator#SRC_GEN Generator.SRC_GEN} outlet
+	 * and injects the {@link #getTmpPath()}.
+	 */
+	override protected createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
+		if (name == Generator.SRC_GEN || name == Generator.SRC_GEN_IDE || name == Generator.SRC_GEN_UI) {
+			super.createOutlet(append, encoding, name, overwrite, getTmpFolder().absolutePath)			
+		} else {			
+			super.createOutlet(append, encoding, name, overwrite, path)
 		}
 	}
 
@@ -123,6 +147,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		deleteDir(tmpFolder)
 	}
 
+
 	protected def loadAndCompareGrammars(IFileSystemAccess2 fsa, String outlet, String grammarFileName, ErrorHandler errorHandler) {
 		val stopWatch = Stopwatch.createStarted
 		
@@ -130,21 +155,21 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		
 		val absoluteGrammarFileNameReference = '''«tmpFolder.absolutePath»/«grammarFileName»'''
 		
-		errorHandler.absoluteGrammarFileName = '''«fsa.path»/«grammarFileName»'''
-		errorHandler.absoluteGrammarFileNameReference = absoluteGrammarFileNameReference
-		
 		val grammar = fsa.readTextFile(grammarFileName)
 		val grammarReference = Files.toString(new File(absoluteGrammarFileNameReference), Charset.forName(ENCODING))
 		
-		comparator.compareGrammars(grammar, grammarReference, errorHandler)
+		val result = comparator.compareGrammars(grammar, grammarReference,
+			'''«fsa.path»/«grammarFileName»''', absoluteGrammarFileNameReference, errorHandler
+		)
 		
 		val time = stopWatch.elapsed(TimeUnit.MILLISECONDS)
 		
 		val type = if (outlet === Generator.SRC_GEN) "parser" else "content assist" 
 		
-		LOG.info('''Generated «type» grammar of «errorHandler.lineNumber
-				» lines matches expected one of «errorHandler.lineNumberReference» («time» ms).''')
+		LOG.info('''Generated «type» grammar of «result.testedGrammar.lineNumber
+				» lines matches expected one of «result.referenceGrammar.lineNumber» («time» ms).''')
 	}
+
 
 	def protected void performXpandBasedGeneration(String outlet) { 
 		val RuleFilter filter = new RuleFilter();
@@ -173,31 +198,20 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		}
 	}
 
-	protected def static copyFile(String from, String to) {
-		Files.copy(
-			new File(from),
-			new File('''«to.substring(0, to.length - 2)»Expected.g''')
-		)
-	}
 
 	/**
 	 * offers a singleton temporary folder 
 	 */
 	private def File create path: Files.createTempDir() getTmpFolder() {
 	}
-
-	/**
-	 * Tweaks the generation of the {@link Generator#SRC_GEN Generator.SRC_GEN} outlet
-	 * and injects the {@link #getTmpPath()}.
-	 */
-	override protected createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
-		if (name == Generator.SRC_GEN || name == Generator.SRC_GEN_IDE || name == Generator.SRC_GEN_UI) {
-			super.createOutlet(append, encoding, name, overwrite, getTmpFolder().absolutePath)			
-		} else {			
-			super.createOutlet(append, encoding, name, overwrite, path)
-		}
+	
+	protected static def copyFile(String from, String to) {
+		Files.copy(
+			new File(from),
+			new File('''«to.substring(0, to.length - 2)»Expected.g''')
+		)
 	}
-
+	
 	/** little helper for cleaning up the temporary stuff. */
     private static def void deleteDir(File dir) {
         if (!dir.exists) {
