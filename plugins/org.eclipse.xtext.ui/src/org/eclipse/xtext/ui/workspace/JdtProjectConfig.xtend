@@ -22,7 +22,7 @@ class JdtProjectConfig extends EclipseProjectConfig {
 		val classpath = javaProject.rawClasspath
 		val sourceEntries = classpath.filter[entryKind === IClasspathEntry.CPE_SOURCE]
 		val sourceFolders = sourceEntries.map[path.removeFirstSegments(1).toString]
-		sourceFolders.map[new EclipseSourceFolder(project, it)].toSet
+		return sourceFolders.map[new EclipseSourceFolder(project, it)].toSet
 	}
 
 }
