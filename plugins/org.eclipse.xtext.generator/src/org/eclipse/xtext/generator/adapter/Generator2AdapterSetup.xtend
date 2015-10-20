@@ -16,15 +16,15 @@ import org.eclipse.xtext.generator.LanguageConfig
 import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule
-import org.eclipse.xtext.xtext.generator.ILanguageConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
-import org.eclipse.xtext.xtext.generator.WizardConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig
 
 import static org.eclipse.xtext.generator.Generator.*
 import com.google.inject.Binder
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xtext.generator.StandardProjectConfig
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage
 
 /**
  * @since 2.9
@@ -72,7 +72,7 @@ class Generator2AdapterSetup {
 		generatorModule.code.initialize(generatorInjector)
 		val language = createLanguage(generatorInjector)
 		val Module languageModule = [
-			bind(ILanguageConfig).toInstance(language)
+			bind(IXtextGeneratorLanguage).toInstance(language)
 			bind(Grammar).toInstance(language.grammar)
 			bind(XtextGeneratorNaming).toInstance(new NamingAdapter(naming))
 			install(additionalLanguageBindings)
@@ -81,7 +81,7 @@ class Generator2AdapterSetup {
 	}
 	
 	private def XtextProjectConfig createProjectConfig() {
-		new WizardConfig => [
+		new StandardProjectConfig => [
 			createEclipseMetaData = true
 			baseName = naming.projectNameRt
 			val runtimeRoot = xpandContext.output.getOutlet(PLUGIN_RT).path
@@ -115,8 +115,8 @@ class Generator2AdapterSetup {
 		]
 	}
 	
-	private def ILanguageConfig createLanguage(Injector generatorInjector) {
-		new LanguageConfig2 => [
+	private def IXtextGeneratorLanguage createLanguage(Injector generatorInjector) {
+		new XtextGeneratorLanguage => [
 			grammarUri = languageConfig.grammar.eResource.URI.toString
 			resourceSet = languageConfig.grammar.eResource.resourceSet
 			fileExtensions = languageConfig.getFileExtensions(languageConfig.grammar).join(',')

@@ -6,8 +6,8 @@ import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
-import org.eclipse.xtext.xtext.generator.WizardConfig;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
+import org.eclipse.xtext.xtext.generator.StandardProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
@@ -55,7 +55,7 @@ final class GenerateXbase {
 		
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
-				setProject(new WizardConfig() {{
+				setProject(new StandardProjectConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
 					getEclipsePlugin().setEnabled(true);
@@ -68,7 +68,7 @@ final class GenerateXbase {
 				}});
 			}});
 
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xtype";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
@@ -82,7 +82,7 @@ final class GenerateXbase {
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
 			}});
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbase";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
@@ -116,7 +116,7 @@ final class GenerateXbase {
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
 			}});
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbasewithannotations";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
