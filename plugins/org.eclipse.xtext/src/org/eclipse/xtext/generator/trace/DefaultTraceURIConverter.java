@@ -12,21 +12,20 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 
 import com.google.inject.Inject;
 
 /**
  * Default implementation of the {@link ITraceURIConverter} that is based on the
- * workspace data (see {@link IWorkspaceConfigProvider}).
+ * workspace data (see {@link IProjectConfigProvider}).
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class DefaultTraceURIConverter implements ITraceURIConverter {
 	
 	@Inject(optional = true) 
-	private IWorkspaceConfigProvider configProvider;
+	private IProjectConfigProvider configProvider;
 
 	@Override
 	public SourceRelativeURI getURIForTrace(IProjectConfig projectConfig, AbsoluteURI absoluteURI) {
@@ -40,8 +39,7 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 	@Override
 	public SourceRelativeURI getURIForTrace(Resource resource) {
 		if (configProvider != null) {
-			IWorkspaceConfig workspaceConfig = configProvider.getWorkspaceConfig(resource.getResourceSet());
-			IProjectConfig projectConfig = workspaceConfig.findProjectContaining(resource.getURI());
+			IProjectConfig projectConfig = configProvider.getProjectConfig(resource.getResourceSet());
 			if (projectConfig != null) {
 				return getURIForTrace(projectConfig, new AbsoluteURI(resource.getURI()));
 			}

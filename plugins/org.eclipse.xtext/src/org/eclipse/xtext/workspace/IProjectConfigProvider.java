@@ -5,17 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.workspace
+package org.eclipse.xtext.workspace;
 
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
-class RuntimeWorkspaceConfigProvider implements IWorkspaceConfigProvider {
-
-	override getWorkspaceConfig(ResourceSet context) {
-		val adapters = context.eAdapters
-		val adapter = EcoreUtil.getAdapter(adapters, WorkspaceConfigAdapter) as WorkspaceConfigAdapter
-		adapter?.workspaceConfig ?: new NullWorkspaceConfig
-	}
-
+public interface IProjectConfigProvider {
+	IProjectConfig getProjectConfig(ResourceSet context);
 }

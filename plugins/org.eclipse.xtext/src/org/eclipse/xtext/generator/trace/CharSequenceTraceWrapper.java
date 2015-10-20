@@ -12,8 +12,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 
 import com.google.inject.Inject;
 
@@ -26,13 +26,13 @@ public class CharSequenceTraceWrapper {
 	private ILocationInFileProvider locationInFileProvider;
 	
 	@Inject
-	private IWorkspaceConfigProvider workspaceConfigProvider;
+	private IProjectConfigProvider projectConfigProvider;
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, EObject origin) {
 		ITextRegionWithLineInformation location = (ITextRegionWithLineInformation) locationInFileProvider.getSignificantTextRegion(origin);
 		AbsoluteURI absoluteURI = new AbsoluteURI(origin.eResource().getURI());
-		IWorkspaceConfig workspaceConfig = workspaceConfigProvider.getWorkspaceConfig(EcoreUtil2.getResourceSet(origin));
-		SourceRelativeURI sourceRelativeURI = absoluteURI.deresolve(workspaceConfig);
+		IProjectConfig projectConfig = projectConfigProvider.getProjectConfig(EcoreUtil2.getResourceSet(origin));
+		SourceRelativeURI sourceRelativeURI = absoluteURI.deresolve(projectConfig);
 		return wrapWithTraceData(sequence, sourceRelativeURI, location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber());
 	}
 	
