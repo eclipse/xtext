@@ -32,11 +32,11 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.NamingAware
 import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
 import org.eclipse.xtext.xtext.generator.MweIssues
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
@@ -46,7 +46,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 /**
  * @since 2.9
  */
-class FragmentAdapter extends AbstractGeneratorFragment2 {
+class FragmentAdapter extends AbstractXtextGeneratorFragment {
 	
 	@Inject CodeConfig codeConfig
 	
@@ -289,7 +289,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def LanguageConfig createLanguageConfig() {
-		val config2 = language as LanguageConfig2
+		val config2 = language as XtextGeneratorLanguage
 		val config = new LanguageConfig
 		config.forcedResourceSet = config2.resourceSet
 		config.fileExtensions = config2.fileExtensions.join(',')
