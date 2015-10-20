@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import org.eclipse.xtext.xtext.generator.ILanguageConfig
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage
 
 @Accessors
 @EqualsHashCode
@@ -30,11 +30,11 @@ class TypeReference {
 		new TypeReference(clazz, arguments)
 	}
 	
-	static def TypeReference typeRef(EClass clazz, ILanguageConfig language) {
+	static def TypeReference typeRef(EClass clazz, IXtextGeneratorLanguage language) {
 		new TypeReference(clazz, language.resourceSet)
 	}
 	
-	static def TypeReference typeRef(EPackage epackage, ILanguageConfig language) {
+	static def TypeReference typeRef(EPackage epackage, IXtextGeneratorLanguage language) {
 		new TypeReference(epackage, language.resourceSet)
 	}
 	

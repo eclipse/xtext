@@ -57,9 +57,9 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -76,7 +76,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
+public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -121,10 +121,10 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     if (_not) {
       return;
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     List<String> _fileExtensions = _language.getFileExtensions();
     final String fileExtension = IterableExtensions.<String>head(_fileExtensions);
-    ILanguageConfig _language_1 = this.getLanguage();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     final Grammar grammar = _language_1.getGrammar();
     final GuiceModuleAccess.BindingFactory bindFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
@@ -254,7 +254,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_26 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider");
       bindFactory.addTypeToType(_typeRef_25, _typeRef_26);
     }
-    ILanguageConfig _language_2 = this.getLanguage();
+    IXtextGeneratorLanguage _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();
     bindFactory.contributeTo(_ideaGenModule);
     XtendFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
@@ -768,7 +768,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("type=\"");
-        ILanguageConfig _language = IdeaPluginGenerator.this.getLanguage();
+        IXtextGeneratorLanguage _language = IdeaPluginGenerator.this.getLanguage();
         List<String> _fileExtensions = _language.getFileExtensions();
         String _head = IterableExtensions.<String>head(_fileExtensions);
         _builder.append(_head, "\t\t\t");
@@ -791,7 +791,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("uriExtension=\"");
-        ILanguageConfig _language_1 = IdeaPluginGenerator.this.getLanguage();
+        IXtextGeneratorLanguage _language_1 = IdeaPluginGenerator.this.getLanguage();
         List<String> _fileExtensions_1 = _language_1.getFileExtensions();
         String _head_1 = IterableExtensions.<String>head(_fileExtensions_1);
         _builder.append(_head_1, "\t\t\t");

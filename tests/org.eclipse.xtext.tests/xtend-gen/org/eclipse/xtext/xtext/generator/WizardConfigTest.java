@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
-import org.eclipse.xtext.xtext.generator.WizardConfig;
+import org.eclipse.xtext.xtext.generator.StandardProjectConfig;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +34,10 @@ public class WizardConfigTest {
   
   @Test
   public void testMavenProjectNames() {
-    WizardConfig _wizardConfig = new WizardConfig();
-    final Procedure1<WizardConfig> _function = new Procedure1<WizardConfig>() {
+    StandardProjectConfig _standardProjectConfig = new StandardProjectConfig();
+    final Procedure1<StandardProjectConfig> _function = new Procedure1<StandardProjectConfig>() {
       @Override
-      public void apply(final WizardConfig it) {
+      public void apply(final StandardProjectConfig it) {
         it.setBaseName("com.acme");
         it.setMavenLayout(true);
         BundleProjectConfig _runtimeTest = it.getRuntimeTest();
@@ -48,7 +48,7 @@ public class WizardConfigTest {
         _eclipsePluginTest.setEnabled(true);
       }
     };
-    final WizardConfig cfg = ObjectExtensions.<WizardConfig>operator_doubleArrow(_wizardConfig, _function);
+    final StandardProjectConfig cfg = ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
     cfg.initialize(this.injector);
     BundleProjectConfig _runtimeTest = cfg.getRuntimeTest();
     String _name = _runtimeTest.getName();
@@ -60,10 +60,10 @@ public class WizardConfigTest {
   
   @Test
   public void testPlainProjectNames() {
-    WizardConfig _wizardConfig = new WizardConfig();
-    final Procedure1<WizardConfig> _function = new Procedure1<WizardConfig>() {
+    StandardProjectConfig _standardProjectConfig = new StandardProjectConfig();
+    final Procedure1<StandardProjectConfig> _function = new Procedure1<StandardProjectConfig>() {
       @Override
-      public void apply(final WizardConfig it) {
+      public void apply(final StandardProjectConfig it) {
         it.setBaseName("com.acme");
         BundleProjectConfig _runtimeTest = it.getRuntimeTest();
         _runtimeTest.setEnabled(true);
@@ -73,7 +73,7 @@ public class WizardConfigTest {
         _eclipsePluginTest.setEnabled(true);
       }
     };
-    final WizardConfig cfg = ObjectExtensions.<WizardConfig>operator_doubleArrow(_wizardConfig, _function);
+    final StandardProjectConfig cfg = ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
     cfg.initialize(this.injector);
     BundleProjectConfig _runtimeTest = cfg.getRuntimeTest();
     String _name = _runtimeTest.getName();

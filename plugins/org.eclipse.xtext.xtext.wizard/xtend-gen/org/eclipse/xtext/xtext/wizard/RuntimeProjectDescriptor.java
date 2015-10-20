@@ -376,7 +376,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("configuration = {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("project = WizardConfig {");
+    _builder.append("project = StandardProjectConfig {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("baseName = \"");

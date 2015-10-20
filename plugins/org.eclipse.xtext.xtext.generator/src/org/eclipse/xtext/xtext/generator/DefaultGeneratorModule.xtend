@@ -17,7 +17,7 @@ import org.eclipse.xtext.service.AbstractGenericModule
 class DefaultGeneratorModule extends AbstractGenericModule {
 	
 	@Accessors
-	XtextProjectConfig project = new WizardConfig
+	XtextProjectConfig project = new StandardProjectConfig
 	
 	@Accessors
 	CodeConfig code = new CodeConfig

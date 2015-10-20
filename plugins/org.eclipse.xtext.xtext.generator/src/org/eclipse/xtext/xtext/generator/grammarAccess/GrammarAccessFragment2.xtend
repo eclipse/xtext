@@ -38,7 +38,6 @@ import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElement
 import org.eclipse.xtext.service.GrammarProvider
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.util.internal.Log
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -46,9 +45,10 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotat
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 @Log
-class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
+class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Accessors
 	String xmlVersion

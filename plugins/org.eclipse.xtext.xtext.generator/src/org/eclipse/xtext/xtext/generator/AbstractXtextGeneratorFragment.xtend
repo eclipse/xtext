@@ -7,28 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import java.util.List
-import org.eclipse.emf.ecore.resource.ResourceSet
+import com.google.inject.Inject
+import com.google.inject.Injector
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 
-interface ILanguageConfig {
+abstract class AbstractXtextGeneratorFragment implements IXtextGeneratorFragment {
 	
-	def Grammar getGrammar()
+	@Accessors(PROTECTED_GETTER)
+	@Inject IXtextProjectConfig projectConfig
 	
-	def List<String> getFileExtensions()
+	@Accessors(PROTECTED_GETTER)
+	@Inject IXtextGeneratorLanguage language
 	
-	def StandaloneSetupAccess getRuntimeGenSetup()
+	@Accessors(PROTECTED_GETTER)
+	@Inject Grammar grammar
 	
-	def GuiceModuleAccess getRuntimeGenModule()
+	override checkConfiguration(Issues issues) {
+	}
 	
-	def GuiceModuleAccess getEclipsePluginGenModule()
-	
-	def GuiceModuleAccess getIdeaGenModule()
-	
-	def GuiceModuleAccess getWebGenModule()
-	
-	def ResourceSet getResourceSet()
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
+	}
 	
 }

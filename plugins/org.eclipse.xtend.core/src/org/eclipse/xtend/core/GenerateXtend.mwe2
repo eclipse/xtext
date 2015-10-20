@@ -41,7 +41,7 @@ Workflow {
 
 	component = XtextGenerator auto-inject {
 		configuration = parser.XtendGeneratorModule {
-			project = WizardConfig auto-inject {
+			project = StandardProjectConfig auto-inject {
 				runtime = {
 					name = runtimeProjectName
 				}

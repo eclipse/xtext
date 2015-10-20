@@ -161,7 +161,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				
 				component = XtextGenerator {
 					configuration = {
-						project = WizardConfig {
+						project = StandardProjectConfig {
 							baseName = "«name»"
 							rootPath = rootPath
 							«IF testProject.enabled»

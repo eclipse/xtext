@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 
 @Log
 @SuppressWarnings("all")
@@ -46,7 +46,7 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
   private List<String> loadedResources = CollectionLiterals.<String>newArrayList();
   
   @Inject
-  private ILanguageConfig language;
+  private IXtextGeneratorLanguage language;
   
   public void addLoadedResource(final String uri) {
     this.loadedResources.add(uri);

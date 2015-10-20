@@ -16,16 +16,16 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.xtext.RuleNames;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class LanguageModule extends AbstractGenericModule {
-  private final LanguageConfig2 language;
+  private final XtextGeneratorLanguage language;
   
   public void configureLanguage(final Binder binder) {
-    AnnotatedBindingBuilder<ILanguageConfig> _bind = binder.<ILanguageConfig>bind(ILanguageConfig.class);
+    AnnotatedBindingBuilder<IXtextGeneratorLanguage> _bind = binder.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class);
     _bind.toInstance(this.language);
   }
   
@@ -56,7 +56,7 @@ public class LanguageModule extends AbstractGenericModule {
     binder.install(_guiceModule);
   }
   
-  public LanguageModule(final LanguageConfig2 language) {
+  public LanguageModule(final XtextGeneratorLanguage language) {
     super();
     this.language = language;
   }

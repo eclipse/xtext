@@ -25,7 +25,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
 @Accessors
 @SuppressWarnings("all")
-public class WizardConfig extends XtextProjectConfig {
+public class StandardProjectConfig extends XtextProjectConfig {
   private boolean mavenLayout;
   
   private boolean createEclipseMetaData;
@@ -65,45 +65,45 @@ public class WizardConfig extends XtextProjectConfig {
         String _name = it.getName();
         boolean _tripleEquals = (_name == null);
         if (_tripleEquals) {
-          String _computeName = WizardConfig.this.computeName(it);
+          String _computeName = StandardProjectConfig.this.computeName(it);
           it.setName(_computeName);
         }
         String _rootPath = it.getRootPath();
         boolean _tripleEquals_1 = (_rootPath == null);
         if (_tripleEquals_1) {
-          String _computeRoot = WizardConfig.this.computeRoot(it);
+          String _computeRoot = StandardProjectConfig.this.computeRoot(it);
           it.setRoot(_computeRoot);
         }
         String _metaInfPath = it.getMetaInfPath();
         boolean _tripleEquals_2 = (_metaInfPath == null);
         if (_tripleEquals_2) {
-          String _computeMetaInf = WizardConfig.this.computeMetaInf(it);
+          String _computeMetaInf = StandardProjectConfig.this.computeMetaInf(it);
           it.setMetaInf(_computeMetaInf);
         }
         String _srcPath = it.getSrcPath();
         boolean _tripleEquals_3 = (_srcPath == null);
         if (_tripleEquals_3) {
-          String _computeSrc = WizardConfig.this.computeSrc(it);
+          String _computeSrc = StandardProjectConfig.this.computeSrc(it);
           it.setSrc(_computeSrc);
         }
         String _srcGenPath = it.getSrcGenPath();
         boolean _tripleEquals_4 = (_srcGenPath == null);
         if (_tripleEquals_4) {
-          String _computeSrcGen = WizardConfig.this.computeSrcGen(it);
+          String _computeSrcGen = StandardProjectConfig.this.computeSrcGen(it);
           it.setSrcGen(_computeSrcGen);
         }
         if ((it instanceof BundleProjectConfig)) {
-          if (WizardConfig.this.createEclipseMetaData) {
+          if (StandardProjectConfig.this.createEclipseMetaData) {
             ManifestAccess _manifest = ((BundleProjectConfig)it).getManifest();
             boolean _tripleEquals_5 = (_manifest == null);
             if (_tripleEquals_5) {
-              ManifestAccess _newManifestAccess = WizardConfig.this.newManifestAccess();
+              ManifestAccess _newManifestAccess = StandardProjectConfig.this.newManifestAccess();
               ((BundleProjectConfig)it).setManifest(_newManifestAccess);
             }
             PluginXmlAccess _pluginXml = ((BundleProjectConfig)it).getPluginXml();
             boolean _tripleEquals_6 = (_pluginXml == null);
             if (_tripleEquals_6) {
-              PluginXmlAccess _newPluginXmlAccess = WizardConfig.this.newPluginXmlAccess();
+              PluginXmlAccess _newPluginXmlAccess = StandardProjectConfig.this.newPluginXmlAccess();
               ((BundleProjectConfig)it).setPluginXml(_newPluginXmlAccess);
             }
           }
@@ -112,7 +112,7 @@ public class WizardConfig extends XtextProjectConfig {
           String _ecoreModelPath = ((RuntimeProjectConfig)it).getEcoreModelPath();
           boolean _tripleEquals_7 = (_ecoreModelPath == null);
           if (_tripleEquals_7) {
-            String _computeEcoreModel = WizardConfig.this.computeEcoreModel(((RuntimeProjectConfig)it));
+            String _computeEcoreModel = StandardProjectConfig.this.computeEcoreModel(((RuntimeProjectConfig)it));
             ((RuntimeProjectConfig)it).setEcoreModel(_computeEcoreModel);
           }
         }
@@ -120,7 +120,7 @@ public class WizardConfig extends XtextProjectConfig {
           String _assetsPath = ((WebProjectConfig)it).getAssetsPath();
           boolean _tripleEquals_8 = (_assetsPath == null);
           if (_tripleEquals_8) {
-            String _computeAssets = WizardConfig.this.computeAssets(((WebProjectConfig)it));
+            String _computeAssets = StandardProjectConfig.this.computeAssets(((WebProjectConfig)it));
             ((WebProjectConfig)it).setAssets(_computeAssets);
           }
         }

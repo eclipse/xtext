@@ -38,10 +38,10 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -60,7 +60,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  * Main generator fragment for web integration.
  */
 @SuppressWarnings("all")
-public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
+public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   private enum Framework {
     ORION,
     
@@ -328,7 +328,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       _and = _tripleNotEquals;
     }
     if (_and) {
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       List<String> _fileExtensions = _language.getFileExtensions();
       final String langId = IterableExtensions.<String>head(_fileExtensions);
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingModuleName);
@@ -442,7 +442,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     Grammar _grammar = this.getGrammar();
     TypeReference _parserClass = this.caNaming.getParserClass(_grammar);
     GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
-    ILanguageConfig _language_1 = this.getLanguage();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
     _addTypeToType.contributeTo(_webGenModule);
   }
@@ -1840,7 +1840,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
-        ILanguageConfig _language = WebIntegrationFragment.this.getLanguage();
+        IXtextGeneratorLanguage _language = WebIntegrationFragment.this.getLanguage();
         List<String> _fileExtensions = _language.getFileExtensions();
         String _head = IterableExtensions.<String>head(_fileExtensions);
         _builder.append(_head, "\t\t");

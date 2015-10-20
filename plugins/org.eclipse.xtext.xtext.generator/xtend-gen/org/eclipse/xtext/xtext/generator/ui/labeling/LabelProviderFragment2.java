@@ -16,10 +16,10 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -37,7 +37,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
+public class LabelProviderFragment2 extends AbstractXtextGeneratorFragment {
   private final static String XBASE_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider";
   
   private final static String XBASE_DESCRIPTION_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider";
@@ -170,7 +170,7 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
         }
       };
       GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ResourceUIServiceLabelProvider", _client);
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
       _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
     }

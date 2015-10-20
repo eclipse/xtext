@@ -9,12 +9,12 @@ package org.eclipse.xtext.xtext.generator.exporting
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.naming.SimpleNameProvider
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class SimpleNamesFragment2 extends AbstractGeneratorFragment2 {
+class SimpleNamesFragment2 extends AbstractXtextGeneratorFragment {
 	
 	override generate() {
 		new GuiceModuleAccess.BindingFactory()

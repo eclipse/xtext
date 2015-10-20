@@ -11,15 +11,15 @@ import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
+public class XtypeGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
@@ -27,7 +27,7 @@ public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
   @Override
   public void generate() {
     boolean _and = false;
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     boolean _inheritsXtype = this._xbaseUsageDetector.inheritsXtype(_grammar);
     if (!_inheritsXtype) {

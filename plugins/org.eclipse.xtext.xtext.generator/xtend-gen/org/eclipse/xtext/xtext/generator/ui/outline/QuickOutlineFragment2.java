@@ -14,7 +14,7 @@ import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class QuickOutlineFragment2 extends AbstractGeneratorFragment2 {
+public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;

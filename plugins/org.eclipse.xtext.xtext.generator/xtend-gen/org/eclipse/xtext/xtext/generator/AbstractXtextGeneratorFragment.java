@@ -13,20 +13,20 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 
 @SuppressWarnings("all")
-public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
+public abstract class AbstractXtextGeneratorFragment implements IXtextGeneratorFragment {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private IXtextProjectConfig projectConfig;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
-  private ILanguageConfig language;
+  private IXtextGeneratorLanguage language;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -47,7 +47,7 @@ public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 
   }
   
   @Pure
-  protected ILanguageConfig getLanguage() {
+  protected IXtextGeneratorLanguage getLanguage() {
     return this.language;
   }
   

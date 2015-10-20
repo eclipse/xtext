@@ -19,7 +19,7 @@ Workflow {
 	
 	component = XtextGenerator auto-inject {
 		configuration = StateMachineGeneratorModule {
-			project = WizardConfig auto-inject {
+			project = StandardProjectConfig auto-inject {
 				genericIde = {
 					enabled = true
 				}

@@ -27,7 +27,7 @@ import com.google.inject.Inject
 class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
 	@Accessors List<String> loadedResources = newArrayList
 	
-	@Inject ILanguageConfig language
+	@Inject IXtextGeneratorLanguage language
 	
 	def void addLoadedResource(String uri) {
 		loadedResources += uri
