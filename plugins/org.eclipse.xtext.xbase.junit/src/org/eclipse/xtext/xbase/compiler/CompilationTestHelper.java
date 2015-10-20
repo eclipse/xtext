@@ -247,7 +247,7 @@ public class CompilationTestHelper {
 		result.setClasspathURIContext(classpathUriContext);
 		FileProjectConfig projectConfig = new FileProjectConfig(new File(workspaceRoot,PROJECT_NAME), PROJECT_NAME);
 		projectConfig.addSourceFolder("src");
-		new ProjectConfigAdapter(projectConfig).attachToEmfObject(result);
+		ProjectConfigAdapter.install(result, projectConfig);
 		for (Pair<String, ? extends CharSequence> entry : resources) {
 			URI uri = copyToWorkspace(getSourceFolderPath()+"/"+entry.getKey(), entry.getValue());
 			Resource resource = result.createResource(uri);
