@@ -214,7 +214,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		}
 		for (Map.Entry<Action, Collection<SerializerPDA>> action : actionPdas.asMap().entrySet()) {
 			SerializerPDA merged = merge(new ActionContext(null, action.getKey()), action.getValue());
-			Set<Set<Parameter>> parameterPermutations = Sets.newHashSet();
+			Set<Set<Parameter>> parameterPermutations = Sets.newLinkedHashSet();
 			for (ISerializationContext container : actionContexts.get(action.getKey())) {
 				parameterPermutations.add(container.getEnabledBooleanParameters());
 			}

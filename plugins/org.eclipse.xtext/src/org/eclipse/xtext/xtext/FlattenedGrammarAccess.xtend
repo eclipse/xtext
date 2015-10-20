@@ -153,6 +153,7 @@ class FlattenedGrammarAccess {
 					var result = super.copy(eObject)
 					if (result instanceof CompoundElement) {
 						var List<AbstractElement> elements = result.getElements()
+//						while (elements !== null && elements.size() === 1) {
 						if (elements.size() === 1) {
 							if (!result.isFirstSetPredicated && !result.isPredicated) {
 								var element = elements.get(0)
@@ -165,6 +166,12 @@ class FlattenedGrammarAccess {
 								result.mergePredicates(element)
 								element.firstSetPredicated = false
 								element.predicated = false
+//								if (element instanceof CompoundElement && element.eClass == result.eClass) {
+//									elements.clear
+//									elements.addAll((element as CompoundElement).getElements)
+//								} else {
+//									elements = null
+//								}
 							}
 						}
 					}

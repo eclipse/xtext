@@ -418,7 +418,7 @@ class GrammarPDAProviderTest {
 				'kw2' -> (|s=S)
 				(s=S|) -> stop
 				(|s=S) -> stop
-			S_P:
+			S<P>:
 				start -> v1=ID
 				v1=ID -> stop
 			S:
