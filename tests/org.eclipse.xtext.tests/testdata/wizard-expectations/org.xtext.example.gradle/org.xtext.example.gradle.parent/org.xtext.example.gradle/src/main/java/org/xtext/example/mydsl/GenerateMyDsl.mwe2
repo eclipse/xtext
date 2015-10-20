@@ -11,7 +11,7 @@ Workflow {
 	
 	component = XtextGenerator {
 		configuration = {
-			project = WizardConfig {
+			project = StandardProjectConfig {
 				baseName = "org.xtext.example.gradle"
 				rootPath = rootPath
 				runtimeTest = {
