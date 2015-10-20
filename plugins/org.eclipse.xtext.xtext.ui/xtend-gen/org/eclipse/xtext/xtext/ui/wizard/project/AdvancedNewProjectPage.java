@@ -13,12 +13,9 @@ import java.util.List;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -74,138 +71,125 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   @Override
   public void createControl(final Composite parent) {
-    ScrolledComposite _scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL);
-    final Procedure1<ScrolledComposite> _function = new Procedure1<ScrolledComposite>() {
+    Composite _composite = new Composite(parent, SWT.NONE);
+    final Procedure1<Composite> _function = new Procedure1<Composite>() {
       @Override
-      public void apply(final ScrolledComposite it) {
-        FillLayout _fillLayout = new FillLayout();
-        it.setLayout(_fillLayout);
-        it.setExpandHorizontal(true);
-        it.setExpandVertical(true);
-        Composite _composite = new Composite(it, SWT.NONE);
-        final Procedure1<Composite> _function = new Procedure1<Composite>() {
+      public void apply(final Composite it) {
+        GridData _gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
+        it.setLayoutData(_gridData);
+        GridLayout _gridLayout = new GridLayout(1, false);
+        it.setLayout(_gridLayout);
+        final Procedure1<Group> _function = new Procedure1<Group>() {
           @Override
-          public void apply(final Composite it) {
-            GridLayout _gridLayout = new GridLayout(1, false);
-            it.setLayout(_gridLayout);
-            final Procedure1<Group> _function = new Procedure1<Group>() {
+          public void apply(final Group it) {
+            it.setText(Messages.WizardNewXtextProjectCreationPage_LabelFacets);
+            final Procedure1<Button> _function = new Procedure1<Button>() {
               @Override
-              public void apply(final Group it) {
-                it.setText(Messages.WizardNewXtextProjectCreationPage_LabelFacets);
-                final Procedure1<Button> _function = new Procedure1<Button>() {
-                  @Override
-                  public void apply(final Button it) {
-                    it.setText("Eclipse Plugin");
-                  }
-                };
-                Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
-                AdvancedNewProjectPage.this.createUiProject = _CheckBox;
-                final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-                  @Override
-                  public void apply(final Button it) {
-                    it.setText("IntelliJ IDEA Plugin");
-                    it.setEnabled(true);
-                  }
-                };
-                Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_1);
-                AdvancedNewProjectPage.this.createIdeaProject = _CheckBox_1;
-                final Procedure1<Button> _function_2 = new Procedure1<Button>() {
-                  @Override
-                  public void apply(final Button it) {
-                    it.setText("Web Integration");
-                    it.setEnabled(true);
-                  }
-                };
-                Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
-                AdvancedNewProjectPage.this.createWebProject = _CheckBox_2;
-                final Procedure1<Button> _function_3 = new Procedure1<Button>() {
-                  @Override
-                  public void apply(final Button it) {
-                    it.setText("Generic IDE Support");
-                    it.setEnabled(true);
-                  }
-                };
-                Button _CheckBox_3 = AdvancedNewProjectPage.this.CheckBox(it, _function_3);
-                AdvancedNewProjectPage.this.createIdeProject = _CheckBox_3;
-                final Procedure1<Button> _function_4 = new Procedure1<Button>() {
-                  @Override
-                  public void apply(final Button it) {
-                    it.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
-                  }
-                };
-                Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
-                AdvancedNewProjectPage.this.createTestProject = _CheckBox_4;
+              public void apply(final Button it) {
+                it.setText("Eclipse Plugin");
               }
             };
-            AdvancedNewProjectPage.this.Group(it, _function);
-            final Procedure1<Group> _function_1 = new Procedure1<Group>() {
+            Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
+            AdvancedNewProjectPage.this.createUiProject = _CheckBox;
+            final Procedure1<Button> _function_1 = new Procedure1<Button>() {
               @Override
-              public void apply(final Group it) {
-                it.setText("Preferred Build System");
-                final Procedure1<Combo> _function = new Procedure1<Combo>() {
-                  @Override
-                  public void apply(final Combo it) {
-                    it.setEnabled(true);
-                    BuildSystem[] _values = BuildSystem.values();
-                    final Function1<BuildSystem, String> _function = new Function1<BuildSystem, String>() {
-                      @Override
-                      public String apply(final BuildSystem it) {
-                        return it.toString();
-                      }
-                    };
-                    List<String> _map = ListExtensions.<BuildSystem, String>map(((List<BuildSystem>)Conversions.doWrapArray(_values)), _function);
-                    it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
-                  }
-                };
-                Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
-                AdvancedNewProjectPage.this.preferredBuildSystem = _DropDown;
+              public void apply(final Button it) {
+                it.setText("IntelliJ IDEA Plugin");
+                it.setEnabled(true);
               }
             };
-            AdvancedNewProjectPage.this.Group(it, _function_1);
-            final Procedure1<Group> _function_2 = new Procedure1<Group>() {
+            Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_1);
+            AdvancedNewProjectPage.this.createIdeaProject = _CheckBox_1;
+            final Procedure1<Button> _function_2 = new Procedure1<Button>() {
               @Override
-              public void apply(final Group it) {
-                it.setText("Source Layout");
-                final Procedure1<Combo> _function = new Procedure1<Combo>() {
-                  @Override
-                  public void apply(final Combo it) {
-                    it.setEnabled(true);
-                    SourceLayout[] _values = SourceLayout.values();
-                    final Function1<SourceLayout, String> _function = new Function1<SourceLayout, String>() {
-                      @Override
-                      public String apply(final SourceLayout it) {
-                        return it.toString();
-                      }
-                    };
-                    List<String> _map = ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(_values)), _function);
-                    it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
-                  }
-                };
-                Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
-                AdvancedNewProjectPage.this.sourceLayout = _DropDown;
+              public void apply(final Button it) {
+                it.setText("Web Integration");
+                it.setEnabled(true);
               }
             };
-            AdvancedNewProjectPage.this.Group(it, _function_2);
-            StatusWidget _statusWidget = new StatusWidget(it, SWT.NONE);
-            final Procedure1<StatusWidget> _function_3 = new Procedure1<StatusWidget>() {
+            Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
+            AdvancedNewProjectPage.this.createWebProject = _CheckBox_2;
+            final Procedure1<Button> _function_3 = new Procedure1<Button>() {
               @Override
-              public void apply(final StatusWidget it) {
-                GridData _gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
-                it.setLayoutData(_gridData);
+              public void apply(final Button it) {
+                it.setText("Generic IDE Support");
+                it.setEnabled(true);
               }
             };
-            StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_3);
-            AdvancedNewProjectPage.this.statusWidget = _doubleArrow;
+            Button _CheckBox_3 = AdvancedNewProjectPage.this.CheckBox(it, _function_3);
+            AdvancedNewProjectPage.this.createIdeProject = _CheckBox_3;
+            final Procedure1<Button> _function_4 = new Procedure1<Button>() {
+              @Override
+              public void apply(final Button it) {
+                it.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
+              }
+            };
+            Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
+            AdvancedNewProjectPage.this.createTestProject = _CheckBox_4;
           }
         };
-        Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
-        it.setContent(_doubleArrow);
-        Control _content = it.getContent();
-        Point _computeSize = _content.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-        it.setMinSize(_computeSize);
+        AdvancedNewProjectPage.this.Group(it, _function);
+        final Procedure1<Group> _function_1 = new Procedure1<Group>() {
+          @Override
+          public void apply(final Group it) {
+            it.setText("Preferred Build System");
+            final Procedure1<Combo> _function = new Procedure1<Combo>() {
+              @Override
+              public void apply(final Combo it) {
+                it.setEnabled(true);
+                BuildSystem[] _values = BuildSystem.values();
+                final Function1<BuildSystem, String> _function = new Function1<BuildSystem, String>() {
+                  @Override
+                  public String apply(final BuildSystem it) {
+                    return it.toString();
+                  }
+                };
+                List<String> _map = ListExtensions.<BuildSystem, String>map(((List<BuildSystem>)Conversions.doWrapArray(_values)), _function);
+                it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
+              }
+            };
+            Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
+            AdvancedNewProjectPage.this.preferredBuildSystem = _DropDown;
+          }
+        };
+        AdvancedNewProjectPage.this.Group(it, _function_1);
+        final Procedure1<Group> _function_2 = new Procedure1<Group>() {
+          @Override
+          public void apply(final Group it) {
+            it.setText("Source Layout");
+            final Procedure1<Combo> _function = new Procedure1<Combo>() {
+              @Override
+              public void apply(final Combo it) {
+                it.setEnabled(true);
+                SourceLayout[] _values = SourceLayout.values();
+                final Function1<SourceLayout, String> _function = new Function1<SourceLayout, String>() {
+                  @Override
+                  public String apply(final SourceLayout it) {
+                    return it.toString();
+                  }
+                };
+                List<String> _map = ListExtensions.<SourceLayout, String>map(((List<SourceLayout>)Conversions.doWrapArray(_values)), _function);
+                it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
+              }
+            };
+            Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
+            AdvancedNewProjectPage.this.sourceLayout = _DropDown;
+          }
+        };
+        AdvancedNewProjectPage.this.Group(it, _function_2);
+        StatusWidget _statusWidget = new StatusWidget(it, SWT.NONE);
+        final Procedure1<StatusWidget> _function_3 = new Procedure1<StatusWidget>() {
+          @Override
+          public void apply(final StatusWidget it) {
+            GridData _gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
+            it.setLayoutData(_gridData);
+          }
+        };
+        StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_3);
+        AdvancedNewProjectPage.this.statusWidget = _doubleArrow;
       }
     };
-    ScrolledComposite _doubleArrow = ObjectExtensions.<ScrolledComposite>operator_doubleArrow(_scrolledComposite, _function);
+    Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
     this.setControl(_doubleArrow);
     final SelectionAdapter selectionControl = new SelectionAdapter() {
       @Override
@@ -236,8 +220,8 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.setPageComplete(_tripleNotEquals);
   }
   
-  public int checkWidgets(final SelectionEvent e) {
-    int _xblockexpression = (int) 0;
+  public Procedure0 checkWidgets(final SelectionEvent e) {
+    Procedure0 _xblockexpression = null;
     {
       boolean _and = false;
       boolean _isSelected = this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN);
@@ -363,7 +347,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         }
       }
       final List<Button> dependend = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
-      int _xifexpression = (int) 0;
+      Procedure0 _xifexpression = null;
       boolean _and_4 = false;
       boolean _selection_2 = this.createIdeProject.getSelection();
       boolean _not_3 = (!_selection_2);
@@ -380,7 +364,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_4 = _exists;
       }
       if (_and_4) {
-        int _xblockexpression_1 = (int) 0;
+        Procedure0 _xblockexpression_1 = null;
         {
           final Function1<Button, Boolean> _function_5 = new Function1<Button, Boolean>() {
             @Override
@@ -396,7 +380,7 @@ public class AdvancedNewProjectPage extends WizardPage {
             }
           };
           final String affectedProjects = IterableExtensions.<Button>join(_filter, ", ", _function_6);
-          int _xifexpression_1 = (int) 0;
+          Procedure0 _xifexpression_1 = null;
           if ((this.createIdeProject == source)) {
             StringConcatenation _builder_4 = new StringConcatenation();
             _builder_4.append("Frontend projects like \'");
@@ -472,7 +456,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     return Objects.equal(_string, _text);
   }
   
-  protected <T extends Control> int reportIssue(final int severity, final String text) {
+  protected <T extends Control> Procedure0 reportIssue(final int severity, final String text) {
     final Procedure0 _function = new Procedure0() {
       @Override
       public void apply() {
@@ -481,7 +465,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     return this.<Control>reportIssue(severity, text, _function);
   }
   
-  protected <T extends Control> int reportIssue(final int severity, final String text, final Procedure0 fix) {
+  protected <T extends Control> Procedure0 reportIssue(final int severity, final String text, final Procedure0 fix) {
     final Procedure0 _function = new Procedure0() {
       @Override
       public void apply() {
@@ -509,8 +493,9 @@ public class AdvancedNewProjectPage extends WizardPage {
       _and = false;
     } else {
       int _state = bundle.getState();
-      boolean _tripleEquals = (_state == Bundle.RESOLVED);
-      _and = _tripleEquals;
+      int _bitwiseAnd = (_state & ((Bundle.RESOLVED | Bundle.STARTING) | Bundle.ACTIVE));
+      boolean _tripleNotEquals = (_bitwiseAnd != 0);
+      _and = _tripleNotEquals;
     }
     return _and;
   }
