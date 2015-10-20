@@ -10,7 +10,7 @@ In this chapter you will learn how to create a new Xtext project, generate a ful
 
 ## Creating A New Xtext Project {#new-project}
 
-The first step is to create a new Xtext project by choosing *File &rarr; New &rarr; Project...*. The dialog offers a couple of different project types. Select *New Xtext Project* from the category *Xtext* and finish the wizard with the default settings. You will find 4 new projects in your workspace which are mostly empty. The Xtext grammar editor will be opened and show the definition of a very simple *Hello World* language.
+The first step is to create a new Xtext project by choosing *File &rarr; New &rarr; Project...*. The dialog offers a couple of different project types. Select *New Xtext Project* from the category *Xtext* and finish the wizard with the default settings. You will find 5 new projects in your workspace which are mostly empty. The Xtext grammar editor will be opened and show the definition of a very simple *Hello World* language.
 
 ```xtext
 grammar org.xtext.example.mydsl.MyDsl with 
@@ -33,6 +33,7 @@ Hello World!
 ```
 
 ![](images/FiveMinTutorial_FreshProject.png)
+NEEDS TO BE UPDATED
 
 ## Generating The Language Infrastructure {#run-workflow}
 
@@ -43,6 +44,7 @@ In order to test drive this language, you will have to generate the respective l
 Let's give the editor a try. If you select *Run As &rarr; Eclipse Application* from the project's context menu, you can create a new Eclipse Application. A new Eclipse instance will be launched and allows to test drive the editor.
 
 ![](images/FiveMinTutorial_LaunchConfig.png)
+NEEDS TO BE UPDATED, WE SAID RUN AS, BUT THIS IS A SCREENSHOT FOR DEBUG AS
 
 Before you can create a file for the sample language, you will have to create a sample project. Select *File &rarr; New &rarr; Project...* and choose a project type of your choice, e.g. *Java Project*, name it *Sample* and create a new file in the *src* folder of the project: From the context menu of the folder choose *New &rarr; File*, call it *Sample.mydsl* and hit *Finish*. The newly created editor will open for your language and ask you in a dialog, whether you want to add the Xtext nature to your project, which should be confirmed. You can now give the editor a try, e.g. use content assist (*Ctrl+Space*) to insert the keyword `Hello` and see how the input is validated immediately.
 
