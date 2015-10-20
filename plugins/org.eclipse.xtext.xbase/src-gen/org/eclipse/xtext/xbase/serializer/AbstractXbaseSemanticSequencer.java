@@ -320,6 +320,9 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     FullJvmFormalParameter returns JvmFormalParameter
+	 *
 	 * Constraint:
 	 *     (parameterType=JvmTypeReference name=ValidID)
 	 */
@@ -342,6 +345,9 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmFormalParameter returns JvmFormalParameter
+	 *
 	 * Constraint:
 	 *     (parameterType=JvmTypeReference? name=ValidID)
 	 */
@@ -355,6 +361,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XBinaryOperation
+	 *     XAssignment returns XBinaryOperation
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBinaryOperation
+	 *     XOrExpression returns XBinaryOperation
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XAndExpression returns XBinaryOperation
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XEqualityExpression returns XBinaryOperation
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XRelationalExpression returns XBinaryOperation
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XBinaryOperation
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XBinaryOperation
+	 *     XOtherOperatorExpression returns XBinaryOperation
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XAdditiveExpression returns XBinaryOperation
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XMultiplicativeExpression returns XBinaryOperation
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XUnaryOperation returns XBinaryOperation
+	 *     XCastedExpression returns XBinaryOperation
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XBinaryOperation
+	 *     XPostfixOperation returns XBinaryOperation
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XBinaryOperation
+	 *     XMemberFeatureCall returns XBinaryOperation
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XBinaryOperation
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XBinaryOperation
+	 *     XPrimaryExpression returns XBinaryOperation
+	 *     XParenthesizedExpression returns XBinaryOperation
+	 *     XExpressionOrVarDeclaration returns XBinaryOperation
+	 *
 	 * Constraint:
 	 *     (
 	 *         (leftOperand=XAssignment_XBinaryOperation_1_1_0_0_0 feature=[JvmIdentifiableElement|OpMultiAssign] rightOperand=XAssignment) | 
@@ -377,6 +414,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XAssignment
+	 *     XAssignment returns XAssignment
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XAssignment
+	 *     XOrExpression returns XAssignment
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XAndExpression returns XAssignment
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XEqualityExpression returns XAssignment
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XRelationalExpression returns XAssignment
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XAssignment
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XAssignment
+	 *     XOtherOperatorExpression returns XAssignment
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XAdditiveExpression returns XAssignment
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XMultiplicativeExpression returns XAssignment
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XUnaryOperation returns XAssignment
+	 *     XCastedExpression returns XAssignment
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XAssignment
+	 *     XPostfixOperation returns XAssignment
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XAssignment
+	 *     XMemberFeatureCall returns XAssignment
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XAssignment
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XAssignment
+	 *     XPrimaryExpression returns XAssignment
+	 *     XParenthesizedExpression returns XAssignment
+	 *     XExpressionOrVarDeclaration returns XAssignment
+	 *
 	 * Constraint:
 	 *     (
 	 *         (feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment) | 
@@ -393,6 +461,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XBasicForLoopExpression
+	 *     XAssignment returns XBasicForLoopExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBasicForLoopExpression
+	 *     XOrExpression returns XBasicForLoopExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XBasicForLoopExpression
+	 *     XAndExpression returns XBasicForLoopExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XBasicForLoopExpression
+	 *     XEqualityExpression returns XBasicForLoopExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XBasicForLoopExpression
+	 *     XRelationalExpression returns XBasicForLoopExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XBasicForLoopExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XBasicForLoopExpression
+	 *     XOtherOperatorExpression returns XBasicForLoopExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XBasicForLoopExpression
+	 *     XAdditiveExpression returns XBasicForLoopExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XBasicForLoopExpression
+	 *     XMultiplicativeExpression returns XBasicForLoopExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XBasicForLoopExpression
+	 *     XUnaryOperation returns XBasicForLoopExpression
+	 *     XCastedExpression returns XBasicForLoopExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XBasicForLoopExpression
+	 *     XPostfixOperation returns XBasicForLoopExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XBasicForLoopExpression
+	 *     XMemberFeatureCall returns XBasicForLoopExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XBasicForLoopExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XBasicForLoopExpression
+	 *     XPrimaryExpression returns XBasicForLoopExpression
+	 *     XParenthesizedExpression returns XBasicForLoopExpression
+	 *     XBasicForLoopExpression returns XBasicForLoopExpression
+	 *     XExpressionOrVarDeclaration returns XBasicForLoopExpression
+	 *
 	 * Constraint:
 	 *     (
 	 *         (initExpressions+=XExpressionOrVarDeclaration initExpressions+=XExpressionOrVarDeclaration*)? 
@@ -411,6 +511,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XBlockExpression
+	 *     XAssignment returns XBlockExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBlockExpression
+	 *     XOrExpression returns XBlockExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XBlockExpression
+	 *     XAndExpression returns XBlockExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XBlockExpression
+	 *     XEqualityExpression returns XBlockExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XBlockExpression
+	 *     XRelationalExpression returns XBlockExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XBlockExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XBlockExpression
+	 *     XOtherOperatorExpression returns XBlockExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XBlockExpression
+	 *     XAdditiveExpression returns XBlockExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XBlockExpression
+	 *     XMultiplicativeExpression returns XBlockExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XBlockExpression
+	 *     XUnaryOperation returns XBlockExpression
+	 *     XCastedExpression returns XBlockExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XBlockExpression
+	 *     XPostfixOperation returns XBlockExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XBlockExpression
+	 *     XMemberFeatureCall returns XBlockExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XBlockExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XBlockExpression
+	 *     XPrimaryExpression returns XBlockExpression
+	 *     XParenthesizedExpression returns XBlockExpression
+	 *     XBlockExpression returns XBlockExpression
+	 *     XExpressionOrVarDeclaration returns XBlockExpression
+	 *
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
 	 */
@@ -424,6 +556,39 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XBooleanLiteral
+	 *     XAssignment returns XBooleanLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBooleanLiteral
+	 *     XOrExpression returns XBooleanLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XBooleanLiteral
+	 *     XAndExpression returns XBooleanLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XBooleanLiteral
+	 *     XEqualityExpression returns XBooleanLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XBooleanLiteral
+	 *     XRelationalExpression returns XBooleanLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XBooleanLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XBooleanLiteral
+	 *     XOtherOperatorExpression returns XBooleanLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XBooleanLiteral
+	 *     XAdditiveExpression returns XBooleanLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XBooleanLiteral
+	 *     XMultiplicativeExpression returns XBooleanLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XBooleanLiteral
+	 *     XUnaryOperation returns XBooleanLiteral
+	 *     XCastedExpression returns XBooleanLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XBooleanLiteral
+	 *     XPostfixOperation returns XBooleanLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XBooleanLiteral
+	 *     XMemberFeatureCall returns XBooleanLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XBooleanLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XBooleanLiteral
+	 *     XPrimaryExpression returns XBooleanLiteral
+	 *     XLiteral returns XBooleanLiteral
+	 *     XParenthesizedExpression returns XBooleanLiteral
+	 *     XExpressionOrVarDeclaration returns XBooleanLiteral
+	 *     XBooleanLiteral returns XBooleanLiteral
+	 *
 	 * Constraint:
 	 *     isTrue?='true'?
 	 */
@@ -437,6 +602,9 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XCasePart returns XCasePart
+	 *
 	 * Constraint:
 	 *     (typeGuard=JvmTypeReference? case=XExpression? (then=XExpression | fallThrough?=','))
 	 */
@@ -450,6 +618,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XCastedExpression
+	 *     XAssignment returns XCastedExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XCastedExpression
+	 *     XOrExpression returns XCastedExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XCastedExpression
+	 *     XAndExpression returns XCastedExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XCastedExpression
+	 *     XEqualityExpression returns XCastedExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XCastedExpression
+	 *     XRelationalExpression returns XCastedExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XCastedExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XCastedExpression
+	 *     XOtherOperatorExpression returns XCastedExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XCastedExpression
+	 *     XAdditiveExpression returns XCastedExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XCastedExpression
+	 *     XMultiplicativeExpression returns XCastedExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XCastedExpression
+	 *     XUnaryOperation returns XCastedExpression
+	 *     XCastedExpression returns XCastedExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XCastedExpression
+	 *     XPostfixOperation returns XCastedExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XCastedExpression
+	 *     XMemberFeatureCall returns XCastedExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XCastedExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XCastedExpression
+	 *     XPrimaryExpression returns XCastedExpression
+	 *     XParenthesizedExpression returns XCastedExpression
+	 *     XExpressionOrVarDeclaration returns XCastedExpression
+	 *
 	 * Constraint:
 	 *     (target=XCastedExpression_XCastedExpression_1_0_0_0 type=JvmTypeReference)
 	 */
@@ -472,6 +671,9 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XCatchClause returns XCatchClause
+	 *
 	 * Constraint:
 	 *     (declaredParam=FullJvmFormalParameter expression=XExpression)
 	 */
@@ -494,6 +696,39 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XClosure
+	 *     XAssignment returns XClosure
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XClosure
+	 *     XOrExpression returns XClosure
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XClosure
+	 *     XAndExpression returns XClosure
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XClosure
+	 *     XEqualityExpression returns XClosure
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XClosure
+	 *     XRelationalExpression returns XClosure
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XClosure
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XClosure
+	 *     XOtherOperatorExpression returns XClosure
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XClosure
+	 *     XAdditiveExpression returns XClosure
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XClosure
+	 *     XMultiplicativeExpression returns XClosure
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XClosure
+	 *     XUnaryOperation returns XClosure
+	 *     XCastedExpression returns XClosure
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XClosure
+	 *     XPostfixOperation returns XClosure
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XClosure
+	 *     XMemberFeatureCall returns XClosure
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XClosure
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XClosure
+	 *     XPrimaryExpression returns XClosure
+	 *     XLiteral returns XClosure
+	 *     XClosure returns XClosure
+	 *     XParenthesizedExpression returns XClosure
+	 *     XExpressionOrVarDeclaration returns XClosure
+	 *
 	 * Constraint:
 	 *     (
 	 *         ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|')? 
@@ -510,6 +745,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XConstructorCall
+	 *     XAssignment returns XConstructorCall
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XConstructorCall
+	 *     XOrExpression returns XConstructorCall
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XAndExpression returns XConstructorCall
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XEqualityExpression returns XConstructorCall
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XRelationalExpression returns XConstructorCall
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XConstructorCall
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XConstructorCall
+	 *     XOtherOperatorExpression returns XConstructorCall
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XAdditiveExpression returns XConstructorCall
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XMultiplicativeExpression returns XConstructorCall
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XUnaryOperation returns XConstructorCall
+	 *     XCastedExpression returns XConstructorCall
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XConstructorCall
+	 *     XPostfixOperation returns XConstructorCall
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XConstructorCall
+	 *     XMemberFeatureCall returns XConstructorCall
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XConstructorCall
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XConstructorCall
+	 *     XPrimaryExpression returns XConstructorCall
+	 *     XParenthesizedExpression returns XConstructorCall
+	 *     XExpressionOrVarDeclaration returns XConstructorCall
+	 *     XConstructorCall returns XConstructorCall
+	 *
 	 * Constraint:
 	 *     (
 	 *         constructor=[JvmConstructor|QualifiedName] 
@@ -528,6 +795,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XDoWhileExpression
+	 *     XAssignment returns XDoWhileExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XDoWhileExpression
+	 *     XOrExpression returns XDoWhileExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XDoWhileExpression
+	 *     XAndExpression returns XDoWhileExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XDoWhileExpression
+	 *     XEqualityExpression returns XDoWhileExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XDoWhileExpression
+	 *     XRelationalExpression returns XDoWhileExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XDoWhileExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XDoWhileExpression
+	 *     XOtherOperatorExpression returns XDoWhileExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XDoWhileExpression
+	 *     XAdditiveExpression returns XDoWhileExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XDoWhileExpression
+	 *     XMultiplicativeExpression returns XDoWhileExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XDoWhileExpression
+	 *     XUnaryOperation returns XDoWhileExpression
+	 *     XCastedExpression returns XDoWhileExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XDoWhileExpression
+	 *     XPostfixOperation returns XDoWhileExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XDoWhileExpression
+	 *     XMemberFeatureCall returns XDoWhileExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XDoWhileExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XDoWhileExpression
+	 *     XPrimaryExpression returns XDoWhileExpression
+	 *     XParenthesizedExpression returns XDoWhileExpression
+	 *     XDoWhileExpression returns XDoWhileExpression
+	 *     XExpressionOrVarDeclaration returns XDoWhileExpression
+	 *
 	 * Constraint:
 	 *     (body=XExpression predicate=XExpression)
 	 */
@@ -550,6 +849,9 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpressionInClosure returns XBlockExpression
+	 *
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
 	 */
@@ -563,6 +865,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XFeatureCall
+	 *     XAssignment returns XFeatureCall
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XFeatureCall
+	 *     XOrExpression returns XFeatureCall
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XFeatureCall
+	 *     XAndExpression returns XFeatureCall
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XFeatureCall
+	 *     XEqualityExpression returns XFeatureCall
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XFeatureCall
+	 *     XRelationalExpression returns XFeatureCall
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XFeatureCall
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XFeatureCall
+	 *     XOtherOperatorExpression returns XFeatureCall
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XFeatureCall
+	 *     XAdditiveExpression returns XFeatureCall
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XFeatureCall
+	 *     XMultiplicativeExpression returns XFeatureCall
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XFeatureCall
+	 *     XUnaryOperation returns XFeatureCall
+	 *     XCastedExpression returns XFeatureCall
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XFeatureCall
+	 *     XPostfixOperation returns XFeatureCall
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XFeatureCall
+	 *     XMemberFeatureCall returns XFeatureCall
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XFeatureCall
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XFeatureCall
+	 *     XPrimaryExpression returns XFeatureCall
+	 *     XParenthesizedExpression returns XFeatureCall
+	 *     XExpressionOrVarDeclaration returns XFeatureCall
+	 *     XFeatureCall returns XFeatureCall
+	 *
 	 * Constraint:
 	 *     (
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
@@ -581,6 +915,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XForLoopExpression
+	 *     XAssignment returns XForLoopExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XForLoopExpression
+	 *     XOrExpression returns XForLoopExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XForLoopExpression
+	 *     XAndExpression returns XForLoopExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XForLoopExpression
+	 *     XEqualityExpression returns XForLoopExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XForLoopExpression
+	 *     XRelationalExpression returns XForLoopExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XForLoopExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XForLoopExpression
+	 *     XOtherOperatorExpression returns XForLoopExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XForLoopExpression
+	 *     XAdditiveExpression returns XForLoopExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XForLoopExpression
+	 *     XMultiplicativeExpression returns XForLoopExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XForLoopExpression
+	 *     XUnaryOperation returns XForLoopExpression
+	 *     XCastedExpression returns XForLoopExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XForLoopExpression
+	 *     XPostfixOperation returns XForLoopExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XForLoopExpression
+	 *     XMemberFeatureCall returns XForLoopExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XForLoopExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XForLoopExpression
+	 *     XPrimaryExpression returns XForLoopExpression
+	 *     XParenthesizedExpression returns XForLoopExpression
+	 *     XForLoopExpression returns XForLoopExpression
+	 *     XExpressionOrVarDeclaration returns XForLoopExpression
+	 *
 	 * Constraint:
 	 *     (declaredParam=JvmFormalParameter forExpression=XExpression eachExpression=XExpression)
 	 */
@@ -606,6 +972,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XIfExpression
+	 *     XAssignment returns XIfExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XIfExpression
+	 *     XOrExpression returns XIfExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XAndExpression returns XIfExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XEqualityExpression returns XIfExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XRelationalExpression returns XIfExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XIfExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XIfExpression
+	 *     XOtherOperatorExpression returns XIfExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XAdditiveExpression returns XIfExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XMultiplicativeExpression returns XIfExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XUnaryOperation returns XIfExpression
+	 *     XCastedExpression returns XIfExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XIfExpression
+	 *     XPostfixOperation returns XIfExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XIfExpression
+	 *     XMemberFeatureCall returns XIfExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XIfExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XIfExpression
+	 *     XPrimaryExpression returns XIfExpression
+	 *     XParenthesizedExpression returns XIfExpression
+	 *     XIfExpression returns XIfExpression
+	 *     XExpressionOrVarDeclaration returns XIfExpression
+	 *
 	 * Constraint:
 	 *     (if=XExpression then=XExpression else=XExpression?)
 	 */
@@ -619,6 +1017,40 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XListLiteral
+	 *     XAssignment returns XListLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XListLiteral
+	 *     XOrExpression returns XListLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XListLiteral
+	 *     XAndExpression returns XListLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XListLiteral
+	 *     XEqualityExpression returns XListLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XListLiteral
+	 *     XRelationalExpression returns XListLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XListLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XListLiteral
+	 *     XOtherOperatorExpression returns XListLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XListLiteral
+	 *     XAdditiveExpression returns XListLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XListLiteral
+	 *     XMultiplicativeExpression returns XListLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XListLiteral
+	 *     XUnaryOperation returns XListLiteral
+	 *     XCastedExpression returns XListLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XListLiteral
+	 *     XPostfixOperation returns XListLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XListLiteral
+	 *     XMemberFeatureCall returns XListLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XListLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XListLiteral
+	 *     XPrimaryExpression returns XListLiteral
+	 *     XLiteral returns XListLiteral
+	 *     XCollectionLiteral returns XListLiteral
+	 *     XListLiteral returns XListLiteral
+	 *     XParenthesizedExpression returns XListLiteral
+	 *     XExpressionOrVarDeclaration returns XListLiteral
+	 *
 	 * Constraint:
 	 *     (elements+=XExpression elements+=XExpression*)?
 	 */
@@ -632,6 +1064,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XMemberFeatureCall
+	 *     XAssignment returns XMemberFeatureCall
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XMemberFeatureCall
+	 *     XOrExpression returns XMemberFeatureCall
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XMemberFeatureCall
+	 *     XAndExpression returns XMemberFeatureCall
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XMemberFeatureCall
+	 *     XEqualityExpression returns XMemberFeatureCall
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XMemberFeatureCall
+	 *     XRelationalExpression returns XMemberFeatureCall
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XMemberFeatureCall
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XMemberFeatureCall
+	 *     XOtherOperatorExpression returns XMemberFeatureCall
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XMemberFeatureCall
+	 *     XAdditiveExpression returns XMemberFeatureCall
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XMemberFeatureCall
+	 *     XMultiplicativeExpression returns XMemberFeatureCall
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XMemberFeatureCall
+	 *     XUnaryOperation returns XMemberFeatureCall
+	 *     XCastedExpression returns XMemberFeatureCall
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XMemberFeatureCall
+	 *     XPostfixOperation returns XMemberFeatureCall
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XMemberFeatureCall
+	 *     XMemberFeatureCall returns XMemberFeatureCall
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XMemberFeatureCall
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XMemberFeatureCall
+	 *     XPrimaryExpression returns XMemberFeatureCall
+	 *     XParenthesizedExpression returns XMemberFeatureCall
+	 *     XExpressionOrVarDeclaration returns XMemberFeatureCall
+	 *
 	 * Constraint:
 	 *     (
 	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0 
@@ -652,6 +1115,39 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XNullLiteral
+	 *     XAssignment returns XNullLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XNullLiteral
+	 *     XOrExpression returns XNullLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XNullLiteral
+	 *     XAndExpression returns XNullLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XNullLiteral
+	 *     XEqualityExpression returns XNullLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XNullLiteral
+	 *     XRelationalExpression returns XNullLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XNullLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XNullLiteral
+	 *     XOtherOperatorExpression returns XNullLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XNullLiteral
+	 *     XAdditiveExpression returns XNullLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XNullLiteral
+	 *     XMultiplicativeExpression returns XNullLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XNullLiteral
+	 *     XUnaryOperation returns XNullLiteral
+	 *     XCastedExpression returns XNullLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XNullLiteral
+	 *     XPostfixOperation returns XNullLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XNullLiteral
+	 *     XMemberFeatureCall returns XNullLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XNullLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XNullLiteral
+	 *     XPrimaryExpression returns XNullLiteral
+	 *     XLiteral returns XNullLiteral
+	 *     XParenthesizedExpression returns XNullLiteral
+	 *     XExpressionOrVarDeclaration returns XNullLiteral
+	 *     XNullLiteral returns XNullLiteral
+	 *
 	 * Constraint:
 	 *     {XNullLiteral}
 	 */
@@ -665,6 +1161,39 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XNumberLiteral
+	 *     XAssignment returns XNumberLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XNumberLiteral
+	 *     XOrExpression returns XNumberLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XNumberLiteral
+	 *     XAndExpression returns XNumberLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XNumberLiteral
+	 *     XEqualityExpression returns XNumberLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XNumberLiteral
+	 *     XRelationalExpression returns XNumberLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XNumberLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XNumberLiteral
+	 *     XOtherOperatorExpression returns XNumberLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XNumberLiteral
+	 *     XAdditiveExpression returns XNumberLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XNumberLiteral
+	 *     XMultiplicativeExpression returns XNumberLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XNumberLiteral
+	 *     XUnaryOperation returns XNumberLiteral
+	 *     XCastedExpression returns XNumberLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XNumberLiteral
+	 *     XPostfixOperation returns XNumberLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XNumberLiteral
+	 *     XMemberFeatureCall returns XNumberLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XNumberLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XNumberLiteral
+	 *     XPrimaryExpression returns XNumberLiteral
+	 *     XLiteral returns XNumberLiteral
+	 *     XParenthesizedExpression returns XNumberLiteral
+	 *     XExpressionOrVarDeclaration returns XNumberLiteral
+	 *     XNumberLiteral returns XNumberLiteral
+	 *
 	 * Constraint:
 	 *     value=Number
 	 */
@@ -684,6 +1213,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XPostfixOperation
+	 *     XAssignment returns XPostfixOperation
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XPostfixOperation
+	 *     XOrExpression returns XPostfixOperation
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XPostfixOperation
+	 *     XAndExpression returns XPostfixOperation
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XPostfixOperation
+	 *     XEqualityExpression returns XPostfixOperation
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XPostfixOperation
+	 *     XRelationalExpression returns XPostfixOperation
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XPostfixOperation
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XPostfixOperation
+	 *     XOtherOperatorExpression returns XPostfixOperation
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XPostfixOperation
+	 *     XAdditiveExpression returns XPostfixOperation
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XPostfixOperation
+	 *     XMultiplicativeExpression returns XPostfixOperation
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XPostfixOperation
+	 *     XUnaryOperation returns XPostfixOperation
+	 *     XCastedExpression returns XPostfixOperation
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XPostfixOperation
+	 *     XPostfixOperation returns XPostfixOperation
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XPostfixOperation
+	 *     XMemberFeatureCall returns XPostfixOperation
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XPostfixOperation
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XPostfixOperation
+	 *     XPrimaryExpression returns XPostfixOperation
+	 *     XParenthesizedExpression returns XPostfixOperation
+	 *     XExpressionOrVarDeclaration returns XPostfixOperation
+	 *
 	 * Constraint:
 	 *     (operand=XPostfixOperation_XPostfixOperation_1_0_0 feature=[JvmIdentifiableElement|OpPostfix])
 	 */
@@ -706,6 +1266,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XInstanceOfExpression
+	 *     XAssignment returns XInstanceOfExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XInstanceOfExpression
+	 *     XOrExpression returns XInstanceOfExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XInstanceOfExpression
+	 *     XAndExpression returns XInstanceOfExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XInstanceOfExpression
+	 *     XEqualityExpression returns XInstanceOfExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XInstanceOfExpression
+	 *     XRelationalExpression returns XInstanceOfExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XInstanceOfExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XInstanceOfExpression
+	 *     XOtherOperatorExpression returns XInstanceOfExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XInstanceOfExpression
+	 *     XAdditiveExpression returns XInstanceOfExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XInstanceOfExpression
+	 *     XMultiplicativeExpression returns XInstanceOfExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XInstanceOfExpression
+	 *     XUnaryOperation returns XInstanceOfExpression
+	 *     XCastedExpression returns XInstanceOfExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XInstanceOfExpression
+	 *     XPostfixOperation returns XInstanceOfExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XInstanceOfExpression
+	 *     XMemberFeatureCall returns XInstanceOfExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XInstanceOfExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XInstanceOfExpression
+	 *     XPrimaryExpression returns XInstanceOfExpression
+	 *     XParenthesizedExpression returns XInstanceOfExpression
+	 *     XExpressionOrVarDeclaration returns XInstanceOfExpression
+	 *
 	 * Constraint:
 	 *     (expression=XRelationalExpression_XInstanceOfExpression_1_0_0_0_0 type=JvmTypeReference)
 	 */
@@ -728,6 +1319,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XReturnExpression
+	 *     XAssignment returns XReturnExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XReturnExpression
+	 *     XOrExpression returns XReturnExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XReturnExpression
+	 *     XAndExpression returns XReturnExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XReturnExpression
+	 *     XEqualityExpression returns XReturnExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XReturnExpression
+	 *     XRelationalExpression returns XReturnExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XReturnExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XReturnExpression
+	 *     XOtherOperatorExpression returns XReturnExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XReturnExpression
+	 *     XAdditiveExpression returns XReturnExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XReturnExpression
+	 *     XMultiplicativeExpression returns XReturnExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XReturnExpression
+	 *     XUnaryOperation returns XReturnExpression
+	 *     XCastedExpression returns XReturnExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XReturnExpression
+	 *     XPostfixOperation returns XReturnExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XReturnExpression
+	 *     XMemberFeatureCall returns XReturnExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XReturnExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XReturnExpression
+	 *     XPrimaryExpression returns XReturnExpression
+	 *     XParenthesizedExpression returns XReturnExpression
+	 *     XExpressionOrVarDeclaration returns XReturnExpression
+	 *     XReturnExpression returns XReturnExpression
+	 *
 	 * Constraint:
 	 *     expression=XExpression?
 	 */
@@ -741,6 +1364,40 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XSetLiteral
+	 *     XAssignment returns XSetLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XSetLiteral
+	 *     XOrExpression returns XSetLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XSetLiteral
+	 *     XAndExpression returns XSetLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XSetLiteral
+	 *     XEqualityExpression returns XSetLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XSetLiteral
+	 *     XRelationalExpression returns XSetLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XSetLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XSetLiteral
+	 *     XOtherOperatorExpression returns XSetLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XSetLiteral
+	 *     XAdditiveExpression returns XSetLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XSetLiteral
+	 *     XMultiplicativeExpression returns XSetLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XSetLiteral
+	 *     XUnaryOperation returns XSetLiteral
+	 *     XCastedExpression returns XSetLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XSetLiteral
+	 *     XPostfixOperation returns XSetLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XSetLiteral
+	 *     XMemberFeatureCall returns XSetLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XSetLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XSetLiteral
+	 *     XPrimaryExpression returns XSetLiteral
+	 *     XLiteral returns XSetLiteral
+	 *     XCollectionLiteral returns XSetLiteral
+	 *     XSetLiteral returns XSetLiteral
+	 *     XParenthesizedExpression returns XSetLiteral
+	 *     XExpressionOrVarDeclaration returns XSetLiteral
+	 *
 	 * Constraint:
 	 *     (elements+=XExpression elements+=XExpression*)?
 	 */
@@ -754,6 +1411,9 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XShortClosure returns XClosure
+	 *
 	 * Constraint:
 	 *     ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|' expression=XExpression)
 	 */
@@ -767,6 +1427,39 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XStringLiteral
+	 *     XAssignment returns XStringLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XStringLiteral
+	 *     XOrExpression returns XStringLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XAndExpression returns XStringLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XEqualityExpression returns XStringLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XRelationalExpression returns XStringLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XStringLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XStringLiteral
+	 *     XOtherOperatorExpression returns XStringLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XAdditiveExpression returns XStringLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XMultiplicativeExpression returns XStringLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XUnaryOperation returns XStringLiteral
+	 *     XCastedExpression returns XStringLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XStringLiteral
+	 *     XPostfixOperation returns XStringLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XStringLiteral
+	 *     XMemberFeatureCall returns XStringLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XStringLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XStringLiteral
+	 *     XPrimaryExpression returns XStringLiteral
+	 *     XLiteral returns XStringLiteral
+	 *     XParenthesizedExpression returns XStringLiteral
+	 *     XExpressionOrVarDeclaration returns XStringLiteral
+	 *     XStringLiteral returns XStringLiteral
+	 *
 	 * Constraint:
 	 *     value=STRING
 	 */
@@ -786,6 +1479,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XSwitchExpression
+	 *     XAssignment returns XSwitchExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XSwitchExpression
+	 *     XOrExpression returns XSwitchExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XAndExpression returns XSwitchExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XEqualityExpression returns XSwitchExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XRelationalExpression returns XSwitchExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XSwitchExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XSwitchExpression
+	 *     XOtherOperatorExpression returns XSwitchExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XAdditiveExpression returns XSwitchExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XMultiplicativeExpression returns XSwitchExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XUnaryOperation returns XSwitchExpression
+	 *     XCastedExpression returns XSwitchExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XSwitchExpression
+	 *     XPostfixOperation returns XSwitchExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XSwitchExpression
+	 *     XMemberFeatureCall returns XSwitchExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XSwitchExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XSwitchExpression
+	 *     XPrimaryExpression returns XSwitchExpression
+	 *     XParenthesizedExpression returns XSwitchExpression
+	 *     XSwitchExpression returns XSwitchExpression
+	 *     XExpressionOrVarDeclaration returns XSwitchExpression
+	 *
 	 * Constraint:
 	 *     (
 	 *         ((declaredParam=JvmFormalParameter switch=XExpression) | (declaredParam=JvmFormalParameter? switch=XExpression)) 
@@ -803,6 +1528,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XSynchronizedExpression
+	 *     XAssignment returns XSynchronizedExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XSynchronizedExpression
+	 *     XOrExpression returns XSynchronizedExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XSynchronizedExpression
+	 *     XAndExpression returns XSynchronizedExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XSynchronizedExpression
+	 *     XEqualityExpression returns XSynchronizedExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XSynchronizedExpression
+	 *     XRelationalExpression returns XSynchronizedExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XSynchronizedExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XSynchronizedExpression
+	 *     XOtherOperatorExpression returns XSynchronizedExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XSynchronizedExpression
+	 *     XAdditiveExpression returns XSynchronizedExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XSynchronizedExpression
+	 *     XMultiplicativeExpression returns XSynchronizedExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XSynchronizedExpression
+	 *     XUnaryOperation returns XSynchronizedExpression
+	 *     XCastedExpression returns XSynchronizedExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XSynchronizedExpression
+	 *     XPostfixOperation returns XSynchronizedExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XSynchronizedExpression
+	 *     XMemberFeatureCall returns XSynchronizedExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XSynchronizedExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XSynchronizedExpression
+	 *     XPrimaryExpression returns XSynchronizedExpression
+	 *     XParenthesizedExpression returns XSynchronizedExpression
+	 *     XExpressionOrVarDeclaration returns XSynchronizedExpression
+	 *     XSynchronizedExpression returns XSynchronizedExpression
+	 *
 	 * Constraint:
 	 *     (param=XExpression expression=XExpression)
 	 */
@@ -825,6 +1582,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XThrowExpression
+	 *     XAssignment returns XThrowExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XThrowExpression
+	 *     XOrExpression returns XThrowExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XThrowExpression
+	 *     XAndExpression returns XThrowExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XThrowExpression
+	 *     XEqualityExpression returns XThrowExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XThrowExpression
+	 *     XRelationalExpression returns XThrowExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XThrowExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XThrowExpression
+	 *     XOtherOperatorExpression returns XThrowExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XThrowExpression
+	 *     XAdditiveExpression returns XThrowExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XThrowExpression
+	 *     XMultiplicativeExpression returns XThrowExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XThrowExpression
+	 *     XUnaryOperation returns XThrowExpression
+	 *     XCastedExpression returns XThrowExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XThrowExpression
+	 *     XPostfixOperation returns XThrowExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XThrowExpression
+	 *     XMemberFeatureCall returns XThrowExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XThrowExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XThrowExpression
+	 *     XPrimaryExpression returns XThrowExpression
+	 *     XParenthesizedExpression returns XThrowExpression
+	 *     XExpressionOrVarDeclaration returns XThrowExpression
+	 *     XThrowExpression returns XThrowExpression
+	 *
 	 * Constraint:
 	 *     expression=XExpression
 	 */
@@ -844,6 +1633,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XTryCatchFinallyExpression
+	 *     XAssignment returns XTryCatchFinallyExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XOrExpression returns XTryCatchFinallyExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XAndExpression returns XTryCatchFinallyExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XEqualityExpression returns XTryCatchFinallyExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XRelationalExpression returns XTryCatchFinallyExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XTryCatchFinallyExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XOtherOperatorExpression returns XTryCatchFinallyExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XAdditiveExpression returns XTryCatchFinallyExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XMultiplicativeExpression returns XTryCatchFinallyExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XUnaryOperation returns XTryCatchFinallyExpression
+	 *     XCastedExpression returns XTryCatchFinallyExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XPostfixOperation returns XTryCatchFinallyExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XTryCatchFinallyExpression
+	 *     XMemberFeatureCall returns XTryCatchFinallyExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XTryCatchFinallyExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XPrimaryExpression returns XTryCatchFinallyExpression
+	 *     XParenthesizedExpression returns XTryCatchFinallyExpression
+	 *     XExpressionOrVarDeclaration returns XTryCatchFinallyExpression
+	 *     XTryCatchFinallyExpression returns XTryCatchFinallyExpression
+	 *
 	 * Constraint:
 	 *     (expression=XExpression ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression))
 	 */
@@ -857,6 +1678,39 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XTypeLiteral
+	 *     XAssignment returns XTypeLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XTypeLiteral
+	 *     XOrExpression returns XTypeLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XTypeLiteral
+	 *     XAndExpression returns XTypeLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XTypeLiteral
+	 *     XEqualityExpression returns XTypeLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XTypeLiteral
+	 *     XRelationalExpression returns XTypeLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XTypeLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XTypeLiteral
+	 *     XOtherOperatorExpression returns XTypeLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XTypeLiteral
+	 *     XAdditiveExpression returns XTypeLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XTypeLiteral
+	 *     XMultiplicativeExpression returns XTypeLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XTypeLiteral
+	 *     XUnaryOperation returns XTypeLiteral
+	 *     XCastedExpression returns XTypeLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XTypeLiteral
+	 *     XPostfixOperation returns XTypeLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XTypeLiteral
+	 *     XMemberFeatureCall returns XTypeLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XTypeLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XTypeLiteral
+	 *     XPrimaryExpression returns XTypeLiteral
+	 *     XLiteral returns XTypeLiteral
+	 *     XParenthesizedExpression returns XTypeLiteral
+	 *     XExpressionOrVarDeclaration returns XTypeLiteral
+	 *     XTypeLiteral returns XTypeLiteral
+	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arrayDimensions+=ArrayBrackets*)
 	 */
@@ -870,6 +1724,37 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XUnaryOperation
+	 *     XAssignment returns XUnaryOperation
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XUnaryOperation
+	 *     XOrExpression returns XUnaryOperation
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XUnaryOperation
+	 *     XAndExpression returns XUnaryOperation
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XUnaryOperation
+	 *     XEqualityExpression returns XUnaryOperation
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XUnaryOperation
+	 *     XRelationalExpression returns XUnaryOperation
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XUnaryOperation
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XUnaryOperation
+	 *     XOtherOperatorExpression returns XUnaryOperation
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XUnaryOperation
+	 *     XAdditiveExpression returns XUnaryOperation
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XUnaryOperation
+	 *     XMultiplicativeExpression returns XUnaryOperation
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XUnaryOperation
+	 *     XUnaryOperation returns XUnaryOperation
+	 *     XCastedExpression returns XUnaryOperation
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XUnaryOperation
+	 *     XPostfixOperation returns XUnaryOperation
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XUnaryOperation
+	 *     XMemberFeatureCall returns XUnaryOperation
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XUnaryOperation
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XUnaryOperation
+	 *     XPrimaryExpression returns XUnaryOperation
+	 *     XParenthesizedExpression returns XUnaryOperation
+	 *     XExpressionOrVarDeclaration returns XUnaryOperation
+	 *
 	 * Constraint:
 	 *     (feature=[JvmIdentifiableElement|OpUnary] operand=XUnaryOperation)
 	 */
@@ -892,6 +1777,10 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpressionOrVarDeclaration returns XVariableDeclaration
+	 *     XVariableDeclaration returns XVariableDeclaration
+	 *
 	 * Constraint:
 	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression?)
 	 */
@@ -905,6 +1794,38 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     XExpression returns XWhileExpression
+	 *     XAssignment returns XWhileExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XWhileExpression
+	 *     XOrExpression returns XWhileExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XWhileExpression
+	 *     XAndExpression returns XWhileExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XWhileExpression
+	 *     XEqualityExpression returns XWhileExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XWhileExpression
+	 *     XRelationalExpression returns XWhileExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XWhileExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XWhileExpression
+	 *     XOtherOperatorExpression returns XWhileExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XWhileExpression
+	 *     XAdditiveExpression returns XWhileExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XWhileExpression
+	 *     XMultiplicativeExpression returns XWhileExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XWhileExpression
+	 *     XUnaryOperation returns XWhileExpression
+	 *     XCastedExpression returns XWhileExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XWhileExpression
+	 *     XPostfixOperation returns XWhileExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XWhileExpression
+	 *     XMemberFeatureCall returns XWhileExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XWhileExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XWhileExpression
+	 *     XPrimaryExpression returns XWhileExpression
+	 *     XParenthesizedExpression returns XWhileExpression
+	 *     XWhileExpression returns XWhileExpression
+	 *     XExpressionOrVarDeclaration returns XWhileExpression
+	 *
 	 * Constraint:
 	 *     (predicate=XExpression body=XExpression)
 	 */
