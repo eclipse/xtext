@@ -39,6 +39,9 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
+/**
+ * @noreference
+ */
 @Singleton
 class XtextGeneratorTemplates {
 	
@@ -46,7 +49,7 @@ class XtextGeneratorTemplates {
 	
 	@Inject extension XtextGeneratorNaming naming
 	
-	def JavaFileAccess createRuntimeSetup(ILanguageConfig langConfig) {
+	def JavaFileAccess createRuntimeSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		return fileAccessFactory.createXtendFile(runtimeSetup,'''
 			/**
@@ -62,7 +65,7 @@ class XtextGeneratorTemplates {
 		 ''')
 	}
 	
-	def JavaFileAccess createRuntimeGenSetup(ILanguageConfig langConfig) {
+	def JavaFileAccess createRuntimeGenSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		val file = fileAccessFactory.createGeneratedJavaFile(runtimeGenSetup)
 		// The following imports are added for backwards-compatibility
@@ -152,7 +155,7 @@ class XtextGeneratorTemplates {
 		«ENDIF»
 	'''
 	
-	def JavaFileAccess createRuntimeModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createRuntimeModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		return fileAccessFactory.createXtendFile(runtimeModule,'''
 			/**
@@ -163,7 +166,7 @@ class XtextGeneratorTemplates {
 		''')
 	}
 	
-	def JavaFileAccess createRuntimeGenModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createRuntimeGenModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
 		val file = fileAccessFactory.createGeneratedJavaFile(runtimeGenModule)
@@ -205,7 +208,7 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createEclipsePluginModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createEclipsePluginModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		return fileAccessFactory.createXtendFile(eclipsePluginModule,'''
 			/**
@@ -216,7 +219,7 @@ class XtextGeneratorTemplates {
 		''')
 	}
 	
-	def JavaFileAccess createEclipsePluginGenModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createEclipsePluginGenModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
 		val file = fileAccessFactory.createGeneratedJavaFile(eclipsePluginGenModule)
@@ -245,7 +248,7 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createIdeaModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createIdeaModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		return fileAccessFactory.createXtendFile(ideaModule,'''
 			/**
@@ -256,7 +259,7 @@ class XtextGeneratorTemplates {
 		''')
 	}
 	
-	def JavaFileAccess createIdeaGenModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createIdeaGenModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		val superClass = langConfig.ideaGenModule.superClass ?: ideaDefaultModule
 		val file = fileAccessFactory.createGeneratedJavaFile(ideaGenModule)
@@ -280,7 +283,7 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createWebModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createWebModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		return fileAccessFactory.createXtendFile(webModule,'''
 			/**
@@ -291,7 +294,7 @@ class XtextGeneratorTemplates {
 		''')
 	}
 	
-	def JavaFileAccess createWebGenModule(ILanguageConfig langConfig) {
+	def JavaFileAccess createWebGenModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		val superClass = langConfig.webGenModule.superClass ?: webDefaultModule
 		val file = fileAccessFactory.createGeneratedJavaFile(webGenModule)
@@ -319,7 +322,7 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createWebSetup(ILanguageConfig langConfig) {
+	def JavaFileAccess createWebSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		return fileAccessFactory.createXtendFile(webSetup, '''
 			/**
@@ -340,7 +343,7 @@ class XtextGeneratorTemplates {
 	}
 
 	
-	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(ILanguageConfig langConfig, ILanguageConfig activatorLanguage) {
+	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(IXtextGeneratorLanguage langConfig, IXtextGeneratorLanguage activatorLanguage) {
 		val grammar = langConfig.grammar
 		val activatorGrammar = activatorLanguage.grammar
 		val file = fileAccessFactory.createGeneratedJavaFile(grammar.eclipsePluginExecutableExtensionFactory)
@@ -368,7 +371,7 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createEclipsePluginActivator(List<? extends ILanguageConfig> langConfigs) {
+	def JavaFileAccess createEclipsePluginActivator(List<? extends IXtextGeneratorLanguage> langConfigs) {
 		val activator = getEclipsePluginActivator(langConfigs.head.grammar)
 		val file = fileAccessFactory.createGeneratedJavaFile(activator)
 		

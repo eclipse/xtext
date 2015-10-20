@@ -13,7 +13,10 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 
-interface ILanguageConfig {
+/**
+ * @noimplement
+ */
+interface IXtextGeneratorLanguage {
 	
 	def Grammar getGrammar()
 	

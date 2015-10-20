@@ -8,15 +8,15 @@
 package org.eclipse.xtext.xtext.generator.ui.outline
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the 'Quick Outline' entry to the language editor's context menu. 
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class QuickOutlineFragment2 extends AbstractGeneratorFragment2 {
+class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject
 	extension XtextGeneratorNaming

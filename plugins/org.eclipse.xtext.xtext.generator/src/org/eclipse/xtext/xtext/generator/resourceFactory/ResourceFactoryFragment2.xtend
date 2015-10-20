@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.resourceFactory
 
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the registration <code>org.eclipse.emf.ecore.extension_parser</code>
@@ -22,7 +22,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class ResourceFactoryFragment2 extends AbstractGeneratorFragment2 {
+class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Inject
 	extension XtextGeneratorNaming

@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import org.eclipse.xtext.xtext.generator.ILanguageConfig
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage
 
 @Accessors
 @EqualsHashCode
@@ -30,15 +30,15 @@ class TypeReference {
 		new TypeReference(clazz, arguments)
 	}
 	
-	static def TypeReference typeRef(EClass clazz, ILanguageConfig language) {
+	static def TypeReference typeRef(EClass clazz, IXtextGeneratorLanguage language) {
 		new TypeReference(clazz, language.resourceSet)
 	}
 	
-	static def TypeReference typeRef(EPackage epackage, ILanguageConfig language) {
+	static def TypeReference typeRef(EPackage epackage, IXtextGeneratorLanguage language) {
 		new TypeReference(epackage, language.resourceSet)
 	}
 	
-	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')
+	static val PACKAGE_MATCHER = Pattern.compile('([a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*)?')
 	static val CLASS_MATCHER = Pattern.compile('[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*')
 	
 	val String packageName
@@ -108,6 +108,7 @@ class TypeReference {
 					packageEnd = i
 			}
 		}
+		return ""
 	}
 	
 	private static def getClassName(String qualifiedName) {
@@ -120,6 +121,7 @@ class TypeReference {
 					classStart = i + 1
 			}
 		}
+		return qualifiedName
 	}
 	
 	private static def getQualifiedName(EClass clazz, ResourceSet resourceSet) {

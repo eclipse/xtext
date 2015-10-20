@@ -18,7 +18,6 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider
 import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -30,8 +29,9 @@ import static org.eclipse.xtext.GrammarUtil.*
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
+class ImportNamespacesScopingFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector

@@ -50,7 +50,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
@@ -65,8 +64,9 @@ import static extension org.eclipse.xtext.serializer.analysis.SerializationConte
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 import org.eclipse.xtext.serializer.analysis.SerializationContext
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class SerializerFragment2 extends AbstractGeneratorFragment2 {
+class SerializerFragment2 extends AbstractXtextGeneratorFragment {
 	
 	private static def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
 		val result = newLinkedHashMap
