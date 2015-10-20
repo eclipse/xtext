@@ -49,7 +49,7 @@ import org.eclipse.xtext.xtext.XtextTransientValueService;
 import org.eclipse.xtext.xtext.XtextTransientValueService2;
 import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
-import org.eclipse.xtext.xtext.XtextXtextSyntacticSequencer;
+import org.eclipse.xtext.xtext.CardinalityAwareSyntacticSequencer;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.parser.CardinalityAwareEcoreFactory;
@@ -191,6 +191,6 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 
 	@Override
 	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
-		return XtextXtextSyntacticSequencer.class;
+		return CardinalityAwareSyntacticSequencer.class;
 	}
 }

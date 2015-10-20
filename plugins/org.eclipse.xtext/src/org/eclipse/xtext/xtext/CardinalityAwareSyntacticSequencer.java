@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -23,14 +22,14 @@ import com.google.common.base.Strings;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtextXtextSyntacticSequencer extends XtextSyntacticSequencer {
+public class CardinalityAwareSyntacticSequencer extends XtextSyntacticSequencer {
 
 	@Override
 	protected void emit_ParenthesizedElement_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition,
 			List<INode> nodes) {
 		if (semanticObject instanceof CompoundElement) {
-			AbstractElement ele = (CompoundElement) semanticObject;
-			if (!Strings.isNullOrEmpty(ele.getCardinality())) {
+			CompoundElement ele = (CompoundElement) semanticObject;
+			if (!Strings.isNullOrEmpty(ele.getCardinality()) && ele.getElements().size() > 1) {
 				Keyword kw = grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0();
 				acceptUnassignedKeyword(kw, kw.getValue(), nodes == null || nodes.isEmpty() ? null : (ILeafNode) nodes.get(0));
 			}
