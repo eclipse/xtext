@@ -34,7 +34,6 @@ import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.LexerBindings
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -47,8 +46,9 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
+class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector
 	@Inject ContentAssistGrammarNaming caNaming

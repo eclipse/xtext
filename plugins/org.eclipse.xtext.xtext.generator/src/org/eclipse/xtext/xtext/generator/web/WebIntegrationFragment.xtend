@@ -26,7 +26,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -40,11 +39,12 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import static extension org.eclipse.xtext.xtext.generator.web.RegexpExtensions.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Main generator fragment for web integration.
  */
-class WebIntegrationFragment extends AbstractGeneratorFragment2 {
+class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 	
 	private static enum Framework {
 		ORION, ACE, CODEMIRROR

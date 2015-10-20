@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtext.generator
 /**
  * A fragment that contributes to the {@link XtextGenerator}.
  */
-interface IGeneratorFragment2 extends IGuiceAwareGeneratorComponent {
+interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {
 	
 	def void checkConfiguration(Issues issues)
 	

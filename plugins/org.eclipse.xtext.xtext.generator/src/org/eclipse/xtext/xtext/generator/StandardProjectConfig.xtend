@@ -11,7 +11,7 @@ import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class WizardConfig extends XtextProjectConfig {
+class StandardProjectConfig extends XtextProjectConfig {
 
 	boolean mavenLayout
 	boolean createEclipseMetaData

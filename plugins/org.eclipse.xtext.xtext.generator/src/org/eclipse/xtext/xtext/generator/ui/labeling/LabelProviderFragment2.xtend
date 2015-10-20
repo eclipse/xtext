@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.labeling
 import com.google.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -19,13 +18,14 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the Labeling provider stub, either in Xtend or Java language.
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
+class LabelProviderFragment2 extends AbstractXtextGeneratorFragment {
 
 	private static val XBASE_LABEL_PROVIDER = 
 		"org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider"
