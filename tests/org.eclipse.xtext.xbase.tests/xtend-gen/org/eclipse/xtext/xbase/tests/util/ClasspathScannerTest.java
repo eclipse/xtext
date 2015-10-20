@@ -8,10 +8,15 @@
 package org.eclipse.xtext.xbase.tests.util;
 
 import com.google.common.base.Objects;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Collections;
 import org.eclipse.xtext.xbase.ide.types.ClasspathScanner;
 import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -37,17 +42,23 @@ public class ClasspathScannerTest {
   
   @Test
   public void testClasspathScanning() {
-    Class<? extends ClasspathScannerTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    final Iterable<ITypeDescriptor> thisPackage = this.scanner.getDescriptors(_classLoader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase.tests.util")));
-    final Function1<ITypeDescriptor, Boolean> _function = new Function1<ITypeDescriptor, Boolean>() {
-      @Override
-      public Boolean apply(final ITypeDescriptor it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, "ClasspathScannerTest"));
-      }
-    };
-    boolean _exists = IterableExtensions.<ITypeDescriptor>exists(thisPackage, _function);
-    Assert.assertTrue(_exists);
+    try {
+      final File bootstrapJar = new File("../org.eclipse.xtext.bootstrap/lastversion.jar");
+      URI _uRI = bootstrapJar.toURI();
+      URL _uRL = _uRI.toURL();
+      final URLClassLoader classloader = new URLClassLoader(new URL[] { _uRL });
+      final Iterable<ITypeDescriptor> utilPackage = this.scanner.getDescriptors(classloader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.util")));
+      final Function1<ITypeDescriptor, Boolean> _function = new Function1<ITypeDescriptor, Boolean>() {
+        @Override
+        public Boolean apply(final ITypeDescriptor it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "org.eclipse.xtext.util.Arrays"));
+        }
+      };
+      boolean _exists = IterableExtensions.<ITypeDescriptor>exists(utilPackage, _function);
+      Assert.assertTrue(_exists);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
