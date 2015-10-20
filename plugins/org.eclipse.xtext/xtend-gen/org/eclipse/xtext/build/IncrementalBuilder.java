@@ -266,7 +266,7 @@ public class IncrementalBuilder {
             _and = false;
           } else {
             IShouldGenerate _get = serviceProvider.<IShouldGenerate>get(IShouldGenerate.class);
-            boolean _shouldGenerate = _get.shouldGenerate(resource, null, CancelIndicator.NullImpl);
+            boolean _shouldGenerate = _get.shouldGenerate(resource, CancelIndicator.NullImpl);
             _and = _shouldGenerate;
           }
           if (_and) {
