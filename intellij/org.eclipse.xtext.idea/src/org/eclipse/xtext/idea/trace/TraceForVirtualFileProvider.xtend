@@ -29,9 +29,10 @@ import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.filesystem.IdeaProjectConfig
 import org.eclipse.xtext.idea.filesystem.IdeaProjectConfigProvider
-import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.workspace.IProjectConfig
+
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -117,7 +118,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	}
 	
 	override protected asFile(AbsoluteURI absoluteURI, IProjectConfig project) {
-		val file = VirtualFileManager.instance.findFileByUrl(absoluteURI.URI.toString)
+		val file = absoluteURI.URI.virtualFile
 		val module = (project as IdeaProjectConfig).module
 		val ideaProject = module.project
 		return new VirtualFileInProject(file, ideaProject)
@@ -130,14 +131,8 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		if(builder === null) {
 			return newArrayList
 		}
-		val generatedSources = builder.getGeneratedSources(VirtualFileURIUtil.getURI(sourceFile.file))
-		val mngr = VirtualFileManager.instance
-		val generatedFiles = generatedSources.map [
-			mngr.findFileByUrl(it.toString)
-		]
-		val generatedTraces = generatedFiles.filter[
-			isTraceFile(it)
-		]
+		val generatedSources = builder.getGeneratedSources(sourceFile.file.URI)
+		val generatedTraces = generatedSources.map[virtualFile].filter[isTraceFile]
 		val result = generatedTraces.map[
 			new VirtualFilePersistedTrace(it, this) as PersistedTrace
 		].toList
@@ -169,7 +164,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 			val result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter)
 			return result
 		}
-		val sourceFolderURI = VirtualFileURIUtil.getURI(outputSourceFolder)
+		val sourceFolderURI = outputSourceFolder.URI
 		val result = generatedFileURI.deresolve(sourceFolderURI)
 		return result
 	}
@@ -200,7 +195,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	}
 	
 	def protected getAbsoluteLocation(VirtualFile file) {
-		return new AbsoluteURI(VirtualFileURIUtil.getURI(file))
+		return new AbsoluteURI(file.URI)
 	}
 	
 	override protected IdeaProjectConfig getProjectConfig(VirtualFileInProject sourceFile) {
