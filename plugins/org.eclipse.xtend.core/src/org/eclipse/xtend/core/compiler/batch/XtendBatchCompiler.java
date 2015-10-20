@@ -391,7 +391,7 @@ public class XtendBatchCompiler {
 		}
 		Map<String, Set<OutputConfiguration>> outputConfigurations = newHashMap();
 		outputConfigurations.put(languageName, newHashSet(outputConfiguration));
-		new ProjectConfigAdapter(projectConfig).attachToEmfObject(resourceSet);
+		ProjectConfigAdapter.install(resourceSet, projectConfig);
 		resourceSet.eAdapters().add(new OutputConfigurationAdapter(outputConfigurations));
 		return true;
 	}
