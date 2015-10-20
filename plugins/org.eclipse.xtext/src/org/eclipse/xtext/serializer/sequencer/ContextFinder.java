@@ -162,7 +162,8 @@ public class ContextFinder implements IContextFinder {
 	}
 
 	@Override
-	public Set<ISerializationContext> findByContentsAndContainer(EObject semanticObject, Iterable<ISerializationContext> contextCandidates) {
+	public Set<ISerializationContext> findByContentsAndContainer(EObject semanticObject,
+			Iterable<ISerializationContext> contextCandidates) {
 		initConstraints();
 		contextCandidates = findContextsByContainer(semanticObject, contextCandidates);
 		if (contextCandidates != null && Iterables.size(contextCandidates) < 2)
@@ -225,8 +226,7 @@ public class ContextFinder implements IContextFinder {
 
 	@Override
 	@Deprecated
-	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanticObject,
-			Iterable<EObject> contextCandidates) {
+	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanticObject, Iterable<EObject> contextCandidates) {
 		List<ISerializationContext> candidates = fromEObjects(contextCandidates, semanticObject);
 		return fromIContexts(findByContentsAndContainer(semanticObject, candidates));
 	}
@@ -283,24 +283,31 @@ public class ContextFinder implements IContextFinder {
 			return false;
 		for (int featureID = 0; featureID < semanicObj.eClass().getFeatureCount(); featureID++) {
 			IFeatureInfo featureInfo = constraint.getFeatures()[featureID];
-			EStructuralFeature structuralFeature = semanicObj.eClass().getEStructuralFeature(featureID);
-			// TODO  validated bounds of lists properly
-			ValueTransient trans = transientValueUtil.isTransient(semanicObj, structuralFeature);
-			switch (trans) {
-				case NO:
-					if (featureInfo == null)
-						return false;
-					if (featureInfo.getUpperBound() <= 0)
-						return false;
-					break;
-				case YES:
-					if (featureInfo == null)
+			EStructuralFeature feature = semanicObj.eClass().getEStructuralFeature(featureID);
+			if (feature.isMany()) {
+				int count = transientValueUtil.countNonTransientListValues(semanicObj, feature);
+				if (count > featureInfo.getUpperBound())
+					return false;
+				if (count < featureInfo.getLowerBound())
+					return false;
+			} else {
+				ValueTransient valueTransient = transientValues.isValueTransient(semanicObj, feature);
+				switch (valueTransient) {
+					case NO:
+						if (featureInfo == null)
+							return false;
+						if (featureInfo.getUpperBound() <= 0)
+							return false;
 						break;
-					if (featureInfo.getLowerBound() > 0)
-						return false;
-					break;
-				case PREFERABLY:
-					break;
+					case YES:
+						if (featureInfo == null)
+							break;
+						if (featureInfo.getLowerBound() > 0)
+							return false;
+						break;
+					case PREFERABLY:
+						break;
+				}
 			}
 		}
 		return true;
