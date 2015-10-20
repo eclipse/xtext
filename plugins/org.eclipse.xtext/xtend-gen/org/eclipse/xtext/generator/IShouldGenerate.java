@@ -32,7 +32,7 @@ public interface IShouldGenerate {
     private IResourceValidator resourceValidator;
     
     @Override
-    public boolean shouldGenerate(final Resource resource, final String projectName, final CancelIndicator cancelIndicator) {
+    public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {
       List<Issue> _validate = this.resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator);
       return _validate.isEmpty();
     }
@@ -41,16 +41,13 @@ public interface IShouldGenerate {
   @Beta
   public static class Always implements IShouldGenerate {
     @Override
-    public boolean shouldGenerate(final Resource resource, final String projectName, final CancelIndicator cancelIndicator) {
+    public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {
       return true;
     }
   }
   
   /**
    * whether code should be generated for this resource.
-   * 
-   * @param projectName the name of the currently built project. May be null which indicates that the given resource
-   * 	is located in the source tree of the currently built project.
    */
-  public abstract boolean shouldGenerate(final Resource resource, final String projectName, final CancelIndicator cancelIndicator);
+  public abstract boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator);
 }
