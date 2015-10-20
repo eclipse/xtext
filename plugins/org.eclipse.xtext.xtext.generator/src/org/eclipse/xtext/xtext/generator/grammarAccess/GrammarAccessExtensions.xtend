@@ -81,7 +81,7 @@ class GrammarAccessExtensions {
 	}
 
 	/**
-	 * Converts an arbitary string to a valid Java identifier.
+	 * Converts an arbitary string to a valid Java identifier that is valid in an Antlr grammar action context, too.
 	 * The string is split up along the the characters that are not valid as java 
 	 * identifier. The first character of each segments is made upper case which 
 	 * leads to a camel-case style.
@@ -133,7 +133,7 @@ class GrammarAccessExtensions {
 		var up = true
 		val builder = new StringBuilder
 		for (c : text.toCharArray) {
-			val valid = if (start) c.isJavaIdentifierStart else c.isJavaIdentifierPart
+			val valid = c.isValidJavaLatinIdentifier(start)
 			if (valid) {
 				if (start)
 					builder.append(if (uppercaseFirst) c.toUpperCase else c.toLowerCase)
@@ -145,6 +145,21 @@ class GrammarAccessExtensions {
 				up = true
 		}
 		return builder.toString
+	}
+	
+	def boolean isValidJavaLatinIdentifier(char c, boolean start) {
+		var boolean valid = c >= 'A' && c<= 'Z';
+		valid = valid || c >= 'a' && c<= 'z';
+		valid = valid || c.eq('ä') || c.eq('ö') || c.eq('ü') || c.eq('Ä') || c.eq('Ö') || c.eq('Ü');
+		valid = valid || c.eq('_');
+		if (!start) {
+			valid = valid || c>='0' && c<='9';
+		}
+		return valid;
+	}
+	
+	private def static eq(char c1, char c2) {
+		c1 == c2
 	}
 		
 	/** 

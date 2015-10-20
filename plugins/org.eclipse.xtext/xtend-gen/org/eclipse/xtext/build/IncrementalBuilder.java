@@ -56,9 +56,8 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -388,22 +387,17 @@ public class IncrementalBuilder {
     protected URIBasedFileSystemAccess createFileSystemAccess(final IResourceServiceProvider serviceProvider, final Resource resource) {
       URIBasedFileSystemAccess _xblockexpression = null;
       {
-        final IWorkspaceConfigProvider workspaceConfigProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
-        IWorkspaceConfig _workspaceConfig = null;
-        if (workspaceConfigProvider!=null) {
+        final IProjectConfigProvider projectConfigProvider = serviceProvider.<IProjectConfigProvider>get(IProjectConfigProvider.class);
+        IProjectConfig _projectConfig = null;
+        if (projectConfigProvider!=null) {
           ResourceSet _resourceSet = resource.getResourceSet();
-          _workspaceConfig=workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
+          _projectConfig=projectConfigProvider.getProjectConfig(_resourceSet);
         }
-        final IWorkspaceConfig workspaceConfig = _workspaceConfig;
-        IProjectConfig _findProjectContaining = null;
-        if (workspaceConfig!=null) {
-          URI _uRI = resource.getURI();
-          _findProjectContaining=workspaceConfig.findProjectContaining(_uRI);
-        }
+        final IProjectConfig projectConfig = _projectConfig;
         ISourceFolder _findSourceFolderContaining = null;
-        if (_findProjectContaining!=null) {
-          URI _uRI_1 = resource.getURI();
-          _findSourceFolderContaining=_findProjectContaining.findSourceFolderContaining(_uRI_1);
+        if (projectConfig!=null) {
+          URI _uRI = resource.getURI();
+          _findSourceFolderContaining=projectConfig.findSourceFolderContaining(_uRI);
         }
         final ISourceFolder sourceFolder = _findSourceFolderContaining;
         URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();

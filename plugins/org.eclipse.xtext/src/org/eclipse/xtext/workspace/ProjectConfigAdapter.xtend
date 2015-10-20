@@ -5,10 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.workspace;
+package org.eclipse.xtext.workspace
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.util.internal.EmfAdaptable
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.emf.ecore.resource.ResourceSet
 
-public interface IWorkspaceConfigProvider {
-	IWorkspaceConfig getWorkspaceConfig(ResourceSet context);
+@EmfAdaptable
+@Data
+class ProjectConfigAdapter {
+	IProjectConfig projectConfig
+	
+	def static void install(ResourceSet resourceSet, IProjectConfig config) {
+		new ProjectConfigAdapter(config).attachToEmfObject(resourceSet)
+	}
 }

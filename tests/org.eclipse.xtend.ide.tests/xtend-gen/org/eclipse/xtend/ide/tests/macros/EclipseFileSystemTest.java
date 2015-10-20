@@ -9,8 +9,6 @@ package org.eclipse.xtend.ide.tests.macros;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.io.File;
-import java.io.FileInputStream;
 import java.net.URI;
 import java.util.Set;
 import org.eclipse.core.internal.resources.ProjectDescription;
@@ -141,25 +139,19 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       boolean _exists = this.fs.exists(file);
       Assert.assertFalse(_exists);
       URI _uRI = this.fs.toURI(file);
-      Assert.assertNotNull(_uRI);
-      this.fs.setContents(file, "Hello Foo");
+      Assert.assertNull(_uRI);
+      try {
+        this.fs.setContents(file, "Hello Foo");
+        Assert.fail();
+      } catch (final Throwable _t) {
+        if (_t instanceof IllegalArgumentException) {
+          final IllegalArgumentException e = (IllegalArgumentException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
       boolean _exists_1 = this.fs.exists(file);
-      Assert.assertTrue(_exists_1);
-      final URI uri = this.fs.toURI(file);
-      Assert.assertNotNull(uri);
-      String _string = uri.toString();
-      boolean _endsWith = _string.endsWith("/foo/bar/Foo.text");
-      Assert.assertTrue(("" + uri), _endsWith);
-      final File javaIoFile = new File(uri);
-      boolean _exists_2 = javaIoFile.exists();
-      Assert.assertTrue(_exists_2);
-      long _length = javaIoFile.length();
-      final byte[] data = new byte[((int) _length)];
-      final FileInputStream fis = new FileInputStream(javaIoFile);
-      fis.read(data);
-      fis.close();
-      String _string_1 = new String(data);
-      Assert.assertEquals("Hello Foo", _string_1);
+      Assert.assertFalse(_exists_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -7,6 +7,8 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.UnsupportedEncodingException
+import java.net.MalformedURLException
+import java.net.URISyntaxException
 import java.net.URL
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
@@ -17,20 +19,18 @@ import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.workspace.IProjectConfigProvider
 
 import static org.eclipse.emf.ecore.resource.URIConverter.*
 import static org.eclipse.xtend.lib.macro.file.Path.*
 
 import static extension org.eclipse.xtext.util.UriUtil.*
-import java.net.MalformedURLException
-import java.net.URISyntaxException
 
 abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 
 	@Inject @Accessors IEncodingProvider encodingProvider
 	@Inject(optional=true) @Accessors IFilePostProcessor postProcessor
-	@Inject @Accessors extension IWorkspaceConfigProvider workspaceConfigProvider
+	@Inject @Accessors extension IProjectConfigProvider projectConfigProvider
 	@Accessors ResourceSet context
 	
 	override CharSequence getContents(Path path) {
@@ -123,7 +123,7 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 
 	override getChildren(Path path) {
 		if (path == ROOT) {
-			return context.workspaceConfig.projects.map[path.getAbsolutePath(name)].filter[exists]
+			return #[path.getAbsolutePath(context.projectConfig.name)]
 		}
 		val uri = path.URI
 		if (uri === null || !uri.exists || !uri.folder)
@@ -212,6 +212,9 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	}
 
 	override isFolder(Path path) {
+		if (path == Path.ROOT)
+			return true
+		
 		path.URI.folder
 	}
 	
@@ -240,18 +243,17 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	}
 
 	protected def getURI(Path path) {
-		if(path === null) return null
+		if(path === null || path == Path.ROOT) return null
 
-		val workspaceConfig = context.workspaceConfig
-		if (workspaceConfig === null) return null
-
-		val moduleName = path.segments.head
-		if (moduleName === null) return null
-
-		val projectConfig = workspaceConfig.findProjectByName(moduleName)
+		val projectConfig = context.projectConfig
 		if (projectConfig === null) return null
 
 		val projectURI = projectConfig.path
+		val projectName = path.segments.head
+		if (projectName != projectConfig.name) {
+			// unmapped path
+			return null
+		}
 		val segments = path.segments.tail
 		if (segments.empty)
 			return projectURI
@@ -280,10 +282,7 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	}
 	
 	protected def getPath(URI uri, ResourceSet context) {
-		val workspaceConfig = context.workspaceConfig
-		if(workspaceConfig === null) return null
-
-		val projectConfig = workspaceConfig.findProjectContaining(uri)
+		val projectConfig = context.projectConfig
 		if (projectConfig === null) return null
 
 		return uri.getPath(projectConfig.path, ROOT.append(projectConfig.name))

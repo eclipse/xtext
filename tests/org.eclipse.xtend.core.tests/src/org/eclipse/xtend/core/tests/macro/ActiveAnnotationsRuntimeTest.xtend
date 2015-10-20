@@ -23,8 +23,8 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.workspace.FileWorkspaceConfig
-import org.eclipse.xtext.workspace.WorkspaceConfigAdapter
+import org.eclipse.xtext.workspace.FileProjectConfig
+import org.eclipse.xtext.workspace.ProjectConfigAdapter
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Before
 import org.junit.Rule
@@ -93,24 +93,23 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 		expectations.apply(validator.validate(singleResource, CheckMode.ALL, CancelIndicator.NullImpl))
 	}
 	
-	def compileMacroResourceSet(Pair<String, String> macroFile, Pair<String, String> clientFile) {
+	def XtextResourceSet compileMacroResourceSet(Pair<String, String> macroFile, Pair<String, String> clientFile) {
 		val macroURI = copyToDisk(macroProject, macroFile)
 		val clientURI = copyToDisk(clientProject, clientFile)
-		val workspaceConfig = new FileWorkspaceConfig(workspaceRoot) => [
-			addProject(macroProject)
-			addProject(clientProject)
-			projects.forEach [
-				addSourceFolder("src")
-			]
-		] 
+		val macroProjectConfig = new FileProjectConfig(new File(workspaceRoot, macroProject)) => [
+			addSourceFolder("src")
+		]
+		val clientProjectConfig = new FileProjectConfig(new File(workspaceRoot, clientProject)) => [
+			addSourceFolder("src")
+		]
 		
 		val macroResourceSet = resourceSetProvider.get
-		macroResourceSet.eAdapters.add(new WorkspaceConfigAdapter(workspaceConfig))
+		new ProjectConfigAdapter(macroProjectConfig).attachToEmfObject(macroResourceSet)
 		macroResourceSet.classpathURIContext = getClass.classLoader
 		macroResourceSet.createResource(macroURI)
 		
 		val resourceSet = resourceSetProvider.get
-		resourceSet.eAdapters.add(new WorkspaceConfigAdapter(workspaceConfig))
+		new ProjectConfigAdapter(clientProjectConfig).attachToEmfObject(resourceSet)
 		resourceSet.createResource(clientURI)
 		
 		compiler.compile(macroResourceSet) [ result |
@@ -119,7 +118,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 			compiler.javaCompilerClassPath = classLoader 
 		]
 		
-		resourceSet
+		return resourceSet
 	}
 
 	// dummy override to enable launch configs

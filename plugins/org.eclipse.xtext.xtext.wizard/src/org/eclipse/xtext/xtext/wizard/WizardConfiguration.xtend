@@ -54,15 +54,15 @@ class WizardConfiguration {
 		ImmutableSet.copyOf(productionProjects + testProjects)
 	}
 	
-	def needsMavenBuild() {
+	def boolean needsMavenBuild() {
 		preferredBuildSystem == BuildSystem.MAVEN || preferredBuildSystem == BuildSystem.GRADLE && uiProject.enabled
 	}
 	
-	def needsTychoBuild() {
+	def boolean needsTychoBuild() {
 		needsMavenBuild && runtimeProject.isEclipsePluginProject
 	}
 	
-	def needsGradleBuild() {
+	def boolean needsGradleBuild() {
 		preferredBuildSystem == BuildSystem.GRADLE || intellijProject.isEnabled
 	}
 }

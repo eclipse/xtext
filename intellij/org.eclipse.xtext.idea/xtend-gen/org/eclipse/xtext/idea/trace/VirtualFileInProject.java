@@ -8,6 +8,8 @@
 package org.eclipse.xtext.idea.trace;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -30,6 +32,10 @@ public class VirtualFileInProject {
     }
     Project _project = element.getProject();
     return new VirtualFileInProject(virtualFile, _project);
+  }
+  
+  public Module getModule() {
+    return ModuleUtilCore.findModuleForFile(this.file, this.project);
   }
   
   private final VirtualFile file;
