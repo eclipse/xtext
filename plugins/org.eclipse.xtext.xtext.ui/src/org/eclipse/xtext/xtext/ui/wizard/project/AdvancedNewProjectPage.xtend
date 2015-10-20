@@ -9,10 +9,8 @@ package org.eclipse.xtext.xtext.ui.wizard.project
 
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
-import org.eclipse.swt.custom.ScrolledComposite
 import org.eclipse.swt.events.SelectionAdapter
 import org.eclipse.swt.events.SelectionEvent
-import org.eclipse.swt.layout.FillLayout
 import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Button
@@ -24,7 +22,8 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
-import org.osgi.framework.Bundle
+
+import static org.osgi.framework.Bundle.*
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -45,55 +44,48 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	override createControl(Composite parent) {
-		control = new ScrolledComposite(parent, SWT.V_SCROLL) => [
-			layout = new FillLayout
-			expandHorizontal = true
-			expandVertical = true
-
-			content = new Composite(it, SWT.NONE) => [
-				layout = new GridLayout(1, false)
-				Group [
-					text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-					createUiProject = CheckBox [
-						text = "Eclipse Plugin"
-					]
-					createIdeaProject = CheckBox [
-						text = "IntelliJ IDEA Plugin"
-						enabled = true
-					]
-					createWebProject = CheckBox [
-						text = "Web Integration"
-						enabled = true
-					]
-					createIdeProject = CheckBox [
-						text = "Generic IDE Support"
-						enabled = true
-					]
-					createTestProject = CheckBox [
-						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
-					]
+		control = new Composite(parent, SWT.NONE) => [
+			layoutData = new GridData(SWT.FILL, SWT.FILL, true, true)
+			layout = new GridLayout(1, false)
+			Group [
+				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+				createUiProject = CheckBox [
+					text = "Eclipse Plugin"
 				]
-				Group [
-					text = "Preferred Build System"
-					preferredBuildSystem = DropDown[
-						enabled = true
-						items = BuildSystem.values.map[toString]
-					]
+				createIdeaProject = CheckBox [
+					text = "IntelliJ IDEA Plugin"
+					enabled = true
 				]
-				Group [
-					text = "Source Layout"
-					sourceLayout = DropDown[
-						enabled = true
-						items = SourceLayout.values.map[toString]
-					]
-
+				createWebProject = CheckBox [
+					text = "Web Integration"
+					enabled = true
 				]
-				statusWidget = new StatusWidget(it, SWT.NONE) => [
-					layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+				createIdeProject = CheckBox [
+					text = "Generic IDE Support"
+					enabled = true
+				]
+				createTestProject = CheckBox [
+					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
 				]
 			]
-			minSize = content.computeSize(SWT.DEFAULT, SWT.DEFAULT)
+			Group [
+				text = "Preferred Build System"
+				preferredBuildSystem = DropDown[
+					enabled = true
+					items = BuildSystem.values.map[toString]
+				]
+			]
+			Group [
+				text = "Source Layout"
+				sourceLayout = DropDown[
+					enabled = true
+					items = SourceLayout.values.map[toString]
+				]
 
+			]
+			statusWidget = new StatusWidget(it, SWT.NONE) => [
+				layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+			]
 		]
 
 		val selectionControl = new SelectionAdapter() {
@@ -202,7 +194,7 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def protected boolean isBundleResolved(String bundleId) {
 		val bundle = Activator.instance.bundle.bundleContext.bundles.findFirst[bundleId == it.symbolicName]
-		return bundle !== null && bundle.state === Bundle.RESOLVED
+		return bundle !== null && (bundle.state.bitwiseAnd(RESOLVED.bitwiseOr(STARTING).bitwiseOr(ACTIVE)) !== 0)
 	}
 
 	def protected Group(Composite parent, (Group)=>void config) {

@@ -103,7 +103,8 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   protected TypeReference getGenProposalProviderSuperClass(final Grammar g) {
     TypeReference _xblockexpression = null;
     {
-      final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
+      EList<Grammar> _usedGrammars = g.getUsedGrammars();
+      final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       TypeReference _xifexpression = null;
       boolean _and = false;
       if (!this.inheritImplementation) {
