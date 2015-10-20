@@ -50,7 +50,7 @@ public class TypeReference {
     return new TypeReference(epackage, _resourceSet);
   }
   
-  private final static Pattern PACKAGE_MATCHER = Pattern.compile("[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*");
+  private final static Pattern PACKAGE_MATCHER = Pattern.compile("([a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*)?");
   
   private final static Pattern CLASS_MATCHER = Pattern.compile("[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*");
   
@@ -180,7 +180,7 @@ public class TypeReference {
         }
       }
     }
-    return null;
+    return "";
   }
   
   private static String getClassName(final String qualifiedName) {
@@ -198,7 +198,7 @@ public class TypeReference {
         }
       }
     }
-    return null;
+    return qualifiedName;
   }
   
   private static String getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
