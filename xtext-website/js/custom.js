@@ -147,3 +147,15 @@ function pimp_rotating_quotes() {
 	}
 	showNext(Math.floor((Math.random() * elements.length) + 1));
 }
+
+function pimp_rotating_companies() {
+	var elements = $(".companies li");
+	var showNext = function (index) {
+	    if (index >= elements.length) {
+	        index = 0;
+	    }
+	    elements.hide().slice(index, index+1).fadeIn();
+	    setTimeout(function(){ showNext(index+1) }, 5000);
+	}
+	showNext(Math.floor((Math.random() * elements.length) + 1));
+}

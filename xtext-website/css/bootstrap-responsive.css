@@ -137,13 +137,13 @@
 
 @media (max-width: 767px) {
   body {
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
   }
   .navbar-fixed-top,
   .navbar-fixed-bottom {
-    margin-right: -20px;
-    margin-left: -20px;
+    margin-right: 0px;
+    margin-left: 0px;
   }
   .container-fluid {
     padding: 0;
@@ -159,6 +159,8 @@
   }
   .container {
     width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .row-fluid {
     width: 100%;
