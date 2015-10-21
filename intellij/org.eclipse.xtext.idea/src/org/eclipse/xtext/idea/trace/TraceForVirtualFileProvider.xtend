@@ -135,7 +135,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val generatedFiles = generatedSources.map [
 			mngr.findFileByUrl(it.toString)
 		]
-		val generatedTraces = generatedFiles.filter[
+		val generatedTraces = generatedFiles.filterNull.filter[
 			isTraceFile(it)
 		]
 		val result = generatedTraces.map[
