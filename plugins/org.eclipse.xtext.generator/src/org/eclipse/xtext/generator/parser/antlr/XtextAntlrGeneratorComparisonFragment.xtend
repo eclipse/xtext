@@ -40,7 +40,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
  * GrammarComparator} to compare them.
  * 
  * @author Christian Schneider - Initial contribution and API
- * @since 2.9
+ * @noreference
  */
  @Log
 class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {

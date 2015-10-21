@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * Ignores differences in white space, and counts line breaks for usable error diagnosis.
  * 
  * @author Christian Schneider - Initial contribution and API
- * @since 2.9
+ * @noreference
  */
 @SuppressWarnings("all")
 public class AntlrGrammarComparator {
