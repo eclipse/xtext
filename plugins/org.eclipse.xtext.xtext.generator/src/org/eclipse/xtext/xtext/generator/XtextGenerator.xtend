@@ -19,6 +19,7 @@ import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
+import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.emf.mwe.utils.StandaloneSetup
@@ -123,18 +124,34 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, org.eclipse.emf.mwe.core.issues.Issues issues) {
 		initialize
-		cleaner.clean
-		for (language : languageConfigs) {
-			LOG.info('Generating ' + language.grammar.name)
-			language.generate
-			language.generateSetups
-			language.generateModules
-			language.generateExecutableExtensionFactory
+		try {
+			cleaner.clean
+			for (language : languageConfigs) {
+				try {
+					LOG.info('Generating ' + language.grammar.name)
+					language.generate
+					language.generateSetups
+					language.generateModules
+					language.generateExecutableExtensionFactory
+				} catch(Exception e) {
+					handleException(e, issues)
+				}
+			}
+			LOG.info('Generating common infrastructure')
+			generatePluginXmls
+			generateManifests
+			generateActivator
+		} catch (Exception e) {
+			handleException(e, issues)
 		}
-		LOG.info('Generating common infrastructure')
-		generatePluginXmls
-		generateManifests
-		generateActivator
+	}
+	
+	private def void handleException(Exception ex, Issues issues) {
+		if (ex instanceof CompositeGeneratorException) {
+			ex.exceptions.forEach[handleException(issues)]
+		} else {
+			issues.addError(this, "GeneratorException: ", null, ex, null)
+		}
 	}
 	
 	protected def generateSetups(IXtextGeneratorLanguage language) {
