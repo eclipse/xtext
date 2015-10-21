@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-/**
- * @noimplement
- */
-interface IGeneratesStub {
-	def boolean isGenerateStub()
-	def void setGenerateStub(boolean generateStub)
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtend.lib.annotations.Accessors
+
+abstract class AbstractStubGeneratingFragment extends AbstractXtextGeneratorFragment {
+	@Accessors boolean generateStub = true
 }
