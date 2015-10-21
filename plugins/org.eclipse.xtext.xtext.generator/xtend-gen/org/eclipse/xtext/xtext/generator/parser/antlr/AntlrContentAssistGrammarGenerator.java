@@ -105,8 +105,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
           final Function1<String, Integer> _function = new Function1<String, Integer>() {
             @Override
             public Integer apply(final String it) {
-              int _length = it.length();
-              return Integer.valueOf((-_length));
+              return Integer.valueOf(it.length());
             }
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
