@@ -311,7 +311,8 @@ public abstract class AbstractAntlrGrammarGenerator {
           final Function1<String, Integer> _function = new Function1<String, Integer>() {
             @Override
             public Integer apply(final String it) {
-              return Integer.valueOf(it.length());
+              int _length = it.length();
+              return Integer.valueOf((-_length));
             }
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
