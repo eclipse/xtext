@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
+import java.nio.charset.Charset
 
 /**
  * Configuration object for generated code.
@@ -29,10 +30,10 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	static val FILE_HEADER_VAR_VERSION = '${version}'
 	
 	@Accessors
-	String encoding
+	String encoding = Charset.defaultCharset.name
 	
 	@Accessors
-	String lineDelimiter
+	String lineDelimiter = Strings.newLine
 	
 	@Accessors(PUBLIC_GETTER)
 	String fileHeader

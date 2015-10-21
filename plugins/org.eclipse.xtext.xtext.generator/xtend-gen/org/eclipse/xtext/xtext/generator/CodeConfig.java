@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator;
 
 import com.google.common.base.Objects;
 import com.google.inject.Injector;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -39,10 +40,10 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   private final static String FILE_HEADER_VAR_VERSION = "${version}";
   
   @Accessors
-  private String encoding;
+  private String encoding = Charset.defaultCharset().name();
   
   @Accessors
-  private String lineDelimiter;
+  private String lineDelimiter = Strings.newLine();
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private String fileHeader;
