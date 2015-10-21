@@ -13,7 +13,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.openapi.fileEditor.FileEditorManager
-import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import org.eclipse.xtext.Constants
@@ -46,7 +46,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 			return true
 		try {
 			acceptor = [ offset, length, styles |
-				ProgressManager.checkCanceled
+				ProgressIndicatorProvider.checkCanceled
 				if (length > 0) {
 					styles.forEach [
 						val info = HighlightInfo.newHighlightInfo(highlightInfoType).range(offset, offset + length).
@@ -55,7 +55,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 					]
 				}
 			]
-			ProgressManager.checkCanceled
+			ProgressIndicatorProvider.checkCanceled
 			action.run
 		} finally {
 			acceptor = null

@@ -37,7 +37,6 @@ import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.jetbrains.annotations.NotNull;
 
-import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -46,6 +45,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -160,6 +160,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	}
 
 	protected XtextResource createResource() {    	
+		ProgressIndicatorProvider.checkCanceled();
     	VirtualFile virtualFile = getViewProvider().getVirtualFile();
         if (virtualFile == null) {
             return null;
@@ -190,10 +191,13 @@ public abstract class BaseXtextFile extends PsiFileBase {
 
 	protected void initialize(final Resource resource) {
 		installDerivedState(resource);
+		
+		ProgressIndicatorProvider.checkCanceled();
 		EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
 	}
 
 	protected void installDerivedState(Resource resource) {
+		ProgressIndicatorProvider.checkCanceled();
 		if (resource instanceof DerivedStateAwareResource) {
 			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
 			boolean deliver = derivedStateAwareResource.eDeliver();
