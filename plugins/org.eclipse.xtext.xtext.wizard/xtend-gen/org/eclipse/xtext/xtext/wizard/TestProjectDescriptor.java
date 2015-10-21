@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -91,6 +94,26 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
   @Override
   public boolean isEclipsePluginProject() {
     return this.testedProject.isEclipsePluginProject();
+  }
+  
+  @Override
+  public Set<ExternalDependency> getExternalDependencies() {
+    final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
+    Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
+    Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
+    ExternalDependency _externalDependency = new ExternalDependency();
+    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
+      @Override
+      public void apply(final ExternalDependency it) {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.junit");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("4.7.0");
+      }
+    };
+    ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
+    deps.add(_doubleArrow);
+    return deps;
   }
   
   @Override
@@ -392,7 +415,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           _builder_1.append("<properties>");
           _builder_1.newLine();
           _builder_1.append("\t\t\t");
-          _builder_1.append("<argLine>-XstartOnFirstThread</argLine>");
+          _builder_1.append("<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>");
           _builder_1.newLine();
           _builder_1.append("\t\t");
           _builder_1.append("</properties>");

@@ -237,8 +237,7 @@ public abstract class ProjectDescriptor {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(key, "");
     _builder.append(": ");
-    Set<String> _requiredBundles = this.getRequiredBundles();
-    String _join = IterableExtensions.join(_requiredBundles, ",\n ");
+    String _join = IterableExtensions.join(value, ",\n ");
     _builder.append(_join, "");
     return _builder.toString();
   }
