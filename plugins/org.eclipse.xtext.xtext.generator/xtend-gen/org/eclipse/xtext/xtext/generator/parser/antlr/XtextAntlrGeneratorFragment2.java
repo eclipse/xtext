@@ -140,6 +140,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(_isCombinedGrammar);
     Grammar _grammar_1 = this.getGrammar();
     _combinedGrammarMarker.attachToEmfObject(_grammar_1);
+    if (this.debugGrammar) {
+      this.generateDebugGrammar();
+    }
     this.generateProductionGrammar();
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
@@ -147,9 +150,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     boolean _notEquals = (!Objects.equal(_srcGen, null));
     if (_notEquals) {
       this.generateContentAssistGrammar();
-    }
-    if (this.debugGrammar) {
-      this.generateDebugGrammar();
     }
     JavaFileAccess _generateProductionParser = this.generateProductionParser();
     IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
@@ -166,9 +166,24 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
     IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
     _generateContentAssistParser.writeTo(_srcGen_3);
+    boolean _and = false;
     boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
     boolean _not = (!_isCombinedGrammar_1);
-    if (_not) {
+    if (!_not) {
+      _and = false;
+    } else {
+      Grammar _grammar_2 = this.getGrammar();
+      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
+      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+        }
+      };
+      boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+      _and = _exists;
+    }
+    if (_and) {
       JavaFileAccess _generateProductionTokenSource = this.generateProductionTokenSource();
       IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_2 = _projectConfig_4.getRuntime();
