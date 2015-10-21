@@ -84,7 +84,6 @@ final class GenerateXbase {
 				addFragment(antlr);
 				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
 				comparison.setOptions(antlrOptions);
-				comparison.setSkipContentAssistGrammarComparison(true);
 				addFragment(comparison);
 			}});
 			addLanguage(new XtextGeneratorLanguage() {{
