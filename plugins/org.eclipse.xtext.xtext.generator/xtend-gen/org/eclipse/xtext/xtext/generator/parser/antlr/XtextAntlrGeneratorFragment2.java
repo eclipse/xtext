@@ -1593,13 +1593,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       }
     };
     GuiceModuleAccess.BindingFactory _addConfiguredBinding_2 = _addConfiguredBinding_1.addConfiguredBinding("HighlightingTokenDefProvider", _client_2);
-    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory");
-    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory");
-    GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addConfiguredBinding_2.addTypeToType(_typeRef_2, _typeRef_3);
-    TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
+    TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.contentassist", "ContentAssistContext.Factory");
+    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory");
+    GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addConfiguredBinding_2.addTypeToType(_typeReference, _typeRef_2);
+    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
     Grammar _grammar = this.getGrammar();
     TypeReference _parserClass = naming.getParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_4, _parserClass);
+    GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_3, _parserClass);
     StringConcatenationClient _client_3 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1622,9 +1622,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     };
     final GuiceModuleAccess.BindingFactory uiBindings = _addTypeToType_2.addConfiguredBinding("ContentAssistLexerProvider", _client_3);
     if (this.partialParsing) {
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory");
-      TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
-      uiBindings.addTypeToType(_typeRef_5, _typeRef_6);
+      TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory");
+      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
+      uiBindings.addTypeToType(_typeRef_4, _typeRef_5);
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();

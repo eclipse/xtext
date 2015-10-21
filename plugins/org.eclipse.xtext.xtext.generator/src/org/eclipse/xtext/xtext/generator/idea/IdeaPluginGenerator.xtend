@@ -99,7 +99,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«caNaming.getLexerClass(grammar)».class);''')
 		if (grammar.inheritsXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider'.typeRef, 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider'.typeRef)
-			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider'.typeRef, 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider'.typeRef)
+			bindFactory.addTypeToType(new TypeReference('org.eclipse.xtext.xbase.typesystem.internal', 'IFeatureScopeTracker.Provider'), 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider'.typeRef)
 			bindFactory.addConfiguredBinding('LanguageSpecificPsiModelAssociations', '''
 				binder.bind(«"org.eclipse.xtext.psi.IPsiModelAssociations".typeRef».class)
 					.annotatedWith(«LanguageSpecific».class)
@@ -111,7 +111,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 			bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider'.typeRef)
-			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider'.typeRef, new TypeReference('org.eclipse.xtext.xbase.idea.findusages', 'XbaseWordsScanner.XbaseWordsScannerProvider'))
 		}
 
 		bindFactory.contributeTo(language.ideaGenModule)
@@ -513,7 +513,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	def compileTokenTypeProvider(Grammar grammar) {
 		val tokenSet = "com.intellij.psi.tree.TokenSet".typeRef
 		val iElementType = "com.intellij.psi.tree.IElementType".typeRef
-		val indexedElementType = "org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType".typeRef
+		val indexedElementType = new TypeReference("org.eclipse.xtext.idea.parser", "TokenTypeProvider.IndexedElementType")
 		return fileAccessFactory.createJavaFile(grammar.tokenTypeProvider, '''
 			@«Singleton» public class «grammar.tokenTypeProvider.simpleName» implements «"org.eclipse.xtext.idea.parser.TokenTypeProvider".typeRef» {
 			

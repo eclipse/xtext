@@ -260,12 +260,19 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("binder.bind(");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer");
         _builder.append(_typeRef, "");
-        _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
-        _builder.append(".named(\"builderPreferenceInitializer\")).to(");
-        TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer");
-        _builder.append(_typeRef_1, "");
+        _builder.append(".class)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".annotatedWith(");
+        _builder.append(Names.class, "\t");
+        _builder.append(".named(\"builderPreferenceInitializer\"))");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".to(");
+        TypeReference _typeReference = new TypeReference("org.eclipse.xtext.builder.preferences", "BuilderPreferenceAccess.Initializer");
+        _builder.append(_typeReference, "\t");
         _builder.append(".class);");
+        _builder.newLineIfNotEmpty();
       }
     };
     final StringConcatenationClient statement = _client_1;

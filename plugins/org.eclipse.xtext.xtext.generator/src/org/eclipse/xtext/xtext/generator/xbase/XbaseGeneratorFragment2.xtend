@@ -146,8 +146,8 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				.addTypeToType('org.eclipse.xtext.ui.refactoring.IRenameStrategy'.typeRef, 
 						'org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy'.typeRef)
 				
-				.addTypeToType('org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory'.typeRef,
-						'org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory'.typeRef)
+				.addTypeToType(new TypeReference('org.eclipse.xtext.common.types.ui.refactoring.participant', 'JdtRenameParticipant.ContextFactory'),
+						new TypeReference ('org.eclipse.xtext.xbase.ui.jvmmodel.refactoring', 'JvmModelJdtRenameParticipantContext.ContextFactory'))
 				.addTypeToType('org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener'.typeRef, 
 						'org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener'.typeRef)
 				.addTypeToType('org.eclipse.xtext.ui.editor.GlobalURIEditorOpener'.typeRef, 
@@ -155,7 +155,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				.addTypeToType('org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer'.typeRef, 
 						'org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer'.typeRef)
 				.addTypeToType('org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation'.typeRef, 
-						'org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No'.typeRef)
+						new TypeReference('org.eclipse.xtext.common.types.ui.query', 'IJavaSearchParticipation.No'))
 				// DerivedMemberAwareEditorOpener
 				.addConfiguredBinding('LanguageSpecificURIEditorOpener', statement)
 		} else {

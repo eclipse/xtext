@@ -52,15 +52,31 @@ public class TypeReferenceTest {
     Assert.assertEquals("String", _simpleName_1);
   }
   
+  @Test(expected = IllegalArgumentException.class)
+  public void testWrongNestedTypeUsage() {
+    TypeReference.typeRef("java.util.Map.Entry");
+  }
+  
   @Test
   public void testNestedType() {
-    final TypeReference ref = TypeReference.typeRef("java.util.Map.Entry");
+    final TypeReference ref = new TypeReference("java.util", "Map.Entry");
     String _packageName = ref.getPackageName();
     Assert.assertEquals("java.util", _packageName);
     String _simpleName = ref.getSimpleName();
     Assert.assertEquals("Entry", _simpleName);
     List<String> _simpleNames = ref.getSimpleNames();
     Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), _simpleNames);
+  }
+  
+  @Test
+  public void testLowerCaseNestedType() {
+    final TypeReference ref = new TypeReference("java.util", "Map.entry");
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("java.util", _packageName);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("entry", _simpleName);
+    List<String> _simpleNames = ref.getSimpleNames();
+    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "entry")), _simpleNames);
   }
   
   @Test

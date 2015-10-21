@@ -18,6 +18,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
  * Contributes the registration of element renaming infrastructure.
@@ -60,11 +61,9 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 			.addConfiguredBinding(
 					"org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer".typeRef.simpleNames.join("."),
 					'''
-						binder.bind(«
-							"org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer".typeRef
-							».class).annotatedWith(«Names».named("RefactoringPreferences")).to(«
-							"org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences.Initializer".typeRef
-							».class);
+						binder.bind(«"org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer".typeRef».class)
+							.annotatedWith(«Names».named("RefactoringPreferences"))
+							.to(«new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "RefactoringPreferences.Initializer")».class);
 					''')
 				
 		if (grammar.useJdtRefactoring) {
@@ -78,19 +77,19 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 						"org.eclipse.xtext.common.types.ui.refactoring.JvmRenameRefactoringProvider".typeRef)
 
 				.addTypeToType(
-						"org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory".typeRef,
-						"org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport.Factory".typeRef)
+						new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "IRenameSupport.Factory"),
+						new TypeReference("org.eclipse.xtext.common.types.ui.refactoring", "JdtRenameSupport.Factory"))
 
 				.addTypeToType(
-						"org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider".typeRef,
-						"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider".typeRef)
+						new TypeReference("org.eclipse.xtext.ui.refactoring", "IRenameStrategy.Provider"),
+						new TypeReference("org.eclipse.xtext.common.types.ui.refactoring.participant", "JvmMemberRenameStrategy.Provider"))
 
 				.addConfiguredBinding(
-						"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate".typeRef.simpleNames.join("."),
+						"JvmMemberRenameStrategy.Provider.Delegate",
 						'''
-							binder.bind(«"org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider".typeRef
+							binder.bind(«new TypeReference("org.eclipse.xtext.ui.refactoring", "IRenameStrategy.Provider")
 								».class).annotatedWith(«
-								"org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy.Provider.Delegate".typeRef
+								new TypeReference("org.eclipse.xtext.common.types.ui.refactoring.participant", "JvmMemberRenameStrategy.Provider.Delegate")
 								».class).to(«"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider".typeRef
 								».class);
 						''')
@@ -101,8 +100,8 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 						"org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider".typeRef)
 						
 				.addTypeToType(
-						"org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory".typeRef,
-						"org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory".typeRef)
+						new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "IRenameSupport.Factory"),
+						new TypeReference("org.eclipse.xtext.ui.refactoring.ui", "DefaultRenameSupport.Factory"))
 		}
 
 		bindings.contributeTo(language.eclipsePluginGenModule);

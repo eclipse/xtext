@@ -417,7 +417,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 			
 				protected «grammar.grammarAccess» grammarAccess;
 				«FOR group : allAmbiguousTransitionsBySyntax»
-					protected «'org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias'.typeRef» match_«group.identifier»;
+					protected «new TypeReference ('org.eclipse.xtext.serializer.analysis', 'GrammarAlias.AbstractElementAlias')» match_«group.identifier»;
 				«ENDFOR»
 				
 				@«Inject»

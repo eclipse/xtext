@@ -102,8 +102,8 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
         _builder.append(".named(");
         _builder.append(ResourceDescriptionsProvider.class, "");
         _builder.append(".NAMED_BUILDER_SCOPE)).to(");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware");
-        _builder.append(_typeRef, "");
+        TypeReference _typeReference = new TypeReference("org.eclipse.xtext.builder.clustering", "CurrentDescriptions.ResourceSetAware");
+        _builder.append(_typeReference, "");
         _builder.append(".class);");
       }
     };

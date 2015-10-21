@@ -118,7 +118,11 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	protected def contributeEclipsePluginGuiceBindings() {
 		val StringConcatenationClient expression = '''«'org.eclipse.core.resources.ResourcesPlugin'.typeRef».getWorkspace().getRoot()'''
 		val StringConcatenationClient statement =
-			'''binder.bind(«'org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer'.typeRef».class).annotatedWith(«Names».named("builderPreferenceInitializer")).to(«'org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer'.typeRef».class);'''
+			'''
+				binder.bind(«'org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer'.typeRef».class)
+					.annotatedWith(«Names».named("builderPreferenceInitializer"))
+					.to(«new TypeReference('org.eclipse.xtext.builder.preferences', 'BuilderPreferenceAccess.Initializer')».class);
+			'''
 		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType('org.eclipse.xtext.builder.IXtextBuilderParticipant'.typeRef,
 					'org.eclipse.xtext.builder.BuilderParticipant'.typeRef)

@@ -1316,8 +1316,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           for(final EqualAmbiguousTransitions group : _allAmbiguousTransitionsBySyntax) {
             _builder.append("\t");
             _builder.append("protected ");
-            TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias");
-            _builder.append(_typeRef, "\t");
+            TypeReference _typeReference = new TypeReference("org.eclipse.xtext.serializer.analysis", "GrammarAlias.AbstractElementAlias");
+            _builder.append(_typeReference, "\t");
             _builder.append(" match_");
             String _identifier = group.getIdentifier();
             _builder.append(_identifier, "\t");
