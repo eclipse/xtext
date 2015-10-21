@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -55,7 +56,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 @SuppressWarnings("all")
-public class Formatter2Fragment2 extends AbstractXtextGeneratorFragment {
+public class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
   @Inject
   private FileAccessFactory fileAccessFactory;
   

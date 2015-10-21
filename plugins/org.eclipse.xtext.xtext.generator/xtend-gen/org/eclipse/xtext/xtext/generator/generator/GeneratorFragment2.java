@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -51,7 +52,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class GeneratorFragment2 extends AbstractXtextGeneratorFragment {
+public class GeneratorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
   @Inject
   private CodeConfig codeConfig;
   
@@ -76,8 +77,9 @@ public class GeneratorFragment2 extends AbstractXtextGeneratorFragment {
   private boolean generateXtendMain = false;
   
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private boolean generateStubs = true;
+  private boolean generateStub = true;
   
+  @Override
   public boolean isGenerateStub() {
     boolean _and = false;
     Grammar _grammar = this.getGrammar();
@@ -86,7 +88,7 @@ public class GeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if (!_not) {
       _and = false;
     } else {
-      _and = this.generateStubs;
+      _and = this.generateStub;
     }
     return _and;
   }
@@ -984,7 +986,7 @@ public class GeneratorFragment2 extends AbstractXtextGeneratorFragment {
     this.generateXtendMain = generateXtendMain;
   }
   
-  public void setGenerateStubs(final boolean generateStubs) {
-    this.generateStubs = generateStubs;
+  public void setGenerateStub(final boolean generateStub) {
+    this.generateStub = generateStub;
   }
 }

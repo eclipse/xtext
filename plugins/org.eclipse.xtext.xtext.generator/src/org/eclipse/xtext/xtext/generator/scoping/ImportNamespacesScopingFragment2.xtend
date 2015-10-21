@@ -30,8 +30,9 @@ import static org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class ImportNamespacesScopingFragment2 extends AbstractXtextGeneratorFragment {
+class ImportNamespacesScopingFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 	
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector
