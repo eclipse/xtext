@@ -170,7 +170,7 @@ public class AntlrGrammarComparator {
     }
   }.apply();
   
-  private final AntlrGrammarComparator.ErrorContext errorContext = new AntlrGrammarComparator.ErrorContext();
+  private AntlrGrammarComparator.ErrorContext errorContext;
   
   /**
    * Performs the actual comparison of given and expected grammar.
@@ -179,9 +179,11 @@ public class AntlrGrammarComparator {
    * 			and the referenced grammar (value) for logging purposes
    */
   public AntlrGrammarComparator.ErrorContext compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final String absoluteGrammarFileName, final String absoluteGrammarFileNameReference, final AntlrGrammarComparator.IErrorHandler errorHandler) {
+    AntlrGrammarComparator.ErrorContext _errorContext = new AntlrGrammarComparator.ErrorContext();
+    this.errorContext = _errorContext;
     this.errorContext.testedGrammar.absoluteFileName = absoluteGrammarFileName;
     this.errorContext.referenceGrammar.absoluteFileName = absoluteGrammarFileNameReference;
-    return this.compareGrammars(grammar, grammar, errorHandler);
+    return this.compareGrammars(grammar, grammarReference, errorHandler);
   }
   
   /**
@@ -191,7 +193,11 @@ public class AntlrGrammarComparator {
    * 			and the referenced grammar (value) for logging purposes
    */
   public AntlrGrammarComparator.ErrorContext compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.IErrorHandler errorHandler) {
-    this.errorContext.reset();
+    boolean _equals = Objects.equal(this.errorContext, null);
+    if (_equals) {
+      AntlrGrammarComparator.ErrorContext _errorContext = new AntlrGrammarComparator.ErrorContext();
+      this.errorContext = _errorContext;
+    }
     final Matcher compoundMatcher = this.compoundPattern.matcher(grammar);
     final Matcher compoundMatcherReference = this.compoundPattern.matcher(grammarReference);
     boolean continue_ = true;

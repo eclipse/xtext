@@ -85,7 +85,7 @@ class AntlrGrammarComparator {
 	private val p_ws = Pattern.compile(WS)
 	private val compoundPattern = Pattern.compile('''(«TOKEN»)|(«NEWLINE»)|(«WS»)''', Pattern.MULTILINE) 		
 	
-	private val errorContext = new ErrorContext()
+	private ErrorContext errorContext
 
 	/**
 	 * Performs the actual comparison of given and expected grammar.
@@ -95,11 +95,12 @@ class AntlrGrammarComparator {
 	 */
 	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
 			String absoluteGrammarFileName, String absoluteGrammarFileNameReference, IErrorHandler errorHandler) {
+		errorContext = new ErrorContext()
 		
 		errorContext.testedGrammar.absoluteFileName = absoluteGrammarFileName
 		errorContext.referenceGrammar.absoluteFileName = absoluteGrammarFileNameReference
 		
-		return compareGrammars(grammar, grammar, errorHandler)
+		return compareGrammars(grammar, grammarReference, errorHandler)
 	}
 	
 	/**
@@ -110,9 +111,11 @@ class AntlrGrammarComparator {
 	 */
 	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
 			IErrorHandler errorHandler) {
-
-		errorContext.reset()
-
+		
+		if (errorContext == null) {			
+			errorContext = new ErrorContext()
+		}
+		
 		val compoundMatcher = compoundPattern.matcher(grammar)
 		val compoundMatcherReference = compoundPattern.matcher(grammarReference)
 		
