@@ -80,16 +80,16 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	override protected doGenerate() {
 		new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
 		new CombinedGrammarMarker(isCombinedGrammar).attachToEmfObject(grammar)
+		if (debugGrammar)
+			generateDebugGrammar
 		generateProductionGrammar
 		if (projectConfig.genericIde.srcGen != null)
 			generateContentAssistGrammar
-		if (debugGrammar)
-			generateDebugGrammar
 		
 		generateProductionParser.writeTo(projectConfig.runtime.srcGen)
 		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
 		generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
-		if (!isCombinedGrammar) {
+		if (!isCombinedGrammar && grammar.allTerminalRules().exists[ isSyntheticTerminalRule ]) {
 			generateProductionTokenSource.writeTo(projectConfig.runtime.srcGen)
 			generateContentAssistTokenSource.writeTo(projectConfig.genericIde.srcGen)
 		}

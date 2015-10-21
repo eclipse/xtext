@@ -44,7 +44,7 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 				
 				{
 					«FOR kw: allKeywords.sort.sortBy[-length]»
-						tokenNameToValue.put("«keyWordHelper.getRuleName(kw)»", "'«kw.toJavaIdentifier(false).replaceAll("\\\\\\$", "\\\\u0024")»'");
+						tokenNameToValue.put("«keywordHelper.getRuleName(kw)»", "'«kw.toJavaIdentifier(false).replaceAll("\\\\\\$", "\\\\u0024")»'");
 					«ENDFOR»
 				}
 			«ENDIF»
