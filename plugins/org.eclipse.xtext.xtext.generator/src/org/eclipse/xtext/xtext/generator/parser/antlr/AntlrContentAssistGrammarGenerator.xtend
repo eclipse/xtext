@@ -43,8 +43,8 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 				private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
 				
 				{
-					«FOR kw: allKeywords.sort.sortBy[-length]»
-						tokenNameToValue.put("«keywordHelper.getRuleName(kw)»", "'«kw.toStringInAntlrAction.replaceAll("\\\\\\$", "\\\\u0024")»'");
+					«FOR kw: allKeywords.sort.sortBy[length]»
+						tokenNameToValue.put("«keywordHelper.getRuleName(kw)»", "'«kw.toStringInAntlrAction.replace('$', "\\u0024")»'");
 					«ENDFOR»
 				}
 			«ENDIF»

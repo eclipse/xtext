@@ -105,8 +105,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
           final Function1<String, Integer> _function = new Function1<String, Integer>() {
             @Override
             public Integer apply(final String it) {
-              int _length = it.length();
-              return Integer.valueOf((-_length));
+              return Integer.valueOf(it.length());
             }
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
@@ -118,8 +117,8 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
             _builder.append(_ruleName, "\t\t");
             _builder.append("\", \"\'");
             String _stringInAntlrAction = AntlrGrammarGenUtil.toStringInAntlrAction(kw);
-            String _replaceAll = _stringInAntlrAction.replaceAll("\\\\\\$", "\\\\u0024");
-            _builder.append(_replaceAll, "\t\t");
+            String _replace = _stringInAntlrAction.replace("$", "\\u0024");
+            _builder.append(_replace, "\t\t");
             _builder.append("\'\");");
             _builder.newLineIfNotEmpty();
           }
