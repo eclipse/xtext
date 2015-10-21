@@ -47,15 +47,14 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.internal.Log;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.RuleNames;
+import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
-import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -68,7 +67,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
  */
 @Log
 @SuppressWarnings("all")
-public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {
+public class XtextGeneratorLanguage extends CompositeGeneratorFragment implements IXtextGeneratorLanguage {
   private String grammarUri;
   
   private String name;
@@ -109,9 +108,6 @@ public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGe
   
   @Accessors
   private final GuiceModuleAccess webGenModule = new GuiceModuleAccess();
-  
-  @Accessors(AccessorType.PROTECTED_GETTER)
-  private final List<IXtextGeneratorFragment> fragments = CollectionLiterals.<IXtextGeneratorFragment>newArrayList();
   
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
@@ -170,31 +166,11 @@ public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGe
     return this.fileExtensions;
   }
   
-  public void addFragment(final IXtextGeneratorFragment fragment) {
-    if ((fragment == this)) {
-      throw new IllegalArgumentException();
-    }
-    this.fragments.add(fragment);
-  }
-  
-  @Override
-  public void checkConfiguration(final Issues issues) {
-    for (final IXtextGeneratorFragment fragment : this.fragments) {
-      fragment.checkConfiguration(issues);
-    }
-  }
-  
-  @Override
-  public void generate() {
-    for (final IXtextGeneratorFragment fragment : this.fragments) {
-      fragment.generate();
-    }
-  }
-  
   @Override
   public void initialize(final Injector injector) {
+    List<IXtextGeneratorFragment> _fragments = this.getFragments();
     ImplicitFragment _implicitFragment = new ImplicitFragment();
-    this.fragments.add(0, _implicitFragment);
+    _fragments.add(0, _implicitFragment);
     injector.injectMembers(XtextGeneratorLanguage.class);
     if ((this.resourceSet == null)) {
       ResourceSet _get = this.resourceSetProvider.get();
@@ -281,9 +257,7 @@ public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGe
     final Grammar grammar = ((Grammar) _get_1);
     this.validateGrammar(grammar);
     this.initialize(grammar);
-    for (final IXtextGeneratorFragment fragment : this.fragments) {
-      fragment.initialize(injector);
-    }
+    super.initialize(injector);
   }
   
   public void initialize(final Grammar grammar) {
@@ -463,10 +437,5 @@ public class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGe
   @Pure
   public GuiceModuleAccess getWebGenModule() {
     return this.webGenModule;
-  }
-  
-  @Pure
-  protected List<IXtextGeneratorFragment> getFragments() {
-    return this.fragments;
   }
 }

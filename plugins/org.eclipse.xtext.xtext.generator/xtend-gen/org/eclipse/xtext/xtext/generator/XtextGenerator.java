@@ -49,6 +49,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.CompositeGeneratorException;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.LanguageModule;
@@ -190,23 +191,54 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Override
   protected void invokeInternal(final WorkflowContext ctx, final ProgressMonitor monitor, final Issues issues) {
     this.initialize();
-    this.cleaner.clean();
-    for (final XtextGeneratorLanguage language : this.languageConfigs) {
-      {
-        Grammar _grammar = language.getGrammar();
-        String _name = _grammar.getName();
-        String _plus = ("Generating " + _name);
-        XtextGenerator.LOG.info(_plus);
-        language.generate();
-        this.generateSetups(language);
-        this.generateModules(language);
-        this.generateExecutableExtensionFactory(language);
+    try {
+      this.cleaner.clean();
+      for (final XtextGeneratorLanguage language : this.languageConfigs) {
+        try {
+          Grammar _grammar = language.getGrammar();
+          String _name = _grammar.getName();
+          String _plus = ("Generating " + _name);
+          XtextGenerator.LOG.info(_plus);
+          language.generate();
+          this.generateSetups(language);
+          this.generateModules(language);
+          this.generateExecutableExtensionFactory(language);
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            final Exception e = (Exception)_t;
+            this.handleException(e, issues);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+      }
+      XtextGenerator.LOG.info("Generating common infrastructure");
+      this.generatePluginXmls();
+      this.generateManifests();
+      this.generateActivator();
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof Exception) {
+        final Exception e_1 = (Exception)_t_1;
+        this.handleException(e_1, issues);
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
       }
     }
-    XtextGenerator.LOG.info("Generating common infrastructure");
-    this.generatePluginXmls();
-    this.generateManifests();
-    this.generateActivator();
+  }
+  
+  private void handleException(final Exception ex, final Issues issues) {
+    if ((ex instanceof CompositeGeneratorException)) {
+      List<Exception> _exceptions = ((CompositeGeneratorException)ex).getExceptions();
+      final Procedure1<Exception> _function = new Procedure1<Exception>() {
+        @Override
+        public void apply(final Exception it) {
+          XtextGenerator.this.handleException(it, issues);
+        }
+      };
+      IterableExtensions.<Exception>forEach(_exceptions, _function);
+    } else {
+      issues.addError(this, "GeneratorException: ", null, ex, null);
+    }
   }
   
   protected void generateSetups(final IXtextGeneratorLanguage language) {

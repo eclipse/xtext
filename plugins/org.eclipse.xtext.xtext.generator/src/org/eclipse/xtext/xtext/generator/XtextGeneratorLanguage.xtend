@@ -43,7 +43,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
  * @noextend
  */
 @Log
-class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGeneratorLanguage {
+class XtextGeneratorLanguage extends CompositeGeneratorFragment implements IXtextGeneratorLanguage {
 	
 	String grammarUri
 	
@@ -82,8 +82,6 @@ class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGenerator
 	@Accessors
 	val webGenModule = new GuiceModuleAccess
 	
-	@Accessors(PROTECTED_GETTER)
-	val List<IXtextGeneratorFragment> fragments = newArrayList
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
@@ -111,24 +109,6 @@ class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGenerator
 			LOG.info("No explicit fileExtensions configured. Using '*." + fileExtensions + "'.")
 		}
 		return fileExtensions
-	}
-	
-	def void addFragment(IXtextGeneratorFragment fragment) {
-		if (fragment === this)
-			throw new IllegalArgumentException
-		this.fragments.add(fragment)
-	}
-	
-	override checkConfiguration(Issues issues) {
-		for (fragment : fragments) {
-			fragment.checkConfiguration(issues)
-		}
-	}
-	
-	override generate() {
-		for (fragment : fragments) {
-			fragment.generate()
-		}
 	}
 	
 	override initialize(Injector injector) {
@@ -164,9 +144,7 @@ class XtextGeneratorLanguage implements IXtextGeneratorFragment, IXtextGenerator
 		val grammar = resource.contents.get(0) as Grammar
 		validateGrammar(grammar)
 		initialize(grammar)
-		for (fragment : fragments) {
-			fragment.initialize(injector)
-		}
+		super.initialize(injector)
 	}
 	
 	def void initialize(Grammar grammar) {
