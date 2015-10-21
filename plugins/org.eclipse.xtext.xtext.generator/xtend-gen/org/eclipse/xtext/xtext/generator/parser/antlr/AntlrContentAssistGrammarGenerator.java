@@ -114,7 +114,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("tokenNameToValue.put(\"");
-            String _ruleName = this.keyWordHelper.getRuleName(kw);
+            String _ruleName = this.keywordHelper.getRuleName(kw);
             _builder.append(_ruleName, "\t\t");
             _builder.append("\", \"\'");
             String _javaIdentifier = this._grammarAccessExtensions.toJavaIdentifier(kw, false);
