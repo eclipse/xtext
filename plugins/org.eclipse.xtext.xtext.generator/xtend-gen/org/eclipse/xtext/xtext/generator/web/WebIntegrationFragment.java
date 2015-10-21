@@ -251,58 +251,6 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     if ((this.framework == null)) {
       issues.addError("The property \'framework\' is required.");
     }
-    boolean _and = false;
-    if (!this.generateJsHighlighting) {
-      _and = false;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IWebProjectConfig _web = _projectConfig.getWeb();
-      IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-      boolean _tripleEquals = (_assets == null);
-      _and = _tripleEquals;
-    }
-    if (_and) {
-      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.");
-    }
-    boolean _and_1 = false;
-    if (!this.generateServlet) {
-      _and_1 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-      IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
-      boolean _tripleEquals_1 = (_src == null);
-      _and_1 = _tripleEquals_1;
-    }
-    if (_and_1) {
-      issues.addWarning("The \'web.src\' outlet is not defined in the project configuration; the generated servlet is disabled.");
-    }
-    boolean _and_2 = false;
-    if (!this.generateJettyLauncher) {
-      _and_2 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
-      IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
-      boolean _tripleEquals_2 = (_src_1 == null);
-      _and_2 = _tripleEquals_2;
-    }
-    if (_and_2) {
-      issues.addWarning("The \'web.src\' outlet is not defined in the project configuration; the Jetty launcher is disabled.");
-    }
-    boolean _and_3 = false;
-    if (!this.generateHtmlExample) {
-      _and_3 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
-      IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
-      boolean _tripleEquals_3 = (_assets_1 == null);
-      _and_3 = _tripleEquals_3;
-    }
-    if (_and_3) {
-      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.");
-    }
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
       @Override
       public Boolean apply(final String it) {
