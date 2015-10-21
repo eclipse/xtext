@@ -33,6 +33,7 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.jetbrains.annotations.NotNull;
 
@@ -95,11 +96,15 @@ public abstract class BaseXtextFile extends PsiFileBase {
 
 			@Override
 			public Result<XtextResource> compute() {
-				XtextResource resource = createResource();
-				return Result.create(resource, new Object[] {
-						globalModificationCount, 
-						BaseXtextFile.this
-				});
+				try {
+					XtextResource resource = createResource();
+					return Result.create(resource, new Object[] {
+							globalModificationCount, 
+							BaseXtextFile.this
+					});
+				} catch (OperationCanceledError e) {
+					throw e.getWrapped();
+				}
 			}
         	
         }, false);
@@ -111,36 +116,8 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	
 	public XtextResource getResource() {
     	synchronized(resourceCacheLock) {
-    		XtextResource resource = resourceCache.getValue();
-    		try {
-    			initialize(resource);
-    		} catch (Throwable e) {
-    			if (operationCanceledManager.isOperationCanceledException(e)) {
-    				clearCaches();
-    				operationCanceledManager.propagateIfCancelException(e);
-    			}
-    			Throwables.propagate(e);
-    		}
-    		return resource;
+    		return resourceCache.getValue();
     	}
-	}
-
-	protected void initialize(final Resource resource) {
-		installDerivedState(resource);
-		EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
-	}
-
-	protected void installDerivedState(Resource resource) {
-		if (resource instanceof DerivedStateAwareResource) {
-			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
-			boolean deliver = derivedStateAwareResource.eDeliver();
-			try {
-				derivedStateAwareResource.eSetDeliver(false);
-				derivedStateAwareResource.installDerivedState(false);
-			} finally {
-				derivedStateAwareResource.eSetDeliver(deliver);
-			}
-		}
 	}
 	
 	public INode getINode(ASTNode node) {
@@ -207,10 +184,27 @@ public abstract class BaseXtextFile extends PsiFileBase {
         }
         
         psiToEcoreTransformator.getAdapter().install(resource);
-        
+		initialize(resource);
         return resource;
     }
-	
+
+	protected void initialize(final Resource resource) {
+		installDerivedState(resource);
+		EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
+	}
+
+	protected void installDerivedState(Resource resource) {
+		if (resource instanceof DerivedStateAwareResource) {
+			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
+			boolean deliver = derivedStateAwareResource.eDeliver();
+			try {
+				derivedStateAwareResource.eSetDeliver(false);
+				derivedStateAwareResource.installDerivedState(false);
+			} finally {
+				derivedStateAwareResource.eSetDeliver(deliver);
+			}
+		}
+	}
 	 
 	protected VirtualFile findVirtualFile(final PsiFile psiFile) {
 		return XtextPsiUtils.findVirtualFile(psiFile);
