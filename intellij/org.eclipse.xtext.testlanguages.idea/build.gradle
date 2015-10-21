@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':tests:org.eclipse.xtext.testlanguages')
+	compile project(':tests:org.eclipse.xtext.testlanguages.ide')
 }
 
 ideaDevelopment {
