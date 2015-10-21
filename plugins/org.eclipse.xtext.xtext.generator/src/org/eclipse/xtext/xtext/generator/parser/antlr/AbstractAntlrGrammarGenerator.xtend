@@ -135,7 +135,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	protected def compileTokens(Grammar it, AntlrOptions options) '''
 		«IF options.isBacktrackLexer»
 			tokens {
-				«FOR kw : allKeywords.sort.sortBy[length]»
+				«FOR kw : allKeywords.sort.sortBy[-length]»
 					«keywordHelper.getRuleName(kw)»;
 				«ENDFOR»
 				«FOR rule: allTerminalRules»

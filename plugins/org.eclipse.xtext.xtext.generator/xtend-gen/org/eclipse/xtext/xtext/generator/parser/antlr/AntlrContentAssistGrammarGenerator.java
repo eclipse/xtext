@@ -117,8 +117,8 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
             String _ruleName = this.keywordHelper.getRuleName(kw);
             _builder.append(_ruleName, "\t\t");
             _builder.append("\", \"\'");
-            String _javaIdentifier = this._grammarAccessExtensions.toJavaIdentifier(kw, false);
-            String _replaceAll = _javaIdentifier.replaceAll("\\\\\\$", "\\\\u0024");
+            String _stringInAntlrAction = AntlrGrammarGenUtil.toStringInAntlrAction(kw);
+            String _replaceAll = _stringInAntlrAction.replaceAll("\\\\\\$", "\\\\u0024");
             _builder.append(_replaceAll, "\t\t");
             _builder.append("\'\");");
             _builder.newLineIfNotEmpty();
