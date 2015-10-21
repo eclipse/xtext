@@ -107,7 +107,7 @@ abstract class ProjectDescriptor {
 	private def manifestEntry(String key, Iterable<String> value) {
 		if (value.isEmpty)
 			return ""
-		return '''«key»: «requiredBundles.join(",\n ")»'''
+		return '''«key»: «value.join(",\n ")»'''
 	}
 
 	def Set<String> getRequiredBundles() {
