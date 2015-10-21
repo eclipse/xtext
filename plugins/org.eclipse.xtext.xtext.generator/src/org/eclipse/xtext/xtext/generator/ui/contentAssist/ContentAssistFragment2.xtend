@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
 /**
  * Contributes the 'Abstract...ProposalProvider' and '...ProposalProvider' stub,
@@ -35,7 +36,7 @@ import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class ContentAssistFragment2 extends AbstractXtextGeneratorFragment {
+class ContentAssistFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 
 	@Inject
 	extension XtextGeneratorNaming

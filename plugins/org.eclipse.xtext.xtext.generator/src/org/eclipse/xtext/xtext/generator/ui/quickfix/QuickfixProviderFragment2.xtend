@@ -20,13 +20,14 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
 /**
  * Contributes the Quickfix provider stub, either in Xtend or Java language.
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment {
+class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 
 	@Inject
 	extension XtextGeneratorNaming

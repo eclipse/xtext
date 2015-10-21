@@ -37,8 +37,9 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class Formatter2Fragment2 extends AbstractXtextGeneratorFragment {
+class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
