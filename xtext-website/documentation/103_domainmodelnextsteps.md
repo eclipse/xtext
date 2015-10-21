@@ -355,12 +355,18 @@ The second validation rule is straight-forward, too. We traverse the inheritance
 ```xtend
 @Check
 def void checkFeatureNameIsUnique(Feature f) {
-	var superEntity = (f.eContainer() as Entity).getSuperType();
+	var superEntity = f.eContainer() as Entity
+	
+	var once = false
 	while (superEntity != null) {
 		for (other : superEntity.getFeatures()) {
 			if (f.getName().equals(other.getName())) {
-				error("Feature names have to be unique", DomainmodelPackage$Literals::FEATURE__NAME);
-				return;
+				if (!once) {
+					once = true
+				} else {
+					error("Feature names have to be unique", DomainmodelPackage$Literals::FEATURE__NAME);
+					return;
+				}
 			}
 		}
 		superEntity = superEntity.getSuperType();
