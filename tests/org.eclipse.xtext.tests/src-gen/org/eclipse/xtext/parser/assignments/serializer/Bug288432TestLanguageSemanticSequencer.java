@@ -60,6 +60,9 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Body returns Body
+	 *
 	 * Constraint:
 	 *     ((parameter+=Parameter parameter+=Parameter*)? (content=Content | content=ParameterRef) foo+=Foo+)
 	 */
@@ -69,6 +72,9 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Foo returns Foo
+	 *
 	 * Constraint:
 	 *     fooValue=STRING
 	 */
@@ -84,6 +90,11 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Content returns MyElement
+	 *     MyElement returns MyElement
+	 *     ParameterObject returns MyElement
+	 *
 	 * Constraint:
 	 *     (bar=MyInt | bar=ParameterRef)
 	 */
@@ -93,6 +104,10 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterObject returns MyInt
+	 *     MyInt returns MyInt
+	 *
 	 * Constraint:
 	 *     int=INT
 	 */
@@ -108,6 +123,10 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterObject returns ParameterRef
+	 *     ParameterRef returns ParameterRef
+	 *
 	 * Constraint:
 	 *     parameter=[Parameter|ID]
 	 */
@@ -123,6 +142,9 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Parameter returns Parameter
+	 *
 	 * Constraint:
 	 *     (name=ID value=[ParameterObject|ID]?)
 	 */

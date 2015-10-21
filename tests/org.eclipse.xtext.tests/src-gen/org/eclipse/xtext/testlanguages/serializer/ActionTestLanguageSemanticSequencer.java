@@ -45,6 +45,11 @@ public class ActionTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Child
+	 *     Model.Parent_1_0 returns Child
+	 *     Child returns Child
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -60,6 +65,9 @@ public class ActionTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Parent
+	 *
 	 * Constraint:
 	 *     (left=Model_Parent_1_0 right=Child)
 	 */

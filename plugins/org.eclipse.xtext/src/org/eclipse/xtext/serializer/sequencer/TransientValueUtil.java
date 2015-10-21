@@ -61,6 +61,23 @@ public class TransientValueUtil {
 		return Collections.emptyList();
 	}
 
+	public int countNonTransientListValues(EObject container, EStructuralFeature feature) {
+		switch (transientValues.isListTransient(container, feature)) {
+			case SOME:
+				int result = 0;
+				List<?> values = (List<?>) container.eGet(feature);
+				for (int i = 0; i < values.size(); i++)
+					if (!transientValues.isValueInListTransient(container, i, feature))
+						result++;
+				return result;
+			case NO:
+				return ((List<?>) container.eGet(feature)).size();
+			case YES:
+				return 0;
+		}
+		return 0;
+	}
+
 	public ValueTransient isTransient(EObject obj, EStructuralFeature feature) {
 		if (feature.isMany())
 			switch (transientValues.isListTransient(obj, feature)) {

@@ -65,6 +65,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     AfterObj returns AfterObj
+	 *
 	 * Constraint:
 	 *     value='after'
 	 */
@@ -80,6 +83,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns Root
+	 *
 	 * Constraint:
 	 *     (element=Rule1 | element=Rule2 | element=Rule3 | element=Rule4)
 	 */
@@ -89,6 +95,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Rule1 returns Rule1
+	 *
 	 * Constraint:
 	 *     (type=FirstEnum value=INT unit=SecondEnum)
 	 */
@@ -110,6 +119,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Rule2 returns Rule2
+	 *
 	 * Constraint:
 	 *     value=INT
 	 */
@@ -125,6 +137,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Rule3 returns Rule3
+	 *
 	 * Constraint:
 	 *     value=INT
 	 */
@@ -140,6 +155,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Rule4 returns Rule4
+	 *
 	 * Constraint:
 	 *     (after=AfterObj value=INT s=SObj)
 	 */
@@ -161,6 +179,9 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SObj returns SObj
+	 *
 	 * Constraint:
 	 *     value='s'
 	 */

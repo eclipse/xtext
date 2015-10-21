@@ -45,6 +45,9 @@ public class UnassignedRuleCallTestLanguageSemanticSequencer extends AbstractDel
 	}
 	
 	/**
+	 * Contexts:
+	 *     ModelFeatures returns ModelFeatures
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -60,6 +63,9 @@ public class UnassignedRuleCallTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     modelFeatures=ModelFeatures
 	 */

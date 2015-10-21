@@ -73,11 +73,11 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//{ParserRuleFragments}
 		public Action getParserRuleFragmentsAction_0() { return cParserRuleFragmentsAction_0; }
 
-		//('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
+		//'#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
 		//element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate)
+		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'#1' element=PRFNamed
@@ -378,7 +378,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//=> ('-' PRFNamedRef)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//('-' PRFNamedRef)
+		//'-' PRFNamedRef
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//'-'

@@ -109,6 +109,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmLowerBoundAnded returns JvmLowerBound
+	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
@@ -128,6 +131,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmLowerBound returns JvmLowerBound
+	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
@@ -147,6 +153,13 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmTypeReference returns JvmInnerTypeReference
+	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmInnerTypeReference
+	 *     JvmParameterizedTypeReference returns JvmInnerTypeReference
+	 *     JvmParameterizedTypeReference.JvmInnerTypeReference_1_4_0_0_0 returns JvmInnerTypeReference
+	 *     JvmArgumentTypeReference returns JvmInnerTypeReference
+	 *
 	 * Constraint:
 	 *     (
 	 *         outer=JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0 
@@ -164,6 +177,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmParameterizedTypeReference.JvmInnerTypeReference_1_4_0_0_0 returns JvmParameterizedTypeReference
+	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
 	 */
@@ -177,6 +193,12 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmTypeReference returns JvmParameterizedTypeReference
+	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmParameterizedTypeReference
+	 *     JvmParameterizedTypeReference returns JvmParameterizedTypeReference
+	 *     JvmArgumentTypeReference returns JvmParameterizedTypeReference
+	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
 	 */
@@ -190,6 +212,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmTypeParameter returns JvmTypeParameter
+	 *
 	 * Constraint:
 	 *     (name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?)
 	 */
@@ -203,6 +228,11 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmTypeReference returns JvmGenericArrayTypeReference
+	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmGenericArrayTypeReference
+	 *     JvmArgumentTypeReference returns JvmGenericArrayTypeReference
+	 *
 	 * Constraint:
 	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
 	 */
@@ -222,6 +252,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmUpperBoundAnded returns JvmUpperBound
+	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
@@ -241,6 +274,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmUpperBound returns JvmUpperBound
+	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
@@ -260,6 +296,10 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmArgumentTypeReference returns JvmWildcardTypeReference
+	 *     JvmWildcardTypeReference returns JvmWildcardTypeReference
+	 *
 	 * Constraint:
 	 *     ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?
 	 */
@@ -273,6 +313,11 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     JvmTypeReference returns XFunctionTypeRef
+	 *     XFunctionTypeRef returns XFunctionTypeRef
+	 *     JvmArgumentTypeReference returns XFunctionTypeRef
+	 *
 	 * Constraint:
 	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
 	 */
@@ -286,6 +331,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     XImportDeclaration returns XImportDeclaration
+	 *
 	 * Constraint:
 	 *     (
 	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' | memberName=ValidID)) | 
@@ -303,6 +351,9 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * Contexts:
+	 *     XImportSection returns XImportSection
+	 *
 	 * Constraint:
 	 *     importDeclarations+=XImportDeclaration+
 	 */

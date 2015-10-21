@@ -43,6 +43,9 @@ public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSeque
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (name=ID reference=[Element|ID]? elements+=Element*)
 	 */
@@ -52,6 +55,9 @@ public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSeque
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     elements+=Element+
 	 */

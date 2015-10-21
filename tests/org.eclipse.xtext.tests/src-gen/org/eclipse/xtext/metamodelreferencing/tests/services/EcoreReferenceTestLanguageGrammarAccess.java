@@ -141,9 +141,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 
-		//('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
+		//'EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
 		//'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
-		//eObjectReference1=[ExtendsResourceEObject])
+		//eObjectReference1=[ExtendsResourceEObject]
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//'EObject' eObjectReference1=[EObject]
@@ -411,9 +411,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 
-		//('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
+		//'EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
 		//'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
-		//eObjectReference1=[ExtendsResourceEObject])
+		//eObjectReference1=[ExtendsResourceEObject]
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//'EObject' eObjectReference1=[EObject]
@@ -703,9 +703,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 
-		//('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
+		//'EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
 		//'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
-		//eObjectReference1=[ExtendsResourceEObject])
+		//eObjectReference1=[ExtendsResourceEObject]
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//'EObject' eObjectReference1=[EObject]

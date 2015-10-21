@@ -43,6 +43,9 @@ public class Bug305397SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (a?='a'? name=ID? elements+=Element*)
 	 */
@@ -52,6 +55,9 @@ public class Bug305397SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     elements+=Element+
 	 */

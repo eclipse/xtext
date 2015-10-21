@@ -49,6 +49,9 @@ public class Bug289524ExTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * Contexts:
+	 *     Contained returns Contained
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -64,6 +67,9 @@ public class Bug289524ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     ModelElement returns ModelElement
+	 *
 	 * Constraint:
 	 *     (containments+=Contained | (refs+=[Contained|ID] refs+=[Contained|ID]*))+
 	 */
@@ -73,6 +79,9 @@ public class Bug289524ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     refs+=ModelElement*
 	 */

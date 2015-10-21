@@ -49,6 +49,9 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Bar returns Bar
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -64,6 +67,10 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Baz returns Baz
+	 *     Baz.Baz_2_0 returns Baz
+	 *
 	 * Constraint:
 	 *     (name=ID | (child=Baz_Baz_2_0 name=ID))
 	 */
@@ -73,6 +80,9 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Foo returns Foo
+	 *
 	 * Constraint:
 	 *     (name=ID (bar=Bar | baz=Baz) ref=[Foo|ID])
 	 */

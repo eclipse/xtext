@@ -37,57 +37,45 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 				sequence_ParserRuleParameters(context, (ParserRuleParameters) semanticObject); 
 				return; 
 			case ParametersTestLanguagePackage.SCENARIO:
-				if ((rule == grammarAccess.getScenario1Rule() && parameters.isEmpty())) {
+				if (rule == grammarAccess.getScenario1Rule() && (parameters.isEmpty())) {
 					sequence_Scenario1$Param$false$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario1Rule() && ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getScenario1Rule() && (ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
 					sequence_Scenario1$Param$true$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario2Rule() && ImmutableSet.of(grammarAccess.getScenario2Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario2Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario2Rule()) {
 					sequence_Scenario2(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario3Rule() && ImmutableSet.of(grammarAccess.getScenario3Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario3Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario3Rule()) {
 					sequence_Scenario3(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario4Rule() && ImmutableSet.of(grammarAccess.getScenario4Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario4Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario4Rule()) {
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario5Rule() && ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/), grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getScenario5Rule() && (ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/), grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters))) {
 					sequence_Scenario5$A$true$B$true$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario5Rule() && ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario5Rule() && ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario5Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario5Rule() && (ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/)).equals(parameters)
+				 			|| ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters)
+				 			|| parameters.isEmpty())) {
 					sequence_Scenario5(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario6Rule() && ImmutableSet.of(grammarAccess.getScenario6Rule().getParameters().get(0/*A*/), grammarAccess.getScenario6Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario6Rule() && ImmutableSet.of(grammarAccess.getScenario6Rule().getParameters().get(0/*A*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario6Rule() && ImmutableSet.of(grammarAccess.getScenario6Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario6Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario6Rule()) {
 					sequence_Scenario6(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario7Rule() && ImmutableSet.of(grammarAccess.getScenario7Rule().getParameters().get(0/*A*/), grammarAccess.getScenario7Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario7Rule() && ImmutableSet.of(grammarAccess.getScenario7Rule().getParameters().get(0/*A*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario7Rule() && ImmutableSet.of(grammarAccess.getScenario7Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario7Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario7Rule()) {
 					sequence_Scenario7(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario8Rule() && ImmutableSet.of(grammarAccess.getScenario8Rule().getParameters().get(0/*A*/), grammarAccess.getScenario8Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario8Rule() && ImmutableSet.of(grammarAccess.getScenario8Rule().getParameters().get(0/*A*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario8Rule() && ImmutableSet.of(grammarAccess.getScenario8Rule().getParameters().get(1/*B*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario8Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario8Rule()) {
 					sequence_Scenario8(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -98,6 +86,9 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	}
 	
 	/**
+	 * Contexts:
+	 *     ParserRuleParameters returns ParserRuleParameters
+	 *
 	 * Constraint:
 	 *     (
 	 *         scenario=Scenario5 | 
@@ -124,6 +115,9 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario5<A,B> returns Scenario
+	 *
 	 * Constraint:
 	 *     first=ID
 	 */
@@ -139,6 +133,11 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario5<A> returns Scenario
+	 *     Scenario5<B> returns Scenario
+	 *     Scenario5 returns Scenario
+	 *
 	 * Constraint:
 	 *     second=ID
 	 */
@@ -154,6 +153,12 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario6<A,B> returns Scenario
+	 *     Scenario6<A> returns Scenario
+	 *     Scenario6<B> returns Scenario
+	 *     Scenario6 returns Scenario
+	 *
 	 * Constraint:
 	 *     first=IdOrKeyword2
 	 */
@@ -169,6 +174,12 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario7<A,B> returns Scenario
+	 *     Scenario7<A> returns Scenario
+	 *     Scenario7<B> returns Scenario
+	 *     Scenario7 returns Scenario
+	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword2 | second='keyword')
 	 */
@@ -178,6 +189,12 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario8<A,B> returns Scenario
+	 *     Scenario8<A> returns Scenario
+	 *     Scenario8<B> returns Scenario
+	 *     Scenario8 returns Scenario
+	 *
 	 * Constraint:
 	 *     second=IdOrKeyword2
 	 */

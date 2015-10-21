@@ -39,6 +39,9 @@ public class KeywordsTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         first?='foo\bar' | 

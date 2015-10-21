@@ -51,6 +51,9 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     types+=Type+
 	 */
@@ -60,6 +63,9 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     Property returns Property
+	 *
 	 * Constraint:
 	 *     (type+=[Type|ID]+ name=ID)
 	 */
@@ -69,6 +75,9 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns Type
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID 
@@ -84,6 +93,9 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     UnresolvedProxyProperty returns UnresolvedProxyProperty
+	 *
 	 * Constraint:
 	 *     (type+=[Type|ID]+ name=ID)
 	 */

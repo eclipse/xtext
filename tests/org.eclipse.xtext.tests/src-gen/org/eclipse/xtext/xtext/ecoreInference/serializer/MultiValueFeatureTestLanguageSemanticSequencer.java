@@ -39,6 +39,9 @@ public class MultiValueFeatureTestLanguageSemanticSequencer extends AbstractDele
 	}
 	
 	/**
+	 * Contexts:
+	 *     Start returns Start
+	 *
 	 * Constraint:
 	 *     featureA+=ID+
 	 */

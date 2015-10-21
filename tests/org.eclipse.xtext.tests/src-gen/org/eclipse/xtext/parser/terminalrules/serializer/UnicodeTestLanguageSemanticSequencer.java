@@ -49,6 +49,10 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * Contexts:
+	 *     AbstractString returns GString
+	 *     GString returns GString
+	 *
 	 * Constraint:
 	 *     name=GERMAN_STRING
 	 */
@@ -64,6 +68,9 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     strings+=AbstractString+
 	 */
@@ -73,6 +80,10 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractString returns QuotedString
+	 *     QuotedString returns QuotedString
+	 *
 	 * Constraint:
 	 *     name=STRING
 	 */

@@ -271,7 +271,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName
 		public Group getGroup_1_5() { return cGroup_1_5; }
 
-		//('C6' 'C7')
+		//'C6' 'C7'
 		public Group getGroup_1_5_0() { return cGroup_1_5_0; }
 
 		//'C6'
@@ -292,7 +292,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName
 		public Group getGroup_1_6() { return cGroup_1_6; }
 
-		//('C6' 'C8')
+		//'C6' 'C8'
 		public Group getGroup_1_6_0() { return cGroup_1_6_0; }
 
 		//'C6'

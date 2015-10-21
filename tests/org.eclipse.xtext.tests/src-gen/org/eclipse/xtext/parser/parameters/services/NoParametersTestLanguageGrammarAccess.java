@@ -116,11 +116,11 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//{ParserRuleParameters}
 		public Action getParserRuleParametersAction_0() { return cParserRuleParametersAction_0; }
 
-		//('#1' scenario=Scenario1_True | '#2' scenario=Scenario1_False | '#3' scenario=Scenario2_True | '#4'
+		//'#1' scenario=Scenario1_True | '#2' scenario=Scenario1_False | '#3' scenario=Scenario2_True | '#4'
 		//scenario=Scenario2_False | => ('#5' scenario=Scenario2_True) | => ('#6' scenario=Scenario2_False) | '#7'
 		//scenario=Scenario3_True | '#8' scenario=Scenario3_False | '#9' (scenario=Scenario4_True | scenario=Scenario2_True
 		//'keyword'?) | '#10' (scenario=Scenario4_True | scenario=Scenario2_False 'keyword'?) | '#11' (scenario=Scenario4_False |
-		//scenario=Scenario2_True 'keyword'?) | '#12' (scenario=Scenario4_False | scenario=Scenario2_False 'keyword'?))
+		//scenario=Scenario2_True 'keyword'?) | '#12' (scenario=Scenario4_False | scenario=Scenario2_False 'keyword'?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'#1' scenario=Scenario1_True
@@ -174,7 +174,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//=> ('#5' scenario=Scenario2_True)
 		public Group getGroup_1_4() { return cGroup_1_4; }
 
-		//('#5' scenario=Scenario2_True)
+		//'#5' scenario=Scenario2_True
 		public Group getGroup_1_4_0() { return cGroup_1_4_0; }
 
 		//'#5'
@@ -189,7 +189,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//=> ('#6' scenario=Scenario2_False)
 		public Group getGroup_1_5() { return cGroup_1_5; }
 
-		//('#6' scenario=Scenario2_False)
+		//'#6' scenario=Scenario2_False
 		public Group getGroup_1_5_0() { return cGroup_1_5_0; }
 
 		//'#6'
@@ -231,7 +231,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'#9'
 		public Keyword getNumberSignDigitNineKeyword_1_8_0() { return cNumberSignDigitNineKeyword_1_8_0; }
 
-		//(scenario=Scenario4_True | scenario=Scenario2_True 'keyword'?)
+		//scenario=Scenario4_True | scenario=Scenario2_True 'keyword'?
 		public Alternatives getAlternatives_1_8_1() { return cAlternatives_1_8_1; }
 
 		//scenario=Scenario4_True
@@ -258,7 +258,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'#10'
 		public Keyword getNumberSignDigitOneDigitZeroKeyword_1_9_0() { return cNumberSignDigitOneDigitZeroKeyword_1_9_0; }
 
-		//(scenario=Scenario4_True | scenario=Scenario2_False 'keyword'?)
+		//scenario=Scenario4_True | scenario=Scenario2_False 'keyword'?
 		public Alternatives getAlternatives_1_9_1() { return cAlternatives_1_9_1; }
 
 		//scenario=Scenario4_True
@@ -285,7 +285,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'#11'
 		public Keyword getNumberSignDigitOneDigitOneKeyword_1_10_0() { return cNumberSignDigitOneDigitOneKeyword_1_10_0; }
 
-		//(scenario=Scenario4_False | scenario=Scenario2_True 'keyword'?)
+		//scenario=Scenario4_False | scenario=Scenario2_True 'keyword'?
 		public Alternatives getAlternatives_1_10_1() { return cAlternatives_1_10_1; }
 
 		//scenario=Scenario4_False
@@ -312,7 +312,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'#12'
 		public Keyword getNumberSignDigitOneDigitTwoKeyword_1_11_0() { return cNumberSignDigitOneDigitTwoKeyword_1_11_0; }
 
-		//(scenario=Scenario4_False | scenario=Scenario2_False 'keyword'?)
+		//scenario=Scenario4_False | scenario=Scenario2_False 'keyword'?
 		public Alternatives getAlternatives_1_11_1() { return cAlternatives_1_11_1; }
 
 		//scenario=Scenario4_False

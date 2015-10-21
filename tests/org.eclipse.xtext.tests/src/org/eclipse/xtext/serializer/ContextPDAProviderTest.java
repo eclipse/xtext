@@ -33,8 +33,7 @@ import com.google.common.collect.Lists;
  */
 public class ContextPDAProviderTest extends AbstractXtextTests {
 	private static class ToStr implements Function<ISerState, String> {
-		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments()
-				.hideCardinality().showQualified();
+		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments().hideCardinality().showQualified();
 
 		@Override
 		public String apply(ISerState from) {
@@ -92,7 +91,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  >>F -> {A.prev=}\n");
 		expected.append("  f2=ID -> <<F\n");
 		expected.append("  {A.prev=} -> f2=ID\n");
-		expected.append("A_1:\n");
+		expected.append("F.A_1:\n");
 		expected.append("  start -> f1=ID\n");
 		expected.append("  f1=ID -> stop");
 		assertEquals(expected.toString(), actual);
@@ -109,7 +108,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  >>F -> {A.prev=}\n");
 		expected.append("  f2=ID -> <<F\n");
 		expected.append("  {A.prev=} -> f2=ID\n");
-		expected.append("A_3:\n");
+		expected.append("F.A_3:\n");
 		expected.append("  start -> 'kw2'\n");
 		expected.append("  'kw2' -> >>F, f1=ID\n");
 		expected.append("  <<F -> f1=ID\n");
@@ -132,10 +131,10 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  >>F -> {B.prev=}\n");
 		expected.append("  f3=ID -> <<F\n");
 		expected.append("  {B.prev=} -> f3=ID\n");
-		expected.append("A_1:\n");
+		expected.append("F.A_1:\n");
 		expected.append("  start -> f1=ID\n");
 		expected.append("  f1=ID -> stop\n");
-		expected.append("B_3:\n");
+		expected.append("F.B_3:\n");
 		expected.append("  start -> {A.prev=}\n");
 		expected.append("  f2=ID -> stop\n");
 		expected.append("  {A.prev=} -> f2=ID");
@@ -153,7 +152,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  f1=ID -> >>F\n");
 		expected.append("  f2=ID -> <<F\n");
 		expected.append("  {A.prev=} -> f2=ID\n");
-		expected.append("A_0:\n");
+		expected.append("F.A_0:\n");
 		expected.append("  start -> stop, {A.prev=}\n");
 		expected.append("  f2=ID -> stop\n");
 		expected.append("  {A.prev=} -> f2=ID");
@@ -218,8 +217,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 
 	@Test
 	public void testDelegation2() throws Exception {
-		String actual = getParserRule(
-				"Rule: Foo | Delegate1; Delegate1: 'del' Delegate2 bar=ID; Delegate2: val=ID; Foo: val2=ID;");
+		String actual = getParserRule("Rule: Foo | Delegate1; Delegate1: 'del' Delegate2 bar=ID; Delegate2: val=ID; Foo: val2=ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule:\n");
 		expected.append("  start -> >>Delegate1, >>Foo\n");
@@ -257,7 +255,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  start -> {Act.val2=}\n");
 		expected.append("  val3=ID -> stop\n");
 		expected.append("  {Act.val2=} -> val3=ID\n");
-		expected.append("Act_1:\n");
+		expected.append("Rule.Act_1:\n");
 		expected.append("  start -> val1=ID\n");
 		expected.append("  val1=ID -> stop");
 		assertEquals(expected.toString(), actual);
@@ -272,7 +270,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  val1=ID -> stop\n");
 		expected.append("  val3=ID -> stop\n");
 		expected.append("  {Act.val2=} -> val3=ID\n");
-		expected.append("Act_1_0:\n");
+		expected.append("Rule.Act_1_0:\n");
 		expected.append("  start -> val1=ID\n");
 		expected.append("  val1=ID -> stop");
 		assertEquals(expected.toString(), actual);
@@ -286,7 +284,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  start -> {Act.val2=}\n");
 		expected.append("  val3=ID -> stop\n");
 		expected.append("  {Act.val2=} -> val3=ID\n");
-		expected.append("Act_1_0:\n");
+		expected.append("Rule.Act_1_0:\n");
 		expected.append("  start -> val1=ID, {Act.val2=}\n");
 		expected.append("  val1=ID -> stop\n");
 		expected.append("  val3=ID -> stop\n");
@@ -298,7 +296,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 	public void testActionManyOptional() throws Exception {
 		String actual = getParserRule("Rule: val1=ID ({Act.val2=current} val3=ID)*;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule, Act_1_0:\n");
+		expected.append("Rule, Rule.Act_1_0:\n");
 		expected.append("  start -> val1=ID, {Act.val2=}\n");
 		expected.append("  val1=ID -> stop\n");
 		expected.append("  val3=ID -> stop\n");
@@ -385,10 +383,10 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  start -> {Act2.val2=}\n");
 		expected.append("  val4=ID -> stop\n");
 		expected.append("  {Act2.val2=} -> val4=ID\n");
-		expected.append("Act1_1:\n");
+		expected.append("Rule.Act1_1:\n");
 		expected.append("  start -> val1=ID\n");
 		expected.append("  val1=ID -> stop\n");
-		expected.append("Act2_3:\n");
+		expected.append("Rule.Act2_3:\n");
 		expected.append("  start -> {Act1.val2=}\n");
 		expected.append("  val3=ID -> stop\n");
 		expected.append("  {Act1.val2=} -> val3=ID");
@@ -403,7 +401,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  start -> val=ID, {Foo.child=}\n");
 		expected.append("  val=ID -> stop\n");
 		expected.append("  {Foo.child=} -> stop\n");
-		expected.append("Foo_0_3:\n");
+		expected.append("Greeting.Foo_0_3:\n");
 		expected.append("  start -> '('\n");
 		expected.append("  '(' -> >>Greeting\n");
 		expected.append("  ')' -> stop\n");
@@ -431,7 +429,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  val=ID -> <<Prim\n");
 		expected.append("  {Add.left=} -> '+'\n");
 		expected.append("  {Val} -> val=ID\n");
-		expected.append("Addit, Add_1_0:\n");
+		expected.append("Addit, Addit.Add_1_0:\n");
 		expected.append("  start -> >>Prim, {Add.left=}\n");
 		expected.append("  '+' -> right=Prim\n");
 		expected.append("  <<Prim -> stop\n");
@@ -454,7 +452,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Addition, Add_1_0:\n");
+		expected.append("Addition, Addition.Add_1_0:\n");
 		expected.append("  start -> >>Prim, {Add.left=}\n");
 		expected.append("  '(' -> >>Addition\n");
 		expected.append("  ')' -> <<Prim\n");
@@ -523,7 +521,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  opt=ID -> stop");
 		assertEquals(expected.toString(), actual);
 	}
-	
+
 	@Test
 	public void testParameters() throws Exception {
 		String actual = getParserRule("M: 'kw1' s=S<true> | 'kw2' s=S<false>; S <P>: <P> v1=ID | <!P> v2=ID;  ");
@@ -534,12 +532,52 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		expected.append("  'kw2' -> (|s=S)\n");
 		expected.append("  (s=S|) -> stop\n");
 		expected.append("  (|s=S) -> stop\n");
-		expected.append("S_P:\n");
+		expected.append("S<P>:\n");
 		expected.append("  start -> v1=ID\n");
 		expected.append("  v1=ID -> stop\n");
 		expected.append("S:\n");
 		expected.append("  start -> v2=ID\n");
 		expected.append("  v2=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+
+	@Test
+	public void testParameterDelegate() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("ParameterDelegation: p=X<true, true> | p=X<true, false>;\n");
+		grammar.append("X<D, P>: <!D> (<P> p=ID | <!P> np=INT) | <D> X<false, P> ({XA.left=current} rc2=X<false, P>)?;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("ParameterDelegation:\n");
+		expected.append("  start -> (p=X|), (|p=X)\n");
+		expected.append("  (p=X|) -> stop\n");
+		expected.append("  (|p=X) -> stop\n");
+		expected.append("X<D,P>:\n");
+		expected.append("  start -> >>X, {XA.left=}\n");
+		expected.append("  <<X -> stop\n");
+		expected.append("  >>X -> p=ID\n");
+		expected.append("  p=ID -> <<X\n");
+		expected.append("  rc2=X -> stop\n");
+		expected.append("  {XA.left=} -> rc2=X\n");
+		expected.append("X<D>:\n");
+		expected.append("  start -> >>X, {XA.left=}\n");
+		expected.append("  <<X -> stop\n");
+		expected.append("  >>X -> np=INT\n");
+		expected.append("  np=INT -> <<X\n");
+		expected.append("  rc2=X -> stop\n");
+		expected.append("  {XA.left=} -> rc2=X\n");
+		expected.append("X<P>:\n");
+		expected.append("  start -> p=ID\n");
+		expected.append("  p=ID -> stop\n");
+		expected.append("X:\n");
+		expected.append("  start -> np=INT\n");
+		expected.append("  np=INT -> stop\n");
+		expected.append("X.XA_1_1_0<D,P>, X.XA_1_1_0<D>:\n");
+		expected.append("  start -> >>X\n");
+		expected.append("  <<X -> stop\n");
+		expected.append("  >>X -> np=INT, p=ID\n");
+		expected.append("  np=INT -> <<X\n");
+		expected.append("  p=ID -> <<X");
 		assertEquals(expected.toString(), actual);
 	}
 }

@@ -52,6 +52,9 @@ public class SubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticS
 	}
 	
 	/**
+	 * Contexts:
+	 *     AnotherSuperMain returns AnotherSuperMain
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -67,6 +70,9 @@ public class SubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticS
 	
 	
 	/**
+	 * Contexts:
+	 *     SubMain returns SubMain
+	 *
 	 * Constraint:
 	 *     (superMains+=SuperMain another=AnotherSuperMain?)
 	 */

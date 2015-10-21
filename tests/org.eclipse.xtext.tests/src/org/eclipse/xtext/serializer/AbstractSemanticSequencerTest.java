@@ -586,5 +586,25 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 	public void testParameterized4() throws Exception {
 		testSequence("#34 kw4 kwp2 foo");
 	}
+	
+	@Test
+	public void testParameterDelegation1a() throws Exception {
+		testSequence("#35 kw1 kwd foo");
+	}
+	
+	@Test @Ignore
+	public void testParameterDelegation1b() throws Exception {
+		testSequence("#35 kw1 kwd foo bar");
+	}
+	
+	@Test
+	public void testParameterDelegation2a() throws Exception {
+		testSequence("#35 kw2 kwd 1");
+	}
+	
+	@Test @Ignore
+	public void testParameterDelegation2b() throws Exception {
+		testSequence("#35 kw2 kwd 1 2");
+	}
 
 }

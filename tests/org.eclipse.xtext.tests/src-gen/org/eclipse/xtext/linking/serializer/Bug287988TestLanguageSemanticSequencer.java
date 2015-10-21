@@ -44,7 +44,7 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 					return; 
 				}
 				else if (rule == grammarAccess.getBaseAttributeRule()) {
-					sequence_BaseAttribute(context, (Attribute) semanticObject); 
+					sequence_Attribute_BaseAttribute(context, (Attribute) semanticObject); 
 					return; 
 				}
 				else if (rule == grammarAccess.getCallMe2Rule()) {
@@ -83,7 +83,7 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 					return; 
 				}
 				else if (rule == grammarAccess.getBaseAttributeRule()) {
-					sequence_BaseAttribute(context, (Master) semanticObject); 
+					sequence_BaseAttribute_Master(context, (Master) semanticObject); 
 					return; 
 				}
 				else if (rule == grammarAccess.getMasterRule()) {
@@ -100,6 +100,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     ActionAttribute returns Attribute
+	 *
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
 	 */
@@ -109,6 +112,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ActionAttribute returns Master
+	 *
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
 	 */
@@ -118,6 +124,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Attribute returns Attribute
+	 *
 	 * Constraint:
 	 *     {Attribute}
 	 */
@@ -127,24 +136,33 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     BaseAttribute returns Attribute
+	 *
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
 	 */
-	protected void sequence_BaseAttribute(ISerializationContext context, Attribute semanticObject) {
+	protected void sequence_Attribute_BaseAttribute(ISerializationContext context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     BaseAttribute returns Master
+	 *
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
 	 */
-	protected void sequence_BaseAttribute(ISerializationContext context, Master semanticObject) {
+	protected void sequence_BaseAttribute_Master(ISerializationContext context, Master semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     CallMe2 returns Attribute
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -160,6 +178,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     RuleCallAttribute2 returns Attribute
+	 *
 	 * Constraint:
 	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
 	 */
@@ -169,6 +190,10 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     CallMe3 returns Attribute
+	 *     CallMe4 returns Attribute
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -184,6 +209,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     RuleCallAttribute3 returns Attribute
+	 *
 	 * Constraint:
 	 *     (name=ID (typeRef=[BaseAttribute|ID] | type=ID))
 	 */
@@ -193,6 +221,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     CallMe returns Attribute
+	 *
 	 * Constraint:
 	 *     (typeRef=[BaseAttribute|ID] | type=ID)
 	 */
@@ -202,6 +233,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     RuleCallAttribute returns Attribute
+	 *
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
 	 */
@@ -211,6 +245,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Master returns Master
+	 *
 	 * Constraint:
 	 *     {Master}
 	 */
@@ -220,6 +257,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         attributes+=BaseAttribute+ | 
@@ -236,6 +276,9 @@ public class Bug287988TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleAttribute returns Attribute
+	 *
 	 * Constraint:
 	 *     ((typeRef=[BaseAttribute|ID] | type=ID) name=ID)
 	 */

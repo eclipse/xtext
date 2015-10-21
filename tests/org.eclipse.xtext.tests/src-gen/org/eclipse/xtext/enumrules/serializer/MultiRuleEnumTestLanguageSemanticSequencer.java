@@ -41,6 +41,9 @@ public class MultiRuleEnumTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (a=EnumRuleA b=EnumRuleB c=EnumRuleC)
 	 */

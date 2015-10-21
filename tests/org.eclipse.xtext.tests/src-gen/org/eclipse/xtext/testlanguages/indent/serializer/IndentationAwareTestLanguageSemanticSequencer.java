@@ -43,6 +43,9 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * Contexts:
+	 *     NodeList returns NodeList
+	 *
 	 * Constraint:
 	 *     (children+=Node children+=Node*)
 	 */
@@ -52,6 +55,9 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Node returns Node
+	 *
 	 * Constraint:
 	 *     (name=String children=NodeList?)
 	 */

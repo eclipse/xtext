@@ -45,6 +45,9 @@ public class EncodingTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     words+=Word+
 	 */
@@ -54,6 +57,9 @@ public class EncodingTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	
 	
 	/**
+	 * Contexts:
+	 *     Word returns Word
+	 *
 	 * Constraint:
 	 *     value=LEXEME
 	 */

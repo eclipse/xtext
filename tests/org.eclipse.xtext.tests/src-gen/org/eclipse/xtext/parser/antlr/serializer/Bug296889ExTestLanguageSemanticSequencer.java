@@ -53,6 +53,9 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (expressions+=Expression+ | values+=DataTypeExpression+)
 	 */
@@ -62,6 +65,10 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Postop
+	 *     Postop returns Postop
+	 *
 	 * Constraint:
 	 *     (expr=Postop_Postop_1_0 functionName='--')
 	 */
@@ -80,6 +87,10 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Preop
+	 *     Preop returns Preop
+	 *
 	 * Constraint:
 	 *     (functionName='--' expr=Variable)
 	 */
@@ -98,6 +109,12 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Variable
+	 *     Postop returns Variable
+	 *     Postop.Postop_1_0 returns Variable
+	 *     Variable returns Variable
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */

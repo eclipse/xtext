@@ -25,7 +25,6 @@ import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToDot;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.serializer.EqualAmbiguousTransitions;
@@ -78,46 +76,46 @@ public class DebugGraphGenerator {
   public Iterable<Pair<String, String>> generateDebugGraphs() {
     final ArrayList<Pair<String, String>> result = CollectionLiterals.<Pair<String, String>>newArrayList();
     Map<ISerializationContext, Pda<ISerState, RuleCall>> _contextPDAs = this.contextPDAProvider.getContextPDAs(this.grammar);
-    List<org.eclipse.xtext.util.Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> _groupByEqualityAndSort = SerializationContext.<Pda<ISerState, RuleCall>>groupByEqualityAndSort(_contextPDAs);
-    for (final org.eclipse.xtext.util.Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> e : _groupByEqualityAndSort) {
-      List<ISerializationContext> _first = e.getFirst();
-      String _file = this.file("context", _first);
-      List<ISerializationContext> _first_1 = e.getFirst();
-      Pda<ISerState, RuleCall> _second = e.getSecond();
-      String _drawSafe = this.drawSafe(this.pdaToDot, _first_1, _second);
+    Set<Map.Entry<ISerializationContext, Pda<ISerState, RuleCall>>> _entrySet = _contextPDAs.entrySet();
+    for (final Map.Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : _entrySet) {
+      ISerializationContext _key = e.getKey();
+      String _file = this.file("context", _key);
+      ISerializationContext _key_1 = e.getKey();
+      Pda<ISerState, RuleCall> _value = e.getValue();
+      String _drawSafe = this.drawSafe(this.pdaToDot, _key_1, _value);
       Pair<String, String> _mappedTo = Pair.<String, String>of(_file, _drawSafe);
       result.add(_mappedTo);
     }
     Map<ISerializationContext, Pda<ISerState, RuleCall>> _contextTypePDAs = this.contextTypePDAProvider.getContextTypePDAs(this.grammar);
-    List<org.eclipse.xtext.util.Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> _groupByEqualityAndSort_1 = SerializationContext.<Pda<ISerState, RuleCall>>groupByEqualityAndSort(_contextTypePDAs);
-    for (final org.eclipse.xtext.util.Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> e_1 : _groupByEqualityAndSort_1) {
-      List<ISerializationContext> _first_2 = e_1.getFirst();
-      String _file_1 = this.file("context_type", _first_2);
-      List<ISerializationContext> _first_3 = e_1.getFirst();
-      Pda<ISerState, RuleCall> _second_1 = e_1.getSecond();
-      String _drawSafe_1 = this.drawSafe(this.pdaToDot, _first_3, _second_1);
+    Set<Map.Entry<ISerializationContext, Pda<ISerState, RuleCall>>> _entrySet_1 = _contextTypePDAs.entrySet();
+    for (final Map.Entry<ISerializationContext, Pda<ISerState, RuleCall>> e_1 : _entrySet_1) {
+      ISerializationContext _key_2 = e_1.getKey();
+      String _file_1 = this.file("context_type", _key_2);
+      ISerializationContext _key_3 = e_1.getKey();
+      Pda<ISerState, RuleCall> _value_1 = e_1.getValue();
+      String _drawSafe_1 = this.drawSafe(this.pdaToDot, _key_3, _value_1);
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_file_1, _drawSafe_1);
       result.add(_mappedTo_1);
     }
     Map<ISerializationContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(this.grammar);
-    List<org.eclipse.xtext.util.Pair<List<ISerializationContext>, ISyntacticSequencerPDAProvider.ISynAbsorberState>> _groupByEqualityAndSort_2 = SerializationContext.<ISyntacticSequencerPDAProvider.ISynAbsorberState>groupByEqualityAndSort(_syntacticSequencerPDAs);
-    for (final org.eclipse.xtext.util.Pair<List<ISerializationContext>, ISyntacticSequencerPDAProvider.ISynAbsorberState> e_2 : _groupByEqualityAndSort_2) {
-      List<ISerializationContext> _first_4 = e_2.getFirst();
-      String _file_2 = this.file("syntactic_sequencer", _first_4);
-      List<ISerializationContext> _first_5 = e_2.getFirst();
-      ISyntacticSequencerPDAProvider.ISynAbsorberState _second_2 = e_2.getSecond();
-      String _drawSafe_2 = this.drawSafe(this.syntacticSequencerPDA2Dot, _first_5, _second_2);
+    Set<Map.Entry<ISerializationContext, ISyntacticSequencerPDAProvider.ISynAbsorberState>> _entrySet_2 = _syntacticSequencerPDAs.entrySet();
+    for (final Map.Entry<ISerializationContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> e_2 : _entrySet_2) {
+      ISerializationContext _key_4 = e_2.getKey();
+      String _file_2 = this.file("syntactic_sequencer", _key_4);
+      ISerializationContext _key_5 = e_2.getKey();
+      ISyntacticSequencerPDAProvider.ISynAbsorberState _value_2 = e_2.getValue();
+      String _drawSafe_2 = this.drawSafe(this.syntacticSequencerPDA2Dot, _key_5, _value_2);
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of(_file_2, _drawSafe_2);
       result.add(_mappedTo_2);
     }
     Map<ISerializationContext, Nfa<ISemanticSequencerNfaProvider.ISemState>> _semanticSequencerNFAs = this.semanticSequencerNFAProvider.getSemanticSequencerNFAs(this.grammar);
-    List<org.eclipse.xtext.util.Pair<List<ISerializationContext>, Nfa<ISemanticSequencerNfaProvider.ISemState>>> _groupByEqualityAndSort_3 = SerializationContext.<Nfa<ISemanticSequencerNfaProvider.ISemState>>groupByEqualityAndSort(_semanticSequencerNFAs);
-    for (final org.eclipse.xtext.util.Pair<List<ISerializationContext>, Nfa<ISemanticSequencerNfaProvider.ISemState>> e_3 : _groupByEqualityAndSort_3) {
-      List<ISerializationContext> _first_6 = e_3.getFirst();
-      String _file_3 = this.file("semantic_sequencer", _first_6);
-      List<ISerializationContext> _first_7 = e_3.getFirst();
-      Nfa<ISemanticSequencerNfaProvider.ISemState> _second_3 = e_3.getSecond();
-      String _drawSafe_3 = this.drawSafe(this.nfaToDot, _first_7, _second_3);
+    Set<Map.Entry<ISerializationContext, Nfa<ISemanticSequencerNfaProvider.ISemState>>> _entrySet_3 = _semanticSequencerNFAs.entrySet();
+    for (final Map.Entry<ISerializationContext, Nfa<ISemanticSequencerNfaProvider.ISemState>> e_3 : _entrySet_3) {
+      ISerializationContext _key_6 = e_3.getKey();
+      String _file_3 = this.file("semantic_sequencer", _key_6);
+      ISerializationContext _key_7 = e_3.getKey();
+      Nfa<ISemanticSequencerNfaProvider.ISemState> _value_3 = e_3.getValue();
+      String _drawSafe_3 = this.drawSafe(this.nfaToDot, _key_7, _value_3);
       Pair<String, String> _mappedTo_3 = Pair.<String, String>of(_file_3, _drawSafe_3);
       result.add(_mappedTo_3);
     }
@@ -196,16 +194,14 @@ public class DebugGraphGenerator {
     return result;
   }
   
-  private String drawSafe(final GraphvizDotBuilder builder, final Iterable<ISerializationContext> contexts, final Object graph) {
+  private String drawSafe(final GraphvizDotBuilder builder, final ISerializationContext context, final Object graph) {
     String _xtrycatchfinallyexpression = null;
     try {
       _xtrycatchfinallyexpression = builder.draw(graph);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        String _join = IterableExtensions.join(contexts, ",");
-        String _plus = ("Error rendering " + _join);
-        InputOutput.<String>println(_plus);
+        InputOutput.<String>println(("Error rendering " + context));
         e.printStackTrace();
         return Throwables.getStackTraceAsString(e);
       } else {
@@ -228,11 +224,9 @@ public class DebugGraphGenerator {
     return (_plus_3 + "/");
   }
   
-  private String file(final String name, final Iterable<ISerializationContext> contexts) {
+  private String file(final String name, final ISerializationContext contexts) {
     String _directory = this.directory(name);
-    List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(contexts);
-    String _join = IterableExtensions.join(_sort, "_");
-    String _plus = (_directory + _join);
+    String _plus = (_directory + contexts);
     return (_plus + ".dot");
   }
 }

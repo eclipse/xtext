@@ -655,6 +655,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	}
 	
 	/**
+	 * Contexts:
+	 *     AnnotationField returns XtendAnnotationType
+	 *
 	 * Constraint:
 	 *     (annotationInfo=AnnotationField_XtendAnnotationType_2_4_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
 	 */
@@ -664,6 +667,14 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     AnnotationField.XtendField_2_0_0_0_0 returns XtendMember
+	 *     AnnotationField.XtendField_2_0_0_1_0 returns XtendMember
+	 *     AnnotationField.XtendClass_2_1_0 returns XtendMember
+	 *     AnnotationField.XtendInterface_2_2_0 returns XtendMember
+	 *     AnnotationField.XtendEnum_2_3_0 returns XtendMember
+	 *     AnnotationField.XtendAnnotationType_2_4_0 returns XtendMember
+	 *
 	 * Constraint:
 	 *     annotations+=XAnnotation*
 	 */
@@ -673,6 +684,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     AnnotationField returns XtendClass
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=AnnotationField_XtendClass_2_1_0 
@@ -690,6 +704,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     AnnotationField returns XtendEnum
+	 *
 	 * Constraint:
 	 *     (annotationInfo=AnnotationField_XtendEnum_2_3_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
 	 */
@@ -699,6 +716,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     AnnotationField returns XtendField
+	 *
 	 * Constraint:
 	 *     (
 	 *         (
@@ -721,6 +741,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     AnnotationField returns XtendInterface
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=AnnotationField_XtendInterface_2_2_0 
@@ -737,6 +760,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     CreateExtensionInfo returns CreateExtensionInfo
+	 *
 	 * Constraint:
 	 *     (name=ValidID? createExpression=XExpression)
 	 */
@@ -746,6 +772,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     File returns XtendFile
+	 *
 	 * Constraint:
 	 *     ((package=QualifiedName? importSection=XImportSection xtendTypes+=Type+) | (package=QualifiedName? xtendTypes+=Type+) | xtendTypes+=Type+)?
 	 */
@@ -755,6 +784,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     FullJvmFormalParameter returns XtendFormalParameter
+	 *
 	 * Constraint:
 	 *     (extension?='extension'? parameterType=JvmTypeReference name=InnerVarID)
 	 */
@@ -764,6 +796,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     InternalRichString returns RichString
+	 *
 	 * Constraint:
 	 *     (expressions+=RichStringLiteralInbetween (expressions+=RichStringPart? expressions+=RichStringLiteralInbetween)*)
 	 */
@@ -773,6 +808,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     JvmFormalParameter returns XtendFormalParameter
+	 *
 	 * Constraint:
 	 *     (extension?='extension'? parameterType=JvmTypeReference? name=InnerVarID)
 	 */
@@ -782,6 +820,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendAnnotationType
+	 *
 	 * Constraint:
 	 *     (annotationInfo=Member_XtendAnnotationType_2_6_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
 	 */
@@ -791,6 +832,15 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member.XtendField_2_0_0 returns XtendMember
+	 *     Member.XtendFunction_2_1_0 returns XtendMember
+	 *     Member.XtendConstructor_2_2_0 returns XtendMember
+	 *     Member.XtendClass_2_3_0 returns XtendMember
+	 *     Member.XtendInterface_2_4_0 returns XtendMember
+	 *     Member.XtendEnum_2_5_0 returns XtendMember
+	 *     Member.XtendAnnotationType_2_6_0 returns XtendMember
+	 *
 	 * Constraint:
 	 *     annotations+=XAnnotation*
 	 */
@@ -800,6 +850,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendClass
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Member_XtendClass_2_3_0 
@@ -817,6 +870,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendConstructor
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Member_XtendConstructor_2_2_0 
@@ -833,6 +889,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendEnum
+	 *
 	 * Constraint:
 	 *     (annotationInfo=Member_XtendEnum_2_5_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
 	 */
@@ -842,6 +901,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendField
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Member_XtendField_2_0_0 
@@ -868,6 +930,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendFunction
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Member_XtendFunction_2_1_0 
@@ -893,6 +958,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Member returns XtendInterface
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Member_XtendInterface_2_4_0 
@@ -909,6 +977,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Parameter returns XtendParameter
+	 *
 	 * Constraint:
 	 *     (annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)? parameterType=JvmTypeReference varArg?='...'? name=ValidID)
 	 */
@@ -918,6 +989,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeReferenceWithTypeArgs returns JvmInnerTypeReference
+	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_0_1_0_0 returns JvmInnerTypeReference
+	 *     ParameterizedTypeReferenceWithTypeArgs returns JvmInnerTypeReference
+	 *     ParameterizedTypeReferenceWithTypeArgs.JvmInnerTypeReference_1_4_0_0_0 returns JvmInnerTypeReference
+	 *
 	 * Constraint:
 	 *     (
 	 *         outer=ParameterizedTypeReferenceWithTypeArgs_JvmInnerTypeReference_1_4_0_0_0 
@@ -931,6 +1008,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeReferenceWithTypeArgs returns JvmParameterizedTypeReference
+	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_0_1_0_0 returns JvmParameterizedTypeReference
+	 *     ParameterizedTypeReferenceWithTypeArgs returns JvmParameterizedTypeReference
+	 *     ParameterizedTypeReferenceWithTypeArgs.JvmInnerTypeReference_1_4_0_0_0 returns JvmParameterizedTypeReference
+	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
 	 */
@@ -940,6 +1023,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringElseIf returns RichStringElseIf
+	 *
 	 * Constraint:
 	 *     (if=XExpression then=InternalRichString)
 	 */
@@ -958,6 +1044,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringPart returns RichStringForLoop
+	 *     RichStringForLoop returns RichStringForLoop
+	 *
 	 * Constraint:
 	 *     (
 	 *         declaredParam=JvmFormalParameter 
@@ -974,6 +1064,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringPart returns RichStringIf
+	 *     RichStringIf returns RichStringIf
+	 *
 	 * Constraint:
 	 *     (if=XExpression then=InternalRichString elseIfs+=RichStringElseIf* else=InternalRichString?)
 	 */
@@ -983,6 +1077,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringLiteralEnd returns RichStringLiteral
+	 *
 	 * Constraint:
 	 *     (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END)
 	 */
@@ -992,6 +1089,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringLiteralInbetween returns RichStringLiteral
+	 *
 	 * Constraint:
 	 *     (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN)
 	 */
@@ -1001,6 +1101,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringLiteralStart returns RichStringLiteral
+	 *
 	 * Constraint:
 	 *     value=RICH_TEXT_START
 	 */
@@ -1016,6 +1119,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     RichStringLiteral returns RichStringLiteral
+	 *
 	 * Constraint:
 	 *     value=RICH_TEXT
 	 */
@@ -1031,6 +1137,46 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XStringLiteral returns RichString
+	 *     XExpressionOrSimpleConstructorCall returns RichString
+	 *     RichString returns RichString
+	 *     RichStringPart returns RichString
+	 *     XAnnotationElementValueOrCommaList returns RichString
+	 *     XAnnotationElementValueOrCommaList.XListLiteral_1_1_0 returns RichString
+	 *     XAnnotationElementValue returns RichString
+	 *     XAnnotationOrExpression returns RichString
+	 *     XExpression returns RichString
+	 *     XAssignment returns RichString
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns RichString
+	 *     XOrExpression returns RichString
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns RichString
+	 *     XAndExpression returns RichString
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns RichString
+	 *     XEqualityExpression returns RichString
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns RichString
+	 *     XRelationalExpression returns RichString
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns RichString
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns RichString
+	 *     XOtherOperatorExpression returns RichString
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns RichString
+	 *     XAdditiveExpression returns RichString
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns RichString
+	 *     XMultiplicativeExpression returns RichString
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns RichString
+	 *     XUnaryOperation returns RichString
+	 *     XCastedExpression returns RichString
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns RichString
+	 *     XPostfixOperation returns RichString
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns RichString
+	 *     XMemberFeatureCall returns RichString
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns RichString
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns RichString
+	 *     XPrimaryExpression returns RichString
+	 *     XLiteral returns RichString
+	 *     XParenthesizedExpression returns RichString
+	 *     XExpressionOrVarDeclaration returns RichString
+	 *
 	 * Constraint:
 	 *     (
 	 *         expressions+=RichStringLiteral | 
@@ -1048,6 +1194,46 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XStringLiteral returns XStringLiteral
+	 *     XExpressionOrSimpleConstructorCall returns XStringLiteral
+	 *     SimpleStringLiteral returns XStringLiteral
+	 *     RichStringPart returns XStringLiteral
+	 *     XAnnotationElementValueOrCommaList returns XStringLiteral
+	 *     XAnnotationElementValueOrCommaList.XListLiteral_1_1_0 returns XStringLiteral
+	 *     XAnnotationElementValue returns XStringLiteral
+	 *     XAnnotationOrExpression returns XStringLiteral
+	 *     XExpression returns XStringLiteral
+	 *     XAssignment returns XStringLiteral
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XStringLiteral
+	 *     XOrExpression returns XStringLiteral
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XAndExpression returns XStringLiteral
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XEqualityExpression returns XStringLiteral
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XRelationalExpression returns XStringLiteral
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XStringLiteral
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XStringLiteral
+	 *     XOtherOperatorExpression returns XStringLiteral
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XAdditiveExpression returns XStringLiteral
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XMultiplicativeExpression returns XStringLiteral
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XStringLiteral
+	 *     XUnaryOperation returns XStringLiteral
+	 *     XCastedExpression returns XStringLiteral
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XStringLiteral
+	 *     XPostfixOperation returns XStringLiteral
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XStringLiteral
+	 *     XMemberFeatureCall returns XStringLiteral
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XStringLiteral
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XStringLiteral
+	 *     XPrimaryExpression returns XStringLiteral
+	 *     XLiteral returns XStringLiteral
+	 *     XParenthesizedExpression returns XStringLiteral
+	 *     XExpressionOrVarDeclaration returns XStringLiteral
+	 *
 	 * Constraint:
 	 *     value=STRING
 	 */
@@ -1063,6 +1249,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeReferenceNoTypeArgs returns JvmParameterizedTypeReference
+	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_1_1_0_0 returns JvmParameterizedTypeReference
+	 *
 	 * Constraint:
 	 *     type=[JvmType|QualifiedName]
 	 */
@@ -1078,6 +1268,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeReferenceWithTypeArgs returns JvmGenericArrayTypeReference
+	 *
 	 * Constraint:
 	 *     (
 	 *         componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0 | 
@@ -1090,6 +1283,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_0_1_0_0 returns JvmGenericArrayTypeReference
+	 *
 	 * Constraint:
 	 *     componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0
 	 */
@@ -1105,6 +1301,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_1_1_0_0 returns JvmGenericArrayTypeReference
+	 *
 	 * Constraint:
 	 *     componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0
 	 */
@@ -1120,6 +1319,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns XtendAnnotationType
+	 *
 	 * Constraint:
 	 *     (annotationInfo=Type_XtendAnnotationType_2_3_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
 	 */
@@ -1129,6 +1331,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Type.XtendClass_2_0_0 returns XtendTypeDeclaration
+	 *     Type.XtendInterface_2_1_0 returns XtendTypeDeclaration
+	 *     Type.XtendEnum_2_2_0 returns XtendTypeDeclaration
+	 *     Type.XtendAnnotationType_2_3_0 returns XtendTypeDeclaration
+	 *
 	 * Constraint:
 	 *     annotations+=XAnnotation*
 	 */
@@ -1138,6 +1346,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns XtendClass
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Type_XtendClass_2_0_0 
@@ -1155,6 +1366,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns XtendEnum
+	 *
 	 * Constraint:
 	 *     (annotationInfo=Type_XtendEnum_2_2_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
 	 */
@@ -1164,6 +1378,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns XtendInterface
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationInfo=Type_XtendInterface_2_1_0 
@@ -1180,6 +1397,44 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XConstructorCall returns AnonymousClass
+	 *     XExpressionOrSimpleConstructorCall returns AnonymousClass
+	 *     RichStringPart returns AnonymousClass
+	 *     XAnnotationElementValueOrCommaList returns AnonymousClass
+	 *     XAnnotationElementValueOrCommaList.XListLiteral_1_1_0 returns AnonymousClass
+	 *     XAnnotationElementValue returns AnonymousClass
+	 *     XAnnotationOrExpression returns AnonymousClass
+	 *     XExpression returns AnonymousClass
+	 *     XAssignment returns AnonymousClass
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns AnonymousClass
+	 *     XOrExpression returns AnonymousClass
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns AnonymousClass
+	 *     XAndExpression returns AnonymousClass
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns AnonymousClass
+	 *     XEqualityExpression returns AnonymousClass
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns AnonymousClass
+	 *     XRelationalExpression returns AnonymousClass
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns AnonymousClass
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns AnonymousClass
+	 *     XOtherOperatorExpression returns AnonymousClass
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns AnonymousClass
+	 *     XAdditiveExpression returns AnonymousClass
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns AnonymousClass
+	 *     XMultiplicativeExpression returns AnonymousClass
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns AnonymousClass
+	 *     XUnaryOperation returns AnonymousClass
+	 *     XCastedExpression returns AnonymousClass
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns AnonymousClass
+	 *     XPostfixOperation returns AnonymousClass
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns AnonymousClass
+	 *     XMemberFeatureCall returns AnonymousClass
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns AnonymousClass
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns AnonymousClass
+	 *     XPrimaryExpression returns AnonymousClass
+	 *     XParenthesizedExpression returns AnonymousClass
+	 *     XExpressionOrVarDeclaration returns AnonymousClass
+	 *
 	 * Constraint:
 	 *     (constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*)
 	 */
@@ -1189,6 +1444,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     JvmSuperTypeReference returns XFunctionTypeRef
+	 *     XFunctionSuperTypeRef returns XFunctionTypeRef
+	 *
 	 * Constraint:
 	 *     ((instanceContext?='(' (paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)?)? returnType=JvmTypeReference)
 	 */
@@ -1198,6 +1457,44 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XSwitchExpression returns XSwitchExpression
+	 *     XExpressionOrSimpleConstructorCall returns XSwitchExpression
+	 *     RichStringPart returns XSwitchExpression
+	 *     XAnnotationElementValueOrCommaList returns XSwitchExpression
+	 *     XAnnotationElementValueOrCommaList.XListLiteral_1_1_0 returns XSwitchExpression
+	 *     XAnnotationElementValue returns XSwitchExpression
+	 *     XAnnotationOrExpression returns XSwitchExpression
+	 *     XExpression returns XSwitchExpression
+	 *     XAssignment returns XSwitchExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XSwitchExpression
+	 *     XOrExpression returns XSwitchExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XAndExpression returns XSwitchExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XEqualityExpression returns XSwitchExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XRelationalExpression returns XSwitchExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XSwitchExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XSwitchExpression
+	 *     XOtherOperatorExpression returns XSwitchExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XAdditiveExpression returns XSwitchExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XMultiplicativeExpression returns XSwitchExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XSwitchExpression
+	 *     XUnaryOperation returns XSwitchExpression
+	 *     XCastedExpression returns XSwitchExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XSwitchExpression
+	 *     XPostfixOperation returns XSwitchExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XSwitchExpression
+	 *     XMemberFeatureCall returns XSwitchExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XSwitchExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XSwitchExpression
+	 *     XPrimaryExpression returns XSwitchExpression
+	 *     XParenthesizedExpression returns XSwitchExpression
+	 *     XExpressionOrVarDeclaration returns XSwitchExpression
+	 *
 	 * Constraint:
 	 *     (
 	 *         ((declaredParam=JvmFormalParameter switch=XExpression) | (declaredParam=JvmFormalParameter? switch=XExpressionOrSimpleConstructorCall)) 
@@ -1211,6 +1508,11 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XVariableDeclaration returns XtendVariableDeclaration
+	 *     RichStringPart returns XtendVariableDeclaration
+	 *     XExpressionOrVarDeclaration returns XtendVariableDeclaration
+	 *
 	 * Constraint:
 	 *     (
 	 *         ((writeable?='var'? extension?='extension'?) | (extension?='extension' writeable?='var'?)) 
@@ -1224,6 +1526,46 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XConstructorCall returns XConstructorCall
+	 *     XConstructorCall.AnonymousClass_1_0_0_0 returns XConstructorCall
+	 *     XbaseConstructorCall returns XConstructorCall
+	 *     XExpressionOrSimpleConstructorCall returns XConstructorCall
+	 *     RichStringPart returns XConstructorCall
+	 *     XAnnotationElementValueOrCommaList returns XConstructorCall
+	 *     XAnnotationElementValueOrCommaList.XListLiteral_1_1_0 returns XConstructorCall
+	 *     XAnnotationElementValue returns XConstructorCall
+	 *     XAnnotationOrExpression returns XConstructorCall
+	 *     XExpression returns XConstructorCall
+	 *     XAssignment returns XConstructorCall
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XConstructorCall
+	 *     XOrExpression returns XConstructorCall
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XAndExpression returns XConstructorCall
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XEqualityExpression returns XConstructorCall
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XRelationalExpression returns XConstructorCall
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XConstructorCall
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XConstructorCall
+	 *     XOtherOperatorExpression returns XConstructorCall
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XAdditiveExpression returns XConstructorCall
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XMultiplicativeExpression returns XConstructorCall
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XConstructorCall
+	 *     XUnaryOperation returns XConstructorCall
+	 *     XCastedExpression returns XConstructorCall
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XConstructorCall
+	 *     XPostfixOperation returns XConstructorCall
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XConstructorCall
+	 *     XMemberFeatureCall returns XConstructorCall
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XConstructorCall
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XConstructorCall
+	 *     XPrimaryExpression returns XConstructorCall
+	 *     XParenthesizedExpression returns XConstructorCall
+	 *     XExpressionOrVarDeclaration returns XConstructorCall
+	 *
 	 * Constraint:
 	 *     (
 	 *         constructor=[JvmConstructor|QualifiedName] 
@@ -1238,6 +1580,9 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * Contexts:
+	 *     XtendEnumLiteral returns XtendEnumLiteral
+	 *
 	 * Constraint:
 	 *     name=ValidID
 	 */

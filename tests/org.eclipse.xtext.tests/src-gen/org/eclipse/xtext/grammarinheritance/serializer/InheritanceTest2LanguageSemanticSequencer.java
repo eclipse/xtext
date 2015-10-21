@@ -46,6 +46,9 @@ public class InheritanceTest2LanguageSemanticSequencer extends InheritanceTestLa
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (name=ID elements+=Element* ids+=FQN)
 	 */

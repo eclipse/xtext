@@ -162,6 +162,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     AttributeExclusionTest1 returns AttributeExclusionTest
+	 *
 	 * Constraint:
 	 *     attr1=ID
 	 */
@@ -177,6 +180,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     AttributeExclusionTest2 returns AttributeExclusionTest
+	 *
 	 * Constraint:
 	 *     attr2=ID
 	 */
@@ -192,6 +198,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Model2 returns Model
+	 *
 	 * Constraint:
 	 *     {Model}
 	 */
@@ -201,6 +210,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         model=Model2 | 
@@ -226,6 +238,10 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeChild returns NestedTypeChild1
+	 *     NestedTypeChild1 returns NestedTypeChild1
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -241,6 +257,10 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeChild returns NestedTypeChild2
+	 *     NestedTypeChild2 returns NestedTypeChild2
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -256,6 +276,10 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest
+	 *     NestedTypeRecursiveTest1.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest
+	 *
 	 * Constraint:
 	 *     left=NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0
 	 */
@@ -271,6 +295,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeRecursiveTest1.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest1
+	 *
 	 * Constraint:
 	 *     {NestedTypeRecursiveTest1}
 	 */
@@ -280,6 +307,10 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest
+	 *     NestedTypeRecursiveTest2.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest
+	 *
 	 * Constraint:
 	 *     left=NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0
 	 */
@@ -295,6 +326,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeRecursiveTest2.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest2
+	 *
 	 * Constraint:
 	 *     {NestedTypeRecursiveTest2}
 	 */
@@ -304,6 +338,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeTest1 returns NestedTypeTest
+	 *
 	 * Constraint:
 	 *     nested=NestedTypeChild1
 	 */
@@ -319,6 +356,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NestedTypeTest2 returns NestedTypeTest
+	 *
 	 * Constraint:
 	 *     nested=NestedTypeChild2
 	 */
@@ -334,6 +374,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NodeExclusion1List returns NodeExclusionList
+	 *
 	 * Constraint:
 	 *     ref+=[Model|ID]+
 	 */
@@ -343,6 +386,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NodeExclusion1 returns NodeExclusion
+	 *
 	 * Constraint:
 	 *     ref=[Model|ID]
 	 */
@@ -358,6 +404,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NodeExclusion2List returns NodeExclusionList
+	 *
 	 * Constraint:
 	 *     ref+=[Model|STRING]+
 	 */
@@ -367,6 +416,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     NodeExclusion2 returns NodeExclusion
+	 *
 	 * Constraint:
 	 *     ref=[Model|STRING]
 	 */
@@ -382,6 +434,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     ParentRefTest1 returns ParentRefTest1
+	 *
 	 * Constraint:
 	 *     child1=ParentRefTestChild1
 	 */
@@ -397,6 +452,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     ParentRefTest2 returns ParentRefTest2
+	 *
 	 * Constraint:
 	 *     child2=ParentRefTestChild2
 	 */
@@ -412,6 +470,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     ParentRefTestChild1 returns ParentRefTestChild
+	 *
 	 * Constraint:
 	 *     child=ParentRefTestChild1?
 	 */
@@ -421,6 +482,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     ParentRefTestChild2 returns ParentRefTestChild
+	 *
 	 * Constraint:
 	 *     child=ParentRefTestChild2?
 	 */
@@ -430,6 +494,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     QuantityExclusionTest1 returns QuantityExclusionTest
+	 *
 	 * Constraint:
 	 *     (attr1=ID attr2=ID?)
 	 */
@@ -439,6 +506,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     QuantityExclusionTest2 returns QuantityExclusionTest
+	 *
 	 * Constraint:
 	 *     (attr1=ID? attr2=ID)
 	 */
@@ -448,6 +518,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     ValueExclusionTest1 returns ValueExclusionTest
+	 *
 	 * Constraint:
 	 *     val=ValueExclusionTestEn1
 	 */
@@ -463,6 +536,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     ValueExclusionTest2 returns ValueExclusionTest
+	 *
 	 * Constraint:
 	 *     val=ValueExclusionTestEn2
 	 */

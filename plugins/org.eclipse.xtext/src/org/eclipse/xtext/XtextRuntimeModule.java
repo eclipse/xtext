@@ -30,6 +30,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xtext.GrammarResource;
@@ -48,6 +49,7 @@ import org.eclipse.xtext.xtext.XtextTransientValueService;
 import org.eclipse.xtext.xtext.XtextTransientValueService2;
 import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
+import org.eclipse.xtext.xtext.CardinalityAwareSyntacticSequencer;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.parser.CardinalityAwareEcoreFactory;
@@ -89,7 +91,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return XtextTransientValueService.class;
 	}
-	
+
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ITransientValueService> bindITransientValueService2() {
 		return XtextTransientValueService2.class;
 	}
@@ -107,71 +109,71 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
 		return XtendXtext2EcorePostProcessor.class;
 	}
-	
+
 	@Override
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
 		return XtextFragmentProvider.class;
 	}
-	
+
 	public Class<? extends IReferableElementsUnloader> bindIReferableElementsUnloader() {
 		return XtextReferableElementsUnloader.class;
 	}
-	
+
 	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
 		return XtextDiagnosticConverter.class;
 	}
-	
+
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return XtextResourceDescriptionStrategy.class;
 	}
-	
+
 	public Class<? extends ILinkingDiagnosticMessageProvider.Extended> bindILinkingDiagnosticMessageProvider() {
 		return XtextLinkingDiagnosticMessageProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtextLocationInFileProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return DefaultGlobalScopeProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return GrammarResource.class;
 	}
-	
+
 	/**
 	 * @since 2.2
 	 */
 	public Class<? extends IDerivedStateComputer> bindIDerivedStateComputer() {
 		return GrammarResource.LinkingTrigger.class;
 	}
-	
+
 	/**
 	 * @since 2.2
 	 */
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionManager() {
 		return DerivedStateAwareResourceDescriptionManager.class;
 	}
-	
+
 	/**
 	 * @since 2.8
 	 */
 	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
 		return XtextConfigurableIssueCodes.class;
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
 	public Class<? extends DefaultEcoreElementFactory> bindCardinalityAwareFactory() {
 		return CardinalityAwareEcoreFactory.class;
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
@@ -185,5 +187,10 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	@Override
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
+	}
+
+	@Override
+	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
+		return CardinalityAwareSyntacticSequencer.class;
 	}
 }

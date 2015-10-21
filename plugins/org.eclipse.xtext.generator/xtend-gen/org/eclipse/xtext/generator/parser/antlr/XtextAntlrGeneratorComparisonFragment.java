@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.parser.antlr;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Stopwatch;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import java.io.File;
@@ -16,7 +15,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
@@ -288,7 +286,6 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   
   protected void loadAndCompareGrammars(final IFileSystemAccess2 fsa, final String outlet, final XtextAntlrGeneratorComparisonFragment.ErrorHandler errorHandler) {
     try {
-      final Stopwatch stopWatch = Stopwatch.createStarted();
       this.performXpandBasedGeneration(outlet);
       String grammarFileName = null;
       String absoluteGrammarFileNameReference = null;
@@ -333,7 +330,6 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder_2.append("/");
       _builder_2.append(grammarFileName, "");
       final AntlrGrammarComparator.ErrorContext result = this.comparator.compareGrammars(grammar, grammarReference, _builder_2.toString(), absoluteGrammarFileNameReference, errorHandler);
-      final long time = stopWatch.elapsed(TimeUnit.MILLISECONDS);
       String _xifexpression = null;
       if ((outlet == Generator.SRC_GEN)) {
         _xifexpression = "parser";
@@ -352,9 +348,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       AntlrGrammarComparator.MatchState _referenceGrammar = result.getReferenceGrammar();
       int _lineNumber_1 = _referenceGrammar.getLineNumber();
       _builder_3.append(_lineNumber_1, "");
-      _builder_3.append(" (");
-      _builder_3.append(time, "");
-      _builder_3.append(" ms).");
+      _builder_3.append(".");
       XtextAntlrGeneratorComparisonFragment.LOG.info(_builder_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -58,7 +58,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//'simple'
 		public Keyword getSimpleKeyword_0_0() { return cSimpleKeyword_0_0; }
 
-		//(single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
+		//single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype
 		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
 
 		//single=SingleValue

@@ -57,6 +57,10 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns CaseInsensitiveKeywordRule
+	 *     CaseInsensitiveKeywordRule returns CaseInsensitiveKeywordRule
+	 *
 	 * Constraint:
 	 *     val=INT
 	 */
@@ -72,6 +76,10 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns CommonTerminalsRule
+	 *     CommonTerminalsRule returns CommonTerminalsRule
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
@@ -87,6 +95,10 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns DatatypeRule
+	 *     DatatypeRule returns DatatypeRule
+	 *
 	 * Constraint:
 	 *     val=INT
 	 */
@@ -102,6 +114,10 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns MultiRule
+	 *     MultiRule returns MultiRule
+	 *
 	 * Constraint:
 	 *     val=INT
 	 */
@@ -117,6 +133,10 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns PluralRule
+	 *     PluralRule returns PluralRule
+	 *
 	 * Constraint:
 	 *     count=INT
 	 */

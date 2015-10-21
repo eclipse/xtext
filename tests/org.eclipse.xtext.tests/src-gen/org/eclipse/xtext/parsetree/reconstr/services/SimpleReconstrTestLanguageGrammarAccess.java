@@ -473,7 +473,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'#5'
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 
-		//(precStar?='*' | prec=INT)
+		//precStar?='*' | prec=INT
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//precStar?='*'
@@ -494,7 +494,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
-		//(scaleStar?='*' | scale=INT)
+		//scaleStar?='*' | scale=INT
 		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
 		//scaleStar?='*'
@@ -538,7 +538,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'#6'
 		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
 
-		//('v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT)
+		//'v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'v1' v1+=INT* v2+=ID
@@ -692,7 +692,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 
-		//('kw1' | id+=ID 'kw2')
+		//'kw1' | id+=ID 'kw2'
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//'kw1'
@@ -728,7 +728,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'kw4'
 		public Keyword getKw4Keyword_3_1_1() { return cKw4Keyword_3_1_1; }
 
-		//('kw5' | 'kw6')
+		//'kw5' | 'kw6'
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//'kw5'
@@ -761,7 +761,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//('kw1' | 'kw2' | 'kw3') '#10' id+=ID ('kw4' id+=ID 'kw5')*
 		public Group getGroup() { return cGroup; }
 
-		//('kw1' | 'kw2' | 'kw3')
+		//'kw1' | 'kw2' | 'kw3'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//'kw1'
@@ -826,7 +826,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'#11'
 		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
 
-		//('kw1' | 'kw2' | 'kw3' 'kw4')
+		//'kw1' | 'kw2' | 'kw3' 'kw4'
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'kw1'
@@ -887,7 +887,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'#12'
 		public Keyword getNumberSignDigitOneDigitTwoKeyword_0() { return cNumberSignDigitOneDigitTwoKeyword_0; }
 
-		//(interface?="interface" | "class")
+		//interface?="interface" | "class"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//interface?="interface"
@@ -1188,7 +1188,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#17"
 		public Keyword getNumberSignDigitOneDigitSevenKeyword_0() { return cNumberSignDigitOneDigitSevenKeyword_0; }
 
-		//(TypeBug1A | TypeBug1B)
+		//TypeBug1A | TypeBug1B
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TypeBug1A
@@ -1216,7 +1216,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#18"
 		public Keyword getNumberSignDigitOneDigitEightKeyword_0() { return cNumberSignDigitOneDigitEightKeyword_0; }
 
-		//(TypeBug2B | TypeBug2A)
+		//TypeBug2B | TypeBug2A
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TypeBug2B
@@ -1405,7 +1405,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
 
-		//(('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?))
+		//('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//('kx' x+=ID (',' x+=ID)*)?
@@ -1432,7 +1432,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getXIDTerminalRuleCall_1_0_2_1_0() { return cXIDTerminalRuleCall_1_0_2_1_0; }
 
-		//(('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)
+		//('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//('ky' y+=ID (',' y+=ID)*)?

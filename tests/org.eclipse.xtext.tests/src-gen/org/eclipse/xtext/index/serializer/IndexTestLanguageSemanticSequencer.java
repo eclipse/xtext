@@ -61,6 +61,11 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Datatype
+	 *     Type returns Datatype
+	 *     Datatype returns Datatype
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -76,6 +81,11 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Element returns Entity
+	 *     Type returns Entity
+	 *     Entity returns Entity
+	 *
 	 * Constraint:
 	 *     (name=ID properties+=Property*)
 	 */
@@ -85,6 +95,9 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     File returns File
+	 *
 	 * Constraint:
 	 *     elements+=Element+
 	 */
@@ -94,6 +107,10 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *     Element returns Import
+	 *
 	 * Constraint:
 	 *     importedNamespace=QualifiedNameWithWildCard
 	 */
@@ -109,6 +126,10 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Namespace returns Namespace
+	 *     Element returns Namespace
+	 *
 	 * Constraint:
 	 *     (name=QualifiedName elements+=Element*)
 	 */
@@ -118,6 +139,9 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Property returns Property
+	 *
 	 * Constraint:
 	 *     (type=[Type|QualifiedName] name=ID)
 	 */

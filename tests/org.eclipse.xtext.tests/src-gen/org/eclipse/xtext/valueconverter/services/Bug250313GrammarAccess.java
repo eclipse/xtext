@@ -219,7 +219,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//('content' children=Child) ('ref' ref=([Child1|STRING] | [Child2]))?
 		public Group getGroup_8() { return cGroup_8; }
 
-		//('content' children=Child)
+		//'content' children=Child
 		public Group getGroup_8_0() { return cGroup_8_0; }
 
 		//'content'

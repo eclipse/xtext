@@ -57,6 +57,9 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Child returns Child
+	 *
 	 * Constraint:
 	 *     (name=ID link=[Definition|ID]?)
 	 */
@@ -66,6 +69,9 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Definition returns Definition
+	 *
 	 * Constraint:
 	 *     (name=ID child+=Child ref+=Reference?)
 	 */
@@ -75,6 +81,9 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     def+=Definition+
 	 */
@@ -84,6 +93,10 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Reference returns NestedRef
+	 *     Reference.NestedRef_2_1 returns NestedRef
+	 *
 	 * Constraint:
 	 *     (left=Reference_NestedRef_2_1 refChild=[Child|ID])
 	 */
@@ -102,6 +115,10 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Reference returns Reference
+	 *     Reference.NestedRef_2_1 returns Reference
+	 *
 	 * Constraint:
 	 *     refChild=[Child|ID]
 	 */
