@@ -24,6 +24,7 @@ import org.eclipse.xtext.formatting2.FormatterPreferences
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -35,19 +36,14 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
-import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
 	@Inject extension XtextGeneratorNaming
 	@Inject extension GrammarAccessExtensions
-	
-	@Accessors boolean generateStub = true
-	
+
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + getSimpleName(grammar) + 'Formatter')
 	}

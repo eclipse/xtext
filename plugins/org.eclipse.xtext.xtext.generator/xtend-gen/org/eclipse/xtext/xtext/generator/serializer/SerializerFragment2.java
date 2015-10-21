@@ -72,9 +72,8 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -99,7 +98,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
 @SuppressWarnings("all")
-public class SerializerFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private static <K extends Object, V extends Object> Map<K, V> toMap(final Iterable<Pair<K, V>> items) {
     LinkedHashMap<K, V> _xblockexpression = null;
     {
@@ -149,9 +148,6 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
   
   @Accessors
   private boolean generateDebugData = false;
-  
-  @Accessors
-  private boolean generateStub = true;
   
   @Accessors
   private boolean generateSupportForDeprecatedContextObject = false;
@@ -248,7 +244,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
     }
     this.generateAbstractSemanticSequencer();
     this.generateAbstractSyntacticSequencer();
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       this.generateSemanticSequencer();
       this.generateSyntacticSequencer();
     }
@@ -521,7 +518,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
     Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function);
     final Set<IGrammarConstraintProvider.IConstraint> newLocalConstraints = IterableExtensions.<IGrammarConstraintProvider.IConstraint>toSet(_filter);
     TypeReference _xifexpression = null;
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       Grammar _grammar_2 = this.getGrammar();
       _xifexpression = this.getAbstractSemanticSequencerClass(_grammar_2);
     } else {
@@ -555,7 +553,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public ");
         {
-          if (SerializerFragment2.this.generateStub) {
+          boolean _isGenerateStub = SerializerFragment2.this.isGenerateStub();
+          if (_isGenerateStub) {
             _builder.append("abstract ");
           }
         }
@@ -1274,7 +1273,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
   
   protected void generateAbstractSyntacticSequencer() {
     TypeReference _xifexpression = null;
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       Grammar _grammar = this.getGrammar();
       _xifexpression = this.getAbstractSyntacticSequencerClass(_grammar);
     } else {
@@ -1291,7 +1291,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public ");
         {
-          if (SerializerFragment2.this.generateStub) {
+          boolean _isGenerateStub = SerializerFragment2.this.isGenerateStub();
+          if (_isGenerateStub) {
             _builder.append("abstract ");
           }
         }
@@ -1714,7 +1715,9 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
             _builder.append("* Synthetic terminal rule. The concrete syntax is to be specified by clients.");
             _builder.newLine();
             {
-              if ((!SerializerFragment2.this.generateStub)) {
+              boolean _isGenerateStub = SerializerFragment2.this.isGenerateStub();
+              boolean _not = (!_isGenerateStub);
+              if (_not) {
                 _builder.append(" * Defaults to the empty string.");
               }
             }
@@ -1724,7 +1727,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
             _builder.newLine();
             _builder.append("protected ");
             {
-              if (SerializerFragment2.this.generateStub) {
+              boolean _isGenerateStub_1 = SerializerFragment2.this.isGenerateStub();
+              if (_isGenerateStub_1) {
                 _builder.append("abstract ");
               }
             }
@@ -1739,7 +1743,8 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
             _builder.append(INode.class, "");
             _builder.append(" node)");
             {
-              if (SerializerFragment2.this.generateStub) {
+              boolean _isGenerateStub_2 = SerializerFragment2.this.isGenerateStub();
+              if (_isGenerateStub_2) {
                 _builder.append(";");
               } else {
                 _builder.append(" { return \"\"; }");
@@ -1949,15 +1954,6 @@ public class SerializerFragment2 extends AbstractXtextGeneratorFragment implemen
   
   public void setGenerateDebugData(final boolean generateDebugData) {
     this.generateDebugData = generateDebugData;
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
   }
   
   @Pure

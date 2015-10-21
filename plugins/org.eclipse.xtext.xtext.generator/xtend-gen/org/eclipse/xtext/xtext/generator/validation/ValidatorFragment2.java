@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -28,11 +27,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -51,7 +48,7 @@ import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
 @SuppressWarnings("all")
-public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+public class ValidatorFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private ValidatorNaming _validatorNaming;
@@ -65,12 +62,6 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
   
   @Inject
   private CodeConfig codeConfig;
-  
-  @Accessors
-  private boolean generateStub = true;
-  
-  @Accessors
-  private boolean inheritImplementation = true;
   
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
@@ -90,7 +81,8 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
       TypeReference _xifexpression = null;
       boolean _and = false;
-      if (!this.inheritImplementation) {
+      boolean _isInheritImplementation = this.isInheritImplementation();
+      if (!_isInheritImplementation) {
         _and = false;
       } else {
         _and = (superGrammar != null);
@@ -112,7 +104,8 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
   @Override
   public void generate() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       Grammar _grammar = this.getGrammar();
       TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
       Grammar _grammar_1 = this.getGrammar();
@@ -128,7 +121,8 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     bindingFactory.contributeTo(_runtimeGenModule);
-    if (this.generateStub) {
+    boolean _isGenerateStub_1 = this.isGenerateStub();
+    if (_isGenerateStub_1) {
       boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
         this.generateXtendValidatorStub();
@@ -317,7 +311,8 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
         }
         _builder.append("public ");
         {
-          if (ValidatorFragment2.this.generateStub) {
+          boolean _isGenerateStub = ValidatorFragment2.this.isGenerateStub();
+          if (_isGenerateStub) {
             _builder.append("abstract ");
           }
         }
@@ -355,7 +350,8 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
         _builder.append(">(");
         {
           boolean _and = false;
-          if (!ValidatorFragment2.this.inheritImplementation) {
+          boolean _isInheritImplementation = ValidatorFragment2.this.isInheritImplementation();
+          if (!_isInheritImplementation) {
             _and = false;
           } else {
             Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
@@ -548,23 +544,5 @@ public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implement
       _xblockexpression = _entries.add(_builder.toString());
     }
     return _xblockexpression;
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
-  }
-  
-  @Pure
-  public boolean isInheritImplementation() {
-    return this.inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this.inheritImplementation = inheritImplementation;
   }
 }

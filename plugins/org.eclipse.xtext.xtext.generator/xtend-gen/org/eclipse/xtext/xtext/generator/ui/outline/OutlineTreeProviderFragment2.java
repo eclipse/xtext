@@ -10,15 +10,12 @@ package org.eclipse.xtext.xtext.generator.ui.outline;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Set;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -35,7 +32,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private CodeConfig codeConfig;
   
@@ -45,9 +42,6 @@ public class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Accessors
-  private boolean generateStub = true;
   
   protected TypeReference getOutlineTreeProviderClass(final Grammar grammar) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(grammar);
@@ -71,7 +65,9 @@ public class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
     }
-    if ((!this.generateStub)) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    boolean _not = (!_isGenerateStub);
+    if (_not) {
       return;
     }
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
@@ -182,14 +178,5 @@ public class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createXtendFile.writeTo(_src);
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
   }
 }

@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.contentAssist
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
@@ -19,6 +18,7 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -27,8 +27,6 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
-import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
 /**
  * Contributes the 'Abstract...ProposalProvider' and '...ProposalProvider' stub,
@@ -36,7 +34,7 @@ import org.eclipse.xtext.xtext.generator.IGeneratesStub
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class ContentAssistFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
@@ -46,12 +44,6 @@ class ContentAssistFragment2 extends AbstractXtextGeneratorFragment implements I
 	
 	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	boolean generateStub = true;
-
-	@Accessors
-	boolean inheritImplementation = true
 
 	def protected TypeReference getProposalProviderClass(Grammar g) {
 		return new TypeReference(

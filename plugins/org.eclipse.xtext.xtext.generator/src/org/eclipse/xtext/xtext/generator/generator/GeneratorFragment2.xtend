@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -35,10 +36,8 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
-import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class GeneratorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	
 	@Inject CodeConfig codeConfig
 	
@@ -56,11 +55,8 @@ class GeneratorFragment2 extends AbstractXtextGeneratorFragment implements IGene
 	@Accessors(PUBLIC_SETTER)
 	boolean generateXtendMain = false
 	
-	@Accessors(PUBLIC_SETTER)
-	boolean generateStub = true
-	
 	override boolean isGenerateStub() {
-		!grammar.inheritsXbase && generateStub
+		!grammar.inheritsXbase && super.generateStub
 	}
 	
 	def boolean isGenerateJavaMain() {

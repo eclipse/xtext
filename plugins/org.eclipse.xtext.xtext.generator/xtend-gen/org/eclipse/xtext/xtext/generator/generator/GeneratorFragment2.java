@@ -31,9 +31,8 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -52,7 +51,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class GeneratorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private CodeConfig codeConfig;
   
@@ -76,9 +75,6 @@ public class GeneratorFragment2 extends AbstractXtextGeneratorFragment implement
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateXtendMain = false;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private boolean generateStub = true;
-  
   @Override
   public boolean isGenerateStub() {
     boolean _and = false;
@@ -88,7 +84,8 @@ public class GeneratorFragment2 extends AbstractXtextGeneratorFragment implement
     if (!_not) {
       _and = false;
     } else {
-      _and = this.generateStub;
+      boolean _isGenerateStub = super.isGenerateStub();
+      _and = _isGenerateStub;
     }
     return _and;
   }
@@ -984,9 +981,5 @@ public class GeneratorFragment2 extends AbstractXtextGeneratorFragment implement
   
   public void setGenerateXtendMain(final boolean generateXtendMain) {
     this.generateXtendMain = generateXtendMain;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
   }
 }

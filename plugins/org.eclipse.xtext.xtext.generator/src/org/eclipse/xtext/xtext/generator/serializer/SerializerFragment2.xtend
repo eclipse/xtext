@@ -53,9 +53,8 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.IGeneratesStub
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -69,7 +68,7 @@ import static extension org.eclipse.xtext.serializer.analysis.SerializationConte
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
-class SerializerFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	
 	private static def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
 		val result = newLinkedHashMap
@@ -90,7 +89,6 @@ class SerializerFragment2 extends AbstractXtextGeneratorFragment implements IGen
 	@Inject CodeConfig codeConfig
 	
 	@Accessors boolean generateDebugData = false
-	@Accessors boolean generateStub = true
 	@Accessors boolean generateSupportForDeprecatedContextObject = false
 	
 	boolean detectSyntheticTerminals = true

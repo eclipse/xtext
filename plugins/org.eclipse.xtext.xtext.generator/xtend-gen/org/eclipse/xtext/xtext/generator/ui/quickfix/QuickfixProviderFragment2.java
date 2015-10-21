@@ -11,16 +11,13 @@ import com.google.common.base.Objects;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -42,7 +39,7 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -57,12 +54,6 @@ public class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment im
   
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
-  @Accessors
-  private boolean generateStub = true;
-  
-  @Accessors
-  private boolean inheritImplementation;
   
   protected TypeReference getQuickfixProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
@@ -79,7 +70,8 @@ public class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment im
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
       TypeReference _xifexpression = null;
       boolean _and = false;
-      if (!this.inheritImplementation) {
+      boolean _isInheritImplementation = this.isInheritImplementation();
+      if (!_isInheritImplementation) {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(superGrammar, null));
@@ -105,7 +97,8 @@ public class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment im
   @Override
   public void generate() {
     TypeReference _xifexpression = null;
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       Grammar _grammar = this.getGrammar();
       _xifexpression = this.getQuickfixProviderClass(_grammar);
     } else {
@@ -120,7 +113,8 @@ public class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment im
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
     boolean _and = false;
-    if (!this.generateStub) {
+    boolean _isGenerateStub_1 = this.isGenerateStub();
+    if (!_isGenerateStub_1) {
       _and = false;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
@@ -410,23 +404,5 @@ public class QuickfixProviderFragment2 extends AbstractXtextGeneratorFragment im
       _xblockexpression = _entries.add(_builder.toString());
     }
     return _xblockexpression;
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
-  }
-  
-  @Pure
-  public boolean isInheritImplementation() {
-    return this.inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this.inheritImplementation = inheritImplementation;
   }
 }

@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -38,10 +37,8 @@ import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.IGeneratesStub;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -56,7 +53,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 @SuppressWarnings("all")
-public class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
+public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private FileAccessFactory fileAccessFactory;
   
@@ -67,9 +64,6 @@ public class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implemen
   @Inject
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
-  
-  @Accessors
-  private boolean generateStub = true;
   
   protected TypeReference getFormatter2Stub(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
@@ -82,7 +76,9 @@ public class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implemen
   
   @Override
   public void generate() {
-    if ((!this.generateStub)) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    boolean _not = (!_isGenerateStub);
+    if (_not) {
       return;
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -349,14 +345,5 @@ public class Formatter2Fragment2 extends AbstractXtextGeneratorFragment implemen
     ResourceSet _resourceSet = _language.getResourceSet();
     GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, _resourceSet);
     return _genFeature.getGetAccessor();
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
   }
 }
