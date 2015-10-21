@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr
 
-import com.google.common.base.Stopwatch
 import com.google.common.io.Files
 import com.google.inject.Inject
 import java.io.File
 import java.nio.charset.Charset
 import java.util.List
-import java.util.concurrent.TimeUnit
 import org.eclipse.xpand2.XpandExecutionContextImpl
 import org.eclipse.xpand2.XpandFacade
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -26,6 +24,7 @@ import org.eclipse.xtext.generator.adapter.FragmentAdapter
 import org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGeneratorFragment
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper
 import org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
+import org.eclipse.xtext.util.StopWatch
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess
 import org.eclipse.xtext.xtext.RuleFilter
@@ -152,7 +151,8 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 
 
 	protected def loadAndCompareGrammars(IFileSystemAccess2 fsa, String outlet, ErrorHandler errorHandler) {
-		val stopWatch = Stopwatch.createStarted
+		val stopWatch = new StopWatch()
+		stopWatch.reset()
 		
 		outlet.performXpandBasedGeneration()
 		
@@ -168,7 +168,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		} else if (outlet == Generator.SRC_GEN_IDE) {
 			lexerGrammarFileName = contentAssistNaming.getLexerGrammar(grammar).grammarFileName
 			parserGrammarFileName = contentAssistNaming.getParserGrammar(grammar).grammarFileName
-			type = "content assisst"
+			type = "content assist"
 			
 		} else {
 			throw new RuntimeException("Unexpected value of parameter 'outlet'");
@@ -198,10 +198,8 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			'''«fsa.path»/«parserGrammarFileName»''', absoluteParserGrammarFileNameReference, errorHandler
 		)
 		
-		val time = stopWatch.elapsed(TimeUnit.MILLISECONDS)
-		
 		LOG.info('''Generated «type» parser grammar of «result.testedGrammar.getLineNumber
-				» lines matches expected one of «result.referenceGrammar.getLineNumber» («time» ms).''')
+				» lines matches expected one of «result.referenceGrammar.getLineNumber» («stopWatch.reset» ms).''')
 	}
 
 

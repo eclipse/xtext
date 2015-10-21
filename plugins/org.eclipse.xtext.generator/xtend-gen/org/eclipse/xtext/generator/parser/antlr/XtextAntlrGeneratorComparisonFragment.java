@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.parser.antlr;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Stopwatch;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import java.io.File;
@@ -16,7 +15,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
@@ -38,6 +36,7 @@ import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper;
 import org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment;
+import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -316,7 +315,8 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   
   protected void loadAndCompareGrammars(final IFileSystemAccess2 fsa, final String outlet, final XtextAntlrGeneratorComparisonFragment.ErrorHandler errorHandler) {
     try {
-      final Stopwatch stopWatch = Stopwatch.createStarted();
+      final StopWatch stopWatch = new StopWatch();
+      stopWatch.reset();
       this.performXpandBasedGeneration(outlet);
       String parserGrammarFileName = null;
       String lexerGrammarFileName = null;
@@ -343,7 +343,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
           AntlrGrammar _parserGrammar_1 = this.contentAssistNaming.getParserGrammar(_grammar_3);
           String _grammarFileName_3 = _parserGrammar_1.getGrammarFileName();
           parserGrammarFileName = _grammarFileName_3;
-          type = "content assisst";
+          type = "content assist";
         } else {
           throw new RuntimeException("Unexpected value of parameter \'outlet\'");
         }
@@ -409,7 +409,6 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder_3.append("/");
       _builder_3.append(parserGrammarFileName, "");
       final AntlrGrammarComparator.ErrorContext result = this.comparator.compareGrammars(grammarFile, grammarFileReference, _builder_3.toString(), absoluteParserGrammarFileNameReference, errorHandler);
-      final long time = stopWatch.elapsed(TimeUnit.MILLISECONDS);
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("Generated ");
       _builder_4.append(type, "");
@@ -422,7 +421,8 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       int _lineNumber_3 = _referenceGrammar_1.getLineNumber();
       _builder_4.append(_lineNumber_3, "");
       _builder_4.append(" (");
-      _builder_4.append(time, "");
+      long _reset = stopWatch.reset();
+      _builder_4.append(_reset, "");
       _builder_4.append(" ms).");
       XtextAntlrGeneratorComparisonFragment.LOG.info(_builder_4);
     } catch (Throwable _e) {
