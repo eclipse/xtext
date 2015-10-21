@@ -1,41 +1,40 @@
 module org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage
 
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var grammarURI = "classpath:/org/eclipse/xtext/testlanguages/noJdt/NoJdtTestLanguage.xtext"
 var fileExtensions = "nojdt"
-var generateXtendStub = true
 
-LanguageConfig auto-inject {
-	uri = grammarURI
+XtextGeneratorLanguage {
+	grammarUri = grammarURI
+	fileExtensions = fileExtensions
 
 	// Java API to access grammar elements (required by several other fragments)
-	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+	fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 
 	// generates Java API for the generated EPackages
-	fragment = ecore.EcoreGeneratorFragment auto-inject {
+	fragment = ecore.EMFGeneratorFragment2 auto-inject {
 		emfRuntimeVersion = "2.9"
 	}
 
 	// serializer 2.0
-	fragment = serializer.SerializerFragment auto-inject {
+	fragment = serializer.SerializerFragment2 auto-inject {
 		generateStub = false
 	}
 
 	// a custom ResourceFactory for use with EMF
-	fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
+	fragment = resourceFactory.ResourceFactoryFragment2 auto-inject {}
 
 	// The antlr parser generator fragment.
-	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
 	//  options = {
 	//      backtrack = true
 	//  }
 	}
-
+	fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {}
+	
 	// Xtend-based API for validation
-	fragment = validation.ValidatorFragment auto-inject {
+	fragment = validation.ValidatorFragment2 auto-inject {
 	//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 	//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 	}
@@ -45,39 +44,36 @@ LanguageConfig auto-inject {
 	// fragment = exporting.SimpleNamesFragment auto-inject {}
 
 	// scoping and exporting API
-	fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-	fragment = exporting.QualifiedNamesFragment auto-inject {}
-	fragment = builder.BuilderIntegrationFragment auto-inject {}
+	fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
+	fragment = exporting.QualifiedNamesFragment2 auto-inject {}
+	fragment = builder.BuilderIntegrationFragment2 auto-inject {}
 
 	// generator API
-	fragment = generator.GeneratorFragment auto-inject {}
+	fragment = generator.GeneratorFragment2 auto-inject {}
 
 	// formatter API
-	fragment = formatting.FormatterFragment auto-inject {}
+	fragment = formatting.Formatter2Fragment2 auto-inject {}
 
 	// labeling API
-	fragment = labeling.LabelProviderFragment auto-inject {}
+	fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
 
 	// outline API
-	fragment = outline.OutlineTreeProviderFragment auto-inject {}
-	fragment = outline.QuickOutlineFragment auto-inject {}
+	fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
+	fragment = ui.outline.QuickOutlineFragment2 auto-inject {}
 
 	// quickfix API
-	fragment = quickfix.QuickfixProviderFragment auto-inject {}
+	fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}
 
 	// content assist API
-	fragment = contentAssist.ContentAssistFragment auto-inject {}
-
-	// generates a more lightweight Antlr parser and lexer tailored for content assist
-	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+	fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}
 
 	// rename refactoring
-	fragment = refactoring.RefactorElementNameFragment auto-inject {}
+	fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {}
 
 	// provides a preference page for template proposals
-	fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
+	fragment = ui.templates.CodetemplatesGeneratorFragment2 auto-inject {}
 
 	// provides a compare view
-	fragment = compare.CompareFragment auto-inject {}
+	fragment = ui.compare.CompareFragment2 auto-inject {}
 }	
 
