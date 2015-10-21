@@ -18,8 +18,10 @@ import org.eclipse.xpand2.XpandExecutionContextImpl
 import org.eclipse.xpand2.XpandFacade
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.adapter.FragmentAdapter
 import org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGeneratorFragment
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper
@@ -154,37 +156,72 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		
 		outlet.performXpandBasedGeneration()
 		
-		var String grammarFileName
-		var String absoluteGrammarFileNameReference
+		var String parserGrammarFileName
+		var String lexerGrammarFileName
+		var String type
 		
 		if (outlet == Generator.SRC_GEN) {
-			grammarFileName = productionNaming.getParserGrammar(grammar).grammarFileName
-			absoluteGrammarFileNameReference = '''«tmpFolder.absolutePath»/«grammarFileName»'''
+			lexerGrammarFileName = productionNaming.getLexerGrammar(grammar).grammarFileName
+			parserGrammarFileName = productionNaming.getParserGrammar(grammar).grammarFileName
+			type = "runtime"
 			
 		} else if (outlet == Generator.SRC_GEN_IDE) {
-			grammarFileName = contentAssistNaming.getParserGrammar(grammar).grammarFileName
-			absoluteGrammarFileNameReference = '''«tmpFolder.absolutePath»/«grammarFileName»'''
+			lexerGrammarFileName = contentAssistNaming.getLexerGrammar(grammar).grammarFileName
+			parserGrammarFileName = contentAssistNaming.getParserGrammar(grammar).grammarFileName
+			type = "content assisst"
 			
 		} else {
-			throw new RuntimeException("Unexpected value of param 'outlet'");
+			throw new RuntimeException("Unexpected value of parameter 'outlet'");
 		}
 		
+		val absoluteLexerGrammarFileNameReference = '''«tmpFolder.absolutePath»/«lexerGrammarFileName»'''
+		val absoluteParserGrammarFileNameReference = '''«tmpFolder.absolutePath»/«parserGrammarFileName»'''
 		
-		val grammar = fsa.readTextFile(grammarFileName)
-		val grammarReference = Files.toString(new File(absoluteGrammarFileNameReference), Charset.forName(ENCODING))
+		val resultLexer = if (!grammar.isCombinedGrammar) {
+			val lexerGrammarFile = fsa.readTextFile(lexerGrammarFileName)
+			val lexerGrammarFileReference = Files.toString(new File(absoluteLexerGrammarFileNameReference), Charset.forName(ENCODING))
+			
+			comparator.compareGrammars(lexerGrammarFile, lexerGrammarFileReference,
+				'''«fsa.path»/«lexerGrammarFileName»''', absoluteLexerGrammarFileNameReference, errorHandler
+			)
+		}
 		
-		val result = comparator.compareGrammars(grammar, grammarReference,
-			'''«fsa.path»/«grammarFileName»''', absoluteGrammarFileNameReference, errorHandler
+		if (resultLexer != null) {
+			LOG.info('''Generated «type» lexer grammar of «resultLexer.testedGrammar.getLineNumber
+					» lines matches expected one of «resultLexer.referenceGrammar.getLineNumber».''')
+		}
+		
+		val grammarFile = fsa.readTextFile(parserGrammarFileName)
+		val grammarFileReference = Files.toString(new File(absoluteParserGrammarFileNameReference), Charset.forName(ENCODING))
+		
+		val result = comparator.compareGrammars(grammarFile, grammarFileReference,
+			'''«fsa.path»/«parserGrammarFileName»''', absoluteParserGrammarFileNameReference, errorHandler
 		)
 		
 		val time = stopWatch.elapsed(TimeUnit.MILLISECONDS)
 		
-		val type = if (outlet === Generator.SRC_GEN) "parser" else "content assist" 
-		
-		LOG.info('''Generated «type» grammar of «result.testedGrammar.getLineNumber
+		LOG.info('''Generated «type» parser grammar of «result.testedGrammar.getLineNumber
 				» lines matches expected one of «result.referenceGrammar.getLineNumber» («time» ms).''')
 	}
 
+
+	private static class AntlrFragmentHelperEx extends AntlrFragmentHelper {
+		
+		private Naming naming
+		
+		new(Naming naming) {
+			super(naming)
+			this.naming = naming
+		}
+		
+		override getLexerGrammarFileName(Grammar g) {
+			return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
+		}
+		override getContentAssistLexerGrammarFileName(Grammar g) {
+			return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
+		}
+
+	}
 
 	def protected void performXpandBasedGeneration(String outlet) { 
 		val RuleFilter filter = new RuleFilter();
@@ -200,7 +237,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		];
 
 		val combined = grammar.isCombinedGrammar		
-		val helper = if (!combined) new AntlrFragmentHelper(naming)
+		val helper = if (!combined) new AntlrFragmentHelperEx(naming)
 		var String template
 		var Object[] params
 		
