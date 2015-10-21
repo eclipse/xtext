@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.serializer
 
 import com.google.common.collect.ImmutableSet
 import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import java.util.List
 import java.util.Map
@@ -54,6 +55,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -66,10 +68,8 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
-import com.google.common.collect.Multimaps
-import com.google.common.collect.Multimap
 
-class SerializerFragment2 extends AbstractXtextGeneratorFragment {
+class SerializerFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 	
 	private static def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
 		val result = newLinkedHashMap

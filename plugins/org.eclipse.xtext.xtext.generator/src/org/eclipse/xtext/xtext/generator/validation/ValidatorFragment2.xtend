@@ -27,8 +27,9 @@ import static org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class ValidatorFragment2 extends AbstractXtextGeneratorFragment {
+class ValidatorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 	
 	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
