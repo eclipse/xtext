@@ -88,6 +88,10 @@ Workflow {
 				debugGrammar = true
 				options = auto-inject {}
 			}
+			fragment = parser.antlr.XtextAntlrGeneratorComparisonFragment auto-inject {
+				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
+				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
+			}
 			fragment = validation.ValidatorFragment2 {}
 			fragment = formatting.Formatter2Fragment2 {}
 			fragment = generator.GeneratorFragment2 {}
@@ -105,8 +109,9 @@ Workflow {
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
 			fragment = ui.compare.CompareFragment2 {}
-			
+
 			fragment = ui.contentAssist.ContentAssistFragment2 {}
+
 			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
 				useJdtRefactoring = true
 			}
