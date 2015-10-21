@@ -18,11 +18,12 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.typeRef
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
 /**
  * @author Christian Schneider - Initial contribution and API
  */
-class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment {
+class OutlineTreeProviderFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 
 	@Inject CodeConfig codeConfig
 	@Inject FileAccessFactory fileAccessFactory

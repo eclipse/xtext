@@ -36,8 +36,9 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class GeneratorFragment2 extends AbstractXtextGeneratorFragment {
+class GeneratorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 	
 	@Inject CodeConfig codeConfig
 	
@@ -56,10 +57,10 @@ class GeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	boolean generateXtendMain = false
 	
 	@Accessors(PUBLIC_SETTER)
-	boolean generateStubs = true
+	boolean generateStub = true
 	
-	def boolean isGenerateStub() {
-		!grammar.inheritsXbase && generateStubs
+	override boolean isGenerateStub() {
+		!grammar.inheritsXbase && generateStub
 	}
 	
 	def boolean isGenerateJavaMain() {

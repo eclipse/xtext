@@ -65,8 +65,9 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 import org.eclipse.xtext.serializer.analysis.SerializationContext
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
-class SerializerFragment2 extends AbstractXtextGeneratorFragment {
+class SerializerFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 	
 	private static def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
 		val result = newLinkedHashMap

@@ -19,13 +19,14 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.IGeneratesStub
 
 /**
  * Contributes the Labeling provider stub, either in Xtend or Java language.
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class LabelProviderFragment2 extends AbstractXtextGeneratorFragment {
+class LabelProviderFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
 
 	private static val XBASE_LABEL_PROVIDER = 
 		"org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider"

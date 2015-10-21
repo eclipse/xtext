@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.IGeneratesStub;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -50,7 +51,7 @@ import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
 @SuppressWarnings("all")
-public class ValidatorFragment2 extends AbstractXtextGeneratorFragment {
+public class ValidatorFragment2 extends AbstractXtextGeneratorFragment implements IGeneratesStub {
   @Inject
   @Extension
   private ValidatorNaming _validatorNaming;
