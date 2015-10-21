@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr
 
+import com.google.common.base.Stopwatch
 import com.google.common.io.Files
 import com.google.inject.Inject
 import java.io.File
 import java.nio.charset.Charset
 import java.util.List
+import java.util.concurrent.TimeUnit
 import org.eclipse.xpand2.XpandExecutionContextImpl
 import org.eclipse.xpand2.XpandFacade
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -40,7 +42,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
  * @author Christian Schneider - Initial contribution and API
  * @noreference
  */
-@Log
+ @Log
 class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 
 	private static val ENCODING = 'ISO-8859-1'
@@ -148,6 +150,8 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 
 
 	protected def loadAndCompareGrammars(IFileSystemAccess2 fsa, String outlet, ErrorHandler errorHandler) {
+		val stopWatch = Stopwatch.createStarted
+		
 		outlet.performXpandBasedGeneration()
 		
 		var String grammarFileName
@@ -173,10 +177,12 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			'''«fsa.path»/«grammarFileName»''', absoluteGrammarFileNameReference, errorHandler
 		)
 		
+		val time = stopWatch.elapsed(TimeUnit.MILLISECONDS)
+		
 		val type = if (outlet === Generator.SRC_GEN) "parser" else "content assist" 
 		
 		LOG.info('''Generated «type» grammar of «result.testedGrammar.getLineNumber
-				» lines matches expected one of «result.referenceGrammar.getLineNumber».''')
+				» lines matches expected one of «result.referenceGrammar.getLineNumber» («time» ms).''')
 	}
 
 
