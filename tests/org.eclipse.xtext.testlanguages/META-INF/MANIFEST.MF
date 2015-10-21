@@ -6,7 +6,8 @@ Bundle-Version: 2.9.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,

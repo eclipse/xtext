@@ -1,25 +1,18 @@
 module org.eclipse.xtext.testlanguages.fragments.ExTestLanguageFragments
 
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var grammarURI
 var backtrack = false
 var memoize = false
 var classSplitting = true
 
-var parser = parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
+var parser = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+	combinedGrammar = false
   	options = auto-inject {
   		fieldsPerClass = "100"
   		methodsPerClass = "100"
   	}
-}
-var contentAssist.parser = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment auto-inject {
-	options = auto-inject {
-  		fieldsPerClass = "100"
-  		methodsPerClass = "100"
-	}
 }
 
 @SimpleTestLanguageFragments auto-inject {
