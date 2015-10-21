@@ -211,10 +211,8 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   protected VirtualFileInProject asFile(final AbsoluteURI absoluteURI, final IProjectConfig project) {
-    VirtualFileManager _instance = VirtualFileManager.getInstance();
     URI _uRI = absoluteURI.getURI();
-    String _string = _uRI.toString();
-    final VirtualFile file = _instance.findFileByUrl(_string);
+    final VirtualFile file = VirtualFileURIUtil.getVirtualFile(_uRI);
     final Module module = ((IdeaProjectConfig) project).getModule();
     final Project ideaProject = module.getProject();
     return new VirtualFileInProject(file, ideaProject);
@@ -230,22 +228,20 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     VirtualFile _file = sourceFile.getFile();
     URI _uRI = VirtualFileURIUtil.getURI(_file);
     final Iterable<URI> generatedSources = builder.getGeneratedSources(_uRI);
-    final VirtualFileManager mngr = VirtualFileManager.getInstance();
     final Function1<URI, VirtualFile> _function = new Function1<URI, VirtualFile>() {
       @Override
       public VirtualFile apply(final URI it) {
-        String _string = it.toString();
-        return mngr.findFileByUrl(_string);
+        return VirtualFileURIUtil.getVirtualFile(it);
       }
     };
-    final Iterable<VirtualFile> generatedFiles = IterableExtensions.<URI, VirtualFile>map(generatedSources, _function);
+    Iterable<VirtualFile> _map = IterableExtensions.<URI, VirtualFile>map(generatedSources, _function);
     final Function1<VirtualFile, Boolean> _function_1 = new Function1<VirtualFile, Boolean>() {
       @Override
       public Boolean apply(final VirtualFile it) {
         return Boolean.valueOf(TraceForVirtualFileProvider.this.isTraceFile(it));
       }
     };
-    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(generatedFiles, _function_1);
+    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(_map, _function_1);
     final Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace> _function_2 = new Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>() {
       @Override
       public AbstractTraceForURIProvider.PersistedTrace apply(final VirtualFile it) {
@@ -253,8 +249,8 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
         return ((AbstractTraceForURIProvider.PersistedTrace) _virtualFilePersistedTrace);
       }
     };
-    Iterable<AbstractTraceForURIProvider.PersistedTrace> _map = IterableExtensions.<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>map(generatedTraces, _function_2);
-    final List<AbstractTraceForURIProvider.PersistedTrace> result = IterableExtensions.<AbstractTraceForURIProvider.PersistedTrace>toList(_map);
+    Iterable<AbstractTraceForURIProvider.PersistedTrace> _map_1 = IterableExtensions.<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>map(generatedTraces, _function_2);
+    final List<AbstractTraceForURIProvider.PersistedTrace> result = IterableExtensions.<AbstractTraceForURIProvider.PersistedTrace>toList(_map_1);
     return result;
   }
   
