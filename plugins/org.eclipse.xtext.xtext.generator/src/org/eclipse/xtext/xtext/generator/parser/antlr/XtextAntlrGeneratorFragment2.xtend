@@ -49,6 +49,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	@Accessors
@@ -487,7 +488,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					.to(«AntlrTokenDefProvider».class);
 			''')
 			.addTypeToType(
-				"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory".typeRef,
+				new TypeReference("org.eclipse.xtext.ui.editor.contentassist", "ContentAssistContext.Factory"),
 				"org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory".typeRef
 			)
 			.addTypeToType(

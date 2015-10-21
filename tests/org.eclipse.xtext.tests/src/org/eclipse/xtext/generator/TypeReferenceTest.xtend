@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator
 
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -40,12 +41,25 @@ class TypeReferenceTest {
 		assertEquals("String", ref.typeArguments.head.simpleName)
 	}
 	
+	@Test(expected = IllegalArgumentException)
+	def void testWrongNestedTypeUsage() {
+		"java.util.Map.Entry".typeRef
+	}
+	
 	@Test
 	def void testNestedType() {
-		val ref = "java.util.Map.Entry".typeRef
+		val ref = new TypeReference("java.util", "Map.Entry")
 		assertEquals("java.util", ref.packageName)
 		assertEquals("Entry", ref.simpleName)
 		assertEquals(#["Map", "Entry"], ref.simpleNames)
+	}
+	
+	@Test
+	def void testLowerCaseNestedType() {
+		val ref = new TypeReference("java.util", "Map.entry")
+		assertEquals("java.util", ref.packageName)
+		assertEquals("entry", ref.simpleName)
+		assertEquals(#["Map", "entry"], ref.simpleNames)
 	}
 	
 	@Test
