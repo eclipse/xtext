@@ -16,7 +16,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * Ignores differences in white space, and counts line breaks for usable error diagnosis. 
  * 
  * @author Christian Schneider - Initial contribution and API
- * @since 2.9
+ * @noreference
  */
 class AntlrGrammarComparator {
 
