@@ -126,11 +126,11 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		if (originalElement.datatypeRule)
 			return '[String current=null]'
 		else
-			return '[EObject current=null]'
+			return '''[«currentType» current=null]'''
 	}
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
-		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment)»«ENDIF» returns «compileReturns(options)»
+		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment, currentType)»«ENDIF» returns «compileReturns(options)»
 		@init {
 			enterRule();
 			«compileInitHiddenTokens(options)»
@@ -149,9 +149,9 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 			ParserRule case originalElement.datatypeRule:
 				'[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]'
 			ParserRule case originalElement.isEObjectFragmentRule:
-				'[EObject current=in_current]'
+				'''[«currentType» current=in_current]'''
 			ParserRule:
-				'[EObject current=null]'
+				'''[«currentType» current=null]'''
 			default:
 				throw new IllegalStateException("Unexpected rule: " + it)
 		}
