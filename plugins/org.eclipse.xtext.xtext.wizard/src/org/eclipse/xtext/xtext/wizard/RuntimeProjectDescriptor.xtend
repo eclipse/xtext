@@ -228,6 +228,9 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						serializer = {
 							generateStub = false
 						}
+						validator = {
+							// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+						}
 					}
 				}
 			}
