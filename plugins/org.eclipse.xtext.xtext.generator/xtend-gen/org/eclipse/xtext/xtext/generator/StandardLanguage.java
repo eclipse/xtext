@@ -66,12 +66,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private XtextAntlrGeneratorFragment2 parserGenerator = new XtextAntlrGeneratorFragment2();
   
-  private ValidatorFragment2 validator = ObjectExtensions.<ValidatorFragment2>operator_doubleArrow(new ValidatorFragment2(), new Procedure1<ValidatorFragment2>() {
-    @Override
-    public void apply(final ValidatorFragment2 it) {
-      it.addComposedCheck("org.eclipse.xtext.validation.NamesAreUniqueValidator");
-    }
-  });
+  private ValidatorFragment2 validator = new ValidatorFragment2();
   
   private Formatter2Fragment2 formatter = ObjectExtensions.<Formatter2Fragment2>operator_doubleArrow(new Formatter2Fragment2(), new Procedure1<Formatter2Fragment2>() {
     @Override

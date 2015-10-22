@@ -633,6 +633,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("validator = {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("// composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
