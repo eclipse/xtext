@@ -529,4 +529,40 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 			terminal RULE_ANY_OTHER:
 				.;'''.toString, serialized)
 	}
+	
+	@Test def void test_12() throws Exception {
+		var Grammar flattened = getModel(
+			'''
+				grammar com.foo.bar with org.eclipse.xtext.common.Terminals
+				generate myPack 'http://myURI'
+				Rule: =>(name+=ID*);
+			''', true)
+		var String serialized = getSerializer().serialize(flattened)
+		assertEquals('''
+			grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
+			
+			ruleRule:
+				=> (name+=RULE_ID*);
+			
+			terminal RULE_ID:
+				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+			
+			terminal RULE_INT:
+				"0".."9"+;
+			
+			terminal RULE_STRING:
+				"\"" ("\\" . | !("\\" | "\""))* "\"" | "\'" ("\\" . | !("\\" | "\'"))* "\'";
+			
+			terminal RULE_ML_COMMENT:
+				"/*"->"*/";
+			
+			terminal RULE_SL_COMMENT:
+				"//" !("\n" | "\r")* ("\r"? "\n")?;
+			
+			terminal RULE_WS:
+				" " | "\t" | "\r" | "\n"+;
+			
+			terminal RULE_ANY_OTHER:
+				.;'''.toString, serialized)
+	}
 }
