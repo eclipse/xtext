@@ -35,6 +35,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 
@@ -136,7 +137,11 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
-			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess);
+			CancelIndicator cancelIndicator = CancelIndicator.NullImpl;
+			if (fileSystemAccess instanceof EclipseResourceFileSystemAccess2) {
+				cancelIndicator = new MonitorBasedCancelIndicator(((EclipseResourceFileSystemAccess2) fileSystemAccess).getMonitor());
+			}
+			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, cancelIndicator);
 			context.needRebuild();
 		}
 	}

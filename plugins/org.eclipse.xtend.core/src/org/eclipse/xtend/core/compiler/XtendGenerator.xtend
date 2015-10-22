@@ -44,6 +44,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.generator.IGenerator2
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -60,15 +61,15 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 		callMacroProcessors(input)
 	}
 	
-	override beforeGenerate(Resource input, IFileSystemAccess2 fsa) {
+	override beforeGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
 		issueProviderFactory.attachData(input)
 	}
 	
-	override afterGenerate(Resource input, IFileSystemAccess2 fsa) {
+	override afterGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
 		issueProviderFactory.detachData(input)
 	}
 	
-	override doGenerate(Resource input, IFileSystemAccess2 fsa) {
+	override doGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
 		doGenerate(input, fsa as IFileSystemAccess)
 	}
 	

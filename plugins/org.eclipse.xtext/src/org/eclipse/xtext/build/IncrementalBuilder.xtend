@@ -138,9 +138,7 @@ import org.eclipse.xtext.workspace.IProjectConfigProvider
 					}
 				}
 			}
-			generator.beforeGenerate(resource, fileSystemAccess)
-			generator.doGenerate(resource, fileSystemAccess)
-			generator.afterGenerate(resource, fileSystemAccess)
+			generator.generate(resource, fileSystemAccess, request.cancelIndicator)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)

@@ -362,9 +362,8 @@ public class IncrementalBuilder {
           }
         }
       }
-      generator.beforeGenerate(resource, fileSystemAccess);
-      generator.doGenerate(resource, fileSystemAccess);
-      generator.afterGenerate(resource, fileSystemAccess);
+      CancelIndicator _cancelIndicator = request.getCancelIndicator();
+      generator.generate(resource, fileSystemAccess, _cancelIndicator);
       final Procedure1<URI> _function_1 = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {

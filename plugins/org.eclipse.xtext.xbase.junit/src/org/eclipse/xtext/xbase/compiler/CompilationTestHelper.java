@@ -510,7 +510,7 @@ public class CompilationTestHelper {
 						IResourceServiceProvider resourceServiceProvider = xtextResource.getResourceServiceProvider();
 						GeneratorDelegate generator = resourceServiceProvider.get(GeneratorDelegate.class);
 						if (generator != null) {
-							generator.generate(xtextResource, access);
+							generator.generate(xtextResource, access, CancelIndicator.NullImpl);
 						}
 					}
 				}

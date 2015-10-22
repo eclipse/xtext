@@ -7,15 +7,16 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
+import org.eclipse.xtext.util.CancelIndicator;
 
 @SuppressWarnings("all")
 public class IndexTestLanguageGenerator implements IGenerator2 {
   @Override
-  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa, final CancelIndicator cancelIndicator) {
   }
   
   @Override
-  public void doGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+  public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final CancelIndicator cancelIndicator) {
     final TreeIterator<EObject> iter = input.getAllContents();
     while (iter.hasNext()) {
       EObject _next = iter.next();
@@ -39,6 +40,6 @@ public class IndexTestLanguageGenerator implements IGenerator2 {
   }
   
   @Override
-  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa, final CancelIndicator cancelIndicator) {
   }
 }
