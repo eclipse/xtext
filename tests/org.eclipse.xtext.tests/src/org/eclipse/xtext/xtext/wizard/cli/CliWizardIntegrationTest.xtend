@@ -156,9 +156,10 @@ class CliWizardIntegrationTest {
 	}
 
 	private def void collectAllFiles(File root, List<File> children) {
-		children.add(root)
 		if (root.isDirectory) {
 			root.listFiles.forEach[collectAllFiles(children)]
+		} else {
+			children.add(root)
 		}
 	}
 

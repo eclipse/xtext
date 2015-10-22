@@ -346,7 +346,6 @@ public class CliWizardIntegrationTest {
   }
   
   private void collectAllFiles(final File root, final List<File> children) {
-    children.add(root);
     boolean _isDirectory = root.isDirectory();
     if (_isDirectory) {
       File[] _listFiles = root.listFiles();
@@ -357,6 +356,8 @@ public class CliWizardIntegrationTest {
         }
       };
       IterableExtensions.<File>forEach(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function);
+    } else {
+      children.add(root);
     }
   }
   
