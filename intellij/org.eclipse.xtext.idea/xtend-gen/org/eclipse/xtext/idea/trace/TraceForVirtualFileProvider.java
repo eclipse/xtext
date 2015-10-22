@@ -239,13 +239,14 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
       }
     };
     final Iterable<VirtualFile> generatedFiles = IterableExtensions.<URI, VirtualFile>map(generatedSources, _function);
+    Iterable<VirtualFile> _filterNull = IterableExtensions.<VirtualFile>filterNull(generatedFiles);
     final Function1<VirtualFile, Boolean> _function_1 = new Function1<VirtualFile, Boolean>() {
       @Override
       public Boolean apply(final VirtualFile it) {
         return Boolean.valueOf(TraceForVirtualFileProvider.this.isTraceFile(it));
       }
     };
-    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(generatedFiles, _function_1);
+    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(_filterNull, _function_1);
     final Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace> _function_2 = new Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>() {
       @Override
       public AbstractTraceForURIProvider.PersistedTrace apply(final VirtualFile it) {
