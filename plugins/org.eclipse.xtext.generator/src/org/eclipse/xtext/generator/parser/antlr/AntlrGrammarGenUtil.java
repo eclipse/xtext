@@ -65,7 +65,7 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
-		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterList(rule, skipCurrent);
+		return org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterList(rule, skipCurrent, "EObject");
 	}
 	
 	/**
