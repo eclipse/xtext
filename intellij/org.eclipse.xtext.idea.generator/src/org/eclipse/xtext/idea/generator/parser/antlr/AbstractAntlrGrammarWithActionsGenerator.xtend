@@ -187,4 +187,8 @@ class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenera
 		return false
 	}
 	
+	protected def getCurrentType() {
+		'EObject'
+	}
+	
 }
