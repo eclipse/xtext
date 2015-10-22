@@ -19,6 +19,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
@@ -103,6 +105,37 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 		doWorkInJob[
 			assertFalse(resource.resourceStorageFacade.shouldLoadFromStorage(resource))
 		]
+	}
+	
+	@Test def void testUpstreamResourcesAreLoadedFromStorage() {
+		
+		'mypack/MyClass.xtend'.createFile('''
+			package mypack
+			
+			class MyClass {
+			}
+		''')
+		val downStreamProject = WorkbenchTestHelper.createPluginProject("downstream", project.name)
+		val downstreamFile = '/downstream/src/downstream/SomeClass.xtend'.createFileImpl('''
+			package downstream
+			
+			class SomeClass {
+				
+				def void foo(mypack.MyClass myClass) {
+				}
+			}
+		''')
+		IResourcesSetupUtil.waitForBuild
+
+		val downstreamUri = uriMapper.getUri(downstreamFile)
+		
+		val resourceSet = resourceSetProvider.get(downStreamProject)
+		SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, #[downstreamUri]);
+		val downstreamResource = resourceSet.getResource(downstreamUri, true) as StorageAwareResource
+		val type = downstreamResource.contents.get(1) as JvmGenericType
+		val parameterType = type.members.filter(JvmOperation).head.parameters.head.parameterType.type 
+		assertNotNull(parameterType)
+		assertTrue((parameterType.eResource as StorageAwareResource).isLoadedFromStorage)
 	}
 	
 	protected def void doWorkInJob(()=>void work) {

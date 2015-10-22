@@ -9,11 +9,16 @@ package org.eclipse.xtext.ui.workspace;
 
 import java.util.Set;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfig;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -24,6 +29,8 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class EclipseProjectConfig implements IProjectConfig {
   private final IProject project;
+  
+  private final EclipseProjectConfigProvider projectConfigProvider;
   
   @Override
   public String getName() {
@@ -56,9 +63,17 @@ public class EclipseProjectConfig implements IProjectConfig {
     return IterableExtensions.findFirst(_sourceFolders, _function);
   }
   
-  public EclipseProjectConfig(final IProject project) {
+  @Override
+  public IWorkspaceConfig getWorkspaceConfig() {
+    IWorkspace _workspace = this.project.getWorkspace();
+    IWorkspaceRoot _root = _workspace.getRoot();
+    return new EclipseWorkspaceConfig(_root, this.projectConfigProvider);
+  }
+  
+  public EclipseProjectConfig(final IProject project, final EclipseProjectConfigProvider projectConfigProvider) {
     super();
     this.project = project;
+    this.projectConfigProvider = projectConfigProvider;
   }
   
   @Override
@@ -67,6 +82,7 @@ public class EclipseProjectConfig implements IProjectConfig {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.project== null) ? 0 : this.project.hashCode());
+    result = prime * result + ((this.projectConfigProvider== null) ? 0 : this.projectConfigProvider.hashCode());
     return result;
   }
   
@@ -85,6 +101,11 @@ public class EclipseProjectConfig implements IProjectConfig {
         return false;
     } else if (!this.project.equals(other.project))
       return false;
+    if (this.projectConfigProvider == null) {
+      if (other.projectConfigProvider != null)
+        return false;
+    } else if (!this.projectConfigProvider.equals(other.projectConfigProvider))
+      return false;
     return true;
   }
   
@@ -93,11 +114,17 @@ public class EclipseProjectConfig implements IProjectConfig {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("project", this.project);
+    b.add("projectConfigProvider", this.projectConfigProvider);
     return b.toString();
   }
   
   @Pure
   public IProject getProject() {
     return this.project;
+  }
+  
+  @Pure
+  public EclipseProjectConfigProvider getProjectConfigProvider() {
+    return this.projectConfigProvider;
   }
 }
