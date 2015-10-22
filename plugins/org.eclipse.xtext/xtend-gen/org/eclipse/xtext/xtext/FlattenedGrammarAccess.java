@@ -305,7 +305,6 @@ public class FlattenedGrammarAccess {
                   return element;
                 } else {
                   AbstractElement element_1 = elements.get(0);
-                  this.mergeCardinalities(((AbstractElement)result), element_1);
                   this.mergePredicates(((AbstractElement)result), element_1);
                   element_1.setFirstSetPredicated(false);
                   element_1.setPredicated(false);
