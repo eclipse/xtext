@@ -1,8 +1,6 @@
 module org.eclipse.xtext.testlanguages.fragments.SimpleTestLanguageFragments
 
-import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
 
 var grammarURI
 var backtrack = false
@@ -73,5 +71,9 @@ XtextGeneratorLanguage {
   			methodsPerClass = "100"
   		}
     }
+    fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {
+    	options = auto-inject {}
+    }
+    
 	fragment = idea.IdeaPluginGenerator auto-inject {}
 }
