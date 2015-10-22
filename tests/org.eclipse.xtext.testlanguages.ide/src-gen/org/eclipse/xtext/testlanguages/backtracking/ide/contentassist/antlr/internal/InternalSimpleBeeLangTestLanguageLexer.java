@@ -1,8 +1,8 @@
-package org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.antlr.internal;
+package org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 
 
 import org.antlr.runtime.*;
@@ -1451,12 +1451,12 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOCUMENTATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16394:20: ( '/**' ( options {greedy=false; } : . )* '*/' )
-            // InternalSimpleBeeLangTestLanguage.g:16394:22: '/**' ( options {greedy=false; } : . )* '*/'
+            // InternalSimpleBeeLangTestLanguage.g:14341:20: ( '/**' ( options {greedy=false; } : . )* '*/' )
+            // InternalSimpleBeeLangTestLanguage.g:14341:22: '/**' ( options {greedy=false; } : . )* '*/'
             {
             match("/**"); 
 
-            // InternalSimpleBeeLangTestLanguage.g:16394:28: ( options {greedy=false; } : . )*
+            // InternalSimpleBeeLangTestLanguage.g:14341:28: ( options {greedy=false; } : . )*
             loop1:
             do {
                 int alt1=2;
@@ -1481,7 +1481,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSimpleBeeLangTestLanguage.g:16394:56: .
+            	    // InternalSimpleBeeLangTestLanguage.g:14341:56: .
             	    {
             	    matchAny(); 
 
@@ -1511,8 +1511,8 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16396:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // InternalSimpleBeeLangTestLanguage.g:16396:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalSimpleBeeLangTestLanguage.g:14343:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // InternalSimpleBeeLangTestLanguage.g:14343:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
             match('0'); 
             if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -1524,7 +1524,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalSimpleBeeLangTestLanguage.g:16396:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalSimpleBeeLangTestLanguage.g:14343:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -1578,10 +1578,10 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16398:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalSimpleBeeLangTestLanguage.g:16398:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSimpleBeeLangTestLanguage.g:14345:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalSimpleBeeLangTestLanguage.g:14345:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalSimpleBeeLangTestLanguage.g:16398:11: ( '^' )?
+            // InternalSimpleBeeLangTestLanguage.g:14345:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1590,7 +1590,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalSimpleBeeLangTestLanguage.g:16398:11: '^'
+                    // InternalSimpleBeeLangTestLanguage.g:14345:11: '^'
                     {
                     match('^'); 
 
@@ -1608,7 +1608,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalSimpleBeeLangTestLanguage.g:16398:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSimpleBeeLangTestLanguage.g:14345:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -1657,10 +1657,10 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16400:10: ( ( '0' .. '9' )+ )
-            // InternalSimpleBeeLangTestLanguage.g:16400:12: ( '0' .. '9' )+
+            // InternalSimpleBeeLangTestLanguage.g:14347:10: ( ( '0' .. '9' )+ )
+            // InternalSimpleBeeLangTestLanguage.g:14347:12: ( '0' .. '9' )+
             {
-            // InternalSimpleBeeLangTestLanguage.g:16400:12: ( '0' .. '9' )+
+            // InternalSimpleBeeLangTestLanguage.g:14347:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -1674,7 +1674,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalSimpleBeeLangTestLanguage.g:16400:13: '0' .. '9'
+            	    // InternalSimpleBeeLangTestLanguage.g:14347:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1706,10 +1706,10 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16402:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalSimpleBeeLangTestLanguage.g:16402:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSimpleBeeLangTestLanguage.g:14349:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalSimpleBeeLangTestLanguage.g:14349:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalSimpleBeeLangTestLanguage.g:16402:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSimpleBeeLangTestLanguage.g:14349:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1727,10 +1727,10 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalSimpleBeeLangTestLanguage.g:16402:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalSimpleBeeLangTestLanguage.g:14349:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalSimpleBeeLangTestLanguage.g:16402:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalSimpleBeeLangTestLanguage.g:14349:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -1746,7 +1746,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalSimpleBeeLangTestLanguage.g:16402:21: '\\\\' .
+                    	    // InternalSimpleBeeLangTestLanguage.g:14349:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1754,7 +1754,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalSimpleBeeLangTestLanguage.g:16402:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalSimpleBeeLangTestLanguage.g:14349:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1779,10 +1779,10 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalSimpleBeeLangTestLanguage.g:16402:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalSimpleBeeLangTestLanguage.g:14349:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalSimpleBeeLangTestLanguage.g:16402:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalSimpleBeeLangTestLanguage.g:14349:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1798,7 +1798,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // InternalSimpleBeeLangTestLanguage.g:16402:54: '\\\\' .
+                    	    // InternalSimpleBeeLangTestLanguage.g:14349:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1806,7 +1806,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalSimpleBeeLangTestLanguage.g:16402:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalSimpleBeeLangTestLanguage.g:14349:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1849,12 +1849,12 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16404:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalSimpleBeeLangTestLanguage.g:16404:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalSimpleBeeLangTestLanguage.g:14351:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalSimpleBeeLangTestLanguage.g:14351:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalSimpleBeeLangTestLanguage.g:16404:24: ( options {greedy=false; } : . )*
+            // InternalSimpleBeeLangTestLanguage.g:14351:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -1879,7 +1879,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalSimpleBeeLangTestLanguage.g:16404:52: .
+            	    // InternalSimpleBeeLangTestLanguage.g:14351:52: .
             	    {
             	    matchAny(); 
 
@@ -1909,12 +1909,12 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16406:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalSimpleBeeLangTestLanguage.g:16406:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalSimpleBeeLangTestLanguage.g:14353:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalSimpleBeeLangTestLanguage.g:14353:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalSimpleBeeLangTestLanguage.g:16406:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalSimpleBeeLangTestLanguage.g:14353:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1927,7 +1927,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalSimpleBeeLangTestLanguage.g:16406:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalSimpleBeeLangTestLanguage.g:14353:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1947,7 +1947,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalSimpleBeeLangTestLanguage.g:16406:40: ( ( '\\r' )? '\\n' )?
+            // InternalSimpleBeeLangTestLanguage.g:14353:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1956,9 +1956,9 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalSimpleBeeLangTestLanguage.g:16406:41: ( '\\r' )? '\\n'
+                    // InternalSimpleBeeLangTestLanguage.g:14353:41: ( '\\r' )? '\\n'
                     {
-                    // InternalSimpleBeeLangTestLanguage.g:16406:41: ( '\\r' )?
+                    // InternalSimpleBeeLangTestLanguage.g:14353:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1967,7 +1967,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // InternalSimpleBeeLangTestLanguage.g:16406:41: '\\r'
+                            // InternalSimpleBeeLangTestLanguage.g:14353:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1999,10 +1999,10 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16408:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalSimpleBeeLangTestLanguage.g:16408:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSimpleBeeLangTestLanguage.g:14355:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalSimpleBeeLangTestLanguage.g:14355:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalSimpleBeeLangTestLanguage.g:16408:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSimpleBeeLangTestLanguage.g:14355:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -2056,8 +2056,8 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSimpleBeeLangTestLanguage.g:16410:16: ( . )
-            // InternalSimpleBeeLangTestLanguage.g:16410:18: .
+            // InternalSimpleBeeLangTestLanguage.g:14357:16: ( . )
+            // InternalSimpleBeeLangTestLanguage.g:14357:18: .
             {
             matchAny(); 
 
