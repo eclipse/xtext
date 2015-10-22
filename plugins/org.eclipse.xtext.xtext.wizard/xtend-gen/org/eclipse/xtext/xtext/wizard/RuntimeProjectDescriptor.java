@@ -194,7 +194,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     return CollectionLiterals.<String>newLinkedHashSet(
       "org.eclipse.xtext.xbase", 
       "org.eclipse.xtext.common.types", 
-      "org.eclipse.xtext.generator", 
       "org.eclipse.xtext.xtext.generator", 
       "org.eclipse.emf.codegen.ecore", 
       "org.eclipse.emf.mwe.utils", 
@@ -685,9 +684,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}\"");
-        _builder.newLine();
-        _builder.append("\t");
         _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
         _builder.newLine();
         _builder.append("}");
@@ -933,26 +929,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           if (_needsTychoBuild) {
             _builder.append("\t\t\t");
             _builder.append("<dependencies>");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("\t");
-            _builder.append("<dependency>");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("\t\t");
-            _builder.append("<groupId>org.eclipse.xtext</groupId>");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("\t\t");
-            _builder.append("<artifactId>org.eclipse.xtext.xtext</artifactId>");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("\t\t");
-            _builder.append("<version>${xtextVersion}</version>");
-            _builder.newLine();
-            _builder.append("\t\t\t");
-            _builder.append("\t");
-            _builder.append("</dependency>");
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("\t");
