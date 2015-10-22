@@ -16,7 +16,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -73,7 +73,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
       final IHighlightedPositionAcceptor _function = new IHighlightedPositionAcceptor() {
         @Override
         public void addPosition(final int offset, final int length, final String[] styles) {
-          ProgressManager.checkCanceled();
+          ProgressIndicatorProvider.checkCanceled();
           if ((length > 0)) {
             final Procedure1<String> _function = new Procedure1<String>() {
               @Override
@@ -91,7 +91,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
         }
       };
       this.acceptor = _function;
-      ProgressManager.checkCanceled();
+      ProgressIndicatorProvider.checkCanceled();
       action.run();
     } finally {
       this.acceptor = null;

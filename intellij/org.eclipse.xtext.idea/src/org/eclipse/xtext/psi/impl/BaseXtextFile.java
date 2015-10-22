@@ -183,18 +183,16 @@ public abstract class BaseXtextFile extends PsiFileBase {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
         psiToEcoreTransformator.getAdapter().install(resource);
-		initialize(resource);
-        return resource;
-    }
-
-	protected void initialize(final Resource resource) {
+        
+        ProgressIndicatorProvider.checkCanceled();
 		installDerivedState(resource);
 		
 		ProgressIndicatorProvider.checkCanceled();
 		EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
-	}
+        
+		return resource;
+    }
 
 	protected void installDerivedState(Resource resource) {
 		ProgressIndicatorProvider.checkCanceled();
