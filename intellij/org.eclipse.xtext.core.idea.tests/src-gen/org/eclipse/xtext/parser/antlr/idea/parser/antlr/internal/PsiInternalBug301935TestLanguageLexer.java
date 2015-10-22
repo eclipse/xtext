@@ -77,10 +77,10 @@ public class PsiInternalBug301935TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBug301935TestLanguage.g:165:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalBug301935TestLanguage.g:165:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalBug301935TestLanguage.g:187:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalBug301935TestLanguage.g:187:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalBug301935TestLanguage.g:165:11: ( '^' )?
+            // PsiInternalBug301935TestLanguage.g:187:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -89,7 +89,7 @@ public class PsiInternalBug301935TestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalBug301935TestLanguage.g:165:11: '^'
+                    // PsiInternalBug301935TestLanguage.g:187:11: '^'
                     {
                     match('^'); 
 
@@ -107,7 +107,7 @@ public class PsiInternalBug301935TestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalBug301935TestLanguage.g:165:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalBug301935TestLanguage.g:187:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -156,10 +156,10 @@ public class PsiInternalBug301935TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBug301935TestLanguage.g:167:9: ( ( ' ' | '\\t' )+ )
-            // PsiInternalBug301935TestLanguage.g:167:11: ( ' ' | '\\t' )+
+            // PsiInternalBug301935TestLanguage.g:189:9: ( ( ' ' | '\\t' )+ )
+            // PsiInternalBug301935TestLanguage.g:189:11: ( ' ' | '\\t' )+
             {
-            // PsiInternalBug301935TestLanguage.g:167:11: ( ' ' | '\\t' )+
+            // PsiInternalBug301935TestLanguage.g:189:11: ( ' ' | '\\t' )+
             int cnt3=0;
             loop3:
             do {
@@ -213,8 +213,8 @@ public class PsiInternalBug301935TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBug301935TestLanguage.g:169:16: ( . )
-            // PsiInternalBug301935TestLanguage.g:169:18: .
+            // PsiInternalBug301935TestLanguage.g:191:16: ( . )
+            // PsiInternalBug301935TestLanguage.g:191:18: .
             {
             matchAny(); 
 

@@ -37,7 +37,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		//Addition
 		public RuleCall getAdditionParserRuleCall_0() { return cAdditionParserRuleCall_0; }
 
-		//({Sequence.expressions+=current} expressions+=Addition)*
+		//{Sequence.expressions+=current} expressions+=Addition*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Sequence.expressions+=current}
@@ -73,7 +73,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		//Multiplication
 		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 
-		//({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
+		//{Op.values+=current} operator=('+' | '-') values+=Multiplication*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
@@ -121,7 +121,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		//({Op.values+=current} operator=('*' | '/') values+=Term)*
+		//{Op.values+=current} operator=('*' | '/') values+=Term*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}

@@ -135,7 +135,7 @@ public class AntlrGrammarGenUtil {
 	/**
 	 * @since 2.9
 	 */
-	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
+	public static String getParameterList(ParserRule rule, Boolean skipCurrent, String currentType) {
 		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule(getOriginalElement(rule));
 		if ((skipCurrent || !currentAsParam) && rule.getParameters().isEmpty()) {
 			return "";
@@ -144,7 +144,7 @@ public class AntlrGrammarGenUtil {
 		result.append("[");
 		if (!skipCurrent) {
 			if (currentAsParam) {
-				result.append("EObject in_current");
+				result.append(currentType).append(" in_current");
 				if (!rule.getParameters().isEmpty()) {
 					result.append(", ");
 				}

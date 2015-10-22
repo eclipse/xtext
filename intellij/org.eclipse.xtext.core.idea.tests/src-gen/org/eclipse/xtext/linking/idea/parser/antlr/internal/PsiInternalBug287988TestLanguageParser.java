@@ -79,18 +79,24 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalBug287988TestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalBug287988TestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalBug287988TestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalBug287988TestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -102,26 +108,40 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalBug287988TestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
         Token otherlv_6=null;
         Token otherlv_8=null;
         Token otherlv_10=null;
+        Boolean lv_attributes_1_0 = null;
+
+        Boolean lv_attributes_3_0 = null;
+
+        Boolean lv_attributes_5_0 = null;
+
+        Boolean lv_attributes_7_0 = null;
+
+        Boolean lv_attributes_9_0 = null;
+
+        Boolean lv_attributes_11_0 = null;
+
 
         try {
-            // PsiInternalBug287988TestLanguage.g:58:10: ( ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) ) )
-            // PsiInternalBug287988TestLanguage.g:59:2: ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) )
+            // PsiInternalBug287988TestLanguage.g:60:1: ( ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) ) )
+            // PsiInternalBug287988TestLanguage.g:61:2: ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) )
             {
-            // PsiInternalBug287988TestLanguage.g:59:2: ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) )
+            // PsiInternalBug287988TestLanguage.g:61:2: ( (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* ) | (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* ) | (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* ) | (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* ) | (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* ) | (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* ) )
             int alt7=6;
             switch ( input.LA(1) ) {
             case 11:
@@ -163,10 +183,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
             switch (alt7) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:60:3: (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:62:3: (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* )
                     {
-                    // PsiInternalBug287988TestLanguage.g:60:3: (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* )
-                    // PsiInternalBug287988TestLanguage.g:61:4: otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:62:3: (otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:63:4: otherlv_0= 'actions' ( (lv_attributes_1_0= ruleBaseAttribute ) )*
                     {
 
                     				markLeaf(elementTypeProvider.getModel_ActionsKeyword_0_0ElementType());
@@ -175,7 +195,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalBug287988TestLanguage.g:68:4: ( (lv_attributes_1_0= ruleBaseAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:70:4: ( (lv_attributes_1_0= ruleBaseAttribute ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -188,21 +208,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt1) {
                     	case 1 :
-                    	    // PsiInternalBug287988TestLanguage.g:69:5: (lv_attributes_1_0= ruleBaseAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:71:5: (lv_attributes_1_0= ruleBaseAttribute )
                     	    {
-                    	    // PsiInternalBug287988TestLanguage.g:69:5: (lv_attributes_1_0= ruleBaseAttribute )
-                    	    // PsiInternalBug287988TestLanguage.g:70:6: lv_attributes_1_0= ruleBaseAttribute
+                    	    // PsiInternalBug287988TestLanguage.g:71:5: (lv_attributes_1_0= ruleBaseAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:72:6: lv_attributes_1_0= ruleBaseAttribute
                     	    {
 
                     	    						markComposite(elementTypeProvider.getModel_AttributesBaseAttributeParserRuleCall_0_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_3);
-                    	    ruleBaseAttribute();
+                    	    lv_attributes_1_0=ruleBaseAttribute();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -223,10 +247,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:81:3: (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:87:3: (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* )
                     {
-                    // PsiInternalBug287988TestLanguage.g:81:3: (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* )
-                    // PsiInternalBug287988TestLanguage.g:82:4: otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:87:3: (otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:88:4: otherlv_2= 'simple' ( (lv_attributes_3_0= ruleSimpleAttribute ) )*
                     {
 
                     				markLeaf(elementTypeProvider.getModel_SimpleKeyword_1_0ElementType());
@@ -235,7 +259,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalBug287988TestLanguage.g:89:4: ( (lv_attributes_3_0= ruleSimpleAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:95:4: ( (lv_attributes_3_0= ruleSimpleAttribute ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -248,21 +272,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt2) {
                     	case 1 :
-                    	    // PsiInternalBug287988TestLanguage.g:90:5: (lv_attributes_3_0= ruleSimpleAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:96:5: (lv_attributes_3_0= ruleSimpleAttribute )
                     	    {
-                    	    // PsiInternalBug287988TestLanguage.g:90:5: (lv_attributes_3_0= ruleSimpleAttribute )
-                    	    // PsiInternalBug287988TestLanguage.g:91:6: lv_attributes_3_0= ruleSimpleAttribute
+                    	    // PsiInternalBug287988TestLanguage.g:96:5: (lv_attributes_3_0= ruleSimpleAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:97:6: lv_attributes_3_0= ruleSimpleAttribute
                     	    {
 
                     	    						markComposite(elementTypeProvider.getModel_AttributesSimpleAttributeParserRuleCall_1_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_4);
-                    	    ruleSimpleAttribute();
+                    	    lv_attributes_3_0=ruleSimpleAttribute();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -283,10 +311,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // PsiInternalBug287988TestLanguage.g:102:3: (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:112:3: (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* )
                     {
-                    // PsiInternalBug287988TestLanguage.g:102:3: (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* )
-                    // PsiInternalBug287988TestLanguage.g:103:4: otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:112:3: (otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:113:4: otherlv_4= 'rulecall' ( (lv_attributes_5_0= ruleRuleCallAttribute ) )*
                     {
 
                     				markLeaf(elementTypeProvider.getModel_RulecallKeyword_2_0ElementType());
@@ -295,7 +323,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalBug287988TestLanguage.g:110:4: ( (lv_attributes_5_0= ruleRuleCallAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:120:4: ( (lv_attributes_5_0= ruleRuleCallAttribute ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -308,21 +336,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt3) {
                     	case 1 :
-                    	    // PsiInternalBug287988TestLanguage.g:111:5: (lv_attributes_5_0= ruleRuleCallAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:121:5: (lv_attributes_5_0= ruleRuleCallAttribute )
                     	    {
-                    	    // PsiInternalBug287988TestLanguage.g:111:5: (lv_attributes_5_0= ruleRuleCallAttribute )
-                    	    // PsiInternalBug287988TestLanguage.g:112:6: lv_attributes_5_0= ruleRuleCallAttribute
+                    	    // PsiInternalBug287988TestLanguage.g:121:5: (lv_attributes_5_0= ruleRuleCallAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:122:6: lv_attributes_5_0= ruleRuleCallAttribute
                     	    {
 
                     	    						markComposite(elementTypeProvider.getModel_AttributesRuleCallAttributeParserRuleCall_2_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_4);
-                    	    ruleRuleCallAttribute();
+                    	    lv_attributes_5_0=ruleRuleCallAttribute();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -343,10 +375,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 4 :
-                    // PsiInternalBug287988TestLanguage.g:123:3: (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* )
+                    // PsiInternalBug287988TestLanguage.g:137:3: (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* )
                     {
-                    // PsiInternalBug287988TestLanguage.g:123:3: (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* )
-                    // PsiInternalBug287988TestLanguage.g:124:4: otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )*
+                    // PsiInternalBug287988TestLanguage.g:137:3: (otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )* )
+                    // PsiInternalBug287988TestLanguage.g:138:4: otherlv_6= 'rulecall2' ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )*
                     {
 
                     				markLeaf(elementTypeProvider.getModel_Rulecall2Keyword_3_0ElementType());
@@ -355,7 +387,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_6);
                     			
-                    // PsiInternalBug287988TestLanguage.g:131:4: ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )*
+                    // PsiInternalBug287988TestLanguage.g:145:4: ( (lv_attributes_7_0= ruleRuleCallAttribute2 ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -368,21 +400,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalBug287988TestLanguage.g:132:5: (lv_attributes_7_0= ruleRuleCallAttribute2 )
+                    	    // PsiInternalBug287988TestLanguage.g:146:5: (lv_attributes_7_0= ruleRuleCallAttribute2 )
                     	    {
-                    	    // PsiInternalBug287988TestLanguage.g:132:5: (lv_attributes_7_0= ruleRuleCallAttribute2 )
-                    	    // PsiInternalBug287988TestLanguage.g:133:6: lv_attributes_7_0= ruleRuleCallAttribute2
+                    	    // PsiInternalBug287988TestLanguage.g:146:5: (lv_attributes_7_0= ruleRuleCallAttribute2 )
+                    	    // PsiInternalBug287988TestLanguage.g:147:6: lv_attributes_7_0= ruleRuleCallAttribute2
                     	    {
 
                     	    						markComposite(elementTypeProvider.getModel_AttributesRuleCallAttribute2ParserRuleCall_3_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_5);
-                    	    ruleRuleCallAttribute2();
+                    	    lv_attributes_7_0=ruleRuleCallAttribute2();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -403,10 +439,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 5 :
-                    // PsiInternalBug287988TestLanguage.g:144:3: (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* )
+                    // PsiInternalBug287988TestLanguage.g:162:3: (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* )
                     {
-                    // PsiInternalBug287988TestLanguage.g:144:3: (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* )
-                    // PsiInternalBug287988TestLanguage.g:145:4: otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )*
+                    // PsiInternalBug287988TestLanguage.g:162:3: (otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )* )
+                    // PsiInternalBug287988TestLanguage.g:163:4: otherlv_8= 'rulecall3' ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )*
                     {
 
                     				markLeaf(elementTypeProvider.getModel_Rulecall3Keyword_4_0ElementType());
@@ -415,7 +451,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_8);
                     			
-                    // PsiInternalBug287988TestLanguage.g:152:4: ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )*
+                    // PsiInternalBug287988TestLanguage.g:170:4: ( (lv_attributes_9_0= ruleRuleCallAttribute3 ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -428,21 +464,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalBug287988TestLanguage.g:153:5: (lv_attributes_9_0= ruleRuleCallAttribute3 )
+                    	    // PsiInternalBug287988TestLanguage.g:171:5: (lv_attributes_9_0= ruleRuleCallAttribute3 )
                     	    {
-                    	    // PsiInternalBug287988TestLanguage.g:153:5: (lv_attributes_9_0= ruleRuleCallAttribute3 )
-                    	    // PsiInternalBug287988TestLanguage.g:154:6: lv_attributes_9_0= ruleRuleCallAttribute3
+                    	    // PsiInternalBug287988TestLanguage.g:171:5: (lv_attributes_9_0= ruleRuleCallAttribute3 )
+                    	    // PsiInternalBug287988TestLanguage.g:172:6: lv_attributes_9_0= ruleRuleCallAttribute3
                     	    {
 
                     	    						markComposite(elementTypeProvider.getModel_AttributesRuleCallAttribute3ParserRuleCall_4_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_6);
-                    	    ruleRuleCallAttribute3();
+                    	    lv_attributes_9_0=ruleRuleCallAttribute3();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -463,10 +503,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 6 :
-                    // PsiInternalBug287988TestLanguage.g:165:3: (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:187:3: (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* )
                     {
-                    // PsiInternalBug287988TestLanguage.g:165:3: (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* )
-                    // PsiInternalBug287988TestLanguage.g:166:4: otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:187:3: (otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )* )
+                    // PsiInternalBug287988TestLanguage.g:188:4: otherlv_10= 'inlinedActions' ( (lv_attributes_11_0= ruleActionAttribute ) )*
                     {
 
                     				markLeaf(elementTypeProvider.getModel_InlinedActionsKeyword_5_0ElementType());
@@ -475,7 +515,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_10);
                     			
-                    // PsiInternalBug287988TestLanguage.g:173:4: ( (lv_attributes_11_0= ruleActionAttribute ) )*
+                    // PsiInternalBug287988TestLanguage.g:195:4: ( (lv_attributes_11_0= ruleActionAttribute ) )*
                     loop6:
                     do {
                         int alt6=2;
@@ -488,21 +528,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt6) {
                     	case 1 :
-                    	    // PsiInternalBug287988TestLanguage.g:174:5: (lv_attributes_11_0= ruleActionAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:196:5: (lv_attributes_11_0= ruleActionAttribute )
                     	    {
-                    	    // PsiInternalBug287988TestLanguage.g:174:5: (lv_attributes_11_0= ruleActionAttribute )
-                    	    // PsiInternalBug287988TestLanguage.g:175:6: lv_attributes_11_0= ruleActionAttribute
+                    	    // PsiInternalBug287988TestLanguage.g:196:5: (lv_attributes_11_0= ruleActionAttribute )
+                    	    // PsiInternalBug287988TestLanguage.g:197:6: lv_attributes_11_0= ruleActionAttribute
                     	    {
 
                     	    						markComposite(elementTypeProvider.getModel_AttributesActionAttributeParserRuleCall_5_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_3);
-                    	    ruleActionAttribute();
+                    	    lv_attributes_11_0=ruleActionAttribute();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -535,24 +579,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleBaseAttribute"
-    // PsiInternalBug287988TestLanguage.g:189:1: entryRuleBaseAttribute : ruleBaseAttribute EOF ;
-    public final void entryRuleBaseAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:215:1: entryRuleBaseAttribute returns [Boolean current=false] : iv_ruleBaseAttribute= ruleBaseAttribute EOF ;
+    public final Boolean entryRuleBaseAttribute() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleBaseAttribute = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:189:23: ( ruleBaseAttribute EOF )
-            // PsiInternalBug287988TestLanguage.g:190:2: ruleBaseAttribute EOF
+            // PsiInternalBug287988TestLanguage.g:215:55: (iv_ruleBaseAttribute= ruleBaseAttribute EOF )
+            // PsiInternalBug287988TestLanguage.g:216:2: iv_ruleBaseAttribute= ruleBaseAttribute EOF
             {
              markComposite(elementTypeProvider.getBaseAttributeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleBaseAttribute();
+            iv_ruleBaseAttribute=ruleBaseAttribute();
 
             state._fsp--;
 
+             current =iv_ruleBaseAttribute; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -564,28 +614,34 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleBaseAttribute"
 
 
     // $ANTLR start "ruleBaseAttribute"
-    // PsiInternalBug287988TestLanguage.g:195:1: ruleBaseAttribute : ( ( ruleAttribute | ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' ) ;
-    public final void ruleBaseAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:222:1: ruleBaseAttribute returns [Boolean current=false] : ( (this_Attribute_0= ruleAttribute | this_Master_1= ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' ) ;
+    public final Boolean ruleBaseAttribute() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_2=null;
         Token otherlv_3=null;
         Token lv_type_4_0=null;
         Token lv_name_5_0=null;
         Token otherlv_6=null;
+        Boolean this_Attribute_0 = null;
+
+        Boolean this_Master_1 = null;
+
 
         try {
-            // PsiInternalBug287988TestLanguage.g:195:18: ( ( ( ruleAttribute | ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' ) )
-            // PsiInternalBug287988TestLanguage.g:196:2: ( ( ruleAttribute | ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' )
+            // PsiInternalBug287988TestLanguage.g:223:1: ( ( (this_Attribute_0= ruleAttribute | this_Master_1= ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' ) )
+            // PsiInternalBug287988TestLanguage.g:224:2: ( (this_Attribute_0= ruleAttribute | this_Master_1= ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' )
             {
-            // PsiInternalBug287988TestLanguage.g:196:2: ( ( ruleAttribute | ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' )
-            // PsiInternalBug287988TestLanguage.g:197:3: ( ruleAttribute | ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';'
+            // PsiInternalBug287988TestLanguage.g:224:2: ( (this_Attribute_0= ruleAttribute | this_Master_1= ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';' )
+            // PsiInternalBug287988TestLanguage.g:225:3: (this_Attribute_0= ruleAttribute | this_Master_1= ruleMaster ) ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) ) ( (lv_name_5_0= RULE_ID ) ) otherlv_6= ';'
             {
-            // PsiInternalBug287988TestLanguage.g:197:3: ( ruleAttribute | ruleMaster )
+            // PsiInternalBug287988TestLanguage.g:225:3: (this_Attribute_0= ruleAttribute | this_Master_1= ruleMaster )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -603,34 +659,36 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt8) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:198:4: ruleAttribute
+                    // PsiInternalBug287988TestLanguage.g:226:4: this_Attribute_0= ruleAttribute
                     {
 
                     				markComposite(elementTypeProvider.getBaseAttribute_AttributeParserRuleCall_0_0ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_7);
-                    ruleAttribute();
+                    this_Attribute_0=ruleAttribute();
 
                     state._fsp--;
 
 
+                    				current = this_Attribute_0;
                     				doneComposite();
                     			
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:206:4: ruleMaster
+                    // PsiInternalBug287988TestLanguage.g:235:4: this_Master_1= ruleMaster
                     {
 
                     				markComposite(elementTypeProvider.getBaseAttribute_MasterParserRuleCall_0_1ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_7);
-                    ruleMaster();
+                    this_Master_1=ruleMaster();
 
                     state._fsp--;
 
 
+                    				current = this_Master_1;
                     				doneComposite();
                     			
 
@@ -639,7 +697,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalBug287988TestLanguage.g:214:3: ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:244:3: ( (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) ) | ( (lv_type_4_0= RULE_ID ) ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -657,10 +715,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt9) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:215:4: (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:245:4: (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:215:4: (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) )
-                    // PsiInternalBug287988TestLanguage.g:216:5: otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:245:4: (otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:246:5: otherlv_2= 'ref' ( (otherlv_3= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getBaseAttribute_RefKeyword_1_0_0ElementType());
@@ -669,12 +727,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     					doneLeaf(otherlv_2);
                     				
-                    // PsiInternalBug287988TestLanguage.g:223:5: ( (otherlv_3= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:224:6: (otherlv_3= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:253:5: ( (otherlv_3= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:254:6: (otherlv_3= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:224:6: (otherlv_3= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:225:7: otherlv_3= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:254:6: (otherlv_3= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:255:7: otherlv_3= RULE_ID
                     {
+
+                    							if (!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							markLeaf(elementTypeProvider.getBaseAttribute_TypeRefBaseAttributeCrossReference_1_0_1_0ElementType());
                     						
@@ -695,16 +759,22 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:236:4: ( (lv_type_4_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:272:4: ( (lv_type_4_0= RULE_ID ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:236:4: ( (lv_type_4_0= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:237:5: (lv_type_4_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:272:4: ( (lv_type_4_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:273:5: (lv_type_4_0= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:237:5: (lv_type_4_0= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:238:6: lv_type_4_0= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:273:5: (lv_type_4_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:274:6: lv_type_4_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getBaseAttribute_TypeIDTerminalRuleCall_1_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_type_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
@@ -722,14 +792,20 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalBug287988TestLanguage.g:248:3: ( (lv_name_5_0= RULE_ID ) )
-            // PsiInternalBug287988TestLanguage.g:249:4: (lv_name_5_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:290:3: ( (lv_name_5_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:291:4: (lv_name_5_0= RULE_ID )
             {
-            // PsiInternalBug287988TestLanguage.g:249:4: (lv_name_5_0= RULE_ID )
-            // PsiInternalBug287988TestLanguage.g:250:5: lv_name_5_0= RULE_ID
+            // PsiInternalBug287988TestLanguage.g:291:4: (lv_name_5_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:292:5: lv_name_5_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getBaseAttribute_NameIDTerminalRuleCall_2_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
@@ -761,24 +837,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleBaseAttribute"
 
 
     // $ANTLR start "entryRuleAttribute"
-    // PsiInternalBug287988TestLanguage.g:270:1: entryRuleAttribute : ruleAttribute EOF ;
-    public final void entryRuleAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:318:1: entryRuleAttribute returns [Boolean current=false] : iv_ruleAttribute= ruleAttribute EOF ;
+    public final Boolean entryRuleAttribute() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAttribute = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:270:19: ( ruleAttribute EOF )
-            // PsiInternalBug287988TestLanguage.g:271:2: ruleAttribute EOF
+            // PsiInternalBug287988TestLanguage.g:318:51: (iv_ruleAttribute= ruleAttribute EOF )
+            // PsiInternalBug287988TestLanguage.g:319:2: iv_ruleAttribute= ruleAttribute EOF
             {
              markComposite(elementTypeProvider.getAttributeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAttribute();
+            iv_ruleAttribute=ruleAttribute();
 
             state._fsp--;
 
+             current =iv_ruleAttribute; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -790,29 +872,32 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAttribute"
 
 
     // $ANTLR start "ruleAttribute"
-    // PsiInternalBug287988TestLanguage.g:276:1: ruleAttribute : ( () otherlv_1= 'attribute' ) ;
-    public final void ruleAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:325:1: ruleAttribute returns [Boolean current=false] : ( () otherlv_1= 'attribute' ) ;
+    public final Boolean ruleAttribute() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:276:14: ( ( () otherlv_1= 'attribute' ) )
-            // PsiInternalBug287988TestLanguage.g:277:2: ( () otherlv_1= 'attribute' )
+            // PsiInternalBug287988TestLanguage.g:326:1: ( ( () otherlv_1= 'attribute' ) )
+            // PsiInternalBug287988TestLanguage.g:327:2: ( () otherlv_1= 'attribute' )
             {
-            // PsiInternalBug287988TestLanguage.g:277:2: ( () otherlv_1= 'attribute' )
-            // PsiInternalBug287988TestLanguage.g:278:3: () otherlv_1= 'attribute'
+            // PsiInternalBug287988TestLanguage.g:327:2: ( () otherlv_1= 'attribute' )
+            // PsiInternalBug287988TestLanguage.g:328:3: () otherlv_1= 'attribute'
             {
-            // PsiInternalBug287988TestLanguage.g:278:3: ()
-            // PsiInternalBug287988TestLanguage.g:279:4: 
+            // PsiInternalBug287988TestLanguage.g:328:3: ()
+            // PsiInternalBug287988TestLanguage.g:329:4: 
             {
 
             				precedeComposite(elementTypeProvider.getAttribute_AttributeAction_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -837,24 +922,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAttribute"
 
 
     // $ANTLR start "entryRuleMaster"
-    // PsiInternalBug287988TestLanguage.g:295:1: entryRuleMaster : ruleMaster EOF ;
-    public final void entryRuleMaster() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:346:1: entryRuleMaster returns [Boolean current=false] : iv_ruleMaster= ruleMaster EOF ;
+    public final Boolean entryRuleMaster() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleMaster = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:295:16: ( ruleMaster EOF )
-            // PsiInternalBug287988TestLanguage.g:296:2: ruleMaster EOF
+            // PsiInternalBug287988TestLanguage.g:346:48: (iv_ruleMaster= ruleMaster EOF )
+            // PsiInternalBug287988TestLanguage.g:347:2: iv_ruleMaster= ruleMaster EOF
             {
              markComposite(elementTypeProvider.getMasterElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleMaster();
+            iv_ruleMaster=ruleMaster();
 
             state._fsp--;
 
+             current =iv_ruleMaster; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -866,29 +957,32 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleMaster"
 
 
     // $ANTLR start "ruleMaster"
-    // PsiInternalBug287988TestLanguage.g:301:1: ruleMaster : ( () otherlv_1= 'master' ) ;
-    public final void ruleMaster() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:353:1: ruleMaster returns [Boolean current=false] : ( () otherlv_1= 'master' ) ;
+    public final Boolean ruleMaster() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:301:11: ( ( () otherlv_1= 'master' ) )
-            // PsiInternalBug287988TestLanguage.g:302:2: ( () otherlv_1= 'master' )
+            // PsiInternalBug287988TestLanguage.g:354:1: ( ( () otherlv_1= 'master' ) )
+            // PsiInternalBug287988TestLanguage.g:355:2: ( () otherlv_1= 'master' )
             {
-            // PsiInternalBug287988TestLanguage.g:302:2: ( () otherlv_1= 'master' )
-            // PsiInternalBug287988TestLanguage.g:303:3: () otherlv_1= 'master'
+            // PsiInternalBug287988TestLanguage.g:355:2: ( () otherlv_1= 'master' )
+            // PsiInternalBug287988TestLanguage.g:356:3: () otherlv_1= 'master'
             {
-            // PsiInternalBug287988TestLanguage.g:303:3: ()
-            // PsiInternalBug287988TestLanguage.g:304:4: 
+            // PsiInternalBug287988TestLanguage.g:356:3: ()
+            // PsiInternalBug287988TestLanguage.g:357:4: 
             {
 
             				precedeComposite(elementTypeProvider.getMaster_MasterAction_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -913,24 +1007,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleMaster"
 
 
     // $ANTLR start "entryRuleActionAttribute"
-    // PsiInternalBug287988TestLanguage.g:320:1: entryRuleActionAttribute : ruleActionAttribute EOF ;
-    public final void entryRuleActionAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:374:1: entryRuleActionAttribute returns [Boolean current=false] : iv_ruleActionAttribute= ruleActionAttribute EOF ;
+    public final Boolean entryRuleActionAttribute() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleActionAttribute = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:320:25: ( ruleActionAttribute EOF )
-            // PsiInternalBug287988TestLanguage.g:321:2: ruleActionAttribute EOF
+            // PsiInternalBug287988TestLanguage.g:374:57: (iv_ruleActionAttribute= ruleActionAttribute EOF )
+            // PsiInternalBug287988TestLanguage.g:375:2: iv_ruleActionAttribute= ruleActionAttribute EOF
             {
              markComposite(elementTypeProvider.getActionAttributeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleActionAttribute();
+            iv_ruleActionAttribute=ruleActionAttribute();
 
             state._fsp--;
 
+             current =iv_ruleActionAttribute; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -942,14 +1042,16 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleActionAttribute"
 
 
     // $ANTLR start "ruleActionAttribute"
-    // PsiInternalBug287988TestLanguage.g:326:1: ruleActionAttribute : ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' ) ;
-    public final void ruleActionAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:381:1: ruleActionAttribute returns [Boolean current=false] : ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' ) ;
+    public final Boolean ruleActionAttribute() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
         Token otherlv_3=null;
         Token otherlv_4=null;
@@ -959,13 +1061,13 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         Token otherlv_8=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:326:20: ( ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' ) )
-            // PsiInternalBug287988TestLanguage.g:327:2: ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' )
+            // PsiInternalBug287988TestLanguage.g:382:1: ( ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' ) )
+            // PsiInternalBug287988TestLanguage.g:383:2: ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' )
             {
-            // PsiInternalBug287988TestLanguage.g:327:2: ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' )
-            // PsiInternalBug287988TestLanguage.g:328:3: ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';'
+            // PsiInternalBug287988TestLanguage.g:383:2: ( ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';' )
+            // PsiInternalBug287988TestLanguage.g:384:3: ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) ) ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) ) ( (lv_name_7_0= RULE_ID ) ) otherlv_8= ';'
             {
-            // PsiInternalBug287988TestLanguage.g:328:3: ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) )
+            // PsiInternalBug287988TestLanguage.g:384:3: ( ( () otherlv_1= 'attribute' ) | ( () otherlv_3= 'master' ) )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -983,17 +1085,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:329:4: ( () otherlv_1= 'attribute' )
+                    // PsiInternalBug287988TestLanguage.g:385:4: ( () otherlv_1= 'attribute' )
                     {
-                    // PsiInternalBug287988TestLanguage.g:329:4: ( () otherlv_1= 'attribute' )
-                    // PsiInternalBug287988TestLanguage.g:330:5: () otherlv_1= 'attribute'
+                    // PsiInternalBug287988TestLanguage.g:385:4: ( () otherlv_1= 'attribute' )
+                    // PsiInternalBug287988TestLanguage.g:386:5: () otherlv_1= 'attribute'
                     {
-                    // PsiInternalBug287988TestLanguage.g:330:5: ()
-                    // PsiInternalBug287988TestLanguage.g:331:6: 
+                    // PsiInternalBug287988TestLanguage.g:386:5: ()
+                    // PsiInternalBug287988TestLanguage.g:387:6: 
                     {
 
                     						precedeComposite(elementTypeProvider.getActionAttribute_AttributeAction_0_0_0ElementType());
                     						doneComposite();
+                    						associateWithSemanticElement();
                     					
 
                     }
@@ -1012,17 +1115,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:345:4: ( () otherlv_3= 'master' )
+                    // PsiInternalBug287988TestLanguage.g:402:4: ( () otherlv_3= 'master' )
                     {
-                    // PsiInternalBug287988TestLanguage.g:345:4: ( () otherlv_3= 'master' )
-                    // PsiInternalBug287988TestLanguage.g:346:5: () otherlv_3= 'master'
+                    // PsiInternalBug287988TestLanguage.g:402:4: ( () otherlv_3= 'master' )
+                    // PsiInternalBug287988TestLanguage.g:403:5: () otherlv_3= 'master'
                     {
-                    // PsiInternalBug287988TestLanguage.g:346:5: ()
-                    // PsiInternalBug287988TestLanguage.g:347:6: 
+                    // PsiInternalBug287988TestLanguage.g:403:5: ()
+                    // PsiInternalBug287988TestLanguage.g:404:6: 
                     {
 
                     						precedeComposite(elementTypeProvider.getActionAttribute_MasterAction_0_1_0ElementType());
                     						doneComposite();
+                    						associateWithSemanticElement();
                     					
 
                     }
@@ -1043,7 +1147,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalBug287988TestLanguage.g:361:3: ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:419:3: ( (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) ) | ( (lv_type_6_0= RULE_ID ) ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1061,10 +1165,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt11) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:362:4: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:420:4: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:362:4: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )
-                    // PsiInternalBug287988TestLanguage.g:363:5: otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:420:4: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:421:5: otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getActionAttribute_RefKeyword_1_0_0ElementType());
@@ -1073,12 +1177,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     					doneLeaf(otherlv_4);
                     				
-                    // PsiInternalBug287988TestLanguage.g:370:5: ( (otherlv_5= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:371:6: (otherlv_5= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:428:5: ( (otherlv_5= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:429:6: (otherlv_5= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:371:6: (otherlv_5= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:372:7: otherlv_5= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:429:6: (otherlv_5= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:430:7: otherlv_5= RULE_ID
                     {
+
+                    							if (!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							markLeaf(elementTypeProvider.getActionAttribute_TypeRefBaseAttributeCrossReference_1_0_1_0ElementType());
                     						
@@ -1099,16 +1209,22 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:383:4: ( (lv_type_6_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:447:4: ( (lv_type_6_0= RULE_ID ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:383:4: ( (lv_type_6_0= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:384:5: (lv_type_6_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:447:4: ( (lv_type_6_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:448:5: (lv_type_6_0= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:384:5: (lv_type_6_0= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:385:6: lv_type_6_0= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:448:5: (lv_type_6_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:449:6: lv_type_6_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getActionAttribute_TypeIDTerminalRuleCall_1_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_type_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
@@ -1126,14 +1242,20 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalBug287988TestLanguage.g:395:3: ( (lv_name_7_0= RULE_ID ) )
-            // PsiInternalBug287988TestLanguage.g:396:4: (lv_name_7_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:465:3: ( (lv_name_7_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:466:4: (lv_name_7_0= RULE_ID )
             {
-            // PsiInternalBug287988TestLanguage.g:396:4: (lv_name_7_0= RULE_ID )
-            // PsiInternalBug287988TestLanguage.g:397:5: lv_name_7_0= RULE_ID
+            // PsiInternalBug287988TestLanguage.g:466:4: (lv_name_7_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:467:5: lv_name_7_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getActionAttribute_NameIDTerminalRuleCall_2_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
@@ -1165,24 +1287,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleActionAttribute"
 
 
     // $ANTLR start "entryRuleSimpleAttribute"
-    // PsiInternalBug287988TestLanguage.g:417:1: entryRuleSimpleAttribute : ruleSimpleAttribute EOF ;
-    public final void entryRuleSimpleAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:493:1: entryRuleSimpleAttribute returns [Boolean current=false] : iv_ruleSimpleAttribute= ruleSimpleAttribute EOF ;
+    public final Boolean entryRuleSimpleAttribute() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSimpleAttribute = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:417:25: ( ruleSimpleAttribute EOF )
-            // PsiInternalBug287988TestLanguage.g:418:2: ruleSimpleAttribute EOF
+            // PsiInternalBug287988TestLanguage.g:493:57: (iv_ruleSimpleAttribute= ruleSimpleAttribute EOF )
+            // PsiInternalBug287988TestLanguage.g:494:2: iv_ruleSimpleAttribute= ruleSimpleAttribute EOF
             {
              markComposite(elementTypeProvider.getSimpleAttributeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSimpleAttribute();
+            iv_ruleSimpleAttribute=ruleSimpleAttribute();
 
             state._fsp--;
 
+             current =iv_ruleSimpleAttribute; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1194,14 +1322,16 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSimpleAttribute"
 
 
     // $ANTLR start "ruleSimpleAttribute"
-    // PsiInternalBug287988TestLanguage.g:423:1: ruleSimpleAttribute : ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' ) ;
-    public final void ruleSimpleAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:500:1: ruleSimpleAttribute returns [Boolean current=false] : ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' ) ;
+    public final Boolean ruleSimpleAttribute() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_type_2_0=null;
@@ -1209,13 +1339,13 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         Token otherlv_4=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:423:20: ( ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' ) )
-            // PsiInternalBug287988TestLanguage.g:424:2: ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' )
+            // PsiInternalBug287988TestLanguage.g:501:1: ( ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' ) )
+            // PsiInternalBug287988TestLanguage.g:502:2: ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' )
             {
-            // PsiInternalBug287988TestLanguage.g:424:2: ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' )
-            // PsiInternalBug287988TestLanguage.g:425:3: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';'
+            // PsiInternalBug287988TestLanguage.g:502:2: ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';' )
+            // PsiInternalBug287988TestLanguage.g:503:3: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ';'
             {
-            // PsiInternalBug287988TestLanguage.g:425:3: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:503:3: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1233,10 +1363,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt12) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:426:4: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:504:4: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:426:4: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
-                    // PsiInternalBug287988TestLanguage.g:427:5: otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:504:4: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:505:5: otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getSimpleAttribute_RefKeyword_0_0_0ElementType());
@@ -1245,12 +1375,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     					doneLeaf(otherlv_0);
                     				
-                    // PsiInternalBug287988TestLanguage.g:434:5: ( (otherlv_1= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:435:6: (otherlv_1= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:512:5: ( (otherlv_1= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:513:6: (otherlv_1= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:435:6: (otherlv_1= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:436:7: otherlv_1= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:513:6: (otherlv_1= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:514:7: otherlv_1= RULE_ID
                     {
+
+                    							if (!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							markLeaf(elementTypeProvider.getSimpleAttribute_TypeRefBaseAttributeCrossReference_0_0_1_0ElementType());
                     						
@@ -1271,16 +1407,22 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:447:4: ( (lv_type_2_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:531:4: ( (lv_type_2_0= RULE_ID ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:447:4: ( (lv_type_2_0= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:448:5: (lv_type_2_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:531:4: ( (lv_type_2_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:532:5: (lv_type_2_0= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:448:5: (lv_type_2_0= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:449:6: lv_type_2_0= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:532:5: (lv_type_2_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:533:6: lv_type_2_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSimpleAttribute_TypeIDTerminalRuleCall_0_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_type_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
@@ -1298,14 +1440,20 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalBug287988TestLanguage.g:459:3: ( (lv_name_3_0= RULE_ID ) )
-            // PsiInternalBug287988TestLanguage.g:460:4: (lv_name_3_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:549:3: ( (lv_name_3_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:550:4: (lv_name_3_0= RULE_ID )
             {
-            // PsiInternalBug287988TestLanguage.g:460:4: (lv_name_3_0= RULE_ID )
-            // PsiInternalBug287988TestLanguage.g:461:5: lv_name_3_0= RULE_ID
+            // PsiInternalBug287988TestLanguage.g:550:4: (lv_name_3_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:551:5: lv_name_3_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getSimpleAttribute_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
@@ -1337,24 +1485,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSimpleAttribute"
 
 
     // $ANTLR start "entryRuleRuleCallAttribute"
-    // PsiInternalBug287988TestLanguage.g:481:1: entryRuleRuleCallAttribute : ruleRuleCallAttribute EOF ;
-    public final void entryRuleRuleCallAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:577:1: entryRuleRuleCallAttribute returns [Boolean current=false] : iv_ruleRuleCallAttribute= ruleRuleCallAttribute EOF ;
+    public final Boolean entryRuleRuleCallAttribute() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleRuleCallAttribute = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:481:27: ( ruleRuleCallAttribute EOF )
-            // PsiInternalBug287988TestLanguage.g:482:2: ruleRuleCallAttribute EOF
+            // PsiInternalBug287988TestLanguage.g:577:59: (iv_ruleRuleCallAttribute= ruleRuleCallAttribute EOF )
+            // PsiInternalBug287988TestLanguage.g:578:2: iv_ruleRuleCallAttribute= ruleRuleCallAttribute EOF
             {
              markComposite(elementTypeProvider.getRuleCallAttributeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleRuleCallAttribute();
+            iv_ruleRuleCallAttribute=ruleRuleCallAttribute();
 
             state._fsp--;
 
+             current =iv_ruleRuleCallAttribute; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1366,43 +1520,54 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleRuleCallAttribute"
 
 
     // $ANTLR start "ruleRuleCallAttribute"
-    // PsiInternalBug287988TestLanguage.g:487:1: ruleRuleCallAttribute : ( ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
-    public final void ruleRuleCallAttribute() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:584:1: ruleRuleCallAttribute returns [Boolean current=false] : (this_CallMe_0= ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
+    public final Boolean ruleRuleCallAttribute() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_1_0=null;
         Token otherlv_2=null;
+        Boolean this_CallMe_0 = null;
+
 
         try {
-            // PsiInternalBug287988TestLanguage.g:487:22: ( ( ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
-            // PsiInternalBug287988TestLanguage.g:488:2: ( ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // PsiInternalBug287988TestLanguage.g:585:1: ( (this_CallMe_0= ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
+            // PsiInternalBug287988TestLanguage.g:586:2: (this_CallMe_0= ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
             {
-            // PsiInternalBug287988TestLanguage.g:488:2: ( ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
-            // PsiInternalBug287988TestLanguage.g:489:3: ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
+            // PsiInternalBug287988TestLanguage.g:586:2: (this_CallMe_0= ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // PsiInternalBug287988TestLanguage.g:587:3: this_CallMe_0= ruleCallMe ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
             {
 
             			markComposite(elementTypeProvider.getRuleCallAttribute_CallMeParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_8);
-            ruleCallMe();
+            this_CallMe_0=ruleCallMe();
 
             state._fsp--;
 
 
+            			current = this_CallMe_0;
             			doneComposite();
             		
-            // PsiInternalBug287988TestLanguage.g:496:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalBug287988TestLanguage.g:497:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:595:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:596:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalBug287988TestLanguage.g:497:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalBug287988TestLanguage.g:498:5: lv_name_1_0= RULE_ID
+            // PsiInternalBug287988TestLanguage.g:596:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:597:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getRuleCallAttribute_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
@@ -1434,24 +1599,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleRuleCallAttribute"
 
 
     // $ANTLR start "entryRuleCallMe"
-    // PsiInternalBug287988TestLanguage.g:518:1: entryRuleCallMe : ruleCallMe EOF ;
-    public final void entryRuleCallMe() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:623:1: entryRuleCallMe returns [Boolean current=false] : iv_ruleCallMe= ruleCallMe EOF ;
+    public final Boolean entryRuleCallMe() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCallMe = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:518:16: ( ruleCallMe EOF )
-            // PsiInternalBug287988TestLanguage.g:519:2: ruleCallMe EOF
+            // PsiInternalBug287988TestLanguage.g:623:48: (iv_ruleCallMe= ruleCallMe EOF )
+            // PsiInternalBug287988TestLanguage.g:624:2: iv_ruleCallMe= ruleCallMe EOF
             {
              markComposite(elementTypeProvider.getCallMeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCallMe();
+            iv_ruleCallMe=ruleCallMe();
 
             state._fsp--;
 
+             current =iv_ruleCallMe; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1463,23 +1634,25 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCallMe"
 
 
     // $ANTLR start "ruleCallMe"
-    // PsiInternalBug287988TestLanguage.g:524:1: ruleCallMe : ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ;
-    public final void ruleCallMe() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:630:1: ruleCallMe returns [Boolean current=false] : ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) ;
+    public final Boolean ruleCallMe() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_type_2_0=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:524:11: ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) )
-            // PsiInternalBug287988TestLanguage.g:525:2: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:631:1: ( ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) ) )
+            // PsiInternalBug287988TestLanguage.g:632:2: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) )
             {
-            // PsiInternalBug287988TestLanguage.g:525:2: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:632:2: ( (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) ) | ( (lv_type_2_0= RULE_ID ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1497,10 +1670,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt13) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:526:3: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:633:3: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:526:3: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
-                    // PsiInternalBug287988TestLanguage.g:527:4: otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:633:3: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:634:4: otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getCallMe_RefKeyword_0_0ElementType());
@@ -1509,12 +1682,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalBug287988TestLanguage.g:534:4: ( (otherlv_1= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:535:5: (otherlv_1= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:641:4: ( (otherlv_1= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:642:5: (otherlv_1= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:535:5: (otherlv_1= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:536:6: otherlv_1= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:642:5: (otherlv_1= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:643:6: otherlv_1= RULE_ID
                     {
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						markLeaf(elementTypeProvider.getCallMe_TypeRefBaseAttributeCrossReference_0_1_0ElementType());
                     					
@@ -1535,16 +1714,22 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:547:3: ( (lv_type_2_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:660:3: ( (lv_type_2_0= RULE_ID ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:547:3: ( (lv_type_2_0= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:548:4: (lv_type_2_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:660:3: ( (lv_type_2_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:661:4: (lv_type_2_0= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:548:4: (lv_type_2_0= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:549:5: lv_type_2_0= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:661:4: (lv_type_2_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:662:5: lv_type_2_0= RULE_ID
                     {
 
                     					markLeaf(elementTypeProvider.getCallMe_TypeIDTerminalRuleCall_1_0ElementType());
+                    				
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
                     lv_type_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1572,24 +1757,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCallMe"
 
 
     // $ANTLR start "entryRuleRuleCallAttribute2"
-    // PsiInternalBug287988TestLanguage.g:562:1: entryRuleRuleCallAttribute2 : ruleRuleCallAttribute2 EOF ;
-    public final void entryRuleRuleCallAttribute2() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:681:1: entryRuleRuleCallAttribute2 returns [Boolean current=false] : iv_ruleRuleCallAttribute2= ruleRuleCallAttribute2 EOF ;
+    public final Boolean entryRuleRuleCallAttribute2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleRuleCallAttribute2 = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:562:28: ( ruleRuleCallAttribute2 EOF )
-            // PsiInternalBug287988TestLanguage.g:563:2: ruleRuleCallAttribute2 EOF
+            // PsiInternalBug287988TestLanguage.g:681:60: (iv_ruleRuleCallAttribute2= ruleRuleCallAttribute2 EOF )
+            // PsiInternalBug287988TestLanguage.g:682:2: iv_ruleRuleCallAttribute2= ruleRuleCallAttribute2 EOF
             {
              markComposite(elementTypeProvider.getRuleCallAttribute2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleRuleCallAttribute2();
+            iv_ruleRuleCallAttribute2=ruleRuleCallAttribute2();
 
             state._fsp--;
 
+             current =iv_ruleRuleCallAttribute2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1601,38 +1792,43 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleRuleCallAttribute2"
 
 
     // $ANTLR start "ruleRuleCallAttribute2"
-    // PsiInternalBug287988TestLanguage.g:568:1: ruleRuleCallAttribute2 : ( ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) ;
-    public final void ruleRuleCallAttribute2() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:688:1: ruleRuleCallAttribute2 returns [Boolean current=false] : (this_CallMe2_0= ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) ;
+    public final Boolean ruleRuleCallAttribute2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token lv_type_3_0=null;
         Token otherlv_4=null;
+        Boolean this_CallMe2_0 = null;
+
 
         try {
-            // PsiInternalBug287988TestLanguage.g:568:23: ( ( ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) )
-            // PsiInternalBug287988TestLanguage.g:569:2: ( ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
+            // PsiInternalBug287988TestLanguage.g:689:1: ( (this_CallMe2_0= ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) )
+            // PsiInternalBug287988TestLanguage.g:690:2: (this_CallMe2_0= ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
             {
-            // PsiInternalBug287988TestLanguage.g:569:2: ( ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
-            // PsiInternalBug287988TestLanguage.g:570:3: ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';'
+            // PsiInternalBug287988TestLanguage.g:690:2: (this_CallMe2_0= ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
+            // PsiInternalBug287988TestLanguage.g:691:3: this_CallMe2_0= ruleCallMe2 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';'
             {
 
             			markComposite(elementTypeProvider.getRuleCallAttribute2_CallMe2ParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_7);
-            ruleCallMe2();
+            this_CallMe2_0=ruleCallMe2();
 
             state._fsp--;
 
 
+            			current = this_CallMe2_0;
             			doneComposite();
             		
-            // PsiInternalBug287988TestLanguage.g:577:3: ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:699:3: ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) )
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1650,10 +1846,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt14) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:578:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:700:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:578:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
-                    // PsiInternalBug287988TestLanguage.g:579:5: otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:700:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:701:5: otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getRuleCallAttribute2_RefKeyword_1_0_0ElementType());
@@ -1662,12 +1858,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     					doneLeaf(otherlv_1);
                     				
-                    // PsiInternalBug287988TestLanguage.g:586:5: ( (otherlv_2= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:587:6: (otherlv_2= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:708:5: ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:709:6: (otherlv_2= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:587:6: (otherlv_2= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:588:7: otherlv_2= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:709:6: (otherlv_2= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:710:7: otherlv_2= RULE_ID
                     {
+
+                    							if (!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							markLeaf(elementTypeProvider.getRuleCallAttribute2_TypeRefBaseAttributeCrossReference_1_0_1_0ElementType());
                     						
@@ -1688,16 +1890,22 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:599:4: ( (lv_type_3_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:727:4: ( (lv_type_3_0= RULE_ID ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:599:4: ( (lv_type_3_0= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:600:5: (lv_type_3_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:727:4: ( (lv_type_3_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:728:5: (lv_type_3_0= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:600:5: (lv_type_3_0= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:601:6: lv_type_3_0= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:728:5: (lv_type_3_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:729:6: lv_type_3_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getRuleCallAttribute2_TypeIDTerminalRuleCall_1_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_type_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
@@ -1735,24 +1943,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleRuleCallAttribute2"
 
 
     // $ANTLR start "entryRuleCallMe2"
-    // PsiInternalBug287988TestLanguage.g:622:1: entryRuleCallMe2 : ruleCallMe2 EOF ;
-    public final void entryRuleCallMe2() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:756:1: entryRuleCallMe2 returns [Boolean current=false] : iv_ruleCallMe2= ruleCallMe2 EOF ;
+    public final Boolean entryRuleCallMe2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCallMe2 = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:622:17: ( ruleCallMe2 EOF )
-            // PsiInternalBug287988TestLanguage.g:623:2: ruleCallMe2 EOF
+            // PsiInternalBug287988TestLanguage.g:756:49: (iv_ruleCallMe2= ruleCallMe2 EOF )
+            // PsiInternalBug287988TestLanguage.g:757:2: iv_ruleCallMe2= ruleCallMe2 EOF
             {
              markComposite(elementTypeProvider.getCallMe2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCallMe2();
+            iv_ruleCallMe2=ruleCallMe2();
 
             state._fsp--;
 
+             current =iv_ruleCallMe2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1764,28 +1978,36 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCallMe2"
 
 
     // $ANTLR start "ruleCallMe2"
-    // PsiInternalBug287988TestLanguage.g:628:1: ruleCallMe2 : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final void ruleCallMe2() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:763:1: ruleCallMe2 returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
+    public final Boolean ruleCallMe2() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:628:12: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalBug287988TestLanguage.g:629:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:764:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:765:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalBug287988TestLanguage.g:629:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalBug287988TestLanguage.g:630:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:765:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:766:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalBug287988TestLanguage.g:630:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalBug287988TestLanguage.g:631:4: lv_name_0_0= RULE_ID
+            // PsiInternalBug287988TestLanguage.g:766:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:767:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getCallMe2_NameIDTerminalRuleCall_0ElementType());
+            			
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1807,24 +2029,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCallMe2"
 
 
     // $ANTLR start "entryRuleRuleCallAttribute3"
-    // PsiInternalBug287988TestLanguage.g:643:1: entryRuleRuleCallAttribute3 : ruleRuleCallAttribute3 EOF ;
-    public final void entryRuleRuleCallAttribute3() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:785:1: entryRuleRuleCallAttribute3 returns [Boolean current=false] : iv_ruleRuleCallAttribute3= ruleRuleCallAttribute3 EOF ;
+    public final Boolean entryRuleRuleCallAttribute3() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleRuleCallAttribute3 = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:643:28: ( ruleRuleCallAttribute3 EOF )
-            // PsiInternalBug287988TestLanguage.g:644:2: ruleRuleCallAttribute3 EOF
+            // PsiInternalBug287988TestLanguage.g:785:60: (iv_ruleRuleCallAttribute3= ruleRuleCallAttribute3 EOF )
+            // PsiInternalBug287988TestLanguage.g:786:2: iv_ruleRuleCallAttribute3= ruleRuleCallAttribute3 EOF
             {
              markComposite(elementTypeProvider.getRuleCallAttribute3ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleRuleCallAttribute3();
+            iv_ruleRuleCallAttribute3=ruleRuleCallAttribute3();
 
             state._fsp--;
 
+             current =iv_ruleRuleCallAttribute3; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1836,38 +2064,43 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleRuleCallAttribute3"
 
 
     // $ANTLR start "ruleRuleCallAttribute3"
-    // PsiInternalBug287988TestLanguage.g:649:1: ruleRuleCallAttribute3 : ( ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) ;
-    public final void ruleRuleCallAttribute3() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:792:1: ruleRuleCallAttribute3 returns [Boolean current=false] : (this_CallMe3_0= ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) ;
+    public final Boolean ruleRuleCallAttribute3() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token lv_type_3_0=null;
         Token otherlv_4=null;
+        Boolean this_CallMe3_0 = null;
+
 
         try {
-            // PsiInternalBug287988TestLanguage.g:649:23: ( ( ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) )
-            // PsiInternalBug287988TestLanguage.g:650:2: ( ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
+            // PsiInternalBug287988TestLanguage.g:793:1: ( (this_CallMe3_0= ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' ) )
+            // PsiInternalBug287988TestLanguage.g:794:2: (this_CallMe3_0= ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
             {
-            // PsiInternalBug287988TestLanguage.g:650:2: ( ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
-            // PsiInternalBug287988TestLanguage.g:651:3: ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';'
+            // PsiInternalBug287988TestLanguage.g:794:2: (this_CallMe3_0= ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';' )
+            // PsiInternalBug287988TestLanguage.g:795:3: this_CallMe3_0= ruleCallMe3 ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) ) otherlv_4= ';'
             {
 
             			markComposite(elementTypeProvider.getRuleCallAttribute3_CallMe3ParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_7);
-            ruleCallMe3();
+            this_CallMe3_0=ruleCallMe3();
 
             state._fsp--;
 
 
+            			current = this_CallMe3_0;
             			doneComposite();
             		
-            // PsiInternalBug287988TestLanguage.g:658:3: ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:803:3: ( (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) ) | ( (lv_type_3_0= RULE_ID ) ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1885,10 +2118,10 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt15) {
                 case 1 :
-                    // PsiInternalBug287988TestLanguage.g:659:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:804:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:659:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
-                    // PsiInternalBug287988TestLanguage.g:660:5: otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:804:4: (otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalBug287988TestLanguage.g:805:5: otherlv_1= 'ref' ( (otherlv_2= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getRuleCallAttribute3_RefKeyword_1_0_0ElementType());
@@ -1897,12 +2130,18 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
 
                     					doneLeaf(otherlv_1);
                     				
-                    // PsiInternalBug287988TestLanguage.g:667:5: ( (otherlv_2= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:668:6: (otherlv_2= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:812:5: ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:813:6: (otherlv_2= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:668:6: (otherlv_2= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:669:7: otherlv_2= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:813:6: (otherlv_2= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:814:7: otherlv_2= RULE_ID
                     {
+
+                    							if (!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							markLeaf(elementTypeProvider.getRuleCallAttribute3_TypeRefBaseAttributeCrossReference_1_0_1_0ElementType());
                     						
@@ -1923,16 +2162,22 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug287988TestLanguage.g:680:4: ( (lv_type_3_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:831:4: ( (lv_type_3_0= RULE_ID ) )
                     {
-                    // PsiInternalBug287988TestLanguage.g:680:4: ( (lv_type_3_0= RULE_ID ) )
-                    // PsiInternalBug287988TestLanguage.g:681:5: (lv_type_3_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:831:4: ( (lv_type_3_0= RULE_ID ) )
+                    // PsiInternalBug287988TestLanguage.g:832:5: (lv_type_3_0= RULE_ID )
                     {
-                    // PsiInternalBug287988TestLanguage.g:681:5: (lv_type_3_0= RULE_ID )
-                    // PsiInternalBug287988TestLanguage.g:682:6: lv_type_3_0= RULE_ID
+                    // PsiInternalBug287988TestLanguage.g:832:5: (lv_type_3_0= RULE_ID )
+                    // PsiInternalBug287988TestLanguage.g:833:6: lv_type_3_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getRuleCallAttribute3_TypeIDTerminalRuleCall_1_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_type_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
@@ -1970,24 +2215,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleRuleCallAttribute3"
 
 
     // $ANTLR start "entryRuleCallMe3"
-    // PsiInternalBug287988TestLanguage.g:703:1: entryRuleCallMe3 : ruleCallMe3 EOF ;
-    public final void entryRuleCallMe3() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:860:1: entryRuleCallMe3 returns [Boolean current=false] : iv_ruleCallMe3= ruleCallMe3 EOF ;
+    public final Boolean entryRuleCallMe3() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCallMe3 = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:703:17: ( ruleCallMe3 EOF )
-            // PsiInternalBug287988TestLanguage.g:704:2: ruleCallMe3 EOF
+            // PsiInternalBug287988TestLanguage.g:860:49: (iv_ruleCallMe3= ruleCallMe3 EOF )
+            // PsiInternalBug287988TestLanguage.g:861:2: iv_ruleCallMe3= ruleCallMe3 EOF
             {
              markComposite(elementTypeProvider.getCallMe3ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCallMe3();
+            iv_ruleCallMe3=ruleCallMe3();
 
             state._fsp--;
 
+             current =iv_ruleCallMe3; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1999,23 +2250,27 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCallMe3"
 
 
     // $ANTLR start "ruleCallMe3"
-    // PsiInternalBug287988TestLanguage.g:709:1: ruleCallMe3 : (otherlv_0= 'call' otherlv_1= 'me' ruleCallMe4 ) ;
-    public final void ruleCallMe3() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:867:1: ruleCallMe3 returns [Boolean current=false] : (otherlv_0= 'call' otherlv_1= 'me' this_CallMe4_2= ruleCallMe4 ) ;
+    public final Boolean ruleCallMe3() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
+        Boolean this_CallMe4_2 = null;
+
 
         try {
-            // PsiInternalBug287988TestLanguage.g:709:12: ( (otherlv_0= 'call' otherlv_1= 'me' ruleCallMe4 ) )
-            // PsiInternalBug287988TestLanguage.g:710:2: (otherlv_0= 'call' otherlv_1= 'me' ruleCallMe4 )
+            // PsiInternalBug287988TestLanguage.g:868:1: ( (otherlv_0= 'call' otherlv_1= 'me' this_CallMe4_2= ruleCallMe4 ) )
+            // PsiInternalBug287988TestLanguage.g:869:2: (otherlv_0= 'call' otherlv_1= 'me' this_CallMe4_2= ruleCallMe4 )
             {
-            // PsiInternalBug287988TestLanguage.g:710:2: (otherlv_0= 'call' otherlv_1= 'me' ruleCallMe4 )
-            // PsiInternalBug287988TestLanguage.g:711:3: otherlv_0= 'call' otherlv_1= 'me' ruleCallMe4
+            // PsiInternalBug287988TestLanguage.g:869:2: (otherlv_0= 'call' otherlv_1= 'me' this_CallMe4_2= ruleCallMe4 )
+            // PsiInternalBug287988TestLanguage.g:870:3: otherlv_0= 'call' otherlv_1= 'me' this_CallMe4_2= ruleCallMe4
             {
 
             			markLeaf(elementTypeProvider.getCallMe3_CallKeyword_0ElementType());
@@ -2035,11 +2290,12 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
             			markComposite(elementTypeProvider.getCallMe3_CallMe4ParserRuleCall_2ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleCallMe4();
+            this_CallMe4_2=ruleCallMe4();
 
             state._fsp--;
 
 
+            			current = this_CallMe4_2;
             			doneComposite();
             		
 
@@ -2055,24 +2311,30 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCallMe3"
 
 
     // $ANTLR start "entryRuleCallMe4"
-    // PsiInternalBug287988TestLanguage.g:736:1: entryRuleCallMe4 : ruleCallMe4 EOF ;
-    public final void entryRuleCallMe4() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:896:1: entryRuleCallMe4 returns [Boolean current=false] : iv_ruleCallMe4= ruleCallMe4 EOF ;
+    public final Boolean entryRuleCallMe4() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCallMe4 = null;
+
+
         try {
-            // PsiInternalBug287988TestLanguage.g:736:17: ( ruleCallMe4 EOF )
-            // PsiInternalBug287988TestLanguage.g:737:2: ruleCallMe4 EOF
+            // PsiInternalBug287988TestLanguage.g:896:49: (iv_ruleCallMe4= ruleCallMe4 EOF )
+            // PsiInternalBug287988TestLanguage.g:897:2: iv_ruleCallMe4= ruleCallMe4 EOF
             {
              markComposite(elementTypeProvider.getCallMe4ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCallMe4();
+            iv_ruleCallMe4=ruleCallMe4();
 
             state._fsp--;
 
+             current =iv_ruleCallMe4; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2084,28 +2346,36 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCallMe4"
 
 
     // $ANTLR start "ruleCallMe4"
-    // PsiInternalBug287988TestLanguage.g:742:1: ruleCallMe4 : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final void ruleCallMe4() throws RecognitionException {
+    // PsiInternalBug287988TestLanguage.g:903:1: ruleCallMe4 returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
+    public final Boolean ruleCallMe4() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalBug287988TestLanguage.g:742:12: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalBug287988TestLanguage.g:743:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:904:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalBug287988TestLanguage.g:905:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalBug287988TestLanguage.g:743:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalBug287988TestLanguage.g:744:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:905:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalBug287988TestLanguage.g:906:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalBug287988TestLanguage.g:744:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalBug287988TestLanguage.g:745:4: lv_name_0_0= RULE_ID
+            // PsiInternalBug287988TestLanguage.g:906:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalBug287988TestLanguage.g:907:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getCallMe4_NameIDTerminalRuleCall_0ElementType());
+            			
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -2127,7 +2397,7 @@ public class PsiInternalBug287988TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCallMe4"
 

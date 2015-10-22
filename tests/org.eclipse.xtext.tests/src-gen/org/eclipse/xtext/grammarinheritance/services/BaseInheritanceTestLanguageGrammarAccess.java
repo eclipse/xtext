@@ -60,7 +60,7 @@ public class BaseInheritanceTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('.' ID)*
+		//'.' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'.'

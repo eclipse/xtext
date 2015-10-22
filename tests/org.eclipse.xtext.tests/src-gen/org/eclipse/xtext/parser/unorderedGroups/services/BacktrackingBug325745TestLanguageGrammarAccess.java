@@ -107,7 +107,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//ID
 		public RuleCall getBaseTypeIDTerminalRuleCall_0_0() { return cBaseTypeIDTerminalRuleCall_0_0; }
 
-		//(':=' defaultValue=STRING)?
+		//':=' defaultValue=STRING?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//':='
@@ -148,7 +148,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//{Expression}
 		public Action getExpressionAction_0() { return cExpressionAction_0; }
 
-		//('['? & prefix=STRING?)
+		//'['? & prefix=STRING?
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
 		//'['?
@@ -160,7 +160,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//STRING
 		public RuleCall getPrefixSTRINGTerminalRuleCall_1_1_0() { return cPrefixSTRINGTerminalRuleCall_1_1_0; }
 
-		//('['? terms+=SimpleTerm ']'?)*
+		//'['? terms+=SimpleTerm ']'?*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'['?
@@ -175,7 +175,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//']'?
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 
-		//(']'? & postfix=STRING?)
+		//']'? & postfix=STRING?
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//']'?

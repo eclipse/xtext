@@ -49,88 +49,100 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_DatatypeBug286557ParserRuleCall_0ElementType());
 		}
-		ruleDatatypeBug286557
+		this_DatatypeBug286557_0=ruleDatatypeBug286557
 		{
+			$current = $this_DatatypeBug286557_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_EnumBugParserRuleCall_1ElementType());
 		}
-		ruleEnumBug
+		this_EnumBug_1=ruleEnumBug
 		{
+			$current = $this_EnumBug_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_CommentableParserRuleCall_2ElementType());
 		}
-		ruleCommentable
+		this_Commentable_2=ruleCommentable
 		{
+			$current = $this_Commentable_2.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_ValueListParserRuleCall_3ElementType());
 		}
-		ruleValueList
+		this_ValueList_3=ruleValueList
 		{
+			$current = $this_ValueList_3.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_RefListParserRuleCall_4ElementType());
 		}
-		ruleRefList
+		this_RefList_4=ruleRefList
 		{
+			$current = $this_RefList_4.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_SingleRefParserRuleCall_5ElementType());
 		}
-		ruleSingleRef
+		this_SingleRef_5=ruleSingleRef
 		{
+			$current = $this_SingleRef_5.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_AppendToFileEndParserRuleCall_6ElementType());
 		}
-		ruleAppendToFileEnd
+		this_AppendToFileEnd_6=ruleAppendToFileEnd
 		{
+			$current = $this_AppendToFileEnd_6.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_Action1ParserRuleCall_7ElementType());
 		}
-		ruleAction1
+		this_Action1_7=ruleAction1
 		{
+			$current = $this_Action1_7.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleDatatypeBug286557
-entryRuleDatatypeBug286557:
+entryRuleDatatypeBug286557 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDatatypeBug286557ElementType()); }
-	ruleDatatypeBug286557
+	iv_ruleDatatypeBug286557=ruleDatatypeBug286557
+	{ $current=$iv_ruleDatatypeBug286557.current; }
 	EOF;
 
 // Rule DatatypeBug286557
-ruleDatatypeBug286557:
+ruleDatatypeBug286557 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDatatypeBug286557_NumberSignDigitOneKeyword_0ElementType());
@@ -147,6 +159,10 @@ ruleDatatypeBug286557:
 				lv_name_1_0=ruleFQN
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -160,6 +176,12 @@ ruleDatatypeBug286557:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markComposite(elementTypeProvider.getDatatypeBug286557_RefDatatypeBug286557CrossReference_2_1_0ElementType());
 					}
@@ -181,13 +203,15 @@ ruleDatatypeBug286557:
 ;
 
 //Entry rule entryRuleFQN
-entryRuleFQN:
+entryRuleFQN returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFQNElementType()); }
-	ruleFQN
+	iv_ruleFQN=ruleFQN
+	{ $current=$iv_ruleFQN.current; }
 	EOF;
 
 // Rule FQN
-ruleFQN:
+ruleFQN returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
@@ -216,13 +240,15 @@ ruleFQN:
 ;
 
 //Entry rule entryRuleEnumBug
-entryRuleEnumBug:
+entryRuleEnumBug returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEnumBugElementType()); }
-	ruleEnumBug
+	iv_ruleEnumBug=ruleEnumBug
+	{ $current=$iv_ruleEnumBug.current; }
 	EOF;
 
 // Rule EnumBug
-ruleEnumBug:
+ruleEnumBug returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getEnumBug_NumberSignDigitTwoKeyword_0ElementType());
@@ -246,6 +272,10 @@ ruleEnumBug:
 				lv_return_2_0=ruleEnumBugEnum
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -253,6 +283,12 @@ ruleEnumBug:
 			(
 				{
 					markLeaf(elementTypeProvider.getEnumBug_NameIDTerminalRuleCall_3_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_3_0=RULE_ID
 				{
@@ -264,13 +300,15 @@ ruleEnumBug:
 ;
 
 //Entry rule entryRuleCommentable
-entryRuleCommentable:
+entryRuleCommentable returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCommentableElementType()); }
-	ruleCommentable
+	iv_ruleCommentable=ruleCommentable
+	{ $current=$iv_ruleCommentable.current; }
 	EOF;
 
 // Rule Commentable
-ruleCommentable:
+ruleCommentable returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getCommentable_NumberSignDigitThreeKeyword_0ElementType());
@@ -287,6 +325,10 @@ ruleCommentable:
 				lv_item_1_0=ruleCommentableItem
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -294,13 +336,15 @@ ruleCommentable:
 ;
 
 //Entry rule entryRuleCommentableItem
-entryRuleCommentableItem:
+entryRuleCommentableItem returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCommentableItemElementType()); }
-	ruleCommentableItem
+	iv_ruleCommentableItem=ruleCommentableItem
+	{ $current=$iv_ruleCommentableItem.current; }
 	EOF;
 
 // Rule CommentableItem
-ruleCommentableItem:
+ruleCommentableItem returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getCommentableItem_ItemKeyword_0ElementType());
@@ -314,6 +358,12 @@ ruleCommentableItem:
 				{
 					markLeaf(elementTypeProvider.getCommentableItem_IdIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_id_1_0=RULE_ID
 				{
 					doneLeaf(lv_id_1_0);
@@ -324,13 +374,15 @@ ruleCommentableItem:
 ;
 
 //Entry rule entryRuleValueList
-entryRuleValueList:
+entryRuleValueList returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getValueListElementType()); }
-	ruleValueList
+	iv_ruleValueList=ruleValueList
+	{ $current=$iv_ruleValueList.current; }
 	EOF;
 
 // Rule ValueList
-ruleValueList:
+ruleValueList returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getValueList_NumberSignDigitFourKeyword_0ElementType());
@@ -347,6 +399,10 @@ ruleValueList:
 				lv_ids_1_0=ruleFQN
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -354,13 +410,15 @@ ruleValueList:
 ;
 
 //Entry rule entryRuleRefList
-entryRuleRefList:
+entryRuleRefList returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRefListElementType()); }
-	ruleRefList
+	iv_ruleRefList=ruleRefList
+	{ $current=$iv_ruleRefList.current; }
 	EOF;
 
 // Rule RefList
-ruleRefList:
+ruleRefList returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getRefList_NumberSignDigitFiveKeyword_0ElementType());
@@ -377,6 +435,10 @@ ruleRefList:
 				lv_objs_1_0=ruleRefObj
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -390,6 +452,12 @@ ruleRefList:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markComposite(elementTypeProvider.getRefList_RefsRefObjCrossReference_3_0ElementType());
 				}
 				ruleFQN
@@ -402,13 +470,15 @@ ruleRefList:
 ;
 
 //Entry rule entryRuleRefObj
-entryRuleRefObj:
+entryRuleRefObj returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRefObjElementType()); }
-	ruleRefObj
+	iv_ruleRefObj=ruleRefObj
+	{ $current=$iv_ruleRefObj.current; }
 	EOF;
 
 // Rule RefObj
-ruleRefObj:
+ruleRefObj returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -417,19 +487,25 @@ ruleRefObj:
 			lv_name_0_0=ruleFQN
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleSingleRef
-entryRuleSingleRef:
+entryRuleSingleRef returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleRefElementType()); }
-	ruleSingleRef
+	iv_ruleSingleRef=ruleSingleRef
+	{ $current=$iv_ruleSingleRef.current; }
 	EOF;
 
 // Rule SingleRef
-ruleSingleRef:
+ruleSingleRef returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleRef_NumberSignDigitSixKeyword_0ElementType());
@@ -446,6 +522,10 @@ ruleSingleRef:
 				lv_obj_1_0=ruleRefObj
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -459,6 +539,12 @@ ruleSingleRef:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markComposite(elementTypeProvider.getSingleRef_RefRefObjCrossReference_3_0ElementType());
 				}
 				ruleFQN
@@ -471,13 +557,15 @@ ruleSingleRef:
 ;
 
 //Entry rule entryRuleAppendToFileEnd
-entryRuleAppendToFileEnd:
+entryRuleAppendToFileEnd returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAppendToFileEndElementType()); }
-	ruleAppendToFileEnd
+	iv_ruleAppendToFileEnd=ruleAppendToFileEnd
+	{ $current=$iv_ruleAppendToFileEnd.current; }
 	EOF;
 
 // Rule AppendToFileEnd
-ruleAppendToFileEnd:
+ruleAppendToFileEnd returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAppendToFileEnd_NumberSignDigitSevenKeyword_0ElementType());
@@ -494,6 +582,10 @@ ruleAppendToFileEnd:
 				lv_items_1_0=ruleAppendToFileEndItem
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -501,13 +593,15 @@ ruleAppendToFileEnd:
 ;
 
 //Entry rule entryRuleAppendToFileEndItem
-entryRuleAppendToFileEndItem:
+entryRuleAppendToFileEndItem returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAppendToFileEndItemElementType()); }
-	ruleAppendToFileEndItem
+	iv_ruleAppendToFileEndItem=ruleAppendToFileEndItem
+	{ $current=$iv_ruleAppendToFileEndItem.current; }
 	EOF;
 
 // Rule AppendToFileEndItem
-ruleAppendToFileEndItem:
+ruleAppendToFileEndItem returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAppendToFileEndItem_ClassKeyword_0ElementType());
@@ -520,6 +614,12 @@ ruleAppendToFileEndItem:
 			(
 				{
 					markLeaf(elementTypeProvider.getAppendToFileEndItem_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -538,13 +638,15 @@ ruleAppendToFileEndItem:
 ;
 
 //Entry rule entryRuleAction1
-entryRuleAction1:
+entryRuleAction1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAction1ElementType()); }
-	ruleAction1
+	iv_ruleAction1=ruleAction1
+	{ $current=$iv_ruleAction1.current; }
 	EOF;
 
 // Rule Action1
-ruleAction1:
+ruleAction1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAction1_NumberSignDigitEightKeyword_0ElementType());
@@ -557,12 +659,19 @@ ruleAction1:
 			{
 				precedeComposite(elementTypeProvider.getAction1_Action1Action_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getAction1_NameIDTerminalRuleCall_2_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_2_0=RULE_ID
 				{
@@ -578,6 +687,10 @@ ruleAction1:
 				lv_actions2_3_0=ruleAction1Sub1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -589,6 +702,10 @@ ruleAction1:
 				lv_actions2_4_0=ruleAction1Sub2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -596,18 +713,21 @@ ruleAction1:
 ;
 
 //Entry rule entryRuleAction1Sub1
-entryRuleAction1Sub1:
+entryRuleAction1Sub1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAction1Sub1ElementType()); }
-	ruleAction1Sub1
+	iv_ruleAction1Sub1=ruleAction1Sub1
+	{ $current=$iv_ruleAction1Sub1.current; }
 	EOF;
 
 // Rule Action1Sub1
-ruleAction1Sub1:
+ruleAction1Sub1 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getAction1Sub1_Action1SubAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -621,18 +741,21 @@ ruleAction1Sub1:
 ;
 
 //Entry rule entryRuleAction1Sub2
-entryRuleAction1Sub2:
+entryRuleAction1Sub2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAction1Sub2ElementType()); }
-	ruleAction1Sub2
+	iv_ruleAction1Sub2=ruleAction1Sub2
+	{ $current=$iv_ruleAction1Sub2.current; }
 	EOF;
 
 // Rule Action1Sub2
-ruleAction1Sub2:
+ruleAction1Sub2 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getAction1Sub2_Action1SubClassAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -646,7 +769,8 @@ ruleAction1Sub2:
 ;
 
 // Rule EnumBugEnum
-ruleEnumBugEnum:
+ruleEnumBugEnum returns [Boolean current=false]
+:
 	(
 		(
 			{

@@ -107,7 +107,7 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// ('{' strings+=STRING? '}')*
+// '{' strings+=STRING? '}'*
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -209,7 +209,7 @@ protected class Model_RightCurlyBracketKeyword_1_2 extends KeywordToken  {
 }
 
 
-// ('[' (keys+=STRING values+=STRING)* ']')*
+// '[' (keys+=STRING values+=STRING)* ']'*
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -254,7 +254,7 @@ protected class Model_LeftSquareBracketKeyword_2_0 extends KeywordToken  {
 
 }
 
-// (keys+=STRING values+=STRING)*
+// keys+=STRING values+=STRING*
 protected class Model_Group_2_1 extends GroupToken {
 	
 	public Model_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -369,7 +369,7 @@ protected class Model_RightSquareBracketKeyword_2_2 extends KeywordToken  {
 }
 
 
-// ('subModel' subModel=SubModel)?
+// 'subModel' subModel=SubModel?
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -531,7 +531,7 @@ protected class SubModel_SubModelAction_0 extends ActionToken  {
 	}
 }
 
-// ('1' '2' strings+=STRING?)*
+// '1' '2' strings+=STRING?*
 protected class SubModel_Group_1 extends GroupToken {
 	
 	public SubModel_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

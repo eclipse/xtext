@@ -73,11 +73,11 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//{ParserRuleFragments}
 		public Action getParserRuleFragmentsAction_0() { return cParserRuleFragmentsAction_0; }
 
-		//('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
+		//'#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
 		//element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate)
+		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'#1' element=PRFNamed
@@ -189,7 +189,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//PRFNamedFragment
 		public RuleCall getPRFNamedFragmentParserRuleCall_0() { return cPRFNamedFragmentParserRuleCall_0; }
 
-		//(':' ref=[PRFNamed] | '-' PRFNamedRef)?
+		//':' ref=[PRFNamed] | '-' PRFNamedRef?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//':' ref=[PRFNamed]
@@ -283,7 +283,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//(ref=[PRFNamed] ref2=[PRFNamed])?
+		//ref=[PRFNamed] ref2=[PRFNamed]?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//ref=[PRFNamed]
@@ -340,7 +340,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_0_0() { return cNameFQNParserRuleCall_0_0; }
 
-		//('-' ref=[PRFNamed|FQN2])?
+		//'-' ref=[PRFNamed|FQN2]?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'-'
@@ -378,7 +378,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//=> ('-' PRFNamedRef)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//('-' PRFNamedRef)
+		//'-' PRFNamedRef
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//'-'

@@ -49,7 +49,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')? 'body' content=(Content | ParameterRef) foo+=Foo+ 'end body'
 		public Group getGroup() { return cGroup; }
 
-		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
+		//'(' parameter+=Parameter (',' parameter+=Parameter)* ')'?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//'('
@@ -61,7 +61,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Parameter
 		public RuleCall getParameterParameterParserRuleCall_0_1_0() { return cParameterParameterParserRuleCall_0_1_0; }
 
-		//(',' parameter+=Parameter)*
+		//',' parameter+=Parameter*
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//','

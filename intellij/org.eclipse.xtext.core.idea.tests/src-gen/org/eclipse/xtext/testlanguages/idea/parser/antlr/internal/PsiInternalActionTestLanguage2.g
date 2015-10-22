@@ -49,19 +49,22 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleORing
-entryRuleORing:
+entryRuleORing returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getORingElementType()); }
-	ruleORing
+	iv_ruleORing=ruleORing
+	{ $current=$iv_ruleORing.current; }
 	EOF;
 
 // Rule ORing
-ruleORing:
+ruleORing returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getORing_ValueParserRuleCall_0ElementType());
 		}
-		ruleValue
+		this_Value_0=ruleValue
 		{
+			$current = $this_Value_0.current;
 			doneComposite();
 		}
 		(
@@ -69,6 +72,7 @@ ruleORing:
 				{
 					precedeComposite(elementTypeProvider.getORing_ORingDisjunctsAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -86,6 +90,10 @@ ruleORing:
 					lv_disjuncts_3_0=ruleValue
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -94,13 +102,15 @@ ruleORing:
 ;
 
 //Entry rule entryRuleValue
-entryRuleValue:
+entryRuleValue returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getValueElementType()); }
-	ruleValue
+	iv_ruleValue=ruleValue
+	{ $current=$iv_ruleValue.current; }
 	EOF;
 
 // Rule Value
-ruleValue:
+ruleValue returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -109,6 +119,12 @@ ruleValue:
 			lv_value_0_0='a'
 			{
 				doneLeaf(lv_value_0_0);
+			}
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)

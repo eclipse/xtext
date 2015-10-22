@@ -67,18 +67,24 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
 
     // $ANTLR start "entryRuleFoo"
-    // PsiInternalMultiGenMMTestLanguage.g:52:1: entryRuleFoo : ruleFoo EOF ;
-    public final void entryRuleFoo() throws RecognitionException {
+    // PsiInternalMultiGenMMTestLanguage.g:52:1: entryRuleFoo returns [Boolean current=false] : iv_ruleFoo= ruleFoo EOF ;
+    public final Boolean entryRuleFoo() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleFoo = null;
+
+
         try {
-            // PsiInternalMultiGenMMTestLanguage.g:52:13: ( ruleFoo EOF )
-            // PsiInternalMultiGenMMTestLanguage.g:53:2: ruleFoo EOF
+            // PsiInternalMultiGenMMTestLanguage.g:52:45: (iv_ruleFoo= ruleFoo EOF )
+            // PsiInternalMultiGenMMTestLanguage.g:53:2: iv_ruleFoo= ruleFoo EOF
             {
              markComposite(elementTypeProvider.getFooElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleFoo();
+            iv_ruleFoo=ruleFoo();
 
             state._fsp--;
 
+             current =iv_ruleFoo; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -90,31 +96,41 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleFoo"
 
 
     // $ANTLR start "ruleFoo"
-    // PsiInternalMultiGenMMTestLanguage.g:58:1: ruleFoo : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
-    public final void ruleFoo() throws RecognitionException {
+    // PsiInternalMultiGenMMTestLanguage.g:59:1: ruleFoo returns [Boolean current=false] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
+    public final Boolean ruleFoo() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
+        Boolean lv_nameRefs_1_0 = null;
+
 
         try {
-            // PsiInternalMultiGenMMTestLanguage.g:58:8: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
-            // PsiInternalMultiGenMMTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // PsiInternalMultiGenMMTestLanguage.g:60:1: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
+            // PsiInternalMultiGenMMTestLanguage.g:61:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
             {
-            // PsiInternalMultiGenMMTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
-            // PsiInternalMultiGenMMTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // PsiInternalMultiGenMMTestLanguage.g:61:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // PsiInternalMultiGenMMTestLanguage.g:62:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
             {
-            // PsiInternalMultiGenMMTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalMultiGenMMTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalMultiGenMMTestLanguage.g:62:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalMultiGenMMTestLanguage.g:63:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalMultiGenMMTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalMultiGenMMTestLanguage.g:62:5: lv_name_0_0= RULE_ID
+            // PsiInternalMultiGenMMTestLanguage.g:63:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalMultiGenMMTestLanguage.g:64:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -126,7 +142,7 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
             }
 
-            // PsiInternalMultiGenMMTestLanguage.g:71:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // PsiInternalMultiGenMMTestLanguage.g:79:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,21 +155,25 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalMultiGenMMTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // PsiInternalMultiGenMMTestLanguage.g:80:4: (lv_nameRefs_1_0= ruleNameRef )
             	    {
-            	    // PsiInternalMultiGenMMTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
-            	    // PsiInternalMultiGenMMTestLanguage.g:73:5: lv_nameRefs_1_0= ruleNameRef
+            	    // PsiInternalMultiGenMMTestLanguage.g:80:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // PsiInternalMultiGenMMTestLanguage.g:81:5: lv_nameRefs_1_0= ruleNameRef
             	    {
 
             	    					markComposite(elementTypeProvider.getFoo_NameRefsNameRefParserRuleCall_1_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleNameRef();
+            	    lv_nameRefs_1_0=ruleNameRef();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -180,24 +200,30 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleFoo"
 
 
     // $ANTLR start "entryRuleNameRef"
-    // PsiInternalMultiGenMMTestLanguage.g:86:1: entryRuleNameRef : ruleNameRef EOF ;
-    public final void entryRuleNameRef() throws RecognitionException {
+    // PsiInternalMultiGenMMTestLanguage.g:98:1: entryRuleNameRef returns [Boolean current=false] : iv_ruleNameRef= ruleNameRef EOF ;
+    public final Boolean entryRuleNameRef() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNameRef = null;
+
+
         try {
-            // PsiInternalMultiGenMMTestLanguage.g:86:17: ( ruleNameRef EOF )
-            // PsiInternalMultiGenMMTestLanguage.g:87:2: ruleNameRef EOF
+            // PsiInternalMultiGenMMTestLanguage.g:98:49: (iv_ruleNameRef= ruleNameRef EOF )
+            // PsiInternalMultiGenMMTestLanguage.g:99:2: iv_ruleNameRef= ruleNameRef EOF
             {
              markComposite(elementTypeProvider.getNameRefElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNameRef();
+            iv_ruleNameRef=ruleNameRef();
 
             state._fsp--;
 
+             current =iv_ruleNameRef; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -209,28 +235,36 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNameRef"
 
 
     // $ANTLR start "ruleNameRef"
-    // PsiInternalMultiGenMMTestLanguage.g:92:1: ruleNameRef : ( (lv_name_0_0= RULE_STRING ) ) ;
-    public final void ruleNameRef() throws RecognitionException {
+    // PsiInternalMultiGenMMTestLanguage.g:105:1: ruleNameRef returns [Boolean current=false] : ( (lv_name_0_0= RULE_STRING ) ) ;
+    public final Boolean ruleNameRef() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalMultiGenMMTestLanguage.g:92:12: ( ( (lv_name_0_0= RULE_STRING ) ) )
-            // PsiInternalMultiGenMMTestLanguage.g:93:2: ( (lv_name_0_0= RULE_STRING ) )
+            // PsiInternalMultiGenMMTestLanguage.g:106:1: ( ( (lv_name_0_0= RULE_STRING ) ) )
+            // PsiInternalMultiGenMMTestLanguage.g:107:2: ( (lv_name_0_0= RULE_STRING ) )
             {
-            // PsiInternalMultiGenMMTestLanguage.g:93:2: ( (lv_name_0_0= RULE_STRING ) )
-            // PsiInternalMultiGenMMTestLanguage.g:94:3: (lv_name_0_0= RULE_STRING )
+            // PsiInternalMultiGenMMTestLanguage.g:107:2: ( (lv_name_0_0= RULE_STRING ) )
+            // PsiInternalMultiGenMMTestLanguage.g:108:3: (lv_name_0_0= RULE_STRING )
             {
-            // PsiInternalMultiGenMMTestLanguage.g:94:3: (lv_name_0_0= RULE_STRING )
-            // PsiInternalMultiGenMMTestLanguage.g:95:4: lv_name_0_0= RULE_STRING
+            // PsiInternalMultiGenMMTestLanguage.g:108:3: (lv_name_0_0= RULE_STRING )
+            // PsiInternalMultiGenMMTestLanguage.g:109:4: lv_name_0_0= RULE_STRING
             {
 
             				markLeaf(elementTypeProvider.getNameRef_NameSTRINGTerminalRuleCall_0ElementType());
+            			
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
             lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -252,7 +286,7 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNameRef"
 

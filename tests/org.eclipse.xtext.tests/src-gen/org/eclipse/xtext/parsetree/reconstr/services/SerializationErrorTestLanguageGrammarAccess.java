@@ -150,7 +150,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		//"twooptions"
 		public Keyword getTwooptionsKeyword_0() { return cTwooptionsKeyword_0; }
 
-		//("one" one=ID | "two" two=ID)
+		//"one" one=ID | "two" two=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"one" one=ID

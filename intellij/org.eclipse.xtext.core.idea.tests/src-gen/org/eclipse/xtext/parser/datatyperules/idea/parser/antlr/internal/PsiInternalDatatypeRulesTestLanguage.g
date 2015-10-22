@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleCompositeModel
-entryRuleCompositeModel:
+entryRuleCompositeModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCompositeModelElementType()); }
-	ruleCompositeModel
+	iv_ruleCompositeModel=ruleCompositeModel
+	{ $current=$iv_ruleCompositeModel.current; }
 	EOF;
 
 // Rule CompositeModel
-ruleCompositeModel:
+ruleCompositeModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleCompositeModel:
 			lv_model_0_0=ruleModel
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)+
 ;
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -86,6 +94,10 @@ ruleModel:
 				lv_id_0_0=ruleNestedModelId
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -105,6 +117,10 @@ ruleModel:
 					lv_value_2_0=ruleFraction
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -125,6 +141,10 @@ ruleModel:
 					lv_vector_4_0=ruleVector
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -145,6 +165,10 @@ ruleModel:
 					lv_dots_6_0=ruleDots
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -165,6 +189,10 @@ ruleModel:
 					lv_double_8_0=ruleDouble
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -180,13 +208,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleModelId
-entryRuleModelId:
+entryRuleModelId returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelIdElementType()); }
-	ruleModelId
+	iv_ruleModelId=ruleModelId
+	{ $current=$iv_ruleModelId.current; }
 	EOF;
 
 // Rule ModelId
-ruleModelId:
+ruleModelId returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getModelId_IDTerminalRuleCall_0ElementType());
@@ -213,13 +243,15 @@ ruleModelId:
 ;
 
 //Entry rule entryRuleNestedModelId
-entryRuleNestedModelId:
+entryRuleNestedModelId returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedModelIdElementType()); }
-	ruleNestedModelId
+	iv_ruleNestedModelId=ruleNestedModelId
+	{ $current=$iv_ruleNestedModelId.current; }
 	EOF;
 
 // Rule NestedModelId
-ruleNestedModelId:
+ruleNestedModelId returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getNestedModelId_ModelIdParserRuleCall_0ElementType());
@@ -246,13 +278,15 @@ ruleNestedModelId:
 ;
 
 //Entry rule entryRuleFraction
-entryRuleFraction:
+entryRuleFraction returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFractionElementType()); }
-	ruleFraction
+	iv_ruleFraction=ruleFraction
+	{ $current=$iv_ruleFraction.current; }
 	EOF;
 
 // Rule Fraction
-ruleFraction:
+ruleFraction returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFraction_INTTerminalRuleCall_0ElementType());
@@ -281,13 +315,15 @@ ruleFraction:
 ;
 
 //Entry rule entryRuleVector
-entryRuleVector:
+entryRuleVector returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getVectorElementType()); }
-	ruleVector
+	iv_ruleVector=ruleVector
+	{ $current=$iv_ruleVector.current; }
 	EOF;
 
 // Rule Vector
-ruleVector:
+ruleVector returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getVector_LeftParenthesisKeyword_0ElementType());
@@ -321,13 +357,15 @@ ruleVector:
 ;
 
 //Entry rule entryRuleDots
-entryRuleDots:
+entryRuleDots returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDotsElementType()); }
-	ruleDots
+	iv_ruleDots=ruleDots
+	{ $current=$iv_ruleDots.current; }
 	EOF;
 
 // Rule Dots
-ruleDots:
+ruleDots returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -357,13 +395,15 @@ ruleDots:
 ;
 
 //Entry rule entryRuleDouble
-entryRuleDouble:
+entryRuleDouble returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDoubleElementType()); }
-	ruleDouble
+	iv_ruleDouble=ruleDouble
+	{ $current=$iv_ruleDouble.current; }
 	EOF;
 
 // Rule Double
-ruleDouble:
+ruleDouble returns [Boolean current=false]
+:
 	(
 		(
 			{

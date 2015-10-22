@@ -38,7 +38,7 @@ class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
 	}
 
 	override protected getInternalNavigationElement() {
-		owner.findNodesForFeature(feature).map[leafNodes].flatten.filter[!hidden].head.ASTNodes.map[psi].head
+		owner.findNodesForFeature(feature).map[leafNodes].flatten.filter[!hidden].head.ASTNode.psi
 	}
 
 	override protected getObjectToPresent() {

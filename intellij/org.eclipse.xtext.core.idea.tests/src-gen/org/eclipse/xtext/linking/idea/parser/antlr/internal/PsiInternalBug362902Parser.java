@@ -70,18 +70,24 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalBug362902.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalBug362902.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalBug362902.g:52:15: ( ruleModel EOF )
-            // PsiInternalBug362902.g:53:2: ruleModel EOF
+            // PsiInternalBug362902.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalBug362902.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -93,24 +99,28 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalBug362902.g:58:1: ruleModel : ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalBug362902.g:59:1: ruleModel returns [Boolean current=false] : ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
+        Boolean lv_greetings_0_0 = null;
+
 
         try {
-            // PsiInternalBug362902.g:58:10: ( ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) ) )
-            // PsiInternalBug362902.g:59:2: ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) )
+            // PsiInternalBug362902.g:60:1: ( ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) ) )
+            // PsiInternalBug362902.g:61:2: ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) )
             {
-            // PsiInternalBug362902.g:59:2: ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) )
-            // PsiInternalBug362902.g:60:3: ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) )
+            // PsiInternalBug362902.g:61:2: ( ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) ) )
+            // PsiInternalBug362902.g:62:3: ( (lv_greetings_0_0= ruleGreeting ) )* otherlv_1= 'favourite' ( ( ruleMyId ) )
             {
-            // PsiInternalBug362902.g:60:3: ( (lv_greetings_0_0= ruleGreeting ) )*
+            // PsiInternalBug362902.g:62:3: ( (lv_greetings_0_0= ruleGreeting ) )*
             loop1:
             do {
                 int alt1=2;
@@ -123,21 +133,25 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalBug362902.g:61:4: (lv_greetings_0_0= ruleGreeting )
+            	    // PsiInternalBug362902.g:63:4: (lv_greetings_0_0= ruleGreeting )
             	    {
-            	    // PsiInternalBug362902.g:61:4: (lv_greetings_0_0= ruleGreeting )
-            	    // PsiInternalBug362902.g:62:5: lv_greetings_0_0= ruleGreeting
+            	    // PsiInternalBug362902.g:63:4: (lv_greetings_0_0= ruleGreeting )
+            	    // PsiInternalBug362902.g:64:5: lv_greetings_0_0= ruleGreeting
             	    {
 
             	    					markComposite(elementTypeProvider.getModel_GreetingsGreetingParserRuleCall_0_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleGreeting();
+            	    lv_greetings_0_0=ruleGreeting();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -158,12 +172,18 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalBug362902.g:78:3: ( ( ruleMyId ) )
-            // PsiInternalBug362902.g:79:4: ( ruleMyId )
+            // PsiInternalBug362902.g:84:3: ( ( ruleMyId ) )
+            // PsiInternalBug362902.g:85:4: ( ruleMyId )
             {
-            // PsiInternalBug362902.g:79:4: ( ruleMyId )
-            // PsiInternalBug362902.g:80:5: ruleMyId
+            // PsiInternalBug362902.g:85:4: ( ruleMyId )
+            // PsiInternalBug362902.g:86:5: ruleMyId
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markComposite(elementTypeProvider.getModel_FavouriteGreetingCrossReference_2_0ElementType());
             				
@@ -194,24 +214,30 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleGreeting"
-    // PsiInternalBug362902.g:93:1: entryRuleGreeting : ruleGreeting EOF ;
-    public final void entryRuleGreeting() throws RecognitionException {
+    // PsiInternalBug362902.g:105:1: entryRuleGreeting returns [Boolean current=false] : iv_ruleGreeting= ruleGreeting EOF ;
+    public final Boolean entryRuleGreeting() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleGreeting = null;
+
+
         try {
-            // PsiInternalBug362902.g:93:18: ( ruleGreeting EOF )
-            // PsiInternalBug362902.g:94:2: ruleGreeting EOF
+            // PsiInternalBug362902.g:105:50: (iv_ruleGreeting= ruleGreeting EOF )
+            // PsiInternalBug362902.g:106:2: iv_ruleGreeting= ruleGreeting EOF
             {
              markComposite(elementTypeProvider.getGreetingElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleGreeting();
+            iv_ruleGreeting=ruleGreeting();
 
             state._fsp--;
 
+             current =iv_ruleGreeting; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -223,23 +249,27 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleGreeting"
 
 
     // $ANTLR start "ruleGreeting"
-    // PsiInternalBug362902.g:99:1: ruleGreeting : (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' ) ;
-    public final void ruleGreeting() throws RecognitionException {
+    // PsiInternalBug362902.g:112:1: ruleGreeting returns [Boolean current=false] : (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' ) ;
+    public final Boolean ruleGreeting() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
+        Boolean lv_name_1_0 = null;
+
 
         try {
-            // PsiInternalBug362902.g:99:13: ( (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' ) )
-            // PsiInternalBug362902.g:100:2: (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' )
+            // PsiInternalBug362902.g:113:1: ( (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' ) )
+            // PsiInternalBug362902.g:114:2: (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' )
             {
-            // PsiInternalBug362902.g:100:2: (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' )
-            // PsiInternalBug362902.g:101:3: otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!'
+            // PsiInternalBug362902.g:114:2: (otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!' )
+            // PsiInternalBug362902.g:115:3: otherlv_0= 'Hello' ( (lv_name_1_0= ruleMyId ) ) otherlv_2= '!'
             {
 
             			markLeaf(elementTypeProvider.getGreeting_HelloKeyword_0ElementType());
@@ -248,22 +278,26 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalBug362902.g:108:3: ( (lv_name_1_0= ruleMyId ) )
-            // PsiInternalBug362902.g:109:4: (lv_name_1_0= ruleMyId )
+            // PsiInternalBug362902.g:122:3: ( (lv_name_1_0= ruleMyId ) )
+            // PsiInternalBug362902.g:123:4: (lv_name_1_0= ruleMyId )
             {
-            // PsiInternalBug362902.g:109:4: (lv_name_1_0= ruleMyId )
-            // PsiInternalBug362902.g:110:5: lv_name_1_0= ruleMyId
+            // PsiInternalBug362902.g:123:4: (lv_name_1_0= ruleMyId )
+            // PsiInternalBug362902.g:124:5: lv_name_1_0= ruleMyId
             {
 
             					markComposite(elementTypeProvider.getGreeting_NameMyIdParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_5);
-            ruleMyId();
+            lv_name_1_0=ruleMyId();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -291,24 +325,30 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleGreeting"
 
 
     // $ANTLR start "entryRuleMyId"
-    // PsiInternalBug362902.g:130:1: entryRuleMyId : ruleMyId EOF ;
-    public final void entryRuleMyId() throws RecognitionException {
+    // PsiInternalBug362902.g:148:1: entryRuleMyId returns [Boolean current=false] : iv_ruleMyId= ruleMyId EOF ;
+    public final Boolean entryRuleMyId() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleMyId = null;
+
+
         try {
-            // PsiInternalBug362902.g:130:14: ( ruleMyId EOF )
-            // PsiInternalBug362902.g:131:2: ruleMyId EOF
+            // PsiInternalBug362902.g:148:46: (iv_ruleMyId= ruleMyId EOF )
+            // PsiInternalBug362902.g:149:2: iv_ruleMyId= ruleMyId EOF
             {
              markComposite(elementTypeProvider.getMyIdElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleMyId();
+            iv_ruleMyId=ruleMyId();
 
             state._fsp--;
 
+             current =iv_ruleMyId; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -320,19 +360,21 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleMyId"
 
 
     // $ANTLR start "ruleMyId"
-    // PsiInternalBug362902.g:136:1: ruleMyId : this_ID_0= RULE_ID ;
-    public final void ruleMyId() throws RecognitionException {
+    // PsiInternalBug362902.g:155:1: ruleMyId returns [Boolean current=false] : this_ID_0= RULE_ID ;
+    public final Boolean ruleMyId() throws RecognitionException {
+        Boolean current = false;
+
         Token this_ID_0=null;
 
         try {
-            // PsiInternalBug362902.g:136:9: (this_ID_0= RULE_ID )
-            // PsiInternalBug362902.g:137:2: this_ID_0= RULE_ID
+            // PsiInternalBug362902.g:156:1: (this_ID_0= RULE_ID )
+            // PsiInternalBug362902.g:157:2: this_ID_0= RULE_ID
             {
 
             		markLeaf(elementTypeProvider.getMyId_IDTerminalRuleCallElementType());
@@ -351,7 +393,7 @@ public class PsiInternalBug362902Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleMyId"
 

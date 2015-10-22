@@ -49,18 +49,26 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleFoo
-entryRuleFoo:
+entryRuleFoo returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
-	ruleFoo
+	iv_ruleFoo=ruleFoo
+	{ $current=$iv_ruleFoo.current; }
 	EOF;
 
 // Rule Foo
-ruleFoo:
+ruleFoo returns [Boolean current=false]
+:
 	(
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_0_0=RULE_ID
 				{
@@ -76,6 +84,10 @@ ruleFoo:
 				lv_nameRefs_1_0=ruleNameRef
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -83,15 +95,23 @@ ruleFoo:
 ;
 
 //Entry rule entryRuleNameRef
-entryRuleNameRef:
+entryRuleNameRef returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNameRefElementType()); }
-	ruleNameRef
+	iv_ruleNameRef=ruleNameRef
+	{ $current=$iv_ruleNameRef.current; }
 	EOF;
 
 // Rule NameRef
-ruleNameRef:
+ruleNameRef returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getNameRef_RuleParserRuleCrossReference_0ElementType());
 			}

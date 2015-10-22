@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleSuperMain
-entryRuleSuperMain:
+entryRuleSuperMain returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSuperMainElementType()); }
-	ruleSuperMain
+	iv_ruleSuperMain=ruleSuperMain
+	{ $current=$iv_ruleSuperMain.current; }
 	EOF;
 
 // Rule SuperMain
-ruleSuperMain:
+ruleSuperMain returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
@@ -68,6 +70,12 @@ ruleSuperMain:
 			(
 				{
 					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{

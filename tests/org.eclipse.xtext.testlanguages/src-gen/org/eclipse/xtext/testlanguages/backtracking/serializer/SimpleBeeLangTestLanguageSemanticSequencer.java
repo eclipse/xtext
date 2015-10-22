@@ -4,14 +4,13 @@
 package org.eclipse.xtext.testlanguages.backtracking.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AliasedRequiredCapability;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AndExpression;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AssignmentExpression;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Function
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.GuardExpression;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Model;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.OrExpression;
-import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Parameter;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ParameterDeclaration;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ParameterList;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ProvidedCapability;
@@ -46,7 +44,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ValueLit
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.VariableExpression;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.WithContextExpression;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.WithExpression;
-import org.eclipse.xtext.testlanguages.backtracking.serializer.BeeLangTestLanguageSemanticSequencer;
 import org.eclipse.xtext.testlanguages.backtracking.services.SimpleBeeLangTestLanguageGrammarAccess;
 
 @SuppressWarnings("all")
@@ -56,8 +53,13 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 	private SimpleBeeLangTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == BeeLangTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == BeeLangTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case BeeLangTestLanguagePackage.ALIASED_REQUIRED_CAPABILITY:
 				sequence_AliasedRequiredCapability(context, (AliasedRequiredCapability) semanticObject); 
 				return; 
@@ -65,39 +67,39 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 				sequence_AndExpression(context, (AndExpression) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.ASSIGNMENT_EXPRESSION:
-				if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_AssignmentExpression(context, (AssignmentExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInitializationExpressionRule()) {
+				else if (rule == grammarAccess.getInitializationExpressionRule()) {
 					sequence_InitializationExpression(context, (AssignmentExpression) semanticObject); 
 					return; 
 				}
@@ -121,47 +123,47 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 				sequence_OperationCall(context, (CallNamedFunction) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.CHAINED_EXPRESSION:
-				if(context == grammarAccess.getBlockExpressionWithoutBracketsRule()) {
+				if (rule == grammarAccess.getBlockExpressionWithoutBracketsRule()) {
 					sequence_BlockExpressionWithoutBrackets(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getOneOrManyExpressionsRule()) {
-					sequence_BlockExpression_BlockExpressionWithoutBrackets_OneOrManyExpressions(context, (ChainedExpression) semanticObject); 
+				else if (rule == grammarAccess.getOneOrManyExpressionsRule()) {
+					sequence_BlockExpression_BlockExpressionWithoutBrackets(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getBlockExpressionRule() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				else if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getBlockExpressionRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_BlockExpression(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInitializationBlockExpressionRule()) {
+				else if (rule == grammarAccess.getInitializationBlockExpressionRule()) {
 					sequence_InitializationBlockExpression(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
@@ -176,94 +178,94 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 				sequence_ConstructorCallExpression(context, (CreateExpression) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.DEF_VALUE:
-				if(context == grammarAccess.getTopLevelExpressionRule()) {
-					sequence_TopLevelExpression_ValDeclaration_VarDeclaration(context, (DefValue) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getValDeclarationRule()) {
+				if (rule == grammarAccess.getValDeclarationRule()) {
 					sequence_ValDeclaration(context, (DefValue) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getVarDeclarationRule()) {
+				else if (rule == grammarAccess.getTopLevelExpressionRule()) {
+					sequence_ValDeclaration_VarDeclaration(context, (DefValue) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getVarDeclarationRule()) {
 					sequence_VarDeclaration(context, (DefValue) semanticObject); 
 					return; 
 				}
 				else break;
 			case BeeLangTestLanguagePackage.FEATURE_EXPRESSION:
-				if(context == grammarAccess.getFeatureOfThisRule()) {
+				if (rule == grammarAccess.getFeatureOfThisRule()) {
 					sequence_FeatureOfThis(context, (FeatureExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				else if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_InfixExpression(context, (FeatureExpression) semanticObject); 
 					return; 
 				}
 				else break;
 			case BeeLangTestLanguagePackage.FUNCTION:
-				if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getClosureExpressionRule() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getLiteralRule() ||
-				   context == grammarAccess.getLiteralFunctionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getLiteralRule()
+						|| rule == grammarAccess.getLiteralFunctionRule()
+						|| rule == grammarAccess.getClosureExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_ClosureExpression(context, (Function) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getFunctionRule()) {
+				else if (rule == grammarAccess.getFunctionRule()) {
 					sequence_Function(context, (Function) semanticObject); 
 					return; 
 				}
@@ -278,7 +280,7 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 				sequence_OrExpression(context, (OrExpression) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.PARAMETER:
-				sequence_Parameter(context, (Parameter) semanticObject); 
+				sequence_Parameter(context, (org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Parameter) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.PARAMETER_DECLARATION:
 				sequence_ParameterDeclaration(context, (ParameterDeclaration) semanticObject); 
@@ -311,43 +313,43 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 				sequence_ValueLiteral(context, (ValueLiteral) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.VARIABLE_EXPRESSION:
-				if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
-					sequence_KeywordVariables_PrimaryExpression_Value(context, (VariableExpression) semanticObject); 
+				if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
+					sequence_KeywordVariables_Value(context, (VariableExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getKeywordVariablesRule()) {
+				else if (rule == grammarAccess.getKeywordVariablesRule()) {
 					sequence_KeywordVariables(context, (VariableExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getValueRule()) {
+				else if (rule == grammarAccess.getValueRule()) {
 					sequence_Value(context, (VariableExpression) semanticObject); 
 					return; 
 				}
@@ -359,7 +361,8 @@ public class SimpleBeeLangTestLanguageSemanticSequencer extends BeeLangTestLangu
 				sequence_WithExpression(context, (WithExpression) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 }

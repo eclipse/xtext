@@ -510,10 +510,10 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2690:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2690:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalUnorderedGroupsTestLanguage.g:2989:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2989:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalUnorderedGroupsTestLanguage.g:2690:11: ( '^' )?
+            // PsiInternalUnorderedGroupsTestLanguage.g:2989:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -522,7 +522,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2690:11: '^'
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2989:11: '^'
                     {
                     match('^'); 
 
@@ -540,7 +540,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalUnorderedGroupsTestLanguage.g:2690:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalUnorderedGroupsTestLanguage.g:2989:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -589,10 +589,10 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2692:10: ( ( '0' .. '9' )+ )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2692:12: ( '0' .. '9' )+
+            // PsiInternalUnorderedGroupsTestLanguage.g:2991:10: ( ( '0' .. '9' )+ )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2991:12: ( '0' .. '9' )+
             {
-            // PsiInternalUnorderedGroupsTestLanguage.g:2692:12: ( '0' .. '9' )+
+            // PsiInternalUnorderedGroupsTestLanguage.g:2991:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -606,7 +606,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalUnorderedGroupsTestLanguage.g:2692:13: '0' .. '9'
+            	    // PsiInternalUnorderedGroupsTestLanguage.g:2991:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -638,10 +638,10 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2694:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2694:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2993:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2993:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalUnorderedGroupsTestLanguage.g:2694:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2993:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -659,10 +659,10 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2694:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2993:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2694:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2993:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -678,7 +678,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2694:21: '\\\\' .
+                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2993:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -686,7 +686,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2694:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2993:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -711,10 +711,10 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2694:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2993:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2694:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2993:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -730,7 +730,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2694:54: '\\\\' .
+                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2993:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -738,7 +738,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2694:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalUnorderedGroupsTestLanguage.g:2993:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -781,12 +781,12 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2696:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2696:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalUnorderedGroupsTestLanguage.g:2995:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2995:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalUnorderedGroupsTestLanguage.g:2696:24: ( options {greedy=false; } : . )*
+            // PsiInternalUnorderedGroupsTestLanguage.g:2995:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -811,7 +811,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalUnorderedGroupsTestLanguage.g:2696:52: .
+            	    // PsiInternalUnorderedGroupsTestLanguage.g:2995:52: .
             	    {
             	    matchAny(); 
 
@@ -841,12 +841,12 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2698:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2698:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalUnorderedGroupsTestLanguage.g:2997:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2997:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalUnorderedGroupsTestLanguage.g:2698:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalUnorderedGroupsTestLanguage.g:2997:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -859,7 +859,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalUnorderedGroupsTestLanguage.g:2698:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalUnorderedGroupsTestLanguage.g:2997:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -879,7 +879,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalUnorderedGroupsTestLanguage.g:2698:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalUnorderedGroupsTestLanguage.g:2997:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -888,9 +888,9 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2698:41: ( '\\r' )? '\\n'
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2997:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalUnorderedGroupsTestLanguage.g:2698:41: ( '\\r' )?
+                    // PsiInternalUnorderedGroupsTestLanguage.g:2997:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -899,7 +899,7 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalUnorderedGroupsTestLanguage.g:2698:41: '\\r'
+                            // PsiInternalUnorderedGroupsTestLanguage.g:2997:41: '\\r'
                             {
                             match('\r'); 
 
@@ -931,10 +931,10 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2700:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2700:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalUnorderedGroupsTestLanguage.g:2999:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalUnorderedGroupsTestLanguage.g:2999:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalUnorderedGroupsTestLanguage.g:2700:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalUnorderedGroupsTestLanguage.g:2999:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -988,8 +988,8 @@ public class PsiInternalUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalUnorderedGroupsTestLanguage.g:2702:16: ( . )
-            // PsiInternalUnorderedGroupsTestLanguage.g:2702:18: .
+            // PsiInternalUnorderedGroupsTestLanguage.g:3001:16: ( . )
+            // PsiInternalUnorderedGroupsTestLanguage.g:3001:18: .
             {
             matchAny(); 
 

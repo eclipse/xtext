@@ -69,18 +69,24 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalSerializationBug269362TestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalSerializationBug269362TestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalSerializationBug269362TestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalSerializationBug269362TestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalSerializationBug269362TestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalSerializationBug269362TestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -92,14 +98,16 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalSerializationBug269362TestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalSerializationBug269362TestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_foo_1_0=null;
         Token otherlv_2=null;
@@ -108,10 +116,10 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
         Token lv_bar_5_0=null;
 
         try {
-            // PsiInternalSerializationBug269362TestLanguage.g:58:10: ( ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) )
-            // PsiInternalSerializationBug269362TestLanguage.g:59:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
+            // PsiInternalSerializationBug269362TestLanguage.g:60:1: ( ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) ) )
+            // PsiInternalSerializationBug269362TestLanguage.g:61:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
             {
-            // PsiInternalSerializationBug269362TestLanguage.g:59:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
+            // PsiInternalSerializationBug269362TestLanguage.g:61:2: ( (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? ) | (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -129,10 +137,10 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalSerializationBug269362TestLanguage.g:60:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
+                    // PsiInternalSerializationBug269362TestLanguage.g:62:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
                     {
-                    // PsiInternalSerializationBug269362TestLanguage.g:60:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
-                    // PsiInternalSerializationBug269362TestLanguage.g:61:4: otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
+                    // PsiInternalSerializationBug269362TestLanguage.g:62:3: (otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )? )
+                    // PsiInternalSerializationBug269362TestLanguage.g:63:4: otherlv_0= 'foo' ( (lv_foo_1_0= RULE_ID ) ) (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
                     {
 
                     				markLeaf(elementTypeProvider.getModel_FooKeyword_0_0ElementType());
@@ -141,14 +149,20 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalSerializationBug269362TestLanguage.g:68:4: ( (lv_foo_1_0= RULE_ID ) )
-                    // PsiInternalSerializationBug269362TestLanguage.g:69:5: (lv_foo_1_0= RULE_ID )
+                    // PsiInternalSerializationBug269362TestLanguage.g:70:4: ( (lv_foo_1_0= RULE_ID ) )
+                    // PsiInternalSerializationBug269362TestLanguage.g:71:5: (lv_foo_1_0= RULE_ID )
                     {
-                    // PsiInternalSerializationBug269362TestLanguage.g:69:5: (lv_foo_1_0= RULE_ID )
-                    // PsiInternalSerializationBug269362TestLanguage.g:70:6: lv_foo_1_0= RULE_ID
+                    // PsiInternalSerializationBug269362TestLanguage.g:71:5: (lv_foo_1_0= RULE_ID )
+                    // PsiInternalSerializationBug269362TestLanguage.g:72:6: lv_foo_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -160,7 +174,7 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                     }
 
-                    // PsiInternalSerializationBug269362TestLanguage.g:79:4: (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
+                    // PsiInternalSerializationBug269362TestLanguage.g:87:4: (otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -169,7 +183,7 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
                     }
                     switch (alt1) {
                         case 1 :
-                            // PsiInternalSerializationBug269362TestLanguage.g:80:5: otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) )
+                            // PsiInternalSerializationBug269362TestLanguage.g:88:5: otherlv_2= 'bar' ( (lv_bar_3_0= RULE_ID ) )
                             {
 
                             					markLeaf(elementTypeProvider.getModel_BarKeyword_0_2_0ElementType());
@@ -178,14 +192,20 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                             					doneLeaf(otherlv_2);
                             				
-                            // PsiInternalSerializationBug269362TestLanguage.g:87:5: ( (lv_bar_3_0= RULE_ID ) )
-                            // PsiInternalSerializationBug269362TestLanguage.g:88:6: (lv_bar_3_0= RULE_ID )
+                            // PsiInternalSerializationBug269362TestLanguage.g:95:5: ( (lv_bar_3_0= RULE_ID ) )
+                            // PsiInternalSerializationBug269362TestLanguage.g:96:6: (lv_bar_3_0= RULE_ID )
                             {
-                            // PsiInternalSerializationBug269362TestLanguage.g:88:6: (lv_bar_3_0= RULE_ID )
-                            // PsiInternalSerializationBug269362TestLanguage.g:89:7: lv_bar_3_0= RULE_ID
+                            // PsiInternalSerializationBug269362TestLanguage.g:96:6: (lv_bar_3_0= RULE_ID )
+                            // PsiInternalSerializationBug269362TestLanguage.g:97:7: lv_bar_3_0= RULE_ID
                             {
 
                             							markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
+                            						
+
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
                             lv_bar_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -210,10 +230,10 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
                     }
                     break;
                 case 2 :
-                    // PsiInternalSerializationBug269362TestLanguage.g:101:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
+                    // PsiInternalSerializationBug269362TestLanguage.g:115:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
                     {
-                    // PsiInternalSerializationBug269362TestLanguage.g:101:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
-                    // PsiInternalSerializationBug269362TestLanguage.g:102:4: otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) )
+                    // PsiInternalSerializationBug269362TestLanguage.g:115:3: (otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) ) )
+                    // PsiInternalSerializationBug269362TestLanguage.g:116:4: otherlv_4= 'bar' ( (lv_bar_5_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_BarKeyword_1_0ElementType());
@@ -222,14 +242,20 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalSerializationBug269362TestLanguage.g:109:4: ( (lv_bar_5_0= RULE_ID ) )
-                    // PsiInternalSerializationBug269362TestLanguage.g:110:5: (lv_bar_5_0= RULE_ID )
+                    // PsiInternalSerializationBug269362TestLanguage.g:123:4: ( (lv_bar_5_0= RULE_ID ) )
+                    // PsiInternalSerializationBug269362TestLanguage.g:124:5: (lv_bar_5_0= RULE_ID )
                     {
-                    // PsiInternalSerializationBug269362TestLanguage.g:110:5: (lv_bar_5_0= RULE_ID )
-                    // PsiInternalSerializationBug269362TestLanguage.g:111:6: lv_bar_5_0= RULE_ID
+                    // PsiInternalSerializationBug269362TestLanguage.g:124:5: (lv_bar_5_0= RULE_ID )
+                    // PsiInternalSerializationBug269362TestLanguage.g:125:6: lv_bar_5_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_bar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -260,7 +286,7 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

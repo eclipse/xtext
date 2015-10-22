@@ -30,6 +30,8 @@ interface IASTNodeAwareNodeModelBuilder {
 
 	val TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
 
+	val HAS_SEMANTIC_ELEMENT_KEY = Key.<Boolean>create('HAS_SEMANTIC_ELEMENT_KEY')
+
 	def Map<ASTNode, INode> getNodesMapping()
 
 	def Map<INode, List<ASTNode>> getReverseNodesMapping()

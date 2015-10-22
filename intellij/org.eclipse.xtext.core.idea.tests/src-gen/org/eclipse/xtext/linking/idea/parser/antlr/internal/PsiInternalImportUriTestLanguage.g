@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleMain
-entryRuleMain:
+entryRuleMain returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMainElementType()); }
-	ruleMain
+	iv_ruleMain=ruleMain
+	{ $current=$iv_ruleMain.current; }
 	EOF;
 
 // Rule Main
-ruleMain:
+ruleMain returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleMain:
 				lv_imports_0_0=ruleImport
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -76,6 +82,10 @@ ruleMain:
 				lv_types_1_0=ruleType
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -83,13 +93,15 @@ ruleMain:
 ;
 
 //Entry rule entryRuleImport
-entryRuleImport:
+entryRuleImport returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getImportElementType()); }
-	ruleImport
+	iv_ruleImport=ruleImport
+	{ $current=$iv_ruleImport.current; }
 	EOF;
 
 // Rule Import
-ruleImport:
+ruleImport returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getImport_ImportKeyword_0ElementType());
@@ -103,6 +115,12 @@ ruleImport:
 				{
 					markLeaf(elementTypeProvider.getImport_ImportURISTRINGTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_importURI_1_0=RULE_STRING
 				{
 					doneLeaf(lv_importURI_1_0);
@@ -113,13 +131,15 @@ ruleImport:
 ;
 
 //Entry rule entryRuleType
-entryRuleType:
+entryRuleType returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTypeElementType()); }
-	ruleType
+	iv_ruleType=ruleType
+	{ $current=$iv_ruleType.current; }
 	EOF;
 
 // Rule Type
-ruleType:
+ruleType returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getType_TypeKeyword_0ElementType());
@@ -132,6 +152,12 @@ ruleType:
 			(
 				{
 					markLeaf(elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -148,6 +174,12 @@ ruleType:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_3_0ElementType());
 				}

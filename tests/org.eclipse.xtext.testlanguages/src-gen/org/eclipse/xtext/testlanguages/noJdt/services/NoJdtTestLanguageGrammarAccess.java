@@ -65,7 +65,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//('(' 'from' other=[Greeting] ')')?
+		//'(' 'from' other=[Greeting] ')'?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'('

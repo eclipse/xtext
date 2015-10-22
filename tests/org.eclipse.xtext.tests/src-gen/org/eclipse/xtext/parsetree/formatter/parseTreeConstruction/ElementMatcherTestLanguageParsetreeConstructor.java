@@ -500,7 +500,7 @@ protected class Simple_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ('kw1' optional=ID)?
+// 'kw1' optional=ID?
 protected class Simple_Group_2 extends GroupToken {
 	
 	public Simple_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1801,7 +1801,7 @@ protected class RecursionSub_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// (sub+=RecursionSub | vals+=ID)*
+// sub+=RecursionSub | vals+=ID*
 protected class RecursionSub_Alternatives_2 extends AlternativesToken {
 
 	public RecursionSub_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2062,7 +2062,7 @@ protected class Loop_NamesAssignment_1 extends AssignmentToken  {
 
 }
 
-// ('gr' gr+=ID)*
+// 'gr' gr+=ID*
 protected class Loop_Group_2 extends GroupToken {
 	
 	public Loop_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2142,7 +2142,7 @@ protected class Loop_GrAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// (ints+=INT | strings+=STRING)*
+// ints+=INT | strings+=STRING*
 protected class Loop_Alternatives_3 extends AlternativesToken {
 
 	public Loop_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2417,7 +2417,7 @@ protected class Add_MultParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Add.left=current} '+' right=Mult)*
+// {Add.left=current} '+' right=Mult*
 protected class Add_Group_1 extends GroupToken {
 	
 	public Add_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2624,7 +2624,7 @@ protected class Mult_PrimParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Mult.left=current} '*' right=Prim)*
+// {Mult.left=current} '*' right=Prim*
 protected class Mult_Group_1 extends GroupToken {
 	
 	public Mult_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3047,7 +3047,7 @@ protected class Prim_ParamAssignment_1_3 extends AssignmentToken  {
 	}	
 }
 
-// (',' param+=Add)*
+// ',' param+=Add*
 protected class Prim_Group_1_4 extends GroupToken {
 	
 	public Prim_Group_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

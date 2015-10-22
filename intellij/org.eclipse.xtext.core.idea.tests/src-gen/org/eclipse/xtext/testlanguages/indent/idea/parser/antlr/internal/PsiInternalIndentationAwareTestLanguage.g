@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleNodeList
-entryRuleNodeList:
+entryRuleNodeList returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeListElementType()); }
-	ruleNodeList
+	iv_ruleNodeList=ruleNodeList
+	{ $current=$iv_ruleNodeList.current; }
 	EOF;
 
 // Rule NodeList
-ruleNodeList:
+ruleNodeList returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleNodeList:
 				lv_children_0_0=ruleNode
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -84,6 +90,10 @@ ruleNodeList:
 					lv_children_2_0=ruleNode
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -92,13 +102,15 @@ ruleNodeList:
 ;
 
 //Entry rule entryRuleNode
-entryRuleNode:
+entryRuleNode returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeElementType()); }
-	ruleNode
+	iv_ruleNode=ruleNode
+	{ $current=$iv_ruleNode.current; }
 	EOF;
 
 // Rule Node
-ruleNode:
+ruleNode returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -108,6 +120,10 @@ ruleNode:
 				lv_name_0_0=ruleString
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -134,6 +150,10 @@ ruleNode:
 					lv_children_3_0=ruleNodeList
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -149,13 +169,15 @@ ruleNode:
 ;
 
 //Entry rule entryRuleString
-entryRuleString:
+entryRuleString returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getStringElementType()); }
-	ruleString
+	iv_ruleString=ruleString
+	{ $current=$iv_ruleString.current; }
 	EOF;
 
 // Rule String
-ruleString:
+ruleString returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getString_OTHERTerminalRuleCallElementType());

@@ -186,11 +186,11 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getExpression_VariableNameParserRuleCall_0() { return cExpression_VariableNameParserRuleCall_0; }
 
-		//('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2' {Expression_Smaller.left=current}
+		//'C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2' {Expression_Smaller.left=current}
 		//right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
 		//{Expression_Equal.left=current} right=Expression_VariableName | 'C5' {Expression_Not_Equal.left=current}
 		//right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName | ('C6'
-		//'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+		//'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName
@@ -271,7 +271,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName
 		public Group getGroup_1_5() { return cGroup_1_5; }
 
-		//('C6' 'C7')
+		//'C6' 'C7'
 		public Group getGroup_1_5_0() { return cGroup_1_5_0; }
 
 		//'C6'
@@ -292,7 +292,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName
 		public Group getGroup_1_6() { return cGroup_1_6; }
 
-		//('C6' 'C8')
+		//'C6' 'C8'
 		public Group getGroup_1_6_0() { return cGroup_1_6_0; }
 
 		//'C6'

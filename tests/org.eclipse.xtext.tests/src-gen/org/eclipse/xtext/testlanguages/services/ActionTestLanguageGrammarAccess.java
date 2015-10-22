@@ -37,7 +37,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//Child
 		public RuleCall getChildParserRuleCall_0() { return cChildParserRuleCall_0; }
 
-		//({Parent.left=current} right=Child)?
+		//{Parent.left=current} right=Child?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Parent.left=current}

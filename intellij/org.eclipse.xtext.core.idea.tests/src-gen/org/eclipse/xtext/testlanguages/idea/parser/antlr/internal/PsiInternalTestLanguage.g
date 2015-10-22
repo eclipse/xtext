@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleEntryRule
-entryRuleEntryRule:
+entryRuleEntryRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEntryRuleElementType()); }
-	ruleEntryRule
+	iv_ruleEntryRule=ruleEntryRule
+	{ $current=$iv_ruleEntryRule.current; }
 	EOF;
 
 // Rule EntryRule
-ruleEntryRule:
+ruleEntryRule returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,46 +66,56 @@ ruleEntryRule:
 			lv_multiFeature_0_0=ruleAbstractRule
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleAbstractRule
-entryRuleAbstractRule:
+entryRuleAbstractRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAbstractRuleElementType()); }
-	ruleAbstractRule
+	iv_ruleAbstractRule=ruleAbstractRule
+	{ $current=$iv_ruleAbstractRule.current; }
 	EOF;
 
 // Rule AbstractRule
-ruleAbstractRule:
+ruleAbstractRule returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractRule_ChoiceRuleParserRuleCall_0ElementType());
 		}
-		ruleChoiceRule
+		this_ChoiceRule_0=ruleChoiceRule
 		{
+			$current = $this_ChoiceRule_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getAbstractRule_ReducibleRuleParserRuleCall_1ElementType());
 		}
-		ruleReducibleRule
+		this_ReducibleRule_1=ruleReducibleRule
 		{
+			$current = $this_ReducibleRule_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleChoiceRule
-entryRuleChoiceRule:
+entryRuleChoiceRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getChoiceRuleElementType()); }
-	ruleChoiceRule
+	iv_ruleChoiceRule=ruleChoiceRule
+	{ $current=$iv_ruleChoiceRule.current; }
 	EOF;
 
 // Rule ChoiceRule
-ruleChoiceRule:
+ruleChoiceRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getChoiceRule_ChoiceKeyword_0ElementType());
@@ -121,12 +133,24 @@ ruleChoiceRule:
 				{
 					doneLeaf(lv_optionalKeyword_1_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)?
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getChoiceRule_NameIDTerminalRuleCall_2_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_2_0=RULE_ID
 				{
@@ -138,13 +162,15 @@ ruleChoiceRule:
 ;
 
 //Entry rule entryRuleReducibleRule
-entryRuleReducibleRule:
+entryRuleReducibleRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getReducibleRuleElementType()); }
-	ruleReducibleRule
+	iv_ruleReducibleRule=ruleReducibleRule
+	{ $current=$iv_ruleReducibleRule.current; }
 	EOF;
 
 // Rule ReducibleRule
-ruleReducibleRule:
+ruleReducibleRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getReducibleRule_ReducibleKeyword_0ElementType());
@@ -156,8 +182,9 @@ ruleReducibleRule:
 		{
 			markComposite(elementTypeProvider.getReducibleRule_TerminalRuleParserRuleCall_1ElementType());
 		}
-		ruleTerminalRule
+		this_TerminalRule_1=ruleTerminalRule
 		{
+			$current = $this_TerminalRule_1.current;
 			doneComposite();
 		}
 		(
@@ -165,6 +192,7 @@ ruleReducibleRule:
 				{
 					precedeComposite(elementTypeProvider.getReducibleRule_ReducibleCompositeActionFeatureAction_2_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
@@ -175,6 +203,10 @@ ruleReducibleRule:
 					lv_actionFeature_3_0=ruleTerminalRule
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -183,17 +215,25 @@ ruleReducibleRule:
 ;
 
 //Entry rule entryRuleTerminalRule
-entryRuleTerminalRule:
+entryRuleTerminalRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTerminalRuleElementType()); }
-	ruleTerminalRule
+	iv_ruleTerminalRule=ruleTerminalRule
+	{ $current=$iv_ruleTerminalRule.current; }
 	EOF;
 
 // Rule TerminalRule
-ruleTerminalRule:
+ruleTerminalRule returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType());
+			}
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 			lv_stringFeature_0_0=RULE_STRING
 			{

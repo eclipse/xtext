@@ -60,7 +60,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//GrammarID
 		public RuleCall getNameGrammarIDParserRuleCall_1_0() { return cNameGrammarIDParserRuleCall_1_0; }
 
-		//('with' usedGrammars+=[Grammar|GrammarID] (',' usedGrammars+=[Grammar|GrammarID])*)?
+		//'with' usedGrammars+=[Grammar|GrammarID] (',' usedGrammars+=[Grammar|GrammarID])*?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'with'
@@ -75,7 +75,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//GrammarID
 		public RuleCall getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1() { return cUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1; }
 
-		//(',' usedGrammars+=[Grammar|GrammarID])*
+		//',' usedGrammars+=[Grammar|GrammarID]*
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//','
@@ -139,7 +139,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//(hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)?
+		//hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//hiddenTokens+=[AbstractRule]
@@ -151,7 +151,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getHiddenTokensAbstractRuleIDTerminalRuleCall_2_0_0_1() { return cHiddenTokensAbstractRuleIDTerminalRuleCall_2_0_0_1; }
 
-		//(',' hiddenTokens+=[AbstractRule])*
+		//',' hiddenTokens+=[AbstractRule]*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//','
@@ -188,7 +188,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('.' ID)*
+		//'.' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'.'
@@ -283,7 +283,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//STRING
 		public RuleCall getEPackageEPackageSTRINGTerminalRuleCall_2_0_1() { return cEPackageEPackageSTRINGTerminalRuleCall_2_0_1; }
 
-		//('as' alias=ID)?
+		//'as' alias=ID?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//'as'
@@ -329,7 +329,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//STRING
 		public RuleCall getEPackageEPackageSTRINGTerminalRuleCall_1_0_1() { return cEPackageEPackageSTRINGTerminalRuleCall_1_0_1; }
 
-		//('as' alias=ID)?
+		//'as' alias=ID?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'as'
@@ -374,7 +374,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//HiddenClause? ':' alternatives=Alternatives ';'
 		public Group getGroup() { return cGroup; }
 
-		//(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) | RuleNameAndParams ReturnsClause?)
+		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) | RuleNameAndParams ReturnsClause?
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?)
@@ -389,7 +389,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//RuleNameAndParams
 		public RuleCall getRuleNameAndParamsParserRuleCall_0_0_1() { return cRuleNameAndParamsParserRuleCall_0_0_1; }
 
-		//(wildcard?='*' | ReturnsClause?)
+		//wildcard?='*' | ReturnsClause?
 		public Alternatives getAlternatives_0_0_2() { return cAlternatives_0_0_2; }
 
 		//wildcard?='*'
@@ -455,13 +455,13 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//('[' (parameters+=Parameter (',' parameters+=Parameter)*)? ']')?
+		//'[' (parameters+=Parameter (',' parameters+=Parameter)*)? ']'?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
 
-		//(parameters+=Parameter (',' parameters+=Parameter)*)?
+		//parameters+=Parameter (',' parameters+=Parameter)*?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//parameters+=Parameter
@@ -470,7 +470,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Parameter
 		public RuleCall getParametersParameterParserRuleCall_1_1_0_0() { return cParametersParameterParserRuleCall_1_1_0_0; }
 
-		//(',' parameters+=Parameter)*
+		//',' parameters+=Parameter*
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
 		//','
@@ -545,7 +545,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//(metamodel=[AbstractMetamodelDeclaration] '::')? classifier=[ecore::EClassifier]
 		public Group getGroup() { return cGroup; }
 
-		//(metamodel=[AbstractMetamodelDeclaration] '::')?
+		//metamodel=[AbstractMetamodelDeclaration] '::'?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//metamodel=[AbstractMetamodelDeclaration]
@@ -591,13 +591,13 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ConditionalBranch
 		public RuleCall getConditionalBranchParserRuleCall_0() { return cConditionalBranchParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ('|' elements+=ConditionalBranch)+)?
+		//{Alternatives.elements+=current} ('|' elements+=ConditionalBranch)+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.elements+=current}
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
-		//('|' elements+=ConditionalBranch)+
+		//'|' elements+=ConditionalBranch+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//'|'
@@ -693,13 +693,13 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Group
 		public RuleCall getGroupParserRuleCall_0() { return cGroupParserRuleCall_0; }
 
-		//({UnorderedGroup.elements+=current} ('&' elements+=Group)+)?
+		//{UnorderedGroup.elements+=current} ('&' elements+=Group)+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{UnorderedGroup.elements+=current}
 		public Action getUnorderedGroupElementsAction_1_0() { return cUnorderedGroupElementsAction_1_0; }
 
-		//('&' elements+=Group)+
+		//'&' elements+=Group+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//'&'
@@ -731,7 +731,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//AbstractToken
 		public RuleCall getAbstractTokenParserRuleCall_0() { return cAbstractTokenParserRuleCall_0; }
 
-		//({Group.elements+=current} elements+=AbstractToken+)?
+		//{Group.elements+=current} elements+=AbstractToken+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Group.elements+=current}
@@ -780,7 +780,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//(Assignment | AbstractTerminal) Cardinalities?
 		public Group getGroup() { return cGroup; }
 
-		//(Assignment | AbstractTerminal)
+		//Assignment | AbstractTerminal
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Assignment
@@ -854,7 +854,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//TypeRef
 		public RuleCall getTypeTypeRefParserRuleCall_1_0() { return cTypeTypeRefParserRuleCall_1_0; }
 
-		//('.' feature=ID operator=('=' | '+=') 'current')?
+		//'.' feature=ID operator=('=' | '+=') 'current'?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'.'
@@ -978,7 +978,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//RuleID
 		public RuleCall getRuleAbstractRuleRuleIDParserRuleCall_1_0_1() { return cRuleAbstractRuleRuleIDParserRuleCall_1_0_1; }
 
-		//('[' arguments+=NamedArgument (',' arguments+=NamedArgument)* ']')?
+		//'[' arguments+=NamedArgument (',' arguments+=NamedArgument)* ']'?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'['
@@ -990,7 +990,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//NamedArgument
 		public RuleCall getArgumentsNamedArgumentParserRuleCall_2_1_0() { return cArgumentsNamedArgumentParserRuleCall_2_1_0; }
 
-		//(',' arguments+=NamedArgument)*
+		//',' arguments+=NamedArgument*
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//','
@@ -1068,7 +1068,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//{NamedArgument}
 		public Action getNamedArgumentAction_0() { return cNamedArgumentAction_0; }
 
-		//(literalValue=LiteralValue? parameter=[Parameter] | parameter=[Parameter] '=' value=[Parameter])
+		//literalValue=LiteralValue? parameter=[Parameter] | parameter=[Parameter] '=' value=[Parameter]
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//literalValue=LiteralValue? parameter=[Parameter]
@@ -1152,7 +1152,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('::' ID)*
+		//'::' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'::'
@@ -1367,13 +1367,13 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//AssignableTerminal
 		public RuleCall getAssignableTerminalParserRuleCall_0() { return cAssignableTerminalParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+)?
+		//{Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.elements+=current}
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
-		//('|' elements+=AssignableTerminal)+
+		//'|' elements+=AssignableTerminal+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//'|'
@@ -1414,7 +1414,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//TypeRef
 		public RuleCall getTypeTypeRefParserRuleCall_1_0() { return cTypeTypeRefParserRuleCall_1_0; }
 
-		//('|' ^terminal=CrossReferenceableTerminal)?
+		//'|' ^terminal=CrossReferenceableTerminal?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'|'
@@ -1537,7 +1537,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//'terminal'
 		public Keyword getTerminalKeyword_0() { return cTerminalKeyword_0; }
 
-		//(^fragment?='fragment' name=ID | name=ID ReturnsClause?)
+		//^fragment?='fragment' name=ID | name=ID ReturnsClause?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//^fragment?='fragment' name=ID
@@ -1601,13 +1601,13 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//TerminalGroup
 		public RuleCall getTerminalGroupParserRuleCall_0() { return cTerminalGroupParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ('|' elements+=TerminalGroup)+)?
+		//{Alternatives.elements+=current} ('|' elements+=TerminalGroup)+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.elements+=current}
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
-		//('|' elements+=TerminalGroup)+
+		//'|' elements+=TerminalGroup+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//'|'
@@ -1639,7 +1639,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//TerminalToken
 		public RuleCall getTerminalTokenParserRuleCall_0() { return cTerminalTokenParserRuleCall_0; }
 
-		//({Group.elements+=current} elements+=TerminalToken+)?
+		//{Group.elements+=current} elements+=TerminalToken+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Group.elements+=current}
@@ -1860,7 +1860,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Keyword
 		public RuleCall getKeywordParserRuleCall_0() { return cKeywordParserRuleCall_0; }
 
-		//({CharacterRange.left=current} '..' right=Keyword)?
+		//{CharacterRange.left=current} '..' right=Keyword?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{CharacterRange.left=current}
@@ -1943,13 +1943,13 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//EnumLiteralDeclaration
 		public RuleCall getEnumLiteralDeclarationParserRuleCall_0() { return cEnumLiteralDeclarationParserRuleCall_0; }
 
-		//({Alternatives.elements+=current} ('|' elements+=EnumLiteralDeclaration)+)?
+		//{Alternatives.elements+=current} ('|' elements+=EnumLiteralDeclaration)+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.elements+=current}
 		public Action getAlternativesElementsAction_1_0() { return cAlternativesElementsAction_1_0; }
 
-		//('|' elements+=EnumLiteralDeclaration)+
+		//'|' elements+=EnumLiteralDeclaration+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//'|'
@@ -1989,7 +1989,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1() { return cEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1; }
 
-		//('=' literal=Keyword)?
+		//'=' literal=Keyword?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'='

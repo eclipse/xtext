@@ -72,18 +72,24 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalEnumRulesTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalEnumRulesTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalEnumRulesTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalEnumRulesTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalEnumRulesTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalEnumRulesTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -95,23 +101,31 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalEnumRulesTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalEnumRulesTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_existing_1_0 = null;
+
+        Boolean lv_generated_3_0 = null;
+
+        Boolean lv_generated_5_0 = null;
+
 
         try {
-            // PsiInternalEnumRulesTestLanguage.g:58:10: ( ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )
-            // PsiInternalEnumRulesTestLanguage.g:59:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:60:1: ( ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:61:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
             {
-            // PsiInternalEnumRulesTestLanguage.g:59:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:61:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -129,10 +143,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalEnumRulesTestLanguage.g:60:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
+                    // PsiInternalEnumRulesTestLanguage.g:62:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:60:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
-                    // PsiInternalEnumRulesTestLanguage.g:61:4: otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
+                    // PsiInternalEnumRulesTestLanguage.g:62:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
+                    // PsiInternalEnumRulesTestLanguage.g:63:4: otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
                     {
 
                     				markLeaf(elementTypeProvider.getModel_ExistingKeyword_0_0ElementType());
@@ -141,22 +155,26 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalEnumRulesTestLanguage.g:68:4: ( (lv_existing_1_0= ruleExistingEnum ) )
-                    // PsiInternalEnumRulesTestLanguage.g:69:5: (lv_existing_1_0= ruleExistingEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:70:4: ( (lv_existing_1_0= ruleExistingEnum ) )
+                    // PsiInternalEnumRulesTestLanguage.g:71:5: (lv_existing_1_0= ruleExistingEnum )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:69:5: (lv_existing_1_0= ruleExistingEnum )
-                    // PsiInternalEnumRulesTestLanguage.g:70:6: lv_existing_1_0= ruleExistingEnum
+                    // PsiInternalEnumRulesTestLanguage.g:71:5: (lv_existing_1_0= ruleExistingEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:72:6: lv_existing_1_0= ruleExistingEnum
                     {
 
                     						markComposite(elementTypeProvider.getModel_ExistingExistingEnumEnumRuleCall_0_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_4);
-                    ruleExistingEnum();
+                    lv_existing_1_0=ruleExistingEnum();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -164,7 +182,7 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
                     }
 
-                    // PsiInternalEnumRulesTestLanguage.g:79:4: (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
+                    // PsiInternalEnumRulesTestLanguage.g:85:4: (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -173,7 +191,7 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     switch (alt1) {
                         case 1 :
-                            // PsiInternalEnumRulesTestLanguage.g:80:5: otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) )
+                            // PsiInternalEnumRulesTestLanguage.g:86:5: otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) )
                             {
 
                             					markLeaf(elementTypeProvider.getModel_GeneratedKeyword_0_2_0ElementType());
@@ -182,22 +200,26 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
                             					doneLeaf(otherlv_2);
                             				
-                            // PsiInternalEnumRulesTestLanguage.g:87:5: ( (lv_generated_3_0= ruleGeneratedEnum ) )
-                            // PsiInternalEnumRulesTestLanguage.g:88:6: (lv_generated_3_0= ruleGeneratedEnum )
+                            // PsiInternalEnumRulesTestLanguage.g:93:5: ( (lv_generated_3_0= ruleGeneratedEnum ) )
+                            // PsiInternalEnumRulesTestLanguage.g:94:6: (lv_generated_3_0= ruleGeneratedEnum )
                             {
-                            // PsiInternalEnumRulesTestLanguage.g:88:6: (lv_generated_3_0= ruleGeneratedEnum )
-                            // PsiInternalEnumRulesTestLanguage.g:89:7: lv_generated_3_0= ruleGeneratedEnum
+                            // PsiInternalEnumRulesTestLanguage.g:94:6: (lv_generated_3_0= ruleGeneratedEnum )
+                            // PsiInternalEnumRulesTestLanguage.g:95:7: lv_generated_3_0= ruleGeneratedEnum
                             {
 
                             							markComposite(elementTypeProvider.getModel_GeneratedGeneratedEnumEnumRuleCall_0_2_1_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleGeneratedEnum();
+                            lv_generated_3_0=ruleGeneratedEnum();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -218,10 +240,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalEnumRulesTestLanguage.g:101:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
+                    // PsiInternalEnumRulesTestLanguage.g:111:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:101:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
-                    // PsiInternalEnumRulesTestLanguage.g:102:4: otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) )
+                    // PsiInternalEnumRulesTestLanguage.g:111:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
+                    // PsiInternalEnumRulesTestLanguage.g:112:4: otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_GeneratedKeyword_1_0ElementType());
@@ -230,22 +252,26 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalEnumRulesTestLanguage.g:109:4: ( (lv_generated_5_0= ruleGeneratedEnum ) )
-                    // PsiInternalEnumRulesTestLanguage.g:110:5: (lv_generated_5_0= ruleGeneratedEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:119:4: ( (lv_generated_5_0= ruleGeneratedEnum ) )
+                    // PsiInternalEnumRulesTestLanguage.g:120:5: (lv_generated_5_0= ruleGeneratedEnum )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:110:5: (lv_generated_5_0= ruleGeneratedEnum )
-                    // PsiInternalEnumRulesTestLanguage.g:111:6: lv_generated_5_0= ruleGeneratedEnum
+                    // PsiInternalEnumRulesTestLanguage.g:120:5: (lv_generated_5_0= ruleGeneratedEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:121:6: lv_generated_5_0= ruleGeneratedEnum
                     {
 
                     						markComposite(elementTypeProvider.getModel_GeneratedGeneratedEnumEnumRuleCall_1_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleGeneratedEnum();
+                    lv_generated_5_0=ruleGeneratedEnum();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -272,23 +298,25 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "ruleExistingEnum"
-    // PsiInternalEnumRulesTestLanguage.g:125:1: ruleExistingEnum : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) ;
-    public final void ruleExistingEnum() throws RecognitionException {
+    // PsiInternalEnumRulesTestLanguage.g:139:1: ruleExistingEnum returns [Boolean current=false] : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) ;
+    public final Boolean ruleExistingEnum() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
         try {
-            // PsiInternalEnumRulesTestLanguage.g:125:17: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) )
-            // PsiInternalEnumRulesTestLanguage.g:126:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:140:1: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:141:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
             {
-            // PsiInternalEnumRulesTestLanguage.g:126:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:141:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -315,10 +343,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
             switch (alt3) {
                 case 1 :
-                    // PsiInternalEnumRulesTestLanguage.g:127:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:142:3: (enumLiteral_0= 'SameName' )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:127:3: (enumLiteral_0= 'SameName' )
-                    // PsiInternalEnumRulesTestLanguage.g:128:4: enumLiteral_0= 'SameName'
+                    // PsiInternalEnumRulesTestLanguage.g:142:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:143:4: enumLiteral_0= 'SameName'
                     {
 
                     				markLeaf(elementTypeProvider.getExistingEnum_SameNameEnumLiteralDeclaration_0ElementType());
@@ -334,10 +362,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalEnumRulesTestLanguage.g:137:3: (enumLiteral_1= 'overridden' )
+                    // PsiInternalEnumRulesTestLanguage.g:152:3: (enumLiteral_1= 'overridden' )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:137:3: (enumLiteral_1= 'overridden' )
-                    // PsiInternalEnumRulesTestLanguage.g:138:4: enumLiteral_1= 'overridden'
+                    // PsiInternalEnumRulesTestLanguage.g:152:3: (enumLiteral_1= 'overridden' )
+                    // PsiInternalEnumRulesTestLanguage.g:153:4: enumLiteral_1= 'overridden'
                     {
 
                     				markLeaf(elementTypeProvider.getExistingEnum_OverriddenLiteralEnumLiteralDeclaration_1ElementType());
@@ -353,10 +381,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // PsiInternalEnumRulesTestLanguage.g:147:3: (enumLiteral_2= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_2= 'DifferentLiteral' )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:147:3: (enumLiteral_2= 'DifferentLiteral' )
-                    // PsiInternalEnumRulesTestLanguage.g:148:4: enumLiteral_2= 'DifferentLiteral'
+                    // PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_2= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:163:4: enumLiteral_2= 'DifferentLiteral'
                     {
 
                     				markLeaf(elementTypeProvider.getExistingEnum_DifferentNameEnumLiteralDeclaration_2ElementType());
@@ -384,22 +412,24 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleExistingEnum"
 
 
     // $ANTLR start "ruleGeneratedEnum"
-    // PsiInternalEnumRulesTestLanguage.g:160:1: ruleGeneratedEnum : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) ;
-    public final void ruleGeneratedEnum() throws RecognitionException {
+    // PsiInternalEnumRulesTestLanguage.g:175:1: ruleGeneratedEnum returns [Boolean current=false] : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) ;
+    public final Boolean ruleGeneratedEnum() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
         try {
-            // PsiInternalEnumRulesTestLanguage.g:160:18: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) )
-            // PsiInternalEnumRulesTestLanguage.g:161:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:176:1: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:177:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
             {
-            // PsiInternalEnumRulesTestLanguage.g:161:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:177:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -417,10 +447,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:178:3: (enumLiteral_0= 'SameName' )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_0= 'SameName' )
-                    // PsiInternalEnumRulesTestLanguage.g:163:4: enumLiteral_0= 'SameName'
+                    // PsiInternalEnumRulesTestLanguage.g:178:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:179:4: enumLiteral_0= 'SameName'
                     {
 
                     				markLeaf(elementTypeProvider.getGeneratedEnum_SameNameEnumLiteralDeclaration_0ElementType());
@@ -436,10 +466,10 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalEnumRulesTestLanguage.g:172:3: (enumLiteral_1= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:188:3: (enumLiteral_1= 'DifferentLiteral' )
                     {
-                    // PsiInternalEnumRulesTestLanguage.g:172:3: (enumLiteral_1= 'DifferentLiteral' )
-                    // PsiInternalEnumRulesTestLanguage.g:173:4: enumLiteral_1= 'DifferentLiteral'
+                    // PsiInternalEnumRulesTestLanguage.g:188:3: (enumLiteral_1= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:189:4: enumLiteral_1= 'DifferentLiteral'
                     {
 
                     				markLeaf(elementTypeProvider.getGeneratedEnum_DifferentNameEnumLiteralDeclaration_1ElementType());
@@ -467,7 +497,7 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleGeneratedEnum"
 

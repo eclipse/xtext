@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,24 +66,36 @@ ruleModel:
 			lv_children_0_0=ruleNode
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleNode
-entryRuleNode:
+entryRuleNode returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeElementType()); }
-	ruleNode
+	iv_ruleNode=ruleNode
+	{ $current=$iv_ruleNode.current; }
 	EOF;
 
 // Rule Node
-ruleNode:
+ruleNode returns [Boolean current=false]
+:
 	(
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getNode_NameIDTerminalRuleCall_0_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_0_0=RULE_ID
 				{
@@ -100,6 +114,12 @@ ruleNode:
 			(
 				{
 					markLeaf(elementTypeProvider.getNode_AttribSTRINGTerminalRuleCall_2_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_attrib_2_0=RULE_STRING
 				{
@@ -129,6 +149,10 @@ ruleNode:
 				lv_children_5_0=ruleNode
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*

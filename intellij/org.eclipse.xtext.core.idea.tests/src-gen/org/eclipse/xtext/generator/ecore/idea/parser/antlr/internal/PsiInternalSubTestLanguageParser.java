@@ -71,18 +71,24 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleSubMain"
-    // PsiInternalSubTestLanguage.g:52:1: entryRuleSubMain : ruleSubMain EOF ;
-    public final void entryRuleSubMain() throws RecognitionException {
+    // PsiInternalSubTestLanguage.g:52:1: entryRuleSubMain returns [Boolean current=false] : iv_ruleSubMain= ruleSubMain EOF ;
+    public final Boolean entryRuleSubMain() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSubMain = null;
+
+
         try {
-            // PsiInternalSubTestLanguage.g:52:17: ( ruleSubMain EOF )
-            // PsiInternalSubTestLanguage.g:53:2: ruleSubMain EOF
+            // PsiInternalSubTestLanguage.g:52:49: (iv_ruleSubMain= ruleSubMain EOF )
+            // PsiInternalSubTestLanguage.g:53:2: iv_ruleSubMain= ruleSubMain EOF
             {
              markComposite(elementTypeProvider.getSubMainElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSubMain();
+            iv_ruleSubMain=ruleSubMain();
 
             state._fsp--;
 
+             current =iv_ruleSubMain; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -94,23 +100,29 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSubMain"
 
 
     // $ANTLR start "ruleSubMain"
-    // PsiInternalSubTestLanguage.g:58:1: ruleSubMain : (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) ;
-    public final void ruleSubMain() throws RecognitionException {
+    // PsiInternalSubTestLanguage.g:59:1: ruleSubMain returns [Boolean current=false] : (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) ;
+    public final Boolean ruleSubMain() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
+        Boolean lv_superMains_1_0 = null;
+
+        Boolean lv_another_3_0 = null;
+
 
         try {
-            // PsiInternalSubTestLanguage.g:58:12: ( (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) )
-            // PsiInternalSubTestLanguage.g:59:2: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
+            // PsiInternalSubTestLanguage.g:60:1: ( (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) )
+            // PsiInternalSubTestLanguage.g:61:2: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
             {
-            // PsiInternalSubTestLanguage.g:59:2: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
-            // PsiInternalSubTestLanguage.g:60:3: otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )?
+            // PsiInternalSubTestLanguage.g:61:2: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
+            // PsiInternalSubTestLanguage.g:62:3: otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )?
             {
 
             			markLeaf(elementTypeProvider.getSubMain_LeftCurlyBracketKeyword_0ElementType());
@@ -119,22 +131,26 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSubTestLanguage.g:67:3: ( (lv_superMains_1_0= ruleSuperMain ) )
-            // PsiInternalSubTestLanguage.g:68:4: (lv_superMains_1_0= ruleSuperMain )
+            // PsiInternalSubTestLanguage.g:69:3: ( (lv_superMains_1_0= ruleSuperMain ) )
+            // PsiInternalSubTestLanguage.g:70:4: (lv_superMains_1_0= ruleSuperMain )
             {
-            // PsiInternalSubTestLanguage.g:68:4: (lv_superMains_1_0= ruleSuperMain )
-            // PsiInternalSubTestLanguage.g:69:5: lv_superMains_1_0= ruleSuperMain
+            // PsiInternalSubTestLanguage.g:70:4: (lv_superMains_1_0= ruleSuperMain )
+            // PsiInternalSubTestLanguage.g:71:5: lv_superMains_1_0= ruleSuperMain
             {
 
             					markComposite(elementTypeProvider.getSubMain_SuperMainsSuperMainParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_4);
-            ruleSuperMain();
+            lv_superMains_1_0=ruleSuperMain();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -149,7 +165,7 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_2);
             		
-            // PsiInternalSubTestLanguage.g:85:3: ( (lv_another_3_0= ruleAnotherSuperMain ) )?
+            // PsiInternalSubTestLanguage.g:91:3: ( (lv_another_3_0= ruleAnotherSuperMain ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -158,21 +174,25 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalSubTestLanguage.g:86:4: (lv_another_3_0= ruleAnotherSuperMain )
+                    // PsiInternalSubTestLanguage.g:92:4: (lv_another_3_0= ruleAnotherSuperMain )
                     {
-                    // PsiInternalSubTestLanguage.g:86:4: (lv_another_3_0= ruleAnotherSuperMain )
-                    // PsiInternalSubTestLanguage.g:87:5: lv_another_3_0= ruleAnotherSuperMain
+                    // PsiInternalSubTestLanguage.g:92:4: (lv_another_3_0= ruleAnotherSuperMain )
+                    // PsiInternalSubTestLanguage.g:93:5: lv_another_3_0= ruleAnotherSuperMain
                     {
 
                     					markComposite(elementTypeProvider.getSubMain_AnotherAnotherSuperMainParserRuleCall_3_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleAnotherSuperMain();
+                    lv_another_3_0=ruleAnotherSuperMain();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -196,24 +216,30 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSubMain"
 
 
     // $ANTLR start "entryRuleAnotherSuperMain"
-    // PsiInternalSubTestLanguage.g:100:1: entryRuleAnotherSuperMain : ruleAnotherSuperMain EOF ;
-    public final void entryRuleAnotherSuperMain() throws RecognitionException {
+    // PsiInternalSubTestLanguage.g:110:1: entryRuleAnotherSuperMain returns [Boolean current=false] : iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF ;
+    public final Boolean entryRuleAnotherSuperMain() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAnotherSuperMain = null;
+
+
         try {
-            // PsiInternalSubTestLanguage.g:100:26: ( ruleAnotherSuperMain EOF )
-            // PsiInternalSubTestLanguage.g:101:2: ruleAnotherSuperMain EOF
+            // PsiInternalSubTestLanguage.g:110:58: (iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF )
+            // PsiInternalSubTestLanguage.g:111:2: iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF
             {
              markComposite(elementTypeProvider.getAnotherSuperMainElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAnotherSuperMain();
+            iv_ruleAnotherSuperMain=ruleAnotherSuperMain();
 
             state._fsp--;
 
+             current =iv_ruleAnotherSuperMain; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -225,23 +251,25 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAnotherSuperMain"
 
 
     // $ANTLR start "ruleAnotherSuperMain"
-    // PsiInternalSubTestLanguage.g:106:1: ruleAnotherSuperMain : (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) ;
-    public final void ruleAnotherSuperMain() throws RecognitionException {
+    // PsiInternalSubTestLanguage.g:117:1: ruleAnotherSuperMain returns [Boolean current=false] : (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleAnotherSuperMain() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalSubTestLanguage.g:106:21: ( (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalSubTestLanguage.g:107:2: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSubTestLanguage.g:118:1: ( (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSubTestLanguage.g:119:2: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalSubTestLanguage.g:107:2: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalSubTestLanguage.g:108:3: otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSubTestLanguage.g:119:2: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSubTestLanguage.g:120:3: otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getAnotherSuperMain_UpsKeyword_0ElementType());
@@ -250,14 +278,20 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSubTestLanguage.g:115:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSubTestLanguage.g:116:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSubTestLanguage.g:127:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSubTestLanguage.g:128:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSubTestLanguage.g:116:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSubTestLanguage.g:117:5: lv_name_1_0= RULE_ID
+            // PsiInternalSubTestLanguage.g:128:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSubTestLanguage.g:129:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -282,24 +316,30 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAnotherSuperMain"
 
 
     // $ANTLR start "entryRuleSuperMain"
-    // PsiInternalSubTestLanguage.g:130:1: entryRuleSuperMain : ruleSuperMain EOF ;
-    public final void entryRuleSuperMain() throws RecognitionException {
+    // PsiInternalSubTestLanguage.g:148:1: entryRuleSuperMain returns [Boolean current=false] : iv_ruleSuperMain= ruleSuperMain EOF ;
+    public final Boolean entryRuleSuperMain() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSuperMain = null;
+
+
         try {
-            // PsiInternalSubTestLanguage.g:130:19: ( ruleSuperMain EOF )
-            // PsiInternalSubTestLanguage.g:131:2: ruleSuperMain EOF
+            // PsiInternalSubTestLanguage.g:148:51: (iv_ruleSuperMain= ruleSuperMain EOF )
+            // PsiInternalSubTestLanguage.g:149:2: iv_ruleSuperMain= ruleSuperMain EOF
             {
              markComposite(elementTypeProvider.getSuperMainElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSuperMain();
+            iv_ruleSuperMain=ruleSuperMain();
 
             state._fsp--;
 
+             current =iv_ruleSuperMain; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -311,23 +351,25 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSuperMain"
 
 
     // $ANTLR start "ruleSuperMain"
-    // PsiInternalSubTestLanguage.g:136:1: ruleSuperMain : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
-    public final void ruleSuperMain() throws RecognitionException {
+    // PsiInternalSubTestLanguage.g:155:1: ruleSuperMain returns [Boolean current=false] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleSuperMain() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalSubTestLanguage.g:136:14: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalSubTestLanguage.g:137:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSubTestLanguage.g:156:1: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSubTestLanguage.g:157:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalSubTestLanguage.g:137:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalSubTestLanguage.g:138:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSubTestLanguage.g:157:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSubTestLanguage.g:158:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
@@ -336,14 +378,20 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSubTestLanguage.g:145:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSubTestLanguage.g:146:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSubTestLanguage.g:165:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSubTestLanguage.g:166:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSubTestLanguage.g:146:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSubTestLanguage.g:147:5: lv_name_1_0= RULE_ID
+            // PsiInternalSubTestLanguage.g:166:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSubTestLanguage.g:167:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -368,7 +416,7 @@ public class PsiInternalSubTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSuperMain"
 

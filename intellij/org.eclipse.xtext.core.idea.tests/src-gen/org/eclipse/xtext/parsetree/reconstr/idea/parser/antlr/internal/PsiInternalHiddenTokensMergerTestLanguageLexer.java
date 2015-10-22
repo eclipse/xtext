@@ -521,10 +521,10 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:693:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:693:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalHiddenTokensMergerTestLanguage.g:817:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:817:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalHiddenTokensMergerTestLanguage.g:693:11: ( '^' )?
+            // PsiInternalHiddenTokensMergerTestLanguage.g:817:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -533,7 +533,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:693:11: '^'
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:817:11: '^'
                     {
                     match('^'); 
 
@@ -551,7 +551,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalHiddenTokensMergerTestLanguage.g:693:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalHiddenTokensMergerTestLanguage.g:817:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -600,10 +600,10 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:695:10: ( ( '0' .. '9' )+ )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:695:12: ( '0' .. '9' )+
+            // PsiInternalHiddenTokensMergerTestLanguage.g:819:10: ( ( '0' .. '9' )+ )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:819:12: ( '0' .. '9' )+
             {
-            // PsiInternalHiddenTokensMergerTestLanguage.g:695:12: ( '0' .. '9' )+
+            // PsiInternalHiddenTokensMergerTestLanguage.g:819:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -617,7 +617,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalHiddenTokensMergerTestLanguage.g:695:13: '0' .. '9'
+            	    // PsiInternalHiddenTokensMergerTestLanguage.g:819:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -649,10 +649,10 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:697:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:697:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:821:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:821:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalHiddenTokensMergerTestLanguage.g:697:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:821:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -670,10 +670,10 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:697:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:821:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:697:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:821:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -689,7 +689,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:697:21: '\\\\' .
+                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:821:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -697,7 +697,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:697:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:821:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -722,10 +722,10 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:697:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:821:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:697:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:821:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -741,7 +741,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:697:54: '\\\\' .
+                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:821:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -749,7 +749,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:697:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalHiddenTokensMergerTestLanguage.g:821:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -792,12 +792,12 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:699:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:699:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalHiddenTokensMergerTestLanguage.g:823:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:823:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalHiddenTokensMergerTestLanguage.g:699:24: ( options {greedy=false; } : . )*
+            // PsiInternalHiddenTokensMergerTestLanguage.g:823:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -822,7 +822,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalHiddenTokensMergerTestLanguage.g:699:52: .
+            	    // PsiInternalHiddenTokensMergerTestLanguage.g:823:52: .
             	    {
             	    matchAny(); 
 
@@ -852,12 +852,12 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:701:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:701:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalHiddenTokensMergerTestLanguage.g:825:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:825:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalHiddenTokensMergerTestLanguage.g:701:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalHiddenTokensMergerTestLanguage.g:825:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -870,7 +870,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalHiddenTokensMergerTestLanguage.g:701:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalHiddenTokensMergerTestLanguage.g:825:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -890,7 +890,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalHiddenTokensMergerTestLanguage.g:701:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalHiddenTokensMergerTestLanguage.g:825:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -899,9 +899,9 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:701:41: ( '\\r' )? '\\n'
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:825:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalHiddenTokensMergerTestLanguage.g:701:41: ( '\\r' )?
+                    // PsiInternalHiddenTokensMergerTestLanguage.g:825:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -910,7 +910,7 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalHiddenTokensMergerTestLanguage.g:701:41: '\\r'
+                            // PsiInternalHiddenTokensMergerTestLanguage.g:825:41: '\\r'
                             {
                             match('\r'); 
 
@@ -942,10 +942,10 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:703:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:703:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalHiddenTokensMergerTestLanguage.g:827:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:827:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalHiddenTokensMergerTestLanguage.g:703:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalHiddenTokensMergerTestLanguage.g:827:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -999,8 +999,8 @@ public class PsiInternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalHiddenTokensMergerTestLanguage.g:705:16: ( . )
-            // PsiInternalHiddenTokensMergerTestLanguage.g:705:18: .
+            // PsiInternalHiddenTokensMergerTestLanguage.g:829:16: ( . )
+            // PsiInternalHiddenTokensMergerTestLanguage.g:829:18: .
             {
             matchAny(); 
 

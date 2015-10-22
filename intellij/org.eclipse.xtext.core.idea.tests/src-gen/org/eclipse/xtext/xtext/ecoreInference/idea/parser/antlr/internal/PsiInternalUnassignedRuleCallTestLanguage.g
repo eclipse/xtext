@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
@@ -81,6 +83,10 @@ ruleModel:
 				lv_modelFeatures_2_0=ruleModelFeatures
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -88,13 +94,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleModelFeatures
-entryRuleModelFeatures:
+entryRuleModelFeatures returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelFeaturesElementType()); }
-	ruleModelFeatures
+	iv_ruleModelFeatures=ruleModelFeatures
+	{ $current=$iv_ruleModelFeatures.current; }
 	EOF;
 
 // Rule ModelFeatures
-ruleModelFeatures:
+ruleModelFeatures returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getModelFeatures_FeatureKeyword_0ElementType());
@@ -107,6 +115,12 @@ ruleModelFeatures:
 			(
 				{
 					markLeaf(elementTypeProvider.getModelFeatures_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -132,13 +146,15 @@ ruleModelFeatures:
 ;
 
 //Entry rule entryRuleDataTypeRule
-entryRuleDataTypeRule:
+entryRuleDataTypeRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDataTypeRuleElementType()); }
-	ruleDataTypeRule
+	iv_ruleDataTypeRule=ruleDataTypeRule
+	{ $current=$iv_ruleDataTypeRule.current; }
 	EOF;
 
 // Rule DataTypeRule
-ruleDataTypeRule:
+ruleDataTypeRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_0ElementType());

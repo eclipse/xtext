@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.FileASTNode;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
@@ -71,6 +72,7 @@ public class PsiToEcoreTransformator implements IParser {
   public IParseResult parse(final Reader reader) {
     ParseResult _xblockexpression = null;
     {
+      ProgressIndicatorProvider.checkCanceled();
       final PsiToEcoreTransformationContext transformationContext = this.transform();
       PsiToEcoreAdapter _psiToEcoreAdapter = new PsiToEcoreAdapter(transformationContext);
       this.adapter = _psiToEcoreAdapter;
@@ -111,6 +113,7 @@ public class PsiToEcoreTransformator implements IParser {
   }
   
   protected void _transformNode(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    ProgressIndicatorProvider.checkCanceled();
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof GrammarAwarePsiErrorElement) {

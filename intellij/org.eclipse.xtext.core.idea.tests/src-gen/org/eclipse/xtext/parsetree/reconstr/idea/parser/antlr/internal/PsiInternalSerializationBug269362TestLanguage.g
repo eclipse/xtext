@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -69,6 +71,12 @@ ruleModel:
 				(
 					{
 						markLeaf(elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
+					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					lv_foo_1_0=RULE_ID
 					{
@@ -88,6 +96,12 @@ ruleModel:
 					(
 						{
 							markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
+						}
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						lv_bar_3_0=RULE_ID
 						{
@@ -110,6 +124,12 @@ ruleModel:
 				(
 					{
 						markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
+					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					lv_bar_5_0=RULE_ID
 					{

@@ -12,6 +12,7 @@ import com.intellij.psi.tree.IElementType
 import org.eclipse.xtext.idea.lang.CreateElementType
 
 import static org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class CompositeMarker {
 
@@ -20,6 +21,8 @@ class CompositeMarker {
 	val IElementType elementType
 
 	val PsiBuilder.Marker marker
+	
+	@Accessors boolean hasSemanticElement
 
 	new(PsiBuilder.Marker marker, int lookAhead, IElementType elementType) {
 		this.marker = marker
@@ -38,6 +41,7 @@ class CompositeMarker {
 	protected def withUserData(IElementType elementType) {
 		new CreateElementType(elementType) [
 			putUserData(LOOK_AHEAD_KEY, lookAhead)
+			putUserData(HAS_SEMANTIC_ELEMENT_KEY, hasSemanticElement)
 		]
 	}
 

@@ -71,15 +71,8 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     };
     Iterable<ILeafNode> _filter = IterableExtensions.<ILeafNode>filter(_flatten, _function_1);
     ILeafNode _head = IterableExtensions.<ILeafNode>head(_filter);
-    List<ASTNode> _aSTNodes = this.xtextFile.getASTNodes(_head);
-    final Function1<ASTNode, PsiElement> _function_2 = new Function1<ASTNode, PsiElement>() {
-      @Override
-      public PsiElement apply(final ASTNode it) {
-        return it.getPsi();
-      }
-    };
-    List<PsiElement> _map_1 = ListExtensions.<ASTNode, PsiElement>map(_aSTNodes, _function_2);
-    return IterableExtensions.<PsiElement>head(_map_1);
+    ASTNode _aSTNode = this.xtextFile.getASTNode(_head);
+    return _aSTNode.getPsi();
   }
   
   @Override

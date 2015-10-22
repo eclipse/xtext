@@ -175,7 +175,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//('actions' '{' actions+=[Command]+ '}')?
+		//'actions' '{' actions+=[Command]+ '}'?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'actions'

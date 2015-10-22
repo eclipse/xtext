@@ -76,18 +76,24 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalBug289515TestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalBug289515TestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalBug289515TestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalBug289515TestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalBug289515TestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalBug289515TestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -99,14 +105,16 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalBug289515TestLanguage.g:58:1: ruleModel : ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalBug289515TestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_value_1_0=null;
         Token otherlv_2=null;
@@ -121,10 +129,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
         Token lv_value_11_0=null;
 
         try {
-            // PsiInternalBug289515TestLanguage.g:58:10: ( ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) )
-            // PsiInternalBug289515TestLanguage.g:59:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
+            // PsiInternalBug289515TestLanguage.g:60:1: ( ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) ) )
+            // PsiInternalBug289515TestLanguage.g:61:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
             {
-            // PsiInternalBug289515TestLanguage.g:59:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
+            // PsiInternalBug289515TestLanguage.g:61:2: ( (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) ) | (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) ) | (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) ) | (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) ) | (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) ) | (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) ) )
             int alt1=6;
             switch ( input.LA(1) ) {
             case 11:
@@ -166,10 +174,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
             switch (alt1) {
                 case 1 :
-                    // PsiInternalBug289515TestLanguage.g:60:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:62:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
                     {
-                    // PsiInternalBug289515TestLanguage.g:60:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
-                    // PsiInternalBug289515TestLanguage.g:61:4: otherlv_0= '1' ( (lv_value_1_0= '%' ) )
+                    // PsiInternalBug289515TestLanguage.g:62:3: (otherlv_0= '1' ( (lv_value_1_0= '%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:63:4: otherlv_0= '1' ( (lv_value_1_0= '%' ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_DigitOneKeyword_0_0ElementType());
@@ -178,11 +186,11 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalBug289515TestLanguage.g:68:4: ( (lv_value_1_0= '%' ) )
-                    // PsiInternalBug289515TestLanguage.g:69:5: (lv_value_1_0= '%' )
+                    // PsiInternalBug289515TestLanguage.g:70:4: ( (lv_value_1_0= '%' ) )
+                    // PsiInternalBug289515TestLanguage.g:71:5: (lv_value_1_0= '%' )
                     {
-                    // PsiInternalBug289515TestLanguage.g:69:5: (lv_value_1_0= '%' )
-                    // PsiInternalBug289515TestLanguage.g:70:6: lv_value_1_0= '%'
+                    // PsiInternalBug289515TestLanguage.g:71:5: (lv_value_1_0= '%' )
+                    // PsiInternalBug289515TestLanguage.g:72:6: lv_value_1_0= '%'
                     {
 
                     						markLeaf(elementTypeProvider.getModel_ValuePercentSignKeyword_0_1_0ElementType());
@@ -190,6 +198,12 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     lv_value_1_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_1_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -204,10 +218,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalBug289515TestLanguage.g:81:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:89:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
                     {
-                    // PsiInternalBug289515TestLanguage.g:81:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
-                    // PsiInternalBug289515TestLanguage.g:82:4: otherlv_2= '2' ( (lv_value_3_0= '%' ) )
+                    // PsiInternalBug289515TestLanguage.g:89:3: (otherlv_2= '2' ( (lv_value_3_0= '%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:90:4: otherlv_2= '2' ( (lv_value_3_0= '%' ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_DigitTwoKeyword_1_0ElementType());
@@ -216,11 +230,11 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalBug289515TestLanguage.g:89:4: ( (lv_value_3_0= '%' ) )
-                    // PsiInternalBug289515TestLanguage.g:90:5: (lv_value_3_0= '%' )
+                    // PsiInternalBug289515TestLanguage.g:97:4: ( (lv_value_3_0= '%' ) )
+                    // PsiInternalBug289515TestLanguage.g:98:5: (lv_value_3_0= '%' )
                     {
-                    // PsiInternalBug289515TestLanguage.g:90:5: (lv_value_3_0= '%' )
-                    // PsiInternalBug289515TestLanguage.g:91:6: lv_value_3_0= '%'
+                    // PsiInternalBug289515TestLanguage.g:98:5: (lv_value_3_0= '%' )
+                    // PsiInternalBug289515TestLanguage.g:99:6: lv_value_3_0= '%'
                     {
 
                     						markLeaf(elementTypeProvider.getModel_ValuePercentSignKeyword_1_1_0ElementType());
@@ -228,6 +242,12 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     lv_value_3_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_3_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -242,10 +262,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // PsiInternalBug289515TestLanguage.g:102:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:116:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
                     {
-                    // PsiInternalBug289515TestLanguage.g:102:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
-                    // PsiInternalBug289515TestLanguage.g:103:4: otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) )
+                    // PsiInternalBug289515TestLanguage.g:116:3: (otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:117:4: otherlv_4= '3' ( (lv_value_5_0= '\\\\%' ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_DigitThreeKeyword_2_0ElementType());
@@ -254,11 +274,11 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalBug289515TestLanguage.g:110:4: ( (lv_value_5_0= '\\\\%' ) )
-                    // PsiInternalBug289515TestLanguage.g:111:5: (lv_value_5_0= '\\\\%' )
+                    // PsiInternalBug289515TestLanguage.g:124:4: ( (lv_value_5_0= '\\\\%' ) )
+                    // PsiInternalBug289515TestLanguage.g:125:5: (lv_value_5_0= '\\\\%' )
                     {
-                    // PsiInternalBug289515TestLanguage.g:111:5: (lv_value_5_0= '\\\\%' )
-                    // PsiInternalBug289515TestLanguage.g:112:6: lv_value_5_0= '\\\\%'
+                    // PsiInternalBug289515TestLanguage.g:125:5: (lv_value_5_0= '\\\\%' )
+                    // PsiInternalBug289515TestLanguage.g:126:6: lv_value_5_0= '\\\\%'
                     {
 
                     						markLeaf(elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_2_1_0ElementType());
@@ -266,6 +286,12 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     lv_value_5_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_5_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -280,10 +306,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 4 :
-                    // PsiInternalBug289515TestLanguage.g:123:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:143:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
                     {
-                    // PsiInternalBug289515TestLanguage.g:123:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
-                    // PsiInternalBug289515TestLanguage.g:124:4: otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) )
+                    // PsiInternalBug289515TestLanguage.g:143:3: (otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:144:4: otherlv_6= '4' ( (lv_value_7_0= '\\\\%' ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_DigitFourKeyword_3_0ElementType());
@@ -292,11 +318,11 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_6);
                     			
-                    // PsiInternalBug289515TestLanguage.g:131:4: ( (lv_value_7_0= '\\\\%' ) )
-                    // PsiInternalBug289515TestLanguage.g:132:5: (lv_value_7_0= '\\\\%' )
+                    // PsiInternalBug289515TestLanguage.g:151:4: ( (lv_value_7_0= '\\\\%' ) )
+                    // PsiInternalBug289515TestLanguage.g:152:5: (lv_value_7_0= '\\\\%' )
                     {
-                    // PsiInternalBug289515TestLanguage.g:132:5: (lv_value_7_0= '\\\\%' )
-                    // PsiInternalBug289515TestLanguage.g:133:6: lv_value_7_0= '\\\\%'
+                    // PsiInternalBug289515TestLanguage.g:152:5: (lv_value_7_0= '\\\\%' )
+                    // PsiInternalBug289515TestLanguage.g:153:6: lv_value_7_0= '\\\\%'
                     {
 
                     						markLeaf(elementTypeProvider.getModel_ValueReverseSolidusPercentSignKeyword_3_1_0ElementType());
@@ -304,6 +330,12 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     lv_value_7_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_7_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -318,10 +350,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 5 :
-                    // PsiInternalBug289515TestLanguage.g:144:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:170:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
                     {
-                    // PsiInternalBug289515TestLanguage.g:144:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
-                    // PsiInternalBug289515TestLanguage.g:145:4: otherlv_8= '5' ( (lv_value_9_0= '%%' ) )
+                    // PsiInternalBug289515TestLanguage.g:170:3: (otherlv_8= '5' ( (lv_value_9_0= '%%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:171:4: otherlv_8= '5' ( (lv_value_9_0= '%%' ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_DigitFiveKeyword_4_0ElementType());
@@ -330,11 +362,11 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_8);
                     			
-                    // PsiInternalBug289515TestLanguage.g:152:4: ( (lv_value_9_0= '%%' ) )
-                    // PsiInternalBug289515TestLanguage.g:153:5: (lv_value_9_0= '%%' )
+                    // PsiInternalBug289515TestLanguage.g:178:4: ( (lv_value_9_0= '%%' ) )
+                    // PsiInternalBug289515TestLanguage.g:179:5: (lv_value_9_0= '%%' )
                     {
-                    // PsiInternalBug289515TestLanguage.g:153:5: (lv_value_9_0= '%%' )
-                    // PsiInternalBug289515TestLanguage.g:154:6: lv_value_9_0= '%%'
+                    // PsiInternalBug289515TestLanguage.g:179:5: (lv_value_9_0= '%%' )
+                    // PsiInternalBug289515TestLanguage.g:180:6: lv_value_9_0= '%%'
                     {
 
                     						markLeaf(elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_4_1_0ElementType());
@@ -342,6 +374,12 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     lv_value_9_0=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_9_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -356,10 +394,10 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 6 :
-                    // PsiInternalBug289515TestLanguage.g:165:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:197:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
                     {
-                    // PsiInternalBug289515TestLanguage.g:165:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
-                    // PsiInternalBug289515TestLanguage.g:166:4: otherlv_10= '6' ( (lv_value_11_0= '%%' ) )
+                    // PsiInternalBug289515TestLanguage.g:197:3: (otherlv_10= '6' ( (lv_value_11_0= '%%' ) ) )
+                    // PsiInternalBug289515TestLanguage.g:198:4: otherlv_10= '6' ( (lv_value_11_0= '%%' ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_DigitSixKeyword_5_0ElementType());
@@ -368,11 +406,11 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_10);
                     			
-                    // PsiInternalBug289515TestLanguage.g:173:4: ( (lv_value_11_0= '%%' ) )
-                    // PsiInternalBug289515TestLanguage.g:174:5: (lv_value_11_0= '%%' )
+                    // PsiInternalBug289515TestLanguage.g:205:4: ( (lv_value_11_0= '%%' ) )
+                    // PsiInternalBug289515TestLanguage.g:206:5: (lv_value_11_0= '%%' )
                     {
-                    // PsiInternalBug289515TestLanguage.g:174:5: (lv_value_11_0= '%%' )
-                    // PsiInternalBug289515TestLanguage.g:175:6: lv_value_11_0= '%%'
+                    // PsiInternalBug289515TestLanguage.g:206:5: (lv_value_11_0= '%%' )
+                    // PsiInternalBug289515TestLanguage.g:207:6: lv_value_11_0= '%%'
                     {
 
                     						markLeaf(elementTypeProvider.getModel_ValuePercentSignPercentSignKeyword_5_1_0ElementType());
@@ -380,6 +418,12 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
                     lv_value_11_0=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_11_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -406,7 +450,7 @@ public class PsiInternalBug289515TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleModel:
 			lv_elements_0_0=ruleElement
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleElement
-entryRuleElement:
+entryRuleElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
-	ruleElement
+	iv_ruleElement=ruleElement
+	{ $current=$iv_ruleElement.current; }
 	EOF;
 
 // Rule Element
-ruleElement:
+ruleElement returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getElement_ElementKeyword_0ElementType());
@@ -93,6 +101,10 @@ ruleElement:
 				lv_first_1_0=ruleNamed
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -104,6 +116,10 @@ ruleElement:
 				lv_second_2_0=ruleNamed
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -116,6 +132,10 @@ ruleElement:
 					lv_third_3_0=ruleNamed
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -127,6 +147,10 @@ ruleElement:
 					lv_forth_4_0=ruleNamed
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -135,13 +159,15 @@ ruleElement:
 ;
 
 //Entry rule entryRuleNamed
-entryRuleNamed:
+entryRuleNamed returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNamedElementType()); }
-	ruleNamed
+	iv_ruleNamed=ruleNamed
+	{ $current=$iv_ruleNamed.current; }
 	EOF;
 
 // Rule Named
-ruleNamed:
+ruleNamed returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -150,24 +176,30 @@ ruleNamed:
 			lv_name_0_0=ruleNAME
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleNAME
-entryRuleNAME@init {
+entryRuleNAME returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	{ markComposite(elementTypeProvider.getNAMEElementType()); }
-	ruleNAME
+	iv_ruleNAME=ruleNAME
+	{ $current=$iv_ruleNAME.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule NAME
-ruleNAME@init {
+ruleNAME returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	(

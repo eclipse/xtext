@@ -1,7 +1,6 @@
 package org.eclipse.xtext.generator.ecore.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageElementTypeProvider;
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.EcoreFragmentTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -27,31 +26,10 @@ public class EcoreFragmentTestLanguageParserDefinition extends AbstractXtextPars
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType()) {
-			return new PsiEObjectReference(node);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
 		}
-		if (elementType == elementTypeProvider.getSecondElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSecond_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSecond_NameAssignment_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSecond_FirstKeyword_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSecond_FirstAssignment_2ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSecond_FirstFirstIDTerminalRuleCall_2_0_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

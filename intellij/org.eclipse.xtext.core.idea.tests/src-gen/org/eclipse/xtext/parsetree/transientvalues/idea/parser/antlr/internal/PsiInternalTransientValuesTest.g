@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleRoot
-entryRuleRoot:
+entryRuleRoot returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
-	ruleRoot
+	iv_ruleRoot=ruleRoot
+	{ $current=$iv_ruleRoot.current; }
 	EOF;
 
 // Rule Root
-ruleRoot:
+ruleRoot returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getRoot_TestKeyword_0ElementType());
@@ -68,24 +70,27 @@ ruleRoot:
 			{
 				markComposite(elementTypeProvider.getRoot_TestRequiredParserRuleCall_1_0ElementType());
 			}
-			ruleTestRequired
+			this_TestRequired_1=ruleTestRequired
 			{
+				$current = $this_TestRequired_1.current;
 				doneComposite();
 			}
 			    |
 			{
 				markComposite(elementTypeProvider.getRoot_TestOptionalParserRuleCall_1_1ElementType());
 			}
-			ruleTestOptional
+			this_TestOptional_2=ruleTestOptional
 			{
+				$current = $this_TestOptional_2.current;
 				doneComposite();
 			}
 			    |
 			{
 				markComposite(elementTypeProvider.getRoot_TestListParserRuleCall_1_2ElementType());
 			}
-			ruleTestList
+			this_TestList_3=ruleTestList
 			{
+				$current = $this_TestList_3.current;
 				doneComposite();
 			}
 		)
@@ -93,18 +98,21 @@ ruleRoot:
 ;
 
 //Entry rule entryRuleTestRequired
-entryRuleTestRequired:
+entryRuleTestRequired returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTestRequiredElementType()); }
-	ruleTestRequired
+	iv_ruleTestRequired=ruleTestRequired
+	{ $current=$iv_ruleTestRequired.current; }
 	EOF;
 
 // Rule TestRequired
-ruleTestRequired:
+ruleTestRequired returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getTestRequired_TestRequiredAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -119,6 +127,12 @@ ruleTestRequired:
 				{
 					markLeaf(elementTypeProvider.getTestRequired_Required1INTTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_required1_2_0=RULE_INT
 				{
 					doneLeaf(lv_required1_2_0);
@@ -130,6 +144,12 @@ ruleTestRequired:
 				{
 					markLeaf(elementTypeProvider.getTestRequired_Required2INTTerminalRuleCall_3_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_required2_3_0=RULE_INT
 				{
 					doneLeaf(lv_required2_3_0);
@@ -140,18 +160,21 @@ ruleTestRequired:
 ;
 
 //Entry rule entryRuleTestOptional
-entryRuleTestOptional:
+entryRuleTestOptional returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTestOptionalElementType()); }
-	ruleTestOptional
+	iv_ruleTestOptional=ruleTestOptional
+	{ $current=$iv_ruleTestOptional.current; }
 	EOF;
 
 // Rule TestOptional
-ruleTestOptional:
+ruleTestOptional returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getTestOptional_TestOptionalAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -165,6 +188,12 @@ ruleTestOptional:
 			(
 				{
 					markLeaf(elementTypeProvider.getTestOptional_Opt1INTTerminalRuleCall_2_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_opt1_2_0=RULE_INT
 				{
@@ -185,6 +214,12 @@ ruleTestOptional:
 					{
 						markLeaf(elementTypeProvider.getTestOptional_Opt2INTTerminalRuleCall_3_1_0ElementType());
 					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					lv_opt2_4_0=RULE_INT
 					{
 						doneLeaf(lv_opt2_4_0);
@@ -196,18 +231,21 @@ ruleTestOptional:
 ;
 
 //Entry rule entryRuleTestList
-entryRuleTestList:
+entryRuleTestList returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTestListElementType()); }
-	ruleTestList
+	iv_ruleTestList=ruleTestList
+	{ $current=$iv_ruleTestList.current; }
 	EOF;
 
 // Rule TestList
-ruleTestList:
+ruleTestList returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getTestList_TestListAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -221,6 +259,12 @@ ruleTestList:
 			(
 				{
 					markLeaf(elementTypeProvider.getTestList_ItemINTTerminalRuleCall_2_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_item_2_0=RULE_INT
 				{

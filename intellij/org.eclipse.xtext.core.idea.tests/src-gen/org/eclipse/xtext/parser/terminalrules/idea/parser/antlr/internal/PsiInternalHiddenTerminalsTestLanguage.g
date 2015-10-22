@@ -49,64 +49,73 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_WithoutHiddensParserRuleCall_0ElementType());
 		}
-		ruleWithoutHiddens
+		this_WithoutHiddens_0=ruleWithoutHiddens
 		{
+			$current = $this_WithoutHiddens_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_WithHiddensParserRuleCall_1ElementType());
 		}
-		ruleWithHiddens
+		this_WithHiddens_1=ruleWithHiddens
 		{
+			$current = $this_WithHiddens_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_OverridingHiddensParserRuleCall_2ElementType());
 		}
-		ruleOverridingHiddens
+		this_OverridingHiddens_2=ruleOverridingHiddens
 		{
+			$current = $this_OverridingHiddens_2.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_InheritingHiddensParserRuleCall_3ElementType());
 		}
-		ruleInheritingHiddens
+		this_InheritingHiddens_3=ruleInheritingHiddens
 		{
+			$current = $this_InheritingHiddens_3.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_DatatypeHiddensParserRuleCall_4ElementType());
 		}
-		ruleDatatypeHiddens
+		this_DatatypeHiddens_4=ruleDatatypeHiddens
 		{
+			$current = $this_DatatypeHiddens_4.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleWithoutHiddens
-entryRuleWithoutHiddens:
+entryRuleWithoutHiddens returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getWithoutHiddensElementType()); }
-	ruleWithoutHiddens
+	iv_ruleWithoutHiddens=ruleWithoutHiddens
+	{ $current=$iv_ruleWithoutHiddens.current; }
 	EOF;
 
 // Rule WithoutHiddens
-ruleWithoutHiddens:
+ruleWithoutHiddens returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getWithoutHiddens_WithoutKeyword_0ElementType());
@@ -119,6 +128,12 @@ ruleWithoutHiddens:
 			(
 				{
 					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_spaces_1_0=RULE_WS
 				{
@@ -138,6 +153,12 @@ ruleWithoutHiddens:
 				{
 					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_spaces_3_0=RULE_WS
 				{
 					doneLeaf(lv_spaces_3_0);
@@ -153,24 +174,32 @@ ruleWithoutHiddens:
 				{
 					doneLeaf(lv_valid_4_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
 ;
 
 //Entry rule entryRuleWithHiddens
-entryRuleWithHiddens@init {
+entryRuleWithHiddens returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 }:
 	{ markComposite(elementTypeProvider.getWithHiddensElementType()); }
-	ruleWithHiddens
+	iv_ruleWithHiddens=ruleWithHiddens
+	{ $current=$iv_ruleWithHiddens.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule WithHiddens
-ruleWithHiddens@init {
+ruleWithHiddens returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 }:
 	(
@@ -197,6 +226,12 @@ ruleWithHiddens@init {
 				{
 					doneLeaf(lv_valid_2_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
@@ -206,18 +241,20 @@ finally {
 }
 
 //Entry rule entryRuleOverridingHiddens
-entryRuleOverridingHiddens@init {
+entryRuleOverridingHiddens returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 }:
 	{ markComposite(elementTypeProvider.getOverridingHiddensElementType()); }
-	ruleOverridingHiddens
+	iv_ruleOverridingHiddens=ruleOverridingHiddens
+	{ $current=$iv_ruleOverridingHiddens.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule OverridingHiddens
-ruleOverridingHiddens@init {
+ruleOverridingHiddens returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 }:
 	(
@@ -250,6 +287,10 @@ ruleOverridingHiddens@init {
 				lv_called_3_0=ruleOverridingHiddensCall
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -269,6 +310,12 @@ ruleOverridingHiddens@init {
 				{
 					doneLeaf(lv_valid_5_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
@@ -278,18 +325,20 @@ finally {
 }
 
 //Entry rule entryRuleOverridingHiddensCall
-entryRuleOverridingHiddensCall@init {
+entryRuleOverridingHiddensCall returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	{ markComposite(elementTypeProvider.getOverridingHiddensCallElementType()); }
-	ruleOverridingHiddensCall
+	iv_ruleOverridingHiddensCall=ruleOverridingHiddensCall
+	{ $current=$iv_ruleOverridingHiddensCall.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule OverridingHiddensCall
-ruleOverridingHiddensCall@init {
+ruleOverridingHiddensCall returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	(
@@ -304,6 +353,12 @@ ruleOverridingHiddensCall@init {
 			(
 				{
 					markLeaf(elementTypeProvider.getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_spaces_1_0=RULE_WS
 				{
@@ -320,6 +375,12 @@ ruleOverridingHiddensCall@init {
 				{
 					doneLeaf(lv_valid_2_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
@@ -329,18 +390,20 @@ finally {
 }
 
 //Entry rule entryRuleInheritingHiddens
-entryRuleInheritingHiddens@init {
+entryRuleInheritingHiddens returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 }:
 	{ markComposite(elementTypeProvider.getInheritingHiddensElementType()); }
-	ruleInheritingHiddens
+	iv_ruleInheritingHiddens=ruleInheritingHiddens
+	{ $current=$iv_ruleInheritingHiddens.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule InheritingHiddens
-ruleInheritingHiddens@init {
+ruleInheritingHiddens returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 }:
 	(
@@ -374,6 +437,10 @@ ruleInheritingHiddens@init {
 					lv_called_3_0=ruleInheritingHiddensCall
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -386,6 +453,10 @@ ruleInheritingHiddens@init {
 					lv_hidingCalled_4_0=ruleHidingHiddens
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -406,6 +477,12 @@ ruleInheritingHiddens@init {
 				{
 					doneLeaf(lv_valid_6_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
@@ -415,13 +492,15 @@ finally {
 }
 
 //Entry rule entryRuleDatatypeHiddens
-entryRuleDatatypeHiddens:
+entryRuleDatatypeHiddens returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDatatypeHiddensElementType()); }
-	ruleDatatypeHiddens
+	iv_ruleDatatypeHiddens=ruleDatatypeHiddens
+	{ $current=$iv_ruleDatatypeHiddens.current; }
 	EOF;
 
 // Rule DatatypeHiddens
-ruleDatatypeHiddens:
+ruleDatatypeHiddens returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDatatypeHiddens_DatatypeKeyword_0ElementType());
@@ -438,6 +517,10 @@ ruleDatatypeHiddens:
 				lv_valid_1_0=ruleDatatypeRule
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -445,18 +528,20 @@ ruleDatatypeHiddens:
 ;
 
 //Entry rule entryRuleDatatypeRule
-entryRuleDatatypeRule@init {
+entryRuleDatatypeRule returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	{ markComposite(elementTypeProvider.getDatatypeRuleElementType()); }
-	ruleDatatypeRule
+	iv_ruleDatatypeRule=ruleDatatypeRule
+	{ $current=$iv_ruleDatatypeRule.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule DatatypeRule
-ruleDatatypeRule@init {
+ruleDatatypeRule returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	(
@@ -481,18 +566,20 @@ finally {
 }
 
 //Entry rule entryRuleHidingHiddens
-entryRuleHidingHiddens@init {
+entryRuleHidingHiddens returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	{ markComposite(elementTypeProvider.getHidingHiddensElementType()); }
-	ruleHidingHiddens
+	iv_ruleHidingHiddens=ruleHidingHiddens
+	{ $current=$iv_ruleHidingHiddens.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule HidingHiddens
-ruleHidingHiddens@init {
+ruleHidingHiddens returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	(
@@ -508,6 +595,12 @@ ruleHidingHiddens@init {
 				{
 					markLeaf(elementTypeProvider.getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_space_1_0=RULE_WS
 				{
 					doneLeaf(lv_space_1_0);
@@ -522,6 +615,10 @@ ruleHidingHiddens@init {
 				lv_called_2_0=ruleInheritingHiddensCall
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -532,13 +629,15 @@ finally {
 }
 
 //Entry rule entryRuleInheritingHiddensCall
-entryRuleInheritingHiddensCall:
+entryRuleInheritingHiddensCall returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getInheritingHiddensCallElementType()); }
-	ruleInheritingHiddensCall
+	iv_ruleInheritingHiddensCall=ruleInheritingHiddensCall
+	{ $current=$iv_ruleInheritingHiddensCall.current; }
 	EOF;
 
 // Rule InheritingHiddensCall
-ruleInheritingHiddensCall:
+ruleInheritingHiddensCall returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getInheritingHiddensCall_CallKeyword_0ElementType());
@@ -555,6 +654,12 @@ ruleInheritingHiddensCall:
 				lv_valid_1_0=';'
 				{
 					doneLeaf(lv_valid_1_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)

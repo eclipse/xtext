@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleProgram
-entryRuleProgram:
+entryRuleProgram returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getProgramElementType()); }
-	ruleProgram
+	iv_ruleProgram=ruleProgram
+	{ $current=$iv_ruleProgram.current; }
 	EOF;
 
 // Rule Program
-ruleProgram:
+ruleProgram returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleProgram:
 				lv_define_0_0=ruleDefineVariables
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -76,6 +82,10 @@ ruleProgram:
 				lv_statements_1_0=ruleStatement
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -90,13 +100,15 @@ ruleProgram:
 ;
 
 //Entry rule entryRuleDefineVariables
-entryRuleDefineVariables:
+entryRuleDefineVariables returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDefineVariablesElementType()); }
-	ruleDefineVariables
+	iv_ruleDefineVariables=ruleDefineVariables
+	{ $current=$iv_ruleDefineVariables.current; }
 	EOF;
 
 // Rule DefineVariables
-ruleDefineVariables:
+ruleDefineVariables returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDefineVariables_VARIABLESKeyword_0ElementType());
@@ -113,6 +125,10 @@ ruleDefineVariables:
 				lv_variables_1_0=ruleDefineVariable
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)+
@@ -127,13 +143,15 @@ ruleDefineVariables:
 ;
 
 //Entry rule entryRuleDefineVariable
-entryRuleDefineVariable:
+entryRuleDefineVariable returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDefineVariableElementType()); }
-	ruleDefineVariable
+	iv_ruleDefineVariable=ruleDefineVariable
+	{ $current=$iv_ruleDefineVariable.current; }
 	EOF;
 
 // Rule DefineVariable
-ruleDefineVariable:
+ruleDefineVariable returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDefineVariable_NAMEKeyword_0ElementType());
@@ -147,6 +165,12 @@ ruleDefineVariable:
 				{
 					markLeaf(elementTypeProvider.getDefineVariable_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
@@ -157,15 +181,23 @@ ruleDefineVariable:
 ;
 
 //Entry rule entryRuleNVariableAccess
-entryRuleNVariableAccess:
+entryRuleNVariableAccess returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNVariableAccessElementType()); }
-	ruleNVariableAccess
+	iv_ruleNVariableAccess=ruleNVariableAccess
+	{ $current=$iv_ruleNVariableAccess.current; }
 	EOF;
 
 // Rule NVariableAccess
-ruleNVariableAccess:
+ruleNVariableAccess returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getNVariableAccess_VariableDefineVariableCrossReference_0ElementType());
 			}
@@ -178,19 +210,22 @@ ruleNVariableAccess:
 ;
 
 //Entry rule entryRuleStatement
-entryRuleStatement:
+entryRuleStatement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getStatementElementType()); }
-	ruleStatement
+	iv_ruleStatement=ruleStatement
+	{ $current=$iv_ruleStatement.current; }
 	EOF;
 
 // Rule Statement
-ruleStatement:
+ruleStatement returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getStatement_Expression_VariableNameParserRuleCall_0ElementType());
 		}
-		ruleExpression_VariableName
+		this_Expression_VariableName_0=ruleExpression_VariableName
 		{
+			$current = $this_Expression_VariableName_0.current;
 			doneComposite();
 		}
 		(
@@ -206,6 +241,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_Larger_EqualLeftAction_1_0_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -216,6 +252,10 @@ ruleStatement:
 						lv_right_3_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -233,6 +273,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_SmallerLeftAction_1_1_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -243,6 +284,10 @@ ruleStatement:
 						lv_right_6_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -260,6 +305,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_Smaller_EqualLeftAction_1_2_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -270,6 +316,10 @@ ruleStatement:
 						lv_right_9_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -287,6 +337,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_EqualLeftAction_1_3_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -297,6 +348,10 @@ ruleStatement:
 						lv_right_12_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -314,6 +369,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_Not_EqualLeftAction_1_4_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -324,6 +380,10 @@ ruleStatement:
 						lv_right_15_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -350,6 +410,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_Not_LessLeftAction_1_5_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -360,6 +421,10 @@ ruleStatement:
 						lv_right_19_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -386,6 +451,7 @@ ruleStatement:
 					{
 						precedeComposite(elementTypeProvider.getStatement_Expression_Not_GreaterLeftAction_1_6_1ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				(
@@ -396,6 +462,10 @@ ruleStatement:
 						lv_right_23_0=ruleExpression_VariableName
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -405,13 +475,15 @@ ruleStatement:
 ;
 
 //Entry rule entryRuleExpression_VariableName
-entryRuleExpression_VariableName:
+entryRuleExpression_VariableName returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExpression_VariableNameElementType()); }
-	ruleExpression_VariableName
+	iv_ruleExpression_VariableName=ruleExpression_VariableName
+	{ $current=$iv_ruleExpression_VariableName.current; }
 	EOF;
 
 // Rule Expression_VariableName
-ruleExpression_VariableName:
+ruleExpression_VariableName returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -420,6 +492,10 @@ ruleExpression_VariableName:
 			lv_variable_0_0=ruleNVariableAccess
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)

@@ -69,18 +69,24 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalCommentAssociationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalCommentAssociationTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalCommentAssociationTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalCommentAssociationTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalCommentAssociationTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalCommentAssociationTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -92,19 +98,24 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalCommentAssociationTestLanguage.g:58:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalCommentAssociationTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_elements_0_0= ruleElement ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_elements_0_0 = null;
+
+
         try {
-            // PsiInternalCommentAssociationTestLanguage.g:58:10: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // PsiInternalCommentAssociationTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
+            // PsiInternalCommentAssociationTestLanguage.g:60:1: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // PsiInternalCommentAssociationTestLanguage.g:61:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // PsiInternalCommentAssociationTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
+            // PsiInternalCommentAssociationTestLanguage.g:61:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -117,21 +128,25 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalCommentAssociationTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalCommentAssociationTestLanguage.g:62:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // PsiInternalCommentAssociationTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
-            	    // PsiInternalCommentAssociationTestLanguage.g:61:4: lv_elements_0_0= ruleElement
+            	    // PsiInternalCommentAssociationTestLanguage.g:62:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalCommentAssociationTestLanguage.g:63:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleElement();
+            	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -155,24 +170,30 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleElement"
-    // PsiInternalCommentAssociationTestLanguage.g:73:1: entryRuleElement : ruleElement EOF ;
-    public final void entryRuleElement() throws RecognitionException {
+    // PsiInternalCommentAssociationTestLanguage.g:79:1: entryRuleElement returns [Boolean current=false] : iv_ruleElement= ruleElement EOF ;
+    public final Boolean entryRuleElement() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleElement = null;
+
+
         try {
-            // PsiInternalCommentAssociationTestLanguage.g:73:17: ( ruleElement EOF )
-            // PsiInternalCommentAssociationTestLanguage.g:74:2: ruleElement EOF
+            // PsiInternalCommentAssociationTestLanguage.g:79:49: (iv_ruleElement= ruleElement EOF )
+            // PsiInternalCommentAssociationTestLanguage.g:80:2: iv_ruleElement= ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleElement();
+            iv_ruleElement=ruleElement();
 
             state._fsp--;
 
+             current =iv_ruleElement; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -184,25 +205,27 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleElement"
 
 
     // $ANTLR start "ruleElement"
-    // PsiInternalCommentAssociationTestLanguage.g:79:1: ruleElement : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) ;
-    public final void ruleElement() throws RecognitionException {
+    // PsiInternalCommentAssociationTestLanguage.g:86:1: ruleElement returns [Boolean current=false] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) ;
+    public final Boolean ruleElement() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_3=null;
         Token lv_name_4_0=null;
 
         try {
-            // PsiInternalCommentAssociationTestLanguage.g:79:12: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) )
-            // PsiInternalCommentAssociationTestLanguage.g:80:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
+            // PsiInternalCommentAssociationTestLanguage.g:87:1: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) )
+            // PsiInternalCommentAssociationTestLanguage.g:88:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
             {
-            // PsiInternalCommentAssociationTestLanguage.g:80:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
-            // PsiInternalCommentAssociationTestLanguage.g:81:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
+            // PsiInternalCommentAssociationTestLanguage.g:88:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
+            // PsiInternalCommentAssociationTestLanguage.g:89:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
             {
 
             			markLeaf(elementTypeProvider.getElement_ElementKeyword_0ElementType());
@@ -211,14 +234,20 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalCommentAssociationTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalCommentAssociationTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalCommentAssociationTestLanguage.g:96:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalCommentAssociationTestLanguage.g:97:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalCommentAssociationTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalCommentAssociationTestLanguage.g:90:5: lv_name_1_0= RULE_ID
+            // PsiInternalCommentAssociationTestLanguage.g:97:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalCommentAssociationTestLanguage.g:98:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
@@ -230,7 +259,7 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalCommentAssociationTestLanguage.g:99:3: ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
+            // PsiInternalCommentAssociationTestLanguage.g:113:3: ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -239,14 +268,15 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalCommentAssociationTestLanguage.g:100:4: () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) )
+                    // PsiInternalCommentAssociationTestLanguage.g:114:4: () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) )
                     {
-                    // PsiInternalCommentAssociationTestLanguage.g:100:4: ()
-                    // PsiInternalCommentAssociationTestLanguage.g:101:5: 
+                    // PsiInternalCommentAssociationTestLanguage.g:114:4: ()
+                    // PsiInternalCommentAssociationTestLanguage.g:115:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getElement_ElementChildAction_2_0ElementType());
                     					doneComposite();
+                    					associateWithSemanticElement();
                     				
 
                     }
@@ -258,14 +288,20 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
                     				doneLeaf(otherlv_3);
                     			
-                    // PsiInternalCommentAssociationTestLanguage.g:113:4: ( (lv_name_4_0= RULE_ID ) )
-                    // PsiInternalCommentAssociationTestLanguage.g:114:5: (lv_name_4_0= RULE_ID )
+                    // PsiInternalCommentAssociationTestLanguage.g:128:4: ( (lv_name_4_0= RULE_ID ) )
+                    // PsiInternalCommentAssociationTestLanguage.g:129:5: (lv_name_4_0= RULE_ID )
                     {
-                    // PsiInternalCommentAssociationTestLanguage.g:114:5: (lv_name_4_0= RULE_ID )
-                    // PsiInternalCommentAssociationTestLanguage.g:115:6: lv_name_4_0= RULE_ID
+                    // PsiInternalCommentAssociationTestLanguage.g:129:5: (lv_name_4_0= RULE_ID )
+                    // PsiInternalCommentAssociationTestLanguage.g:130:6: lv_name_4_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -296,7 +332,7 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleElement"
 

@@ -85,7 +85,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//WS*
 		public RuleCall getWSTerminalRuleCall_0() { return cWSTerminalRuleCall_0; }
 
-		//('\r'? '\n')
+		//'\r'? '\n'
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'\r'?

@@ -68,18 +68,24 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleSuperMain"
-    // PsiInternalSuperTestLanguage.g:52:1: entryRuleSuperMain : ruleSuperMain EOF ;
-    public final void entryRuleSuperMain() throws RecognitionException {
+    // PsiInternalSuperTestLanguage.g:52:1: entryRuleSuperMain returns [Boolean current=false] : iv_ruleSuperMain= ruleSuperMain EOF ;
+    public final Boolean entryRuleSuperMain() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSuperMain = null;
+
+
         try {
-            // PsiInternalSuperTestLanguage.g:52:19: ( ruleSuperMain EOF )
-            // PsiInternalSuperTestLanguage.g:53:2: ruleSuperMain EOF
+            // PsiInternalSuperTestLanguage.g:52:51: (iv_ruleSuperMain= ruleSuperMain EOF )
+            // PsiInternalSuperTestLanguage.g:53:2: iv_ruleSuperMain= ruleSuperMain EOF
             {
              markComposite(elementTypeProvider.getSuperMainElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSuperMain();
+            iv_ruleSuperMain=ruleSuperMain();
 
             state._fsp--;
 
+             current =iv_ruleSuperMain; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -91,23 +97,25 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSuperMain"
 
 
     // $ANTLR start "ruleSuperMain"
-    // PsiInternalSuperTestLanguage.g:58:1: ruleSuperMain : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
-    public final void ruleSuperMain() throws RecognitionException {
+    // PsiInternalSuperTestLanguage.g:59:1: ruleSuperMain returns [Boolean current=false] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleSuperMain() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalSuperTestLanguage.g:58:14: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalSuperTestLanguage.g:59:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSuperTestLanguage.g:60:1: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSuperTestLanguage.g:61:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalSuperTestLanguage.g:59:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalSuperTestLanguage.g:60:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSuperTestLanguage.g:61:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSuperTestLanguage.g:62:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
@@ -116,14 +124,20 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSuperTestLanguage.g:67:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalSuperTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSuperTestLanguage.g:69:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSuperTestLanguage.g:70:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalSuperTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalSuperTestLanguage.g:69:5: lv_name_1_0= RULE_ID
+            // PsiInternalSuperTestLanguage.g:70:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSuperTestLanguage.g:71:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -148,7 +162,7 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSuperMain"
 

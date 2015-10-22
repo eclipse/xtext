@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -69,6 +71,12 @@ ruleModel:
 				(
 					{
 						markLeaf(elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
+					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					lv_intValues_1_0=RULE_EINT
 					{
@@ -91,6 +99,12 @@ ruleModel:
 					{
 						markLeaf(elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
 					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					lv_doubleValues_3_0=RULE_EDOUBLE
 					{
 						doneLeaf(lv_doubleValues_3_0);
@@ -111,6 +125,12 @@ ruleModel:
 				(
 					{
 						markLeaf(elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
+					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					lv_dateValues_5_0=RULE_EDATE
 					{

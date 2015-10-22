@@ -49,19 +49,22 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_ChildParserRuleCall_0ElementType());
 		}
-		ruleChild
+		this_Child_0=ruleChild
 		{
+			$current = $this_Child_0.current;
 			doneComposite();
 		}
 		(
@@ -69,6 +72,7 @@ ruleModel:
 				{
 					precedeComposite(elementTypeProvider.getModel_ParentLeftAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
@@ -79,6 +83,10 @@ ruleModel:
 					lv_right_2_0=ruleChild
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -87,17 +95,25 @@ ruleModel:
 ;
 
 //Entry rule entryRuleChild
-entryRuleChild:
+entryRuleChild returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getChildElementType()); }
-	ruleChild
+	iv_ruleChild=ruleChild
+	{ $current=$iv_ruleChild.current; }
 	EOF;
 
 // Rule Child
-ruleChild:
+ruleChild returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getChild_NameIDTerminalRuleCall_0ElementType());
+			}
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 			lv_name_0_0=RULE_ID
 			{

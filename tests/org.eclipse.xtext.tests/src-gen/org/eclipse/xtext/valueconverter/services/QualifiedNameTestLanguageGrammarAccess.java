@@ -63,7 +63,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('.' ID)*
+		//'.' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'.'
@@ -72,7 +72,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 
-		//('.' '*')?
+		//'.' '*'?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'.'

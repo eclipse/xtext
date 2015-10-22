@@ -49,56 +49,64 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleRootRule
-entryRuleRootRule:
+entryRuleRootRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRootRuleElementType()); }
-	ruleRootRule
+	iv_ruleRootRule=ruleRootRule
+	{ $current=$iv_ruleRootRule.current; }
 	EOF;
 
 // Rule RootRule
-ruleRootRule:
+ruleRootRule returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getRootRule_ConcreteParserRuleParserRuleCall_0ElementType());
 		}
-		ruleConcreteParserRule
+		this_ConcreteParserRule_0=ruleConcreteParserRule
 		{
+			$current = $this_ConcreteParserRule_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getRootRule_CallOverridenParserRuleParserRuleCall_1ElementType());
 		}
-		ruleCallOverridenParserRule
+		this_CallOverridenParserRule_1=ruleCallOverridenParserRule
 		{
+			$current = $this_CallOverridenParserRule_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getRootRule_CallExtendedParserRuleParserRuleCall_2ElementType());
 		}
-		ruleCallExtendedParserRule
+		this_CallExtendedParserRule_2=ruleCallExtendedParserRule
 		{
+			$current = $this_CallExtendedParserRule_2.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getRootRule_OverridableParserRule2ParserRuleCall_3ElementType());
 		}
-		ruleOverridableParserRule2
+		this_OverridableParserRule2_3=ruleOverridableParserRule2
 		{
+			$current = $this_OverridableParserRule2_3.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleConcreteParserRule
-entryRuleConcreteParserRule:
+entryRuleConcreteParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getConcreteParserRuleElementType()); }
-	ruleConcreteParserRule
+	iv_ruleConcreteParserRule=ruleConcreteParserRule
+	{ $current=$iv_ruleConcreteParserRule.current; }
 	EOF;
 
 // Rule ConcreteParserRule
-ruleConcreteParserRule:
+ruleConcreteParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getConcreteParserRule_ModelKeyword_0ElementType());
@@ -111,6 +119,12 @@ ruleConcreteParserRule:
 			(
 				{
 					markLeaf(elementTypeProvider.getConcreteParserRule_MagicNumberREALTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_magicNumber_1_0=RULE_REAL
 				{
@@ -133,6 +147,10 @@ ruleConcreteParserRule:
 				lv_elements_3_0=ruleInheritedParserRule
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -140,13 +158,15 @@ ruleConcreteParserRule:
 ;
 
 //Entry rule entryRuleOverridableParserRule
-entryRuleOverridableParserRule:
+entryRuleOverridableParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getOverridableParserRuleElementType()); }
-	ruleOverridableParserRule
+	iv_ruleOverridableParserRule=ruleOverridableParserRule
+	{ $current=$iv_ruleOverridableParserRule.current; }
 	EOF;
 
 // Rule OverridableParserRule
-ruleOverridableParserRule:
+ruleOverridableParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getOverridableParserRule_OverriddenelementKeyword_0ElementType());
@@ -160,6 +180,12 @@ ruleOverridableParserRule:
 				{
 					markLeaf(elementTypeProvider.getOverridableParserRule_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
@@ -170,13 +196,15 @@ ruleOverridableParserRule:
 ;
 
 //Entry rule entryRuleCallOverridenParserRule
-entryRuleCallOverridenParserRule:
+entryRuleCallOverridenParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCallOverridenParserRuleElementType()); }
-	ruleCallOverridenParserRule
+	iv_ruleCallOverridenParserRule=ruleCallOverridenParserRule
+	{ $current=$iv_ruleCallOverridenParserRule.current; }
 	EOF;
 
 // Rule CallOverridenParserRule
-ruleCallOverridenParserRule:
+ruleCallOverridenParserRule returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -185,19 +213,25 @@ ruleCallOverridenParserRule:
 			lv_call_0_0=ruleAbstractCallOverridenParserRule
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleOverridableParserRule2
-entryRuleOverridableParserRule2:
+entryRuleOverridableParserRule2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getOverridableParserRule2ElementType()); }
-	ruleOverridableParserRule2
+	iv_ruleOverridableParserRule2=ruleOverridableParserRule2
+	{ $current=$iv_ruleOverridableParserRule2.current; }
 	EOF;
 
 // Rule OverridableParserRule2
-ruleOverridableParserRule2:
+ruleOverridableParserRule2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getOverridableParserRule2_OverriddenOtherElementKeyword_0ElementType());
@@ -210,6 +244,12 @@ ruleOverridableParserRule2:
 			(
 				{
 					markLeaf(elementTypeProvider.getOverridableParserRule2_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -229,6 +269,12 @@ ruleOverridableParserRule2:
 				{
 					markLeaf(elementTypeProvider.getOverridableParserRule2_AgeINTTerminalRuleCall_3_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_age_3_0=RULE_INT
 				{
 					doneLeaf(lv_age_3_0);
@@ -239,48 +285,55 @@ ruleOverridableParserRule2:
 ;
 
 //Entry rule entryRuleExtendableParserRule
-entryRuleExtendableParserRule:
+entryRuleExtendableParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExtendableParserRuleElementType()); }
-	ruleExtendableParserRule
+	iv_ruleExtendableParserRule=ruleExtendableParserRule
+	{ $current=$iv_ruleExtendableParserRule.current; }
 	EOF;
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule:
+ruleExtendableParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getExtendableParserRule_Subrule1ParserRuleCall_0ElementType());
 		}
-		ruleSubrule1
+		this_Subrule1_0=ruleSubrule1
 		{
+			$current = $this_Subrule1_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getExtendableParserRule_Subrule2ParserRuleCall_1ElementType());
 		}
-		ruleSubrule2
+		this_Subrule2_1=ruleSubrule2
 		{
+			$current = $this_Subrule2_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getExtendableParserRule_Subrule3ParserRuleCall_2ElementType());
 		}
-		ruleSubrule3
+		this_Subrule3_2=ruleSubrule3
 		{
+			$current = $this_Subrule3_2.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleSubrule1
-entryRuleSubrule1:
+entryRuleSubrule1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSubrule1ElementType()); }
-	ruleSubrule1
+	iv_ruleSubrule1=ruleSubrule1
+	{ $current=$iv_ruleSubrule1.current; }
 	EOF;
 
 // Rule Subrule1
-ruleSubrule1:
+ruleSubrule1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSubrule1_Subrule1Keyword_0ElementType());
@@ -294,6 +347,12 @@ ruleSubrule1:
 				{
 					markLeaf(elementTypeProvider.getSubrule1_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
@@ -305,6 +364,12 @@ ruleSubrule1:
 				{
 					markLeaf(elementTypeProvider.getSubrule1_Sub1IDTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_sub1_2_0=RULE_ID
 				{
 					doneLeaf(lv_sub1_2_0);
@@ -315,13 +380,15 @@ ruleSubrule1:
 ;
 
 //Entry rule entryRuleSubrule2
-entryRuleSubrule2:
+entryRuleSubrule2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSubrule2ElementType()); }
-	ruleSubrule2
+	iv_ruleSubrule2=ruleSubrule2
+	{ $current=$iv_ruleSubrule2.current; }
 	EOF;
 
 // Rule Subrule2
-ruleSubrule2:
+ruleSubrule2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSubrule2_Subrule3Keyword_0ElementType());
@@ -335,6 +402,12 @@ ruleSubrule2:
 				{
 					markLeaf(elementTypeProvider.getSubrule2_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
@@ -346,6 +419,12 @@ ruleSubrule2:
 				{
 					markLeaf(elementTypeProvider.getSubrule2_Sub2STRINGTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_sub2_2_0=RULE_STRING
 				{
 					doneLeaf(lv_sub2_2_0);
@@ -356,13 +435,15 @@ ruleSubrule2:
 ;
 
 //Entry rule entryRuleSubrule3
-entryRuleSubrule3:
+entryRuleSubrule3 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSubrule3ElementType()); }
-	ruleSubrule3
+	iv_ruleSubrule3=ruleSubrule3
+	{ $current=$iv_ruleSubrule3.current; }
 	EOF;
 
 // Rule Subrule3
-ruleSubrule3:
+ruleSubrule3 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSubrule3_Subrule3Keyword_0ElementType());
@@ -376,6 +457,12 @@ ruleSubrule3:
 				{
 					markLeaf(elementTypeProvider.getSubrule3_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
@@ -387,6 +474,12 @@ ruleSubrule3:
 				{
 					markLeaf(elementTypeProvider.getSubrule3_Sub1INTTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_sub1_2_0=RULE_INT
 				{
 					doneLeaf(lv_sub1_2_0);
@@ -397,13 +490,15 @@ ruleSubrule3:
 ;
 
 //Entry rule entryRuleCallExtendedParserRule
-entryRuleCallExtendedParserRule:
+entryRuleCallExtendedParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCallExtendedParserRuleElementType()); }
-	ruleCallExtendedParserRule
+	iv_ruleCallExtendedParserRule=ruleCallExtendedParserRule
+	{ $current=$iv_ruleCallExtendedParserRule.current; }
 	EOF;
 
 // Rule CallExtendedParserRule
-ruleCallExtendedParserRule:
+ruleCallExtendedParserRule returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -412,19 +507,25 @@ ruleCallExtendedParserRule:
 			lv_call_0_0=ruleAbstractCallExtendedParserRule
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleInheritedParserRule
-entryRuleInheritedParserRule:
+entryRuleInheritedParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getInheritedParserRuleElementType()); }
-	ruleInheritedParserRule
+	iv_ruleInheritedParserRule=ruleInheritedParserRule
+	{ $current=$iv_ruleInheritedParserRule.current; }
 	EOF;
 
 // Rule InheritedParserRule
-ruleInheritedParserRule:
+ruleInheritedParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getInheritedParserRule_ElementKeyword_0ElementType());
@@ -438,6 +539,12 @@ ruleInheritedParserRule:
 				{
 					markLeaf(elementTypeProvider.getInheritedParserRule_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
@@ -448,13 +555,15 @@ ruleInheritedParserRule:
 ;
 
 //Entry rule entryRuleAbstractCallOverridenParserRule
-entryRuleAbstractCallOverridenParserRule:
+entryRuleAbstractCallOverridenParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAbstractCallOverridenParserRuleElementType()); }
-	ruleAbstractCallOverridenParserRule
+	iv_ruleAbstractCallOverridenParserRule=ruleAbstractCallOverridenParserRule
+	{ $current=$iv_ruleAbstractCallOverridenParserRule.current; }
 	EOF;
 
 // Rule AbstractCallOverridenParserRule
-ruleAbstractCallOverridenParserRule:
+ruleAbstractCallOverridenParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAbstractCallOverridenParserRule_OverridemodelKeyword_0ElementType());
@@ -471,6 +580,10 @@ ruleAbstractCallOverridenParserRule:
 				lv_elements_1_0=ruleOverridableParserRule
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -478,13 +591,15 @@ ruleAbstractCallOverridenParserRule:
 ;
 
 //Entry rule entryRuleAbstractCallExtendedParserRule
-entryRuleAbstractCallExtendedParserRule:
+entryRuleAbstractCallExtendedParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAbstractCallExtendedParserRuleElementType()); }
-	ruleAbstractCallExtendedParserRule
+	iv_ruleAbstractCallExtendedParserRule=ruleAbstractCallExtendedParserRule
+	{ $current=$iv_ruleAbstractCallExtendedParserRule.current; }
 	EOF;
 
 // Rule AbstractCallExtendedParserRule
-ruleAbstractCallExtendedParserRule:
+ruleAbstractCallExtendedParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAbstractCallExtendedParserRule_ExtendedmodelKeyword_0ElementType());
@@ -501,6 +616,10 @@ ruleAbstractCallExtendedParserRule:
 				lv_elements_1_0=ruleExtendableParserRule
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*

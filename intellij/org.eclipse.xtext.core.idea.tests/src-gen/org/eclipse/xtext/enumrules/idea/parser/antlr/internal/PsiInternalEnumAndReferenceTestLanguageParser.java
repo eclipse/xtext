@@ -70,18 +70,24 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "entryRuleEntityWithEnumAndReference"
-    // PsiInternalEnumAndReferenceTestLanguage.g:52:1: entryRuleEntityWithEnumAndReference : ruleEntityWithEnumAndReference EOF ;
-    public final void entryRuleEntityWithEnumAndReference() throws RecognitionException {
+    // PsiInternalEnumAndReferenceTestLanguage.g:52:1: entryRuleEntityWithEnumAndReference returns [Boolean current=false] : iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF ;
+    public final Boolean entryRuleEntityWithEnumAndReference() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleEntityWithEnumAndReference = null;
+
+
         try {
-            // PsiInternalEnumAndReferenceTestLanguage.g:52:36: ( ruleEntityWithEnumAndReference EOF )
-            // PsiInternalEnumAndReferenceTestLanguage.g:53:2: ruleEntityWithEnumAndReference EOF
+            // PsiInternalEnumAndReferenceTestLanguage.g:52:68: (iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF )
+            // PsiInternalEnumAndReferenceTestLanguage.g:53:2: iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF
             {
              markComposite(elementTypeProvider.getEntityWithEnumAndReferenceElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleEntityWithEnumAndReference();
+            iv_ruleEntityWithEnumAndReference=ruleEntityWithEnumAndReference();
 
             state._fsp--;
 
+             current =iv_ruleEntityWithEnumAndReference; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -93,41 +99,49 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleEntityWithEnumAndReference"
 
 
     // $ANTLR start "ruleEntityWithEnumAndReference"
-    // PsiInternalEnumAndReferenceTestLanguage.g:58:1: ruleEntityWithEnumAndReference : ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) ;
-    public final void ruleEntityWithEnumAndReference() throws RecognitionException {
+    // PsiInternalEnumAndReferenceTestLanguage.g:59:1: ruleEntityWithEnumAndReference returns [Boolean current=false] : ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) ;
+    public final Boolean ruleEntityWithEnumAndReference() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_3=null;
+        Boolean lv_type_0_0 = null;
+
 
         try {
-            // PsiInternalEnumAndReferenceTestLanguage.g:58:31: ( ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:59:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:60:1: ( ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:61:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:59:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:60:3: ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:61:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:62:3: ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:60:3: ( (lv_type_0_0= ruleKindOfKeyword ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:61:4: (lv_type_0_0= ruleKindOfKeyword )
+            // PsiInternalEnumAndReferenceTestLanguage.g:62:3: ( (lv_type_0_0= ruleKindOfKeyword ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:63:4: (lv_type_0_0= ruleKindOfKeyword )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:61:4: (lv_type_0_0= ruleKindOfKeyword )
-            // PsiInternalEnumAndReferenceTestLanguage.g:62:5: lv_type_0_0= ruleKindOfKeyword
+            // PsiInternalEnumAndReferenceTestLanguage.g:63:4: (lv_type_0_0= ruleKindOfKeyword )
+            // PsiInternalEnumAndReferenceTestLanguage.g:64:5: lv_type_0_0= ruleKindOfKeyword
             {
 
             					markComposite(elementTypeProvider.getEntityWithEnumAndReference_TypeKindOfKeywordEnumRuleCall_0_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_3);
-            ruleKindOfKeyword();
+            lv_type_0_0=ruleKindOfKeyword();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -135,14 +149,20 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalEnumAndReferenceTestLanguage.g:71:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:72:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:77:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:78:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:72:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalEnumAndReferenceTestLanguage.g:73:5: lv_name_1_0= RULE_ID
+            // PsiInternalEnumAndReferenceTestLanguage.g:78:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:79:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -161,12 +181,18 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
             			doneLeaf(otherlv_2);
             		
-            // PsiInternalEnumAndReferenceTestLanguage.g:89:3: ( (otherlv_3= RULE_ID ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:90:4: (otherlv_3= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:101:3: ( (otherlv_3= RULE_ID ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:102:4: (otherlv_3= RULE_ID )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:90:4: (otherlv_3= RULE_ID )
-            // PsiInternalEnumAndReferenceTestLanguage.g:91:5: otherlv_3= RULE_ID
+            // PsiInternalEnumAndReferenceTestLanguage.g:102:4: (otherlv_3= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:103:5: otherlv_3= RULE_ID
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0ElementType());
             				
@@ -193,22 +219,24 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEntityWithEnumAndReference"
 
 
     // $ANTLR start "ruleKindOfKeyword"
-    // PsiInternalEnumAndReferenceTestLanguage.g:104:1: ruleKindOfKeyword : ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) ;
-    public final void ruleKindOfKeyword() throws RecognitionException {
+    // PsiInternalEnumAndReferenceTestLanguage.g:122:1: ruleKindOfKeyword returns [Boolean current=false] : ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) ;
+    public final Boolean ruleKindOfKeyword() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
         try {
-            // PsiInternalEnumAndReferenceTestLanguage.g:104:18: ( ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:105:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:123:1: ( ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:124:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:105:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:124:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -226,10 +254,10 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalEnumAndReferenceTestLanguage.g:106:3: (enumLiteral_0= 'kindOfKeyword' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:125:3: (enumLiteral_0= 'kindOfKeyword' )
                     {
-                    // PsiInternalEnumAndReferenceTestLanguage.g:106:3: (enumLiteral_0= 'kindOfKeyword' )
-                    // PsiInternalEnumAndReferenceTestLanguage.g:107:4: enumLiteral_0= 'kindOfKeyword'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:125:3: (enumLiteral_0= 'kindOfKeyword' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:126:4: enumLiteral_0= 'kindOfKeyword'
                     {
 
                     				markLeaf(elementTypeProvider.getKindOfKeyword_KindOfKeywordEnumLiteralDeclaration_0ElementType());
@@ -245,10 +273,10 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
                     }
                     break;
                 case 2 :
-                    // PsiInternalEnumAndReferenceTestLanguage.g:116:3: (enumLiteral_1= 'anotherEnumLiteral' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:135:3: (enumLiteral_1= 'anotherEnumLiteral' )
                     {
-                    // PsiInternalEnumAndReferenceTestLanguage.g:116:3: (enumLiteral_1= 'anotherEnumLiteral' )
-                    // PsiInternalEnumAndReferenceTestLanguage.g:117:4: enumLiteral_1= 'anotherEnumLiteral'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:135:3: (enumLiteral_1= 'anotherEnumLiteral' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:136:4: enumLiteral_1= 'anotherEnumLiteral'
                     {
 
                     				markLeaf(elementTypeProvider.getKindOfKeyword_AnotherEnumLiteralEnumLiteralDeclaration_1ElementType());
@@ -276,7 +304,7 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleKindOfKeyword"
 

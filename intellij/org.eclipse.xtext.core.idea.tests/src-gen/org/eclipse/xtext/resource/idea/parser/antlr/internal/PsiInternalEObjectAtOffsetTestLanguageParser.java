@@ -74,18 +74,24 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalEObjectAtOffsetTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -97,19 +103,26 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:58:1: ruleModel : ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_foos_0_0 = null;
+
+        Boolean lv_bars_1_0 = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:58:10: ( ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )* )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:59:2: ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:60:1: ( ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:61:2: ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )*
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:59:2: ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:61:2: ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )*
             loop1:
             do {
                 int alt1=3;
@@ -125,24 +138,28 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:60:3: ( (lv_foos_0_0= ruleFoo ) )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:62:3: ( (lv_foos_0_0= ruleFoo ) )
             	    {
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:60:3: ( (lv_foos_0_0= ruleFoo ) )
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:61:4: (lv_foos_0_0= ruleFoo )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:62:3: ( (lv_foos_0_0= ruleFoo ) )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:63:4: (lv_foos_0_0= ruleFoo )
             	    {
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:61:4: (lv_foos_0_0= ruleFoo )
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:62:5: lv_foos_0_0= ruleFoo
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:63:4: (lv_foos_0_0= ruleFoo )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:64:5: lv_foos_0_0= ruleFoo
             	    {
 
             	    					markComposite(elementTypeProvider.getModel_FoosFooParserRuleCall_0_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleFoo();
+            	    lv_foos_0_0=ruleFoo();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -154,24 +171,28 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
             	    }
             	    break;
             	case 2 :
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:72:3: ( (lv_bars_1_0= ruleAbstractBar ) )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:78:3: ( (lv_bars_1_0= ruleAbstractBar ) )
             	    {
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:72:3: ( (lv_bars_1_0= ruleAbstractBar ) )
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:73:4: (lv_bars_1_0= ruleAbstractBar )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:78:3: ( (lv_bars_1_0= ruleAbstractBar ) )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:79:4: (lv_bars_1_0= ruleAbstractBar )
             	    {
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:73:4: (lv_bars_1_0= ruleAbstractBar )
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:74:5: lv_bars_1_0= ruleAbstractBar
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:79:4: (lv_bars_1_0= ruleAbstractBar )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:80:5: lv_bars_1_0= ruleAbstractBar
             	    {
 
             	    					markComposite(elementTypeProvider.getModel_BarsAbstractBarParserRuleCall_1_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleAbstractBar();
+            	    lv_bars_1_0=ruleAbstractBar();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -198,24 +219,30 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleAbstractBar"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:87:1: entryRuleAbstractBar : ruleAbstractBar EOF ;
-    public final void entryRuleAbstractBar() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:97:1: entryRuleAbstractBar returns [Boolean current=false] : iv_ruleAbstractBar= ruleAbstractBar EOF ;
+    public final Boolean entryRuleAbstractBar() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAbstractBar = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:87:21: ( ruleAbstractBar EOF )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:88:2: ruleAbstractBar EOF
+            // PsiInternalEObjectAtOffsetTestLanguage.g:97:53: (iv_ruleAbstractBar= ruleAbstractBar EOF )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:98:2: iv_ruleAbstractBar= ruleAbstractBar EOF
             {
              markComposite(elementTypeProvider.getAbstractBarElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAbstractBar();
+            iv_ruleAbstractBar=ruleAbstractBar();
 
             state._fsp--;
 
+             current =iv_ruleAbstractBar; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -227,26 +254,30 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAbstractBar"
 
 
     // $ANTLR start "ruleAbstractBar"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:93:1: ruleAbstractBar : ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? ) ;
-    public final void ruleAbstractBar() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:104:1: ruleAbstractBar returns [Boolean current=false] : ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? this_Bar_2= ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? ) ;
+    public final Boolean ruleAbstractBar() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token this_INT_1=null;
         Token otherlv_4=null;
+        Boolean this_Bar_2 = null;
+
 
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:93:16: ( ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:94:2: ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:105:1: ( ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? this_Bar_2= ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:106:2: ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? this_Bar_2= ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:94:2: ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:95:3: (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )?
+            // PsiInternalEObjectAtOffsetTestLanguage.g:106:2: ( (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? this_Bar_2= ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )? )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:107:3: (otherlv_0= 'zonk' )? (this_INT_1= RULE_INT )? this_Bar_2= ruleBar ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )? ( ( ruleQualifiedNameWithOtherDelim ) )?
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:95:3: (otherlv_0= 'zonk' )?
+            // PsiInternalEObjectAtOffsetTestLanguage.g:107:3: (otherlv_0= 'zonk' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -255,7 +286,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:96:4: otherlv_0= 'zonk'
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:108:4: otherlv_0= 'zonk'
                     {
 
                     				markLeaf(elementTypeProvider.getAbstractBar_ZonkKeyword_0ElementType());
@@ -270,7 +301,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             }
 
-            // PsiInternalEObjectAtOffsetTestLanguage.g:104:3: (this_INT_1= RULE_INT )?
+            // PsiInternalEObjectAtOffsetTestLanguage.g:116:3: (this_INT_1= RULE_INT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -279,7 +310,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:105:4: this_INT_1= RULE_INT
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:117:4: this_INT_1= RULE_INT
                     {
 
                     				markLeaf(elementTypeProvider.getAbstractBar_INTTerminalRuleCall_1ElementType());
@@ -298,14 +329,15 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
             			markComposite(elementTypeProvider.getAbstractBar_BarParserRuleCall_2ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_5);
-            ruleBar();
+            this_Bar_2=ruleBar();
 
             state._fsp--;
 
 
+            			current = this_Bar_2;
             			doneComposite();
             		
-            // PsiInternalEObjectAtOffsetTestLanguage.g:120:3: ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )?
+            // PsiInternalEObjectAtOffsetTestLanguage.g:133:3: ( () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -314,14 +346,15 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:121:4: () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) )
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:134:4: () otherlv_4= 'foobar' ( ( ruleQualifiedNameWithOtherDelim ) )
                     {
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:121:4: ()
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:122:5: 
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:134:4: ()
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:135:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getAbstractBar_FooBarBarAction_3_0ElementType());
                     					doneComposite();
+                    					associateWithSemanticElement();
                     				
 
                     }
@@ -333,12 +366,18 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:134:4: ( ( ruleQualifiedNameWithOtherDelim ) )
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:135:5: ( ruleQualifiedNameWithOtherDelim )
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:148:4: ( ( ruleQualifiedNameWithOtherDelim ) )
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:149:5: ( ruleQualifiedNameWithOtherDelim )
                     {
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:135:5: ( ruleQualifiedNameWithOtherDelim )
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:136:6: ruleQualifiedNameWithOtherDelim
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:149:5: ( ruleQualifiedNameWithOtherDelim )
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:150:6: ruleQualifiedNameWithOtherDelim
                     {
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						markComposite(elementTypeProvider.getAbstractBar_FooFooCrossReference_3_2_0ElementType());
                     					
@@ -362,7 +401,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             }
 
-            // PsiInternalEObjectAtOffsetTestLanguage.g:146:3: ( ( ruleQualifiedNameWithOtherDelim ) )?
+            // PsiInternalEObjectAtOffsetTestLanguage.g:166:3: ( ( ruleQualifiedNameWithOtherDelim ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -371,11 +410,17 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt5) {
                 case 1 :
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:147:4: ( ruleQualifiedNameWithOtherDelim )
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:167:4: ( ruleQualifiedNameWithOtherDelim )
                     {
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:147:4: ( ruleQualifiedNameWithOtherDelim )
-                    // PsiInternalEObjectAtOffsetTestLanguage.g:148:5: ruleQualifiedNameWithOtherDelim
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:167:4: ( ruleQualifiedNameWithOtherDelim )
+                    // PsiInternalEObjectAtOffsetTestLanguage.g:168:5: ruleQualifiedNameWithOtherDelim
                     {
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					markComposite(elementTypeProvider.getAbstractBar_FooFooCrossReference_4_0ElementType());
                     				
@@ -409,24 +454,30 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAbstractBar"
 
 
     // $ANTLR start "entryRuleBar"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:161:1: entryRuleBar : ruleBar EOF ;
-    public final void entryRuleBar() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:187:1: entryRuleBar returns [Boolean current=false] : iv_ruleBar= ruleBar EOF ;
+    public final Boolean entryRuleBar() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleBar = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:161:13: ( ruleBar EOF )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:162:2: ruleBar EOF
+            // PsiInternalEObjectAtOffsetTestLanguage.g:187:45: (iv_ruleBar= ruleBar EOF )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:188:2: iv_ruleBar= ruleBar EOF
             {
              markComposite(elementTypeProvider.getBarElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleBar();
+            iv_ruleBar=ruleBar();
 
             state._fsp--;
 
+             current =iv_ruleBar; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -438,24 +489,26 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleBar"
 
 
     // $ANTLR start "ruleBar"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:167:1: ruleBar : (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* ) ;
-    public final void ruleBar() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:194:1: ruleBar returns [Boolean current=false] : (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* ) ;
+    public final Boolean ruleBar() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_3=null;
 
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:167:8: ( (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:168:2: (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:195:1: ( (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:196:2: (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:168:2: (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:169:3: otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:196:2: (otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:197:3: otherlv_0= 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( ruleQualifiedNameWithOtherDelim ) ) (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )*
             {
 
             			markLeaf(elementTypeProvider.getBar_BarKeyword_0ElementType());
@@ -464,14 +517,20 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalEObjectAtOffsetTestLanguage.g:176:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:177:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:204:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:205:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:177:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:178:5: lv_name_1_0= RULE_ID
+            // PsiInternalEObjectAtOffsetTestLanguage.g:205:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:206:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
@@ -483,12 +542,18 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             }
 
-            // PsiInternalEObjectAtOffsetTestLanguage.g:187:3: ( ( ruleQualifiedNameWithOtherDelim ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:188:4: ( ruleQualifiedNameWithOtherDelim )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:221:3: ( ( ruleQualifiedNameWithOtherDelim ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:222:4: ( ruleQualifiedNameWithOtherDelim )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:188:4: ( ruleQualifiedNameWithOtherDelim )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:189:5: ruleQualifiedNameWithOtherDelim
+            // PsiInternalEObjectAtOffsetTestLanguage.g:222:4: ( ruleQualifiedNameWithOtherDelim )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:223:5: ruleQualifiedNameWithOtherDelim
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markComposite(elementTypeProvider.getBar_FooFooCrossReference_2_0ElementType());
             				
@@ -506,7 +571,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             }
 
-            // PsiInternalEObjectAtOffsetTestLanguage.g:198:3: (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:238:3: (otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) ) )*
             loop6:
             do {
                 int alt6=2;
@@ -519,7 +584,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
                 switch (alt6) {
             	case 1 :
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:199:4: otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:239:4: otherlv_3= ',' ( ( ruleQualifiedNameWithOtherDelim ) )
             	    {
 
             	    				markLeaf(elementTypeProvider.getBar_CommaKeyword_3_0ElementType());
@@ -528,12 +593,18 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             	    				doneLeaf(otherlv_3);
             	    			
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:206:4: ( ( ruleQualifiedNameWithOtherDelim ) )
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:207:5: ( ruleQualifiedNameWithOtherDelim )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:246:4: ( ( ruleQualifiedNameWithOtherDelim ) )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:247:5: ( ruleQualifiedNameWithOtherDelim )
             	    {
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:207:5: ( ruleQualifiedNameWithOtherDelim )
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:208:6: ruleQualifiedNameWithOtherDelim
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:247:5: ( ruleQualifiedNameWithOtherDelim )
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:248:6: ruleQualifiedNameWithOtherDelim
             	    {
+
+            	    						if (!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
+            	    					
 
             	    						markComposite(elementTypeProvider.getBar_FooFooCrossReference_3_1_0ElementType());
             	    					
@@ -573,24 +644,30 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleBar"
 
 
     // $ANTLR start "entryRuleFoo"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:222:1: entryRuleFoo : ruleFoo EOF ;
-    public final void entryRuleFoo() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:268:1: entryRuleFoo returns [Boolean current=false] : iv_ruleFoo= ruleFoo EOF ;
+    public final Boolean entryRuleFoo() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleFoo = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:222:13: ( ruleFoo EOF )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:223:2: ruleFoo EOF
+            // PsiInternalEObjectAtOffsetTestLanguage.g:268:45: (iv_ruleFoo= ruleFoo EOF )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:269:2: iv_ruleFoo= ruleFoo EOF
             {
              markComposite(elementTypeProvider.getFooElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleFoo();
+            iv_ruleFoo=ruleFoo();
 
             state._fsp--;
 
+             current =iv_ruleFoo; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -602,22 +679,26 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleFoo"
 
 
     // $ANTLR start "ruleFoo"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:228:1: ruleFoo : (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) ) ;
-    public final void ruleFoo() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:275:1: ruleFoo returns [Boolean current=false] : (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) ) ;
+    public final Boolean ruleFoo() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_name_1_0 = null;
+
 
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:228:8: ( (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:229:2: (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:276:1: ( (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:277:2: (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:229:2: (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:230:3: otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:277:2: (otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:278:3: otherlv_0= 'foo' ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) )
             {
 
             			markLeaf(elementTypeProvider.getFoo_FooKeyword_0ElementType());
@@ -626,22 +707,26 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalEObjectAtOffsetTestLanguage.g:237:3: ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:238:4: (lv_name_1_0= ruleQualifiedNameWithOtherDelim )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:285:3: ( (lv_name_1_0= ruleQualifiedNameWithOtherDelim ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:286:4: (lv_name_1_0= ruleQualifiedNameWithOtherDelim )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:238:4: (lv_name_1_0= ruleQualifiedNameWithOtherDelim )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:239:5: lv_name_1_0= ruleQualifiedNameWithOtherDelim
+            // PsiInternalEObjectAtOffsetTestLanguage.g:286:4: (lv_name_1_0= ruleQualifiedNameWithOtherDelim )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:287:5: lv_name_1_0= ruleQualifiedNameWithOtherDelim
             {
 
             					markComposite(elementTypeProvider.getFoo_NameQualifiedNameWithOtherDelimParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleQualifiedNameWithOtherDelim();
+            lv_name_1_0=ruleQualifiedNameWithOtherDelim();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -662,24 +747,30 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleFoo"
 
 
     // $ANTLR start "entryRuleQualifiedNameWithOtherDelim"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:252:1: entryRuleQualifiedNameWithOtherDelim : ruleQualifiedNameWithOtherDelim EOF ;
-    public final void entryRuleQualifiedNameWithOtherDelim() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:304:1: entryRuleQualifiedNameWithOtherDelim returns [Boolean current=false] : iv_ruleQualifiedNameWithOtherDelim= ruleQualifiedNameWithOtherDelim EOF ;
+    public final Boolean entryRuleQualifiedNameWithOtherDelim() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleQualifiedNameWithOtherDelim = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:252:37: ( ruleQualifiedNameWithOtherDelim EOF )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:253:2: ruleQualifiedNameWithOtherDelim EOF
+            // PsiInternalEObjectAtOffsetTestLanguage.g:304:69: (iv_ruleQualifiedNameWithOtherDelim= ruleQualifiedNameWithOtherDelim EOF )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:305:2: iv_ruleQualifiedNameWithOtherDelim= ruleQualifiedNameWithOtherDelim EOF
             {
              markComposite(elementTypeProvider.getQualifiedNameWithOtherDelimElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleQualifiedNameWithOtherDelim();
+            iv_ruleQualifiedNameWithOtherDelim=ruleQualifiedNameWithOtherDelim();
 
             state._fsp--;
 
+             current =iv_ruleQualifiedNameWithOtherDelim; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -691,22 +782,24 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleQualifiedNameWithOtherDelim"
 
 
     // $ANTLR start "ruleQualifiedNameWithOtherDelim"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:258:1: ruleQualifiedNameWithOtherDelim : ( ruleQualifiedName (kw= '=' ruleQualifiedName )* ) ;
-    public final void ruleQualifiedNameWithOtherDelim() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:311:1: ruleQualifiedNameWithOtherDelim returns [Boolean current=false] : ( ruleQualifiedName (kw= '=' ruleQualifiedName )* ) ;
+    public final Boolean ruleQualifiedNameWithOtherDelim() throws RecognitionException {
+        Boolean current = false;
+
         Token kw=null;
 
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:258:32: ( ( ruleQualifiedName (kw= '=' ruleQualifiedName )* ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:259:2: ( ruleQualifiedName (kw= '=' ruleQualifiedName )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:312:1: ( ( ruleQualifiedName (kw= '=' ruleQualifiedName )* ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:313:2: ( ruleQualifiedName (kw= '=' ruleQualifiedName )* )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:259:2: ( ruleQualifiedName (kw= '=' ruleQualifiedName )* )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:260:3: ruleQualifiedName (kw= '=' ruleQualifiedName )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:313:2: ( ruleQualifiedName (kw= '=' ruleQualifiedName )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:314:3: ruleQualifiedName (kw= '=' ruleQualifiedName )*
             {
 
             			markComposite(elementTypeProvider.getQualifiedNameWithOtherDelim_QualifiedNameParserRuleCall_0ElementType());
@@ -719,7 +812,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             			doneComposite();
             		
-            // PsiInternalEObjectAtOffsetTestLanguage.g:267:3: (kw= '=' ruleQualifiedName )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:321:3: (kw= '=' ruleQualifiedName )*
             loop7:
             do {
                 int alt7=2;
@@ -732,7 +825,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:268:4: kw= '=' ruleQualifiedName
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:322:4: kw= '=' ruleQualifiedName
             	    {
 
             	    				markLeaf(elementTypeProvider.getQualifiedNameWithOtherDelim_EqualsSignKeyword_1_0ElementType());
@@ -774,24 +867,30 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleQualifiedNameWithOtherDelim"
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:287:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
-    public final void entryRuleQualifiedName() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:341:1: entryRuleQualifiedName returns [Boolean current=false] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    public final Boolean entryRuleQualifiedName() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleQualifiedName = null;
+
+
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:287:23: ( ruleQualifiedName EOF )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:288:2: ruleQualifiedName EOF
+            // PsiInternalEObjectAtOffsetTestLanguage.g:341:55: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:342:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              markComposite(elementTypeProvider.getQualifiedNameElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleQualifiedName();
+            iv_ruleQualifiedName=ruleQualifiedName();
 
             state._fsp--;
 
+             current =iv_ruleQualifiedName; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -803,24 +902,26 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleQualifiedName"
 
 
     // $ANTLR start "ruleQualifiedName"
-    // PsiInternalEObjectAtOffsetTestLanguage.g:293:1: ruleQualifiedName : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
-    public final void ruleQualifiedName() throws RecognitionException {
+    // PsiInternalEObjectAtOffsetTestLanguage.g:348:1: ruleQualifiedName returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    public final Boolean ruleQualifiedName() throws RecognitionException {
+        Boolean current = false;
+
         Token this_ID_0=null;
         Token kw=null;
         Token this_ID_2=null;
 
         try {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:293:18: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:294:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:349:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:350:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // PsiInternalEObjectAtOffsetTestLanguage.g:294:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // PsiInternalEObjectAtOffsetTestLanguage.g:295:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:350:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // PsiInternalEObjectAtOffsetTestLanguage.g:351:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
 
             			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
@@ -829,7 +930,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(this_ID_0);
             		
-            // PsiInternalEObjectAtOffsetTestLanguage.g:302:3: (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalEObjectAtOffsetTestLanguage.g:358:3: (kw= '.' this_ID_2= RULE_ID )*
             loop8:
             do {
                 int alt8=2;
@@ -842,7 +943,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalEObjectAtOffsetTestLanguage.g:303:4: kw= '.' this_ID_2= RULE_ID
+            	    // PsiInternalEObjectAtOffsetTestLanguage.g:359:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
@@ -880,7 +981,7 @@ public class PsiInternalEObjectAtOffsetTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleQualifiedName"
 

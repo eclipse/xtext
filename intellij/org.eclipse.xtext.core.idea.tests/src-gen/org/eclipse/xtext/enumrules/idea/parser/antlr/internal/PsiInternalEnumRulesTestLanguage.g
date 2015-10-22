@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -73,6 +75,10 @@ ruleModel:
 					lv_existing_1_0=ruleExistingEnum
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -92,6 +98,10 @@ ruleModel:
 						lv_generated_3_0=ruleGeneratedEnum
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -114,6 +124,10 @@ ruleModel:
 					lv_generated_5_0=ruleGeneratedEnum
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -122,7 +136,8 @@ ruleModel:
 ;
 
 // Rule ExistingEnum
-ruleExistingEnum:
+ruleExistingEnum returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -157,7 +172,8 @@ ruleExistingEnum:
 ;
 
 // Rule GeneratedEnum
-ruleGeneratedEnum:
+ruleGeneratedEnum returns [Boolean current=false]
+:
 	(
 		(
 			{

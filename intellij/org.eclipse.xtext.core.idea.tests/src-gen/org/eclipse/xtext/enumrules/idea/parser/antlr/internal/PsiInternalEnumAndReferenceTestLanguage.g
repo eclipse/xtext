@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleEntityWithEnumAndReference
-entryRuleEntityWithEnumAndReference:
+entryRuleEntityWithEnumAndReference returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEntityWithEnumAndReferenceElementType()); }
-	ruleEntityWithEnumAndReference
+	iv_ruleEntityWithEnumAndReference=ruleEntityWithEnumAndReference
+	{ $current=$iv_ruleEntityWithEnumAndReference.current; }
 	EOF;
 
 // Rule EntityWithEnumAndReference
-ruleEntityWithEnumAndReference:
+ruleEntityWithEnumAndReference returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleEntityWithEnumAndReference:
 				lv_type_0_0=ruleKindOfKeyword
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -72,6 +78,12 @@ ruleEntityWithEnumAndReference:
 			(
 				{
 					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -89,6 +101,12 @@ ruleEntityWithEnumAndReference:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0ElementType());
 				}
 				otherlv_3=RULE_ID
@@ -101,7 +119,8 @@ ruleEntityWithEnumAndReference:
 ;
 
 // Rule KindOfKeyword
-ruleKindOfKeyword:
+ruleKindOfKeyword returns [Boolean current=false]
+:
 	(
 		(
 			{

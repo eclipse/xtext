@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -73,6 +75,10 @@ ruleModel:
 					lv_model_1_0=ruleModel2
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -95,6 +101,10 @@ ruleModel:
 						lv_attributeExclusion_3_1=ruleAttributeExclusionTest1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -103,6 +113,10 @@ ruleModel:
 						lv_attributeExclusion_3_2=ruleAttributeExclusionTest2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -126,6 +140,10 @@ ruleModel:
 						lv_nestedType_5_1=ruleNestedTypeTest1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -134,6 +152,10 @@ ruleModel:
 						lv_nestedType_5_2=ruleNestedTypeTest2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -157,6 +179,10 @@ ruleModel:
 						lv_nestedTypeRecursiveTest2_7_1=ruleNestedTypeRecursiveTest1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -165,6 +191,10 @@ ruleModel:
 						lv_nestedTypeRecursiveTest2_7_2=ruleNestedTypeRecursiveTest2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -188,6 +218,10 @@ ruleModel:
 						lv_parentRef_9_1=ruleParentRefTest1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -196,6 +230,10 @@ ruleModel:
 						lv_parentRef_9_2=ruleParentRefTest2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -219,6 +257,10 @@ ruleModel:
 						lv_quantityExclusion_11_1=ruleQuantityExclusionTest1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -227,6 +269,10 @@ ruleModel:
 						lv_quantityExclusion_11_2=ruleQuantityExclusionTest2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -250,6 +296,10 @@ ruleModel:
 						lv_valueExclusion_13_1=ruleValueExclusionTest1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -258,6 +308,10 @@ ruleModel:
 						lv_valueExclusion_13_2=ruleValueExclusionTest2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -277,6 +331,12 @@ ruleModel:
 					{
 						markLeaf(elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_7_1_0ElementType());
 					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					lv_name_15_0=RULE_STRING
 					{
 						doneLeaf(lv_name_15_0);
@@ -292,6 +352,10 @@ ruleModel:
 						lv_nodeExclusion_16_1=ruleNodeExclusion1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -300,6 +364,10 @@ ruleModel:
 						lv_nodeExclusion_16_2=ruleNodeExclusion2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -319,6 +387,12 @@ ruleModel:
 					{
 						markLeaf(elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_8_1_0ElementType());
 					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					lv_name_18_0=RULE_STRING
 					{
 						doneLeaf(lv_name_18_0);
@@ -334,6 +408,10 @@ ruleModel:
 						lv_nodeExclusionList_19_1=ruleNodeExclusion1List
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -342,6 +420,10 @@ ruleModel:
 						lv_nodeExclusionList_19_2=ruleNodeExclusion2List
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -351,18 +433,21 @@ ruleModel:
 ;
 
 //Entry rule entryRuleModel2
-entryRuleModel2:
+entryRuleModel2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModel2ElementType()); }
-	ruleModel2
+	iv_ruleModel2=ruleModel2
+	{ $current=$iv_ruleModel2.current; }
 	EOF;
 
 // Rule Model2
-ruleModel2:
+ruleModel2 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getModel2_ModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -376,13 +461,15 @@ ruleModel2:
 ;
 
 //Entry rule entryRuleAttributeExclusionTest1
-entryRuleAttributeExclusionTest1:
+entryRuleAttributeExclusionTest1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAttributeExclusionTest1ElementType()); }
-	ruleAttributeExclusionTest1
+	iv_ruleAttributeExclusionTest1=ruleAttributeExclusionTest1
+	{ $current=$iv_ruleAttributeExclusionTest1.current; }
 	EOF;
 
 // Rule AttributeExclusionTest1
-ruleAttributeExclusionTest1:
+ruleAttributeExclusionTest1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAttributeExclusionTest1_Kw1Keyword_0ElementType());
@@ -396,6 +483,12 @@ ruleAttributeExclusionTest1:
 				{
 					markLeaf(elementTypeProvider.getAttributeExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_attr1_1_0=RULE_ID
 				{
 					doneLeaf(lv_attr1_1_0);
@@ -406,13 +499,15 @@ ruleAttributeExclusionTest1:
 ;
 
 //Entry rule entryRuleAttributeExclusionTest2
-entryRuleAttributeExclusionTest2:
+entryRuleAttributeExclusionTest2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAttributeExclusionTest2ElementType()); }
-	ruleAttributeExclusionTest2
+	iv_ruleAttributeExclusionTest2=ruleAttributeExclusionTest2
+	{ $current=$iv_ruleAttributeExclusionTest2.current; }
 	EOF;
 
 // Rule AttributeExclusionTest2
-ruleAttributeExclusionTest2:
+ruleAttributeExclusionTest2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAttributeExclusionTest2_Kw2Keyword_0ElementType());
@@ -426,6 +521,12 @@ ruleAttributeExclusionTest2:
 				{
 					markLeaf(elementTypeProvider.getAttributeExclusionTest2_Attr2IDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_attr2_1_0=RULE_ID
 				{
 					doneLeaf(lv_attr2_1_0);
@@ -436,13 +537,15 @@ ruleAttributeExclusionTest2:
 ;
 
 //Entry rule entryRuleNestedTypeTest1
-entryRuleNestedTypeTest1:
+entryRuleNestedTypeTest1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedTypeTest1ElementType()); }
-	ruleNestedTypeTest1
+	iv_ruleNestedTypeTest1=ruleNestedTypeTest1
+	{ $current=$iv_ruleNestedTypeTest1.current; }
 	EOF;
 
 // Rule NestedTypeTest1
-ruleNestedTypeTest1:
+ruleNestedTypeTest1 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -451,19 +554,25 @@ ruleNestedTypeTest1:
 			lv_nested_0_0=ruleNestedTypeChild1
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleNestedTypeTest2
-entryRuleNestedTypeTest2:
+entryRuleNestedTypeTest2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedTypeTest2ElementType()); }
-	ruleNestedTypeTest2
+	iv_ruleNestedTypeTest2=ruleNestedTypeTest2
+	{ $current=$iv_ruleNestedTypeTest2.current; }
 	EOF;
 
 // Rule NestedTypeTest2
-ruleNestedTypeTest2:
+ruleNestedTypeTest2 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -472,19 +581,25 @@ ruleNestedTypeTest2:
 			lv_nested_0_0=ruleNestedTypeChild2
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleNestedTypeChild1
-entryRuleNestedTypeChild1:
+entryRuleNestedTypeChild1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedTypeChild1ElementType()); }
-	ruleNestedTypeChild1
+	iv_ruleNestedTypeChild1=ruleNestedTypeChild1
+	{ $current=$iv_ruleNestedTypeChild1.current; }
 	EOF;
 
 // Rule NestedTypeChild1
-ruleNestedTypeChild1:
+ruleNestedTypeChild1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNestedTypeChild1_Kw1Keyword_0ElementType());
@@ -498,6 +613,12 @@ ruleNestedTypeChild1:
 				{
 					markLeaf(elementTypeProvider.getNestedTypeChild1_ValIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_val_1_0=RULE_ID
 				{
 					doneLeaf(lv_val_1_0);
@@ -508,13 +629,15 @@ ruleNestedTypeChild1:
 ;
 
 //Entry rule entryRuleNestedTypeChild2
-entryRuleNestedTypeChild2:
+entryRuleNestedTypeChild2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedTypeChild2ElementType()); }
-	ruleNestedTypeChild2
+	iv_ruleNestedTypeChild2=ruleNestedTypeChild2
+	{ $current=$iv_ruleNestedTypeChild2.current; }
 	EOF;
 
 // Rule NestedTypeChild2
-ruleNestedTypeChild2:
+ruleNestedTypeChild2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNestedTypeChild2_Kw2Keyword_0ElementType());
@@ -528,6 +651,12 @@ ruleNestedTypeChild2:
 				{
 					markLeaf(elementTypeProvider.getNestedTypeChild2_ValIDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_val_1_0=RULE_ID
 				{
 					doneLeaf(lv_val_1_0);
@@ -538,18 +667,21 @@ ruleNestedTypeChild2:
 ;
 
 //Entry rule entryRuleNestedTypeRecursiveTest1
-entryRuleNestedTypeRecursiveTest1:
+entryRuleNestedTypeRecursiveTest1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedTypeRecursiveTest1ElementType()); }
-	ruleNestedTypeRecursiveTest1
+	iv_ruleNestedTypeRecursiveTest1=ruleNestedTypeRecursiveTest1
+	{ $current=$iv_ruleNestedTypeRecursiveTest1.current; }
 	EOF;
 
 // Rule NestedTypeRecursiveTest1
-ruleNestedTypeRecursiveTest1:
+ruleNestedTypeRecursiveTest1 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest1_NestedTypeRecursiveTest1Action_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -564,6 +696,7 @@ ruleNestedTypeRecursiveTest1:
 				{
 					precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest1_NestedTypeRecursiveTestLeftAction_2_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -578,18 +711,21 @@ ruleNestedTypeRecursiveTest1:
 ;
 
 //Entry rule entryRuleNestedTypeRecursiveTest2
-entryRuleNestedTypeRecursiveTest2:
+entryRuleNestedTypeRecursiveTest2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedTypeRecursiveTest2ElementType()); }
-	ruleNestedTypeRecursiveTest2
+	iv_ruleNestedTypeRecursiveTest2=ruleNestedTypeRecursiveTest2
+	{ $current=$iv_ruleNestedTypeRecursiveTest2.current; }
 	EOF;
 
 // Rule NestedTypeRecursiveTest2
-ruleNestedTypeRecursiveTest2:
+ruleNestedTypeRecursiveTest2 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest2_NestedTypeRecursiveTest2Action_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -604,6 +740,7 @@ ruleNestedTypeRecursiveTest2:
 				{
 					precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest2_NestedTypeRecursiveTestLeftAction_2_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -618,13 +755,15 @@ ruleNestedTypeRecursiveTest2:
 ;
 
 //Entry rule entryRuleParentRefTest1
-entryRuleParentRefTest1:
+entryRuleParentRefTest1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParentRefTest1ElementType()); }
-	ruleParentRefTest1
+	iv_ruleParentRefTest1=ruleParentRefTest1
+	{ $current=$iv_ruleParentRefTest1.current; }
 	EOF;
 
 // Rule ParentRefTest1
-ruleParentRefTest1:
+ruleParentRefTest1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getParentRefTest1_Kw1Keyword_0ElementType());
@@ -641,6 +780,10 @@ ruleParentRefTest1:
 				lv_child1_1_0=ruleParentRefTestChild1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -648,13 +791,15 @@ ruleParentRefTest1:
 ;
 
 //Entry rule entryRuleParentRefTest2
-entryRuleParentRefTest2:
+entryRuleParentRefTest2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParentRefTest2ElementType()); }
-	ruleParentRefTest2
+	iv_ruleParentRefTest2=ruleParentRefTest2
+	{ $current=$iv_ruleParentRefTest2.current; }
 	EOF;
 
 // Rule ParentRefTest2
-ruleParentRefTest2:
+ruleParentRefTest2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getParentRefTest2_Kw2Keyword_0ElementType());
@@ -671,6 +816,10 @@ ruleParentRefTest2:
 				lv_child2_1_0=ruleParentRefTestChild2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -678,18 +827,21 @@ ruleParentRefTest2:
 ;
 
 //Entry rule entryRuleParentRefTestChild1
-entryRuleParentRefTestChild1:
+entryRuleParentRefTestChild1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParentRefTestChild1ElementType()); }
-	ruleParentRefTestChild1
+	iv_ruleParentRefTestChild1=ruleParentRefTestChild1
+	{ $current=$iv_ruleParentRefTestChild1.current; }
 	EOF;
 
 // Rule ParentRefTestChild1
-ruleParentRefTestChild1:
+ruleParentRefTestChild1 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getParentRefTestChild1_ParentRefTestChildAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -707,6 +859,10 @@ ruleParentRefTestChild1:
 				lv_child_2_0=ruleParentRefTestChild1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -714,18 +870,21 @@ ruleParentRefTestChild1:
 ;
 
 //Entry rule entryRuleParentRefTestChild2
-entryRuleParentRefTestChild2:
+entryRuleParentRefTestChild2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParentRefTestChild2ElementType()); }
-	ruleParentRefTestChild2
+	iv_ruleParentRefTestChild2=ruleParentRefTestChild2
+	{ $current=$iv_ruleParentRefTestChild2.current; }
 	EOF;
 
 // Rule ParentRefTestChild2
-ruleParentRefTestChild2:
+ruleParentRefTestChild2 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getParentRefTestChild2_ParentRefTestChildAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -743,6 +902,10 @@ ruleParentRefTestChild2:
 				lv_child_2_0=ruleParentRefTestChild2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -750,13 +913,15 @@ ruleParentRefTestChild2:
 ;
 
 //Entry rule entryRuleQuantityExclusionTest1
-entryRuleQuantityExclusionTest1:
+entryRuleQuantityExclusionTest1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getQuantityExclusionTest1ElementType()); }
-	ruleQuantityExclusionTest1
+	iv_ruleQuantityExclusionTest1=ruleQuantityExclusionTest1
+	{ $current=$iv_ruleQuantityExclusionTest1.current; }
 	EOF;
 
 // Rule QuantityExclusionTest1
-ruleQuantityExclusionTest1:
+ruleQuantityExclusionTest1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getQuantityExclusionTest1_Kw1Keyword_0ElementType());
@@ -770,6 +935,12 @@ ruleQuantityExclusionTest1:
 				{
 					markLeaf(elementTypeProvider.getQuantityExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_attr1_1_0=RULE_ID
 				{
 					doneLeaf(lv_attr1_1_0);
@@ -781,6 +952,12 @@ ruleQuantityExclusionTest1:
 				{
 					markLeaf(elementTypeProvider.getQuantityExclusionTest1_Attr2IDTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_attr2_2_0=RULE_ID
 				{
 					doneLeaf(lv_attr2_2_0);
@@ -791,13 +968,15 @@ ruleQuantityExclusionTest1:
 ;
 
 //Entry rule entryRuleQuantityExclusionTest2
-entryRuleQuantityExclusionTest2:
+entryRuleQuantityExclusionTest2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getQuantityExclusionTest2ElementType()); }
-	ruleQuantityExclusionTest2
+	iv_ruleQuantityExclusionTest2=ruleQuantityExclusionTest2
+	{ $current=$iv_ruleQuantityExclusionTest2.current; }
 	EOF;
 
 // Rule QuantityExclusionTest2
-ruleQuantityExclusionTest2:
+ruleQuantityExclusionTest2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getQuantityExclusionTest2_Kw2Keyword_0ElementType());
@@ -811,6 +990,12 @@ ruleQuantityExclusionTest2:
 				{
 					markLeaf(elementTypeProvider.getQuantityExclusionTest2_Attr1IDTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_attr1_1_0=RULE_ID
 				{
 					doneLeaf(lv_attr1_1_0);
@@ -822,6 +1007,12 @@ ruleQuantityExclusionTest2:
 				{
 					markLeaf(elementTypeProvider.getQuantityExclusionTest2_Attr2IDTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_attr2_2_0=RULE_ID
 				{
 					doneLeaf(lv_attr2_2_0);
@@ -832,13 +1023,15 @@ ruleQuantityExclusionTest2:
 ;
 
 //Entry rule entryRuleValueExclusionTest1
-entryRuleValueExclusionTest1:
+entryRuleValueExclusionTest1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getValueExclusionTest1ElementType()); }
-	ruleValueExclusionTest1
+	iv_ruleValueExclusionTest1=ruleValueExclusionTest1
+	{ $current=$iv_ruleValueExclusionTest1.current; }
 	EOF;
 
 // Rule ValueExclusionTest1
-ruleValueExclusionTest1:
+ruleValueExclusionTest1 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -847,19 +1040,25 @@ ruleValueExclusionTest1:
 			lv_val_0_0=ruleValueExclusionTestEn1
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleValueExclusionTest2
-entryRuleValueExclusionTest2:
+entryRuleValueExclusionTest2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getValueExclusionTest2ElementType()); }
-	ruleValueExclusionTest2
+	iv_ruleValueExclusionTest2=ruleValueExclusionTest2
+	{ $current=$iv_ruleValueExclusionTest2.current; }
 	EOF;
 
 // Rule ValueExclusionTest2
-ruleValueExclusionTest2:
+ruleValueExclusionTest2 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -868,21 +1067,33 @@ ruleValueExclusionTest2:
 			lv_val_0_0=ruleValueExclusionTestEn2
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleNodeExclusion1
-entryRuleNodeExclusion1:
+entryRuleNodeExclusion1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeExclusion1ElementType()); }
-	ruleNodeExclusion1
+	iv_ruleNodeExclusion1=ruleNodeExclusion1
+	{ $current=$iv_ruleNodeExclusion1.current; }
 	EOF;
 
 // Rule NodeExclusion1
-ruleNodeExclusion1:
+ruleNodeExclusion1 returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getNodeExclusion1_RefModelCrossReference_0ElementType());
 			}
@@ -895,15 +1106,23 @@ ruleNodeExclusion1:
 ;
 
 //Entry rule entryRuleNodeExclusion2
-entryRuleNodeExclusion2:
+entryRuleNodeExclusion2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeExclusion2ElementType()); }
-	ruleNodeExclusion2
+	iv_ruleNodeExclusion2=ruleNodeExclusion2
+	{ $current=$iv_ruleNodeExclusion2.current; }
 	EOF;
 
 // Rule NodeExclusion2
-ruleNodeExclusion2:
+ruleNodeExclusion2 returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getNodeExclusion2_RefModelCrossReference_0ElementType());
 			}
@@ -916,15 +1135,23 @@ ruleNodeExclusion2:
 ;
 
 //Entry rule entryRuleNodeExclusion1List
-entryRuleNodeExclusion1List:
+entryRuleNodeExclusion1List returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeExclusion1ListElementType()); }
-	ruleNodeExclusion1List
+	iv_ruleNodeExclusion1List=ruleNodeExclusion1List
+	{ $current=$iv_ruleNodeExclusion1List.current; }
 	EOF;
 
 // Rule NodeExclusion1List
-ruleNodeExclusion1List:
+ruleNodeExclusion1List returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getNodeExclusion1List_RefModelCrossReference_0ElementType());
 			}
@@ -937,15 +1164,23 @@ ruleNodeExclusion1List:
 ;
 
 //Entry rule entryRuleNodeExclusion2List
-entryRuleNodeExclusion2List:
+entryRuleNodeExclusion2List returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeExclusion2ListElementType()); }
-	ruleNodeExclusion2List
+	iv_ruleNodeExclusion2List=ruleNodeExclusion2List
+	{ $current=$iv_ruleNodeExclusion2List.current; }
 	EOF;
 
 // Rule NodeExclusion2List
-ruleNodeExclusion2List:
+ruleNodeExclusion2List returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getNodeExclusion2List_RefModelCrossReference_0ElementType());
 			}
@@ -958,7 +1193,8 @@ ruleNodeExclusion2List:
 ;
 
 // Rule ValueExclusionTestEn1
-ruleValueExclusionTestEn1:
+ruleValueExclusionTestEn1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getValueExclusionTestEn1_Lit1EnumLiteralDeclarationElementType());
@@ -971,7 +1207,8 @@ ruleValueExclusionTestEn1:
 ;
 
 // Rule ValueExclusionTestEn2
-ruleValueExclusionTestEn2:
+ruleValueExclusionTestEn2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getValueExclusionTestEn2_Lit2EnumLiteralDeclarationElementType());

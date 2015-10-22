@@ -10,8 +10,10 @@ package org.eclipse.xtext.idea.parser;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.CreateElementType;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class CompositeMarker {
@@ -20,6 +22,9 @@ public class CompositeMarker {
   private final IElementType elementType;
   
   private final PsiBuilder.Marker marker;
+  
+  @Accessors
+  private boolean hasSemanticElement;
   
   public CompositeMarker(final PsiBuilder.Marker marker, final int lookAhead, final IElementType elementType) {
     this.marker = marker;
@@ -42,8 +47,18 @@ public class CompositeMarker {
       @Override
       public void onCreate(final ASTNode it) {
         it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, Integer.valueOf(CompositeMarker.this.lookAhead));
+        it.<Boolean>putUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY, Boolean.valueOf(CompositeMarker.this.hasSemanticElement));
       }
     };
     return new CreateElementType(elementType, _function);
+  }
+  
+  @Pure
+  public boolean isHasSemanticElement() {
+    return this.hasSemanticElement;
+  }
+  
+  public void setHasSemanticElement(final boolean hasSemanticElement) {
+    this.hasSemanticElement = hasSemanticElement;
   }
 }

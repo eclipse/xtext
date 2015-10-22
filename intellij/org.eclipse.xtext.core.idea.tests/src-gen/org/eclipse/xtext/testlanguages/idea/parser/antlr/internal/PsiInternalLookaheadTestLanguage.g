@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleEntry
-entryRuleEntry:
+entryRuleEntry returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEntryElementType()); }
-	ruleEntry
+	iv_ruleEntry=ruleEntry
+	{ $current=$iv_ruleEntry.current; }
 	EOF;
 
 // Rule Entry
-ruleEntry:
+ruleEntry returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,54 +66,65 @@ ruleEntry:
 			lv_contents_0_0=ruleAlts
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleAlts
-entryRuleAlts:
+entryRuleAlts returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAltsElementType()); }
-	ruleAlts
+	iv_ruleAlts=ruleAlts
+	{ $current=$iv_ruleAlts.current; }
 	EOF;
 
 // Rule Alts
-ruleAlts:
+ruleAlts returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getAlts_LookAhead0ParserRuleCall_0ElementType());
 		}
-		ruleLookAhead0
+		this_LookAhead0_0=ruleLookAhead0
 		{
+			$current = $this_LookAhead0_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getAlts_LookAhead1ParserRuleCall_1ElementType());
 		}
-		ruleLookAhead1
+		this_LookAhead1_1=ruleLookAhead1
 		{
+			$current = $this_LookAhead1_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getAlts_LookAhead3ParserRuleCall_2ElementType());
 		}
-		ruleLookAhead3
+		this_LookAhead3_2=ruleLookAhead3
 		{
+			$current = $this_LookAhead3_2.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleLookAhead0
-entryRuleLookAhead0:
+entryRuleLookAhead0 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getLookAhead0ElementType()); }
-	ruleLookAhead0
+	iv_ruleLookAhead0=ruleLookAhead0
+	{ $current=$iv_ruleLookAhead0.current; }
 	EOF;
 
 // Rule LookAhead0
-ruleLookAhead0:
+ruleLookAhead0 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getLookAhead0_BarKeyword_0ElementType());
@@ -129,19 +142,27 @@ ruleLookAhead0:
 				{
 					doneLeaf(lv_x_1_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
 ;
 
 //Entry rule entryRuleLookAhead1
-entryRuleLookAhead1:
+entryRuleLookAhead1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getLookAhead1ElementType()); }
-	ruleLookAhead1
+	iv_ruleLookAhead1=ruleLookAhead1
+	{ $current=$iv_ruleLookAhead1.current; }
 	EOF;
 
 // Rule LookAhead1
-ruleLookAhead1:
+ruleLookAhead1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getLookAhead1_FooKeyword_0ElementType());
@@ -158,6 +179,10 @@ ruleLookAhead1:
 				lv_y_1_0=ruleLookAhead2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -170,6 +195,12 @@ ruleLookAhead1:
 				{
 					doneLeaf(lv_x_2_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		(
@@ -181,19 +212,27 @@ ruleLookAhead1:
 				{
 					doneLeaf(lv_z_3_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
 ;
 
 //Entry rule entryRuleLookAhead2
-entryRuleLookAhead2:
+entryRuleLookAhead2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getLookAhead2ElementType()); }
-	ruleLookAhead2
+	iv_ruleLookAhead2=ruleLookAhead2
+	{ $current=$iv_ruleLookAhead2.current; }
 	EOF;
 
 // Rule LookAhead2
-ruleLookAhead2:
+ruleLookAhead2 returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -204,6 +243,12 @@ ruleLookAhead2:
 					lv_z_0_0='foo'
 					{
 						doneLeaf(lv_z_0_0);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -216,6 +261,12 @@ ruleLookAhead2:
 					lv_z_1_0='bar'
 					{
 						doneLeaf(lv_z_1_0);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -231,13 +282,15 @@ ruleLookAhead2:
 ;
 
 //Entry rule entryRuleLookAhead3
-entryRuleLookAhead3:
+entryRuleLookAhead3 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getLookAhead3ElementType()); }
-	ruleLookAhead3
+	iv_ruleLookAhead3=ruleLookAhead3
+	{ $current=$iv_ruleLookAhead3.current; }
 	EOF;
 
 // Rule LookAhead3
-ruleLookAhead3:
+ruleLookAhead3 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getLookAhead3_FooKeyword_0ElementType());
@@ -262,6 +315,12 @@ ruleLookAhead3:
 				{
 					doneLeaf(lv_x_2_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		(
@@ -272,6 +331,10 @@ ruleLookAhead3:
 				lv_z_3_0=ruleLookAhead4
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -279,13 +342,15 @@ ruleLookAhead3:
 ;
 
 //Entry rule entryRuleLookAhead4
-entryRuleLookAhead4:
+entryRuleLookAhead4 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getLookAhead4ElementType()); }
-	ruleLookAhead4
+	iv_ruleLookAhead4=ruleLookAhead4
+	{ $current=$iv_ruleLookAhead4.current; }
 	EOF;
 
 // Rule LookAhead4
-ruleLookAhead4:
+ruleLookAhead4 returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -295,6 +360,12 @@ ruleLookAhead4:
 				lv_x_0_0='c'
 				{
 					doneLeaf(lv_x_0_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -307,6 +378,12 @@ ruleLookAhead4:
 				lv_x_1_0='d'
 				{
 					doneLeaf(lv_x_1_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)

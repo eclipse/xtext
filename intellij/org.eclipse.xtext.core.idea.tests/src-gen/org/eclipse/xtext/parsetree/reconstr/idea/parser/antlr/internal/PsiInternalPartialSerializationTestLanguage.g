@@ -49,30 +49,35 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	{
 		markComposite(elementTypeProvider.getModel_NodeRootParserRuleCallElementType());
 	}
-	ruleNodeRoot
+	this_NodeRoot_0=ruleNodeRoot
 	{
+		$current = $this_NodeRoot_0.current;
 		doneComposite();
 	}
 ;
 
 //Entry rule entryRuleNodeRoot
-entryRuleNodeRoot:
+entryRuleNodeRoot returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeRootElementType()); }
-	ruleNodeRoot
+	iv_ruleNodeRoot=ruleNodeRoot
+	{ $current=$iv_ruleNodeRoot.current; }
 	EOF;
 
 // Rule NodeRoot
-ruleNodeRoot:
+ruleNodeRoot returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNodeRoot_NumberSignDigitOneKeyword_0ElementType());
@@ -89,6 +94,10 @@ ruleNodeRoot:
 				lv_node_1_0=ruleNode
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -96,13 +105,15 @@ ruleNodeRoot:
 ;
 
 //Entry rule entryRuleNode
-entryRuleNode:
+entryRuleNode returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNodeElementType()); }
-	ruleNode
+	iv_ruleNode=ruleNode
+	{ $current=$iv_ruleNode.current; }
 	EOF;
 
 // Rule Node
-ruleNode:
+ruleNode returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNode_NodeKeyword_0ElementType());
@@ -115,6 +126,12 @@ ruleNode:
 			(
 				{
 					markLeaf(elementTypeProvider.getNode_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -138,6 +155,10 @@ ruleNode:
 					lv_children_3_0=ruleNode
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)+

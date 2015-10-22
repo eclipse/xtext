@@ -234,7 +234,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Primary
 		public RuleCall getPrimaryParserRuleCall_0() { return cPrimaryParserRuleCall_0; }
 
-		//({Add.left=current} "+" right=Primary)*
+		//{Add.left=current} "+" right=Primary*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add.left=current}
@@ -356,13 +356,13 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"("
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
-		//("unassigned" (ID | Datatype))?
+		//"unassigned" (ID | Datatype)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"unassigned"
 		public Keyword getUnassignedKeyword_1_0() { return cUnassignedKeyword_1_0; }
 
-		//(ID | Datatype)
+		//ID | Datatype
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//ID
@@ -371,7 +371,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Datatype
 		public RuleCall getDatatypeParserRuleCall_1_1_1() { return cDatatypeParserRuleCall_1_1_1; }
 
-		//({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum))
+		//{Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//{Action}
@@ -431,7 +431,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//")"
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 
-		//({AssignedAction.child=current} "action" (body=Mixed "end")?)*
+		//{AssignedAction.child=current} "action" (body=Mixed "end")?*
 		public Group getGroup_4() { return cGroup_4; }
 
 		//{AssignedAction.child=current}
@@ -440,7 +440,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"action"
 		public Keyword getActionKeyword_4_1() { return cActionKeyword_4_1; }
 
-		//(body=Mixed "end")?
+		//body=Mixed "end"?
 		public Group getGroup_4_2() { return cGroup_4_2; }
 
 		//body=Mixed
@@ -471,7 +471,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"datatype"
 		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
 
-		//(Datatype | ID)
+		//Datatype | ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//Datatype

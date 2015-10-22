@@ -109,7 +109,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//('extends' ^extends=[Type])?
+		//'extends' ^extends=[Type]?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'extends'
@@ -124,7 +124,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getExtendsTypeIDTerminalRuleCall_2_1_0_1() { return cExtendsTypeIDTerminalRuleCall_2_1_0_1; }
 
-		//('implements' implements+=[Type] (',' implements+=[Type])*)?
+		//'implements' implements+=[Type] (',' implements+=[Type])*?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//'implements'
@@ -139,7 +139,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getImplementsTypeIDTerminalRuleCall_3_1_0_1() { return cImplementsTypeIDTerminalRuleCall_3_1_0_1; }
 
-		//(',' implements+=[Type])*
+		//',' implements+=[Type]*
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
 		//','

@@ -64,18 +64,24 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "entryRuleNodeList"
-    // PsiInternalIndentationAwareTestLanguage.g:52:1: entryRuleNodeList : ruleNodeList EOF ;
-    public final void entryRuleNodeList() throws RecognitionException {
+    // PsiInternalIndentationAwareTestLanguage.g:52:1: entryRuleNodeList returns [Boolean current=false] : iv_ruleNodeList= ruleNodeList EOF ;
+    public final Boolean entryRuleNodeList() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNodeList = null;
+
+
         try {
-            // PsiInternalIndentationAwareTestLanguage.g:52:18: ( ruleNodeList EOF )
-            // PsiInternalIndentationAwareTestLanguage.g:53:2: ruleNodeList EOF
+            // PsiInternalIndentationAwareTestLanguage.g:52:50: (iv_ruleNodeList= ruleNodeList EOF )
+            // PsiInternalIndentationAwareTestLanguage.g:53:2: iv_ruleNodeList= ruleNodeList EOF
             {
              markComposite(elementTypeProvider.getNodeListElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNodeList();
+            iv_ruleNodeList=ruleNodeList();
 
             state._fsp--;
 
+             current =iv_ruleNodeList; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -87,39 +93,49 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNodeList"
 
 
     // $ANTLR start "ruleNodeList"
-    // PsiInternalIndentationAwareTestLanguage.g:58:1: ruleNodeList : ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) ;
-    public final void ruleNodeList() throws RecognitionException {
+    // PsiInternalIndentationAwareTestLanguage.g:59:1: ruleNodeList returns [Boolean current=false] : ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) ;
+    public final Boolean ruleNodeList() throws RecognitionException {
+        Boolean current = false;
+
         Token this_NL_1=null;
+        Boolean lv_children_0_0 = null;
+
+        Boolean lv_children_2_0 = null;
+
 
         try {
-            // PsiInternalIndentationAwareTestLanguage.g:58:13: ( ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) )
-            // PsiInternalIndentationAwareTestLanguage.g:59:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
+            // PsiInternalIndentationAwareTestLanguage.g:60:1: ( ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) )
+            // PsiInternalIndentationAwareTestLanguage.g:61:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
             {
-            // PsiInternalIndentationAwareTestLanguage.g:59:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
-            // PsiInternalIndentationAwareTestLanguage.g:60:3: ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
+            // PsiInternalIndentationAwareTestLanguage.g:61:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
+            // PsiInternalIndentationAwareTestLanguage.g:62:3: ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
             {
-            // PsiInternalIndentationAwareTestLanguage.g:60:3: ( (lv_children_0_0= ruleNode ) )
-            // PsiInternalIndentationAwareTestLanguage.g:61:4: (lv_children_0_0= ruleNode )
+            // PsiInternalIndentationAwareTestLanguage.g:62:3: ( (lv_children_0_0= ruleNode ) )
+            // PsiInternalIndentationAwareTestLanguage.g:63:4: (lv_children_0_0= ruleNode )
             {
-            // PsiInternalIndentationAwareTestLanguage.g:61:4: (lv_children_0_0= ruleNode )
-            // PsiInternalIndentationAwareTestLanguage.g:62:5: lv_children_0_0= ruleNode
+            // PsiInternalIndentationAwareTestLanguage.g:63:4: (lv_children_0_0= ruleNode )
+            // PsiInternalIndentationAwareTestLanguage.g:64:5: lv_children_0_0= ruleNode
             {
 
             					markComposite(elementTypeProvider.getNodeList_ChildrenNodeParserRuleCall_0_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_3);
-            ruleNode();
+            lv_children_0_0=ruleNode();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -127,7 +143,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalIndentationAwareTestLanguage.g:71:3: (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
+            // PsiInternalIndentationAwareTestLanguage.g:77:3: (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -140,7 +156,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalIndentationAwareTestLanguage.g:72:4: this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) )
+            	    // PsiInternalIndentationAwareTestLanguage.g:78:4: this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) )
             	    {
 
             	    				markLeaf(elementTypeProvider.getNodeList_NLTerminalRuleCall_1_0ElementType());
@@ -149,22 +165,26 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
             	    				doneLeaf(this_NL_1);
             	    			
-            	    // PsiInternalIndentationAwareTestLanguage.g:79:4: ( (lv_children_2_0= ruleNode ) )
-            	    // PsiInternalIndentationAwareTestLanguage.g:80:5: (lv_children_2_0= ruleNode )
+            	    // PsiInternalIndentationAwareTestLanguage.g:85:4: ( (lv_children_2_0= ruleNode ) )
+            	    // PsiInternalIndentationAwareTestLanguage.g:86:5: (lv_children_2_0= ruleNode )
             	    {
-            	    // PsiInternalIndentationAwareTestLanguage.g:80:5: (lv_children_2_0= ruleNode )
-            	    // PsiInternalIndentationAwareTestLanguage.g:81:6: lv_children_2_0= ruleNode
+            	    // PsiInternalIndentationAwareTestLanguage.g:86:5: (lv_children_2_0= ruleNode )
+            	    // PsiInternalIndentationAwareTestLanguage.g:87:6: lv_children_2_0= ruleNode
             	    {
 
             	    						markComposite(elementTypeProvider.getNodeList_ChildrenNodeParserRuleCall_1_1_0ElementType());
             	    					
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleNode();
+            	    lv_children_2_0=ruleNode();
 
             	    state._fsp--;
 
 
             	    						doneComposite();
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
             	    					
 
             	    }
@@ -194,24 +214,30 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNodeList"
 
 
     // $ANTLR start "entryRuleNode"
-    // PsiInternalIndentationAwareTestLanguage.g:95:1: entryRuleNode : ruleNode EOF ;
-    public final void entryRuleNode() throws RecognitionException {
+    // PsiInternalIndentationAwareTestLanguage.g:105:1: entryRuleNode returns [Boolean current=false] : iv_ruleNode= ruleNode EOF ;
+    public final Boolean entryRuleNode() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNode = null;
+
+
         try {
-            // PsiInternalIndentationAwareTestLanguage.g:95:14: ( ruleNode EOF )
-            // PsiInternalIndentationAwareTestLanguage.g:96:2: ruleNode EOF
+            // PsiInternalIndentationAwareTestLanguage.g:105:46: (iv_ruleNode= ruleNode EOF )
+            // PsiInternalIndentationAwareTestLanguage.g:106:2: iv_ruleNode= ruleNode EOF
             {
              markComposite(elementTypeProvider.getNodeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNode();
+            iv_ruleNode=ruleNode();
 
             state._fsp--;
 
+             current =iv_ruleNode; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -223,41 +249,51 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNode"
 
 
     // $ANTLR start "ruleNode"
-    // PsiInternalIndentationAwareTestLanguage.g:101:1: ruleNode : ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) ;
-    public final void ruleNode() throws RecognitionException {
+    // PsiInternalIndentationAwareTestLanguage.g:112:1: ruleNode returns [Boolean current=false] : ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) ;
+    public final Boolean ruleNode() throws RecognitionException {
+        Boolean current = false;
+
         Token this_NL_1=null;
         Token this_BEGIN_2=null;
         Token this_END_4=null;
+        Boolean lv_name_0_0 = null;
+
+        Boolean lv_children_3_0 = null;
+
 
         try {
-            // PsiInternalIndentationAwareTestLanguage.g:101:9: ( ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) )
-            // PsiInternalIndentationAwareTestLanguage.g:102:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
+            // PsiInternalIndentationAwareTestLanguage.g:113:1: ( ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) )
+            // PsiInternalIndentationAwareTestLanguage.g:114:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
             {
-            // PsiInternalIndentationAwareTestLanguage.g:102:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
-            // PsiInternalIndentationAwareTestLanguage.g:103:3: ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
+            // PsiInternalIndentationAwareTestLanguage.g:114:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
+            // PsiInternalIndentationAwareTestLanguage.g:115:3: ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
             {
-            // PsiInternalIndentationAwareTestLanguage.g:103:3: ( (lv_name_0_0= ruleString ) )
-            // PsiInternalIndentationAwareTestLanguage.g:104:4: (lv_name_0_0= ruleString )
+            // PsiInternalIndentationAwareTestLanguage.g:115:3: ( (lv_name_0_0= ruleString ) )
+            // PsiInternalIndentationAwareTestLanguage.g:116:4: (lv_name_0_0= ruleString )
             {
-            // PsiInternalIndentationAwareTestLanguage.g:104:4: (lv_name_0_0= ruleString )
-            // PsiInternalIndentationAwareTestLanguage.g:105:5: lv_name_0_0= ruleString
+            // PsiInternalIndentationAwareTestLanguage.g:116:4: (lv_name_0_0= ruleString )
+            // PsiInternalIndentationAwareTestLanguage.g:117:5: lv_name_0_0= ruleString
             {
 
             					markComposite(elementTypeProvider.getNode_NameStringParserRuleCall_0_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_3);
-            ruleString();
+            lv_name_0_0=ruleString();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -265,7 +301,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalIndentationAwareTestLanguage.g:114:3: (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
+            // PsiInternalIndentationAwareTestLanguage.g:130:3: (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -278,7 +314,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalIndentationAwareTestLanguage.g:115:4: this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END
+                    // PsiInternalIndentationAwareTestLanguage.g:131:4: this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END
                     {
 
                     				markLeaf(elementTypeProvider.getNode_NLTerminalRuleCall_1_0ElementType());
@@ -294,22 +330,26 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
                     				doneLeaf(this_BEGIN_2);
                     			
-                    // PsiInternalIndentationAwareTestLanguage.g:129:4: ( (lv_children_3_0= ruleNodeList ) )
-                    // PsiInternalIndentationAwareTestLanguage.g:130:5: (lv_children_3_0= ruleNodeList )
+                    // PsiInternalIndentationAwareTestLanguage.g:145:4: ( (lv_children_3_0= ruleNodeList ) )
+                    // PsiInternalIndentationAwareTestLanguage.g:146:5: (lv_children_3_0= ruleNodeList )
                     {
-                    // PsiInternalIndentationAwareTestLanguage.g:130:5: (lv_children_3_0= ruleNodeList )
-                    // PsiInternalIndentationAwareTestLanguage.g:131:6: lv_children_3_0= ruleNodeList
+                    // PsiInternalIndentationAwareTestLanguage.g:146:5: (lv_children_3_0= ruleNodeList )
+                    // PsiInternalIndentationAwareTestLanguage.g:147:6: lv_children_3_0= ruleNodeList
                     {
 
                     						markComposite(elementTypeProvider.getNode_ChildrenNodeListParserRuleCall_1_2_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_6);
-                    ruleNodeList();
+                    lv_children_3_0=ruleNodeList();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -343,24 +383,30 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNode"
 
 
     // $ANTLR start "entryRuleString"
-    // PsiInternalIndentationAwareTestLanguage.g:152:1: entryRuleString : ruleString EOF ;
-    public final void entryRuleString() throws RecognitionException {
+    // PsiInternalIndentationAwareTestLanguage.g:172:1: entryRuleString returns [Boolean current=false] : iv_ruleString= ruleString EOF ;
+    public final Boolean entryRuleString() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleString = null;
+
+
         try {
-            // PsiInternalIndentationAwareTestLanguage.g:152:16: ( ruleString EOF )
-            // PsiInternalIndentationAwareTestLanguage.g:153:2: ruleString EOF
+            // PsiInternalIndentationAwareTestLanguage.g:172:48: (iv_ruleString= ruleString EOF )
+            // PsiInternalIndentationAwareTestLanguage.g:173:2: iv_ruleString= ruleString EOF
             {
              markComposite(elementTypeProvider.getStringElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleString();
+            iv_ruleString=ruleString();
 
             state._fsp--;
 
+             current =iv_ruleString; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -372,21 +418,23 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleString"
 
 
     // $ANTLR start "ruleString"
-    // PsiInternalIndentationAwareTestLanguage.g:158:1: ruleString : (this_OTHER_0= RULE_OTHER )+ ;
-    public final void ruleString() throws RecognitionException {
+    // PsiInternalIndentationAwareTestLanguage.g:179:1: ruleString returns [Boolean current=false] : (this_OTHER_0= RULE_OTHER )+ ;
+    public final Boolean ruleString() throws RecognitionException {
+        Boolean current = false;
+
         Token this_OTHER_0=null;
 
         try {
-            // PsiInternalIndentationAwareTestLanguage.g:158:11: ( (this_OTHER_0= RULE_OTHER )+ )
-            // PsiInternalIndentationAwareTestLanguage.g:159:2: (this_OTHER_0= RULE_OTHER )+
+            // PsiInternalIndentationAwareTestLanguage.g:180:1: ( (this_OTHER_0= RULE_OTHER )+ )
+            // PsiInternalIndentationAwareTestLanguage.g:181:2: (this_OTHER_0= RULE_OTHER )+
             {
-            // PsiInternalIndentationAwareTestLanguage.g:159:2: (this_OTHER_0= RULE_OTHER )+
+            // PsiInternalIndentationAwareTestLanguage.g:181:2: (this_OTHER_0= RULE_OTHER )+
             int cnt3=0;
             loop3:
             do {
@@ -400,7 +448,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalIndentationAwareTestLanguage.g:160:3: this_OTHER_0= RULE_OTHER
+            	    // PsiInternalIndentationAwareTestLanguage.g:182:3: this_OTHER_0= RULE_OTHER
             	    {
 
             	    			markLeaf(elementTypeProvider.getString_OTHERTerminalRuleCallElementType());
@@ -432,7 +480,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleString"
 

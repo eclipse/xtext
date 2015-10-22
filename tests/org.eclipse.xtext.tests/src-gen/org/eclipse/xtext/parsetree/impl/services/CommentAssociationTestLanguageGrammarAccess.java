@@ -62,7 +62,7 @@ public class CommentAssociationTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//({Element.child=current} 'parent' name=ID)?
+		//{Element.child=current} 'parent' name=ID?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{Element.child=current}

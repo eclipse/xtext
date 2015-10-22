@@ -49,15 +49,23 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleEReference
-entryRuleEReference:
+entryRuleEReference returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEReferenceElementType()); }
-	ruleEReference
+	iv_ruleEReference=ruleEReference
+	{ $current=$iv_ruleEReference.current; }
 	EOF;
 
 // Rule EReference
-ruleEReference:
+ruleEReference returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType());
 			}

@@ -7,12 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi.impl;
 
-import static java.util.Collections.*;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -25,16 +21,13 @@ import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
-import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.service.OperationCanceledManager;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.inject.Inject;
@@ -53,7 +46,6 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -71,9 +63,6 @@ public abstract class BaseXtextFile extends PsiFileBase {
     
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
-    
-    @Inject
-    protected OperationCanceledManager operationCanceledManager;
     
     protected final Object resourceCacheLock;
     
@@ -120,43 +109,12 @@ public abstract class BaseXtextFile extends PsiFileBase {
     	}
 	}
 	
-	public INode getINode(ASTNode node) {
-		return PsiToEcoreAdapter.get(getResource()).getNodesMapping().get(node);
+	public INode getINode(ASTNode astNode) {
+		return PsiToEcoreAdapter.findInEmfObject(getResource()).getINode(astNode);
 	}
 	
-	public List<ASTNode> getASTNodes(INode node) {
-		INode originalNode = findOriginalNode(node);
-		List<ASTNode> astNodes = PsiToEcoreAdapter.get(getResource()).getReverseNodesMapping().get(originalNode);
-		return filterASTNodes(node, astNodes);
-	}
-
-	protected INode findOriginalNode(INode node) {
-		// TODO get rid of this dependency on synth nodes
-		if (node instanceof SyntheticCompositeNode) {
-			return findOriginalNode(node.getParent());
-		}
-		return node;
-	}
-
-	protected List<ASTNode> filterASTNodes(INode node, List<ASTNode> astNodes) {
-		if (astNodes == null) {
-			return emptyList();
-		}
-		// TODO get rid of this dependency on synth nodes
-		if (node instanceof SyntheticCompositeNode) {
-			List<ASTNode> result = new ArrayList<ASTNode>();
-			for (ASTNode astNode : astNodes) {
-				IElementType elementType = astNode.getElementType();
-				if (elementType instanceof IGrammarAwareElementType) {
-					IGrammarAwareElementType grammarAwareElementType = (IGrammarAwareElementType) elementType;
-					if (grammarAwareElementType.getGrammarElement() == node.getGrammarElement()) {
-						result.add(astNode);
-					}
-				}
-			}
-			return result;
-		}
-		return astNodes;
+	public ASTNode getASTNode(INode node) {
+		return PsiToEcoreAdapter.findInEmfObject(getResource()).getASTNode(node);
 	}
 
 	protected XtextResource createResource() {    	
@@ -184,7 +142,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
             throw new RuntimeException(e);
         }
         
-        psiToEcoreTransformator.getAdapter().install(resource);
+        psiToEcoreTransformator.getAdapter().attachToEmfObject(resource);
 		initialize(resource);
         return resource;
     }

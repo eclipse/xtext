@@ -339,7 +339,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     if (_isDatatypeRule) {
       return "[String current=null]";
     } else {
-      return "[EObject current=null]";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("[");
+      String _currentType = this.getCurrentType();
+      _builder.append(_currentType, "");
+      _builder.append(" current=null]");
+      return _builder.toString();
     }
   }
   
@@ -350,12 +355,13 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       if ((it instanceof ParserRule)) {
         boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
         boolean _not = (!_isPassCurrentIntoFragment);
-        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not));
+        String _currentType = this.getCurrentType();
+        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), _currentType);
         _builder.append(_parameterList, "");
       }
     }
     _builder.append(" returns ");
-    String _compileReturns = this.compileReturns(it, options);
+    CharSequence _compileReturns = this.compileReturns(it, options);
     _builder.append(_compileReturns, "");
     _builder.newLineIfNotEmpty();
     _builder.append("@init {");
@@ -382,8 +388,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     return _builder.toString();
   }
   
-  protected String compileReturns(final AbstractRule it, final AntlrOptions options) {
-    String _switchResult = null;
+  protected CharSequence compileReturns(final AbstractRule it, final AntlrOptions options) {
+    CharSequence _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof EnumRule) {
@@ -407,14 +413,24 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_originalElement);
         if (_isEObjectFragmentRule) {
           _matched=true;
-          _switchResult = "[EObject current=in_current]";
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("[");
+          String _currentType = this.getCurrentType();
+          _builder.append(_currentType, "");
+          _builder.append(" current=in_current]");
+          _switchResult = _builder;
         }
       }
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
         _matched=true;
-        _switchResult = "[EObject current=null]";
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("[");
+        String _currentType = this.getCurrentType();
+        _builder.append(_currentType, "");
+        _builder.append(" current=null]");
+        _switchResult = _builder;
       }
     }
     if (!_matched) {

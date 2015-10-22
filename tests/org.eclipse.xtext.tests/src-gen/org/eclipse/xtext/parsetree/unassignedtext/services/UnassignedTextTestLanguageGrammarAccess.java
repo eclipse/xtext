@@ -354,8 +354,12 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getMultiRuleAccess().getRule();
 	}
 
-	//terminal Multi:
-	//	'a' 'b'? 'c'+ 'd'* ('e' | 'f') (('g' | 'h') | 'i'+) Multi2 '0'..'9' '0'..'9'+;
+	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
+	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
+	//Values: predicated(0-1), firstSetPredicated(0-1), elements(9)
+	//Semantic Object: Grammar'org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage'.rules[6]->TerminalRule'Multi'.alternatives->Group
+	//URI: classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext
+	//Context: TerminalAlternatives_Group
 	public TerminalRule getMultiRule() {
 		return tMulti;
 	} 

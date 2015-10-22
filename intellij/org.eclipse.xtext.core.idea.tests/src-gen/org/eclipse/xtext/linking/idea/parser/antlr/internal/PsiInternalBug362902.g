@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleModel:
 				lv_greetings_0_0=ruleGreeting
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -78,6 +84,12 @@ ruleModel:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markComposite(elementTypeProvider.getModel_FavouriteGreetingCrossReference_2_0ElementType());
 				}
 				ruleMyId
@@ -90,13 +102,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleGreeting
-entryRuleGreeting:
+entryRuleGreeting returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getGreetingElementType()); }
-	ruleGreeting
+	iv_ruleGreeting=ruleGreeting
+	{ $current=$iv_ruleGreeting.current; }
 	EOF;
 
 // Rule Greeting
-ruleGreeting:
+ruleGreeting returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getGreeting_HelloKeyword_0ElementType());
@@ -113,6 +127,10 @@ ruleGreeting:
 				lv_name_1_0=ruleMyId
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -127,13 +145,15 @@ ruleGreeting:
 ;
 
 //Entry rule entryRuleMyId
-entryRuleMyId:
+entryRuleMyId returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMyIdElementType()); }
-	ruleMyId
+	iv_ruleMyId=ruleMyId
+	{ $current=$iv_ruleMyId.current; }
 	EOF;
 
 // Rule MyId
-ruleMyId:
+ruleMyId returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getMyId_IDTerminalRuleCallElementType());
 	}

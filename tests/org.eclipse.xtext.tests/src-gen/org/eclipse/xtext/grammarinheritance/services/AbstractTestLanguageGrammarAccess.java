@@ -278,8 +278,12 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getExtendableParserRuleAccess().getRule();
 	}
 
-	//terminal REAL returns ecore::EDouble:
-	//	INT '.' INT;
+	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
+	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
+	//Values: predicated(0-1), firstSetPredicated(0-1), elements(3)
+	//Semantic Object: Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[6]->TerminalRule'REAL'.alternatives->Group
+	//URI: classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext
+	//Context: TerminalAlternatives_Group
 	public TerminalRule getREALRule() {
 		return tREAL;
 	} 

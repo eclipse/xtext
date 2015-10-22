@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getModel_SomeEnumKeyword_0ElementType());
@@ -72,6 +74,10 @@ ruleModel:
 				lv_a_1_0=ruleEnumRuleA
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -83,6 +89,10 @@ ruleModel:
 				lv_b_2_0=ruleEnumRuleB
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -94,6 +104,10 @@ ruleModel:
 				lv_c_3_0=ruleEnumRuleC
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -101,7 +115,8 @@ ruleModel:
 ;
 
 // Rule EnumRuleA
-ruleEnumRuleA:
+ruleEnumRuleA returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -136,7 +151,8 @@ ruleEnumRuleA:
 ;
 
 // Rule EnumRuleB
-ruleEnumRuleB:
+ruleEnumRuleB returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -171,7 +187,8 @@ ruleEnumRuleB:
 ;
 
 // Rule EnumRuleC
-ruleEnumRuleC:
+ruleEnumRuleC returns [Boolean current=false]
+:
 	(
 		(
 			{

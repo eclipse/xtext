@@ -73,18 +73,24 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleEntry"
-    // PsiInternalLookaheadTestLanguage.g:52:1: entryRuleEntry : ruleEntry EOF ;
-    public final void entryRuleEntry() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:52:1: entryRuleEntry returns [Boolean current=false] : iv_ruleEntry= ruleEntry EOF ;
+    public final Boolean entryRuleEntry() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleEntry = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:52:15: ( ruleEntry EOF )
-            // PsiInternalLookaheadTestLanguage.g:53:2: ruleEntry EOF
+            // PsiInternalLookaheadTestLanguage.g:52:47: (iv_ruleEntry= ruleEntry EOF )
+            // PsiInternalLookaheadTestLanguage.g:53:2: iv_ruleEntry= ruleEntry EOF
             {
              markComposite(elementTypeProvider.getEntryElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleEntry();
+            iv_ruleEntry=ruleEntry();
 
             state._fsp--;
 
+             current =iv_ruleEntry; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -96,19 +102,24 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleEntry"
 
 
     // $ANTLR start "ruleEntry"
-    // PsiInternalLookaheadTestLanguage.g:58:1: ruleEntry : ( (lv_contents_0_0= ruleAlts ) )* ;
-    public final void ruleEntry() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:59:1: ruleEntry returns [Boolean current=false] : ( (lv_contents_0_0= ruleAlts ) )* ;
+    public final Boolean ruleEntry() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_contents_0_0 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:58:10: ( ( (lv_contents_0_0= ruleAlts ) )* )
-            // PsiInternalLookaheadTestLanguage.g:59:2: ( (lv_contents_0_0= ruleAlts ) )*
+            // PsiInternalLookaheadTestLanguage.g:60:1: ( ( (lv_contents_0_0= ruleAlts ) )* )
+            // PsiInternalLookaheadTestLanguage.g:61:2: ( (lv_contents_0_0= ruleAlts ) )*
             {
-            // PsiInternalLookaheadTestLanguage.g:59:2: ( (lv_contents_0_0= ruleAlts ) )*
+            // PsiInternalLookaheadTestLanguage.g:61:2: ( (lv_contents_0_0= ruleAlts ) )*
             loop1:
             do {
                 int alt1=2;
@@ -121,21 +132,25 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalLookaheadTestLanguage.g:60:3: (lv_contents_0_0= ruleAlts )
+            	    // PsiInternalLookaheadTestLanguage.g:62:3: (lv_contents_0_0= ruleAlts )
             	    {
-            	    // PsiInternalLookaheadTestLanguage.g:60:3: (lv_contents_0_0= ruleAlts )
-            	    // PsiInternalLookaheadTestLanguage.g:61:4: lv_contents_0_0= ruleAlts
+            	    // PsiInternalLookaheadTestLanguage.g:62:3: (lv_contents_0_0= ruleAlts )
+            	    // PsiInternalLookaheadTestLanguage.g:63:4: lv_contents_0_0= ruleAlts
             	    {
 
             	    				markComposite(elementTypeProvider.getEntry_ContentsAltsParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleAlts();
+            	    lv_contents_0_0=ruleAlts();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -159,24 +174,30 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEntry"
 
 
     // $ANTLR start "entryRuleAlts"
-    // PsiInternalLookaheadTestLanguage.g:73:1: entryRuleAlts : ruleAlts EOF ;
-    public final void entryRuleAlts() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:79:1: entryRuleAlts returns [Boolean current=false] : iv_ruleAlts= ruleAlts EOF ;
+    public final Boolean entryRuleAlts() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAlts = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:73:14: ( ruleAlts EOF )
-            // PsiInternalLookaheadTestLanguage.g:74:2: ruleAlts EOF
+            // PsiInternalLookaheadTestLanguage.g:79:46: (iv_ruleAlts= ruleAlts EOF )
+            // PsiInternalLookaheadTestLanguage.g:80:2: iv_ruleAlts= ruleAlts EOF
             {
              markComposite(elementTypeProvider.getAltsElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAlts();
+            iv_ruleAlts=ruleAlts();
 
             state._fsp--;
 
+             current =iv_ruleAlts; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -188,19 +209,28 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAlts"
 
 
     // $ANTLR start "ruleAlts"
-    // PsiInternalLookaheadTestLanguage.g:79:1: ruleAlts : ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 ) ;
-    public final void ruleAlts() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:86:1: ruleAlts returns [Boolean current=false] : (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 ) ;
+    public final Boolean ruleAlts() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_LookAhead0_0 = null;
+
+        Boolean this_LookAhead1_1 = null;
+
+        Boolean this_LookAhead3_2 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:79:9: ( ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 ) )
-            // PsiInternalLookaheadTestLanguage.g:80:2: ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 )
+            // PsiInternalLookaheadTestLanguage.g:87:1: ( (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 ) )
+            // PsiInternalLookaheadTestLanguage.g:88:2: (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 )
             {
-            // PsiInternalLookaheadTestLanguage.g:80:2: ( ruleLookAhead0 | ruleLookAhead1 | ruleLookAhead3 )
+            // PsiInternalLookaheadTestLanguage.g:88:2: (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -210,24 +240,24 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             else if ( (LA2_0==13) ) {
                 int LA2_2 = input.LA(2);
 
-                if ( (LA2_2==11) ) {
-                    int LA2_3 = input.LA(3);
+                if ( (LA2_2==13) ) {
+                    alt2=2;
+                }
+                else if ( (LA2_2==11) ) {
+                    int LA2_4 = input.LA(3);
 
-                    if ( (LA2_3==16) ) {
-                        alt2=2;
-                    }
-                    else if ( (LA2_3==14) ) {
+                    if ( (LA2_4==14) ) {
                         alt2=3;
+                    }
+                    else if ( (LA2_4==16) ) {
+                        alt2=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 2, 3, input);
+                            new NoViableAltException("", 2, 4, input);
 
                         throw nvae;
                     }
-                }
-                else if ( (LA2_2==13) ) {
-                    alt2=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -244,51 +274,54 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalLookaheadTestLanguage.g:81:3: ruleLookAhead0
+                    // PsiInternalLookaheadTestLanguage.g:89:3: this_LookAhead0_0= ruleLookAhead0
                     {
 
                     			markComposite(elementTypeProvider.getAlts_LookAhead0ParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleLookAhead0();
+                    this_LookAhead0_0=ruleLookAhead0();
 
                     state._fsp--;
 
 
+                    			current = this_LookAhead0_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalLookaheadTestLanguage.g:89:3: ruleLookAhead1
+                    // PsiInternalLookaheadTestLanguage.g:98:3: this_LookAhead1_1= ruleLookAhead1
                     {
 
                     			markComposite(elementTypeProvider.getAlts_LookAhead1ParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleLookAhead1();
+                    this_LookAhead1_1=ruleLookAhead1();
 
                     state._fsp--;
 
 
+                    			current = this_LookAhead1_1;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 3 :
-                    // PsiInternalLookaheadTestLanguage.g:97:3: ruleLookAhead3
+                    // PsiInternalLookaheadTestLanguage.g:107:3: this_LookAhead3_2= ruleLookAhead3
                     {
 
                     			markComposite(elementTypeProvider.getAlts_LookAhead3ParserRuleCall_2ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleLookAhead3();
+                    this_LookAhead3_2=ruleLookAhead3();
 
                     state._fsp--;
 
 
+                    			current = this_LookAhead3_2;
                     			doneComposite();
                     		
 
@@ -307,24 +340,30 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAlts"
 
 
     // $ANTLR start "entryRuleLookAhead0"
-    // PsiInternalLookaheadTestLanguage.g:108:1: entryRuleLookAhead0 : ruleLookAhead0 EOF ;
-    public final void entryRuleLookAhead0() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:119:1: entryRuleLookAhead0 returns [Boolean current=false] : iv_ruleLookAhead0= ruleLookAhead0 EOF ;
+    public final Boolean entryRuleLookAhead0() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleLookAhead0 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:108:20: ( ruleLookAhead0 EOF )
-            // PsiInternalLookaheadTestLanguage.g:109:2: ruleLookAhead0 EOF
+            // PsiInternalLookaheadTestLanguage.g:119:52: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
+            // PsiInternalLookaheadTestLanguage.g:120:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
             {
              markComposite(elementTypeProvider.getLookAhead0ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleLookAhead0();
+            iv_ruleLookAhead0=ruleLookAhead0();
 
             state._fsp--;
 
+             current =iv_ruleLookAhead0; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -336,23 +375,25 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleLookAhead0"
 
 
     // $ANTLR start "ruleLookAhead0"
-    // PsiInternalLookaheadTestLanguage.g:114:1: ruleLookAhead0 : (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) ;
-    public final void ruleLookAhead0() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:126:1: ruleLookAhead0 returns [Boolean current=false] : (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) ;
+    public final Boolean ruleLookAhead0() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_x_1_0=null;
 
         try {
-            // PsiInternalLookaheadTestLanguage.g:114:15: ( (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) )
-            // PsiInternalLookaheadTestLanguage.g:115:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:127:1: ( (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) )
+            // PsiInternalLookaheadTestLanguage.g:128:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
             {
-            // PsiInternalLookaheadTestLanguage.g:115:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
-            // PsiInternalLookaheadTestLanguage.g:116:3: otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) )
+            // PsiInternalLookaheadTestLanguage.g:128:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:129:3: otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) )
             {
 
             			markLeaf(elementTypeProvider.getLookAhead0_BarKeyword_0ElementType());
@@ -361,11 +402,11 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalLookaheadTestLanguage.g:123:3: ( (lv_x_1_0= 'a' ) )
-            // PsiInternalLookaheadTestLanguage.g:124:4: (lv_x_1_0= 'a' )
+            // PsiInternalLookaheadTestLanguage.g:136:3: ( (lv_x_1_0= 'a' ) )
+            // PsiInternalLookaheadTestLanguage.g:137:4: (lv_x_1_0= 'a' )
             {
-            // PsiInternalLookaheadTestLanguage.g:124:4: (lv_x_1_0= 'a' )
-            // PsiInternalLookaheadTestLanguage.g:125:5: lv_x_1_0= 'a'
+            // PsiInternalLookaheadTestLanguage.g:137:4: (lv_x_1_0= 'a' )
+            // PsiInternalLookaheadTestLanguage.g:138:5: lv_x_1_0= 'a'
             {
 
             					markLeaf(elementTypeProvider.getLookAhead0_XAKeyword_1_0ElementType());
@@ -375,6 +416,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             					doneLeaf(lv_x_1_0);
             				
 
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
+
             }
 
 
@@ -393,24 +440,30 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleLookAhead0"
 
 
     // $ANTLR start "entryRuleLookAhead1"
-    // PsiInternalLookaheadTestLanguage.g:138:1: entryRuleLookAhead1 : ruleLookAhead1 EOF ;
-    public final void entryRuleLookAhead1() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:157:1: entryRuleLookAhead1 returns [Boolean current=false] : iv_ruleLookAhead1= ruleLookAhead1 EOF ;
+    public final Boolean entryRuleLookAhead1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleLookAhead1 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:138:20: ( ruleLookAhead1 EOF )
-            // PsiInternalLookaheadTestLanguage.g:139:2: ruleLookAhead1 EOF
+            // PsiInternalLookaheadTestLanguage.g:157:52: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
+            // PsiInternalLookaheadTestLanguage.g:158:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
             {
              markComposite(elementTypeProvider.getLookAhead1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleLookAhead1();
+            iv_ruleLookAhead1=ruleLookAhead1();
 
             state._fsp--;
 
+             current =iv_ruleLookAhead1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -422,24 +475,28 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleLookAhead1"
 
 
     // $ANTLR start "ruleLookAhead1"
-    // PsiInternalLookaheadTestLanguage.g:144:1: ruleLookAhead1 : (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) ;
-    public final void ruleLookAhead1() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:164:1: ruleLookAhead1 returns [Boolean current=false] : (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) ;
+    public final Boolean ruleLookAhead1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_x_2_0=null;
         Token lv_z_3_0=null;
+        Boolean lv_y_1_0 = null;
+
 
         try {
-            // PsiInternalLookaheadTestLanguage.g:144:15: ( (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) )
-            // PsiInternalLookaheadTestLanguage.g:145:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:165:1: ( (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) )
+            // PsiInternalLookaheadTestLanguage.g:166:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
             {
-            // PsiInternalLookaheadTestLanguage.g:145:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
-            // PsiInternalLookaheadTestLanguage.g:146:3: otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) )
+            // PsiInternalLookaheadTestLanguage.g:166:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:167:3: otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) )
             {
 
             			markLeaf(elementTypeProvider.getLookAhead1_FooKeyword_0ElementType());
@@ -448,22 +505,26 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalLookaheadTestLanguage.g:153:3: ( (lv_y_1_0= ruleLookAhead2 ) )
-            // PsiInternalLookaheadTestLanguage.g:154:4: (lv_y_1_0= ruleLookAhead2 )
+            // PsiInternalLookaheadTestLanguage.g:174:3: ( (lv_y_1_0= ruleLookAhead2 ) )
+            // PsiInternalLookaheadTestLanguage.g:175:4: (lv_y_1_0= ruleLookAhead2 )
             {
-            // PsiInternalLookaheadTestLanguage.g:154:4: (lv_y_1_0= ruleLookAhead2 )
-            // PsiInternalLookaheadTestLanguage.g:155:5: lv_y_1_0= ruleLookAhead2
+            // PsiInternalLookaheadTestLanguage.g:175:4: (lv_y_1_0= ruleLookAhead2 )
+            // PsiInternalLookaheadTestLanguage.g:176:5: lv_y_1_0= ruleLookAhead2
             {
 
             					markComposite(elementTypeProvider.getLookAhead1_YLookAhead2ParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_6);
-            ruleLookAhead2();
+            lv_y_1_0=ruleLookAhead2();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -471,11 +532,11 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalLookaheadTestLanguage.g:164:3: ( (lv_x_2_0= 'b' ) )
-            // PsiInternalLookaheadTestLanguage.g:165:4: (lv_x_2_0= 'b' )
+            // PsiInternalLookaheadTestLanguage.g:189:3: ( (lv_x_2_0= 'b' ) )
+            // PsiInternalLookaheadTestLanguage.g:190:4: (lv_x_2_0= 'b' )
             {
-            // PsiInternalLookaheadTestLanguage.g:165:4: (lv_x_2_0= 'b' )
-            // PsiInternalLookaheadTestLanguage.g:166:5: lv_x_2_0= 'b'
+            // PsiInternalLookaheadTestLanguage.g:190:4: (lv_x_2_0= 'b' )
+            // PsiInternalLookaheadTestLanguage.g:191:5: lv_x_2_0= 'b'
             {
 
             					markLeaf(elementTypeProvider.getLookAhead1_XBKeyword_2_0ElementType());
@@ -485,16 +546,22 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             					doneLeaf(lv_x_2_0);
             				
 
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
+
             }
 
 
             }
 
-            // PsiInternalLookaheadTestLanguage.g:175:3: ( (lv_z_3_0= 'd' ) )
-            // PsiInternalLookaheadTestLanguage.g:176:4: (lv_z_3_0= 'd' )
+            // PsiInternalLookaheadTestLanguage.g:206:3: ( (lv_z_3_0= 'd' ) )
+            // PsiInternalLookaheadTestLanguage.g:207:4: (lv_z_3_0= 'd' )
             {
-            // PsiInternalLookaheadTestLanguage.g:176:4: (lv_z_3_0= 'd' )
-            // PsiInternalLookaheadTestLanguage.g:177:5: lv_z_3_0= 'd'
+            // PsiInternalLookaheadTestLanguage.g:207:4: (lv_z_3_0= 'd' )
+            // PsiInternalLookaheadTestLanguage.g:208:5: lv_z_3_0= 'd'
             {
 
             					markLeaf(elementTypeProvider.getLookAhead1_ZDKeyword_3_0ElementType());
@@ -502,6 +569,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             lv_z_3_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_z_3_0);
+            				
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -522,24 +595,30 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleLookAhead1"
 
 
     // $ANTLR start "entryRuleLookAhead2"
-    // PsiInternalLookaheadTestLanguage.g:190:1: entryRuleLookAhead2 : ruleLookAhead2 EOF ;
-    public final void entryRuleLookAhead2() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:227:1: entryRuleLookAhead2 returns [Boolean current=false] : iv_ruleLookAhead2= ruleLookAhead2 EOF ;
+    public final Boolean entryRuleLookAhead2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleLookAhead2 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:190:20: ( ruleLookAhead2 EOF )
-            // PsiInternalLookaheadTestLanguage.g:191:2: ruleLookAhead2 EOF
+            // PsiInternalLookaheadTestLanguage.g:227:52: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
+            // PsiInternalLookaheadTestLanguage.g:228:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
             {
              markComposite(elementTypeProvider.getLookAhead2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleLookAhead2();
+            iv_ruleLookAhead2=ruleLookAhead2();
 
             state._fsp--;
 
+             current =iv_ruleLookAhead2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -551,26 +630,28 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleLookAhead2"
 
 
     // $ANTLR start "ruleLookAhead2"
-    // PsiInternalLookaheadTestLanguage.g:196:1: ruleLookAhead2 : ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) ;
-    public final void ruleLookAhead2() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:234:1: ruleLookAhead2 returns [Boolean current=false] : ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) ;
+    public final Boolean ruleLookAhead2() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_z_0_0=null;
         Token lv_z_1_0=null;
         Token otherlv_2=null;
 
         try {
-            // PsiInternalLookaheadTestLanguage.g:196:15: ( ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) )
-            // PsiInternalLookaheadTestLanguage.g:197:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
+            // PsiInternalLookaheadTestLanguage.g:235:1: ( ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) )
+            // PsiInternalLookaheadTestLanguage.g:236:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
             {
-            // PsiInternalLookaheadTestLanguage.g:197:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
-            // PsiInternalLookaheadTestLanguage.g:198:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c'
+            // PsiInternalLookaheadTestLanguage.g:236:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
+            // PsiInternalLookaheadTestLanguage.g:237:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c'
             {
-            // PsiInternalLookaheadTestLanguage.g:198:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:237:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -588,13 +669,13 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalLookaheadTestLanguage.g:199:4: ( (lv_z_0_0= 'foo' ) )
+                    // PsiInternalLookaheadTestLanguage.g:238:4: ( (lv_z_0_0= 'foo' ) )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:199:4: ( (lv_z_0_0= 'foo' ) )
-                    // PsiInternalLookaheadTestLanguage.g:200:5: (lv_z_0_0= 'foo' )
+                    // PsiInternalLookaheadTestLanguage.g:238:4: ( (lv_z_0_0= 'foo' ) )
+                    // PsiInternalLookaheadTestLanguage.g:239:5: (lv_z_0_0= 'foo' )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:200:5: (lv_z_0_0= 'foo' )
-                    // PsiInternalLookaheadTestLanguage.g:201:6: lv_z_0_0= 'foo'
+                    // PsiInternalLookaheadTestLanguage.g:239:5: (lv_z_0_0= 'foo' )
+                    // PsiInternalLookaheadTestLanguage.g:240:6: lv_z_0_0= 'foo'
                     {
 
                     						markLeaf(elementTypeProvider.getLookAhead2_ZFooKeyword_0_0_0ElementType());
@@ -602,6 +683,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     lv_z_0_0=(Token)match(input,13,FollowSets000.FOLLOW_8); 
 
                     						doneLeaf(lv_z_0_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -613,13 +700,13 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalLookaheadTestLanguage.g:211:4: ( (lv_z_1_0= 'bar' ) )
+                    // PsiInternalLookaheadTestLanguage.g:256:4: ( (lv_z_1_0= 'bar' ) )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:211:4: ( (lv_z_1_0= 'bar' ) )
-                    // PsiInternalLookaheadTestLanguage.g:212:5: (lv_z_1_0= 'bar' )
+                    // PsiInternalLookaheadTestLanguage.g:256:4: ( (lv_z_1_0= 'bar' ) )
+                    // PsiInternalLookaheadTestLanguage.g:257:5: (lv_z_1_0= 'bar' )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:212:5: (lv_z_1_0= 'bar' )
-                    // PsiInternalLookaheadTestLanguage.g:213:6: lv_z_1_0= 'bar'
+                    // PsiInternalLookaheadTestLanguage.g:257:5: (lv_z_1_0= 'bar' )
+                    // PsiInternalLookaheadTestLanguage.g:258:6: lv_z_1_0= 'bar'
                     {
 
                     						markLeaf(elementTypeProvider.getLookAhead2_ZBarKeyword_0_1_0ElementType());
@@ -627,6 +714,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     lv_z_1_0=(Token)match(input,11,FollowSets000.FOLLOW_8); 
 
                     						doneLeaf(lv_z_1_0);
+                    					
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -660,24 +753,30 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleLookAhead2"
 
 
     // $ANTLR start "entryRuleLookAhead3"
-    // PsiInternalLookaheadTestLanguage.g:234:1: entryRuleLookAhead3 : ruleLookAhead3 EOF ;
-    public final void entryRuleLookAhead3() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:285:1: entryRuleLookAhead3 returns [Boolean current=false] : iv_ruleLookAhead3= ruleLookAhead3 EOF ;
+    public final Boolean entryRuleLookAhead3() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleLookAhead3 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:234:20: ( ruleLookAhead3 EOF )
-            // PsiInternalLookaheadTestLanguage.g:235:2: ruleLookAhead3 EOF
+            // PsiInternalLookaheadTestLanguage.g:285:52: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
+            // PsiInternalLookaheadTestLanguage.g:286:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
             {
              markComposite(elementTypeProvider.getLookAhead3ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleLookAhead3();
+            iv_ruleLookAhead3=ruleLookAhead3();
 
             state._fsp--;
 
+             current =iv_ruleLookAhead3; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -689,24 +788,28 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleLookAhead3"
 
 
     // $ANTLR start "ruleLookAhead3"
-    // PsiInternalLookaheadTestLanguage.g:240:1: ruleLookAhead3 : (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) ;
-    public final void ruleLookAhead3() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:292:1: ruleLookAhead3 returns [Boolean current=false] : (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) ;
+    public final Boolean ruleLookAhead3() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_x_2_0=null;
+        Boolean lv_z_3_0 = null;
+
 
         try {
-            // PsiInternalLookaheadTestLanguage.g:240:15: ( (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) )
-            // PsiInternalLookaheadTestLanguage.g:241:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
+            // PsiInternalLookaheadTestLanguage.g:293:1: ( (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) )
+            // PsiInternalLookaheadTestLanguage.g:294:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
             {
-            // PsiInternalLookaheadTestLanguage.g:241:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
-            // PsiInternalLookaheadTestLanguage.g:242:3: otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) )
+            // PsiInternalLookaheadTestLanguage.g:294:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
+            // PsiInternalLookaheadTestLanguage.g:295:3: otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) )
             {
 
             			markLeaf(elementTypeProvider.getLookAhead3_FooKeyword_0ElementType());
@@ -722,11 +825,11 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalLookaheadTestLanguage.g:256:3: ( (lv_x_2_0= 'b' ) )
-            // PsiInternalLookaheadTestLanguage.g:257:4: (lv_x_2_0= 'b' )
+            // PsiInternalLookaheadTestLanguage.g:309:3: ( (lv_x_2_0= 'b' ) )
+            // PsiInternalLookaheadTestLanguage.g:310:4: (lv_x_2_0= 'b' )
             {
-            // PsiInternalLookaheadTestLanguage.g:257:4: (lv_x_2_0= 'b' )
-            // PsiInternalLookaheadTestLanguage.g:258:5: lv_x_2_0= 'b'
+            // PsiInternalLookaheadTestLanguage.g:310:4: (lv_x_2_0= 'b' )
+            // PsiInternalLookaheadTestLanguage.g:311:5: lv_x_2_0= 'b'
             {
 
             					markLeaf(elementTypeProvider.getLookAhead3_XBKeyword_2_0ElementType());
@@ -736,27 +839,37 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             					doneLeaf(lv_x_2_0);
             				
 
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
+
             }
 
 
             }
 
-            // PsiInternalLookaheadTestLanguage.g:267:3: ( (lv_z_3_0= ruleLookAhead4 ) )
-            // PsiInternalLookaheadTestLanguage.g:268:4: (lv_z_3_0= ruleLookAhead4 )
+            // PsiInternalLookaheadTestLanguage.g:326:3: ( (lv_z_3_0= ruleLookAhead4 ) )
+            // PsiInternalLookaheadTestLanguage.g:327:4: (lv_z_3_0= ruleLookAhead4 )
             {
-            // PsiInternalLookaheadTestLanguage.g:268:4: (lv_z_3_0= ruleLookAhead4 )
-            // PsiInternalLookaheadTestLanguage.g:269:5: lv_z_3_0= ruleLookAhead4
+            // PsiInternalLookaheadTestLanguage.g:327:4: (lv_z_3_0= ruleLookAhead4 )
+            // PsiInternalLookaheadTestLanguage.g:328:5: lv_z_3_0= ruleLookAhead4
             {
 
             					markComposite(elementTypeProvider.getLookAhead3_ZLookAhead4ParserRuleCall_3_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleLookAhead4();
+            lv_z_3_0=ruleLookAhead4();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -777,24 +890,30 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleLookAhead3"
 
 
     // $ANTLR start "entryRuleLookAhead4"
-    // PsiInternalLookaheadTestLanguage.g:282:1: entryRuleLookAhead4 : ruleLookAhead4 EOF ;
-    public final void entryRuleLookAhead4() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:345:1: entryRuleLookAhead4 returns [Boolean current=false] : iv_ruleLookAhead4= ruleLookAhead4 EOF ;
+    public final Boolean entryRuleLookAhead4() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleLookAhead4 = null;
+
+
         try {
-            // PsiInternalLookaheadTestLanguage.g:282:20: ( ruleLookAhead4 EOF )
-            // PsiInternalLookaheadTestLanguage.g:283:2: ruleLookAhead4 EOF
+            // PsiInternalLookaheadTestLanguage.g:345:52: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
+            // PsiInternalLookaheadTestLanguage.g:346:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
             {
              markComposite(elementTypeProvider.getLookAhead4ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleLookAhead4();
+            iv_ruleLookAhead4=ruleLookAhead4();
 
             state._fsp--;
 
+             current =iv_ruleLookAhead4; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -806,22 +925,24 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleLookAhead4"
 
 
     // $ANTLR start "ruleLookAhead4"
-    // PsiInternalLookaheadTestLanguage.g:288:1: ruleLookAhead4 : ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) ;
-    public final void ruleLookAhead4() throws RecognitionException {
+    // PsiInternalLookaheadTestLanguage.g:352:1: ruleLookAhead4 returns [Boolean current=false] : ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) ;
+    public final Boolean ruleLookAhead4() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_x_0_0=null;
         Token lv_x_1_0=null;
 
         try {
-            // PsiInternalLookaheadTestLanguage.g:288:15: ( ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) )
-            // PsiInternalLookaheadTestLanguage.g:289:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:353:1: ( ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) )
+            // PsiInternalLookaheadTestLanguage.g:354:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
             {
-            // PsiInternalLookaheadTestLanguage.g:289:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
+            // PsiInternalLookaheadTestLanguage.g:354:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -839,13 +960,13 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalLookaheadTestLanguage.g:290:3: ( (lv_x_0_0= 'c' ) )
+                    // PsiInternalLookaheadTestLanguage.g:355:3: ( (lv_x_0_0= 'c' ) )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:290:3: ( (lv_x_0_0= 'c' ) )
-                    // PsiInternalLookaheadTestLanguage.g:291:4: (lv_x_0_0= 'c' )
+                    // PsiInternalLookaheadTestLanguage.g:355:3: ( (lv_x_0_0= 'c' ) )
+                    // PsiInternalLookaheadTestLanguage.g:356:4: (lv_x_0_0= 'c' )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:291:4: (lv_x_0_0= 'c' )
-                    // PsiInternalLookaheadTestLanguage.g:292:5: lv_x_0_0= 'c'
+                    // PsiInternalLookaheadTestLanguage.g:356:4: (lv_x_0_0= 'c' )
+                    // PsiInternalLookaheadTestLanguage.g:357:5: lv_x_0_0= 'c'
                     {
 
                     					markLeaf(elementTypeProvider.getLookAhead4_XCKeyword_0_0ElementType());
@@ -853,6 +974,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     lv_x_0_0=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_x_0_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -864,13 +991,13 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // PsiInternalLookaheadTestLanguage.g:302:3: ( (lv_x_1_0= 'd' ) )
+                    // PsiInternalLookaheadTestLanguage.g:373:3: ( (lv_x_1_0= 'd' ) )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:302:3: ( (lv_x_1_0= 'd' ) )
-                    // PsiInternalLookaheadTestLanguage.g:303:4: (lv_x_1_0= 'd' )
+                    // PsiInternalLookaheadTestLanguage.g:373:3: ( (lv_x_1_0= 'd' ) )
+                    // PsiInternalLookaheadTestLanguage.g:374:4: (lv_x_1_0= 'd' )
                     {
-                    // PsiInternalLookaheadTestLanguage.g:303:4: (lv_x_1_0= 'd' )
-                    // PsiInternalLookaheadTestLanguage.g:304:5: lv_x_1_0= 'd'
+                    // PsiInternalLookaheadTestLanguage.g:374:4: (lv_x_1_0= 'd' )
+                    // PsiInternalLookaheadTestLanguage.g:375:5: lv_x_1_0= 'd'
                     {
 
                     					markLeaf(elementTypeProvider.getLookAhead4_XDKeyword_1_0ElementType());
@@ -878,6 +1005,12 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
                     lv_x_1_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_x_1_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -901,7 +1034,7 @@ public class PsiInternalLookaheadTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleLookAhead4"
 

@@ -2390,8 +2390,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      Iterable<CrossReference> _crossReferences = this.getCrossReferences(grammar);
-      final List<CrossReference> crossReferences = IterableExtensions.<CrossReference>toList(_crossReferences);
       final LinkedHashMultimap<String, String> namedGrammarElement = this.getNamedGrammarElements(grammar);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
@@ -2401,16 +2399,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectImpl;");
+      _builder.append("import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;");
       _builder.newLine();
-      {
-        boolean _isEmpty = crossReferences.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectReference;");
-          _builder.newLine();
-        }
-      }
       _builder.append("import ");
       String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
       _builder.append(_elementTypeProviderName, "");
@@ -2427,9 +2417,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       {
-        boolean _isEmpty_1 = namedGrammarElement.isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
+        boolean _isEmpty = namedGrammarElement.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
           _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
           _builder.newLine();
         }
@@ -2502,15 +2492,21 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append("\t\t");
       _builder.append("IElementType elementType = node.getElementType();");
       _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
+      _builder.newLine();
       {
         Set<String> _keySet = namedGrammarElement.keySet();
         for(final String namedElementType : _keySet) {
-          _builder.append("\t\t");
+          _builder.append("\t\t\t");
           _builder.append("if (elementType == elementTypeProvider.get");
-          _builder.append(namedElementType, "\t\t");
+          _builder.append(namedElementType, "\t\t\t");
           _builder.append("ElementType()) {");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
+          _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("return new PsiNamedEObjectImpl(node,");
           _builder.newLine();
@@ -2521,105 +2517,30 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               if (!_hasElements) {
                 _hasElements = true;
               } else {
-                _builder.appendImmediate(",", "\t\t\t\t");
+                _builder.appendImmediate(",", "\t\t\t\t\t");
               }
-              _builder.append("\t\t");
+              _builder.append("\t\t\t");
               _builder.append("\t\t");
               _builder.append("elementTypeProvider.get");
-              _builder.append(nameType, "\t\t\t\t");
+              _builder.append(nameType, "\t\t\t\t\t");
               _builder.append("ElementType()");
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t\t");
+          _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append(");");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t\t\t");
           _builder.append("}");
           _builder.newLine();
-        }
-      }
-      {
-        for(final CrossReference crossReference : crossReferences) {
-          _builder.append("\t\t");
-          _builder.append("if (elementType == elementTypeProvider.get");
-          String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(crossReference);
-          _builder.append(_grammarElementIdentifier, "\t\t");
-          _builder.append("ElementType()) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("return new PsiEObjectReference(node);");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
-      {
-        Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-        for(final AbstractRule rule : _allNonTerminalRules) {
-          _builder.append("\t\t");
-          _builder.append("if (elementType == elementTypeProvider.get");
-          String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
-          _builder.append(_grammarElementIdentifier_1, "\t\t");
-          _builder.append("ElementType()) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("return new PsiEObjectImpl(node) {};");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-          {
-            TreeIterator<EObject> _eAllContents = rule.eAllContents();
-            Iterator<AbstractElement> _filter = Iterators.<AbstractElement>filter(_eAllContents, AbstractElement.class);
-            final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-              @Override
-              public Boolean apply(final AbstractElement element) {
-                boolean _contains = crossReferences.contains(element);
-                return Boolean.valueOf((!_contains));
-              }
-            };
-            Iterator<AbstractElement> _filter_1 = IteratorExtensions.<AbstractElement>filter(_filter, _function);
-            final Function1<AbstractElement, String> _function_1 = new Function1<AbstractElement, String>() {
-              @Override
-              public String apply(final AbstractElement it) {
-                return IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(it);
-              }
-            };
-            Iterator<String> _map = IteratorExtensions.<AbstractElement, String>map(_filter_1, _function_1);
-            final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
-              @Override
-              public Boolean apply(final String identifier) {
-                Set<String> _keySet = namedGrammarElement.keySet();
-                boolean _contains = _keySet.contains(identifier);
-                return Boolean.valueOf((!_contains));
-              }
-            };
-            Iterator<String> _filter_2 = IteratorExtensions.<String>filter(_map, _function_2);
-            Iterable<String> _iterable = IteratorExtensions.<String>toIterable(_filter_2);
-            for(final String grammarElementIdentifier : _iterable) {
-              _builder.append("\t\t");
-              _builder.append("if (elementType == elementTypeProvider.get");
-              _builder.append(grammarElementIdentifier, "\t\t");
-              _builder.append("ElementType()) {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append("return new PsiEObjectImpl(node) {};");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("}");
-              _builder.newLine();
-            }
-          }
         }
       }
       _builder.append("\t\t");
-      _builder.append("throw new java.lang.IllegalStateException(\"Unexpected element type: \" + elementType);");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return super.createElement(node);");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");

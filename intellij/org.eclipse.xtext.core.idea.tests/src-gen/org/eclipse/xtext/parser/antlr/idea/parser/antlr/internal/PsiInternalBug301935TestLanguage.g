@@ -49,18 +49,26 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_0_0=RULE_ID
 				{
@@ -80,6 +88,12 @@ ruleModel:
 				{
 					markLeaf(elementTypeProvider.getModel_ValueIDTerminalRuleCall_2_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_value_2_0=RULE_ID
 				{
 					doneLeaf(lv_value_2_0);
@@ -98,6 +112,12 @@ ruleModel:
 				{
 					markLeaf(elementTypeProvider.getModel_Value2IDTerminalRuleCall_4_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_value2_4_0=RULE_ID
 				{
 					doneLeaf(lv_value2_4_0);
@@ -115,13 +135,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleNL
-entryRuleNL:
+entryRuleNL returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNLElementType()); }
-	ruleNL
+	iv_ruleNL=ruleNL
+	{ $current=$iv_ruleNL.current; }
 	EOF;
 
 // Rule NL
-ruleNL:
+ruleNL returns [Boolean current=false]
+:
 	(
 		(
 			{

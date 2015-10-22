@@ -82,18 +82,24 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "entryRuleSpielplatz"
-    // PsiInternalReferenceGrammarTestLanguage.g:52:1: entryRuleSpielplatz : ruleSpielplatz EOF ;
-    public final void entryRuleSpielplatz() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:52:1: entryRuleSpielplatz returns [Boolean current=false] : iv_ruleSpielplatz= ruleSpielplatz EOF ;
+    public final Boolean entryRuleSpielplatz() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSpielplatz = null;
+
+
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:52:20: ( ruleSpielplatz EOF )
-            // PsiInternalReferenceGrammarTestLanguage.g:53:2: ruleSpielplatz EOF
+            // PsiInternalReferenceGrammarTestLanguage.g:52:52: (iv_ruleSpielplatz= ruleSpielplatz EOF )
+            // PsiInternalReferenceGrammarTestLanguage.g:53:2: iv_ruleSpielplatz= ruleSpielplatz EOF
             {
              markComposite(elementTypeProvider.getSpielplatzElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSpielplatz();
+            iv_ruleSpielplatz=ruleSpielplatz();
 
             state._fsp--;
 
+             current =iv_ruleSpielplatz; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -105,25 +111,35 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSpielplatz"
 
 
     // $ANTLR start "ruleSpielplatz"
-    // PsiInternalReferenceGrammarTestLanguage.g:58:1: ruleSpielplatz : (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )? ;
-    public final void ruleSpielplatz() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:59:1: ruleSpielplatz returns [Boolean current=false] : (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )? ;
+    public final Boolean ruleSpielplatz() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_groesse_1_0=null;
         Token lv_beschreibung_2_0=null;
         Token otherlv_3=null;
         Token otherlv_8=null;
+        Boolean lv_kinder_4_0 = null;
+
+        Boolean lv_erzieher_5_0 = null;
+
+        Boolean lv_spielzeuge_6_0 = null;
+
+        Boolean lv_familie_7_0 = null;
+
 
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:58:15: ( (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )? )
-            // PsiInternalReferenceGrammarTestLanguage.g:59:2: (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )?
+            // PsiInternalReferenceGrammarTestLanguage.g:60:1: ( (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )? )
+            // PsiInternalReferenceGrammarTestLanguage.g:61:2: (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )?
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:59:2: (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )?
+            // PsiInternalReferenceGrammarTestLanguage.g:61:2: (otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -132,7 +148,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:60:3: otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}'
+                    // PsiInternalReferenceGrammarTestLanguage.g:62:3: otherlv_0= 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? otherlv_3= '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* otherlv_8= '}'
                     {
 
                     			markLeaf(elementTypeProvider.getSpielplatz_SpielplatzKeyword_0ElementType());
@@ -141,14 +157,20 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                     			doneLeaf(otherlv_0);
                     		
-                    // PsiInternalReferenceGrammarTestLanguage.g:67:3: ( (lv_groesse_1_0= RULE_INT ) )
-                    // PsiInternalReferenceGrammarTestLanguage.g:68:4: (lv_groesse_1_0= RULE_INT )
+                    // PsiInternalReferenceGrammarTestLanguage.g:69:3: ( (lv_groesse_1_0= RULE_INT ) )
+                    // PsiInternalReferenceGrammarTestLanguage.g:70:4: (lv_groesse_1_0= RULE_INT )
                     {
-                    // PsiInternalReferenceGrammarTestLanguage.g:68:4: (lv_groesse_1_0= RULE_INT )
-                    // PsiInternalReferenceGrammarTestLanguage.g:69:5: lv_groesse_1_0= RULE_INT
+                    // PsiInternalReferenceGrammarTestLanguage.g:70:4: (lv_groesse_1_0= RULE_INT )
+                    // PsiInternalReferenceGrammarTestLanguage.g:71:5: lv_groesse_1_0= RULE_INT
                     {
 
                     					markLeaf(elementTypeProvider.getSpielplatz_GroesseINTTerminalRuleCall_1_0ElementType());
+                    				
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
                     lv_groesse_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
@@ -160,7 +182,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                     }
 
-                    // PsiInternalReferenceGrammarTestLanguage.g:78:3: ( (lv_beschreibung_2_0= RULE_STRING ) )?
+                    // PsiInternalReferenceGrammarTestLanguage.g:86:3: ( (lv_beschreibung_2_0= RULE_STRING ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -169,13 +191,19 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     }
                     switch (alt1) {
                         case 1 :
-                            // PsiInternalReferenceGrammarTestLanguage.g:79:4: (lv_beschreibung_2_0= RULE_STRING )
+                            // PsiInternalReferenceGrammarTestLanguage.g:87:4: (lv_beschreibung_2_0= RULE_STRING )
                             {
-                            // PsiInternalReferenceGrammarTestLanguage.g:79:4: (lv_beschreibung_2_0= RULE_STRING )
-                            // PsiInternalReferenceGrammarTestLanguage.g:80:5: lv_beschreibung_2_0= RULE_STRING
+                            // PsiInternalReferenceGrammarTestLanguage.g:87:4: (lv_beschreibung_2_0= RULE_STRING )
+                            // PsiInternalReferenceGrammarTestLanguage.g:88:5: lv_beschreibung_2_0= RULE_STRING
                             {
 
                             					markLeaf(elementTypeProvider.getSpielplatz_BeschreibungSTRINGTerminalRuleCall_2_0ElementType());
+                            				
+
+                            					if(!current) {
+                            						associateWithSemanticElement();
+                            						current = true;
+                            					}
                             				
                             lv_beschreibung_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); 
 
@@ -197,7 +225,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                     			doneLeaf(otherlv_3);
                     		
-                    // PsiInternalReferenceGrammarTestLanguage.g:96:3: ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )*
+                    // PsiInternalReferenceGrammarTestLanguage.g:110:3: ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )*
                     loop2:
                     do {
                         int alt2=5;
@@ -227,24 +255,28 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                         switch (alt2) {
                     	case 1 :
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:97:4: ( (lv_kinder_4_0= ruleKind ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:111:4: ( (lv_kinder_4_0= ruleKind ) )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:97:4: ( (lv_kinder_4_0= ruleKind ) )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:98:5: (lv_kinder_4_0= ruleKind )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:111:4: ( (lv_kinder_4_0= ruleKind ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:112:5: (lv_kinder_4_0= ruleKind )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:98:5: (lv_kinder_4_0= ruleKind )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:99:6: lv_kinder_4_0= ruleKind
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:112:5: (lv_kinder_4_0= ruleKind )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:113:6: lv_kinder_4_0= ruleKind
                     	    {
 
                     	    						markComposite(elementTypeProvider.getSpielplatz_KinderKindParserRuleCall_4_0_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_6);
-                    	    ruleKind();
+                    	    lv_kinder_4_0=ruleKind();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -256,24 +288,28 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:109:4: ( (lv_erzieher_5_0= ruleErwachsener ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:127:4: ( (lv_erzieher_5_0= ruleErwachsener ) )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:109:4: ( (lv_erzieher_5_0= ruleErwachsener ) )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:110:5: (lv_erzieher_5_0= ruleErwachsener )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:127:4: ( (lv_erzieher_5_0= ruleErwachsener ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:128:5: (lv_erzieher_5_0= ruleErwachsener )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:110:5: (lv_erzieher_5_0= ruleErwachsener )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:111:6: lv_erzieher_5_0= ruleErwachsener
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:128:5: (lv_erzieher_5_0= ruleErwachsener )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:129:6: lv_erzieher_5_0= ruleErwachsener
                     	    {
 
                     	    						markComposite(elementTypeProvider.getSpielplatz_ErzieherErwachsenerParserRuleCall_4_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_6);
-                    	    ruleErwachsener();
+                    	    lv_erzieher_5_0=ruleErwachsener();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -285,24 +321,28 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     	    }
                     	    break;
                     	case 3 :
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:121:4: ( (lv_spielzeuge_6_0= ruleSpielzeug ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:143:4: ( (lv_spielzeuge_6_0= ruleSpielzeug ) )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:121:4: ( (lv_spielzeuge_6_0= ruleSpielzeug ) )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:122:5: (lv_spielzeuge_6_0= ruleSpielzeug )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:143:4: ( (lv_spielzeuge_6_0= ruleSpielzeug ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:144:5: (lv_spielzeuge_6_0= ruleSpielzeug )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:122:5: (lv_spielzeuge_6_0= ruleSpielzeug )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:123:6: lv_spielzeuge_6_0= ruleSpielzeug
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:144:5: (lv_spielzeuge_6_0= ruleSpielzeug )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:145:6: lv_spielzeuge_6_0= ruleSpielzeug
                     	    {
 
                     	    						markComposite(elementTypeProvider.getSpielplatz_SpielzeugeSpielzeugParserRuleCall_4_2_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_6);
-                    	    ruleSpielzeug();
+                    	    lv_spielzeuge_6_0=ruleSpielzeug();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -314,24 +354,28 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     	    }
                     	    break;
                     	case 4 :
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:133:4: ( (lv_familie_7_0= ruleFamilie ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:159:4: ( (lv_familie_7_0= ruleFamilie ) )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:133:4: ( (lv_familie_7_0= ruleFamilie ) )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:134:5: (lv_familie_7_0= ruleFamilie )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:159:4: ( (lv_familie_7_0= ruleFamilie ) )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:160:5: (lv_familie_7_0= ruleFamilie )
                     	    {
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:134:5: (lv_familie_7_0= ruleFamilie )
-                    	    // PsiInternalReferenceGrammarTestLanguage.g:135:6: lv_familie_7_0= ruleFamilie
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:160:5: (lv_familie_7_0= ruleFamilie )
+                    	    // PsiInternalReferenceGrammarTestLanguage.g:161:6: lv_familie_7_0= ruleFamilie
                     	    {
 
                     	    						markComposite(elementTypeProvider.getSpielplatz_FamilieFamilieParserRuleCall_4_3_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_6);
-                    	    ruleFamilie();
+                    	    lv_familie_7_0=ruleFamilie();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -371,24 +415,30 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSpielplatz"
 
 
     // $ANTLR start "entryRuleKind"
-    // PsiInternalReferenceGrammarTestLanguage.g:156:1: entryRuleKind : ruleKind EOF ;
-    public final void entryRuleKind() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:186:1: entryRuleKind returns [Boolean current=false] : iv_ruleKind= ruleKind EOF ;
+    public final Boolean entryRuleKind() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleKind = null;
+
+
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:156:14: ( ruleKind EOF )
-            // PsiInternalReferenceGrammarTestLanguage.g:157:2: ruleKind EOF
+            // PsiInternalReferenceGrammarTestLanguage.g:186:46: (iv_ruleKind= ruleKind EOF )
+            // PsiInternalReferenceGrammarTestLanguage.g:187:2: iv_ruleKind= ruleKind EOF
             {
              markComposite(elementTypeProvider.getKindElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleKind();
+            iv_ruleKind=ruleKind();
 
             state._fsp--;
 
+             current =iv_ruleKind; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -400,14 +450,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleKind"
 
 
     // $ANTLR start "ruleKind"
-    // PsiInternalReferenceGrammarTestLanguage.g:162:1: ruleKind : (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) ;
-    public final void ruleKind() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:193:1: ruleKind returns [Boolean current=false] : (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) ;
+    public final Boolean ruleKind() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_name_2_0=null;
@@ -415,11 +467,11 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         Token otherlv_4=null;
 
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:162:9: ( (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:163:2: (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:194:1: ( (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:195:2: (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:163:2: (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
-            // PsiInternalReferenceGrammarTestLanguage.g:164:3: otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')'
+            // PsiInternalReferenceGrammarTestLanguage.g:195:2: (otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:196:3: otherlv_0= 'kind' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')'
             {
 
             			markLeaf(elementTypeProvider.getKind_KindKeyword_0ElementType());
@@ -435,14 +487,20 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalReferenceGrammarTestLanguage.g:178:3: ( (lv_name_2_0= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:179:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:210:3: ( (lv_name_2_0= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:211:4: (lv_name_2_0= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:179:4: (lv_name_2_0= RULE_ID )
-            // PsiInternalReferenceGrammarTestLanguage.g:180:5: lv_name_2_0= RULE_ID
+            // PsiInternalReferenceGrammarTestLanguage.g:211:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:212:5: lv_name_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getKind_NameIDTerminalRuleCall_2_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -454,14 +512,20 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:189:3: ( (lv_age_3_0= RULE_INT ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:190:4: (lv_age_3_0= RULE_INT )
+            // PsiInternalReferenceGrammarTestLanguage.g:227:3: ( (lv_age_3_0= RULE_INT ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:228:4: (lv_age_3_0= RULE_INT )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:190:4: (lv_age_3_0= RULE_INT )
-            // PsiInternalReferenceGrammarTestLanguage.g:191:5: lv_age_3_0= RULE_INT
+            // PsiInternalReferenceGrammarTestLanguage.g:228:4: (lv_age_3_0= RULE_INT )
+            // PsiInternalReferenceGrammarTestLanguage.g:229:5: lv_age_3_0= RULE_INT
             {
 
             					markLeaf(elementTypeProvider.getKind_AgeINTTerminalRuleCall_3_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_age_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_9); 
 
@@ -493,24 +557,30 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleKind"
 
 
     // $ANTLR start "entryRuleErwachsener"
-    // PsiInternalReferenceGrammarTestLanguage.g:211:1: entryRuleErwachsener : ruleErwachsener EOF ;
-    public final void entryRuleErwachsener() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:255:1: entryRuleErwachsener returns [Boolean current=false] : iv_ruleErwachsener= ruleErwachsener EOF ;
+    public final Boolean entryRuleErwachsener() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleErwachsener = null;
+
+
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:211:21: ( ruleErwachsener EOF )
-            // PsiInternalReferenceGrammarTestLanguage.g:212:2: ruleErwachsener EOF
+            // PsiInternalReferenceGrammarTestLanguage.g:255:53: (iv_ruleErwachsener= ruleErwachsener EOF )
+            // PsiInternalReferenceGrammarTestLanguage.g:256:2: iv_ruleErwachsener= ruleErwachsener EOF
             {
              markComposite(elementTypeProvider.getErwachsenerElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleErwachsener();
+            iv_ruleErwachsener=ruleErwachsener();
 
             state._fsp--;
 
+             current =iv_ruleErwachsener; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -522,14 +592,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleErwachsener"
 
 
     // $ANTLR start "ruleErwachsener"
-    // PsiInternalReferenceGrammarTestLanguage.g:217:1: ruleErwachsener : (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) ;
-    public final void ruleErwachsener() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:262:1: ruleErwachsener returns [Boolean current=false] : (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) ;
+    public final Boolean ruleErwachsener() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_name_2_0=null;
@@ -537,11 +609,11 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         Token otherlv_4=null;
 
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:217:16: ( (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:218:2: (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:263:1: ( (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:264:2: (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:218:2: (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
-            // PsiInternalReferenceGrammarTestLanguage.g:219:3: otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')'
+            // PsiInternalReferenceGrammarTestLanguage.g:264:2: (otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:265:3: otherlv_0= 'erwachsener' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) otherlv_4= ')'
             {
 
             			markLeaf(elementTypeProvider.getErwachsener_ErwachsenerKeyword_0ElementType());
@@ -557,14 +629,20 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalReferenceGrammarTestLanguage.g:233:3: ( (lv_name_2_0= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:234:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:279:3: ( (lv_name_2_0= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:280:4: (lv_name_2_0= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:234:4: (lv_name_2_0= RULE_ID )
-            // PsiInternalReferenceGrammarTestLanguage.g:235:5: lv_name_2_0= RULE_ID
+            // PsiInternalReferenceGrammarTestLanguage.g:280:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:281:5: lv_name_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getErwachsener_NameIDTerminalRuleCall_2_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -576,14 +654,20 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:244:3: ( (lv_age_3_0= RULE_INT ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:245:4: (lv_age_3_0= RULE_INT )
+            // PsiInternalReferenceGrammarTestLanguage.g:296:3: ( (lv_age_3_0= RULE_INT ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:297:4: (lv_age_3_0= RULE_INT )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:245:4: (lv_age_3_0= RULE_INT )
-            // PsiInternalReferenceGrammarTestLanguage.g:246:5: lv_age_3_0= RULE_INT
+            // PsiInternalReferenceGrammarTestLanguage.g:297:4: (lv_age_3_0= RULE_INT )
+            // PsiInternalReferenceGrammarTestLanguage.g:298:5: lv_age_3_0= RULE_INT
             {
 
             					markLeaf(elementTypeProvider.getErwachsener_AgeINTTerminalRuleCall_3_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_age_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_9); 
 
@@ -615,24 +699,30 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleErwachsener"
 
 
     // $ANTLR start "entryRuleSpielzeug"
-    // PsiInternalReferenceGrammarTestLanguage.g:266:1: entryRuleSpielzeug : ruleSpielzeug EOF ;
-    public final void entryRuleSpielzeug() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:324:1: entryRuleSpielzeug returns [Boolean current=false] : iv_ruleSpielzeug= ruleSpielzeug EOF ;
+    public final Boolean entryRuleSpielzeug() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSpielzeug = null;
+
+
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:266:19: ( ruleSpielzeug EOF )
-            // PsiInternalReferenceGrammarTestLanguage.g:267:2: ruleSpielzeug EOF
+            // PsiInternalReferenceGrammarTestLanguage.g:324:51: (iv_ruleSpielzeug= ruleSpielzeug EOF )
+            // PsiInternalReferenceGrammarTestLanguage.g:325:2: iv_ruleSpielzeug= ruleSpielzeug EOF
             {
              markComposite(elementTypeProvider.getSpielzeugElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSpielzeug();
+            iv_ruleSpielzeug=ruleSpielzeug();
 
             state._fsp--;
 
+             current =iv_ruleSpielzeug; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -644,25 +734,29 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSpielzeug"
 
 
     // $ANTLR start "ruleSpielzeug"
-    // PsiInternalReferenceGrammarTestLanguage.g:272:1: ruleSpielzeug : (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' ) ;
-    public final void ruleSpielzeug() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:331:1: ruleSpielzeug returns [Boolean current=false] : (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' ) ;
+    public final Boolean ruleSpielzeug() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_name_2_0=null;
         Token otherlv_4=null;
+        Boolean lv_farbe_3_0 = null;
+
 
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:272:14: ( (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:273:2: (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:332:1: ( (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:333:2: (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:273:2: (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' )
-            // PsiInternalReferenceGrammarTestLanguage.g:274:3: otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')'
+            // PsiInternalReferenceGrammarTestLanguage.g:333:2: (otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:334:3: otherlv_0= 'spielzeug' otherlv_1= '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) otherlv_4= ')'
             {
 
             			markLeaf(elementTypeProvider.getSpielzeug_SpielzeugKeyword_0ElementType());
@@ -678,14 +772,20 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalReferenceGrammarTestLanguage.g:288:3: ( (lv_name_2_0= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:289:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:348:3: ( (lv_name_2_0= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:349:4: (lv_name_2_0= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:289:4: (lv_name_2_0= RULE_ID )
-            // PsiInternalReferenceGrammarTestLanguage.g:290:5: lv_name_2_0= RULE_ID
+            // PsiInternalReferenceGrammarTestLanguage.g:349:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:350:5: lv_name_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getSpielzeug_NameIDTerminalRuleCall_2_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
 
@@ -697,22 +797,26 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:299:3: ( (lv_farbe_3_0= ruleFarbe ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:300:4: (lv_farbe_3_0= ruleFarbe )
+            // PsiInternalReferenceGrammarTestLanguage.g:365:3: ( (lv_farbe_3_0= ruleFarbe ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:366:4: (lv_farbe_3_0= ruleFarbe )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:300:4: (lv_farbe_3_0= ruleFarbe )
-            // PsiInternalReferenceGrammarTestLanguage.g:301:5: lv_farbe_3_0= ruleFarbe
+            // PsiInternalReferenceGrammarTestLanguage.g:366:4: (lv_farbe_3_0= ruleFarbe )
+            // PsiInternalReferenceGrammarTestLanguage.g:367:5: lv_farbe_3_0= ruleFarbe
             {
 
             					markComposite(elementTypeProvider.getSpielzeug_FarbeFarbeParserRuleCall_3_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_9);
-            ruleFarbe();
+            lv_farbe_3_0=ruleFarbe();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -740,24 +844,30 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSpielzeug"
 
 
     // $ANTLR start "entryRuleFarbe"
-    // PsiInternalReferenceGrammarTestLanguage.g:321:1: entryRuleFarbe : ruleFarbe EOF ;
-    public final void entryRuleFarbe() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:391:1: entryRuleFarbe returns [Boolean current=false] : iv_ruleFarbe= ruleFarbe EOF ;
+    public final Boolean entryRuleFarbe() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleFarbe = null;
+
+
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:321:15: ( ruleFarbe EOF )
-            // PsiInternalReferenceGrammarTestLanguage.g:322:2: ruleFarbe EOF
+            // PsiInternalReferenceGrammarTestLanguage.g:391:47: (iv_ruleFarbe= ruleFarbe EOF )
+            // PsiInternalReferenceGrammarTestLanguage.g:392:2: iv_ruleFarbe= ruleFarbe EOF
             {
              markComposite(elementTypeProvider.getFarbeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleFarbe();
+            iv_ruleFarbe=ruleFarbe();
 
             state._fsp--;
 
+             current =iv_ruleFarbe; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -769,30 +879,32 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleFarbe"
 
 
     // $ANTLR start "ruleFarbe"
-    // PsiInternalReferenceGrammarTestLanguage.g:327:1: ruleFarbe : ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) ) ;
-    public final void ruleFarbe() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:398:1: ruleFarbe returns [Boolean current=false] : ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) ) ;
+    public final Boolean ruleFarbe() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_wert_0_1=null;
         Token lv_wert_0_2=null;
         Token lv_wert_0_3=null;
         Token lv_wert_0_4=null;
 
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:327:10: ( ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:328:2: ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:399:1: ( ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:400:2: ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:328:2: ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:329:3: ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:400:2: ( ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:401:3: ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:329:3: ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:330:4: (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' )
+            // PsiInternalReferenceGrammarTestLanguage.g:401:3: ( (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:402:4: (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:330:4: (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' )
+            // PsiInternalReferenceGrammarTestLanguage.g:402:4: (lv_wert_0_1= 'ROT' | lv_wert_0_2= 'BLAU' | lv_wert_0_3= 'GELB' | lv_wert_0_4= 'GR\\u00DCN' )
             int alt4=4;
             switch ( input.LA(1) ) {
             case 19:
@@ -824,7 +936,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             switch (alt4) {
                 case 1 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:331:5: lv_wert_0_1= 'ROT'
+                    // PsiInternalReferenceGrammarTestLanguage.g:403:5: lv_wert_0_1= 'ROT'
                     {
 
                     					markLeaf(elementTypeProvider.getFarbe_WertROTKeyword_0_0ElementType());
@@ -834,10 +946,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     					doneLeaf(lv_wert_0_1);
                     				
 
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
+
                     }
                     break;
                 case 2 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:339:5: lv_wert_0_2= 'BLAU'
+                    // PsiInternalReferenceGrammarTestLanguage.g:417:5: lv_wert_0_2= 'BLAU'
                     {
 
                     					markLeaf(elementTypeProvider.getFarbe_WertBLAUKeyword_0_1ElementType());
@@ -847,10 +965,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     					doneLeaf(lv_wert_0_2);
                     				
 
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
+
                     }
                     break;
                 case 3 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:347:5: lv_wert_0_3= 'GELB'
+                    // PsiInternalReferenceGrammarTestLanguage.g:431:5: lv_wert_0_3= 'GELB'
                     {
 
                     					markLeaf(elementTypeProvider.getFarbe_WertGELBKeyword_0_2ElementType());
@@ -860,10 +984,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     					doneLeaf(lv_wert_0_3);
                     				
 
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
+
                     }
                     break;
                 case 4 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:355:5: lv_wert_0_4= 'GR\\u00DCN'
+                    // PsiInternalReferenceGrammarTestLanguage.g:445:5: lv_wert_0_4= 'GR\\u00DCN'
                     {
 
                     					markLeaf(elementTypeProvider.getFarbe_WertGRÜNKeyword_0_3ElementType());
@@ -871,6 +1001,12 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     lv_wert_0_4=(Token)match(input,22,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_wert_0_4);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -894,24 +1030,30 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleFarbe"
 
 
     // $ANTLR start "entryRuleFamilie"
-    // PsiInternalReferenceGrammarTestLanguage.g:368:1: entryRuleFamilie : ruleFamilie EOF ;
-    public final void entryRuleFamilie() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:464:1: entryRuleFamilie returns [Boolean current=false] : iv_ruleFamilie= ruleFamilie EOF ;
+    public final Boolean entryRuleFamilie() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleFamilie = null;
+
+
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:368:17: ( ruleFamilie EOF )
-            // PsiInternalReferenceGrammarTestLanguage.g:369:2: ruleFamilie EOF
+            // PsiInternalReferenceGrammarTestLanguage.g:464:49: (iv_ruleFamilie= ruleFamilie EOF )
+            // PsiInternalReferenceGrammarTestLanguage.g:465:2: iv_ruleFamilie= ruleFamilie EOF
             {
              markComposite(elementTypeProvider.getFamilieElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleFamilie();
+            iv_ruleFamilie=ruleFamilie();
 
             state._fsp--;
 
+             current =iv_ruleFamilie; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -923,14 +1065,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleFamilie"
 
 
     // $ANTLR start "ruleFamilie"
-    // PsiInternalReferenceGrammarTestLanguage.g:374:1: ruleFamilie : (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' ) ;
-    public final void ruleFamilie() throws RecognitionException {
+    // PsiInternalReferenceGrammarTestLanguage.g:471:1: ruleFamilie returns [Boolean current=false] : (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' ) ;
+    public final Boolean ruleFamilie() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_name_2_1=null;
@@ -944,11 +1088,11 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         Token otherlv_8=null;
 
         try {
-            // PsiInternalReferenceGrammarTestLanguage.g:374:12: ( (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:375:2: (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:472:1: ( (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:473:2: (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:375:2: (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' )
-            // PsiInternalReferenceGrammarTestLanguage.g:376:3: otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')'
+            // PsiInternalReferenceGrammarTestLanguage.g:473:2: (otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')' )
+            // PsiInternalReferenceGrammarTestLanguage.g:474:3: otherlv_0= 'familie' otherlv_1= '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* otherlv_8= ')'
             {
 
             			markLeaf(elementTypeProvider.getFamilie_FamilieKeyword_0ElementType());
@@ -964,13 +1108,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalReferenceGrammarTestLanguage.g:390:3: ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:391:4: ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:488:3: ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:489:4: ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:391:4: ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:392:5: (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:489:4: ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:490:5: (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:392:5: (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:490:5: (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID )
             int alt5=3;
             switch ( input.LA(1) ) {
             case 24:
@@ -997,7 +1141,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             switch (alt5) {
                 case 1 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:393:6: lv_name_2_1= 'keyword'
+                    // PsiInternalReferenceGrammarTestLanguage.g:491:6: lv_name_2_1= 'keyword'
                     {
 
                     						markLeaf(elementTypeProvider.getFamilie_NameKeywordKeyword_2_0_0ElementType());
@@ -1007,13 +1151,25 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     						doneLeaf(lv_name_2_1);
                     					
 
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
+
                     }
                     break;
                 case 2 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:401:6: lv_name_2_2= RULE_STRING
+                    // PsiInternalReferenceGrammarTestLanguage.g:505:6: lv_name_2_2= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_name_2_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_8); 
 
@@ -1023,10 +1179,16 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
                     }
                     break;
                 case 3 :
-                    // PsiInternalReferenceGrammarTestLanguage.g:409:6: lv_name_2_3= RULE_ID
+                    // PsiInternalReferenceGrammarTestLanguage.g:519:6: lv_name_2_3= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getFamilie_NameIDTerminalRuleCall_2_0_2ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_name_2_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
@@ -1044,12 +1206,18 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:419:3: ( (otherlv_3= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:420:4: (otherlv_3= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:535:3: ( (otherlv_3= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:536:4: (otherlv_3= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:420:4: (otherlv_3= RULE_ID )
-            // PsiInternalReferenceGrammarTestLanguage.g:421:5: otherlv_3= RULE_ID
+            // PsiInternalReferenceGrammarTestLanguage.g:536:4: (otherlv_3= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:537:5: otherlv_3= RULE_ID
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markLeaf(elementTypeProvider.getFamilie_MutterErwachsenerCrossReference_3_0ElementType());
             				
@@ -1063,12 +1231,18 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:430:3: ( (otherlv_4= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:431:4: (otherlv_4= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:552:3: ( (otherlv_4= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:553:4: (otherlv_4= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:431:4: (otherlv_4= RULE_ID )
-            // PsiInternalReferenceGrammarTestLanguage.g:432:5: otherlv_4= RULE_ID
+            // PsiInternalReferenceGrammarTestLanguage.g:553:4: (otherlv_4= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:554:5: otherlv_4= RULE_ID
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markLeaf(elementTypeProvider.getFamilie_VaterErwachsenerCrossReference_4_0ElementType());
             				
@@ -1082,12 +1256,18 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:441:3: ( (otherlv_5= RULE_ID ) )
-            // PsiInternalReferenceGrammarTestLanguage.g:442:4: (otherlv_5= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:569:3: ( (otherlv_5= RULE_ID ) )
+            // PsiInternalReferenceGrammarTestLanguage.g:570:4: (otherlv_5= RULE_ID )
             {
-            // PsiInternalReferenceGrammarTestLanguage.g:442:4: (otherlv_5= RULE_ID )
-            // PsiInternalReferenceGrammarTestLanguage.g:443:5: otherlv_5= RULE_ID
+            // PsiInternalReferenceGrammarTestLanguage.g:570:4: (otherlv_5= RULE_ID )
+            // PsiInternalReferenceGrammarTestLanguage.g:571:5: otherlv_5= RULE_ID
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markLeaf(elementTypeProvider.getFamilie_KinderKindCrossReference_5_0ElementType());
             				
@@ -1101,7 +1281,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // PsiInternalReferenceGrammarTestLanguage.g:452:3: (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
+            // PsiInternalReferenceGrammarTestLanguage.g:586:3: (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
             loop6:
             do {
                 int alt6=2;
@@ -1114,7 +1294,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                 switch (alt6) {
             	case 1 :
-            	    // PsiInternalReferenceGrammarTestLanguage.g:453:4: otherlv_6= ',' ( (otherlv_7= RULE_ID ) )
+            	    // PsiInternalReferenceGrammarTestLanguage.g:587:4: otherlv_6= ',' ( (otherlv_7= RULE_ID ) )
             	    {
 
             	    				markLeaf(elementTypeProvider.getFamilie_CommaKeyword_6_0ElementType());
@@ -1123,12 +1303,18 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             	    				doneLeaf(otherlv_6);
             	    			
-            	    // PsiInternalReferenceGrammarTestLanguage.g:460:4: ( (otherlv_7= RULE_ID ) )
-            	    // PsiInternalReferenceGrammarTestLanguage.g:461:5: (otherlv_7= RULE_ID )
+            	    // PsiInternalReferenceGrammarTestLanguage.g:594:4: ( (otherlv_7= RULE_ID ) )
+            	    // PsiInternalReferenceGrammarTestLanguage.g:595:5: (otherlv_7= RULE_ID )
             	    {
-            	    // PsiInternalReferenceGrammarTestLanguage.g:461:5: (otherlv_7= RULE_ID )
-            	    // PsiInternalReferenceGrammarTestLanguage.g:462:6: otherlv_7= RULE_ID
+            	    // PsiInternalReferenceGrammarTestLanguage.g:595:5: (otherlv_7= RULE_ID )
+            	    // PsiInternalReferenceGrammarTestLanguage.g:596:6: otherlv_7= RULE_ID
             	    {
+
+            	    						if (!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
+            	    					
 
             	    						markLeaf(elementTypeProvider.getFamilie_KinderKindCrossReference_6_1_0ElementType());
             	    					
@@ -1171,7 +1357,7 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleFamilie"
 

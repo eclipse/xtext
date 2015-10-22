@@ -69,18 +69,24 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalHiddenTokenSequencerTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalHiddenTokenSequencerTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -92,34 +98,43 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalHiddenTokenSequencerTestLanguage.g:58:1: ruleModel : ( (lv_domainModel_0_0= ruleDomainModel ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalHiddenTokenSequencerTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_domainModel_0_0= ruleDomainModel ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_domainModel_0_0 = null;
+
+
         try {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:58:10: ( ( (lv_domainModel_0_0= ruleDomainModel ) ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:59:2: ( (lv_domainModel_0_0= ruleDomainModel ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:60:1: ( ( (lv_domainModel_0_0= ruleDomainModel ) ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:61:2: ( (lv_domainModel_0_0= ruleDomainModel ) )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:59:2: ( (lv_domainModel_0_0= ruleDomainModel ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:60:3: (lv_domainModel_0_0= ruleDomainModel )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:61:2: ( (lv_domainModel_0_0= ruleDomainModel ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:62:3: (lv_domainModel_0_0= ruleDomainModel )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:60:3: (lv_domainModel_0_0= ruleDomainModel )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:61:4: lv_domainModel_0_0= ruleDomainModel
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:62:3: (lv_domainModel_0_0= ruleDomainModel )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:63:4: lv_domainModel_0_0= ruleDomainModel
             {
 
             				markComposite(elementTypeProvider.getModel_DomainModelDomainModelParserRuleCall_0ElementType());
             			
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleDomainModel();
+            lv_domainModel_0_0=ruleDomainModel();
 
             state._fsp--;
 
 
             				doneComposite();
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
 
             }
@@ -137,24 +152,30 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleDomainModel"
-    // PsiInternalHiddenTokenSequencerTestLanguage.g:73:1: entryRuleDomainModel : ruleDomainModel EOF ;
-    public final void entryRuleDomainModel() throws RecognitionException {
+    // PsiInternalHiddenTokenSequencerTestLanguage.g:79:1: entryRuleDomainModel returns [Boolean current=false] : iv_ruleDomainModel= ruleDomainModel EOF ;
+    public final Boolean entryRuleDomainModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleDomainModel = null;
+
+
         try {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:73:21: ( ruleDomainModel EOF )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:74:2: ruleDomainModel EOF
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:79:53: (iv_ruleDomainModel= ruleDomainModel EOF )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:80:2: iv_ruleDomainModel= ruleDomainModel EOF
             {
              markComposite(elementTypeProvider.getDomainModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleDomainModel();
+            iv_ruleDomainModel=ruleDomainModel();
 
             state._fsp--;
 
+             current =iv_ruleDomainModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -166,23 +187,27 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleDomainModel"
 
 
     // $ANTLR start "ruleDomainModel"
-    // PsiInternalHiddenTokenSequencerTestLanguage.g:79:1: ruleDomainModel : (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) ;
-    public final void ruleDomainModel() throws RecognitionException {
+    // PsiInternalHiddenTokenSequencerTestLanguage.g:86:1: ruleDomainModel returns [Boolean current=false] : (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) ;
+    public final Boolean ruleDomainModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
+        Boolean lv_entities_1_0 = null;
+
 
         try {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:79:16: ( (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:80:2: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:87:1: ( (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:88:2: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:80:2: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:81:3: otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end'
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:88:2: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:89:3: otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end'
             {
 
             			markLeaf(elementTypeProvider.getDomainModel_EntitiesKeyword_0ElementType());
@@ -191,7 +216,7 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:88:3: ( (lv_entities_1_0= ruleEntity ) )*
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:96:3: ( (lv_entities_1_0= ruleEntity ) )*
             loop1:
             do {
                 int alt1=2;
@@ -204,21 +229,25 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalHiddenTokenSequencerTestLanguage.g:89:4: (lv_entities_1_0= ruleEntity )
+            	    // PsiInternalHiddenTokenSequencerTestLanguage.g:97:4: (lv_entities_1_0= ruleEntity )
             	    {
-            	    // PsiInternalHiddenTokenSequencerTestLanguage.g:89:4: (lv_entities_1_0= ruleEntity )
-            	    // PsiInternalHiddenTokenSequencerTestLanguage.g:90:5: lv_entities_1_0= ruleEntity
+            	    // PsiInternalHiddenTokenSequencerTestLanguage.g:97:4: (lv_entities_1_0= ruleEntity )
+            	    // PsiInternalHiddenTokenSequencerTestLanguage.g:98:5: lv_entities_1_0= ruleEntity
             	    {
 
             	    					markComposite(elementTypeProvider.getDomainModel_EntitiesEntityParserRuleCall_1_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleEntity();
+            	    lv_entities_1_0=ruleEntity();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -252,24 +281,30 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleDomainModel"
 
 
     // $ANTLR start "entryRuleEntity"
-    // PsiInternalHiddenTokenSequencerTestLanguage.g:110:1: entryRuleEntity : ruleEntity EOF ;
-    public final void entryRuleEntity() throws RecognitionException {
+    // PsiInternalHiddenTokenSequencerTestLanguage.g:122:1: entryRuleEntity returns [Boolean current=false] : iv_ruleEntity= ruleEntity EOF ;
+    public final Boolean entryRuleEntity() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleEntity = null;
+
+
         try {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:110:16: ( ruleEntity EOF )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:111:2: ruleEntity EOF
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:122:48: (iv_ruleEntity= ruleEntity EOF )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:123:2: iv_ruleEntity= ruleEntity EOF
             {
              markComposite(elementTypeProvider.getEntityElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleEntity();
+            iv_ruleEntity=ruleEntity();
 
             state._fsp--;
 
+             current =iv_ruleEntity; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -281,32 +316,40 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleEntity"
 
 
     // $ANTLR start "ruleEntity"
-    // PsiInternalHiddenTokenSequencerTestLanguage.g:116:1: ruleEntity : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) ;
-    public final void ruleEntity() throws RecognitionException {
+    // PsiInternalHiddenTokenSequencerTestLanguage.g:129:1: ruleEntity returns [Boolean current=false] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) ;
+    public final Boolean ruleEntity() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
         Token lv_description_1_0=null;
 
         try {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:116:11: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:117:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:130:1: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:131:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:117:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:118:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:131:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:132:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:118:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:119:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:132:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:133:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:119:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:120:5: lv_name_0_0= RULE_ID
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:133:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:134:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEntity_NameIDTerminalRuleCall_0_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -318,14 +361,20 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
 
             }
 
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:129:3: ( (lv_description_1_0= RULE_STRING ) )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:130:4: (lv_description_1_0= RULE_STRING )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:149:3: ( (lv_description_1_0= RULE_STRING ) )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:150:4: (lv_description_1_0= RULE_STRING )
             {
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:130:4: (lv_description_1_0= RULE_STRING )
-            // PsiInternalHiddenTokenSequencerTestLanguage.g:131:5: lv_description_1_0= RULE_STRING
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:150:4: (lv_description_1_0= RULE_STRING )
+            // PsiInternalHiddenTokenSequencerTestLanguage.g:151:5: lv_description_1_0= RULE_STRING
             {
 
             					markLeaf(elementTypeProvider.getEntity_DescriptionSTRINGTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_description_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -350,7 +399,7 @@ public class PsiInternalHiddenTokenSequencerTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEntity"
 

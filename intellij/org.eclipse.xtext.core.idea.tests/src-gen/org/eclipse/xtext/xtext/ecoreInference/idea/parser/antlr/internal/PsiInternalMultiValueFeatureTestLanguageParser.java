@@ -67,18 +67,24 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "entryRuleStart"
-    // PsiInternalMultiValueFeatureTestLanguage.g:52:1: entryRuleStart : ruleStart EOF ;
-    public final void entryRuleStart() throws RecognitionException {
+    // PsiInternalMultiValueFeatureTestLanguage.g:52:1: entryRuleStart returns [Boolean current=false] : iv_ruleStart= ruleStart EOF ;
+    public final Boolean entryRuleStart() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleStart = null;
+
+
         try {
-            // PsiInternalMultiValueFeatureTestLanguage.g:52:15: ( ruleStart EOF )
-            // PsiInternalMultiValueFeatureTestLanguage.g:53:2: ruleStart EOF
+            // PsiInternalMultiValueFeatureTestLanguage.g:52:47: (iv_ruleStart= ruleStart EOF )
+            // PsiInternalMultiValueFeatureTestLanguage.g:53:2: iv_ruleStart= ruleStart EOF
             {
              markComposite(elementTypeProvider.getStartElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleStart();
+            iv_ruleStart=ruleStart();
 
             state._fsp--;
 
+             current =iv_ruleStart; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -90,21 +96,23 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleStart"
 
 
     // $ANTLR start "ruleStart"
-    // PsiInternalMultiValueFeatureTestLanguage.g:58:1: ruleStart : ( (lv_featureA_0_0= RULE_ID ) )+ ;
-    public final void ruleStart() throws RecognitionException {
+    // PsiInternalMultiValueFeatureTestLanguage.g:59:1: ruleStart returns [Boolean current=false] : ( (lv_featureA_0_0= RULE_ID ) )+ ;
+    public final Boolean ruleStart() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_featureA_0_0=null;
 
         try {
-            // PsiInternalMultiValueFeatureTestLanguage.g:58:10: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
-            // PsiInternalMultiValueFeatureTestLanguage.g:59:2: ( (lv_featureA_0_0= RULE_ID ) )+
+            // PsiInternalMultiValueFeatureTestLanguage.g:60:1: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
+            // PsiInternalMultiValueFeatureTestLanguage.g:61:2: ( (lv_featureA_0_0= RULE_ID ) )+
             {
-            // PsiInternalMultiValueFeatureTestLanguage.g:59:2: ( (lv_featureA_0_0= RULE_ID ) )+
+            // PsiInternalMultiValueFeatureTestLanguage.g:61:2: ( (lv_featureA_0_0= RULE_ID ) )+
             int cnt1=0;
             loop1:
             do {
@@ -118,13 +126,19 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalMultiValueFeatureTestLanguage.g:60:3: (lv_featureA_0_0= RULE_ID )
+            	    // PsiInternalMultiValueFeatureTestLanguage.g:62:3: (lv_featureA_0_0= RULE_ID )
             	    {
-            	    // PsiInternalMultiValueFeatureTestLanguage.g:60:3: (lv_featureA_0_0= RULE_ID )
-            	    // PsiInternalMultiValueFeatureTestLanguage.g:61:4: lv_featureA_0_0= RULE_ID
+            	    // PsiInternalMultiValueFeatureTestLanguage.g:62:3: (lv_featureA_0_0= RULE_ID )
+            	    // PsiInternalMultiValueFeatureTestLanguage.g:63:4: lv_featureA_0_0= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
+            	    			
+
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
             	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -156,7 +170,7 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleStart"
 

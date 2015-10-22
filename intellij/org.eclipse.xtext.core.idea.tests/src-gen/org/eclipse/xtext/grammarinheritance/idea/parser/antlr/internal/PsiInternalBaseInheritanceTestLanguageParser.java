@@ -68,18 +68,24 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalBaseInheritanceTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalBaseInheritanceTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalBaseInheritanceTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalBaseInheritanceTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalBaseInheritanceTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalBaseInheritanceTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -91,23 +97,25 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalBaseInheritanceTestLanguage.g:58:1: ruleModel : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalBaseInheritanceTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // PsiInternalBaseInheritanceTestLanguage.g:58:10: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // PsiInternalBaseInheritanceTestLanguage.g:59:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:60:1: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:61:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // PsiInternalBaseInheritanceTestLanguage.g:59:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
-            // PsiInternalBaseInheritanceTestLanguage.g:60:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:61:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:62:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
@@ -116,14 +124,20 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalBaseInheritanceTestLanguage.g:67:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalBaseInheritanceTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalBaseInheritanceTestLanguage.g:69:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:70:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalBaseInheritanceTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalBaseInheritanceTestLanguage.g:69:5: lv_name_1_0= RULE_ID
+            // PsiInternalBaseInheritanceTestLanguage.g:70:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalBaseInheritanceTestLanguage.g:71:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -148,7 +162,7 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleModel:
 			lv_def_0_0=ruleDefinition
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)+
 ;
 
 //Entry rule entryRuleDefinition
-entryRuleDefinition:
+entryRuleDefinition returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDefinitionElementType()); }
-	ruleDefinition
+	iv_ruleDefinition=ruleDefinition
+	{ $current=$iv_ruleDefinition.current; }
 	EOF;
 
 // Rule Definition
-ruleDefinition:
+ruleDefinition returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDefinition_DefKeyword_0ElementType());
@@ -89,6 +97,12 @@ ruleDefinition:
 			(
 				{
 					markLeaf(elementTypeProvider.getDefinition_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -111,6 +125,10 @@ ruleDefinition:
 				lv_child_3_0=ruleChild
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -122,6 +140,10 @@ ruleDefinition:
 				lv_ref_4_0=ruleReference
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -129,13 +151,15 @@ ruleDefinition:
 ;
 
 //Entry rule entryRuleChild
-entryRuleChild:
+entryRuleChild returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getChildElementType()); }
-	ruleChild
+	iv_ruleChild=ruleChild
+	{ $current=$iv_ruleChild.current; }
 	EOF;
 
 // Rule Child
-ruleChild:
+ruleChild returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getChild_ChildKeyword_0ElementType());
@@ -148,6 +172,12 @@ ruleChild:
 			(
 				{
 					markLeaf(elementTypeProvider.getChild_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -165,6 +195,12 @@ ruleChild:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markLeaf(elementTypeProvider.getChild_LinkDefinitionCrossReference_3_0ElementType());
 				}
 				otherlv_3=RULE_ID
@@ -177,13 +213,15 @@ ruleChild:
 ;
 
 //Entry rule entryRuleReference
-entryRuleReference:
+entryRuleReference returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getReferenceElementType()); }
-	ruleReference
+	iv_ruleReference=ruleReference
+	{ $current=$iv_ruleReference.current; }
 	EOF;
 
 // Rule Reference
-ruleReference:
+ruleReference returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getReference_RefKeyword_0ElementType());
@@ -194,6 +232,12 @@ ruleReference:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getReference_RefChildChildCrossReference_1_0ElementType());
 				}
@@ -215,10 +259,17 @@ ruleReference:
 				{
 					precedeComposite(elementTypeProvider.getReference_NestedRefLeftAction_2_1ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getReference_RefChildChildCrossReference_2_2_0ElementType());
 					}

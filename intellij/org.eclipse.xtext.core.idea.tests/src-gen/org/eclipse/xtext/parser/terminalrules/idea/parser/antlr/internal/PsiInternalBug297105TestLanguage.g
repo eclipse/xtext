@@ -55,13 +55,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -70,19 +72,25 @@ ruleModel:
 			lv_expressions_0_0=ruleExpression
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleExpression
-entryRuleExpression:
+entryRuleExpression returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExpressionElementType()); }
-	ruleExpression
+	iv_ruleExpression=ruleExpression
+	{ $current=$iv_ruleExpression.current; }
 	EOF;
 
 // Rule Expression
-ruleExpression:
+ruleExpression returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -92,6 +100,10 @@ ruleExpression:
 				lv_left_0_0=ruleLiteral
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -110,6 +122,10 @@ ruleExpression:
 				lv_right_2_0=ruleLiteral
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -117,13 +133,15 @@ ruleExpression:
 ;
 
 //Entry rule entryRuleLiteral
-entryRuleLiteral:
+entryRuleLiteral returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getLiteralElementType()); }
-	ruleLiteral
+	iv_ruleLiteral=ruleLiteral
+	{ $current=$iv_ruleLiteral.current; }
 	EOF;
 
 // Rule Literal
-ruleLiteral:
+ruleLiteral returns [Boolean current=false]
+:
 	(
 		{
 			/* */
@@ -131,8 +149,9 @@ ruleLiteral:
 		{
 			markComposite(elementTypeProvider.getLiteral_RealLiteralParserRuleCall_0ElementType());
 		}
-		ruleRealLiteral
+		this_RealLiteral_0=ruleRealLiteral
 		{
+			$current = $this_RealLiteral_0.current;
 			doneComposite();
 		}
 		    |
@@ -142,21 +161,24 @@ ruleLiteral:
 		{
 			markComposite(elementTypeProvider.getLiteral_IntLiteralParserRuleCall_1ElementType());
 		}
-		ruleIntLiteral
+		this_IntLiteral_1=ruleIntLiteral
 		{
+			$current = $this_IntLiteral_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleIntLiteral
-entryRuleIntLiteral:
+entryRuleIntLiteral returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getIntLiteralElementType()); }
-	ruleIntLiteral
+	iv_ruleIntLiteral=ruleIntLiteral
+	{ $current=$iv_ruleIntLiteral.current; }
 	EOF;
 
 // Rule IntLiteral
-ruleIntLiteral:
+ruleIntLiteral returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -165,19 +187,25 @@ ruleIntLiteral:
 			lv_value_0_0=ruleIntValue
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleRealLiteral
-entryRuleRealLiteral:
+entryRuleRealLiteral returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRealLiteralElementType()); }
-	ruleRealLiteral
+	iv_ruleRealLiteral=ruleRealLiteral
+	{ $current=$iv_ruleRealLiteral.current; }
 	EOF;
 
 // Rule RealLiteral
-ruleRealLiteral:
+ruleRealLiteral returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -186,19 +214,25 @@ ruleRealLiteral:
 			lv_value_0_0=ruleRealValue
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleIntValue
-entryRuleIntValue:
+entryRuleIntValue returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getIntValueElementType()); }
-	ruleIntValue
+	iv_ruleIntValue=ruleIntValue
+	{ $current=$iv_ruleIntValue.current; }
 	EOF;
 
 // Rule IntValue
-ruleIntValue:
+ruleIntValue returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getIntValue_INTTerminalRuleCallElementType());
 	}
@@ -209,13 +243,15 @@ ruleIntValue:
 ;
 
 //Entry rule entryRuleRealValue
-entryRuleRealValue:
+entryRuleRealValue returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRealValueElementType()); }
-	ruleRealValue
+	iv_ruleRealValue=ruleRealValue
+	{ $current=$iv_ruleRealValue.current; }
 	EOF;
 
 // Rule RealValue
-ruleRealValue:
+ruleRealValue returns [Boolean current=false]
+:
 	{
 		markComposite(elementTypeProvider.getRealValue_RealParserRuleCallElementType());
 	}
@@ -226,18 +262,20 @@ ruleRealValue:
 ;
 
 //Entry rule entryRuleReal
-entryRuleReal@init {
+entryRuleReal returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	{ markComposite(elementTypeProvider.getRealElementType()); }
-	ruleReal
+	iv_ruleReal=ruleReal
+	{ $current=$iv_ruleReal.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Real
-ruleReal@init {
+ruleReal returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	(

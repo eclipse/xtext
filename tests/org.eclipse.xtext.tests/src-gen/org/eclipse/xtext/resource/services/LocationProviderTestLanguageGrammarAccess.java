@@ -80,7 +80,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("singleref" singleref=[Element])?
+		//"singleref" singleref=[Element]?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"singleref"
@@ -95,7 +95,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getSinglerefElementIDTerminalRuleCall_2_1_0_1() { return cSinglerefElementIDTerminalRuleCall_2_1_0_1; }
 
-		//("multiref" multirefs+=[Element])*
+		//"multiref" multirefs+=[Element]*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"multiref"
@@ -135,7 +135,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)? 'end' ';'
 		public Group getGroup() { return cGroup; }
 
-		//(Bus | Processor)
+		//Bus | Processor
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Bus
@@ -144,13 +144,13 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Processor
 		public RuleCall getProcessorParserRuleCall_0_1() { return cProcessorParserRuleCall_0_1; }
 
-		//('modes' (mode+=Mode | transition+=Transition)+)?
+		//'modes' (mode+=Mode | transition+=Transition)+?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'modes'
 		public Keyword getModesKeyword_1_0() { return cModesKeyword_1_0; }
 
-		//(mode+=Mode | transition+=Transition)+
+		//mode+=Mode | transition+=Transition+
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//mode+=Mode

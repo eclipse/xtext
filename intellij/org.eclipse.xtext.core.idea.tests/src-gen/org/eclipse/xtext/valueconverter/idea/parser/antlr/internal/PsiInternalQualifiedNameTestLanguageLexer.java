@@ -103,10 +103,10 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:132:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalQualifiedNameTestLanguage.g:132:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalQualifiedNameTestLanguage.g:140:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalQualifiedNameTestLanguage.g:140:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalQualifiedNameTestLanguage.g:132:11: ( '^' )?
+            // PsiInternalQualifiedNameTestLanguage.g:140:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -115,7 +115,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalQualifiedNameTestLanguage.g:132:11: '^'
+                    // PsiInternalQualifiedNameTestLanguage.g:140:11: '^'
                     {
                     match('^'); 
 
@@ -133,7 +133,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalQualifiedNameTestLanguage.g:132:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalQualifiedNameTestLanguage.g:140:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -182,10 +182,10 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:134:10: ( ( '0' .. '9' )+ )
-            // PsiInternalQualifiedNameTestLanguage.g:134:12: ( '0' .. '9' )+
+            // PsiInternalQualifiedNameTestLanguage.g:142:10: ( ( '0' .. '9' )+ )
+            // PsiInternalQualifiedNameTestLanguage.g:142:12: ( '0' .. '9' )+
             {
-            // PsiInternalQualifiedNameTestLanguage.g:134:12: ( '0' .. '9' )+
+            // PsiInternalQualifiedNameTestLanguage.g:142:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -199,7 +199,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalQualifiedNameTestLanguage.g:134:13: '0' .. '9'
+            	    // PsiInternalQualifiedNameTestLanguage.g:142:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -231,10 +231,10 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:136:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalQualifiedNameTestLanguage.g:136:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalQualifiedNameTestLanguage.g:144:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalQualifiedNameTestLanguage.g:144:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalQualifiedNameTestLanguage.g:136:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalQualifiedNameTestLanguage.g:144:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -252,10 +252,10 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalQualifiedNameTestLanguage.g:136:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalQualifiedNameTestLanguage.g:144:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalQualifiedNameTestLanguage.g:136:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalQualifiedNameTestLanguage.g:144:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -271,7 +271,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalQualifiedNameTestLanguage.g:136:21: '\\\\' .
+                    	    // PsiInternalQualifiedNameTestLanguage.g:144:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -279,7 +279,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalQualifiedNameTestLanguage.g:136:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalQualifiedNameTestLanguage.g:144:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -304,10 +304,10 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalQualifiedNameTestLanguage.g:136:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalQualifiedNameTestLanguage.g:144:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalQualifiedNameTestLanguage.g:136:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalQualifiedNameTestLanguage.g:144:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -323,7 +323,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalQualifiedNameTestLanguage.g:136:54: '\\\\' .
+                    	    // PsiInternalQualifiedNameTestLanguage.g:144:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -331,7 +331,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalQualifiedNameTestLanguage.g:136:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalQualifiedNameTestLanguage.g:144:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -374,12 +374,12 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:138:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalQualifiedNameTestLanguage.g:138:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalQualifiedNameTestLanguage.g:146:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalQualifiedNameTestLanguage.g:146:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalQualifiedNameTestLanguage.g:138:24: ( options {greedy=false; } : . )*
+            // PsiInternalQualifiedNameTestLanguage.g:146:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -404,7 +404,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalQualifiedNameTestLanguage.g:138:52: .
+            	    // PsiInternalQualifiedNameTestLanguage.g:146:52: .
             	    {
             	    matchAny(); 
 
@@ -434,12 +434,12 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:140:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalQualifiedNameTestLanguage.g:140:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalQualifiedNameTestLanguage.g:148:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalQualifiedNameTestLanguage.g:148:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalQualifiedNameTestLanguage.g:140:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalQualifiedNameTestLanguage.g:148:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -452,7 +452,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalQualifiedNameTestLanguage.g:140:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalQualifiedNameTestLanguage.g:148:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -472,7 +472,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalQualifiedNameTestLanguage.g:140:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalQualifiedNameTestLanguage.g:148:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -481,9 +481,9 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalQualifiedNameTestLanguage.g:140:41: ( '\\r' )? '\\n'
+                    // PsiInternalQualifiedNameTestLanguage.g:148:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalQualifiedNameTestLanguage.g:140:41: ( '\\r' )?
+                    // PsiInternalQualifiedNameTestLanguage.g:148:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -492,7 +492,7 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalQualifiedNameTestLanguage.g:140:41: '\\r'
+                            // PsiInternalQualifiedNameTestLanguage.g:148:41: '\\r'
                             {
                             match('\r'); 
 
@@ -524,10 +524,10 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:142:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalQualifiedNameTestLanguage.g:142:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalQualifiedNameTestLanguage.g:150:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalQualifiedNameTestLanguage.g:150:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalQualifiedNameTestLanguage.g:142:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalQualifiedNameTestLanguage.g:150:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -581,8 +581,8 @@ public class PsiInternalQualifiedNameTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalQualifiedNameTestLanguage.g:144:16: ( . )
-            // PsiInternalQualifiedNameTestLanguage.g:144:18: .
+            // PsiInternalQualifiedNameTestLanguage.g:152:16: ( . )
+            // PsiInternalQualifiedNameTestLanguage.g:152:18: .
             {
             matchAny(); 
 

@@ -81,18 +81,24 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalAssignmentsTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalAssignmentsTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalAssignmentsTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalAssignmentsTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -104,22 +110,40 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalAssignmentsTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_5=null;
+        Boolean lv_single_1_0 = null;
+
+        Boolean lv_multi_2_0 = null;
+
+        Boolean lv_single_3_0 = null;
+
+        Boolean lv_multi_4_0 = null;
+
+        Boolean lv_object_6_1 = null;
+
+        Boolean lv_object_6_2 = null;
+
+        Boolean lv_object_6_3 = null;
+
+        Boolean lv_object_6_4 = null;
+
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:58:10: ( ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
-            // PsiInternalAssignmentsTestLanguage.g:59:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:60:1: ( ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:61:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
             {
-            // PsiInternalAssignmentsTestLanguage.g:59:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:61:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -137,10 +161,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalAssignmentsTestLanguage.g:60:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:62:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:60:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:61:4: otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:62:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:63:4: otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_SimpleKeyword_0_0ElementType());
@@ -149,7 +173,7 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:68:4: ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:70:4: ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
                     int alt1=4;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -189,24 +213,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     switch (alt1) {
                         case 1 :
-                            // PsiInternalAssignmentsTestLanguage.g:69:5: ( (lv_single_1_0= ruleSingleValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:71:5: ( (lv_single_1_0= ruleSingleValue ) )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:69:5: ( (lv_single_1_0= ruleSingleValue ) )
-                            // PsiInternalAssignmentsTestLanguage.g:70:6: (lv_single_1_0= ruleSingleValue )
+                            // PsiInternalAssignmentsTestLanguage.g:71:5: ( (lv_single_1_0= ruleSingleValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:72:6: (lv_single_1_0= ruleSingleValue )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:70:6: (lv_single_1_0= ruleSingleValue )
-                            // PsiInternalAssignmentsTestLanguage.g:71:7: lv_single_1_0= ruleSingleValue
+                            // PsiInternalAssignmentsTestLanguage.g:72:6: (lv_single_1_0= ruleSingleValue )
+                            // PsiInternalAssignmentsTestLanguage.g:73:7: lv_single_1_0= ruleSingleValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_SingleSingleValueParserRuleCall_0_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleSingleValue();
+                            lv_single_1_0=ruleSingleValue();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -218,24 +246,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // PsiInternalAssignmentsTestLanguage.g:81:5: ( (lv_multi_2_0= ruleMultiValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:87:5: ( (lv_multi_2_0= ruleMultiValue ) )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:81:5: ( (lv_multi_2_0= ruleMultiValue ) )
-                            // PsiInternalAssignmentsTestLanguage.g:82:6: (lv_multi_2_0= ruleMultiValue )
+                            // PsiInternalAssignmentsTestLanguage.g:87:5: ( (lv_multi_2_0= ruleMultiValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:88:6: (lv_multi_2_0= ruleMultiValue )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:82:6: (lv_multi_2_0= ruleMultiValue )
-                            // PsiInternalAssignmentsTestLanguage.g:83:7: lv_multi_2_0= ruleMultiValue
+                            // PsiInternalAssignmentsTestLanguage.g:88:6: (lv_multi_2_0= ruleMultiValue )
+                            // PsiInternalAssignmentsTestLanguage.g:89:7: lv_multi_2_0= ruleMultiValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_MultiMultiValueParserRuleCall_0_1_1_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleMultiValue();
+                            lv_multi_2_0=ruleMultiValue();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -247,24 +279,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 3 :
-                            // PsiInternalAssignmentsTestLanguage.g:93:5: ( (lv_single_3_0= ruleSingleDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:103:5: ( (lv_single_3_0= ruleSingleDatatype ) )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:93:5: ( (lv_single_3_0= ruleSingleDatatype ) )
-                            // PsiInternalAssignmentsTestLanguage.g:94:6: (lv_single_3_0= ruleSingleDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:103:5: ( (lv_single_3_0= ruleSingleDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:104:6: (lv_single_3_0= ruleSingleDatatype )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:94:6: (lv_single_3_0= ruleSingleDatatype )
-                            // PsiInternalAssignmentsTestLanguage.g:95:7: lv_single_3_0= ruleSingleDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:104:6: (lv_single_3_0= ruleSingleDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:105:7: lv_single_3_0= ruleSingleDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_SingleSingleDatatypeParserRuleCall_0_1_2_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleSingleDatatype();
+                            lv_single_3_0=ruleSingleDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -276,24 +312,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 4 :
-                            // PsiInternalAssignmentsTestLanguage.g:105:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:119:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:105:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
-                            // PsiInternalAssignmentsTestLanguage.g:106:6: (lv_multi_4_0= ruleMultiDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:119:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:120:6: (lv_multi_4_0= ruleMultiDatatype )
                             {
-                            // PsiInternalAssignmentsTestLanguage.g:106:6: (lv_multi_4_0= ruleMultiDatatype )
-                            // PsiInternalAssignmentsTestLanguage.g:107:7: lv_multi_4_0= ruleMultiDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:120:6: (lv_multi_4_0= ruleMultiDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:121:7: lv_multi_4_0= ruleMultiDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_MultiMultiDatatypeParserRuleCall_0_1_3_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleMultiDatatype();
+                            lv_multi_4_0=ruleMultiDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -314,10 +354,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // PsiInternalAssignmentsTestLanguage.g:119:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:137:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:119:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:120:4: otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:137:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:138:4: otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_ComplexKeyword_1_0ElementType());
@@ -326,13 +366,13 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_5);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:127:4: ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:128:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:145:4: ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:146:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:128:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:129:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:146:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:147:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:129:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:147:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
                     int alt2=4;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -372,69 +412,85 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     switch (alt2) {
                         case 1 :
-                            // PsiInternalAssignmentsTestLanguage.g:130:7: lv_object_6_1= ruleSingleValue
+                            // PsiInternalAssignmentsTestLanguage.g:148:7: lv_object_6_1= ruleSingleValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectSingleValueParserRuleCall_1_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleSingleValue();
+                            lv_object_6_1=ruleSingleValue();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalAssignmentsTestLanguage.g:138:7: lv_object_6_2= ruleMultiValue
+                            // PsiInternalAssignmentsTestLanguage.g:160:7: lv_object_6_2= ruleMultiValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectMultiValueParserRuleCall_1_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleMultiValue();
+                            lv_object_6_2=ruleMultiValue();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 3 :
-                            // PsiInternalAssignmentsTestLanguage.g:146:7: lv_object_6_3= ruleSingleDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:172:7: lv_object_6_3= ruleSingleDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectSingleDatatypeParserRuleCall_1_1_0_2ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleSingleDatatype();
+                            lv_object_6_3=ruleSingleDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 4 :
-                            // PsiInternalAssignmentsTestLanguage.g:154:7: lv_object_6_4= ruleMultiDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:184:7: lv_object_6_4= ruleMultiDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectMultiDatatypeParserRuleCall_1_1_0_3ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleMultiDatatype();
+                            lv_object_6_4=ruleMultiDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -467,24 +523,30 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleSingleValue"
-    // PsiInternalAssignmentsTestLanguage.g:169:1: entryRuleSingleValue : ruleSingleValue EOF ;
-    public final void entryRuleSingleValue() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:203:1: entryRuleSingleValue returns [Boolean current=false] : iv_ruleSingleValue= ruleSingleValue EOF ;
+    public final Boolean entryRuleSingleValue() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSingleValue = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:169:21: ( ruleSingleValue EOF )
-            // PsiInternalAssignmentsTestLanguage.g:170:2: ruleSingleValue EOF
+            // PsiInternalAssignmentsTestLanguage.g:203:53: (iv_ruleSingleValue= ruleSingleValue EOF )
+            // PsiInternalAssignmentsTestLanguage.g:204:2: iv_ruleSingleValue= ruleSingleValue EOF
             {
              markComposite(elementTypeProvider.getSingleValueElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSingleValue();
+            iv_ruleSingleValue=ruleSingleValue();
 
             state._fsp--;
 
+             current =iv_ruleSingleValue; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -496,14 +558,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSingleValue"
 
 
     // $ANTLR start "ruleSingleValue"
-    // PsiInternalAssignmentsTestLanguage.g:175:1: ruleSingleValue : ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
-    public final void ruleSingleValue() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:210:1: ruleSingleValue returns [Boolean current=false] : ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
+    public final Boolean ruleSingleValue() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_value_1_0=null;
         Token otherlv_2=null;
@@ -513,10 +577,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         Token lv_value_5_0=null;
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:175:16: ( ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
-            // PsiInternalAssignmentsTestLanguage.g:176:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:211:1: ( ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:212:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
             {
-            // PsiInternalAssignmentsTestLanguage.g:176:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:212:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
             int alt5=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -543,10 +607,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt5) {
                 case 1 :
-                    // PsiInternalAssignmentsTestLanguage.g:177:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:213:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:177:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:178:4: otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:213:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:214:4: otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleValue_IdKeyword_0_0ElementType());
@@ -555,14 +619,20 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:185:4: ( (lv_value_1_0= RULE_ID ) )
-                    // PsiInternalAssignmentsTestLanguage.g:186:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:221:4: ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:222:5: (lv_value_1_0= RULE_ID )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:186:5: (lv_value_1_0= RULE_ID )
-                    // PsiInternalAssignmentsTestLanguage.g:187:6: lv_value_1_0= RULE_ID
+                    // PsiInternalAssignmentsTestLanguage.g:222:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:223:6: lv_value_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleValue_ValueIDTerminalRuleCall_0_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -581,10 +651,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // PsiInternalAssignmentsTestLanguage.g:198:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:240:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:198:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:199:4: otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:240:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:241:4: otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleValue_AlternativeKeyword_1_0ElementType());
@@ -593,13 +663,13 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:206:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:207:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:248:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:249:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:207:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
-                    // PsiInternalAssignmentsTestLanguage.g:208:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:249:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:250:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:208:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:250:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -617,10 +687,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt4) {
                         case 1 :
-                            // PsiInternalAssignmentsTestLanguage.g:209:7: lv_value_3_1= RULE_ID
+                            // PsiInternalAssignmentsTestLanguage.g:251:7: lv_value_3_1= RULE_ID
                             {
 
                             							markLeaf(elementTypeProvider.getSingleValue_ValueIDTerminalRuleCall_1_1_0_0ElementType());
+                            						
+
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
                             lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -630,10 +706,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // PsiInternalAssignmentsTestLanguage.g:217:7: lv_value_3_2= RULE_STRING
+                            // PsiInternalAssignmentsTestLanguage.g:265:7: lv_value_3_2= RULE_STRING
                             {
 
                             							markLeaf(elementTypeProvider.getSingleValue_ValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
+                            						
+
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
                             lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -658,10 +740,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // PsiInternalAssignmentsTestLanguage.g:229:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:283:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:229:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:230:4: otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:283:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:284:4: otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleValue_StringKeyword_2_0ElementType());
@@ -670,14 +752,20 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:237:4: ( (lv_value_5_0= RULE_STRING ) )
-                    // PsiInternalAssignmentsTestLanguage.g:238:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:291:4: ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:292:5: (lv_value_5_0= RULE_STRING )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:238:5: (lv_value_5_0= RULE_STRING )
-                    // PsiInternalAssignmentsTestLanguage.g:239:6: lv_value_5_0= RULE_STRING
+                    // PsiInternalAssignmentsTestLanguage.g:292:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:293:6: lv_value_5_0= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getSingleValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -708,24 +796,30 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSingleValue"
 
 
     // $ANTLR start "entryRuleMultiValue"
-    // PsiInternalAssignmentsTestLanguage.g:253:1: entryRuleMultiValue : ruleMultiValue EOF ;
-    public final void entryRuleMultiValue() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:313:1: entryRuleMultiValue returns [Boolean current=false] : iv_ruleMultiValue= ruleMultiValue EOF ;
+    public final Boolean entryRuleMultiValue() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleMultiValue = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:253:20: ( ruleMultiValue EOF )
-            // PsiInternalAssignmentsTestLanguage.g:254:2: ruleMultiValue EOF
+            // PsiInternalAssignmentsTestLanguage.g:313:52: (iv_ruleMultiValue= ruleMultiValue EOF )
+            // PsiInternalAssignmentsTestLanguage.g:314:2: iv_ruleMultiValue= ruleMultiValue EOF
             {
              markComposite(elementTypeProvider.getMultiValueElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleMultiValue();
+            iv_ruleMultiValue=ruleMultiValue();
 
             state._fsp--;
 
+             current =iv_ruleMultiValue; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -737,14 +831,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleMultiValue"
 
 
     // $ANTLR start "ruleMultiValue"
-    // PsiInternalAssignmentsTestLanguage.g:259:1: ruleMultiValue : ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
-    public final void ruleMultiValue() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:320:1: ruleMultiValue returns [Boolean current=false] : ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
+    public final Boolean ruleMultiValue() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_value_1_0=null;
         Token otherlv_2=null;
@@ -754,10 +850,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         Token lv_value_5_0=null;
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:259:15: ( ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
-            // PsiInternalAssignmentsTestLanguage.g:260:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:321:1: ( ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:322:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
             {
-            // PsiInternalAssignmentsTestLanguage.g:260:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:322:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
             int alt7=3;
             switch ( input.LA(1) ) {
             case 16:
@@ -784,10 +880,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt7) {
                 case 1 :
-                    // PsiInternalAssignmentsTestLanguage.g:261:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:323:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:261:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:262:4: otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:323:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:324:4: otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiValue_IdsKeyword_0_0ElementType());
@@ -796,14 +892,20 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:269:4: ( (lv_value_1_0= RULE_ID ) )
-                    // PsiInternalAssignmentsTestLanguage.g:270:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:331:4: ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:332:5: (lv_value_1_0= RULE_ID )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:270:5: (lv_value_1_0= RULE_ID )
-                    // PsiInternalAssignmentsTestLanguage.g:271:6: lv_value_1_0= RULE_ID
+                    // PsiInternalAssignmentsTestLanguage.g:332:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:333:6: lv_value_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getMultiValue_ValueIDTerminalRuleCall_0_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -822,10 +924,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // PsiInternalAssignmentsTestLanguage.g:282:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:350:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:282:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:283:4: otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:350:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:351:4: otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiValue_AlternativesKeyword_1_0ElementType());
@@ -834,13 +936,13 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:290:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:291:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:358:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:359:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:291:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
-                    // PsiInternalAssignmentsTestLanguage.g:292:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:359:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:360:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:292:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:360:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -858,10 +960,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt6) {
                         case 1 :
-                            // PsiInternalAssignmentsTestLanguage.g:293:7: lv_value_3_1= RULE_ID
+                            // PsiInternalAssignmentsTestLanguage.g:361:7: lv_value_3_1= RULE_ID
                             {
 
                             							markLeaf(elementTypeProvider.getMultiValue_ValueIDTerminalRuleCall_1_1_0_0ElementType());
+                            						
+
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
                             lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -871,10 +979,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // PsiInternalAssignmentsTestLanguage.g:301:7: lv_value_3_2= RULE_STRING
+                            // PsiInternalAssignmentsTestLanguage.g:375:7: lv_value_3_2= RULE_STRING
                             {
 
                             							markLeaf(elementTypeProvider.getMultiValue_ValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
+                            						
+
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
                             lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -899,10 +1013,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // PsiInternalAssignmentsTestLanguage.g:313:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:393:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:313:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:314:4: otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:393:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:394:4: otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiValue_StringsKeyword_2_0ElementType());
@@ -911,14 +1025,20 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:321:4: ( (lv_value_5_0= RULE_STRING ) )
-                    // PsiInternalAssignmentsTestLanguage.g:322:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:401:4: ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:402:5: (lv_value_5_0= RULE_STRING )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:322:5: (lv_value_5_0= RULE_STRING )
-                    // PsiInternalAssignmentsTestLanguage.g:323:6: lv_value_5_0= RULE_STRING
+                    // PsiInternalAssignmentsTestLanguage.g:402:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:403:6: lv_value_5_0= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getMultiValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
+                    					
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
                     lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -949,24 +1069,30 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleMultiValue"
 
 
     // $ANTLR start "entryRuleSingleDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:337:1: entryRuleSingleDatatype : ruleSingleDatatype EOF ;
-    public final void entryRuleSingleDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:423:1: entryRuleSingleDatatype returns [Boolean current=false] : iv_ruleSingleDatatype= ruleSingleDatatype EOF ;
+    public final Boolean entryRuleSingleDatatype() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSingleDatatype = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:337:24: ( ruleSingleDatatype EOF )
-            // PsiInternalAssignmentsTestLanguage.g:338:2: ruleSingleDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:423:56: (iv_ruleSingleDatatype= ruleSingleDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:424:2: iv_ruleSingleDatatype= ruleSingleDatatype EOF
             {
              markComposite(elementTypeProvider.getSingleDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSingleDatatype();
+            iv_ruleSingleDatatype=ruleSingleDatatype();
 
             state._fsp--;
 
+             current =iv_ruleSingleDatatype; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -978,23 +1104,33 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSingleDatatype"
 
 
     // $ANTLR start "ruleSingleDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:343:1: ruleSingleDatatype : ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
-    public final void ruleSingleDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:430:1: ruleSingleDatatype returns [Boolean current=false] : ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
+    public final Boolean ruleSingleDatatype() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_value_1_0 = null;
+
+        Boolean lv_value_3_1 = null;
+
+        Boolean lv_value_3_2 = null;
+
+        Boolean lv_value_5_0 = null;
+
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:343:19: ( ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
-            // PsiInternalAssignmentsTestLanguage.g:344:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:431:1: ( ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:432:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             {
-            // PsiInternalAssignmentsTestLanguage.g:344:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:432:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             int alt9=3;
             switch ( input.LA(1) ) {
             case 19:
@@ -1021,10 +1157,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt9) {
                 case 1 :
-                    // PsiInternalAssignmentsTestLanguage.g:345:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:433:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:345:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:346:4: otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:433:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:434:4: otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleDatatype_DatatypeidKeyword_0_0ElementType());
@@ -1033,22 +1169,26 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:353:4: ( (lv_value_1_0= ruleIdDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:354:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:441:4: ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:442:5: (lv_value_1_0= ruleIdDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:354:5: (lv_value_1_0= ruleIdDatatype )
-                    // PsiInternalAssignmentsTestLanguage.g:355:6: lv_value_1_0= ruleIdDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:442:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:443:6: lv_value_1_0= ruleIdDatatype
                     {
 
                     						markComposite(elementTypeProvider.getSingleDatatype_ValueIdDatatypeParserRuleCall_0_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleIdDatatype();
+                    lv_value_1_0=ruleIdDatatype();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -1063,10 +1203,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // PsiInternalAssignmentsTestLanguage.g:366:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:458:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:366:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:367:4: otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:458:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:459:4: otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleDatatype_DatatypealternativeKeyword_1_0ElementType());
@@ -1075,13 +1215,13 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:374:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:375:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:466:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:467:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:375:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:376:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:467:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:468:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:376:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:468:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1099,35 +1239,43 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt8) {
                         case 1 :
-                            // PsiInternalAssignmentsTestLanguage.g:377:7: lv_value_3_1= ruleIdDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:469:7: lv_value_3_1= ruleIdDatatype
                             {
 
                             							markComposite(elementTypeProvider.getSingleDatatype_ValueIdDatatypeParserRuleCall_1_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleIdDatatype();
+                            lv_value_3_1=ruleIdDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalAssignmentsTestLanguage.g:385:7: lv_value_3_2= ruleStringDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:481:7: lv_value_3_2= ruleStringDatatype
                             {
 
                             							markComposite(elementTypeProvider.getSingleDatatype_ValueStringDatatypeParserRuleCall_1_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleStringDatatype();
+                            lv_value_3_2=ruleStringDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -1148,10 +1296,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // PsiInternalAssignmentsTestLanguage.g:397:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:497:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:397:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:398:4: otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:497:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:498:4: otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleDatatype_DatatypestringKeyword_2_0ElementType());
@@ -1160,22 +1308,26 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:405:4: ( (lv_value_5_0= ruleStringDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:406:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:505:4: ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:506:5: (lv_value_5_0= ruleStringDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:406:5: (lv_value_5_0= ruleStringDatatype )
-                    // PsiInternalAssignmentsTestLanguage.g:407:6: lv_value_5_0= ruleStringDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:506:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:507:6: lv_value_5_0= ruleStringDatatype
                     {
 
                     						markComposite(elementTypeProvider.getSingleDatatype_ValueStringDatatypeParserRuleCall_2_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleStringDatatype();
+                    lv_value_5_0=ruleStringDatatype();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -1202,24 +1354,30 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSingleDatatype"
 
 
     // $ANTLR start "entryRuleMultiDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:421:1: entryRuleMultiDatatype : ruleMultiDatatype EOF ;
-    public final void entryRuleMultiDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:525:1: entryRuleMultiDatatype returns [Boolean current=false] : iv_ruleMultiDatatype= ruleMultiDatatype EOF ;
+    public final Boolean entryRuleMultiDatatype() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleMultiDatatype = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:421:23: ( ruleMultiDatatype EOF )
-            // PsiInternalAssignmentsTestLanguage.g:422:2: ruleMultiDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:525:55: (iv_ruleMultiDatatype= ruleMultiDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:526:2: iv_ruleMultiDatatype= ruleMultiDatatype EOF
             {
              markComposite(elementTypeProvider.getMultiDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleMultiDatatype();
+            iv_ruleMultiDatatype=ruleMultiDatatype();
 
             state._fsp--;
 
+             current =iv_ruleMultiDatatype; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1231,23 +1389,33 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleMultiDatatype"
 
 
     // $ANTLR start "ruleMultiDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:427:1: ruleMultiDatatype : ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
-    public final void ruleMultiDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:532:1: ruleMultiDatatype returns [Boolean current=false] : ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
+    public final Boolean ruleMultiDatatype() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_value_1_0 = null;
+
+        Boolean lv_value_3_1 = null;
+
+        Boolean lv_value_3_2 = null;
+
+        Boolean lv_value_5_0 = null;
+
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:427:18: ( ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
-            // PsiInternalAssignmentsTestLanguage.g:428:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:533:1: ( ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:534:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             {
-            // PsiInternalAssignmentsTestLanguage.g:428:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:534:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             int alt11=3;
             switch ( input.LA(1) ) {
             case 22:
@@ -1274,10 +1442,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt11) {
                 case 1 :
-                    // PsiInternalAssignmentsTestLanguage.g:429:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:535:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:429:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:430:4: otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:535:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:536:4: otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiDatatype_DatatypeidsKeyword_0_0ElementType());
@@ -1286,22 +1454,26 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:437:4: ( (lv_value_1_0= ruleIdDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:438:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:543:4: ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:544:5: (lv_value_1_0= ruleIdDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:438:5: (lv_value_1_0= ruleIdDatatype )
-                    // PsiInternalAssignmentsTestLanguage.g:439:6: lv_value_1_0= ruleIdDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:544:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:545:6: lv_value_1_0= ruleIdDatatype
                     {
 
                     						markComposite(elementTypeProvider.getMultiDatatype_ValueIdDatatypeParserRuleCall_0_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleIdDatatype();
+                    lv_value_1_0=ruleIdDatatype();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -1316,10 +1488,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // PsiInternalAssignmentsTestLanguage.g:450:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:560:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:450:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:451:4: otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:560:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:561:4: otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiDatatype_DatatypealternativesKeyword_1_0ElementType());
@@ -1328,13 +1500,13 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:458:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:459:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:568:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:569:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:459:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:460:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:569:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:570:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:460:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:570:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1352,35 +1524,43 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt10) {
                         case 1 :
-                            // PsiInternalAssignmentsTestLanguage.g:461:7: lv_value_3_1= ruleIdDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:571:7: lv_value_3_1= ruleIdDatatype
                             {
 
                             							markComposite(elementTypeProvider.getMultiDatatype_ValueIdDatatypeParserRuleCall_1_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleIdDatatype();
+                            lv_value_3_1=ruleIdDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalAssignmentsTestLanguage.g:469:7: lv_value_3_2= ruleStringDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:583:7: lv_value_3_2= ruleStringDatatype
                             {
 
                             							markComposite(elementTypeProvider.getMultiDatatype_ValueStringDatatypeParserRuleCall_1_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleStringDatatype();
+                            lv_value_3_2=ruleStringDatatype();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -1401,10 +1581,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // PsiInternalAssignmentsTestLanguage.g:481:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:599:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:481:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
-                    // PsiInternalAssignmentsTestLanguage.g:482:4: otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:599:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:600:4: otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiDatatype_DatatypestringsKeyword_2_0ElementType());
@@ -1413,22 +1593,26 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalAssignmentsTestLanguage.g:489:4: ( (lv_value_5_0= ruleStringDatatype ) )
-                    // PsiInternalAssignmentsTestLanguage.g:490:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:607:4: ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:608:5: (lv_value_5_0= ruleStringDatatype )
                     {
-                    // PsiInternalAssignmentsTestLanguage.g:490:5: (lv_value_5_0= ruleStringDatatype )
-                    // PsiInternalAssignmentsTestLanguage.g:491:6: lv_value_5_0= ruleStringDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:608:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:609:6: lv_value_5_0= ruleStringDatatype
                     {
 
                     						markComposite(elementTypeProvider.getMultiDatatype_ValueStringDatatypeParserRuleCall_2_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleStringDatatype();
+                    lv_value_5_0=ruleStringDatatype();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -1455,24 +1639,30 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleMultiDatatype"
 
 
     // $ANTLR start "entryRuleIdDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:505:1: entryRuleIdDatatype : ruleIdDatatype EOF ;
-    public final void entryRuleIdDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:627:1: entryRuleIdDatatype returns [Boolean current=false] : iv_ruleIdDatatype= ruleIdDatatype EOF ;
+    public final Boolean entryRuleIdDatatype() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleIdDatatype = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:505:20: ( ruleIdDatatype EOF )
-            // PsiInternalAssignmentsTestLanguage.g:506:2: ruleIdDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:627:52: (iv_ruleIdDatatype= ruleIdDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:628:2: iv_ruleIdDatatype= ruleIdDatatype EOF
             {
              markComposite(elementTypeProvider.getIdDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleIdDatatype();
+            iv_ruleIdDatatype=ruleIdDatatype();
 
             state._fsp--;
 
+             current =iv_ruleIdDatatype; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1484,19 +1674,21 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleIdDatatype"
 
 
     // $ANTLR start "ruleIdDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:511:1: ruleIdDatatype : this_ID_0= RULE_ID ;
-    public final void ruleIdDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:634:1: ruleIdDatatype returns [Boolean current=false] : this_ID_0= RULE_ID ;
+    public final Boolean ruleIdDatatype() throws RecognitionException {
+        Boolean current = false;
+
         Token this_ID_0=null;
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:511:15: (this_ID_0= RULE_ID )
-            // PsiInternalAssignmentsTestLanguage.g:512:2: this_ID_0= RULE_ID
+            // PsiInternalAssignmentsTestLanguage.g:635:1: (this_ID_0= RULE_ID )
+            // PsiInternalAssignmentsTestLanguage.g:636:2: this_ID_0= RULE_ID
             {
 
             		markLeaf(elementTypeProvider.getIdDatatype_IDTerminalRuleCallElementType());
@@ -1515,24 +1707,30 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleIdDatatype"
 
 
     // $ANTLR start "entryRuleStringDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:522:1: entryRuleStringDatatype : ruleStringDatatype EOF ;
-    public final void entryRuleStringDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:646:1: entryRuleStringDatatype returns [Boolean current=false] : iv_ruleStringDatatype= ruleStringDatatype EOF ;
+    public final Boolean entryRuleStringDatatype() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleStringDatatype = null;
+
+
         try {
-            // PsiInternalAssignmentsTestLanguage.g:522:24: ( ruleStringDatatype EOF )
-            // PsiInternalAssignmentsTestLanguage.g:523:2: ruleStringDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:646:56: (iv_ruleStringDatatype= ruleStringDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:647:2: iv_ruleStringDatatype= ruleStringDatatype EOF
             {
              markComposite(elementTypeProvider.getStringDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleStringDatatype();
+            iv_ruleStringDatatype=ruleStringDatatype();
 
             state._fsp--;
 
+             current =iv_ruleStringDatatype; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1544,19 +1742,21 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleStringDatatype"
 
 
     // $ANTLR start "ruleStringDatatype"
-    // PsiInternalAssignmentsTestLanguage.g:528:1: ruleStringDatatype : this_STRING_0= RULE_STRING ;
-    public final void ruleStringDatatype() throws RecognitionException {
+    // PsiInternalAssignmentsTestLanguage.g:653:1: ruleStringDatatype returns [Boolean current=false] : this_STRING_0= RULE_STRING ;
+    public final Boolean ruleStringDatatype() throws RecognitionException {
+        Boolean current = false;
+
         Token this_STRING_0=null;
 
         try {
-            // PsiInternalAssignmentsTestLanguage.g:528:19: (this_STRING_0= RULE_STRING )
-            // PsiInternalAssignmentsTestLanguage.g:529:2: this_STRING_0= RULE_STRING
+            // PsiInternalAssignmentsTestLanguage.g:654:1: (this_STRING_0= RULE_STRING )
+            // PsiInternalAssignmentsTestLanguage.g:655:2: this_STRING_0= RULE_STRING
             {
 
             		markLeaf(elementTypeProvider.getStringDatatype_STRINGTerminalRuleCallElementType());
@@ -1575,7 +1775,7 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleStringDatatype"
 

@@ -80,7 +80,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Bar
 		public RuleCall getBarParserRuleCall_2() { return cBarParserRuleCall_2; }
 
-		//({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
+		//{FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim]?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//{FooBar.bar=current}
@@ -148,7 +148,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//QualifiedNameWithOtherDelim
 		public RuleCall getFooFooQualifiedNameWithOtherDelimParserRuleCall_2_0_1() { return cFooFooQualifiedNameWithOtherDelimParserRuleCall_2_0_1; }
 
-		//(',' foo+=[Foo|QualifiedNameWithOtherDelim])*
+		//',' foo+=[Foo|QualifiedNameWithOtherDelim]*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//','
@@ -206,7 +206,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//QualifiedName
 		public RuleCall getQualifiedNameParserRuleCall_0() { return cQualifiedNameParserRuleCall_0; }
 
-		//('=' QualifiedName)*
+		//'=' QualifiedName*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'='
@@ -234,7 +234,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('.' ID)*
+		//'.' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'.'

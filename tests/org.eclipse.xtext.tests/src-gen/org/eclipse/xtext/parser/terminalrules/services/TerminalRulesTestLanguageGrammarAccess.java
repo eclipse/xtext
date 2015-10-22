@@ -172,15 +172,22 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return tINT;
 	} 
 
-	//terminal STRING:
-	//	'"' (ESCAPED_CHAR | !('\\' | '"'))* '"' |
-	//	"'" (ESCAPED_CHAR | !('\\' | "'"))* "'";
+	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
+	//Constraint: TerminalAlternatives_TerminalToken_Alternatives returns Alternatives: (elements+=TerminalAlternatives_Alternatives_1_0 elements+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')*);
+	//Values: cardinality(1), predicated(0-1), firstSetPredicated(0-1), elements(2)
+	//Semantic Object: Grammar'org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage'.rules[3]->TerminalRule'STRING'.alternatives->Alternatives.elements[0]->Group.elements[1]->Alternatives
+	//URI: classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xtext
+	//Context: TerminalToken_Alternatives
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	} 
 
-	//terminal RICH_STRING:
-	//	"'''" IN_RICH_STRING* ("'''" | ("'" "'"?)? EOF);
+	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
+	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
+	//Values: predicated(0-1), firstSetPredicated(0-1), elements(3)
+	//Semantic Object: Grammar'org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage'.rules[4]->TerminalRule'RICH_STRING'.alternatives->Group
+	//URI: classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xtext
+	//Context: TerminalAlternatives_Group
 	public TerminalRule getRICH_STRINGRule() {
 		return tRICH_STRING;
 	} 

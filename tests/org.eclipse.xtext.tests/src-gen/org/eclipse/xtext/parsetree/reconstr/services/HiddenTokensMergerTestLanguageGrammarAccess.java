@@ -91,7 +91,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 
-		//('ref' ref=[DatatypeBug286557|FQN])?
+		//'ref' ref=[DatatypeBug286557|FQN]?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'ref'
@@ -128,7 +128,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('.' ID)*
+		//'.' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'.'

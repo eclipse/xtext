@@ -56,13 +56,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -72,6 +74,10 @@ ruleModel:
 				lv_enums_0_0=ruleEnumName
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -79,6 +85,12 @@ ruleModel:
 			(
 				{
 					markLeaf(elementTypeProvider.getModel_YcsYcTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_ycs_1_0=RULE_YC
 				{
@@ -94,6 +106,10 @@ ruleModel:
 				lv_abs_2_0=ruleAb
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -105,6 +121,10 @@ ruleModel:
 				lv_xbs_3_0=ruleXb
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -112,6 +132,12 @@ ruleModel:
 			(
 				{
 					markLeaf(elementTypeProvider.getModel_YsCharYTerminalRuleCall_4_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_ys_4_0=RULE_CHARY
 				{
@@ -124,6 +150,12 @@ ruleModel:
 				{
 					markLeaf(elementTypeProvider.getModel_AsCharATerminalRuleCall_5_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_as_5_0=RULE_CHARA
 				{
 					doneLeaf(lv_as_5_0);
@@ -134,18 +166,26 @@ ruleModel:
 ;
 
 //Entry rule entryRuleAb
-entryRuleAb:
+entryRuleAb returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAbElementType()); }
-	ruleAb
+	iv_ruleAb=ruleAb
+	{ $current=$iv_ruleAb.current; }
 	EOF;
 
 // Rule Ab
-ruleAb:
+ruleAb returns [Boolean current=false]
+:
 	(
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getAb_XCharATerminalRuleCall_0_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_x_0_0=RULE_CHARA
 				{
@@ -158,6 +198,12 @@ ruleAb:
 				{
 					markLeaf(elementTypeProvider.getAb_YCharbTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_y_1_0=RULE_CHARB
 				{
 					doneLeaf(lv_y_1_0);
@@ -168,18 +214,26 @@ ruleAb:
 ;
 
 //Entry rule entryRuleXb
-entryRuleXb:
+entryRuleXb returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getXbElementType()); }
-	ruleXb
+	iv_ruleXb=ruleXb
+	{ $current=$iv_ruleXb.current; }
 	EOF;
 
 // Rule Xb
-ruleXb:
+ruleXb returns [Boolean current=false]
+:
 	(
 		(
 			(
 				{
 					markLeaf(elementTypeProvider.getXb_XCharXTerminalRuleCall_0_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_x_0_0=RULE_CHARX
 				{
@@ -192,6 +246,12 @@ ruleXb:
 				{
 					markLeaf(elementTypeProvider.getXb_YCharbTerminalRuleCall_1_0ElementType());
 				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				lv_y_1_0=RULE_CHARB
 				{
 					doneLeaf(lv_y_1_0);
@@ -202,7 +262,8 @@ ruleXb:
 ;
 
 // Rule EnumName
-ruleEnumName:
+ruleEnumName returns [Boolean current=false]
+:
 	(
 		(
 			{

@@ -437,11 +437,11 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_TERMINAL1;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:799:16: ( '%' ( 'A' .. 'Z' )* )
-            // PsiInternalAssignmentFinderTestLanguage.g:799:18: '%' ( 'A' .. 'Z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1009:16: ( '%' ( 'A' .. 'Z' )* )
+            // PsiInternalAssignmentFinderTestLanguage.g:1009:18: '%' ( 'A' .. 'Z' )*
             {
             match('%'); 
-            // PsiInternalAssignmentFinderTestLanguage.g:799:22: ( 'A' .. 'Z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1009:22: ( 'A' .. 'Z' )*
             loop1:
             do {
                 int alt1=2;
@@ -454,7 +454,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalAssignmentFinderTestLanguage.g:799:23: 'A' .. 'Z'
+            	    // PsiInternalAssignmentFinderTestLanguage.g:1009:23: 'A' .. 'Z'
             	    {
             	    matchRange('A','Z'); 
 
@@ -482,11 +482,11 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_TERMINAL2;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:801:16: ( '%' ( 'a' .. 'z' )* )
-            // PsiInternalAssignmentFinderTestLanguage.g:801:18: '%' ( 'a' .. 'z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1011:16: ( '%' ( 'a' .. 'z' )* )
+            // PsiInternalAssignmentFinderTestLanguage.g:1011:18: '%' ( 'a' .. 'z' )*
             {
             match('%'); 
-            // PsiInternalAssignmentFinderTestLanguage.g:801:22: ( 'a' .. 'z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1011:22: ( 'a' .. 'z' )*
             loop2:
             do {
                 int alt2=2;
@@ -499,7 +499,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalAssignmentFinderTestLanguage.g:801:23: 'a' .. 'z'
+            	    // PsiInternalAssignmentFinderTestLanguage.g:1011:23: 'a' .. 'z'
             	    {
             	    matchRange('a','z'); 
 
@@ -527,10 +527,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:803:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalAssignmentFinderTestLanguage.g:803:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1013:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalAssignmentFinderTestLanguage.g:1013:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalAssignmentFinderTestLanguage.g:803:11: ( '^' )?
+            // PsiInternalAssignmentFinderTestLanguage.g:1013:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -539,7 +539,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalAssignmentFinderTestLanguage.g:803:11: '^'
+                    // PsiInternalAssignmentFinderTestLanguage.g:1013:11: '^'
                     {
                     match('^'); 
 
@@ -557,7 +557,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalAssignmentFinderTestLanguage.g:803:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1013:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -606,10 +606,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:805:10: ( ( '0' .. '9' )+ )
-            // PsiInternalAssignmentFinderTestLanguage.g:805:12: ( '0' .. '9' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:1015:10: ( ( '0' .. '9' )+ )
+            // PsiInternalAssignmentFinderTestLanguage.g:1015:12: ( '0' .. '9' )+
             {
-            // PsiInternalAssignmentFinderTestLanguage.g:805:12: ( '0' .. '9' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:1015:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -623,7 +623,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalAssignmentFinderTestLanguage.g:805:13: '0' .. '9'
+            	    // PsiInternalAssignmentFinderTestLanguage.g:1015:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -655,10 +655,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:807:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalAssignmentFinderTestLanguage.g:807:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAssignmentFinderTestLanguage.g:1017:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalAssignmentFinderTestLanguage.g:1017:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalAssignmentFinderTestLanguage.g:807:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAssignmentFinderTestLanguage.g:1017:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -676,10 +676,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // PsiInternalAssignmentFinderTestLanguage.g:807:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalAssignmentFinderTestLanguage.g:1017:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalAssignmentFinderTestLanguage.g:807:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalAssignmentFinderTestLanguage.g:1017:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -695,7 +695,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:21: '\\\\' .
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:1017:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -703,7 +703,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:1017:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -728,10 +728,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalAssignmentFinderTestLanguage.g:807:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalAssignmentFinderTestLanguage.g:1017:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalAssignmentFinderTestLanguage.g:807:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalAssignmentFinderTestLanguage.g:1017:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -747,7 +747,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:54: '\\\\' .
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:1017:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -755,7 +755,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:1017:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -798,12 +798,12 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:809:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalAssignmentFinderTestLanguage.g:809:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalAssignmentFinderTestLanguage.g:1019:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalAssignmentFinderTestLanguage.g:1019:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalAssignmentFinderTestLanguage.g:809:24: ( options {greedy=false; } : . )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1019:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -828,7 +828,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // PsiInternalAssignmentFinderTestLanguage.g:809:52: .
+            	    // PsiInternalAssignmentFinderTestLanguage.g:1019:52: .
             	    {
             	    matchAny(); 
 
@@ -858,12 +858,12 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:811:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalAssignmentFinderTestLanguage.g:811:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalAssignmentFinderTestLanguage.g:1021:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalAssignmentFinderTestLanguage.g:1021:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalAssignmentFinderTestLanguage.g:811:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalAssignmentFinderTestLanguage.g:1021:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -876,7 +876,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // PsiInternalAssignmentFinderTestLanguage.g:811:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalAssignmentFinderTestLanguage.g:1021:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -896,7 +896,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalAssignmentFinderTestLanguage.g:811:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalAssignmentFinderTestLanguage.g:1021:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -905,9 +905,9 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // PsiInternalAssignmentFinderTestLanguage.g:811:41: ( '\\r' )? '\\n'
+                    // PsiInternalAssignmentFinderTestLanguage.g:1021:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalAssignmentFinderTestLanguage.g:811:41: ( '\\r' )?
+                    // PsiInternalAssignmentFinderTestLanguage.g:1021:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -916,7 +916,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // PsiInternalAssignmentFinderTestLanguage.g:811:41: '\\r'
+                            // PsiInternalAssignmentFinderTestLanguage.g:1021:41: '\\r'
                             {
                             match('\r'); 
 
@@ -948,10 +948,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:813:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalAssignmentFinderTestLanguage.g:813:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:1023:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalAssignmentFinderTestLanguage.g:1023:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalAssignmentFinderTestLanguage.g:813:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:1023:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -1005,8 +1005,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAssignmentFinderTestLanguage.g:815:16: ( . )
-            // PsiInternalAssignmentFinderTestLanguage.g:815:18: .
+            // PsiInternalAssignmentFinderTestLanguage.g:1025:16: ( . )
+            // PsiInternalAssignmentFinderTestLanguage.g:1025:18: .
             {
             matchAny(); 
 

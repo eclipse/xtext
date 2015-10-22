@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.resource
 
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
+import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
@@ -34,7 +35,6 @@ import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xtext.RuleNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import com.intellij.openapi.progress.ProgressIndicatorProvider
 
 class PsiToEcoreTransformator implements IParser {
 

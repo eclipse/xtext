@@ -67,18 +67,24 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleEReference"
-    // PsiInternalBug419429.g:52:1: entryRuleEReference : ruleEReference EOF ;
-    public final void entryRuleEReference() throws RecognitionException {
+    // PsiInternalBug419429.g:52:1: entryRuleEReference returns [Boolean current=false] : iv_ruleEReference= ruleEReference EOF ;
+    public final Boolean entryRuleEReference() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleEReference = null;
+
+
         try {
-            // PsiInternalBug419429.g:52:20: ( ruleEReference EOF )
-            // PsiInternalBug419429.g:53:2: ruleEReference EOF
+            // PsiInternalBug419429.g:52:52: (iv_ruleEReference= ruleEReference EOF )
+            // PsiInternalBug419429.g:53:2: iv_ruleEReference= ruleEReference EOF
             {
              markComposite(elementTypeProvider.getEReferenceElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleEReference();
+            iv_ruleEReference=ruleEReference();
 
             state._fsp--;
 
+             current =iv_ruleEReference; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -90,26 +96,34 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleEReference"
 
 
     // $ANTLR start "ruleEReference"
-    // PsiInternalBug419429.g:58:1: ruleEReference : ( (otherlv_0= RULE_ID ) ) ;
-    public final void ruleEReference() throws RecognitionException {
+    // PsiInternalBug419429.g:59:1: ruleEReference returns [Boolean current=false] : ( (otherlv_0= RULE_ID ) ) ;
+    public final Boolean ruleEReference() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalBug419429.g:58:15: ( ( (otherlv_0= RULE_ID ) ) )
-            // PsiInternalBug419429.g:59:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalBug419429.g:60:1: ( ( (otherlv_0= RULE_ID ) ) )
+            // PsiInternalBug419429.g:61:2: ( (otherlv_0= RULE_ID ) )
             {
-            // PsiInternalBug419429.g:59:2: ( (otherlv_0= RULE_ID ) )
-            // PsiInternalBug419429.g:60:3: (otherlv_0= RULE_ID )
+            // PsiInternalBug419429.g:61:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalBug419429.g:62:3: (otherlv_0= RULE_ID )
             {
-            // PsiInternalBug419429.g:60:3: (otherlv_0= RULE_ID )
-            // PsiInternalBug419429.g:61:4: otherlv_0= RULE_ID
+            // PsiInternalBug419429.g:62:3: (otherlv_0= RULE_ID )
+            // PsiInternalBug419429.g:63:4: otherlv_0= RULE_ID
             {
+
+            				if (!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				markLeaf(elementTypeProvider.getEReference_ETypeEClassifierCrossReference_0ElementType());
             			
@@ -133,7 +147,7 @@ public class PsiInternalBug419429Parser extends AbstractPsiAntlrParser {
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEReference"
 

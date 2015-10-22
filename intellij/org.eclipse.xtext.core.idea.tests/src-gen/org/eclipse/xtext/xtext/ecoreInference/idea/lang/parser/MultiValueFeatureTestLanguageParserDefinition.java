@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xtext.ecoreInference.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.MultiValueFeatureTestLanguageElementTypeProvider;
 import org.eclipse.xtext.xtext.ecoreInference.idea.lang.psi.impl.MultiValueFeatureTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -26,16 +26,10 @@ public class MultiValueFeatureTestLanguageParserDefinition extends AbstractXtext
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getStartElementType()) {
-			return new PsiEObjectImpl(node) {};
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
 		}
-		if (elementType == elementTypeProvider.getStart_FeatureAAssignmentElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

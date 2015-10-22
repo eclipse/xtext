@@ -1,6 +1,6 @@
 package org.eclipse.xtext.testlanguages.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.testlanguages.idea.lang.OptionalEmptyTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.OptionalEmptyTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -27,33 +27,15 @@ public class OptionalEmptyTestLanguageParserDefinition extends AbstractXtextPars
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModel_ChildGreetingParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType()
-			);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			if (elementType == elementTypeProvider.getModel_ChildGreetingParserRuleCall_0ElementType()) {
+				return new PsiNamedEObjectImpl(node,
+					elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType()
+				);
+			}
 		}
-		if (elementType == elementTypeProvider.getModelElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_ChildAssignmentElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getGreetingElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getGreeting_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getGreeting_HalloKeyword_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getGreeting_NameAssignment_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

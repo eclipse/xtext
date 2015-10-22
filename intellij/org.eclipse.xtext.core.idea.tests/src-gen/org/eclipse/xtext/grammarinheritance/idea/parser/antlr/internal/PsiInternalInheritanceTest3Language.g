@@ -49,36 +49,42 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	{
 		markComposite(elementTypeProvider.getModel_ModelParserRuleCallElementType());
 	}
-	superModel
+	this_Model_0=superModel
 	{
+		$current = $this_Model_0.current;
 		doneComposite();
 	}
 ;
 
 //Entry rule entryRuleElement
-entryRuleElement:
+entryRuleElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
-	ruleElement
+	iv_ruleElement=ruleElement
+	{ $current=$iv_ruleElement.current; }
 	EOF;
 
 // Rule Element
-ruleElement:
+ruleElement returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getElement_ElementParserRuleCall_0ElementType());
 		}
-		superElement
+		this_Element_0=superElement
 		{
+			$current = $this_Element_0.current;
 			doneComposite();
 		}
 		    |
@@ -87,6 +93,7 @@ ruleElement:
 				{
 					precedeComposite(elementTypeProvider.getElement_ElementAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -101,6 +108,12 @@ ruleElement:
 					{
 						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_2_0ElementType());
 					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					lv_name_3_0=SUPER_ID
 					{
 						doneLeaf(lv_name_3_0);
@@ -114,6 +127,7 @@ ruleElement:
 				{
 					precedeComposite(elementTypeProvider.getElement_ElementAction_2_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -128,6 +142,12 @@ ruleElement:
 					{
 						markLeaf(elementTypeProvider.getElement_NameSTRINGTerminalRuleCall_2_2_0ElementType());
 					}
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					lv_name_6_0=RULE_STRING
 					{
 						doneLeaf(lv_name_6_0);
@@ -139,13 +159,15 @@ ruleElement:
 ;
 
 //Entry rule entrySuperModel
-entrySuperModel:
+entrySuperModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getInheritanceTestLanguageModelElementType()); }
-	superModel
+	iv_superModel=superModel
+	{ $current=$iv_superModel.current; }
 	EOF;
 
 // Rule Model
-superModel:
+superModel returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getInheritanceTestLanguageModel_ModelKeyword_0ElementType());
@@ -158,6 +180,12 @@ superModel:
 			(
 				{
 					markLeaf(elementTypeProvider.getInheritanceTestLanguageModel_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{
@@ -180,6 +208,10 @@ superModel:
 				lv_elements_3_0=ruleElement
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -194,13 +226,15 @@ superModel:
 ;
 
 //Entry rule entrySuperElement
-entrySuperElement:
+entrySuperElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getInheritanceTestLanguageElementElementType()); }
-	superElement
+	iv_superElement=superElement
+	{ $current=$iv_superElement.current; }
 	EOF;
 
 // Rule Element
-superElement:
+superElement returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getInheritanceTestLanguageElement_ElementKeyword_0ElementType());
@@ -213,6 +247,12 @@ superElement:
 			(
 				{
 					markLeaf(elementTypeProvider.getInheritanceTestLanguageElement_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				lv_name_1_0=RULE_ID
 				{

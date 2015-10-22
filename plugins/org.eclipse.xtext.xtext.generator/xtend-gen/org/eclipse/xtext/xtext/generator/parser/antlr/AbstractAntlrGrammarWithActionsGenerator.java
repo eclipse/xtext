@@ -630,6 +630,10 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     return false;
   }
   
+  protected String getCurrentType() {
+    return "EObject";
+  }
+  
   @Override
   protected boolean _mustBeParenthesized(final AbstractElement it) {
     return true;

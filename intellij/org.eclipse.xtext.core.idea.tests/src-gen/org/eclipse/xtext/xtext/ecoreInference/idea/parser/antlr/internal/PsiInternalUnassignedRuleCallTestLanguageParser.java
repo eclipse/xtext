@@ -71,18 +71,24 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalUnassignedRuleCallTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalUnassignedRuleCallTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalUnassignedRuleCallTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -94,23 +100,27 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalUnassignedRuleCallTestLanguage.g:58:1: ruleModel : (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalUnassignedRuleCallTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token this_INT_1=null;
+        Boolean lv_modelFeatures_2_0 = null;
+
 
         try {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:58:10: ( (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:59:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:60:1: ( (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:61:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
             {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:59:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:60:3: otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:61:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:62:3: otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
             {
 
             			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
@@ -119,7 +129,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalUnassignedRuleCallTestLanguage.g:67:3: (this_INT_1= RULE_INT )+
+            // PsiInternalUnassignedRuleCallTestLanguage.g:69:3: (this_INT_1= RULE_INT )+
             int cnt1=0;
             loop1:
             do {
@@ -133,7 +143,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalUnassignedRuleCallTestLanguage.g:68:4: this_INT_1= RULE_INT
+            	    // PsiInternalUnassignedRuleCallTestLanguage.g:70:4: this_INT_1= RULE_INT
             	    {
 
             	    				markLeaf(elementTypeProvider.getModel_INTTerminalRuleCall_1ElementType());
@@ -155,22 +165,26 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
                 cnt1++;
             } while (true);
 
-            // PsiInternalUnassignedRuleCallTestLanguage.g:76:3: ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:77:4: (lv_modelFeatures_2_0= ruleModelFeatures )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:78:3: ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:79:4: (lv_modelFeatures_2_0= ruleModelFeatures )
             {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:77:4: (lv_modelFeatures_2_0= ruleModelFeatures )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:78:5: lv_modelFeatures_2_0= ruleModelFeatures
+            // PsiInternalUnassignedRuleCallTestLanguage.g:79:4: (lv_modelFeatures_2_0= ruleModelFeatures )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:80:5: lv_modelFeatures_2_0= ruleModelFeatures
             {
 
             					markComposite(elementTypeProvider.getModel_ModelFeaturesModelFeaturesParserRuleCall_2_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleModelFeatures();
+            lv_modelFeatures_2_0=ruleModelFeatures();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -191,24 +205,30 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleModelFeatures"
-    // PsiInternalUnassignedRuleCallTestLanguage.g:91:1: entryRuleModelFeatures : ruleModelFeatures EOF ;
-    public final void entryRuleModelFeatures() throws RecognitionException {
+    // PsiInternalUnassignedRuleCallTestLanguage.g:97:1: entryRuleModelFeatures returns [Boolean current=false] : iv_ruleModelFeatures= ruleModelFeatures EOF ;
+    public final Boolean entryRuleModelFeatures() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModelFeatures = null;
+
+
         try {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:91:23: ( ruleModelFeatures EOF )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:92:2: ruleModelFeatures EOF
+            // PsiInternalUnassignedRuleCallTestLanguage.g:97:55: (iv_ruleModelFeatures= ruleModelFeatures EOF )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:98:2: iv_ruleModelFeatures= ruleModelFeatures EOF
             {
              markComposite(elementTypeProvider.getModelFeaturesElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModelFeatures();
+            iv_ruleModelFeatures=ruleModelFeatures();
 
             state._fsp--;
 
+             current =iv_ruleModelFeatures; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -220,24 +240,26 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModelFeatures"
 
 
     // $ANTLR start "ruleModelFeatures"
-    // PsiInternalUnassignedRuleCallTestLanguage.g:97:1: ruleModelFeatures : (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) ;
-    public final void ruleModelFeatures() throws RecognitionException {
+    // PsiInternalUnassignedRuleCallTestLanguage.g:104:1: ruleModelFeatures returns [Boolean current=false] : (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) ;
+    public final Boolean ruleModelFeatures() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_3=null;
 
         try {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:97:18: ( (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:98:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:105:1: ( (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:106:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
             {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:98:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:99:3: otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';'
+            // PsiInternalUnassignedRuleCallTestLanguage.g:106:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:107:3: otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';'
             {
 
             			markLeaf(elementTypeProvider.getModelFeatures_FeatureKeyword_0ElementType());
@@ -246,14 +268,20 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalUnassignedRuleCallTestLanguage.g:106:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:107:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:114:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:107:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:108:5: lv_name_1_0= RULE_ID
+            // PsiInternalUnassignedRuleCallTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:116:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getModelFeatures_NameIDTerminalRuleCall_1_0ElementType());
+            				
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -296,24 +324,30 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModelFeatures"
 
 
     // $ANTLR start "entryRuleDataTypeRule"
-    // PsiInternalUnassignedRuleCallTestLanguage.g:135:1: entryRuleDataTypeRule : ruleDataTypeRule EOF ;
-    public final void entryRuleDataTypeRule() throws RecognitionException {
+    // PsiInternalUnassignedRuleCallTestLanguage.g:149:1: entryRuleDataTypeRule returns [Boolean current=false] : iv_ruleDataTypeRule= ruleDataTypeRule EOF ;
+    public final Boolean entryRuleDataTypeRule() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleDataTypeRule = null;
+
+
         try {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:135:22: ( ruleDataTypeRule EOF )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:136:2: ruleDataTypeRule EOF
+            // PsiInternalUnassignedRuleCallTestLanguage.g:149:54: (iv_ruleDataTypeRule= ruleDataTypeRule EOF )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:150:2: iv_ruleDataTypeRule= ruleDataTypeRule EOF
             {
              markComposite(elementTypeProvider.getDataTypeRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleDataTypeRule();
+            iv_ruleDataTypeRule=ruleDataTypeRule();
 
             state._fsp--;
 
+             current =iv_ruleDataTypeRule; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -325,25 +359,27 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleDataTypeRule"
 
 
     // $ANTLR start "ruleDataTypeRule"
-    // PsiInternalUnassignedRuleCallTestLanguage.g:141:1: ruleDataTypeRule : (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) ;
-    public final void ruleDataTypeRule() throws RecognitionException {
+    // PsiInternalUnassignedRuleCallTestLanguage.g:156:1: ruleDataTypeRule returns [Boolean current=false] : (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) ;
+    public final Boolean ruleDataTypeRule() throws RecognitionException {
+        Boolean current = false;
+
         Token this_INT_0=null;
         Token kw=null;
         Token this_INT_2=null;
         Token this_STRING_3=null;
 
         try {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:141:17: ( (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:142:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:157:1: ( (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:158:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
             {
-            // PsiInternalUnassignedRuleCallTestLanguage.g:142:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
-            // PsiInternalUnassignedRuleCallTestLanguage.g:143:3: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
+            // PsiInternalUnassignedRuleCallTestLanguage.g:158:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:159:3: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
             {
 
             			markLeaf(elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_0ElementType());
@@ -366,7 +402,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
             			doneLeaf(this_INT_2);
             		
-            // PsiInternalUnassignedRuleCallTestLanguage.g:164:3: (this_STRING_3= RULE_STRING )?
+            // PsiInternalUnassignedRuleCallTestLanguage.g:180:3: (this_STRING_3= RULE_STRING )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -375,7 +411,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalUnassignedRuleCallTestLanguage.g:165:4: this_STRING_3= RULE_STRING
+                    // PsiInternalUnassignedRuleCallTestLanguage.g:181:4: this_STRING_3= RULE_STRING
                     {
 
                     				markLeaf(elementTypeProvider.getDataTypeRule_STRINGTerminalRuleCall_3ElementType());
@@ -403,7 +439,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleDataTypeRule"
 

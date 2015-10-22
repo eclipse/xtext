@@ -4,17 +4,15 @@
 package org.eclipse.xtext.testlanguages.backtracking.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AliasedRequiredCapability;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AndExpression;
@@ -36,7 +34,6 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Function
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.GuardExpression;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Model;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.OrExpression;
-import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Parameter;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ParameterDeclaration;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ParameterList;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ProvidedCapability;
@@ -59,8 +56,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	private BeeLangTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == BeeLangTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == BeeLangTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case BeeLangTestLanguagePackage.ALIASED_REQUIRED_CAPABILITY:
 				sequence_AliasedRequiredCapability(context, (AliasedRequiredCapability) semanticObject); 
 				return; 
@@ -68,39 +70,39 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_AndExpression(context, (AndExpression) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.ASSIGNMENT_EXPRESSION:
-				if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_AssignmentExpression(context, (AssignmentExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInitializationExpressionRule()) {
+				else if (rule == grammarAccess.getInitializationExpressionRule()) {
 					sequence_InitializationExpression(context, (AssignmentExpression) semanticObject); 
 					return; 
 				}
@@ -124,47 +126,47 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_OperationCall(context, (CallNamedFunction) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.CHAINED_EXPRESSION:
-				if(context == grammarAccess.getBlockExpressionWithoutBracketsRule()) {
+				if (rule == grammarAccess.getBlockExpressionWithoutBracketsRule()) {
 					sequence_BlockExpressionWithoutBrackets(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getOneOrManyExpressionsRule()) {
-					sequence_BlockExpression_BlockExpressionWithoutBrackets_OneOrManyExpressions(context, (ChainedExpression) semanticObject); 
+				else if (rule == grammarAccess.getOneOrManyExpressionsRule()) {
+					sequence_BlockExpression_BlockExpressionWithoutBrackets(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getBlockExpressionRule() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				else if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getBlockExpressionRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_BlockExpression(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInitializationBlockExpressionRule()) {
+				else if (rule == grammarAccess.getInitializationBlockExpressionRule()) {
 					sequence_InitializationBlockExpression(context, (ChainedExpression) semanticObject); 
 					return; 
 				}
@@ -179,94 +181,94 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_ConstructorCallExpression(context, (CreateExpression) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.DEF_VALUE:
-				if(context == grammarAccess.getTopLevelExpressionRule()) {
-					sequence_TopLevelExpression_ValDeclaration_VarDeclaration(context, (DefValue) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getValDeclarationRule()) {
+				if (rule == grammarAccess.getValDeclarationRule()) {
 					sequence_ValDeclaration(context, (DefValue) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getVarDeclarationRule()) {
+				else if (rule == grammarAccess.getTopLevelExpressionRule()) {
+					sequence_ValDeclaration_VarDeclaration(context, (DefValue) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getVarDeclarationRule()) {
 					sequence_VarDeclaration(context, (DefValue) semanticObject); 
 					return; 
 				}
 				else break;
 			case BeeLangTestLanguagePackage.FEATURE_EXPRESSION:
-				if(context == grammarAccess.getFeatureOfThisRule()) {
+				if (rule == grammarAccess.getFeatureOfThisRule()) {
 					sequence_FeatureOfThis(context, (FeatureExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				else if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_InfixExpression(context, (FeatureExpression) semanticObject); 
 					return; 
 				}
 				else break;
 			case BeeLangTestLanguagePackage.FUNCTION:
-				if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getClosureExpressionRule() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getLiteralRule() ||
-				   context == grammarAccess.getLiteralFunctionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
+				if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getLiteralRule()
+						|| rule == grammarAccess.getLiteralFunctionRule()
+						|| rule == grammarAccess.getClosureExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
 					sequence_ClosureExpression(context, (Function) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getFunctionRule()) {
+				else if (rule == grammarAccess.getFunctionRule()) {
 					sequence_Function(context, (Function) semanticObject); 
 					return; 
 				}
@@ -281,7 +283,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_OrExpression(context, (OrExpression) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.PARAMETER:
-				sequence_Parameter(context, (Parameter) semanticObject); 
+				sequence_Parameter(context, (org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Parameter) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.PARAMETER_DECLARATION:
 				sequence_ParameterDeclaration(context, (ParameterDeclaration) semanticObject); 
@@ -314,43 +316,43 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_ValueLiteral(context, (ValueLiteral) semanticObject); 
 				return; 
 			case BeeLangTestLanguagePackage.VARIABLE_EXPRESSION:
-				if(context == grammarAccess.getAdditiveExpressionRule() ||
-				   context == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAndExpressionRule() ||
-				   context == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getAssignmentExpressionRule() ||
-				   context == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getCachedExpressionRule() ||
-				   context == grammarAccess.getCallExpressionRule() ||
-				   context == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionRule() ||
-				   context == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0() ||
-				   context == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0() ||
-				   context == grammarAccess.getMultiplicativeExpressionRule() ||
-				   context == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getOneOrManyExpressionsRule() ||
-				   context == grammarAccess.getOrExpressionRule() ||
-				   context == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getParanthesizedExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionRule() ||
-				   context == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0() ||
-				   context == grammarAccess.getPrimaryExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionRule() ||
-				   context == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getSetExpressionRule() ||
-				   context == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0() ||
-				   context == grammarAccess.getTopLevelExpressionRule() ||
-				   context == grammarAccess.getUnaryOrInfixExpressionRule()) {
-					sequence_KeywordVariables_PrimaryExpression_Value(context, (VariableExpression) semanticObject); 
+				if (rule == grammarAccess.getTopLevelExpressionRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getAssignmentExpressionRule()
+						|| action == grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getCachedExpressionRule()
+						|| rule == grammarAccess.getOrExpressionRule()
+						|| action == grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAndExpressionRule()
+						|| action == grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getRelationalExpressionRule()
+						|| action == grammarAccess.getRelationalExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getAdditiveExpressionRule()
+						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getMultiplicativeExpressionRule()
+						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getSetExpressionRule()
+						|| action == grammarAccess.getSetExpressionAccess().getBinaryOpExpressionLeftExprAction_1_0()
+						|| rule == grammarAccess.getUnaryOrInfixExpressionRule()
+						|| rule == grammarAccess.getPostopExpressionRule()
+						|| action == grammarAccess.getPostopExpressionAccess().getUnaryPostOpExpressionExprAction_1_0()
+						|| rule == grammarAccess.getInfixExpressionRule()
+						|| action == grammarAccess.getInfixExpressionAccess().getCallFeatureFuncExprAction_1_0_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0()
+						|| action == grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0()
+						|| rule == grammarAccess.getCallExpressionRule()
+						|| action == grammarAccess.getCallExpressionAccess().getCallFunctionFuncExprAction_1_0()
+						|| rule == grammarAccess.getPrimaryExpressionRule()
+						|| rule == grammarAccess.getOneOrManyExpressionsRule()
+						|| rule == grammarAccess.getParanthesizedExpressionRule()) {
+					sequence_KeywordVariables_Value(context, (VariableExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getKeywordVariablesRule()) {
+				else if (rule == grammarAccess.getKeywordVariablesRule()) {
 					sequence_KeywordVariables(context, (VariableExpression) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getValueRule()) {
+				else if (rule == grammarAccess.getValueRule()) {
 					sequence_Value(context, (VariableExpression) semanticObject); 
 					return; 
 				}
@@ -362,37 +364,29 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 				sequence_WithExpression(context, (WithExpression) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
 	 * Constraint:
 	 *     (
-	 *         (leftExpr=MultiplicativeExpression_BinaryOpExpression_1_0 (functionName='*' | functionName='/' | functionName='%') rightExpr=SetExpression) | 
-	 *         (leftExpr=SetExpression_BinaryOpExpression_1_0 functionName='..' rightExpr=UnaryOrInfixExpression) | 
+	 *         (leftExpr=RelationalExpression_BinaryOpExpression_1_0 functionName=RelationalOperator rightExpr=AdditiveExpression) | 
 	 *         (leftExpr=AdditiveExpression_BinaryOpExpression_1_0 (functionName='+' | functionName='-') rightExpr=MultiplicativeExpression) | 
-	 *         (leftExpr=RelationalExpression_BinaryOpExpression_1_0 functionName=RelationalOperator rightExpr=AdditiveExpression)
+	 *         (leftExpr=MultiplicativeExpression_BinaryOpExpression_1_0 (functionName='*' | functionName='/' | functionName='%') rightExpr=SetExpression) | 
+	 *         (leftExpr=SetExpression_BinaryOpExpression_1_0 functionName='..' rightExpr=UnaryOrInfixExpression)
 	 *     )
 	 */
-	protected void sequence_AdditiveExpression_MultiplicativeExpression_RelationalExpression_SetExpression(EObject context, BinaryOpExpression semanticObject) {
+	protected void sequence_AdditiveExpression_MultiplicativeExpression_RelationalExpression_SetExpression(ISerializationContext context, BinaryOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         nameSpace=ID? 
-	 *         name=ID 
-	 *         alias=ID? 
-	 *         condExpr=Expression? 
-	 *         greedy?='greedy'? 
-	 *         min=INT? 
-	 *         max=INT? 
-	 *         versionRange=ID?
-	 *     )
+	 *     (nameSpace=ID? name=ID alias=ID? (condExpr=Expression | greedy?='greedy' | min=INT | max=INT | versionRange=ID)*)
 	 */
-	protected void sequence_AliasedRequiredCapability(EObject context, AliasedRequiredCapability semanticObject) {
+	protected void sequence_AliasedRequiredCapability(ISerializationContext context, AliasedRequiredCapability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -401,15 +395,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (leftExpr=AndExpression_AndExpression_1_0 rightExpr=RelationalExpression)
 	 */
-	protected void sequence_AndExpression(EObject context, AndExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AND_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
+	protected void sequence_AndExpression(ISerializationContext context, AndExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AND_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.AND_EXPRESSION__LEFT_EXPR));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AND_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AND_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.AND_EXPRESSION__RIGHT_EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAndExpressionAccess().getAndExpressionLeftExprAction_1_0(), semanticObject.getLeftExpr());
 		feeder.accept(grammarAccess.getAndExpressionAccess().getRightExprRelationalExpressionParserRuleCall_1_2_0(), semanticObject.getRightExpr());
 		feeder.finish();
@@ -420,17 +413,16 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (leftExpr=AssignmentExpression_AssignmentExpression_1_0 functionName=AssignmentOperator rightExpr=AssignmentExpression)
 	 */
-	protected void sequence_AssignmentExpression(EObject context, AssignmentExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
+	protected void sequence_AssignmentExpression(ISerializationContext context, AssignmentExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__LEFT_EXPR));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__FUNCTION_NAME) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__FUNCTION_NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__FUNCTION_NAME));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__RIGHT_EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAssignmentExpressionAccess().getAssignmentExpressionLeftExprAction_1_0(), semanticObject.getLeftExpr());
 		feeder.accept(grammarAccess.getAssignmentExpressionAccess().getFunctionNameAssignmentOperatorParserRuleCall_1_1_0(), semanticObject.getFunctionName());
 		feeder.accept(grammarAccess.getAssignmentExpressionAccess().getRightExprAssignmentExpressionParserRuleCall_1_2_0(), semanticObject.getRightExpr());
@@ -442,25 +434,25 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     expressions+=TopLevelExpression+
 	 */
-	protected void sequence_BlockExpressionWithoutBrackets(EObject context, ChainedExpression semanticObject) {
+	protected void sequence_BlockExpressionWithoutBrackets(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (expressions+=TopLevelExpression+ | (expressions+=TopLevelExpression*))
+	 *     (expressions+=TopLevelExpression+ | expressions+=TopLevelExpression+)?
 	 */
-	protected void sequence_BlockExpression_BlockExpressionWithoutBrackets_OneOrManyExpressions(EObject context, ChainedExpression semanticObject) {
+	protected void sequence_BlockExpression_BlockExpressionWithoutBrackets(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (expressions+=TopLevelExpression*)
+	 *     expressions+=TopLevelExpression*
 	 */
-	protected void sequence_BlockExpression(EObject context, ChainedExpression semanticObject) {
+	protected void sequence_BlockExpression(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -469,13 +461,12 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     expr=OrExpression
 	 */
-	protected void sequence_CachedExpression(EObject context, CachedExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.CACHED_EXPRESSION__EXPR) == ValueTransient.YES)
+	protected void sequence_CachedExpression(ISerializationContext context, CachedExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.CACHED_EXPRESSION__EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.CACHED_EXPRESSION__EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCachedExpressionAccess().getExprOrExpressionParserRuleCall_0_2_0(), semanticObject.getExpr());
 		feeder.finish();
 	}
@@ -483,9 +474,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	/**
 	 * Constraint:
-	 *     ((funcExpr=CallExpression_CallFunction_1_0 parameterList=ParameterList?) | funcExpr=CallExpression_CallFunction_1_0)
+	 *     (funcExpr=CallExpression_CallFunction_1_0 parameterList=ParameterList?)
 	 */
-	protected void sequence_CallExpression(EObject context, CallFunction semanticObject) {
+	protected void sequence_CallExpression(ISerializationContext context, CallFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -501,7 +492,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         funcExpr=OneOrManyExpressions
 	 *     )
 	 */
-	protected void sequence_ClosureExpression(EObject context, Function semanticObject) {
+	protected void sequence_ClosureExpression(ISerializationContext context, Function semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -510,13 +501,12 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     expr=ClosureExpression
 	 */
-	protected void sequence_ClosureParameter(EObject context, ClosureParameter semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.PARAMETER__EXPR) == ValueTransient.YES)
+	protected void sequence_ClosureParameter(ISerializationContext context, ClosureParameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.PARAMETER__EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.PARAMETER__EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getClosureParameterAccess().getExprClosureExpressionParserRuleCall_0(), semanticObject.getExpr());
 		feeder.finish();
 	}
@@ -526,7 +516,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (((parameterTypes+=ID parameterTypes+=ID* (varArgs?='...' parameterTypes+=ID)?) | (varArgs?='...' parameterTypes+=ID))? returnType=ID)
 	 */
-	protected void sequence_ClosureTypeRef(EObject context, ClosureTypeRef semanticObject) {
+	protected void sequence_ClosureTypeRef(ISerializationContext context, ClosureTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -535,7 +525,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (typeExpr=ID parameterList=ParameterList? alias=ID? contextBlock=InitializationBlockExpression?)
 	 */
-	protected void sequence_ConstructorCallExpression(EObject context, CreateExpression semanticObject) {
+	protected void sequence_ConstructorCallExpression(ISerializationContext context, CreateExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -544,8 +534,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     featureName=ID
 	 */
-	protected void sequence_FeatureOfThis(EObject context, FeatureExpression semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_FeatureOfThis(ISerializationContext context, FeatureExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__FEATURE_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__FEATURE_NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFeatureOfThisAccess().getFeatureNameIDTerminalRuleCall_1_0(), semanticObject.getFeatureName());
+		feeder.finish();
 	}
 	
 	
@@ -565,7 +561,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         (funcExpr=Expression | funcExpr=BlockExpression)
 	 *     )
 	 */
-	protected void sequence_Function(EObject context, Function semanticObject) {
+	protected void sequence_Function(ISerializationContext context, Function semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -574,7 +570,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (guardExpr=Expression | guardExpr=BlockExpression)
 	 */
-	protected void sequence_GuardExpression(EObject context, GuardExpression semanticObject) {
+	protected void sequence_GuardExpression(ISerializationContext context, GuardExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -583,15 +579,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (objExpr=InfixExpression_AtExpression_1_1_0 indexExpr=Expression)
 	 */
-	protected void sequence_InfixExpression(EObject context, AtExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AT_EXPRESSION__OBJ_EXPR) == ValueTransient.YES)
+	protected void sequence_InfixExpression(ISerializationContext context, AtExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AT_EXPRESSION__OBJ_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.AT_EXPRESSION__OBJ_EXPR));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AT_EXPRESSION__INDEX_EXPR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.AT_EXPRESSION__INDEX_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.AT_EXPRESSION__INDEX_EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getInfixExpressionAccess().getAtExpressionObjExprAction_1_1_0(), semanticObject.getObjExpr());
 		feeder.accept(grammarAccess.getInfixExpressionAccess().getIndexExprExpressionParserRuleCall_1_1_2_0(), semanticObject.getIndexExpr());
 		feeder.finish();
@@ -602,7 +597,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (funcExpr=InfixExpression_CallFeature_1_0_0 name=ID parameterList=ParameterList?)
 	 */
-	protected void sequence_InfixExpression(EObject context, CallFeature semanticObject) {
+	protected void sequence_InfixExpression(ISerializationContext context, CallFeature semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -611,15 +606,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (objExpr=InfixExpression_FeatureExpression_1_2_0 featureName=ID)
 	 */
-	protected void sequence_InfixExpression(EObject context, FeatureExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__OBJ_EXPR) == ValueTransient.YES)
+	protected void sequence_InfixExpression(ISerializationContext context, FeatureExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__OBJ_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__OBJ_EXPR));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__FEATURE_NAME) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__FEATURE_NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.FEATURE_EXPRESSION__FEATURE_NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getInfixExpressionAccess().getFeatureExpressionObjExprAction_1_2_0(), semanticObject.getObjExpr());
 		feeder.accept(grammarAccess.getInfixExpressionAccess().getFeatureNameIDTerminalRuleCall_1_2_2_0(), semanticObject.getFeatureName());
 		feeder.finish();
@@ -630,7 +624,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     expressions+=InitializationExpression
 	 */
-	protected void sequence_InitializationBlockExpression(EObject context, ChainedExpression semanticObject) {
+	protected void sequence_InitializationBlockExpression(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -639,17 +633,16 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (leftExpr=FeatureOfThis functionName=':' rightExpr=Expression)
 	 */
-	protected void sequence_InitializationExpression(EObject context, AssignmentExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
+	protected void sequence_InitializationExpression(ISerializationContext context, AssignmentExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__LEFT_EXPR));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__FUNCTION_NAME) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__FUNCTION_NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__FUNCTION_NAME));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.ASSIGNMENT_EXPRESSION__RIGHT_EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getInitializationExpressionAccess().getLeftExprFeatureOfThisParserRuleCall_1_0(), semanticObject.getLeftExpr());
 		feeder.accept(grammarAccess.getInitializationExpressionAccess().getFunctionNameColonKeyword_2_0(), semanticObject.getFunctionName());
 		feeder.accept(grammarAccess.getInitializationExpressionAccess().getRightExprExpressionParserRuleCall_3_0(), semanticObject.getRightExpr());
@@ -670,7 +663,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         name='this'
 	 *     )
 	 */
-	protected void sequence_KeywordVariables_PrimaryExpression_Value(EObject context, VariableExpression semanticObject) {
+	protected void sequence_KeywordVariables_Value(ISerializationContext context, VariableExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -687,16 +680,16 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         name='this'
 	 *     )
 	 */
-	protected void sequence_KeywordVariables(EObject context, VariableExpression semanticObject) {
+	protected void sequence_KeywordVariables(ISerializationContext context, VariableExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (units+=Unit* | functions+=Function*)
+	 *     (units+=Unit+ | functions+=Function+)
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -705,7 +698,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (name=ID parameterList=ParameterList?)
 	 */
-	protected void sequence_OperationCall(EObject context, CallNamedFunction semanticObject) {
+	protected void sequence_OperationCall(ISerializationContext context, CallNamedFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -714,15 +707,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (leftExpr=OrExpression_OrExpression_1_0 rightExpr=AndExpression)
 	 */
-	protected void sequence_OrExpression(EObject context, OrExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.OR_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
+	protected void sequence_OrExpression(ISerializationContext context, OrExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.OR_EXPRESSION__LEFT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.OR_EXPRESSION__LEFT_EXPR));
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.OR_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.OR_EXPRESSION__RIGHT_EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.OR_EXPRESSION__RIGHT_EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getOrExpressionAccess().getOrExpressionLeftExprAction_1_0(), semanticObject.getLeftExpr());
 		feeder.accept(grammarAccess.getOrExpressionAccess().getRightExprAndExpressionParserRuleCall_1_2_0(), semanticObject.getRightExpr());
 		feeder.finish();
@@ -733,7 +725,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (type=TypeRef? name=ID)
 	 */
-	protected void sequence_ParameterDeclaration(EObject context, ParameterDeclaration semanticObject) {
+	protected void sequence_ParameterDeclaration(ISerializationContext context, ParameterDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -742,7 +734,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (parameters+=FirstParameter parameters+=FirstParameter*)
 	 */
-	protected void sequence_ParameterList(EObject context, ParameterList semanticObject) {
+	protected void sequence_ParameterList(ISerializationContext context, ParameterList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -751,13 +743,12 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     expr=Expression
 	 */
-	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.PARAMETER__EXPR) == ValueTransient.YES)
+	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Parameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.PARAMETER__EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.PARAMETER__EXPR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getParameterAccess().getExprExpressionParserRuleCall_0(), semanticObject.getExpr());
 		feeder.finish();
 	}
@@ -767,7 +758,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (expr=PostopExpression_UnaryPostOpExpression_1_0 (functionName='--' | functionName='++'))
 	 */
-	protected void sequence_PostopExpression(EObject context, UnaryPostOpExpression semanticObject) {
+	protected void sequence_PostopExpression(ISerializationContext context, UnaryPostOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -776,33 +767,25 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     ((functionName='++' | functionName='--') expr=InfixExpression)
 	 */
-	protected void sequence_PreopExpression(EObject context, UnaryPreOpExpression semanticObject) {
+	protected void sequence_PreopExpression(ISerializationContext context, UnaryPreOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (nameSpace=ID? (condExpr=Expression? name=ID version=ID?)?)
+	 *     (nameSpace=ID? (condExpr=Expression | name=ID | version=ID)*)
 	 */
-	protected void sequence_ProvidedCapability(EObject context, ProvidedCapability semanticObject) {
+	protected void sequence_ProvidedCapability(ISerializationContext context, ProvidedCapability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         nameSpace=ID? 
-	 *         name=ID 
-	 *         condExpr=Expression? 
-	 *         greedy?='greedy'? 
-	 *         min=INT? 
-	 *         max=INT? 
-	 *         versionRange=ID?
-	 *     )
+	 *     (nameSpace=ID? name=ID (condExpr=Expression | greedy?='greedy' | min=INT | max=INT | versionRange=ID)*)
 	 */
-	protected void sequence_RequiredCapability(EObject context, RequiredCapability semanticObject) {
+	protected void sequence_RequiredCapability(ISerializationContext context, RequiredCapability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -811,16 +794,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (rawType=ID (actualArgumentsList+=ID actualArgumentsList+=ID*)?)
 	 */
-	protected void sequence_SimpleTypeRef(EObject context, SimpleTypeRef semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     ((final?='final'? type=TypeRef? name=ID valueExpr=Expression?) | (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression))
-	 */
-	protected void sequence_TopLevelExpression_ValDeclaration_VarDeclaration(EObject context, DefValue semanticObject) {
+	protected void sequence_SimpleTypeRef(ISerializationContext context, SimpleTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -829,7 +803,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     ((functionName='!' | functionName='-') expr=InfixExpression)
 	 */
-	protected void sequence_UnaryExpression(EObject context, UnaryOpExpression semanticObject) {
+	protected void sequence_UnaryExpression(ISerializationContext context, UnaryOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -841,15 +815,17 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         name=ID? 
 	 *         version=ID? 
 	 *         (implements+=SimpleTypeRef implements+=SimpleTypeRef*)? 
-	 *         sourceLocation=Path? 
-	 *         outputLocation=Path? 
-	 *         providedCapabilities+=ProvidedCapability* 
-	 *         requiredCapabilities+=AliasedRequiredCapability* 
-	 *         metaRequiredCapabilities+=RequiredCapability* 
-	 *         functions+=Function*
+	 *         (
+	 *             sourceLocation=Path | 
+	 *             outputLocation=Path | 
+	 *             providedCapabilities+=ProvidedCapability | 
+	 *             requiredCapabilities+=AliasedRequiredCapability | 
+	 *             metaRequiredCapabilities+=RequiredCapability | 
+	 *             functions+=Function
+	 *         )*
 	 *     )
 	 */
-	protected void sequence_Unit(EObject context, Unit semanticObject) {
+	protected void sequence_Unit(ISerializationContext context, Unit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -858,7 +834,16 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression)
 	 */
-	protected void sequence_ValDeclaration(EObject context, DefValue semanticObject) {
+	protected void sequence_ValDeclaration(ISerializationContext context, DefValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((final?='final'? type=TypeRef? name=ID valueExpr=Expression?) | (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression))
+	 */
+	protected void sequence_ValDeclaration_VarDeclaration(ISerializationContext context, DefValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -867,13 +852,12 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     value=STRING
 	 */
-	protected void sequence_ValueLiteral(EObject context, ValueLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.VALUE_LITERAL__VALUE) == ValueTransient.YES)
+	protected void sequence_ValueLiteral(ISerializationContext context, ValueLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.VALUE_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.VALUE_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getValueLiteralAccess().getValueSTRINGTerminalRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
@@ -883,13 +867,12 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Value(EObject context, VariableExpression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.VARIABLE_EXPRESSION__NAME) == ValueTransient.YES)
+	protected void sequence_Value(ISerializationContext context, VariableExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BeeLangTestLanguagePackage.Literals.VARIABLE_EXPRESSION__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BeeLangTestLanguagePackage.Literals.VARIABLE_EXPRESSION__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getValueAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -899,7 +882,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (final?='final'? type=TypeRef? name=ID valueExpr=Expression?)
 	 */
-	protected void sequence_VarDeclaration(EObject context, DefValue semanticObject) {
+	protected void sequence_VarDeclaration(ISerializationContext context, DefValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -908,7 +891,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     (expr=Expression alias=ID? contextBlock=BlockExpression)
 	 */
-	protected void sequence_WithContextExpression(EObject context, WithContextExpression semanticObject) {
+	protected void sequence_WithContextExpression(ISerializationContext context, WithContextExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -917,7 +900,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 * Constraint:
 	 *     ((referencedAdvice+=ID referencedAdvice+=ID*)? (funcExpr=Expression | funcExpr=BlockExpressionWithoutBrackets))
 	 */
-	protected void sequence_WithExpression(EObject context, WithExpression semanticObject) {
+	protected void sequence_WithExpression(ISerializationContext context, WithExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

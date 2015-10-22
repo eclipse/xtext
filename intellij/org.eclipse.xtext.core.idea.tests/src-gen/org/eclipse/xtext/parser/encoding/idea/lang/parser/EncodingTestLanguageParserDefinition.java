@@ -1,6 +1,6 @@
 package org.eclipse.xtext.parser.encoding.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.encoding.idea.lang.EncodingTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.encoding.idea.lang.psi.impl.EncodingTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -26,25 +26,10 @@ public class EncodingTestLanguageParserDefinition extends AbstractXtextParserDef
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModelElementType()) {
-			return new PsiEObjectImpl(node) {};
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
 		}
-		if (elementType == elementTypeProvider.getModel_WordsAssignmentElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_WordsWordParserRuleCall_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getWordElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getWord_ValueAssignmentElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

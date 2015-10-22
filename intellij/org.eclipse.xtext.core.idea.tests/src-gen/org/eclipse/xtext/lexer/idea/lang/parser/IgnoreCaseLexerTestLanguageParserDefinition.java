@@ -1,6 +1,6 @@
 package org.eclipse.xtext.lexer.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageElementTypeProvider;
 import org.eclipse.xtext.lexer.idea.lang.psi.impl.IgnoreCaseLexerTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -26,25 +26,10 @@ public class IgnoreCaseLexerTestLanguageParserDefinition extends AbstractXtextPa
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModelElementType()) {
-			return new PsiEObjectImpl(node) {};
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
 		}
-		if (elementType == elementTypeProvider.getModel_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_CaseKeyword_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_FooKeyword_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_ValueAssignment_2ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_ValueCaSeKeyword_2_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

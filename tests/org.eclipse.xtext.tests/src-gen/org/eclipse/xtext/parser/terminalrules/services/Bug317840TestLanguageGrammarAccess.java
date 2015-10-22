@@ -70,7 +70,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Named
 		public RuleCall getSecondNamedParserRuleCall_2_0() { return cSecondNamedParserRuleCall_2_0; }
 
-		//(third+=Named forth+=Named)*
+		//third+=Named forth+=Named*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//third+=Named
@@ -120,7 +120,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//('.' ID)*
+		//'.' ID*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'.'

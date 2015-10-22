@@ -1,6 +1,6 @@
 package org.eclipse.xtext.parser.indentation.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.indentation.idea.lang.psi.impl.IndentationAwareTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
@@ -27,53 +27,20 @@ public class IndentationAwareTestLanguageParserDefinition extends AbstractXtextP
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getTree_NodesTreeNodeParserRuleCall_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()
-			);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			if (elementType == elementTypeProvider.getTree_NodesTreeNodeParserRuleCall_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node,
+					elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()
+				);
+			}
+			if (elementType == elementTypeProvider.getTreeNode_ChildrenTreeNodeParserRuleCall_1_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node,
+					elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()
+				);
+			}
 		}
-		if (elementType == elementTypeProvider.getTreeNode_ChildrenTreeNodeParserRuleCall_1_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getTreeElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTree_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTree_TreeAction_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTree_NodesAssignment_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNodeElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_NameAssignment_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_Group_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_INDENTTerminalRuleCall_1_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_ChildrenAssignment_1_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getTreeNode_DEDENTTerminalRuleCall_1_2ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

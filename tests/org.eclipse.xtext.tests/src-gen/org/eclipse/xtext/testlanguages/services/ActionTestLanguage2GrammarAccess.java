@@ -39,7 +39,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		//Value
 		public RuleCall getValueParserRuleCall_0() { return cValueParserRuleCall_0; }
 
-		//({ORing.disjuncts+=current} '|' disjuncts+=Value)*
+		//{ORing.disjuncts+=current} '|' disjuncts+=Value*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{ORing.disjuncts+=current}
