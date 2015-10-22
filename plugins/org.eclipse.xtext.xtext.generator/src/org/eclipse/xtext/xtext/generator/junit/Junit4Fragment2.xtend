@@ -91,7 +91,7 @@ class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 	def JavaFileAccess generateInjectorProvider() {
 		val file = fileAccessFactory.createJavaFile(injectorProvider)
 		val globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries")
-		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento")
+		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento")
 		val iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator")
 		file.content = '''
 			public class «injectorProvider.simpleName» implements «iInjectorProvider», «iRegistryConfigurator» {

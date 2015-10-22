@@ -47,6 +47,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -169,8 +170,8 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment implement
   @Override
   public void initialize(final Injector injector) {
     List<IXtextGeneratorFragment> _fragments = this.getFragments();
-    ImplicitFragment _implicitFragment = new ImplicitFragment();
-    _fragments.add(0, _implicitFragment);
+    List<? extends IXtextGeneratorFragment> _implicitFragments = this.getImplicitFragments();
+    _fragments.addAll(0, _implicitFragments);
     injector.injectMembers(XtextGeneratorLanguage.class);
     if ((this.resourceSet == null)) {
       ResourceSet _get = this.resourceSetProvider.get();
@@ -258,6 +259,17 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment implement
     this.validateGrammar(grammar);
     this.initialize(grammar);
     super.initialize(injector);
+  }
+  
+  protected List<? extends IXtextGeneratorFragment> getImplicitFragments() {
+    ArrayList<ImplicitFragment> _xblockexpression = null;
+    {
+      final ArrayList<ImplicitFragment> fragments = CollectionLiterals.<ImplicitFragment>newArrayList();
+      ImplicitFragment _implicitFragment = new ImplicitFragment();
+      fragments.add(_implicitFragment);
+      _xblockexpression = fragments;
+    }
+    return _xblockexpression;
   }
   
   public void initialize(final Grammar grammar) {

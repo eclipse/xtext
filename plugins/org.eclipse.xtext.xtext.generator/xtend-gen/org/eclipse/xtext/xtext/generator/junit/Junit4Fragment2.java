@@ -241,7 +241,7 @@ public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
       TypeReference _injectorProvider = this.injectorProvider();
       final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_injectorProvider);
       final TypeReference globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries");
-      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento");
+      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento");
       final TypeReference iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator");
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
