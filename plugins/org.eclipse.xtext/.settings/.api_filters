@@ -411,6 +411,12 @@
                 <message_argument value="bindIQualifiedNameConverter()"/>
             </message_arguments>
         </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextRuntimeModule"/>
+                <message_argument value="bindIXtext2EcorePostProcessor()"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/formatting/impl/MatcherNFAProvider.java" type="org.eclipse.xtext.formatting.impl.MatcherNFAProvider">
         <filter id="576720909">

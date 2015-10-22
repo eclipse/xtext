@@ -106,8 +106,15 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return XtextValueConverters.class;
 	}
 
-	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
-		return XtendXtext2EcorePostProcessor.class;
+	/**
+	 * @since 2.9
+	 */
+	public void configureIXtext2EcorePostProcessor(Binder binder) {
+		try {
+			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
+			binder.bind(IXtext2EcorePostProcessor.class).to(XtendXtext2EcorePostProcessor.class);
+		} catch (ClassNotFoundException e) {
+		}
 	}
 
 	@Override
