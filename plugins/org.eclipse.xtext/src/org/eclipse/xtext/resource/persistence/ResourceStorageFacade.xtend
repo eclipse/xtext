@@ -111,7 +111,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		}
 		
 		// check for source project locations, i.e. use generator config
-		val fsa = getFileSystemAccess(resource);
+		val fsa = getFileSystemAccess(resource)
 		val outputRelativePath = computeOutputPath(resource)
 		val uri = fsa.getURI(outputRelativePath)
 		return uri !== null && resource.resourceSet.URIConverter.exists(uri, null)
