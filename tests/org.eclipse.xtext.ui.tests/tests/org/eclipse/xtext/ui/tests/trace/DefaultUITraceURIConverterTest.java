@@ -18,7 +18,7 @@ import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.ui.workspace.JdtProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -50,6 +50,9 @@ public class DefaultUITraceURIConverterTest extends Assert {
 
 	@Inject
 	private ITraceURIConverter converter;
+	
+	@Inject 
+	private EclipseProjectConfigProvider projectConfigProvider;
 
 	@Inject
 	@Named(Constants.FILE_EXTENSIONS)
@@ -61,7 +64,7 @@ public class DefaultUITraceURIConverterTest extends Assert {
 
 	private void assertConversion(String expected, IFile source) {
 		AbsoluteURI sourceURI = new AbsoluteURI(URI.createPlatformResourceURI(source.getFullPath().toString(), true));
-		IProjectConfig projectConfig = new JdtProjectConfig(project.getProject());
+		IProjectConfig projectConfig = projectConfigProvider.createProjectConfig(project.getProject());
 		SourceRelativeURI traceUri = converter.getURIForTrace(projectConfig, sourceURI);
 		assertEquals(expected, traceUri.toString());
 	}
