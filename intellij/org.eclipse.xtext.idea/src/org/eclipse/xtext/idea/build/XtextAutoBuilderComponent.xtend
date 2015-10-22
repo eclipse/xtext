@@ -352,8 +352,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						ignoreIncomingEvents = true
 						for (uri : uris) {
 							val file = uri.virtualFile
-							if (file!== null && file.exists) {
-									file.delete(XtextAutoBuilderComponent.this)	
+							if (file !== null && file.exists) {
+								file.delete(XtextAutoBuilderComponent.this)	
 							}
 						}
 					} finally {
@@ -458,8 +458,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		} else {
 			val allEvents = newArrayList
 			if(TEST_MODE) {
-					queue.drainTo(allEvents)
-					internalBuild(allEvents, null)
+				queue.drainTo(allEvents)
+				internalBuild(allEvents, null)
 			} else {
 				ProgressManager.instance.run(new Task.Backgroundable(project, 'Code Generation...') {
 					override run(ProgressIndicator indicator) {
@@ -467,7 +467,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						indicator.indeterminate = true
 						synchronized (BUILD_MONITOR) {
 							queue.drainTo(allEvents)
-							internalBuild(allEvents, indicator)
+							if (!allEvents.empty) {
+								internalBuild(allEvents, indicator)
+							}
 						}
 					}
 				})
