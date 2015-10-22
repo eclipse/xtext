@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.arithmetics.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.example.arithmetics,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr,
+ org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal
+

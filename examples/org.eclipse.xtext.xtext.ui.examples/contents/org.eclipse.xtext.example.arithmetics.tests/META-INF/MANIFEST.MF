@@ -1,26 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Arithmetics Test Bundle
-Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.tests
-Bundle-Version: 2.9.0.qualifier
+Bundle-Name: org.eclipse.xtext.example.arithmetics.tests
 Bundle-Vendor: itemis AG
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Version: 2.9.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.arithmetics,
- org.eclipse.emf.ecore;bundle-version="2.10.2",
+ org.junit;bundle-version="4.7.0",
  org.eclipse.xtext.junit4,
- com.google.guava;bundle-version="[10.0.1,19.0.0)",
- com.google.inject;bundle-version="3.0.0",
- org.eclipse.xtext,
- org.eclipse.xtext.example.arithmetics.ui,
- org.eclipse.core.runtime;bundle-version="3.6.0",
- org.eclipse.ui.workbench;bundle-version="3.6.0";resolution:=optional,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.xbase.lib
-Import-Package: org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0",
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.xtext.example.arithmetics.tests
+Import-Package: org.hamcrest.core,
+ org.junit;version="4.5.0",
  org.junit.runners.model;version="4.5.0",
- org.hamcrest.core
-Export-Package: org.eclipse.xtext.example.arithmetics
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0"
