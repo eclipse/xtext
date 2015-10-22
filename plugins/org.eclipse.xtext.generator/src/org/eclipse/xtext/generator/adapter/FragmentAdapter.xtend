@@ -41,7 +41,7 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.guessTypeRef
 
 /**
  * @since 2.9
@@ -148,10 +148,10 @@ class FragmentAdapter extends AbstractXtextGeneratorFragment {
 	private def translateBinding(Binding it) {
 		val newKey =
 			if (value.statements === null || value.statements.empty)
-				new GuiceModuleAccess.BindKey(null, key.type?.typeRef, key.singleton, key.eagerSingleton)
+				new GuiceModuleAccess.BindKey(null, key.type?.guessTypeRef, key.singleton, key.eagerSingleton)
 			else
 				new GuiceModuleAccess.BindKey(key.type.className, null, key.singleton, key.eagerSingleton)
-		val newValue = new GuiceModuleAccess.BindValue(value.expression, value.typeName?.typeRef,
+		val newValue = new GuiceModuleAccess.BindValue(value.expression, value.typeName?.guessTypeRef,
 				value.provider, value.statements.map[s | if (s.endsWith(';')) s else s + ';'])
 		new GuiceModuleAccess.Binding(newKey, newValue, final, contributedBy)
 	}
