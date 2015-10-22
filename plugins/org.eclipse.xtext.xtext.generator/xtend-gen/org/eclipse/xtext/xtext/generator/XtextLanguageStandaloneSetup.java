@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 
@@ -45,7 +43,6 @@ import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 @Log
 @SuppressWarnings("all")
 public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
-  @Accessors
   private List<String> loadedResources = CollectionLiterals.<String>newArrayList();
   
   @Inject
@@ -253,13 +250,4 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
   }
   
   private final static Logger LOG = Logger.getLogger(XtextLanguageStandaloneSetup.class);
-  
-  @Pure
-  public List<String> getLoadedResources() {
-    return this.loadedResources;
-  }
-  
-  public void setLoadedResources(final List<String> loadedResources) {
-    this.loadedResources = loadedResources;
-  }
 }

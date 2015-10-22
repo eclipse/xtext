@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.utils.GenModelHelper
 import org.eclipse.emf.mwe.utils.StandaloneSetup
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
@@ -28,7 +27,7 @@ import org.eclipse.xtext.util.internal.Log
  */
 @Log
 class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
-	@Accessors List<String> loadedResources = newArrayList
+	List<String> loadedResources = newArrayList
 	
 	@Inject IXtextGeneratorLanguage language
 	
