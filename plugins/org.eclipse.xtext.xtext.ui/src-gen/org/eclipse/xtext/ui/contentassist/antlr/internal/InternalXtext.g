@@ -252,14 +252,6 @@ finally {
 
 
 
-// Entry rule entryRuleRuleNameAndParams
-entryRuleRuleNameAndParams 
-:
-{ before(grammarAccess.getRuleNameAndParamsRule()); }
-	 ruleRuleNameAndParams
-{ after(grammarAccess.getRuleNameAndParamsRule()); } 
-	 EOF 
-;
 
 // Rule RuleNameAndParams
 ruleRuleNameAndParams

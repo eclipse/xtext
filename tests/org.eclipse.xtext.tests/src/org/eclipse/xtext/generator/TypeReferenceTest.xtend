@@ -63,6 +63,19 @@ class TypeReferenceTest {
 	}
 	
 	@Test
+	def void testGuessTypeRef() {
+		val ref = TypeReference.guessTypeRef("java.util.Map.Entry")
+		assertEquals("java.util", ref.packageName)
+		assertEquals("Entry", ref.simpleName)
+		assertEquals(#["Map", "Entry"], ref.simpleNames)
+	}
+	
+	@Test(expected=IllegalArgumentException)
+	def void testIllegalTypeRef() {
+		TypeReference.typeRef("java.util.Map.Entry")
+	}
+	
+	@Test
 	def void testJavaPath() {
 		val ref = "org.example.MyType".typeRef
 		assertEquals("org/example/MyType.java", ref.javaPath)

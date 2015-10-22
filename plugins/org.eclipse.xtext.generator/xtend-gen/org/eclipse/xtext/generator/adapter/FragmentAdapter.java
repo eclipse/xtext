@@ -253,15 +253,15 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
       if (_or) {
         BindKey _key = it.getKey();
         String _type = _key.getType();
-        TypeReference _typeRef = null;
+        TypeReference _guessTypeRef = null;
         if (_type!=null) {
-          _typeRef=TypeReference.typeRef(_type);
+          _guessTypeRef=TypeReference.guessTypeRef(_type);
         }
         BindKey _key_1 = it.getKey();
         boolean _isSingleton = _key_1.isSingleton();
         BindKey _key_2 = it.getKey();
         boolean _isEagerSingleton = _key_2.isEagerSingleton();
-        _xifexpression = new GuiceModuleAccess.BindKey(null, _typeRef, _isSingleton, _isEagerSingleton);
+        _xifexpression = new GuiceModuleAccess.BindKey(null, _guessTypeRef, _isSingleton, _isEagerSingleton);
       } else {
         BindKey _key_3 = it.getKey();
         String _type_1 = _key_3.getType();
@@ -277,9 +277,9 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
       String _expression = _value_2.getExpression();
       BindValue _value_3 = it.getValue();
       String _typeName = _value_3.getTypeName();
-      TypeReference _typeRef_1 = null;
+      TypeReference _guessTypeRef_1 = null;
       if (_typeName!=null) {
-        _typeRef_1=TypeReference.typeRef(_typeName);
+        _guessTypeRef_1=TypeReference.guessTypeRef(_typeName);
       }
       BindValue _value_4 = it.getValue();
       boolean _isProvider = _value_4.isProvider();
@@ -299,7 +299,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         }
       };
       List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(_statements_2)), _function);
-      final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _typeRef_1, _isProvider, _map);
+      final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _guessTypeRef_1, _isProvider, _map);
       boolean _isFinal = it.isFinal();
       String _contributedBy = it.getContributedBy();
       _xblockexpression = new GuiceModuleAccess.Binding(newKey, newValue, _isFinal, _contributedBy);

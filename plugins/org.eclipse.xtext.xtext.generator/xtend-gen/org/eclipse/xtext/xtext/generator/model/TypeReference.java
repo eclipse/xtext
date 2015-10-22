@@ -37,6 +37,14 @@ public class TypeReference {
     return new TypeReference(name, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
+  /**
+   * @deprecated this method is available for backwards compatibility reasons
+   */
+  @Deprecated
+  public static TypeReference guessTypeRef(final String name, final TypeReference... arguments) {
+    return new TypeReference(name, (List<TypeReference>)Conversions.doWrapArray(arguments), false);
+  }
+  
   public static TypeReference typeRef(final Class<?> clazz, final TypeReference... arguments) {
     return new TypeReference(clazz, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
@@ -61,7 +69,11 @@ public class TypeReference {
   }
   
   public TypeReference(final String qualifiedName, final List<TypeReference> arguments) {
-    this(TypeReference.getPackageName(qualifiedName), TypeReference.getClassName(qualifiedName), arguments);
+    this(qualifiedName, arguments, true);
+  }
+  
+  private TypeReference(final String qualifiedName, final List<TypeReference> arguments, final boolean strict) {
+    this(TypeReference.getPackageName(qualifiedName, strict), TypeReference.getClassName(qualifiedName, strict), arguments);
   }
   
   public TypeReference(final String packageName, final String className) {
@@ -161,7 +173,7 @@ public class TypeReference {
     this(TypeReference.getQualifiedName(epackage, resourceSet));
   }
   
-  private static String getPackageName(final String qualifiedName) {
+  private static String getPackageName(final String qualifiedName, final boolean strict) {
     Splitter _on = Splitter.on(".");
     Iterable<String> _split = _on.split(qualifiedName);
     final List<String> segments = IterableExtensions.<String>toList(_split);
@@ -170,29 +182,50 @@ public class TypeReference {
     if (_equals) {
       return "";
     }
-    int _length = ((Object[])Conversions.unwrapArray(segments, Object.class)).length;
-    int _minus = (_length - 1);
-    final List<String> packageSegments = segments.subList(0, _minus);
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        char _charAt = it.charAt(0);
-        return Boolean.valueOf(Character.isUpperCase(_charAt));
+    if (strict) {
+      int _length = ((Object[])Conversions.unwrapArray(segments, Object.class)).length;
+      int _minus = (_length - 1);
+      final List<String> packageSegments = segments.subList(0, _minus);
+      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
+        public Boolean apply(final String it) {
+          char _charAt = it.charAt(0);
+          return Boolean.valueOf(Character.isUpperCase(_charAt));
+        }
+      };
+      Iterable<String> _filter = IterableExtensions.<String>filter(packageSegments, _function);
+      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        throw new IllegalArgumentException((("Cannot determine the package name of \'" + qualifiedName) + "\'. Please use the TypeReference(packageName, className) constructor"));
       }
-    };
-    Iterable<String> _filter = IterableExtensions.<String>filter(packageSegments, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      throw new IllegalArgumentException((("Cannot determine the package name of \'" + qualifiedName) + "\'. Please use the TypeReference(packageName, className) constructor"));
+      return IterableExtensions.join(packageSegments, ".");
+    } else {
+      int _length_1 = ((Object[])Conversions.unwrapArray(segments, Object.class)).length;
+      int _minus_1 = (_length_1 - 1);
+      List<String> packageSegments_1 = segments.subList(0, _minus_1);
+      while ((!packageSegments_1.isEmpty())) {
+        String _last = IterableExtensions.<String>last(packageSegments_1);
+        char _charAt = _last.charAt(0);
+        boolean _isUpperCase = Character.isUpperCase(_charAt);
+        if (_isUpperCase) {
+          final List<String> _converted_packageSegments_1 = (List<String>)packageSegments_1;
+          int _length_2 = ((Object[])Conversions.unwrapArray(_converted_packageSegments_1, Object.class)).length;
+          int _minus_2 = (_length_2 - 1);
+          List<String> _subList = packageSegments_1.subList(0, _minus_2);
+          packageSegments_1 = _subList;
+        } else {
+          return IterableExtensions.join(packageSegments_1, ".");
+        }
+      }
+      return "";
     }
-    return IterableExtensions.join(packageSegments, ".");
   }
   
-  private static String getClassName(final String qualifiedName) {
+  private static String getClassName(final String qualifiedName, final boolean strict) {
     String _xblockexpression = null;
     {
-      final String packageName = TypeReference.getPackageName(qualifiedName);
+      final String packageName = TypeReference.getPackageName(qualifiedName, strict);
       String _xifexpression = null;
       boolean _isEmpty = packageName.isEmpty();
       if (_isEmpty) {
