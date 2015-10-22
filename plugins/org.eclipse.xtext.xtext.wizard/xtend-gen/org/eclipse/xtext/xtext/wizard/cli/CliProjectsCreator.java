@@ -11,9 +11,12 @@ import com.google.common.io.Files;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Set;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
@@ -23,6 +26,9 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
 public class CliProjectsCreator implements ProjectsCreator {
+  @Accessors
+  private String lineDelimiter;
+  
   @Override
   public void createProjects(final WizardConfiguration config) {
     Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
@@ -55,9 +61,11 @@ public class CliProjectsCreator implements ProjectsCreator {
           File _parentFile = file.getParentFile();
           _parentFile.mkdirs();
           String _content = it.getContent();
+          String _newLine = Strings.newLine();
+          final String normalizedContent = _content.replace(_newLine, CliProjectsCreator.this.lineDelimiter);
           WizardConfiguration _config_1 = project.getConfig();
           Charset _encoding = _config_1.getEncoding();
-          Files.write(_content, file, _encoding);
+          Files.write(normalizedContent, file, _encoding);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -73,5 +81,14 @@ public class CliProjectsCreator implements ProjectsCreator {
       }
     };
     IterableExtensions.<String>forEach(_sourceFolders, _function_1);
+  }
+  
+  @Pure
+  public String getLineDelimiter() {
+    return this.lineDelimiter;
+  }
+  
+  public void setLineDelimiter(final String lineDelimiter) {
+    this.lineDelimiter = lineDelimiter;
   }
 }

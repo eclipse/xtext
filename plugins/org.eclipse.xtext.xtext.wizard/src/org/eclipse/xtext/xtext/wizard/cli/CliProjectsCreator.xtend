@@ -12,8 +12,12 @@ import java.io.File
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.Strings
 
 class CliProjectsCreator implements ProjectsCreator {
+	
+	@Accessors String lineDelimiter
 
 	override createProjects(WizardConfiguration config) {
 		config.enabledProjects.forEach [
@@ -28,7 +32,8 @@ class CliProjectsCreator implements ProjectsCreator {
 			val projectRelativePath = project.config.sourceLayout.getPathFor(outlet) + "/" + relativePath
 			val file = new File(projectRoot, projectRelativePath)
 			file.parentFile.mkdirs
-			Files.write(content, file, project.config.encoding)
+			val normalizedContent = content.replace(Strings.newLine, lineDelimiter)
+			Files.write(normalizedContent, file, project.config.encoding)
 		]
 		project.sourceFolders.forEach [
 			new File(projectRoot, it).mkdirs
