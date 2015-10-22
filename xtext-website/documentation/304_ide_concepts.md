@@ -19,7 +19,7 @@ Almost all label providers in the Xtext framework inherit from the base class [A
 Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. The [AbstractLabelProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java) helps you managing the images: In your implementation of `doGetImage(Object)` you can as well return an [Image]({{site.javadoc.eclipse-platform}}/org/eclipse/swt/graphics/Image.html), an [ImageDescriptor]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/resource/ImageDescriptor.html) or a string, representing a path in the *icons/* folder of the containing plug-in. This path is actually configurable by Google Guice. Have a look at the [PluginImageHelper]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/PluginImageHelper.java) to learn about the customizing possibilities.
 
 If you have the [LabelProviderFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java) in the list of generator fragments in the MWE2 workflow for your language, it will automatically create stubs and bindings for an [`{MyLang}EObjectLabelProvider`](#eobject-label-provider) and an [`{MyLang}DescriptionLabelProvider`](#description-label-provider) which you can implement manually. 
-
+Needs to be updated, now LabelProviderFragment is encapsulated in the class StandardLanguage
 ### Label Providers For EObjects {#eobject-label-provider}
 
 The EObject label provider refers to actually loaded and thereby available model elements. By default, Xtext binds the [DefaultEObjectLabelProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java) to all use cases, but you can change the binding individually for the Outline, Content Assist or other places. For that purpose, there is a so called *binding annotation* for each use case. For example, to use a custom *MyContentAssistLabelProvider* to display elements in the content assist, you have to override `configureContentProposalLabelProvider(..)` in your language's UI module:
@@ -148,6 +148,8 @@ warning("Name should start with a capital",
 
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. We start by adding the [QuickfixProviderFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java) to our workflow and after regenerating the code we should find an empty class *MyDslQuickfixProvider* in our DSL's UI project and new entries in the *plugin.xml\_gen* file.
 
+The QuickfixProviderFragment is added by default, doesn't it? If so, this paragraph needs to be updated.
+
 Continuing with the `INVALID_TYPE_NAME` problem from the domain model example we add a method with which the problem can be fixed (have a look at the *DomainmodelQuickfixProvider* for details):
 
 ```java
@@ -171,6 +173,7 @@ public void fixName(final Issue issue,
   );
 }
 ```
+We recommande to use closure to implement it, so could be updated.
 
 By using the correct signature (see below) and annotating the method with the @[Fix]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/Fix.java) annotation referencing the previously specified issue code from the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
 
@@ -209,6 +212,8 @@ Hence, there is the [ISyntaxErrorMessageProvider]({{site.src.xtext}}/plugins/org
 Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named *templates.xml* inside the *templates* directory of the generated UI-plug-in. This file contains templates in a format as described in the [Eclipse online help](http://help.eclipse.org/luna/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm) .
 
 ![](images/preferences_templates.png)
+
+Needs to be updated. The generated language is not a child of Xtext language. And there are no quotes surrounding the cross refrence variable in the new version.
 
 By default Xtext registers *context types* that follow certain patterns. A context type will be created 
 
@@ -414,12 +419,10 @@ public class FilterOperationsContribution
 The contribution must be bound in the *MyDslUiModule* like this
 
 ```java
-public void configureFilterOperationsContribution(Binder binder) {
-  binder
-    .bind(IOutlineContribution.class).annotatedWith(
-      Names.named("FilterOperationsContribution"))
-    .to(FilterOperationsContribution.class);
-}
+def void configureFilterOperationsContribution(Binder binder) {
+		binder.bind(IOutlineContribution).annotatedWith(Names.named("FilterOperationsContribution")).to(
+			FilterOperationsContribution)
+	}
 ```
 
 ### Sorting actions
@@ -447,16 +450,15 @@ public class MydslOutlineNodeComparator extends DefaultComparator {
 As always, you have to declare a binding for your custom implementation in your *MyDslUiModule*:
 
 ```java
-@Override
-public Class<? extends IComparator> 
-  bindOutlineFilterAndSorter$IComparator() {
-    return MydslOutlineNodeComparator.class;
+override Class<? extends IComparator> bindOutlineFilterAndSorter$IComparator() {
+	return MydslOutlineNodeComparator 
 }
 ```
 
 ### Quick Outline {#quick-outline}
 
 Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline, you have to put the [QuickOutlineFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/QuickOutlineFragment.java) into your workflow.
+The QuickOutlineFragment is added by default. 
 
 ## Hyperlinking {#hyperlinking}
 
@@ -475,12 +477,9 @@ The location service offers different methods to obtain the region of interest f
 As the default strategy is a best effort it may not always result in the selection you want. If that's the case you can [override](302_configuration.html#guicemodules) the [ILocationInFileProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java) binding in the UI module as in the following example:
 
 ```java
-public class MyDslUiModule extends AbstractMyDslUiModule {
-  @Override
-  public Class<? extends ILocationInFileProvider> 
-      bindILocationInFileProvider() {
-    return MyDslLocationInFileProvider.class;
-  }
+@FinalFieldsConstructor class MyDslUiModule extends AbstractMyDslUiModule {
+  def Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
+	return MyDslLocationInFileProvider 
 }
 ```
 
@@ -598,6 +597,7 @@ To enable refactoring support make sure the [RefactorElementNameFragment]({{site
 // rename refactoring
 fragment = refactoring.RefactorElementNameFragment {}
 ```
+Needs to be updated.
 
 The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](305_xbase.html) and an [inferred JVM model](305_xbase.html#xbase-inferred-type) (i.e. the domain model example or Xtend). 
 
