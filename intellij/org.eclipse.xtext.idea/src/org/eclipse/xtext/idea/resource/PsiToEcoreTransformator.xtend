@@ -34,6 +34,7 @@ import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xtext.RuleNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import com.intellij.openapi.progress.ProgressIndicatorProvider
 
 class PsiToEcoreTransformator implements IParser {
 
@@ -50,6 +51,7 @@ class PsiToEcoreTransformator implements IParser {
 	extension PsiToEcoreTransformationContext.PsiToEcoreTransformationContextProvider
 
 	override parse(Reader reader) {
+		ProgressIndicatorProvider.checkCanceled
 		val transformationContext = transform
 
 		adapter = new PsiToEcoreAdapter(transformationContext)
@@ -86,6 +88,7 @@ class PsiToEcoreTransformator implements IParser {
 
 	protected dispatch def void transformNode(CompositeElement it,
 		extension PsiToEcoreTransformationContext transformationContext) {
+		ProgressIndicatorProvider.checkCanceled
 		switch it {
 			GrammarAwarePsiErrorElement:
 				grammarElement.ensureModelElementCreated
@@ -253,7 +256,6 @@ class PsiToEcoreTransformator implements IParser {
 	}
 	
 	protected def dispatch void transformActionLeftElement(CompositeElement it, ParserRule parserRule,
-		
 		extension PsiToEcoreTransformationContext transformationContext) {
 		newCompositeNode
 		transformChildren(transformationContext)
@@ -279,7 +281,6 @@ class PsiToEcoreTransformator implements IParser {
 	}
 
 	protected def dispatch void transformActionLeftElement(CompositeElement it, RuleCall ruleCall,
-		
 		extension PsiToEcoreTransformationContext transformationContext) {
 		newCompositeNode
 		transformationContext.actionRuleCall = ruleCall

@@ -32,11 +32,9 @@ import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.inject.Inject;
@@ -47,6 +45,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -73,6 +72,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
     
+    @Inject
+    protected OperationCanceledManager operationCanceledManager;
+    
     protected final Object resourceCacheLock;
     
     protected final CachedValue<XtextResource> resourceCache;
@@ -94,11 +96,15 @@ public abstract class BaseXtextFile extends PsiFileBase {
 
 			@Override
 			public Result<XtextResource> compute() {
-				XtextResource resource = createResource();
-				return Result.create(resource, new Object[] {
-						globalModificationCount, 
-						BaseXtextFile.this
-				});
+				try {
+					XtextResource resource = createResource();
+					return Result.create(resource, new Object[] {
+							globalModificationCount, 
+							BaseXtextFile.this
+					});
+				} catch (OperationCanceledError e) {
+					throw e.getWrapped();
+				}
 			}
         	
         }, false);
@@ -109,16 +115,10 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	}
 	
 	public XtextResource getResource() {
-		XtextResource resource = doGetResource();
-		initialize(resource);
-		return resource;
-	}
-    
-    protected XtextResource doGetResource() {
     	synchronized(resourceCacheLock) {
     		return resourceCache.getValue();
     	}
-    }
+	}
 	
 	public INode getINode(ASTNode node) {
 		return PsiToEcoreAdapter.get(getResource()).getNodesMapping().get(node);
@@ -160,6 +160,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	}
 
 	protected XtextResource createResource() {    	
+		ProgressIndicatorProvider.checkCanceled();
     	VirtualFile virtualFile = getViewProvider().getVirtualFile();
         if (virtualFile == null) {
             return null;
@@ -182,48 +183,19 @@ public abstract class BaseXtextFile extends PsiFileBase {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
         psiToEcoreTransformator.getAdapter().install(resource);
         
-        return resource;
+        ProgressIndicatorProvider.checkCanceled();
+		installDerivedState(resource);
+		
+		ProgressIndicatorProvider.checkCanceled();
+		EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
+        
+		return resource;
     }
-	
-	 
-	protected VirtualFile findVirtualFile(final PsiFile psiFile) {
-		return XtextPsiUtils.findVirtualFile(psiFile);
-	}
-
-	protected void initialize(final Resource resource) {
-		if (resource instanceof ISynchronizable<?>) {
-			ISynchronizable<?> synchronizable = (ISynchronizable<?>) resource;
-			try {
-				synchronizable.execute(new IUnitOfWork.Void<Object>() {
-
-					@Override
-					public void process(Object state) throws Exception {
-						doInitialize(resource);
-					}
-					
-				});
-			} catch (Exception e) {
-				Exceptions.sneakyThrow(e);
-			}
-		} else {
-			// TODO: throw an exception?
-			doInitialize(resource);
-		}
-	}
-	
-	protected void doInitialize(Resource resource) {
-		try {
-			installDerivedState(resource);
-			EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
-		} catch (OperationCanceledError e) {
-			throw e.getWrapped();
-		}
-	}
 
 	protected void installDerivedState(Resource resource) {
+		ProgressIndicatorProvider.checkCanceled();
 		if (resource instanceof DerivedStateAwareResource) {
 			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
 			boolean deliver = derivedStateAwareResource.eDeliver();
@@ -234,6 +206,10 @@ public abstract class BaseXtextFile extends PsiFileBase {
 				derivedStateAwareResource.eSetDeliver(deliver);
 			}
 		}
+	}
+	 
+	protected VirtualFile findVirtualFile(final PsiFile psiFile) {
+		return XtextPsiUtils.findVirtualFile(psiFile);
 	}
 
 	public EObject getEObject(URI uri) {

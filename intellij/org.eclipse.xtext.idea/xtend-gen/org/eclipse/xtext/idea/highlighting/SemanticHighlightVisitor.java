@@ -16,7 +16,7 @@ import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -25,12 +25,12 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.highlighting.IdeaHighlightingAttributesProvider;
+import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -73,7 +73,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
       final IHighlightedPositionAcceptor _function = new IHighlightedPositionAcceptor() {
         @Override
         public void addPosition(final int offset, final int length, final String[] styles) {
-          ProgressManager.checkCanceled();
+          ProgressIndicatorProvider.checkCanceled();
           if ((length > 0)) {
             final Procedure1<String> _function = new Procedure1<String>() {
               @Override
@@ -91,7 +91,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
         }
       };
       this.acceptor = _function;
-      ProgressManager.checkCanceled();
+      ProgressIndicatorProvider.checkCanceled();
       action.run();
     } finally {
       this.acceptor = null;
@@ -127,7 +127,8 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
         final XtextResource resource = ((BaseXtextFile)element).getResource();
         long _modificationStamp = resource.getModificationStamp();
         this.lastRun = _modificationStamp;
-        this.highlightCalculator.provideHighlightingFor(resource, this.acceptor, CancelIndicator.NullImpl);
+        CancelProgressIndicator _cancelProgressIndicator = new CancelProgressIndicator();
+        this.highlightCalculator.provideHighlightingFor(resource, this.acceptor, _cancelProgressIndicator);
       }
     } catch (final Throwable _t) {
       if (_t instanceof OperationCanceledError) {
