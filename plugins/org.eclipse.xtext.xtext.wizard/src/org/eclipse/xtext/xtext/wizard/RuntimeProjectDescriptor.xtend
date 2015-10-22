@@ -81,7 +81,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		newLinkedHashSet(
 			"org.eclipse.xtext.xbase", 
 			"org.eclipse.xtext.common.types", 
-			"org.eclipse.xtext.generator",
 			"org.eclipse.xtext.xtext.generator",
 			"org.eclipse.emf.codegen.ecore", 
 			"org.eclipse.emf.mwe.utils",
@@ -251,7 +250,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 
 				dependencies {
-					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 				}
 				
@@ -323,11 +321,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							</configuration>
 							«IF config.needsTychoBuild»
 								<dependencies>
-									<dependency>
-										<groupId>org.eclipse.xtext</groupId>
-										<artifactId>org.eclipse.xtext.xtext</artifactId>
-										<version>${xtextVersion}</version>
-									</dependency>
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
 										<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
