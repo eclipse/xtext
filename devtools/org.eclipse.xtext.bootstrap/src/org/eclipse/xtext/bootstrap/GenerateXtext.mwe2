@@ -62,6 +62,9 @@ Workflow {
 					classSplitting = true
 				}
 			}
+			fragment = serializer.SerializerFragment {
+				srcGenOnly = true
+			}
 			fragment = compare.CompareFragment {
 				fileExtensions = file.extensions
 			}
