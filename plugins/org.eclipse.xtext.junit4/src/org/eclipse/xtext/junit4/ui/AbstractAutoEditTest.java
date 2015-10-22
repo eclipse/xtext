@@ -13,12 +13,14 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.bindings.keys.KeyLookupFactory;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.After;
 import org.junit.Before;
@@ -37,6 +39,8 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		closeWelcomePage();
+		IProject project = createProject("foo");
+		addNature(project, XtextProjectHelper.NATURE_ID);
 	}
 	
 	@Override
@@ -59,8 +63,12 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		editor.getInternalSourceViewer().getTextWidget().setFocus();
 		return editor;
 	}
-
+	
 	protected void assertState(String string, XtextEditor editor) {
+		assertState(editor, string);
+	}
+	
+	protected void assertState(XtextEditor editor, String string) {
 		int cursor = string.indexOf('|');
 		assertEquals(string.replace("|", ""), editor.getDocument().get());
 		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();

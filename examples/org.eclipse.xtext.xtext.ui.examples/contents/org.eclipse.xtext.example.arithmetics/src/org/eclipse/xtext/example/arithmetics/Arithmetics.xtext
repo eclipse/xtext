@@ -16,10 +16,7 @@ Module:
 	(statements+=Statement)*;
 
 Import:
-	'import' importedNamespace=ImportName;
-
-ImportName:
-	ID ('.' '*')?;
+	'import' module=[Module];
 
 Statement:
 	Definition | Evaluation;

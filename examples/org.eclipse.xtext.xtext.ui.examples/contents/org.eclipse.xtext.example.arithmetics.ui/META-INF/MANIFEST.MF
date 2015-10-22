@@ -3,24 +3,23 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.arithmetics.ui
 Bundle-Vendor: itemis AG
 Bundle-Version: 2.9.0.qualifier
-Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.ui;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.example.arithmetics;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext.example.arithmetics,
+ org.eclipse.xtext.example.arithmetics.ide,
  org.eclipse.xtext.ui,
- org.eclipse.ui.editors;bundle-version="3.6.0",
- org.eclipse.ui.ide;bundle-version="3.6.0",
  org.eclipse.xtext.ui.shared,
- org.eclipse.ui;bundle-version="3.6.0",
- org.eclipse.xtext.builder,
- org.antlr.runtime,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare;bundle-version="3.5.101",
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.xbase.lib
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Activator: org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator
-Export-Package: org.eclipse.xtext.example.arithmetics.ui.contentassist.antlr,
- org.eclipse.xtext.example.arithmetics.ui.contentassist,
- org.eclipse.xtext.example.arithmetics.ui.internal,
+Export-Package: org.eclipse.xtext.example.arithmetics.ui.internal,
  org.eclipse.xtext.example.arithmetics.ui.quickfix,
- org.eclipse.xtext.example.arithmetics.ui.contentassist.antlr.internal
+ org.eclipse.xtext.example.arithmetics.ui.contentassist
+Bundle-Activator: org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator
