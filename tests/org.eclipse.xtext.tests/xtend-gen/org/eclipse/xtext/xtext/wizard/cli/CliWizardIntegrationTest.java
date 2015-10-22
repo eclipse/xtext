@@ -9,10 +9,10 @@ package org.eclipse.xtext.xtext.wizard.cli;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Sets;
-import com.google.common.io.Files;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +21,13 @@ import java.util.TreeSet;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
+import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -45,7 +47,6 @@ import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 import org.eclipse.xtext.xtext.wizard.cli.CliProjectsCreator;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.Test;
@@ -118,15 +119,133 @@ public class CliWizardIntegrationTest {
     }
   }
   
-  @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  /**
+   * Use this main method to update the expectations to whatever the wizard currently generates
+   */
+  public static void main(final String[] args) {
+    final CliProjectsCreator creator = CliWizardIntegrationTest.newProjectCreator();
+    final Procedure1<WizardConfiguration> _function = new Procedure1<WizardConfiguration>() {
+      @Override
+      public void apply(final WizardConfiguration config) {
+        try {
+          String _baseName = config.getBaseName();
+          final File targetLocation = new File("testdata/wizard-expectations", _baseName);
+          targetLocation.mkdirs();
+          Files.sweepFolder(targetLocation);
+          String _path = targetLocation.getPath();
+          config.setRootLocation(_path);
+          creator.createProjects(config);
+          String _baseName_1 = config.getBaseName();
+          String _plus = ("Updating expectations for " + _baseName_1);
+          InputOutput.<String>println(_plus);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    IterableExtensions.<WizardConfiguration>forEach(CliWizardIntegrationTest.projectConfigs, _function);
+  }
   
-  private WizardConfiguration config;
+  private final static List<WizardConfiguration> projectConfigs = Collections.<WizardConfiguration>unmodifiableList(CollectionLiterals.<WizardConfiguration>newArrayList(ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.plainMaven");
+      it.setPreferredBuildSystem(BuildSystem.MAVEN);
+      it.setSourceLayout(SourceLayout.MAVEN);
+      it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      WebProjectDescriptor _webProject = it.getWebProject();
+      _webProject.setEnabled(true);
+    }
+  }), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.mavenTycho");
+      it.setPreferredBuildSystem(BuildSystem.MAVEN);
+      it.setSourceLayout(SourceLayout.PLAIN);
+      it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      UiProjectDescriptor _uiProject = it.getUiProject();
+      _uiProject.setEnabled(true);
+      UiProjectDescriptor _uiProject_1 = it.getUiProject();
+      TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+      _testProject_1.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      WebProjectDescriptor _webProject = it.getWebProject();
+      _webProject.setEnabled(true);
+    }
+  }), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.gradle");
+      it.setPreferredBuildSystem(BuildSystem.GRADLE);
+      it.setSourceLayout(SourceLayout.MAVEN);
+      it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      WebProjectDescriptor _webProject = it.getWebProject();
+      _webProject.setEnabled(true);
+      IntellijProjectDescriptor _intellijProject = it.getIntellijProject();
+      _intellijProject.setEnabled(true);
+    }
+  }), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.eclipsePlugin");
+      it.setPreferredBuildSystem(BuildSystem.ECLIPSE);
+      it.setSourceLayout(SourceLayout.PLAIN);
+      it.setProjectLayout(ProjectLayout.FLAT);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      UiProjectDescriptor _uiProject = it.getUiProject();
+      _uiProject.setEnabled(true);
+      UiProjectDescriptor _uiProject_1 = it.getUiProject();
+      TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+      _testProject_1.setEnabled(true);
+    }
+  }), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.full");
+      it.setPreferredBuildSystem(BuildSystem.GRADLE);
+      it.setSourceLayout(SourceLayout.PLAIN);
+      it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      UiProjectDescriptor _uiProject = it.getUiProject();
+      _uiProject.setEnabled(true);
+      UiProjectDescriptor _uiProject_1 = it.getUiProject();
+      TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+      _testProject_1.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      WebProjectDescriptor _webProject = it.getWebProject();
+      _webProject.setEnabled(true);
+      IntellijProjectDescriptor _intellijProject = it.getIntellijProject();
+      _intellijProject.setEnabled(true);
+    }
+  })));
   
-  private CliProjectsCreator creator;
-  
-  @Before
-  public void setup() {
+  private static WizardConfiguration newProjectConfig() {
     WizardConfiguration _wizardConfiguration = new WizardConfiguration();
     final Procedure1<WizardConfiguration> _function = new Procedure1<WizardConfiguration>() {
       @Override
@@ -146,107 +265,39 @@ public class CliWizardIntegrationTest {
         ObjectExtensions.<LanguageDescriptor>operator_doubleArrow(_language, _function);
       }
     };
-    WizardConfiguration _doubleArrow = ObjectExtensions.<WizardConfiguration>operator_doubleArrow(_wizardConfiguration, _function);
-    this.config = _doubleArrow;
+    return ObjectExtensions.<WizardConfiguration>operator_doubleArrow(_wizardConfiguration, _function);
+  }
+  
+  private static CliProjectsCreator newProjectCreator() {
     CliProjectsCreator _cliProjectsCreator = new CliProjectsCreator();
-    this.creator = _cliProjectsCreator;
+    final Procedure1<CliProjectsCreator> _function = new Procedure1<CliProjectsCreator>() {
+      @Override
+      public void apply(final CliProjectsCreator it) {
+        it.setLineDelimiter("\n");
+      }
+    };
+    return ObjectExtensions.<CliProjectsCreator>operator_doubleArrow(_cliProjectsCreator, _function);
   }
   
-  @Test
-  public void testPlainMavenProject() {
-    this.config.setBaseName("org.xtext.example.plainMaven");
-    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
-    this.config.setSourceLayout(SourceLayout.MAVEN);
-    this.config.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
-    _testProject.setEnabled(true);
-    IdeProjectDescriptor _ideProject = this.config.getIdeProject();
-    _ideProject.setEnabled(true);
-    WebProjectDescriptor _webProject = this.config.getWebProject();
-    _webProject.setEnabled(true);
-    this.validateCreatedProjects();
-  }
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
+  
+  private WizardConfiguration config;
+  
+  private CliProjectsCreator creator;
   
   @Test
-  public void testMavenTychoProject() {
-    this.config.setBaseName("org.xtext.example.mavenTycho");
-    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
-    this.config.setSourceLayout(SourceLayout.PLAIN);
-    this.config.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
-    _testProject.setEnabled(true);
-    UiProjectDescriptor _uiProject = this.config.getUiProject();
-    _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
-    _testProject_1.setEnabled(true);
-    IdeProjectDescriptor _ideProject = this.config.getIdeProject();
-    _ideProject.setEnabled(true);
-    WebProjectDescriptor _webProject = this.config.getWebProject();
-    _webProject.setEnabled(true);
-    this.validateCreatedProjects();
-  }
-  
-  @Test
-  public void testGradleProject() {
-    this.config.setBaseName("org.xtext.example.gradle");
-    this.config.setPreferredBuildSystem(BuildSystem.GRADLE);
-    this.config.setSourceLayout(SourceLayout.MAVEN);
-    this.config.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
-    _testProject.setEnabled(true);
-    IdeProjectDescriptor _ideProject = this.config.getIdeProject();
-    _ideProject.setEnabled(true);
-    WebProjectDescriptor _webProject = this.config.getWebProject();
-    _webProject.setEnabled(true);
-    IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
-    _intellijProject.setEnabled(true);
-    this.validateCreatedProjects();
-  }
-  
-  @Test
-  public void testEclipsePluginProject() {
-    this.config.setBaseName("org.xtext.example.eclipsePlugin");
-    this.config.setPreferredBuildSystem(BuildSystem.ECLIPSE);
-    this.config.setSourceLayout(SourceLayout.PLAIN);
-    this.config.setProjectLayout(ProjectLayout.FLAT);
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
-    _testProject.setEnabled(true);
-    IdeProjectDescriptor _ideProject = this.config.getIdeProject();
-    _ideProject.setEnabled(true);
-    UiProjectDescriptor _uiProject = this.config.getUiProject();
-    _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
-    _testProject_1.setEnabled(true);
-    this.validateCreatedProjects();
-  }
-  
-  @Test
-  public void testFullProject() {
-    this.config.setBaseName("org.xtext.example.full");
-    this.config.setPreferredBuildSystem(BuildSystem.GRADLE);
-    this.config.setSourceLayout(SourceLayout.PLAIN);
-    this.config.setProjectLayout(ProjectLayout.HIERARCHICAL);
-    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
-    TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
-    _testProject.setEnabled(true);
-    UiProjectDescriptor _uiProject = this.config.getUiProject();
-    _uiProject.setEnabled(true);
-    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
-    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
-    _testProject_1.setEnabled(true);
-    IdeProjectDescriptor _ideProject = this.config.getIdeProject();
-    _ideProject.setEnabled(true);
-    WebProjectDescriptor _webProject = this.config.getWebProject();
-    _webProject.setEnabled(true);
-    IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
-    _intellijProject.setEnabled(true);
-    this.validateCreatedProjects();
+  public void testProjectCreation() {
+    CliProjectsCreator _newProjectCreator = CliWizardIntegrationTest.newProjectCreator();
+    this.creator = _newProjectCreator;
+    final Procedure1<WizardConfiguration> _function = new Procedure1<WizardConfiguration>() {
+      @Override
+      public void apply(final WizardConfiguration config) {
+        CliWizardIntegrationTest.this.config = config;
+        CliWizardIntegrationTest.this.validateCreatedProjects();
+      }
+    };
+    IterableExtensions.<WizardConfiguration>forEach(CliWizardIntegrationTest.projectConfigs, _function);
   }
   
   private void validateCreatedProjects() {
@@ -317,7 +368,7 @@ public class CliWizardIntegrationTest {
         _xifexpression = "";
       } else {
         Charset _encoding = this.config.getEncoding();
-        _xifexpression = Files.toString(file, _encoding);
+        _xifexpression = com.google.common.io.Files.toString(file, _encoding);
       }
       return new CliWizardIntegrationTest.GeneratedFile(relativePath, _xifexpression);
     } catch (Throwable _e) {
@@ -340,23 +391,10 @@ public class CliWizardIntegrationTest {
       }
     };
     final Map<String, CliWizardIntegrationTest.GeneratedFile> actualFilesByPath = IterableExtensions.<String, CliWizardIntegrationTest.GeneratedFile>toMap(actualFiles, _function_1);
-    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> difference = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(expectedFiles, actualFiles);
-    final Function1<CliWizardIntegrationTest.GeneratedFile, Boolean> _function_2 = new Function1<CliWizardIntegrationTest.GeneratedFile, Boolean>() {
-      @Override
-      public Boolean apply(final CliWizardIntegrationTest.GeneratedFile it) {
-        return Boolean.valueOf(expectedFiles.contains(it));
-      }
-    };
-    final Iterable<CliWizardIntegrationTest.GeneratedFile> missingFiles = IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>filter(difference, _function_2);
-    final Function1<CliWizardIntegrationTest.GeneratedFile, Boolean> _function_3 = new Function1<CliWizardIntegrationTest.GeneratedFile, Boolean>() {
-      @Override
-      public Boolean apply(final CliWizardIntegrationTest.GeneratedFile it) {
-        return Boolean.valueOf(actualFiles.contains(it));
-      }
-    };
-    final Iterable<CliWizardIntegrationTest.GeneratedFile> unexpectedFiles = IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>filter(difference, _function_3);
+    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> missingFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(actualFiles, expectedFiles);
+    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> unexpectedFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(expectedFiles, actualFiles);
     final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> comparableFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>intersection(expectedFiles, actualFiles);
-    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_4 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
+    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_2 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
       @Override
       public void apply(final CliWizardIntegrationTest.GeneratedFile it) {
         StringConcatenation _builder = new StringConcatenation();
@@ -365,8 +403,8 @@ public class CliWizardIntegrationTest {
         throw new ComparisonFailure(_builder.toString(), it.content, "");
       }
     };
-    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(missingFiles, _function_4);
-    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_5 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
+    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(missingFiles, _function_2);
+    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_3 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
       @Override
       public void apply(final CliWizardIntegrationTest.GeneratedFile it) {
         StringConcatenation _builder = new StringConcatenation();
@@ -375,8 +413,8 @@ public class CliWizardIntegrationTest {
         throw new ComparisonFailure(_builder.toString(), "", it.content);
       }
     };
-    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(unexpectedFiles, _function_5);
-    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_6 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
+    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(unexpectedFiles, _function_3);
+    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_4 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
       @Override
       public void apply(final CliWizardIntegrationTest.GeneratedFile it) {
         CliWizardIntegrationTest.GeneratedFile _get = expectedFilesByPath.get(it.relativePath);
@@ -386,6 +424,6 @@ public class CliWizardIntegrationTest {
         Assert.assertEquals(it.relativePath, expectedContent, actualContent);
       }
     };
-    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(comparableFiles, _function_6);
+    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(comparableFiles, _function_4);
   }
 }
