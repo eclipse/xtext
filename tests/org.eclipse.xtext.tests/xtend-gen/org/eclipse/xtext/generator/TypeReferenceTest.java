@@ -80,6 +80,22 @@ public class TypeReferenceTest {
   }
   
   @Test
+  public void testGuessTypeRef() {
+    final TypeReference ref = TypeReference.guessTypeRef("java.util.Map.Entry");
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("java.util", _packageName);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("Entry", _simpleName);
+    List<String> _simpleNames = ref.getSimpleNames();
+    Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Map", "Entry")), _simpleNames);
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testIllegalTypeRef() {
+    TypeReference.typeRef("java.util.Map.Entry");
+  }
+  
+  @Test
   public void testJavaPath() {
     final TypeReference ref = TypeReference.typeRef("org.example.MyType");
     String _javaPath = ref.getJavaPath();

@@ -27,6 +27,14 @@ class TypeReference {
 		new TypeReference(name, arguments)
 	}
 	
+	/**
+	 * @deprecated this method is available for backwards compatibility reasons
+	 */
+	@Deprecated
+	static def TypeReference guessTypeRef(String name, TypeReference... arguments) {
+		new TypeReference(name, arguments, false)
+	}
+	
 	static def TypeReference typeRef(Class<?> clazz, TypeReference... arguments) {
 		new TypeReference(clazz, arguments)
 	}
@@ -49,7 +57,11 @@ class TypeReference {
 	}
 
 	new(String qualifiedName, List<TypeReference> arguments) {
-		this(getPackageName(qualifiedName), getClassName(qualifiedName), arguments)
+		this(qualifiedName, arguments, true)
+	}
+	
+	private new(String qualifiedName, List<TypeReference> arguments, boolean strict) {
+		this(getPackageName(qualifiedName, strict), getClassName(qualifiedName, strict), arguments)
 	}
 	
 	new(String packageName, String className) {
@@ -95,18 +107,30 @@ class TypeReference {
 		this(getQualifiedName(epackage, resourceSet))
 	}
 	
-	private static def getPackageName(String qualifiedName) {
+	private static def getPackageName(String qualifiedName, boolean strict) {
 		val segments = Splitter.on('.').split(qualifiedName).toList
 		if (segments.size == 1)
 			return ""
-		val packageSegments = segments.subList(0, segments.length -1)
-		if (!packageSegments.filter[Character.isUpperCase(charAt(0))].isEmpty)
-			throw new IllegalArgumentException("Cannot determine the package name of '" + qualifiedName + "'. Please use the TypeReference(packageName, className) constructor")
-		return packageSegments.join(".")
+		if (strict) {
+			val packageSegments = segments.subList(0, segments.length -1)
+			if (!packageSegments.filter[Character.isUpperCase(charAt(0))].isEmpty)
+				throw new IllegalArgumentException("Cannot determine the package name of '" + qualifiedName + "'. Please use the TypeReference(packageName, className) constructor")
+			return packageSegments.join(".")
+		} else {
+			var packageSegments = segments.subList(0, segments.length -1)
+			while(!packageSegments.isEmpty) {
+				if (Character.isUpperCase(packageSegments.last.charAt(0))) {
+					packageSegments = packageSegments.subList(0, packageSegments.length -1)
+				} else {
+					return packageSegments.join(".") 
+				}
+			}
+			return ""
+		}
 	}
 	
-	private static def getClassName(String qualifiedName) {
-		val packageName = qualifiedName.packageName
+	private static def getClassName(String qualifiedName, boolean strict) {
+		val packageName = qualifiedName.getPackageName(strict)
 		if (packageName.isEmpty)
 			qualifiedName
 		else
