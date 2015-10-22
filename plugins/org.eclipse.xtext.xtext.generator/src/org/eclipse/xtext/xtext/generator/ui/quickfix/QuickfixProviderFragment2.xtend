@@ -96,7 +96,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 			 */
 			class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(«grammar.validatorClass».INVALID_NAME)
+			//	@Fix(«grammar.validatorClass.simpleName».INVALID_NAME)
 			//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
 			//			context |
@@ -118,7 +118,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 			 */
 			public class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(«grammar.validatorClass».INVALID_NAME)
+			//	@Fix(«grammar.validatorClass.simpleName».INVALID_NAME)
 			//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
 			//			public void apply(IModificationContext context) throws BadLocationException {

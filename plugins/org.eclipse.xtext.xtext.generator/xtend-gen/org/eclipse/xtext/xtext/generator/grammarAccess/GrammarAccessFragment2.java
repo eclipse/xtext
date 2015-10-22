@@ -609,9 +609,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("public class ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
         _builder.append(_gaRuleAccessorClassName, "");
-        _builder.append(" extends ");
-        _builder.append(AbstractElementFinder.AbstractParserRuleElementFinder.class, "");
-        _builder.append(" {");
+        _builder.append(" extends AbstractParserRuleElementFinder {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("private final ");

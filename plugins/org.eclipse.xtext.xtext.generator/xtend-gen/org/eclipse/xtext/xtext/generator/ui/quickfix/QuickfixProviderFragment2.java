@@ -189,7 +189,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         _builder.append("//\t@Fix(");
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
-        _builder.append(_validatorClass, "");
+        String _simpleName_1 = _validatorClass.getSimpleName();
+        _builder.append(_simpleName_1, "");
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
         _builder.append("//\tdef capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {");
@@ -254,7 +255,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         _builder.append("//\t@Fix(");
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
-        _builder.append(_validatorClass, "");
+        String _simpleName_1 = _validatorClass.getSimpleName();
+        _builder.append(_simpleName_1, "");
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
         _builder.append("//\tpublic void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {");
