@@ -263,7 +263,7 @@ class StandaloneBuilder {
 					}
 				}
 			}
-			access.generator.generate(it, fileSystemAccess);
+			access.generator.generate(it, fileSystemAccess, CancelIndicator.NullImpl);
 		}
 	}
 

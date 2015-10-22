@@ -31,6 +31,7 @@ import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.Futures;
@@ -113,6 +114,10 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			return buildContextDelegate.isSourceLevelURI(uri);
 		}
 		
+		public CancelIndicator getCancelIndicator() {
+			return new MonitorBasedCancelIndicator(progressMonitor);
+		}
+		
 	}
 	
 	@Inject private BuildExecutors executors;
@@ -158,7 +163,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 		Resource resource = context.resource;
 		saveResourceStorage(resource, access);
 		if (shouldGenerate(resource, context)) {
-			getGenerator2().doGenerate(resource, access);
+			getGenerator2().doGenerate(resource, access, context.getCancelIndicator());
 		}
 	}
 	
@@ -275,7 +280,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 		final IGenerator2 generator = getGenerator2();
 		final Resource resource = buildContext.resource;
 		if (resource != null)
-			generator.beforeGenerate(resource, buildContext.synchronousFileSystemAccess);
+			generator.beforeGenerate(resource, buildContext.synchronousFileSystemAccess, buildContext.getCancelIndicator());
 		return new Runnable() {
 
 			@Override
@@ -297,7 +302,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 								derivedResourceCallback.run();
 							} finally {
 								if (resource != null) {
-									generator.afterGenerate(resource, buildContext.synchronousFileSystemAccess);
+									generator.afterGenerate(resource, buildContext.synchronousFileSystemAccess, buildContext.getCancelIndicator());
 								}
 							}
 						}

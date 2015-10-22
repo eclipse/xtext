@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.MonitorBasedCancelIndicator;
 import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
@@ -182,12 +183,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
             // resources that are not yet in the delta. Validate resources. Do this in chunks.
             final SubMonitor subProgress = progress.newChild(80);
-            CancelIndicator cancelMonitor = new CancelIndicator() {
-                @Override
-				public boolean isCanceled() {
-                    return progress.isCanceled();
-                }
-            };
+            CancelIndicator cancelMonitor = new MonitorBasedCancelIndicator(progress);
 
             int index = 0;
             while (!queue.isEmpty()) {

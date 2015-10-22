@@ -473,7 +473,7 @@ public class StandaloneBuilder {
           }
         }
         GeneratorDelegate _generator = access.getGenerator();
-        _generator.generate(it, fileSystemAccess);
+        _generator.generate(it, fileSystemAccess, CancelIndicator.NullImpl);
       }
     }
   }
