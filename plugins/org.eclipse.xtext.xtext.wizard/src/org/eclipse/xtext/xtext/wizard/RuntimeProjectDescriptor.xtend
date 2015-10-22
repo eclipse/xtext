@@ -218,9 +218,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						«ENDIF»
 						«IF fromExistingEcoreModels»
 							
-							fragment = adapter.FragmentAdapter { 
-								fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment {}
-							}
+							fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
+
 							fragment = adapter.FragmentAdapter {
 								fragment = ecore2xtext.FormatterFragment {}
 							}
