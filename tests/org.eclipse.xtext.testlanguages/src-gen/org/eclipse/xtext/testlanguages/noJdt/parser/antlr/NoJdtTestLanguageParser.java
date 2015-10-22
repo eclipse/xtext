@@ -4,36 +4,37 @@
 package org.eclipse.xtext.testlanguages.noJdt.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.testlanguages.noJdt.parser.antlr.internal.InternalNoJdtTestLanguageParser;
 import org.eclipse.xtext.testlanguages.noJdt.services.NoJdtTestLanguageGrammarAccess;
 
-public class NoJdtTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class NoJdtTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private NoJdtTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.testlanguages.noJdt.parser.antlr.internal.InternalNoJdtTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.testlanguages.noJdt.parser.antlr.internal.InternalNoJdtTestLanguageParser(stream, getGrammarAccess());
+	protected InternalNoJdtTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalNoJdtTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public NoJdtTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(NoJdtTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

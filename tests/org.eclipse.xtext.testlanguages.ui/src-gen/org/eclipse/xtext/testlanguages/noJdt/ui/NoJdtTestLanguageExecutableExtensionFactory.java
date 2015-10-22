@@ -3,12 +3,10 @@
  */
 package org.eclipse.xtext.testlanguages.noJdt.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly

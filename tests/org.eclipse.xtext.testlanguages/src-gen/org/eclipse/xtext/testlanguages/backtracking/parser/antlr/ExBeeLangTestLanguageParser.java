@@ -4,36 +4,37 @@
 package org.eclipse.xtext.testlanguages.backtracking.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalExBeeLangTestLanguageParser;
 import org.eclipse.xtext.testlanguages.backtracking.services.ExBeeLangTestLanguageGrammarAccess;
 
-public class ExBeeLangTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class ExBeeLangTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private ExBeeLangTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalExBeeLangTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalExBeeLangTestLanguageParser(stream, getGrammarAccess());
+	protected InternalExBeeLangTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalExBeeLangTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "DelegateModel";
 	}
-	
+
 	public ExBeeLangTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(ExBeeLangTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }
