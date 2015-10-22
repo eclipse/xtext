@@ -330,8 +330,8 @@ public class NodeModelBuilder {
 			CompositeNode oldComposite = (CompositeNode) oldNode;
 			CompositeNode newComposite = (CompositeNode) newNode;
 			AbstractNode child = oldComposite.basicGetFirstChild();
+			newComposite.basicSetFirstChild(child);
 			if (child != null) {
-				newComposite.basicSetFirstChild(child);
 				while(child.basicGetParent() != newComposite) {
 					child.basicSetParent(newComposite);
 					child = child.basicGetNextSibling();
