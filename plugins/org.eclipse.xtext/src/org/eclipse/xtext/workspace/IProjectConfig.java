@@ -31,4 +31,9 @@ public interface IProjectConfig {
 	 * Finds the source folder that physically contains this member or null if none was found.
 	 */
 	ISourceFolder findSourceFolderContaining(URI member);
+	
+	/**
+	 * @return the workspace config
+	 */
+	IWorkspaceConfig getWorkspaceConfig();
 }

@@ -15,6 +15,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.ui.workspace.EclipseSourceFolder;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -70,8 +71,8 @@ public class JdtProjectConfig extends EclipseProjectConfig {
     }
   }
   
-  public JdtProjectConfig(final IProject project) {
-    super(project);
+  public JdtProjectConfig(final IProject project, final EclipseProjectConfigProvider projectConfigProvider) {
+    super(project, projectConfigProvider);
   }
   
   @Override

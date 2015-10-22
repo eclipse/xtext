@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.workspace;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.util.IJdtHelper;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IProjectConfigProvider;
 import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 
+@Singleton
 @SuppressWarnings("all")
 public class EclipseProjectConfigProvider implements IProjectConfigProvider {
   @Inject
@@ -41,9 +43,9 @@ public class EclipseProjectConfigProvider implements IProjectConfigProvider {
     EclipseProjectConfig _xifexpression = null;
     boolean _isJavaCoreAvailable = this.jdtHelper.isJavaCoreAvailable();
     if (_isJavaCoreAvailable) {
-      _xifexpression = new JdtProjectConfig(eclipseProject);
+      _xifexpression = new JdtProjectConfig(eclipseProject, this);
     } else {
-      _xifexpression = new EclipseProjectConfig(eclipseProject);
+      _xifexpression = new EclipseProjectConfig(eclipseProject, this);
     }
     return _xifexpression;
   }
