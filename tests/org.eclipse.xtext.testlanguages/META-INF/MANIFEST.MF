@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.testlanguages.backtracking,
@@ -26,7 +27,6 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal,
  org.eclipse.xtext.testlanguages.backtracking.validation,
- org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer,
  org.eclipse.xtext.testlanguages.backtracking.scoping,
  org.eclipse.xtext.testlanguages.backtracking.formatting,
  org.eclipse.xtext.testlanguages.noJdt,
