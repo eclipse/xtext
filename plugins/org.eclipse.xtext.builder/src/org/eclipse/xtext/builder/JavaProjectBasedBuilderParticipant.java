@@ -137,7 +137,11 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
-			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, CancelIndicator.NullImpl);
+			CancelIndicator cancelIndicator = CancelIndicator.NullImpl;
+			if (fileSystemAccess instanceof EclipseResourceFileSystemAccess2) {
+				cancelIndicator = new MonitorBasedCancelIndicator(((EclipseResourceFileSystemAccess2) fileSystemAccess).getMonitor());
+			}
+			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, cancelIndicator);
 			context.needRebuild();
 		}
 	}
