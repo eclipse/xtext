@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
@@ -70,6 +69,11 @@ public class EclipseProjectConfig implements IProjectConfig {
     return new EclipseWorkspaceConfig(_root, this.projectConfigProvider);
   }
   
+  @Override
+  public String toString() {
+    return this.project.toString();
+  }
+  
   public EclipseProjectConfig(final IProject project, final EclipseProjectConfigProvider projectConfigProvider) {
     super();
     this.project = project;
@@ -107,15 +111,6 @@ public class EclipseProjectConfig implements IProjectConfig {
     } else if (!this.projectConfigProvider.equals(other.projectConfigProvider))
       return false;
     return true;
-  }
-  
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("project", this.project);
-    b.add("projectConfigProvider", this.projectConfigProvider);
-    return b.toString();
   }
   
   @Pure

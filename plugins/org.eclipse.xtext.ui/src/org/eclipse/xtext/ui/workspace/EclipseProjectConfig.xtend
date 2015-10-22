@@ -74,6 +74,10 @@ class EclipseProjectConfig implements IProjectConfig {
 		new EclipseWorkspaceConfig(project.workspace.root, projectConfigProvider)
 	}
 	
+	override toString() {
+		return project.toString
+	}
+	
 }
 
 @Data
