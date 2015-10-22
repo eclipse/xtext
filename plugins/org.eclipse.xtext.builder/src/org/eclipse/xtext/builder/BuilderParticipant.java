@@ -548,7 +548,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
-				generatorDelegate.generate(resource, fileSystemAccess);
+				generatorDelegate.generate(resource, fileSystemAccess, new MonitorBasedCancelIndicator(fileSystemAccess.getMonitor()));
 			} catch (OperationCanceledException e) {
 				// don't look into the cause for OCE
 				throw e;
