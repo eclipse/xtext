@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
@@ -119,39 +118,35 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		}
 	}
 	
-	override initialize(Injector injector) {
-		prependStandardFragments()
-		super.initialize(injector)
+	override protected getImplicitFragments() {
+		val fragments = newArrayList 
+		fragments += super.getImplicitFragments
+		fragments.add(grammarAccess)
+		fragments.add(emfGenerator)
+		fragments.add(serializer)
+		fragments.add(resourceFactoryFragment)
+		fragments.add(parserGenerator)
+		fragments.add(validator)
+		fragments.add(scopeProvider)
+		fragments.add(qualifiedNamesProvider)
+		fragments.add(builder)
+		fragments.add(generator)
+		fragments.add(formatter)
+		fragments.add(labelProvider)
+		fragments.add(quickOutline)
+		fragments.add(outline)
+		fragments.add(quickFixProvider)
+		fragments.add(contentAssist)
+		fragments.add(junitSupport)
+		fragments.add(renameRefactoring)
+		fragments.add(commonTypesSupport)
+		fragments.add(xbaseSupport)
+		fragments.add(xtypeSupport)
+		fragments.add(codeTemplates)
+		fragments.add(compareEditor)
+		fragments.add(ideaParser)
+		fragments.add(ideaPlugin)
+		fragments.add(webSupport)
+		fragments
 	}
-	
-	protected def prependStandardFragments() {
-		var i = 0
-		fragments.add(i++,grammarAccess)
-		fragments.add(i++,emfGenerator)
-		fragments.add(i++,resourceFactoryFragment)
-		fragments.add(i++,serializer)
-		fragments.add(i++,parserGenerator)
-		fragments.add(i++,validator)
-		fragments.add(i++,formatter)
-		fragments.add(i++,generator)
-		fragments.add(i++,builder)
-		fragments.add(i++,scopeProvider)
-		fragments.add(i++,qualifiedNamesProvider)
-		fragments.add(i++,commonTypesSupport)
-		fragments.add(i++,xtypeSupport)
-		fragments.add(i++,xbaseSupport)
-		fragments.add(i++,junitSupport)
-		fragments.add(i++,quickFixProvider)
-		fragments.add(i++,labelProvider)
-		fragments.add(i++,outline)
-		fragments.add(i++,quickOutline)
-		fragments.add(i++,compareEditor)
-		fragments.add(i++,contentAssist)
-		fragments.add(i++,renameRefactoring)
-		fragments.add(i++,codeTemplates)
-		fragments.add(i++,ideaParser)
-		fragments.add(i++,ideaPlugin)
-		fragments.add(i++,webSupport)
-	}
-	
 }
