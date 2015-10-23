@@ -1,10 +1,10 @@
-/** 
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
+ *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.interpreter
 
 import com.google.common.collect.ImmutableMap
@@ -25,7 +25,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Plus
 /** 
  * an interpreter for instances of EClasses of the {@link ArithmeticsPackage}.
  * It internally uses a polymorphic dispatcher to dispatch between the implementations for the different EClasses.
- * @author Sven Efftinge - initial contribution and API
  */
 class Calculator {
 
