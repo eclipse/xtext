@@ -8,9 +8,9 @@
 package org.eclipse.xtext.example.arithmetics.generator;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
-import org.eclipse.xtext.generator.IGenerator2;
-import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.generator.IGeneratorContext;
 
 /**
  * Generates code from your model files on save.
@@ -18,16 +18,8 @@ import org.eclipse.xtext.util.CancelIndicator;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 @SuppressWarnings("all")
-public class ArithmeticsGenerator implements IGenerator2 {
+public class ArithmeticsGenerator extends AbstractGenerator {
   @Override
-  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final CancelIndicator cancelIndicator) {
-  }
-  
-  @Override
-  public void beforeGenerate(final Resource resource, final IFileSystemAccess2 fsa, final CancelIndicator cancelIndicator) {
-  }
-  
-  @Override
-  public void afterGenerate(final Resource resource, final IFileSystemAccess2 fsa, final CancelIndicator cancelIndicator) {
+  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
   }
 }
