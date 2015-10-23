@@ -11821,9 +11821,6 @@ rule__Unit__UnorderedGroup_7__Impl
 					(rule__Unit__Group_7_0__0)
 					{ after(grammarAccess.getUnitAccess().getGroup_7_0()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-				}
 			)
 		)|
 		( 
@@ -11839,9 +11836,6 @@ rule__Unit__UnorderedGroup_7__Impl
 					(rule__Unit__Group_7_1__0)
 					{ after(grammarAccess.getUnitAccess().getGroup_7_1()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-				}
 			)
 		)|
 		( 
@@ -11864,9 +11858,6 @@ rule__Unit__UnorderedGroup_7__Impl
 						{ after(grammarAccess.getUnitAccess().getGroup_7_2()); }
 					)
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-				}
 			)
 		)|
 		( 
@@ -11889,9 +11880,6 @@ rule__Unit__UnorderedGroup_7__Impl
 						{ after(grammarAccess.getUnitAccess().getGroup_7_3()); }
 					)
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-				}
 			)
 		)|
 		( 
@@ -11914,9 +11902,6 @@ rule__Unit__UnorderedGroup_7__Impl
 						{ after(grammarAccess.getUnitAccess().getGroup_7_4()); }
 					)
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-				}
 			)
 		)|
 		( 
@@ -11939,9 +11924,6 @@ rule__Unit__UnorderedGroup_7__Impl
 						{ after(grammarAccess.getUnitAccess().getFunctionsAssignment_7_5()); }
 					)
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-				}
 			)
 		)
 		)
@@ -12058,9 +12040,6 @@ rule__ProvidedCapability__UnorderedGroup_2_1__Impl
 					(rule__ProvidedCapability__Group_2_1_0__0)
 					{ after(grammarAccess.getProvidedCapabilityAccess().getGroup_2_1_0()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
-				}
 			)
 		)|
 		( 
@@ -12076,9 +12055,6 @@ rule__ProvidedCapability__UnorderedGroup_2_1__Impl
 					(rule__ProvidedCapability__Group_2_1_1__0)
 					{ after(grammarAccess.getProvidedCapabilityAccess().getGroup_2_1_1()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
-				}
 			)
 		)|
 		( 
@@ -12094,9 +12070,6 @@ rule__ProvidedCapability__UnorderedGroup_2_1__Impl
 					(rule__ProvidedCapability__Group_2_1_2__0)
 					{ after(grammarAccess.getProvidedCapabilityAccess().getGroup_2_1_2()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
-				}
 			)
 		)
 		)
@@ -12177,9 +12150,6 @@ rule__AliasedRequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__AliasedRequiredCapability__Group_3_1_0__0)
 					{ after(grammarAccess.getAliasedRequiredCapabilityAccess().getGroup_3_1_0()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12195,9 +12165,6 @@ rule__AliasedRequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__AliasedRequiredCapability__Group_3_1_1__0)
 					{ after(grammarAccess.getAliasedRequiredCapabilityAccess().getGroup_3_1_1()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12213,9 +12180,6 @@ rule__AliasedRequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__AliasedRequiredCapability__Group_3_1_2__0)
 					{ after(grammarAccess.getAliasedRequiredCapabilityAccess().getGroup_3_1_2()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12231,9 +12195,6 @@ rule__AliasedRequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__AliasedRequiredCapability__Group_3_1_3__0)
 					{ after(grammarAccess.getAliasedRequiredCapabilityAccess().getGroup_3_1_3()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12249,9 +12210,6 @@ rule__AliasedRequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__AliasedRequiredCapability__Group_3_1_4__0)
 					{ after(grammarAccess.getAliasedRequiredCapabilityAccess().getGroup_3_1_4()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)
 		)
@@ -12356,9 +12314,6 @@ rule__RequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__RequiredCapability__Group_3_1_0__0)
 					{ after(grammarAccess.getRequiredCapabilityAccess().getGroup_3_1_0()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12374,9 +12329,6 @@ rule__RequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__RequiredCapability__Group_3_1_1__0)
 					{ after(grammarAccess.getRequiredCapabilityAccess().getGroup_3_1_1()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12392,9 +12344,6 @@ rule__RequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__RequiredCapability__Group_3_1_2__0)
 					{ after(grammarAccess.getRequiredCapabilityAccess().getGroup_3_1_2()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12410,9 +12359,6 @@ rule__RequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__RequiredCapability__Group_3_1_3__0)
 					{ after(grammarAccess.getRequiredCapabilityAccess().getGroup_3_1_3()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)|
 		( 
@@ -12428,9 +12374,6 @@ rule__RequiredCapability__UnorderedGroup_3_1__Impl
 					(rule__RequiredCapability__Group_3_1_4__0)
 					{ after(grammarAccess.getRequiredCapabilityAccess().getGroup_3_1_4()); }
 				)
-				{
-				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
-				}
 			)
 		)
 		)
