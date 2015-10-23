@@ -233,12 +233,6 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 					}
 					«ENDIF»
 					{
-						«IF isEObjectFragmentRuleCall»
-							if (!$current) {
-								«associateWithSemanticElement»
-								$current = true;
-							}
-						«ENDIF»
 						«markComposite»
 					}
 					«super._ebnf2(it, options, supportActions)»
@@ -253,6 +247,12 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 					}
 					«ENDIF»
 					{
+						«IF isEObjectFragmentRuleCall»
+							if (!$current) {
+								«associateWithSemanticElement»
+								$current = true;
+							}
+						«ENDIF»
 						«markComposite»
 					}
 					«localVar»=«super._ebnf2(it, options, supportActions)»
