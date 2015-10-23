@@ -33,6 +33,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 @SuppressWarnings("all")
 public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
   @Inject
+  @Extension
   private ContentAssistGrammarNaming naming;
   
   @Override
@@ -821,22 +823,29 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
         _builder.append("\t\t");
         _builder.append(")");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("{ ");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t\t  ");
-        _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-        UnorderedGroup _originalElement_9 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
-        String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(_originalElement_9);
-        _builder.append(_gaRuleElementAccessor_2, "\t\t\t\t  ");
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
+        {
+          boolean _isCombinedGrammar = this.naming.isCombinedGrammar(grammar);
+          boolean _not = (!_isCombinedGrammar);
+          if (_not) {
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("{");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("  ");
+            _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
+            UnorderedGroup _originalElement_9 = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
+            String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(_originalElement_9);
+            _builder.append(_gaRuleElementAccessor_2, "\t\t\t\t  ");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append(")");
