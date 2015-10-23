@@ -40,7 +40,7 @@ Each language is very simple and focuses on the value a DSL can add to the respe
 
 ## Common Requirements {#common-requirements}
 
-To run any of the examples, you will need [Eclipse 3.6 or better](http://www.eclipse.org/downloads/) for your platform. In addition, you have to install [Xtend](http://www.eclipse.org/xtend/download.html) and of course [Xtext 2.7](http://www.eclipse.org/Xtext/download.html).
+To run any of the examples, you will need [Eclipse 3.6 or better](http://www.eclipse.org/downloads/) for your platform. In addition, you have to install [Xtend](http://www.eclipse.org/xtend/download.html) and of course [Xtext 2.7 or latter](http://www.eclipse.org/Xtext/download.html).
 
 If you prefer a simple all-inclusive installation, consider downloading the latest [Xtext distribution](http://www.eclipse.org/Xtext/download.html).
 
