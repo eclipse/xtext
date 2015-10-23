@@ -38,6 +38,7 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -791,13 +792,15 @@ public class XtendBatchCompiler {
 		javaIoFileSystemAccess.setOutputPath(outputPath);
 		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
 
+		GeneratorContext context = new GeneratorContext();
+		context.setCancelIndicator(CancelIndicator.NullImpl);
 		for (Resource resource : newArrayList(resourceSet.getResources())) {
 			if (isSourceFile(resource)) {
 				if (isWriteStorageFiles()) {
 					StorageAwareResource storageAwareResource = (StorageAwareResource)resource;
 					storageAwareResource.getResourceStorageFacade().saveResource(storageAwareResource, javaIoFileSystemAccess);
 				}
-				generator.generate(resource, javaIoFileSystemAccess, CancelIndicator.NullImpl);
+				generator.generate(resource, javaIoFileSystemAccess, context);
 			}
 		}
 	}
