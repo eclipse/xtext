@@ -91,6 +91,8 @@ public class GradleBuildFile extends TextFile {
         _builder.newLine();
         _builder.append("eclipseClasspath.enabled=false");
         _builder.newLine();
+        _builder.append("cleanEclipseClasspath.enabled=false");
+        _builder.newLine();
       }
     }
     return _builder.toString();
