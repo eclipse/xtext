@@ -44,6 +44,8 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
  */
 @Singleton
 class XtextGeneratorTemplates {
+
+	@Inject CodeConfig codeConfig
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
@@ -51,18 +53,31 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		return fileAccessFactory.createXtendFile(runtimeSetup,'''
-			/**
-			 * Initialization support for running Xtext languages without Equinox extension registry.
-			 */
-			class «runtimeSetup.simpleName» extends «runtimeGenSetup» {
-			
-				def static void doSetup() {
-					new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration()
+		if (codeConfig.preferXtendStubs) {
+			return fileAccessFactory.createXtendFile(runtimeSetup,'''
+				/**
+				 * Initialization support for running Xtext languages without Equinox extension registry.
+				 */
+				class «runtimeSetup.simpleName» extends «runtimeGenSetup» {
+				
+					def static void doSetup() {
+						new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration()
+					}
 				}
-			
-			}
-		 ''')
+		 	''')
+		} else {
+			return fileAccessFactory.createJavaFile(runtimeSetup,'''
+				/**
+				 * Initialization support for running Xtext languages without Equinox extension registry.
+				 */
+				public class «runtimeSetup.simpleName» extends «runtimeGenSetup» {
+				
+					public static void doSetup() {
+						new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration();
+					}				
+				}
+		 	''')
+		}
 	}
 	
 	def JavaFileAccess createRuntimeGenSetup(IXtextGeneratorLanguage langConfig) {
@@ -157,13 +172,23 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		return fileAccessFactory.createXtendFile(runtimeModule,'''
-			/**
-			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
-			 */
-			class «runtimeModule.simpleName» extends «runtimeGenModule» {
-			}
-		''')
+		if (codeConfig.preferXtendStubs) {
+			return fileAccessFactory.createXtendFile(runtimeModule,'''
+				/**
+				 * Use this class to register components to be used at runtime / without the Equinox extension registry.
+				 */
+				class «runtimeModule.simpleName» extends «runtimeGenModule» {
+				}
+			''')
+		} else {
+			return fileAccessFactory.createJavaFile(runtimeModule,'''
+				/**
+				 * Use this class to register components to be used at runtime / without the Equinox extension registry.
+				 */
+				public class «runtimeModule.simpleName» extends «runtimeGenModule» {
+				}
+			''')
+		}
 	}
 	
 	def JavaFileAccess createRuntimeGenModule(IXtextGeneratorLanguage langConfig) {
@@ -210,13 +235,28 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		return fileAccessFactory.createXtendFile(eclipsePluginModule,'''
-			/**
-			 * Use this class to register components to be used within the Eclipse IDE.
-			 */
-			@«FinalFieldsConstructor» class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
-			}
-		''')
+		if (codeConfig.preferXtendStubs) {
+			return fileAccessFactory.createXtendFile(eclipsePluginModule,'''
+				/**
+				 * Use this class to register components to be used within the Eclipse IDE.
+				 */
+				@«FinalFieldsConstructor»
+				class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
+				}
+			''')
+		} else {
+			return fileAccessFactory.createJavaFile(eclipsePluginModule,'''
+				/**
+				 * Use this class to register components to be used within the Eclipse IDE.
+				 */
+				public class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
+
+					public «eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
+						super(plugin);
+					}
+				}
+			''')
+		}
 	}
 	
 	def JavaFileAccess createEclipsePluginGenModule(IXtextGeneratorLanguage langConfig) {
@@ -250,13 +290,23 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createIdeaModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		return fileAccessFactory.createXtendFile(ideaModule,'''
-			/**
-			 * Use this class to register components to be used within IntelliJ IDEA.
-			 */
-			class «ideaModule.simpleName» extends «ideaGenModule» {
-			}
-		''')
+		if (codeConfig.preferXtendStubs) {			
+			return fileAccessFactory.createXtendFile(ideaModule,'''
+				/**
+				 * Use this class to register components to be used within IntelliJ IDEA.
+				 */
+				class «ideaModule.simpleName» extends «ideaGenModule» {
+				}
+			''')
+		} else {
+			return fileAccessFactory.createJavaFile(ideaModule,'''
+				/**
+				 * Use this class to register components to be used within IntelliJ IDEA.
+				 */
+				public class «ideaModule.simpleName» extends «ideaGenModule» {
+				}
+			''')
+		}
 	}
 	
 	def JavaFileAccess createIdeaGenModule(IXtextGeneratorLanguage langConfig) {
@@ -285,13 +335,28 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createWebModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		return fileAccessFactory.createXtendFile(webModule,'''
-			/**
-			 * Use this class to register additional components to be used within the web application.
-			 */
-			@«FinalFieldsConstructor» class «webModule.simpleName» extends «webGenModule» {
-			}
-		''')
+		if (codeConfig.preferXtendStubs) {			
+			return fileAccessFactory.createXtendFile(webModule,'''
+				/**
+				 * Use this class to register additional components to be used within the web application.
+				 */
+				@«FinalFieldsConstructor»
+				class «webModule.simpleName» extends «webGenModule» {
+				}
+			''')
+		} else {
+			return fileAccessFactory.createJavaFile(webModule,'''
+				/**
+				 * Use this class to register additional components to be used within the web application.
+				 */
+				public class «webModule.simpleName» extends «webGenModule» {
+
+					public «webGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+						super(executorServiceProvider);
+					}
+				}
+			''')
+		}
 	}
 	
 	def JavaFileAccess createWebGenModule(IXtextGeneratorLanguage langConfig) {
@@ -324,22 +389,46 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createWebSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		return fileAccessFactory.createXtendFile(webSetup, '''
-			/**
-			 * Initialization support for running Xtext languages in web applications.
-			 */
-			@«FinalFieldsConstructor» class «webSetup.simpleName» extends «runtimeSetup» {
-				
-				val «Provider»<«ExecutorService»> executorServiceProvider;
-				
-				override «Injector» createInjector() {
-					val runtimeModule = new «runtimeModule»()
-					val webModule = new «webModule»(executorServiceProvider)
-					return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule))
+		if (codeConfig.preferXtendStubs) {			
+			return fileAccessFactory.createXtendFile(webSetup, '''
+				/**
+				 * Initialization support for running Xtext languages in web applications.
+				 */
+				@«FinalFieldsConstructor»
+				class «webSetup.simpleName» extends «runtimeSetup» {
+					
+					val «Provider»<«ExecutorService»> executorServiceProvider;
+					
+					override «Injector» createInjector() {
+						val runtimeModule = new «runtimeModule»()
+						val webModule = new «webModule»(executorServiceProvider)
+						return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule))
+					}
+					
 				}
-				
-			}
-		 ''')
+			''')
+		} else {
+			return fileAccessFactory.createJavaFile(webSetup, '''
+				/**
+				 * Initialization support for running Xtext languages in web applications.
+				 */
+				public class «webSetup.simpleName» extends «runtimeSetup» {
+					
+					private final «Provider»<«ExecutorService»> executorServiceProvider;
+
+					«webSetup.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+						this.executorServiceProvider = executorServiceProvider
+					}
+
+					public «Injector» createInjector() {
+						val runtimeModule = new «runtimeModule»()
+						val webModule = new «webModule»(executorServiceProvider)
+						return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule))
+					}
+					
+				}
+			''')
+		}
 	}
 
 	
@@ -382,7 +471,7 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		file.content = '''
-			public class «activator.simpleName» extends «'org.eclipse.ui.plugin.AbstractUIPlugin'» {
+			public class «activator.simpleName» extends «'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» {
 			
 				«FOR lang : langConfigs»
 					public static final String «lang.grammar.name.toUpperCase.replaceAll('\\.', '_')» = "«lang.grammar.name»";
