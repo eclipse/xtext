@@ -43,6 +43,9 @@ public class NoJdtTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * Contexts:
+	 *     Greeting returns Greeting
+	 *
 	 * Constraint:
 	 *     (name=ID other=[Greeting|ID]?)
 	 */
@@ -52,6 +55,9 @@ public class NoJdtTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     greetings+=Greeting
 	 */

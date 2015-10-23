@@ -1869,6 +1869,10 @@ ruleFragmentCaller returns [Boolean current=false]
 			)
 		)
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
 		}
 		this_Fragment1_2=ruleFragment1[$current]

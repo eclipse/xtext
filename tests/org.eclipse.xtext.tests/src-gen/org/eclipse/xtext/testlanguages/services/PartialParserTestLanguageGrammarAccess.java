@@ -52,7 +52,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//nested+=Nested | content+=Content*
+		//(nested+=Nested | content+=Content)*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//nested+=Nested
@@ -159,7 +159,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Child
 		public RuleCall getChildrenChildParserRuleCall_2_0() { return cChildrenChildParserRuleCall_2_0; }
 
-		//',' children+=Child*
+		//(',' children+=Child)*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//','

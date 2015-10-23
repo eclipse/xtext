@@ -133,7 +133,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		//Variable
 		public RuleCall getVariableParserRuleCall_0() { return cVariableParserRuleCall_0; }
 
-		//{Postop.expr=current} functionName="--"?
+		//({Postop.expr=current} functionName="--")?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Postop.expr=current}

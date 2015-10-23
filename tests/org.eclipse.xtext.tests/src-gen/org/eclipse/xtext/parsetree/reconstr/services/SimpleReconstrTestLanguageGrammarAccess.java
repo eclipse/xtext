@@ -37,7 +37,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		//{Op.values+=current} values+=Term*
+		//({Op.values+=current} values+=Term)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
@@ -249,7 +249,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//INT
 		public RuleCall getNum2INTTerminalRuleCall_1_0() { return cNum2INTTerminalRuleCall_1_0; }
 
-		//'#' num3+=INT*
+		//('#' num3+=INT)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'#'
@@ -397,7 +397,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 
-		//'.' id+=ID*
+		//('.' id+=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'.'
@@ -488,7 +488,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//INT
 		public RuleCall getPrecINTTerminalRuleCall_1_1_0() { return cPrecINTTerminalRuleCall_1_1_0; }
 
-		//',' (scaleStar?='*' | scale=INT)?
+		//(',' (scaleStar?='*' | scale=INT))?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//','
@@ -644,7 +644,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_4_0() { return cIdIDTerminalRuleCall_4_0; }
 
-		//'kw2'* 'kw30'+
+		//('kw2'* 'kw30')+
 		public Group getGroup_5() { return cGroup_5; }
 
 		//'kw2'*
@@ -710,7 +710,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'kw2'
 		public Keyword getKw2Keyword_2_1_1() { return cKw2Keyword_2_1_1; }
 
-		//'kw3' | id+=ID 'kw4'?
+		//('kw3' | id+=ID 'kw4')?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//'kw3'
@@ -782,7 +782,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
 
-		//'kw4' id+=ID 'kw5'*
+		//('kw4' id+=ID 'kw5')*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//'kw4'
@@ -850,13 +850,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
 
-		//'kw5' ('kw6' 'kw7'?)?+
+		//('kw5' ('kw6' 'kw7'?)?)+
 		public Group getGroup_3() { return cGroup_3; }
 
 		//'kw5'
 		public Keyword getKw5Keyword_3_0() { return cKw5Keyword_3_0; }
 
-		//'kw6' 'kw7'??
+		//('kw6' 'kw7'?)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//'kw6'
@@ -928,7 +928,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'#13'
 		public Keyword getNumberSignDigitOneDigitThreeKeyword_0() { return cNumberSignDigitOneDigitThreeKeyword_0; }
 
-		//static?='static' | final?='final' | transient?='transient'*
+		//(static?='static' | final?='final' | transient?='transient')*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//static?='static'
@@ -1408,7 +1408,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)
 		public Group getGroup_1() { return cGroup_1; }
 
-		//'kx' x+=ID (',' x+=ID)*?
+		//('kx' x+=ID (',' x+=ID)*)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//'kx'
@@ -1420,7 +1420,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getXIDTerminalRuleCall_1_0_1_0() { return cXIDTerminalRuleCall_1_0_1_0; }
 
-		//',' x+=ID*
+		//(',' x+=ID)*
 		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
 
 		//','
@@ -1435,7 +1435,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//'ky' y+=ID (',' y+=ID)*?
+		//('ky' y+=ID (',' y+=ID)*)?
 		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
 
 		//'ky'
@@ -1447,7 +1447,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getYIDTerminalRuleCall_1_1_0_1_0() { return cYIDTerminalRuleCall_1_1_0_1_0; }
 
-		//',' y+=ID*
+		//(',' y+=ID)*
 		public Group getGroup_1_1_0_2() { return cGroup_1_1_0_2; }
 
 		//','
@@ -1459,7 +1459,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getYIDTerminalRuleCall_1_1_0_2_1_0() { return cYIDTerminalRuleCall_1_1_0_2_1_0; }
 
-		//'kz' z+=ID (',' z+=ID)*?
+		//('kz' z+=ID (',' z+=ID)*)?
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
 		//'kz'
@@ -1471,7 +1471,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getZIDTerminalRuleCall_1_1_1_1_0() { return cZIDTerminalRuleCall_1_1_1_1_0; }
 
-		//',' z+=ID*
+		//(',' z+=ID)*
 		public Group getGroup_1_1_1_2() { return cGroup_1_1_1_2; }
 
 		//','
@@ -1514,7 +1514,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#20"
 		public Keyword getNumberSignDigitTwoDigitZeroKeyword_0() { return cNumberSignDigitTwoDigitZeroKeyword_0; }
 
-		//'kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2*
+		//('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'kw1' lits+=EnumBug310435Lit1
@@ -1566,7 +1566,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#21"
 		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
 
-		//'kw1' lits+=ID | 'kw2' lits+=STRING*
+		//('kw1' lits+=ID | 'kw2' lits+=STRING)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'kw1' lits+=ID
@@ -1632,7 +1632,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"kw1"
 		public Keyword getKw1Keyword_2() { return cKw1Keyword_2; }
 
-		//"kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2]*
+		//("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//"kw2" ref+=[CrossRefNamed|ID1]

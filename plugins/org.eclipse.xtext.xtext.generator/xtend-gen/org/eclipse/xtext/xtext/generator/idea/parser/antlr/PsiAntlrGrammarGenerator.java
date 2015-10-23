@@ -666,26 +666,6 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           }
           _builder.append("{");
           _builder.newLine();
-          {
-            boolean _isEObjectFragmentRuleCall = GrammarUtil.isEObjectFragmentRuleCall(it);
-            if (_isEObjectFragmentRuleCall) {
-              _builder.append("\t");
-              _builder.append("if (!$current) {");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
-              CharSequence _associateWithSemanticElement = this.associateWithSemanticElement();
-              _builder.append(_associateWithSemanticElement, "\t\t");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("$current = true;");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-            }
-          }
           _builder.append("\t");
           CharSequence _markComposite = this.markComposite(it);
           _builder.append(_markComposite, "\t");
@@ -724,6 +704,26 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           }
           _builder_1.append("{");
           _builder_1.newLine();
+          {
+            boolean _isEObjectFragmentRuleCall = GrammarUtil.isEObjectFragmentRuleCall(it);
+            if (_isEObjectFragmentRuleCall) {
+              _builder_1.append("\t");
+              _builder_1.append("if (!$current) {");
+              _builder_1.newLine();
+              _builder_1.append("\t");
+              _builder_1.append("\t");
+              CharSequence _associateWithSemanticElement = this.associateWithSemanticElement();
+              _builder_1.append(_associateWithSemanticElement, "\t\t");
+              _builder_1.newLineIfNotEmpty();
+              _builder_1.append("\t");
+              _builder_1.append("\t");
+              _builder_1.append("$current = true;");
+              _builder_1.newLine();
+              _builder_1.append("\t");
+              _builder_1.append("}");
+              _builder_1.newLine();
+            }
+          }
           _builder_1.append("\t");
           CharSequence _markComposite_1 = this.markComposite(it);
           _builder_1.append(_markComposite_1, "\t");

@@ -1,9 +1,11 @@
 package org.eclipse.xtext.parser.antlr.idea.lang.parser;
 
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.parser.antlr.idea.lang.Bug301935TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug301935TestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.parser.antlr.idea.lang.Bug301935TestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,9 +27,31 @@ public class Bug301935TestLanguageParserDefinition extends AbstractXtextParserDe
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
 		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getModelElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_WSTerminalRuleCall_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_ValueIDTerminalRuleCall_2_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_NLParserRuleCall_3ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_Value2IDTerminalRuleCall_4_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_WSTerminalRuleCall_5ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

@@ -483,7 +483,7 @@ protected class DatatypeBug286557_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// 'ref' ref=[DatatypeBug286557|FQN]?
+// ('ref' ref=[DatatypeBug286557|FQN])?
 protected class DatatypeBug286557_Group_2 extends GroupToken {
 	
 	public DatatypeBug286557_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

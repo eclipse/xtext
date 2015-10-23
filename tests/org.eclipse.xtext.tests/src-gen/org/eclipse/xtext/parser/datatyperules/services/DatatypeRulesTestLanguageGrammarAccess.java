@@ -70,7 +70,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//NestedModelId
 		public RuleCall getIdNestedModelIdParserRuleCall_0_0() { return cIdNestedModelIdParserRuleCall_0_0; }
 
-		//':' value=Fraction?
+		//(':' value=Fraction)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//':'
@@ -82,7 +82,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Fraction
 		public RuleCall getValueFractionParserRuleCall_1_1_0() { return cValueFractionParserRuleCall_1_1_0; }
 
-		//'#' vector=Vector?
+		//('#' vector=Vector)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'#'
@@ -94,7 +94,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Vector
 		public RuleCall getVectorVectorParserRuleCall_2_1_0() { return cVectorVectorParserRuleCall_2_1_0; }
 
-		//'+' dots=Dots?
+		//('+' dots=Dots)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//'+'
@@ -106,7 +106,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Dots
 		public RuleCall getDotsDotsParserRuleCall_3_1_0() { return cDotsDotsParserRuleCall_3_1_0; }
 
-		//'*' double=Double?
+		//('*' double=Double)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//'*'
@@ -188,7 +188,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		//'/' INT?
+		//('/' INT)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//'/'
@@ -285,7 +285,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//INT
 		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
 
-		//'E' '-'? INT?
+		//('E' '-'? INT)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//'E'

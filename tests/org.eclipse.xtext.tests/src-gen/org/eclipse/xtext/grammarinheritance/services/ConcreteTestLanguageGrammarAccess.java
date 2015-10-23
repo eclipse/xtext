@@ -500,12 +500,8 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getAbstractCallExtendedParserRuleAccess().getRule();
 	}
 
-	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
-	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
-	//Values: predicated(0-1), firstSetPredicated(0-1), elements(3)
-	//Semantic Object: Grammar'org.eclipse.xtext.grammarinheritance.AbstractTestLanguage'.rules[6]->TerminalRule'REAL'.alternatives->Group
-	//URI: file:/Users/kosyakov/oomph/xtext-master/git/xtext/tests/org.eclipse.xtext.tests/bin/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext
-	//Context: TerminalAlternatives_Group
+	//terminal REAL returns ecore::EDouble:
+	//	INT '.' INT;
 	public TerminalRule getREALRule() {
 		return gaAbstractTestLanguage.getREALRule();
 	} 

@@ -152,7 +152,7 @@ protected class Model_FooAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// 'bar' bar=ID?
+// ('bar' bar=ID)?
 protected class Model_Group_0_2 extends GroupToken {
 	
 	public Model_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

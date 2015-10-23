@@ -91,7 +91,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//'kw1' optional=ID?
+		//('kw1' optional=ID)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'kw1'
@@ -413,7 +413,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//sub+=RecursionSub | vals+=ID*
+		//(sub+=RecursionSub | vals+=ID)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//sub+=RecursionSub
@@ -470,7 +470,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNamesIDTerminalRuleCall_1_0() { return cNamesIDTerminalRuleCall_1_0; }
 
-		//'gr' gr+=ID*
+		//('gr' gr+=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'gr'
@@ -482,7 +482,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getGrIDTerminalRuleCall_2_1_0() { return cGrIDTerminalRuleCall_2_1_0; }
 
-		//ints+=INT | strings+=STRING*
+		//(ints+=INT | strings+=STRING)*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//ints+=INT
@@ -538,7 +538,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Mult
 		public RuleCall getMultParserRuleCall_0() { return cMultParserRuleCall_0; }
 
-		//{Add.left=current} '+' right=Mult*
+		//({Add.left=current} '+' right=Mult)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add.left=current}
@@ -574,7 +574,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Prim
 		public RuleCall getPrimParserRuleCall_0() { return cPrimParserRuleCall_0; }
 
-		//{Mult.left=current} '*' right=Prim*
+		//({Mult.left=current} '*' right=Prim)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Mult.left=current}
@@ -660,7 +660,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Add
 		public RuleCall getParamAddParserRuleCall_1_3_0() { return cParamAddParserRuleCall_1_3_0; }
 
-		//',' param+=Add*
+		//(',' param+=Add)*
 		public Group getGroup_1_4() { return cGroup_1_4; }
 
 		//','

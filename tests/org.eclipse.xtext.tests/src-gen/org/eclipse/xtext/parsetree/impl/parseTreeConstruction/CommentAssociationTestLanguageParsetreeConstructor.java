@@ -186,7 +186,7 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// {Element.child=current} 'parent' name=ID?
+// ({Element.child=current} 'parent' name=ID)?
 protected class Element_Group_2 extends GroupToken {
 	
 	public Element_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

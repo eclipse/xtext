@@ -602,6 +602,22 @@ ruleModel returns [Boolean current=false]
 				}
 			)
 		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X35ParameterDelegationParserRuleCall_34_0ElementType());
+				}
+				lv_x35_34_0=ruleParameterDelegation
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)
 	)
 ;
 
@@ -3846,6 +3862,10 @@ ruleFragmentCaller returns [Boolean current=false]
 			)
 		)
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
 		}
 		this_Fragment1_2=ruleFragment1[$current]
@@ -4175,6 +4195,224 @@ norm3_Parameterized returns [Boolean current=false]
 				}
 			)
 		)
+	)
+;
+
+//Entry rule entryRuleParameterDelegation
+entryRuleParameterDelegation returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getParameterDelegationElementType()); }
+	iv_ruleParameterDelegation=ruleParameterDelegation
+	{ $current=$iv_ruleParameterDelegation.current; }
+	EOF;
+
+// Rule ParameterDelegation
+ruleParameterDelegation returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0ElementType());
+		}
+		otherlv_0='#35'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterDelegation_Kw1Keyword_1_0_0ElementType());
+				}
+				otherlv_1='kw1'
+				{
+					doneLeaf(otherlv_1);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterDelegation_PDelegationParserRuleCall_1_0_1_0ElementType());
+						}
+						lv_p_2_0=norm3_Delegation
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterDelegation_Kw2Keyword_1_1_0ElementType());
+				}
+				otherlv_3='kw2'
+				{
+					doneLeaf(otherlv_3);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterDelegation_PDelegationParserRuleCall_1_1_1_0ElementType());
+						}
+						lv_p_4_0=norm1_Delegation
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+		)
+	)
+;
+
+//Entry rule entryRuleDelegation
+entryRuleDelegation returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getDelegationElementType()); }
+	iv_ruleDelegation=ruleDelegation
+	{ $current=$iv_ruleDelegation.current; }
+	EOF;
+
+// Rule Delegation
+ruleDelegation returns [Boolean current=false]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getDelegation_NpINTTerminalRuleCall_0_0_1_0_0ElementType());
+			}
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
+			lv_np_0_0=RULE_INT
+			{
+				doneLeaf(lv_np_0_0);
+			}
+		)
+	)
+;
+
+
+// Rule Delegation
+norm1_Delegation returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getDelegation_KwdKeyword_1_0ElementType());
+		}
+		otherlv_0='kwd'
+		{
+			doneLeaf(otherlv_0);
+		}
+		{
+			markComposite(elementTypeProvider.getDelegation_DelegationParserRuleCall_1_1ElementType());
+		}
+		this_Delegation_1=ruleDelegation
+		{
+			$current = $this_Delegation_1.current;
+			doneComposite();
+		}
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getDelegation_DelegationALeftAction_1_2_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType());
+					}
+					lv_rc2_3_0=ruleDelegation
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)?
+	)
+;
+
+
+// Rule Delegation
+norm2_Delegation returns [Boolean current=false]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getDelegation_PIDTerminalRuleCall_0_0_0_0_0ElementType());
+			}
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
+			lv_p_0_0=RULE_ID
+			{
+				doneLeaf(lv_p_0_0);
+			}
+		)
+	)
+;
+
+
+// Rule Delegation
+norm3_Delegation returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getDelegation_KwdKeyword_1_0ElementType());
+		}
+		otherlv_0='kwd'
+		{
+			doneLeaf(otherlv_0);
+		}
+		{
+			markComposite(elementTypeProvider.getDelegation_DelegationParserRuleCall_1_1ElementType());
+		}
+		this_Delegation_1=norm2_Delegation
+		{
+			$current = $this_Delegation_1.current;
+			doneComposite();
+		}
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getDelegation_DelegationALeftAction_1_2_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType());
+					}
+					lv_rc2_3_0=norm2_Delegation
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)?
 	)
 ;
 

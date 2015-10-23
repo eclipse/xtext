@@ -5565,6 +5565,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
             if ( state.backtracking==0 ) {
 
+              			if (!current) {
+              				associateWithSemanticElement();
+              				current = true;
+              			}
               			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
               		
             }
@@ -5579,11 +5583,11 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               			doneComposite();
               		
             }
-            // PsiInternalSyntacticSequencerTestLanguage.g:1879:3: ( (lv_val_3_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1880:4: (lv_val_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1883:3: ( (lv_val_3_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1884:4: (lv_val_3_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1880:4: (lv_val_3_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1881:5: lv_val_3_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1884:4: (lv_val_3_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1885:5: lv_val_3_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -5629,21 +5633,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleFragment1"
-    // PsiInternalSyntacticSequencerTestLanguage.g:1901:1: ruleFragment1[Boolean in_current] returns [Boolean current=in_current] : ( (lv_fragVal_0_0= RULE_ID ) ) ;
+    // PsiInternalSyntacticSequencerTestLanguage.g:1905:1: ruleFragment1[Boolean in_current] returns [Boolean current=in_current] : ( (lv_fragVal_0_0= RULE_ID ) ) ;
     public final Boolean ruleFragment1(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
         Token lv_fragVal_0_0=null;
 
         try {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1902:1: ( ( (lv_fragVal_0_0= RULE_ID ) ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1903:2: ( (lv_fragVal_0_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1906:1: ( ( (lv_fragVal_0_0= RULE_ID ) ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1907:2: ( (lv_fragVal_0_0= RULE_ID ) )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1903:2: ( (lv_fragVal_0_0= RULE_ID ) )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1904:3: (lv_fragVal_0_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1907:2: ( (lv_fragVal_0_0= RULE_ID ) )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1908:3: (lv_fragVal_0_0= RULE_ID )
             {
-            // PsiInternalSyntacticSequencerTestLanguage.g:1904:3: (lv_fragVal_0_0= RULE_ID )
-            // PsiInternalSyntacticSequencerTestLanguage.g:1905:4: lv_fragVal_0_0= RULE_ID
+            // PsiInternalSyntacticSequencerTestLanguage.g:1908:3: (lv_fragVal_0_0= RULE_ID )
+            // PsiInternalSyntacticSequencerTestLanguage.g:1909:4: lv_fragVal_0_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 

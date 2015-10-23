@@ -1,9 +1,11 @@
 package org.eclipse.xtext.generator.ecore.idea.lang.parser;
 
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageElementTypeProvider;
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.EcoreFragmentTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.generator.ecore.idea.lang.EcoreFragmentTestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,9 +27,19 @@ public class EcoreFragmentTestLanguageParserDefinition extends AbstractXtextPars
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
 		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getSecondElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getSecond_FirstFirstIDTerminalRuleCall_2_0_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

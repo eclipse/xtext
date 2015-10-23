@@ -89,7 +89,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//'extends' ^extends=[Type] '.' parentId=[Property]?
+		//('extends' ^extends=[Type] '.' parentId=[Property])?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//'extends'
@@ -116,7 +116,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getParentIdPropertyIDTerminalRuleCall_2_3_0_1() { return cParentIdPropertyIDTerminalRuleCall_2_3_0_1; }
 
-		//'for' parentId=[Property] 'in' ^extends=[Type]?
+		//('for' parentId=[Property] 'in' ^extends=[Type])?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//'for'

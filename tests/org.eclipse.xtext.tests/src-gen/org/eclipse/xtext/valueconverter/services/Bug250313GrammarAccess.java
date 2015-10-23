@@ -231,7 +231,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//Child
 		public RuleCall getChildrenChildParserRuleCall_8_0_1_0() { return cChildrenChildParserRuleCall_8_0_1_0; }
 
-		//'ref' ref=([Child1|STRING] | [Child2])?
+		//('ref' ref=([Child1|STRING] | [Child2]))?
 		public Group getGroup_8_1() { return cGroup_8_1; }
 
 		//'ref'

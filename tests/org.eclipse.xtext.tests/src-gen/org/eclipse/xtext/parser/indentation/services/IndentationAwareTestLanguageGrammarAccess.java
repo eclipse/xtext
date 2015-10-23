@@ -68,7 +68,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//INDENT children+=TreeNode* DEDENT?
+		//(INDENT children+=TreeNode* DEDENT)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//INDENT

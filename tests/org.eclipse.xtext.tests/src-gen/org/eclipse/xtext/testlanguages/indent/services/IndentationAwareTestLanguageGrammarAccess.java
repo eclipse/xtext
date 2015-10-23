@@ -40,7 +40,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_0_0() { return cChildrenNodeParserRuleCall_0_0; }
 
-		//NL children+=Node*
+		//(NL children+=Node)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//NL
@@ -78,7 +78,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//String
 		public RuleCall getNameStringParserRuleCall_0_0() { return cNameStringParserRuleCall_0_0; }
 
-		//NL BEGIN children=NodeList END?
+		//(NL BEGIN children=NodeList END)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//NL

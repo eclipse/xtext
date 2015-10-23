@@ -58,8 +58,11 @@ class PsiToEcoreAdapter {
 			originalNode = originalNode.getParent()
 			index++
 		}
-		return reverseNodesMapping.get(originalNode).get(index)
-
+		val astNodes = reverseNodesMapping.get(originalNode)
+		if (astNodes === null && node.rootNode === node) {
+			return xtextFile.node.firstChildNode
+		}
+		return astNodes.get(index)
 	}
 
 }

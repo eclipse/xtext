@@ -82,7 +82,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"(" children+=Node+ ")"?
+		//("(" children+=Node+ ")")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"("

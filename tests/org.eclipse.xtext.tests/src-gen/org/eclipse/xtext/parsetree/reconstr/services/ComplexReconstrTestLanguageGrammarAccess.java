@@ -64,7 +64,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		//{Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term*
+		//({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//{Add.addOperands+=current} '+' addOperands+=Term
@@ -194,7 +194,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'TB'
 		public Keyword getTBKeyword_0() { return cTBKeyword_0; }
 
-		//name=ID type+=INT?
+		//(name=ID type+=INT)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//name=ID
@@ -248,7 +248,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//{C1.x=current} 'x'?
+		//({C1.x=current} 'x')?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{C1.x=current}
@@ -257,7 +257,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'x'
 		public Keyword getXKeyword_2_1() { return cXKeyword_2_1; }
 
-		//{C2.y=current} 'y'?
+		//({C2.y=current} 'y')?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//{C2.y=current}
@@ -266,7 +266,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'y'
 		public Keyword getYKeyword_3_1() { return cYKeyword_3_1; }
 
-		//{C3.z=current} 'z'?
+		//({C3.z=current} 'z')?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//{C3.z=current}
@@ -305,7 +305,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'TD'
 		public Keyword getTDKeyword_0() { return cTDKeyword_0; }
 
-		//name+=INT foo=STRING type+=ID?
+		//(name+=INT foo=STRING type+=ID)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//name+=INT
@@ -326,7 +326,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getTypeIDTerminalRuleCall_1_2_0() { return cTypeIDTerminalRuleCall_1_2_0; }
 
-		//name+=INT type+=ID?
+		//(name+=INT type+=ID)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//name+=INT
@@ -377,7 +377,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'TE'
 		public Keyword getTEKeyword_0() { return cTEKeyword_0; }
 
-		//name+=INT foo+=STRING type+=ID*
+		//(name+=INT foo+=STRING type+=ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//name+=INT
@@ -401,7 +401,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'x'
 		public Keyword getXKeyword_2() { return cXKeyword_2; }
 
-		//name+=INT type+=ID*
+		//(name+=INT type+=ID)*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//name+=INT
@@ -443,7 +443,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'TF'
 		public Keyword getTFKeyword_0() { return cTFKeyword_0; }
 
-		//name+=ID type+=INT*
+		//(name+=ID type+=INT)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//name+=ID
@@ -521,7 +521,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 
-		//vals+=TrickyG2 (',' vals+=TrickyG2)*?
+		//(vals+=TrickyG2 (',' vals+=TrickyG2)*)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//vals+=TrickyG2
@@ -530,7 +530,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//TrickyG2
 		public RuleCall getValsTrickyG2ParserRuleCall_1_0_0() { return cValsTrickyG2ParserRuleCall_1_0_0; }
 
-		//',' vals+=TrickyG2*
+		//(',' vals+=TrickyG2)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//','

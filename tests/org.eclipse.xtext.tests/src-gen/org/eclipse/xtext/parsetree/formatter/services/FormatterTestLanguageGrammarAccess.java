@@ -193,7 +193,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"["
 		public Keyword getLeftSquareBracketKeyword_2() { return cLeftSquareBracketKeyword_2; }
 
-		//val+=INT ("," val+=INT)*?
+		//(val+=INT ("," val+=INT)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//val+=INT
@@ -202,7 +202,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getValINTTerminalRuleCall_3_0_0() { return cValINTTerminalRuleCall_3_0_0; }
 
-		//"," val+=INT*
+		//("," val+=INT)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//","
@@ -253,7 +253,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//param+=Param ("," param+=Param)*?
+		//(param+=Param ("," param+=Param)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//param+=Param
@@ -262,7 +262,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Param
 		public RuleCall getParamParamParserRuleCall_3_0_0() { return cParamParamParserRuleCall_3_0_0; }
 
-		//"," param+=Param*
+		//("," param+=Param)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//","
@@ -484,7 +484,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//"." ID*
+		//("." ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
@@ -549,7 +549,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Enum1
 		public RuleCall getValEnum1EnumRuleCall_1_0() { return cValEnum1EnumRuleCall_1_0; }
 
-		//',' val+=Enum1*
+		//(',' val+=Enum1)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//','
@@ -589,7 +589,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"`"
 		public Keyword getGraveAccentKeyword_1() { return cGraveAccentKeyword_1; }
 
-		//vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*?
+		//(vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//vals+=SuppressedHiddenSub
@@ -598,7 +598,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//SuppressedHiddenSub
 		public RuleCall getValsSuppressedHiddenSubParserRuleCall_2_0_0() { return cValsSuppressedHiddenSubParserRuleCall_2_0_0; }
 
-		//'%' vals+=SuppressedHiddenSub*
+		//('%' vals+=SuppressedHiddenSub)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//'%'

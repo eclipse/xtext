@@ -1,9 +1,10 @@
 package org.eclipse.xtext.linking.idea.lang.parser;
 
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageElementTypeProvider;
 import org.eclipse.xtext.linking.idea.lang.psi.impl.Bug313089TestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -26,31 +27,46 @@ public class Bug313089TestLanguageParserDefinition extends AbstractXtextParserDe
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
 		if (hasSemanticElement != null && hasSemanticElement) {
-			if (elementType == elementTypeProvider.getFoo_BarBarParserRuleCall_1_0_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType()
-				);
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getFooElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getBar_BarAction_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType()
-				);
+			if (elementType == elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getFoo_BarBarParserRuleCall_1_0_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getFoo_BazBazParserRuleCall_1_1_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType(),
-					elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getFoo_RefFooIDTerminalRuleCall_2_0_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBarElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBar_BarAction_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBazElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getBaz_BazChildAction_2_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType(),
-					elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
 			}
+			if (elementType == elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

@@ -65,7 +65,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie*
+		//(kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//kinder+=Kind
@@ -351,7 +351,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getKinderKindIDTerminalRuleCall_5_0_1() { return cKinderKindIDTerminalRuleCall_5_0_1; }
 
-		//"," kinder+=[Kind]*
+		//("," kinder+=[Kind])*
 		public Group getGroup_6() { return cGroup_6; }
 
 		//","

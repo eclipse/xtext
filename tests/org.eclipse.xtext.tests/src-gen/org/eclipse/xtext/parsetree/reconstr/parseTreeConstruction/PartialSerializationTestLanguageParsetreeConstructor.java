@@ -284,7 +284,7 @@ protected class Node_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "(" children+=Node+ ")"?
+// ("(" children+=Node+ ")")?
 protected class Node_Group_2 extends GroupToken {
 	
 	public Node_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

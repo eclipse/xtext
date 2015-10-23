@@ -1,9 +1,10 @@
 package org.eclipse.xtext.resource.idea.lang.parser;
 
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-import org.eclipse.xtext.resource.idea.lang.LocationProviderTestLanguageElementTypeProvider;
 import org.eclipse.xtext.resource.idea.lang.psi.impl.LocationProviderTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.resource.idea.lang.LocationProviderTestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -26,44 +27,94 @@ public class LocationProviderTestLanguageParserDefinition extends AbstractXtextP
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
 		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getModelElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
 			if (elementType == elementTypeProvider.getModel_ElementsElementParserRuleCall_0_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_ComponentsComponentParserRuleCall_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getElementElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getElement_SinglerefElementIDTerminalRuleCall_2_1_0_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getElement_MultirefsElementIDTerminalRuleCall_3_1_0_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getComponentElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getComponent_BusParserRuleCall_0_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getBus_NameIDTerminalRuleCall_1_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getComponent_ProcessorParserRuleCall_0_1ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getProcessor_NameIDTerminalRuleCall_1_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getComponent_ModeModeParserRuleCall_1_1_0_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getMode_NameIDTerminalRuleCall_1_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getComponent_TransitionTransitionParserRuleCall_1_1_1_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getTransition_NameIDTerminalRuleCall_0_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBusElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getBus_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getBus_PortPortParserRuleCall_2_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getPort_NameIDTerminalRuleCall_1_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getProcessorElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getProcessor_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getProcessor_DataDataParserRuleCall_2_0ElementType()) {
-				return new PsiNamedEObjectImpl(node,
-					elementTypeProvider.getData_NameIDTerminalRuleCall_1_0ElementType()
-				);
+				return new PsiNamedEObjectImpl(node) {};
 			}
+			if (elementType == elementTypeProvider.getModeElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMode_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTransitionElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTransition_NameIDTerminalRuleCall_0_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTransition_SourceModeIDTerminalRuleCall_2_0_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTransition_DestinationModeIDTerminalRuleCall_4_0_1ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getPortElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getPort_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getDataElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getData_NameIDTerminalRuleCall_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

@@ -122,7 +122,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//{Baz.child=current} 'baz' name=ID*
+		//({Baz.child=current} 'baz' name=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{Baz.child=current}

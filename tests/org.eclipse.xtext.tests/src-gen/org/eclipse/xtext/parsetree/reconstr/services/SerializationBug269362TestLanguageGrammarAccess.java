@@ -53,7 +53,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		//ID
 		public RuleCall getFooIDTerminalRuleCall_0_1_0() { return cFooIDTerminalRuleCall_0_1_0; }
 
-		//'bar' bar=ID?
+		//('bar' bar=ID)?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//'bar'

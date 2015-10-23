@@ -97,11 +97,11 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Unit:
 	//	{Unit} documentation=DOCUMENTATION?
 	//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
-	//	'{' ('source' ':' sourceLocation=Path ';'?
-	//	& 'output' ':' outputLocation=Path ';'?
-	//	& 'provides' ':' providedCapabilities+=ProvidedCapability ';'*
-	//	& 'requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'*
-	//	& 'requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';'*
+	//	'{' (('source' ':' sourceLocation=Path ';')?
+	//	& ('output' ':' outputLocation=Path ';')?
+	//	& ('provides' ':' providedCapabilities+=ProvidedCapability ';')*
+	//	& ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')*
+	//	& ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')*
 	//	& functions+=Function*)
 	//	'}';
 	public BeeLangTestLanguageGrammarAccess.UnitElements getUnitAccess() {
@@ -113,8 +113,8 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//ProvidedCapability:
-	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' ('when' ':' condExpr=Expression ';'?
-	//	& "name" ':' name=ID ';' & "version" ':' version=ID ';'?)
+	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' (('when' ':' condExpr=Expression ';')?
+	//	& "name" ':' name=ID ';' & ("version" ':' version=ID ';')?)
 	//	'}')?;
 	public BeeLangTestLanguageGrammarAccess.ProvidedCapabilityElements getProvidedCapabilityAccess() {
 		return gaBeeLangTestLanguage.getProvidedCapabilityAccess();
@@ -125,11 +125,11 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//AliasedRequiredCapability:
-	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ('when' ':' condExpr=Expression ';'?
-	//	& greedy?="greedy" ';'?
-	//	& "requires-min" ':' min=INT ';'?
-	//	& "requires-max" ':' max=INT ';'?
-	//	& "version" ':' versionRange=ID ';'?)
+	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' (('when' ':' condExpr=Expression ';')?
+	//	& (greedy?="greedy" ';')?
+	//	& ("requires-min" ':' min=INT ';')?
+	//	& ("requires-max" ':' max=INT ';')?
+	//	& ("version" ':' versionRange=ID ';')?)
 	//	'}');
 	public BeeLangTestLanguageGrammarAccess.AliasedRequiredCapabilityElements getAliasedRequiredCapabilityAccess() {
 		return gaBeeLangTestLanguage.getAliasedRequiredCapabilityAccess();
@@ -140,11 +140,11 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//RequiredCapability:
-	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ('when' ':' condExpr=Expression ';'?
-	//	& greedy?="greedy" ';'?
-	//	& "requires-min" ':' min=INT ';'?
-	//	& "requires-max" ':' max=INT ';'?
-	//	& "version" ':' versionRange=ID ';'?)
+	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' (('when' ':' condExpr=Expression ';')?
+	//	& (greedy?="greedy" ';')?
+	//	& ("requires-min" ':' min=INT ';')?
+	//	& ("requires-max" ':' max=INT ';')?
+	//	& ("version" ':' versionRange=ID ';')?)
 	//	'}');
 	public BeeLangTestLanguageGrammarAccess.RequiredCapabilityElements getRequiredCapabilityAccess() {
 		return gaBeeLangTestLanguage.getRequiredCapabilityAccess();

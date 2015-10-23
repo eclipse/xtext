@@ -221,7 +221,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getPathIDTerminalRuleCall_2_0() { return cPathIDTerminalRuleCall_2_0; }
 
-		//"." path+=ID*
+		//("." path+=ID)*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"."
@@ -265,7 +265,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getPathIDTerminalRuleCall_2_0() { return cPathIDTerminalRuleCall_2_0; }
 
-		//"::" path+=ID*
+		//("::" path+=ID)*
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"::"
@@ -531,14 +531,14 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//FRAGMENT
 		public RuleCall getRightFragFRAGMENTTerminalRuleCall_2_1_5_0() { return cRightFragFRAGMENTTerminalRuleCall_2_1_5_0; }
 
-		//"{" (assignments+=BiSingleAssignment | assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
-		//rightMig=Migration)? "}"?
+		//("{" (assignments+=BiSingleAssignment | assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
+		//rightMig=Migration)? "}")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
-		//assignments+=BiSingleAssignment | assignments+=BiListAssignment+
+		//(assignments+=BiSingleAssignment | assignments+=BiListAssignment)+
 		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
 
 		//assignments+=BiSingleAssignment
@@ -553,7 +553,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//BiListAssignment
 		public RuleCall getAssignmentsBiListAssignmentParserRuleCall_3_1_1_0() { return cAssignmentsBiListAssignmentParserRuleCall_3_1_1_0; }
 
-		//"left" leftMig=Migration?
+		//("left" leftMig=Migration)?
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
 		//"left"
@@ -565,7 +565,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//Migration
 		public RuleCall getLeftMigMigrationParserRuleCall_3_2_1_0() { return cLeftMigMigrationParserRuleCall_3_2_1_0; }
 
-		//"right" rightMig=Migration?
+		//("right" rightMig=Migration)?
 		public Group getGroup_3_3() { return cGroup_3_3; }
 
 		//"right"
@@ -703,7 +703,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//"["
 		public Keyword getLeftSquareBracketKeyword_2() { return cLeftSquareBracketKeyword_2; }
 
-		//leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*?
+		//(leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//leftValues+=ListAssignmentValue
@@ -712,7 +712,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ListAssignmentValue
 		public RuleCall getLeftValuesListAssignmentValueParserRuleCall_3_0_0() { return cLeftValuesListAssignmentValueParserRuleCall_3_0_0; }
 
-		//"," leftValues+=ListAssignmentValue*
+		//("," leftValues+=ListAssignmentValue)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//","
@@ -727,7 +727,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//"|"
 		public Keyword getVerticalLineKeyword_4() { return cVerticalLineKeyword_4; }
 
-		//rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*?
+		//(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//rightValues+=ListAssignmentValue
@@ -736,7 +736,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ListAssignmentValue
 		public RuleCall getRightValuesListAssignmentValueParserRuleCall_5_0_0() { return cRightValuesListAssignmentValueParserRuleCall_5_0_0; }
 
-		//"," rightValues+=ListAssignmentValue*
+		//("," rightValues+=ListAssignmentValue)*
 		public Group getGroup_5_1() { return cGroup_5_1; }
 
 		//","
@@ -827,7 +827,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//"["
 		public Keyword getLeftSquareBracketKeyword_2() { return cLeftSquareBracketKeyword_2; }
 
-		//leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*?
+		//(leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//leftValues+=AssignmentValue
@@ -836,7 +836,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//AssignmentValue
 		public RuleCall getLeftValuesAssignmentValueParserRuleCall_3_0_0() { return cLeftValuesAssignmentValueParserRuleCall_3_0_0; }
 
-		//"," leftValues+=AssignmentValue*
+		//("," leftValues+=AssignmentValue)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//","
@@ -909,7 +909,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getRefObjectNamedObjectIDTerminalRuleCall_1_0_0_1() { return cRefObjectNamedObjectIDTerminalRuleCall_1_0_0_1; }
 
-		//"." refFeature=ID ("[" refIndex=INT "]")??
+		//("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"."
@@ -921,7 +921,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getRefFeatureIDTerminalRuleCall_1_1_1_0() { return cRefFeatureIDTerminalRuleCall_1_1_1_0; }
 
-		//"[" refIndex=INT "]"?
+		//("[" refIndex=INT "]")?
 		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
 
 		//"["
@@ -1052,7 +1052,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getRefObjectNamedObjectIDTerminalRuleCall_2_2_0_0_1() { return cRefObjectNamedObjectIDTerminalRuleCall_2_2_0_0_1; }
 
-		//"." refFeature=ID ("[" refIndex=INT "]")??
+		//("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group getGroup_2_2_1() { return cGroup_2_2_1; }
 
 		//"."
@@ -1064,7 +1064,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getRefFeatureIDTerminalRuleCall_2_2_1_1_0() { return cRefFeatureIDTerminalRuleCall_2_2_1_1_0; }
 
-		//"[" refIndex=INT "]"?
+		//("[" refIndex=INT "]")?
 		public Group getGroup_2_2_1_2() { return cGroup_2_2_1_2; }
 
 		//"["
@@ -1166,7 +1166,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getRefObjectNamedObjectIDTerminalRuleCall_2_0_0_1() { return cRefObjectNamedObjectIDTerminalRuleCall_2_0_0_1; }
 
-		//"." refFeature=ID ("[" refIndex=INT "]")??
+		//("." refFeature=ID ("[" refIndex=INT "]")?)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"."
@@ -1178,7 +1178,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getRefFeatureIDTerminalRuleCall_2_1_1_0() { return cRefFeatureIDTerminalRuleCall_2_1_1_0; }
 
-		//"[" refIndex=INT "]"?
+		//("[" refIndex=INT "]")?
 		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
 
 		//"["
@@ -1262,13 +1262,13 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"{" (assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration? "}"?
+		//("{" (assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
 
-		//assignments+=MonoSingleAssignment | assignments+=MonoListAssignment+
+		//(assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+
 		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
 		//assignments+=MonoSingleAssignment
@@ -1404,7 +1404,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//Executable
 		public RuleCall getFirstExecutableParserRuleCall_2_0() { return cFirstExecutableParserRuleCall_2_0; }
 
-		//"as" asOp=Executable | "each" eachOp=Executable?
+		//("as" asOp=Executable | "each" eachOp=Executable)?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//"as" asOp=Executable

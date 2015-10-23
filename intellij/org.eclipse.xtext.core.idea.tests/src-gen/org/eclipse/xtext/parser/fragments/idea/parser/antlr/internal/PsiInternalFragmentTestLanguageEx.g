@@ -276,6 +276,10 @@ rulePRFNamed returns [Boolean current=false]
 :
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPRFNamed_PRFNamedFragmentParserRuleCall_0ElementType());
 		}
 		this_PRFNamedFragment_0=rulePRFNamedFragment[$current]
@@ -320,6 +324,10 @@ rulePRFNamed returns [Boolean current=false]
 					doneLeaf(otherlv_3);
 				}
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 					markComposite(elementTypeProvider.getPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType());
 				}
 				this_PRFNamedRef_4=rulePRFNamedRef[$current]
@@ -368,6 +376,10 @@ rulePRFNamedRefFirst returns [Boolean current=false]
 			doneLeaf(otherlv_1);
 		}
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPRFNamedRefFirst_PRFNamedFragmentParserRuleCall_2ElementType());
 		}
 		this_PRFNamedFragment_2=rulePRFNamedFragment[$current]
@@ -527,6 +539,10 @@ rulePRFWithPredicate returns [Boolean current=false]
 :
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType());
 		}
 		this_PRFNamedFragment_0=rulePRFNamedFragment[$current]
@@ -549,6 +565,10 @@ rulePRFWithPredicate returns [Boolean current=false]
 					doneLeaf(otherlv_1);
 				}
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 					markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType());
 				}
 				this_PRFNamedRef_2=rulePRFNamedRef[$current]

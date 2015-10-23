@@ -135,6 +135,10 @@ ruleGrammar returns [Boolean current=false]
 		)?
 		(
 			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 				markComposite(elementTypeProvider.getGrammar_HiddenClauseParserRuleCall_3ElementType());
 			}
 			this_HiddenClause_6=ruleHiddenClause[$current]
@@ -544,6 +548,10 @@ ruleParserRule returns [Boolean current=false]
 					)
 				)
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 					markComposite(elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_0_0_1ElementType());
 				}
 				this_RuleNameAndParams_1=ruleRuleNameAndParams[$current]
@@ -572,6 +580,10 @@ ruleParserRule returns [Boolean current=false]
 					    |
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 							markComposite(elementTypeProvider.getParserRule_ReturnsClauseParserRuleCall_0_0_2_1ElementType());
 						}
 						this_ReturnsClause_3=ruleReturnsClause[$current]
@@ -585,6 +597,10 @@ ruleParserRule returns [Boolean current=false]
 			    |
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 					markComposite(elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_0_1_0ElementType());
 				}
 				this_RuleNameAndParams_4=ruleRuleNameAndParams[$current]
@@ -594,6 +610,10 @@ ruleParserRule returns [Boolean current=false]
 				}
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 						markComposite(elementTypeProvider.getParserRule_ReturnsClauseParserRuleCall_0_1_1ElementType());
 					}
 					this_ReturnsClause_5=ruleReturnsClause[$current]
@@ -606,6 +626,10 @@ ruleParserRule returns [Boolean current=false]
 		)
 		(
 			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 				markComposite(elementTypeProvider.getParserRule_HiddenClauseParserRuleCall_1ElementType());
 			}
 			this_HiddenClause_6=ruleHiddenClause[$current]
@@ -1156,6 +1180,10 @@ ruleAbstractTokenWithCardinality returns [Boolean current=false]
 		)
 		(
 			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 				markComposite(elementTypeProvider.getAbstractTokenWithCardinality_CardinalitiesParserRuleCall_1ElementType());
 			}
 			this_Cardinalities_2=ruleCardinalities[$current]
@@ -1745,6 +1773,10 @@ rulePredicatedKeyword returns [Boolean current=false]
 :
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPredicatedKeyword_PredicateParserRuleCall_0ElementType());
 		}
 		this_Predicate_0=rulePredicate[$current]
@@ -1784,6 +1816,10 @@ rulePredicatedRuleCall returns [Boolean current=false]
 :
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPredicatedRuleCall_PredicateParserRuleCall_0ElementType());
 		}
 		this_Predicate_0=rulePredicate[$current]
@@ -1824,6 +1860,10 @@ ruleAssignment returns [Boolean current=false]
 	(
 		(
 			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 				markComposite(elementTypeProvider.getAssignment_PredicateParserRuleCall_0ElementType());
 			}
 			this_Predicate_0=rulePredicate[$current]
@@ -2243,6 +2283,10 @@ rulePredicatedGroup returns [Boolean current=false]
 :
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPredicatedGroup_PredicateParserRuleCall_0ElementType());
 		}
 		this_Predicate_0=rulePredicate[$current]
@@ -2358,6 +2402,10 @@ ruleTerminalRule returns [Boolean current=false]
 				)
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 						markComposite(elementTypeProvider.getTerminalRule_ReturnsClauseParserRuleCall_1_1_1ElementType());
 					}
 					this_ReturnsClause_4=ruleReturnsClause[$current]
@@ -2522,6 +2570,10 @@ ruleTerminalToken returns [Boolean current=false]
 		}
 		(
 			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 				markComposite(elementTypeProvider.getTerminalToken_CardinalitiesParserRuleCall_1ElementType());
 			}
 			this_Cardinalities_1=ruleCardinalities[$current]
@@ -2885,6 +2937,10 @@ ruleEnumRule returns [Boolean current=false]
 		)
 		(
 			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 				markComposite(elementTypeProvider.getEnumRule_ReturnsClauseParserRuleCall_2ElementType());
 			}
 			this_ReturnsClause_2=ruleReturnsClause[$current]

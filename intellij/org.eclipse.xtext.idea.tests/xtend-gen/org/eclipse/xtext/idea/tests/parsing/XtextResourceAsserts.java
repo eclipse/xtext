@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea.tests.parsing;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.FileASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -74,16 +74,13 @@ public class XtextResourceAsserts extends Assert {
     Assert.assertEquals(_objToStr, _objToStr_1);
     this.invariantChecker.checkInvariant(actualRootNode);
     final PsiToEcoreAdapter psiToEcoreAdapter = PsiToEcoreAdapter.findInEmfObject(actualResource);
-    final BaseXtextFile xtextFile = psiToEcoreAdapter.getXtextFile();
-    FileASTNode _node = xtextFile.getNode();
-    ASTNode[] _children = _node.getChildren(null);
-    for (final ASTNode child : _children) {
-      this.assertASTNode(child, actualRootNode, psiToEcoreAdapter);
-    }
-    FileASTNode _node_1 = xtextFile.getNode();
-    ASTNode _firstChildNode = _node_1.getFirstChildNode();
-    String _printAST = this.printAST(_firstChildNode);
-    String _printAST_1 = this.printAST(actualRootNode, psiToEcoreAdapter);
+    BaseXtextFile _xtextFile = psiToEcoreAdapter.getXtextFile();
+    PsiElement _firstChild = _xtextFile.getFirstChild();
+    final ASTNode rootASTNode = _firstChild.getNode();
+    this.assertASTNode(rootASTNode, actualRootNode, psiToEcoreAdapter);
+    String _printAST = this.printAST(rootASTNode);
+    INode _iNode = psiToEcoreAdapter.getINode(rootASTNode);
+    String _printAST_1 = this.printAST(_iNode, psiToEcoreAdapter);
     Assert.assertEquals(_printAST, _printAST_1);
   }
   

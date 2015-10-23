@@ -275,12 +275,8 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		return tCharX;
 	} 
 
-	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
-	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
-	//Values: predicated(0-1), firstSetPredicated(0-1), elements(2)
-	//Semantic Object: Grammar'org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage'.rules[6]->TerminalRule'Yc'.alternatives->Group
-	//URI: classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext
-	//Context: TerminalAlternatives_Group
+	//terminal Yc:
+	//	CharY CharC;
 	public TerminalRule getYcRule() {
 		return tYc;
 	} 

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.parser.fragments;
 
 import org.eclipse.xtext.parser.fragments.AbstractFragmentsPlainParsingTest;
-import org.eclipse.xtext.parser.fragments.FragmentTestLanguageExStandaloneSetup;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,8 +16,7 @@ import org.eclipse.xtext.parser.fragments.FragmentTestLanguageExStandaloneSetup;
 public class FragmentExsPlainParsingTest extends AbstractFragmentsPlainParsingTest {
   @Override
   public void setUp() throws Exception {
-    super.setUp();
-    FragmentTestLanguageExStandaloneSetup _fragmentTestLanguageExStandaloneSetup = new FragmentTestLanguageExStandaloneSetup();
-    this.with(_fragmentTestLanguageExStandaloneSetup);
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from FragmentTestLanguageExStandaloneSetup to Class<? extends ISetup>");
   }
 }

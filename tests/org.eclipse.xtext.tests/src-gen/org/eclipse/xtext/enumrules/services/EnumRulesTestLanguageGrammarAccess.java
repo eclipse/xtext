@@ -53,7 +53,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ExistingEnum
 		public RuleCall getExistingExistingEnumEnumRuleCall_0_1_0() { return cExistingExistingEnumEnumRuleCall_0_1_0; }
 
-		//'generated' generated=GeneratedEnum?
+		//('generated' generated=GeneratedEnum)?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//'generated'

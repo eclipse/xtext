@@ -20,8 +20,12 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
@@ -34,12 +38,14 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
@@ -2390,7 +2396,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      final LinkedHashMultimap<String, String> namedGrammarElement = this.getNamedGrammarElements(grammar);
+      Iterable<AbstractRule> _eObjectRules = this.getEObjectRules(grammar);
+      final List<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>toList(_eObjectRules);
+      final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+        @Override
+        public Boolean apply(final AbstractRule it) {
+          return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
+        }
+      };
+      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(EObjectRules, _function);
+      final List<AbstractRule> namedEObjectRules = IterableExtensions.<AbstractRule>toList(_filter);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
@@ -2399,13 +2414,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;");
-      _builder.newLine();
-      _builder.append("import ");
-      String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-      _builder.append(_elementTypeProviderName, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
       _builder.append("import ");
       String _fileImplName = this._ideaPluginClassNames.getFileImplName(grammar);
       _builder.append(_fileImplName, "");
@@ -2417,11 +2425,26 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       {
-        boolean _isEmpty = namedGrammarElement.isEmpty();
+        boolean _isEmpty = EObjectRules.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
+          _builder.append("import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;");
           _builder.newLine();
+          _builder.append("import ");
+          String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
+          _builder.append(_elementTypeProviderName, "");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectImpl;");
+          _builder.newLine();
+          {
+            boolean _isEmpty_1 = namedEObjectRules.isEmpty();
+            boolean _not_1 = (!_isEmpty_1);
+            if (_not_1) {
+              _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
+              _builder.newLine();
+            }
+          }
         }
       }
       _builder.newLine();
@@ -2451,17 +2474,23 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(_simpleName_1, "");
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("@Inject ");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("private ");
-      String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-      String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
-      _builder.append(_simpleName_2, "\t");
-      _builder.append(" elementTypeProvider;");
-      _builder.newLineIfNotEmpty();
+      {
+        boolean _isEmpty_2 = EObjectRules.isEmpty();
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Inject ");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("private ");
+          String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
+          String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
+          _builder.append(_simpleName_2, "\t");
+          _builder.append(" elementTypeProvider;");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
       _builder.append("\t");
       _builder.append("@Override");
@@ -2479,76 +2508,231 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("@Override");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("@SuppressWarnings(\"rawtypes\")");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("public PsiElement createElement(ASTNode node) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("IElementType elementType = node.getElementType();");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
-      _builder.newLine();
       {
-        Set<String> _keySet = namedGrammarElement.keySet();
-        for(final String namedElementType : _keySet) {
-          _builder.append("\t\t\t");
-          _builder.append("if (elementType == elementTypeProvider.get");
-          _builder.append(namedElementType, "\t\t\t");
-          _builder.append("ElementType()) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t\t");
+        boolean _isEmpty_3 = EObjectRules.isEmpty();
+        boolean _not_3 = (!_isEmpty_3);
+        if (_not_3) {
+          _builder.newLine();
           _builder.append("\t");
-          _builder.append("return new PsiNamedEObjectImpl(node,");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@SuppressWarnings(\"rawtypes\")");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public PsiElement createElement(ASTNode node) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t\t");
+          _builder.append("IElementType elementType = node.getElementType();");
           _builder.newLine();
           {
-            Set<String> _get = namedGrammarElement.get(namedElementType);
-            boolean _hasElements = false;
-            for(final String nameType : _get) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(",", "\t\t\t\t\t");
-              }
-              _builder.append("\t\t\t");
+            for(final AbstractRule rule : EObjectRules) {
+              _builder.append("\t");
               _builder.append("\t\t");
-              _builder.append("elementTypeProvider.get");
-              _builder.append(nameType, "\t\t\t\t\t");
-              _builder.append("ElementType()");
+              _builder.append("if (elementType == elementTypeProvider.get");
+              String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+              _builder.append(_grammarElementIdentifier, "\t\t\t");
+              _builder.append("ElementType()) {");
               _builder.newLineIfNotEmpty();
+              {
+                boolean _contains = namedEObjectRules.contains(rule);
+                if (_contains) {
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  _builder.append("return new PsiNamedEObjectImpl(node) {};");
+                  _builder.newLine();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t");
+                  _builder.append("return new PsiEObjectImpl(node) {};");
+                  _builder.newLine();
+                }
+              }
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("}");
+              _builder.newLine();
+              {
+                List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
+                for(final AbstractElement element : _eAllOfType) {
+                  {
+                    if ((element instanceof Action)) {
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("if (elementType == elementTypeProvider.get");
+                      String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(element);
+                      _builder.append(_grammarElementIdentifier_1, "\t\t\t");
+                      _builder.append("ElementType()) {");
+                      _builder.newLineIfNotEmpty();
+                      {
+                        boolean _contains_1 = namedEObjectRules.contains(rule);
+                        if (_contains_1) {
+                          _builder.append("\t");
+                          _builder.append("\t\t");
+                          _builder.append("\t");
+                          _builder.append("return new PsiNamedEObjectImpl(node) {};");
+                          _builder.newLine();
+                        } else {
+                          _builder.append("\t");
+                          _builder.append("\t\t");
+                          _builder.append("\t");
+                          _builder.append("return new PsiEObjectImpl(node) {};");
+                          _builder.newLine();
+                        }
+                      }
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("}");
+                      _builder.newLine();
+                    }
+                  }
+                  {
+                    if ((element instanceof RuleCall)) {
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("if (elementType == elementTypeProvider.get");
+                      String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(element);
+                      _builder.append(_grammarElementIdentifier_2, "\t\t\t");
+                      _builder.append("ElementType()) {");
+                      _builder.newLineIfNotEmpty();
+                      {
+                        AbstractRule _rule = ((RuleCall)element).getRule();
+                        boolean _contains_2 = namedEObjectRules.contains(_rule);
+                        if (_contains_2) {
+                          _builder.append("\t");
+                          _builder.append("\t\t");
+                          _builder.append("\t");
+                          _builder.append("return new PsiNamedEObjectImpl(node) {};");
+                          _builder.newLine();
+                        } else {
+                          _builder.append("\t");
+                          _builder.append("\t\t");
+                          _builder.append("\t");
+                          _builder.append("return new PsiEObjectImpl(node) {};");
+                          _builder.newLine();
+                        }
+                      }
+                      _builder.append("\t");
+                      _builder.append("\t\t");
+                      _builder.append("}");
+                      _builder.newLine();
+                    }
+                  }
+                }
+              }
             }
           }
-          _builder.append("\t\t\t");
           _builder.append("\t");
-          _builder.append(");");
+          _builder.append("\t\t");
+          _builder.append("throw new IllegalStateException(\"Unexpected element type: \" + elementType);");
           _builder.newLine();
-          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("return super.createElement(node);");
+          _builder.newLine();
+          _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("return super.createElement(node);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
       _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  protected Iterable<AbstractRule> getEObjectRules(final Grammar grammar) {
+    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
+    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractRule it) {
+        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
+      }
+    };
+    return IterableExtensions.<AbstractRule>filter(_allRules, _function);
+  }
+  
+  protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
+    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
+    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractElement element) {
+        boolean _switchResult = false;
+        boolean _matched = false;
+        if (!_matched) {
+          if (element instanceof Action) {
+            _matched=true;
+          }
+          if (!_matched) {
+            if (element instanceof RuleCall) {
+              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+              if (_isEObjectRuleCall) {
+                _matched=true;
+              }
+            }
+          }
+          if (_matched) {
+            _switchResult = true;
+          }
+        }
+        if (!_matched) {
+          _switchResult = false;
+        }
+        return Boolean.valueOf(_switchResult);
+      }
+    };
+    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
+  }
+  
+  protected boolean isNamed(final AbstractRule rule) {
+    boolean _xblockexpression = false;
+    {
+      TypeRef _type = rule.getType();
+      EClassifier _classifier = null;
+      if (_type!=null) {
+        _classifier=_type.getClassifier();
+      }
+      final EClassifier classifier = _classifier;
+      EStructuralFeature _xifexpression = null;
+      if ((classifier instanceof EClass)) {
+        _xifexpression = ((EClass)classifier).getEStructuralFeature("name");
+      }
+      final EStructuralFeature feature = _xifexpression;
+      boolean _and = false;
+      boolean _and_1 = false;
+      if (!(feature instanceof EAttribute)) {
+        _and_1 = false;
+      } else {
+        boolean _isMany = feature.isMany();
+        boolean _not = (!_isMany);
+        _and_1 = _not;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        EClassifier _eType = feature.getEType();
+        Class<?> _instanceClass = _eType.getInstanceClass();
+        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+        _and = _isAssignableFrom;
+      }
+      _xblockexpression = _and;
     }
     return _xblockexpression;
   }

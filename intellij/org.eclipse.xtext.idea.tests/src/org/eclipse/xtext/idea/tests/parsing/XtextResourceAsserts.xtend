@@ -52,13 +52,12 @@ class XtextResourceAsserts extends Assert {
 
 		actualRootNode.checkInvariant
 		val psiToEcoreAdapter = PsiToEcoreAdapter.findInEmfObject(actualResource)
-		val xtextFile = psiToEcoreAdapter.xtextFile
-		for (child : xtextFile.node.getChildren(null)) {
-			assertASTNode(child, actualRootNode, psiToEcoreAdapter)
-		}
+		val rootASTNode = psiToEcoreAdapter.xtextFile.firstChild.node
+		assertASTNode(rootASTNode, actualRootNode, psiToEcoreAdapter)
+
 		assertEquals(
-			xtextFile.node.firstChildNode.printAST,
-			actualRootNode.printAST(psiToEcoreAdapter)
+			rootASTNode.printAST,
+			psiToEcoreAdapter.getINode(rootASTNode).printAST(psiToEcoreAdapter)
 		)
 	}
 

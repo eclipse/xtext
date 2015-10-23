@@ -9,15 +9,9 @@ package org.eclipse.xtext.resource;
 
 import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
-import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -37,24 +31,7 @@ public class Bug451668Test extends AbstractXtextTests {
   
   @Test
   public void testUnloadAndGetContents() throws IOException {
-    try {
-      this.with(OptionalEmptyTestLanguageStandaloneSetup.class);
-      Bug451668Test.TestResource r = this.<Bug451668Test.TestResource>get(Bug451668Test.TestResource.class);
-      URI _createURI = URI.createURI("foo.dummy");
-      r.setURI(_createURI);
-      StringInputStream _stringInputStream = new StringInputStream("");
-      r.load(_stringInputStream, null);
-      boolean _isLoaded = r.isLoaded();
-      Assert.assertTrue(_isLoaded);
-      final int callsBeforeUnload = r.contentsCalls;
-      r.unload();
-      Assert.assertEquals(callsBeforeUnload, r.contentsCalls);
-      boolean _isLoaded_1 = r.isLoaded();
-      Assert.assertFalse(_isLoaded_1);
-      IParseResult _parseResult = r.getParseResult();
-      Assert.assertNull(_parseResult);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from Class<OptionalEmptyTestLanguageStandaloneSetup> to Class<? extends ISetup>");
   }
 }

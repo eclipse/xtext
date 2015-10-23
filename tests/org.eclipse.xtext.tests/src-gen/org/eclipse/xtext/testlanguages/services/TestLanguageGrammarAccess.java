@@ -109,7 +109,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//TerminalRule
 		public RuleCall getTerminalRuleParserRuleCall_1() { return cTerminalRuleParserRuleCall_1; }
 
-		//{ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule?
+		//({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{ReducibleComposite.actionFeature+=current}

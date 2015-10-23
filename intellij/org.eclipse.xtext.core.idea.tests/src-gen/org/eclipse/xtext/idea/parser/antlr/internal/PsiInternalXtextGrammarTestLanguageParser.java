@@ -319,6 +319,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     // PsiInternalXtextGrammarTestLanguage.g:137:4: this_HiddenClause_6= ruleHiddenClause[$current]
                     {
 
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
                     				markComposite(elementTypeProvider.getGrammar_HiddenClauseParserRuleCall_3ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_4);
@@ -336,7 +340,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:146:3: ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )*
+            // PsiInternalXtextGrammarTestLanguage.g:150:3: ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )*
             loop4:
             do {
                 int alt4=2;
@@ -349,10 +353,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                 switch (alt4) {
             	case 1 :
-            	    // PsiInternalXtextGrammarTestLanguage.g:147:4: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
+            	    // PsiInternalXtextGrammarTestLanguage.g:151:4: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
             	    {
-            	    // PsiInternalXtextGrammarTestLanguage.g:147:4: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
-            	    // PsiInternalXtextGrammarTestLanguage.g:148:5: lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration
+            	    // PsiInternalXtextGrammarTestLanguage.g:151:4: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
+            	    // PsiInternalXtextGrammarTestLanguage.g:152:5: lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration
             	    {
 
             	    					markComposite(elementTypeProvider.getGrammar_MetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0ElementType());
@@ -381,7 +385,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                 }
             } while (true);
 
-            // PsiInternalXtextGrammarTestLanguage.g:161:3: ( (lv_rules_8_0= ruleAbstractRule ) )+
+            // PsiInternalXtextGrammarTestLanguage.g:165:3: ( (lv_rules_8_0= ruleAbstractRule ) )+
             int cnt5=0;
             loop5:
             do {
@@ -395,10 +399,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalXtextGrammarTestLanguage.g:162:4: (lv_rules_8_0= ruleAbstractRule )
+            	    // PsiInternalXtextGrammarTestLanguage.g:166:4: (lv_rules_8_0= ruleAbstractRule )
             	    {
-            	    // PsiInternalXtextGrammarTestLanguage.g:162:4: (lv_rules_8_0= ruleAbstractRule )
-            	    // PsiInternalXtextGrammarTestLanguage.g:163:5: lv_rules_8_0= ruleAbstractRule
+            	    // PsiInternalXtextGrammarTestLanguage.g:166:4: (lv_rules_8_0= ruleAbstractRule )
+            	    // PsiInternalXtextGrammarTestLanguage.g:167:5: lv_rules_8_0= ruleAbstractRule
             	    {
 
             	    					markComposite(elementTypeProvider.getGrammar_RulesAbstractRuleParserRuleCall_5_0ElementType());
@@ -450,7 +454,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleHiddenClause"
-    // PsiInternalXtextGrammarTestLanguage.g:181:1: ruleHiddenClause[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:185:1: ruleHiddenClause[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) ;
     public final Boolean ruleHiddenClause(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
@@ -462,17 +466,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token otherlv_5=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:182:1: ( ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:183:2: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:186:1: ( ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:187:2: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:183:2: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
-            // PsiInternalXtextGrammarTestLanguage.g:184:3: ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')'
+            // PsiInternalXtextGrammarTestLanguage.g:187:2: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:188:3: ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')'
             {
-            // PsiInternalXtextGrammarTestLanguage.g:184:3: ( (lv_definesHiddenTokens_0_0= 'hidden' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:185:4: (lv_definesHiddenTokens_0_0= 'hidden' )
+            // PsiInternalXtextGrammarTestLanguage.g:188:3: ( (lv_definesHiddenTokens_0_0= 'hidden' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:189:4: (lv_definesHiddenTokens_0_0= 'hidden' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:185:4: (lv_definesHiddenTokens_0_0= 'hidden' )
-            // PsiInternalXtextGrammarTestLanguage.g:186:5: lv_definesHiddenTokens_0_0= 'hidden'
+            // PsiInternalXtextGrammarTestLanguage.g:189:4: (lv_definesHiddenTokens_0_0= 'hidden' )
+            // PsiInternalXtextGrammarTestLanguage.g:190:5: lv_definesHiddenTokens_0_0= 'hidden'
             {
 
             					markLeaf(elementTypeProvider.getHiddenClause_DefinesHiddenTokensHiddenKeyword_0_0ElementType());
@@ -500,7 +504,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:208:3: ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )?
+            // PsiInternalXtextGrammarTestLanguage.g:212:3: ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -509,13 +513,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt7) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:209:4: ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
+                    // PsiInternalXtextGrammarTestLanguage.g:213:4: ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:209:4: ( (otherlv_2= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:210:5: (otherlv_2= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:213:4: ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:214:5: (otherlv_2= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:210:5: (otherlv_2= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:211:6: otherlv_2= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:214:5: (otherlv_2= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:215:6: otherlv_2= RULE_ID
                     {
 
                     						if (!current) {
@@ -536,7 +540,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:226:4: (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
+                    // PsiInternalXtextGrammarTestLanguage.g:230:4: (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
                     loop6:
                     do {
                         int alt6=2;
@@ -549,7 +553,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt6) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:227:5: otherlv_3= ',' ( (otherlv_4= RULE_ID ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:231:5: otherlv_3= ',' ( (otherlv_4= RULE_ID ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getHiddenClause_CommaKeyword_2_1_0ElementType());
@@ -558,11 +562,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_3);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:234:5: ( (otherlv_4= RULE_ID ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:235:6: (otherlv_4= RULE_ID )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:238:5: ( (otherlv_4= RULE_ID ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:239:6: (otherlv_4= RULE_ID )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:235:6: (otherlv_4= RULE_ID )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:236:7: otherlv_4= RULE_ID
+                    	    // PsiInternalXtextGrammarTestLanguage.g:239:6: (otherlv_4= RULE_ID )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:240:7: otherlv_4= RULE_ID
                     	    {
 
                     	    							if (!current) {
@@ -624,7 +628,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleGrammarID"
-    // PsiInternalXtextGrammarTestLanguage.g:264:1: entryRuleGrammarID returns [Boolean current=false] : iv_ruleGrammarID= ruleGrammarID EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:268:1: entryRuleGrammarID returns [Boolean current=false] : iv_ruleGrammarID= ruleGrammarID EOF ;
     public final Boolean entryRuleGrammarID() throws RecognitionException {
         Boolean current = false;
 
@@ -632,8 +636,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:264:51: (iv_ruleGrammarID= ruleGrammarID EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:265:2: iv_ruleGrammarID= ruleGrammarID EOF
+            // PsiInternalXtextGrammarTestLanguage.g:268:51: (iv_ruleGrammarID= ruleGrammarID EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:269:2: iv_ruleGrammarID= ruleGrammarID EOF
             {
              markComposite(elementTypeProvider.getGrammarIDElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -659,7 +663,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleGrammarID"
-    // PsiInternalXtextGrammarTestLanguage.g:271:1: ruleGrammarID returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:275:1: ruleGrammarID returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final Boolean ruleGrammarID() throws RecognitionException {
         Boolean current = false;
 
@@ -668,11 +672,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token this_ID_2=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:272:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // PsiInternalXtextGrammarTestLanguage.g:273:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // PsiInternalXtextGrammarTestLanguage.g:276:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // PsiInternalXtextGrammarTestLanguage.g:277:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:273:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // PsiInternalXtextGrammarTestLanguage.g:274:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalXtextGrammarTestLanguage.g:277:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // PsiInternalXtextGrammarTestLanguage.g:278:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
 
             			markLeaf(elementTypeProvider.getGrammarID_IDTerminalRuleCall_0ElementType());
@@ -681,7 +685,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(this_ID_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:281:3: (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalXtextGrammarTestLanguage.g:285:3: (kw= '.' this_ID_2= RULE_ID )*
             loop8:
             do {
                 int alt8=2;
@@ -694,7 +698,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalXtextGrammarTestLanguage.g:282:4: kw= '.' this_ID_2= RULE_ID
+            	    // PsiInternalXtextGrammarTestLanguage.g:286:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getGrammarID_FullStopKeyword_1_0ElementType());
@@ -738,7 +742,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAbstractRule"
-    // PsiInternalXtextGrammarTestLanguage.g:301:1: entryRuleAbstractRule returns [Boolean current=false] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:305:1: entryRuleAbstractRule returns [Boolean current=false] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
     public final Boolean entryRuleAbstractRule() throws RecognitionException {
         Boolean current = false;
 
@@ -746,8 +750,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:301:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:302:2: iv_ruleAbstractRule= ruleAbstractRule EOF
+            // PsiInternalXtextGrammarTestLanguage.g:305:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:306:2: iv_ruleAbstractRule= ruleAbstractRule EOF
             {
              markComposite(elementTypeProvider.getAbstractRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -773,7 +777,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAbstractRule"
-    // PsiInternalXtextGrammarTestLanguage.g:308:1: ruleAbstractRule returns [Boolean current=false] : (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:312:1: ruleAbstractRule returns [Boolean current=false] : (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) ;
     public final Boolean ruleAbstractRule() throws RecognitionException {
         Boolean current = false;
 
@@ -785,10 +789,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:309:1: ( (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) )
-            // PsiInternalXtextGrammarTestLanguage.g:310:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
+            // PsiInternalXtextGrammarTestLanguage.g:313:1: ( (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) )
+            // PsiInternalXtextGrammarTestLanguage.g:314:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:310:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
+            // PsiInternalXtextGrammarTestLanguage.g:314:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
             int alt9=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -816,7 +820,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt9) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:311:3: this_ParserRule_0= ruleParserRule
+                    // PsiInternalXtextGrammarTestLanguage.g:315:3: this_ParserRule_0= ruleParserRule
                     {
 
                     			markComposite(elementTypeProvider.getAbstractRule_ParserRuleParserRuleCall_0ElementType());
@@ -834,7 +838,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:320:3: this_TerminalRule_1= ruleTerminalRule
+                    // PsiInternalXtextGrammarTestLanguage.g:324:3: this_TerminalRule_1= ruleTerminalRule
                     {
 
                     			markComposite(elementTypeProvider.getAbstractRule_TerminalRuleParserRuleCall_1ElementType());
@@ -852,7 +856,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtextGrammarTestLanguage.g:329:3: this_EnumRule_2= ruleEnumRule
+                    // PsiInternalXtextGrammarTestLanguage.g:333:3: this_EnumRule_2= ruleEnumRule
                     {
 
                     			markComposite(elementTypeProvider.getAbstractRule_EnumRuleParserRuleCall_2ElementType());
@@ -888,7 +892,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAbstractMetamodelDeclaration"
-    // PsiInternalXtextGrammarTestLanguage.g:341:1: entryRuleAbstractMetamodelDeclaration returns [Boolean current=false] : iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:345:1: entryRuleAbstractMetamodelDeclaration returns [Boolean current=false] : iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF ;
     public final Boolean entryRuleAbstractMetamodelDeclaration() throws RecognitionException {
         Boolean current = false;
 
@@ -896,8 +900,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:341:70: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:342:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
+            // PsiInternalXtextGrammarTestLanguage.g:345:70: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:346:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
             {
              markComposite(elementTypeProvider.getAbstractMetamodelDeclarationElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -923,7 +927,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAbstractMetamodelDeclaration"
-    // PsiInternalXtextGrammarTestLanguage.g:348:1: ruleAbstractMetamodelDeclaration returns [Boolean current=false] : (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:352:1: ruleAbstractMetamodelDeclaration returns [Boolean current=false] : (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) ;
     public final Boolean ruleAbstractMetamodelDeclaration() throws RecognitionException {
         Boolean current = false;
 
@@ -933,10 +937,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:349:1: ( (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) )
-            // PsiInternalXtextGrammarTestLanguage.g:350:2: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
+            // PsiInternalXtextGrammarTestLanguage.g:353:1: ( (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) )
+            // PsiInternalXtextGrammarTestLanguage.g:354:2: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:350:2: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
+            // PsiInternalXtextGrammarTestLanguage.g:354:2: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -954,7 +958,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:351:3: this_GeneratedMetamodel_0= ruleGeneratedMetamodel
+                    // PsiInternalXtextGrammarTestLanguage.g:355:3: this_GeneratedMetamodel_0= ruleGeneratedMetamodel
                     {
 
                     			markComposite(elementTypeProvider.getAbstractMetamodelDeclaration_GeneratedMetamodelParserRuleCall_0ElementType());
@@ -972,7 +976,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:360:3: this_ReferencedMetamodel_1= ruleReferencedMetamodel
+                    // PsiInternalXtextGrammarTestLanguage.g:364:3: this_ReferencedMetamodel_1= ruleReferencedMetamodel
                     {
 
                     			markComposite(elementTypeProvider.getAbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1ElementType());
@@ -1008,7 +1012,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleGeneratedMetamodel"
-    // PsiInternalXtextGrammarTestLanguage.g:372:1: entryRuleGeneratedMetamodel returns [Boolean current=false] : iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:376:1: entryRuleGeneratedMetamodel returns [Boolean current=false] : iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF ;
     public final Boolean entryRuleGeneratedMetamodel() throws RecognitionException {
         Boolean current = false;
 
@@ -1016,8 +1020,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:372:60: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:373:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
+            // PsiInternalXtextGrammarTestLanguage.g:376:60: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:377:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
             {
              markComposite(elementTypeProvider.getGeneratedMetamodelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1043,7 +1047,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleGeneratedMetamodel"
-    // PsiInternalXtextGrammarTestLanguage.g:379:1: ruleGeneratedMetamodel returns [Boolean current=false] : (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:383:1: ruleGeneratedMetamodel returns [Boolean current=false] : (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) ;
     public final Boolean ruleGeneratedMetamodel() throws RecognitionException {
         Boolean current = false;
 
@@ -1054,11 +1058,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token lv_alias_4_0=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:380:1: ( (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:381:2: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:384:1: ( (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:385:2: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:381:2: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
-            // PsiInternalXtextGrammarTestLanguage.g:382:3: otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:385:2: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:386:3: otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
             {
 
             			markLeaf(elementTypeProvider.getGeneratedMetamodel_GenerateKeyword_0ElementType());
@@ -1067,11 +1071,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:389:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:390:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:393:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:394:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:390:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:391:5: lv_name_1_0= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:394:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:395:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getGeneratedMetamodel_NameIDTerminalRuleCall_1_0ElementType());
@@ -1092,11 +1096,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:406:3: ( (otherlv_2= RULE_STRING ) )
-            // PsiInternalXtextGrammarTestLanguage.g:407:4: (otherlv_2= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:410:3: ( (otherlv_2= RULE_STRING ) )
+            // PsiInternalXtextGrammarTestLanguage.g:411:4: (otherlv_2= RULE_STRING )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:407:4: (otherlv_2= RULE_STRING )
-            // PsiInternalXtextGrammarTestLanguage.g:408:5: otherlv_2= RULE_STRING
+            // PsiInternalXtextGrammarTestLanguage.g:411:4: (otherlv_2= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:412:5: otherlv_2= RULE_STRING
             {
 
             					if (!current) {
@@ -1117,7 +1121,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:423:3: (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:427:3: (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1126,7 +1130,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt11) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:424:4: otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:428:4: otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getGeneratedMetamodel_AsKeyword_3_0ElementType());
@@ -1135,11 +1139,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_3);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:431:4: ( (lv_alias_4_0= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:432:5: (lv_alias_4_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:435:4: ( (lv_alias_4_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:436:5: (lv_alias_4_0= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:432:5: (lv_alias_4_0= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:433:6: lv_alias_4_0= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:436:5: (lv_alias_4_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:437:6: lv_alias_4_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getGeneratedMetamodel_AliasIDTerminalRuleCall_3_1_0ElementType());
@@ -1185,7 +1189,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleReferencedMetamodel"
-    // PsiInternalXtextGrammarTestLanguage.g:453:1: entryRuleReferencedMetamodel returns [Boolean current=false] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:457:1: entryRuleReferencedMetamodel returns [Boolean current=false] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
     public final Boolean entryRuleReferencedMetamodel() throws RecognitionException {
         Boolean current = false;
 
@@ -1193,8 +1197,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:453:61: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:454:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
+            // PsiInternalXtextGrammarTestLanguage.g:457:61: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:458:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
             {
              markComposite(elementTypeProvider.getReferencedMetamodelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1220,7 +1224,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleReferencedMetamodel"
-    // PsiInternalXtextGrammarTestLanguage.g:460:1: ruleReferencedMetamodel returns [Boolean current=false] : (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:464:1: ruleReferencedMetamodel returns [Boolean current=false] : (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) ;
     public final Boolean ruleReferencedMetamodel() throws RecognitionException {
         Boolean current = false;
 
@@ -1230,11 +1234,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token lv_alias_3_0=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:461:1: ( (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:462:2: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:465:1: ( (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:466:2: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:462:2: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
-            // PsiInternalXtextGrammarTestLanguage.g:463:3: otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:466:2: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:467:3: otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
             {
 
             			markLeaf(elementTypeProvider.getReferencedMetamodel_ImportKeyword_0ElementType());
@@ -1243,11 +1247,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:470:3: ( (otherlv_1= RULE_STRING ) )
-            // PsiInternalXtextGrammarTestLanguage.g:471:4: (otherlv_1= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:474:3: ( (otherlv_1= RULE_STRING ) )
+            // PsiInternalXtextGrammarTestLanguage.g:475:4: (otherlv_1= RULE_STRING )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:471:4: (otherlv_1= RULE_STRING )
-            // PsiInternalXtextGrammarTestLanguage.g:472:5: otherlv_1= RULE_STRING
+            // PsiInternalXtextGrammarTestLanguage.g:475:4: (otherlv_1= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:476:5: otherlv_1= RULE_STRING
             {
 
             					if (!current) {
@@ -1268,7 +1272,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:487:3: (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:491:3: (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1277,7 +1281,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt12) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:488:4: otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:492:4: otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getReferencedMetamodel_AsKeyword_2_0ElementType());
@@ -1286,11 +1290,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:495:4: ( (lv_alias_3_0= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:496:5: (lv_alias_3_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:499:4: ( (lv_alias_3_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:500:5: (lv_alias_3_0= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:496:5: (lv_alias_3_0= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:497:6: lv_alias_3_0= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:500:5: (lv_alias_3_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:501:6: lv_alias_3_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getReferencedMetamodel_AliasIDTerminalRuleCall_2_1_0ElementType());
@@ -1336,7 +1340,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleParserRule"
-    // PsiInternalXtextGrammarTestLanguage.g:517:1: entryRuleParserRule returns [Boolean current=false] : iv_ruleParserRule= ruleParserRule EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:521:1: entryRuleParserRule returns [Boolean current=false] : iv_ruleParserRule= ruleParserRule EOF ;
     public final Boolean entryRuleParserRule() throws RecognitionException {
         Boolean current = false;
 
@@ -1344,8 +1348,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:517:52: (iv_ruleParserRule= ruleParserRule EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:518:2: iv_ruleParserRule= ruleParserRule EOF
+            // PsiInternalXtextGrammarTestLanguage.g:521:52: (iv_ruleParserRule= ruleParserRule EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:522:2: iv_ruleParserRule= ruleParserRule EOF
             {
              markComposite(elementTypeProvider.getParserRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1371,7 +1375,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleParserRule"
-    // PsiInternalXtextGrammarTestLanguage.g:524:1: ruleParserRule returns [Boolean current=false] : ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:528:1: ruleParserRule returns [Boolean current=false] : ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) ;
     public final Boolean ruleParserRule() throws RecognitionException {
         Boolean current = false;
 
@@ -1393,13 +1397,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:525:1: ( ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:526:2: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
+            // PsiInternalXtextGrammarTestLanguage.g:529:1: ( ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:530:2: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:526:2: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
-            // PsiInternalXtextGrammarTestLanguage.g:527:3: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';'
+            // PsiInternalXtextGrammarTestLanguage.g:530:2: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
+            // PsiInternalXtextGrammarTestLanguage.g:531:3: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';'
             {
-            // PsiInternalXtextGrammarTestLanguage.g:527:3: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:531:3: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) )
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1417,16 +1421,16 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt16) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:528:4: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:532:4: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:528:4: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:529:5: ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
+                    // PsiInternalXtextGrammarTestLanguage.g:532:4: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:533:5: ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:529:5: ( (lv_fragment_0_0= 'fragment' ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:530:6: (lv_fragment_0_0= 'fragment' )
+                    // PsiInternalXtextGrammarTestLanguage.g:533:5: ( (lv_fragment_0_0= 'fragment' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:534:6: (lv_fragment_0_0= 'fragment' )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:530:6: (lv_fragment_0_0= 'fragment' )
-                    // PsiInternalXtextGrammarTestLanguage.g:531:7: lv_fragment_0_0= 'fragment'
+                    // PsiInternalXtextGrammarTestLanguage.g:534:6: (lv_fragment_0_0= 'fragment' )
+                    // PsiInternalXtextGrammarTestLanguage.g:535:7: lv_fragment_0_0= 'fragment'
                     {
 
                     							markLeaf(elementTypeProvider.getParserRule_FragmentFragmentKeyword_0_0_0_0ElementType());
@@ -1448,6 +1452,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
 
 
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     					markComposite(elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_0_0_1ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_14);
@@ -1459,7 +1467,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     					current = this_RuleNameAndParams_1;
                     					doneComposite();
                     				
-                    // PsiInternalXtextGrammarTestLanguage.g:554:5: ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
+                    // PsiInternalXtextGrammarTestLanguage.g:562:5: ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1477,13 +1485,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     switch (alt14) {
                         case 1 :
-                            // PsiInternalXtextGrammarTestLanguage.g:555:6: ( (lv_wildcard_2_0= '*' ) )
+                            // PsiInternalXtextGrammarTestLanguage.g:563:6: ( (lv_wildcard_2_0= '*' ) )
                             {
-                            // PsiInternalXtextGrammarTestLanguage.g:555:6: ( (lv_wildcard_2_0= '*' ) )
-                            // PsiInternalXtextGrammarTestLanguage.g:556:7: (lv_wildcard_2_0= '*' )
+                            // PsiInternalXtextGrammarTestLanguage.g:563:6: ( (lv_wildcard_2_0= '*' ) )
+                            // PsiInternalXtextGrammarTestLanguage.g:564:7: (lv_wildcard_2_0= '*' )
                             {
-                            // PsiInternalXtextGrammarTestLanguage.g:556:7: (lv_wildcard_2_0= '*' )
-                            // PsiInternalXtextGrammarTestLanguage.g:557:8: lv_wildcard_2_0= '*'
+                            // PsiInternalXtextGrammarTestLanguage.g:564:7: (lv_wildcard_2_0= '*' )
+                            // PsiInternalXtextGrammarTestLanguage.g:565:8: lv_wildcard_2_0= '*'
                             {
 
                             								markLeaf(elementTypeProvider.getParserRule_WildcardAsteriskKeyword_0_0_2_0_0ElementType());
@@ -1508,9 +1516,9 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtextGrammarTestLanguage.g:573:6: (this_ReturnsClause_3= ruleReturnsClause[$current] )?
+                            // PsiInternalXtextGrammarTestLanguage.g:581:6: (this_ReturnsClause_3= ruleReturnsClause[$current] )?
                             {
-                            // PsiInternalXtextGrammarTestLanguage.g:573:6: (this_ReturnsClause_3= ruleReturnsClause[$current] )?
+                            // PsiInternalXtextGrammarTestLanguage.g:581:6: (this_ReturnsClause_3= ruleReturnsClause[$current] )?
                             int alt13=2;
                             int LA13_0 = input.LA(1);
 
@@ -1519,9 +1527,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                             }
                             switch (alt13) {
                                 case 1 :
-                                    // PsiInternalXtextGrammarTestLanguage.g:574:7: this_ReturnsClause_3= ruleReturnsClause[$current]
+                                    // PsiInternalXtextGrammarTestLanguage.g:582:7: this_ReturnsClause_3= ruleReturnsClause[$current]
                                     {
 
+                                    							if (!current) {
+                                    								associateWithSemanticElement();
+                                    								current = true;
+                                    							}
                                     							markComposite(elementTypeProvider.getParserRule_ReturnsClauseParserRuleCall_0_0_2_1ElementType());
                                     						
                                     pushFollow(FollowSets000.FOLLOW_15);
@@ -1552,12 +1564,16 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:586:4: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
+                    // PsiInternalXtextGrammarTestLanguage.g:598:4: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:586:4: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
-                    // PsiInternalXtextGrammarTestLanguage.g:587:5: this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )?
+                    // PsiInternalXtextGrammarTestLanguage.g:598:4: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
+                    // PsiInternalXtextGrammarTestLanguage.g:599:5: this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )?
                     {
 
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     					markComposite(elementTypeProvider.getParserRule_RuleNameAndParamsParserRuleCall_0_1_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_16);
@@ -1569,7 +1585,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     					current = this_RuleNameAndParams_4;
                     					doneComposite();
                     				
-                    // PsiInternalXtextGrammarTestLanguage.g:595:5: (this_ReturnsClause_5= ruleReturnsClause[$current] )?
+                    // PsiInternalXtextGrammarTestLanguage.g:611:5: (this_ReturnsClause_5= ruleReturnsClause[$current] )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -1578,9 +1594,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     switch (alt15) {
                         case 1 :
-                            // PsiInternalXtextGrammarTestLanguage.g:596:6: this_ReturnsClause_5= ruleReturnsClause[$current]
+                            // PsiInternalXtextGrammarTestLanguage.g:612:6: this_ReturnsClause_5= ruleReturnsClause[$current]
                             {
 
+                            						if (!current) {
+                            							associateWithSemanticElement();
+                            							current = true;
+                            						}
                             						markComposite(elementTypeProvider.getParserRule_ReturnsClauseParserRuleCall_0_1_1ElementType());
                             					
                             pushFollow(FollowSets000.FOLLOW_15);
@@ -1607,7 +1627,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:607:3: (this_HiddenClause_6= ruleHiddenClause[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:627:3: (this_HiddenClause_6= ruleHiddenClause[$current] )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1616,9 +1636,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt17) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:608:4: this_HiddenClause_6= ruleHiddenClause[$current]
+                    // PsiInternalXtextGrammarTestLanguage.g:628:4: this_HiddenClause_6= ruleHiddenClause[$current]
                     {
 
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
                     				markComposite(elementTypeProvider.getParserRule_HiddenClauseParserRuleCall_1ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_17);
@@ -1643,11 +1667,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_7);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:624:3: ( (lv_alternatives_8_0= ruleAlternatives ) )
-            // PsiInternalXtextGrammarTestLanguage.g:625:4: (lv_alternatives_8_0= ruleAlternatives )
+            // PsiInternalXtextGrammarTestLanguage.g:648:3: ( (lv_alternatives_8_0= ruleAlternatives ) )
+            // PsiInternalXtextGrammarTestLanguage.g:649:4: (lv_alternatives_8_0= ruleAlternatives )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:625:4: (lv_alternatives_8_0= ruleAlternatives )
-            // PsiInternalXtextGrammarTestLanguage.g:626:5: lv_alternatives_8_0= ruleAlternatives
+            // PsiInternalXtextGrammarTestLanguage.g:649:4: (lv_alternatives_8_0= ruleAlternatives )
+            // PsiInternalXtextGrammarTestLanguage.g:650:5: lv_alternatives_8_0= ruleAlternatives
             {
 
             					markComposite(elementTypeProvider.getParserRule_AlternativesAlternativesParserRuleCall_3_0ElementType());
@@ -1696,7 +1720,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleRuleNameAndParams"
-    // PsiInternalXtextGrammarTestLanguage.g:651:1: ruleRuleNameAndParams[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:675:1: ruleRuleNameAndParams[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) ;
     public final Boolean ruleRuleNameAndParams(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
@@ -1710,17 +1734,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:652:1: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:653:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
+            // PsiInternalXtextGrammarTestLanguage.g:676:1: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:677:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:653:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
-            // PsiInternalXtextGrammarTestLanguage.g:654:3: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
+            // PsiInternalXtextGrammarTestLanguage.g:677:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
+            // PsiInternalXtextGrammarTestLanguage.g:678:3: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
             {
-            // PsiInternalXtextGrammarTestLanguage.g:654:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:655:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:678:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:679:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:655:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:656:5: lv_name_0_0= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:679:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:680:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getRuleNameAndParams_NameIDTerminalRuleCall_0_0ElementType());
@@ -1741,7 +1765,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:671:3: (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
+            // PsiInternalXtextGrammarTestLanguage.g:695:3: (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1750,7 +1774,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt20) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:672:4: otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']'
+                    // PsiInternalXtextGrammarTestLanguage.g:696:4: otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']'
                     {
 
                     				markLeaf(elementTypeProvider.getRuleNameAndParams_LeftSquareBracketKeyword_1_0ElementType());
@@ -1759,7 +1783,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_1);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:679:4: ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )?
+                    // PsiInternalXtextGrammarTestLanguage.g:703:4: ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )?
                     int alt19=2;
                     int LA19_0 = input.LA(1);
 
@@ -1768,13 +1792,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     switch (alt19) {
                         case 1 :
-                            // PsiInternalXtextGrammarTestLanguage.g:680:5: ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
+                            // PsiInternalXtextGrammarTestLanguage.g:704:5: ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
                             {
-                            // PsiInternalXtextGrammarTestLanguage.g:680:5: ( (lv_parameters_2_0= ruleParameter ) )
-                            // PsiInternalXtextGrammarTestLanguage.g:681:6: (lv_parameters_2_0= ruleParameter )
+                            // PsiInternalXtextGrammarTestLanguage.g:704:5: ( (lv_parameters_2_0= ruleParameter ) )
+                            // PsiInternalXtextGrammarTestLanguage.g:705:6: (lv_parameters_2_0= ruleParameter )
                             {
-                            // PsiInternalXtextGrammarTestLanguage.g:681:6: (lv_parameters_2_0= ruleParameter )
-                            // PsiInternalXtextGrammarTestLanguage.g:682:7: lv_parameters_2_0= ruleParameter
+                            // PsiInternalXtextGrammarTestLanguage.g:705:6: (lv_parameters_2_0= ruleParameter )
+                            // PsiInternalXtextGrammarTestLanguage.g:706:7: lv_parameters_2_0= ruleParameter
                             {
 
                             							markComposite(elementTypeProvider.getRuleNameAndParams_ParametersParameterParserRuleCall_1_1_0_0ElementType());
@@ -1797,7 +1821,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                             }
 
-                            // PsiInternalXtextGrammarTestLanguage.g:695:5: (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
+                            // PsiInternalXtextGrammarTestLanguage.g:719:5: (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
                             loop18:
                             do {
                                 int alt18=2;
@@ -1810,7 +1834,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                                 switch (alt18) {
                             	case 1 :
-                            	    // PsiInternalXtextGrammarTestLanguage.g:696:6: otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) )
+                            	    // PsiInternalXtextGrammarTestLanguage.g:720:6: otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) )
                             	    {
 
                             	    						markLeaf(elementTypeProvider.getRuleNameAndParams_CommaKeyword_1_1_1_0ElementType());
@@ -1819,11 +1843,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                             	    						doneLeaf(otherlv_3);
                             	    					
-                            	    // PsiInternalXtextGrammarTestLanguage.g:703:6: ( (lv_parameters_4_0= ruleParameter ) )
-                            	    // PsiInternalXtextGrammarTestLanguage.g:704:7: (lv_parameters_4_0= ruleParameter )
+                            	    // PsiInternalXtextGrammarTestLanguage.g:727:6: ( (lv_parameters_4_0= ruleParameter ) )
+                            	    // PsiInternalXtextGrammarTestLanguage.g:728:7: (lv_parameters_4_0= ruleParameter )
                             	    {
-                            	    // PsiInternalXtextGrammarTestLanguage.g:704:7: (lv_parameters_4_0= ruleParameter )
-                            	    // PsiInternalXtextGrammarTestLanguage.g:705:8: lv_parameters_4_0= ruleParameter
+                            	    // PsiInternalXtextGrammarTestLanguage.g:728:7: (lv_parameters_4_0= ruleParameter )
+                            	    // PsiInternalXtextGrammarTestLanguage.g:729:8: lv_parameters_4_0= ruleParameter
                             	    {
 
                             	    								markComposite(elementTypeProvider.getRuleNameAndParams_ParametersParameterParserRuleCall_1_1_1_1_0ElementType());
@@ -1893,7 +1917,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleReturnsClause"
-    // PsiInternalXtextGrammarTestLanguage.g:733:1: ruleReturnsClause[Boolean in_current] returns [Boolean current=in_current] : (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:757:1: ruleReturnsClause[Boolean in_current] returns [Boolean current=in_current] : (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) ;
     public final Boolean ruleReturnsClause(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
@@ -1902,11 +1926,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:734:1: ( (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:735:2: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:758:1: ( (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:759:2: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:735:2: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:736:3: otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) )
+            // PsiInternalXtextGrammarTestLanguage.g:759:2: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:760:3: otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) )
             {
 
             			markLeaf(elementTypeProvider.getReturnsClause_ReturnsKeyword_0ElementType());
@@ -1915,11 +1939,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:743:3: ( (lv_type_1_0= ruleTypeRef ) )
-            // PsiInternalXtextGrammarTestLanguage.g:744:4: (lv_type_1_0= ruleTypeRef )
+            // PsiInternalXtextGrammarTestLanguage.g:767:3: ( (lv_type_1_0= ruleTypeRef ) )
+            // PsiInternalXtextGrammarTestLanguage.g:768:4: (lv_type_1_0= ruleTypeRef )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:744:4: (lv_type_1_0= ruleTypeRef )
-            // PsiInternalXtextGrammarTestLanguage.g:745:5: lv_type_1_0= ruleTypeRef
+            // PsiInternalXtextGrammarTestLanguage.g:768:4: (lv_type_1_0= ruleTypeRef )
+            // PsiInternalXtextGrammarTestLanguage.g:769:5: lv_type_1_0= ruleTypeRef
             {
 
             					markComposite(elementTypeProvider.getReturnsClause_TypeTypeRefParserRuleCall_1_0ElementType());
@@ -1961,7 +1985,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleParameter"
-    // PsiInternalXtextGrammarTestLanguage.g:762:1: entryRuleParameter returns [Boolean current=false] : iv_ruleParameter= ruleParameter EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:786:1: entryRuleParameter returns [Boolean current=false] : iv_ruleParameter= ruleParameter EOF ;
     public final Boolean entryRuleParameter() throws RecognitionException {
         Boolean current = false;
 
@@ -1969,8 +1993,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:762:51: (iv_ruleParameter= ruleParameter EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:763:2: iv_ruleParameter= ruleParameter EOF
+            // PsiInternalXtextGrammarTestLanguage.g:786:51: (iv_ruleParameter= ruleParameter EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:787:2: iv_ruleParameter= ruleParameter EOF
             {
              markComposite(elementTypeProvider.getParameterElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1996,21 +2020,21 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleParameter"
-    // PsiInternalXtextGrammarTestLanguage.g:769:1: ruleParameter returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:793:1: ruleParameter returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final Boolean ruleParameter() throws RecognitionException {
         Boolean current = false;
 
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:770:1: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:771:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:794:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:795:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:771:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:772:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:795:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:796:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:772:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:773:4: lv_name_0_0= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:796:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:797:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getParameter_NameIDTerminalRuleCall_0ElementType());
@@ -2047,7 +2071,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTypeRef"
-    // PsiInternalXtextGrammarTestLanguage.g:791:1: entryRuleTypeRef returns [Boolean current=false] : iv_ruleTypeRef= ruleTypeRef EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:815:1: entryRuleTypeRef returns [Boolean current=false] : iv_ruleTypeRef= ruleTypeRef EOF ;
     public final Boolean entryRuleTypeRef() throws RecognitionException {
         Boolean current = false;
 
@@ -2055,8 +2079,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:791:49: (iv_ruleTypeRef= ruleTypeRef EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:792:2: iv_ruleTypeRef= ruleTypeRef EOF
+            // PsiInternalXtextGrammarTestLanguage.g:815:49: (iv_ruleTypeRef= ruleTypeRef EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:816:2: iv_ruleTypeRef= ruleTypeRef EOF
             {
              markComposite(elementTypeProvider.getTypeRefElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2082,7 +2106,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTypeRef"
-    // PsiInternalXtextGrammarTestLanguage.g:798:1: ruleTypeRef returns [Boolean current=false] : ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:822:1: ruleTypeRef returns [Boolean current=false] : ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) ;
     public final Boolean ruleTypeRef() throws RecognitionException {
         Boolean current = false;
 
@@ -2091,13 +2115,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token otherlv_2=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:799:1: ( ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:800:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:823:1: ( ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:824:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:800:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:801:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:824:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:825:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:801:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )?
+            // PsiInternalXtextGrammarTestLanguage.g:825:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -2110,13 +2134,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt21) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:802:4: ( (otherlv_0= RULE_ID ) ) otherlv_1= '::'
+                    // PsiInternalXtextGrammarTestLanguage.g:826:4: ( (otherlv_0= RULE_ID ) ) otherlv_1= '::'
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:802:4: ( (otherlv_0= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:803:5: (otherlv_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:826:4: ( (otherlv_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:827:5: (otherlv_0= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:803:5: (otherlv_0= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:804:6: otherlv_0= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:827:5: (otherlv_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:828:6: otherlv_0= RULE_ID
                     {
 
                     						if (!current) {
@@ -2150,11 +2174,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:827:3: ( (otherlv_2= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:828:4: (otherlv_2= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:851:3: ( (otherlv_2= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:852:4: (otherlv_2= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:828:4: (otherlv_2= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:829:5: otherlv_2= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:852:4: (otherlv_2= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:853:5: otherlv_2= RULE_ID
             {
 
             					if (!current) {
@@ -2194,7 +2218,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAlternatives"
-    // PsiInternalXtextGrammarTestLanguage.g:848:1: entryRuleAlternatives returns [Boolean current=false] : iv_ruleAlternatives= ruleAlternatives EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:872:1: entryRuleAlternatives returns [Boolean current=false] : iv_ruleAlternatives= ruleAlternatives EOF ;
     public final Boolean entryRuleAlternatives() throws RecognitionException {
         Boolean current = false;
 
@@ -2202,8 +2226,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:848:54: (iv_ruleAlternatives= ruleAlternatives EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:849:2: iv_ruleAlternatives= ruleAlternatives EOF
+            // PsiInternalXtextGrammarTestLanguage.g:872:54: (iv_ruleAlternatives= ruleAlternatives EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:873:2: iv_ruleAlternatives= ruleAlternatives EOF
             {
              markComposite(elementTypeProvider.getAlternativesElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2229,7 +2253,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAlternatives"
-    // PsiInternalXtextGrammarTestLanguage.g:855:1: ruleAlternatives returns [Boolean current=false] : (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:879:1: ruleAlternatives returns [Boolean current=false] : (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) ;
     public final Boolean ruleAlternatives() throws RecognitionException {
         Boolean current = false;
 
@@ -2240,11 +2264,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:856:1: ( (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:857:2: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:880:1: ( (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:881:2: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:857:2: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:858:3: this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:881:2: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:882:3: this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getAlternatives_ConditionalBranchParserRuleCall_0ElementType());
@@ -2258,7 +2282,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_ConditionalBranch_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:866:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:890:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -2267,10 +2291,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt23) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:867:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:891:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:867:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:868:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:891:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:892:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getAlternatives_AlternativesElementsAction_1_0ElementType());
@@ -2280,7 +2304,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:874:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:898:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
                     int cnt22=0;
                     loop22:
                     do {
@@ -2294,7 +2318,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt22) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:875:5: otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:899:5: otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getAlternatives_VerticalLineKeyword_1_1_0ElementType());
@@ -2303,11 +2327,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_2);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:882:5: ( (lv_elements_3_0= ruleConditionalBranch ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:883:6: (lv_elements_3_0= ruleConditionalBranch )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:906:5: ( (lv_elements_3_0= ruleConditionalBranch ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:907:6: (lv_elements_3_0= ruleConditionalBranch )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:883:6: (lv_elements_3_0= ruleConditionalBranch )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:884:7: lv_elements_3_0= ruleConditionalBranch
+                    	    // PsiInternalXtextGrammarTestLanguage.g:907:6: (lv_elements_3_0= ruleConditionalBranch )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:908:7: lv_elements_3_0= ruleConditionalBranch
                     	    {
 
                     	    							markComposite(elementTypeProvider.getAlternatives_ElementsConditionalBranchParserRuleCall_1_1_1_0ElementType());
@@ -2368,7 +2392,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleConditionalBranch"
-    // PsiInternalXtextGrammarTestLanguage.g:903:1: entryRuleConditionalBranch returns [Boolean current=false] : iv_ruleConditionalBranch= ruleConditionalBranch EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:927:1: entryRuleConditionalBranch returns [Boolean current=false] : iv_ruleConditionalBranch= ruleConditionalBranch EOF ;
     public final Boolean entryRuleConditionalBranch() throws RecognitionException {
         Boolean current = false;
 
@@ -2376,8 +2400,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:903:59: (iv_ruleConditionalBranch= ruleConditionalBranch EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:904:2: iv_ruleConditionalBranch= ruleConditionalBranch EOF
+            // PsiInternalXtextGrammarTestLanguage.g:927:59: (iv_ruleConditionalBranch= ruleConditionalBranch EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:928:2: iv_ruleConditionalBranch= ruleConditionalBranch EOF
             {
              markComposite(elementTypeProvider.getConditionalBranchElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2403,7 +2427,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleConditionalBranch"
-    // PsiInternalXtextGrammarTestLanguage.g:910:1: ruleConditionalBranch returns [Boolean current=false] : (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:934:1: ruleConditionalBranch returns [Boolean current=false] : (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) ;
     public final Boolean ruleConditionalBranch() throws RecognitionException {
         Boolean current = false;
 
@@ -2418,10 +2442,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:911:1: ( (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:912:2: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:935:1: ( (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:936:2: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:912:2: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:936:2: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2439,7 +2463,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt24) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:913:3: this_UnorderedGroup_0= ruleUnorderedGroup
+                    // PsiInternalXtextGrammarTestLanguage.g:937:3: this_UnorderedGroup_0= ruleUnorderedGroup
                     {
 
                     			markComposite(elementTypeProvider.getConditionalBranch_UnorderedGroupParserRuleCall_0ElementType());
@@ -2457,13 +2481,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:922:3: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:946:3: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:922:3: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:923:4: () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:946:3: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:947:4: () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:923:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:924:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:947:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:948:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getConditionalBranch_ConditionalBranchAction_1_0ElementType());
@@ -2480,11 +2504,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:937:4: ( (lv_filtered_3_0= ruleInverseLiteralValue ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:938:5: (lv_filtered_3_0= ruleInverseLiteralValue )
+                    // PsiInternalXtextGrammarTestLanguage.g:961:4: ( (lv_filtered_3_0= ruleInverseLiteralValue ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:962:5: (lv_filtered_3_0= ruleInverseLiteralValue )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:938:5: (lv_filtered_3_0= ruleInverseLiteralValue )
-                    // PsiInternalXtextGrammarTestLanguage.g:939:6: lv_filtered_3_0= ruleInverseLiteralValue
+                    // PsiInternalXtextGrammarTestLanguage.g:962:5: (lv_filtered_3_0= ruleInverseLiteralValue )
+                    // PsiInternalXtextGrammarTestLanguage.g:963:6: lv_filtered_3_0= ruleInverseLiteralValue
                     {
 
                     						markComposite(elementTypeProvider.getConditionalBranch_FilteredInverseLiteralValueParserRuleCall_1_2_0ElementType());
@@ -2507,11 +2531,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:952:4: ( (otherlv_4= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:953:5: (otherlv_4= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:976:4: ( (otherlv_4= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:977:5: (otherlv_4= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:953:5: (otherlv_4= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:954:6: otherlv_4= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:977:5: (otherlv_4= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:978:6: otherlv_4= RULE_ID
                     {
 
                     						if (!current) {
@@ -2539,11 +2563,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_5);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:976:4: ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:977:5: (lv_guardedElement_6_0= ruleUnorderedGroup )
+                    // PsiInternalXtextGrammarTestLanguage.g:1000:4: ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1001:5: (lv_guardedElement_6_0= ruleUnorderedGroup )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:977:5: (lv_guardedElement_6_0= ruleUnorderedGroup )
-                    // PsiInternalXtextGrammarTestLanguage.g:978:6: lv_guardedElement_6_0= ruleUnorderedGroup
+                    // PsiInternalXtextGrammarTestLanguage.g:1001:5: (lv_guardedElement_6_0= ruleUnorderedGroup )
+                    // PsiInternalXtextGrammarTestLanguage.g:1002:6: lv_guardedElement_6_0= ruleUnorderedGroup
                     {
 
                     						markComposite(elementTypeProvider.getConditionalBranch_GuardedElementUnorderedGroupParserRuleCall_1_5_0ElementType());
@@ -2591,7 +2615,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleUnorderedGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:996:1: entryRuleUnorderedGroup returns [Boolean current=false] : iv_ruleUnorderedGroup= ruleUnorderedGroup EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1020:1: entryRuleUnorderedGroup returns [Boolean current=false] : iv_ruleUnorderedGroup= ruleUnorderedGroup EOF ;
     public final Boolean entryRuleUnorderedGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -2599,8 +2623,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:996:56: (iv_ruleUnorderedGroup= ruleUnorderedGroup EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:997:2: iv_ruleUnorderedGroup= ruleUnorderedGroup EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1020:56: (iv_ruleUnorderedGroup= ruleUnorderedGroup EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1021:2: iv_ruleUnorderedGroup= ruleUnorderedGroup EOF
             {
              markComposite(elementTypeProvider.getUnorderedGroupElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2626,7 +2650,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleUnorderedGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:1003:1: ruleUnorderedGroup returns [Boolean current=false] : (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1027:1: ruleUnorderedGroup returns [Boolean current=false] : (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) ;
     public final Boolean ruleUnorderedGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -2637,11 +2661,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1004:1: ( (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1005:2: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1028:1: ( (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1029:2: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1005:2: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:1006:3: this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:1029:2: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1030:3: this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getUnorderedGroup_GroupParserRuleCall_0ElementType());
@@ -2655,7 +2679,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_Group_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:1014:3: ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:1038:3: ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -2664,10 +2688,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt26) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1015:4: () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:1039:4: () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1015:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:1016:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:1039:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:1040:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getUnorderedGroup_UnorderedGroupElementsAction_1_0ElementType());
@@ -2677,7 +2701,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:1022:4: (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:1046:4: (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
                     int cnt25=0;
                     loop25:
                     do {
@@ -2691,7 +2715,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt25) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1023:5: otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1047:5: otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getUnorderedGroup_AmpersandKeyword_1_1_0ElementType());
@@ -2700,11 +2724,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_2);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1030:5: ( (lv_elements_3_0= ruleGroup ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1031:6: (lv_elements_3_0= ruleGroup )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1054:5: ( (lv_elements_3_0= ruleGroup ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1055:6: (lv_elements_3_0= ruleGroup )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1031:6: (lv_elements_3_0= ruleGroup )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1032:7: lv_elements_3_0= ruleGroup
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1055:6: (lv_elements_3_0= ruleGroup )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1056:7: lv_elements_3_0= ruleGroup
                     	    {
 
                     	    							markComposite(elementTypeProvider.getUnorderedGroup_ElementsGroupParserRuleCall_1_1_1_0ElementType());
@@ -2765,7 +2789,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:1051:1: entryRuleGroup returns [Boolean current=false] : iv_ruleGroup= ruleGroup EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1075:1: entryRuleGroup returns [Boolean current=false] : iv_ruleGroup= ruleGroup EOF ;
     public final Boolean entryRuleGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -2773,8 +2797,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1051:47: (iv_ruleGroup= ruleGroup EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1052:2: iv_ruleGroup= ruleGroup EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1075:47: (iv_ruleGroup= ruleGroup EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1076:2: iv_ruleGroup= ruleGroup EOF
             {
              markComposite(elementTypeProvider.getGroupElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2800,7 +2824,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:1058:1: ruleGroup returns [Boolean current=false] : (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1082:1: ruleGroup returns [Boolean current=false] : (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) ;
     public final Boolean ruleGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -2810,11 +2834,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1059:1: ( (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1060:2: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1083:1: ( (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1084:2: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1060:2: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:1061:3: this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:1084:2: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1085:3: this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getGroup_AbstractTokenParserRuleCall_0ElementType());
@@ -2828,7 +2852,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_AbstractToken_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:1069:3: ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:1093:3: ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -2837,10 +2861,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt28) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1070:4: () ( (lv_elements_2_0= ruleAbstractToken ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:1094:4: () ( (lv_elements_2_0= ruleAbstractToken ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1070:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:1071:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:1094:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:1095:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getGroup_GroupElementsAction_1_0ElementType());
@@ -2850,7 +2874,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:1077:4: ( (lv_elements_2_0= ruleAbstractToken ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:1101:4: ( (lv_elements_2_0= ruleAbstractToken ) )+
                     int cnt27=0;
                     loop27:
                     do {
@@ -2864,10 +2888,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt27) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1078:5: (lv_elements_2_0= ruleAbstractToken )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1102:5: (lv_elements_2_0= ruleAbstractToken )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1078:5: (lv_elements_2_0= ruleAbstractToken )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1079:6: lv_elements_2_0= ruleAbstractToken
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1102:5: (lv_elements_2_0= ruleAbstractToken )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1103:6: lv_elements_2_0= ruleAbstractToken
                     	    {
 
                     	    						markComposite(elementTypeProvider.getGroup_ElementsAbstractTokenParserRuleCall_1_1_0ElementType());
@@ -2925,7 +2949,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAbstractToken"
-    // PsiInternalXtextGrammarTestLanguage.g:1097:1: entryRuleAbstractToken returns [Boolean current=false] : iv_ruleAbstractToken= ruleAbstractToken EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1121:1: entryRuleAbstractToken returns [Boolean current=false] : iv_ruleAbstractToken= ruleAbstractToken EOF ;
     public final Boolean entryRuleAbstractToken() throws RecognitionException {
         Boolean current = false;
 
@@ -2933,8 +2957,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1097:55: (iv_ruleAbstractToken= ruleAbstractToken EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1098:2: iv_ruleAbstractToken= ruleAbstractToken EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1121:55: (iv_ruleAbstractToken= ruleAbstractToken EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1122:2: iv_ruleAbstractToken= ruleAbstractToken EOF
             {
              markComposite(elementTypeProvider.getAbstractTokenElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2960,7 +2984,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAbstractToken"
-    // PsiInternalXtextGrammarTestLanguage.g:1104:1: ruleAbstractToken returns [Boolean current=false] : (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1128:1: ruleAbstractToken returns [Boolean current=false] : (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) ;
     public final Boolean ruleAbstractToken() throws RecognitionException {
         Boolean current = false;
 
@@ -2970,10 +2994,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1105:1: ( (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1106:2: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
+            // PsiInternalXtextGrammarTestLanguage.g:1129:1: ( (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1130:2: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1106:2: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
+            // PsiInternalXtextGrammarTestLanguage.g:1130:2: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -2991,7 +3015,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt29) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1107:3: this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality
+                    // PsiInternalXtextGrammarTestLanguage.g:1131:3: this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality
                     {
 
                     			markComposite(elementTypeProvider.getAbstractToken_AbstractTokenWithCardinalityParserRuleCall_0ElementType());
@@ -3009,7 +3033,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1116:3: this_Action_1= ruleAction
+                    // PsiInternalXtextGrammarTestLanguage.g:1140:3: this_Action_1= ruleAction
                     {
 
                     			markComposite(elementTypeProvider.getAbstractToken_ActionParserRuleCall_1ElementType());
@@ -3045,7 +3069,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAbstractTokenWithCardinality"
-    // PsiInternalXtextGrammarTestLanguage.g:1128:1: entryRuleAbstractTokenWithCardinality returns [Boolean current=false] : iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1152:1: entryRuleAbstractTokenWithCardinality returns [Boolean current=false] : iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF ;
     public final Boolean entryRuleAbstractTokenWithCardinality() throws RecognitionException {
         Boolean current = false;
 
@@ -3053,8 +3077,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1128:70: (iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1129:2: iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1152:70: (iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1153:2: iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF
             {
              markComposite(elementTypeProvider.getAbstractTokenWithCardinalityElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3080,7 +3104,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAbstractTokenWithCardinality"
-    // PsiInternalXtextGrammarTestLanguage.g:1135:1: ruleAbstractTokenWithCardinality returns [Boolean current=false] : ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1159:1: ruleAbstractTokenWithCardinality returns [Boolean current=false] : ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) ;
     public final Boolean ruleAbstractTokenWithCardinality() throws RecognitionException {
         Boolean current = false;
 
@@ -3092,13 +3116,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1136:1: ( ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1137:2: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1160:1: ( ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1161:2: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1137:2: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
-            // PsiInternalXtextGrammarTestLanguage.g:1138:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:1161:2: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1162:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )?
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1138:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal )
+            // PsiInternalXtextGrammarTestLanguage.g:1162:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal )
             int alt30=2;
             switch ( input.LA(1) ) {
             case 40:
@@ -3196,7 +3220,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt30) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1139:4: this_Assignment_0= ruleAssignment
+                    // PsiInternalXtextGrammarTestLanguage.g:1163:4: this_Assignment_0= ruleAssignment
                     {
 
                     				markComposite(elementTypeProvider.getAbstractTokenWithCardinality_AssignmentParserRuleCall_0_0ElementType());
@@ -3214,7 +3238,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1148:4: this_AbstractTerminal_1= ruleAbstractTerminal
+                    // PsiInternalXtextGrammarTestLanguage.g:1172:4: this_AbstractTerminal_1= ruleAbstractTerminal
                     {
 
                     				markComposite(elementTypeProvider.getAbstractTokenWithCardinality_AbstractTerminalParserRuleCall_0_1ElementType());
@@ -3234,7 +3258,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1157:3: (this_Cardinalities_2= ruleCardinalities[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:1181:3: (this_Cardinalities_2= ruleCardinalities[$current] )?
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -3243,9 +3267,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt31) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1158:4: this_Cardinalities_2= ruleCardinalities[$current]
+                    // PsiInternalXtextGrammarTestLanguage.g:1182:4: this_Cardinalities_2= ruleCardinalities[$current]
                     {
 
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
                     				markComposite(elementTypeProvider.getAbstractTokenWithCardinality_CardinalitiesParserRuleCall_1ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -3282,7 +3310,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleCardinalities"
-    // PsiInternalXtextGrammarTestLanguage.g:1172:1: ruleCardinalities[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1200:1: ruleCardinalities[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) ;
     public final Boolean ruleCardinalities(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
@@ -3291,16 +3319,16 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token lv_cardinality_0_3=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1173:1: ( ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1174:2: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1201:1: ( ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1202:2: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1174:2: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1175:3: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1202:2: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1203:3: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1175:3: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1176:4: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
+            // PsiInternalXtextGrammarTestLanguage.g:1203:3: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1204:4: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1176:4: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
+            // PsiInternalXtextGrammarTestLanguage.g:1204:4: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
             int alt32=3;
             switch ( input.LA(1) ) {
             case 31:
@@ -3327,7 +3355,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt32) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1177:5: lv_cardinality_0_1= '?'
+                    // PsiInternalXtextGrammarTestLanguage.g:1205:5: lv_cardinality_0_1= '?'
                     {
 
                     					markLeaf(elementTypeProvider.getCardinalities_CardinalityQuestionMarkKeyword_0_0ElementType());
@@ -3346,7 +3374,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1191:5: lv_cardinality_0_2= '*'
+                    // PsiInternalXtextGrammarTestLanguage.g:1219:5: lv_cardinality_0_2= '*'
                     {
 
                     					markLeaf(elementTypeProvider.getCardinalities_CardinalityAsteriskKeyword_0_1ElementType());
@@ -3365,7 +3393,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1205:5: lv_cardinality_0_3= '+'
+                    // PsiInternalXtextGrammarTestLanguage.g:1233:5: lv_cardinality_0_3= '+'
                     {
 
                     					markLeaf(elementTypeProvider.getCardinalities_CardinalityPlusSignKeyword_0_2ElementType());
@@ -3408,7 +3436,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAction"
-    // PsiInternalXtextGrammarTestLanguage.g:1224:1: entryRuleAction returns [Boolean current=false] : iv_ruleAction= ruleAction EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1252:1: entryRuleAction returns [Boolean current=false] : iv_ruleAction= ruleAction EOF ;
     public final Boolean entryRuleAction() throws RecognitionException {
         Boolean current = false;
 
@@ -3416,8 +3444,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1224:48: (iv_ruleAction= ruleAction EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1225:2: iv_ruleAction= ruleAction EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1252:48: (iv_ruleAction= ruleAction EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1253:2: iv_ruleAction= ruleAction EOF
             {
              markComposite(elementTypeProvider.getActionElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3443,7 +3471,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAction"
-    // PsiInternalXtextGrammarTestLanguage.g:1231:1: ruleAction returns [Boolean current=false] : (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1259:1: ruleAction returns [Boolean current=false] : (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) ;
     public final Boolean ruleAction() throws RecognitionException {
         Boolean current = false;
 
@@ -3458,11 +3486,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1232:1: ( (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1233:2: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
+            // PsiInternalXtextGrammarTestLanguage.g:1260:1: ( (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1261:2: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1233:2: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
-            // PsiInternalXtextGrammarTestLanguage.g:1234:3: otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}'
+            // PsiInternalXtextGrammarTestLanguage.g:1261:2: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
+            // PsiInternalXtextGrammarTestLanguage.g:1262:3: otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}'
             {
 
             			markLeaf(elementTypeProvider.getAction_LeftCurlyBracketKeyword_0ElementType());
@@ -3471,11 +3499,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:1241:3: ( (lv_type_1_0= ruleTypeRef ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1242:4: (lv_type_1_0= ruleTypeRef )
+            // PsiInternalXtextGrammarTestLanguage.g:1269:3: ( (lv_type_1_0= ruleTypeRef ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1270:4: (lv_type_1_0= ruleTypeRef )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1242:4: (lv_type_1_0= ruleTypeRef )
-            // PsiInternalXtextGrammarTestLanguage.g:1243:5: lv_type_1_0= ruleTypeRef
+            // PsiInternalXtextGrammarTestLanguage.g:1270:4: (lv_type_1_0= ruleTypeRef )
+            // PsiInternalXtextGrammarTestLanguage.g:1271:5: lv_type_1_0= ruleTypeRef
             {
 
             					markComposite(elementTypeProvider.getAction_TypeTypeRefParserRuleCall_1_0ElementType());
@@ -3498,7 +3526,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1256:3: (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )?
+            // PsiInternalXtextGrammarTestLanguage.g:1284:3: (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -3507,7 +3535,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt34) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1257:4: otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current'
+                    // PsiInternalXtextGrammarTestLanguage.g:1285:4: otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current'
                     {
 
                     				markLeaf(elementTypeProvider.getAction_FullStopKeyword_2_0ElementType());
@@ -3516,11 +3544,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:1264:4: ( (lv_feature_3_0= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1265:5: (lv_feature_3_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1292:4: ( (lv_feature_3_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1293:5: (lv_feature_3_0= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1265:5: (lv_feature_3_0= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:1266:6: lv_feature_3_0= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:1293:5: (lv_feature_3_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1294:6: lv_feature_3_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getAction_FeatureIDTerminalRuleCall_2_1_0ElementType());
@@ -3541,13 +3569,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:1281:4: ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1282:5: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1309:4: ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1310:5: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1282:5: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1283:6: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
+                    // PsiInternalXtextGrammarTestLanguage.g:1310:5: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1311:6: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1283:6: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
+                    // PsiInternalXtextGrammarTestLanguage.g:1311:6: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
                     int alt33=2;
                     int LA33_0 = input.LA(1);
 
@@ -3565,7 +3593,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     switch (alt33) {
                         case 1 :
-                            // PsiInternalXtextGrammarTestLanguage.g:1284:7: lv_operator_4_1= '='
+                            // PsiInternalXtextGrammarTestLanguage.g:1312:7: lv_operator_4_1= '='
                             {
 
                             							markLeaf(elementTypeProvider.getAction_OperatorEqualsSignKeyword_2_2_0_0ElementType());
@@ -3584,7 +3612,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                             }
                             break;
                         case 2 :
-                            // PsiInternalXtextGrammarTestLanguage.g:1298:7: lv_operator_4_2= '+='
+                            // PsiInternalXtextGrammarTestLanguage.g:1326:7: lv_operator_4_2= '+='
                             {
 
                             							markLeaf(elementTypeProvider.getAction_OperatorPlusSignEqualsSignKeyword_2_2_0_1ElementType());
@@ -3650,7 +3678,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAbstractTerminal"
-    // PsiInternalXtextGrammarTestLanguage.g:1333:1: entryRuleAbstractTerminal returns [Boolean current=false] : iv_ruleAbstractTerminal= ruleAbstractTerminal EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1361:1: entryRuleAbstractTerminal returns [Boolean current=false] : iv_ruleAbstractTerminal= ruleAbstractTerminal EOF ;
     public final Boolean entryRuleAbstractTerminal() throws RecognitionException {
         Boolean current = false;
 
@@ -3658,8 +3686,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1333:58: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1334:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1361:58: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1362:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
             {
              markComposite(elementTypeProvider.getAbstractTerminalElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3685,7 +3713,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAbstractTerminal"
-    // PsiInternalXtextGrammarTestLanguage.g:1340:1: ruleAbstractTerminal returns [Boolean current=false] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1368:1: ruleAbstractTerminal returns [Boolean current=false] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) ;
     public final Boolean ruleAbstractTerminal() throws RecognitionException {
         Boolean current = false;
 
@@ -3703,10 +3731,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1341:1: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1342:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
+            // PsiInternalXtextGrammarTestLanguage.g:1369:1: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1370:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1342:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
+            // PsiInternalXtextGrammarTestLanguage.g:1370:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
             int alt35=6;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -3787,7 +3815,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt35) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1343:3: this_Keyword_0= ruleKeyword
+                    // PsiInternalXtextGrammarTestLanguage.g:1371:3: this_Keyword_0= ruleKeyword
                     {
 
                     			markComposite(elementTypeProvider.getAbstractTerminal_KeywordParserRuleCall_0ElementType());
@@ -3805,7 +3833,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1352:3: this_RuleCall_1= ruleRuleCall
+                    // PsiInternalXtextGrammarTestLanguage.g:1380:3: this_RuleCall_1= ruleRuleCall
                     {
 
                     			markComposite(elementTypeProvider.getAbstractTerminal_RuleCallParserRuleCall_1ElementType());
@@ -3823,7 +3851,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1361:3: this_ParenthesizedElement_2= ruleParenthesizedElement
+                    // PsiInternalXtextGrammarTestLanguage.g:1389:3: this_ParenthesizedElement_2= ruleParenthesizedElement
                     {
 
                     			markComposite(elementTypeProvider.getAbstractTerminal_ParenthesizedElementParserRuleCall_2ElementType());
@@ -3841,7 +3869,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1370:3: this_PredicatedKeyword_3= rulePredicatedKeyword
+                    // PsiInternalXtextGrammarTestLanguage.g:1398:3: this_PredicatedKeyword_3= rulePredicatedKeyword
                     {
 
                     			markComposite(elementTypeProvider.getAbstractTerminal_PredicatedKeywordParserRuleCall_3ElementType());
@@ -3859,7 +3887,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1379:3: this_PredicatedRuleCall_4= rulePredicatedRuleCall
+                    // PsiInternalXtextGrammarTestLanguage.g:1407:3: this_PredicatedRuleCall_4= rulePredicatedRuleCall
                     {
 
                     			markComposite(elementTypeProvider.getAbstractTerminal_PredicatedRuleCallParserRuleCall_4ElementType());
@@ -3877,7 +3905,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1388:3: this_PredicatedGroup_5= rulePredicatedGroup
+                    // PsiInternalXtextGrammarTestLanguage.g:1416:3: this_PredicatedGroup_5= rulePredicatedGroup
                     {
 
                     			markComposite(elementTypeProvider.getAbstractTerminal_PredicatedGroupParserRuleCall_5ElementType());
@@ -3913,7 +3941,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleKeyword"
-    // PsiInternalXtextGrammarTestLanguage.g:1400:1: entryRuleKeyword returns [Boolean current=false] : iv_ruleKeyword= ruleKeyword EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1428:1: entryRuleKeyword returns [Boolean current=false] : iv_ruleKeyword= ruleKeyword EOF ;
     public final Boolean entryRuleKeyword() throws RecognitionException {
         Boolean current = false;
 
@@ -3921,8 +3949,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1400:49: (iv_ruleKeyword= ruleKeyword EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1401:2: iv_ruleKeyword= ruleKeyword EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1428:49: (iv_ruleKeyword= ruleKeyword EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1429:2: iv_ruleKeyword= ruleKeyword EOF
             {
              markComposite(elementTypeProvider.getKeywordElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3948,21 +3976,21 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleKeyword"
-    // PsiInternalXtextGrammarTestLanguage.g:1407:1: ruleKeyword returns [Boolean current=false] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1435:1: ruleKeyword returns [Boolean current=false] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final Boolean ruleKeyword() throws RecognitionException {
         Boolean current = false;
 
         Token lv_value_0_0=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1408:1: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1409:2: ( (lv_value_0_0= RULE_STRING ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1436:1: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1437:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1409:2: ( (lv_value_0_0= RULE_STRING ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1410:3: (lv_value_0_0= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:1437:2: ( (lv_value_0_0= RULE_STRING ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1438:3: (lv_value_0_0= RULE_STRING )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1410:3: (lv_value_0_0= RULE_STRING )
-            // PsiInternalXtextGrammarTestLanguage.g:1411:4: lv_value_0_0= RULE_STRING
+            // PsiInternalXtextGrammarTestLanguage.g:1438:3: (lv_value_0_0= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:1439:4: lv_value_0_0= RULE_STRING
             {
 
             				markLeaf(elementTypeProvider.getKeyword_ValueSTRINGTerminalRuleCall_0ElementType());
@@ -3999,7 +4027,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleRuleCall"
-    // PsiInternalXtextGrammarTestLanguage.g:1429:1: entryRuleRuleCall returns [Boolean current=false] : iv_ruleRuleCall= ruleRuleCall EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1457:1: entryRuleRuleCall returns [Boolean current=false] : iv_ruleRuleCall= ruleRuleCall EOF ;
     public final Boolean entryRuleRuleCall() throws RecognitionException {
         Boolean current = false;
 
@@ -4007,8 +4035,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1429:50: (iv_ruleRuleCall= ruleRuleCall EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1430:2: iv_ruleRuleCall= ruleRuleCall EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1457:50: (iv_ruleRuleCall= ruleRuleCall EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1458:2: iv_ruleRuleCall= ruleRuleCall EOF
             {
              markComposite(elementTypeProvider.getRuleCallElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4034,7 +4062,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleRuleCall"
-    // PsiInternalXtextGrammarTestLanguage.g:1436:1: ruleRuleCall returns [Boolean current=false] : ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1464:1: ruleRuleCall returns [Boolean current=false] : ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) ;
     public final Boolean ruleRuleCall() throws RecognitionException {
         Boolean current = false;
 
@@ -4047,14 +4075,14 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1437:1: ( ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1438:2: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1465:1: ( ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1466:2: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1438:2: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
-            // PsiInternalXtextGrammarTestLanguage.g:1439:3: () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
+            // PsiInternalXtextGrammarTestLanguage.g:1466:2: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
+            // PsiInternalXtextGrammarTestLanguage.g:1467:3: () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1439:3: ()
-            // PsiInternalXtextGrammarTestLanguage.g:1440:4: 
+            // PsiInternalXtextGrammarTestLanguage.g:1467:3: ()
+            // PsiInternalXtextGrammarTestLanguage.g:1468:4: 
             {
 
             				precedeComposite(elementTypeProvider.getRuleCall_RuleCallAction_0ElementType());
@@ -4064,11 +4092,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1446:3: ( ( ruleRuleID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1447:4: ( ruleRuleID )
+            // PsiInternalXtextGrammarTestLanguage.g:1474:3: ( ( ruleRuleID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1475:4: ( ruleRuleID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1447:4: ( ruleRuleID )
-            // PsiInternalXtextGrammarTestLanguage.g:1448:5: ruleRuleID
+            // PsiInternalXtextGrammarTestLanguage.g:1475:4: ( ruleRuleID )
+            // PsiInternalXtextGrammarTestLanguage.g:1476:5: ruleRuleID
             {
 
             					if (!current) {
@@ -4093,7 +4121,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1463:3: (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
+            // PsiInternalXtextGrammarTestLanguage.g:1491:3: (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -4102,7 +4130,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt37) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1464:4: otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']'
+                    // PsiInternalXtextGrammarTestLanguage.g:1492:4: otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']'
                     {
 
                     				markLeaf(elementTypeProvider.getRuleCall_LeftSquareBracketKeyword_2_0ElementType());
@@ -4111,11 +4139,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:1471:4: ( (lv_arguments_3_0= ruleNamedArgument ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1472:5: (lv_arguments_3_0= ruleNamedArgument )
+                    // PsiInternalXtextGrammarTestLanguage.g:1499:4: ( (lv_arguments_3_0= ruleNamedArgument ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1500:5: (lv_arguments_3_0= ruleNamedArgument )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1472:5: (lv_arguments_3_0= ruleNamedArgument )
-                    // PsiInternalXtextGrammarTestLanguage.g:1473:6: lv_arguments_3_0= ruleNamedArgument
+                    // PsiInternalXtextGrammarTestLanguage.g:1500:5: (lv_arguments_3_0= ruleNamedArgument )
+                    // PsiInternalXtextGrammarTestLanguage.g:1501:6: lv_arguments_3_0= ruleNamedArgument
                     {
 
                     						markComposite(elementTypeProvider.getRuleCall_ArgumentsNamedArgumentParserRuleCall_2_1_0ElementType());
@@ -4138,7 +4166,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:1486:4: (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )*
+                    // PsiInternalXtextGrammarTestLanguage.g:1514:4: (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )*
                     loop36:
                     do {
                         int alt36=2;
@@ -4151,7 +4179,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt36) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1487:5: otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1515:5: otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getRuleCall_CommaKeyword_2_2_0ElementType());
@@ -4160,11 +4188,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_4);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1494:5: ( (lv_arguments_5_0= ruleNamedArgument ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1495:6: (lv_arguments_5_0= ruleNamedArgument )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1522:5: ( (lv_arguments_5_0= ruleNamedArgument ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1523:6: (lv_arguments_5_0= ruleNamedArgument )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1495:6: (lv_arguments_5_0= ruleNamedArgument )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:1496:7: lv_arguments_5_0= ruleNamedArgument
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1523:6: (lv_arguments_5_0= ruleNamedArgument )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:1524:7: lv_arguments_5_0= ruleNamedArgument
                     	    {
 
                     	    							markComposite(elementTypeProvider.getRuleCall_ArgumentsNamedArgumentParserRuleCall_2_2_1_0ElementType());
@@ -4228,7 +4256,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleLiteralValue"
-    // PsiInternalXtextGrammarTestLanguage.g:1522:1: entryRuleLiteralValue returns [Boolean current=false] : iv_ruleLiteralValue= ruleLiteralValue EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1550:1: entryRuleLiteralValue returns [Boolean current=false] : iv_ruleLiteralValue= ruleLiteralValue EOF ;
     public final Boolean entryRuleLiteralValue() throws RecognitionException {
         Boolean current = false;
 
@@ -4236,8 +4264,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1522:54: (iv_ruleLiteralValue= ruleLiteralValue EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1523:2: iv_ruleLiteralValue= ruleLiteralValue EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1550:54: (iv_ruleLiteralValue= ruleLiteralValue EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1551:2: iv_ruleLiteralValue= ruleLiteralValue EOF
             {
              markComposite(elementTypeProvider.getLiteralValueElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4263,17 +4291,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleLiteralValue"
-    // PsiInternalXtextGrammarTestLanguage.g:1529:1: ruleLiteralValue returns [Boolean current=false] : (kw= '!' | kw= '+' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1557:1: ruleLiteralValue returns [Boolean current=false] : (kw= '!' | kw= '+' ) ;
     public final Boolean ruleLiteralValue() throws RecognitionException {
         Boolean current = false;
 
         Token kw=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1530:1: ( (kw= '!' | kw= '+' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1531:2: (kw= '!' | kw= '+' )
+            // PsiInternalXtextGrammarTestLanguage.g:1558:1: ( (kw= '!' | kw= '+' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1559:2: (kw= '!' | kw= '+' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1531:2: (kw= '!' | kw= '+' )
+            // PsiInternalXtextGrammarTestLanguage.g:1559:2: (kw= '!' | kw= '+' )
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -4291,7 +4319,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt38) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1532:3: kw= '!'
+                    // PsiInternalXtextGrammarTestLanguage.g:1560:3: kw= '!'
                     {
 
                     			markLeaf(elementTypeProvider.getLiteralValue_ExclamationMarkKeyword_0ElementType());
@@ -4304,7 +4332,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1540:3: kw= '+'
+                    // PsiInternalXtextGrammarTestLanguage.g:1568:3: kw= '+'
                     {
 
                     			markLeaf(elementTypeProvider.getLiteralValue_PlusSignKeyword_1ElementType());
@@ -4335,7 +4363,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleInverseLiteralValue"
-    // PsiInternalXtextGrammarTestLanguage.g:1551:1: entryRuleInverseLiteralValue returns [Boolean current=false] : iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1579:1: entryRuleInverseLiteralValue returns [Boolean current=false] : iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF ;
     public final Boolean entryRuleInverseLiteralValue() throws RecognitionException {
         Boolean current = false;
 
@@ -4343,8 +4371,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1551:61: (iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1552:2: iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1579:61: (iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1580:2: iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF
             {
              markComposite(elementTypeProvider.getInverseLiteralValueElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4370,13 +4398,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleInverseLiteralValue"
-    // PsiInternalXtextGrammarTestLanguage.g:1558:1: ruleInverseLiteralValue returns [Boolean current=false] : ruleLiteralValue ;
+    // PsiInternalXtextGrammarTestLanguage.g:1586:1: ruleInverseLiteralValue returns [Boolean current=false] : ruleLiteralValue ;
     public final Boolean ruleInverseLiteralValue() throws RecognitionException {
         Boolean current = false;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1559:1: ( ruleLiteralValue )
-            // PsiInternalXtextGrammarTestLanguage.g:1560:2: ruleLiteralValue
+            // PsiInternalXtextGrammarTestLanguage.g:1587:1: ( ruleLiteralValue )
+            // PsiInternalXtextGrammarTestLanguage.g:1588:2: ruleLiteralValue
             {
 
             		markComposite(elementTypeProvider.getInverseLiteralValue_LiteralValueParserRuleCallElementType());
@@ -4405,7 +4433,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleNamedArgument"
-    // PsiInternalXtextGrammarTestLanguage.g:1570:1: entryRuleNamedArgument returns [Boolean current=false] : iv_ruleNamedArgument= ruleNamedArgument EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1598:1: entryRuleNamedArgument returns [Boolean current=false] : iv_ruleNamedArgument= ruleNamedArgument EOF ;
     public final Boolean entryRuleNamedArgument() throws RecognitionException {
         Boolean current = false;
 
@@ -4413,8 +4441,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1570:55: (iv_ruleNamedArgument= ruleNamedArgument EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1571:2: iv_ruleNamedArgument= ruleNamedArgument EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1598:55: (iv_ruleNamedArgument= ruleNamedArgument EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1599:2: iv_ruleNamedArgument= ruleNamedArgument EOF
             {
              markComposite(elementTypeProvider.getNamedArgumentElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4440,7 +4468,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleNamedArgument"
-    // PsiInternalXtextGrammarTestLanguage.g:1577:1: ruleNamedArgument returns [Boolean current=false] : ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1605:1: ruleNamedArgument returns [Boolean current=false] : ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) ;
     public final Boolean ruleNamedArgument() throws RecognitionException {
         Boolean current = false;
 
@@ -4452,14 +4480,14 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1578:1: ( ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1579:2: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1606:1: ( ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1607:2: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1579:2: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1580:3: () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1607:2: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1608:3: () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1580:3: ()
-            // PsiInternalXtextGrammarTestLanguage.g:1581:4: 
+            // PsiInternalXtextGrammarTestLanguage.g:1608:3: ()
+            // PsiInternalXtextGrammarTestLanguage.g:1609:4: 
             {
 
             				precedeComposite(elementTypeProvider.getNamedArgument_NamedArgumentAction_0ElementType());
@@ -4469,7 +4497,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1587:3: ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1615:3: ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -4500,12 +4528,12 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt40) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1588:4: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1616:4: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1588:4: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1589:5: ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1616:4: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1617:5: ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1589:5: ( (lv_literalValue_1_0= ruleLiteralValue ) )?
+                    // PsiInternalXtextGrammarTestLanguage.g:1617:5: ( (lv_literalValue_1_0= ruleLiteralValue ) )?
                     int alt39=2;
                     int LA39_0 = input.LA(1);
 
@@ -4514,10 +4542,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     switch (alt39) {
                         case 1 :
-                            // PsiInternalXtextGrammarTestLanguage.g:1590:6: (lv_literalValue_1_0= ruleLiteralValue )
+                            // PsiInternalXtextGrammarTestLanguage.g:1618:6: (lv_literalValue_1_0= ruleLiteralValue )
                             {
-                            // PsiInternalXtextGrammarTestLanguage.g:1590:6: (lv_literalValue_1_0= ruleLiteralValue )
-                            // PsiInternalXtextGrammarTestLanguage.g:1591:7: lv_literalValue_1_0= ruleLiteralValue
+                            // PsiInternalXtextGrammarTestLanguage.g:1618:6: (lv_literalValue_1_0= ruleLiteralValue )
+                            // PsiInternalXtextGrammarTestLanguage.g:1619:7: lv_literalValue_1_0= ruleLiteralValue
                             {
 
                             							markComposite(elementTypeProvider.getNamedArgument_LiteralValueLiteralValueParserRuleCall_1_0_0_0ElementType());
@@ -4543,11 +4571,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:1604:5: ( (otherlv_2= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1605:6: (otherlv_2= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1632:5: ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1633:6: (otherlv_2= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1605:6: (otherlv_2= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:1606:7: otherlv_2= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:1633:6: (otherlv_2= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1634:7: otherlv_2= RULE_ID
                     {
 
                     							if (!current) {
@@ -4575,16 +4603,16 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1623:4: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1651:4: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1623:4: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1624:5: ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1651:4: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1652:5: ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1624:5: ( (otherlv_3= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1625:6: (otherlv_3= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1652:5: ( (otherlv_3= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1653:6: (otherlv_3= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1625:6: (otherlv_3= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:1626:7: otherlv_3= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:1653:6: (otherlv_3= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1654:7: otherlv_3= RULE_ID
                     {
 
                     							if (!current) {
@@ -4612,11 +4640,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     					doneLeaf(otherlv_4);
                     				
-                    // PsiInternalXtextGrammarTestLanguage.g:1648:5: ( (otherlv_5= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1649:6: (otherlv_5= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1676:5: ( (otherlv_5= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1677:6: (otherlv_5= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1649:6: (otherlv_5= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:1650:7: otherlv_5= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:1677:6: (otherlv_5= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:1678:7: otherlv_5= RULE_ID
                     {
 
                     							if (!current) {
@@ -4665,7 +4693,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTerminalRuleCall"
-    // PsiInternalXtextGrammarTestLanguage.g:1671:1: entryRuleTerminalRuleCall returns [Boolean current=false] : iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1699:1: entryRuleTerminalRuleCall returns [Boolean current=false] : iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF ;
     public final Boolean entryRuleTerminalRuleCall() throws RecognitionException {
         Boolean current = false;
 
@@ -4673,8 +4701,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1671:58: (iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1672:2: iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1699:58: (iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1700:2: iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF
             {
              markComposite(elementTypeProvider.getTerminalRuleCallElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4700,19 +4728,19 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTerminalRuleCall"
-    // PsiInternalXtextGrammarTestLanguage.g:1678:1: ruleTerminalRuleCall returns [Boolean current=false] : ( ( ruleRuleID ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1706:1: ruleTerminalRuleCall returns [Boolean current=false] : ( ( ruleRuleID ) ) ;
     public final Boolean ruleTerminalRuleCall() throws RecognitionException {
         Boolean current = false;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1679:1: ( ( ( ruleRuleID ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1680:2: ( ( ruleRuleID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1707:1: ( ( ( ruleRuleID ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1708:2: ( ( ruleRuleID ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1680:2: ( ( ruleRuleID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1681:3: ( ruleRuleID )
+            // PsiInternalXtextGrammarTestLanguage.g:1708:2: ( ( ruleRuleID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1709:3: ( ruleRuleID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1681:3: ( ruleRuleID )
-            // PsiInternalXtextGrammarTestLanguage.g:1682:4: ruleRuleID
+            // PsiInternalXtextGrammarTestLanguage.g:1709:3: ( ruleRuleID )
+            // PsiInternalXtextGrammarTestLanguage.g:1710:4: ruleRuleID
             {
 
             				if (!current) {
@@ -4753,7 +4781,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleRuleID"
-    // PsiInternalXtextGrammarTestLanguage.g:1700:1: entryRuleRuleID returns [Boolean current=false] : iv_ruleRuleID= ruleRuleID EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1728:1: entryRuleRuleID returns [Boolean current=false] : iv_ruleRuleID= ruleRuleID EOF ;
     public final Boolean entryRuleRuleID() throws RecognitionException {
         Boolean current = false;
 
@@ -4761,8 +4789,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1700:48: (iv_ruleRuleID= ruleRuleID EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1701:2: iv_ruleRuleID= ruleRuleID EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1728:48: (iv_ruleRuleID= ruleRuleID EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1729:2: iv_ruleRuleID= ruleRuleID EOF
             {
              markComposite(elementTypeProvider.getRuleIDElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4788,7 +4816,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleRuleID"
-    // PsiInternalXtextGrammarTestLanguage.g:1707:1: ruleRuleID returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1735:1: ruleRuleID returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) ;
     public final Boolean ruleRuleID() throws RecognitionException {
         Boolean current = false;
 
@@ -4797,11 +4825,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token this_ID_2=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1708:1: ( (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1709:2: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
+            // PsiInternalXtextGrammarTestLanguage.g:1736:1: ( (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1737:2: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1709:2: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
-            // PsiInternalXtextGrammarTestLanguage.g:1710:3: this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )*
+            // PsiInternalXtextGrammarTestLanguage.g:1737:2: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
+            // PsiInternalXtextGrammarTestLanguage.g:1738:3: this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )*
             {
 
             			markLeaf(elementTypeProvider.getRuleID_IDTerminalRuleCall_0ElementType());
@@ -4810,7 +4838,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(this_ID_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:1717:3: (kw= '::' this_ID_2= RULE_ID )*
+            // PsiInternalXtextGrammarTestLanguage.g:1745:3: (kw= '::' this_ID_2= RULE_ID )*
             loop41:
             do {
                 int alt41=2;
@@ -4823,7 +4851,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                 switch (alt41) {
             	case 1 :
-            	    // PsiInternalXtextGrammarTestLanguage.g:1718:4: kw= '::' this_ID_2= RULE_ID
+            	    // PsiInternalXtextGrammarTestLanguage.g:1746:4: kw= '::' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getRuleID_ColonColonKeyword_1_0ElementType());
@@ -4867,7 +4895,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRulePredicatedKeyword"
-    // PsiInternalXtextGrammarTestLanguage.g:1737:1: entryRulePredicatedKeyword returns [Boolean current=false] : iv_rulePredicatedKeyword= rulePredicatedKeyword EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1765:1: entryRulePredicatedKeyword returns [Boolean current=false] : iv_rulePredicatedKeyword= rulePredicatedKeyword EOF ;
     public final Boolean entryRulePredicatedKeyword() throws RecognitionException {
         Boolean current = false;
 
@@ -4875,8 +4903,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1737:59: (iv_rulePredicatedKeyword= rulePredicatedKeyword EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1738:2: iv_rulePredicatedKeyword= rulePredicatedKeyword EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1765:59: (iv_rulePredicatedKeyword= rulePredicatedKeyword EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1766:2: iv_rulePredicatedKeyword= rulePredicatedKeyword EOF
             {
              markComposite(elementTypeProvider.getPredicatedKeywordElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4902,7 +4930,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "rulePredicatedKeyword"
-    // PsiInternalXtextGrammarTestLanguage.g:1744:1: rulePredicatedKeyword returns [Boolean current=false] : (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1772:1: rulePredicatedKeyword returns [Boolean current=false] : (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final Boolean rulePredicatedKeyword() throws RecognitionException {
         Boolean current = false;
 
@@ -4911,13 +4939,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1745:1: ( (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1746:2: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1773:1: ( (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1774:2: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1746:2: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1747:3: this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1774:2: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1775:3: this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) )
             {
 
+            			if (!current) {
+            				associateWithSemanticElement();
+            				current = true;
+            			}
             			markComposite(elementTypeProvider.getPredicatedKeyword_PredicateParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_11);
@@ -4929,11 +4961,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_Predicate_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:1755:3: ( (lv_value_1_0= RULE_STRING ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1756:4: (lv_value_1_0= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:1787:3: ( (lv_value_1_0= RULE_STRING ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1788:4: (lv_value_1_0= RULE_STRING )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1756:4: (lv_value_1_0= RULE_STRING )
-            // PsiInternalXtextGrammarTestLanguage.g:1757:5: lv_value_1_0= RULE_STRING
+            // PsiInternalXtextGrammarTestLanguage.g:1788:4: (lv_value_1_0= RULE_STRING )
+            // PsiInternalXtextGrammarTestLanguage.g:1789:5: lv_value_1_0= RULE_STRING
             {
 
             					markLeaf(elementTypeProvider.getPredicatedKeyword_ValueSTRINGTerminalRuleCall_1_0ElementType());
@@ -4973,7 +5005,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRulePredicatedRuleCall"
-    // PsiInternalXtextGrammarTestLanguage.g:1776:1: entryRulePredicatedRuleCall returns [Boolean current=false] : iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1808:1: entryRulePredicatedRuleCall returns [Boolean current=false] : iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF ;
     public final Boolean entryRulePredicatedRuleCall() throws RecognitionException {
         Boolean current = false;
 
@@ -4981,8 +5013,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1776:60: (iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1777:2: iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1808:60: (iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1809:2: iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF
             {
              markComposite(elementTypeProvider.getPredicatedRuleCallElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5008,7 +5040,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "rulePredicatedRuleCall"
-    // PsiInternalXtextGrammarTestLanguage.g:1783:1: rulePredicatedRuleCall returns [Boolean current=false] : (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1815:1: rulePredicatedRuleCall returns [Boolean current=false] : (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) ;
     public final Boolean rulePredicatedRuleCall() throws RecognitionException {
         Boolean current = false;
 
@@ -5017,13 +5049,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1784:1: ( (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1785:2: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1816:1: ( (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1817:2: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1785:2: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1786:3: this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1817:2: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1818:3: this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) )
             {
 
+            			if (!current) {
+            				associateWithSemanticElement();
+            				current = true;
+            			}
             			markComposite(elementTypeProvider.getPredicatedRuleCall_PredicateParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_3);
@@ -5035,11 +5071,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_Predicate_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:1794:3: ( (otherlv_1= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1795:4: (otherlv_1= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:1830:3: ( (otherlv_1= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1831:4: (otherlv_1= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1795:4: (otherlv_1= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:1796:5: otherlv_1= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:1831:4: (otherlv_1= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:1832:5: otherlv_1= RULE_ID
             {
 
             					if (!current) {
@@ -5079,7 +5115,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAssignment"
-    // PsiInternalXtextGrammarTestLanguage.g:1815:1: entryRuleAssignment returns [Boolean current=false] : iv_ruleAssignment= ruleAssignment EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:1851:1: entryRuleAssignment returns [Boolean current=false] : iv_ruleAssignment= ruleAssignment EOF ;
     public final Boolean entryRuleAssignment() throws RecognitionException {
         Boolean current = false;
 
@@ -5087,8 +5123,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1815:52: (iv_ruleAssignment= ruleAssignment EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1816:2: iv_ruleAssignment= ruleAssignment EOF
+            // PsiInternalXtextGrammarTestLanguage.g:1851:52: (iv_ruleAssignment= ruleAssignment EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:1852:2: iv_ruleAssignment= ruleAssignment EOF
             {
              markComposite(elementTypeProvider.getAssignmentElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5114,7 +5150,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAssignment"
-    // PsiInternalXtextGrammarTestLanguage.g:1822:1: ruleAssignment returns [Boolean current=false] : ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1858:1: ruleAssignment returns [Boolean current=false] : ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) ;
     public final Boolean ruleAssignment() throws RecognitionException {
         Boolean current = false;
 
@@ -5128,13 +5164,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1823:1: ( ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1824:2: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1859:1: ( ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1860:2: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1824:2: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1825:3: (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1860:2: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1861:3: (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1825:3: (this_Predicate_0= rulePredicate[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:1861:3: (this_Predicate_0= rulePredicate[$current] )?
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -5143,9 +5179,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt42) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1826:4: this_Predicate_0= rulePredicate[$current]
+                    // PsiInternalXtextGrammarTestLanguage.g:1862:4: this_Predicate_0= rulePredicate[$current]
                     {
 
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
                     				markComposite(elementTypeProvider.getAssignment_PredicateParserRuleCall_0ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_3);
@@ -5163,11 +5203,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1835:3: ( (lv_feature_1_0= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1836:4: (lv_feature_1_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:1875:3: ( (lv_feature_1_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1876:4: (lv_feature_1_0= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1836:4: (lv_feature_1_0= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:1837:5: lv_feature_1_0= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:1876:4: (lv_feature_1_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:1877:5: lv_feature_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getAssignment_FeatureIDTerminalRuleCall_1_0ElementType());
@@ -5188,13 +5228,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1852:3: ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1853:4: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1892:3: ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1893:4: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1853:4: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1854:5: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
+            // PsiInternalXtextGrammarTestLanguage.g:1893:4: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1894:5: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1854:5: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
+            // PsiInternalXtextGrammarTestLanguage.g:1894:5: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
             int alt43=3;
             switch ( input.LA(1) ) {
             case 35:
@@ -5221,7 +5261,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt43) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1855:6: lv_operator_2_1= '+='
+                    // PsiInternalXtextGrammarTestLanguage.g:1895:6: lv_operator_2_1= '+='
                     {
 
                     						markLeaf(elementTypeProvider.getAssignment_OperatorPlusSignEqualsSignKeyword_2_0_0ElementType());
@@ -5240,7 +5280,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1869:6: lv_operator_2_2= '='
+                    // PsiInternalXtextGrammarTestLanguage.g:1909:6: lv_operator_2_2= '='
                     {
 
                     						markLeaf(elementTypeProvider.getAssignment_OperatorEqualsSignKeyword_2_0_1ElementType());
@@ -5259,7 +5299,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1883:6: lv_operator_2_3= '?='
+                    // PsiInternalXtextGrammarTestLanguage.g:1923:6: lv_operator_2_3= '?='
                     {
 
                     						markLeaf(elementTypeProvider.getAssignment_OperatorQuestionMarkEqualsSignKeyword_2_0_2ElementType());
@@ -5286,11 +5326,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:1899:3: ( (lv_terminal_3_0= ruleAssignableTerminal ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1900:4: (lv_terminal_3_0= ruleAssignableTerminal )
+            // PsiInternalXtextGrammarTestLanguage.g:1939:3: ( (lv_terminal_3_0= ruleAssignableTerminal ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1940:4: (lv_terminal_3_0= ruleAssignableTerminal )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1900:4: (lv_terminal_3_0= ruleAssignableTerminal )
-            // PsiInternalXtextGrammarTestLanguage.g:1901:5: lv_terminal_3_0= ruleAssignableTerminal
+            // PsiInternalXtextGrammarTestLanguage.g:1940:4: (lv_terminal_3_0= ruleAssignableTerminal )
+            // PsiInternalXtextGrammarTestLanguage.g:1941:5: lv_terminal_3_0= ruleAssignableTerminal
             {
 
             					markComposite(elementTypeProvider.getAssignment_TerminalAssignableTerminalParserRuleCall_3_0ElementType());
@@ -5332,7 +5372,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "rulePredicate"
-    // PsiInternalXtextGrammarTestLanguage.g:1919:1: rulePredicate[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:1959:1: rulePredicate[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ;
     public final Boolean rulePredicate(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
@@ -5340,10 +5380,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
         Token lv_firstSetPredicated_1_0=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1920:1: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1921:2: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1960:1: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1961:2: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1921:2: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:1961:2: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
             int alt44=2;
             int LA44_0 = input.LA(1);
 
@@ -5361,13 +5401,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt44) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1922:3: ( (lv_predicated_0_0= '=>' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1962:3: ( (lv_predicated_0_0= '=>' ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1922:3: ( (lv_predicated_0_0= '=>' ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1923:4: (lv_predicated_0_0= '=>' )
+                    // PsiInternalXtextGrammarTestLanguage.g:1962:3: ( (lv_predicated_0_0= '=>' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1963:4: (lv_predicated_0_0= '=>' )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1923:4: (lv_predicated_0_0= '=>' )
-                    // PsiInternalXtextGrammarTestLanguage.g:1924:5: lv_predicated_0_0= '=>'
+                    // PsiInternalXtextGrammarTestLanguage.g:1963:4: (lv_predicated_0_0= '=>' )
+                    // PsiInternalXtextGrammarTestLanguage.g:1964:5: lv_predicated_0_0= '=>'
                     {
 
                     					markLeaf(elementTypeProvider.getPredicate_PredicatedEqualsSignGreaterThanSignKeyword_0_0ElementType());
@@ -5392,13 +5432,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1940:3: ( (lv_firstSetPredicated_1_0= '->' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1980:3: ( (lv_firstSetPredicated_1_0= '->' ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1940:3: ( (lv_firstSetPredicated_1_0= '->' ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:1941:4: (lv_firstSetPredicated_1_0= '->' )
+                    // PsiInternalXtextGrammarTestLanguage.g:1980:3: ( (lv_firstSetPredicated_1_0= '->' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:1981:4: (lv_firstSetPredicated_1_0= '->' )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:1941:4: (lv_firstSetPredicated_1_0= '->' )
-                    // PsiInternalXtextGrammarTestLanguage.g:1942:5: lv_firstSetPredicated_1_0= '->'
+                    // PsiInternalXtextGrammarTestLanguage.g:1981:4: (lv_firstSetPredicated_1_0= '->' )
+                    // PsiInternalXtextGrammarTestLanguage.g:1982:5: lv_firstSetPredicated_1_0= '->'
                     {
 
                     					markLeaf(elementTypeProvider.getPredicate_FirstSetPredicatedHyphenMinusGreaterThanSignKeyword_1_0ElementType());
@@ -5441,7 +5481,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAssignableTerminal"
-    // PsiInternalXtextGrammarTestLanguage.g:1961:1: entryRuleAssignableTerminal returns [Boolean current=false] : iv_ruleAssignableTerminal= ruleAssignableTerminal EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2001:1: entryRuleAssignableTerminal returns [Boolean current=false] : iv_ruleAssignableTerminal= ruleAssignableTerminal EOF ;
     public final Boolean entryRuleAssignableTerminal() throws RecognitionException {
         Boolean current = false;
 
@@ -5449,8 +5489,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1961:60: (iv_ruleAssignableTerminal= ruleAssignableTerminal EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:1962:2: iv_ruleAssignableTerminal= ruleAssignableTerminal EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2001:60: (iv_ruleAssignableTerminal= ruleAssignableTerminal EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2002:2: iv_ruleAssignableTerminal= ruleAssignableTerminal EOF
             {
              markComposite(elementTypeProvider.getAssignableTerminalElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5476,7 +5516,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAssignableTerminal"
-    // PsiInternalXtextGrammarTestLanguage.g:1968:1: ruleAssignableTerminal returns [Boolean current=false] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2008:1: ruleAssignableTerminal returns [Boolean current=false] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) ;
     public final Boolean ruleAssignableTerminal() throws RecognitionException {
         Boolean current = false;
 
@@ -5490,10 +5530,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:1969:1: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) )
-            // PsiInternalXtextGrammarTestLanguage.g:1970:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
+            // PsiInternalXtextGrammarTestLanguage.g:2009:1: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2010:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:1970:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
+            // PsiInternalXtextGrammarTestLanguage.g:2010:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
             int alt45=4;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -5525,7 +5565,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt45) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1971:3: this_Keyword_0= ruleKeyword
+                    // PsiInternalXtextGrammarTestLanguage.g:2011:3: this_Keyword_0= ruleKeyword
                     {
 
                     			markComposite(elementTypeProvider.getAssignableTerminal_KeywordParserRuleCall_0ElementType());
@@ -5543,7 +5583,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1980:3: this_RuleCall_1= ruleRuleCall
+                    // PsiInternalXtextGrammarTestLanguage.g:2020:3: this_RuleCall_1= ruleRuleCall
                     {
 
                     			markComposite(elementTypeProvider.getAssignableTerminal_RuleCallParserRuleCall_1ElementType());
@@ -5561,7 +5601,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1989:3: this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement
+                    // PsiInternalXtextGrammarTestLanguage.g:2029:3: this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement
                     {
 
                     			markComposite(elementTypeProvider.getAssignableTerminal_ParenthesizedAssignableElementParserRuleCall_2ElementType());
@@ -5579,7 +5619,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtextGrammarTestLanguage.g:1998:3: this_CrossReference_3= ruleCrossReference
+                    // PsiInternalXtextGrammarTestLanguage.g:2038:3: this_CrossReference_3= ruleCrossReference
                     {
 
                     			markComposite(elementTypeProvider.getAssignableTerminal_CrossReferenceParserRuleCall_3ElementType());
@@ -5615,7 +5655,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleParenthesizedAssignableElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2010:1: entryRuleParenthesizedAssignableElement returns [Boolean current=false] : iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2050:1: entryRuleParenthesizedAssignableElement returns [Boolean current=false] : iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF ;
     public final Boolean entryRuleParenthesizedAssignableElement() throws RecognitionException {
         Boolean current = false;
 
@@ -5623,8 +5663,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2010:72: (iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2011:2: iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2050:72: (iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2051:2: iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF
             {
              markComposite(elementTypeProvider.getParenthesizedAssignableElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5650,7 +5690,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleParenthesizedAssignableElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2017:1: ruleParenthesizedAssignableElement returns [Boolean current=false] : (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2057:1: ruleParenthesizedAssignableElement returns [Boolean current=false] : (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) ;
     public final Boolean ruleParenthesizedAssignableElement() throws RecognitionException {
         Boolean current = false;
 
@@ -5660,11 +5700,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2018:1: ( (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2019:2: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2058:1: ( (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2059:2: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2019:2: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
-            // PsiInternalXtextGrammarTestLanguage.g:2020:3: otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')'
+            // PsiInternalXtextGrammarTestLanguage.g:2059:2: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2060:3: otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')'
             {
 
             			markLeaf(elementTypeProvider.getParenthesizedAssignableElement_LeftParenthesisKeyword_0ElementType());
@@ -5711,7 +5751,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAssignableAlternatives"
-    // PsiInternalXtextGrammarTestLanguage.g:2046:1: entryRuleAssignableAlternatives returns [Boolean current=false] : iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2086:1: entryRuleAssignableAlternatives returns [Boolean current=false] : iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF ;
     public final Boolean entryRuleAssignableAlternatives() throws RecognitionException {
         Boolean current = false;
 
@@ -5719,8 +5759,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2046:64: (iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2047:2: iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2086:64: (iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2087:2: iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF
             {
              markComposite(elementTypeProvider.getAssignableAlternativesElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5746,7 +5786,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAssignableAlternatives"
-    // PsiInternalXtextGrammarTestLanguage.g:2053:1: ruleAssignableAlternatives returns [Boolean current=false] : (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2093:1: ruleAssignableAlternatives returns [Boolean current=false] : (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) ;
     public final Boolean ruleAssignableAlternatives() throws RecognitionException {
         Boolean current = false;
 
@@ -5757,11 +5797,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2054:1: ( (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2055:2: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2094:1: ( (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2095:2: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2055:2: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2056:3: this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2095:2: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2096:3: this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getAssignableAlternatives_AssignableTerminalParserRuleCall_0ElementType());
@@ -5775,7 +5815,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_AssignableTerminal_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2064:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2104:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
             int alt47=2;
             int LA47_0 = input.LA(1);
 
@@ -5784,10 +5824,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt47) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2065:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:2105:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2065:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:2066:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:2105:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:2106:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getAssignableAlternatives_AlternativesElementsAction_1_0ElementType());
@@ -5797,7 +5837,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:2072:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:2112:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
                     int cnt46=0;
                     loop46:
                     do {
@@ -5811,7 +5851,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt46) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2073:5: otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2113:5: otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getAssignableAlternatives_VerticalLineKeyword_1_1_0ElementType());
@@ -5820,11 +5860,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_2);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2080:5: ( (lv_elements_3_0= ruleAssignableTerminal ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2081:6: (lv_elements_3_0= ruleAssignableTerminal )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2120:5: ( (lv_elements_3_0= ruleAssignableTerminal ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2121:6: (lv_elements_3_0= ruleAssignableTerminal )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2081:6: (lv_elements_3_0= ruleAssignableTerminal )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2082:7: lv_elements_3_0= ruleAssignableTerminal
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2121:6: (lv_elements_3_0= ruleAssignableTerminal )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2122:7: lv_elements_3_0= ruleAssignableTerminal
                     	    {
 
                     	    							markComposite(elementTypeProvider.getAssignableAlternatives_ElementsAssignableTerminalParserRuleCall_1_1_1_0ElementType());
@@ -5885,7 +5925,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleCrossReference"
-    // PsiInternalXtextGrammarTestLanguage.g:2101:1: entryRuleCrossReference returns [Boolean current=false] : iv_ruleCrossReference= ruleCrossReference EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2141:1: entryRuleCrossReference returns [Boolean current=false] : iv_ruleCrossReference= ruleCrossReference EOF ;
     public final Boolean entryRuleCrossReference() throws RecognitionException {
         Boolean current = false;
 
@@ -5893,8 +5933,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2101:56: (iv_ruleCrossReference= ruleCrossReference EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2102:2: iv_ruleCrossReference= ruleCrossReference EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2141:56: (iv_ruleCrossReference= ruleCrossReference EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2142:2: iv_ruleCrossReference= ruleCrossReference EOF
             {
              markComposite(elementTypeProvider.getCrossReferenceElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5920,7 +5960,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleCrossReference"
-    // PsiInternalXtextGrammarTestLanguage.g:2108:1: ruleCrossReference returns [Boolean current=false] : (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2148:1: ruleCrossReference returns [Boolean current=false] : (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) ;
     public final Boolean ruleCrossReference() throws RecognitionException {
         Boolean current = false;
 
@@ -5933,11 +5973,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2109:1: ( (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2110:2: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
+            // PsiInternalXtextGrammarTestLanguage.g:2149:1: ( (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2150:2: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2110:2: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
-            // PsiInternalXtextGrammarTestLanguage.g:2111:3: otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']'
+            // PsiInternalXtextGrammarTestLanguage.g:2150:2: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
+            // PsiInternalXtextGrammarTestLanguage.g:2151:3: otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']'
             {
 
             			markLeaf(elementTypeProvider.getCrossReference_LeftSquareBracketKeyword_0ElementType());
@@ -5946,11 +5986,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2118:3: ( (lv_type_1_0= ruleTypeRef ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2119:4: (lv_type_1_0= ruleTypeRef )
+            // PsiInternalXtextGrammarTestLanguage.g:2158:3: ( (lv_type_1_0= ruleTypeRef ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2159:4: (lv_type_1_0= ruleTypeRef )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2119:4: (lv_type_1_0= ruleTypeRef )
-            // PsiInternalXtextGrammarTestLanguage.g:2120:5: lv_type_1_0= ruleTypeRef
+            // PsiInternalXtextGrammarTestLanguage.g:2159:4: (lv_type_1_0= ruleTypeRef )
+            // PsiInternalXtextGrammarTestLanguage.g:2160:5: lv_type_1_0= ruleTypeRef
             {
 
             					markComposite(elementTypeProvider.getCrossReference_TypeTypeRefParserRuleCall_1_0ElementType());
@@ -5973,7 +6013,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:2133:3: (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:2173:3: (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )?
             int alt48=2;
             int LA48_0 = input.LA(1);
 
@@ -5982,7 +6022,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt48) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2134:4: otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2174:4: otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
                     {
 
                     				markLeaf(elementTypeProvider.getCrossReference_VerticalLineKeyword_2_0ElementType());
@@ -5991,11 +6031,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:2141:4: ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:2142:5: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
+                    // PsiInternalXtextGrammarTestLanguage.g:2181:4: ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2182:5: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2142:5: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
-                    // PsiInternalXtextGrammarTestLanguage.g:2143:6: lv_terminal_3_0= ruleCrossReferenceableTerminal
+                    // PsiInternalXtextGrammarTestLanguage.g:2182:5: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
+                    // PsiInternalXtextGrammarTestLanguage.g:2183:6: lv_terminal_3_0= ruleCrossReferenceableTerminal
                     {
 
                     						markComposite(elementTypeProvider.getCrossReference_TerminalCrossReferenceableTerminalParserRuleCall_2_1_0ElementType());
@@ -6050,7 +6090,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleCrossReferenceableTerminal"
-    // PsiInternalXtextGrammarTestLanguage.g:2168:1: entryRuleCrossReferenceableTerminal returns [Boolean current=false] : iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2208:1: entryRuleCrossReferenceableTerminal returns [Boolean current=false] : iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF ;
     public final Boolean entryRuleCrossReferenceableTerminal() throws RecognitionException {
         Boolean current = false;
 
@@ -6058,8 +6098,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2168:68: (iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2169:2: iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2208:68: (iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2209:2: iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF
             {
              markComposite(elementTypeProvider.getCrossReferenceableTerminalElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6085,7 +6125,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleCrossReferenceableTerminal"
-    // PsiInternalXtextGrammarTestLanguage.g:2175:1: ruleCrossReferenceableTerminal returns [Boolean current=false] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2215:1: ruleCrossReferenceableTerminal returns [Boolean current=false] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) ;
     public final Boolean ruleCrossReferenceableTerminal() throws RecognitionException {
         Boolean current = false;
 
@@ -6095,10 +6135,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2176:1: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2177:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
+            // PsiInternalXtextGrammarTestLanguage.g:2216:1: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2217:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2177:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
+            // PsiInternalXtextGrammarTestLanguage.g:2217:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -6116,7 +6156,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt49) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2178:3: this_Keyword_0= ruleKeyword
+                    // PsiInternalXtextGrammarTestLanguage.g:2218:3: this_Keyword_0= ruleKeyword
                     {
 
                     			markComposite(elementTypeProvider.getCrossReferenceableTerminal_KeywordParserRuleCall_0ElementType());
@@ -6134,7 +6174,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2187:3: this_RuleCall_1= ruleRuleCall
+                    // PsiInternalXtextGrammarTestLanguage.g:2227:3: this_RuleCall_1= ruleRuleCall
                     {
 
                     			markComposite(elementTypeProvider.getCrossReferenceableTerminal_RuleCallParserRuleCall_1ElementType());
@@ -6170,7 +6210,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleParenthesizedElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2199:1: entryRuleParenthesizedElement returns [Boolean current=false] : iv_ruleParenthesizedElement= ruleParenthesizedElement EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2239:1: entryRuleParenthesizedElement returns [Boolean current=false] : iv_ruleParenthesizedElement= ruleParenthesizedElement EOF ;
     public final Boolean entryRuleParenthesizedElement() throws RecognitionException {
         Boolean current = false;
 
@@ -6178,8 +6218,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2199:62: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2200:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2239:62: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2240:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
             {
              markComposite(elementTypeProvider.getParenthesizedElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6205,7 +6245,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleParenthesizedElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2206:1: ruleParenthesizedElement returns [Boolean current=false] : (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2246:1: ruleParenthesizedElement returns [Boolean current=false] : (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) ;
     public final Boolean ruleParenthesizedElement() throws RecognitionException {
         Boolean current = false;
 
@@ -6215,11 +6255,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2207:1: ( (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2208:2: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2247:1: ( (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2248:2: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2208:2: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
-            // PsiInternalXtextGrammarTestLanguage.g:2209:3: otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')'
+            // PsiInternalXtextGrammarTestLanguage.g:2248:2: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2249:3: otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')'
             {
 
             			markLeaf(elementTypeProvider.getParenthesizedElement_LeftParenthesisKeyword_0ElementType());
@@ -6266,7 +6306,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRulePredicatedGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:2235:1: entryRulePredicatedGroup returns [Boolean current=false] : iv_rulePredicatedGroup= rulePredicatedGroup EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2275:1: entryRulePredicatedGroup returns [Boolean current=false] : iv_rulePredicatedGroup= rulePredicatedGroup EOF ;
     public final Boolean entryRulePredicatedGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -6274,8 +6314,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2235:57: (iv_rulePredicatedGroup= rulePredicatedGroup EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2236:2: iv_rulePredicatedGroup= rulePredicatedGroup EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2275:57: (iv_rulePredicatedGroup= rulePredicatedGroup EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2276:2: iv_rulePredicatedGroup= rulePredicatedGroup EOF
             {
              markComposite(elementTypeProvider.getPredicatedGroupElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6301,7 +6341,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "rulePredicatedGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:2242:1: rulePredicatedGroup returns [Boolean current=false] : (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2282:1: rulePredicatedGroup returns [Boolean current=false] : (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) ;
     public final Boolean rulePredicatedGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -6313,13 +6353,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2243:1: ( (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2244:2: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2283:1: ( (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2284:2: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2244:2: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
-            // PsiInternalXtextGrammarTestLanguage.g:2245:3: this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')'
+            // PsiInternalXtextGrammarTestLanguage.g:2284:2: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2285:3: this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')'
             {
 
+            			if (!current) {
+            				associateWithSemanticElement();
+            				current = true;
+            			}
             			markComposite(elementTypeProvider.getPredicatedGroup_PredicateParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_7);
@@ -6338,11 +6382,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2260:3: ( (lv_elements_2_0= ruleAlternatives ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2261:4: (lv_elements_2_0= ruleAlternatives )
+            // PsiInternalXtextGrammarTestLanguage.g:2304:3: ( (lv_elements_2_0= ruleAlternatives ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2305:4: (lv_elements_2_0= ruleAlternatives )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2261:4: (lv_elements_2_0= ruleAlternatives )
-            // PsiInternalXtextGrammarTestLanguage.g:2262:5: lv_elements_2_0= ruleAlternatives
+            // PsiInternalXtextGrammarTestLanguage.g:2305:4: (lv_elements_2_0= ruleAlternatives )
+            // PsiInternalXtextGrammarTestLanguage.g:2306:5: lv_elements_2_0= ruleAlternatives
             {
 
             					markComposite(elementTypeProvider.getPredicatedGroup_ElementsAlternativesParserRuleCall_2_0ElementType());
@@ -6391,7 +6435,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTerminalRule"
-    // PsiInternalXtextGrammarTestLanguage.g:2286:1: entryRuleTerminalRule returns [Boolean current=false] : iv_ruleTerminalRule= ruleTerminalRule EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2330:1: entryRuleTerminalRule returns [Boolean current=false] : iv_ruleTerminalRule= ruleTerminalRule EOF ;
     public final Boolean entryRuleTerminalRule() throws RecognitionException {
         Boolean current = false;
 
@@ -6399,8 +6443,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2286:54: (iv_ruleTerminalRule= ruleTerminalRule EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2287:2: iv_ruleTerminalRule= ruleTerminalRule EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2330:54: (iv_ruleTerminalRule= ruleTerminalRule EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2331:2: iv_ruleTerminalRule= ruleTerminalRule EOF
             {
              markComposite(elementTypeProvider.getTerminalRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6426,7 +6470,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTerminalRule"
-    // PsiInternalXtextGrammarTestLanguage.g:2293:1: ruleTerminalRule returns [Boolean current=false] : (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2337:1: ruleTerminalRule returns [Boolean current=false] : (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) ;
     public final Boolean ruleTerminalRule() throws RecognitionException {
         Boolean current = false;
 
@@ -6442,11 +6486,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2294:1: ( (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2295:2: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
+            // PsiInternalXtextGrammarTestLanguage.g:2338:1: ( (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2339:2: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2295:2: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
-            // PsiInternalXtextGrammarTestLanguage.g:2296:3: otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';'
+            // PsiInternalXtextGrammarTestLanguage.g:2339:2: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
+            // PsiInternalXtextGrammarTestLanguage.g:2340:3: otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';'
             {
 
             			markLeaf(elementTypeProvider.getTerminalRule_TerminalKeyword_0ElementType());
@@ -6455,7 +6499,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2303:3: ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2347:3: ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) )
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -6473,16 +6517,16 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt51) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2304:4: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2348:4: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2304:4: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:2305:5: ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2348:4: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2349:5: ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2305:5: ( (lv_fragment_1_0= 'fragment' ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:2306:6: (lv_fragment_1_0= 'fragment' )
+                    // PsiInternalXtextGrammarTestLanguage.g:2349:5: ( (lv_fragment_1_0= 'fragment' ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2350:6: (lv_fragment_1_0= 'fragment' )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2306:6: (lv_fragment_1_0= 'fragment' )
-                    // PsiInternalXtextGrammarTestLanguage.g:2307:7: lv_fragment_1_0= 'fragment'
+                    // PsiInternalXtextGrammarTestLanguage.g:2350:6: (lv_fragment_1_0= 'fragment' )
+                    // PsiInternalXtextGrammarTestLanguage.g:2351:7: lv_fragment_1_0= 'fragment'
                     {
 
                     							markLeaf(elementTypeProvider.getTerminalRule_FragmentFragmentKeyword_1_0_0_0ElementType());
@@ -6503,11 +6547,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:2322:5: ( (lv_name_2_0= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:2323:6: (lv_name_2_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:2366:5: ( (lv_name_2_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2367:6: (lv_name_2_0= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2323:6: (lv_name_2_0= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:2324:7: lv_name_2_0= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:2367:6: (lv_name_2_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:2368:7: lv_name_2_0= RULE_ID
                     {
 
                     							markLeaf(elementTypeProvider.getTerminalRule_NameIDTerminalRuleCall_1_0_1_0ElementType());
@@ -6535,16 +6579,16 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2341:4: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
+                    // PsiInternalXtextGrammarTestLanguage.g:2385:4: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2341:4: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
-                    // PsiInternalXtextGrammarTestLanguage.g:2342:5: ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )?
+                    // PsiInternalXtextGrammarTestLanguage.g:2385:4: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
+                    // PsiInternalXtextGrammarTestLanguage.g:2386:5: ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )?
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2342:5: ( (lv_name_3_0= RULE_ID ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:2343:6: (lv_name_3_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:2386:5: ( (lv_name_3_0= RULE_ID ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2387:6: (lv_name_3_0= RULE_ID )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2343:6: (lv_name_3_0= RULE_ID )
-                    // PsiInternalXtextGrammarTestLanguage.g:2344:7: lv_name_3_0= RULE_ID
+                    // PsiInternalXtextGrammarTestLanguage.g:2387:6: (lv_name_3_0= RULE_ID )
+                    // PsiInternalXtextGrammarTestLanguage.g:2388:7: lv_name_3_0= RULE_ID
                     {
 
                     							markLeaf(elementTypeProvider.getTerminalRule_NameIDTerminalRuleCall_1_1_0_0ElementType());
@@ -6565,7 +6609,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:2359:5: (this_ReturnsClause_4= ruleReturnsClause[$current] )?
+                    // PsiInternalXtextGrammarTestLanguage.g:2403:5: (this_ReturnsClause_4= ruleReturnsClause[$current] )?
                     int alt50=2;
                     int LA50_0 = input.LA(1);
 
@@ -6574,9 +6618,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     switch (alt50) {
                         case 1 :
-                            // PsiInternalXtextGrammarTestLanguage.g:2360:6: this_ReturnsClause_4= ruleReturnsClause[$current]
+                            // PsiInternalXtextGrammarTestLanguage.g:2404:6: this_ReturnsClause_4= ruleReturnsClause[$current]
                             {
 
+                            						if (!current) {
+                            							associateWithSemanticElement();
+                            							current = true;
+                            						}
                             						markComposite(elementTypeProvider.getTerminalRule_ReturnsClauseParserRuleCall_1_1_1ElementType());
                             					
                             pushFollow(FollowSets000.FOLLOW_17);
@@ -6610,11 +6658,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_5);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2378:3: ( (lv_alternatives_6_0= ruleTerminalAlternatives ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2379:4: (lv_alternatives_6_0= ruleTerminalAlternatives )
+            // PsiInternalXtextGrammarTestLanguage.g:2426:3: ( (lv_alternatives_6_0= ruleTerminalAlternatives ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2427:4: (lv_alternatives_6_0= ruleTerminalAlternatives )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2379:4: (lv_alternatives_6_0= ruleTerminalAlternatives )
-            // PsiInternalXtextGrammarTestLanguage.g:2380:5: lv_alternatives_6_0= ruleTerminalAlternatives
+            // PsiInternalXtextGrammarTestLanguage.g:2427:4: (lv_alternatives_6_0= ruleTerminalAlternatives )
+            // PsiInternalXtextGrammarTestLanguage.g:2428:5: lv_alternatives_6_0= ruleTerminalAlternatives
             {
 
             					markComposite(elementTypeProvider.getTerminalRule_AlternativesTerminalAlternativesParserRuleCall_3_0ElementType());
@@ -6663,7 +6711,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTerminalAlternatives"
-    // PsiInternalXtextGrammarTestLanguage.g:2404:1: entryRuleTerminalAlternatives returns [Boolean current=false] : iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2452:1: entryRuleTerminalAlternatives returns [Boolean current=false] : iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF ;
     public final Boolean entryRuleTerminalAlternatives() throws RecognitionException {
         Boolean current = false;
 
@@ -6671,8 +6719,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2404:62: (iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2405:2: iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2452:62: (iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2453:2: iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF
             {
              markComposite(elementTypeProvider.getTerminalAlternativesElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6698,7 +6746,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTerminalAlternatives"
-    // PsiInternalXtextGrammarTestLanguage.g:2411:1: ruleTerminalAlternatives returns [Boolean current=false] : (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2459:1: ruleTerminalAlternatives returns [Boolean current=false] : (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) ;
     public final Boolean ruleTerminalAlternatives() throws RecognitionException {
         Boolean current = false;
 
@@ -6709,11 +6757,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2412:1: ( (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2413:2: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2460:1: ( (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2461:2: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2413:2: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2414:3: this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2461:2: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2462:3: this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getTerminalAlternatives_TerminalGroupParserRuleCall_0ElementType());
@@ -6727,7 +6775,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_TerminalGroup_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2422:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2470:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
             int alt53=2;
             int LA53_0 = input.LA(1);
 
@@ -6736,10 +6784,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt53) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2423:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:2471:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2423:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:2424:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:2471:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:2472:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getTerminalAlternatives_AlternativesElementsAction_1_0ElementType());
@@ -6749,7 +6797,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:2430:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:2478:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
                     int cnt52=0;
                     loop52:
                     do {
@@ -6763,7 +6811,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt52) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2431:5: otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2479:5: otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getTerminalAlternatives_VerticalLineKeyword_1_1_0ElementType());
@@ -6772,11 +6820,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_2);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2438:5: ( (lv_elements_3_0= ruleTerminalGroup ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2439:6: (lv_elements_3_0= ruleTerminalGroup )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2486:5: ( (lv_elements_3_0= ruleTerminalGroup ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2487:6: (lv_elements_3_0= ruleTerminalGroup )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2439:6: (lv_elements_3_0= ruleTerminalGroup )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2440:7: lv_elements_3_0= ruleTerminalGroup
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2487:6: (lv_elements_3_0= ruleTerminalGroup )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2488:7: lv_elements_3_0= ruleTerminalGroup
                     	    {
 
                     	    							markComposite(elementTypeProvider.getTerminalAlternatives_ElementsTerminalGroupParserRuleCall_1_1_1_0ElementType());
@@ -6837,7 +6885,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTerminalGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:2459:1: entryRuleTerminalGroup returns [Boolean current=false] : iv_ruleTerminalGroup= ruleTerminalGroup EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2507:1: entryRuleTerminalGroup returns [Boolean current=false] : iv_ruleTerminalGroup= ruleTerminalGroup EOF ;
     public final Boolean entryRuleTerminalGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -6845,8 +6893,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2459:55: (iv_ruleTerminalGroup= ruleTerminalGroup EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2460:2: iv_ruleTerminalGroup= ruleTerminalGroup EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2507:55: (iv_ruleTerminalGroup= ruleTerminalGroup EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2508:2: iv_ruleTerminalGroup= ruleTerminalGroup EOF
             {
              markComposite(elementTypeProvider.getTerminalGroupElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6872,7 +6920,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTerminalGroup"
-    // PsiInternalXtextGrammarTestLanguage.g:2466:1: ruleTerminalGroup returns [Boolean current=false] : (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2514:1: ruleTerminalGroup returns [Boolean current=false] : (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) ;
     public final Boolean ruleTerminalGroup() throws RecognitionException {
         Boolean current = false;
 
@@ -6882,11 +6930,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2467:1: ( (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2468:2: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2515:1: ( (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2516:2: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2468:2: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2469:3: this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2516:2: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2517:3: this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getTerminalGroup_TerminalTokenParserRuleCall_0ElementType());
@@ -6900,7 +6948,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_TerminalToken_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2477:3: ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2525:3: ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -6909,10 +6957,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt55) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2478:4: () ( (lv_elements_2_0= ruleTerminalToken ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:2526:4: () ( (lv_elements_2_0= ruleTerminalToken ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2478:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:2479:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:2526:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:2527:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getTerminalGroup_GroupElementsAction_1_0ElementType());
@@ -6922,7 +6970,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:2485:4: ( (lv_elements_2_0= ruleTerminalToken ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:2533:4: ( (lv_elements_2_0= ruleTerminalToken ) )+
                     int cnt54=0;
                     loop54:
                     do {
@@ -6936,10 +6984,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt54) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2486:5: (lv_elements_2_0= ruleTerminalToken )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2534:5: (lv_elements_2_0= ruleTerminalToken )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2486:5: (lv_elements_2_0= ruleTerminalToken )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2487:6: lv_elements_2_0= ruleTerminalToken
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2534:5: (lv_elements_2_0= ruleTerminalToken )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:2535:6: lv_elements_2_0= ruleTerminalToken
                     	    {
 
                     	    						markComposite(elementTypeProvider.getTerminalGroup_ElementsTerminalTokenParserRuleCall_1_1_0ElementType());
@@ -6997,7 +7045,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTerminalToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2505:1: entryRuleTerminalToken returns [Boolean current=false] : iv_ruleTerminalToken= ruleTerminalToken EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2553:1: entryRuleTerminalToken returns [Boolean current=false] : iv_ruleTerminalToken= ruleTerminalToken EOF ;
     public final Boolean entryRuleTerminalToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7005,8 +7053,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2505:55: (iv_ruleTerminalToken= ruleTerminalToken EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2506:2: iv_ruleTerminalToken= ruleTerminalToken EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2553:55: (iv_ruleTerminalToken= ruleTerminalToken EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2554:2: iv_ruleTerminalToken= ruleTerminalToken EOF
             {
              markComposite(elementTypeProvider.getTerminalTokenElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7032,7 +7080,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTerminalToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2512:1: ruleTerminalToken returns [Boolean current=false] : (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2560:1: ruleTerminalToken returns [Boolean current=false] : (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) ;
     public final Boolean ruleTerminalToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7042,11 +7090,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2513:1: ( (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2514:2: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2561:1: ( (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2562:2: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2514:2: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2515:3: this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:2562:2: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2563:3: this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )?
             {
 
             			markComposite(elementTypeProvider.getTerminalToken_TerminalTokenElementParserRuleCall_0ElementType());
@@ -7060,7 +7108,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_TerminalTokenElement_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2523:3: (this_Cardinalities_1= ruleCardinalities[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:2571:3: (this_Cardinalities_1= ruleCardinalities[$current] )?
             int alt56=2;
             int LA56_0 = input.LA(1);
 
@@ -7069,9 +7117,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt56) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2524:4: this_Cardinalities_1= ruleCardinalities[$current]
+                    // PsiInternalXtextGrammarTestLanguage.g:2572:4: this_Cardinalities_1= ruleCardinalities[$current]
                     {
 
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
                     				markComposite(elementTypeProvider.getTerminalToken_CardinalitiesParserRuleCall_1ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_2);
@@ -7108,7 +7160,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleTerminalTokenElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2537:1: entryRuleTerminalTokenElement returns [Boolean current=false] : iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2589:1: entryRuleTerminalTokenElement returns [Boolean current=false] : iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF ;
     public final Boolean entryRuleTerminalTokenElement() throws RecognitionException {
         Boolean current = false;
 
@@ -7116,8 +7168,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2537:62: (iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2538:2: iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2589:62: (iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2590:2: iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF
             {
              markComposite(elementTypeProvider.getTerminalTokenElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7143,7 +7195,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleTerminalTokenElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2544:1: ruleTerminalTokenElement returns [Boolean current=false] : (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2596:1: ruleTerminalTokenElement returns [Boolean current=false] : (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) ;
     public final Boolean ruleTerminalTokenElement() throws RecognitionException {
         Boolean current = false;
 
@@ -7161,10 +7213,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2545:1: ( (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2546:2: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2597:1: ( (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2598:2: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2546:2: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2598:2: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
             int alt57=6;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -7207,7 +7259,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             switch (alt57) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2547:3: this_CharacterRange_0= ruleCharacterRange
+                    // PsiInternalXtextGrammarTestLanguage.g:2599:3: this_CharacterRange_0= ruleCharacterRange
                     {
 
                     			markComposite(elementTypeProvider.getTerminalTokenElement_CharacterRangeParserRuleCall_0ElementType());
@@ -7225,7 +7277,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2556:3: this_TerminalRuleCall_1= ruleTerminalRuleCall
+                    // PsiInternalXtextGrammarTestLanguage.g:2608:3: this_TerminalRuleCall_1= ruleTerminalRuleCall
                     {
 
                     			markComposite(elementTypeProvider.getTerminalTokenElement_TerminalRuleCallParserRuleCall_1ElementType());
@@ -7243,7 +7295,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 3 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2565:3: this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement
+                    // PsiInternalXtextGrammarTestLanguage.g:2617:3: this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement
                     {
 
                     			markComposite(elementTypeProvider.getTerminalTokenElement_ParenthesizedTerminalElementParserRuleCall_2ElementType());
@@ -7261,7 +7313,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 4 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2574:3: this_AbstractNegatedToken_3= ruleAbstractNegatedToken
+                    // PsiInternalXtextGrammarTestLanguage.g:2626:3: this_AbstractNegatedToken_3= ruleAbstractNegatedToken
                     {
 
                     			markComposite(elementTypeProvider.getTerminalTokenElement_AbstractNegatedTokenParserRuleCall_3ElementType());
@@ -7279,7 +7331,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 5 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2583:3: this_Wildcard_4= ruleWildcard
+                    // PsiInternalXtextGrammarTestLanguage.g:2635:3: this_Wildcard_4= ruleWildcard
                     {
 
                     			markComposite(elementTypeProvider.getTerminalTokenElement_WildcardParserRuleCall_4ElementType());
@@ -7297,7 +7349,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 6 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2592:3: this_EOF_5= ruleEOF
+                    // PsiInternalXtextGrammarTestLanguage.g:2644:3: this_EOF_5= ruleEOF
                     {
 
                     			markComposite(elementTypeProvider.getTerminalTokenElement_EOFParserRuleCall_5ElementType());
@@ -7333,7 +7385,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleParenthesizedTerminalElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2604:1: entryRuleParenthesizedTerminalElement returns [Boolean current=false] : iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2656:1: entryRuleParenthesizedTerminalElement returns [Boolean current=false] : iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF ;
     public final Boolean entryRuleParenthesizedTerminalElement() throws RecognitionException {
         Boolean current = false;
 
@@ -7341,8 +7393,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2604:70: (iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2605:2: iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2656:70: (iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2657:2: iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF
             {
              markComposite(elementTypeProvider.getParenthesizedTerminalElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7368,7 +7420,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleParenthesizedTerminalElement"
-    // PsiInternalXtextGrammarTestLanguage.g:2611:1: ruleParenthesizedTerminalElement returns [Boolean current=false] : (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2663:1: ruleParenthesizedTerminalElement returns [Boolean current=false] : (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) ;
     public final Boolean ruleParenthesizedTerminalElement() throws RecognitionException {
         Boolean current = false;
 
@@ -7378,11 +7430,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2612:1: ( (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2613:2: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2664:1: ( (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2665:2: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2613:2: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
-            // PsiInternalXtextGrammarTestLanguage.g:2614:3: otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')'
+            // PsiInternalXtextGrammarTestLanguage.g:2665:2: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
+            // PsiInternalXtextGrammarTestLanguage.g:2666:3: otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')'
             {
 
             			markLeaf(elementTypeProvider.getParenthesizedTerminalElement_LeftParenthesisKeyword_0ElementType());
@@ -7429,7 +7481,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleAbstractNegatedToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2640:1: entryRuleAbstractNegatedToken returns [Boolean current=false] : iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2692:1: entryRuleAbstractNegatedToken returns [Boolean current=false] : iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF ;
     public final Boolean entryRuleAbstractNegatedToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7437,8 +7489,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2640:62: (iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2641:2: iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2692:62: (iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2693:2: iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF
             {
              markComposite(elementTypeProvider.getAbstractNegatedTokenElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7464,7 +7516,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleAbstractNegatedToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2647:1: ruleAbstractNegatedToken returns [Boolean current=false] : (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2699:1: ruleAbstractNegatedToken returns [Boolean current=false] : (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) ;
     public final Boolean ruleAbstractNegatedToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7474,10 +7526,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2648:1: ( (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2649:2: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
+            // PsiInternalXtextGrammarTestLanguage.g:2700:1: ( (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2701:2: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2649:2: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
+            // PsiInternalXtextGrammarTestLanguage.g:2701:2: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
             int alt58=2;
             int LA58_0 = input.LA(1);
 
@@ -7495,7 +7547,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt58) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2650:3: this_NegatedToken_0= ruleNegatedToken
+                    // PsiInternalXtextGrammarTestLanguage.g:2702:3: this_NegatedToken_0= ruleNegatedToken
                     {
 
                     			markComposite(elementTypeProvider.getAbstractNegatedToken_NegatedTokenParserRuleCall_0ElementType());
@@ -7513,7 +7565,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2659:3: this_UntilToken_1= ruleUntilToken
+                    // PsiInternalXtextGrammarTestLanguage.g:2711:3: this_UntilToken_1= ruleUntilToken
                     {
 
                     			markComposite(elementTypeProvider.getAbstractNegatedToken_UntilTokenParserRuleCall_1ElementType());
@@ -7549,7 +7601,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleNegatedToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2671:1: entryRuleNegatedToken returns [Boolean current=false] : iv_ruleNegatedToken= ruleNegatedToken EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2723:1: entryRuleNegatedToken returns [Boolean current=false] : iv_ruleNegatedToken= ruleNegatedToken EOF ;
     public final Boolean entryRuleNegatedToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7557,8 +7609,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2671:54: (iv_ruleNegatedToken= ruleNegatedToken EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2672:2: iv_ruleNegatedToken= ruleNegatedToken EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2723:54: (iv_ruleNegatedToken= ruleNegatedToken EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2724:2: iv_ruleNegatedToken= ruleNegatedToken EOF
             {
              markComposite(elementTypeProvider.getNegatedTokenElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7584,7 +7636,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleNegatedToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2678:1: ruleNegatedToken returns [Boolean current=false] : (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2730:1: ruleNegatedToken returns [Boolean current=false] : (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
     public final Boolean ruleNegatedToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7593,11 +7645,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2679:1: ( (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2680:2: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2731:1: ( (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2732:2: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2680:2: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2681:3: otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2732:2: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2733:3: otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
             {
 
             			markLeaf(elementTypeProvider.getNegatedToken_ExclamationMarkKeyword_0ElementType());
@@ -7606,11 +7658,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2688:3: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2689:4: (lv_terminal_1_0= ruleTerminalTokenElement )
+            // PsiInternalXtextGrammarTestLanguage.g:2740:3: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2741:4: (lv_terminal_1_0= ruleTerminalTokenElement )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2689:4: (lv_terminal_1_0= ruleTerminalTokenElement )
-            // PsiInternalXtextGrammarTestLanguage.g:2690:5: lv_terminal_1_0= ruleTerminalTokenElement
+            // PsiInternalXtextGrammarTestLanguage.g:2741:4: (lv_terminal_1_0= ruleTerminalTokenElement )
+            // PsiInternalXtextGrammarTestLanguage.g:2742:5: lv_terminal_1_0= ruleTerminalTokenElement
             {
 
             					markComposite(elementTypeProvider.getNegatedToken_TerminalTerminalTokenElementParserRuleCall_1_0ElementType());
@@ -7652,7 +7704,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleUntilToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2707:1: entryRuleUntilToken returns [Boolean current=false] : iv_ruleUntilToken= ruleUntilToken EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2759:1: entryRuleUntilToken returns [Boolean current=false] : iv_ruleUntilToken= ruleUntilToken EOF ;
     public final Boolean entryRuleUntilToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7660,8 +7712,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2707:52: (iv_ruleUntilToken= ruleUntilToken EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2708:2: iv_ruleUntilToken= ruleUntilToken EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2759:52: (iv_ruleUntilToken= ruleUntilToken EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2760:2: iv_ruleUntilToken= ruleUntilToken EOF
             {
              markComposite(elementTypeProvider.getUntilTokenElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7687,7 +7739,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleUntilToken"
-    // PsiInternalXtextGrammarTestLanguage.g:2714:1: ruleUntilToken returns [Boolean current=false] : (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2766:1: ruleUntilToken returns [Boolean current=false] : (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
     public final Boolean ruleUntilToken() throws RecognitionException {
         Boolean current = false;
 
@@ -7696,11 +7748,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2715:1: ( (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2716:2: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2767:1: ( (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2768:2: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2716:2: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2717:3: otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2768:2: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2769:3: otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
             {
 
             			markLeaf(elementTypeProvider.getUntilToken_HyphenMinusGreaterThanSignKeyword_0ElementType());
@@ -7709,11 +7761,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2724:3: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2725:4: (lv_terminal_1_0= ruleTerminalTokenElement )
+            // PsiInternalXtextGrammarTestLanguage.g:2776:3: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2777:4: (lv_terminal_1_0= ruleTerminalTokenElement )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2725:4: (lv_terminal_1_0= ruleTerminalTokenElement )
-            // PsiInternalXtextGrammarTestLanguage.g:2726:5: lv_terminal_1_0= ruleTerminalTokenElement
+            // PsiInternalXtextGrammarTestLanguage.g:2777:4: (lv_terminal_1_0= ruleTerminalTokenElement )
+            // PsiInternalXtextGrammarTestLanguage.g:2778:5: lv_terminal_1_0= ruleTerminalTokenElement
             {
 
             					markComposite(elementTypeProvider.getUntilToken_TerminalTerminalTokenElementParserRuleCall_1_0ElementType());
@@ -7755,7 +7807,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleWildcard"
-    // PsiInternalXtextGrammarTestLanguage.g:2743:1: entryRuleWildcard returns [Boolean current=false] : iv_ruleWildcard= ruleWildcard EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2795:1: entryRuleWildcard returns [Boolean current=false] : iv_ruleWildcard= ruleWildcard EOF ;
     public final Boolean entryRuleWildcard() throws RecognitionException {
         Boolean current = false;
 
@@ -7763,8 +7815,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2743:50: (iv_ruleWildcard= ruleWildcard EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2744:2: iv_ruleWildcard= ruleWildcard EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2795:50: (iv_ruleWildcard= ruleWildcard EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2796:2: iv_ruleWildcard= ruleWildcard EOF
             {
              markComposite(elementTypeProvider.getWildcardElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7790,21 +7842,21 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleWildcard"
-    // PsiInternalXtextGrammarTestLanguage.g:2750:1: ruleWildcard returns [Boolean current=false] : ( () otherlv_1= '.' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2802:1: ruleWildcard returns [Boolean current=false] : ( () otherlv_1= '.' ) ;
     public final Boolean ruleWildcard() throws RecognitionException {
         Boolean current = false;
 
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2751:1: ( ( () otherlv_1= '.' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2752:2: ( () otherlv_1= '.' )
+            // PsiInternalXtextGrammarTestLanguage.g:2803:1: ( ( () otherlv_1= '.' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2804:2: ( () otherlv_1= '.' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2752:2: ( () otherlv_1= '.' )
-            // PsiInternalXtextGrammarTestLanguage.g:2753:3: () otherlv_1= '.'
+            // PsiInternalXtextGrammarTestLanguage.g:2804:2: ( () otherlv_1= '.' )
+            // PsiInternalXtextGrammarTestLanguage.g:2805:3: () otherlv_1= '.'
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2753:3: ()
-            // PsiInternalXtextGrammarTestLanguage.g:2754:4: 
+            // PsiInternalXtextGrammarTestLanguage.g:2805:3: ()
+            // PsiInternalXtextGrammarTestLanguage.g:2806:4: 
             {
 
             				precedeComposite(elementTypeProvider.getWildcard_WildcardAction_0ElementType());
@@ -7840,7 +7892,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleEOF"
-    // PsiInternalXtextGrammarTestLanguage.g:2771:1: entryRuleEOF returns [Boolean current=false] : iv_ruleEOF= ruleEOF EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2823:1: entryRuleEOF returns [Boolean current=false] : iv_ruleEOF= ruleEOF EOF ;
     public final Boolean entryRuleEOF() throws RecognitionException {
         Boolean current = false;
 
@@ -7848,8 +7900,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2771:45: (iv_ruleEOF= ruleEOF EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2772:2: iv_ruleEOF= ruleEOF EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2823:45: (iv_ruleEOF= ruleEOF EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2824:2: iv_ruleEOF= ruleEOF EOF
             {
              markComposite(elementTypeProvider.getEOFElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7875,21 +7927,21 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleEOF"
-    // PsiInternalXtextGrammarTestLanguage.g:2778:1: ruleEOF returns [Boolean current=false] : ( () otherlv_1= 'EOF' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2830:1: ruleEOF returns [Boolean current=false] : ( () otherlv_1= 'EOF' ) ;
     public final Boolean ruleEOF() throws RecognitionException {
         Boolean current = false;
 
         Token otherlv_1=null;
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2779:1: ( ( () otherlv_1= 'EOF' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2780:2: ( () otherlv_1= 'EOF' )
+            // PsiInternalXtextGrammarTestLanguage.g:2831:1: ( ( () otherlv_1= 'EOF' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2832:2: ( () otherlv_1= 'EOF' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2780:2: ( () otherlv_1= 'EOF' )
-            // PsiInternalXtextGrammarTestLanguage.g:2781:3: () otherlv_1= 'EOF'
+            // PsiInternalXtextGrammarTestLanguage.g:2832:2: ( () otherlv_1= 'EOF' )
+            // PsiInternalXtextGrammarTestLanguage.g:2833:3: () otherlv_1= 'EOF'
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2781:3: ()
-            // PsiInternalXtextGrammarTestLanguage.g:2782:4: 
+            // PsiInternalXtextGrammarTestLanguage.g:2833:3: ()
+            // PsiInternalXtextGrammarTestLanguage.g:2834:4: 
             {
 
             				precedeComposite(elementTypeProvider.getEOF_EOFAction_0ElementType());
@@ -7925,7 +7977,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleCharacterRange"
-    // PsiInternalXtextGrammarTestLanguage.g:2799:1: entryRuleCharacterRange returns [Boolean current=false] : iv_ruleCharacterRange= ruleCharacterRange EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2851:1: entryRuleCharacterRange returns [Boolean current=false] : iv_ruleCharacterRange= ruleCharacterRange EOF ;
     public final Boolean entryRuleCharacterRange() throws RecognitionException {
         Boolean current = false;
 
@@ -7933,8 +7985,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2799:56: (iv_ruleCharacterRange= ruleCharacterRange EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2800:2: iv_ruleCharacterRange= ruleCharacterRange EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2851:56: (iv_ruleCharacterRange= ruleCharacterRange EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2852:2: iv_ruleCharacterRange= ruleCharacterRange EOF
             {
              markComposite(elementTypeProvider.getCharacterRangeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7960,7 +8012,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleCharacterRange"
-    // PsiInternalXtextGrammarTestLanguage.g:2806:1: ruleCharacterRange returns [Boolean current=false] : (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2858:1: ruleCharacterRange returns [Boolean current=false] : (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) ;
     public final Boolean ruleCharacterRange() throws RecognitionException {
         Boolean current = false;
 
@@ -7971,11 +8023,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2807:1: ( (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2808:2: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2859:1: ( (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2860:2: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2808:2: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2809:3: this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:2860:2: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2861:3: this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
             {
 
             			markComposite(elementTypeProvider.getCharacterRange_KeywordParserRuleCall_0ElementType());
@@ -7989,7 +8041,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_Keyword_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2817:3: ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:2869:3: ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -7998,10 +8050,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt59) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2818:4: () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2870:4: () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2818:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:2819:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:2870:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:2871:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getCharacterRange_CharacterRangeLeftAction_1_0ElementType());
@@ -8018,11 +8070,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:2832:4: ( (lv_right_3_0= ruleKeyword ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:2833:5: (lv_right_3_0= ruleKeyword )
+                    // PsiInternalXtextGrammarTestLanguage.g:2884:4: ( (lv_right_3_0= ruleKeyword ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:2885:5: (lv_right_3_0= ruleKeyword )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2833:5: (lv_right_3_0= ruleKeyword )
-                    // PsiInternalXtextGrammarTestLanguage.g:2834:6: lv_right_3_0= ruleKeyword
+                    // PsiInternalXtextGrammarTestLanguage.g:2885:5: (lv_right_3_0= ruleKeyword )
+                    // PsiInternalXtextGrammarTestLanguage.g:2886:6: lv_right_3_0= ruleKeyword
                     {
 
                     						markComposite(elementTypeProvider.getCharacterRange_RightKeywordParserRuleCall_1_2_0ElementType());
@@ -8070,7 +8122,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleEnumRule"
-    // PsiInternalXtextGrammarTestLanguage.g:2852:1: entryRuleEnumRule returns [Boolean current=false] : iv_ruleEnumRule= ruleEnumRule EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2904:1: entryRuleEnumRule returns [Boolean current=false] : iv_ruleEnumRule= ruleEnumRule EOF ;
     public final Boolean entryRuleEnumRule() throws RecognitionException {
         Boolean current = false;
 
@@ -8078,8 +8130,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2852:50: (iv_ruleEnumRule= ruleEnumRule EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2853:2: iv_ruleEnumRule= ruleEnumRule EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2904:50: (iv_ruleEnumRule= ruleEnumRule EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2905:2: iv_ruleEnumRule= ruleEnumRule EOF
             {
              markComposite(elementTypeProvider.getEnumRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8105,7 +8157,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleEnumRule"
-    // PsiInternalXtextGrammarTestLanguage.g:2859:1: ruleEnumRule returns [Boolean current=false] : (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2911:1: ruleEnumRule returns [Boolean current=false] : (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) ;
     public final Boolean ruleEnumRule() throws RecognitionException {
         Boolean current = false;
 
@@ -8119,11 +8171,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2860:1: ( (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2861:2: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
+            // PsiInternalXtextGrammarTestLanguage.g:2912:1: ( (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2913:2: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2861:2: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
-            // PsiInternalXtextGrammarTestLanguage.g:2862:3: otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';'
+            // PsiInternalXtextGrammarTestLanguage.g:2913:2: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
+            // PsiInternalXtextGrammarTestLanguage.g:2914:3: otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';'
             {
 
             			markLeaf(elementTypeProvider.getEnumRule_EnumKeyword_0ElementType());
@@ -8132,11 +8184,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2869:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2870:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:2921:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2922:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2870:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:2871:5: lv_name_1_0= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:2922:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:2923:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEnumRule_NameIDTerminalRuleCall_1_0ElementType());
@@ -8157,7 +8209,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:2886:3: (this_ReturnsClause_2= ruleReturnsClause[$current] )?
+            // PsiInternalXtextGrammarTestLanguage.g:2938:3: (this_ReturnsClause_2= ruleReturnsClause[$current] )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -8166,9 +8218,13 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt60) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2887:4: this_ReturnsClause_2= ruleReturnsClause[$current]
+                    // PsiInternalXtextGrammarTestLanguage.g:2939:4: this_ReturnsClause_2= ruleReturnsClause[$current]
                     {
 
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
                     				markComposite(elementTypeProvider.getEnumRule_ReturnsClauseParserRuleCall_2ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_17);
@@ -8193,11 +8249,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             			doneLeaf(otherlv_3);
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2903:3: ( (lv_alternatives_4_0= ruleEnumLiterals ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2904:4: (lv_alternatives_4_0= ruleEnumLiterals )
+            // PsiInternalXtextGrammarTestLanguage.g:2959:3: ( (lv_alternatives_4_0= ruleEnumLiterals ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2960:4: (lv_alternatives_4_0= ruleEnumLiterals )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2904:4: (lv_alternatives_4_0= ruleEnumLiterals )
-            // PsiInternalXtextGrammarTestLanguage.g:2905:5: lv_alternatives_4_0= ruleEnumLiterals
+            // PsiInternalXtextGrammarTestLanguage.g:2960:4: (lv_alternatives_4_0= ruleEnumLiterals )
+            // PsiInternalXtextGrammarTestLanguage.g:2961:5: lv_alternatives_4_0= ruleEnumLiterals
             {
 
             					markComposite(elementTypeProvider.getEnumRule_AlternativesEnumLiteralsParserRuleCall_4_0ElementType());
@@ -8246,7 +8302,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleEnumLiterals"
-    // PsiInternalXtextGrammarTestLanguage.g:2929:1: entryRuleEnumLiterals returns [Boolean current=false] : iv_ruleEnumLiterals= ruleEnumLiterals EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:2985:1: entryRuleEnumLiterals returns [Boolean current=false] : iv_ruleEnumLiterals= ruleEnumLiterals EOF ;
     public final Boolean entryRuleEnumLiterals() throws RecognitionException {
         Boolean current = false;
 
@@ -8254,8 +8310,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2929:54: (iv_ruleEnumLiterals= ruleEnumLiterals EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2930:2: iv_ruleEnumLiterals= ruleEnumLiterals EOF
+            // PsiInternalXtextGrammarTestLanguage.g:2985:54: (iv_ruleEnumLiterals= ruleEnumLiterals EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:2986:2: iv_ruleEnumLiterals= ruleEnumLiterals EOF
             {
              markComposite(elementTypeProvider.getEnumLiteralsElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8281,7 +8337,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleEnumLiterals"
-    // PsiInternalXtextGrammarTestLanguage.g:2936:1: ruleEnumLiterals returns [Boolean current=false] : (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:2992:1: ruleEnumLiterals returns [Boolean current=false] : (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) ;
     public final Boolean ruleEnumLiterals() throws RecognitionException {
         Boolean current = false;
 
@@ -8292,11 +8348,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2937:1: ( (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2938:2: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2993:1: ( (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:2994:2: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2938:2: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2939:3: this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:2994:2: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
+            // PsiInternalXtextGrammarTestLanguage.g:2995:3: this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
             {
 
             			markComposite(elementTypeProvider.getEnumLiterals_EnumLiteralDeclarationParserRuleCall_0ElementType());
@@ -8310,7 +8366,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             			current = this_EnumLiteralDeclaration_0;
             			doneComposite();
             		
-            // PsiInternalXtextGrammarTestLanguage.g:2947:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
+            // PsiInternalXtextGrammarTestLanguage.g:3003:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
             int alt62=2;
             int LA62_0 = input.LA(1);
 
@@ -8319,10 +8375,10 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt62) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:2948:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:3004:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:2948:4: ()
-                    // PsiInternalXtextGrammarTestLanguage.g:2949:5: 
+                    // PsiInternalXtextGrammarTestLanguage.g:3004:4: ()
+                    // PsiInternalXtextGrammarTestLanguage.g:3005:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getEnumLiterals_AlternativesElementsAction_1_0ElementType());
@@ -8332,7 +8388,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     }
 
-                    // PsiInternalXtextGrammarTestLanguage.g:2955:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
+                    // PsiInternalXtextGrammarTestLanguage.g:3011:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
                     int cnt61=0;
                     loop61:
                     do {
@@ -8346,7 +8402,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                         switch (alt61) {
                     	case 1 :
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2956:5: otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:3012:5: otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getEnumLiterals_VerticalLineKeyword_1_1_0ElementType());
@@ -8355,11 +8411,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     	    					doneLeaf(otherlv_2);
                     	    				
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2963:5: ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2964:6: (lv_elements_3_0= ruleEnumLiteralDeclaration )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:3019:5: ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:3020:6: (lv_elements_3_0= ruleEnumLiteralDeclaration )
                     	    {
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2964:6: (lv_elements_3_0= ruleEnumLiteralDeclaration )
-                    	    // PsiInternalXtextGrammarTestLanguage.g:2965:7: lv_elements_3_0= ruleEnumLiteralDeclaration
+                    	    // PsiInternalXtextGrammarTestLanguage.g:3020:6: (lv_elements_3_0= ruleEnumLiteralDeclaration )
+                    	    // PsiInternalXtextGrammarTestLanguage.g:3021:7: lv_elements_3_0= ruleEnumLiteralDeclaration
                     	    {
 
                     	    							markComposite(elementTypeProvider.getEnumLiterals_ElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0ElementType());
@@ -8420,7 +8476,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleEnumLiteralDeclaration"
-    // PsiInternalXtextGrammarTestLanguage.g:2984:1: entryRuleEnumLiteralDeclaration returns [Boolean current=false] : iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF ;
+    // PsiInternalXtextGrammarTestLanguage.g:3040:1: entryRuleEnumLiteralDeclaration returns [Boolean current=false] : iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF ;
     public final Boolean entryRuleEnumLiteralDeclaration() throws RecognitionException {
         Boolean current = false;
 
@@ -8428,8 +8484,8 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2984:64: (iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF )
-            // PsiInternalXtextGrammarTestLanguage.g:2985:2: iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF
+            // PsiInternalXtextGrammarTestLanguage.g:3040:64: (iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF )
+            // PsiInternalXtextGrammarTestLanguage.g:3041:2: iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF
             {
              markComposite(elementTypeProvider.getEnumLiteralDeclarationElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8455,7 +8511,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleEnumLiteralDeclaration"
-    // PsiInternalXtextGrammarTestLanguage.g:2991:1: ruleEnumLiteralDeclaration returns [Boolean current=false] : ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) ;
+    // PsiInternalXtextGrammarTestLanguage.g:3047:1: ruleEnumLiteralDeclaration returns [Boolean current=false] : ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) ;
     public final Boolean ruleEnumLiteralDeclaration() throws RecognitionException {
         Boolean current = false;
 
@@ -8465,17 +8521,17 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalXtextGrammarTestLanguage.g:2992:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2993:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:3048:1: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) )
+            // PsiInternalXtextGrammarTestLanguage.g:3049:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2993:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
-            // PsiInternalXtextGrammarTestLanguage.g:2994:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:3049:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
+            // PsiInternalXtextGrammarTestLanguage.g:3050:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2994:3: ( (otherlv_0= RULE_ID ) )
-            // PsiInternalXtextGrammarTestLanguage.g:2995:4: (otherlv_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:3050:3: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalXtextGrammarTestLanguage.g:3051:4: (otherlv_0= RULE_ID )
             {
-            // PsiInternalXtextGrammarTestLanguage.g:2995:4: (otherlv_0= RULE_ID )
-            // PsiInternalXtextGrammarTestLanguage.g:2996:5: otherlv_0= RULE_ID
+            // PsiInternalXtextGrammarTestLanguage.g:3051:4: (otherlv_0= RULE_ID )
+            // PsiInternalXtextGrammarTestLanguage.g:3052:5: otherlv_0= RULE_ID
             {
 
             					if (!current) {
@@ -8496,7 +8552,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalXtextGrammarTestLanguage.g:3011:3: (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
+            // PsiInternalXtextGrammarTestLanguage.g:3067:3: (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
             int alt63=2;
             int LA63_0 = input.LA(1);
 
@@ -8505,7 +8561,7 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt63) {
                 case 1 :
-                    // PsiInternalXtextGrammarTestLanguage.g:3012:4: otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:3068:4: otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) )
                     {
 
                     				markLeaf(elementTypeProvider.getEnumLiteralDeclaration_EqualsSignKeyword_1_0ElementType());
@@ -8514,11 +8570,11 @@ public class PsiInternalXtextGrammarTestLanguageParser extends AbstractPsiAntlrP
 
                     				doneLeaf(otherlv_1);
                     			
-                    // PsiInternalXtextGrammarTestLanguage.g:3019:4: ( (lv_literal_2_0= ruleKeyword ) )
-                    // PsiInternalXtextGrammarTestLanguage.g:3020:5: (lv_literal_2_0= ruleKeyword )
+                    // PsiInternalXtextGrammarTestLanguage.g:3075:4: ( (lv_literal_2_0= ruleKeyword ) )
+                    // PsiInternalXtextGrammarTestLanguage.g:3076:5: (lv_literal_2_0= ruleKeyword )
                     {
-                    // PsiInternalXtextGrammarTestLanguage.g:3020:5: (lv_literal_2_0= ruleKeyword )
-                    // PsiInternalXtextGrammarTestLanguage.g:3021:6: lv_literal_2_0= ruleKeyword
+                    // PsiInternalXtextGrammarTestLanguage.g:3076:5: (lv_literal_2_0= ruleKeyword )
+                    // PsiInternalXtextGrammarTestLanguage.g:3077:6: lv_literal_2_0= ruleKeyword
                     {
 
                     						markComposite(elementTypeProvider.getEnumLiteralDeclaration_LiteralKeywordParserRuleCall_1_1_0ElementType());

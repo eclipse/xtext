@@ -151,7 +151,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getRefChildChildIDTerminalRuleCall_1_0_1() { return cRefChildChildIDTerminalRuleCall_1_0_1; }
 
-		//':' {NestedRef.left=current} refChild=[Child]*
+		//(':' {NestedRef.left=current} refChild=[Child])*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//':'

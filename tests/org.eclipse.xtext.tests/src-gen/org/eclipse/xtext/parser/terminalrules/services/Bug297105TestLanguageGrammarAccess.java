@@ -312,12 +312,8 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getRealAccess().getRule();
 	}
 
-	//java.lang.RuntimeException: Could not serialize EObject via backtracking.
-	//Constraint: TerminalGroup_TerminalToken_Group returns Group: (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*);
-	//Values: predicated(0-1), firstSetPredicated(0-1), elements(4)
-	//Semantic Object: Grammar'org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage'.rules[8]->TerminalRule'EXT_INT'.alternatives->Group
-	//URI: classpath:/org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.xtext
-	//Context: TerminalAlternatives_Group
+	//terminal EXT_INT:
+	//	INT ('e' | 'E') ('-' | '+') INT;
 	public TerminalRule getEXT_INTRule() {
 		return tEXT_INT;
 	} 

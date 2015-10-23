@@ -369,6 +369,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns BinaryOpExpression
+	 *     Expression returns BinaryOpExpression
+	 *     AssignmentExpression returns BinaryOpExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns BinaryOpExpression
+	 *     CachedExpression returns BinaryOpExpression
+	 *     OrExpression returns BinaryOpExpression
+	 *     OrExpression.OrExpression_1_0 returns BinaryOpExpression
+	 *     AndExpression returns BinaryOpExpression
+	 *     AndExpression.AndExpression_1_0 returns BinaryOpExpression
+	 *     RelationalExpression returns BinaryOpExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns BinaryOpExpression
+	 *     AdditiveExpression returns BinaryOpExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns BinaryOpExpression
+	 *     MultiplicativeExpression returns BinaryOpExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns BinaryOpExpression
+	 *     SetExpression returns BinaryOpExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns BinaryOpExpression
+	 *     UnaryOrInfixExpression returns BinaryOpExpression
+	 *     PostopExpression returns BinaryOpExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns BinaryOpExpression
+	 *     InfixExpression returns BinaryOpExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns BinaryOpExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns BinaryOpExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns BinaryOpExpression
+	 *     CallExpression returns BinaryOpExpression
+	 *     CallExpression.CallFunction_1_0 returns BinaryOpExpression
+	 *     PrimaryExpression returns BinaryOpExpression
+	 *     OneOrManyExpressions returns BinaryOpExpression
+	 *     ParanthesizedExpression returns BinaryOpExpression
+	 *
 	 * Constraint:
 	 *     (
 	 *         (leftExpr=RelationalExpression_BinaryOpExpression_1_0 functionName=RelationalOperator rightExpr=AdditiveExpression) | 
@@ -383,6 +414,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     AliasedRequiredCapability returns AliasedRequiredCapability
+	 *
 	 * Constraint:
 	 *     (nameSpace=ID? name=ID alias=ID? (condExpr=Expression | greedy?='greedy' | min=INT | max=INT | versionRange=ID)*)
 	 */
@@ -392,6 +426,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns AndExpression
+	 *     Expression returns AndExpression
+	 *     AssignmentExpression returns AndExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns AndExpression
+	 *     CachedExpression returns AndExpression
+	 *     OrExpression returns AndExpression
+	 *     OrExpression.OrExpression_1_0 returns AndExpression
+	 *     AndExpression returns AndExpression
+	 *     AndExpression.AndExpression_1_0 returns AndExpression
+	 *     RelationalExpression returns AndExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns AndExpression
+	 *     AdditiveExpression returns AndExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns AndExpression
+	 *     MultiplicativeExpression returns AndExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns AndExpression
+	 *     SetExpression returns AndExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns AndExpression
+	 *     UnaryOrInfixExpression returns AndExpression
+	 *     PostopExpression returns AndExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns AndExpression
+	 *     InfixExpression returns AndExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns AndExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns AndExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns AndExpression
+	 *     CallExpression returns AndExpression
+	 *     CallExpression.CallFunction_1_0 returns AndExpression
+	 *     PrimaryExpression returns AndExpression
+	 *     OneOrManyExpressions returns AndExpression
+	 *     ParanthesizedExpression returns AndExpression
+	 *
 	 * Constraint:
 	 *     (leftExpr=AndExpression_AndExpression_1_0 rightExpr=RelationalExpression)
 	 */
@@ -410,6 +475,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns AssignmentExpression
+	 *     Expression returns AssignmentExpression
+	 *     AssignmentExpression returns AssignmentExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns AssignmentExpression
+	 *     CachedExpression returns AssignmentExpression
+	 *     OrExpression returns AssignmentExpression
+	 *     OrExpression.OrExpression_1_0 returns AssignmentExpression
+	 *     AndExpression returns AssignmentExpression
+	 *     AndExpression.AndExpression_1_0 returns AssignmentExpression
+	 *     RelationalExpression returns AssignmentExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns AssignmentExpression
+	 *     AdditiveExpression returns AssignmentExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns AssignmentExpression
+	 *     MultiplicativeExpression returns AssignmentExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns AssignmentExpression
+	 *     SetExpression returns AssignmentExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns AssignmentExpression
+	 *     UnaryOrInfixExpression returns AssignmentExpression
+	 *     PostopExpression returns AssignmentExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns AssignmentExpression
+	 *     InfixExpression returns AssignmentExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns AssignmentExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns AssignmentExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns AssignmentExpression
+	 *     CallExpression returns AssignmentExpression
+	 *     CallExpression.CallFunction_1_0 returns AssignmentExpression
+	 *     PrimaryExpression returns AssignmentExpression
+	 *     OneOrManyExpressions returns AssignmentExpression
+	 *     ParanthesizedExpression returns AssignmentExpression
+	 *
 	 * Constraint:
 	 *     (leftExpr=AssignmentExpression_AssignmentExpression_1_0 functionName=AssignmentOperator rightExpr=AssignmentExpression)
 	 */
@@ -431,6 +527,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     BlockExpressionWithoutBrackets returns ChainedExpression
+	 *
 	 * Constraint:
 	 *     expressions+=TopLevelExpression+
 	 */
@@ -440,6 +539,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     OneOrManyExpressions returns ChainedExpression
+	 *
 	 * Constraint:
 	 *     (expressions+=TopLevelExpression+ | expressions+=TopLevelExpression+)?
 	 */
@@ -449,6 +551,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns ChainedExpression
+	 *     Expression returns ChainedExpression
+	 *     AssignmentExpression returns ChainedExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns ChainedExpression
+	 *     CachedExpression returns ChainedExpression
+	 *     OrExpression returns ChainedExpression
+	 *     OrExpression.OrExpression_1_0 returns ChainedExpression
+	 *     AndExpression returns ChainedExpression
+	 *     AndExpression.AndExpression_1_0 returns ChainedExpression
+	 *     RelationalExpression returns ChainedExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns ChainedExpression
+	 *     AdditiveExpression returns ChainedExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns ChainedExpression
+	 *     MultiplicativeExpression returns ChainedExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns ChainedExpression
+	 *     SetExpression returns ChainedExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns ChainedExpression
+	 *     UnaryOrInfixExpression returns ChainedExpression
+	 *     PostopExpression returns ChainedExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns ChainedExpression
+	 *     InfixExpression returns ChainedExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns ChainedExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns ChainedExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns ChainedExpression
+	 *     CallExpression returns ChainedExpression
+	 *     CallExpression.CallFunction_1_0 returns ChainedExpression
+	 *     PrimaryExpression returns ChainedExpression
+	 *     BlockExpression returns ChainedExpression
+	 *     ParanthesizedExpression returns ChainedExpression
+	 *
 	 * Constraint:
 	 *     expressions+=TopLevelExpression*
 	 */
@@ -458,6 +591,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns CachedExpression
+	 *     Expression returns CachedExpression
+	 *     AssignmentExpression returns CachedExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns CachedExpression
+	 *     CachedExpression returns CachedExpression
+	 *     OrExpression returns CachedExpression
+	 *     OrExpression.OrExpression_1_0 returns CachedExpression
+	 *     AndExpression returns CachedExpression
+	 *     AndExpression.AndExpression_1_0 returns CachedExpression
+	 *     RelationalExpression returns CachedExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns CachedExpression
+	 *     AdditiveExpression returns CachedExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns CachedExpression
+	 *     MultiplicativeExpression returns CachedExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns CachedExpression
+	 *     SetExpression returns CachedExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns CachedExpression
+	 *     UnaryOrInfixExpression returns CachedExpression
+	 *     PostopExpression returns CachedExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns CachedExpression
+	 *     InfixExpression returns CachedExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns CachedExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns CachedExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns CachedExpression
+	 *     CallExpression returns CachedExpression
+	 *     CallExpression.CallFunction_1_0 returns CachedExpression
+	 *     PrimaryExpression returns CachedExpression
+	 *     OneOrManyExpressions returns CachedExpression
+	 *     ParanthesizedExpression returns CachedExpression
+	 *
 	 * Constraint:
 	 *     expr=OrExpression
 	 */
@@ -473,6 +637,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns CallFunction
+	 *     Expression returns CallFunction
+	 *     AssignmentExpression returns CallFunction
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns CallFunction
+	 *     CachedExpression returns CallFunction
+	 *     OrExpression returns CallFunction
+	 *     OrExpression.OrExpression_1_0 returns CallFunction
+	 *     AndExpression returns CallFunction
+	 *     AndExpression.AndExpression_1_0 returns CallFunction
+	 *     RelationalExpression returns CallFunction
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns CallFunction
+	 *     AdditiveExpression returns CallFunction
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns CallFunction
+	 *     MultiplicativeExpression returns CallFunction
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns CallFunction
+	 *     SetExpression returns CallFunction
+	 *     SetExpression.BinaryOpExpression_1_0 returns CallFunction
+	 *     UnaryOrInfixExpression returns CallFunction
+	 *     PostopExpression returns CallFunction
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns CallFunction
+	 *     InfixExpression returns CallFunction
+	 *     InfixExpression.CallFeature_1_0_0 returns CallFunction
+	 *     InfixExpression.AtExpression_1_1_0 returns CallFunction
+	 *     InfixExpression.FeatureExpression_1_2_0 returns CallFunction
+	 *     CallExpression returns CallFunction
+	 *     CallExpression.CallFunction_1_0 returns CallFunction
+	 *     PrimaryExpression returns CallFunction
+	 *     OneOrManyExpressions returns CallFunction
+	 *     ParanthesizedExpression returns CallFunction
+	 *
 	 * Constraint:
 	 *     (funcExpr=CallExpression_CallFunction_1_0 parameterList=ParameterList?)
 	 */
@@ -482,6 +677,40 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns Function
+	 *     Expression returns Function
+	 *     AssignmentExpression returns Function
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns Function
+	 *     CachedExpression returns Function
+	 *     OrExpression returns Function
+	 *     OrExpression.OrExpression_1_0 returns Function
+	 *     AndExpression returns Function
+	 *     AndExpression.AndExpression_1_0 returns Function
+	 *     RelationalExpression returns Function
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns Function
+	 *     AdditiveExpression returns Function
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns Function
+	 *     MultiplicativeExpression returns Function
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns Function
+	 *     SetExpression returns Function
+	 *     SetExpression.BinaryOpExpression_1_0 returns Function
+	 *     UnaryOrInfixExpression returns Function
+	 *     PostopExpression returns Function
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns Function
+	 *     InfixExpression returns Function
+	 *     InfixExpression.CallFeature_1_0_0 returns Function
+	 *     InfixExpression.AtExpression_1_1_0 returns Function
+	 *     InfixExpression.FeatureExpression_1_2_0 returns Function
+	 *     CallExpression returns Function
+	 *     CallExpression.CallFunction_1_0 returns Function
+	 *     PrimaryExpression returns Function
+	 *     Literal returns Function
+	 *     LiteralFunction returns Function
+	 *     ClosureExpression returns Function
+	 *     OneOrManyExpressions returns Function
+	 *     ParanthesizedExpression returns Function
+	 *
 	 * Constraint:
 	 *     (
 	 *         returnType=TypeRef? 
@@ -498,6 +727,10 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     FirstParameter returns ClosureParameter
+	 *     ClosureParameter returns ClosureParameter
+	 *
 	 * Constraint:
 	 *     expr=ClosureExpression
 	 */
@@ -513,6 +746,10 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeRef returns ClosureTypeRef
+	 *     ClosureTypeRef returns ClosureTypeRef
+	 *
 	 * Constraint:
 	 *     (((parameterTypes+=ID parameterTypes+=ID* (varArgs?='...' parameterTypes+=ID)?) | (varArgs?='...' parameterTypes+=ID))? returnType=ID)
 	 */
@@ -522,6 +759,38 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns CreateExpression
+	 *     Expression returns CreateExpression
+	 *     AssignmentExpression returns CreateExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns CreateExpression
+	 *     CachedExpression returns CreateExpression
+	 *     OrExpression returns CreateExpression
+	 *     OrExpression.OrExpression_1_0 returns CreateExpression
+	 *     AndExpression returns CreateExpression
+	 *     AndExpression.AndExpression_1_0 returns CreateExpression
+	 *     RelationalExpression returns CreateExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns CreateExpression
+	 *     AdditiveExpression returns CreateExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns CreateExpression
+	 *     MultiplicativeExpression returns CreateExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns CreateExpression
+	 *     SetExpression returns CreateExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns CreateExpression
+	 *     UnaryOrInfixExpression returns CreateExpression
+	 *     PostopExpression returns CreateExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns CreateExpression
+	 *     InfixExpression returns CreateExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns CreateExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns CreateExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns CreateExpression
+	 *     CallExpression returns CreateExpression
+	 *     CallExpression.CallFunction_1_0 returns CreateExpression
+	 *     PrimaryExpression returns CreateExpression
+	 *     ConstructorCallExpression returns CreateExpression
+	 *     OneOrManyExpressions returns CreateExpression
+	 *     ParanthesizedExpression returns CreateExpression
+	 *
 	 * Constraint:
 	 *     (typeExpr=ID parameterList=ParameterList? alias=ID? contextBlock=InitializationBlockExpression?)
 	 */
@@ -531,6 +800,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     FeatureOfThis returns FeatureExpression
+	 *
 	 * Constraint:
 	 *     featureName=ID
 	 */
@@ -546,6 +818,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Function returns Function
+	 *
 	 * Constraint:
 	 *     (
 	 *         documentation=DOCUMENTATION? 
@@ -567,6 +842,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     GuardExpression returns GuardExpression
+	 *
 	 * Constraint:
 	 *     (guardExpr=Expression | guardExpr=BlockExpression)
 	 */
@@ -576,6 +854,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns AtExpression
+	 *     Expression returns AtExpression
+	 *     AssignmentExpression returns AtExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns AtExpression
+	 *     CachedExpression returns AtExpression
+	 *     OrExpression returns AtExpression
+	 *     OrExpression.OrExpression_1_0 returns AtExpression
+	 *     AndExpression returns AtExpression
+	 *     AndExpression.AndExpression_1_0 returns AtExpression
+	 *     RelationalExpression returns AtExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns AtExpression
+	 *     AdditiveExpression returns AtExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns AtExpression
+	 *     MultiplicativeExpression returns AtExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns AtExpression
+	 *     SetExpression returns AtExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns AtExpression
+	 *     UnaryOrInfixExpression returns AtExpression
+	 *     PostopExpression returns AtExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns AtExpression
+	 *     InfixExpression returns AtExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns AtExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns AtExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns AtExpression
+	 *     CallExpression returns AtExpression
+	 *     CallExpression.CallFunction_1_0 returns AtExpression
+	 *     PrimaryExpression returns AtExpression
+	 *     OneOrManyExpressions returns AtExpression
+	 *     ParanthesizedExpression returns AtExpression
+	 *
 	 * Constraint:
 	 *     (objExpr=InfixExpression_AtExpression_1_1_0 indexExpr=Expression)
 	 */
@@ -594,6 +903,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns CallFeature
+	 *     Expression returns CallFeature
+	 *     AssignmentExpression returns CallFeature
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns CallFeature
+	 *     CachedExpression returns CallFeature
+	 *     OrExpression returns CallFeature
+	 *     OrExpression.OrExpression_1_0 returns CallFeature
+	 *     AndExpression returns CallFeature
+	 *     AndExpression.AndExpression_1_0 returns CallFeature
+	 *     RelationalExpression returns CallFeature
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns CallFeature
+	 *     AdditiveExpression returns CallFeature
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns CallFeature
+	 *     MultiplicativeExpression returns CallFeature
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns CallFeature
+	 *     SetExpression returns CallFeature
+	 *     SetExpression.BinaryOpExpression_1_0 returns CallFeature
+	 *     UnaryOrInfixExpression returns CallFeature
+	 *     PostopExpression returns CallFeature
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns CallFeature
+	 *     InfixExpression returns CallFeature
+	 *     InfixExpression.CallFeature_1_0_0 returns CallFeature
+	 *     InfixExpression.AtExpression_1_1_0 returns CallFeature
+	 *     InfixExpression.FeatureExpression_1_2_0 returns CallFeature
+	 *     CallExpression returns CallFeature
+	 *     CallExpression.CallFunction_1_0 returns CallFeature
+	 *     PrimaryExpression returns CallFeature
+	 *     OneOrManyExpressions returns CallFeature
+	 *     ParanthesizedExpression returns CallFeature
+	 *
 	 * Constraint:
 	 *     (funcExpr=InfixExpression_CallFeature_1_0_0 name=ID parameterList=ParameterList?)
 	 */
@@ -603,6 +943,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns FeatureExpression
+	 *     Expression returns FeatureExpression
+	 *     AssignmentExpression returns FeatureExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns FeatureExpression
+	 *     CachedExpression returns FeatureExpression
+	 *     OrExpression returns FeatureExpression
+	 *     OrExpression.OrExpression_1_0 returns FeatureExpression
+	 *     AndExpression returns FeatureExpression
+	 *     AndExpression.AndExpression_1_0 returns FeatureExpression
+	 *     RelationalExpression returns FeatureExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns FeatureExpression
+	 *     AdditiveExpression returns FeatureExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns FeatureExpression
+	 *     MultiplicativeExpression returns FeatureExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns FeatureExpression
+	 *     SetExpression returns FeatureExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns FeatureExpression
+	 *     UnaryOrInfixExpression returns FeatureExpression
+	 *     PostopExpression returns FeatureExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns FeatureExpression
+	 *     InfixExpression returns FeatureExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns FeatureExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns FeatureExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns FeatureExpression
+	 *     CallExpression returns FeatureExpression
+	 *     CallExpression.CallFunction_1_0 returns FeatureExpression
+	 *     PrimaryExpression returns FeatureExpression
+	 *     OneOrManyExpressions returns FeatureExpression
+	 *     ParanthesizedExpression returns FeatureExpression
+	 *
 	 * Constraint:
 	 *     (objExpr=InfixExpression_FeatureExpression_1_2_0 featureName=ID)
 	 */
@@ -621,6 +992,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     InitializationBlockExpression returns ChainedExpression
+	 *
 	 * Constraint:
 	 *     expressions+=InitializationExpression
 	 */
@@ -630,6 +1004,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     InitializationExpression returns AssignmentExpression
+	 *
 	 * Constraint:
 	 *     (leftExpr=FeatureOfThis functionName=':' rightExpr=Expression)
 	 */
@@ -651,6 +1028,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns VariableExpression
+	 *     Expression returns VariableExpression
+	 *     AssignmentExpression returns VariableExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns VariableExpression
+	 *     CachedExpression returns VariableExpression
+	 *     OrExpression returns VariableExpression
+	 *     OrExpression.OrExpression_1_0 returns VariableExpression
+	 *     AndExpression returns VariableExpression
+	 *     AndExpression.AndExpression_1_0 returns VariableExpression
+	 *     RelationalExpression returns VariableExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns VariableExpression
+	 *     AdditiveExpression returns VariableExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns VariableExpression
+	 *     MultiplicativeExpression returns VariableExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns VariableExpression
+	 *     SetExpression returns VariableExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns VariableExpression
+	 *     UnaryOrInfixExpression returns VariableExpression
+	 *     PostopExpression returns VariableExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns VariableExpression
+	 *     InfixExpression returns VariableExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns VariableExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns VariableExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns VariableExpression
+	 *     CallExpression returns VariableExpression
+	 *     CallExpression.CallFunction_1_0 returns VariableExpression
+	 *     PrimaryExpression returns VariableExpression
+	 *     OneOrManyExpressions returns VariableExpression
+	 *     ParanthesizedExpression returns VariableExpression
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID | 
@@ -669,6 +1077,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     KeywordVariables returns VariableExpression
+	 *
 	 * Constraint:
 	 *     (
 	 *         name='input' | 
@@ -686,6 +1097,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (units+=Unit+ | functions+=Function+)
 	 */
@@ -695,6 +1109,39 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns CallNamedFunction
+	 *     Expression returns CallNamedFunction
+	 *     AssignmentExpression returns CallNamedFunction
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns CallNamedFunction
+	 *     CachedExpression returns CallNamedFunction
+	 *     OrExpression returns CallNamedFunction
+	 *     OrExpression.OrExpression_1_0 returns CallNamedFunction
+	 *     AndExpression returns CallNamedFunction
+	 *     AndExpression.AndExpression_1_0 returns CallNamedFunction
+	 *     RelationalExpression returns CallNamedFunction
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns CallNamedFunction
+	 *     AdditiveExpression returns CallNamedFunction
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns CallNamedFunction
+	 *     MultiplicativeExpression returns CallNamedFunction
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns CallNamedFunction
+	 *     SetExpression returns CallNamedFunction
+	 *     SetExpression.BinaryOpExpression_1_0 returns CallNamedFunction
+	 *     UnaryOrInfixExpression returns CallNamedFunction
+	 *     PostopExpression returns CallNamedFunction
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns CallNamedFunction
+	 *     InfixExpression returns CallNamedFunction
+	 *     InfixExpression.CallFeature_1_0_0 returns CallNamedFunction
+	 *     InfixExpression.AtExpression_1_1_0 returns CallNamedFunction
+	 *     InfixExpression.FeatureExpression_1_2_0 returns CallNamedFunction
+	 *     CallExpression returns CallNamedFunction
+	 *     CallExpression.CallFunction_1_0 returns CallNamedFunction
+	 *     PrimaryExpression returns CallNamedFunction
+	 *     FeatureCall returns CallNamedFunction
+	 *     OperationCall returns CallNamedFunction
+	 *     OneOrManyExpressions returns CallNamedFunction
+	 *     ParanthesizedExpression returns CallNamedFunction
+	 *
 	 * Constraint:
 	 *     (name=ID parameterList=ParameterList?)
 	 */
@@ -704,6 +1151,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns OrExpression
+	 *     Expression returns OrExpression
+	 *     AssignmentExpression returns OrExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns OrExpression
+	 *     CachedExpression returns OrExpression
+	 *     OrExpression returns OrExpression
+	 *     OrExpression.OrExpression_1_0 returns OrExpression
+	 *     AndExpression returns OrExpression
+	 *     AndExpression.AndExpression_1_0 returns OrExpression
+	 *     RelationalExpression returns OrExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns OrExpression
+	 *     AdditiveExpression returns OrExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns OrExpression
+	 *     MultiplicativeExpression returns OrExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns OrExpression
+	 *     SetExpression returns OrExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns OrExpression
+	 *     UnaryOrInfixExpression returns OrExpression
+	 *     PostopExpression returns OrExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns OrExpression
+	 *     InfixExpression returns OrExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns OrExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns OrExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns OrExpression
+	 *     CallExpression returns OrExpression
+	 *     CallExpression.CallFunction_1_0 returns OrExpression
+	 *     PrimaryExpression returns OrExpression
+	 *     OneOrManyExpressions returns OrExpression
+	 *     ParanthesizedExpression returns OrExpression
+	 *
 	 * Constraint:
 	 *     (leftExpr=OrExpression_OrExpression_1_0 rightExpr=AndExpression)
 	 */
@@ -722,6 +1200,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterDeclaration returns ParameterDeclaration
+	 *
 	 * Constraint:
 	 *     (type=TypeRef? name=ID)
 	 */
@@ -731,6 +1212,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterList returns ParameterList
+	 *
 	 * Constraint:
 	 *     (parameters+=FirstParameter parameters+=FirstParameter*)
 	 */
@@ -740,6 +1224,10 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     FirstParameter returns Parameter
+	 *     Parameter returns Parameter
+	 *
 	 * Constraint:
 	 *     expr=Expression
 	 */
@@ -755,6 +1243,37 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns UnaryPostOpExpression
+	 *     Expression returns UnaryPostOpExpression
+	 *     AssignmentExpression returns UnaryPostOpExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns UnaryPostOpExpression
+	 *     CachedExpression returns UnaryPostOpExpression
+	 *     OrExpression returns UnaryPostOpExpression
+	 *     OrExpression.OrExpression_1_0 returns UnaryPostOpExpression
+	 *     AndExpression returns UnaryPostOpExpression
+	 *     AndExpression.AndExpression_1_0 returns UnaryPostOpExpression
+	 *     RelationalExpression returns UnaryPostOpExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns UnaryPostOpExpression
+	 *     AdditiveExpression returns UnaryPostOpExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns UnaryPostOpExpression
+	 *     MultiplicativeExpression returns UnaryPostOpExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns UnaryPostOpExpression
+	 *     SetExpression returns UnaryPostOpExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns UnaryPostOpExpression
+	 *     UnaryOrInfixExpression returns UnaryPostOpExpression
+	 *     PostopExpression returns UnaryPostOpExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns UnaryPostOpExpression
+	 *     InfixExpression returns UnaryPostOpExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns UnaryPostOpExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns UnaryPostOpExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns UnaryPostOpExpression
+	 *     CallExpression returns UnaryPostOpExpression
+	 *     CallExpression.CallFunction_1_0 returns UnaryPostOpExpression
+	 *     PrimaryExpression returns UnaryPostOpExpression
+	 *     OneOrManyExpressions returns UnaryPostOpExpression
+	 *     ParanthesizedExpression returns UnaryPostOpExpression
+	 *
 	 * Constraint:
 	 *     (expr=PostopExpression_UnaryPostOpExpression_1_0 (functionName='--' | functionName='++'))
 	 */
@@ -764,6 +1283,38 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns UnaryPreOpExpression
+	 *     Expression returns UnaryPreOpExpression
+	 *     AssignmentExpression returns UnaryPreOpExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns UnaryPreOpExpression
+	 *     CachedExpression returns UnaryPreOpExpression
+	 *     OrExpression returns UnaryPreOpExpression
+	 *     OrExpression.OrExpression_1_0 returns UnaryPreOpExpression
+	 *     AndExpression returns UnaryPreOpExpression
+	 *     AndExpression.AndExpression_1_0 returns UnaryPreOpExpression
+	 *     RelationalExpression returns UnaryPreOpExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns UnaryPreOpExpression
+	 *     AdditiveExpression returns UnaryPreOpExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns UnaryPreOpExpression
+	 *     MultiplicativeExpression returns UnaryPreOpExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns UnaryPreOpExpression
+	 *     SetExpression returns UnaryPreOpExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns UnaryPreOpExpression
+	 *     UnaryOrInfixExpression returns UnaryPreOpExpression
+	 *     PreopExpression returns UnaryPreOpExpression
+	 *     PostopExpression returns UnaryPreOpExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns UnaryPreOpExpression
+	 *     InfixExpression returns UnaryPreOpExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns UnaryPreOpExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns UnaryPreOpExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns UnaryPreOpExpression
+	 *     CallExpression returns UnaryPreOpExpression
+	 *     CallExpression.CallFunction_1_0 returns UnaryPreOpExpression
+	 *     PrimaryExpression returns UnaryPreOpExpression
+	 *     OneOrManyExpressions returns UnaryPreOpExpression
+	 *     ParanthesizedExpression returns UnaryPreOpExpression
+	 *
 	 * Constraint:
 	 *     ((functionName='++' | functionName='--') expr=InfixExpression)
 	 */
@@ -773,6 +1324,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     ProvidedCapability returns ProvidedCapability
+	 *
 	 * Constraint:
 	 *     (nameSpace=ID? (condExpr=Expression | name=ID | version=ID)*)
 	 */
@@ -782,6 +1336,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     RequiredCapability returns RequiredCapability
+	 *
 	 * Constraint:
 	 *     (nameSpace=ID? name=ID (condExpr=Expression | greedy?='greedy' | min=INT | max=INT | versionRange=ID)*)
 	 */
@@ -791,6 +1348,10 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeRef returns SimpleTypeRef
+	 *     SimpleTypeRef returns SimpleTypeRef
+	 *
 	 * Constraint:
 	 *     (rawType=ID (actualArgumentsList+=ID actualArgumentsList+=ID*)?)
 	 */
@@ -800,6 +1361,38 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns UnaryOpExpression
+	 *     Expression returns UnaryOpExpression
+	 *     AssignmentExpression returns UnaryOpExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns UnaryOpExpression
+	 *     CachedExpression returns UnaryOpExpression
+	 *     OrExpression returns UnaryOpExpression
+	 *     OrExpression.OrExpression_1_0 returns UnaryOpExpression
+	 *     AndExpression returns UnaryOpExpression
+	 *     AndExpression.AndExpression_1_0 returns UnaryOpExpression
+	 *     RelationalExpression returns UnaryOpExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns UnaryOpExpression
+	 *     AdditiveExpression returns UnaryOpExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns UnaryOpExpression
+	 *     MultiplicativeExpression returns UnaryOpExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns UnaryOpExpression
+	 *     SetExpression returns UnaryOpExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns UnaryOpExpression
+	 *     UnaryOrInfixExpression returns UnaryOpExpression
+	 *     UnaryExpression returns UnaryOpExpression
+	 *     PostopExpression returns UnaryOpExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns UnaryOpExpression
+	 *     InfixExpression returns UnaryOpExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns UnaryOpExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns UnaryOpExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns UnaryOpExpression
+	 *     CallExpression returns UnaryOpExpression
+	 *     CallExpression.CallFunction_1_0 returns UnaryOpExpression
+	 *     PrimaryExpression returns UnaryOpExpression
+	 *     OneOrManyExpressions returns UnaryOpExpression
+	 *     ParanthesizedExpression returns UnaryOpExpression
+	 *
 	 * Constraint:
 	 *     ((functionName='!' | functionName='-') expr=InfixExpression)
 	 */
@@ -809,6 +1402,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Unit returns Unit
+	 *
 	 * Constraint:
 	 *     (
 	 *         documentation=DOCUMENTATION? 
@@ -831,6 +1427,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     ValDeclaration returns DefValue
+	 *
 	 * Constraint:
 	 *     (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression)
 	 */
@@ -840,6 +1439,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns DefValue
+	 *
 	 * Constraint:
 	 *     ((final?='final'? type=TypeRef? name=ID valueExpr=Expression?) | (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression))
 	 */
@@ -849,6 +1451,39 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns ValueLiteral
+	 *     Expression returns ValueLiteral
+	 *     AssignmentExpression returns ValueLiteral
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns ValueLiteral
+	 *     CachedExpression returns ValueLiteral
+	 *     OrExpression returns ValueLiteral
+	 *     OrExpression.OrExpression_1_0 returns ValueLiteral
+	 *     AndExpression returns ValueLiteral
+	 *     AndExpression.AndExpression_1_0 returns ValueLiteral
+	 *     RelationalExpression returns ValueLiteral
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns ValueLiteral
+	 *     AdditiveExpression returns ValueLiteral
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns ValueLiteral
+	 *     MultiplicativeExpression returns ValueLiteral
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns ValueLiteral
+	 *     SetExpression returns ValueLiteral
+	 *     SetExpression.BinaryOpExpression_1_0 returns ValueLiteral
+	 *     UnaryOrInfixExpression returns ValueLiteral
+	 *     PostopExpression returns ValueLiteral
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns ValueLiteral
+	 *     InfixExpression returns ValueLiteral
+	 *     InfixExpression.CallFeature_1_0_0 returns ValueLiteral
+	 *     InfixExpression.AtExpression_1_1_0 returns ValueLiteral
+	 *     InfixExpression.FeatureExpression_1_2_0 returns ValueLiteral
+	 *     CallExpression returns ValueLiteral
+	 *     CallExpression.CallFunction_1_0 returns ValueLiteral
+	 *     PrimaryExpression returns ValueLiteral
+	 *     Literal returns ValueLiteral
+	 *     OneOrManyExpressions returns ValueLiteral
+	 *     ValueLiteral returns ValueLiteral
+	 *     ParanthesizedExpression returns ValueLiteral
+	 *
 	 * Constraint:
 	 *     value=STRING
 	 */
@@ -864,6 +1499,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Value returns VariableExpression
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -879,6 +1517,9 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     VarDeclaration returns DefValue
+	 *
 	 * Constraint:
 	 *     (final?='final'? type=TypeRef? name=ID valueExpr=Expression?)
 	 */
@@ -888,6 +1529,38 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns WithContextExpression
+	 *     Expression returns WithContextExpression
+	 *     AssignmentExpression returns WithContextExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns WithContextExpression
+	 *     CachedExpression returns WithContextExpression
+	 *     OrExpression returns WithContextExpression
+	 *     OrExpression.OrExpression_1_0 returns WithContextExpression
+	 *     AndExpression returns WithContextExpression
+	 *     AndExpression.AndExpression_1_0 returns WithContextExpression
+	 *     RelationalExpression returns WithContextExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns WithContextExpression
+	 *     AdditiveExpression returns WithContextExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns WithContextExpression
+	 *     MultiplicativeExpression returns WithContextExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns WithContextExpression
+	 *     SetExpression returns WithContextExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns WithContextExpression
+	 *     UnaryOrInfixExpression returns WithContextExpression
+	 *     PostopExpression returns WithContextExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns WithContextExpression
+	 *     InfixExpression returns WithContextExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns WithContextExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns WithContextExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns WithContextExpression
+	 *     CallExpression returns WithContextExpression
+	 *     CallExpression.CallFunction_1_0 returns WithContextExpression
+	 *     PrimaryExpression returns WithContextExpression
+	 *     WithContextExpression returns WithContextExpression
+	 *     OneOrManyExpressions returns WithContextExpression
+	 *     ParanthesizedExpression returns WithContextExpression
+	 *
 	 * Constraint:
 	 *     (expr=Expression alias=ID? contextBlock=BlockExpression)
 	 */
@@ -897,6 +1570,38 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     TopLevelExpression returns WithExpression
+	 *     Expression returns WithExpression
+	 *     AssignmentExpression returns WithExpression
+	 *     AssignmentExpression.AssignmentExpression_1_0 returns WithExpression
+	 *     CachedExpression returns WithExpression
+	 *     OrExpression returns WithExpression
+	 *     OrExpression.OrExpression_1_0 returns WithExpression
+	 *     AndExpression returns WithExpression
+	 *     AndExpression.AndExpression_1_0 returns WithExpression
+	 *     RelationalExpression returns WithExpression
+	 *     RelationalExpression.BinaryOpExpression_1_0 returns WithExpression
+	 *     AdditiveExpression returns WithExpression
+	 *     AdditiveExpression.BinaryOpExpression_1_0 returns WithExpression
+	 *     MultiplicativeExpression returns WithExpression
+	 *     MultiplicativeExpression.BinaryOpExpression_1_0 returns WithExpression
+	 *     SetExpression returns WithExpression
+	 *     SetExpression.BinaryOpExpression_1_0 returns WithExpression
+	 *     UnaryOrInfixExpression returns WithExpression
+	 *     PostopExpression returns WithExpression
+	 *     PostopExpression.UnaryPostOpExpression_1_0 returns WithExpression
+	 *     InfixExpression returns WithExpression
+	 *     InfixExpression.CallFeature_1_0_0 returns WithExpression
+	 *     InfixExpression.AtExpression_1_1_0 returns WithExpression
+	 *     InfixExpression.FeatureExpression_1_2_0 returns WithExpression
+	 *     CallExpression returns WithExpression
+	 *     CallExpression.CallFunction_1_0 returns WithExpression
+	 *     PrimaryExpression returns WithExpression
+	 *     WithExpression returns WithExpression
+	 *     OneOrManyExpressions returns WithExpression
+	 *     ParanthesizedExpression returns WithExpression
+	 *
 	 * Constraint:
 	 *     ((referencedAdvice+=ID referencedAdvice+=ID*)? (funcExpr=Expression | funcExpr=BlockExpressionWithoutBrackets))
 	 */

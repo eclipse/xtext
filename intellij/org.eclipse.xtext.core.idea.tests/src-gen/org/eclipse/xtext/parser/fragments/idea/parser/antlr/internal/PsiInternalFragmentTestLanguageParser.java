@@ -653,6 +653,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             {
             if ( state.backtracking==0 ) {
 
+              			if (!current) {
+              				associateWithSemanticElement();
+              				current = true;
+              			}
               			markComposite(elementTypeProvider.getPRFNamed_PRFNamedFragmentParserRuleCall_0ElementType());
               		
             }
@@ -667,7 +671,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
               			doneComposite();
               		
             }
-            // PsiInternalFragmentTestLanguage.g:266:3: ( (otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) ) | (otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current] ) )?
+            // PsiInternalFragmentTestLanguage.g:270:3: ( (otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) ) | (otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current] ) )?
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -679,10 +683,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalFragmentTestLanguage.g:267:4: (otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalFragmentTestLanguage.g:271:4: (otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
                     {
-                    // PsiInternalFragmentTestLanguage.g:267:4: (otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
-                    // PsiInternalFragmentTestLanguage.g:268:5: otherlv_1= ':' ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalFragmentTestLanguage.g:271:4: (otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) )
+                    // PsiInternalFragmentTestLanguage.g:272:5: otherlv_1= ':' ( (otherlv_2= RULE_ID ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -695,11 +699,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
                       					doneLeaf(otherlv_1);
                       				
                     }
-                    // PsiInternalFragmentTestLanguage.g:275:5: ( (otherlv_2= RULE_ID ) )
-                    // PsiInternalFragmentTestLanguage.g:276:6: (otherlv_2= RULE_ID )
+                    // PsiInternalFragmentTestLanguage.g:279:5: ( (otherlv_2= RULE_ID ) )
+                    // PsiInternalFragmentTestLanguage.g:280:6: (otherlv_2= RULE_ID )
                     {
-                    // PsiInternalFragmentTestLanguage.g:276:6: (otherlv_2= RULE_ID )
-                    // PsiInternalFragmentTestLanguage.g:277:7: otherlv_2= RULE_ID
+                    // PsiInternalFragmentTestLanguage.g:280:6: (otherlv_2= RULE_ID )
+                    // PsiInternalFragmentTestLanguage.g:281:7: otherlv_2= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -733,10 +737,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 2 :
-                    // PsiInternalFragmentTestLanguage.g:294:4: (otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current] )
+                    // PsiInternalFragmentTestLanguage.g:298:4: (otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current] )
                     {
-                    // PsiInternalFragmentTestLanguage.g:294:4: (otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current] )
-                    // PsiInternalFragmentTestLanguage.g:295:5: otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current]
+                    // PsiInternalFragmentTestLanguage.g:298:4: (otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current] )
+                    // PsiInternalFragmentTestLanguage.g:299:5: otherlv_3= '-' this_PRFNamedRef_4= rulePRFNamedRef[$current]
                     {
                     if ( state.backtracking==0 ) {
 
@@ -751,6 +755,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     if ( state.backtracking==0 ) {
 
+                      					if (!current) {
+                      						associateWithSemanticElement();
+                      						current = true;
+                      					}
                       					markComposite(elementTypeProvider.getPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType());
                       				
                     }
@@ -793,7 +801,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRulePRFNamedRefFirst"
-    // PsiInternalFragmentTestLanguage.g:316:1: entryRulePRFNamedRefFirst returns [Boolean current=false] : iv_rulePRFNamedRefFirst= rulePRFNamedRefFirst EOF ;
+    // PsiInternalFragmentTestLanguage.g:324:1: entryRulePRFNamedRefFirst returns [Boolean current=false] : iv_rulePRFNamedRefFirst= rulePRFNamedRefFirst EOF ;
     public final Boolean entryRulePRFNamedRefFirst() throws RecognitionException {
         Boolean current = false;
 
@@ -801,8 +809,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:316:58: (iv_rulePRFNamedRefFirst= rulePRFNamedRefFirst EOF )
-            // PsiInternalFragmentTestLanguage.g:317:2: iv_rulePRFNamedRefFirst= rulePRFNamedRefFirst EOF
+            // PsiInternalFragmentTestLanguage.g:324:58: (iv_rulePRFNamedRefFirst= rulePRFNamedRefFirst EOF )
+            // PsiInternalFragmentTestLanguage.g:325:2: iv_rulePRFNamedRefFirst= rulePRFNamedRefFirst EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPRFNamedRefFirstElementType()); 
@@ -832,7 +840,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "rulePRFNamedRefFirst"
-    // PsiInternalFragmentTestLanguage.g:323:1: rulePRFNamedRefFirst returns [Boolean current=false] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] ) ;
+    // PsiInternalFragmentTestLanguage.g:331:1: rulePRFNamedRefFirst returns [Boolean current=false] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] ) ;
     public final Boolean rulePRFNamedRefFirst() throws RecognitionException {
         Boolean current = false;
 
@@ -842,17 +850,17 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:324:1: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] ) )
-            // PsiInternalFragmentTestLanguage.g:325:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] )
+            // PsiInternalFragmentTestLanguage.g:332:1: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] ) )
+            // PsiInternalFragmentTestLanguage.g:333:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] )
             {
-            // PsiInternalFragmentTestLanguage.g:325:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] )
-            // PsiInternalFragmentTestLanguage.g:326:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current]
+            // PsiInternalFragmentTestLanguage.g:333:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current] )
+            // PsiInternalFragmentTestLanguage.g:334:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' this_PRFNamedFragment_2= rulePRFNamedFragment[$current]
             {
-            // PsiInternalFragmentTestLanguage.g:326:3: ( (otherlv_0= RULE_ID ) )
-            // PsiInternalFragmentTestLanguage.g:327:4: (otherlv_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:334:3: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:335:4: (otherlv_0= RULE_ID )
             {
-            // PsiInternalFragmentTestLanguage.g:327:4: (otherlv_0= RULE_ID )
-            // PsiInternalFragmentTestLanguage.g:328:5: otherlv_0= RULE_ID
+            // PsiInternalFragmentTestLanguage.g:335:4: (otherlv_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:336:5: otherlv_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -892,6 +900,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             if ( state.backtracking==0 ) {
 
+              			if (!current) {
+              				associateWithSemanticElement();
+              				current = true;
+              			}
               			markComposite(elementTypeProvider.getPRFNamedRefFirst_PRFNamedFragmentParserRuleCall_2ElementType());
               		
             }
@@ -925,7 +937,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRulePRFNamedWithAction"
-    // PsiInternalFragmentTestLanguage.g:362:1: entryRulePRFNamedWithAction returns [Boolean current=false] : iv_rulePRFNamedWithAction= rulePRFNamedWithAction EOF ;
+    // PsiInternalFragmentTestLanguage.g:374:1: entryRulePRFNamedWithAction returns [Boolean current=false] : iv_rulePRFNamedWithAction= rulePRFNamedWithAction EOF ;
     public final Boolean entryRulePRFNamedWithAction() throws RecognitionException {
         Boolean current = false;
 
@@ -933,8 +945,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:362:60: (iv_rulePRFNamedWithAction= rulePRFNamedWithAction EOF )
-            // PsiInternalFragmentTestLanguage.g:363:2: iv_rulePRFNamedWithAction= rulePRFNamedWithAction EOF
+            // PsiInternalFragmentTestLanguage.g:374:60: (iv_rulePRFNamedWithAction= rulePRFNamedWithAction EOF )
+            // PsiInternalFragmentTestLanguage.g:375:2: iv_rulePRFNamedWithAction= rulePRFNamedWithAction EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPRFNamedWithActionElementType()); 
@@ -964,7 +976,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "rulePRFNamedWithAction"
-    // PsiInternalFragmentTestLanguage.g:369:1: rulePRFNamedWithAction returns [Boolean current=false] : (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? ) ;
+    // PsiInternalFragmentTestLanguage.g:381:1: rulePRFNamedWithAction returns [Boolean current=false] : (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? ) ;
     public final Boolean rulePRFNamedWithAction() throws RecognitionException {
         Boolean current = false;
 
@@ -975,11 +987,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:370:1: ( (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? ) )
-            // PsiInternalFragmentTestLanguage.g:371:2: (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? )
+            // PsiInternalFragmentTestLanguage.g:382:1: ( (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? ) )
+            // PsiInternalFragmentTestLanguage.g:383:2: (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? )
             {
-            // PsiInternalFragmentTestLanguage.g:371:2: (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? )
-            // PsiInternalFragmentTestLanguage.g:372:3: this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )?
+            // PsiInternalFragmentTestLanguage.g:383:2: (this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )? )
+            // PsiInternalFragmentTestLanguage.g:384:3: this_PRFNamed_0= rulePRFNamed () ( (lv_name_2_0= RULE_ID ) ) ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )?
             {
             if ( state.backtracking==0 ) {
 
@@ -997,8 +1009,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
               			doneComposite();
               		
             }
-            // PsiInternalFragmentTestLanguage.g:380:3: ()
-            // PsiInternalFragmentTestLanguage.g:381:4: 
+            // PsiInternalFragmentTestLanguage.g:392:3: ()
+            // PsiInternalFragmentTestLanguage.g:393:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -1010,11 +1022,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
             }
 
-            // PsiInternalFragmentTestLanguage.g:387:3: ( (lv_name_2_0= RULE_ID ) )
-            // PsiInternalFragmentTestLanguage.g:388:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:399:3: ( (lv_name_2_0= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:400:4: (lv_name_2_0= RULE_ID )
             {
-            // PsiInternalFragmentTestLanguage.g:388:4: (lv_name_2_0= RULE_ID )
-            // PsiInternalFragmentTestLanguage.g:389:5: lv_name_2_0= RULE_ID
+            // PsiInternalFragmentTestLanguage.g:400:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:401:5: lv_name_2_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1041,7 +1053,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
             }
 
-            // PsiInternalFragmentTestLanguage.g:404:3: ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )?
+            // PsiInternalFragmentTestLanguage.g:416:3: ( ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1050,13 +1062,13 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalFragmentTestLanguage.g:405:4: ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) )
+                    // PsiInternalFragmentTestLanguage.g:417:4: ( (otherlv_3= RULE_ID ) ) ( (otherlv_4= RULE_ID ) )
                     {
-                    // PsiInternalFragmentTestLanguage.g:405:4: ( (otherlv_3= RULE_ID ) )
-                    // PsiInternalFragmentTestLanguage.g:406:5: (otherlv_3= RULE_ID )
+                    // PsiInternalFragmentTestLanguage.g:417:4: ( (otherlv_3= RULE_ID ) )
+                    // PsiInternalFragmentTestLanguage.g:418:5: (otherlv_3= RULE_ID )
                     {
-                    // PsiInternalFragmentTestLanguage.g:406:5: (otherlv_3= RULE_ID )
-                    // PsiInternalFragmentTestLanguage.g:407:6: otherlv_3= RULE_ID
+                    // PsiInternalFragmentTestLanguage.g:418:5: (otherlv_3= RULE_ID )
+                    // PsiInternalFragmentTestLanguage.g:419:6: otherlv_3= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1083,11 +1095,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
                     }
 
-                    // PsiInternalFragmentTestLanguage.g:422:4: ( (otherlv_4= RULE_ID ) )
-                    // PsiInternalFragmentTestLanguage.g:423:5: (otherlv_4= RULE_ID )
+                    // PsiInternalFragmentTestLanguage.g:434:4: ( (otherlv_4= RULE_ID ) )
+                    // PsiInternalFragmentTestLanguage.g:435:5: (otherlv_4= RULE_ID )
                     {
-                    // PsiInternalFragmentTestLanguage.g:423:5: (otherlv_4= RULE_ID )
-                    // PsiInternalFragmentTestLanguage.g:424:6: otherlv_4= RULE_ID
+                    // PsiInternalFragmentTestLanguage.g:435:5: (otherlv_4= RULE_ID )
+                    // PsiInternalFragmentTestLanguage.g:436:6: otherlv_4= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1139,7 +1151,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRulePRFNamedWithFQN"
-    // PsiInternalFragmentTestLanguage.g:444:1: entryRulePRFNamedWithFQN returns [Boolean current=false] : iv_rulePRFNamedWithFQN= rulePRFNamedWithFQN EOF ;
+    // PsiInternalFragmentTestLanguage.g:456:1: entryRulePRFNamedWithFQN returns [Boolean current=false] : iv_rulePRFNamedWithFQN= rulePRFNamedWithFQN EOF ;
     public final Boolean entryRulePRFNamedWithFQN() throws RecognitionException {
         Boolean current = false;
 
@@ -1147,8 +1159,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:444:57: (iv_rulePRFNamedWithFQN= rulePRFNamedWithFQN EOF )
-            // PsiInternalFragmentTestLanguage.g:445:2: iv_rulePRFNamedWithFQN= rulePRFNamedWithFQN EOF
+            // PsiInternalFragmentTestLanguage.g:456:57: (iv_rulePRFNamedWithFQN= rulePRFNamedWithFQN EOF )
+            // PsiInternalFragmentTestLanguage.g:457:2: iv_rulePRFNamedWithFQN= rulePRFNamedWithFQN EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPRFNamedWithFQNElementType()); 
@@ -1178,7 +1190,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "rulePRFNamedWithFQN"
-    // PsiInternalFragmentTestLanguage.g:451:1: rulePRFNamedWithFQN returns [Boolean current=false] : ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? ) ;
+    // PsiInternalFragmentTestLanguage.g:463:1: rulePRFNamedWithFQN returns [Boolean current=false] : ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? ) ;
     public final Boolean rulePRFNamedWithFQN() throws RecognitionException {
         Boolean current = false;
 
@@ -1187,17 +1199,17 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:452:1: ( ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? ) )
-            // PsiInternalFragmentTestLanguage.g:453:2: ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? )
+            // PsiInternalFragmentTestLanguage.g:464:1: ( ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? ) )
+            // PsiInternalFragmentTestLanguage.g:465:2: ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? )
             {
-            // PsiInternalFragmentTestLanguage.g:453:2: ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? )
-            // PsiInternalFragmentTestLanguage.g:454:3: ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )?
+            // PsiInternalFragmentTestLanguage.g:465:2: ( ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )? )
+            // PsiInternalFragmentTestLanguage.g:466:3: ( (lv_name_0_0= ruleFQN ) ) (otherlv_1= '-' ( ( ruleFQN2 ) ) )?
             {
-            // PsiInternalFragmentTestLanguage.g:454:3: ( (lv_name_0_0= ruleFQN ) )
-            // PsiInternalFragmentTestLanguage.g:455:4: (lv_name_0_0= ruleFQN )
+            // PsiInternalFragmentTestLanguage.g:466:3: ( (lv_name_0_0= ruleFQN ) )
+            // PsiInternalFragmentTestLanguage.g:467:4: (lv_name_0_0= ruleFQN )
             {
-            // PsiInternalFragmentTestLanguage.g:455:4: (lv_name_0_0= ruleFQN )
-            // PsiInternalFragmentTestLanguage.g:456:5: lv_name_0_0= ruleFQN
+            // PsiInternalFragmentTestLanguage.g:467:4: (lv_name_0_0= ruleFQN )
+            // PsiInternalFragmentTestLanguage.g:468:5: lv_name_0_0= ruleFQN
             {
             if ( state.backtracking==0 ) {
 
@@ -1224,7 +1236,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
             }
 
-            // PsiInternalFragmentTestLanguage.g:469:3: (otherlv_1= '-' ( ( ruleFQN2 ) ) )?
+            // PsiInternalFragmentTestLanguage.g:481:3: (otherlv_1= '-' ( ( ruleFQN2 ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1233,7 +1245,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalFragmentTestLanguage.g:470:4: otherlv_1= '-' ( ( ruleFQN2 ) )
+                    // PsiInternalFragmentTestLanguage.g:482:4: otherlv_1= '-' ( ( ruleFQN2 ) )
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1246,11 +1258,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
                       				doneLeaf(otherlv_1);
                       			
                     }
-                    // PsiInternalFragmentTestLanguage.g:477:4: ( ( ruleFQN2 ) )
-                    // PsiInternalFragmentTestLanguage.g:478:5: ( ruleFQN2 )
+                    // PsiInternalFragmentTestLanguage.g:489:4: ( ( ruleFQN2 ) )
+                    // PsiInternalFragmentTestLanguage.g:490:5: ( ruleFQN2 )
                     {
-                    // PsiInternalFragmentTestLanguage.g:478:5: ( ruleFQN2 )
-                    // PsiInternalFragmentTestLanguage.g:479:6: ruleFQN2
+                    // PsiInternalFragmentTestLanguage.g:490:5: ( ruleFQN2 )
+                    // PsiInternalFragmentTestLanguage.g:491:6: ruleFQN2
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1306,7 +1318,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRulePRFWithPredicate"
-    // PsiInternalFragmentTestLanguage.g:499:1: entryRulePRFWithPredicate returns [Boolean current=false] : iv_rulePRFWithPredicate= rulePRFWithPredicate EOF ;
+    // PsiInternalFragmentTestLanguage.g:511:1: entryRulePRFWithPredicate returns [Boolean current=false] : iv_rulePRFWithPredicate= rulePRFWithPredicate EOF ;
     public final Boolean entryRulePRFWithPredicate() throws RecognitionException {
         Boolean current = false;
 
@@ -1314,8 +1326,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:499:58: (iv_rulePRFWithPredicate= rulePRFWithPredicate EOF )
-            // PsiInternalFragmentTestLanguage.g:500:2: iv_rulePRFWithPredicate= rulePRFWithPredicate EOF
+            // PsiInternalFragmentTestLanguage.g:511:58: (iv_rulePRFWithPredicate= rulePRFWithPredicate EOF )
+            // PsiInternalFragmentTestLanguage.g:512:2: iv_rulePRFWithPredicate= rulePRFWithPredicate EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getPRFWithPredicateElementType()); 
@@ -1345,7 +1357,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "rulePRFWithPredicate"
-    // PsiInternalFragmentTestLanguage.g:506:1: rulePRFWithPredicate returns [Boolean current=false] : (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? ) ;
+    // PsiInternalFragmentTestLanguage.g:518:1: rulePRFWithPredicate returns [Boolean current=false] : (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? ) ;
     public final Boolean rulePRFWithPredicate() throws RecognitionException {
         Boolean current = false;
 
@@ -1356,14 +1368,18 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:507:1: ( (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? ) )
-            // PsiInternalFragmentTestLanguage.g:508:2: (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? )
+            // PsiInternalFragmentTestLanguage.g:519:1: ( (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? ) )
+            // PsiInternalFragmentTestLanguage.g:520:2: (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? )
             {
-            // PsiInternalFragmentTestLanguage.g:508:2: (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? )
-            // PsiInternalFragmentTestLanguage.g:509:3: this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )?
+            // PsiInternalFragmentTestLanguage.g:520:2: (this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )? )
+            // PsiInternalFragmentTestLanguage.g:521:3: this_PRFNamedFragment_0= rulePRFNamedFragment[$current] ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )?
             {
             if ( state.backtracking==0 ) {
 
+              			if (!current) {
+              				associateWithSemanticElement();
+              				current = true;
+              			}
               			markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType());
               		
             }
@@ -1378,7 +1394,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
               			doneComposite();
               		
             }
-            // PsiInternalFragmentTestLanguage.g:517:3: ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )?
+            // PsiInternalFragmentTestLanguage.g:533:3: ( ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1387,10 +1403,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             switch (alt5) {
                 case 1 :
-                    // PsiInternalFragmentTestLanguage.g:518:4: ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] )
+                    // PsiInternalFragmentTestLanguage.g:534:4: ( ( '-' rulePRFNamedRef[null] ) )=> (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] )
                     {
-                    // PsiInternalFragmentTestLanguage.g:523:4: (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] )
-                    // PsiInternalFragmentTestLanguage.g:524:5: otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current]
+                    // PsiInternalFragmentTestLanguage.g:539:4: (otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current] )
+                    // PsiInternalFragmentTestLanguage.g:540:5: otherlv_1= '-' this_PRFNamedRef_2= rulePRFNamedRef[$current]
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1405,6 +1421,10 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     if ( state.backtracking==0 ) {
 
+                      					if (!current) {
+                      						associateWithSemanticElement();
+                      						current = true;
+                      					}
                       					markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType());
                       				
                     }
@@ -1447,7 +1467,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRuleFQN"
-    // PsiInternalFragmentTestLanguage.g:545:1: entryRuleFQN returns [Boolean current=false] : iv_ruleFQN= ruleFQN EOF ;
+    // PsiInternalFragmentTestLanguage.g:565:1: entryRuleFQN returns [Boolean current=false] : iv_ruleFQN= ruleFQN EOF ;
     public final Boolean entryRuleFQN() throws RecognitionException {
         Boolean current = false;
 
@@ -1455,8 +1475,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:545:45: (iv_ruleFQN= ruleFQN EOF )
-            // PsiInternalFragmentTestLanguage.g:546:2: iv_ruleFQN= ruleFQN EOF
+            // PsiInternalFragmentTestLanguage.g:565:45: (iv_ruleFQN= ruleFQN EOF )
+            // PsiInternalFragmentTestLanguage.g:566:2: iv_ruleFQN= ruleFQN EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFQNElementType()); 
@@ -1486,18 +1506,18 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "ruleFQN"
-    // PsiInternalFragmentTestLanguage.g:552:1: ruleFQN returns [Boolean current=false] : (this_ID_0= RULE_ID ( ruleSuffix )? ) ;
+    // PsiInternalFragmentTestLanguage.g:572:1: ruleFQN returns [Boolean current=false] : (this_ID_0= RULE_ID ( ruleSuffix )? ) ;
     public final Boolean ruleFQN() throws RecognitionException {
         Boolean current = false;
 
         Token this_ID_0=null;
 
         try {
-            // PsiInternalFragmentTestLanguage.g:553:1: ( (this_ID_0= RULE_ID ( ruleSuffix )? ) )
-            // PsiInternalFragmentTestLanguage.g:554:2: (this_ID_0= RULE_ID ( ruleSuffix )? )
+            // PsiInternalFragmentTestLanguage.g:573:1: ( (this_ID_0= RULE_ID ( ruleSuffix )? ) )
+            // PsiInternalFragmentTestLanguage.g:574:2: (this_ID_0= RULE_ID ( ruleSuffix )? )
             {
-            // PsiInternalFragmentTestLanguage.g:554:2: (this_ID_0= RULE_ID ( ruleSuffix )? )
-            // PsiInternalFragmentTestLanguage.g:555:3: this_ID_0= RULE_ID ( ruleSuffix )?
+            // PsiInternalFragmentTestLanguage.g:574:2: (this_ID_0= RULE_ID ( ruleSuffix )? )
+            // PsiInternalFragmentTestLanguage.g:575:3: this_ID_0= RULE_ID ( ruleSuffix )?
             {
             if ( state.backtracking==0 ) {
 
@@ -1510,7 +1530,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
               			doneLeaf(this_ID_0);
               		
             }
-            // PsiInternalFragmentTestLanguage.g:562:3: ( ruleSuffix )?
+            // PsiInternalFragmentTestLanguage.g:582:3: ( ruleSuffix )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1519,7 +1539,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalFragmentTestLanguage.g:563:4: ruleSuffix
+                    // PsiInternalFragmentTestLanguage.g:583:4: ruleSuffix
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1561,7 +1581,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRuleFQN2"
-    // PsiInternalFragmentTestLanguage.g:575:1: entryRuleFQN2 returns [Boolean current=false] : iv_ruleFQN2= ruleFQN2 EOF ;
+    // PsiInternalFragmentTestLanguage.g:595:1: entryRuleFQN2 returns [Boolean current=false] : iv_ruleFQN2= ruleFQN2 EOF ;
     public final Boolean entryRuleFQN2() throws RecognitionException {
         Boolean current = false;
 
@@ -1569,8 +1589,8 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
         try {
-            // PsiInternalFragmentTestLanguage.g:575:46: (iv_ruleFQN2= ruleFQN2 EOF )
-            // PsiInternalFragmentTestLanguage.g:576:2: iv_ruleFQN2= ruleFQN2 EOF
+            // PsiInternalFragmentTestLanguage.g:595:46: (iv_ruleFQN2= ruleFQN2 EOF )
+            // PsiInternalFragmentTestLanguage.g:596:2: iv_ruleFQN2= ruleFQN2 EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getFQN2ElementType()); 
@@ -1600,18 +1620,18 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "ruleFQN2"
-    // PsiInternalFragmentTestLanguage.g:582:1: ruleFQN2 returns [Boolean current=false] : (this_ID_0= RULE_ID ( ruleSuffix2 )* ) ;
+    // PsiInternalFragmentTestLanguage.g:602:1: ruleFQN2 returns [Boolean current=false] : (this_ID_0= RULE_ID ( ruleSuffix2 )* ) ;
     public final Boolean ruleFQN2() throws RecognitionException {
         Boolean current = false;
 
         Token this_ID_0=null;
 
         try {
-            // PsiInternalFragmentTestLanguage.g:583:1: ( (this_ID_0= RULE_ID ( ruleSuffix2 )* ) )
-            // PsiInternalFragmentTestLanguage.g:584:2: (this_ID_0= RULE_ID ( ruleSuffix2 )* )
+            // PsiInternalFragmentTestLanguage.g:603:1: ( (this_ID_0= RULE_ID ( ruleSuffix2 )* ) )
+            // PsiInternalFragmentTestLanguage.g:604:2: (this_ID_0= RULE_ID ( ruleSuffix2 )* )
             {
-            // PsiInternalFragmentTestLanguage.g:584:2: (this_ID_0= RULE_ID ( ruleSuffix2 )* )
-            // PsiInternalFragmentTestLanguage.g:585:3: this_ID_0= RULE_ID ( ruleSuffix2 )*
+            // PsiInternalFragmentTestLanguage.g:604:2: (this_ID_0= RULE_ID ( ruleSuffix2 )* )
+            // PsiInternalFragmentTestLanguage.g:605:3: this_ID_0= RULE_ID ( ruleSuffix2 )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1624,7 +1644,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
               			doneLeaf(this_ID_0);
               		
             }
-            // PsiInternalFragmentTestLanguage.g:592:3: ( ruleSuffix2 )*
+            // PsiInternalFragmentTestLanguage.g:612:3: ( ruleSuffix2 )*
             loop7:
             do {
                 int alt7=2;
@@ -1637,7 +1657,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalFragmentTestLanguage.g:593:4: ruleSuffix2
+            	    // PsiInternalFragmentTestLanguage.g:613:4: ruleSuffix2
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1682,7 +1702,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "ruleSuffix"
-    // PsiInternalFragmentTestLanguage.g:606:1: ruleSuffix returns [Boolean current=false] : (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? ) ;
+    // PsiInternalFragmentTestLanguage.g:626:1: ruleSuffix returns [Boolean current=false] : (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? ) ;
     public final Boolean ruleSuffix() throws RecognitionException {
         Boolean current = false;
 
@@ -1690,11 +1710,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
         Token this_ID_1=null;
 
         try {
-            // PsiInternalFragmentTestLanguage.g:607:1: ( (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? ) )
-            // PsiInternalFragmentTestLanguage.g:608:2: (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? )
+            // PsiInternalFragmentTestLanguage.g:627:1: ( (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? ) )
+            // PsiInternalFragmentTestLanguage.g:628:2: (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? )
             {
-            // PsiInternalFragmentTestLanguage.g:608:2: (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? )
-            // PsiInternalFragmentTestLanguage.g:609:3: kw= '.' this_ID_1= RULE_ID ( ruleSuffix )?
+            // PsiInternalFragmentTestLanguage.g:628:2: (kw= '.' this_ID_1= RULE_ID ( ruleSuffix )? )
+            // PsiInternalFragmentTestLanguage.g:629:3: kw= '.' this_ID_1= RULE_ID ( ruleSuffix )?
             {
             if ( state.backtracking==0 ) {
 
@@ -1718,7 +1738,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
               			doneLeaf(this_ID_1);
               		
             }
-            // PsiInternalFragmentTestLanguage.g:623:3: ( ruleSuffix )?
+            // PsiInternalFragmentTestLanguage.g:643:3: ( ruleSuffix )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1727,7 +1747,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
             }
             switch (alt8) {
                 case 1 :
-                    // PsiInternalFragmentTestLanguage.g:624:4: ruleSuffix
+                    // PsiInternalFragmentTestLanguage.g:644:4: ruleSuffix
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1769,7 +1789,7 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "ruleSuffix2"
-    // PsiInternalFragmentTestLanguage.g:637:1: ruleSuffix2 returns [Boolean current=false] : (kw= '.' this_ID_1= RULE_ID ) ;
+    // PsiInternalFragmentTestLanguage.g:657:1: ruleSuffix2 returns [Boolean current=false] : (kw= '.' this_ID_1= RULE_ID ) ;
     public final Boolean ruleSuffix2() throws RecognitionException {
         Boolean current = false;
 
@@ -1777,11 +1797,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
         Token this_ID_1=null;
 
         try {
-            // PsiInternalFragmentTestLanguage.g:638:1: ( (kw= '.' this_ID_1= RULE_ID ) )
-            // PsiInternalFragmentTestLanguage.g:639:2: (kw= '.' this_ID_1= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:658:1: ( (kw= '.' this_ID_1= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:659:2: (kw= '.' this_ID_1= RULE_ID )
             {
-            // PsiInternalFragmentTestLanguage.g:639:2: (kw= '.' this_ID_1= RULE_ID )
-            // PsiInternalFragmentTestLanguage.g:640:3: kw= '.' this_ID_1= RULE_ID
+            // PsiInternalFragmentTestLanguage.g:659:2: (kw= '.' this_ID_1= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:660:3: kw= '.' this_ID_1= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1824,21 +1844,21 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "rulePRFNamedFragment"
-    // PsiInternalFragmentTestLanguage.g:659:1: rulePRFNamedFragment[Boolean in_current] returns [Boolean current=in_current] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // PsiInternalFragmentTestLanguage.g:679:1: rulePRFNamedFragment[Boolean in_current] returns [Boolean current=in_current] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final Boolean rulePRFNamedFragment(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalFragmentTestLanguage.g:660:1: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalFragmentTestLanguage.g:661:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:680:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalFragmentTestLanguage.g:681:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalFragmentTestLanguage.g:661:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalFragmentTestLanguage.g:662:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:681:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:682:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalFragmentTestLanguage.g:662:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalFragmentTestLanguage.g:663:4: lv_name_0_0= RULE_ID
+            // PsiInternalFragmentTestLanguage.g:682:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:683:4: lv_name_0_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1881,21 +1901,21 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "rulePRFNamedRef"
-    // PsiInternalFragmentTestLanguage.g:682:1: rulePRFNamedRef[Boolean in_current] returns [Boolean current=in_current] : ( (otherlv_0= RULE_ID ) ) ;
+    // PsiInternalFragmentTestLanguage.g:702:1: rulePRFNamedRef[Boolean in_current] returns [Boolean current=in_current] : ( (otherlv_0= RULE_ID ) ) ;
     public final Boolean rulePRFNamedRef(Boolean in_current) throws RecognitionException {
         Boolean current = in_current;
 
         Token otherlv_0=null;
 
         try {
-            // PsiInternalFragmentTestLanguage.g:683:1: ( ( (otherlv_0= RULE_ID ) ) )
-            // PsiInternalFragmentTestLanguage.g:684:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:703:1: ( ( (otherlv_0= RULE_ID ) ) )
+            // PsiInternalFragmentTestLanguage.g:704:2: ( (otherlv_0= RULE_ID ) )
             {
-            // PsiInternalFragmentTestLanguage.g:684:2: ( (otherlv_0= RULE_ID ) )
-            // PsiInternalFragmentTestLanguage.g:685:3: (otherlv_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:704:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalFragmentTestLanguage.g:705:3: (otherlv_0= RULE_ID )
             {
-            // PsiInternalFragmentTestLanguage.g:685:3: (otherlv_0= RULE_ID )
-            // PsiInternalFragmentTestLanguage.g:686:4: otherlv_0= RULE_ID
+            // PsiInternalFragmentTestLanguage.g:705:3: (otherlv_0= RULE_ID )
+            // PsiInternalFragmentTestLanguage.g:706:4: otherlv_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -1938,11 +1958,11 @@ public class PsiInternalFragmentTestLanguageParser extends AbstractPsiAntlrParse
 
     // $ANTLR start synpred1_PsiInternalFragmentTestLanguage
     public final void synpred1_PsiInternalFragmentTestLanguage_fragment() throws RecognitionException {   
-        // PsiInternalFragmentTestLanguage.g:518:4: ( ( '-' rulePRFNamedRef[null] ) )
-        // PsiInternalFragmentTestLanguage.g:518:5: ( '-' rulePRFNamedRef[null] )
+        // PsiInternalFragmentTestLanguage.g:534:4: ( ( '-' rulePRFNamedRef[null] ) )
+        // PsiInternalFragmentTestLanguage.g:534:5: ( '-' rulePRFNamedRef[null] )
         {
-        // PsiInternalFragmentTestLanguage.g:518:5: ( '-' rulePRFNamedRef[null] )
-        // PsiInternalFragmentTestLanguage.g:519:5: '-' rulePRFNamedRef[null]
+        // PsiInternalFragmentTestLanguage.g:534:5: ( '-' rulePRFNamedRef[null] )
+        // PsiInternalFragmentTestLanguage.g:535:5: '-' rulePRFNamedRef[null]
         {
         match(input,19,FollowSets000.FOLLOW_3); if (state.failed) return ;
         pushFollow(FollowSets000.FOLLOW_2);

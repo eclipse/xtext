@@ -74,7 +74,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		//{ModelElement}
 		public Action getModelElementAction_0() { return cModelElementAction_0; }
 
-		//containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*+
+		//(containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//containments+=Contained
@@ -98,7 +98,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getRefsContainedIDTerminalRuleCall_1_1_1_0_1() { return cRefsContainedIDTerminalRuleCall_1_1_1_0_1; }
 
-		//"$" refs+=[Contained]*
+		//("$" refs+=[Contained])*
 		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
 
 		//"$"
