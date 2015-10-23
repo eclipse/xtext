@@ -50,7 +50,9 @@
 		<!-- run task "generate_self" to compose the list below -->
 		<zip_example name="org.eclipse.xtext.example.arithmetics" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.tests" />
+		<zip_example name="org.eclipse.xtext.example.arithmetics.ide" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.ui" />
+		<zip_example name="org.eclipse.xtext.example.arithmetics.ui.tests" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel.tests" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel.ui" />
