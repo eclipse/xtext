@@ -30,6 +30,7 @@ import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Indexer;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2;
@@ -362,8 +363,10 @@ public class IncrementalBuilder {
           }
         }
       }
+      final GeneratorContext generatorContext = new GeneratorContext();
       CancelIndicator _cancelIndicator = request.getCancelIndicator();
-      generator.generate(resource, fileSystemAccess, _cancelIndicator);
+      generatorContext.setCancelIndicator(_cancelIndicator);
+      generator.generate(resource, fileSystemAccess, generatorContext);
       final Procedure1<URI> _function_1 = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {

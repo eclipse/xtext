@@ -30,21 +30,21 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGenerator2
+import org.eclipse.xtext.generator.IGeneratorContext
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
-import org.eclipse.xtext.service.OperationCanceledManager
-import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
-import org.eclipse.xtext.generator.IGenerator2
-import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,15 +61,15 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 		callMacroProcessors(input)
 	}
 	
-	override beforeGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	override beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		issueProviderFactory.attachData(input)
 	}
 	
-	override afterGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	override afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		issueProviderFactory.detachData(input)
 	}
 	
-	override doGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		doGenerate(input, fsa as IFileSystemAccess)
 	}
 	

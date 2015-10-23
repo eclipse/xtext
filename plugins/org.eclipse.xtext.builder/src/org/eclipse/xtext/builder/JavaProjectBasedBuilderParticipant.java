@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -141,7 +142,9 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			if (fileSystemAccess instanceof EclipseResourceFileSystemAccess2) {
 				cancelIndicator = new MonitorBasedCancelIndicator(((EclipseResourceFileSystemAccess2) fileSystemAccess).getMonitor());
 			}
-			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, cancelIndicator);
+			GeneratorContext generatorContext = new GeneratorContext();
+			generatorContext.setCancelIndicator(cancelIndicator);
+			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, generatorContext);
 			context.needRebuild();
 		}
 	}
