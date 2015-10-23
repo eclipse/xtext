@@ -188,7 +188,12 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
         _requiredBundles.add("org.eclipse.xtext.xbase.lib");
       }
-      this.doGenerateStubFile();
+      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
+      if (_isPreferXtendStubs) {
+        this.doGenerateXtendStubFile();
+      } else {
+        this.doGenerateJavaStubFile();
+      }
     }
     boolean _or = false;
     boolean _isGenerateStub_1 = this.isGenerateStub();
@@ -292,7 +297,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
   }
   
-  protected void doGenerateStubFile() {
+  protected void doGenerateXtendStubFile() {
     Grammar _grammar = this.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -354,6 +359,81 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
     _createXtendFile.writeTo(_src);
+  }
+  
+  protected void doGenerateJavaStubFile() {
+    Grammar _grammar = this.getGrammar();
+    TypeReference _generatorStub = this.getGeneratorStub(_grammar);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Generates code from your model files on save.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+        _builder.append("public class ");
+        IXtextGeneratorLanguage _language = GeneratorFragment2.this.getLanguage();
+        Grammar _grammar = _language.getGrammar();
+        TypeReference _generatorStub = GeneratorFragment2.this.getGeneratorStub(_grammar);
+        String _simpleName = _generatorStub.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        _builder.append(AbstractGenerator.class, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@");
+        _builder.append(Override.class, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("public void doGenerate(");
+        _builder.append(Resource.class, "\t");
+        _builder.append(" resource, ");
+        _builder.append(IFileSystemAccess2.class, "\t");
+        _builder.append(" fsa) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("//\t\tIterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);");
+        _builder.newLine();
+        _builder.append("//\t\tIterator<String> names = Iterators.transform(filtered, new Function<Greeting, String>() {");
+        _builder.newLine();
+        _builder.append("//");
+        _builder.newLine();
+        _builder.append("//\t\t\t@");
+        _builder.append(Override.class, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("//\t\t\tpublic String apply(Greeting greeting) {");
+        _builder.newLine();
+        _builder.append("//\t\t\t\treturn greeting.getName();");
+        _builder.newLine();
+        _builder.append("//\t\t\t}");
+        _builder.newLine();
+        _builder.append("//\t\t});");
+        _builder.newLine();
+        _builder.append("//\t\tfsa.generateFile(\"greetings.txt\", \"People to greet: \" + IteratorExtensions.join(names, \", \"));");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_generatorStub, _client);
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
+    _createJavaFile.writeTo(_src);
   }
   
   protected void doGenerateJavaMain() {
@@ -828,11 +908,8 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       List<String> _fileExtensions = _language_1.getFileExtensions();
       String _join = IterableExtensions.join(_fileExtensions, ",");
       _builder.append(_join, "\t\t");
-      _builder.append("\">");
+      _builder.append("\"/>");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("</participant>");
-      _builder.newLine();
       _builder.append("</extension>");
       _builder.newLine();
       _builder.append("<extension point=\"org.eclipse.ui.preferencePages\">");
