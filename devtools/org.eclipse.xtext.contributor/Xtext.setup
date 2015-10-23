@@ -274,8 +274,8 @@
         url="http://download.eclipse.org/technology/m2e/releases/1.5/1.5.2.20150413-2215/"/>
     <repository
         url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
-    <!--repository
-        url="http://findbugs.cs.umd.edu/eclipse"/-->
+    <repository
+        url="http://findbugs.cs.umd.edu/eclipse"/>
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
