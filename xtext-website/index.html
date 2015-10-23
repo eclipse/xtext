@@ -15,16 +15,16 @@ title: Language Engineering Made Easy!
       <br />
       <br />
       <p>Xtext is a framework for development of programming languages
-      and domain specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, 
+      and domain specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure,
         including <b>parser</b>, <b>linker</b>, <b>typechecker</b>, <b>compiler</b> as well as editing support for <b>Eclipse</b>, <b>IntelliJ IDEA</b> and your favorite <b>web browser</b>.</p>
         <a href="#"><img src="{{ site.baseurl }}/images/slides/Introduction.png"
-          alt="image" id="intro-screenshot"/></a> 
+          alt="image" id="intro-screenshot"/></a>
         <a href="https://vimeo.com/8260921"
           data-rel="prettyPhoto" title="Introduction" class="zoom zoom_icon"></a>
         <br />
       <!--a href="download.html" class="btn_download pull_right"></a>
       <br /-->
-        <p>Check out the latest news : 
+        <p>Check out the latest news :
           {% for post in site.categories.news limit:1 %}
             <a href="{{ site.baseurl }}/news.html">{{ post.title }}</a>
           {% endfor %}</p>
@@ -62,7 +62,8 @@ title: Language Engineering Made Easy!
         </div-->
         <h4>Easy To Learn</h4>
         <p>
-          Xtext is designed to onboard you smoothly. Simple languages are very easy and are done within minutes, while fully-featured, statically-typed programming languages are still possible..
+          Xtext is designed to onboard you smoothly. Simple languages are easily done within minutes.
+          Yet Xtext is flexible enough to build fully-featured, statically-typed programming languages.
         </p>
       </div>
       <div class="span4">
@@ -80,7 +81,8 @@ title: Language Engineering Made Easy!
         </div-->
         <h4>Multi Platform</h4>
         <p>
-          No matter your language targets developers or other experts, you will be able to provide a dedicated smart editor with much more than just syntax coloring and content assist. See the feature table.</b>
+          Whether you are targeting developers or domain experts, you will be able to provide a dedicated smart editor. Syntax coloring, content assist and
+          <a href="#platform-comparison">many more features</a> are supported.
         </p>
       </div>
       <div class="span4">
@@ -90,7 +92,8 @@ title: Language Engineering Made Easy!
         </div-->
         <h4>Performance</h4>
         <p>
-          The team is constantly improving the performance of the various aspects. Being it the compilers, parsers or specific tool integration. We know that tools need to be fast in order to be helful.
+          We know that tools need to be fast in order to be helpful. That is why we spend considerable effort on optimization in every release.
+          You can also fine-tune your language if needed, thanks to Xtext's configurability.
         </p>
       </div>
       <div class="span4">
@@ -99,7 +102,10 @@ title: Language Engineering Made Easy!
             src="{{ site.baseurl }}/images/features_java.png" alt="Image" />
         </div-->
         <h4>Easy JVM languages</h4>
-        <p>Although Xtext runs on the JVM, one can build languages for any platform with it. If you target the JVM we have rich reusable parts, from statically-typed expressions over Java type literals, that you can easily embed in your language.</p>
+        <p>You can build languages for any target platform with Xtext.
+          If you target the JVM you can reuse Xbase, a statically typed expression language.
+          Linking against Java types, code generation and debugging work out of the box.
+        </p>
       </div>
       <div class="span4">
         <!--div class="thumb">
@@ -108,10 +114,11 @@ title: Language Engineering Made Easy!
         </div-->
         <h4>Continuous Integration</h4>
         <p>
-          Xtext supports both Gradle and Maven, to not only build your language and IDE plugins but also to integrate your languages compiler in any standard build script. Out of the box Xtext even comes with incremental compilation of your language files.
+          Xtext supports both Gradle and Maven to build your language and use it in downstream projects.
+          For Gradle builds, you even get incremental compilation of your language files.
         </p>
       </div>
-      
+
     </div>
   </div>
 </div>
