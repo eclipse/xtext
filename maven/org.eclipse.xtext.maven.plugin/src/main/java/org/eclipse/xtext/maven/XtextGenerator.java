@@ -4,10 +4,12 @@
 package org.eclipse.xtext.maven;
 
 import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Sets.newLinkedHashSet;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -144,13 +146,12 @@ public class XtextGenerator extends AbstractMojo {
 	protected void internalExecute() throws MojoExecutionException, MojoFailureException {
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(), this
 				.getClass().getClassLoader());
-		Iterable<String> classPathEntries = filter(getClasspathElements(), emptyStringFilter());
 		Injector injector = Guice.createInjector(new MavenStandaloneBuilderModule());
 		StandaloneBuilder builder = injector.getInstance(StandaloneBuilder.class);
 		builder.setBaseDir(project.getBasedir().getAbsolutePath());
 		builder.setLanguages(languages);
 		builder.setEncoding(encoding);
-		builder.setClassPathEntries(classPathEntries);
+		builder.setClassPathEntries(getClasspathElements());
 		builder.setClassPathLookUpFilter(classPathLookupFilter);
 		builder.setSourceDirs(sourceRoots);
 		builder.setJavaSourceDirs(javaSourceRoots);
@@ -181,7 +182,7 @@ public class XtextGenerator extends AbstractMojo {
 		if (getLog().isDebugEnabled()) {
 			getLog().debug("Source dirs: " + IterableExtensions.join(sourceRoots, ", "));
 			getLog().debug("Java source dirs: " + IterableExtensions.join(javaSourceRoots, ", "));
-			getLog().debug("Classpath entries: " + IterableExtensions.join(classpathElements, ", "));
+			getLog().debug("Classpath entries: " + IterableExtensions.join(getClasspathElements(), ", "));
 		}
 	}
 
@@ -201,8 +202,13 @@ public class XtextGenerator extends AbstractMojo {
 		};
 	}
 
-	public List<String> getClasspathElements() {
-		return classpathElements;
+	public Set<String> getClasspathElements() {
+		Set<String> classpathElements = newLinkedHashSet();
+		classpathElements.addAll(this.classpathElements);
+		classpathElements.remove(project.getBuild().getOutputDirectory());
+		classpathElements.remove(project.getBuild().getTestOutputDirectory());
+		Set<String> nonEmptyElements = newLinkedHashSet(filter(classpathElements, emptyStringFilter()));
+		return nonEmptyElements;
 	}
 
 	public List<Language> getLanguages() {

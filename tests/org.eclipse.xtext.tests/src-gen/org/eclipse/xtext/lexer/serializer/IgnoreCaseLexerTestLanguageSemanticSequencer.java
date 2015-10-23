@@ -41,6 +41,9 @@ public class IgnoreCaseLexerTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     value='CaSe'
 	 */

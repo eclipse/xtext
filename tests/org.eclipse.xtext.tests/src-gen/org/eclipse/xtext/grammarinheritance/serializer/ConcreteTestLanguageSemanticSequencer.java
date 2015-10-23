@@ -90,6 +90,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	}
 	
 	/**
+	 * Contexts:
+	 *     RootRule returns CallExtendedParserRule
+	 *     CallExtendedParserRule returns CallExtendedParserRule
+	 *
 	 * Constraint:
 	 *     call=AbstractCallExtendedParserRule
 	 */
@@ -105,6 +109,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     RootRule returns CallOverridenParserRule
+	 *     CallOverridenParserRule returns CallOverridenParserRule
+	 *
 	 * Constraint:
 	 *     call=AbstractCallOverridenParserRule
 	 */
@@ -120,6 +128,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     RootRule returns ConcreteParserRule
+	 *     ConcreteParserRule returns ConcreteParserRule
+	 *
 	 * Constraint:
 	 *     (magicNumber=REAL elements+=InheritedParserRule*)
 	 */
@@ -129,6 +141,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     RootRule returns AType2
+	 *     OverridableParserRule2 returns AType2
+	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
 	 */
@@ -147,6 +163,9 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     OverridableParserRule returns AType
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -162,6 +181,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendableParserRule returns Subrule1
+	 *     Subrule1 returns Subrule1
+	 *
 	 * Constraint:
 	 *     (name=ID sub1=ID)
 	 */
@@ -180,6 +203,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendableParserRule returns Subrule2
+	 *     Subrule2 returns Subrule2
+	 *
 	 * Constraint:
 	 *     (name=ID sub2=STRING)
 	 */
@@ -198,6 +225,10 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendableParserRule returns Subrule3
+	 *     Subrule3 returns Subrule3
+	 *
 	 * Constraint:
 	 *     (name=ID sub1=INT)
 	 */

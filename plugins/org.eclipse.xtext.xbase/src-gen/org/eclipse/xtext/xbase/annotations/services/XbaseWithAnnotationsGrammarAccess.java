@@ -143,7 +143,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//=> (element=[types::JvmOperation|ValidID] '=')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//(element=[types::JvmOperation|ValidID] '=')
+		//element=[types::JvmOperation|ValidID] '='
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//element=[types::JvmOperation|ValidID]
@@ -205,7 +205,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//=> ({xbase::XListLiteral} '#' '[')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
-		//({xbase::XListLiteral} '#' '[')
+		//{xbase::XListLiteral} '#' '['
 		public Group getGroup_0_0_0() { return cGroup_0_0_0; }
 		
 		//{xbase::XListLiteral}
@@ -299,7 +299,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//=> ({xbase::XListLiteral} '#' '[')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
-		//({xbase::XListLiteral} '#' '[')
+		//{xbase::XListLiteral} '#' '['
 		public Group getGroup_0_0_0() { return cGroup_0_0_0; }
 		
 		//{xbase::XListLiteral}
@@ -1144,7 +1144,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
 	// * which makes downstream grammars break on classloading, when a rule is removed.
 	// * / StaticQualifier:
-	//	ValidID '::'+;
+	//	(ValidID '::')+;
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
 		return gaXbase.getStaticQualifierAccess();
 	}
@@ -1328,7 +1328,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	//QualifiedNameInStaticImport:
-	//	ValidID '.'+;
+	//	(ValidID '.')+;
 	public XtypeGrammarAccess.QualifiedNameInStaticImportElements getQualifiedNameInStaticImportAccess() {
 		return gaXbase.getQualifiedNameInStaticImportAccess();
 	}

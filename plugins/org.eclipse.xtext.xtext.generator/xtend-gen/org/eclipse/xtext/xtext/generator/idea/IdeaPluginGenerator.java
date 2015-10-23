@@ -57,10 +57,8 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginClassNames;
@@ -72,11 +70,13 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
+public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -121,10 +121,10 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     if (_not) {
       return;
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     List<String> _fileExtensions = _language.getFileExtensions();
     final String fileExtension = IterableExtensions.<String>head(_fileExtensions);
-    ILanguageConfig _language_1 = this.getLanguage();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     final Grammar grammar = _language_1.getGrammar();
     final GuiceModuleAccess.BindingFactory bindFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
@@ -207,9 +207,9 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider");
       TypeReference _typeRef_10 = TypeReference.typeRef("org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider");
       bindFactory.addTypeToType(_typeRef_9, _typeRef_10);
-      TypeReference _typeRef_11 = TypeReference.typeRef("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider");
-      TypeReference _typeRef_12 = TypeReference.typeRef("org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
-      bindFactory.addTypeToType(_typeRef_11, _typeRef_12);
+      TypeReference _typeReference = new TypeReference("org.eclipse.xtext.xbase.typesystem.internal", "IFeatureScopeTracker.Provider");
+      TypeReference _typeRef_11 = TypeReference.typeRef("org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
+      bindFactory.addTypeToType(_typeReference, _typeRef_11);
       StringConcatenationClient _client_3 = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -232,29 +232,29 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         }
       };
       bindFactory.addConfiguredBinding("LanguageSpecificPsiModelAssociations", _client_3);
-      TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration");
-      TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration");
-      bindFactory.addTypeToType(_typeRef_13, _typeRef_14);
-      TypeReference _typeRef_15 = TypeReference.typeRef("org.eclipse.xtext.idea.formatting.BlockFactory");
-      TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory");
-      bindFactory.addTypeToType(_typeRef_15, _typeRef_16);
-      TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.idea.formatting.ChildAttributesProvider");
-      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider");
-      bindFactory.addTypeToType(_typeRef_17, _typeRef_18);
-      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider");
-      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider");
-      bindFactory.addTypeToType(_typeRef_19, _typeRef_20);
-      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.IReferenceSearcher");
-      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher");
-      bindFactory.addTypeToType(_typeRef_21, _typeRef_22);
-      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider");
-      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider");
-      bindFactory.addTypeToType(_typeRef_23, _typeRef_24);
-      TypeReference _typeRef_25 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.WordsScannerProvider");
-      TypeReference _typeRef_26 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider");
-      bindFactory.addTypeToType(_typeRef_25, _typeRef_26);
+      TypeReference _typeRef_12 = TypeReference.typeRef("org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration");
+      TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration");
+      bindFactory.addTypeToType(_typeRef_12, _typeRef_13);
+      TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.xtext.idea.formatting.BlockFactory");
+      TypeReference _typeRef_15 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory");
+      bindFactory.addTypeToType(_typeRef_14, _typeRef_15);
+      TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.idea.formatting.ChildAttributesProvider");
+      TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider");
+      bindFactory.addTypeToType(_typeRef_16, _typeRef_17);
+      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider");
+      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider");
+      bindFactory.addTypeToType(_typeRef_18, _typeRef_19);
+      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.IReferenceSearcher");
+      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher");
+      bindFactory.addTypeToType(_typeRef_20, _typeRef_21);
+      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider");
+      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider");
+      bindFactory.addTypeToType(_typeRef_22, _typeRef_23);
+      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.WordsScannerProvider");
+      TypeReference _typeReference_1 = new TypeReference("org.eclipse.xtext.xbase.idea.findusages", "XbaseWordsScanner.XbaseWordsScannerProvider");
+      bindFactory.addTypeToType(_typeRef_24, _typeReference_1);
     }
-    ILanguageConfig _language_2 = this.getLanguage();
+    IXtextGeneratorLanguage _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();
     bindFactory.contributeTo(_ideaGenModule);
     XtendFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
@@ -768,7 +768,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("type=\"");
-        ILanguageConfig _language = IdeaPluginGenerator.this.getLanguage();
+        IXtextGeneratorLanguage _language = IdeaPluginGenerator.this.getLanguage();
         List<String> _fileExtensions = _language.getFileExtensions();
         String _head = IterableExtensions.<String>head(_fileExtensions);
         _builder.append(_head, "\t\t\t");
@@ -791,7 +791,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("uriExtension=\"");
-        ILanguageConfig _language_1 = IdeaPluginGenerator.this.getLanguage();
+        IXtextGeneratorLanguage _language_1 = IdeaPluginGenerator.this.getLanguage();
         List<String> _fileExtensions_1 = _language_1.getFileExtensions();
         String _head_1 = IterableExtensions.<String>head(_fileExtensions_1);
         _builder.append(_head_1, "\t\t\t");
@@ -1663,7 +1663,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileTokenTypeProvider(final Grammar grammar) {
     final TypeReference tokenSet = TypeReference.typeRef("com.intellij.psi.tree.TokenSet");
     final TypeReference iElementType = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
-    final TypeReference indexedElementType = TypeReference.typeRef("org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType");
+    final TypeReference indexedElementType = new TypeReference("org.eclipse.xtext.idea.parser", "TokenTypeProvider.IndexedElementType");
     TypeReference _tokenTypeProvider = this._ideaPluginClassNames.getTokenTypeProvider(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override

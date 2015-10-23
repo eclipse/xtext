@@ -132,7 +132,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 			return newArrayList
 		}
 		val generatedSources = builder.getGeneratedSources(sourceFile.file.URI)
-		val generatedTraces = generatedSources.map[virtualFile].filter[isTraceFile]
+		val generatedTraces = generatedSources.map[virtualFile].filterNull.filter[isTraceFile]
 		val result = generatedTraces.map[
 			new VirtualFilePersistedTrace(it, this) as PersistedTrace
 		].toList

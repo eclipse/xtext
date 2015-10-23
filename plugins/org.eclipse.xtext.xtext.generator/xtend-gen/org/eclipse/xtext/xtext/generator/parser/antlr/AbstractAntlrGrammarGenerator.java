@@ -70,13 +70,13 @@ public abstract class AbstractAntlrGrammarGenerator {
   @Inject
   private CodeConfig codeConfig;
   
-  protected KeywordHelper keyWordHelper;
+  protected KeywordHelper keywordHelper;
   
   private Grammar originalGrammar;
   
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
     KeywordHelper _helper = KeywordHelper.getHelper(it);
-    this.keyWordHelper = _helper;
+    this.keywordHelper = _helper;
     this.originalGrammar = it;
     final RuleFilter filter = new RuleFilter();
     boolean _isSkipUnusedRules = options.isSkipUnusedRules();
@@ -311,13 +311,14 @@ public abstract class AbstractAntlrGrammarGenerator {
           final Function1<String, Integer> _function = new Function1<String, Integer>() {
             @Override
             public Integer apply(final String it) {
-              return Integer.valueOf(it.length());
+              int _length = it.length();
+              return Integer.valueOf((-_length));
             }
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
           for(final String kw : _sortBy) {
             _builder.append("\t");
-            String _ruleName = this.keyWordHelper.getRuleName(kw);
+            String _ruleName = this.keywordHelper.getRuleName(kw);
             _builder.append(_ruleName, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
@@ -478,15 +479,15 @@ public abstract class AbstractAntlrGrammarGenerator {
             for(final Pair<Integer, String> kw : _indexed) {
               _builder.append("(FRAGMENT_");
               String _value = kw.getValue();
-              String _ruleName = this.keyWordHelper.getRuleName(_value);
+              String _ruleName = this.keywordHelper.getRuleName(_value);
               _builder.append(_ruleName, "");
               _builder.append(")=> FRAGMENT_");
               String _value_1 = kw.getValue();
-              String _ruleName_1 = this.keyWordHelper.getRuleName(_value_1);
+              String _ruleName_1 = this.keywordHelper.getRuleName(_value_1);
               _builder.append(_ruleName_1, "");
               _builder.append(" {$type = ");
               String _value_2 = kw.getValue();
-              String _ruleName_2 = this.keyWordHelper.getRuleName(_value_2);
+              String _ruleName_2 = this.keywordHelper.getRuleName(_value_2);
               _builder.append(_ruleName_2, "");
               _builder.append("; } ");
               _builder.newLineIfNotEmpty();
@@ -559,7 +560,7 @@ public abstract class AbstractAntlrGrammarGenerator {
           {
             for(final String kw_1 : allKeywords) {
               _builder.append("fragment FRAGMENT_");
-              String _ruleName_6 = this.keyWordHelper.getRuleName(kw_1);
+              String _ruleName_6 = this.keywordHelper.getRuleName(kw_1);
               _builder.append(_ruleName_6, "");
               _builder.append(" : \'");
               String _antlrString = AntlrGrammarGenUtil.toAntlrString(kw_1);
@@ -683,28 +684,27 @@ public abstract class AbstractAntlrGrammarGenerator {
     return _builder;
   }
   
-  protected CharSequence _compileRule(final String keyWord, final Grammar grammar, final AntlrOptions options) {
+  protected CharSequence _compileRule(final String keyword, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
-    String _ruleName = this.keyWordHelper.getRuleName(keyWord);
+    String _ruleName = this.keywordHelper.getRuleName(keyword);
     _builder.append(_ruleName, "");
     _builder.append(" : ");
-    String _antlrKeyWordRule = this.toAntlrKeyWordRule(keyWord, options);
-    _builder.append(_antlrKeyWordRule, "");
+    String _antlrKeywordRule = this.toAntlrKeywordRule(keyword, options);
+    _builder.append(_antlrKeywordRule, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  protected String toAntlrKeyWordRule(final String keyWord, final AntlrOptions options) {
-    String _xifexpression = null;
+  protected String toAntlrKeywordRule(final String keyword, final AntlrOptions options) {
     boolean _isIgnoreCase = options.isIgnoreCase();
     if (_isIgnoreCase) {
-      _xifexpression = AntlrGrammarGenUtil.toAntlrStringIgnoreCase(keyWord);
+      return AntlrGrammarGenUtil.toAntlrStringIgnoreCase(keyword);
     } else {
-      String _antlrString = AntlrGrammarGenUtil.toAntlrString(keyWord);
-      _xifexpression = (_antlrString + "\'");
+      String _antlrString = AntlrGrammarGenUtil.toAntlrString(keyword);
+      String _plus = ("\'" + _antlrString);
+      return (_plus + "\'");
     }
-    return ("\'" + _xifexpression);
   }
   
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
@@ -980,7 +980,7 @@ public abstract class AbstractAntlrGrammarGenerator {
       _xifexpression = (_plus + "\'");
     } else {
       String _value_1 = it.getValue();
-      _xifexpression = this.keyWordHelper.getRuleName(_value_1);
+      _xifexpression = this.keywordHelper.getRuleName(_value_1);
     }
     return _xifexpression;
   }
@@ -1076,7 +1076,7 @@ public abstract class AbstractAntlrGrammarGenerator {
       _xifexpression = (_plus + "\'");
     } else {
       String _value_1 = it.getValue();
-      _xifexpression = this.keyWordHelper.getRuleName(_value_1);
+      _xifexpression = this.keywordHelper.getRuleName(_value_1);
     }
     return _xifexpression;
   }
@@ -1098,7 +1098,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     } else {
       Keyword _literal_1 = it.getLiteral();
       String _value_1 = _literal_1.getValue();
-      _xifexpression = this.keyWordHelper.getRuleName(_value_1);
+      _xifexpression = this.keywordHelper.getRuleName(_value_1);
     }
     return _xifexpression;
   }

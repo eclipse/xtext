@@ -723,6 +723,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX35ParameterDelegationParserRuleCall_34_0()); 
+	    }
+		lv_x35_34_0=ruleParameterDelegation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x35",
+        		lv_x35_34_0, 
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ParameterDelegation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -4448,6 +4467,246 @@ norm3_Parameterized returns [EObject current=null]
 
 )
 ))
+;
+
+
+
+
+
+// Entry rule entryRuleParameterDelegation
+entryRuleParameterDelegation returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParameterDelegationRule()); }
+	 iv_ruleParameterDelegation=ruleParameterDelegation 
+	 { $current=$iv_ruleParameterDelegation.current; } 
+	 EOF 
+;
+
+// Rule ParameterDelegation
+ruleParameterDelegation returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#35' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getParameterDelegationAccess().getNumberSignDigitThreeDigitFiveKeyword_0());
+    }
+((	otherlv_1='kw1' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getParameterDelegationAccess().getKw1Keyword_1_0_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParameterDelegationAccess().getPDelegationParserRuleCall_1_0_1_0()); 
+	    }
+		lv_p_2_0=norm3_Delegation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParameterDelegationRule());
+	        }
+       		set(
+       			$current, 
+       			"p",
+        		lv_p_2_0, 
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Delegation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |(	otherlv_3='kw2' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getParameterDelegationAccess().getKw2Keyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParameterDelegationAccess().getPDelegationParserRuleCall_1_1_1_0()); 
+	    }
+		lv_p_4_0=norm1_Delegation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParameterDelegationRule());
+	        }
+       		set(
+       			$current, 
+       			"p",
+        		lv_p_4_0, 
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Delegation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))))
+;
+
+
+
+
+
+// Entry rule entryRuleDelegation
+entryRuleDelegation returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDelegationRule()); }
+	 iv_ruleDelegation=ruleDelegation 
+	 { $current=$iv_ruleDelegation.current; } 
+	 EOF 
+;
+
+// Rule Delegation
+ruleDelegation returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		lv_np_0_0=RULE_INT
+		{
+			newLeafNode(lv_np_0_0, grammarAccess.getDelegationAccess().getNpINTTerminalRuleCall_0_0_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDelegationRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"np",
+        		lv_np_0_0, 
+        		"org.eclipse.xtext.common.Terminals.INT");
+	    }
+
+)
+)
+;
+
+
+
+
+
+
+// Rule Delegation
+norm1_Delegation returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kwd' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getDelegationAccess().getKwdKeyword_1_0());
+    }
+
+    { 
+        newCompositeNode(grammarAccess.getDelegationAccess().getDelegationParserRuleCall_1_1()); 
+    }
+    this_Delegation_1=ruleDelegation
+    { 
+        $current = $this_Delegation_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+((
+    {
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0(),
+            $current);
+    }
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getDelegationAccess().getRc2DelegationParserRuleCall_1_2_1_0()); 
+	    }
+		lv_rc2_3_0=ruleDelegation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getDelegationRule());
+	        }
+       		set(
+       			$current, 
+       			"rc2",
+        		lv_rc2_3_0, 
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Delegation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?)
+;
+
+
+
+
+
+
+// Rule Delegation
+norm2_Delegation returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		lv_p_0_0=RULE_ID
+		{
+			newLeafNode(lv_p_0_0, grammarAccess.getDelegationAccess().getPIDTerminalRuleCall_0_0_0_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDelegationRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"p",
+        		lv_p_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)
+;
+
+
+
+
+
+
+// Rule Delegation
+norm3_Delegation returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kwd' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getDelegationAccess().getKwdKeyword_1_0());
+    }
+
+    { 
+        newCompositeNode(grammarAccess.getDelegationAccess().getDelegationParserRuleCall_1_1()); 
+    }
+    this_Delegation_1=norm2_Delegation
+    { 
+        $current = $this_Delegation_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+((
+    {
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getDelegationAccess().getDelegationALeftAction_1_2_0(),
+            $current);
+    }
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getDelegationAccess().getRc2DelegationParserRuleCall_1_2_1_0()); 
+	    }
+		lv_rc2_3_0=norm2_Delegation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getDelegationRule());
+	        }
+       		set(
+       			$current, 
+       			"rc2",
+        		lv_rc2_3_0, 
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Delegation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?)
 ;
 
 

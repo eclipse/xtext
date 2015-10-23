@@ -41,6 +41,9 @@ public class Bug299237TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */

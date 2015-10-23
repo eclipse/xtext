@@ -55,6 +55,9 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	}
 	
 	/**
+	 * Contexts:
+	 *     DataType returns DataType
+	 *
 	 * Constraint:
 	 *     (baseType=ID defaultValue=STRING?)
 	 */
@@ -64,6 +67,9 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (name=ID dataType=DataType? expression=Expression)
 	 */
@@ -73,6 +79,9 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Expression
+	 *
 	 * Constraint:
 	 *     (prefix=STRING* terms+=SimpleTerm* postfix=STRING*)
 	 */
@@ -82,6 +91,9 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     fields+=Element+
 	 */
@@ -91,6 +103,9 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleTerm returns SimpleTerm
+	 *
 	 * Constraint:
 	 *     ((lineCount=INT charCount=INT? charSet=ID?) | refChar=ID)
 	 */

@@ -49,6 +49,16 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	}
 	
 	/**
+	 * Contexts:
+	 *     Sequence returns Op
+	 *     Sequence.Sequence_1_0 returns Op
+	 *     Addition returns Op
+	 *     Addition.Op_1_0 returns Op
+	 *     Multiplication returns Op
+	 *     Multiplication.Op_1_0 returns Op
+	 *     Term returns Op
+	 *     Parens returns Op
+	 *
 	 * Constraint:
 	 *     (
 	 *         (values+=Addition_Op_1_0 (operator='+' | operator='-') values+=Multiplication) | 
@@ -61,6 +71,17 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * Contexts:
+	 *     Sequence returns Atom
+	 *     Sequence.Sequence_1_0 returns Atom
+	 *     Addition returns Atom
+	 *     Addition.Op_1_0 returns Atom
+	 *     Multiplication returns Atom
+	 *     Multiplication.Op_1_0 returns Atom
+	 *     Term returns Atom
+	 *     Atom returns Atom
+	 *     Parens returns Atom
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -76,6 +97,10 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * Contexts:
+	 *     Sequence returns Sequence
+	 *     Sequence.Sequence_1_0 returns Sequence
+	 *
 	 * Constraint:
 	 *     (expressions+=Sequence_Sequence_1_0 expressions+=Addition)
 	 */

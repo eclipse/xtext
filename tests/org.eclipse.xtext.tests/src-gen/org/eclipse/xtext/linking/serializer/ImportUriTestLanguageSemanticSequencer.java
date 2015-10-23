@@ -49,6 +49,9 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importURI=STRING
 	 */
@@ -64,6 +67,9 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Main returns Main
+	 *
 	 * Constraint:
 	 *     ((imports+=Import+ types+=Type+) | types+=Type+)?
 	 */
@@ -73,6 +79,9 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns Type
+	 *
 	 * Constraint:
 	 *     (name=ID extends=[Type|ID])
 	 */

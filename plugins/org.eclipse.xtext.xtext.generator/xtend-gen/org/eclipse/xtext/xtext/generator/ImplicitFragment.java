@@ -19,20 +19,20 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-class ImplicitFragment extends AbstractGeneratorFragment2 {
+class ImplicitFragment extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
@@ -115,7 +115,7 @@ class ImplicitFragment extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler");
       _addTypeToType_1.addTypeToType(_typeRef_5, _typeRef_6);
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     bindingFactory.contributeTo(_eclipsePluginGenModule);
   }
@@ -144,7 +144,7 @@ class ImplicitFragment extends AbstractGeneratorFragment2 {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("extensions=\"");
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     List<String> _fileExtensions = _language.getFileExtensions();
     String _join = IterableExtensions.join(_fileExtensions, ",");
     _builder.append(_join, "\t\t");

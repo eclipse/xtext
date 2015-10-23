@@ -385,6 +385,9 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * Contexts:
+	 *     XAnnotationElementValueOrCommaList returns XListLiteral
+	 *
 	 * Constraint:
 	 *     (
 	 *         (elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*) | 
@@ -402,6 +405,9 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * Contexts:
+	 *     XAnnotationElementValuePair returns XAnnotationElementValuePair
+	 *
 	 * Constraint:
 	 *     (element=[JvmOperation|ValidID] value=XAnnotationElementValue)
 	 */
@@ -424,6 +430,9 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * Contexts:
+	 *     XAnnotationElementValue returns XListLiteral
+	 *
 	 * Constraint:
 	 *     ((elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*) | (elements+=XExpression elements+=XExpression*))?
 	 */
@@ -437,6 +446,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * Contexts:
+	 *     XAnnotation returns XAnnotation
+	 *     XAnnotationElementValueOrCommaList returns XAnnotation
+	 *     XAnnotationElementValueOrCommaList.XListLiteral_1_1_0 returns XAnnotation
+	 *     XAnnotationElementValue returns XAnnotation
+	 *     XAnnotationOrExpression returns XAnnotation
+	 *
 	 * Constraint:
 	 *     (
 	 *         annotationType=[JvmAnnotationType|QualifiedName] 

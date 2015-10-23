@@ -38,11 +38,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IWebProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -51,6 +49,8 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.web.RegexpExtensions;
@@ -60,7 +60,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  * Main generator fragment for web integration.
  */
 @SuppressWarnings("all")
-public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
+public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   private enum Framework {
     ORION,
     
@@ -251,58 +251,6 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if ((this.framework == null)) {
       issues.addError("The property \'framework\' is required.");
     }
-    boolean _and = false;
-    if (!this.generateJsHighlighting) {
-      _and = false;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IWebProjectConfig _web = _projectConfig.getWeb();
-      IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-      boolean _tripleEquals = (_assets == null);
-      _and = _tripleEquals;
-    }
-    if (_and) {
-      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.");
-    }
-    boolean _and_1 = false;
-    if (!this.generateServlet) {
-      _and_1 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-      IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
-      boolean _tripleEquals_1 = (_src == null);
-      _and_1 = _tripleEquals_1;
-    }
-    if (_and_1) {
-      issues.addWarning("The \'web.src\' outlet is not defined in the project configuration; the generated servlet is disabled.");
-    }
-    boolean _and_2 = false;
-    if (!this.generateJettyLauncher) {
-      _and_2 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
-      IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
-      boolean _tripleEquals_2 = (_src_1 == null);
-      _and_2 = _tripleEquals_2;
-    }
-    if (_and_2) {
-      issues.addWarning("The \'web.src\' outlet is not defined in the project configuration; the Jetty launcher is disabled.");
-    }
-    boolean _and_3 = false;
-    if (!this.generateHtmlExample) {
-      _and_3 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
-      IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
-      boolean _tripleEquals_3 = (_assets_1 == null);
-      _and_3 = _tripleEquals_3;
-    }
-    if (_and_3) {
-      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.");
-    }
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
       @Override
       public Boolean apply(final String it) {
@@ -328,7 +276,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       _and = _tripleNotEquals;
     }
     if (_and) {
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       List<String> _fileExtensions = _language.getFileExtensions();
       final String langId = IterableExtensions.<String>head(_fileExtensions);
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingModuleName);
@@ -442,7 +390,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     Grammar _grammar = this.getGrammar();
     TypeReference _parserClass = this.caNaming.getParserClass(_grammar);
     GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
-    ILanguageConfig _language_1 = this.getLanguage();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
     _addTypeToType.contributeTo(_webGenModule);
   }
@@ -1840,7 +1788,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
-        ILanguageConfig _language = WebIntegrationFragment.this.getLanguage();
+        IXtextGeneratorLanguage _language = WebIntegrationFragment.this.getLanguage();
         List<String> _fileExtensions = _language.getFileExtensions();
         String _head = IterableExtensions.<String>head(_fileExtensions);
         _builder.append(_head, "\t\t");

@@ -67,6 +67,9 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	}
 	
 	/**
+	 * Contexts:
+	 *     AbstractCallExtendedParserRule returns AModel
+	 *
 	 * Constraint:
 	 *     elements+=ExtendableParserRule+
 	 */
@@ -76,6 +79,9 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractCallOverridenParserRule returns AModel
+	 *
 	 * Constraint:
 	 *     elements+=OverridableParserRule+
 	 */
@@ -85,6 +91,9 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendableParserRule returns AType
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -100,6 +109,9 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * Contexts:
+	 *     InheritedParserRule returns AType
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -115,6 +127,9 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * Contexts:
+	 *     OverridableParserRule2 returns AType
+	 *
 	 * Constraint:
 	 *     name=STRING
 	 */
@@ -130,6 +145,9 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * Contexts:
+	 *     OverridableParserRule returns AType
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */

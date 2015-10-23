@@ -137,11 +137,11 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #aa1111;
+  color: #777;
   text-decoration: none;
 }
 a:hover {
-  color: #640a0a;
+  color: #888;
   text-decoration: underline;
 }
 .row {
@@ -1669,18 +1669,18 @@ legend + .control-group {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .btn-primary {
-  background-color: #aa2011;
-  background-image: -moz-linear-gradient(top, #aa1111, #aa3711);
-  background-image: -ms-linear-gradient(top, #aa1111, #aa3711);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#aa1111), to(#aa3711));
-  background-image: -webkit-linear-gradient(top, #aa1111, #aa3711);
-  background-image: -o-linear-gradient(top, #aa1111, #aa3711);
-  background-image: linear-gradient(top, #aa1111, #aa3711);
+  background-color: #999;
+  background-image: -moz-linear-gradient(top, #444, #999);
+  background-image: -ms-linear-gradient(top, #444, #999);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#999));
+  background-image: -webkit-linear-gradient(top, #444, #999);
+  background-image: -o-linear-gradient(top, #444, #999);
+  background-image: linear-gradient(top, #444, #999);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1111', endColorstr='#aa3711', GradientType=0);
-  border-color: #aa3711 #aa3711 #64210a;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444', endColorstr='#aa3711', GradientType=0);
+  border-color: #999 #999 #64210a;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #aa3711;
+  *background-color: #999;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -1690,8 +1690,8 @@ legend + .control-group {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #aa3711;
-  *background-color: #93300f;
+  background-color: #999;
+  *background-color: #999;
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -2520,7 +2520,7 @@ input[type="submit"].btn.btn-mini {
 .nav-list > .active > a:hover {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
-  background-color: #aa1111;
+  background-color: #444;
 }
 .nav-list [class^="icon-"] {
   margin-right: 2px;
@@ -2598,7 +2598,7 @@ input[type="submit"].btn.btn-mini {
 .nav-pills > .active > a,
 .nav-pills > .active > a:hover {
   color: #ffffff;
-  background-color: #aa1111;
+  background-color: #444;
 }
 .nav-stacked > li {
   float: none;
@@ -2647,8 +2647,8 @@ input[type="submit"].btn.btn-mini {
 }
 .nav-tabs .dropdown-toggle .caret,
 .nav-pills .dropdown-toggle .caret {
-  border-top-color: #aa1111;
-  border-bottom-color: #aa1111;
+  border-top-color: #444;
+  border-bottom-color: #444;
   margin-top: 6px;
 }
 .nav-tabs .dropdown-toggle:hover .caret,
@@ -2994,12 +2994,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 }
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #aa1111;
+  color: #444;
   text-decoration: none;
 }
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
-  color: #aa1111;
+  color: #444;
   text-decoration: none;
 /*  background-color: #EBEBEB;*/
 }
@@ -3308,7 +3308,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 a.thumbnail:hover {
-  border-color: #aa1111;
+  border-color: #444;
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
@@ -3940,7 +3940,7 @@ a.thumbnail:hover {
 .dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #aa1111;
+  background-color: #444;
 }
 .open {
   *z-index: 1000;
@@ -4275,13 +4275,13 @@ button.close {
 }
 @media (max-width: 767px) {
   body {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
   .navbar-fixed-top,
   .navbar-fixed-bottom {
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: 0px;
+    margin-right: 0px;
   }
   .container-fluid {
     padding: 0;

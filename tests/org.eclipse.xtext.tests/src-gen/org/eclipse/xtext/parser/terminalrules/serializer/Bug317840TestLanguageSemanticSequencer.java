@@ -49,6 +49,9 @@ public class Bug317840TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (first=Named second=Named? (third+=Named forth+=Named)*)
 	 */
@@ -58,6 +61,9 @@ public class Bug317840TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     elements+=Element+
 	 */
@@ -67,6 +73,9 @@ public class Bug317840TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Named returns Named
+	 *
 	 * Constraint:
 	 *     name=NAME
 	 */

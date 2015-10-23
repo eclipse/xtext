@@ -45,6 +45,9 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	}
 	
 	/**
+	 * Contexts:
+	 *     AnotherSuperMain returns AnotherSuperMain
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -60,6 +63,9 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * Contexts:
+	 *     SuperMain returns SuperMain
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */

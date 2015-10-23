@@ -14,6 +14,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 import static extension org.eclipse.xtext.util.UriUtil.*
 import org.eclipse.xtext.util.UriUtil
+import org.eclipse.xtend.lib.annotations.Data
 
 @FinalFieldsConstructor
 class FileProjectConfig implements IProjectConfig {
@@ -62,6 +63,10 @@ class FileProjectConfig implements IProjectConfig {
 	override toString() {
 		'''Project «name» («path»)'''
 	}
+	
+	override getWorkspaceConfig() {
+		return new SingleProjectWorkspaceConfig(this)
+	}
 
 }
 
@@ -91,6 +96,27 @@ class FileSourceFolder implements ISourceFolder {
 	
 	override toString() {
 		'''«name» («path»)'''
+	}
+	
+}
+
+@Data
+class SingleProjectWorkspaceConfig implements IWorkspaceConfig {
+	
+	IProjectConfig projectConfig
+	
+	override findProjectByName(String name) {
+		if (projectConfig.name == name)
+			return projectConfig
+	}
+	
+	override findProjectContaining(URI member) {
+		if (projectConfig.path.isPrefixOf(member))
+			return projectConfig
+	}
+	
+	override getProjects() {
+		return #{projectConfig}
 	}
 	
 }

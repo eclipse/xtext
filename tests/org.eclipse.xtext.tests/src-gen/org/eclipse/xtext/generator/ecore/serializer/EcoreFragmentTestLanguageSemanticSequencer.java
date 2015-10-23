@@ -41,6 +41,9 @@ public class EcoreFragmentTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     Second returns Second
+	 *
 	 * Constraint:
 	 *     (name=ID first=[First|ID])
 	 */

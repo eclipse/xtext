@@ -24,11 +24,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @SuppressWarnings("all")
 public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
   @Inject

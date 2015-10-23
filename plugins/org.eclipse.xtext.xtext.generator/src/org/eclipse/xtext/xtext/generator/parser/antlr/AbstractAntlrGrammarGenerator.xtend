@@ -49,12 +49,12 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	@Inject CodeConfig codeConfig
 	
-	protected KeywordHelper keyWordHelper
+	protected KeywordHelper keywordHelper
 	
 	Grammar originalGrammar
 	
 	def generate(Grammar it, AntlrOptions options, IXtextGeneratorFileSystemAccess fsa) {
-		this.keyWordHelper = KeywordHelper.getHelper(it)
+		this.keywordHelper = KeywordHelper.getHelper(it)
 		this.originalGrammar = it
 		val RuleFilter filter = new RuleFilter();
 		filter.discardUnreachableRules = options.skipUnusedRules
@@ -135,8 +135,8 @@ abstract class AbstractAntlrGrammarGenerator {
 	protected def compileTokens(Grammar it, AntlrOptions options) '''
 		«IF options.isBacktrackLexer»
 			tokens {
-				«FOR kw : allKeywords.sort.sortBy[length]»
-					«keyWordHelper.getRuleName(kw)»;
+				«FOR kw : allKeywords.sort.sortBy[-length]»
+					«keywordHelper.getRuleName(kw)»;
 				«ENDFOR»
 				«FOR rule: allTerminalRules»
 					«rule.ruleName»;
@@ -198,7 +198,7 @@ abstract class AbstractAntlrGrammarGenerator {
 			«IF options.isBacktrackLexer»
 				SYNTHETIC_ALL_KEYWORDS :
 				«FOR kw: allKeywords.indexed»
-					(FRAGMENT_«keyWordHelper.getRuleName(kw.value)»)=> FRAGMENT_«keyWordHelper.getRuleName(kw.value)» {$type = «keyWordHelper.getRuleName(kw.value)»; } 
+					(FRAGMENT_«keywordHelper.getRuleName(kw.value)»)=> FRAGMENT_«keywordHelper.getRuleName(kw.value)» {$type = «keywordHelper.getRuleName(kw.value)»; } 
 					«IF kw.key != allKeywords.size || !allTerminalRules().isEmpty»|«ENDIF»
 				«ENDFOR»
 				«FOR rule : allTerminalRules.indexed»
@@ -209,7 +209,7 @@ abstract class AbstractAntlrGrammarGenerator {
 				«ENDFOR»
 				;
 				«FOR kw:  allKeywords»
-					fragment FRAGMENT_«keyWordHelper.getRuleName(kw)» : '«kw.toAntlrString()»';
+					fragment FRAGMENT_«keywordHelper.getRuleName(kw)» : '«kw.toAntlrString()»';
 				«ENDFOR»
 			«ELSE»
 				«FOR rule:allKeywords»
@@ -254,12 +254,16 @@ abstract class AbstractAntlrGrammarGenerator {
 		«ENDIF»
 	'''
 	
-	protected def dispatch compileRule(String keyWord, Grammar grammar, AntlrOptions options) '''
-		«keyWordHelper.getRuleName(keyWord)» : «keyWord.toAntlrKeyWordRule(options)»;
+	protected def dispatch compileRule(String keyword, Grammar grammar, AntlrOptions options) '''
+		«keywordHelper.getRuleName(keyword)» : «keyword.toAntlrKeywordRule(options)»;
 	'''
 		
-	protected def toAntlrKeyWordRule(String keyWord, AntlrOptions options) {
-		 "'" + if (options.ignoreCase) keyWord.toAntlrStringIgnoreCase else keyWord.toAntlrString + "'"
+	protected def toAntlrKeywordRule(String keyword, AntlrOptions options) {
+		 if (options.ignoreCase) {
+		 	return keyword.toAntlrStringIgnoreCase
+	 	} else {
+	 		return "'" + keyword.toAntlrString + "'"
+	 	}
 	}
 	
 	protected def shouldBeSkipped(TerminalRule it, Grammar grammar) {
@@ -321,7 +325,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	'''
 	
 	protected dispatch def String dataTypeEbnf2(Keyword it, boolean supportActions) {
-		if (combinedGrammar) "'" + value.toAntlrString + "'" else keyWordHelper.getRuleName(value)
+		if (combinedGrammar) "'" + value.toAntlrString + "'" else keywordHelper.getRuleName(value)
 	}
 	
 	protected dispatch def String dataTypeEbnf2(RuleCall it, boolean supportActions) {
@@ -351,7 +355,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def String ebnf2(Keyword it, AntlrOptions options, boolean supportActions) {
-		if (combinedGrammar) "'" + value.toAntlrString + "'" else keyWordHelper.getRuleName(value) 
+		if (combinedGrammar) "'" + value.toAntlrString + "'" else keywordHelper.getRuleName(value) 
 	}
 	
 	protected dispatch def String ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {
@@ -359,7 +363,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def String ebnf2(EnumLiteralDeclaration it, AntlrOptions options, boolean supportActions) {
-		if (combinedGrammar) "'" + literal.value.toAntlrString + "'" else keyWordHelper.getRuleName(literal.value)
+		if (combinedGrammar) "'" + literal.value.toAntlrString + "'" else keywordHelper.getRuleName(literal.value)
 	}
 	
 	protected dispatch def String crossrefEbnf(AbstractElement it, CrossReference ref, boolean supportActions) {

@@ -49,6 +49,10 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * Contexts:
+	 *     Root returns TestList
+	 *     TestList returns TestList
+	 *
 	 * Constraint:
 	 *     item+=INT*
 	 */
@@ -58,6 +62,10 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns TestOptional
+	 *     TestOptional returns TestOptional
+	 *
 	 * Constraint:
 	 *     (opt1=INT? opt2=INT?)
 	 */
@@ -67,6 +75,10 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns TestRequired
+	 *     TestRequired returns TestRequired
+	 *
 	 * Constraint:
 	 *     (required1=INT required2=INT)
 	 */

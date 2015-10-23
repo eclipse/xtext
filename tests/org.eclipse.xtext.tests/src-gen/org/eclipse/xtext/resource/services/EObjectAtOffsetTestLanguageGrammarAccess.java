@@ -27,10 +27,10 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cBarsAbstractBarParserRuleCall_1_0 = (RuleCall)cBarsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	foos+=Foo | bars+=AbstractBar*;
+		//	(foos+=Foo | bars+=AbstractBar)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//foos+=Foo | bars+=AbstractBar*
+		//(foos+=Foo | bars+=AbstractBar)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//foos+=Foo
@@ -297,7 +297,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	
 	//Model:
-	//	foos+=Foo | bars+=AbstractBar*;
+	//	(foos+=Foo | bars+=AbstractBar)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

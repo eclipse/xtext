@@ -35,7 +35,6 @@ class StatusWidget extends Composite {
 	new(Composite parent, int style) {
 		super(parent, style)
 		createControls()
-		visible = false
 	}
 
 	def protected createControls() {
@@ -56,17 +55,17 @@ class StatusWidget extends Composite {
 	}
 
 	def clearStatus() {
-		setStatus(NONE, '   ', [], [])
+		setStatus(NONE, '\n\n\n', [], [])
 	}
 
 	def setStatus(int severity, String text, ()=>void quickFix, ()=>void callback) {
-		visible = severity !== NONE
+		this.severity = severity
+		this.visible = severity !== NONE
 		imageLabel.image = imageFor(severity)
 		link.text = text
-		val matcher = Pattern.compile('<a>(.*)</a>').matcher(text)
+		val matcher = Pattern.compile('<a>(.*)</a>').matcher(text.trim)
 		link.toolTipText = matcher.replaceAll('$1')
 		this.quickFix = [quickFix.apply callback.apply]
-		this.severity = severity
 	}
 
 	def getSevertity() {

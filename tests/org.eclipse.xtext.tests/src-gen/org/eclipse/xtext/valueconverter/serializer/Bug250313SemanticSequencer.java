@@ -49,6 +49,10 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     Child returns Child1
+	 *     Child1 returns Child1
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -64,6 +68,10 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Child returns Child2
+	 *     Child2 returns Child2
+	 *
 	 * Constraint:
 	 *     name=STRING
 	 */
@@ -79,6 +87,9 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         value='mykeyword1' | 

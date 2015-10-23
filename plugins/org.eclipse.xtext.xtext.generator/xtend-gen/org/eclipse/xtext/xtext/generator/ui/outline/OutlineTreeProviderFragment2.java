@@ -10,17 +10,13 @@ package org.eclipse.xtext.xtext.generator.ui.outline;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Set;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -29,12 +25,14 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
+public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private CodeConfig codeConfig;
   
@@ -44,9 +42,6 @@ public class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Accessors
-  private boolean generateStub = true;
   
   protected TypeReference getOutlineTreeProviderClass(final Grammar grammar) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(grammar);
@@ -70,7 +65,9 @@ public class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.ui");
     }
-    if ((!this.generateStub)) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    boolean _not = (!_isGenerateStub);
+    if (_not) {
       return;
     }
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
@@ -94,7 +91,7 @@ public class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
     Grammar _grammar_1 = this.getGrammar();
     TypeReference _outlineTreeProviderClass_1 = this.getOutlineTreeProviderClass(_grammar_1);
     GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addTypeToType.addTypeToType(_typeReference_1, _outlineTreeProviderClass_1);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType_1.contributeTo(_eclipsePluginGenModule);
   }
@@ -181,14 +178,5 @@ public class OutlineTreeProviderFragment2 extends AbstractGeneratorFragment2 {
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createXtendFile.writeTo(_src);
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
   }
 }

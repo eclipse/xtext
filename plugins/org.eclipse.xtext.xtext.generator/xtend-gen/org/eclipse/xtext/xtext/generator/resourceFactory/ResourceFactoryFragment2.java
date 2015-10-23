@@ -17,14 +17,14 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
 /**
  * Contributes the registration <code>org.eclipse.emf.ecore.extension_parser</code>
@@ -35,14 +35,14 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ResourceFactoryFragment2 extends AbstractGeneratorFragment2 {
+public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Override
   public void generate() {
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     StandaloneSetupAccess _runtimeGenSetup = _language.getRuntimeGenSetup();
     List<StringConcatenationClient> _registrations = _runtimeGenSetup.getRegistrations();
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -60,7 +60,7 @@ public class ResourceFactoryFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         {
-          ILanguageConfig _language = ResourceFactoryFragment2.this.getLanguage();
+          IXtextGeneratorLanguage _language = ResourceFactoryFragment2.this.getLanguage();
           List<String> _fileExtensions = _language.getFileExtensions();
           for(final String fileExtension : _fileExtensions) {
             _builder.append(Resource.class, "");
@@ -94,7 +94,7 @@ public class ResourceFactoryFragment2 extends AbstractGeneratorFragment2 {
       _builder.append("<!-- adding resource factories -->");
       _builder.newLine();
       {
-        ILanguageConfig _language_1 = this.getLanguage();
+        IXtextGeneratorLanguage _language_1 = this.getLanguage();
         List<String> _fileExtensions = _language_1.getFileExtensions();
         for(final String fileExtension : _fileExtensions) {
           _builder.append("\t");

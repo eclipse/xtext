@@ -24,11 +24,9 @@ import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
@@ -38,11 +36,13 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2 {
+public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -58,13 +58,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   private FileAccessFactory fileAccessFactory;
   
   @Accessors
-  private boolean generateStub = true;
-  
-  @Accessors
   private boolean ignoreCase = false;
-  
-  @Accessors
-  private boolean inheritImplementation = true;
   
   protected TypeReference getScopeProviderClass(final Grammar grammar) {
     String _name = grammar.getName();
@@ -98,7 +92,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   protected TypeReference getScopeProviderSuperClass(final Grammar grammar) {
     final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
     boolean _and = false;
-    if (!this.inheritImplementation) {
+    boolean _isInheritImplementation = this.isInheritImplementation();
+    if (!_isInheritImplementation) {
       _and = false;
     } else {
       _and = (superGrammar != null);
@@ -112,7 +107,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   
   protected TypeReference getDefaultScopeProviderSuperClass() {
     TypeReference _xifexpression = null;
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
     if (_inheritsXbase) {
@@ -125,7 +120,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   
   public TypeReference getDelegateScopeProvider() {
     TypeReference _xifexpression = null;
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
     if (_usesXImportSection) {
@@ -139,7 +134,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   @Override
   public void generate() {
     this.contributeRuntimeGuiceBindings();
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       this.generateAbstractScopeProvider();
       boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
@@ -174,7 +170,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       TypeReference _typeRef = TypeReference.typeRef(IScopeProvider.class);
       Grammar _grammar = this.getGrammar();
       TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
@@ -218,7 +215,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
       }
     };
     bindingFactory.addConfiguredBinding(_simpleName_1, _client_1);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     bindingFactory.contributeTo(_runtimeGenModule);
   }
@@ -345,29 +342,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractGeneratorFragment2
   }
   
   @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
-  }
-  
-  @Pure
   public boolean isIgnoreCase() {
     return this.ignoreCase;
   }
   
   public void setIgnoreCase(final boolean ignoreCase) {
     this.ignoreCase = ignoreCase;
-  }
-  
-  @Pure
-  public boolean isInheritImplementation() {
-    return this.inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this.inheritImplementation = inheritImplementation;
   }
 }

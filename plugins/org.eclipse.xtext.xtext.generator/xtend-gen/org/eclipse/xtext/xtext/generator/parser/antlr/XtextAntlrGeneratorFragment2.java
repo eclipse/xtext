@@ -61,10 +61,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IRuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -74,6 +71,9 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrContentAssistGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrDebugGrammarGenerator;
@@ -140,6 +140,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(_isCombinedGrammar);
     Grammar _grammar_1 = this.getGrammar();
     _combinedGrammarMarker.attachToEmfObject(_grammar_1);
+    if (this.debugGrammar) {
+      this.generateDebugGrammar();
+    }
     this.generateProductionGrammar();
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
@@ -147,9 +150,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     boolean _notEquals = (!Objects.equal(_srcGen, null));
     if (_notEquals) {
       this.generateContentAssistGrammar();
-    }
-    if (this.debugGrammar) {
-      this.generateDebugGrammar();
     }
     JavaFileAccess _generateProductionParser = this.generateProductionParser();
     IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
@@ -166,9 +166,24 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
     IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
     _generateContentAssistParser.writeTo(_srcGen_3);
+    boolean _and = false;
     boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
     boolean _not = (!_isCombinedGrammar_1);
-    if (_not) {
+    if (!_not) {
+      _and = false;
+    } else {
+      Grammar _grammar_2 = this.getGrammar();
+      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
+      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+        }
+      };
+      boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+      _and = _exists;
+    }
+    if (_and) {
       JavaFileAccess _generateProductionTokenSource = this.generateProductionTokenSource();
       IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_2 = _projectConfig_4.getRuntime();
@@ -1474,7 +1489,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       TypeReference _typeRef_11 = TypeReference.typeRef(IgnoreCaseIDValueConverter.class);
       _addTypeToType_5.addTypeToType(_typeRef_10, _typeRef_11);
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     rtBindings.contributeTo(_runtimeGenModule);
   }
@@ -1578,13 +1593,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       }
     };
     GuiceModuleAccess.BindingFactory _addConfiguredBinding_2 = _addConfiguredBinding_1.addConfiguredBinding("HighlightingTokenDefProvider", _client_2);
-    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory");
-    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory");
-    GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addConfiguredBinding_2.addTypeToType(_typeRef_2, _typeRef_3);
-    TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
+    TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.contentassist", "ContentAssistContext.Factory");
+    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory");
+    GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addConfiguredBinding_2.addTypeToType(_typeReference, _typeRef_2);
+    TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
     Grammar _grammar = this.getGrammar();
     TypeReference _parserClass = naming.getParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_4, _parserClass);
+    GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_3, _parserClass);
     StringConcatenationClient _client_3 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1607,11 +1622,11 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     };
     final GuiceModuleAccess.BindingFactory uiBindings = _addTypeToType_2.addConfiguredBinding("ContentAssistLexerProvider", _client_3);
     if (this.partialParsing) {
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory");
-      TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
-      uiBindings.addTypeToType(_typeRef_5, _typeRef_6);
+      TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory");
+      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
+      uiBindings.addTypeToType(_typeRef_4, _typeRef_5);
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     uiBindings.contributeTo(_eclipsePluginGenModule);
   }

@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.generator.junit
 
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
@@ -9,8 +8,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import com.google.inject.Injector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class Junit4Fragment2 extends AbstractGeneratorFragment2 {
+class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 
@@ -91,7 +91,7 @@ class Junit4Fragment2 extends AbstractGeneratorFragment2 {
 	def JavaFileAccess generateInjectorProvider() {
 		val file = fileAccessFactory.createJavaFile(injectorProvider)
 		val globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries")
-		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento")
+		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento")
 		val iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator")
 		file.content = '''
 			public class «injectorProvider.simpleName» implements «iInjectorProvider», «iRegistryConfigurator» {

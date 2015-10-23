@@ -87,6 +87,10 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.ui");
       deps.add(_createXtextDependency);
+      ExternalDependency _createXtextDependency_1 = ExternalDependency.createXtextDependency("org.eclipse.xtext.ui.shared");
+      deps.add(_createXtextDependency_1);
+      ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.ui.codetemplates.ui");
+      deps.add(_createXtextDependency_2);
       ExternalDependency _externalDependency = new ExternalDependency();
       final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
         @Override
@@ -132,6 +136,13 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
       _xblockexpression = deps;
     }
     return _xblockexpression;
+  }
+  
+  @Override
+  public Set<String> getImportedPackages() {
+    final Set<String> packs = super.getImportedPackages();
+    packs.add("org.apache.log4j");
+    return packs;
   }
   
   @Override

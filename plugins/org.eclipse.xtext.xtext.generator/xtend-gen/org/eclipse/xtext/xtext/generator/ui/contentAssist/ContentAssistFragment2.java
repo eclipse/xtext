@@ -19,7 +19,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -39,13 +38,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
@@ -55,6 +51,8 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 /**
@@ -64,7 +62,7 @@ import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
+public class ContentAssistFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -75,12 +73,6 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
-  @Accessors
-  private boolean generateStub = true;
-  
-  @Accessors
-  private boolean inheritImplementation = true;
   
   protected TypeReference getProposalProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
@@ -103,10 +95,12 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   protected TypeReference getGenProposalProviderSuperClass(final Grammar g) {
     TypeReference _xblockexpression = null;
     {
-      final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
+      EList<Grammar> _usedGrammars = g.getUsedGrammars();
+      final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       TypeReference _xifexpression = null;
       boolean _and = false;
-      if (!this.inheritImplementation) {
+      boolean _isInheritImplementation = this.isInheritImplementation();
+      if (!_isInheritImplementation) {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(superGrammar, null));
@@ -132,7 +126,8 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
   @Override
   public void generate() {
     TypeReference _xifexpression = null;
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       Grammar _grammar = this.getGrammar();
       _xifexpression = this.getProposalProviderClass(_grammar);
     } else {
@@ -154,7 +149,7 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider");
     GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, chosenClass);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
@@ -165,7 +160,8 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       this.generateGenJavaProposalProvider();
     }
     boolean _and = false;
-    if (!this.generateStub) {
+    boolean _isGenerateStub_1 = this.isGenerateStub();
+    if (!_isGenerateStub_1) {
       _and = false;
     } else {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
@@ -722,23 +718,5 @@ public class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(alternatives, accessor).toString());
     }
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
-  }
-  
-  @Pure
-  public boolean isInheritImplementation() {
-    return this.inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this.inheritImplementation = inheritImplementation;
   }
 }

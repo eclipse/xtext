@@ -92,6 +92,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * Contexts:
+	 *     ContainmentRef1 returns ContainmentRefN
+	 *
 	 * Constraint:
 	 *     val1=ID
 	 */
@@ -107,6 +110,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     ContainmentRef2 returns ContainmentRefN
+	 *
 	 * Constraint:
 	 *     val2=ID
 	 */
@@ -122,6 +128,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     ContainmentRef returns ContainmentRef
+	 *
 	 * Constraint:
 	 *     (ctx=ContainmentRef1 | ctx=ContainmentRef2)
 	 */
@@ -131,6 +140,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     CrossRef returns CrossRef
+	 *
 	 * Constraint:
 	 *     ((name=Terminal1 | name=Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]))
 	 */
@@ -140,6 +152,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     EnumBool returns EnumBool
+	 *
 	 * Constraint:
 	 *     (en?=Enum1 | en?=Enum2)
 	 */
@@ -149,6 +164,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     EnumVal returns EnumVal
+	 *
 	 * Constraint:
 	 *     (en=Enum1 | en=Enum2)
 	 */
@@ -158,6 +176,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     KeywordBool returns KeywordBool
+	 *
 	 * Constraint:
 	 *     (kw?='kw1' | kw?='kw2')
 	 */
@@ -167,6 +188,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     KeywordVal returns KeywordVal
+	 *
 	 * Constraint:
 	 *     (kw='kw1' | kw='kw2')
 	 */
@@ -176,6 +200,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     MixedBool returns MixedBool
+	 *
 	 * Constraint:
 	 *     (val?='kw1' | val=Boolean)
 	 */
@@ -185,6 +212,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     MixedValue returns MixedValue
+	 *
 	 * Constraint:
 	 *     (val=Enum1 | val=DatEnum)
 	 */
@@ -194,6 +224,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         keywordVal=KeywordVal | 
@@ -214,6 +247,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalBool returns TerminalBool
+	 *
 	 * Constraint:
 	 *     (term?=Terminal1 | term?=Terminal2 | term?='%foo')
 	 */
@@ -223,6 +259,9 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * Contexts:
+	 *     TerminalVal returns TerminalVal
+	 *
 	 * Constraint:
 	 *     (term=Terminal1 | term=Terminal2 | term='%foo')
 	 */

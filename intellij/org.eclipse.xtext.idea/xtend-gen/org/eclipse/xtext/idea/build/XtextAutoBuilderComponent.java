@@ -790,7 +790,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             indicator.setIndeterminate(true);
             synchronized (XtextAutoBuilderComponent.BUILD_MONITOR) {
               XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
-              XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
+              boolean _isEmpty = allEvents.isEmpty();
+              boolean _not = (!_isEmpty);
+              if (_not) {
+                XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
+              }
             }
           }
         });

@@ -37,11 +37,11 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 				sequence_ParserRuleParameters(context, (ParserRuleParameters) semanticObject); 
 				return; 
 			case ParametersTestLanguagePackage.SCENARIO:
-				if ((rule == grammarAccess.getScenario1Rule() && parameters.isEmpty())) {
+				if (rule == grammarAccess.getScenario1Rule() && (parameters.isEmpty())) {
 					sequence_Scenario1$Param$false$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario1Rule() && ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
+				else if (rule == grammarAccess.getScenario1Rule() && (ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
 					sequence_Scenario1$Param$true$(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -57,8 +57,7 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 					sequence_Scenario2_False(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario2Rule() && ImmutableSet.of(grammarAccess.getScenario2Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario2Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario2Rule()) {
 					sequence_Scenario2(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -70,8 +69,7 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 					sequence_Scenario3_False(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario3Rule() && ImmutableSet.of(grammarAccess.getScenario3Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario3Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario3Rule()) {
 					sequence_Scenario3(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -83,8 +81,7 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 					sequence_Scenario4_False(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if ((rule == grammarAccess.getScenario4Rule() && ImmutableSet.of(grammarAccess.getScenario4Rule().getParameters().get(0/*AllowKeyword*/)).equals(parameters))
-						|| (rule == grammarAccess.getScenario4Rule() && parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario4Rule()) {
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -99,6 +96,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	}
 	
 	/**
+	 * Contexts:
+	 *     ParserRuleParameters returns ParserRuleParameters
+	 *
 	 * Constraint:
 	 *     (
 	 *         scenario=Scenario1_True | 
@@ -125,6 +125,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario1_False returns Scenario
+	 *
 	 * Constraint:
 	 *     second=ID
 	 */
@@ -140,6 +143,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario1_True returns Scenario
+	 *
 	 * Constraint:
 	 *     first=ID
 	 */
@@ -155,6 +161,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario2_False returns Scenario
+	 *
 	 * Constraint:
 	 *     first=IdOrKeyword_False
 	 */
@@ -170,6 +179,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario2_True returns Scenario
+	 *
 	 * Constraint:
 	 *     first=IdOrKeyword_True
 	 */
@@ -185,6 +197,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario3_False returns Scenario
+	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword_False | second='keyword')
 	 */
@@ -194,6 +209,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario3_True returns Scenario
+	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword_True | second='keyword')
 	 */
@@ -203,6 +221,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario4_False returns Scenario
+	 *
 	 * Constraint:
 	 *     second=IdOrKeyword_False
 	 */
@@ -218,6 +239,9 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario4_True returns Scenario
+	 *
 	 * Constraint:
 	 *     second=IdOrKeyword_True
 	 */

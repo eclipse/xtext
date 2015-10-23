@@ -44,7 +44,6 @@ public class StatusWidget extends Composite {
   public StatusWidget(final Composite parent, final int style) {
     super(parent, style);
     this.createControls();
-    this.setVisible(false);
   }
   
   protected void createControls() {
@@ -71,7 +70,7 @@ public class StatusWidget extends Composite {
     });
   }
   
-  public int clearStatus() {
+  public Procedure0 clearStatus() {
     final Procedure0 _function = new Procedure0() {
       @Override
       public void apply() {
@@ -82,18 +81,20 @@ public class StatusWidget extends Composite {
       public void apply() {
       }
     };
-    return this.setStatus(IMessageProvider.NONE, "   ", _function, _function_1);
+    return this.setStatus(IMessageProvider.NONE, "\n\n\n", _function, _function_1);
   }
   
-  public int setStatus(final int severity, final String text, final Procedure0 quickFix, final Procedure0 callback) {
-    int _xblockexpression = (int) 0;
+  public Procedure0 setStatus(final int severity, final String text, final Procedure0 quickFix, final Procedure0 callback) {
+    Procedure0 _xblockexpression = null;
     {
+      this.severity = severity;
       this.setVisible((severity != IMessageProvider.NONE));
       Image _imageFor = this.imageFor(severity);
       this.imageLabel.setImage(_imageFor);
       this.link.setText(text);
       Pattern _compile = Pattern.compile("<a>(.*)</a>");
-      final Matcher matcher = _compile.matcher(text);
+      String _trim = text.trim();
+      final Matcher matcher = _compile.matcher(_trim);
       String _replaceAll = matcher.replaceAll("$1");
       this.link.setToolTipText(_replaceAll);
       final Procedure0 _function = new Procedure0() {
@@ -103,8 +104,7 @@ public class StatusWidget extends Composite {
           callback.apply();
         }
       };
-      this.quickFix = _function;
-      _xblockexpression = this.severity = severity;
+      _xblockexpression = this.quickFix = _function;
     }
     return _xblockexpression;
   }

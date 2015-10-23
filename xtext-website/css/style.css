@@ -5,7 +5,7 @@ Shield Website Template
 Author - hunzaboy
 URL : http://uexel.com
 
- #A00
+ #444
  -> 
 */
 body { 
@@ -19,9 +19,7 @@ body {
 	font-weight: 300;
 	line-height: 20px;
 	font-size: 16px;
-	color: #717576;
-	background: url('{{ site.baseurl }}/images/header_background.jpg') #9e1f01;
-	background-repeat : no-repeat;
+	color: #333;
 }
 
 p {
@@ -50,14 +48,14 @@ h2 {
 	font-size: 26px;
 	font-family: 'Lato', sans-serif;
 	font-weight: normal;
-	color: #A00;
+	color: #000;
 }
 
 h2 small {
 	font-family: 'Lato', sans-serif;
 	font-weight: normal;
 	font-size: 12px;
-	color: #A00;
+	color: #444;
 }
 
 h3 {
@@ -66,7 +64,7 @@ h3 {
 	font-size: 20px;
 	font-family: 'Lato', sans-serif;
 	font-weight: normal;
-	color: #A00;
+	color: #444;
 }
 
 h4 {
@@ -275,14 +273,13 @@ table tr:hover td {
 	overflow: hidden;
 	min-height:60px;
 	margin-top: 40px;
-	margin-left: -20px;
-	margin-right: -20px;
-	background: url('{{ site.baseurl }}/images/header_background.jpg') #9e1f01;
+	margin-left: 0px;
+	background: url('{{ site.baseurl }}/images/header_background.jpg');
 	background-size:  cover;
 }
 
 .flexslider a {
-	color: white;
+	color: black;
 	text-decoration: underline;
 }
 
@@ -299,7 +296,7 @@ table tr:hover td {
 
 @media (max-width: 767px) {
   #header_wrapper {
-  	 margin-top: -10px;
+  	 margin-top: 0px;
 	 min-height:3px;
   }
 
@@ -312,7 +309,8 @@ table tr:hover td {
 	font-family: 'Lato', sans-serif;
 	font-size: 42px;
 	font-weight: 300;
-	color: #ffffff;
+	color: #333333;
+	text-align: center;
 	text-shadow: 0px 1px 1px #d4d4d4;
 	text-transform: uppercase;
 	word-spacing: 10px;
@@ -323,20 +321,47 @@ table tr:hover td {
 	font-family: 'Lato', sans-serif;
 	font-size: 16px;
 	font-weight: 300;
-	color: #fff;
-	text-align: left;
+	color: #333333;
+	text-align: center;
 	word-spacing: 3px;
+}
+
+.image-slider img {
+	display: block;
+    margin: 0 auto;
+}
+
+.newsticker {
+    text-decoration: none;
+    font-style: italic;
+    font-size: 18pt;
+}
+
+.newsticker li {
+    list-style-type: none;
 }
 
 #features {
 	height: auto;
-	padding-top: 10px;
+	margin-bottom: 40px;
 	background: url('{{ site.baseurl }}/images/pattern1.jpg') repeat #ebebeb;
 }
 
+#features .carousel-indicator li {
+	text-align: center;
+	list-style-type: none;
+}
+
+#features .item {
+	height: 150px;
+}
+
+#features .span4 {
+	height: 200px;
+}
+
 #features h1 {
-	font-family: 'Vollkorn', serif;
-	color: #6B6B6B;
+	color: #444;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -346,8 +371,7 @@ table tr:hover td {
 }
 
 #features h4 {
-	font-family: 'Vollkorn', serif;
-	color: #6B6B6B;
+	color: #444;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -357,8 +381,44 @@ table tr:hover td {
 }
 
 #features p {
-	font-family: 'Vollkorn', serif;
-	color: #6B6B6B;
+	color: #444;
+	font-weight: 200;
+	line-height: 1.3em;
+	font-style: normal;
+	word-spacing: 1px;
+	text-align: center;
+}
+
+.companies img {
+	height : 40px;
+	margin-left : 40px;
+	margin-right : 40px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+}
+
+.companies li {
+	list-style-type: none;
+}
+
+#platform-comparison {
+	height: auto;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+#platform-comparison h2 {
+	color: #444;
+	font-weight: 400;
+	line-height: 1.3em;
+	font-style: normal;
+	word-spacing: 1px;
+	text-align: center;
+	font-size: 32px;
+}
+
+#platform-comparison p {
+	color: #444;
 	font-weight: 200;
 	line-height: 1.3em;
 	font-style: normal;
@@ -471,7 +531,28 @@ img.screenshot {
 	overflow: visible;
 }
 
+.supported {
+	background: url('{{ site.baseurl }}/images/bullet-checkmark.png');
+	background-size: 15px;
+	height:15px;
+    background-repeat: no-repeat;
+}
+.partly-supported {
+	background: url('{{ site.baseurl }}/images/bullet-checkmark-partly.png');
+	background-size: 15px;
+	height:15px;
+    background-repeat: no-repeat;
+}
+.not-supported {
+	background: url('{{ site.baseurl }}/images/bullet-checkmark-not-supported.png');
+	background-size: 15px;
+	height:15px;
+    background-repeat: no-repeat;
+}
+
 #intro-screenshot {
+	display: block;
+    margin: 0 auto;
 	height: 460px; 
 	width: 580px;
 }
@@ -496,9 +577,7 @@ img.screenshot {
 }
 @media (max-width: 979px) {
   img#intro-screenshot {
-  	margin-top: 50px;
-  	margin-left: 20px;
-	height: 100%; 
+  	height: 80%; 
   }
   .introduction .zoom {
 	position: absolute;
@@ -507,12 +586,7 @@ img.screenshot {
   }
 }
 @media (max-width: 767px) {
-  img#intro-screenshot {
-  	margin-top: 50px;
-  	margin-left: 20px;
-	max-height: 40%; 
-	max-width: 40%;
-  }
+
   .introduction .zoom {
 	position: absolute;
 	left: 300px;
@@ -539,7 +613,7 @@ img.screenshot {
 
 a:hover .onhover-red {
 	text-decoration: none;
-	color: #A00;
+	color: #444;
 }
 
 a.onhover-red {
@@ -687,7 +761,7 @@ ul.textlist li {
 }
 
 .pricing td.focus-best {
-	background: #A00;
+	background: #444;
 	width: 84.3%;
 	padding: 25px 8%;
 	font-family: 'Lato', sans-serif;
@@ -849,19 +923,17 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 5px #A00;
-  -moz-box-shadow: 0 0 5px #A00;
-  box-shadow: 0 0 5px #A00;
+  -webkit-box-shadow: 0 0 5px #444;
+  -moz-box-shadow: 0 0 5px #444;
+  box-shadow: 0 0 5px #444;
 }
 
 #extra {
-	border-top: 1px solid #fff;
-	background: url('{{ site.baseurl }}/images/noise.png') #A00;
+	background: url('{{ site.baseurl }}/images/bg-footer.png') #444;
 }
 
 #extra .inner {
 	color: #fff;
-	border-top: 1px solid #000;
 	font-family: 'Vollkorn', serif;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -872,7 +944,6 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 #extra h3 {
 	font-weight: 400;
 	border-bottom: 1px solid #fff;
-	background: url('{{ site.baseurl }}/images/bg-footer.png');
 	padding: 5px;
 }
 
@@ -1026,7 +1097,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #page h1 {
 	font-family: 'Vollkorn', serif;
-	color: #A00;
+	color: #444;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -1036,7 +1107,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #page h1 small,#page h2 small,#page h3 small,#page h4 small,#page h5 small,#page h6 small {
 	font-weight: normal;
-	color: #A11;
+	color: #444;
 }
 
 .page-heading {
@@ -1051,7 +1122,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #page-heading {
 	font-family: 'Vollkorn', serif;
-	color: #A00;
+	color: #444;
 	text-align: center;
 }
 
@@ -1091,7 +1162,9 @@ ul.list3 li {
 	overflow: hidden;
 	line-height: 600px;
 	color: #333;
-	background: url('{{ site.baseurl }}/images/logo.png') no-repeat 0 0;
+	background: url('{{ site.baseurl }}/images/logo.png') no-repeat 0 0px;
+	background-size: 90px ;
+	background-position: center;
 
 	position: relative;
 	top: 0;
@@ -1132,7 +1205,7 @@ ul.list3 li {
 	margin : 3px;
 }
 .language-card {
-	border : 1px solid #A11;
+	border : 1px solid #444;
 	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255, 255, 255, 1)), color-stop(100%,rgba(235, 235, 235, 1)));
 	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%,rgba(235, 235, 235, 1) 100%);
@@ -1156,9 +1229,9 @@ ul.list3 li {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 8px #A00;
-  -moz-box-shadow: 0 0 8px #A00;
-  box-shadow: 0 0 8px #A00;
+  -webkit-box-shadow: 0 0 8px #444;
+  -moz-box-shadow: 0 0 8px #444;
+  box-shadow: 0 0 8px #444;
 }
 
 @media (max-width: 979px) {
@@ -1199,12 +1272,12 @@ ul.list3 li {
   left: 0px;
   top: 80px;
   width: 200px;
-  background-color: #A00;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#A00), to(#A00)); 
-  background-image: -webkit-linear-gradient(top, #A00, #A00); 
-  background-image:    -moz-linear-gradient(top, #A00, #A00); 
-  background-image:     -ms-linear-gradient(top, #A00, #A00); 
-  background-image:      -o-linear-gradient(top, #A00, #A00); 
+  background-color: #444;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#444), to(#444)); 
+  background-image: -webkit-linear-gradient(top, #444, #444); 
+  background-image:    -moz-linear-gradient(top, #444, #444); 
+  background-image:     -ms-linear-gradient(top, #444, #444); 
+  background-image:      -o-linear-gradient(top, #444, #444); 
   color: #6a6340;
   -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
   -moz-box-shadow:    0px 1px 3px rgba(0,0,0,0.3);

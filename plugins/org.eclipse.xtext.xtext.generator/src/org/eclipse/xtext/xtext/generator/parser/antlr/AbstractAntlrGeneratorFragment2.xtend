@@ -22,7 +22,6 @@ import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
@@ -36,8 +35,9 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtr
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment2 {
+abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	@Inject @Accessors(PROTECTED_GETTER) AntlrToolFacade antlrTool
 	@Inject @Accessors(PROTECTED_GETTER) AntlrCodeQualityHelper codeQualityHelper
 	@Inject @Accessors(PROTECTED_GETTER) LineSeparatorHarmonizer newLineNormalizer

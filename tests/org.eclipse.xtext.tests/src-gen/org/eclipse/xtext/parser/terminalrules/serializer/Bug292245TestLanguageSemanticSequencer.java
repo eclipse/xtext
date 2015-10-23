@@ -39,6 +39,9 @@ public class Bug292245TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (fix+=Fix | error+=Error | tick+=Apostrophe)+
 	 */

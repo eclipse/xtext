@@ -51,6 +51,10 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     Type returns AType
+	 *     AType returns AType
+	 *
 	 * Constraint:
 	 *     {AType}
 	 */
@@ -60,6 +64,10 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns AnotherType
+	 *     AnotherType returns AnotherType
+	 *
 	 * Constraint:
 	 *     {AnotherType}
 	 */
@@ -69,6 +77,9 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns AModel
+	 *
 	 * Constraint:
 	 *     elements+=Type+
 	 */

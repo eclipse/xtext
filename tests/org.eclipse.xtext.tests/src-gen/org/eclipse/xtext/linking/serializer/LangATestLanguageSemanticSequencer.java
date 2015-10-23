@@ -49,6 +49,9 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     uri=STRING
 	 */
@@ -64,6 +67,9 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Main returns Main
+	 *
 	 * Constraint:
 	 *     ((imports+=Import+ types+=Type+) | types+=Type+)?
 	 */
@@ -73,6 +79,9 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns Type
+	 *
 	 * Constraint:
 	 *     (name=ID extends=[Type|ID]? (implements+=[Type|ID] implements+=[Type|ID]*)?)
 	 */

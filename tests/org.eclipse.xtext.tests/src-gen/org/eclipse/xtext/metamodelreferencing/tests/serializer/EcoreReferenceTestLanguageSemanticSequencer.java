@@ -91,6 +91,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	}
 	
 	/**
+	 * Contexts:
+	 *     EAttribute returns EAttribute
+	 *
 	 * Constraint:
 	 *     {EAttribute}
 	 */
@@ -100,6 +103,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     EObject returns EObject
+	 *
 	 * Constraint:
 	 *     {EObject}
 	 */
@@ -109,6 +115,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendsNsURIEObject returns ExtendsNsURIEObject
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ValidID 
@@ -138,6 +147,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendsPluginEObject returns ExtendsPluginEObject
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ValidID 
@@ -166,6 +178,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     ExtendsResourceEObject returns ExtendsResourceEObject
+	 *
 	 * Constraint:
 	 *     (
 	 *         name=ValidID 
@@ -194,6 +209,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject)
 	 */
@@ -203,6 +221,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     MyEAttribute returns MyEAttribute
+	 *
 	 * Constraint:
 	 *     {MyEAttribute}
 	 */
@@ -212,6 +233,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Unused_01 returns MyNamedElement_01
+	 *
 	 * Constraint:
 	 *     name=ValidID
 	 */
@@ -227,6 +251,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Unused_02 returns MyNamedElement_02
+	 *
 	 * Constraint:
 	 *     name=ValidID
 	 */
@@ -242,6 +269,9 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * Contexts:
+	 *     Unused_03 returns MyNamedElement_03
+	 *
 	 * Constraint:
 	 *     name=ValidID
 	 */

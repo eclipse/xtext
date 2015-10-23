@@ -26,7 +26,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -40,11 +39,12 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import static extension org.eclipse.xtext.xtext.generator.web.RegexpExtensions.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Main generator fragment for web integration.
  */
-class WebIntegrationFragment extends AbstractGeneratorFragment2 {
+class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 	
 	private static enum Framework {
 		ORION, ACE, CODEMIRROR
@@ -195,14 +195,6 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		super.checkConfiguration(issues)
 		if (framework === null)
 			issues.addError('The property \'framework\' is required.')
-		if (generateJsHighlighting && projectConfig.web.assets === null)
-			issues.addWarning('The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.')
-		if (generateServlet && projectConfig.web.src === null)
-			issues.addWarning('The \'web.src\' outlet is not defined in the project configuration; the generated servlet is disabled.')
-		if (generateJettyLauncher && projectConfig.web.src === null)
-			issues.addWarning('The \'web.src\' outlet is not defined in the project configuration; the Jetty launcher is disabled.')
-		if (generateHtmlExample && projectConfig.web.assets === null)
-			issues.addWarning('The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.')
 		for (pattern : enabledPatterns.filter[suppressedPatterns.contains(it)]) {
 			issues.addError('The pattern \'' + pattern + '\' cannot be enabled and suppressed.')
 		}

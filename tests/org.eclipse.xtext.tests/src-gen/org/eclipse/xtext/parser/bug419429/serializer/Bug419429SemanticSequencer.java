@@ -41,6 +41,9 @@ public class Bug419429SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * Contexts:
+	 *     EReference returns EReference
+	 *
 	 * Constraint:
 	 *     eType=[EClassifier|ID]
 	 */

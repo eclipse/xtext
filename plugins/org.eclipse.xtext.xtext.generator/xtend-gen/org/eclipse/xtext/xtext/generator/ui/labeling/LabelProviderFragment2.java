@@ -10,17 +10,13 @@ package org.eclipse.xtext.xtext.generator.ui.labeling;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Set;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -29,6 +25,8 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 /**
@@ -37,7 +35,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
+public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
   private final static String XBASE_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider";
   
   private final static String XBASE_DESCRIPTION_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider";
@@ -56,9 +54,6 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
-  @Accessors
-  private boolean generateStub = true;
   
   protected TypeReference getEObjectLabelProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
@@ -117,7 +112,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
   @Override
   public void generate() {
     boolean _or = false;
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       _or = true;
     } else {
       Grammar _grammar = this.getGrammar();
@@ -137,7 +133,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
         _requiredBundles.add("org.eclipse.xtext.ui");
       }
       TypeReference _xifexpression = null;
-      if (this.generateStub) {
+      boolean _isGenerateStub_1 = this.isGenerateStub();
+      if (_isGenerateStub_1) {
         Grammar _grammar_1 = this.getGrammar();
         _xifexpression = this.getEObjectLabelProviderClass(_grammar_1);
       } else {
@@ -145,7 +142,8 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
       }
       final TypeReference labelProviderClass = _xifexpression;
       TypeReference _xifexpression_1 = null;
-      if (this.generateStub) {
+      boolean _isGenerateStub_2 = this.isGenerateStub();
+      if (_isGenerateStub_2) {
         Grammar _grammar_2 = this.getGrammar();
         _xifexpression_1 = this.getDescriptionLabelProviderClass(_grammar_2);
       } else {
@@ -170,12 +168,13 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
         }
       };
       GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ResourceUIServiceLabelProvider", _client);
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
       _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
     }
     boolean _and = false;
-    if (!this.generateStub) {
+    boolean _isGenerateStub_3 = this.isGenerateStub();
+    if (!_isGenerateStub_3) {
       _and = false;
     } else {
       IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
@@ -481,14 +480,5 @@ public class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
     _createJavaFile.writeTo(_src);
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
   }
 }

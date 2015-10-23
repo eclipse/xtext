@@ -107,8 +107,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
     	synchronized(resourceCacheLock) {
     		return resourceCache.getValue();
     	}
-	}
-	
+	}	
 	public INode getINode(ASTNode astNode) {
 		return PsiToEcoreAdapter.findInEmfObject(getResource()).getINode(astNode);
 	}
@@ -141,21 +140,18 @@ public abstract class BaseXtextFile extends PsiFileBase {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
         psiToEcoreTransformator.getAdapter().attachToEmfObject(resource);
-		initialize(resource);
-        return resource;
-    }
-
-	protected void initialize(final Resource resource) {
+        
+        ProgressIndicatorProvider.checkCanceled();
 		installDerivedState(resource);
 		
 		ProgressIndicatorProvider.checkCanceled();
 		EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
-	}
+        
+		return resource;
+    }
 
 	protected void installDerivedState(Resource resource) {
-		ProgressIndicatorProvider.checkCanceled();
 		if (resource instanceof DerivedStateAwareResource) {
 			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
 			boolean deliver = derivedStateAwareResource.eDeliver();

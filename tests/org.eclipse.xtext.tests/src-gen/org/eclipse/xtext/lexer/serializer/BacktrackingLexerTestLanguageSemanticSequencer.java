@@ -49,6 +49,9 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	}
 	
 	/**
+	 * Contexts:
+	 *     Ab returns Ab
+	 *
 	 * Constraint:
 	 *     (x=CharA y=Charb)
 	 */
@@ -67,6 +70,9 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         (enums+=EnumName* ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
@@ -87,6 +93,9 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * Contexts:
+	 *     Xb returns Xb
+	 *
 	 * Constraint:
 	 *     (x=CharX y=Charb)
 	 */

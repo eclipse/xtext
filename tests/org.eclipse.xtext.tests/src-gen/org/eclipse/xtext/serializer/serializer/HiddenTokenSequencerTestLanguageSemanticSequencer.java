@@ -49,6 +49,9 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	}
 	
 	/**
+	 * Contexts:
+	 *     DomainModel returns DomainModel
+	 *
 	 * Constraint:
 	 *     entities+=Entity+
 	 */
@@ -58,6 +61,9 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * Contexts:
+	 *     Entity returns Entity
+	 *
 	 * Constraint:
 	 *     (name=ID description=STRING)
 	 */
@@ -76,6 +82,9 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     domainModel=DomainModel
 	 */

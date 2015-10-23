@@ -8,9 +8,8 @@
 package org.eclipse.xtext.xtext.generator.ui.quickfix
 
 import javax.inject.Inject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -26,7 +25,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
+class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
@@ -39,12 +38,6 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 
 	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	private boolean generateStub = true;
-
-	@Accessors	
-	private boolean inheritImplementation;
 
 	def protected TypeReference getQuickfixProviderClass(Grammar g) {
 		return new TypeReference(
@@ -103,7 +96,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(«grammar.validatorClass».INVALID_NAME)
+			//	@Fix(«grammar.validatorClass.simpleName».INVALID_NAME)
 			//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
 			//			context |
@@ -125,7 +118,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			public class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(«grammar.validatorClass».INVALID_NAME)
+			//	@Fix(«grammar.validatorClass.simpleName».INVALID_NAME)
 			//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
 			//			public void apply(IModificationContext context) throws BadLocationException {

@@ -41,6 +41,9 @@ public class BaseInheritanceTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */

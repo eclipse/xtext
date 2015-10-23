@@ -200,6 +200,11 @@
                 <message_argument value="bindIParseTreeConstructor()"/>
             </message_arguments>
         </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="bindISyntacticSequencer()"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
         <filter id="643842064">
@@ -224,6 +229,172 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src-gen/org/eclipse/xtext/serializer/XtextSemanticSequencer.java" type="org.eclipse.xtext.serializer.XtextSemanticSequencer">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractDelegatingSemanticSequencer"/>
+                <message_argument value="XtextSemanticSequencer"/>
+            </message_arguments>
+        </filter>
+        <filter id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.XtextSemanticSequencer"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/serializer/XtextSyntacticSequencer.java" type="org.eclipse.xtext.serializer.XtextSyntacticSequencer">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="AbstractSyntacticSequencer"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedCondition_LeftParenthesisKeyword_0_a"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedCondition_LeftParenthesisKeyword_0_p"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedElement_LeftParenthesisKeyword_0_a"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedElement_LeftParenthesisKeyword_0_p"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="AbstractElementAlias"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="match_RuleNameAndParams___LessThanSignKeyword_1_0_GreaterThanSignKeyword_1_2__q"/>
+            </message_arguments>
+        </filter>
+        <filter id="627060751">
+            <message_arguments>
+                <message_argument value="XtextGrammarAccess"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="grammarAccess"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedCondition_LeftParenthesisKeyword_0_a(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedCondition_LeftParenthesisKeyword_0_p(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedElement_LeftParenthesisKeyword_0_a(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedElement_LeftParenthesisKeyword_0_p(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynNavigable"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emit_RuleNameAndParams___LessThanSignKeyword_1_0_GreaterThanSignKeyword_1_2__q(EObject, ISyntacticSequencerPDAProviderISynNavigable, List&lt;INode&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISynTransition"/>
+                <message_argument value="XtextSyntacticSequencer"/>
+                <message_argument value="emitUnassignedTokens(EObject, ISyntacticSequencerPDAProviderISynTransition, INode, INode)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.XtextSyntacticSequencer"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/GrammarToDot.java" type="org.eclipse.xtext.GrammarToDot">
         <filter id="627060751">
             <message_arguments>
@@ -238,6 +409,12 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.XtextRuntimeModule"/>
                 <message_argument value="bindIQualifiedNameConverter()"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextRuntimeModule"/>
+                <message_argument value="bindIXtext2EcorePostProcessor()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -506,22 +683,13 @@
             <message_arguments>
                 <message_argument value="UriUtil"/>
                 <message_argument value="FileProjectConfig"/>
-                <message_argument value="isPrefixOf(URI, URI)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/workspace/FileWorkspaceConfig.java" type="org.eclipse.xtext.workspace.FileWorkspaceConfig">
-        <filter id="640712815">
-            <message_arguments>
-                <message_argument value="UriUtil"/>
-                <message_argument value="FileWorkspaceConfig"/>
                 <message_argument value="createFolderURI(File)"/>
             </message_arguments>
         </filter>
         <filter id="640712815">
             <message_arguments>
                 <message_argument value="UriUtil"/>
-                <message_argument value="FileWorkspaceConfig"/>
+                <message_argument value="FileProjectConfig"/>
                 <message_argument value="isPrefixOf(URI, URI)"/>
             </message_arguments>
         </filter>

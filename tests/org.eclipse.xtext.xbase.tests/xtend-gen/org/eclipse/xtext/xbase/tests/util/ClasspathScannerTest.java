@@ -43,7 +43,7 @@ public class ClasspathScannerTest {
   @Test
   public void testClasspathScanning() {
     try {
-      final File bootstrapJar = new File("../org.eclipse.xtext.bootstrap/lastversion.jar");
+      final File bootstrapJar = new File("../../devtools/org.eclipse.xtext.bootstrap/lastversion.jar");
       URI _uRI = bootstrapJar.toURI();
       URL _uRL = _uRI.toURL();
       final URLClassLoader classloader = new URLClassLoader(new URL[] { _uRL });

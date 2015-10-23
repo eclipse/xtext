@@ -61,6 +61,9 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * Contexts:
+	 *     AbstractBar returns Bar
+	 *
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]* foo+=[Foo|QualifiedNameWithOtherDelim]?)
 	 */
@@ -70,6 +73,9 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractBar returns FooBar
+	 *
 	 * Constraint:
 	 *     (bar=AbstractBar_FooBar_3_0 foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]?)
 	 */
@@ -79,6 +85,10 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractBar.FooBar_3_0 returns Bar
+	 *     Bar returns Bar
+	 *
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]*)
 	 */
@@ -88,6 +98,9 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     Foo returns Foo
+	 *
 	 * Constraint:
 	 *     name=QualifiedNameWithOtherDelim
 	 */
@@ -103,6 +116,9 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (foos+=Foo | bars+=AbstractBar)+
 	 */

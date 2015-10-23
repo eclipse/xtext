@@ -36,7 +36,7 @@
 				</os>
 			</activation>
 			<properties>
-				<argLine>-XstartOnFirstThread</argLine>
+				<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>
 			</properties>
 		</profile>
 	</profiles>

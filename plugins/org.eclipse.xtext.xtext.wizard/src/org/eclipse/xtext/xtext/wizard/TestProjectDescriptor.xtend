@@ -41,6 +41,16 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		testedProject.isEclipsePluginProject
 	}
 	
+	override getExternalDependencies() {
+		val deps = newLinkedHashSet
+		deps += super.externalDependencies
+		deps += new ExternalDependency()=>[
+			p2.bundleId = "org.junit"
+			p2.version = "4.7.0"
+		]
+		return deps
+	}
+	
 	override pom() {
 		super.pom => [
 			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
@@ -120,7 +130,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 								</os>
 							</activation>
 							<properties>
-								<argLine>-XstartOnFirstThread</argLine>
+								<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>
 							</properties>
 						</profile>
 					</profiles>

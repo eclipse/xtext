@@ -161,7 +161,6 @@ class FlattenedGrammarAccess {
 								return element
 							} else {
 								var element = elements.get(0)
-								result.mergeCardinalities(element)
 								result.mergePredicates(element)
 								element.firstSetPredicated = false
 								element.predicated = false

@@ -16,6 +16,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileSourceFolder;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.SingleProjectWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -98,6 +100,11 @@ public class FileProjectConfig implements IProjectConfig {
     _builder.append(_path, "");
     _builder.append(")");
     return _builder.toString();
+  }
+  
+  @Override
+  public IWorkspaceConfig getWorkspaceConfig() {
+    return new SingleProjectWorkspaceConfig(this);
   }
   
   public FileProjectConfig(final File root, final String name) {

@@ -20,17 +20,20 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.idea.extensions.RootModelExtensions;
 import org.eclipse.xtext.idea.filesystem.IdeaSourceFolder;
+import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
-@Accessors
+@Data
 @SuppressWarnings("all")
 public class IdeaProjectConfig implements IProjectConfig {
   private final Module module;
@@ -110,6 +113,54 @@ public class IdeaProjectConfig implements IProjectConfig {
     };
     Iterable<IdeaSourceFolder> _map = IterableExtensions.<SourceFolder, IdeaSourceFolder>map(_filter, _function_1);
     return IterableExtensions.<IdeaSourceFolder>toSet(_map);
+  }
+  
+  @Override
+  public IWorkspaceConfig getWorkspaceConfig() {
+    Project _project = this.module.getProject();
+    return new IdeaWorkspaceConfig(_project);
+  }
+  
+  @Override
+  @Pure
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((this.module== null) ? 0 : this.module.hashCode());
+    result = prime * result + ((this.contentRoot== null) ? 0 : this.contentRoot.hashCode());
+    return result;
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    IdeaProjectConfig other = (IdeaProjectConfig) obj;
+    if (this.module == null) {
+      if (other.module != null)
+        return false;
+    } else if (!this.module.equals(other.module))
+      return false;
+    if (this.contentRoot == null) {
+      if (other.contentRoot != null)
+        return false;
+    } else if (!this.contentRoot.equals(other.contentRoot))
+      return false;
+    return true;
+  }
+  
+  @Override
+  @Pure
+  public String toString() {
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("module", this.module);
+    b.add("contentRoot", this.contentRoot);
+    return b.toString();
   }
   
   @Pure

@@ -20,19 +20,19 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @SuppressWarnings("all")
-public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
+public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -241,7 +241,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       TypeReference _injectorProvider = this.injectorProvider();
       final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_injectorProvider);
       final TypeReference globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries");
-      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento");
+      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento");
       final TypeReference iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator");
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override

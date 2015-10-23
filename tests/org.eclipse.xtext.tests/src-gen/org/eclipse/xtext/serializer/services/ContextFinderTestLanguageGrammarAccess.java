@@ -454,7 +454,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"kw1"
 		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
 
-		//{NestedTypeRecursiveTest.left=current} "."+
+		//({NestedTypeRecursiveTest.left=current} ".")+
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{NestedTypeRecursiveTest.left=current}
@@ -486,7 +486,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"kw2"
 		public Keyword getKw2Keyword_1() { return cKw2Keyword_1; }
 
-		//{NestedTypeRecursiveTest.left=current} "."+
+		//({NestedTypeRecursiveTest.left=current} ".")+
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{NestedTypeRecursiveTest.left=current}

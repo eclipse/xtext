@@ -41,6 +41,9 @@ public abstract class AbstractBug301935TestLanguageSemanticSequencer extends Abs
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (name=ID value=ID value2=ID)
 	 */

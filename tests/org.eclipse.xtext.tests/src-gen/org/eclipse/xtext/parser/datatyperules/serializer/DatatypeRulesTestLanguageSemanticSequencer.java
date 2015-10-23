@@ -43,6 +43,9 @@ public class DatatypeRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     CompositeModel returns CompositeModel
+	 *
 	 * Constraint:
 	 *     model+=Model+
 	 */
@@ -52,6 +55,9 @@ public class DatatypeRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (id=NestedModelId value=Fraction? vector=Vector? dots=Dots? double=Double?)
 	 */

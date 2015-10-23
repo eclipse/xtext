@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.filesystem
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
+import com.intellij.openapi.module.ModuleManager
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.SourceFolder
@@ -18,14 +21,16 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.workspace.IProjectConfig
 import org.eclipse.xtext.workspace.IProjectConfigProvider
 import org.eclipse.xtext.workspace.ISourceFolder
+import org.eclipse.xtext.workspace.IWorkspaceConfig
 
 import static extension com.intellij.ide.projectView.impl.ProjectRootsUtil.*
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
 import static extension org.eclipse.xtext.util.UriUtil.*
-import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 
 class IdeaProjectConfigProvider implements IProjectConfigProvider {
 
@@ -44,10 +49,9 @@ class IdeaProjectConfigProvider implements IProjectConfigProvider {
 	
 }
 
-@Accessors class IdeaProjectConfig implements IProjectConfig {
+@Data class IdeaProjectConfig implements IProjectConfig {
 
 	val Module module
-	
 	val VirtualFile contentRoot
 	
 	new (Module module) {
@@ -82,7 +86,60 @@ class IdeaProjectConfigProvider implements IProjectConfigProvider {
 			file == contentRoot
 		].map[sourceFolder|new IdeaSourceFolder(sourceFolder)].toSet
 	}
+	
+	override getWorkspaceConfig() {
+		return new IdeaWorkspaceConfig(module.project)
+	}
+	
+}
 
+@Data @Log
+class IdeaWorkspaceConfig implements IWorkspaceConfig {
+	
+	val Project project
+	
+	override getProjects() {
+		val modules = ApplicationManager.application.<Module[]>runReadAction[
+			ModuleManager.getInstance(project).modules
+		]
+		return modules.map[toIdeaProjectConfig].toSet
+	}
+
+	override IdeaProjectConfig findProjectByName(String name) {
+		val module = ApplicationManager.application.<Module>runReadAction[
+			ModuleManager.getInstance(project).findModuleByName(name)	
+		]
+		if (module !== null) {
+			return module.toIdeaProjectConfig
+		} else {
+			return null
+		}
+	}
+	
+	private def toIdeaProjectConfig(Module module) {
+		return new IdeaProjectConfig(module)
+	}
+
+	override IdeaProjectConfig findProjectContaining(URI member) {
+		val file = VirtualFileURIUtil.getVirtualFile(member)
+		if (file === null)
+			return null
+
+		val fileIndex = ProjectRootManager.getInstance(project).fileIndex
+		val module = fileIndex.getModuleForFile(file, true)
+		if (module === null)
+			return null
+
+		val contentRoot = fileIndex.getContentRootForFile(file, true)
+		if (contentRoot === null)
+			return null
+
+		val result = new IdeaProjectConfig(module)
+		if (contentRoot != result.contentRoot)
+			LOG.error('''The file («member») should belong to the first content root («result.contentRoot») but belongs to «contentRoot».''')
+
+		return result
+	}
 }
 
 @Data

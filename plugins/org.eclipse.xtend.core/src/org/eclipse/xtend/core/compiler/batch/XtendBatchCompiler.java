@@ -55,6 +55,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.UriUtil;
@@ -391,7 +392,7 @@ public class XtendBatchCompiler {
 		}
 		Map<String, Set<OutputConfiguration>> outputConfigurations = newHashMap();
 		outputConfigurations.put(languageName, newHashSet(outputConfiguration));
-		new ProjectConfigAdapter(projectConfig).attachToEmfObject(resourceSet);
+		ProjectConfigAdapter.install(resourceSet, projectConfig);
 		resourceSet.eAdapters().add(new OutputConfigurationAdapter(outputConfigurations));
 		return true;
 	}
@@ -796,7 +797,7 @@ public class XtendBatchCompiler {
 					StorageAwareResource storageAwareResource = (StorageAwareResource)resource;
 					storageAwareResource.getResourceStorageFacade().saveResource(storageAwareResource, javaIoFileSystemAccess);
 				}
-				generator.generate(resource, javaIoFileSystemAccess);
+				generator.generate(resource, javaIoFileSystemAccess, CancelIndicator.NullImpl);
 			}
 		}
 	}

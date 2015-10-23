@@ -53,6 +53,10 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	}
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns ChoiceElement
+	 *     ChoiceRule returns ChoiceElement
+	 *
 	 * Constraint:
 	 *     (optionalKeyword?='optional'? name=ID)
 	 */
@@ -62,6 +66,9 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * Contexts:
+	 *     EntryRule returns Model
+	 *
 	 * Constraint:
 	 *     multiFeature+=AbstractRule+
 	 */
@@ -71,6 +78,10 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns ReducibleComposite
+	 *     ReducibleRule returns ReducibleComposite
+	 *
 	 * Constraint:
 	 *     (actionFeature+=ReducibleRule_ReducibleComposite_2_0 actionFeature+=TerminalRule)
 	 */
@@ -80,6 +91,12 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns TerminalElement
+	 *     ReducibleRule returns TerminalElement
+	 *     ReducibleRule.ReducibleComposite_2_0 returns TerminalElement
+	 *     TerminalRule returns TerminalElement
+	 *
 	 * Constraint:
 	 *     stringFeature=STRING
 	 */

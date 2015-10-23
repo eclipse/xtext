@@ -45,6 +45,9 @@ public abstract class AbstractInheritanceTestLanguageSemanticSequencer extends A
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -60,6 +63,9 @@ public abstract class AbstractInheritanceTestLanguageSemanticSequencer extends A
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (name=ID elements+=Element*)
 	 */

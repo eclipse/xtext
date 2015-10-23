@@ -23,10 +23,13 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.ISubProjectConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @Log
 @SuppressWarnings("all")
 public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {

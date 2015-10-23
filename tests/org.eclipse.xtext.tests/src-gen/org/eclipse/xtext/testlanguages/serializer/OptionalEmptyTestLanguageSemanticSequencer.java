@@ -45,6 +45,9 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * Contexts:
+	 *     Greeting returns Greeting
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
@@ -60,6 +63,9 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     child=Greeting
 	 */

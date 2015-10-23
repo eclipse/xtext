@@ -12,14 +12,13 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @EmfAdaptable
-@Data
+@Accessors
 @SuppressWarnings("all")
 public class ProjectConfigAdapter {
   public static class ProjectConfigAdapterAdapter extends AdapterImpl {
@@ -40,6 +39,10 @@ public class ProjectConfigAdapter {
   }
   
   private final IProjectConfig projectConfig;
+  
+  protected ProjectConfigAdapter(final IProjectConfig projectConfig) {
+    this.projectConfig = projectConfig;
+  }
   
   public static void install(final ResourceSet resourceSet, final IProjectConfig config) {
     ProjectConfigAdapter _projectConfigAdapter = new ProjectConfigAdapter(config);
@@ -73,46 +76,6 @@ public class ProjectConfigAdapter {
     	throw new IllegalStateException("The given EMF object already contains an adapter for ProjectConfigAdapter");
     ProjectConfigAdapter.ProjectConfigAdapterAdapter adapter = new ProjectConfigAdapter.ProjectConfigAdapterAdapter(this);
     emfObject.eAdapters().add(adapter);
-  }
-  
-  public ProjectConfigAdapter(final IProjectConfig projectConfig) {
-    super();
-    this.projectConfig = projectConfig;
-  }
-  
-  @Override
-  @Pure
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.projectConfig== null) ? 0 : this.projectConfig.hashCode());
-    return result;
-  }
-  
-  @Override
-  @Pure
-  public boolean equals(final Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ProjectConfigAdapter other = (ProjectConfigAdapter) obj;
-    if (this.projectConfig == null) {
-      if (other.projectConfig != null)
-        return false;
-    } else if (!this.projectConfig.equals(other.projectConfig))
-      return false;
-    return true;
-  }
-  
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("projectConfig", this.projectConfig);
-    return b.toString();
   }
   
   @Pure

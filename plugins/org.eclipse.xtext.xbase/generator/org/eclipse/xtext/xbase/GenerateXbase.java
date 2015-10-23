@@ -4,14 +4,15 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
+import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
-import org.eclipse.xtext.xtext.generator.WizardConfig;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2;
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
@@ -55,7 +56,7 @@ final class GenerateXbase {
 		
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
-				setProject(new WizardConfig() {{
+				setProject(new StandardProjectConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
 					getEclipsePlugin().setEnabled(true);
@@ -68,7 +69,7 @@ final class GenerateXbase {
 				}});
 			}});
 
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xtype";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
@@ -81,8 +82,11 @@ final class GenerateXbase {
 				addFragment(new ContentAssistFragment2());
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbase";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
@@ -115,8 +119,11 @@ final class GenerateXbase {
 				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbasewithannotations";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
@@ -147,6 +154,9 @@ final class GenerateXbase {
 				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
 		}};
 		

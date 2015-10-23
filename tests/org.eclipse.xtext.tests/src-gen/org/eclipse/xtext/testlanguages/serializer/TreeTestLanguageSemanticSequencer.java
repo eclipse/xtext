@@ -43,6 +43,9 @@ public class TreeTestLanguageSemanticSequencer extends AbstractDelegatingSemanti
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     children+=Node+
 	 */
@@ -52,6 +55,9 @@ public class TreeTestLanguageSemanticSequencer extends AbstractDelegatingSemanti
 	
 	
 	/**
+	 * Contexts:
+	 *     Node returns Node
+	 *
 	 * Constraint:
 	 *     (name=ID attrib=STRING children+=Node*)
 	 */

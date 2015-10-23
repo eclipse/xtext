@@ -1180,10 +1180,60 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t\t\t");
         _builder.append("</plugin>");
         _builder.newLine();
+        {
+          WizardConfiguration _config_9 = ParentProjectDescriptor.this.getConfig();
+          boolean _needsTychoBuild_3 = _config_9.needsTychoBuild();
+          if (_needsTychoBuild_3) {
+            _builder.append("\t\t\t");
+            _builder.append("<plugin>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<!-- ");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("Can be removed after first generator execution");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("-->");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<groupId>org.eclipse.tycho</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<artifactId>tycho-compiler-plugin</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<version>${tycho-version}</version>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<configuration>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<compilerArgument>-err:-forbidden</compilerArgument>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("</configuration>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("</plugin>");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t\t");
         _builder.append("</plugins>");
-        _builder.newLine();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("</pluginManagement>");
@@ -1191,8 +1241,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</build>");
         _builder.newLine();
         {
-          WizardConfiguration _config_9 = ParentProjectDescriptor.this.getConfig();
-          XtextVersion _xtextVersion_1 = _config_9.getXtextVersion();
+          WizardConfiguration _config_10 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_1 = _config_10.getXtextVersion();
           boolean _isSnapshot = _xtextVersion_1.isSnapshot();
           if (_isSnapshot) {
             _builder.append("<repositories>");

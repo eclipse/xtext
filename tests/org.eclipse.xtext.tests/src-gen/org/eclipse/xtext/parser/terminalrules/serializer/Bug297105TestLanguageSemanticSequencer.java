@@ -53,6 +53,9 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Expression
+	 *
 	 * Constraint:
 	 *     (left=Literal right=Literal)
 	 */
@@ -71,6 +74,10 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Literal returns IntLiteral
+	 *     IntLiteral returns IntLiteral
+	 *
 	 * Constraint:
 	 *     value=IntValue
 	 */
@@ -86,6 +93,9 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     expressions+=Expression+
 	 */
@@ -95,6 +105,10 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Literal returns RealLiteral
+	 *     RealLiteral returns RealLiteral
+	 *
 	 * Constraint:
 	 *     value=RealValue
 	 */

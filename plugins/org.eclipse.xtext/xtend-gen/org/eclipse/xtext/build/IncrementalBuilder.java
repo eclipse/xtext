@@ -266,7 +266,7 @@ public class IncrementalBuilder {
             _and = false;
           } else {
             IShouldGenerate _get = serviceProvider.<IShouldGenerate>get(IShouldGenerate.class);
-            boolean _shouldGenerate = _get.shouldGenerate(resource, null, CancelIndicator.NullImpl);
+            boolean _shouldGenerate = _get.shouldGenerate(resource, CancelIndicator.NullImpl);
             _and = _shouldGenerate;
           }
           if (_and) {
@@ -362,9 +362,8 @@ public class IncrementalBuilder {
           }
         }
       }
-      generator.beforeGenerate(resource, fileSystemAccess);
-      generator.doGenerate(resource, fileSystemAccess);
-      generator.afterGenerate(resource, fileSystemAccess);
+      CancelIndicator _cancelIndicator = request.getCancelIndicator();
+      generator.generate(resource, fileSystemAccess, _cancelIndicator);
       final Procedure1<URI> _function_1 = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
@@ -106,8 +105,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
           final Function1<String, Integer> _function = new Function1<String, Integer>() {
             @Override
             public Integer apply(final String it) {
-              int _length = it.length();
-              return Integer.valueOf((-_length));
+              return Integer.valueOf(it.length());
             }
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
@@ -115,12 +113,12 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("tokenNameToValue.put(\"");
-            String _ruleName = this.keyWordHelper.getRuleName(kw);
+            String _ruleName = this.keywordHelper.getRuleName(kw);
             _builder.append(_ruleName, "\t\t");
             _builder.append("\", \"\'");
-            String _javaIdentifier = this._grammarAccessExtensions.toJavaIdentifier(kw, false);
-            String _replaceAll = _javaIdentifier.replaceAll("\\\\\\$", "\\\\u0024");
-            _builder.append(_replaceAll, "\t\t");
+            String _stringInAntlrAction = AntlrGrammarGenUtil.toStringInAntlrAction(kw);
+            String _replace = _stringInAntlrAction.replace("$", "\\u0024");
+            _builder.append(_replace, "\t\t");
             _builder.append("\'\");");
             _builder.newLineIfNotEmpty();
           }
@@ -1190,8 +1188,8 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       boolean _and_1 = false;
       AbstractRule _containingRule = GrammarUtil.containingRule(it);
       AbstractElement _alternatives = _containingRule.getAlternatives();
-      boolean _equals = Objects.equal(_alternatives, this);
-      if (!_equals) {
+      boolean _tripleEquals = (_alternatives == it);
+      if (!_tripleEquals) {
         _and_1 = false;
       } else {
         AbstractRule _containingRule_1 = GrammarUtil.containingRule(it);

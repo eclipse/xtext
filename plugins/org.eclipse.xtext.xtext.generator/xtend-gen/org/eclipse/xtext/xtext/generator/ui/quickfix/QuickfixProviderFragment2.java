@@ -11,18 +11,14 @@ import com.google.common.base.Objects;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -32,6 +28,8 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
@@ -41,7 +39,7 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
  * @author Christian Schneider - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
+public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -56,12 +54,6 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
   
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
-  @Accessors
-  private boolean generateStub = true;
-  
-  @Accessors
-  private boolean inheritImplementation;
   
   protected TypeReference getQuickfixProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
@@ -78,7 +70,8 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
       TypeReference _xifexpression = null;
       boolean _and = false;
-      if (!this.inheritImplementation) {
+      boolean _isInheritImplementation = this.isInheritImplementation();
+      if (!_isInheritImplementation) {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(superGrammar, null));
@@ -104,7 +97,8 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
   @Override
   public void generate() {
     TypeReference _xifexpression = null;
-    if (this.generateStub) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       Grammar _grammar = this.getGrammar();
       _xifexpression = this.getQuickfixProviderClass(_grammar);
     } else {
@@ -115,11 +109,12 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider");
     GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, instanceClass);
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
     boolean _and = false;
-    if (!this.generateStub) {
+    boolean _isGenerateStub_1 = this.isGenerateStub();
+    if (!_isGenerateStub_1) {
       _and = false;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
@@ -194,7 +189,8 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
         _builder.append("//\t@Fix(");
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
-        _builder.append(_validatorClass, "");
+        String _simpleName_1 = _validatorClass.getSimpleName();
+        _builder.append(_simpleName_1, "");
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
         _builder.append("//\tdef capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {");
@@ -259,7 +255,8 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
         _builder.append("//\t@Fix(");
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
-        _builder.append(_validatorClass, "");
+        String _simpleName_1 = _validatorClass.getSimpleName();
+        _builder.append(_simpleName_1, "");
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
         _builder.append("//\tpublic void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {");
@@ -409,23 +406,5 @@ public class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
       _xblockexpression = _entries.add(_builder.toString());
     }
     return _xblockexpression;
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
-  }
-  
-  @Pure
-  public boolean isInheritImplementation() {
-    return this.inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this.inheritImplementation = inheritImplementation;
   }
 }

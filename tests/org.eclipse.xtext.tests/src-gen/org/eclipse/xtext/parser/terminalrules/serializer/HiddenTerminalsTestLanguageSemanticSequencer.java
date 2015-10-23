@@ -69,6 +69,10 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns DatatypeHiddens
+	 *     DatatypeHiddens returns DatatypeHiddens
+	 *
 	 * Constraint:
 	 *     valid?=DatatypeRule
 	 */
@@ -84,6 +88,9 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     HidingHiddens returns HidingHiddens
+	 *
 	 * Constraint:
 	 *     (space=WS called=InheritingHiddensCall)
 	 */
@@ -102,6 +109,9 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     InheritingHiddensCall returns InheritingHiddensCall
+	 *
 	 * Constraint:
 	 *     valid?=';'
 	 */
@@ -117,6 +127,10 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns InheritingHiddens
+	 *     InheritingHiddens returns InheritingHiddens
+	 *
 	 * Constraint:
 	 *     ((called=InheritingHiddensCall | hidingCalled=HidingHiddens) valid?=';')
 	 */
@@ -126,6 +140,9 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     OverridingHiddensCall returns OverridingHiddensCall
+	 *
 	 * Constraint:
 	 *     (spaces+=WS? valid?=';')
 	 */
@@ -135,6 +152,10 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns OverridingHiddens
+	 *     OverridingHiddens returns OverridingHiddens
+	 *
 	 * Constraint:
 	 *     (called=OverridingHiddensCall valid?=';')
 	 */
@@ -153,6 +174,10 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns WithHiddens
+	 *     WithHiddens returns WithHiddens
+	 *
 	 * Constraint:
 	 *     valid?=';'
 	 */
@@ -168,6 +193,10 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns WithoutHiddens
+	 *     WithoutHiddens returns WithoutHiddens
+	 *
 	 * Constraint:
 	 *     (spaces+=WS spaces+=WS? valid?=';')
 	 */

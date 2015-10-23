@@ -809,7 +809,7 @@ public class GrammarPDAProviderTest {
     _builder_1.append("\t");
     _builder_1.append("(|s=S) -> stop");
     _builder_1.newLine();
-    _builder_1.append("S_P:");
+    _builder_1.append("S<P>:");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("start -> v1=ID");

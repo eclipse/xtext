@@ -35,6 +35,7 @@ import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xtext.RuleNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import com.intellij.openapi.progress.ProgressIndicatorProvider
 
 class PsiToEcoreTransformator implements IParser {
 

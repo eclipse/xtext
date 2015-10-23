@@ -52,6 +52,9 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	}
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importURI=STRING
 	 */
@@ -67,6 +70,9 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (imports+=Import* elements+=Element+)
 	 */
