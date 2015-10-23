@@ -8,8 +8,10 @@
 package org.eclipse.xtext.web.server.generator
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import com.google.inject.Singleton
-import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.GeneratorDelegate
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.web.server.model.AbstractCachedService
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
@@ -26,20 +28,22 @@ import org.eclipse.xtext.web.server.model.IXtextWebDocument
 @Singleton
 class GeneratorService extends AbstractCachedService<GeneratorResult> {
 	
-	@Inject IGenerator generator
+	@Inject GeneratorDelegate generator
 	
 	@Inject IContentTypeProvider contentTypeProvider
+	
+	@Inject Provider<InMemoryFileSystemAccess> fileSystemAccessProvider
 	
 	/**
 	 * Generate artifacts for the given document.
 	 */
 	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
-		val fileSystemAccess = new ResponseFileSystemAccess
-		generator.doGenerate(resource, fileSystemAccess)
+		val fileSystemAccess = fileSystemAccessProvider.get
+		generator.generate(resource, fileSystemAccess, [cancelIndicator])
 		val result = new GeneratorResult
-		result.documents.addAll(fileSystemAccess.files.map[
-			val contentType = contentTypeProvider.getContentType(name)
-			new GeneratorResult.GeneratedDocument(name, contentType, content.toString)
+		result.documents.addAll(fileSystemAccess.textFiles.entrySet.map[
+			val contentType = contentTypeProvider.getContentType(key)
+			new GeneratorResult.GeneratedDocument(key, contentType, value.toString)
 		])
 		return result
 	}
