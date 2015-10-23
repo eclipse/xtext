@@ -16,12 +16,13 @@ import org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateP
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
-class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
+class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment {
 	
 	override generate() {
 		addRuntimeGuiceBindings
@@ -51,7 +52,7 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 
 	protected def addEclipsePluginGuiceBindings() {
 		val StringConcatenationClient statement1 =
-			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».NAMED_BUILDER_SCOPE)).to(«'org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware'.typeRef».class);'''
+			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».NAMED_BUILDER_SCOPE)).to(«new TypeReference('org.eclipse.xtext.builder.clustering', 'CurrentDescriptions.ResourceSetAware')».class);'''
 		val StringConcatenationClient statement2 =
 			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».PERSISTED_DESCRIPTIONS)).to(«'org.eclipse.xtext.builder.builderState.IBuilderState'.typeRef».class);'''
 		new GuiceModuleAccess.BindingFactory()

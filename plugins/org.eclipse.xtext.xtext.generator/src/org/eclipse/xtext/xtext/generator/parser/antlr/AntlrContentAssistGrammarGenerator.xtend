@@ -43,8 +43,8 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 				private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
 				
 				{
-					«FOR kw: allKeywords.sort.sortBy[-length]»
-						tokenNameToValue.put("«keyWordHelper.getRuleName(kw)»", "'«kw.toJavaIdentifier(false).replaceAll("\\\\\\$", "\\\\u0024")»'");
+					«FOR kw: allKeywords.sort.sortBy[length]»
+						tokenNameToValue.put("«keywordHelper.getRuleName(kw)»", "'«kw.toStringInAntlrAction.replace('$', "\\u0024")»'");
 					«ENDFOR»
 				}
 			«ENDIF»
@@ -336,7 +336,7 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 	'''
 	
 	protected def paramConfig(AbstractElement it) '''
-		«IF containingRule.alternatives == this && ParserRule.isInstance(containingRule) && !(containingRule.originalElement as ParserRule).parameters.isEmpty»
+		«IF containingRule.alternatives === it && ParserRule.isInstance(containingRule) && !(containingRule.originalElement as ParserRule).parameters.isEmpty»
 			, «(containingRule as ParserRule).parameterConfig»
 		«ENDIF»
 	'''

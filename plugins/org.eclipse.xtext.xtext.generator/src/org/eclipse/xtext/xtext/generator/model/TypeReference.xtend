@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import com.google.common.base.Splitter
 import java.util.Collections
 import java.util.List
 import java.util.regex.Pattern
@@ -15,7 +16,7 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import org.eclipse.xtext.xtext.generator.ILanguageConfig
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 @Accessors
@@ -26,20 +27,24 @@ class TypeReference {
 		new TypeReference(name, arguments)
 	}
 	
+	/**
+	 * @deprecated this method is available for backwards compatibility reasons
+	 */
+	@Deprecated
+	static def TypeReference guessTypeRef(String name, TypeReference... arguments) {
+		new TypeReference(name, arguments, false)
+	}
+	
 	static def TypeReference typeRef(Class<?> clazz, TypeReference... arguments) {
 		new TypeReference(clazz, arguments)
 	}
 	
-	static def TypeReference typeRef(EClass clazz, ILanguageConfig language) {
+	static def TypeReference typeRef(EClass clazz, IXtextGeneratorLanguage language) {
 		new TypeReference(clazz, language.resourceSet)
 	}
 	
-	static def TypeReference typeRef(EPackage epackage, ILanguageConfig language) {
-		new TypeReference(epackage, language.resourceSet)
-	}
-	
-	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')
-	static val CLASS_MATCHER = Pattern.compile('[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*')
+	static val PACKAGE_MATCHER = Pattern.compile('([a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*)?')
+	static val CLASS_MATCHER = Pattern.compile('[a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*')
 	
 	val String packageName
 	
@@ -52,7 +57,11 @@ class TypeReference {
 	}
 
 	new(String qualifiedName, List<TypeReference> arguments) {
-		this(getPackageName(qualifiedName), getClassName(qualifiedName), arguments)
+		this(qualifiedName, arguments, true)
+	}
+	
+	private new(String qualifiedName, List<TypeReference> arguments, boolean strict) {
+		this(getPackageName(qualifiedName, strict), getClassName(qualifiedName, strict), arguments)
 	}
 	
 	new(String packageName, String className) {
@@ -98,28 +107,34 @@ class TypeReference {
 		this(getQualifiedName(epackage, resourceSet))
 	}
 	
-	private static def getPackageName(String qualifiedName) {
-		var packageEnd = qualifiedName.length
-		for (var i = qualifiedName.length - 1; i >= 0; i--) {
-			if (qualifiedName.charAt(i).matches('.')) {
-				if (Character.isLowerCase(qualifiedName.charAt(i + 1)))
-					return qualifiedName.substring(0, packageEnd)
-				else
-					packageEnd = i
+	private static def getPackageName(String qualifiedName, boolean strict) {
+		val segments = Splitter.on('.').split(qualifiedName).toList
+		if (segments.size == 1)
+			return ""
+		if (strict) {
+			val packageSegments = segments.subList(0, segments.length -1)
+			if (!packageSegments.filter[Character.isUpperCase(charAt(0))].isEmpty)
+				throw new IllegalArgumentException("Cannot determine the package name of '" + qualifiedName + "'. Please use the TypeReference(packageName, className) constructor")
+			return packageSegments.join(".")
+		} else {
+			var packageSegments = segments.subList(0, segments.length -1)
+			while(!packageSegments.isEmpty) {
+				if (Character.isUpperCase(packageSegments.last.charAt(0))) {
+					packageSegments = packageSegments.subList(0, packageSegments.length -1)
+				} else {
+					return packageSegments.join(".") 
+				}
 			}
+			return ""
 		}
 	}
 	
-	private static def getClassName(String qualifiedName) {
-		var classStart = qualifiedName.length
-		for (var i = qualifiedName.length - 1; i >= 0; i--) {
-			if (qualifiedName.charAt(i).matches('.')) {
-				if (Character.isLowerCase(qualifiedName.charAt(i + 1)))
-					return qualifiedName.substring(classStart)
-				else
-					classStart = i + 1
-			}
-		}
+	private static def getClassName(String qualifiedName, boolean strict) {
+		val packageName = qualifiedName.getPackageName(strict)
+		if (packageName.isEmpty)
+			qualifiedName
+		else
+			qualifiedName.substring(packageName.length + 1, qualifiedName.length)
 	}
 	
 	private static def getQualifiedName(EClass clazz, ResourceSet resourceSet) {
@@ -131,10 +146,6 @@ class TypeReference {
 	
 	private static def getQualifiedName(EPackage epackage, ResourceSet resourceSet) {
 		GenModelUtil2.getGenPackage(epackage, resourceSet).qualifiedPackageInterfaceName
-	}
-	
-	private static def matches(char c1, char c2) {
-		c1 == c2
 	}
 	
 	override toString() {

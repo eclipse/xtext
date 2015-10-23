@@ -11,40 +11,45 @@ import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
 class UiProjectDescriptor extends TestedProjectDescriptor {
 	UiTestProjectDescriptor testProject
-	
+
 	new(WizardConfiguration config) {
 		super(config)
 		this.testProject = new UiTestProjectDescriptor(this)
 	}
-	
+
 	override getTestProject() {
 		testProject
 	}
-	
+
 	override getUpstreamProjects() {
 		#[config.runtimeProject, config.ideProject].filter[enabled].toSet
 	}
-	
+
 	override getNameQualifier() {
 		".ui"
 	}
-	
+
 	override isEclipsePluginProject() {
 		true
 	}
-	
+
 	override isPartOfGradleBuild() {
 		false
 	}
-	
+
 	override isPartOfMavenBuild() {
 		true
 	}
-	
+
 	override getExternalDependencies() {
 		val deps = newLinkedHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.ui")
+
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097
+		deps += createXtextDependency("org.eclipse.xtext.ui.shared")
+		deps += createXtextDependency("org.eclipse.xtext.ui.codetemplates.ui")
+
 		deps += new ExternalDependency => [
 			p2 [
 				bundleId = "org.eclipse.ui.editors"
@@ -62,14 +67,20 @@ class UiProjectDescriptor extends TestedProjectDescriptor {
 		}
 		deps
 	}
-	
+
+	override getImportedPackages() {
+		val packs = super.getImportedPackages()
+		packs += "org.apache.log4j"
+		return packs
+	}
+
 	override getBinIncludes() {
 		val includes = newLinkedHashSet
 		includes += super.binIncludes
 		includes += "plugin.xml"
 		includes
 	}
-	
+
 	override pom() {
 		super.pom => [
 			buildSection = '''

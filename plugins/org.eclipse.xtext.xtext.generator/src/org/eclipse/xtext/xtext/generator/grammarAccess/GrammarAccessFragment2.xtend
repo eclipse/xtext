@@ -34,11 +34,10 @@ import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder
 import org.eclipse.xtext.service.GrammarProvider
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.util.internal.Log
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -48,7 +47,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 @Log
-class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
+class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Accessors
 	String xmlVersion
@@ -247,7 +246,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def StringConcatenationClient parserRuleClasses(ParserRule it) '''
-		public class «gaRuleAccessorClassName» extends «AbstractParserRuleElementFinder» {
+		public class «gaRuleAccessorClassName» extends AbstractParserRuleElementFinder {
 			private final «ParserRule» rule = («ParserRule») «GrammarUtil».findRuleForName(getGrammar(), "«qualifiedName»");
 			«FOR e : containedAbstractElements»
 				private final «e.eClass.typeRef(language)» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;

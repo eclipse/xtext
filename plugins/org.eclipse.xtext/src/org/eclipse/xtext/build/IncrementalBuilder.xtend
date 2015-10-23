@@ -90,7 +90,7 @@ import org.eclipse.xtext.workspace.IProjectConfigProvider
                     val copiedDescription = SerializableResourceDescription.createCopy(description);
                     result.newIndex.addDescription(resource.getURI, copiedDescription)
                     request.cancelIndicator.checkCanceled
-					if (resource.validate && serviceProvider.get(IShouldGenerate).shouldGenerate(resource, null, CancelIndicator.NullImpl)) {
+					if (resource.validate && serviceProvider.get(IShouldGenerate).shouldGenerate(resource, CancelIndicator.NullImpl)) {
 						request.cancelIndicator.checkCanceled
 						resource.generate(request, newSource2GeneratedMapping)
 					}
@@ -138,9 +138,7 @@ import org.eclipse.xtext.workspace.IProjectConfigProvider
 					}
 				}
 			}
-			generator.beforeGenerate(resource, fileSystemAccess)
-			generator.doGenerate(resource, fileSystemAccess)
-			generator.afterGenerate(resource, fileSystemAccess)
+			generator.generate(resource, fileSystemAccess, request.cancelIndicator)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)

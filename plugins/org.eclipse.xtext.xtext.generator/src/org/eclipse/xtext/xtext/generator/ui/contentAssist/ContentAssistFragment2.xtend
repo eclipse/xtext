@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.contentAssist
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
@@ -19,7 +18,7 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -35,7 +34,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
+class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
@@ -45,12 +44,6 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	boolean generateStub = true;
-
-	@Accessors
-	boolean inheritImplementation = true
 
 	def protected TypeReference getProposalProviderClass(Grammar g) {
 		return new TypeReference(
@@ -65,7 +58,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	def protected TypeReference getGenProposalProviderSuperClass(Grammar g) {
-		val superGrammar = g.nonTerminalsSuperGrammar
+		val superGrammar = g.usedGrammars.head
 		if(inheritImplementation && superGrammar != null)
 			superGrammar.proposalProviderClass
 		else getDefaultGenProposalProviderSuperClass
@@ -77,7 +70,6 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	def protected TypeReference getDefaultGenProposalProviderSuperClass() {
 		new TypeReference("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider")
 	}
-
 
 	override generate() {
 		val chosenClass = 

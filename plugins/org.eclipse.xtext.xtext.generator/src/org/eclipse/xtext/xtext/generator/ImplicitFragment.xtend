@@ -17,7 +17,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
-package class ImplicitFragment extends AbstractGeneratorFragment2 {
+package class ImplicitFragment extends AbstractXtextGeneratorFragment {
 	
 	@Inject extension XbaseUsageDetector
 	

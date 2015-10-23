@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Inject
 import com.google.inject.Injector
 import java.util.List
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
@@ -17,17 +18,18 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.utils.GenModelHelper
 import org.eclipse.emf.mwe.utils.StandaloneSetup
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
-import com.google.inject.Inject
 
+/**
+ * @noextend
+ */
 @Log
 class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
-	@Accessors List<String> loadedResources = newArrayList
+	List<String> loadedResources = newArrayList
 	
-	@Inject ILanguageConfig language
+	@Inject IXtextGeneratorLanguage language
 	
 	def void addLoadedResource(String uri) {
 		loadedResources += uri

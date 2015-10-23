@@ -350,8 +350,21 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									</lifecycleMappingMetadata>
 								</configuration>
 							</plugin>
+							«IF config.needsTychoBuild»
+							<plugin>
+								<!-- 
+									Can be removed after first generator execution
+									https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097
+								-->
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-compiler-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<configuration>
+									<compilerArgument>-err:-forbidden</compilerArgument>
+								</configuration>
+							</plugin>
+							«ENDIF»
 						</plugins>
-						
 					</pluginManagement>
 				</build>
 				«IF config.xtextVersion.isSnapshot»

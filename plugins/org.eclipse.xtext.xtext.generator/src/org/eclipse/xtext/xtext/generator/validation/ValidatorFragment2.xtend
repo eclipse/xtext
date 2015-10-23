@@ -11,12 +11,11 @@ import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.ComposedChecks
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -28,18 +27,12 @@ import static org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
-class ValidatorFragment2 extends AbstractGeneratorFragment2 {
+class ValidatorFragment2 extends AbstractInheritingFragment {
 	
 	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
-	
-	@Accessors
-	boolean generateStub = true
-	
-	@Accessors
-	boolean inheritImplementation = true
 	
 	val List<String> composedChecks = newArrayList
 	
@@ -90,8 +83,6 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def generateXtendValidatorStub() {
 		fileAccessFactory.createXtendFile(grammar.validatorClass, '''
-			//import org.eclipse.xtext.validation.Check
-			
 			/**
 			 * This class contains custom validation rules. 
 			 *
@@ -116,8 +107,6 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def generateJavaValidatorStub() {
 		fileAccessFactory.createJavaFile(grammar.validatorClass, '''
-			//import org.eclipse.xtext.validation.Check;
-			
 			/**
 			 * This class contains custom validation rules. 
 			 *

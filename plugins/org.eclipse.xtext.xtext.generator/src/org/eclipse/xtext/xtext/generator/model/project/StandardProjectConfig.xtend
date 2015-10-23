@@ -5,13 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator
+package org.eclipse.xtext.xtext.generator.model.project
 
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xtext.generator.Issues
 
+/**
+ * @noextend
+ */
 @Accessors
-class WizardConfig extends XtextProjectConfig {
+class StandardProjectConfig extends XtextProjectConfig {
 
 	boolean mavenLayout
 	boolean createEclipseMetaData
@@ -109,3 +113,4 @@ class WizardConfig extends XtextProjectConfig {
 	}
 
 }
+		

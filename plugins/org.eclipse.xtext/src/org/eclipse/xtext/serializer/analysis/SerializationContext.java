@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.NamedArgument;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xtext.ConditionEvaluator;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -59,10 +61,6 @@ public abstract class SerializationContext implements ISerializationContext {
 			return action;
 		}
 
-		@Override
-		protected String toStringInternal() {
-			return new Context2NameFunction().getUniqueActionName(action);
-		}
 	}
 
 	public static class ParameterValueContext extends SerializationContext {
@@ -71,20 +69,18 @@ public abstract class SerializationContext implements ISerializationContext {
 
 		public ParameterValueContext(ISerializationContext parent, Set<Parameter> parameters) {
 			super(parent);
+			Preconditions.checkNotNull(parent);
+			ParserRule rule = parent.getParserRule();
+			if (rule != null) {
+				List<Parameter> supportedParameters = ((SerializationContext) parent).getDeclaredParameters();
+				Preconditions.checkArgument(supportedParameters.containsAll(parameters));
+			}
 			this.parameters = ImmutableSet.copyOf(parameters);
 		}
 
 		@Override
 		protected Set<Parameter> getEnabledBooleanParametersInternal() {
 			return parameters;
-		}
-
-		@Override
-		protected String toStringInternal() {
-			List<String> names = Lists.newArrayList();
-			for (Parameter p : parameters)
-				names.add(p.getName());
-			return Joiner.on("_").join(names);
 		}
 
 	}
@@ -101,11 +97,6 @@ public abstract class SerializationContext implements ISerializationContext {
 		@Override
 		public ParserRule getParserRule() {
 			return rule;
-		}
-
-		@Override
-		protected String toStringInternal() {
-			return rule.getName();
 		}
 
 	}
@@ -125,8 +116,8 @@ public abstract class SerializationContext implements ISerializationContext {
 		}
 
 		@Override
-		protected String toStringInternal() {
-			return type == null ? "null" : type.getName();
+		protected String getTypeString() {
+			return type != null ? type.getName() : "null";
 		}
 
 	}
@@ -142,7 +133,11 @@ public abstract class SerializationContext implements ISerializationContext {
 	public static ISerializationContext forChild(ISerializationContext container, Action assignedAction, EObject sem) {
 		EClass type = sem == null ? null : sem.eClass();
 		//		RuleContext ruleContext = new RuleContext(null, container.getParserRule());
-		return new TypeContext(new ActionContext(/*ruleContext*/null, assignedAction), type);
+		ISerializationContext context = new TypeContext(new ActionContext(/*ruleContext*/null, assignedAction), type);
+		Set<Parameter> params = container.getEnabledBooleanParameters();
+		if (!params.isEmpty())
+			context = new ParameterValueContext(context, params);
+		return context;
 	}
 
 	public static ISerializationContext forChild(ISerializationContext container, RuleCall ruleCall, EObject sem) {
@@ -151,7 +146,7 @@ public abstract class SerializationContext implements ISerializationContext {
 		EList<NamedArgument> arguments = ruleCall.getArguments();
 		if (!arguments.isEmpty()) {
 			Set<Parameter> params = Sets.newLinkedHashSet();
-			ConditionEvaluator evaluator = new ConditionEvaluator(params);
+			ConditionEvaluator evaluator = new ConditionEvaluator(container.getEnabledBooleanParameters());
 			for (NamedArgument argument : arguments) {
 				if (evaluator.evaluate(argument.getValue())) {
 					params.add(argument.getParameter());
@@ -284,6 +279,14 @@ public abstract class SerializationContext implements ISerializationContext {
 		if (obj == this)
 			return true;
 		ISerializationContext other = (ISerializationContext) obj;
+		boolean eq1 = equalsInternal(other);
+		//		boolean eq2 = toString().equals(other.toString());
+		//		if (eq1 != eq2)
+		//			System.out.println("Foo");
+		return eq1;
+	}
+
+	private boolean equalsInternal(ISerializationContext other) {
 		if (!Objects.equal(getParserRule(), other.getParserRule()))
 			return false;
 		if (!Objects.equal(getAssignedAction(), other.getAssignedAction()))
@@ -346,6 +349,10 @@ public abstract class SerializationContext implements ISerializationContext {
 		return parent != null ? parent.getType() : null;
 	}
 
+	protected String getTypeString() {
+		return parent != null ? ((SerializationContext) parent).getTypeString() : null;
+	}
+
 	@Override
 	public int hashCode() {
 		ParserRule rule = getParserRule();
@@ -366,13 +373,39 @@ public abstract class SerializationContext implements ISerializationContext {
 
 	@Override
 	public String toString() {
-		if (parent == null) {
-			return toStringInternal();
+		ParserRule rule = getParserRule();
+		Action action = getAssignedAction();
+		Set<Parameter> parameterValues = getEnabledBooleanParameters();
+		String type = getTypeString();
+		StringBuilder builder = new StringBuilder();
+		if (action != null) {
+			builder.append(GrammarUtil.containingRule(action).getName());
+			builder.append(".");
+			builder.append(new Context2NameFunction().getUniqueActionName(action));
+		} else if (rule != null) {
+			builder.append(rule.getName());
 		} else {
-			return parent + "_" + toStringInternal();
+			builder.append("???");
 		}
+		if (parameterValues != null && !parameterValues.isEmpty()) {
+			List<String> names = Lists.newArrayList();
+			List<Parameter> declared = getDeclaredParameters();
+			for (Parameter p : parameterValues) {
+				if (declared.contains(p)) {
+					names.add(p.getName());
+				} else {
+					names.add(((AbstractRule) p.eContainer()).getName() + "." + p.getName());
+				}
+			}
+			builder.append("<");
+			builder.append(Joiner.on(",").join(names));
+			builder.append(">");
+		}
+		if (type != null) {
+			builder.append(" returns ");
+			builder.append(type);
+		}
+		return builder.toString();
 	}
-
-	abstract protected String toStringInternal();
 
 }

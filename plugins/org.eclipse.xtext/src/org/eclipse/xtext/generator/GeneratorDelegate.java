@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
 
@@ -26,36 +27,36 @@ public class GeneratorDelegate implements IGenerator, IGenerator2 {
 	public IGenerator getLegacyGenerator() {
 		return legacyGenerator;
 	}
+	
+	public void generate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+		try {
+			beforeGenerate(input, fsa, cancelIndicator);
+			doGenerate(input, fsa, cancelIndicator);
+		} finally {
+			afterGenerate(input, fsa, cancelIndicator);
+		}
+	}
 
 	@Override
-	public void doGenerate(Resource input, IFileSystemAccess2 fsa) {
+	public void doGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
 		if (generator != null) {
-			generator.doGenerate(input, fsa);
+			generator.doGenerate(input, fsa, cancelIndicator);
 		} else if (getLegacyGenerator() != null) {
 			getLegacyGenerator().doGenerate(input, fsa);
 		}
 	}
 
 	@Override
-	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa) {
+	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
 		if (generator != null) {
-			generator.beforeGenerate(input, fsa);
+			generator.beforeGenerate(input, fsa, cancelIndicator);
 		}
 	}
 
 	@Override
-	public void afterGenerate(Resource input, IFileSystemAccess2 fsa) {
+	public void afterGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
 		if (generator != null) {
-			generator.afterGenerate(input, fsa);
-		}
-	}
-	
-	public void generate(Resource input, IFileSystemAccess2 fsa) {
-		try {
-			beforeGenerate(input, fsa);
-			doGenerate(input, fsa);
-		} finally {
-			afterGenerate(input, fsa);
+			generator.afterGenerate(input, fsa, cancelIndicator);
 		}
 	}
 
@@ -63,11 +64,10 @@ public class GeneratorDelegate implements IGenerator, IGenerator2 {
 	public void doGenerate(Resource input, IFileSystemAccess fsa) {
 		IFileSystemAccess2 casted = (IFileSystemAccess2) fsa;
 		try {
-			beforeGenerate(input, casted);
-			doGenerate(input, casted);
+			beforeGenerate(input, casted, CancelIndicator.NullImpl);
+			doGenerate(input, casted, CancelIndicator.NullImpl);
 		} finally {
-			afterGenerate(input, casted);
+			afterGenerate(input, casted, CancelIndicator.NullImpl);
 		}
 	}
-	
 }

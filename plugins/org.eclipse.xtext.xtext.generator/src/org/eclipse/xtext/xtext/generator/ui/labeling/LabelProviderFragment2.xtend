@@ -8,9 +8,8 @@
 package org.eclipse.xtext.xtext.generator.ui.labeling
 
 import com.google.inject.Inject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -25,7 +24,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
+class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 
 	private static val XBASE_LABEL_PROVIDER = 
 		"org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider"
@@ -44,9 +43,6 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 
 	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	private boolean generateStub = true;
 
 	def protected TypeReference getEObjectLabelProviderClass(Grammar g) {
 		return new TypeReference(
