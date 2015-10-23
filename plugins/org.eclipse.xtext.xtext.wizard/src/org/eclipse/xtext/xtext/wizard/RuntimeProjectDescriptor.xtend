@@ -85,9 +85,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			"org.eclipse.emf.codegen.ecore", 
 			"org.eclipse.emf.mwe.utils",
 			"org.eclipse.emf.mwe2.launch",
+			"org.eclipse.emf.mwe2.lib",
 			"org.objectweb.asm",
 			"org.apache.commons.logging", 
-			"org.apache.log4j"
+			"org.apache.log4j",
+			"com.ibm.icu"
 		)
 	}
 	
