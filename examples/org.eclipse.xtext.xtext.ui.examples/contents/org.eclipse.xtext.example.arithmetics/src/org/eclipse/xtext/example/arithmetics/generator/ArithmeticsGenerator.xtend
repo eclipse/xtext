@@ -8,21 +8,22 @@
 package org.eclipse.xtext.example.arithmetics.generator
 
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.generator.IGenerator2
-import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.generator.IGeneratorContext
 
 /**
  * Generates code from your model files on save.
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
-class ArithmeticsGenerator implements IGenerator2 {
+class ArithmeticsGenerator extends AbstractGenerator {
 
-	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
+//			resource.allContents
+//				.filter(typeof(Greeting))
+//				.map[name]
+//				.join(', '))
 	}
-	
-	override void beforeGenerate(Resource resource, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {}
-	
-	override void afterGenerate(Resource resource, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {}
 }
