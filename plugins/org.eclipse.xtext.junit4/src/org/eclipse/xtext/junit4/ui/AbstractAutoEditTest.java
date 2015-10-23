@@ -39,8 +39,6 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		closeWelcomePage();
-		IProject project = createProject("foo");
-		addNature(project, XtextProjectHelper.NATURE_ID);
 	}
 	
 	@Override
