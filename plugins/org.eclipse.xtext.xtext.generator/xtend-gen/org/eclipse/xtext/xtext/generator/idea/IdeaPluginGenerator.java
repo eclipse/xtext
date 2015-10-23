@@ -466,6 +466,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(_typeRef, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
+        _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
         TypeReference _pomDeclarationSearcher_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getPomDeclarationSearcher(it);
@@ -504,6 +505,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(_typeRef, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
+        _builder.newLine();
         {
           List<String> _initialHiddenTokens = IdeaPluginGenerator.this._grammarAccessExtensions.initialHiddenTokens(grammar);
           boolean _isEmpty = _initialHiddenTokens.isEmpty();
@@ -549,7 +551,6 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
             _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@");
@@ -599,6 +600,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
+        _builder.newLine();
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@");
@@ -1271,7 +1273,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
         _builder.append(_typeRef, "");
-        _builder.append("{");
+        _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");
@@ -1663,14 +1665,15 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   public JavaFileAccess compileTokenTypeProvider(final Grammar grammar) {
     final TypeReference tokenSet = TypeReference.typeRef("com.intellij.psi.tree.TokenSet");
     final TypeReference iElementType = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
-    final TypeReference indexedElementType = new TypeReference("org.eclipse.xtext.idea.parser", "TokenTypeProvider.IndexedElementType");
+    final String indexedElementType = "IndexedElementType";
     TypeReference _tokenTypeProvider = this._ideaPluginClassNames.getTokenTypeProvider(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("@");
         _builder.append(Singleton.class, "");
-        _builder.append(" public class ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("public class ");
         TypeReference _tokenTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getTokenTypeProvider(grammar);
         String _simpleName = _tokenTypeProvider.getSimpleName();
         _builder.append(_simpleName, "");
@@ -1886,11 +1889,8 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(indexedElementType, "        ");
         _builder.append(") ? ((");
         _builder.append(indexedElementType, "        ");
-        _builder.append(") iElementType).getLocalIndex()");
-        _builder.newLineIfNotEmpty();
-        _builder.append("        \t\t\t\t");
-        _builder.append(": ");
-        _builder.append(Token.class, "        \t\t\t\t");
+        _builder.append(") iElementType).getLocalIndex() : ");
+        _builder.append(Token.class, "        ");
         _builder.append(".INVALID_TOKEN_TYPE;");
         _builder.newLineIfNotEmpty();
         _builder.append("    ");
