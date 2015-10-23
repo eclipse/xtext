@@ -174,11 +174,13 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 			content = '''
 				public class «grammar.getGenProposalProviderClass.simpleName» extends «superClass» {
-				
-					«FOR assignment : assignments»
-						«assignment.handleAssignment»
-				  	«ENDFOR»
-					
+
+					«IF !assignments.empty»
+						«FOR assignment : assignments»
+							«assignment.handleAssignment»
+					  	«ENDFOR»
+
+				  	«ENDIF»
 					«FOR rule : remainingRules»
 						public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
 								contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
