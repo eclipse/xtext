@@ -190,6 +190,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected CharSequence compileParserOptions(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
     _builder.append("options {");
     _builder.newLine();
     {
@@ -283,6 +284,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     {
       boolean _isBacktrackLexer = options.isBacktrackLexer();
       if (_isBacktrackLexer) {
+        _builder.newLine();
         _builder.append("options {");
         _builder.newLine();
         _builder.append("\t");
