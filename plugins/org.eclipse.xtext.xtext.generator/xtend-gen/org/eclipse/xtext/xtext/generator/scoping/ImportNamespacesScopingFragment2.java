@@ -134,9 +134,9 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   @Override
   public void generate() {
     this.contributeRuntimeGuiceBindings();
+    this.generateAbstractScopeProvider();
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      this.generateAbstractScopeProvider();
       boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
         this.generateXtendScopeProvider();
@@ -179,8 +179,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     } else {
       TypeReference _typeRef_1 = TypeReference.typeRef(IScopeProvider.class);
       Grammar _grammar_1 = this.getGrammar();
-      TypeReference _scopeProviderSuperClass = this.getScopeProviderSuperClass(_grammar_1);
-      bindingFactory.addTypeToType(_typeRef_1, _scopeProviderSuperClass);
+      TypeReference _abstractScopeProviderClass = this.getAbstractScopeProviderClass(_grammar_1);
+      bindingFactory.addTypeToType(_typeRef_1, _abstractScopeProviderClass);
     }
     String _simpleName = IScopeProvider.class.getSimpleName();
     String _plus = (_simpleName + "Delegate");
@@ -227,7 +227,14 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("public class ");
+        _builder.append("public ");
+        {
+          boolean _isGenerateStub = ImportNamespacesScopingFragment2.this.isGenerateStub();
+          if (_isGenerateStub) {
+            _builder.append("abstract ");
+          }
+        }
+        _builder.append("class ");
         Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
         TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(_grammar);
         String _simpleName = _abstractScopeProviderClass.getSimpleName();

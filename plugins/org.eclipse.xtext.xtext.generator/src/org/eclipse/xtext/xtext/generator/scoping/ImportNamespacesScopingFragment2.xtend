@@ -73,14 +73,15 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		if (language.grammar.usesXImportSection)
 			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
 		else
-			ImportedNamespaceAwareLocalScopeProvider.typeRef 
+			ImportedNamespaceAwareLocalScopeProvider.typeRef
 	}
 	
 	override generate() {
 		contributeRuntimeGuiceBindings()
 		
+		generateAbstractScopeProvider()
+
 		if (generateStub) {
-			generateAbstractScopeProvider()
 			
 			if (codeConfig.preferXtendStubs)
 				generateXtendScopeProvider()
@@ -101,7 +102,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		if (generateStub)
 			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
 		else
-			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderSuperClass)
+			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.abstractScopeProviderClass)
 		
 		bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', 
 				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«getDelegateScopeProvider».class);''')
@@ -114,7 +115,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	def generateAbstractScopeProvider() {
 		val file = fileAccessFactory.createGeneratedJavaFile(grammar.abstractScopeProviderClass)
 		file.content = '''
-			public class «grammar.abstractScopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			public «IF generateStub»abstract «ENDIF»class «grammar.abstractScopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
 			}
 		'''
 		file.writeTo(projectConfig.runtime.srcGen)
