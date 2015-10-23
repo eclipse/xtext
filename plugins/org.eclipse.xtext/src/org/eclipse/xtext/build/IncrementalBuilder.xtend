@@ -35,6 +35,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.workspace.IProjectConfigProvider
+import org.eclipse.xtext.generator.GeneratorContext
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -138,7 +139,9 @@ import org.eclipse.xtext.workspace.IProjectConfigProvider
 					}
 				}
 			}
-			generator.generate(resource, fileSystemAccess, request.cancelIndicator)
+			val generatorContext = new GeneratorContext
+			generatorContext.cancelIndicator = request.cancelIndicator
+			generator.generate(resource, fileSystemAccess, generatorContext)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)

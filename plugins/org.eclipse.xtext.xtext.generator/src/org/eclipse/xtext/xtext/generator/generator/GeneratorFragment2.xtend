@@ -37,6 +37,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IGeneratorContext
+import org.eclipse.xtext.generator.GeneratorContext
 
 class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	
@@ -139,19 +142,15 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			 * 
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
 			 */
-			class «language.grammar.generatorStub.simpleName» implements «IGenerator2» {
+			class «language.grammar.generatorStub.simpleName» extends «AbstractGenerator» {
 			
-				override void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «CancelIndicator» cancelIndicator) {
+				override void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
 			//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 			//			resource.allContents
 			//				.filter(typeof(Greeting))
 			//				.map[name]
 			//				.join(', '))
 				}
-				
-				override void beforeGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «CancelIndicator» cancelIndicator) {}
-				
-				override void afterGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «CancelIndicator» cancelIndicator) {}
 			}
 		''').writeTo(projectConfig.runtime.src)
 	}
@@ -198,7 +197,9 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			
 					// Configure and start the generator
 					fileAccess.setOutputPath("src-gen/");
-					generator.generate(resource, fileAccess, «CancelIndicator».NullImpl);
+					«GeneratorContext» context = new «GeneratorContext»();
+					context.setCancelIndicator(«CancelIndicator».NullImpl);
+					generator.generate(resource, fileAccess, context);
 			
 					System.out.println("Code generation finished.");
 				}
@@ -242,7 +243,10 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			
 					// Configure and start the generator
 					fileAccess.outputPath = 'src-gen/'
-					generator.generate(resource, fileAccess, «CancelIndicator».NullImpl)
+					val context = new «GeneratorContext» => [
+						cancelIndicator = «CancelIndicator».NullImpl
+					]
+					generator.generate(resource, fileAccess, context)
 					System.out.println('Code generation finished.')
 				}
 			}

@@ -8,17 +8,16 @@
 package org.eclipse.xtext.generator;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * Replacement interface for the {@link IGenerator} that adds support for parallel code generation.
  * 
  * Clients of {@link IGenerator} that want to perform the code generation in the background will check for this
- * extension interface and use {@link #beforeGenerate(Resource, IFileSystemAccess2, CancelIndicator)} to prepare the resource set. That
+ * extension interface and use {@link #beforeGenerate(Resource, IFileSystemAccess2, IGeneratorContext)} to prepare the resource set. That
  * is, implementors may alter the state of the resource set in the before hook. This may happen implicitly by resolving
  * proxies or explicitly by loading new resources into the resource set. No changes are allowed while
- * {@link #doGenerate(Resource, IFileSystemAccess2, CancelIndicator)} is executed since this may be parallelized by the caller. The
- * {@link #afterGenerate(Resource, IFileSystemAccess2, CancelIndicator)} is used to cleanup state. Also access to the file system is
+ * {@link #doGenerate(Resource, IFileSystemAccess2, IGeneratorContext)} is executed since this may be parallelized by the caller. The
+ * {@link #afterGenerate(Resource, IFileSystemAccess2, IGeneratorContext)} is used to cleanup state. Also access to the file system is
  * guaranteed to be synchronous in the before and after hook.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,20 +33,20 @@ public interface IGenerator2 {
 	 * Read operations will happen in the background but
 	 * are blocking.
 	 */
-	void doGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator);
+	void doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context);
 
 	/**
 	 * Before the generation is triggered, the resource or the entire resource set
-	 * may be prepared such that no modification will happen while {@link #doGenerate(Resource, IFileSystemAccess2, CancelIndicator)}
+	 * may be prepared such that no modification will happen while {@link #doGenerate(Resource, IFileSystemAccess2, IGeneratorContext)}
 	 * is executed.
 	 */
-	void beforeGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator);
+	void beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context);
 
 	/**
 	 * Release any data that is no longer necessary after the generator ran. 
-	 * This is guaranteed to be called if {@link #beforeGenerate(Resource, IFileSystemAccess2, CancelIndicator)} was called.
-	 * It may be called several times, even if {@link #beforeGenerate(Resource, IFileSystemAccess2, CancelIndicator)} was not called.
+	 * This is guaranteed to be called if {@link #beforeGenerate(Resource, IFileSystemAccess2, IGeneratorContext)} was called.
+	 * It may be called several times. It may be called even if {@link #beforeGenerate(Resource, IFileSystemAccess2, IGeneratorContext)} was not called.
 	 */
-	void afterGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator);
+	void afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context);
 
 }
