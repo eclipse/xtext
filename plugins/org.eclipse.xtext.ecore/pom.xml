@@ -12,4 +12,11 @@
 	<artifactId>org.eclipse.xtext.ecore</artifactId>
 	<name>Xtext Ecore Support</name>
 	
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>

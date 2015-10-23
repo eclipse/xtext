@@ -9,7 +9,6 @@ configurations {
 }
 
 dependencies {
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 }
 

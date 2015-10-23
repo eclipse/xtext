@@ -13,11 +13,8 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
-/**
- * @since 2.9
- */
 @FinalFieldsConstructor
-class NamingAdapter extends XtextGeneratorNaming {
+package class NamingAdapter extends XtextGeneratorNaming {
 	
 	val Naming naming
 	

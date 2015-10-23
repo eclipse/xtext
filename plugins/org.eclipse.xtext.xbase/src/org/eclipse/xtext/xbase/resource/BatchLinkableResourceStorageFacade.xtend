@@ -30,11 +30,14 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 	}
 
 	override protected getSourceContainerURI(StorageAwareResource resource) {
-		val project = projectConfigProvider.getProjectConfig(resource.resourceSet)
 		val uri = resource.URI
-		val sourceFolder = project?.findSourceFolderContaining(uri)
-		if (sourceFolder != null) {
-			return sourceFolder.path
+		val mainProject = projectConfigProvider.getProjectConfig(resource.resourceSet)
+		if (mainProject !== null) {
+			val project = mainProject.workspaceConfig.findProjectContaining(uri)
+			val sourceFolder = project?.findSourceFolderContaining(uri)
+			if (sourceFolder != null) {
+				return sourceFolder.path
+			}
 		}
 		return super.getSourceContainerURI(resource)
 	}
