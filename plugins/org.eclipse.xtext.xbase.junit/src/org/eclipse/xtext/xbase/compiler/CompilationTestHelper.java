@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -510,7 +511,9 @@ public class CompilationTestHelper {
 						IResourceServiceProvider resourceServiceProvider = xtextResource.getResourceServiceProvider();
 						GeneratorDelegate generator = resourceServiceProvider.get(GeneratorDelegate.class);
 						if (generator != null) {
-							generator.generate(xtextResource, access, CancelIndicator.NullImpl);
+							GeneratorContext context = new GeneratorContext();
+							context.setCancelIndicator(CancelIndicator.NullImpl);
+							generator.generate(xtextResource, access, context);
 						}
 					}
 				}

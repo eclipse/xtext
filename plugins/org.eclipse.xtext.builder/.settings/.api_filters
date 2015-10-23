@@ -48,26 +48,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/builder/ParallelBuilderParticipant.java" type="org.eclipse.xtext.builder.ParallelBuilderParticipant">
-        <filter comment="Changes to trace API" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.ParallelBuilderParticipant"/>
-                <message_argument value="createRunnable(IResourceDescription.Delta, IXtextBuilderParticipant.IBuildContext, Map&lt;String,OutputConfiguration&gt;, Map&lt;OutputConfiguration,Iterable&lt;IMarker&gt;&gt;, FileSystemAccessQueue, IFileSystemAccess, IProgressMonitor)"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Changes to trace API" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.ParallelBuilderParticipant"/>
-                <message_argument value="getFlushAndCleanDerivedResourcesCallback(IResourceDescription.Delta, Set&lt;IFile&gt;, IXtextBuilderParticipant.IBuildContext, boolean, IFileSystemAccess, IProgressMonitor)"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Changes to trace API" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.ParallelBuilderParticipant"/>
-                <message_argument value="getParalleFileSystemAccess(IResourceDescription.Delta, IXtextBuilderParticipant.IBuildContext, Set&lt;IFile&gt;, FileSystemAccessQueue, IFileSystemAccess)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/builder/ParallelFileSystemAccess.java" type="org.eclipse.xtext.builder.ParallelFileSystemAccess">
         <filter comment="Changes to trace API" id="338722907">
             <message_arguments>
