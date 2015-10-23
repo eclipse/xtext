@@ -11,6 +11,8 @@ import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.Set
+import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xpand2.output.Outlet
@@ -18,6 +20,7 @@ import org.eclipse.xpand2.output.Output
 import org.eclipse.xpand2.output.OutputImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GeneratedMetamodel
@@ -34,6 +37,7 @@ import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions
 import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions
 
+import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
 
@@ -791,16 +795,20 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileParserDefinition(Grammar grammar) {
-		val namedGrammarElement = grammar.namedGrammarElements
+		val EObjectRules = grammar.EObjectRules.toList
+		val namedEObjectRules = EObjectRules.filter[named].toList
 		'''
 			package «grammar.parserDefinitionName.toPackageName»;
 			
-			import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
-			import «grammar.elementTypeProviderName»;
 			import «grammar.fileImplName»;
 			import «grammar.superParserDefinitionName»;
-			«IF !namedGrammarElement.empty»
-				import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+			«IF !EObjectRules.empty»
+			import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+			import «grammar.elementTypeProviderName»;
+			import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+			«IF !namedEObjectRules.empty»
+			import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+			«ENDIF»
 			«ENDIF»
 			
 			import «Inject.name»;
@@ -811,36 +819,83 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			import com.intellij.psi.tree.IElementType;
 			
 			public class «grammar.parserDefinitionName.toSimpleName» extends «grammar.superParserDefinitionName.toSimpleName» {
-			
+				«IF !EObjectRules.empty»
+
 				@Inject 
 				private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
+				«ENDIF»
 			
 				@Override
 				public PsiFile createFile(FileViewProvider viewProvider) {
 					return new «grammar.fileImplName.toSimpleName»(viewProvider);
 				}
-			
+				«IF !EObjectRules.empty»
+
 				@Override
 				@SuppressWarnings("rawtypes")
 				public PsiElement createElement(ASTNode node) {
-					IElementType elementType = node.getElementType();
 					Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
 					if (hasSemanticElement != null && hasSemanticElement) {
-						«FOR namedElementType:namedGrammarElement.keySet»
-						if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
-							return new PsiNamedEObjectImpl(node,
-								«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
-								elementTypeProvider.get«nameType»ElementType()
-								«ENDFOR»
-							);
+						IElementType elementType = node.getElementType();
+						«FOR rule : EObjectRules»
+						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {
+							«IF namedEObjectRules.contains(rule)»
+							return new PsiNamedEObjectImpl(node) {};
+							«ELSE»
+							return new PsiEObjectImpl(node) {};
+							«ENDIF»
 						}
+						«FOR element : rule.eAllOfType(AbstractElement)»
+						«IF element instanceof Action»
+						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
+							«IF namedEObjectRules.contains(rule)»
+							return new PsiNamedEObjectImpl(node) {};
+							«ELSE»
+							return new PsiEObjectImpl(node) {};
+							«ENDIF»
+						}
+						«ENDIF»
+						«IF element instanceof RuleCall»
+						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
+							«IF namedEObjectRules.contains(element.rule)»
+							return new PsiNamedEObjectImpl(node) {};
+							«ELSE»
+							return new PsiEObjectImpl(node) {};
+							«ENDIF»
+						}
+						«ENDIF»
 						«ENDFOR»
+						«ENDFOR»
+						throw new IllegalStateException("Unexpected element type: " + elementType);
 					}
 					return super.createElement(node);
 				}
+				«ENDIF»
 			
 			}
 		'''
+	}
+	
+	protected def getEObjectRules(Grammar grammar) {
+		grammar.allRules.filter[EObjectRule]
+	}
+	
+	protected def getEObjectElements(AbstractRule rule) {
+		rule.eAllOfType(AbstractElement).filter [ element |
+			switch element {
+				Action,
+				RuleCall case element.EObjectRuleCall:
+					true
+				default:
+					false
+			}
+		]
+	}
+	
+	protected def isNamed(AbstractRule rule) {
+		val classifier = rule.type?.classifier
+		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
+		feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass)
 	}
 	
 	protected def getCrossReferences(Grammar grammar) {
@@ -895,6 +950,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			}
 		}
 	'''
+
 	def compileCompletionContributor(Grammar grammar) '''
 		package «grammar.completionContributor.toPackageName»
 		
