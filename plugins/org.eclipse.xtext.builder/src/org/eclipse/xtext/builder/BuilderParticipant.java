@@ -548,7 +548,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
-				generatorDelegate.generate(resource, fileSystemAccess);
+				generatorDelegate.generate(resource, fileSystemAccess, new MonitorBasedCancelIndicator(fileSystemAccess.getMonitor()));
 			} catch (OperationCanceledException e) {
 				// don't look into the cause for OCE
 				throw e;
@@ -592,7 +592,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	protected boolean shouldGenerate(Resource resource, IBuildContext context) {
-		return shouldGenerate.shouldGenerate(resource, context.getBuiltProject().getName(), CancelIndicator.NullImpl);
+		return shouldGenerate.shouldGenerate(resource, CancelIndicator.NullImpl);
 	}
 
 	protected Map<String, OutputConfiguration> getOutputConfigurations(IBuildContext context) {
