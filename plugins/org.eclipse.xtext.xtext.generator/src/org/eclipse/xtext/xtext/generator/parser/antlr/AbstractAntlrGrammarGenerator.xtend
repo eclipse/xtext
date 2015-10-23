@@ -98,6 +98,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	'''
 	
 	protected def compileParserOptions(Grammar it, AntlrOptions options) '''
+
 		options {
 			«IF !isCombinedGrammar»
 				tokenVocab=«grammarNaming.getLexerGrammar(it).simpleName»;
@@ -125,6 +126,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	
 	protected def compileLexerOptions(Grammar it, AntlrOptions options) '''
 		«IF options.backtrackLexer»
+
 			options {
 				backtrack=true;
 				memoize=true;
