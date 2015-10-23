@@ -45,6 +45,8 @@ public interface IGenerator2 {
 
 	/**
 	 * Release any data that is no longer necessary after the generator ran. 
+	 * This is guaranteed to be called if {@link #beforeGenerate(Resource, IFileSystemAccess2, CancelIndicator)} was called.
+	 * It may be called several times, even if {@link #beforeGenerate(Resource, IFileSystemAccess2, CancelIndicator)} was not called.
 	 */
 	void afterGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator);
 
