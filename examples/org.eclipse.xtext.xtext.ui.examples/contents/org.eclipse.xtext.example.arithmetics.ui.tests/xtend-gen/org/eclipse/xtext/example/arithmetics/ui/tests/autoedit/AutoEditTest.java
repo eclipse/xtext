@@ -8,17 +8,27 @@
 package org.eclipse.xtext.example.arithmetics.ui.tests.autoedit;
 
 import com.google.inject.Inject;
+import java.util.Collections;
+import java.util.List;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator;
 import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.ui.AbstractAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
+import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,19 +36,6 @@ import org.junit.runner.RunWith;
 @InjectWith(ArithmeticsUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class AutoEditTest extends AbstractAutoEditTest {
-  @Inject
-  private FileExtensionProvider extensionProvider;
-  
-  @Override
-  protected String getFileExtension() {
-    return this.extensionProvider.getPrimaryFileExtension();
-  }
-  
-  @Override
-  protected String getEditorId() {
-    return ArithmeticsActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS;
-  }
-  
   @Test
   public void testCalculatorAutoEdit() {
     try {
@@ -64,7 +61,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
             _builder.newLine();
             _builder.append("|");
             _builder.newLine();
-            AutoEditTest.this.assertState(_builder.toString(), it);
+            AutoEditTest.this.assertState(it, _builder.toString());
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -74,5 +71,43 @@ public class AutoEditTest extends AbstractAutoEditTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Inject
+  private FileExtensionProvider extensionProvider;
+  
+  @Inject
+  private PluginProjectFactory projectFactory;
+  
+  @Before
+  public void doSetup() {
+    try {
+      this.createPluginProject("foo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  protected String getFileExtension() {
+    return this.extensionProvider.getPrimaryFileExtension();
+  }
+  
+  @Override
+  protected String getEditorId() {
+    return ArithmeticsActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS;
+  }
+  
+  protected IProject createPluginProject(final String name) throws CoreException {
+    this.projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
+    this.projectFactory.setProjectName(name);
+    List<String> _singletonList = Collections.<String>singletonList("src");
+    this.projectFactory.addFolders(_singletonList);
+    this.projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
+    this.projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
+    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+    IProject result = this.projectFactory.createProject(_nullProgressMonitor, null);
+    JavaProjectSetupUtil.setUnixLineEndings(result);
+    return result;
   }
 }
