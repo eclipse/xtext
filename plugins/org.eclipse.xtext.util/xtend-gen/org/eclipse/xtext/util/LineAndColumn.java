@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * in the document still has line number one.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
  */
 @Data
 @SuppressWarnings("all")

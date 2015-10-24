@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.Data
  * in the document still has line number one. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
  */
 @Data
 class LineAndColumn {
