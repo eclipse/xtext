@@ -15,6 +15,7 @@ import org.eclipse.xtext.formatting2.FormatterRequest
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
+import org.eclipse.xtext.preferences.ITypedPreferenceValues
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
@@ -39,13 +40,13 @@ class FormattingService {
 	/**
 	 * Format the given document. This operation modifies the document content and returns the 
 	 */
-	def FormattingResult format(XtextWebDocumentAccess document, ITextRegion selection) throws InvalidRequestException {
+	def FormattingResult format(XtextWebDocumentAccess document, ITextRegion selection, ITypedPreferenceValues preferences) throws InvalidRequestException {
 		val textWrapper = new Wrapper<String>
 		val regionWrapper = new Wrapper<TextRegion>
 		
 		document.modify([ it, cancelIndicator |
 			if (formatter2Provider !== null) {
-				textWrapper.set = format2(resource, selection)
+				textWrapper.set = format2(resource, selection, preferences)
 				if (selection !== null)
 					regionWrapper.set = new TextRegion(selection.offset, selection.length)
 			} else if (formatter1 !== null) {
@@ -79,12 +80,15 @@ class FormattingService {
 		return formatter1.format(rootNode, region.offset, region.length)
 	}
 	
-	protected def format2(XtextResource resource, ITextRegion selection) {
+	protected def format2(XtextResource resource, ITextRegion selection, ITypedPreferenceValues preferences) {
 		val request = formatterRequestProvider.get()
 		request.allowIdentityEdits = false
 		request.formatUndefinedHiddenRegionsOnly = false
 		if (selection !== null)
 			request.regions = #[selection]
+		if (preferences !== null) {
+			request.preferences = preferences
+		}
 		val regionAccess = regionBuilder.forNodeModel(resource).create()
 		request.textRegionAccess = regionAccess
 		val formatter2 = formatter2Provider.get();

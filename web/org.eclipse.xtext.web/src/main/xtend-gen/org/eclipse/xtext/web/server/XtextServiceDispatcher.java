@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -23,11 +24,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.IRequestData;
@@ -51,6 +55,7 @@ import org.eclipse.xtext.web.server.persistence.ResourceContentResult;
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService;
 import org.eclipse.xtext.web.server.validation.ValidationService;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -807,6 +812,9 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
+  /**
+   * @see FormatterPreferenceKeys
+   */
   protected XtextServiceDispatcher.ServiceDescriptor getFormattingService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
@@ -815,6 +823,21 @@ public class XtextServiceDispatcher {
       final int selectionStart = this.getInt(request, "selectionStart", _of);
       Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(selectionStart));
       final int selectionEnd = this.getInt(request, "selectionEnd", _of_1);
+      String _newLine = Strings.newLine();
+      Optional<String> _of_2 = Optional.<String>of(_newLine);
+      final String lineSeparator = this.getString(request, "lineSeparator", _of_2);
+      Optional<String> _of_3 = Optional.<String>of("\t");
+      final String indentation = this.getString(request, "indentation", _of_3);
+      Optional<Integer> _of_4 = Optional.<Integer>of(Integer.valueOf(4));
+      final int indentationLength = this.getInt(request, "indentationLength", _of_4);
+      Optional<Integer> _of_5 = Optional.<Integer>of(Integer.valueOf(120));
+      final int maxLineWidth = this.getInt(request, "maxLineWidth", _of_5);
+      LinkedHashMap<String, String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap();
+      final MapBasedPreferenceValues preferences = new MapBasedPreferenceValues(_newLinkedHashMap);
+      preferences.<String>put(FormatterPreferenceKeys.lineSeparator, lineSeparator);
+      preferences.<String>put(FormatterPreferenceKeys.indentation, indentation);
+      preferences.<Integer>put(FormatterPreferenceKeys.indentationLength, Integer.valueOf(indentationLength));
+      preferences.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(maxLineWidth));
       TextRegion _xifexpression = null;
       if ((selectionEnd > selectionStart)) {
         _xifexpression = new TextRegion(selectionStart, (selectionEnd - selectionStart));
@@ -831,7 +854,7 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.formattingService.format(document, selection);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.formattingService.format(document, selection, preferences);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -984,6 +1007,26 @@ public class XtextServiceDispatcher {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+  }
+  
+  /**
+   * Read an string-valued parameter. If the parameter is not available, the
+   * {@code defaultValue} is returned.
+   * 
+   * @throws InvalidRequestException.InvalidParametersException if the parameter
+   * 		is not available and {@code defaultValue} is absent
+   */
+  protected String getString(final IRequestData request, final String key, final Optional<String> defaultValue) throws InvalidRequestException.InvalidParametersException {
+    final String stringValue = request.getParameter(key);
+    if ((stringValue == null)) {
+      boolean _isPresent = defaultValue.isPresent();
+      boolean _not = (!_isPresent);
+      if (_not) {
+        throw new InvalidRequestException.InvalidParametersException((("The parameter \'" + key) + "\' must be specified."));
+      }
+      return defaultValue.get();
+    }
+    return stringValue;
   }
   
   /**
