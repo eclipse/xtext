@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper;
+import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
