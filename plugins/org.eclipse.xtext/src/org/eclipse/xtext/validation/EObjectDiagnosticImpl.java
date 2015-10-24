@@ -69,12 +69,13 @@ public class EObjectDiagnosticImpl extends AbstractDiagnostic {
 		if (nodesForFeature.isEmpty()) {
 			return doGetNode(object, null, -1);
 		}
-		if (nodesForFeature.size() == 1 && idx == -1)
-			return nodesForFeature.get(0);
+		if (idx == -1 /* INSIGNIFICANT_INDEX */) {
+			idx = 0;
+		}
 		if (nodesForFeature.size() > idx ) {
 			return nodesForFeature.get(idx);
 		}
-		return null;
+		return doGetNode(object, null, -1);
 	}
 
 	@Override
