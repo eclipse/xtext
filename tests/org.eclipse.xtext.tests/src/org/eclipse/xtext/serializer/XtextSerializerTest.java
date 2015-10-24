@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
