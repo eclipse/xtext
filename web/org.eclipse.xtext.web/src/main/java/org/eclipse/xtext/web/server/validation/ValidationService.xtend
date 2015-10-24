@@ -36,7 +36,7 @@ class ValidationService extends AbstractCachedService<ValidationResult> {
 		val result = new ValidationResult
 		issues.filter[severity != Severity.IGNORE].forEach[ issue |
 			result.issues += new ValidationResult.Issue(issue.message, issue.severity.translate,
-				issue.lineNumber, issue.offset, issue.length)
+				issue.lineNumber, issue.column, issue.offset, issue.length)
 		]
 		return result
 	}

@@ -28,17 +28,29 @@ public class ValidationResult implements IServiceResult {
     
     private final String severity;
     
+    /**
+     * One based, the first line has the number 1.
+     */
     private final Integer line;
     
+    /**
+     * One based, the first column in a line has the number 1.
+     */
+    private final Integer column;
+    
+    /**
+     * Zero based, the first char in a document has the offset 0.
+     */
     private final Integer offset;
     
     private final Integer length;
     
-    public Issue(final String description, final String severity, final Integer line, final Integer offset, final Integer length) {
+    public Issue(final String description, final String severity, final Integer line, final Integer column, final Integer offset, final Integer length) {
       super();
       this.description = description;
       this.severity = severity;
       this.line = line;
+      this.column = column;
       this.offset = offset;
       this.length = length;
     }
@@ -51,6 +63,7 @@ public class ValidationResult implements IServiceResult {
       result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
       result = prime * result + ((this.severity== null) ? 0 : this.severity.hashCode());
       result = prime * result + ((this.line== null) ? 0 : this.line.hashCode());
+      result = prime * result + ((this.column== null) ? 0 : this.column.hashCode());
       result = prime * result + ((this.offset== null) ? 0 : this.offset.hashCode());
       result = prime * result + ((this.length== null) ? 0 : this.length.hashCode());
       return result;
@@ -81,6 +94,11 @@ public class ValidationResult implements IServiceResult {
           return false;
       } else if (!this.line.equals(other.line))
         return false;
+      if (this.column == null) {
+        if (other.column != null)
+          return false;
+      } else if (!this.column.equals(other.column))
+        return false;
       if (this.offset == null) {
         if (other.offset != null)
           return false;
@@ -102,6 +120,7 @@ public class ValidationResult implements IServiceResult {
       b.add("description", this.description);
       b.add("severity", this.severity);
       b.add("line", this.line);
+      b.add("column", this.column);
       b.add("offset", this.offset);
       b.add("length", this.length);
       return b.toString();
@@ -120,6 +139,11 @@ public class ValidationResult implements IServiceResult {
     @Pure
     public Integer getLine() {
       return this.line;
+    }
+    
+    @Pure
+    public Integer getColumn() {
+      return this.column;
     }
     
     @Pure

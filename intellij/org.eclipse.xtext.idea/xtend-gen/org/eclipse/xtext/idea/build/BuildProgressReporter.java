@@ -177,11 +177,11 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     CompilerMessageCategory _category = this.getCategory(issue);
     String _message = issue.getMessage();
     Integer _lineNumber = issue.getLineNumber();
+    Integer _column = issue.getColumn();
     Integer _offset = issue.getOffset();
     OpenFileDescriptor _openFileDescriptor = new OpenFileDescriptor(this.project, file, (_offset).intValue());
     return new CompilerMessageImpl(
-      this.project, _category, _message, file, (_lineNumber).intValue(), 
-      (-1), _openFileDescriptor);
+      this.project, _category, _message, file, (_lineNumber).intValue(), (_column).intValue(), _openFileDescriptor);
   }
   
   protected CompilerMessageCategory getCategory(final Issue issue) {

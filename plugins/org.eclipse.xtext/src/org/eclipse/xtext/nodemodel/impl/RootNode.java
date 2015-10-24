@@ -9,7 +9,6 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -145,36 +142,13 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 	}
 	
 	/**
-	 * <p>Computes the line breaks in the given text and returns an array of offsets.
-	 * A line break is either <code>\r\n</code>, <code>\n</code>, or a single <code>\r</code>.</p>
-	 * This implementation was heavily adapted from <code>org.eclipse.jface.text.DefaultLineTracker</code>.
-	 * It follows the semantics of {@link LineNumberReader}.
+	 * @see InternalNodeModelUtils#computeLineBreaks(String)
 	 * @param text the text whose line-breaks should be computed. May not be <code>null</code>.
 	 * @return the array of line-break offsets in the given text. May be empty but is never <code>null</code>.
 	 * @since 2.0
 	 */
 	protected int[] computeLineBreaks(String text) {
-		List<Integer> list = Lists.newArrayListWithExpectedSize(50);
-		char ch;
-		int length= text.length();
-		for (int i= 0; i < length; i++) {
-			ch= text.charAt(i);
-			if (ch == '\r') {
-				list.add(i);
-				if (i + 1 < length) {
-					if (text.charAt(i + 1) == '\n') {
-						i++;
-					}
-				}
-			} else if (ch == '\n') {
-				list.add(i);
-			}
-		}
-		int[] result = new int[list.size()];
-		for(int i = 0; i < result.length; i++) {
-			result[i] = list.get(i).intValue();
-		}
-		return result;
+		return InternalNodeModelUtils.computeLineBreaks(text);
 	}
 	
 	@Override
