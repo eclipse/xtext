@@ -181,6 +181,10 @@ public class Validator {
 			if (lineNumberCompare != 0) {
 				return lineNumberCompare;
 			}
+			int columnCompare = nullSafeCompare(issue1.getColumn(), issue2.getColumn());
+			if (columnCompare != 0) {
+				return columnCompare;
+			}
 			int offsetCompare = nullSafeCompare(issue1.getOffset(), issue2.getOffset());
 			if (offsetCompare != 0) {
 				return offsetCompare;

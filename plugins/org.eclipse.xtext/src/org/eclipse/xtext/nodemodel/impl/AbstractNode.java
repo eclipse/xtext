@@ -10,7 +10,6 @@ package org.eclipse.xtext.nodemodel.impl;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.nodemodel.util.NodeTreeIterator;
 import org.eclipse.xtext.nodemodel.util.ReversedBidiTreeIterable;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
@@ -174,17 +172,7 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	 * @since 2.0
 	 */
 	protected int basicGetLineOfOffset(INode rootNode, int offset) {
-		if (rootNode instanceof RootNode) {
-			int[] lineBreakOffsets = ((RootNode) rootNode).basicGetLineBreakOffsets();
-			int insertionPoint = Arrays.binarySearch(lineBreakOffsets, offset);
-			if (insertionPoint >= 0) {
-				return insertionPoint + 1;
-			} else {
-				return -insertionPoint;
-			}
-		}
-		int result = Strings.countLineBreaks(rootNode.getText(), 0, offset);
-		return result + 1;
+		return InternalNodeModelUtils.getLineAndColumn(rootNode, offset).getLine();
 	}
 	
 	@Override

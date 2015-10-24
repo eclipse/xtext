@@ -13,13 +13,22 @@ import org.eclipse.xtext.diagnostics.Severity;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
 public interface Issue {
 
 	String CODE_KEY = "CODE_KEY";
 	String URI_KEY = "URI_KEY";
+	/**
+	 * @since 2.9
+	 */
+	String COLUMN_KEY = "COLUMN_KEY";
 	String DATA_KEY = "DATA_KEY";
 	
+	/**
+	 * Returns the severity of the issue. Defaults to {@link Severity#ERROR}.
+	 */
 	Severity getSeverity();
 
 	String getMessage();
@@ -30,7 +39,21 @@ public interface Issue {
 
 	URI getUriToProblem();
 
+	/**
+	 * Returns the one-based line number of the issue.
+	 */
 	Integer getLineNumber();
+	
+	/**
+	 * Returns the column in the line of the issue. It's not the virtual column but literally
+	 * the character offset in the column, e.g. tab ('\t') counts as one character.
+	 * The first char in a line has column number 1, the number is one-based.
+	 * 
+	 * If no column information is available, returns -1.
+	 * 
+	 * @since 2.9
+	 */
+	Integer getColumn();
 
 	Integer getOffset();
 
@@ -43,11 +66,14 @@ public interface Issue {
 	 */
 	String[] getData();
 	
+	/**
+	 * @author zarnekow - Initial contribution and API
+	 */
 	static class IssueImpl implements Issue {
 		
 		private static Logger LOG = Logger.getLogger(IssueImpl.class);
 
-		private Integer length, lineNumber, offset;
+		private Integer length, lineNumber, offset, column;
 		private String code, message;
 		private boolean isSyntaxError = false;
 		private URI uriToProblem;
@@ -76,6 +102,21 @@ public interface Issue {
 
 		public void setLineNumber(Integer lineNumber) {
 			this.lineNumber = lineNumber;
+		}
+		
+		/**
+		 * @since 2.9
+		 */
+		@Override
+		public Integer getColumn() {
+			return column;
+		}
+		
+		/**
+		 * @since 2.9
+		 */
+		public void setColumn(Integer column) {
+			this.column = column;
 		}
 
 		@Override
@@ -152,13 +193,13 @@ public interface Issue {
 
 		@Override
 		public String toString() {
-			StringBuffer buffer = new StringBuffer(getSeverity().name());
-			buffer.append(":").append(getMessage());
-			buffer.append(" (");
+			StringBuilder result = new StringBuilder(getSeverity().name());
+			result.append(":").append(getMessage());
+			result.append(" (");
 			if (getUriToProblem() != null)
-				buffer.append(getUriToProblem().trimFragment());
-			buffer.append(" line : ").append(getLineNumber()).append(")");
-			return buffer.toString();
+				result.append(getUriToProblem().trimFragment());
+			result.append(" line : ").append(getLineNumber()).append(" column : ").append(getColumn()).append(")");
+			return result.toString();
 		}
 	}
 }
