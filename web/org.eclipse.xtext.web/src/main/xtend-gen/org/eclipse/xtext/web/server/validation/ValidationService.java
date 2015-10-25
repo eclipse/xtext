@@ -61,9 +61,10 @@ public class ValidationService extends AbstractCachedService<ValidationResult> {
         Severity _severity = issue.getSeverity();
         String _translate = ValidationService.this.translate(_severity);
         Integer _lineNumber = issue.getLineNumber();
+        Integer _column = issue.getColumn();
         Integer _offset = issue.getOffset();
         Integer _length = issue.getLength();
-        ValidationResult.Issue _issue = new ValidationResult.Issue(_message, _translate, _lineNumber, _offset, _length);
+        ValidationResult.Issue _issue = new ValidationResult.Issue(_message, _translate, _lineNumber, _column, _offset, _length);
         _issues.add(_issue);
       }
     };

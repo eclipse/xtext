@@ -105,7 +105,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 			issue.message,
 			file,
 			issue.lineNumber,
-			-1,
+			issue.column,
 			new OpenFileDescriptor(project, file, issue.offset)
 		)
 	}
