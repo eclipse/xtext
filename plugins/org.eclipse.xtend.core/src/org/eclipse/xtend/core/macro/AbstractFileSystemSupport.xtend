@@ -232,6 +232,9 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 			uri.toURI
 	}
 	
+	/**
+	 * Converts an EMF URI to a {@code java.net.URI}.
+	 */
 	protected def toURI(URI uri) {
 		try {
 			new URL(uri.toString).toURI
