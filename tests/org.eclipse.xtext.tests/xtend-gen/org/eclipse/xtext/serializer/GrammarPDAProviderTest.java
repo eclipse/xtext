@@ -829,6 +829,104 @@ public class GrammarPDAProviderTest {
     Assert.assertEquals(expected, actual);
   }
   
+  @Test
+  public void testDoubleFragment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("R: F1 F2;");
+    _builder.newLine();
+    _builder.append("fragment F1: f1=ID;  ");
+    _builder.newLine();
+    _builder.append("fragment F2: f2=ID;  ");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("R:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> >>F1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F1 -> >>F2");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F2 -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F1 -> f1=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F2 -> f2=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f1=ID -> <<F1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f2=ID -> <<F2");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testFragmentLoop() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("R: F+;");
+    _builder.newLine();
+    _builder.append("fragment F: f+=ID;  ");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("R:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> >>F");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F -> >>F, stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F -> f+=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f+=ID -> <<F");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testParameterizedDoubleDelegation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("R: F<true> | F<false>;");
+    _builder.newLine();
+    _builder.append("fragment F<X>: f+=ID;");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("R:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> >>F, >>F");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F -> f+=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F -> f+=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f+=ID -> <<F, <<F");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
   private String toPda(final CharSequence rulesText) {
     try {
       StringConcatenation _builder = new StringConcatenation();
