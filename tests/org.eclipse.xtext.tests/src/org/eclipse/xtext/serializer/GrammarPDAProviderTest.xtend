@@ -427,6 +427,40 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
+	
+	@Test def void testDoubleFragment() {
+		val actual = '''
+			R: F1 F2;
+			fragment F1: f1=ID;  
+			fragment F2: f2=ID;  
+		'''.toPda
+		val expected = '''
+			R:
+				start -> >>F1
+				<<F1 -> >>F2
+				<<F2 -> stop
+				>>F1 -> f1=ID
+				>>F2 -> f2=ID
+				f1=ID -> <<F1
+				f2=ID -> <<F2
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+	
+	@Test def void testFragmentLoop() {
+		val actual = '''
+			R: F+;
+			fragment F: f+=ID;  
+		'''.toPda
+		val expected = '''
+			R:
+				start -> >>F
+				<<F -> >>F, stop
+				>>F -> f+=ID
+				f+=ID -> <<F
+		'''
+		Assert.assertEquals(expected, actual)
+	}
 
 	def private String toPda(CharSequence rulesText) {
 		val grammar = parser.parse('''
