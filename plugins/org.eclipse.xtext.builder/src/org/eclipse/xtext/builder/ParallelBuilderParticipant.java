@@ -1,9 +1,9 @@
 package org.eclipse.xtext.builder;
 
-import static com.google.common.collect.Lists.*;
-
+import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -65,7 +65,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 		final Map<String, OutputConfiguration> outputConfigurations; 
 		final Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers;
 		final FileSystemAccessQueue fileSystemAccessQueue;
-		final BlockingQueue<ParallelBuildContext> afterGenerateQueue;
+		final Queue<ParallelBuildContext> afterGenerateQueue;
 		final EclipseResourceFileSystemAccess2 synchronousFileSystemAccess;
 		final IProgressMonitor progressMonitor;
 		final Resource resource;
@@ -76,7 +76,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 				Map<String, OutputConfiguration> outputConfigurations,
 				Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers,
 				FileSystemAccessQueue fileSystemAccessQueue,
-				BlockingQueue<ParallelBuildContext> afterGenerateQueue,
+				Queue<ParallelBuildContext> afterGenerateQueue,
 				EclipseResourceFileSystemAccess2 delegate,
 				IProgressMonitor progressMonitor) {
 			this.delta = delta;
@@ -193,7 +193,10 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			EclipseResourceFileSystemAccess2 access, 
 			IProgressMonitor progressMonitor) throws CoreException {
 		BlockingQueue<FileSystemAccessRequest> requestQueue = newBlockingQueue(QUEUE_CAPACITY);
-		BlockingQueue<ParallelBuildContext> afterGenerateQueue = newBlockingQueue(QUEUE_CAPACITY);
+		// This queue is only used from the current thread
+		// thus there is no need for a blocking queue. The add operation should also not block the
+		// builder thread
+		Queue<ParallelBuildContext> afterGenerateQueue = new ArrayDeque<ParallelBuildContext>(QUEUE_CAPACITY);
 		
 		FileSystemAccessQueue fileSystemAccessQueue = new FileSystemAccessQueue(requestQueue, progressMonitor);
 		Tripwire tripwire = new Tripwire();
@@ -267,14 +270,12 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 		}
 	}
 
-	private void cancelProcessing(BlockingQueue<FileSystemAccessRequest> requestQueue, BlockingQueue<ParallelBuildContext> afterGenerateQueue, ListenableFuture<?> generatorResult) {
+	private void cancelProcessing(BlockingQueue<FileSystemAccessRequest> requestQueue, Queue<ParallelBuildContext> afterGenerateQueue, ListenableFuture<?> generatorResult) {
 		// make sure waiting put on the queue are processed by freeing space in the queue
 		requestQueue.clear();
 		// stop processing of resources immediately
 		generatorResult.cancel(true);
-		List<ParallelBuildContext> contextsToFinalize = newArrayList();
-		afterGenerateQueue.drainTo(contextsToFinalize);
-		for (ParallelBuildContext context : contextsToFinalize) {
+		for (ParallelBuildContext context : afterGenerateQueue) {
 			try {
 				getGenerator2().afterGenerate(context.resource, context.synchronousFileSystemAccess, context.getGeneratorContext());
 			} catch (Exception e) {

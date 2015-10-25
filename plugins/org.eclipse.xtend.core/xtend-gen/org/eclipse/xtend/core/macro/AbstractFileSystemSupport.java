@@ -442,6 +442,9 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     return _xblockexpression;
   }
   
+  /**
+   * Converts an EMF URI to a {@code java.net.URI}.
+   */
   protected java.net.URI toURI(final URI uri) {
     java.net.URI _xtrycatchfinallyexpression = null;
     try {
