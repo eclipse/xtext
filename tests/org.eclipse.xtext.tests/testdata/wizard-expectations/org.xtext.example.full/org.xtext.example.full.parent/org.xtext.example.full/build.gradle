@@ -34,3 +34,4 @@ jar {
 }
 //this is an eclipse plugin project
 eclipseClasspath.enabled=false
+cleanEclipseClasspath.enabled=false
