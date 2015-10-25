@@ -18,6 +18,7 @@ import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.CfgAdapter;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.ParameterValueContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.RuleContext;
@@ -33,7 +34,9 @@ import org.eclipse.xtext.xtext.RuleFilter;
 import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.RuleWithParameterValues;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -67,8 +70,7 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 
 	}
 
-	protected static class SerializerParserRuleFollowerFunction
-			extends FollowerFunctionImpl<AbstractElement, AbstractElement> {
+	protected static class SerializerParserRuleFollowerFunction extends FollowerFunctionImpl<AbstractElement, AbstractElement> {
 
 		public SerializerParserRuleFollowerFunction(Production<AbstractElement, AbstractElement> production) {
 			super(production);
@@ -79,6 +81,9 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 	protected static class ToOriginal implements PdaFactory<SerializerPDA, ISerState, RuleCall, AbstractElement> {
 
 		private final SerializerPDAElementFactory delegate;
+		private final Map<AbstractElement, ISerState> pops = Maps.newHashMap();
+		private final Map<AbstractElement, ISerState> pushs = Maps.newHashMap();
+		private final Map<AbstractElement, ISerState> states = Maps.newHashMap();
 
 		public ToOriginal(SerializerPDAElementFactory delegate) {
 			super();
@@ -92,26 +97,53 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 
 		@Override
 		public ISerState createPop(SerializerPDA pda, AbstractElement token) {
-			return delegate.createPop(pda, original(token));
+			AbstractElement original = original(token);
+			ISerState state = pops.get(original);
+			if (state == null) {
+				state = delegate.createPop(pda, original);
+				pops.put(original, state);
+			}
+			return state;
 		}
 
 		@Override
 		public ISerState createPush(SerializerPDA pda, AbstractElement token) {
-			return delegate.createPush(pda, original(token));
+			AbstractElement original = original(token);
+			ISerState state = pushs.get(original);
+			if (state == null) {
+				state = delegate.createPush(pda, original);
+				pushs.put(original, state);
+			}
+			return state;
 		}
 
 		@Override
 		public ISerState createState(SerializerPDA nfa, AbstractElement token) {
-			return delegate.createState(nfa, original(token));
+			AbstractElement original = original(token);
+			ISerState state = states.get(original);
+			if (state == null) {
+				state = delegate.createState(nfa, original);
+				states.put(original, state);
+			}
+			return state;
 		}
 
 		protected AbstractElement original(AbstractElement ele) {
-			return ele != null ? OriginalElement.findInEmfObject(ele).getOriginal() : null;
+			if (ele == null)
+				return null;
+			AbstractElement original = OriginalElement.findInEmfObject(ele).getOriginal();
+			if (original == null) {
+				String name = new GrammarElementTitleSwitch().showQualified().showAssignments().apply(ele);
+				throw new IllegalStateException("no original grammar element found for  " + name);
+			}
+			return original;
 		}
 
 		@Override
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
-			delegate.setFollowers(nfa, owner, followers);
+			Set<ISerState> all = Sets.newLinkedHashSet(owner.getFollowers());
+			Iterables.addAll(all, followers);
+			delegate.setFollowers(nfa, owner, all);
 		}
 	}
 
@@ -132,6 +164,7 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 		SerializerParserRuleCfg cfg = new SerializerParserRuleCfg(flattened, entryRule);
 		SerializerParserRuleFollowerFunction ff = new SerializerParserRuleFollowerFunction(cfg);
 		SerializerPDA pda = pdaUtil.create(cfg, ff, new ToOriginal(factory));
+		//		SerializerPDA pda = pdaUtil.create(cfg, ff, factory);
 		return pda;
 	}
 
