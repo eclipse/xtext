@@ -778,10 +778,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       };
       this.alarm.addRequest(_function, 500);
     } else {
-      final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
       if (XtextAutoBuilderComponent.TEST_MODE) {
-        this.queue.drainTo(allEvents);
-        this.internalBuild(allEvents, null);
+        this.internalBuild(null);
       } else {
         ProgressManager _instance = ProgressManager.getInstance();
         _instance.run(new Task.Backgroundable(this.project, "Code Generation...") {
@@ -789,12 +787,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           public void run(final ProgressIndicator indicator) {
             indicator.setIndeterminate(true);
             synchronized (XtextAutoBuilderComponent.BUILD_MONITOR) {
-              XtextAutoBuilderComponent.this.queue.drainTo(allEvents);
-              boolean _isEmpty = allEvents.isEmpty();
-              boolean _not = (!_isEmpty);
-              if (_not) {
-                XtextAutoBuilderComponent.this.internalBuild(allEvents, indicator);
-              }
+              XtextAutoBuilderComponent.this.internalBuild(indicator);
             }
           }
         });
@@ -822,9 +815,14 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     return _or;
   }
   
-  protected void internalBuild(final List<BuildEvent> allEvents, final ProgressIndicator indicator) {
-    final ArrayList<BuildEvent> unProcessedEvents = CollectionLiterals.<BuildEvent>newArrayList();
-    Iterables.<BuildEvent>addAll(unProcessedEvents, allEvents);
+  private List<BuildEvent> unProcessedEvents = CollectionLiterals.<BuildEvent>newArrayList();
+  
+  protected void internalBuild(final ProgressIndicator indicator) {
+    this.queue.drainTo(this.unProcessedEvents);
+    boolean _isEmpty = this.unProcessedEvents.isEmpty();
+    if (_isEmpty) {
+      return;
+    }
     final Application app = ApplicationManager.getApplication();
     final XtextAutoBuilderComponent.MutableCancelIndicator cancelIndicator = new XtextAutoBuilderComponent.MutableCancelIndicator(indicator);
     this.cancelIndicators.add(cancelIndicator);
@@ -832,7 +830,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     final ModuleManager moduleManager = ModuleManager.getInstance(_project);
     final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
     buildProgressReporter.setProject(this.project);
-    buildProgressReporter.setEvents(allEvents);
+    ArrayList<BuildEvent> _arrayList = new ArrayList<BuildEvent>(this.unProcessedEvents);
+    buildProgressReporter.setEvents(_arrayList);
     try {
       final Computable<Graph<Module>> _function = new Computable<Graph<Module>>() {
         @Override
@@ -872,19 +871,19 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();
           ModuleRootManager _instance = ModuleRootManager.getInstance(module);
           final VirtualFile[] contentRoots = _instance.getContentRoots();
-          final Set<BuildEvent> events = this.getEventsForModule(unProcessedEvents, module);
+          final LinkedHashSet<BuildEvent> events = this.getEventsForModule(this.unProcessedEvents, module);
           boolean _or = false;
-          boolean _isEmpty = ((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty();
-          if (_isEmpty) {
+          boolean _isEmpty_1 = ((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty();
+          if (_isEmpty_1) {
             _or = true;
           } else {
             boolean _and = false;
-            boolean _isEmpty_1 = events.isEmpty();
-            if (!_isEmpty_1) {
+            boolean _isEmpty_2 = events.isEmpty();
+            if (!_isEmpty_2) {
               _and = false;
             } else {
-              boolean _isEmpty_2 = deltas.isEmpty();
-              _and = _isEmpty_2;
+              boolean _isEmpty_3 = deltas.isEmpty();
+              _and = _isEmpty_3;
             }
             _or = _and;
           }
@@ -955,10 +954,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             this.moduleName2GeneratedMapping.put(_name_4, _fileMappings);
             List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
             deltas.addAll(_affectedResources);
-            Iterables.removeAll(unProcessedEvents, events);
+            Iterables.removeAll(this.unProcessedEvents, events);
           }
         }
       }
+      this.unProcessedEvents.clear();
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable exc = (Throwable)_t;
@@ -968,7 +968,6 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           if (_isInfoEnabled) {
             XtextAutoBuilderComponent.LOG.info("Build canceled.");
           }
-          this.queue.addAll(unProcessedEvents);
         } else {
           XtextAutoBuilderComponent.LOG.error("Error during auto build.", exc);
         }
@@ -981,38 +980,44 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     }
   }
   
-  protected Set<BuildEvent> getEventsForModule(final List<BuildEvent> events, final Module module) {
-    Set<BuildEvent> _xblockexpression = null;
-    {
-      final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
-      final String[] excludeRootUrls = moduleRootManager.getExcludeRootUrls();
-      final String[] sourceRootUrls = moduleRootManager.getSourceRootUrls();
-      final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
-        @Override
-        public Boolean apply(final BuildEvent event) {
-          Map<URI, VirtualFile> _filesByURI = event.getFilesByURI();
-          Set<URI> _keySet = _filesByURI.keySet();
-          URI _head = IterableExtensions.<URI>head(_keySet);
-          final String url = _head.toString();
-          for (final String excludeRootUrl : excludeRootUrls) {
-            boolean _isUrlUnderRoot = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, excludeRootUrl);
-            if (_isUrlUnderRoot) {
-              return Boolean.valueOf(false);
-            }
+  protected LinkedHashSet<BuildEvent> getEventsForModule(final List<BuildEvent> events, final Module module) {
+    final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+    final String[] excludeRootUrls = moduleRootManager.getExcludeRootUrls();
+    final String[] sourceRootUrls = moduleRootManager.getSourceRootUrls();
+    final LinkedHashSet<BuildEvent> result = new LinkedHashSet<BuildEvent>();
+    for (final BuildEvent event : events) {
+      {
+        Map<URI, VirtualFile> _filesByURI = event.getFilesByURI();
+        Set<URI> _keySet = _filesByURI.keySet();
+        URI _head = IterableExtensions.<URI>head(_keySet);
+        final String url = _head.toString();
+        boolean _and = false;
+        final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+          @Override
+          public Boolean apply(final String it) {
+            boolean _isUrlUnderRoot = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, it);
+            return Boolean.valueOf((!_isUrlUnderRoot));
           }
-          for (final String sourceRootUrl : sourceRootUrls) {
-            boolean _isUrlUnderRoot_1 = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, sourceRootUrl);
-            if (_isUrlUnderRoot_1) {
-              return Boolean.valueOf(true);
+        };
+        boolean _forall = IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(excludeRootUrls)), _function);
+        if (!_forall) {
+          _and = false;
+        } else {
+          final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+            @Override
+            public Boolean apply(final String it) {
+              return Boolean.valueOf(XtextAutoBuilderComponent.this.isUrlUnderRoot(url, it));
             }
-          }
-          return Boolean.valueOf(false);
+          };
+          boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(sourceRootUrls)), _function_1);
+          _and = _exists;
         }
-      };
-      Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(events, _function);
-      _xblockexpression = IterableExtensions.<BuildEvent>toSet(_filter);
+        if (_and) {
+          result.add(event);
+        }
+      }
     }
-    return _xblockexpression;
+    return result;
   }
   
   private final static char SEGMENT_SEPARATOR = '/';
@@ -1104,7 +1109,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 }
                 if (_and) {
                   for (final URI sourceUri : sourceUris) {
-                    changedUris.add(sourceUri);
+                    this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }
                 } else {
                   VirtualFile _file = event.getFile(uri);
@@ -1120,7 +1125,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                     Set<IResourceDescription.Delta> _runReadAction = app.<Set<IResourceDescription.Delta>>runReadAction(_function);
                     Iterables.<IResourceDescription.Delta>addAll(deltas, _runReadAction);
                   } else {
-                    changedUris.add(uri);
+                    this.consistentAdd(uri, changedUris, deletedUris);
                   }
                 }
               }
@@ -1146,7 +1151,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 }
                 if (_and) {
                   for (final URI sourceUri : sourceUris) {
-                    changedUris.add(sourceUri);
+                    this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }
                 } else {
                   VirtualFile _file = event.getFile(uri_1);
@@ -1162,7 +1167,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                     Set<IResourceDescription.Delta> _runReadAction = app.<Set<IResourceDescription.Delta>>runReadAction(_function);
                     Iterables.<IResourceDescription.Delta>addAll(deltas, _runReadAction);
                   } else {
-                    deletedUris.add(uri_1);
+                    this.consistentAdd(uri_1, deletedUris, changedUris);
                   }
                 }
               }
@@ -1173,6 +1178,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         }
       }
     }
+  }
+  
+  protected void consistentAdd(final URI uri, final Set<URI> toBeAdded, final Set<URI> toBeRemoved) {
+    toBeAdded.add(uri);
+    toBeRemoved.remove(uri);
   }
   
   public boolean isJavaFile(final VirtualFile file) {
