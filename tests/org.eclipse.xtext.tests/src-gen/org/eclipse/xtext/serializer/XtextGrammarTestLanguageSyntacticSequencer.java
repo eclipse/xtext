@@ -147,7 +147,13 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '!' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '->' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '.' (rule start)
+	 *     (rule start) (ambiguity) '.' cardinality='*'
+	 *     (rule start) (ambiguity) '.' cardinality='+'
+	 *     (rule start) (ambiguity) '.' cardinality='?'
 	 *     (rule start) (ambiguity) 'EOF' (rule start)
+	 *     (rule start) (ambiguity) 'EOF' cardinality='*'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='+'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='?'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
@@ -166,7 +172,13 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '!' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '->' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '.' ')' (rule start)
+	 *     (rule start) (ambiguity) '.' cardinality='*'
+	 *     (rule start) (ambiguity) '.' cardinality='+'
+	 *     (rule start) (ambiguity) '.' cardinality='?'
 	 *     (rule start) (ambiguity) 'EOF' ')' (rule start)
+	 *     (rule start) (ambiguity) 'EOF' cardinality='*'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='+'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='?'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
