@@ -79,7 +79,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	override generate() {
 		contributeRuntimeGuiceBindings()
 		
-		generateAbstractScopeProvider()
+		generateGenScopeProvider()
 
 		if (generateStub) {
 			
@@ -99,10 +99,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
-		if (generateStub)
-			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
-		else
-			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.abstractScopeProviderClass)
+		bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
 		
 		bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', 
 				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«getDelegateScopeProvider».class);''')
@@ -112,10 +109,12 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		bindingFactory.contributeTo(language.runtimeGenModule)
 	}
 	
-	def generateAbstractScopeProvider() {
-		val file = fileAccessFactory.createGeneratedJavaFile(grammar.abstractScopeProviderClass)
+	def generateGenScopeProvider() {
+		val genClass = if (generateStub) grammar.abstractScopeProviderClass else grammar.scopeProviderClass		
+		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
+		
 		file.content = '''
-			public «IF generateStub»abstract «ENDIF»class «grammar.abstractScopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.scopeProviderSuperClass» {
 			}
 		'''
 		file.writeTo(projectConfig.runtime.srcGen)
