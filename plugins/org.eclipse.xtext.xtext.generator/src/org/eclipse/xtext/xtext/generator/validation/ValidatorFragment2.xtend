@@ -46,7 +46,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		composedChecks += composedCheckValidator
 	}
 	
-	protected def TypeReference getValidatorSuperClass(Grammar grammar) {
+	protected def TypeReference getGenValidatorSuperClass(Grammar grammar) {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
 		if (inheritImplementation && superGrammar !== null) 
 			superGrammar.validatorClass
@@ -59,12 +59,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	}
 	
 	override generate() {
-		val bindingFactory = new GuiceModuleAccess.BindingFactory()
-		if (generateStub)
-			bindingFactory.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
-		else
-			bindingFactory.addTypeToTypeEagerSingleton(grammar.abstractValidatorClass, grammar.abstractValidatorClass)
-		bindingFactory.contributeTo(language.runtimeGenModule)
+		new GuiceModuleAccess.BindingFactory()
+			.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
+			.contributeTo(language.runtimeGenModule)
 		
 		if (generateStub) {
 			if (codeConfig.preferXtendStubs)
@@ -72,7 +69,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			else
 				generateJavaValidatorStub()
 		}
-		generateAbstractValidator()
+		generateGenValidator()
 		
 		if (projectConfig.runtime.manifest !== null)
 			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
@@ -125,13 +122,19 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		''').writeTo(projectConfig.runtime.src)
 	}
 	
-	protected def generateAbstractValidator() {
-		val javaFile = fileAccessFactory.createGeneratedJavaFile(grammar.abstractValidatorClass)
+	protected def generateGenValidator() {
+		// take the non-abstract class signature for the src-gen class in case of !generateStub
+		//  as validators of sub languages refer to 'superGrammar.validatorClass',
+		//  see 'getGenValidatorSuperClass(...)'
+		val genClass = if (generateStub) grammar.abstractValidatorClass else grammar.validatorClass
+
+		val javaFile = fileAccessFactory.createGeneratedJavaFile(genClass)
+		
 		javaFile.content = '''
 			«IF !composedChecks.empty»
 			@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator.typeRef».class«ENDFOR»})
 			«ENDIF»
-			public «IF generateStub»abstract «ENDIF»class «grammar.abstractValidatorClass.simpleName» extends «grammar.validatorSuperClass» {
+			public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.genValidatorSuperClass» {
 				
 				@Override
 				protected «List»<«EPackage»> getEPackages() {
