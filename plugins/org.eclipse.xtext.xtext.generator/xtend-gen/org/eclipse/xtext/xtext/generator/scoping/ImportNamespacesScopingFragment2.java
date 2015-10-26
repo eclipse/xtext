@@ -134,7 +134,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   @Override
   public void generate() {
     this.contributeRuntimeGuiceBindings();
-    this.generateAbstractScopeProvider();
+    this.generateGenScopeProvider();
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
       boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -170,18 +170,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      TypeReference _typeRef = TypeReference.typeRef(IScopeProvider.class);
-      Grammar _grammar = this.getGrammar();
-      TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
-      bindingFactory.addTypeToType(_typeRef, _scopeProviderClass);
-    } else {
-      TypeReference _typeRef_1 = TypeReference.typeRef(IScopeProvider.class);
-      Grammar _grammar_1 = this.getGrammar();
-      TypeReference _abstractScopeProviderClass = this.getAbstractScopeProviderClass(_grammar_1);
-      bindingFactory.addTypeToType(_typeRef_1, _abstractScopeProviderClass);
-    }
+    TypeReference _typeRef = TypeReference.typeRef(IScopeProvider.class);
+    Grammar _grammar = this.getGrammar();
+    TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
+    bindingFactory.addTypeToType(_typeRef, _scopeProviderClass);
     String _simpleName = IScopeProvider.class.getSimpleName();
     String _plus = (_simpleName + "Delegate");
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -200,9 +192,9 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     };
     bindingFactory.addConfiguredBinding(_plus, _client);
-    TypeReference _typeRef_2 = TypeReference.typeRef(IGlobalScopeProvider.class);
-    TypeReference _typeRef_3 = TypeReference.typeRef(DefaultGlobalScopeProvider.class);
-    bindingFactory.addTypeToType(_typeRef_2, _typeRef_3);
+    TypeReference _typeRef_1 = TypeReference.typeRef(IGlobalScopeProvider.class);
+    TypeReference _typeRef_2 = TypeReference.typeRef(DefaultGlobalScopeProvider.class);
+    bindingFactory.addTypeToType(_typeRef_1, _typeRef_2);
     String _simpleName_1 = IgnoreCaseLinking.class.getSimpleName();
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
@@ -220,10 +212,18 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     bindingFactory.contributeTo(_runtimeGenModule);
   }
   
-  public void generateAbstractScopeProvider() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _abstractScopeProviderClass = this.getAbstractScopeProviderClass(_grammar);
-    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_abstractScopeProviderClass);
+  public void generateGenScopeProvider() {
+    TypeReference _xifexpression = null;
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      Grammar _grammar = this.getGrammar();
+      _xifexpression = this.getAbstractScopeProviderClass(_grammar);
+    } else {
+      Grammar _grammar_1 = this.getGrammar();
+      _xifexpression = this.getScopeProviderClass(_grammar_1);
+    }
+    final TypeReference genClass = _xifexpression;
+    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -235,13 +235,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
           }
         }
         _builder.append("class ");
-        Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(_grammar);
-        String _simpleName = _abstractScopeProviderClass.getSimpleName();
+        String _simpleName = genClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
-        Grammar _grammar_1 = ImportNamespacesScopingFragment2.this.getGrammar();
-        TypeReference _scopeProviderSuperClass = ImportNamespacesScopingFragment2.this.getScopeProviderSuperClass(_grammar_1);
+        Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
+        TypeReference _scopeProviderSuperClass = ImportNamespacesScopingFragment2.this.getScopeProviderSuperClass(_grammar);
         _builder.append(_scopeProviderSuperClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
