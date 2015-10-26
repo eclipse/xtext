@@ -246,11 +246,6 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 									{ after(grammarAccess.«element.value.originalElement.grammarElementAccess()»); }
 								«ENDIF»
 							)
-							«IF !grammar.combinedGrammar»
-								{
-								  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement.gaRuleElementAccessor()»);
-								}
-							«ENDIF»
 						)
 					)
 				«ENDFOR»
