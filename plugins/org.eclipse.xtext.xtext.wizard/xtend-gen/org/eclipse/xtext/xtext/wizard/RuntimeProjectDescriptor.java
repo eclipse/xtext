@@ -686,6 +686,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.8.2\"");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
         _builder.newLine();
         _builder.append("}");
@@ -931,6 +934,26 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           if (_needsTychoBuild) {
             _builder.append("\t\t\t");
             _builder.append("<dependencies>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<groupId>org.eclipse.emf</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<artifactId>org.eclipse.emf.mwe2.launch</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<version>2.8.2</version>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("</dependency>");
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("\t");

@@ -252,6 +252,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 
 				dependencies {
+					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.8.2"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 				}
 				
@@ -323,6 +324,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							</configuration>
 							«IF config.needsTychoBuild»
 								<dependencies>
+									<dependency>
+										<groupId>org.eclipse.emf</groupId>
+										<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+										<version>2.8.2</version>
+									</dependency>
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
 										<artifactId>org.eclipse.xtext.xtext.generator</artifactId>

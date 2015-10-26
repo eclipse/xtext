@@ -48,27 +48,12 @@
 			<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
 			<version>${mwe2-version}</version>
 		</dependency>
-
-
-		<!-- TODO update mwe dependency to reduce transitive dependency management -->
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>[${project.version}]</version>
-			<scope>runtime</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.mwe.utils</artifactId>
 			<version>${mwe-version}</version>
-			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.mwe.core</artifactId>
-			<version>${mwe-version}</version>
-			<scope>runtime</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>xtext-antlr-generator</artifactId>
@@ -76,16 +61,24 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<!-- FIXME should be transitively provided by xtext -->
 			<groupId>org.eclipse.equinox</groupId>
 			<artifactId>org.eclipse.equinox.common</artifactId>
 			<version>[3.6.0,)</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<!-- FIXME should be transitively provided by mwe.utils -->
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commons-logging.version}</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<!-- FIXME should be transitively provided by mwe.utils -->
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.mwe.core</artifactId>
+			<version>${mwe-version}</version>
 		</dependency>
 	</dependencies>
 </project>
