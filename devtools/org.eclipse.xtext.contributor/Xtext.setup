@@ -56,8 +56,7 @@
       xsi:type="setup:VariableTask"
       type="URI"
       name="draw2d.p2.repository"
-      value="http://download.eclipse.org/tools/gef/updates/releases"
-      defaultValue=""/>
+      value="http://download.eclipse.org/tools/gef/updates/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
@@ -228,6 +227,14 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.springsource.ide.eclipse.gradle.core/org.springsource.ide.eclipse.gradle.core.preferences.GradlePreferencesUSE_CUSTOM_TOOLING_MODEL"
+          value="false"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.core.resources">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.core.resources/description.disableLinking"
           value="false"/>
     </setupTask>
   </setupTask>
@@ -688,7 +695,7 @@
         <requirement
             name="org.eclipse.xtext.xtext.ui.examples"/>
         <requirement
-            name="org.eclipse.xtext.example.arithmetics.tests"/>
+            name="org.eclipse.xtext.example.arithmetics.ui.tests"/>
         <requirement
             name="org.eclipse.xtext.example.homeautomation.tests"/>
         <requirement
