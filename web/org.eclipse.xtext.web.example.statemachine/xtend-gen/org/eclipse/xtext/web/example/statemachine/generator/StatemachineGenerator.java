@@ -13,8 +13,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.AbstractGenerator;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.State;
@@ -29,9 +30,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 @SuppressWarnings("all")
-public class StatemachineGenerator implements IGenerator {
+public class StatemachineGenerator extends AbstractGenerator {
   @Override
-  public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EList<EObject> _contents = resource.getContents();
     Iterable<Statemachine> _filter = Iterables.<Statemachine>filter(_contents, Statemachine.class);
     final Statemachine statemachine = IterableExtensions.<Statemachine>head(_filter);

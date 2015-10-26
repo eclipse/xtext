@@ -8,8 +8,9 @@
 package org.eclipse.xtext.web.example.statemachine.generator
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine
 
@@ -18,9 +19,9 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
-class StatemachineGenerator implements IGenerator {
+class StatemachineGenerator extends AbstractGenerator {
 	
-	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val statemachine = resource.contents.filter(Statemachine).head
 		if (statemachine !== null) {
 			fsa.generateFile('statemachine.html', generateHtml(statemachine))
@@ -60,5 +61,6 @@ class StatemachineGenerator implements IGenerator {
 		</body>
 		</html>
 	'''
+	
 	
 }
