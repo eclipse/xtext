@@ -27,7 +27,6 @@
 
 		<module>../../plugins/org.eclipse.xtext.common.types</module>
 		<module>../../plugins/org.eclipse.xtext.ecore</module>
-		<module>../../intellij/org.eclipse.xtext.idea.generator</module>
 		<module>../../plugins/org.eclipse.xtext.generator</module>
 		<module>../../plugins/org.eclipse.xtext.xtext.generator</module>
 		<module>../../plugins/org.eclipse.xtext.xtext.wizard</module>
