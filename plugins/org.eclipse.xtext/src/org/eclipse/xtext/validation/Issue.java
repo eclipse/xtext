@@ -65,10 +65,7 @@ public interface Issue {
 	 * @return the associated user data. May be <code>null</code> or empty but may not contain <code>null</code> entries.
 	 */
 	String[] getData();
-	
-	/**
-	 * @author zarnekow - Initial contribution and API
-	 */
+
 	static class IssueImpl implements Issue {
 		
 		private static Logger LOG = Logger.getLogger(IssueImpl.class);
