@@ -23,7 +23,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
@@ -78,7 +77,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//(InputSignal | OutputSignal) 'signal' name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//(InputSignal | OutputSignal)
+		//InputSignal | OutputSignal
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//InputSignal
