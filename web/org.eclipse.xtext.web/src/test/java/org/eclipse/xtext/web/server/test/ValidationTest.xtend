@@ -31,6 +31,7 @@ class ValidationTest extends AbstractWebServerTest {
 			      description = "missing EOF at 'stat'"
 			      severity = "error"
 			      line = 1
+			      column = 1
 			      offset = 0
 			      length = 4
 			    ]
@@ -46,6 +47,7 @@ class ValidationTest extends AbstractWebServerTest {
 			      description = "Couldn't resolve reference to Signal 'x'."
 			      severity = "error"
 			      line = 1
+			      column = 15
 			      offset = 14
 			      length = 1
 			    ]
@@ -61,6 +63,7 @@ class ValidationTest extends AbstractWebServerTest {
 			      description = "Only output signals are allowed for write access."
 			      severity = "error"
 			      line = 1
+			      column = 30
 			      offset = 29
 			      length = 1
 			    ]
@@ -81,6 +84,7 @@ class ValidationTest extends AbstractWebServerTest {
 			      description = "missing EOF at 'stat'"
 			      severity = "error"
 			      line = 1
+			      column = 1
 			      offset = 0
 			      length = 4
 			    ]

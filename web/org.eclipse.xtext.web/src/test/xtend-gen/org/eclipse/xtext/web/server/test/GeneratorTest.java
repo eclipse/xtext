@@ -15,8 +15,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.AbstractGenerator;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.generator.IGenerator2;
+import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.statemachine.State;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
@@ -33,7 +35,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class GeneratorTest extends AbstractWebServerTest {
-  public static class Generator implements IGenerator {
+  public static class Generator extends AbstractGenerator {
     private int invocationCount = 0;
     
     public Generator() {
@@ -41,7 +43,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     }
     
     @Override
-    public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
+    public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext ctx) {
       this.invocationCount++;
       EList<EObject> _contents = input.getContents();
       Iterable<Statemachine> _filter = Iterables.<Statemachine>filter(_contents, Statemachine.class);
@@ -71,7 +73,7 @@ public class GeneratorTest extends AbstractWebServerTest {
   protected Module getRuntimeModule() {
     return new StatemachineRuntimeModule() {
       @Override
-      public Class<? extends IGenerator> bindIGenerator() {
+      public Class<? extends IGenerator2> bindIGenerator2() {
         return GeneratorTest.Generator.class;
       }
     };
@@ -101,7 +103,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.append("GeneratedDocument [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"test.txt\"");
+    _builder.append("name = \"DEFAULT_OUTPUTtest.txt\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("contentType = \"text/plain\"");
