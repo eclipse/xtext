@@ -51,7 +51,7 @@ public class IssueUtil {
 			Object lineNumber = attributes.get(IMarker.LINE_NUMBER);
 			issue.setLineNumber(lineNumber instanceof Integer ? (Integer) lineNumber : null);
 			Object column = attributes.get(Issue.COLUMN_KEY);
-			issue.setLineNumber(column instanceof Integer ? (Integer) column : null);
+			issue.setColumn(column instanceof Integer ? (Integer) column : null);
 			Object offset = attributes.get(IMarker.CHAR_START);
 			Object endOffset = attributes.get(IMarker.CHAR_END);
 			if(offset instanceof Integer && endOffset instanceof Integer) {

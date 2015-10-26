@@ -40,7 +40,8 @@ public class IssueDataTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "quickfixtest";
 	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
-	private static final String MODEL_WITH_LINKING_ERROR = QuickfixCrossrefTestLanguageJavaValidator.TRIGGER_VALIDATION_ISSUE + "{}";
+	private static final String PREFIX = "//irrelevant\n\t\t";
+	private static final String MODEL_WITH_LINKING_ERROR = PREFIX + QuickfixCrossrefTestLanguageJavaValidator.TRIGGER_VALIDATION_ISSUE + "{}";
 
 
 	@Test public void testIssueData() throws Exception {
@@ -50,6 +51,10 @@ public class IssueDataTest extends AbstractQuickfixTest {
 		List<Issue> issues = getIssues(document);
 		assertEquals(1, issues.size());
 		Issue issue = issues.get(0);
+		assertEquals(2, issue.getLineNumber().intValue());
+		assertEquals(3, issue.getColumn().intValue());
+		assertEquals(PREFIX.length(), issue.getOffset().intValue());
+		assertEquals(QuickfixCrossrefTestLanguageJavaValidator.TRIGGER_VALIDATION_ISSUE.length(), issue.getLength().intValue());
 		String[] expectedIssueData = new String[]{ QuickfixCrossrefTestLanguageJavaValidator.ISSUE_DATA_0,
 			QuickfixCrossrefTestLanguageJavaValidator.ISSUE_DATA_1};
 		assertTrue(Arrays.equals(expectedIssueData, issue.getData()));
@@ -79,6 +84,10 @@ public class IssueDataTest extends AbstractQuickfixTest {
 		assertTrue(Arrays.equals(expectedIssueData, Strings.unpack(attribute)));
 
 		Issue issueFromMarker = issueUtil.createIssue(markers[0]);
+		assertEquals(issue.getColumn(), issueFromMarker.getColumn());
+		assertEquals(issue.getLineNumber(), issueFromMarker.getLineNumber());
+		assertEquals(issue.getOffset(), issueFromMarker.getOffset());
+		assertEquals(issue.getLength(), issueFromMarker.getLength());
 		assertTrue(Arrays.equals(expectedIssueData, issueFromMarker.getData()));
 		
 	}
