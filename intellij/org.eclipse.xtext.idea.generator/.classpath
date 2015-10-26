@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="xtend-gen"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/lib/tools.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/annotations.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/asm-all.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/asm-commons.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/asm.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/asm4-all.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/automaton.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/boot.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/bootstrap.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/cglib-2.2.2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/cli-parser-1.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/commons-codec-1.9.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/commons-httpclient-3.1-patched.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/commons-logging-1.2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/commons-net-3.3.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/coverage-agent.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/coverage-instrumenter.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/coverage-util.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/ecj-4.4.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/extensions.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/fluent-hc-4.4.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/forms_rt.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/groovy-all-2.3.9.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/gson-2.3.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/guava-17.0.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/httpclient-4.4.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/httpcore-4.4.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/httpmime-4.4.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/icons.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/idea.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/idea_rt.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/imgscalr-lib-4.2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/isorelax.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/javac2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jaxen-1.1.3.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jayatana-1.2.4.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jcip-annotations.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jdkAnnotations.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jdom.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jgoodies-common-1.2.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jgoodies-forms.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jgoodies-looks-2.4.2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jh.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jing.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jna-platform.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jna.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jps-builders.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jps-launcher.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jps-model.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch-0.1.52.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch.agentproxy.connector-factory.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch.agentproxy.core.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch.agentproxy.pageant.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch.agentproxy.sshagent.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch.agentproxy.usocket-jna.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsch.agentproxy.usocket-nc.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsr166e.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jsr173_1.0_api.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/junit-4.12.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/junit.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/jzlib-1.1.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/kotlin-reflect.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/kotlin-runtime.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/log4j.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/markdown4j-2.2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/markdownj-core-0.4.2-SNAPSHOT.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/microba.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/miglayout-swing.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/nanoxml-2.2.3.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/nekohtml-1.9.14.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/netty-all-4.1.0.Beta6.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/openapi.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/optimizedFileManager.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/oromatcher.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/picocontainer.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/protobuf-2.5.0.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/proxy-vole_20131209.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/pty4j-0.5.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/purejavacomm.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/resolver.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/resources.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/resources_en.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/rhino-js-1_7R4.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/rngom-20051226-patched.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/sanselan-0.98-snapshot.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/serviceMessages.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/slf4j-api-1.7.10.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/slf4j-log4j12-1.7.10.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/snappy-in-java-0.3.1.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/swingx-core-1.6.2.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/trang-core.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/trove4j.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/util.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/velocity.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/winp-1.23.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/xbean.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/xercesImpl.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/xml-apis.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/xmlrpc-2.0.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/xpp3-1.1.4-min.jar"/>
+	<classpathentry sourcepath="/Users/dhuebner/.gradle/ideaSDK/143.249.6/ideaIC-143.249.6-sources.jar" kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/lib/xstream-1.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/plugins/junit/lib/idea-junit.jar"/>
+	<classpathentry kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/plugins/junit/lib/junit-rt.jar"/>
+	<classpathentry kind="lib" path="/Users/dhuebner/.gradle/ideaSDK/143.249.6/plugins/junit/lib/resources_en.jar"/>
+</classpath>
