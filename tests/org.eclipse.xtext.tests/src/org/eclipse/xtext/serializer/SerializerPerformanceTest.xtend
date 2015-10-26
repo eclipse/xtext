@@ -17,7 +17,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.Timeout
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
 
 /**
  * @author Stefan Oehme - Initial contribution and API
