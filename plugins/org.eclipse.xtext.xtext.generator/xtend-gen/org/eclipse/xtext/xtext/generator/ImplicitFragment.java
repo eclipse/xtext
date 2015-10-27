@@ -697,7 +697,7 @@ class ImplicitFragment extends AbstractXtextGeneratorFragment {
     _builder.append("</menuContribution>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("!-- copy qualified name -->");
+    _builder.append("<!-- copy qualified name -->");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<menuContribution locationURI=\"popup:#TextEditorContext?after=copy\">");

@@ -396,15 +396,20 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
               _builder.newLineIfNotEmpty();
               _builder.newLine();
               {
-                for(final Assignment assignment : assignments) {
-                  _builder.append("\t");
-                  StringConcatenationClient _handleAssignment = ContentAssistFragment2.this.handleAssignment(assignment);
-                  _builder.append(_handleAssignment, "\t");
-                  _builder.newLineIfNotEmpty();
+                boolean _isEmpty = assignments.isEmpty();
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  {
+                    for(final Assignment assignment : assignments) {
+                      _builder.append("\t");
+                      StringConcatenationClient _handleAssignment = ContentAssistFragment2.this.handleAssignment(assignment);
+                      _builder.append(_handleAssignment, "\t");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                  _builder.newLine();
                 }
               }
-              _builder.append("\t");
-              _builder.newLine();
               {
                 for(final AbstractRule rule : remainingRules) {
                   _builder.append("\t");

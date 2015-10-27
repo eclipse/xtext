@@ -231,7 +231,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				@Override
 				public «InputStream» getAntlrTokenFile() {
 					«ClassLoader» classLoader = getClass().getClassLoader();
-					return classLoader.getResourceAsStream("«grammar.lexerGrammar.tokensFileName»");
+					return classLoader.getResourceAsStream("«grammar.parserGrammar.tokensFileName»");
 				}
 			}
 		'''

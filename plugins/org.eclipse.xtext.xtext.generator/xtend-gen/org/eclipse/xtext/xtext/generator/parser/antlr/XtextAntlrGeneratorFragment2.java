@@ -627,8 +627,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("\t\t");
           _builder.append("return classLoader.getResourceAsStream(\"");
           Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          AntlrGrammar _lexerGrammar = naming.getLexerGrammar(_grammar_1);
-          String _tokensFileName = _lexerGrammar.getTokensFileName();
+          AntlrGrammar _parserGrammar = naming.getParserGrammar(_grammar_1);
+          String _tokensFileName = _parserGrammar.getTokensFileName();
           _builder.append(_tokensFileName, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
