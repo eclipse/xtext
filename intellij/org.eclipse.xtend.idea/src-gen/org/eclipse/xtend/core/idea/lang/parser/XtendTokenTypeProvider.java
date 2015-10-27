@@ -14,9 +14,9 @@ import org.antlr.runtime.Token;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType;
 
-@Singleton public class XtendTokenTypeProvider implements TokenTypeProvider {
+@Singleton
+public class XtendTokenTypeProvider implements TokenTypeProvider {
 
 	private static final String[] TOKEN_NAMES = new PsiInternalXtendParser(null).getTokenNames();
 
@@ -34,8 +34,7 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType;
 
 	@Override
     public int getAntlrType(IElementType iElementType) {
-        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex()
-        				: Token.INVALID_TOKEN_TYPE;
+        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex() : Token.INVALID_TOKEN_TYPE;
     }
     
     @Override

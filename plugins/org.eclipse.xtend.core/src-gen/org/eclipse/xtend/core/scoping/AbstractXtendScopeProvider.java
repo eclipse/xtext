@@ -9,5 +9,5 @@ package org.eclipse.xtend.core.scoping;
 
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
 
-public class AbstractXtendScopeProvider extends XbaseWithAnnotationsBatchScopeProvider {
+public abstract class AbstractXtendScopeProvider extends XbaseWithAnnotationsBatchScopeProvider {
 }

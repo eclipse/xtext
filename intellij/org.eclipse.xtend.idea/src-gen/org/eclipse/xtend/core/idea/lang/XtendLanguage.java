@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.idea.lang;
 
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 
-public final class XtendLanguage extends AbstractXtextLanguage{
+public final class XtendLanguage extends AbstractXtextLanguage {
 
 	public static final XtendLanguage INSTANCE = new XtendLanguage();
 
