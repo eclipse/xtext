@@ -209,7 +209,7 @@ package class ImplicitFragment extends AbstractXtextGeneratorFragment {
 				</visibleWhen>
 			</command>  
 			</menuContribution>
-			!-- copy qualified name -->
+			<!-- copy qualified name -->
 			<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 					style="push" tooltip="Copy Qualified Name">
