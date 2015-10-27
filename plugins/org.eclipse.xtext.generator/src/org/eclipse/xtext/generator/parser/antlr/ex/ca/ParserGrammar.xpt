@@ -238,9 +238,6 @@ finally {
 						{ after(grammarAccess.«element.originalElement().grammarElementAccess()»); }
 					)«ENDIF-»
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement().gaRuleElementAccessor()»);
-	 				}
  				)
 			)  «IF !it.lastIteration»|«ENDIF»
 «ENDFOREACH»
