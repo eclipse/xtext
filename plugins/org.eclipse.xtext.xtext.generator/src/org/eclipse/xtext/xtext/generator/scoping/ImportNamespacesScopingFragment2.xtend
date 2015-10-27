@@ -70,7 +70,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	}
 	
 	def TypeReference getDelegateScopeProvider() {
-		if (language.grammar.usesXImportSection)
+		if (language.grammar.inheritsXbase)
 			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
 		else
 			ImportedNamespaceAwareLocalScopeProvider.typeRef
