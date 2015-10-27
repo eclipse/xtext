@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.wizard,
- org.eclipse.xtext.idea.generator;bundle-version="2.9.0"
+ org.eclipse.xtext.idea.generator;resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/simple.jar,
  .
