@@ -10,13 +10,20 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import static com.google.common.collect.Sets.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.JavaCore;
@@ -30,16 +37,20 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
+import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.io.Resources;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class XtextProjectCreator extends WorkspaceModifyOperation implements IProjectCreator {
+	private static final Logger LOG = Logger.getLogger(XtextProjectCreator.class);
 	
 	@Inject
 	private Provider<PluginProjectFactory> pluginProjectProvider;
@@ -47,7 +58,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 	private Provider<JavaProjectFactory> javaProjectProvider;
 	@Inject
 	private Provider<ProjectFactory> plainProjectProvider;
-	
+
 	private XtextProjectInfo projectInfo;
 	Map<ProjectDescriptor, IProject> createdProjects = Maps.newHashMap();
 	private IFile result;
@@ -59,7 +70,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			IProject project = createProject(descriptor, SubMonitor.convert(subMonitor, 1));
 			createdProjects.put(descriptor, project);
 		}
-		
+
 		IProject runtimeProject = createdProjects.get(projectInfo.getRuntimeProject());
 		IFile dslGrammarFile = runtimeProject.getFile(getPath(projectInfo.getRuntimeProject().getGrammarFile()));
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
@@ -104,11 +115,11 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		if (needsM2eIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER")));
 		}
-		if (needsBuildshipIntegration(descriptor) && ! descriptor.isEclipsePluginProject()) {
+		if (needsBuildshipIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
 		}
 	}
-	
+
 	private IProject createPlainProject(ProjectDescriptor descriptor, SubMonitor monitor) {
 		ProjectFactory factory = plainProjectProvider.get();
 		configurePlainProject(descriptor, factory);
@@ -134,29 +145,70 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 
 	private class DescriptorBasedContributor implements IProjectFactoryContributor {
 		private ProjectDescriptor descriptor;
-		
+
 		public DescriptorBasedContributor(ProjectDescriptor descriptor) {
 			this.descriptor = descriptor;
 		}
 
 		@Override
 		public void contributeFiles(IProject project, IFileCreator fileWriter) {
-			for (TextFile file : descriptor.getFiles()) {
+			for (AbstractFile file : descriptor.getFiles()) {
 				if (!isFiltered(file)) {
 					String path = getPath(file);
-					fileWriter.writeToFile(file.getContent(), path);
+					IFile created = null;
+					if (file instanceof TextFile) {
+						created = fileWriter.writeToFile(((TextFile) file).getContent(), path);
+					} else if (file instanceof BinaryFile) {
+						created = createBinaryFile(fileWriter, path, ((BinaryFile) file).getContent());
+					}
+
+					if (created != null && file.isExecutable()) {
+						addExecutableFlag(created);
+					}
 				}
 			}
 		}
-		
-		private boolean isFiltered(TextFile file) {
+
+		private void addExecutableFlag(IFile file) {
+			ResourceAttributes attributes = file.getResourceAttributes();
+			if (attributes != null) {
+				attributes.setExecutable(true);
+				try {
+					file.setResourceAttributes(attributes);
+				} catch (CoreException e) {
+					LOG.warn("Failed to set executable flag for " + file.getFullPath().toOSString(), e);
+				}
+			}
+		}
+
+		private IFile createBinaryFile(IFileCreator fileWriter, String path, URL url) {
+			IFile created = fileWriter.writeToFile("", path);
+			InputStream stream = null;
+			try {
+				stream = Resources.asByteSource(url).openBufferedStream();
+				created.setContents(stream, IResource.FORCE, new NullProgressMonitor());
+			} catch (Exception e) {
+				LOG.error("Failed to create binary file " + created.getFullPath().toOSString(), e);
+			} finally {
+				if (stream != null) {
+					try {
+						stream.close();
+					} catch (IOException e) {
+						LOG.warn("Failed to close stream for " + created.getFullPath().toOSString(), e);
+					}
+				}
+			}
+			return created;
+		}
+
+		private boolean isFiltered(AbstractFile file) {
 			if (isPluginProject(descriptor)) {
 				return newHashSet("plugin.xml", "MANIFEST.MF").contains(file.getRelativePath());
 			}
 			return false;
 		}
 	}
-	
+
 	private static class GradleContributor implements IProjectFactoryContributor {
 
 		private ProjectDescriptor descriptor;
@@ -179,6 +231,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			".settings/gradle.prefs");
 		}
 
+
 		private String getLogicalPath() {
 			if (descriptor instanceof ParentProjectDescriptor) {
 				return ":";
@@ -187,15 +240,15 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			}
 		}
 	}
-	
+
 	private boolean isPluginProject(ProjectDescriptor descriptor) {
 		return descriptor.isEclipsePluginProject();
 	}
-	
+
 	private boolean isJavaProject(ProjectDescriptor descriptor) {
 		return !descriptor.getSourceFolders().isEmpty();
 	}
-	
+
 	private boolean needsM2eIntegration(ProjectDescriptor descriptor) {
 		return descriptor.isPartOfMavenBuild() && descriptor.getConfig().needsMavenBuild();
 	}
@@ -203,7 +256,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 	private boolean needsBuildshipIntegration(ProjectDescriptor descriptor) {
 		return descriptor.isPartOfGradleBuild() && descriptor.getConfig().needsGradleBuild();
 	}
-	
+
 	private int getMonitorTicks() {
 		return projectInfo.getEnabledProjects().size();
 	}
@@ -222,7 +275,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		return result;
 	}
 
-	private String getPath(TextFile file) {
+	private String getPath(AbstractFile file) {
 		return file.getProject().sourceFolder(file.getOutlet()) + "/" + file.getRelativePath();
 	}
 

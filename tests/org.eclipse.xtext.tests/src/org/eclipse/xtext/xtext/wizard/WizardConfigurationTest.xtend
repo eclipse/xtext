@@ -107,7 +107,8 @@ class WizardConfigurationTest {
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		config.sourceLayout = SourceLayout.MAVEN
 		val pom = config.runtimeProject.files.findFirst[relativePath == "pom.xml"]
-		assertTrue(pom.content.toString.contains("<artifactId>org.example.mydsl</artifactId>"))
+		assertTrue(pom instanceof PomFile)
+		assertTrue((pom as PomFile).content.toString.contains("<artifactId>org.example.mydsl</artifactId>"))
 	}
 	
 	@Test
