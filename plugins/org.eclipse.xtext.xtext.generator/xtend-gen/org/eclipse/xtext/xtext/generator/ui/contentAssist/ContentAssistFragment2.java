@@ -125,16 +125,6 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   
   @Override
   public void generate() {
-    TypeReference _xifexpression = null;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      Grammar _grammar = this.getGrammar();
-      _xifexpression = this.getProposalProviderClass(_grammar);
-    } else {
-      Grammar _grammar_1 = this.getGrammar();
-      _xifexpression = this.getGenProposalProviderClass(_grammar_1);
-    }
-    final TypeReference chosenClass = _xifexpression;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = _eclipsePlugin.getManifest();
@@ -148,7 +138,9 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider");
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, chosenClass);
+    Grammar _grammar = this.getGrammar();
+    TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar);
+    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, _proposalProviderClass);
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
@@ -160,8 +152,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       this.generateGenJavaProposalProvider();
     }
     boolean _and = false;
-    boolean _isGenerateStub_1 = this.isGenerateStub();
-    if (!_isGenerateStub_1) {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (!_isGenerateStub) {
       _and = false;
     } else {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
@@ -203,9 +195,9 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       IBundleProjectConfig _eclipsePlugin_8 = _projectConfig_8.getEclipsePlugin();
       ManifestAccess _manifest_6 = _eclipsePlugin_8.getManifest();
       Set<String> _exportedPackages = _manifest_6.getExportedPackages();
-      Grammar _grammar_2 = this.getGrammar();
-      TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar_2);
-      String _packageName = _proposalProviderClass.getPackageName();
+      Grammar _grammar_1 = this.getGrammar();
+      TypeReference _proposalProviderClass_1 = this.getProposalProviderClass(_grammar_1);
+      String _packageName = _proposalProviderClass_1.getPackageName();
       _exportedPackages.add(_packageName);
     }
   }
@@ -352,9 +344,17 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         }
       };
       final ArrayList<AbstractRule> remainingRules = IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(_rules, _newArrayList_1, _function_1);
-      Grammar _grammar_3 = this.getGrammar();
-      TypeReference _genProposalProviderClass = this.getGenProposalProviderClass(_grammar_3);
-      GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(_genProposalProviderClass);
+      TypeReference _xifexpression = null;
+      boolean _isGenerateStub = this.isGenerateStub();
+      if (_isGenerateStub) {
+        Grammar _grammar_3 = this.getGrammar();
+        _xifexpression = this.getGenProposalProviderClass(_grammar_3);
+      } else {
+        Grammar _grammar_4 = this.getGrammar();
+        _xifexpression = this.getProposalProviderClass(_grammar_4);
+      }
+      final TypeReference genClass = _xifexpression;
+      GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
       final Procedure1<GeneratedJavaFileAccess> _function_2 = new Procedure1<GeneratedJavaFileAccess>() {
         @Override
         public void apply(final GeneratedJavaFileAccess it) {
@@ -385,10 +385,15 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("public class ");
-              Grammar _grammar = ContentAssistFragment2.this.getGrammar();
-              TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(_grammar);
-              String _simpleName = _genProposalProviderClass.getSimpleName();
+              _builder.append("public ");
+              {
+                boolean _isGenerateStub = ContentAssistFragment2.this.isGenerateStub();
+                if (_isGenerateStub) {
+                  _builder.append("abstract ");
+                }
+              }
+              _builder.append("class ");
+              String _simpleName = genClass.getSimpleName();
               _builder.append(_simpleName, "");
               _builder.append(" extends ");
               _builder.append(superClass, "");

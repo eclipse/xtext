@@ -92201,11 +92201,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred374_InternalXtend() {
+    public final boolean synpred364_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred374_InternalXtend_fragment(); // can never throw exception
+            synpred364_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -92215,11 +92215,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred364_InternalXtend() {
+    public final boolean synpred374_InternalXtend() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred364_InternalXtend_fragment(); // can never throw exception
+            synpred374_InternalXtend_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -92785,7 +92785,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "3011:1: rule__Type__Alternatives_2 : ( ( ( rule__Type__Group_2_0__0 ) ) | ( ( rule__Type__Group_2_1__0 ) ) | ( ( rule__Type__Group_2_2__0 ) ) | ( ( rule__Type__Group_2_3__0 ) ) );";
+            return "3012:1: rule__Type__Alternatives_2 : ( ( ( rule__Type__Group_2_0__0 ) ) | ( ( rule__Type__Group_2_1__0 ) ) | ( ( rule__Type__Group_2_2__0 ) ) | ( ( rule__Type__Group_2_3__0 ) ) );";
         }
     }
     static final String dfa_7s = "\32\uffff";
@@ -92845,7 +92845,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_13;
         }
         public String getDescription() {
-            return "3065:1: rule__AnnotationField__Alternatives_2 : ( ( ( rule__AnnotationField__Group_2_0__0 ) ) | ( ( rule__AnnotationField__Group_2_1__0 ) ) | ( ( rule__AnnotationField__Group_2_2__0 ) ) | ( ( rule__AnnotationField__Group_2_3__0 ) ) | ( ( rule__AnnotationField__Group_2_4__0 ) ) );";
+            return "3066:1: rule__AnnotationField__Alternatives_2 : ( ( ( rule__AnnotationField__Group_2_0__0 ) ) | ( ( rule__AnnotationField__Group_2_1__0 ) ) | ( ( rule__AnnotationField__Group_2_2__0 ) ) | ( ( rule__AnnotationField__Group_2_3__0 ) ) | ( ( rule__AnnotationField__Group_2_4__0 ) ) );";
         }
     }
     static final String dfa_14s = "\20\uffff";
@@ -92893,7 +92893,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_19;
         }
         public String getDescription() {
-            return "3104:1: rule__AnnotationField__Alternatives_2_0_0 : ( ( ( rule__AnnotationField__Group_2_0_0_0__0 ) ) | ( ( rule__AnnotationField__Group_2_0_0_1__0 ) ) );";
+            return "3105:1: rule__AnnotationField__Alternatives_2_0_0 : ( ( ( rule__AnnotationField__Group_2_0_0_0__0 ) ) | ( ( rule__AnnotationField__Group_2_0_0_1__0 ) ) );";
         }
     }
     static final String dfa_20s = "\34\uffff";
@@ -92955,7 +92955,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "3125:1: rule__Member__Alternatives_2 : ( ( ( rule__Member__Group_2_0__0 ) ) | ( ( rule__Member__Group_2_1__0 ) ) | ( ( rule__Member__Group_2_2__0 ) ) | ( ( rule__Member__Group_2_3__0 ) ) | ( ( rule__Member__Group_2_4__0 ) ) | ( ( rule__Member__Group_2_5__0 ) ) | ( ( rule__Member__Group_2_6__0 ) ) );";
+            return "3126:1: rule__Member__Alternatives_2 : ( ( ( rule__Member__Group_2_0__0 ) ) | ( ( rule__Member__Group_2_1__0 ) ) | ( ( rule__Member__Group_2_2__0 ) ) | ( ( rule__Member__Group_2_3__0 ) ) | ( ( rule__Member__Group_2_4__0 ) ) | ( ( rule__Member__Group_2_5__0 ) ) | ( ( rule__Member__Group_2_6__0 ) ) );";
         }
     }
     static final String dfa_27s = "\24\uffff";
@@ -93007,7 +93007,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_32;
         }
         public String getDescription() {
-            return "3176:1: rule__Member__Alternatives_2_0_2 : ( ( ( rule__Member__Group_2_0_2_0__0 ) ) | ( ( rule__Member__Group_2_0_2_1__0 ) ) | ( ( rule__Member__Group_2_0_2_2__0 ) ) | ( ( rule__Member__Group_2_0_2_3__0 ) ) );";
+            return "3177:1: rule__Member__Alternatives_2_0_2 : ( ( ( rule__Member__Group_2_0_2_0__0 ) ) | ( ( rule__Member__Group_2_0_2_1__0 ) ) | ( ( rule__Member__Group_2_0_2_2__0 ) ) | ( ( rule__Member__Group_2_0_2_3__0 ) ) );";
         }
     }
     static final String dfa_33s = "\51\uffff";
@@ -93080,7 +93080,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_38;
         }
         public String getDescription() {
-            return "3251:1: rule__Member__Alternatives_2_1_5 : ( ( ( rule__Member__Group_2_1_5_0__0 ) ) | ( ( rule__Member__Group_2_1_5_1__0 ) ) | ( ( rule__Member__Group_2_1_5_2__0 ) ) | ( ( rule__Member__Group_2_1_5_3__0 ) ) | ( ( rule__Member__Group_2_1_5_4__0 ) ) );";
+            return "3252:1: rule__Member__Alternatives_2_1_5 : ( ( ( rule__Member__Group_2_1_5_0__0 ) ) | ( ( rule__Member__Group_2_1_5_1__0 ) ) | ( ( rule__Member__Group_2_1_5_2__0 ) ) | ( ( rule__Member__Group_2_1_5_3__0 ) ) | ( ( rule__Member__Group_2_1_5_4__0 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -93288,7 +93288,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_44;
         }
         public String getDescription() {
-            return "3317:1: rule__TypeReferenceWithTypeArgs__Alternatives : ( ( ( rule__TypeReferenceWithTypeArgs__Group_0__0 ) ) | ( ( rule__TypeReferenceWithTypeArgs__Group_1__0 ) ) | ( ruleXFunctionTypeRef ) );";
+            return "3318:1: rule__TypeReferenceWithTypeArgs__Alternatives : ( ( ( rule__TypeReferenceWithTypeArgs__Group_0__0 ) ) | ( ( rule__TypeReferenceWithTypeArgs__Group_1__0 ) ) | ( ruleXFunctionTypeRef ) );";
         }
     }
     static final String dfa_45s = "\16\uffff";
@@ -93336,7 +93336,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_51;
         }
         public String getDescription() {
-            return "3365:1: rule__Operators__Alternatives : ( ( ruleOpMultiAssign ) | ( ruleOpOr ) | ( ruleOpAnd ) | ( ruleOpEquality ) | ( ruleOpCompare ) | ( ruleOpOther ) | ( ruleOpMulti ) | ( ruleOpUnary ) | ( ruleOpPostfix ) );";
+            return "3366:1: rule__Operators__Alternatives : ( ( ruleOpMultiAssign ) | ( ruleOpOr ) | ( ruleOpAnd ) | ( ruleOpEquality ) | ( ruleOpCompare ) | ( ruleOpOther ) | ( ruleOpMulti ) | ( ruleOpUnary ) | ( ruleOpPostfix ) );";
         }
     }
     static final String dfa_52s = "\37\uffff";
@@ -93399,7 +93399,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_57;
         }
         public String getDescription() {
-            return "3863:1: rule__XVariableDeclaration__Alternatives_1 : ( ( ( rule__XVariableDeclaration__Group_1_0__0 ) ) | ( ( rule__XVariableDeclaration__NameAssignment_1_1 ) ) );";
+            return "3864:1: rule__XVariableDeclaration__Alternatives_1 : ( ( ( rule__XVariableDeclaration__Group_1_0__0 ) ) | ( ( rule__XVariableDeclaration__NameAssignment_1_1 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -93592,7 +93592,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_63;
         }
         public String getDescription() {
-            return "3884:1: rule__XbaseConstructorCall__Alternatives_4_1 : ( ( ( rule__XbaseConstructorCall__ArgumentsAssignment_4_1_0 ) ) | ( ( rule__XbaseConstructorCall__Group_4_1_1__0 ) ) );";
+            return "3885:1: rule__XbaseConstructorCall__Alternatives_4_1 : ( ( ( rule__XbaseConstructorCall__ArgumentsAssignment_4_1_0 ) ) | ( ( rule__XbaseConstructorCall__Group_4_1_1__0 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -94142,7 +94142,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_68;
         }
         public String getDescription() {
-            return "3926:1: rule__XSwitchExpression__Alternatives_2 : ( ( ( rule__XSwitchExpression__Group_2_0__0 ) ) | ( ( rule__XSwitchExpression__Group_2_1__0 ) ) );";
+            return "3927:1: rule__XSwitchExpression__Alternatives_2 : ( ( ( rule__XSwitchExpression__Group_2_0__0 ) ) | ( ( rule__XSwitchExpression__Group_2_1__0 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -94210,7 +94210,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_74;
         }
         public String getDescription() {
-            return "3947:1: rule__XExpressionOrSimpleConstructorCall__Alternatives : ( ( ( ruleXbaseConstructorCall ) ) | ( ruleXExpression ) );";
+            return "3948:1: rule__XExpressionOrSimpleConstructorCall__Alternatives : ( ( ( ruleXbaseConstructorCall ) ) | ( ruleXExpression ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -94400,7 +94400,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_79;
         }
         public String getDescription() {
-            return "4058:1: rule__XAnnotation__Alternatives_3_1 : ( ( ( rule__XAnnotation__Group_3_1_0__0 ) ) | ( ( rule__XAnnotation__ValueAssignment_3_1_1 ) ) );";
+            return "4059:1: rule__XAnnotation__Alternatives_3_1 : ( ( ( rule__XAnnotation__Group_3_1_0__0 ) ) | ( ( rule__XAnnotation__ValueAssignment_3_1_1 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -94582,7 +94582,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_80;
         }
         public String getDescription() {
-            return "4079:1: rule__XAnnotationElementValueOrCommaList__Alternatives : ( ( ( rule__XAnnotationElementValueOrCommaList__Group_0__0 ) ) | ( ( rule__XAnnotationElementValueOrCommaList__Group_1__0 ) ) );";
+            return "4080:1: rule__XAnnotationElementValueOrCommaList__Alternatives : ( ( ( rule__XAnnotationElementValueOrCommaList__Group_0__0 ) ) | ( ( rule__XAnnotationElementValueOrCommaList__Group_1__0 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -94626,7 +94626,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_80;
         }
         public String getDescription() {
-            return "4100:1: rule__XAnnotationElementValue__Alternatives : ( ( ( rule__XAnnotationElementValue__Group_0__0 ) ) | ( ruleXAnnotationOrExpression ) );";
+            return "4101:1: rule__XAnnotationElementValue__Alternatives : ( ( ( rule__XAnnotationElementValue__Group_0__0 ) ) | ( ruleXAnnotationOrExpression ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -94718,7 +94718,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_87;
         }
         public String getDescription() {
-            return "4142:1: rule__XAssignment__Alternatives : ( ( ( rule__XAssignment__Group_0__0 ) ) | ( ( rule__XAssignment__Group_1__0 ) ) );";
+            return "4143:1: rule__XAssignment__Alternatives : ( ( ( rule__XAssignment__Group_0__0 ) ) | ( ( rule__XAssignment__Group_1__0 ) ) );";
         }
     }
     static final String dfa_88s = "\13\uffff";
@@ -94761,7 +94761,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_93;
         }
         public String getDescription() {
-            return "4301:1: rule__OpOther__Alternatives : ( ( '->' ) | ( '..<' ) | ( ( rule__OpOther__Group_2__0 ) ) | ( '..' ) | ( '=>' ) | ( ( rule__OpOther__Group_5__0 ) ) | ( ( rule__OpOther__Group_6__0 ) ) | ( '<>' ) | ( '?:' ) );";
+            return "4302:1: rule__OpOther__Alternatives : ( ( '->' ) | ( '..<' ) | ( ( rule__OpOther__Group_2__0 ) ) | ( '..' ) | ( '=>' ) | ( ( rule__OpOther__Group_5__0 ) ) | ( ( rule__OpOther__Group_6__0 ) ) | ( '<>' ) | ( '?:' ) );";
         }
     }
     static final String dfa_94s = "\42\uffff";
@@ -94829,7 +94829,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_100;
         }
         public String getDescription() {
-            return "4535:1: rule__XMemberFeatureCall__Alternatives_1 : ( ( ( rule__XMemberFeatureCall__Group_1_0__0 ) ) | ( ( rule__XMemberFeatureCall__Group_1_1__0 ) ) );";
+            return "4536:1: rule__XMemberFeatureCall__Alternatives_1 : ( ( ( rule__XMemberFeatureCall__Group_1_0__0 ) ) | ( ( rule__XMemberFeatureCall__Group_1_1__0 ) ) );";
         }
     }
 
@@ -94847,7 +94847,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_63;
         }
         public String getDescription() {
-            return "4604:1: rule__XMemberFeatureCall__Alternatives_1_1_3_1 : ( ( ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 ) ) | ( ( rule__XMemberFeatureCall__Group_1_1_3_1_1__0 ) ) );";
+            return "4605:1: rule__XMemberFeatureCall__Alternatives_1_1_3_1 : ( ( ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0 ) ) | ( ( rule__XMemberFeatureCall__Group_1_1_3_1_1__0 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -95398,7 +95398,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_106;
         }
         public String getDescription() {
-            return "4625:1: rule__XPrimaryExpression__Alternatives : ( ( ruleXConstructorCall ) | ( ruleXBlockExpression ) | ( ruleXSwitchExpression ) | ( ( ruleXSynchronizedExpression ) ) | ( ruleXFeatureCall ) | ( ruleXLiteral ) | ( ruleXIfExpression ) | ( ( ruleXForLoopExpression ) ) | ( ruleXBasicForLoopExpression ) | ( ruleXWhileExpression ) | ( ruleXDoWhileExpression ) | ( ruleXThrowExpression ) | ( ruleXReturnExpression ) | ( ruleXTryCatchFinallyExpression ) | ( ruleXParenthesizedExpression ) );";
+            return "4626:1: rule__XPrimaryExpression__Alternatives : ( ( ruleXConstructorCall ) | ( ruleXBlockExpression ) | ( ruleXSwitchExpression ) | ( ( ruleXSynchronizedExpression ) ) | ( ruleXFeatureCall ) | ( ruleXLiteral ) | ( ruleXIfExpression ) | ( ( ruleXForLoopExpression ) ) | ( ruleXBasicForLoopExpression ) | ( ruleXWhileExpression ) | ( ruleXDoWhileExpression ) | ( ruleXThrowExpression ) | ( ruleXReturnExpression ) | ( ruleXTryCatchFinallyExpression ) | ( ruleXParenthesizedExpression ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -95457,7 +95457,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_63;
         }
         public String getDescription() {
-            return "4838:1: rule__XFeatureCall__Alternatives_3_1 : ( ( ( rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 ) ) | ( ( rule__XFeatureCall__Group_3_1_1__0 ) ) );";
+            return "4839:1: rule__XFeatureCall__Alternatives_3_1 : ( ( ( rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0 ) ) | ( ( rule__XFeatureCall__Group_3_1_1__0 ) ) );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -95964,7 +95964,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_111;
         }
         public String getDescription() {
-            return "5048:1: rule__XImportDeclaration__Alternatives_1 : ( ( ( rule__XImportDeclaration__Group_1_0__0 ) ) | ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_1 ) ) | ( ( rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 ) ) );";
+            return "5049:1: rule__XImportDeclaration__Alternatives_1 : ( ( ( rule__XImportDeclaration__Group_1_0__0 ) ) | ( ( rule__XImportDeclaration__ImportedTypeAssignment_1_1 ) ) | ( ( rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 ) ) );";
         }
     }
     static final String dfa_112s = "\47\uffff";
@@ -96037,7 +96037,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_118;
         }
         public String getDescription() {
-            return "7572:2: ( rule__AnnotationField__TypeAssignment_2_0_0_0_4 )?";
+            return "7573:2: ( rule__AnnotationField__TypeAssignment_2_0_0_0_4 )?";
         }
     }
     static final String[] dfa_119s = {
@@ -96097,7 +96097,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_119;
         }
         public String getDescription() {
-            return "9732:2: ( rule__Member__TypeAssignment_2_0_2_0_2 )?";
+            return "9733:2: ( rule__Member__TypeAssignment_2_0_2_0_2 )?";
         }
     }
     static final String dfa_120s = "\41\uffff";
@@ -96164,7 +96164,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_126;
         }
         public String getDescription() {
-            return "9866:2: ( rule__Member__NameAssignment_2_0_2_1_3 )?";
+            return "9867:2: ( rule__Member__NameAssignment_2_0_2_1_3 )?";
         }
     }
 
@@ -96182,7 +96182,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_126;
         }
         public String getDescription() {
-            return "10028:2: ( rule__Member__NameAssignment_2_0_2_2_5 )?";
+            return "10029:2: ( rule__Member__NameAssignment_2_0_2_2_5 )?";
         }
     }
     static final String dfa_127s = "\50\uffff";
@@ -96256,7 +96256,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_133;
         }
         public String getDescription() {
-            return "14247:2: ( rule__ParameterizedTypeReferenceWithTypeArgs__Group_1_4_2__0 )?";
+            return "14248:2: ( rule__ParameterizedTypeReferenceWithTypeArgs__Group_1_4_2__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -96424,7 +96424,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_140;
         }
         public String getDescription() {
-            return "15273:2: ( rule__XConstructorCall__Group_1__0 )?";
+            return "15274:2: ( rule__XConstructorCall__Group_1__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -96579,7 +96579,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_141;
         }
         public String getDescription() {
-            return "15544:2: ( rule__XbaseConstructorCall__Group_3__0 )?";
+            return "15545:2: ( rule__XbaseConstructorCall__Group_3__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -96734,7 +96734,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_142;
         }
         public String getDescription() {
-            return "15571:2: ( rule__XbaseConstructorCall__Group_4__0 )?";
+            return "15572:2: ( rule__XbaseConstructorCall__Group_4__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -96889,7 +96889,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_143;
         }
         public String getDescription() {
-            return "15597:2: ( rule__XbaseConstructorCall__ArgumentsAssignment_5 )?";
+            return "15598:2: ( rule__XbaseConstructorCall__ArgumentsAssignment_5 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -97006,7 +97006,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_149;
         }
         public String getDescription() {
-            return "16516:2: ( rule__XSwitchExpression__Group_2_1_0__0 )?";
+            return "16517:2: ( rule__XSwitchExpression__Group_2_1_0__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -97537,7 +97537,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_155;
         }
         public String getDescription() {
-            return "18216:2: ( rule__XAnnotation__Group_3__0 )?";
+            return "18217:2: ( rule__XAnnotation__Group_3__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -97604,7 +97604,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_161;
         }
         public String getDescription() {
-            return "19465:2: ( rule__XAssignment__Group_1_1__0 )?";
+            return "19466:2: ( rule__XAssignment__Group_1_1__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -97762,7 +97762,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_167;
         }
         public String getDescription() {
-            return "()* loopback of 20761:2: ( rule__XOtherOperatorExpression__Group_1__0 )*";
+            return "()* loopback of 20762:2: ( rule__XOtherOperatorExpression__Group_1__0 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -97911,7 +97911,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_142;
         }
         public String getDescription() {
-            return "22355:2: ( rule__XMemberFeatureCall__Group_1_1_3__0 )?";
+            return "22356:2: ( rule__XMemberFeatureCall__Group_1_1_3__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -97955,7 +97955,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_143;
         }
         public String getDescription() {
-            return "22381:2: ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 )?";
+            return "22382:2: ( rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -98076,7 +98076,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_173;
         }
         public String getDescription() {
-            return "23354:2: ( rule__XClosure__Group_1__0 )?";
+            return "23355:2: ( rule__XClosure__Group_1__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -98555,7 +98555,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_142;
         }
         public String getDescription() {
-            return "25973:2: ( rule__XFeatureCall__Group_3__0 )?";
+            return "25974:2: ( rule__XFeatureCall__Group_3__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -98599,7 +98599,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_143;
         }
         public String getDescription() {
-            return "25999:2: ( rule__XFeatureCall__FeatureCallArgumentsAssignment_4 )?";
+            return "26000:2: ( rule__XFeatureCall__FeatureCallArgumentsAssignment_4 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -98764,7 +98764,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_179;
         }
         public String getDescription() {
-            return "26836:2: ( rule__XReturnExpression__ExpressionAssignment_2 )?";
+            return "26837:2: ( rule__XReturnExpression__ExpressionAssignment_2 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -99671,7 +99671,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_185;
         }
         public String getDescription() {
-            return "()* loopback of 27518:2: ( rule__QualifiedName__Group_1__0 )*";
+            return "()* loopback of 27519:2: ( rule__QualifiedName__Group_1__0 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -99917,7 +99917,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_192;
         }
         public String getDescription() {
-            return "28193:2: ( rule__JvmParameterizedTypeReference__Group_1__0 )?";
+            return "28194:2: ( rule__JvmParameterizedTypeReference__Group_1__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -99976,7 +99976,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_194;
         }
         public String getDescription() {
-            return "()* loopback of 28328:2: ( rule__JvmParameterizedTypeReference__Group_1_4__0 )*";
+            return "()* loopback of 28329:2: ( rule__JvmParameterizedTypeReference__Group_1_4__0 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -100095,7 +100095,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             this.transition = dfa_192;
         }
         public String getDescription() {
-            return "28463:2: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )?";
+            return "28464:2: ( rule__JvmParameterizedTypeReference__Group_1_4_2__0 )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;

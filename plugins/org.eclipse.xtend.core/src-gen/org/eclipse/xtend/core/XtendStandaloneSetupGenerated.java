@@ -37,6 +37,6 @@ public class XtendStandaloneSetupGenerated implements ISetup {
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtend", resourceFactory);
-		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtend", serviceProvider);		
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtend", serviceProvider);
 	}
 }

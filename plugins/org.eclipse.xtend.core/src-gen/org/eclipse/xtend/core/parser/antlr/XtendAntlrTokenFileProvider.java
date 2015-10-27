@@ -11,10 +11,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class XtendAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.tokens");
 	}
 }

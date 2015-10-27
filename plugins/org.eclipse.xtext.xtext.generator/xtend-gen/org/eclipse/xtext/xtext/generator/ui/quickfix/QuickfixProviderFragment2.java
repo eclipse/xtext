@@ -21,6 +21,7 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
+import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
@@ -96,39 +98,30 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   
   @Override
   public void generate() {
-    TypeReference _xifexpression = null;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      Grammar _grammar = this.getGrammar();
-      _xifexpression = this.getQuickfixProviderClass(_grammar);
-    } else {
-      Grammar _grammar_1 = this.getGrammar();
-      _xifexpression = this.getQuickfixProviderSuperClass(_grammar_1);
-    }
-    final TypeReference instanceClass = _xifexpression;
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider");
-    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, instanceClass);
+    Grammar _grammar = this.getGrammar();
+    TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar);
+    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeReference, _quickfixProviderClass);
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType.contributeTo(_eclipsePluginGenModule);
-    boolean _and = false;
-    boolean _isGenerateStub_1 = this.isGenerateStub();
-    if (!_isGenerateStub_1) {
-      _and = false;
-    } else {
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+      IXtextGeneratorFileSystemAccess _src = null;
+      if (_eclipsePlugin!=null) {
+        _src=_eclipsePlugin.getSrc();
+      }
       boolean _tripleNotEquals = (_src != null);
-      _and = _tripleNotEquals;
-    }
-    if (_and) {
-      boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
-        this.generateXtendQuickfixProvider();
-      } else {
-        this.generateJavaQuickfixProvider();
+      if (_tripleNotEquals) {
+        boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
+        if (_isPreferXtendStubs) {
+          this.generateXtendQuickfixProvider();
+        } else {
+          this.generateJavaQuickfixProvider();
+        }
       }
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
@@ -139,9 +132,9 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
         ManifestAccess _manifest_1 = _eclipsePlugin_2.getManifest();
         Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-        Grammar _grammar_2 = this.getGrammar();
-        TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(_grammar_2);
-        String _packageName = _quickfixProviderClass.getPackageName();
+        Grammar _grammar_1 = this.getGrammar();
+        TypeReference _quickfixProviderClass_1 = this.getQuickfixProviderClass(_grammar_1);
+        String _packageName = _quickfixProviderClass_1.getPackageName();
         _exportedPackages.add(_packageName);
       }
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
@@ -151,7 +144,59 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       if (_notEquals_1) {
         this.addRegistrationToPluginXml();
       }
+    } else {
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
+      IXtextGeneratorFileSystemAccess _srcGen = null;
+      if (_eclipsePlugin_4!=null) {
+        _srcGen=_eclipsePlugin_4.getSrcGen();
+      }
+      boolean _tripleNotEquals_1 = (_srcGen != null);
+      if (_tripleNotEquals_1) {
+        this.generateGenScopeProvider();
+      }
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
+      ManifestAccess _manifest_2 = _eclipsePlugin_5.getManifest();
+      boolean _notEquals_2 = (!Objects.equal(_manifest_2, null));
+      if (_notEquals_2) {
+        IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+        IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
+        ManifestAccess _manifest_3 = _eclipsePlugin_6.getManifest();
+        Set<String> _exportedPackages_1 = _manifest_3.getExportedPackages();
+        Grammar _grammar_2 = this.getGrammar();
+        TypeReference _quickfixProviderClass_2 = this.getQuickfixProviderClass(_grammar_2);
+        String _packageName_1 = _quickfixProviderClass_2.getPackageName();
+        _exportedPackages_1.add(_packageName_1);
+      }
     }
+  }
+  
+  public void generateGenScopeProvider() {
+    Grammar _grammar = this.getGrammar();
+    final TypeReference genClass = this.getQuickfixProviderClass(_grammar);
+    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public class ");
+        String _simpleName = genClass.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
+        TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar);
+        _builder.append(_quickfixProviderSuperClass, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    file.setContent(_client);
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    file.writeTo(_srcGen);
   }
   
   protected void generateXtendQuickfixProvider() {

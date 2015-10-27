@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-public class AbstractXbaseWithAnnotationsProposalProvider extends XbaseProposalProvider {
+public abstract class AbstractXbaseWithAnnotationsProposalProvider extends XbaseProposalProvider {
 
 	public void completeXAnnotation_AnnotationType(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference)assignment.getTerminal()), context, acceptor);
@@ -43,7 +43,7 @@ public class AbstractXbaseWithAnnotationsProposalProvider extends XbaseProposalP
 	public void completeXAnnotationElementValue_Elements(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	
+
 	public void complete_XAnnotation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}

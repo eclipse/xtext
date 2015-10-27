@@ -9,5 +9,5 @@ package org.eclipse.xtext.xbase.annotations.scoping;
 
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 
-public class AbstractXbaseWithAnnotationsScopeProvider extends XbaseBatchScopeProvider {
+public abstract class AbstractXbaseWithAnnotationsScopeProvider extends XbaseBatchScopeProvider {
 }

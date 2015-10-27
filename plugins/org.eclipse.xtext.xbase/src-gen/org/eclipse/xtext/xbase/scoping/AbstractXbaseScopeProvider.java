@@ -8,5 +8,5 @@
 package org.eclipse.xtext.xbase.scoping;
 
 
-public class AbstractXbaseScopeProvider extends XtypeScopeProvider {
+public abstract class AbstractXbaseScopeProvider extends XtypeScopeProvider {
 }
