@@ -107,14 +107,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtend/core/parser/XtendNodeModelBuilder.java" type="org.eclipse.xtend.core.parser.XtendNodeModelBuilder">
-        <filter id="571473929">
-            <message_arguments>
-                <message_argument value="NodeModelBuilder"/>
-                <message_argument value="XtendNodeModelBuilder"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="xtend-gen/org/eclipse/xtend/core/macro/AbstractFileSystemSupport.java" type="org.eclipse.xtend.core.macro.AbstractFileSystemSupport">
         <filter id="574619656">
             <message_arguments>

@@ -25,7 +25,6 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -206,7 +205,7 @@ public class Bug480686Test {
   }
   
   @Test
-  public void testCompareNodeModel() {
+  public void testCompareNodeModel_01() {
     try {
       final ContentAssistFragmentTestLanguageRoot result = this.parseHelper.parse("");
       Resource _eResource = result.eResource();
@@ -222,12 +221,80 @@ public class Bug480686Test {
     }
   }
   
+  @Test
+  public void testCompareNodeModel_02() {
+    try {
+      final ContentAssistFragmentTestLanguageRoot result = this.parseHelper.parse("{vjava.beans.VetoableChangeListener x = []}");
+      Resource _eResource = result.eResource();
+      final XtextResource res = ((XtextResource) _eResource);
+      res.update(2, 1, "a");
+      final ContentAssistFragmentTestLanguageRoot fresh = this.parseHelper.parse("{ajava.beans.VetoableChangeListener x = []}");
+      IParseResult _parseResult = res.getParseResult();
+      Resource _eResource_1 = fresh.eResource();
+      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
+      this.assertEqual(_parseResult, _parseResult_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCompareNodeModel_03() {
+    try {
+      final ContentAssistFragmentTestLanguageRoot result = this.parseHelper.parse(((((("{  val Object o = \'foo\'    switch(o) {\n" + 
+        "        String: \"\".oString\n") + 
+        "    }\n") + 
+        "    switch(o) {\n") + 
+        "        String: \"\"\n") + 
+        "    }}"));
+      Resource _eResource = result.eResource();
+      final XtextResource res = ((XtextResource) _eResource);
+      res.update(58, 1, "t");
+      final ContentAssistFragmentTestLanguageRoot fresh = this.parseHelper.parse(((((("{  val Object o = \'foo\'    switch(o) {\n" + 
+        "        String: \"\".tString\n") + 
+        "    }\n") + 
+        "    switch(o) {\n") + 
+        "        String: \"\"\n") + 
+        "    }}"));
+      IParseResult _parseResult = res.getParseResult();
+      Resource _eResource_1 = fresh.eResource();
+      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
+      this.assertEqual(_parseResult, _parseResult_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCompareNodeModel_04() {
+    try {
+      final ContentAssistFragmentTestLanguageRoot result = this.parseHelper.parse(((((("{  val Object o = \'foo\'    switch(o) {\n" + 
+        "        String: \"\".  oString\n") + 
+        "    }\n") + 
+        "    switch(o) {\n") + 
+        "        String: \"\"\n") + 
+        "    }}"));
+      Resource _eResource = result.eResource();
+      final XtextResource res = ((XtextResource) _eResource);
+      res.update(60, 1, "t");
+      final ContentAssistFragmentTestLanguageRoot fresh = this.parseHelper.parse(((((("{  val Object o = \'foo\'    switch(o) {\n" + 
+        "        String: \"\".  tString\n") + 
+        "    }\n") + 
+        "    switch(o) {\n") + 
+        "        String: \"\"\n") + 
+        "    }}"));
+      IParseResult _parseResult = res.getParseResult();
+      Resource _eResource_1 = fresh.eResource();
+      IParseResult _parseResult_1 = ((XtextResource) _eResource_1).getParseResult();
+      this.assertEqual(_parseResult, _parseResult_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private void assertEqual(final IParseResult parsedFromScratch, final IParseResult reparsed) {
     EObject rootFromScratch = parsedFromScratch.getRootASTElement();
     EObject rootReparsed = reparsed.getRootASTElement();
-    String _objToStr = EmfFormatter.objToStr(rootFromScratch);
-    String _objToStr_1 = EmfFormatter.objToStr(rootReparsed);
-    this.assertEqual(_objToStr, _objToStr_1);
     ICompositeNode _rootNode = parsedFromScratch.getRootNode();
     ICompositeNode _rootNode_1 = reparsed.getRootNode();
     this.assertEqual(_rootNode, _rootNode_1);
@@ -275,9 +342,10 @@ public class Bug480686Test {
     SyntaxErrorMessage _syntaxErrorMessage_1 = other.getSyntaxErrorMessage();
     Assert.assertEquals(_syntaxErrorMessage, _syntaxErrorMessage_1);
     if ((node instanceof ICompositeNode)) {
+      String _text = ((ICompositeNode)node).getText();
       int _lookAhead = ((ICompositeNode)node).getLookAhead();
       int _lookAhead_1 = ((ICompositeNode) other).getLookAhead();
-      Assert.assertEquals(_lookAhead, _lookAhead_1);
+      Assert.assertEquals(_text, _lookAhead, _lookAhead_1);
     }
   }
   

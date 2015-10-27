@@ -17,6 +17,7 @@ import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -65,6 +66,12 @@ public class XtendParsingTestCase extends AbstractModelTestCase {
       }
     }
     
+    @Ignore
+    @Override
+    public void testAllGrammarElementsUniqueAfterReparse() throws Exception {
+      super.testAllGrammarElementsUniqueAfterReparse();
+    }
+    
     public Delegate(final ModelChecker modelChecker) {
       super();
       this.modelChecker = modelChecker;
@@ -88,10 +95,6 @@ public class XtendParsingTestCase extends AbstractModelTestCase {
   
   public void testAllGrammarElementsUnique() throws Exception {
     delegate.testAllGrammarElementsUnique();
-  }
-  
-  public void testAllGrammarElementsUniqueAfterReparse() throws Exception {
-    delegate.testAllGrammarElementsUniqueAfterReparse();
   }
   
   public void testBug367949() throws Exception {

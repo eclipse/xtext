@@ -28,15 +28,15 @@ class XbaseModelTestCase extends AbstractModelTestCase {
 	@FinalFieldsConstructor
 	private static class Delegate extends XbaseParserTest {
 
-		val ModelChecker expresssionChecker
+		val ModelChecker expressionChecker
 
 		override protected expression(CharSequence string) throws Exception {
-			expresssionChecker.<Model>checkModel(string.toString, false).block.expressions.head
+			expressionChecker.<Model>checkModel(string.toString, false).block.expressions.head
 		}
 
 		override protected expression(CharSequence string, boolean resolve) throws Exception {
-			expresssionChecker.<Model>checkModel(string.toString, resolve).block.expressions.head
+			expressionChecker.<Model>checkModel(string.toString, resolve).block.expressions.head
 		}
-
+		
 	}
 }

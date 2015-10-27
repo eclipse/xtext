@@ -5,20 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.parser;
+package org.eclipse.xtext.xbase.parser;
 
 import java.util.Iterator;
 
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 
 /**
- * This is required together with the {@link XtendPartialParsingHelper}.
+ * This is required together with the {@link PreferFullParsePartialParsingHelper}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtendNodeModelBuilder extends org.eclipse.xtext.nodemodel.impl.NodeModelBuilder {
+public class XbaseNodeModelBuilder extends NodeModelBuilder {
 
 	@Override
 	public void replaceAndTransferLookAhead(INode oldNode, INode newRootNode) {
