@@ -14,8 +14,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.idea.generator;resolution:=optional
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.testlanguages.backtracking,
