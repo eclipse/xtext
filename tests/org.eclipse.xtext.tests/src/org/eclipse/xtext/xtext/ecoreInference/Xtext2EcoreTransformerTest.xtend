@@ -1136,6 +1136,26 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertTrue(resource.errors.isEmpty)
 	}
 
+	@Test def void testNoException_04() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals generate test 'http://test'
+			Model: WildcardFragment;
+			fragment WildcardFragment*:;
+		'''
+		val resource = getResourceFromStringAndExpect(grammar, 1)
+		assertEquals("no viable alternative at input ';'", resource.errors.head.message)
+	}
+
+	@Test def void testNoException_05() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals generate test 'http://test'
+			Model: WildcardFragment;
+			fragment WildcardFragment:;
+		'''
+		val resource = getResourceFromStringAndExpect(grammar, 1)
+		assertEquals("no viable alternative at input ';'", resource.errors.head.message)
+	}
+
 	@Test def void testBug_266440() throws Exception {
 		var String grammar = '''
 			grammar test with org.eclipse.xtext.common.Terminals import 'http://www.eclipse.org/emf/2002/Ecore' as ecore  generate bugreport 'http://bugreport/266440'
