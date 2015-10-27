@@ -3,6 +3,9 @@
  */
 package org.eclipse.xtend.core
 
+import com.google.inject.Binder
+import com.google.inject.Provider
+import com.google.inject.name.Names
 import org.eclipse.xtend.core.compiler.UnicodeAwarePostProcessor
 import org.eclipse.xtend.core.compiler.XtendCompiler
 import org.eclipse.xtend.core.compiler.XtendGenerator
@@ -28,7 +31,6 @@ import org.eclipse.xtend.core.macro.declaration.NopResourceChangeRegistry
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider
 import org.eclipse.xtend.core.parser.CustomXtendParser
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider
-import org.eclipse.xtend.core.parser.XtendNodeModelBuilder
 import org.eclipse.xtend.core.parser.XtendPartialParsingHelper
 import org.eclipse.xtend.core.parser.antlr.XtendTokenSourceProvider
 import org.eclipse.xtend.core.parser.antlr.internal.DisabledAntlrLexer
@@ -45,6 +47,7 @@ import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver
 import org.eclipse.xtend.core.typesystem.XtendReentrantTypeResolver
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer
 import org.eclipse.xtend.core.typing.XtendExpressionHelper
+import org.eclipse.xtend.core.validation.CachingResourceValidatorImpl
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator
 import org.eclipse.xtend.core.validation.XtendImplicitReturnFinder
@@ -63,7 +66,6 @@ import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.IShouldGenerate
 import org.eclipse.xtext.linking.ILinker
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder
 import org.eclipse.xtext.parser.IParser
 import org.eclipse.xtext.parser.antlr.IPartialParsingHelper
 import org.eclipse.xtext.parser.antlr.Lexer
@@ -79,6 +81,7 @@ import org.eclipse.xtext.resource.impl.EagerResourceSetBasedResourceDescriptions
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding
 import org.eclipse.xtext.tasks.ITaskTagProvider
 import org.eclipse.xtext.validation.CompositeEValidator
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider
@@ -103,14 +106,11 @@ import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames
 import org.eclipse.xtext.xbase.util.XExpressionHelper
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder
-import com.google.inject.Binder
-import com.google.inject.Provider
-import com.google.inject.name.Names
 
 /** 
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModule {
+class XtendRuntimeModule extends AbstractXtendRuntimeModule {
 
 	def XbaseFactory bindXbaseFactory() {
 		return XbaseFactory.eINSTANCE
@@ -128,8 +128,8 @@ class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModu
 		binder.bind(IScopeProvider).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XtendImportedNamespaceScopeProvider)
 	}
 
-	override void configureSerializerIScopeProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider).annotatedWith(org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding).to(
+	override void configureSerializerIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider).annotatedWith(SerializerScopeProviderBinding).to(
 			XtendSerializerScopeProvider)
 	}
 
@@ -223,7 +223,7 @@ class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModu
 	}
 
 	override Class<? extends IResourceValidator> bindIResourceValidator() {
-		return org.eclipse.xtend.core.validation.CachingResourceValidatorImpl
+		return CachingResourceValidatorImpl
 	}
 
 	override Class<? extends ILinker> bindILinker() {
@@ -233,7 +233,7 @@ class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModu
 	/** 
 	 * @since 2.4.2
 	 */
-	override void configureIResourceDescriptions(com.google.inject.Binder binder) {
+	override void configureIResourceDescriptions(Binder binder) {
 		binder.bind(IResourceDescriptions).to(EagerResourceSetBasedResourceDescriptions)
 	}
 
@@ -280,10 +280,6 @@ class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModu
 
 	override Class<? extends IPartialParsingHelper> bindIPartialParserHelper() {
 		return XtendPartialParsingHelper
-	}
-
-	def Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
-		return XtendNodeModelBuilder
 	}
 
 	def Class<? extends ITaskTagProvider> bindTaskTagProvider() {
