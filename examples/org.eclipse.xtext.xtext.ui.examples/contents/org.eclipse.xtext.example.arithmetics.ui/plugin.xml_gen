@@ -152,7 +152,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -243,8 +243,7 @@
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-			fileExtensions="calc">
-		</participant>
+			fileExtensions="calc"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page

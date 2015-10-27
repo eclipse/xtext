@@ -9,5 +9,5 @@ package org.eclipse.xtext.example.arithmetics.scoping;
 
 import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 
-public class AbstractArithmeticsScopeProvider extends DelegatingScopeProvider {
+public abstract class AbstractArithmeticsScopeProvider extends DelegatingScopeProvider {
 }

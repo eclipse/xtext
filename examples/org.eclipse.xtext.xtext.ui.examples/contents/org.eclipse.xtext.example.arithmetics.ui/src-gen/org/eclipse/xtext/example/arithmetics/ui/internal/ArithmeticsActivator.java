@@ -14,6 +14,7 @@ import com.google.inject.Module;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.arithmetics.ArithmeticsRuntimeModule;
 import org.eclipse.xtext.example.arithmetics.ui.ArithmeticsUiModule;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -24,7 +25,7 @@ import org.osgi.framework.BundleContext;
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class ArithmeticsActivator extends org.eclipse.ui.plugin.AbstractUIPlugin {
+public class ArithmeticsActivator extends AbstractUIPlugin {
 
 	public static final String ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS = "org.eclipse.xtext.example.arithmetics.Arithmetics";
 	
