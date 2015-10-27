@@ -61,20 +61,19 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 	} 
 
 	override generate() {
-		val instanceClass = 
-			if (generateStub) grammar.quickfixProviderClass else grammar.quickfixProviderSuperClass;
-
 		new GuiceModuleAccess.BindingFactory()
 				.addTypeToType(
 					new TypeReference("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider"),
-					instanceClass
+					grammar.quickfixProviderClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
-			if (preferXtendStubs) {
-				generateXtendQuickfixProvider
-			} else {
-				generateJavaQuickfixProvider
+		if (generateStub) {
+			if (projectConfig.eclipsePlugin?.src !== null) {
+				if (preferXtendStubs) {
+					generateXtendQuickfixProvider
+				} else {
+					generateJavaQuickfixProvider
+				}
 			}
 
 			if (projectConfig.eclipsePlugin.manifest != null) {
@@ -84,7 +83,31 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 			if (projectConfig.eclipsePlugin.pluginXml != null) {
 				addRegistrationToPluginXml
 			}
+
+		} else {
+			if (projectConfig.eclipsePlugin?.srcGen !== null) {
+				generateGenScopeProvider
+			}
+
+			if (projectConfig.eclipsePlugin.manifest != null) {
+				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
+			}
 		}
+	}
+	
+	def generateGenScopeProvider() {
+		// take the ordinary concrete class signature for the src-gen class, too
+		//  as quickfixProviders of sub languages refer to 'superGrammar.quickfixProviderClass',
+		//  see 'getGenQuickfixProviderSuperClass(...)'
+		val genClass = grammar.quickfixProviderClass
+		
+		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
+		
+		file.content = '''
+			public class «genClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
+			}
+		'''
+		file.writeTo(projectConfig.runtime.srcGen)
 	}
 
 	protected def generateXtendQuickfixProvider() {
