@@ -19,6 +19,6 @@ Require-Bundle: org.eclipse.xpand;bundle-version="1.1.0",
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0",
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.common.types,
- org.eclipse.xtext.idea.generator;bundle-version="2.9.0";resolution:=optional
+ org.eclipse.xtext.idea.generator;resolution:=optional
 Bundle-Vendor: %providerName
 Import-Package: org.apache.log4j;version="1.2.15"
