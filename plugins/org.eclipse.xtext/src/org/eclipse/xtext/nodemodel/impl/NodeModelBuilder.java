@@ -55,11 +55,10 @@ public class NodeModelBuilder {
 				return hashCode;
 			}
 
-			@SuppressWarnings("rawtypes")
 			@Override public boolean equals(/* @Nullable */ Object o) {
 				if (this == o)
 					return true;
-				return o instanceof ArrayAsList && Arrays.equals(array, ((ArrayAsList) o).array);
+				return o instanceof ArrayAsList<?> && Arrays.equals(array, ((ArrayAsList<?>) o).array);
 			}
 		}
 
@@ -200,7 +199,7 @@ public class NodeModelBuilder {
 					&& firstChild.getSyntaxErrorMessage() == null) {
 				// it is our only child and has no direct semantic element
 				// so we can fold its grammar element into our own grammar elements
-				// it refers not to a syntax error or a semantic object
+				// if it refers not to a syntax error or a semantic object
 				EObject myGrammarElement = casted.getGrammarElement();
 				Object childGrammarElement = firstChild.basicGetGrammarElement();
 				EObject[] list = null;
@@ -238,14 +237,7 @@ public class NodeModelBuilder {
 		if (compressRoot && result instanceof RootNode) {
 			if (casted.hasSiblings())
 				throw new IllegalStateException("Root's child should never have siblings");
-			RootNode root = (RootNode) result;
-			if (casted.basicGetFirstChild() != null) {
-				AbstractNode firstChild = casted.basicGetFirstChild();
-				if (firstChild instanceof ILeafNode && !firstChild.basicHasNextSibling()) {
-					return result;
-				}
-				replaceByRootNode(casted, root);
-			}
+			replaceByRootNode(casted, (RootNode) result);
 		}
 		return result;
 	}
@@ -256,11 +248,13 @@ public class NodeModelBuilder {
 	protected void replaceByRootNode(CompositeNode oldNode, RootNode rootNode) {
 		AbstractNode firstChild = oldNode.basicGetFirstChild();
 		rootNode.basicSetFirstChild(firstChild);
-		firstChild.basicSetParent(rootNode);
-		AbstractNode child = firstChild;
-		while(child.basicHasNextSibling()) {
-			child = child.basicGetNextSibling();
-			child.basicSetParent(rootNode);
+		if (firstChild != null) {
+			firstChild.basicSetParent(rootNode);
+			AbstractNode child = firstChild;
+			while(child.basicHasNextSibling()) {
+				child = child.basicGetNextSibling();
+				child.basicSetParent(rootNode);
+			}
 		}
 		rootNode.basicSetGrammarElement(oldNode.basicGetGrammarElement());
 		rootNode.basicSetSemanticElement(oldNode.basicGetSemanticElement());
@@ -346,7 +340,6 @@ public class NodeModelBuilder {
 		if (oldNode instanceof ICompositeNode && newNode instanceof CompositeNode) {
 			CompositeNode newCompositeNode = (CompositeNode) newNode;
 			newCompositeNode.basicSetLookAhead(((ICompositeNode) oldNode).getLookAhead());
-			// todo: unfold both nodes and compress afterwards
 		}
 		ICompositeNode root = newNode.getRootNode();
 		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) root).basicIterator();
