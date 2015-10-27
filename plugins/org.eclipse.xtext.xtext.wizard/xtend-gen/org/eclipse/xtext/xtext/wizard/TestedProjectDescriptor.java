@@ -16,10 +16,10 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -66,34 +66,34 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    ArrayList<TextFile> _xblockexpression = null;
+  public Iterable<? extends AbstractFile> getFiles() {
+    ArrayList<AbstractFile> _xblockexpression = null;
     {
-      final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-      Iterable<? extends TextFile> _files = super.getFiles();
-      Iterables.<TextFile>addAll(files, _files);
+      final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+      Iterable<? extends AbstractFile> _files = super.getFiles();
+      Iterables.<AbstractFile>addAll(files, _files);
       TestProjectDescriptor _testProject = this.getTestProject();
       boolean _isInlined = _testProject.isInlined();
       if (_isInlined) {
         TestProjectDescriptor _testProject_1 = this.getTestProject();
-        Iterable<? extends TextFile> _files_1 = _testProject_1.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files_1 = _testProject_1.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile fileFromTestProject) {
-            final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+          public Boolean apply(final AbstractFile fileFromTestProject) {
+            final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
               @Override
-              public Boolean apply(final TextFile it) {
+              public Boolean apply(final AbstractFile it) {
                 String _relativePath = it.getRelativePath();
                 String _relativePath_1 = fileFromTestProject.getRelativePath();
                 return Boolean.valueOf(Objects.equal(_relativePath, _relativePath_1));
               }
             };
-            boolean _exists = IterableExtensions.<TextFile>exists(files, _function);
+            boolean _exists = IterableExtensions.<AbstractFile>exists(files, _function);
             return Boolean.valueOf((!_exists));
           }
         };
-        Iterable<? extends TextFile> _filter = IterableExtensions.filter(_files_1, _function);
-        Iterables.<TextFile>addAll(files, _filter);
+        Iterable<? extends AbstractFile> _filter = IterableExtensions.filter(_files_1, _function);
+        Iterables.<AbstractFile>addAll(files, _filter);
       }
       _xblockexpression = files;
     }

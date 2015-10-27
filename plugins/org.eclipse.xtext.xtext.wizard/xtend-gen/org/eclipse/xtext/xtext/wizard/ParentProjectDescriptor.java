@@ -7,8 +7,11 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.io.Resources;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,10 +20,13 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
+import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
@@ -30,7 +36,6 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -101,10 +106,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-    Iterable<? extends TextFile> _files = super.getFiles();
-    Iterables.<TextFile>addAll(files, _files);
+  public Iterable<? extends AbstractFile> getFiles() {
+    final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+    Iterable<? extends AbstractFile> _files = super.getFiles();
+    Iterables.<AbstractFile>addAll(files, _files);
     WizardConfiguration _config = this.getConfig();
     boolean _needsGradleBuild = _config.needsGradleBuild();
     if (_needsGradleBuild) {
@@ -117,8 +122,37 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       CharSequence _mavenDeploymentGradle = this.mavenDeploymentGradle();
       PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradle/maven-deployment.gradle", _mavenDeploymentGradle);
       files.add(_file_2);
+      WizardConfiguration _config_1 = this.getConfig();
+      boolean _isNeedsGradleWrapper = _config_1.isNeedsGradleWrapper();
+      if (_isNeedsGradleWrapper) {
+        CharSequence _loadResource = this.loadResource("gradlew/gradlew");
+        PlainTextFile _file_3 = this.file(Outlet.ROOT, "gradlew", _loadResource, true);
+        files.add(_file_3);
+        CharSequence _loadResource_1 = this.loadResource("gradlew/gradlew.bat");
+        PlainTextFile _file_4 = this.file(Outlet.ROOT, "gradlew.bat", _loadResource_1);
+        files.add(_file_4);
+        CharSequence _loadResource_2 = this.loadResource("gradlew/gradle-wrapper.properties");
+        PlainTextFile _file_5 = this.file(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.properties", _loadResource_2);
+        files.add(_file_5);
+        Class<? extends ParentProjectDescriptor> _class = this.getClass();
+        ClassLoader _classLoader = _class.getClassLoader();
+        URL _resource = _classLoader.getResource("gradlew/gradle-wrapper.jar");
+        BinaryFile _binaryFile = this.binaryFile(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.jar", _resource);
+        files.add(_binaryFile);
+      }
     }
     return files;
+  }
+  
+  public CharSequence loadResource(final String resourcePath) {
+    try {
+      Class<? extends ParentProjectDescriptor> _class = this.getClass();
+      ClassLoader _classLoader = _class.getClassLoader();
+      URL _resource = _classLoader.getResource(resourcePath);
+      return Resources.toString(_resource, Charsets.ISO_8859_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Override

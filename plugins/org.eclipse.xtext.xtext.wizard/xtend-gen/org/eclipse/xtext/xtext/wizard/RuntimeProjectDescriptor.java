@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.xtext.wizard.RuntimeTestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -219,10 +219,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-    Iterable<? extends TextFile> _files = super.getFiles();
-    Iterables.<TextFile>addAll(files, _files);
+  public Iterable<? extends AbstractFile> getFiles() {
+    final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+    Iterable<? extends AbstractFile> _files = super.getFiles();
+    Iterables.<AbstractFile>addAll(files, _files);
     PlainTextFile _grammarFile = this.getGrammarFile();
     files.add(_grammarFile);
     String _workflowFilePath = this.getWorkflowFilePath();

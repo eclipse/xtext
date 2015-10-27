@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
+import java.net.URL;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,6 +23,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
+import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
@@ -83,7 +86,7 @@ public abstract class ProjectDescriptor {
     return IterableExtensions.<String>toSet(_map);
   }
   
-  public Iterable<? extends TextFile> getFiles() {
+  public Iterable<? extends AbstractFile> getFiles() {
     final List<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
     boolean _isEclipsePluginProject = this.isEclipsePluginProject();
     if (_isEclipsePluginProject) {
@@ -332,6 +335,14 @@ public abstract class ProjectDescriptor {
   
   protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content) {
     return new PlainTextFile(outlet, relativePath, this, content);
+  }
+  
+  protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content, final boolean executable) {
+    return new PlainTextFile(outlet, relativePath, this, content, executable);
+  }
+  
+  protected BinaryFile binaryFile(final Outlet outlet, final String relativePath, final URL url) {
+    return new BinaryFile(outlet, relativePath, this, false, url);
   }
   
   public ProjectDescriptor(final WizardConfiguration config) {
