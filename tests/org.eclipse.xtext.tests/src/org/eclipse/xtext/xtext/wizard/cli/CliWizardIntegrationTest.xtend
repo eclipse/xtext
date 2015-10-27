@@ -171,8 +171,8 @@ class CliWizardIntegrationTest {
 		val expectedFilesByPath = expectedFiles.toMap[relativePath]
 		val actualFilesByPath = actualFiles.toMap[relativePath]
 
-		val missingFiles = Sets.difference(actualFiles, expectedFiles)
-		val unexpectedFiles = Sets.difference(expectedFiles, actualFiles)
+		val missingFiles = Sets.difference(expectedFiles, actualFiles)
+		val unexpectedFiles = Sets.difference(actualFiles, expectedFiles)
 		val comparableFiles = Sets.intersection(expectedFiles, actualFiles)
 
 		missingFiles.forEach [
