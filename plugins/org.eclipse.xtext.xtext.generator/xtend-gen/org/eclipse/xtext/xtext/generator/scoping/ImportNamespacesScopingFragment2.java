@@ -122,8 +122,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     TypeReference _xifexpression = null;
     IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
-    boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
-    if (_usesXImportSection) {
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+    if (_inheritsXbase) {
       _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider");
     } else {
       _xifexpression = TypeReference.typeRef(ImportedNamespaceAwareLocalScopeProvider.class);
