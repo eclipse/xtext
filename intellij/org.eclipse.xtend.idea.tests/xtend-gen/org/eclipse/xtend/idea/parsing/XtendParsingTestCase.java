@@ -86,6 +86,14 @@ public class XtendParsingTestCase extends AbstractModelTestCase {
     _xtextLanguage.injectMembers(this.delegate);
   }
   
+  public void testAllGrammarElementsUnique() throws Exception {
+    delegate.testAllGrammarElementsUnique();
+  }
+  
+  public void testAllGrammarElementsUniqueAfterReparse() throws Exception {
+    delegate.testAllGrammarElementsUniqueAfterReparse();
+  }
+  
   public void testBug367949() throws Exception {
     delegate.testBug367949();
   }
