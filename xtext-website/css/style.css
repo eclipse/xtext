@@ -73,14 +73,14 @@ h4 {
 	font-size: 17px;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
-	color: #A22;
+	color: #444;
 }
 
 h5 {
 	font-size: 15px;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
-	color: #515556;
+	color: #555;
 }
 
 img {
@@ -89,9 +89,7 @@ img {
 }
 
 em {
-	font-weight: 500;
 	font-style: italic;
-	padding: 0 2px 0 0;
 }
 
 strong {
@@ -99,14 +97,21 @@ strong {
 }
 
 code {
-  color: #48484c;
+  color: #222;
   font-size: 13px;
+  border: none;
+  background: none;
 }
 
 hr {
   border-top: 1px solid #d0d0d0;
   border-bottom: 1px solid #f0f0f0;
   margin: 24px 0;
+}
+
+.doc-contents a {
+	color: inherit;
+	text-decoration: underline;
 }
 
 /* table */
@@ -1096,8 +1101,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 #page h1 {
-	font-family: 'Vollkorn', serif;
-	color: #444;
+	color: #222;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;

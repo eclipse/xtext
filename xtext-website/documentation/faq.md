@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Documentation
+title: Frequently Asked Questions
 part: Xtext Documentation
 ---
 
@@ -8,15 +8,13 @@ part: Xtext Documentation
 
 ## What is Xtext?
 
-No matter if you want to create a small textual domain-specific language (DSL) or you want to implement a full-blown general purpose programming language: with Xtext you can create your very own languages in a snap. If you already have an existing language but it lacks decent tool support, you can use Xtext to create a sophisticated Eclipse-based development environment providing editing experience known from modern Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework. 
+No matter if you want to create a small textual domain-specific language (DSL) or you want to implement a full-blown general purpose programming language: with Xtext you can create your very own languages in a snap. If you already have an existing language but it lacks decent tool support, you can use Xtext to create a sophisticated Eclipse-based development environment providing editing experience known from modern Java IDEs in a surprisingly short amount of time. We call Xtext a language engineering framework. 
 
 ## How Does It Work?
 
 Xtext provides you with a set of domain-specific languages and modern APIs to describe the different aspects of your programming language. Based on that information it gives you a full implementation of that language running on the JVM. The compiler components of your language are independent of Eclipse or OSGi and can be used in any Java environment. They include such things as the parser, the type-safe abstract syntax tree (AST), the serializer and code formatter, the scoping framework and the linking, compiler checks and static analysis aka validation and last but not least a code generator or interpreter. These runtime components integrate with and are based on the Eclipse Modeling Framework (EMF), which effectively allows you to use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project GMF.
 
 In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored for your language. It already provides great default functionality for all aspects and again comes with DSLs and APIs that allow to configure or change the most common things very easily. And if that's not flexible enough there is Guice to replace the default behavior with your own implementations.
-
-## Xtext is Highly Configurable
 
 Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language as well as the IDE infrastructure. A central, external module is used to configure the DI container. As already mentioned, Xtext comes with decent default implementations and DSLs and APIs for the aspect that are common sweet spots for customization. But if you need something completely different, Google Guice gives you the power to exchange every little class in a non-invasive way.
 
@@ -30,7 +28,7 @@ Xtext is a professional Open-Source project. We, the main developers and the pro
 
 You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. Don't hesitate to get in contact with us ([www.itemis.com](http://xtext.itemis.com)).
 
-## What is a Domain-Specific Language {#DSL}
+## What is a Domain-Specific Language {#DSL}?
 
 A *Domain-Specific Language (DSL)* is a small programming language, which focuses on a particular domain. Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can be solved or processed by computers somehow.
 
@@ -43,5 +41,3 @@ There are a couple of well-known examples of DSLs. For instance SQL is actually 
 Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may be as concise and suggestive as possible being a best match for your particular domain. The hard task of reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.
 
 ---
-
-**[Next Chapter: 5 Minutes Tutorial](101_five_minutes.html)**

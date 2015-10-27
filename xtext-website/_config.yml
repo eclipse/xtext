@@ -1,5 +1,5 @@
 # Site settings
-title: Xtext - Language Development Framework
+title: Xtext - Language Engineering Framework
 email: xtext@itemis.com
 description: > # this means to ignore newlines until "baseurl:"
   Xtext is a framework for development of programming languages and domain specific languages. It covers all 

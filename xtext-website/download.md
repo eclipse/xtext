@@ -6,7 +6,7 @@ title: Download
 Installation Instructions
 =========================
 
-Eclipse Xtext is implmented in Java, so you must have a [Java Runtime Environment](http://www.oracle.com/technetwork/java/index.html) installed in order to proceed.
+Eclipse Xtext is implemented in Java, so you must have a [Java Runtime Environment](http://www.oracle.com/technetwork/java/index.html) installed in order to proceed.
 
 There are two easy ways to get Xtext up and running. A pre-configured Eclipse distribution is available which has already all the necessary plug-ins installed. Alternatively, you can install Xtext into your existing Eclipse by means of the Eclipse update mechanism.
 
