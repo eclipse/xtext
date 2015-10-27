@@ -24,6 +24,7 @@ import org.junit.Assert
 import org.junit.ComparisonFailure
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.xbase.XExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -116,7 +117,7 @@ class Bug480686Test {
 	}
 
 	@Test 
-	def void testCompareNodeModel() {
+	def void testCompareNodeModel_01() {
 		val result = parseHelper.parse("")
 		val res = result.eResource as XtextResource
 		res.update(0, 0, "newArrayList()")
@@ -124,11 +125,56 @@ class Bug480686Test {
 		res.parseResult.assertEqual((fresh.eResource as XtextResource).parseResult)
 	}
 
+	@Test 
+	def void testCompareNodeModel_02() {
+		val result = parseHelper.parse("{vjava.beans.VetoableChangeListener x = []}")
+		val res = result.eResource as XtextResource
+		res.update(2, 1, "a")
+		val fresh = parseHelper.parse("{ajava.beans.VetoableChangeListener x = []}")
+		res.parseResult.assertEqual((fresh.eResource as XtextResource).parseResult)
+	}
+
+	@Test 
+	def void testCompareNodeModel_03() {
+		val result = parseHelper.parse("{  val Object o = 'foo'    switch(o) {\n" + 
+				"        String: \"\".oString\n" + 
+				"    }\n" + 
+				"    switch(o) {\n" + 
+				"        String: \"\"\n" + 
+				"    }}")
+		val res = result.eResource as XtextResource
+		res.update(58, 1, "t")
+		val fresh = parseHelper.parse("{  val Object o = 'foo'    switch(o) {\n" + 
+				"        String: \"\".tString\n" + 
+				"    }\n" + 
+				"    switch(o) {\n" + 
+				"        String: \"\"\n" + 
+				"    }}")
+		res.parseResult.assertEqual((fresh.eResource as XtextResource).parseResult)
+	}
+
+	@Test 
+	def void testCompareNodeModel_04() {
+		val result = parseHelper.parse("{  val Object o = 'foo'    switch(o) {\n" + 
+				"        String: \"\".  oString\n" + 
+				"    }\n" + 
+				"    switch(o) {\n" + 
+				"        String: \"\"\n" + 
+				"    }}")
+		val res = result.eResource as XtextResource
+		res.update(60, 1, "t")
+		val fresh = parseHelper.parse("{  val Object o = 'foo'    switch(o) {\n" + 
+				"        String: \"\".  tString\n" + 
+				"    }\n" + 
+				"    switch(o) {\n" + 
+				"        String: \"\"\n" + 
+				"    }}")
+		res.parseResult.assertEqual((fresh.eResource as XtextResource).parseResult)
+	}
 
 	def private void assertEqual(IParseResult parsedFromScratch, IParseResult reparsed) {
 		var rootFromScratch=parsedFromScratch.getRootASTElement() 
 		var rootReparsed=reparsed.getRootASTElement() 
-		assertEqual(EmfFormatter.objToStr(rootFromScratch), EmfFormatter.objToStr(rootReparsed)) 
 		assertEqual(parsedFromScratch.getRootNode(), reparsed.getRootNode()) 
 	}
 	def private void assertEqual(ICompositeNode fromScratch, ICompositeNode reparsed) {
@@ -151,7 +197,7 @@ class Bug480686Test {
 		Assert.assertEquals(node.hasDirectSemanticElement(), other.hasDirectSemanticElement()) 
 		Assert.assertEquals(node.getSyntaxErrorMessage(), other.getSyntaxErrorMessage()) 
 		if (node instanceof ICompositeNode) {
-			Assert.assertEquals(node.getLookAhead(), ((other as ICompositeNode)).getLookAhead()) 
+			Assert.assertEquals(node.text, node.getLookAhead(), ((other as ICompositeNode)).getLookAhead()) 
 		}
 	}
 	def private void assertEqual(String parsedFromScratch, String reparsed) {
