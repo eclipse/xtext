@@ -6,7 +6,8 @@ Bundle-Version: 2.9.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional;x-installation:=greedy,
@@ -14,31 +15,32 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.testlanguages.backtracking,
- org.eclipse.xtext.testlanguages.backtracking.services,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.util,
+ org.eclipse.xtext.testlanguages.backtracking.formatting,
+ org.eclipse.xtext.testlanguages.backtracking.formatting2,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal,
- org.eclipse.xtext.testlanguages.backtracking.validation,
- org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer,
  org.eclipse.xtext.testlanguages.backtracking.scoping,
- org.eclipse.xtext.testlanguages.backtracking.formatting,
+ org.eclipse.xtext.testlanguages.backtracking.serializer,
+ org.eclipse.xtext.testlanguages.backtracking.services,
+ org.eclipse.xtext.testlanguages.backtracking.validation,
  org.eclipse.xtext.testlanguages.noJdt,
- org.eclipse.xtext.testlanguages.noJdt.services,
+ org.eclipse.xtext.testlanguages.noJdt.formatting2,
+ org.eclipse.xtext.testlanguages.noJdt.generator,
  org.eclipse.xtext.testlanguages.noJdt.noJdt,
  org.eclipse.xtext.testlanguages.noJdt.noJdt.impl,
  org.eclipse.xtext.testlanguages.noJdt.noJdt.util,
- org.eclipse.xtext.testlanguages.noJdt.serializer,
  org.eclipse.xtext.testlanguages.noJdt.parser.antlr,
  org.eclipse.xtext.testlanguages.noJdt.parser.antlr.internal,
- org.eclipse.xtext.testlanguages.noJdt.validation,
  org.eclipse.xtext.testlanguages.noJdt.scoping,
- org.eclipse.xtext.testlanguages.noJdt.generator,
- org.eclipse.xtext.testlanguages.noJdt.formatting,
- org.eclipse.xtext.testlanguages.backtracking.serializer
+ org.eclipse.xtext.testlanguages.noJdt.serializer,
+ org.eclipse.xtext.testlanguages.noJdt.services,
+ org.eclipse.xtext.testlanguages.noJdt.validation
 
