@@ -261,7 +261,7 @@
       label="tools">
     <requirement
         name="org.eclipse.m2e.feature.feature.group"
-        versionRange="[1.0.0,1.6.0)"/>
+        versionRange="[1.0.0,1.7.0)"/>
     <requirement
         name="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
     <requirement
