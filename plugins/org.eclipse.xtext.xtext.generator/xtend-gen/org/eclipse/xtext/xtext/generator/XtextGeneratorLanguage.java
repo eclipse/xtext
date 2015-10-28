@@ -52,7 +52,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.RuleNames;
-import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
@@ -68,7 +68,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
  */
 @Log
 @SuppressWarnings("all")
-public class XtextGeneratorLanguage extends CompositeGeneratorFragment implements IXtextGeneratorLanguage {
+public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXtextGeneratorLanguage {
   private String grammarUri;
   
   private String name;

@@ -22,7 +22,7 @@ import org.eclipse.xtext.xtext.generator.Issues;
  * @noreference
  */
 @SuppressWarnings("all")
-public class CompositeGeneratorFragment implements IXtextGeneratorFragment {
+public class CompositeGeneratorFragment2 implements IXtextGeneratorFragment {
   @Accessors(AccessorType.PROTECTED_GETTER)
   private final List<IXtextGeneratorFragment> fragments = CollectionLiterals.<IXtextGeneratorFragment>newArrayList();
   
