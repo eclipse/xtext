@@ -51,17 +51,17 @@ public class SimpleBeeLangTestLanguageSyntacticSequencer extends AbstractSyntact
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ClosureExpression_VerticalLineKeyword_2_0_0_q.equals(syntax))
+			if (match_ClosureExpression_VerticalLineKeyword_2_0_0_q.equals(syntax))
 				emit_ClosureExpression_VerticalLineKeyword_2_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ConstructorCallExpression___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q.equals(syntax))
+			else if (match_ConstructorCallExpression___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q.equals(syntax))
 				emit_ConstructorCallExpression___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Function___LeftParenthesisKeyword_6_0_RightParenthesisKeyword_6_2__q.equals(syntax))
+			else if (match_Function___LeftParenthesisKeyword_6_0_RightParenthesisKeyword_6_2__q.equals(syntax))
 				emit_Function___LeftParenthesisKeyword_6_0_RightParenthesisKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParanthesizedExpression_LeftParenthesisKeyword_0_a.equals(syntax))
+			else if (match_ParanthesizedExpression_LeftParenthesisKeyword_0_a.equals(syntax))
 				emit_ParanthesizedExpression_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParanthesizedExpression_LeftParenthesisKeyword_0_p.equals(syntax))
+			else if (match_ParanthesizedExpression_LeftParenthesisKeyword_0_p.equals(syntax))
 				emit_ParanthesizedExpression_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ProvidedCapability___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q.equals(syntax))
+			else if (match_ProvidedCapability___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q.equals(syntax))
 				emit_ProvidedCapability___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

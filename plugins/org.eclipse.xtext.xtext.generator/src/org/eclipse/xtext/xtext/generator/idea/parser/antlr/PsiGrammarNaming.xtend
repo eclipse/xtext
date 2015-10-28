@@ -19,6 +19,11 @@ class PsiGrammarNaming extends GrammarNaming {
 	@Inject
 	extension XtextGeneratorNaming
 	
+	override isCombinedGrammar(Grammar it) {
+		// separated grammars are not supported for IDEA yet
+		true
+	}
+	
 	override String getParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr'''
 	
 	override getInternalParserSuperClass(Grammar it) {

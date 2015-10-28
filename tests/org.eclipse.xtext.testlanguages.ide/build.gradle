@@ -1,0 +1,3 @@
+dependencies {
+	compile project(':tests:org.eclipse.xtext.testlanguages')
+}

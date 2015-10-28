@@ -3,26 +3,32 @@
  */
 package org.eclipse.xtext.testlanguages.backtracking.ui.internal;
 
-import java.util.Collections;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
-import org.osgi.framework.BundleContext;
-
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import java.util.Collections;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageUiModule;
+import org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageUiModule;
+import org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageUiModule;
+import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageUiModule;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.Modules2;
+import org.osgi.framework.BundleContext;
 
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
 public class BeeLangTestLanguageActivator extends AbstractUIPlugin {
-	
+
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_SIMPLEBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage";
@@ -74,38 +80,36 @@ public class BeeLangTestLanguageActivator extends AbstractUIPlugin {
 			throw new RuntimeException("Failed to create injector for " + language, e);
 		}
 	}
-
+	
 	protected Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageRuntimeModule();
+			return new BeeLangTestLanguageRuntimeModule();
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_SIMPLEBEELANGTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguageRuntimeModule();
+			return new SimpleBeeLangTestLanguageRuntimeModule();
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguageRuntimeModule();
+			return new ExBeeLangTestLanguageRuntimeModule();
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule();
+			return new NoJdtTestLanguageRuntimeModule();
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageUiModule(this);
+			return new BeeLangTestLanguageUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_SIMPLEBEELANGTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageUiModule(this);
+			return new SimpleBeeLangTestLanguageUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageUiModule(this);
+			return new ExBeeLangTestLanguageUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE.equals(grammar)) {
-			return new org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageUiModule(this);
+			return new NoJdtTestLanguageUiModule(this);
 		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	
