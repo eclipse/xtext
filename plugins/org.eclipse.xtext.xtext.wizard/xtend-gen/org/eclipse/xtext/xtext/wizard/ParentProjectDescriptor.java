@@ -144,7 +144,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     return files;
   }
   
-  public CharSequence loadResource(final String resourcePath) {
+  private CharSequence loadResource(final String resourcePath) {
     try {
       Class<? extends ParentProjectDescriptor> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();

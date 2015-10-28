@@ -156,11 +156,11 @@ public class WizardConfiguration {
   
   public boolean isNeedsGradleWrapper() {
     boolean _and = false;
-    boolean _needsGradleBuild = this.needsGradleBuild();
-    if (!_needsGradleBuild) {
+    if (!this.needsGradleWrapper) {
       _and = false;
     } else {
-      _and = this.needsGradleWrapper;
+      boolean _needsGradleBuild = this.needsGradleBuild();
+      _and = _needsGradleBuild;
     }
     return _and;
   }

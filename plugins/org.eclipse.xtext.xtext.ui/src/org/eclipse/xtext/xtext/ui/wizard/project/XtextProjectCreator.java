@@ -185,7 +185,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			IFile created = fileWriter.writeToFile("", path);
 			InputStream stream = null;
 			try {
-				stream = Resources.asByteSource(url).openBufferedStream();
+				stream = Resources.newInputStreamSupplier(url).getInput();
 				created.setContents(stream, IResource.FORCE, new NullProgressMonitor());
 			} catch (Exception e) {
 				LOG.error("Failed to create binary file " + created.getFullPath().toOSString(), e);

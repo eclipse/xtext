@@ -69,6 +69,6 @@ class WizardConfiguration {
 	}
 	
 	def boolean isNeedsGradleWrapper() {
-		return needsGradleBuild && needsGradleWrapper
+		return needsGradleWrapper && needsGradleBuild
 	}
 }

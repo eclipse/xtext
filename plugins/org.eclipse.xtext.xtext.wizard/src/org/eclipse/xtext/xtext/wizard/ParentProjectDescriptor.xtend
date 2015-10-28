@@ -64,7 +64,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		return files
 	}
 
-	def CharSequence loadResource(String resourcePath) {
+	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
 
