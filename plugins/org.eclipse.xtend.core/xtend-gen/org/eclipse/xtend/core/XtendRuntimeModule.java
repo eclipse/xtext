@@ -35,7 +35,6 @@ import org.eclipse.xtend.core.macro.declaration.NopResourceChangeRegistry;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
-import org.eclipse.xtend.core.parser.XtendNodeModelBuilder;
 import org.eclipse.xtend.core.parser.XtendPartialParsingHelper;
 import org.eclipse.xtend.core.parser.antlr.XtendTokenSourceProvider;
 import org.eclipse.xtend.core.parser.antlr.internal.DisabledAntlrLexer;
@@ -71,7 +70,6 @@ import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.parser.antlr.Lexer;
@@ -331,10 +329,6 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   @Override
   public Class<? extends IPartialParsingHelper> bindIPartialParserHelper() {
     return XtendPartialParsingHelper.class;
-  }
-  
-  public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
-    return XtendNodeModelBuilder.class;
   }
   
   public Class<? extends ITaskTagProvider> bindTaskTagProvider() {

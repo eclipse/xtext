@@ -1,7 +1,9 @@
 package org.eclipse.xtend.core.tests.parsing;
 
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
@@ -25,6 +27,10 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -41,6 +47,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.junit.Test;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 public class ParserTest extends AbstractXtendTestCase {
@@ -67,6 +74,47 @@ public class ParserTest extends AbstractXtendTestCase {
 		XtendVariableDeclaration variableDeclaration = (XtendVariableDeclaration) body.getExpressions().get(0);
 		assertTrue(variableDeclaration.isWriteable());
 		assertTrue(variableDeclaration.isExtension());
+	}
+
+	@Test 
+	public void testAllGrammarElementsUnique() throws Exception {
+		XtendClass clazz = clazz("class Foo { def m() { newArrayList() } }");
+		XtextResource resource = (XtextResource) clazz.eResource();
+		ICompositeNode root = resource.getParseResult().getRootNode();
+		new InvariantChecker().checkInvariant(root);
+		assertSame(root, root.getRootNode());
+		Set<EObject> grammarElements = Sets.newHashSet();
+		for(INode node: root.getAsTreeIterable()) {
+			if (node instanceof ICompositeNode) {
+				if (node.getGrammarElement() == null) {
+					fail("node without grammar element");
+				}
+				if (!grammarElements.add(node.getGrammarElement())) {
+					fail(node.getGrammarElement().toString());
+				}
+			}
+		}
+	}
+	
+	@Test 
+	public void testAllGrammarElementsUniqueAfterReparse() throws Exception {
+		String text = "class Foo { def m() { newArrayList() } }";
+		XtendClass clazz = clazz(text);
+		XtextResource resource = (XtextResource) clazz.eResource();
+		resource.update(text.indexOf('m'), 0, "m");
+		ICompositeNode root = resource.getParseResult().getRootNode();
+		assertSame(root, root.getRootNode());
+		Set<EObject> grammarElements = Sets.newHashSet();
+		for(INode node: root.getAsTreeIterable()) {
+			if (node instanceof ICompositeNode) {
+				if (node.getGrammarElement() == null) {
+					fail("node without grammar element");
+				}
+				if (!grammarElements.add(node.getGrammarElement())) {
+					fail(node.getGrammarElement().toString());
+				}
+			}
+		}
 	}
 	
 	@Test

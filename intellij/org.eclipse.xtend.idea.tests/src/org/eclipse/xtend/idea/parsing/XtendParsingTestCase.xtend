@@ -14,6 +14,7 @@ import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -55,5 +56,11 @@ class XtendParsingTestCase extends AbstractModelTestCase {
 				}
 			''')
 		}
+		
+		@Ignore
+		override testAllGrammarElementsUniqueAfterReparse() throws Exception {
+			super.testAllGrammarElementsUniqueAfterReparse()
+		}
+		
 	}
 }
