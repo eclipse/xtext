@@ -52,8 +52,12 @@ import com.google.inject.name.Named;
  * Mostly copied and refactored from the default implementation.
  * 
  * @author Sebastian Zarnekow
+ * @since 2.9
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @noreference This class is not intended to be referenced by clients.
  */
-public class PreferFullParsePartialParsingHelper implements IPartialParsingHelper {
+public class TokenSequencePreservingPartialParsingHelper implements IPartialParsingHelper {
 
 	@Inject
 	private IReferableElementsUnloader unloader;
@@ -130,7 +134,7 @@ public class PreferFullParsePartialParsingHelper implements IPartialParsingHelpe
 	
 	/**
 	 * Returns true if the previous document state was completely broken, e.g. the parser did not recover at all.
-	 * This may happen for documents like
+	 * This may happen e.g. in Xtend for documents like
 	 * <pre>import static class C {}</pre>
 	 * where the class keyword is consumed as an invalid token in the import declaration and everything thereafter
 	 * is unrecoverable.
@@ -258,31 +262,6 @@ public class PreferFullParsePartialParsingHelper implements IPartialParsingHelpe
 				return null;
 			}
 			if (leaf.getTotalEndOffset() > offset) {
-//				ICompositeNode parent = leaf.getParent();
-//				int lookAhead = parent.getLookAhead();
-//				if (lookAhead > 1) {
-//					Iterable<ILeafNode> siblingLeafs = parent.getLeafNodes();
-//					for(ILeafNode sibling: siblingLeafs) {
-//						if (sibling == leaf) {
-//							break;
-//						}
-//						if (!sibling.isHidden()) {
-//							lookAhead--;
-//						}
-//						if (lookAhead == 0) {
-//							break;
-//						}
-//					}
-//				}
-//				while(lookAhead > 0 && leafNodes.hasNext()) {
-//					leaf = leafNodes.next(); 
-//					if (leaf.getSyntaxErrorMessage() != null) {
-//						return null;
-//					}
-//					if (!leaf.isHidden()) {
-//						lookAhead--;
-//					}
-//				}
 				return leaf;
 			}
 		}
@@ -313,10 +292,9 @@ public class PreferFullParsePartialParsingHelper implements IPartialParsingHelpe
 		}
 		List<ICompositeNode> nodesEnclosingRegion = getAllParents(result);
 		Range range = new Range(left.getTotalOffset(), right.getTotalEndOffset());
-		List<ICompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(nodesEnclosingRegion, 
-				range);
+		List<ICompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(nodesEnclosingRegion);
 
-		filterInvalidRootNodes(result, validReplaceRootNodes);
+		filterInvalidRootNodes(validReplaceRootNodes);
 
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.singletonList(oldRoot);
@@ -334,18 +312,18 @@ public class PreferFullParsePartialParsingHelper implements IPartialParsingHelpe
 		return Lists.reverse(list);
 	}
 
-	protected void filterInvalidRootNodes(ICompositeNode oldRootNode, List<ICompositeNode> validReplaceRootNodes) {
+	protected void filterInvalidRootNodes(List<ICompositeNode> validReplaceRootNodes) {
 		ListIterator<ICompositeNode> iter = validReplaceRootNodes.listIterator(validReplaceRootNodes.size());
 		while (iter.hasPrevious()) {
 			ICompositeNode candidate = iter.previous();
-			if (isInvalidRootNode(oldRootNode, candidate))
+			if (isInvalidRootNode(candidate))
 				iter.remove();
 			else
 				return;
 		}
 	}
 
-	protected boolean isInvalidRootNode(ICompositeNode rootNode, ICompositeNode candidate) {
+	protected boolean isInvalidRootNode(ICompositeNode candidate) {
 		if (candidate instanceof SyntheticCompositeNode)
 			return true;
 		if (candidate.getGrammarElement() instanceof RuleCall) {
@@ -364,8 +342,7 @@ public class PreferFullParsePartialParsingHelper implements IPartialParsingHelpe
 	 * replaced by a partial parse. Such a node has a parent that consumes all his current lookahead tokens and all of
 	 * these tokens are located before the changed region.
 	 */
-	protected List<ICompositeNode> internalFindValidReplaceRootNodeForChangeRegion(
-			List<ICompositeNode> nodesEnclosingRegion, Range range) {
+	protected List<ICompositeNode> internalFindValidReplaceRootNodeForChangeRegion(List<ICompositeNode> nodesEnclosingRegion) {
 		List<ICompositeNode> result = new ArrayList<ICompositeNode>();
 		boolean mustSkipNext = false;
 		for (int i = 0; i < nodesEnclosingRegion.size(); i++) {
