@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -295,6 +296,9 @@ public class Bug480686Test {
   private void assertEqual(final IParseResult parsedFromScratch, final IParseResult reparsed) {
     EObject rootFromScratch = parsedFromScratch.getRootASTElement();
     EObject rootReparsed = reparsed.getRootASTElement();
+    String _objToStr = EmfFormatter.objToStr(rootFromScratch);
+    String _objToStr_1 = EmfFormatter.objToStr(rootReparsed);
+    this.assertEqual(_objToStr, _objToStr_1);
     ICompositeNode _rootNode = parsedFromScratch.getRootNode();
     ICompositeNode _rootNode_1 = reparsed.getRootNode();
     this.assertEqual(_rootNode, _rootNode_1);

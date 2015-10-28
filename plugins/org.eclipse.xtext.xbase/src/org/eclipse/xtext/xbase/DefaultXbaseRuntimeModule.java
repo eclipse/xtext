@@ -47,8 +47,8 @@ import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
-import org.eclipse.xtext.xbase.parser.PreferFullParsePartialParsingHelper;
-import org.eclipse.xtext.xbase.parser.XbaseNodeModelBuilder;
+import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
+import org.eclipse.xtext.xbase.parser.LookAheadPreservingNodeModelBuilder;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
@@ -214,14 +214,14 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	
 	@Override
 	public Class<? extends IPartialParsingHelper> bindIPartialParserHelper() {
-		return PreferFullParsePartialParsingHelper.class;
+		return TokenSequencePreservingPartialParsingHelper.class;
 	}
 	
 	/**
 	 * @since 2.9
 	 */
 	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
-		return XbaseNodeModelBuilder.class;
+		return LookAheadPreservingNodeModelBuilder.class;
 	}
 	
 }

@@ -12,7 +12,7 @@ import java.io.StringReader;
 
 import org.antlr.runtime.Token;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtext.xbase.parser.PreferFullParsePartialParsingHelper;
+import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
 
 import com.google.inject.Inject;
 
@@ -27,7 +27,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow
  */
-public class XtendPartialParsingHelper extends PreferFullParsePartialParsingHelper {
+public class XtendPartialParsingHelper extends TokenSequencePreservingPartialParsingHelper {
 
 	@Inject
 	private FlexerFactory flexerFactory;

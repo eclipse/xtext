@@ -15,11 +15,18 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 
 /**
- * This is required together with the {@link PreferFullParsePartialParsingHelper}.
+ * This is required together with the {@link TokenSequencePreservingPartialParsingHelper}.
+ * 
+ * During partial parsing, the resulting token sequence is equal to the old sequence
+ * thus the lookahead can be losslessly transfered from the old node to the new node. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
+ * @noextend This class is not intended to be subclassed by clients.
+ * @nooverride This method is not intended to be re-implemented or extended by clients.
+ * @noreference This method is not intended to be referenced by clients.
  */
-public class XbaseNodeModelBuilder extends NodeModelBuilder {
+public class LookAheadPreservingNodeModelBuilder extends NodeModelBuilder {
 
 	@Override
 	public void replaceAndTransferLookAhead(INode oldNode, INode newRootNode) {

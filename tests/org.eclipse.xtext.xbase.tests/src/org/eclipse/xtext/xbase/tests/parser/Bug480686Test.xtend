@@ -175,6 +175,7 @@ class Bug480686Test {
 	def private void assertEqual(IParseResult parsedFromScratch, IParseResult reparsed) {
 		var rootFromScratch=parsedFromScratch.getRootASTElement() 
 		var rootReparsed=reparsed.getRootASTElement() 
+		assertEqual(EmfFormatter.objToStr(rootFromScratch), EmfFormatter.objToStr(rootReparsed)) 
 		assertEqual(parsedFromScratch.getRootNode(), reparsed.getRootNode()) 
 	}
 	def private void assertEqual(ICompositeNode fromScratch, ICompositeNode reparsed) {
