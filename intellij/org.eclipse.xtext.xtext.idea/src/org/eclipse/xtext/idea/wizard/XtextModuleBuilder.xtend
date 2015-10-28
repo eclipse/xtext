@@ -152,7 +152,8 @@ class XtextModuleBuilder extends ModuleBuilder {
 		return moduleModel.modules
 	}
 
-	def setupWizardConfiguration(WizardConfiguration wizardConfiguration) {
+	def void setupWizardConfiguration(WizardConfiguration wizardConfiguration) {
+		wizardConfiguration.needsGradleWrapper = false
 		// TODO root module will became a '.parent' ending SettingsPage will not validate this
 		// See com.intellij.ide.projectWizard.ProjectSettingsStep.getModuleNameField()
 		// wizardConfiguration.parentProject.nameQualifier = ''

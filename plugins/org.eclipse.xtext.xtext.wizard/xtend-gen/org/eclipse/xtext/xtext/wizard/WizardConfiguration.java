@@ -70,6 +70,8 @@ public class WizardConfiguration {
   
   private final TargetPlatformProject targetPlatformProject = new TargetPlatformProject(this);
   
+  private boolean needsGradleWrapper = true;
+  
   public Set<ProjectDescriptor> getEnabledProjects() {
     ImmutableSet<ProjectDescriptor> _xblockexpression = null;
     {
@@ -150,6 +152,17 @@ public class WizardConfiguration {
       _or = _isEnabled;
     }
     return _or;
+  }
+  
+  public boolean isNeedsGradleWrapper() {
+    boolean _and = false;
+    if (!this.needsGradleWrapper) {
+      _and = false;
+    } else {
+      boolean _needsGradleBuild = this.needsGradleBuild();
+      _and = _needsGradleBuild;
+    }
+    return _and;
   }
   
   @Pure
@@ -258,5 +271,9 @@ public class WizardConfiguration {
   @Pure
   public TargetPlatformProject getTargetPlatformProject() {
     return this.targetPlatformProject;
+  }
+  
+  public void setNeedsGradleWrapper(final boolean needsGradleWrapper) {
+    this.needsGradleWrapper = needsGradleWrapper;
   }
 }

@@ -17,12 +17,12 @@ import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -60,12 +60,12 @@ public class TargetPlatformProject extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    ArrayList<TextFile> _xblockexpression = null;
+  public Iterable<? extends AbstractFile> getFiles() {
+    ArrayList<AbstractFile> _xblockexpression = null;
     {
-      final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-      Iterable<? extends TextFile> _files = super.getFiles();
-      Iterables.<TextFile>addAll(files, _files);
+      final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+      Iterable<? extends AbstractFile> _files = super.getFiles();
+      Iterables.<AbstractFile>addAll(files, _files);
       String _name = this.getName();
       String _plus = (_name + ".target");
       CharSequence _target = this.target();

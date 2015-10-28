@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
@@ -34,7 +35,6 @@ import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -217,16 +217,17 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     this.config.setSourceLayout(SourceLayout.MAVEN);
     RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
-    Iterable<? extends TextFile> _files = _runtimeProject_1.getFiles();
-    final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+    Iterable<? extends AbstractFile> _files = _runtimeProject_1.getFiles();
+    final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
       @Override
-      public Boolean apply(final TextFile it) {
+      public Boolean apply(final AbstractFile it) {
         String _relativePath = it.getRelativePath();
         return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
       }
     };
-    final TextFile pom = IterableExtensions.findFirst(_files, _function);
-    String _content = pom.getContent();
+    final AbstractFile pom = IterableExtensions.findFirst(_files, _function);
+    Assert.assertTrue((pom instanceof PomFile));
+    String _content = ((PomFile) pom).getContent();
     String _string = _content.toString();
     boolean _contains = _string.contains("<artifactId>org.example.mydsl</artifactId>");
     Assert.assertTrue(_contains);
@@ -322,10 +323,10 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final ProjectDescriptor it) {
         it.setEnabled(true);
-        Iterable<? extends TextFile> _files = it.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
           }
@@ -352,10 +353,10 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final ProjectDescriptor it) {
         it.setEnabled(true);
-        Iterable<? extends TextFile> _files = it.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "build.gradle"));
           }
@@ -381,20 +382,20 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final ProjectDescriptor it) {
         it.setEnabled(true);
-        Iterable<? extends TextFile> _files = it.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "MANIFEST.MF"));
           }
         };
         boolean _exists = IterableExtensions.exists(_files, _function);
         Assert.assertTrue(_exists);
-        Iterable<? extends TextFile> _files_1 = it.getFiles();
-        final Function1<TextFile, Boolean> _function_1 = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files_1 = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function_1 = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "build.properties"));
           }

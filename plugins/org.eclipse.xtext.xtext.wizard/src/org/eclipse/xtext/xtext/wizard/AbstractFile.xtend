@@ -7,14 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.wizard
 
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
-abstract class TextFile extends AbstractFile {
-
-	new(Outlet outlet, String relativePath, ProjectDescriptor project) {
-		super(outlet, relativePath, project, false)
-	}
-	
-	abstract def String getContent()
+abstract class AbstractFile {
+	@Accessors val Outlet outlet
+	@Accessors val String relativePath
+	@Accessors val ProjectDescriptor project
+	@Accessors val boolean executable
 }

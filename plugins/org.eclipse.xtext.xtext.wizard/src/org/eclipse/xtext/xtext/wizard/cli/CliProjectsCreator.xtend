@@ -14,6 +14,9 @@ import org.eclipse.xtext.xtext.wizard.ProjectsCreator
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xtext.wizard.TextFile
+import org.eclipse.xtext.xtext.wizard.BinaryFile
+import com.google.common.io.Resources
 
 class CliProjectsCreator implements ProjectsCreator {
 	
@@ -32,8 +35,18 @@ class CliProjectsCreator implements ProjectsCreator {
 			val projectRelativePath = project.config.sourceLayout.getPathFor(outlet) + "/" + relativePath
 			val file = new File(projectRoot, projectRelativePath)
 			file.parentFile.mkdirs
-			val normalizedContent = content.replace(Strings.newLine, lineDelimiter)
-			Files.write(normalizedContent, file, project.config.encoding)
+			switch(it) {
+				TextFile : {
+					val normalizedContent = content.replace(Strings.newLine, lineDelimiter)
+					Files.write(normalizedContent, file, project.config.encoding)
+				}
+				BinaryFile: {
+					Files.write(Resources.toByteArray(content), file)
+				}
+			}
+			if(executable) {
+				file.executable = true
+			}
 		]
 		project.sourceFolders.forEach [
 			new File(projectRoot, it).mkdirs

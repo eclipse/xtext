@@ -392,8 +392,8 @@ public class CliWizardIntegrationTest {
       }
     };
     final Map<String, CliWizardIntegrationTest.GeneratedFile> actualFilesByPath = IterableExtensions.<String, CliWizardIntegrationTest.GeneratedFile>toMap(actualFiles, _function_1);
-    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> missingFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(actualFiles, expectedFiles);
-    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> unexpectedFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(expectedFiles, actualFiles);
+    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> missingFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(expectedFiles, actualFiles);
+    final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> unexpectedFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(actualFiles, expectedFiles);
     final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> comparableFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>intersection(expectedFiles, actualFiles);
     final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_2 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
       @Override
