@@ -35,6 +35,8 @@ class WizardConfiguration {
 	val webProject = new WebProjectDescriptor(this)
 	val parentProject = new ParentProjectDescriptor(this)
 	val targetPlatformProject = new TargetPlatformProject(this)
+	
+	boolean needsGradleWrapper = true
 
 	def Set<ProjectDescriptor> getEnabledProjects() {
 		val productionProjects = #[
@@ -64,5 +66,9 @@ class WizardConfiguration {
 	
 	def boolean needsGradleBuild() {
 		preferredBuildSystem == BuildSystem.GRADLE || intellijProject.isEnabled
+	}
+	
+	def boolean isNeedsGradleWrapper() {
+		return needsGradleWrapper && needsGradleBuild
 	}
 }

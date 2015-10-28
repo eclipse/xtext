@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.wizard
 
+import com.google.common.base.Charsets
+import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
@@ -52,8 +54,18 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
 			files += file(Outlet.ROOT, 'gradle/source-layout.gradle', sourceLayoutGradle)
 			files += file(Outlet.ROOT, 'gradle/maven-deployment.gradle', mavenDeploymentGradle)
+			if(config.needsGradleWrapper) {
+				files += file(Outlet.ROOT, 'gradlew', loadResource("gradlew/gradlew"), true)
+				files += file(Outlet.ROOT, 'gradlew.bat', loadResource("gradlew/gradlew.bat"))
+				files += file(Outlet.ROOT, 'gradle/wrapper/gradle-wrapper.properties', loadResource("gradlew/gradle-wrapper.properties"))
+				files += binaryFile(Outlet.ROOT, 'gradle/wrapper/gradle-wrapper.jar', class.classLoader.getResource("gradlew/gradle-wrapper.jar"))
+			}
 		}
 		return files
+	}
+
+	def private CharSequence loadResource(String resourcePath) {
+		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
 
 	override buildGradle() {

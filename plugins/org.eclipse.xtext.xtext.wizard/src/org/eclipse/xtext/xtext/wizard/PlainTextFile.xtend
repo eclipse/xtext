@@ -14,6 +14,11 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 class PlainTextFile extends TextFile {
 	@Accessors val CharSequence content
 	
+	new(Outlet outlet, String relativePath, ProjectDescriptor project, CharSequence content, boolean executable) {
+		super(outlet, relativePath, project, executable)
+		this.content = content
+	}
+	
 	override String getContent() {
 		content.toString
 	}
