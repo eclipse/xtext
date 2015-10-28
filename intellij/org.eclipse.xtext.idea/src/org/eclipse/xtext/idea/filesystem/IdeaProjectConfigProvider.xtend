@@ -31,6 +31,7 @@ import static extension com.intellij.ide.projectView.impl.ProjectRootsUtil.*
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
 import static extension org.eclipse.xtext.util.UriUtil.*
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
+import com.intellij.openapi.vfs.VfsUtil
 
 class IdeaProjectConfigProvider implements IProjectConfigProvider {
 
@@ -83,7 +84,7 @@ class IdeaProjectConfigProvider implements IProjectConfigProvider {
 
 	override Set<? extends IdeaSourceFolder> getSourceFolders() {
 		module.existingSourceFolders.filter[
-			file == contentRoot
+			file == contentRoot || VfsUtil.isAncestor(contentRoot, file, false)
 		].map[sourceFolder|new IdeaSourceFolder(sourceFolder)].toSet
 	}
 	

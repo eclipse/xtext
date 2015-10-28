@@ -65,22 +65,22 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	protected abstract IStorage findStorage(SourceRelativeURI srcRelativeLocation, IProject project);
 
 	@Override
-	protected InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
-		return getContents(uri, ((EclipseProjectConfig) projectConfig).getProject());
+	protected InputStream getContents(SourceRelativeURI uri) throws IOException {
+		return getContents(uri, ((EclipseProjectConfig) getLocalProjectConfig()).getProject());
 	}
 
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
 
 	@Override
-	protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
-		return getContentsAsText(uri, ((EclipseProjectConfig) projectConfig).getProject());
+	protected Reader getContentsAsText(SourceRelativeURI uri) throws IOException {
+		return getContentsAsText(uri, ((EclipseProjectConfig) getLocalProjectConfig()).getProject());
 	}
 
 	protected abstract Reader getContentsAsText(SourceRelativeURI uri, IProject projectConfig) throws IOException;
 
 	@Override
-	protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
-		return getLocalContentsAsText(((EclipseProjectConfig) projectConfig).getProject());
+	protected Reader getLocalContentsAsText() throws IOException {
+		return getLocalContentsAsText(((EclipseProjectConfig) getLocalProjectConfig()).getProject());
 	}
 
 	protected abstract Reader getLocalContentsAsText(IProject project) throws IOException;
