@@ -30,7 +30,6 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
@@ -153,7 +152,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       }
       boolean _tripleNotEquals_1 = (_srcGen != null);
       if (_tripleNotEquals_1) {
-        this.generateGenScopeProvider();
+        this.generateGenQuickfixProvider();
       }
       IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
@@ -172,7 +171,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     }
   }
   
-  public void generateGenScopeProvider() {
+  public void generateGenQuickfixProvider() {
     Grammar _grammar = this.getGrammar();
     final TypeReference genClass = this.getQuickfixProviderClass(_grammar);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
@@ -194,8 +193,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     };
     file.setContent(_client);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
-    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-    IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
     file.writeTo(_srcGen);
   }
   
