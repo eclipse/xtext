@@ -86,7 +86,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 		} else {
 			if (projectConfig.eclipsePlugin?.srcGen !== null) {
-				generateGenScopeProvider
+				generateGenQuickfixProvider
 			}
 
 			if (projectConfig.eclipsePlugin.manifest != null) {
@@ -95,7 +95,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 		}
 	}
 	
-	def generateGenScopeProvider() {
+	def generateGenQuickfixProvider() {
 		// take the ordinary concrete class signature for the src-gen class, too
 		//  as quickfixProviders of sub languages refer to 'superGrammar.quickfixProviderClass',
 		//  see 'getGenQuickfixProviderSuperClass(...)'
@@ -107,7 +107,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 			public class «genClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			}
 		'''
-		file.writeTo(projectConfig.runtime.srcGen)
+		file.writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
 
 	protected def generateXtendQuickfixProvider() {
