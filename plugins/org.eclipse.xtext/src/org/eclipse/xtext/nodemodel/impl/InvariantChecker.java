@@ -61,7 +61,7 @@ public class InvariantChecker {
 	}
 
 	protected void doCheckInvariant(ICompositeNode rootNode) {
-		int length = doCheckCompositeNodeAndReturnTotalLength(rootNode, 0);
+		int length = doCheckChildNodeAndReturnTotalLength(rootNode, null, 0);
 		if (length != rootNode.getTotalLength())
 			throw new InconsistentNodeModelException("node's computed length differs from actual total length");
 	}
