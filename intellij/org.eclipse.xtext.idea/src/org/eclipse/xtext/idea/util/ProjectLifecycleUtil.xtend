@@ -34,6 +34,13 @@ class ProjectLifecycleUtil {
 	}
 
 	/**
+	 * @returns <code>true</code> when  project is fully initialized and the Index is ready (SmartMode).<br>
+	 */
+	def boolean isProjectReadyForPsiAccess(Project project) {
+		return project.initialized && !DumbService.getInstance(project).isDumb
+	}
+
+	/**
 	 * Executes Runnable with write access, when project is fully initialized and the Index is ready (SmartMode).<br>
 	 * Runnable will be executed immediately when project in in initialized smart mode.
 	 */

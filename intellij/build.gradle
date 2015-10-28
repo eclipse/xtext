@@ -18,6 +18,10 @@ if (version.endsWith("-SNAPSHOT")) {
 }
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**', '**/*common.types.tests*/**'
 
+runIdea {
+	jvmArgs '-ea'
+}
+
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
