@@ -65,6 +65,7 @@
 				<module>../../intellij/org.eclipse.xtext.idea.sdomain.ui</module>
 				<module>../../intellij/org.eclipse.xtext.idea.sdomain.tests</module>
 				<module>../../tests/org.eclipse.xtext.testlanguages</module>
+				<module>../../tests/org.eclipse.xtext.testlanguages.ide</module>
 				<module>../../tests/org.eclipse.xtend.core.tests</module>
 				<module>../../tests/org.eclipse.xtext.tests</module>
 				<module>../../tests/org.eclipse.xtext.common.types.tests</module>
