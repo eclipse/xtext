@@ -401,7 +401,9 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append(Resource.class, "\t");
         _builder.append(" resource, ");
         _builder.append(IFileSystemAccess2.class, "\t");
-        _builder.append(" fsa) {");
+        _builder.append(" fsa, ");
+        _builder.append(IGeneratorContext.class, "\t");
+        _builder.append(" context) {");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\tIterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);");
         _builder.newLine();

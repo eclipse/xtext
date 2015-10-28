@@ -170,7 +170,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			public class «language.grammar.generatorStub.simpleName» extends «AbstractGenerator» {
 
 				@«Override»
-				public void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa) {
+				public void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
 			//		Iterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);
 			//		Iterator<String> names = Iterators.transform(filtered, new Function<Greeting, String>() {
 			//
