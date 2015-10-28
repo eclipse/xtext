@@ -774,6 +774,22 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, 76, 1, "t", "Smoke.xtend");
 	}
 	
+	@Test public void testBug480818() throws Exception {
+		String code = 
+				"class Example {\n" + 
+				" val greeting = 'hello world!'\n" +
+				" def sayHello() {\n" +
+				"   println(greeting)\n" +
+				"   prinntln(greeting)\n" + 
+				" }}";
+		XtextResource resource = createResource(code, "Example.xtend");
+		String before = EmfFormatter.listToStr(resource.getContents());
+		resource.update(code.lastIndexOf("prinntln")+2, 1, "i");
+		// here before bug 480818 was fixed a StackOverflowException occured 
+		String after = EmfFormatter.listToStr(resource.getContents());
+		assertEquals(before, after);
+	}
+	
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
