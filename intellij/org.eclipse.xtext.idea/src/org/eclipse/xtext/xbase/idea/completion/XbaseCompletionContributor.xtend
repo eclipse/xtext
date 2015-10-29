@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xtype.XtypePackage
 import org.eclipse.xtext.xbase.idea.imports.DocumentAwareRewritableImportSectionFactory
+import org.eclipse.xtext.Keyword
 
 class XbaseCompletionContributor extends XtypeCompletionContributor {
 	
@@ -124,6 +125,10 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 				}
 			}
 		]
+	}
+	
+	protected override isKeywordWorthyToPropose(Keyword keyword) {
+		keyword.value.length > 1 && Character.isLetter(keyword.value.charAt(0))
 	}
 	
 	static class ImportAddingInsertHandler implements InsertHandler<JavaPsiClassReferenceElement> {

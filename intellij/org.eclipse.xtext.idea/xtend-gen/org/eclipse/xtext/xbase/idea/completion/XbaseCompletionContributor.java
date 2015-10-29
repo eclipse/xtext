@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -258,5 +259,22 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
       }
     };
     JavaClassNameCompletionContributor.addAllClasses(completionParameters, _lessEqualsThan, _prefixMatcher, _function);
+  }
+  
+  @Override
+  protected boolean isKeywordWorthyToPropose(final Keyword keyword) {
+    boolean _and = false;
+    String _value = keyword.getValue();
+    int _length = _value.length();
+    boolean _greaterThan = (_length > 1);
+    if (!_greaterThan) {
+      _and = false;
+    } else {
+      String _value_1 = keyword.getValue();
+      char _charAt = _value_1.charAt(0);
+      boolean _isLetter = Character.isLetter(_charAt);
+      _and = _isLetter;
+    }
+    return _and;
   }
 }
