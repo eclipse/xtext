@@ -282,6 +282,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 										<fileset>
 											«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].toSet.map[sourceFolder]»
 												<directory>${basedir}/«dir»</directory>
+												<includes>
+													<include>**/*</include>
+												</includes>
 											«ENDFOR»
 										</fileset>
 									</filesets>

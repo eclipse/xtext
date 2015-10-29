@@ -360,11 +360,17 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 										«IF p.enabled»
 											<fileset>
 												<directory>${basedir}/../«p.name»/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
+												<includes>
+													<include>**/*</include>
+												</includes>
 											</fileset>
 											«IF p instanceof TestedProjectDescriptor»
 												«IF p.testProject.enabled»
 													<fileset>
 														<directory>${basedir}/../«if(p.testProject.isInlined) p.name else p.testProject.name»/«Outlet.TEST_SRC_GEN.sourceFolder»/</directory>
+														<includes>
+															<include>**/*</include>
+														</includes>
 													</fileset>
 												«ENDIF»
 											«ENDIF»

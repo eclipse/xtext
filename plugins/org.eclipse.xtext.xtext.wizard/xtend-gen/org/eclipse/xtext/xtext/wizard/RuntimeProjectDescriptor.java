@@ -1062,6 +1062,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                 _builder.append("/</directory>");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t\t\t");
+                _builder.append("\t");
+                _builder.append("<includes>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t\t");
+                _builder.append("<include>**/*</include>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t");
+                _builder.append("</includes>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
                 _builder.append("</fileset>");
                 _builder.newLine();
                 {
@@ -1091,6 +1103,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                         _builder.append(_sourceFolder_4, "\t\t\t\t\t\t");
                         _builder.append("/</directory>");
                         _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t");
+                        _builder.append("<includes>");
+                        _builder.newLine();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t\t");
+                        _builder.append("<include>**/*</include>");
+                        _builder.newLine();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t");
+                        _builder.append("</includes>");
+                        _builder.newLine();
                         _builder.append("\t\t\t\t\t");
                         _builder.append("</fileset>");
                         _builder.newLine();
