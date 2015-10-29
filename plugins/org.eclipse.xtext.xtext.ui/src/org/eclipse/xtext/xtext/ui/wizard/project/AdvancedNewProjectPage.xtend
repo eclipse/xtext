@@ -121,6 +121,12 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && !isBundleResolved("org.eclipse.buildship.core")) {
 			reportIssue(WARNING, 'Gradle integration for eclipse is not installed. Consider to install Buildship.')
 		}
+		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && createUiProject.selection) {
+			reportIssue(WARNING, 'Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created')
+		}
+		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && createIdeaProject.selection) {
+			reportIssue(WARNING, 'Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created')
+		}
 
 		val source = e?.source
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
