@@ -48,6 +48,10 @@ class XtextVersion {
 		version.endsWith("-SNAPSHOT")
 	}
 	
+	def isBeta() {
+		version.matches(".*beta(\\d)*")
+	}
+	
 	def getXtendGradlePluginVersion() {
 		'0.4.8'
 	}
