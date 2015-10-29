@@ -114,6 +114,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addFolders(Lists.newArrayList(descriptor.getSourceFolders()));
 		if (needsM2eIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER")));
+			factory.setDefaultOutput("target/classes");
 		}
 		if (needsBuildshipIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
