@@ -328,7 +328,7 @@ public class AdvancedNewProjectPage extends WizardPage {
               AdvancedNewProjectPage.this.createWebProject.setSelection(false);
             }
           };
-          this.<Control>reportIssue(IMessageProvider.WARNING, _builder_2.toString(), _function_2);
+          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_2.toString(), _function_2);
         } else {
           StringConcatenation _builder_3 = new StringConcatenation();
           _builder_3.append("To build the \'");
@@ -343,7 +343,7 @@ public class AdvancedNewProjectPage extends WizardPage {
               AdvancedNewProjectPage.this.select(AdvancedNewProjectPage.this.preferredBuildSystem, BuildSystem.GRADLE);
             }
           };
-          this.<Control>reportIssue(IMessageProvider.WARNING, _builder_3.toString(), _function_3);
+          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_3.toString(), _function_3);
         }
       }
       final List<Button> dependend = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
