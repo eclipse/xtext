@@ -39,6 +39,7 @@ public class JavaProjectFactory extends ProjectFactory {
 	private static final Logger logger = Logger.getLogger(JavaProjectFactory.class);
 	
 	private List<IClasspathEntry> extraClasspathEntries = Lists.newArrayList();
+	private String defaultOutput = "bin";
 
 	@Override
 	protected void enhanceProject(IProject project, SubMonitor monitor, Shell shell) throws CoreException {
@@ -67,7 +68,7 @@ public class JavaProjectFactory extends ProjectFactory {
 				
 				javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 						subMonitor.newChild(1));
-				javaProject.setOutputLocation(new Path("/" + project.getName() + "/bin"), subMonitor.newChild(1)); //$NON-NLS-1$ //$NON-NLS-2$
+				javaProject.setOutputLocation(new Path("/" + project.getName() + "/" + defaultOutput), subMonitor.newChild(1));
 				
 				String executionEnvironmentId = JavaRuntime.getExecutionEnvironmentId(defaultJREContainerEntry.getPath());
 				if (executionEnvironmentId != null) {
@@ -123,5 +124,14 @@ public class JavaProjectFactory extends ProjectFactory {
 	@Override
 	public JavaProjectFactory addWorkingSets(List<IWorkingSet> workingSets) {
 		return (JavaProjectFactory) super.addWorkingSets(workingSets);
+	}
+	
+	/**
+	 * The default output directory, relative to the project root
+	 * @since 2.9
+	 */
+	public JavaProjectFactory setDefaultOutput(String defaultOutput) {
+		this.defaultOutput= defaultOutput;
+		return this;
 	}
 }
