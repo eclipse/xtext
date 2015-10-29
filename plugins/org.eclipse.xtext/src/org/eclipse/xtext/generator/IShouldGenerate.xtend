@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator
 
-import org.eclipse.emf.ecore.resource.Resource
+import com.google.common.annotations.Beta
 import com.google.inject.ImplementedBy
 import com.google.inject.Inject
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.CancelIndicator
-import com.google.common.annotations.Beta
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -35,7 +36,10 @@ interface IShouldGenerate {
 		@Inject IResourceValidator resourceValidator
 		
 		override shouldGenerate(Resource resource, CancelIndicator cancelIndicator) {
-			return resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator).empty
+			if (!resource.errors.isEmpty)
+				return false
+			val issues = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator)
+			return !issues.exists[severity == Severity.ERROR]
 		}
 		
 	}
