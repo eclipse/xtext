@@ -53,7 +53,7 @@ class XtextVersion {
 	}
 	
 	def getXtendGradlePluginVersion() {
-		'0.4.8'
+		'0.4.12'
 	}
 	
 	def getXtextGradlePluginVersion() {
