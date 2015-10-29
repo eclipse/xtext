@@ -45,7 +45,13 @@
 						<filesets>
 							<fileset>
 								<directory>${basedir}/src/main/xtend-gen</directory>
+								<includes>
+									<include>**/*</include>
+								</includes>
 								<directory>${basedir}/src/test/xtend-gen</directory>
+								<includes>
+									<include>**/*</include>
+								</includes>
 							</fileset>
 						</filesets>
 					</configuration>

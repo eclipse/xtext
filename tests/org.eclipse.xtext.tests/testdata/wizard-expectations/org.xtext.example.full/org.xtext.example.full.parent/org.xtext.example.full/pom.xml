@@ -63,21 +63,39 @@
 					<filesets combine.children="append">
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.tests/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ide/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ui/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ui.tests/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.web/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>

@@ -46,15 +46,27 @@
 					<filesets combine.children="append">
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.plainMaven/src/main/xtext-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.plainMaven/src/test/xtext-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.plainMaven.ide/src/main/xtext-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.plainMaven.web/src/main/xtext-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>
