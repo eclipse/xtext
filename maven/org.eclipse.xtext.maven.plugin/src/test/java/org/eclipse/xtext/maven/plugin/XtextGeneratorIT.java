@@ -7,11 +7,14 @@ import java.util.List;
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.utils.cli.CommandLineUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
+
+import junit.framework.Assert;
 
 public class XtextGeneratorIT {
 
@@ -19,9 +22,32 @@ public class XtextGeneratorIT {
 
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
+		File mvnExecutable = new File(new Verifier(ROOT).getExecutable());
+		if (!mvnExecutable.exists()) {
+			String mavenHome = findMaven();
+			if (mavenHome != null) {
+				System.setProperty("maven.home", mavenHome);
+			} else {
+				Assert.fail("Maven home not found. Tried to call '" + mvnExecutable
+						+ "'.\nConsider to set the envVar 'M2_HOME' or System property 'maven.home'.\n"
+						+ "Current settings are: maven.home=" + System.getProperty("maven.home") + " M2_HOME="
+						+ CommandLineUtils.getSystemEnvVars().getProperty("M2_HOME"));
+			}
+		}
 		new XtextGeneratorIT().verifyErrorFreeLog(ROOT, "clean", "install");
 	}
 
+	private static String findMaven() {
+		// TODO add more mavens here
+		String[] mavens = new String[] { System.getProperty("maven.home"), "/opt/local/share/java/maven3/" };
+		for (String maven : mavens) {
+			if (new File(maven + "/bin/mvn").exists()) {
+				return maven;
+			}
+		}
+		return null;
+	}
+	
 	private final static boolean debug = false;
 
 	@Test
@@ -43,7 +69,7 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
 	}
-	
+
 	@Test
 	public void clustering() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/clustering");
@@ -59,7 +85,8 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
 		verifier.assertFilePresent(verifier.getBasedir() + "/other-gen/OtherIntegrationTestXbase.java");
-		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/OtherIntegrationTestXbase.class");
+		verifier.assertFilePresent(
+				verifier.getBasedir() + "/target/xtext-temp/classes/OtherIntegrationTestXbase.class");
 	}
 
 	@Test
@@ -69,23 +96,26 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/XbaseReferToJava.class");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/JavaClazz.class");
 	}
-	
+
 	@Test
 	public void aggregation() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/aggregate");
 		verifier.assertFilePresent(verifier.getBasedir() + "/purexbase/src-gen/IntegrationTestXbase.java");
-		verifier.assertFilePresent(verifier.getBasedir() + "/purexbase/target/xtext-temp/classes/IntegrationTestXbase.class");
+		verifier.assertFilePresent(
+				verifier.getBasedir() + "/purexbase/target/xtext-temp/classes/IntegrationTestXbase.class");
 	}
-	
+
 	@Test
 	public void xcore() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
 		verifier.addCliOption("-U");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
-		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
-		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java", "(?s).*MY_FIRST_LITERAL = -7.*MY_SECOND_LITERAL = 137.*");
+		verifier.assertFilePresent(
+				verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
+		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java",
+				"(?s).*MY_FIRST_LITERAL = -7.*MY_SECOND_LITERAL = 137.*");
 	}
-	
+
 	@Test
 	public void bug463946() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/bug463946");
@@ -97,8 +127,8 @@ public class XtextGeneratorIT {
 		return verifyErrorFreeLog(pathToTestProject, "clean", "verify");
 	}
 
-	private Verifier verifyErrorFreeLog(String pathToTestProject, String... goals) throws IOException,
-			VerificationException {
+	private Verifier verifyErrorFreeLog(String pathToTestProject, String... goals)
+			throws IOException, VerificationException {
 		Verifier verifier = newVerifier(pathToTestProject);
 		for (String goal : goals) {
 			verifier.executeGoal(goal);
@@ -114,12 +144,13 @@ public class XtextGeneratorIT {
 
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug );
+		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug);
 		verifier.setMavenDebug(debug);
-//		verifier.setForkJvm(!debug);
+		// verifier.setForkJvm(!debug);
 		verifier.setEnvironmentVariable("MAVEN_OPTS", "-Xmx2048m -XX:MaxPermSize=256m");
 		return verifier;
 	}
+
 
 	@AfterClass
 	static public void tearDownOnce() throws IOException, VerificationException {
