@@ -135,7 +135,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return doFindTypeByName(name, false);
 	}
 	
-	private JvmType doFindTypeByName(String name, boolean traverseNestedTypes) {
+	/**
+	 * @since 2.9
+	 */
+	protected JvmType doFindTypeByName(String name, boolean traverseNestedTypes) {
 		String signature = getSignature(name);
 		if (signature == null)
 			return null;
@@ -164,8 +167,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return result;
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	/* @Nullable */
-	private String getSignature(String name) {
+	protected String getSignature(String name) {
 		if (Strings.isEmpty(name))
 			throw new IllegalArgumentException("null");
 		String signature = null;
@@ -177,8 +183,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return signature;
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	/* @Nullable */
-	private JvmType findObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI, boolean traverseNestedTypes) {
+	protected JvmType findObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI, boolean traverseNestedTypes) {
 		ResourceSet resourceSet = getResourceSet();
 		if (resourceSet instanceof SynchronizedXtextResourceSet) {
 			synchronized (((SynchronizedXtextResourceSet) resourceSet).getLock()) {
@@ -188,7 +197,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return doFindObjectType(signature, resourceURI, traverseNestedTypes);
 	}
 
-	private JvmType doFindObjectType(String signature, URI resourceURI, boolean traverseNestedTypes) {
+	/**
+	 * @since 2.9
+	 */
+	protected JvmType doFindObjectType(String signature, URI resourceURI, boolean traverseNestedTypes) {
 		TypeResource resource = getLoadedResourceForJavaURI(resourceURI);
 		try {
 			JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource, traverseNestedTypes);
@@ -236,8 +248,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return true;
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	/* @Nullable */
-	private JvmType findLoadedOrDerivedObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI,
+	protected JvmType findLoadedOrDerivedObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI,
 			/* @Nullable */ TypeResource resource, boolean traverseNestedTypes) throws UnknownNestedTypeException {
 		JvmType result = resource != null ? findTypeBySignature(signature, resource, traverseNestedTypes) : null;
 		if (result != null) {
@@ -250,8 +265,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	/* @Nullable */
-	private JvmType findObjectTypeInJavaProject(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI, boolean traverseNestedTypes)
+	protected JvmType findObjectTypeInJavaProject(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI, boolean traverseNestedTypes)
 			throws JavaModelException {
 		IType type = findObjectTypeInJavaProject(resourceURI);
 		if (type != null) {
@@ -320,7 +338,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return type;
 	}
 
-	private IType findPrimaryType(String packageName, String typeName) throws JavaModelException {
+	/**
+	 * @since 2.9
+	 */
+	protected IType findPrimaryType(String packageName, String typeName) throws JavaModelException {
 		JavaProject casted = (JavaProject) javaProject;
 		NameLookup nameLookup = getNameLookup(casted);
 		NameLookup.Answer answer = nameLookup.findType(
@@ -335,7 +356,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return answer == null ? null : answer.type;
 	}
 
-	private NameLookup getNameLookup(JavaProject casted) throws JavaModelException {
+	/**
+	 * @since 2.9
+	 */
+	protected NameLookup getNameLookup(JavaProject casted) throws JavaModelException {
 		return casted.newNameLookup(getWorkingCopies());
 	}
 	
@@ -343,26 +367,13 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * Searches a secondary type with the given name and package.
 	 * 
 	 * Secondary types are toplevel types with a name that does not match the name of the compilation unit.
+	 * @since 2.9
 	 */
-	private IType findSecondaryType(String packageName, final String typeName)  throws JavaModelException {
+	protected IType findSecondaryType(String packageName, final String typeName)  throws JavaModelException {
 		IPackageFragmentRoot[] sourceFolders = getSourceFolders();
 		IndexManager indexManager = JavaModelManager.getIndexManager();
 		if (indexManager.awaitingJobsCount() > 0) { // still indexing - don't enter a busy wait loop but ask the source folders directly
-			for(IPackageFragmentRoot sourceFolder: sourceFolders) {
-				if (indexManager.awaitingJobsCount() > 0) {
-					IPackageFragment packageFragment = sourceFolder.getPackageFragment(Strings.emptyIfNull(packageName));
-					if (packageFragment.exists()) {
-						ICompilationUnit[] units = packageFragment.getCompilationUnits();
-						for(ICompilationUnit unit: units) {
-							IType type = unit.getType(typeName);
-							if (type.exists()) {
-								return type;
-							}
-						}
-					}
-				}
-			}
-			return null;
+			return findSecondaryTypeInSourceFolders(packageName, typeName, sourceFolders);
 		}
 		
 		// code below is adapted from BasicSearchEnginge.searchAllSecondaryTypes
@@ -450,14 +461,42 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return result.get();
 	}
 
-	private ICompilationUnit[] getWorkingCopies() {
+	/**
+	 * @since 2.9
+	 */
+	protected IType findSecondaryTypeInSourceFolders(String packageName, final String typeName, IPackageFragmentRoot[] sourceFolders) throws JavaModelException {
+		IndexManager indexManager = JavaModelManager.getIndexManager();
+		for(IPackageFragmentRoot sourceFolder: sourceFolders) {
+			if (indexManager.awaitingJobsCount() > 0) {
+				IPackageFragment packageFragment = sourceFolder.getPackageFragment(Strings.emptyIfNull(packageName));
+				if (packageFragment.exists()) {
+					ICompilationUnit[] units = packageFragment.getCompilationUnits();
+					for(ICompilationUnit unit: units) {
+						IType type = unit.getType(typeName);
+						if (type.exists()) {
+							return type;
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected ICompilationUnit[] getWorkingCopies() {
 		if (ResourceSetContext.get(getResourceSet()).isBuilder()) {
 			return new ICompilationUnit[0];
 		}
 		return JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false/*don't add primary WCs a second time*/);
 	}
 
-	private IPackageFragmentRoot[] getSourceFolders() throws JavaModelException {
+	/**
+	 * @since 2.9
+	 */
+	protected IPackageFragmentRoot[] getSourceFolders() throws JavaModelException {
 		// Build scope using prereq projects but only source folders
 		if (javaProject instanceof JavaProject) {
 			return getSourceFolders((JavaProject) javaProject);
@@ -477,12 +516,15 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 	
-	/*
-	 * IJavaProject#getAllPackageFragmentRoots will open all references archives to read the JDK version from
-	 * the first class file it finds. This isn't necessary for our case thus we try to avoid this by copying a lot of 
-	 * code. 
+	/**
+	 * @since 2.9
 	 */
-	private IPackageFragmentRoot[] getSourceFolders(JavaProject javaProject) throws JavaModelException {
+	protected IPackageFragmentRoot[] getSourceFolders(JavaProject javaProject) throws JavaModelException {
+		/*
+		 * IJavaProject#getAllPackageFragmentRoots will open all references archives to read the JDK version from
+		 * the first class file it finds. This isn't necessary for our case thus we try to avoid this by copying a lot of 
+		 * code. 
+		 */
 		ObjectVector result = new ObjectVector();
 		collectSourcePackageFragmentRoots(javaProject, Sets.<String>newHashSet(), null, result);
 		IPackageFragmentRoot[] rootArray = new IPackageFragmentRoot[result.size()];
@@ -492,8 +534,9 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	/**
 	 * @see JavaProject#computePackageFragmentRoots(IClasspathEntry, ObjectVector, HashSet, IClasspathEntry, boolean, java.util.Map)
+	 * @since 2.9
 	 */
-	private void collectSourcePackageFragmentRoots(JavaProject javaProject, HashSet<String> rootIDs, IClasspathEntry referringEntry, ObjectVector result) throws JavaModelException {
+	protected void collectSourcePackageFragmentRoots(JavaProject javaProject, HashSet<String> rootIDs, IClasspathEntry referringEntry, ObjectVector result) throws JavaModelException {
 		if (referringEntry == null){
 			rootIDs.add(javaProject.rootID());
 		} else if (rootIDs.contains(javaProject.rootID())) {
@@ -530,7 +573,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 	
-	private boolean canLink(IType type) throws JavaModelException {
+	/**
+	 * @since 2.9
+	 */
+	protected boolean canLink(IType type) throws JavaModelException {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
 		if (indexedJvmTypeAccess != null && indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
 			IResource underlyingResource = type.getUnderlyingResource();
@@ -562,13 +608,19 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	/* @Nullable */
-	private TypeResource getLoadedResourceForJavaURI(/* @NonNull */ URI resourceURI) {
+	protected TypeResource getLoadedResourceForJavaURI(/* @NonNull */ URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
 		return resource;
 	}
 
-	private JvmType findPrimitiveType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) {
+	/**
+	 * @since 2.9
+	 */
+	protected JvmType findPrimitiveType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
 		JvmType result = findTypeBySignature(signature, resource, false);
 		return result;
@@ -593,7 +645,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	private JvmType findTypeBySignature(String signature, TypeResource resource, boolean traverseNestedTypes) {
+	protected JvmType findTypeBySignature(String signature, TypeResource resource, boolean traverseNestedTypes) {
 		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = typeUriHelper.getFragment(signature);
 		JvmType result = (JvmType) resource.getEObject(fragment);
@@ -629,8 +681,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	/* @Nullable */
-	private IMirror createMirror(/* @NonNull */ IType type) {
+	protected IMirror createMirror(/* @NonNull */ IType type) {
 		String elementName = type.getElementName();
 		if (!elementName.equals(type.getTypeQualifiedName())) {
 			// workaround for bug in jdt with binary type names that start with a $ dollar sign
