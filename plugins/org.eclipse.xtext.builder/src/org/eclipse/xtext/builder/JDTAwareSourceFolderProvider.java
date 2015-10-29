@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
@@ -24,16 +26,21 @@ import com.google.common.collect.Lists;
  * @since 2.6
  */
 public class JDTAwareSourceFolderProvider implements EclipseSourceFolderProvider {
+	static final Logger log = Logger.getLogger(JDTAwareSourceFolderProvider.class);
 
 	@Override
 	public List<? extends IContainer> getSourceFolders(IProject project) {
 		List<IContainer> sourceFolders = Lists.newArrayList();
 		IJavaProject javaProject = JavaCore.create(project);
 		IClasspathEntry[] classpath;
+		if (!javaProject.exists()) {
+			return Collections.emptyList();
+		}
 		try {
 			classpath = javaProject.getRawClasspath();
 		} catch (JavaModelException e) {
-			throw new RuntimeException(e);
+			log.error("Error determining source folders for project " + project.getName(), e);
+			return Collections.emptyList();
 		}
 		for (IClasspathEntry entry : classpath) {
 			if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
