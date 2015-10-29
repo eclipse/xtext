@@ -283,7 +283,7 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder.toString(), _function);
         } else {
           StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append(SourceLayout.PLAIN, "");
+          _builder_1.append(SourceLayout.MAVEN, "");
           _builder_1.append(" source layout is not supported by the \'");
           String _text_1 = this.createUiProject.getText();
           _builder_1.append(_text_1, "");
