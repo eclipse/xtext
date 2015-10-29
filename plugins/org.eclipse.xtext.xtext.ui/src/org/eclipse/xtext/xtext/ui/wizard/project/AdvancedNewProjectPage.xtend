@@ -141,13 +141,13 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		if (createWebProject.selection && preferredBuildSystem.isSelected(BuildSystem.ECLIPSE)) {
 			if (preferredBuildSystem === source) {
-				reportIssue(WARNING, '''
+				reportIssue(ERROR, '''
 				The '«createWebProject.text»' project can not be build using Eclipse-PDE build.
 				Please <a>deselect '«createWebProject.text»'</a>.''', [
 					createWebProject.selection = false
 				])
 			} else {
-				reportIssue(WARNING, '''
+				reportIssue(ERROR, '''
 				To build the '«createWebProject.text»' project, you need to choose maven or gradle build system.
 				Select <a>gradle</a> build.''', [
 					preferredBuildSystem.select(BuildSystem.GRADLE)
