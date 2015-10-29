@@ -2121,7 +2121,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         String _name = _web_2.getName();
         String _replace_1 = _name.replace(".", "\\\\.");
         _builder.append(_replace_1, "\t\t\t");
-        _builder.append("/.*,.*/org\\\\.eclipse\\\\.xtext\\\\.web.*,.*/org\\\\.webjars.*\')");
+        _builder.append("/.*,.*\\\\.jar\')");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("]");
