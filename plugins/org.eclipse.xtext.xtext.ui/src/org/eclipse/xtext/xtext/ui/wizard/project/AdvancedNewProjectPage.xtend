@@ -132,7 +132,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			} else {
 				reportIssue(ERROR, '''
-				«SourceLayout.PLAIN» source layout is not supported by the '«createUiProject.text»' project.
+				«SourceLayout.MAVEN» source layout is not supported by the '«createUiProject.text»' project.
 				Please <a>deselect '«createUiProject.text»'</a>.''', [
 					createUiProject.selection = false
 				])
