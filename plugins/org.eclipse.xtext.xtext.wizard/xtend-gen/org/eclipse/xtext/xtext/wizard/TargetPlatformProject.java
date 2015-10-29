@@ -136,12 +136,20 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
         _builder.newLine();
       } else {
-        _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
         WizardConfiguration _config_1 = this.getConfig();
         XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
-        _builder.append(_xtextVersion_1, "");
-        _builder.append("/\"/>");
-        _builder.newLineIfNotEmpty();
+        boolean _isBeta = _xtextVersion_1.isBeta();
+        if (_isBeta) {
+          _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
+          _builder.newLine();
+        } else {
+          _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
+          WizardConfiguration _config_2 = this.getConfig();
+          XtextVersion _xtextVersion_2 = _config_2.getXtextVersion();
+          _builder.append(_xtextVersion_2, "");
+          _builder.append("/\"/>");
+          _builder.newLineIfNotEmpty();
+        }
       }
     }
     _builder.append("</location>");
