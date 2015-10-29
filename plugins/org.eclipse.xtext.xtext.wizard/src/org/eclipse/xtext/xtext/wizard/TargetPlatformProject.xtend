@@ -71,6 +71,8 @@ class TargetPlatformProject extends ProjectDescriptor {
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 		«IF config.xtextVersion.isSnapshot»
 			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
+		«ELSEIF config.xtextVersion.isBeta»
+			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
 		«ELSE»
 			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
 		«ENDIF»
