@@ -93,7 +93,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			//	def checkGreetingStartsWithCapital(Greeting greeting) {
 			//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
 			//			warning('Name should start with a capital', 
-			//					MyDslPackage.Literals.GREETING__NAME,
+			//					«grammar.simpleName»Package.Literals.GREETING__NAME,
 			//					INVALID_NAME)
 			//		}
 			//	}
@@ -111,10 +111,14 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			 */
 			public class «grammar.validatorClass.simpleName» extends «grammar.abstractValidatorClass» {
 				
+			//  public static final INVALID_NAME = 'invalidName'
+			//
 			//	@Check
 			//	public void checkGreetingStartsWithCapital(Greeting greeting) {
 			//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-			//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
+			//			warning("Name should start with a capital",
+			//					«grammar.simpleName»Package.Literals.GREETING__NAME,
+			//					INVALID_NAME);
 			//		}
 			//	}
 				
