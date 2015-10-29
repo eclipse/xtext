@@ -46,6 +46,8 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 
 @SuppressWarnings("all")
 public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
+  private final String MWE2_VERSION = "[2.8.2,3.0)";
+  
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
   
   private final RuntimeTestProjectDescriptor testProject;
@@ -686,8 +688,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.8.2\"");
-        _builder.newLine();
+        _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:");
+        _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
         _builder.newLine();
@@ -949,8 +953,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("\t\t");
-            _builder.append("<version>2.8.2</version>");
-            _builder.newLine();
+            _builder.append("<version>");
+            _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t\t\t\t\t");
+            _builder.append("</version>");
+            _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t");
             _builder.append("\t");
             _builder.append("</dependency>");
