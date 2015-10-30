@@ -54,10 +54,6 @@ package class NamingAdapter extends XtextGeneratorNaming {
 		new TypeReference(naming.executableExtensionFactory(grammar))
 	}
 	
-	override getEclipsePluginActivator(Grammar grammar) {
-		new TypeReference(naming.activatorName)
-	}
-	
 	override getGenericIdeBasePackage(Grammar grammar) {
 		naming.basePackageIde(grammar)
 	}

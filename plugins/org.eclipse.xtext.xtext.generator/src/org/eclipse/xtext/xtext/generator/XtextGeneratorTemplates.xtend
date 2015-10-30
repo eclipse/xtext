@@ -432,7 +432,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(IXtextGeneratorLanguage langConfig, IXtextGeneratorLanguage activatorLanguage) {
 		val grammar = langConfig.grammar
-		val activatorGrammar = activatorLanguage.grammar
+		
 		val file = fileAccessFactory.createGeneratedJavaFile(grammar.eclipsePluginExecutableExtensionFactory)
 		file.typeComment = '''
 			/**
@@ -445,12 +445,12 @@ class XtextGeneratorTemplates {
 			
 				@Override
 				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
-					return «activatorGrammar.eclipsePluginActivator».getInstance().getBundle();
+					return «eclipsePluginActivator».getInstance().getBundle();
 				}
 				
 				@Override
 				protected «Injector» getInjector() {
-					return «activatorGrammar.eclipsePluginActivator».getInstance().getInjector(«activatorGrammar.eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
+					return «eclipsePluginActivator».getInstance().getInjector(«eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
 				}
 				
 			}
@@ -459,7 +459,7 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginActivator(List<? extends IXtextGeneratorLanguage> langConfigs) {
-		val activator = getEclipsePluginActivator(langConfigs.head.grammar)
+		val activator = eclipsePluginActivator
 		val file = fileAccessFactory.createGeneratedJavaFile(activator)
 		
 		file.typeComment = '''

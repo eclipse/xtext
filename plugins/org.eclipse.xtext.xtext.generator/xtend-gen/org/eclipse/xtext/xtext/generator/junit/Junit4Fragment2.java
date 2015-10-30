@@ -97,8 +97,7 @@ public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_5 = _eclipsePlugin_1.getManifest();
       Set<String> _exportedPackages = _manifest_5.getExportedPackages();
-      Grammar _grammar = this.getGrammar();
-      TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+      TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator();
       String _packageName = _eclipsePluginActivator.getPackageName();
       _exportedPackages.add(_packageName);
     }
@@ -291,7 +290,7 @@ public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
           _builder.append("\t");
           _builder.append("public ");
           _builder.append(Injector.class, "\t");
-          _builder.append(" getInjector()\t{");
+          _builder.append(" getInjector() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("if (injector == null) {");
@@ -414,12 +413,11 @@ public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("return ");
-          Grammar _grammar = Junit4Fragment2.this.getGrammar();
-          TypeReference _eclipsePluginActivator = Junit4Fragment2.this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+          TypeReference _eclipsePluginActivator = Junit4Fragment2.this._xtextGeneratorNaming.getEclipsePluginActivator();
           _builder.append(_eclipsePluginActivator, "\t\t");
           _builder.append(".getInstance().getInjector(\"");
-          Grammar _grammar_1 = Junit4Fragment2.this.getGrammar();
-          String _name = _grammar_1.getName();
+          Grammar _grammar = Junit4Fragment2.this.getGrammar();
+          String _name = _grammar.getName();
           _builder.append(_name, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
