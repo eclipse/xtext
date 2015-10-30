@@ -1,14 +1,15 @@
 package org.eclipse.xtext.xtext.generator.junit
 
 import com.google.inject.Inject
-import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
-import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 import com.google.inject.Injector
-import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
+import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
+
+import static extension org.eclipse.xtext.GrammarUtil.*
 
 class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 	@Inject extension XtextGeneratorNaming
@@ -34,7 +35,7 @@ class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 			]
 		}
 		if (projectConfig.eclipsePlugin.manifest != null) {
-			projectConfig.eclipsePlugin.manifest.exportedPackages.add(grammar.eclipsePluginActivator.packageName)
+			projectConfig.eclipsePlugin.manifest.exportedPackages.add(eclipsePluginActivator.packageName)
 		}
 		
 		#[
@@ -105,7 +106,7 @@ class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 				}
 			
 				@Override
-				public «Injector» getInjector()	{
+				public «Injector» getInjector() {
 					if (injector == null) {
 						stateBeforeInjectorCreation = «globalRegistries».makeCopyOfGlobalState();
 						this.injector = internalCreateInjector();
@@ -148,7 +149,7 @@ class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 			
 				@Override
 				public «Injector» getInjector() {
-					return «grammar.eclipsePluginActivator».getInstance().getInjector("«grammar.name»");
+					return «eclipsePluginActivator».getInstance().getInjector("«grammar.name»");
 				}
 			
 			}
