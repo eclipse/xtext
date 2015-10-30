@@ -1,0 +1,31 @@
+plugins {
+	id 'osgi'
+	id 'war'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.xtend.ide.common')
+	compile project(":web:org.eclipse.xtext.xbase.web")
+	compile project(":web:org.eclipse.xtext.web.servlet")
+	
+	compile "org.webjars:requirejs:2.1.20"
+	compile "org.webjars:jquery:2.1.4"
+	compile "org.webjars:ace:1.2.0"
+	
+	providedCompile "org.eclipse.jetty:jetty-annotations:9.2.11.v20150529"
+	providedCompile "org.slf4j:slf4j-simple:1.7.12"
+}
+
+task jettyRun(type:JavaExec) {
+	dependsOn(sourceSets.main.runtimeClasspath)
+	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
+	main = 'org.eclipse.xtend.web.ServerLauncher'
+	standardInput = System.in
+	group = 'run'
+	description = 'Starts an example Jetty server with your language'
+}
+
+jar.manifest {
+	name 'Xtend Web Integration'
+	vendor 'Eclipse Xtext'
+}

@@ -12,4 +12,8 @@ end
 
 state State2
 	if x == false and y == true goto State1
-end
+end 
+
+state State3
+	if x == false and y == true goto State1
+end 

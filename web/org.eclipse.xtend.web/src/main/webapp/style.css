@@ -1,0 +1,124 @@
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font: 14px Verdana, Arial, Helvetica,sans-serif;
+}
+
+a {
+	color: #22a;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.dirty {
+	text-decoration: line-through;
+}
+
+.container {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+}
+
+.header {
+	display: block;
+	position: absolute;
+	background-color: #fff;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 70px;
+	padding-left: 20px;
+	border-bottom: 1px solid #c5c5c5;
+	background: #f5f5f5;
+	min-width:1000px;
+}
+
+.header h1	{
+	margin:20px 0 0 0;
+	font-size:30px;
+	float:left;
+	color: #a5a5a5;
+	}
+
+.xtext-layout {
+	display: block;
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	left: 0;
+	width: 45%;
+	margin: 20px;
+}
+
+.xtext-layout h2{
+	margin:10px 0 6px 5px;
+	font-size:14px;
+}
+
+#generate-button {
+	margin-bottom:10px;
+	margin-top:10px;
+	position:absolute;
+	top:0;
+	right:0;
+	width:70px;
+	height:20px;
+	font:12px Verdana, Arial, Helvetica, sans-serif;
+	}
+
+#xtext-editor {
+	display: block;
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	width:100%;
+	padding: 4px;
+	border: 1px solid #aaa;
+}
+
+
+.java-layout {
+	display: block;
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	width: 45%;
+	right: 0;
+	margin-right: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.java-layout #java-header{
+	margin:10px 0 6px 5px;
+	font-size:14px;
+}
+
+#java-editor {
+	display: block;
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	width:100%;
+	padding: 4px;
+	border: 1px solid #aaa;
+}
+
+.java-layout #result {
+	display: block;
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	width:100%;
+	margin-right:10px;
+	padding: 4px;
+	border: 1px solid #aaa;
+}

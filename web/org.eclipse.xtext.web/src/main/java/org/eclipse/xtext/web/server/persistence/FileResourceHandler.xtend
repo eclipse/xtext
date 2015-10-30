@@ -10,8 +10,10 @@ package org.eclipse.xtext.web.server.persistence
 import com.google.inject.Provider
 import java.io.IOException
 import java.io.OutputStreamWriter
+import java.util.List
 import javax.inject.Inject
 import org.eclipse.emf.common.util.WrappedException
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
@@ -39,6 +41,7 @@ class FileResourceHandler implements IServerResourceHandler {
 				throw new IOException('The requested resource does not exist.')
 			val resourceSet = resourceSetProvider.get(resourceId)
 			val resource = resourceSet.getResource(uri, true) as XtextResource
+			
 			return documentProvider.get() => [
 				setInput(resource, resourceId)
 			]

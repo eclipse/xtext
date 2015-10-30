@@ -1,0 +1,110 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Example Web Editor</title>
+	<link rel="stylesheet" type="text/css" href="xtext/2.9.0-SNAPSHOT/xtext-ace.css"/>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
+	<script type="text/javascript">
+		function generateJavaByHttpRequest(){  
+			var xmlhttp = new XMLHttpRequest();
+			var url = 'http://' + location.host + '/xtext-service/generate?resource=example.xtend';
+			xmlhttp.open("GET", url, true);
+			xmlhttp.onreadystatechange = function() {
+			    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			        var target = xmlhttp.responseText;
+			        aceEditor.getSession().setValue(target);
+			    }
+			}
+			xmlhttp.send();
+		}
+		function generateJava(){
+			
+			editor.xtextServices.generate().done(function(generateResult) {	
+				aceEditor.getSession().setValue(generateResult);
+			});
+		}
+		
+		function Java2Xtend(){			
+			var sendmsg = 'srcJava='+aceEditor.getSession().getValue();
+			
+			var xmlhttp = new XMLHttpRequest();
+			var url = 'http://' + location.host + '/xtext-service/java2xtend?resource=java.xtend';
+			xmlhttp.open("POST", url, true);
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+			xmlhttp.onreadystatechange = function() {
+			    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			        var target = JSON.parse(xmlhttp.responseText);
+			        editor.getSession().setValue(target.generateText);
+			    }
+			}
+			xmlhttp.send(sendmsg);
+		}
+		
+		var baseUrl = window.location.pathname;
+		var fileIndex = baseUrl.indexOf("index.html");
+		if (fileIndex > 0)
+			baseUrl = baseUrl.slice(0, fileIndex);
+		require.config({
+			baseUrl: baseUrl,
+			paths: {
+				"jquery": "webjars/jquery/2.1.4/jquery.min",
+				"ace/ext/language_tools": "webjars/ace/1.2.0/src/ext-language_tools",
+				"xtext/xtext-ace": "xtext/2.9.0-SNAPSHOT/xtext-ace"
+			}
+		});
+		
+		require(["webjars/ace/1.2.0/src/ace"], function() {
+			require(["xtext/xtext-ace"], function(xtext) {
+				editor = xtext.createEditor({
+					baseUrl: baseUrl,
+					syntaxDefinition: "xtext-resources/generated/mode-xtend"
+					});
+				
+				editor.setBehavioursEnabled(true);
+				editor.$blockScrolling = Infinity
+				
+				aceEditor = ace.edit("result");
+				aceEditor.getSession().setMode("ace/mode/java");
+				aceEditor.$blockScrolling = Infinity
+				//aceEditor.setBehavioursEnabled(true);
+				
+				editor.xtextServices.successListeners.push(function(serviceType, result) {
+					if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
+							generateJava();
+						}
+				    });
+				
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="header">
+		<h1>Xtend Web Editor</h1>
+	</div>
+	<div class="xtext-layout">
+		<h2 id ="dirty-indicator">Xtend code</h2>
+		<button id = "generate-button" onclick="Java2Xtend()">&laquo;</button>
+		<div id="xtext-editor" 
+		data-editor-xtext-lang="xtend"
+		data-editor-resource-id="example.xtend"
+		data-editor-enable-save-action="true"
+		data-editor-enable-formatting-action="true"
+		data-editor-show-error-dialogs="true"
+		>
+		</div>
+	</div>
+	
+	<div class = "java-layout">
+		<h2 id="java-header">Generated Java code</h2>	
+		<div id ="result" ></div>
+	</div>
+	
+</div>
+</body>
+</html>
