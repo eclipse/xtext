@@ -677,6 +677,12 @@
                 <message_argument value="checkCanceled(IProgressMonitor)"/>
             </message_arguments>
         </filter>
+        <filter comment="type widening" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.service.OperationCanceledManager"/>
+                <message_argument value="getPlatformSpecificOperationCanceledException()"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="xtend-gen/org/eclipse/xtext/workspace/FileProjectConfig.java" type="org.eclipse.xtext.workspace.FileProjectConfig">
         <filter id="640712815">

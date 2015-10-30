@@ -105,8 +105,7 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.10.2";visibility:=re
  org.eclipse.xtext.util;visibility:=reexport,
  org.eclipse.xtext.smap;x-installation:=greedy,
  org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.equinox.common;bundle-version="3.5.0"
+ org.eclipse.xtend.lib;resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15",org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.internal.Activator

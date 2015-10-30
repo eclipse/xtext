@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.EList;
@@ -52,6 +51,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
@@ -482,7 +482,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static void resolveAll(Resource resource, CancelIndicator monitor) {
 		for (Iterator<EObject> i = resource.getAllContents(); i.hasNext();) {
 			if (monitor.isCanceled())
-				throw new OperationCanceledException();
+				throw new OperationCanceledError();
 			EObject eObject = i.next();
 			resolveCrossReferences(eObject, monitor);
 		}
@@ -508,7 +508,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		resolveCrossReferences(eObject, monitor);
 		for (Iterator<EObject> i = eObject.eAllContents(); i.hasNext();) {
 			if (monitor.isCanceled())
-				throw new OperationCanceledException();
+				throw new OperationCanceledError();
 			EObject childEObject = i.next();
 			resolveCrossReferences(childEObject, monitor);
 		}
@@ -518,7 +518,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		for (Iterator<EObject> i = eObject.eCrossReferences().iterator(); i.hasNext(); i
 				.next()) {
 			if (monitor.isCanceled()) {
-				throw new OperationCanceledException();
+				throw new OperationCanceledError();
 			}
 			// The loop resolves the cross references by visiting them.
 		}

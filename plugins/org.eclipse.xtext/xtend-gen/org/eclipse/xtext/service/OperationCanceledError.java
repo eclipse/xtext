@@ -12,6 +12,13 @@ package org.eclipse.xtext.service;
  */
 @SuppressWarnings("all")
 public class OperationCanceledError extends Error {
+  /**
+   * @since 2.9
+   */
+  public OperationCanceledError() {
+    super();
+  }
+  
   public OperationCanceledError(final RuntimeException cause) {
     super(cause);
   }

@@ -5,15 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.idea.service;
+package org.eclipse.xtext.ui.service;
 
-import com.intellij.openapi.progress.ProcessCanceledException;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.service.OperationCanceledManager;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 @SuppressWarnings("all")
-public class IdeaOperationCanceledManager extends OperationCanceledManager {
+public class EclipseOperationCanceledManager extends OperationCanceledManager {
   @Override
   protected Throwable getPlatformSpecificOperationCanceledException() {
-    return new ProcessCanceledException();
+    return new OperationCanceledException();
   }
 }

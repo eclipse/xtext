@@ -42,6 +42,7 @@ import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.DispatchingProvider;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.ui.containers.ContainerStateProvider;
@@ -106,6 +107,7 @@ import org.eclipse.xtext.ui.markers.IMarkerContributor;
 import org.eclipse.xtext.ui.preferences.EclipsePreferencesProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.service.EclipseOperationCanceledManager;
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
 import org.eclipse.xtext.ui.validation.ConfigurableIssueCodesPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
@@ -435,5 +437,12 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
 		return EclipseProjectConfigProvider.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public  Class<? extends OperationCanceledManager> bindOperationCanceledManager() {
+		return EclipseOperationCanceledManager.class;
 	}
 }
