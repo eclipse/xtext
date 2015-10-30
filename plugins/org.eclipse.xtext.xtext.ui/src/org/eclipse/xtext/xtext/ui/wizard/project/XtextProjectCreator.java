@@ -45,7 +45,6 @@ import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.io.Resources;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -188,7 +187,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			IFile created = fileWriter.writeToFile("", path);
 			InputStream stream = null;
 			try {
-				stream = Resources.newInputStreamSupplier(url).getInput();
+				stream = url.openStream();
 				created.setContents(stream, IResource.FORCE, new NullProgressMonitor());
 			} catch (Exception e) {
 				LOG.error("Failed to create binary file " + created.getFullPath().toOSString(), e);
