@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.util
 Bundle-Version: 2.9.0.qualifier
-Maven-Version: 2.9.0.beta6
+Maven-Version: 2.9.0-SNAPSHOT
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.util;
