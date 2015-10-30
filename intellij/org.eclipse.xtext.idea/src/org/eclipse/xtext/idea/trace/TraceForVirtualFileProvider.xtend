@@ -226,7 +226,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val result = traceProvider.get();
 		result.localStorage = file
 		val jarRoot = JarFileSystem.instance.getRootByEntry(file.file)
-		if (jarRoot != null) {
+		if (jarRoot !== null) {
 			result.jarRoot = jarRoot			
 		} else {
 			result.localProjectConfig = file.projectConfig
