@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util.formallang;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -147,14 +148,7 @@ public class PdaUtil {
 
 	protected class StackItem<T> {
 		protected StackItem<T> parent;
-		protected Iterator<T> parentIt;
 		protected T value;
-
-		public StackItem(Iterator<T> parentIt, T value) {
-			super();
-			this.parentIt = parentIt;
-			this.value = value;
-		}
 
 		public StackItem(StackItem<T> parent, T value) {
 			super();
@@ -169,8 +163,6 @@ public class PdaUtil {
 		public StackItem<T> pop() {
 			if (parent != null)
 				return parent;
-			if (parentIt != null && parentIt.hasNext())
-				return parent = new StackItem<T>(parentIt, parentIt.next());
 			return null;
 		}
 
@@ -407,9 +399,11 @@ public class PdaUtil {
 	}
 
 	protected <T> StackItem<T> createStack(Iterator<T> stack) {
-		if (stack.hasNext())
-			return new StackItem<T>(stack, stack.next());
-		return new StackItem<T>((StackItem<T>) null, null);
+		StackItem<T> result = new StackItem<T>((StackItem<T>) null, null);
+		ArrayList<T> list = Lists.newArrayList(stack);
+		for (int i = list.size()-1; i >= 0; i--)
+			result = new StackItem<T>(result, list.get(i));
+		return result;
 	}
 
 	public <S, P> long distanceTo(Pda<S, P> pda, Iterable<S> starts, Iterator<P> stack, Predicate<S> matches,
