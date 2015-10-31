@@ -1,0 +1,16 @@
+apply plugin: 'org.xtext.idea-dev'
+
+ideaDevelopment {
+	ideaVersion = "143.249.6"
+	pluginDependencies {
+		id 'junit'
+	}
+}
+
+tasks.withType(Test) {
+	systemProperty 'idea.system.path', "${project.buildDir}/idea-test-system"
+	systemProperty 'idea.config.path', "${project.buildDir}/idea-test-config"
+	minHeapSize = "1024m"
+	jvmArgs '-XX:MaxPermSize=256m', '-ea'
+	exclude {it.name.endsWith('Delegate.class')}
+}
