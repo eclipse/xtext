@@ -18,7 +18,7 @@ configurations {
 task jar(type:Jar) {}
 
 artifacts {
-	archives jar
+	'default' jar
 }
 
 apply from: "${rootDir}/gradle/dependencies-from-manifest.gradle"
