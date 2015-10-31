@@ -1,3 +1,4 @@
 configurations.all {
-	exclude group: 'org.antlr', module: 'stringtemplate'	
+	exclude group: 'org.antlr', module: 'stringtemplate'
+	exclude module:'cglib'
 }

@@ -12,13 +12,6 @@ eclipse {
       natures 'org.eclipse.xtext.ui.shared.xtextNature'
       buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
     }
-    /**
-  	 * Workaround for https://discuss.gradle.org/t/eclipse-classpath-error-when-java-test-code-lives-with-main-code/6547/3
-  	 */
-  	classpath.file.whenMerged { classpath ->
-  		classpath.entries.findAll { it.kind == 'src' && !it.path.startsWith('/')}.each {it.excludes = []}
-  		classpath.entries = classpath.entries.unique()
-  	}
 
     eclipseJdt.enabled = false
     cleanEclipseJdt.enabled = false

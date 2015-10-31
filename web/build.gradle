@@ -7,7 +7,6 @@ configure(eclipsePluginProjects) {
 
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'java'
-	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	apply from: "$rootDir/gradle/gradle-project-layout.gradle"
 }
 

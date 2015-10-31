@@ -1,6 +1,17 @@
-/**
- * This is where we translate Manifest.MF dependencies to Maven Central dependencies.
+/*
+ * Reads the Manifest.mf of a project and translates the required bundles to maven-style dependencies.
+ * The versions are taken from the org.eclipse.xtext.parent pom.xml
  */
+
+import org.apache.ivy.osgi.core.ManifestParser
+
+buildscript {
+	repositories.jcenter()
+	dependencies {
+		classpath (group: 'org.apache.ivy', name: 'ivy', version: '2.4.0')
+	}
+}
+
 def versions
 if (rootProject.hasProperty("parentPomVersions")) {
 	versions = rootProject.parentPomVersions
@@ -10,14 +21,12 @@ if (rootProject.hasProperty("parentPomVersions")) {
 	rootProject.ext.parentPomVersions = versions
 }
 
-ext.toDependency = { requirement ->
+
+def toDependency = {requirement ->
 	if (requirement.name.contains('.ui') || requirement.name.contains('.editor')) {
 		return null
 	}
-	def projectDependency = rootProject.project(':plugins').findProject(requirement.name)
-		?: rootProject.project(':tests').findProject(requirement.name)
-		?: rootProject.project(':intellij').findProject(requirement.name)
-		?: rootProject.project(':web').findProject(requirement.name)
+	def projectDependency = rootProject.allprojects.find{it.name == requirement.name}
 	if (projectDependency) {
 		return projectDependency
 	}
@@ -67,4 +76,15 @@ ext.toDependency = { requirement ->
 		return [group:'javax.inject', name: 'javax.inject', version:versions.'javax-inject.version']
 	}
 	logger.debug("Requirement '${requirement}' of ${project} is not mapped to a Maven dependency")
+}
+
+dependencies {
+	def manifestFile = file('META-INF/MANIFEST.MF')
+	def manifest = ManifestParser.parseManifest(manifestFile)
+	manifest.requires
+		.collect{toDependency(it)}
+		.findAll {it != null}
+		.each {
+			add('compile', it)
+		}
 }

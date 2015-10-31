@@ -5,28 +5,23 @@
  * just like tycho would do it and then use that in the downstream projects.
  */
 
-import org.apache.ivy.osgi.core.ManifestParser
 
-buildscript {
-	repositories.jcenter()
-	dependencies {
-		classpath (group: 'org.apache.ivy', name: 'ivy', version: '2.4.0')
+apply plugin: 'java-base'
+
+configurations {
+	compile
+	'default' {
+		extendsFrom compile
 	}
 }
 
-apply plugin: 'java'
-apply from: "${rootDir}/gradle/dependency-mapping.gradle"
+task jar(type:Jar) {}
 
-dependencies {
-	def manifestFile = file('META-INF/MANIFEST.MF')
-	def manifest = ManifestParser.parseManifest(manifestFile)
-	manifest.requires
-		.collect{toDependency(it)}
-		.findAll {it != null}
-		.each {
-			add('compile', it)
-		}
+artifacts {
+	archives jar
 }
+
+apply from: "${rootDir}/gradle/dependencies-from-manifest.gradle"
 
 task configureJarFromBuildProperties {
 	doLast {
@@ -67,6 +62,5 @@ if (isBuildServer) {
 	jar.dependsOn(':maven:compileEclipsePlugins')
 }
 
-//skip compilation, done by Eclipse/Maven
-compileJava.enabled = false
-processResources.enabled = false
+eclipseClasspath.enabled = false
+cleanEclipseClasspath.enabled = false
