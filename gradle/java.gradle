@@ -5,10 +5,3 @@ plugins.withType(JavaBasePlugin) {
 tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'
 }
-
-if (JavaVersion.current().isJava8Compatible()) {
-	//TODO why do we need this?
-	tasks.withType(Javadoc) {
-		options.addStringOption('Xdoclint:syntax,reference', '-quiet')
-	}
-}

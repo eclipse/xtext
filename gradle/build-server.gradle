@@ -2,7 +2,7 @@ ext.isBuildServer = System.getenv("JOB_NAME") != null || project.hasProperty('bu
 
 if (isBuildServer) {
 	tasks.withType(Test) {
-			ignoreFailures = true
+		ignoreFailures = true
 	}
 }
 

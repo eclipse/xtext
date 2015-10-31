@@ -8,8 +8,5 @@ configure(eclipsePluginProjects) {
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'java'
 	apply from: "$rootDir/gradle/gradle-project-layout.gradle"
-}
-
-configure(subprojects - exampleProjects) {
 	apply from: "$rootDir/gradle/maven-deployment.gradle"
 }

@@ -1,6 +1,13 @@
 task compileEclipsePlugins(type: MavenExec) {
-	args 'clean', 'compile', '-Pinclude-unpublished'
+	description = 'Compiles all Eclipse plugin projects, so their classes can be used by downstream Gradle projects'
+	args 'clean', 'compile', '-Pinclude-unpublished', '-Dmaven.test.skip=true', '-Dmaven.javadoc.skip=true'
 	workingDir 'org.eclipse.xtext.tycho.parent'
+}
+
+task install(type: MavenExec) {
+	description = 'Installs all Maven projects (Eclipse plugins + Maven plugins) into the local repository' 
+	args 'install', '-Dmaven.test.skip=true', '-Dmaven.javadoc.skip=true'
+	workingDir 'org.eclipse.xtext.parent'
 }
 
 class MavenExec extends Exec {
