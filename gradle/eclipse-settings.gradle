@@ -5,9 +5,10 @@ eclipse {
     natures 'org.springsource.ide.eclipse.gradle.core.nature'
   }
 
+  eclipseProject.enabled = false
   cleanEclipseProject.enabled = false
 
-  plugins.withType(JavaPlugin) {
+  plugins.withType(JavaBasePlugin) {
     project {
       natures 'org.eclipse.xtext.ui.shared.xtextNature'
       buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
