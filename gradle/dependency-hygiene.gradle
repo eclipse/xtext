@@ -1,0 +1,3 @@
+configurations.all {
+	exclude group: 'org.antlr', module: 'stringtemplate'	
+}

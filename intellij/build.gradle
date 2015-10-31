@@ -46,24 +46,6 @@ configure(subprojects - eclipsePluginProjects) {
 		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
 		ideaProvided (project(":plugins:org.eclipse.xtend.lib")) { transitive = false }
 	}
-
-	if (!isBuildServer) {
-		// Disable the java task if not on the build server
-		// This allows to reuse the artifacts from /bin that
-		// Eclipse produced. They are immediately available and
-		// contain debug information.
-		compileJava.enabled = false
-		processResources.enabled = false
-
-		task copyFromBin(type: Sync) {
-		    from 'bin'
-		    into 'build/classes/main'
-		}
-
-		classes {
-			dependsOn(copyFromBin)
-		}
-	}
 }
 
 configure(ideaPluginProjects + ideaTestProjects) {

@@ -5,7 +5,7 @@ eclipse {
     natures 'org.springsource.ide.eclipse.gradle.core.nature'
   }
 
-  cleanEclipseProject.enabled =false
+  cleanEclipseProject.enabled = false
 
   plugins.withType(JavaPlugin) {
     project {

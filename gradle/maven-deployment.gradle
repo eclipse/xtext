@@ -1,8 +1,13 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+if (name.startsWith('org.eclipse.xtend')) {
+	group = 'org.eclipse.xtend'
+} else {
+	group = 'org.eclipse.xtext'
+}
 
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'

@@ -8,18 +8,7 @@ configure(eclipsePluginProjects) {
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'java'
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
-
-	sourceSets {
-		main.java.srcDir 'src/main/xtext-gen'
-		main.java.srcDir 'src/main/xtend-gen'
-		test.java.srcDir 'src/test/xtend-gen'
-	}
-	
-	if (JavaVersion.current().isJava8Compatible()) {
-		tasks.withType(Javadoc) {
-			options.addStringOption('Xdoclint:syntax,reference', '-quiet')
-		}
-	}
+	apply from: "$rootDir/gradle/gradle-project-layout.gradle"
 }
 
 configure(subprojects - exampleProjects) {
