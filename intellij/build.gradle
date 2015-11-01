@@ -3,7 +3,8 @@
  * so you can launch them all together. It also creates a repository
  * from where users can install our plugins
  */
- 
+
+
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
 
@@ -14,6 +15,8 @@ if (version.endsWith("-SNAPSHOT")) {
 }
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**'
 
-task check { //TODO unnecessary, make build server execute form the correct folder instead!
+//TODO unnecessary, make build server execute form the correct folder instead!
+evaluationDependsOnChildren()
+task check {
 	dependsOn subprojects*.check
 }
