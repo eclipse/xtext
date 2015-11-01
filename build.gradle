@@ -11,11 +11,11 @@ def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exis
 
 allprojects {
 	repositories.addAll(rootProject.buildscript.repositories)
-	apply from: "$rootDir/gradle/pom-versions.gradle"
-	apply from: "$rootDir/gradle/versioning.gradle"
-	apply from: "$rootDir/gradle/java.gradle"
-	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	apply from: "$rootDir/gradle/build-server.gradle"
+	apply from: "$rootDir/gradle/eclipse-settings.gradle"
+	apply from: "$rootDir/gradle/java-compiler-settings.gradle"
+	apply from: "$rootDir/gradle/versions-from-parent-pom.gradle"
+	apply from: "$rootDir/gradle/versioning.gradle"
 	apply from: "$rootDir/gradle/dependency-hygiene.gradle"
 }
 
