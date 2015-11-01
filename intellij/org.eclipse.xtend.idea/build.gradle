@@ -1,16 +1,5 @@
 dependencies {
-	compile project(":plugins:org.eclipse.xtend.core")
-	compile project(":plugins:org.eclipse.xtext.xbase.ide")
 	compile project(":plugins:org.eclipse.xtend.ide.common")
-	compile project(":plugins:org.eclipse.xtend.lib")
-	
-	compile ('org.eclipse.core:org.eclipse.core.resources:3.7.100') { transitive = false}
-	compile ('org.eclipse.core:org.eclipse.core.jobs:3.5.100') { transitive = false}
-	compile ('org.eclipse.core:org.eclipse.core.runtime:3.7.0') { transitive = false}
-	compile ('org.eclipse.osgi:org.eclipse.osgi:3.7.1') { transitive = false}
-	compile ('org.eclipse.core:org.eclipse.core.contenttype:3.4.100') { transitive = false}
-	compile ('org.eclipse.equinox:org.eclipse.equinox.preferences:3.4.1') { transitive = false}
-
 }
 
 ideaDevelopment {
