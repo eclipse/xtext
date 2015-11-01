@@ -1,9 +1,15 @@
-allprojects {
-	buildscript {
-		repositories {
-			jcenter()
-		}
+buildscript {
+	repositories {
+		jcenter()
 	}
+	dependencies {
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
+	}
+}
+
+def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
+
+allprojects {
 	repositories.addAll(rootProject.buildscript.repositories)
 	apply from: "$rootDir/gradle/pom-versions.gradle"
 	apply from: "$rootDir/gradle/versioning.gradle"
@@ -11,4 +17,34 @@ allprojects {
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	apply from: "$rootDir/gradle/build-server.gradle"
 	apply from: "$rootDir/gradle/dependency-hygiene.gradle"
+}
+
+configure(eclipsePluginProjects) {
+	apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
+}
+
+configure(project('intellij')) {
+	def ideaTestProjects = subprojects.findAll{it.name.endsWith('tests')} - eclipsePluginProjects
+	def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists()} - ideaTestProjects
+
+	configure(allprojects - eclipsePluginProjects) {
+		apply from: "$rootDir/gradle/intellij-development.gradle"
+	}
+	
+	configure(subprojects - eclipsePluginProjects) {
+		apply plugin: 'org.xtext.idea-component'
+		apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+	}
+	
+	configure(ideaPluginProjects) {
+		apply plugin: 'org.xtext.idea-plugin'
+	}
+}
+
+configure(project('web')) {
+	configure(subprojects - eclipsePluginProjects) {
+		apply plugin: 'java'
+		apply from: "$rootDir/gradle/gradle-project-layout.gradle"
+		apply from: "$rootDir/gradle/maven-deployment.gradle"
+	}
 }

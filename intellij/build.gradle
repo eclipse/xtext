@@ -1,31 +1,3 @@
-buildscript {
-	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
-	}
-}
-
-
-def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
-def ideaTestProjects = subprojects.findAll{it.name.endsWith('tests')} - eclipsePluginProjects
-def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists()} - ideaTestProjects
-
-configure(eclipsePluginProjects) {
-	apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
-}
-
-configure(allprojects - eclipsePluginProjects) {
-	apply from: "$rootDir/gradle/intellij-development.gradle"
-}
-
-configure(subprojects - eclipsePluginProjects) {
-	apply plugin: 'org.xtext.idea-component'
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-}
-
-configure(ideaPluginProjects) {
-	apply plugin: 'org.xtext.idea-plugin'
-}
-
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
 
