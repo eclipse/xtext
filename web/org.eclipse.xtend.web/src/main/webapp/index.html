@@ -43,6 +43,13 @@
 			xmlhttp.send(sendmsg);
 		}
 		
+		function insertInto(str, input){
+		        var val = input.getSession().getValue(), s = input.selectionStart, e = input.selectionEnd;
+		        input.value = val.slice(0,e)+str+val.slice(e);
+		        if (e==s) input.selectionStart += str.length - 1;
+		        input.selectionEnd = e + str.length -1;
+		}
+		
 		var baseUrl = window.location.pathname;
 		var fileIndex = baseUrl.indexOf("index.html");
 		if (fileIndex > 0)
@@ -62,9 +69,53 @@
 					baseUrl: baseUrl,
 					syntaxDefinition: "xtext-resources/generated/mode-xtend"
 					});
-				
-				editor.setBehavioursEnabled(true);
-				editor.$blockScrolling = Infinity
+			
+				HashHandler = require("ace/keyboard/hash_handler").HashHandler
+				var parenthesis = new HashHandler([{
+				    bindKey: "(",
+				    exec: function(e){
+				    	var position = editor.getCursorPosition();
+				        editor.insert("()");
+				        editor.moveCursorTo(position.row,position.column+1);
+				    }
+				}]);
+				var bracket = new HashHandler([{
+				    bindKey: "[",
+				    exec: function(e){
+				    	var position = editor.getCursorPosition();
+				        editor.insert("[]");
+				        editor.moveCursorTo(position.row,position.column+1);
+				    }
+				}]);
+				var accolade = new HashHandler([{
+				    bindKey: "{",
+				    exec: function(e){
+				    	var position = editor.getCursorPosition();
+				        editor.insert("{}");
+				        editor.moveCursorTo(position.row,position.column+1);
+				    }
+				}]);
+				var quotes = new HashHandler([{
+				    bindKey: "\"",
+				    exec: function(e){
+				    	var position = editor.getCursorPosition();
+				        editor.insert("\"\"");
+				        editor.moveCursorTo(position.row,position.column+1);
+				    }
+				}]);
+				var single_quotes = new HashHandler([{
+				    bindKey: "\'",
+				    exec: function(e){
+				    	var position = editor.getCursorPosition();
+				        editor.insert("\'\'");
+				        editor.moveCursorTo(position.row,position.column+1);
+				    }
+				}]);
+				editor.keyBinding.addKeyboardHandler(parenthesis);
+				editor.keyBinding.addKeyboardHandler(bracket);
+				editor.keyBinding.addKeyboardHandler(accolade);
+				editor.keyBinding.addKeyboardHandler(quotes);
+				editor.keyBinding.addKeyboardHandler(single_quotes);
 				
 				aceEditor = ace.edit("result");
 				aceEditor.getSession().setMode("ace/mode/java");
@@ -79,6 +130,8 @@
 				
 			});
 		});
+		
+		
 	</script>
 </head>
 <body>
