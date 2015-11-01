@@ -1,0 +1,7 @@
+if (rootProject.hasProperty("parentPomVersions")) {
+	ext.versions = rootProject.parentPomVersions
+} else {
+	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
+	ext.versions = new XmlSlurper().parse(parentPom).properties.children().collectEntries{[(it.name()) : it.text()]}
+	rootProject.ext.parentPomVersions = versions
+}

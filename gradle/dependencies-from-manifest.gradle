@@ -12,17 +12,10 @@ buildscript {
 	}
 }
 
-def versions
-if (rootProject.hasProperty("parentPomVersions")) {
-	versions = rootProject.parentPomVersions
-} else {
-	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
-	versions = new XmlSlurper().parse(parentPom).properties.children().collectEntries{[(it.name()) : it.text()]}
-	rootProject.ext.parentPomVersions = versions
-}
-
-
 def toDependency = {requirement ->
+	if (requirement.resolution == 'optional') {
+		return null
+	}
 	if (requirement.name.contains('.ui') || requirement.name.contains('.editor')) {
 		return null
 	}

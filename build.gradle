@@ -5,6 +5,7 @@ allprojects {
 		}
 	}
 	repositories.addAll(rootProject.buildscript.repositories)
+	apply from: "$rootDir/gradle/pom-versions.gradle"
 	apply from: "$rootDir/gradle/versioning.gradle"
 	apply from: "$rootDir/gradle/java.gradle"
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
