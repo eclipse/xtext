@@ -42,9 +42,6 @@ configure(subprojects - eclipsePluginProjects) {
 
 configure(ideaPluginProjects + ideaTestProjects) {
 	configurations.compile {
-		//TODO this doesn't seem right, why do we suddenly exclude it here when we use it everywhere else?
-		exclude group: 'org.eclipse.equinox', module: 'common'
-
 		if( project.name != 'org.eclipse.xtend.idea') {
 			//TODO why exclude it everywhere but Xtend? Does it hurt somewhere else?
 			exclude module:'org.eclipse.jdt.core'

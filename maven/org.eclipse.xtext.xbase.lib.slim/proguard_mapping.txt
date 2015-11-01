@@ -1926,36 +1926,57 @@ org.eclipse.xtext.xbase.lib.FloatExtensions -> org.eclipse.xtext.xbase.lib.Float
     1449:1449:boolean operator_tripleEquals(float,byte) -> operator_tripleEquals
     1464:1464:boolean operator_tripleNotEquals(float,byte) -> operator_tripleNotEquals
 org.eclipse.xtext.xbase.lib.FunctionExtensions -> org.eclipse.xtext.xbase.lib.FunctionExtensions:
-    39:41:org.eclipse.xtext.xbase.lib.Functions$Function0 curry(org.eclipse.xtext.xbase.lib.Functions$Function1,java.lang.Object) -> curry
-    61:63:org.eclipse.xtext.xbase.lib.Functions$Function1 curry(org.eclipse.xtext.xbase.lib.Functions$Function2,java.lang.Object) -> curry
-    83:85:org.eclipse.xtext.xbase.lib.Functions$Function2 curry(org.eclipse.xtext.xbase.lib.Functions$Function3,java.lang.Object) -> curry
-    105:107:org.eclipse.xtext.xbase.lib.Functions$Function3 curry(org.eclipse.xtext.xbase.lib.Functions$Function4,java.lang.Object) -> curry
-    127:129:org.eclipse.xtext.xbase.lib.Functions$Function4 curry(org.eclipse.xtext.xbase.lib.Functions$Function5,java.lang.Object) -> curry
-    149:151:org.eclipse.xtext.xbase.lib.Functions$Function5 curry(org.eclipse.xtext.xbase.lib.Functions$Function6,java.lang.Object) -> curry
+    41:43:org.eclipse.xtext.xbase.lib.Functions$Function0 curry(org.eclipse.xtext.xbase.lib.Functions$Function1,java.lang.Object) -> curry
+    63:65:org.eclipse.xtext.xbase.lib.Functions$Function1 curry(org.eclipse.xtext.xbase.lib.Functions$Function2,java.lang.Object) -> curry
+    85:87:org.eclipse.xtext.xbase.lib.Functions$Function2 curry(org.eclipse.xtext.xbase.lib.Functions$Function3,java.lang.Object) -> curry
+    107:109:org.eclipse.xtext.xbase.lib.Functions$Function3 curry(org.eclipse.xtext.xbase.lib.Functions$Function4,java.lang.Object) -> curry
+    129:131:org.eclipse.xtext.xbase.lib.Functions$Function4 curry(org.eclipse.xtext.xbase.lib.Functions$Function5,java.lang.Object) -> curry
+    151:153:org.eclipse.xtext.xbase.lib.Functions$Function5 curry(org.eclipse.xtext.xbase.lib.Functions$Function6,java.lang.Object) -> curry
+    184:188:org.eclipse.xtext.xbase.lib.Functions$Function1 compose(org.eclipse.xtext.xbase.lib.Functions$Function1,org.eclipse.xtext.xbase.lib.Functions$Function1) -> compose
+    215:215:org.eclipse.xtext.xbase.lib.Functions$Function1 andThen(org.eclipse.xtext.xbase.lib.Functions$Function1,org.eclipse.xtext.xbase.lib.Functions$Function1) -> andThen
+    238:242:org.eclipse.xtext.xbase.lib.Functions$Function2 andThen(org.eclipse.xtext.xbase.lib.Functions$Function2,org.eclipse.xtext.xbase.lib.Functions$Function1) -> andThen
+    267:271:org.eclipse.xtext.xbase.lib.Procedures$Procedure1 andThen(org.eclipse.xtext.xbase.lib.Procedures$Procedure1,org.eclipse.xtext.xbase.lib.Procedures$Procedure1) -> andThen
+    295:299:org.eclipse.xtext.xbase.lib.Procedures$Procedure0 andThen(org.eclipse.xtext.xbase.lib.Procedures$Procedure0,org.eclipse.xtext.xbase.lib.Procedures$Procedure0) -> andThen
 org.eclipse.xtext.xbase.lib.FunctionExtensions$1 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$1:
     org.eclipse.xtext.xbase.lib.Functions$Function1 val$function -> val$function
     java.lang.Object val$argument -> val$argument
-    44:44:java.lang.Object apply() -> apply
+    46:46:java.lang.Object apply() -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$10 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$10:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure0 val$before -> val$before
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure0 val$after -> val$after
+    302:304:void apply() -> apply
 org.eclipse.xtext.xbase.lib.FunctionExtensions$2 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$2:
     org.eclipse.xtext.xbase.lib.Functions$Function2 val$function -> val$function
     java.lang.Object val$argument -> val$argument
-    66:66:java.lang.Object apply(java.lang.Object) -> apply
+    68:68:java.lang.Object apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.FunctionExtensions$3 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$3:
     org.eclipse.xtext.xbase.lib.Functions$Function3 val$function -> val$function
     java.lang.Object val$argument -> val$argument
-    88:88:java.lang.Object apply(java.lang.Object,java.lang.Object) -> apply
+    90:90:java.lang.Object apply(java.lang.Object,java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.FunctionExtensions$4 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$4:
     org.eclipse.xtext.xbase.lib.Functions$Function4 val$function -> val$function
     java.lang.Object val$argument -> val$argument
-    110:110:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+    112:112:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.FunctionExtensions$5 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$5:
     org.eclipse.xtext.xbase.lib.Functions$Function5 val$function -> val$function
     java.lang.Object val$argument -> val$argument
-    132:132:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+    134:134:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.FunctionExtensions$6 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$6:
     org.eclipse.xtext.xbase.lib.Functions$Function6 val$function -> val$function
     java.lang.Object val$argument -> val$argument
-    154:154:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+    156:156:java.lang.Object apply(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$7 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$7:
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$after -> val$after
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$before -> val$before
+    191:191:java.lang.Object apply(java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$8 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$8:
+    org.eclipse.xtext.xbase.lib.Functions$Function1 val$after -> val$after
+    org.eclipse.xtext.xbase.lib.Functions$Function2 val$before -> val$before
+    245:245:java.lang.Object apply(java.lang.Object,java.lang.Object) -> apply
+org.eclipse.xtext.xbase.lib.FunctionExtensions$9 -> org.eclipse.xtext.xbase.lib.FunctionExtensions$9:
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure1 val$before -> val$before
+    org.eclipse.xtext.xbase.lib.Procedures$Procedure1 val$after -> val$after
+    274:276:void apply(java.lang.Object) -> apply
 org.eclipse.xtext.xbase.lib.Functions -> org.eclipse.xtext.xbase.lib.Functions:
 org.eclipse.xtext.xbase.lib.Functions$Function0 -> org.eclipse.xtext.xbase.lib.Functions$Function0:
     java.lang.Object apply() -> apply
@@ -2164,19 +2185,19 @@ org.eclipse.xtext.xbase.lib.IterableExtensions -> org.eclipse.xtext.xbase.lib.It
     590:590:java.util.Map toInvertedMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toInvertedMap
     606:606:java.util.Map toMap(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> toMap
     626:626:java.util.Map groupBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> groupBy
-    642:642:java.util.List sort(java.lang.Iterable) -> sort
-    663:663:java.util.List sort(java.lang.Iterable,java.util.Comparator) -> sort
-    683:683:java.util.List sortWith(java.lang.Iterable,java.util.Comparator) -> sortWith
-    701:701:java.util.List sortBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> sortBy
-    720:724:java.lang.Iterable takeWhile(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> takeWhile
-    745:749:java.lang.Iterable dropWhile(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> dropWhile
-    772:774:java.lang.Iterable indexed(java.lang.Iterable) -> indexed
-    794:794:java.lang.Comparable min(java.lang.Iterable) -> min
-    812:812:java.lang.Object minBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> minBy
-    829:829:java.lang.Object min(java.lang.Iterable,java.util.Comparator) -> min
-    844:844:java.lang.Comparable max(java.lang.Iterable) -> max
-    862:862:java.lang.Object maxBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> maxBy
-    879:879:java.lang.Object max(java.lang.Iterable,java.util.Comparator) -> max
+    642:648:java.util.List sort(java.lang.Iterable) -> sort
+    669:669:java.util.List sort(java.lang.Iterable,java.util.Comparator) -> sort
+    689:689:java.util.List sortWith(java.lang.Iterable,java.util.Comparator) -> sortWith
+    707:707:java.util.List sortBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> sortBy
+    726:730:java.lang.Iterable takeWhile(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> takeWhile
+    751:755:java.lang.Iterable dropWhile(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> dropWhile
+    778:780:java.lang.Iterable indexed(java.lang.Iterable) -> indexed
+    800:806:java.lang.Comparable min(java.lang.Iterable) -> min
+    824:824:java.lang.Object minBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> minBy
+    841:841:java.lang.Object min(java.lang.Iterable,java.util.Comparator) -> min
+    858:858:java.lang.Comparable max(java.lang.Iterable) -> max
+    876:876:java.lang.Object maxBy(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1) -> maxBy
+    893:893:java.lang.Object max(java.lang.Iterable,java.util.Comparator) -> max
 org.eclipse.xtext.xbase.lib.IterableExtensions$1 -> org.eclipse.xtext.xbase.lib.IterableExtensions$1:
     java.lang.Iterable val$iterable -> val$iterable
     int val$count -> val$count
@@ -2188,14 +2209,14 @@ org.eclipse.xtext.xbase.lib.IterableExtensions$2 -> org.eclipse.xtext.xbase.lib.
 org.eclipse.xtext.xbase.lib.IterableExtensions$3 -> org.eclipse.xtext.xbase.lib.IterableExtensions$3:
     java.lang.Iterable val$iterable -> val$iterable
     org.eclipse.xtext.xbase.lib.Functions$Function1 val$predicate -> val$predicate
-    727:727:java.util.Iterator iterator() -> iterator
+    733:733:java.util.Iterator iterator() -> iterator
 org.eclipse.xtext.xbase.lib.IterableExtensions$4 -> org.eclipse.xtext.xbase.lib.IterableExtensions$4:
     java.lang.Iterable val$iterable -> val$iterable
     org.eclipse.xtext.xbase.lib.Functions$Function1 val$predicate -> val$predicate
-    752:752:java.util.Iterator iterator() -> iterator
+    758:758:java.util.Iterator iterator() -> iterator
 org.eclipse.xtext.xbase.lib.IterableExtensions$5 -> org.eclipse.xtext.xbase.lib.IterableExtensions$5:
     java.lang.Iterable val$iterable -> val$iterable
-    777:777:java.util.Iterator iterator() -> iterator
+    783:783:java.util.Iterator iterator() -> iterator
 org.eclipse.xtext.xbase.lib.IteratorExtensions -> org.eclipse.xtext.xbase.lib.IteratorExtensions:
     53:55:java.lang.Iterable toIterable(java.util.Iterator) -> toIterable
     83:83:java.util.Iterator operator_plus(java.util.Iterator,java.util.Iterator) -> operator_plus

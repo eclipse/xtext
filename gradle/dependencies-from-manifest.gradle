@@ -37,7 +37,7 @@ def toDependency = {requirement ->
 		return [group:'org.antlr', name:'antlr-runtime', version:versions.'antlr.version']
 	}
 	if (requirement.name == 'org.eclipse.equinox.common') {
-		return [group:'org.eclipse.equinox', name:'common', version:versions.'equinox-common-version']
+		return [group:'org.eclipse.equinox', name:'org.eclipse.equinox.common', version:versions.'equinox-common-version']
 	}
 	if (requirement.name.startsWith('org.eclipse.emf.mwe2')) {
 		return [group:'org.eclipse.emf', name: requirement.name, version:versions.'mwe2-version']
