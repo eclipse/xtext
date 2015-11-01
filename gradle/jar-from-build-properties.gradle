@@ -1,0 +1,39 @@
+/*
+ * Lazily reads build.properties to configure the contents of the jar
+ */
+
+task configureJarFromBuildProperties {
+	doLast {
+		jar {
+			//TODO get rid of this distinction by reconfiguring
+			//the Eclipse output folder for the mavenized projects
+			if(isBuildServer) {
+				from('target/classes')
+			} else {
+				from('bin')
+			}
+
+			manifest {
+				from('META-INF/MANIFEST.MF')
+			}
+			Properties buildProperties = new Properties()
+			File propertiesFile = file('build.properties')
+			propertiesFile.withInputStream {
+					buildProperties.load(it)
+			}
+			def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
+			binIncludes.each{ include ->
+				if (project.file(include).isDirectory()) {
+					from(include) {
+						into(include)
+					}
+				} else {
+					from(include)
+				}
+			}
+			duplicatesStrategy 'exclude'
+		}
+	}
+}
+
+jar.dependsOn(configureJarFromBuildProperties)
