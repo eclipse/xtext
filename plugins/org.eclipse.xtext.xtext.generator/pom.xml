@@ -61,13 +61,6 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<!-- FIXME should be transitively provided by xtext -->
-			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>org.eclipse.equinox.common</artifactId>
-			<version>[3.6.0,)</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<!-- FIXME should be transitively provided by mwe.utils -->
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>

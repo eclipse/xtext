@@ -65,5 +65,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+		    <groupId>org.eclipse.equinox</groupId>
+		    <artifactId>org.eclipse.equinox.common</artifactId>
+		    <version>${equinox-common-version}</version>
+		</dependency>
 	</dependencies>
 </project>
