@@ -49,7 +49,7 @@ def toDependency = {requirement ->
 		return [group:'org.eclipse.emf', name: requirement.name, version:versions.'emf.version']
 	}
 	if (requirement.name == 'org.eclipse.jdt.core') {
-		return [group:'org.eclipse.tycho', name: 'org.eclipse.jdt.core', version:versions.'jdt-core-version']
+		return [group:'org.eclipse.jdt', name: 'org.eclipse.jdt.core', version:versions.'jdt-core-version']
 	}
 	if (requirement.name == 'org.apache.log4j') {
 		return [group:'log4j', name: 'log4j', version:versions.'log4j.version']

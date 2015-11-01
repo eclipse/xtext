@@ -40,15 +40,6 @@ configure(subprojects - eclipsePluginProjects) {
 	}
 }
 
-configure(ideaPluginProjects + ideaTestProjects) {
-	configurations.compile {
-		if( project.name != 'org.eclipse.xtend.idea') {
-			//TODO why exclude it everywhere but Xtend? Does it hurt somewhere else?
-			exclude module:'org.eclipse.jdt.core'
-		}
-	}
-}
-
 configure(ideaPluginProjects) {
 	apply plugin: 'org.xtext.idea-plugin'
 }
