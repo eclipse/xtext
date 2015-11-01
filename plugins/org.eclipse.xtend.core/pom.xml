@@ -35,11 +35,6 @@
 			<version>[${project.version}]</version>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>common</artifactId>
-			<version>${equinox-common-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.eclipse.tycho</groupId>
 			<artifactId>org.eclipse.jdt.core</artifactId>
 			<version>${jdt-core-version}</version>
