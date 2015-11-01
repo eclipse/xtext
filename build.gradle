@@ -1,3 +1,10 @@
+/*
+ * Our top-level build script only categorizes the subprojects
+ * and then applies the relevant plugins. All the cross-cutting
+ * build logic can be found in the /gradle folder. The individual projects
+ * should only contain build logic that is specific for them (like dependencies) 
+ */
+
 buildscript {
 	repositories {
 		jcenter()
@@ -11,7 +18,7 @@ def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exis
 
 allprojects {
 	repositories.addAll(rootProject.buildscript.repositories)
-	apply from: "$rootDir/gradle/build-server.gradle"
+	apply from: "$rootDir/gradle/build-server-detection.gradle"
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	apply from: "$rootDir/gradle/java-compiler-settings.gradle"
 	apply from: "$rootDir/gradle/versions-from-parent-pom.gradle"

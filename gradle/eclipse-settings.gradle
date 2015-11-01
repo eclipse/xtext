@@ -1,19 +1,15 @@
+/*
+ * Currently we configure .project and jdt.prefs by hand and check them in.
+ * Only the .classpath for some projects (e.g. web, intellij) is generated.
+ */
+
 apply plugin: 'eclipse'
 
 eclipse {
-  project {
-    natures 'org.springsource.ide.eclipse.gradle.core.nature'
-  }
-
   eclipseProject.enabled = false
   cleanEclipseProject.enabled = false
 
   plugins.withType(JavaBasePlugin) {
-    project {
-      natures 'org.eclipse.xtext.ui.shared.xtextNature'
-      buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
-    }
-
     eclipseJdt.enabled = false
     cleanEclipseJdt.enabled = false
     eclipseClasspath.dependsOn(cleanEclipseClasspath)

@@ -1,3 +1,10 @@
+/*
+ * We currently maintain a list of versions for external
+ * dependencies in our org.eclipse.xtext.parent pom.
+ * This snippet makes these version available to all Gradle
+ * projects
+ */
+
 if (rootProject.hasProperty("parentPomVersions")) {
 	ext.versions = rootProject.parentPomVersions
 } else {

@@ -1,3 +1,9 @@
+/*
+ * This project serves as an aggregator for all idea plugins,
+ * so you can launch them all together. It also creates a repository
+ * from where users can install our plugins
+ */
+ 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
 
