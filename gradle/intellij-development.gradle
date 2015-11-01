@@ -1,4 +1,13 @@
-apply plugin: 'org.xtext.idea-dev'
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
+	}
+}
+
+apply plugin: org.xtext.gradle.idea.IdeaDevelopmentPlugin
 
 ideaDevelopment {
 	ideaVersion = "143.249.6"
@@ -13,4 +22,14 @@ tasks.withType(Test) {
 	minHeapSize = "1024m"
 	jvmArgs '-XX:MaxPermSize=256m', '-ea'
 	exclude {it.name.endsWith('Delegate.class')}
+}
+
+tasks.withType(org.xtext.gradle.idea.tasks.RunIdea) {
+	jvmArgs '-ea'
+}
+
+plugins.withType(org.xtext.gradle.idea.IdeaComponentPlugin) {
+	dependencies {
+		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
+	}
 }

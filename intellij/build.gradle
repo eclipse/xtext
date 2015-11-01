@@ -4,9 +4,27 @@ buildscript {
 	}
 }
 
+
 def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
 def ideaTestProjects = subprojects.findAll{it.name.endsWith('tests')} - eclipsePluginProjects
 def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists()} - ideaTestProjects
+
+configure(eclipsePluginProjects) {
+	apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
+}
+
+configure(allprojects - eclipsePluginProjects) {
+	apply from: "$rootDir/gradle/intellij-development.gradle"
+}
+
+configure(subprojects - eclipsePluginProjects) {
+	apply plugin: 'org.xtext.idea-component'
+	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+}
+
+configure(ideaPluginProjects) {
+	apply plugin: 'org.xtext.idea-plugin'
+}
 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
@@ -18,32 +36,6 @@ if (version.endsWith("-SNAPSHOT")) {
 }
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**'
 
-configure(eclipsePluginProjects) {
-	apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
-}
-
-configure(allprojects - eclipsePluginProjects) {
-	apply from: "$rootDir/gradle/intellij-development.gradle"
-	
-	//TODO move to a script
-	tasks.withType(org.xtext.gradle.idea.tasks.RunIdea) {
-		jvmArgs '-ea'
-	}
-}
-
-configure(subprojects - eclipsePluginProjects) {
-	apply plugin: 'org.xtext.idea-component'
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-
-	dependencies {
-		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
-	}
-}
-
-configure(ideaPluginProjects) {
-	apply plugin: 'org.xtext.idea-plugin'
-}
-
-task check {
+task check { //TODO unnecessary, make build server execute form the correct folder instead!
 	dependsOn subprojects*.check
 }
