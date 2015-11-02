@@ -330,13 +330,13 @@ ruleEntity returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEntity_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -397,13 +397,13 @@ ruleDatatype returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getDatatype_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -445,13 +445,13 @@ ruleProperty returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}

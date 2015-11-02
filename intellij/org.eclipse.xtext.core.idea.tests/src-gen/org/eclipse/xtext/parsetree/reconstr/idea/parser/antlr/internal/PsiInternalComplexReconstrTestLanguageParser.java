@@ -591,13 +591,13 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
             				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
             			
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			
@@ -1142,13 +1142,13 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
                     					markLeaf(elementTypeProvider.getTrickyG2_ValINTTerminalRuleCall_1_0ElementType());
                     				
+                    lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
                     					if(!current) {
                     						associateWithSemanticElement();
                     						current = true;
                     					}
                     				
-                    lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_val_1_0);
                     				

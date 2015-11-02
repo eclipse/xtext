@@ -129,13 +129,13 @@ ruleWithoutHiddens returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType());
 				}
+				lv_spaces_1_0=RULE_WS
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_spaces_1_0=RULE_WS
 				{
 					doneLeaf(lv_spaces_1_0);
 				}
@@ -153,13 +153,13 @@ ruleWithoutHiddens returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType());
 				}
+				lv_spaces_3_0=RULE_WS
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_spaces_3_0=RULE_WS
 				{
 					doneLeaf(lv_spaces_3_0);
 				}
@@ -354,13 +354,13 @@ ruleOverridingHiddensCall returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType());
 				}
+				lv_spaces_1_0=RULE_WS
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_spaces_1_0=RULE_WS
 				{
 					doneLeaf(lv_spaces_1_0);
 				}
@@ -595,13 +595,13 @@ ruleHidingHiddens returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType());
 				}
+				lv_space_1_0=RULE_WS
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_space_1_0=RULE_WS
 				{
 					doneLeaf(lv_space_1_0);
 				}

@@ -281,13 +281,13 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_0ElementType());
             				
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
             					doneLeaf(lv_name_2_0);
             				
@@ -318,13 +318,13 @@ public class PsiInternalDummyTestLanguageParser extends AbstractPsiAntlrParser {
 
             	    					markLeaf(elementTypeProvider.getElement_DescriptionsSTRINGTerminalRuleCall_3_0ElementType());
             	    				
+            	    lv_descriptions_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_6); 
 
             	    					if(!current) {
             	    						associateWithSemanticElement();
             	    						current = true;
             	    					}
             	    				
-            	    lv_descriptions_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_6); 
 
             	    					doneLeaf(lv_descriptions_3_0);
             	    				

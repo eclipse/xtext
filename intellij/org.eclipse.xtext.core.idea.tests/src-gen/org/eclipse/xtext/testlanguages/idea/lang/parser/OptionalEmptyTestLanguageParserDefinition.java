@@ -39,9 +39,6 @@ public class OptionalEmptyTestLanguageParserDefinition extends AbstractXtextPars
 			if (elementType == elementTypeProvider.getGreetingElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

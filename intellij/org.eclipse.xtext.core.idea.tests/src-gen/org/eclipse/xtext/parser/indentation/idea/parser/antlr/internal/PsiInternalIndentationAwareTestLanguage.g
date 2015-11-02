@@ -100,13 +100,13 @@ ruleTreeNode returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_name_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_0_0=RULE_ID
 				{
 					doneLeaf(lv_name_0_0);
 				}

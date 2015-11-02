@@ -13,11 +13,16 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
 import java.util.List;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.idea.nodemodel.ASTNodeExtension;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
@@ -25,6 +30,7 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
@@ -48,6 +54,10 @@ public class XtextResourceAsserts extends Assert {
   @Inject
   @Extension
   private InvariantChecker invariantChecker;
+  
+  @Inject
+  @Extension
+  private ASTNodeExtension astNodeExtension;
   
   public void assertResource(final XtextResource expectedResource, final XtextResource actualResource) {
     this.assertResource(expectedResource, actualResource, true);
@@ -100,6 +110,42 @@ public class XtextResourceAsserts extends Assert {
       Assert.assertTrue(_builder_1.toString(), _belongsTo);
       ASTNode _aSTNode = psiToEcoreAdapter.getASTNode(node);
       Assert.assertEquals(astNode, _aSTNode);
+      final EObject semanticElement = node.getSemanticElement();
+      if ((semanticElement != null)) {
+        EClass _eClass = semanticElement.eClass();
+        final EStructuralFeature feature = _eClass.getEStructuralFeature("name");
+        boolean _and = false;
+        boolean _and_1 = false;
+        if (!(feature instanceof EAttribute)) {
+          _and_1 = false;
+        } else {
+          boolean _isMany = feature.isMany();
+          boolean _not = (!_isMany);
+          _and_1 = _not;
+        }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          EClassifier _eType = feature.getEType();
+          Class<?> _instanceClass = _eType.getInstanceClass();
+          boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+          _and = _isAssignableFrom;
+        }
+        if (_and) {
+          EObject _semanticElement = node.getSemanticElement();
+          final List<INode> nodes = NodeModelUtils.findNodesForFeature(_semanticElement, feature);
+          final List<ASTNode> astNodes = this.astNodeExtension.findNodesForFeature(astNode, feature);
+          int _size = nodes.size();
+          int _size_1 = astNodes.size();
+          Assert.assertEquals(_size, _size_1);
+          for (int i = 0; (i < nodes.size()); i++) {
+            ASTNode _get = astNodes.get(i);
+            INode _get_1 = nodes.get(i);
+            ASTNode _aSTNode_1 = psiToEcoreAdapter.getASTNode(_get_1);
+            Assert.assertEquals(_get, _aSTNode_1);
+          }
+        }
+      }
     }
     ASTNode[] _children = astNode.getChildren(null);
     for (final ASTNode child : _children) {

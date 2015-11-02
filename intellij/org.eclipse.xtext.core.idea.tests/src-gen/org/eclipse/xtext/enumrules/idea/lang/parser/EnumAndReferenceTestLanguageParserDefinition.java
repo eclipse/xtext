@@ -33,15 +33,6 @@ public class EnumAndReferenceTestLanguageParserDefinition extends AbstractXtextP
 			if (elementType == elementTypeProvider.getEntityWithEnumAndReferenceElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getEntityWithEnumAndReference_TypeKindOfKeywordEnumRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

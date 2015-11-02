@@ -129,13 +129,13 @@ ruleCaseInsensitiveKeywordRule returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getCaseInsensitiveKeywordRule_ValINTTerminalRuleCall_1_0ElementType());
 				}
+				lv_val_1_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val_1_0=RULE_INT
 				{
 					doneLeaf(lv_val_1_0);
 				}
@@ -167,13 +167,13 @@ rulePluralRule returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getPluralRule_CountINTTerminalRuleCall_1_0ElementType());
 				}
+				lv_count_1_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_count_1_0=RULE_INT
 				{
 					doneLeaf(lv_count_1_0);
 				}
@@ -212,13 +212,13 @@ ruleMultiRule returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getMultiRule_ValINTTerminalRuleCall_1_0ElementType());
 				}
+				lv_val_1_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val_1_0=RULE_INT
 				{
 					doneLeaf(lv_val_1_0);
 				}
@@ -271,13 +271,13 @@ ruleDatatypeRule returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getDatatypeRule_ValINTTerminalRuleCall_1_0ElementType());
 				}
+				lv_val_1_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val_1_0=RULE_INT
 				{
 					doneLeaf(lv_val_1_0);
 				}
@@ -393,13 +393,13 @@ ruleCommonTerminalsRule returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getCommonTerminalsRule_ValIDTerminalRuleCall_4_0ElementType());
 				}
+				lv_val_4_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val_4_0=RULE_ID
 				{
 					doneLeaf(lv_val_4_0);
 				}

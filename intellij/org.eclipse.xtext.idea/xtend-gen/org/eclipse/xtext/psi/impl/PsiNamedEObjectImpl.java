@@ -22,10 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.idea.nodemodel.ASTNodeExtension;
 import org.eclipse.xtext.psi.PsiEObjectFactory;
 import org.eclipse.xtext.psi.PsiEObjectIdentifier;
@@ -131,28 +128,12 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
   
   protected EStructuralFeature getNameFeature() {
     ASTNode _node = this.getNode();
-    final EObject grammarElement = this._aSTNodeExtension.getGrammarElement(_node);
-    if ((grammarElement == null)) {
-      return null;
+    EClass _eClass = this._aSTNodeExtension.getEClass(_node);
+    EStructuralFeature _eStructuralFeature = null;
+    if (_eClass!=null) {
+      _eStructuralFeature=_eClass.getEStructuralFeature("name");
     }
-    AbstractRule _xifexpression = null;
-    if ((grammarElement instanceof RuleCall)) {
-      _xifexpression = ((RuleCall)grammarElement).getRule();
-    } else {
-      _xifexpression = GrammarUtil.containingRule(grammarElement);
-    }
-    final AbstractRule rule = _xifexpression;
-    TypeRef _type = rule.getType();
-    EClassifier _classifier = null;
-    if (_type!=null) {
-      _classifier=_type.getClassifier();
-    }
-    final EClassifier classifier = _classifier;
-    EStructuralFeature _xifexpression_1 = null;
-    if ((classifier instanceof EClass)) {
-      _xifexpression_1 = ((EClass)classifier).getEStructuralFeature("name");
-    }
-    final EStructuralFeature feature = _xifexpression_1;
+    final EStructuralFeature feature = _eStructuralFeature;
     boolean _and = false;
     boolean _and_1 = false;
     if (!(feature instanceof EAttribute)) {

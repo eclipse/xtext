@@ -86,13 +86,13 @@ ruleModel returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getModel_YcsYcTerminalRuleCall_1_0ElementType());
 				}
+				lv_ycs_1_0=RULE_YC
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_ycs_1_0=RULE_YC
 				{
 					doneLeaf(lv_ycs_1_0);
 				}
@@ -133,13 +133,13 @@ ruleModel returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getModel_YsCharYTerminalRuleCall_4_0ElementType());
 				}
+				lv_ys_4_0=RULE_CHARY
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_ys_4_0=RULE_CHARY
 				{
 					doneLeaf(lv_ys_4_0);
 				}
@@ -150,13 +150,13 @@ ruleModel returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getModel_AsCharATerminalRuleCall_5_0ElementType());
 				}
+				lv_as_5_0=RULE_CHARA
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_as_5_0=RULE_CHARA
 				{
 					doneLeaf(lv_as_5_0);
 				}
@@ -181,13 +181,13 @@ ruleAb returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getAb_XCharATerminalRuleCall_0_0ElementType());
 				}
+				lv_x_0_0=RULE_CHARA
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_x_0_0=RULE_CHARA
 				{
 					doneLeaf(lv_x_0_0);
 				}
@@ -198,13 +198,13 @@ ruleAb returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getAb_YCharbTerminalRuleCall_1_0ElementType());
 				}
+				lv_y_1_0=RULE_CHARB
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_y_1_0=RULE_CHARB
 				{
 					doneLeaf(lv_y_1_0);
 				}
@@ -229,13 +229,13 @@ ruleXb returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getXb_XCharXTerminalRuleCall_0_0ElementType());
 				}
+				lv_x_0_0=RULE_CHARX
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_x_0_0=RULE_CHARX
 				{
 					doneLeaf(lv_x_0_0);
 				}
@@ -246,13 +246,13 @@ ruleXb returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getXb_YCharbTerminalRuleCall_1_0ElementType());
 				}
+				lv_y_1_0=RULE_CHARB
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_y_1_0=RULE_CHARB
 				{
 					doneLeaf(lv_y_1_0);
 				}

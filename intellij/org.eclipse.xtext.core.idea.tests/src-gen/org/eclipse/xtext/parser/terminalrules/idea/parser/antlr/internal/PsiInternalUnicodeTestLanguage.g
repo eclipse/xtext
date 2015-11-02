@@ -121,13 +121,13 @@ ruleGString returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_GERMAN_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_GERMAN_STRING
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -150,13 +150,13 @@ ruleQuotedString returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getQuotedString_NameSTRINGTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_STRING
 			{
 				doneLeaf(lv_name_0_0);
 			}

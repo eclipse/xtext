@@ -44,9 +44,6 @@ public class FormatterTestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getIDList_IDListAction_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getKWListElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}

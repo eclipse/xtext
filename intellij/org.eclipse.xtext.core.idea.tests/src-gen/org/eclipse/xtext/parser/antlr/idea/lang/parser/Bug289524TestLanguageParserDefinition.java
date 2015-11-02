@@ -48,17 +48,8 @@ public class Bug289524TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getModelElement_ContainmentsContainedParserRuleCall_1_0_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getModelElement_RefsContainedIDTerminalRuleCall_1_1_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModelElement_RefsContainedIDTerminalRuleCall_1_1_2_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getContainedElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getContained_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

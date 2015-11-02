@@ -134,13 +134,13 @@ public class PsiInternalMultiValueFeatureTestLanguageParser extends AbstractPsiA
 
             	    				markLeaf(elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
             	    			
+            	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             	    				if(!current) {
             	    					associateWithSemanticElement();
             	    					current = true;
             	    				}
             	    			
-            	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             	    				doneLeaf(lv_featureA_0_0);
             	    			

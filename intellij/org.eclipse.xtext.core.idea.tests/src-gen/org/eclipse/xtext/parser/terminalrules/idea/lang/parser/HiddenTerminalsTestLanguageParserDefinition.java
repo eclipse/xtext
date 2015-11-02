@@ -50,12 +50,6 @@ public class HiddenTerminalsTestLanguageParserDefinition extends AbstractXtextPa
 			if (elementType == elementTypeProvider.getWithoutHiddensElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getWithHiddensElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -66,9 +60,6 @@ public class HiddenTerminalsTestLanguageParserDefinition extends AbstractXtextPa
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOverridingHiddensCallElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getInheritingHiddensElementType()) {
@@ -83,13 +74,7 @@ public class HiddenTerminalsTestLanguageParserDefinition extends AbstractXtextPa
 			if (elementType == elementTypeProvider.getDatatypeHiddensElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getDatatypeHiddens_ValidDatatypeRuleParserRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getHidingHiddensElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getHidingHiddens_CalledInheritingHiddensCallParserRuleCall_2_0ElementType()) {

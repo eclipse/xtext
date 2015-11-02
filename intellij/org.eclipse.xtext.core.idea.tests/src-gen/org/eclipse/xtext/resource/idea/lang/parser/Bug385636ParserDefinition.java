@@ -48,13 +48,7 @@ public class Bug385636ParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getDefineVariableElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getDefineVariable_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getNVariableAccessElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getNVariableAccess_VariableDefineVariableIDTerminalRuleCall_0_1ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getStatementElementType()) {

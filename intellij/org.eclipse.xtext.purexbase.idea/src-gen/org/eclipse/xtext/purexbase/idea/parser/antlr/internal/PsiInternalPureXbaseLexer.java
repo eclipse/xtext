@@ -1646,10 +1646,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5223:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // PsiInternalPureXbase.g:5223:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // PsiInternalPureXbase.g:6113:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // PsiInternalPureXbase.g:6113:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // PsiInternalPureXbase.g:5223:12: ( '0x' | '0X' )
+            // PsiInternalPureXbase.g:6113:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1677,7 +1677,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5223:13: '0x'
+                    // PsiInternalPureXbase.g:6113:13: '0x'
                     {
                     match("0x"); 
 
@@ -1685,7 +1685,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalPureXbase.g:5223:18: '0X'
+                    // PsiInternalPureXbase.g:6113:18: '0X'
                     {
                     match("0X"); 
 
@@ -1695,7 +1695,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
 
             }
 
-            // PsiInternalPureXbase.g:5223:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // PsiInternalPureXbase.g:6113:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1733,7 +1733,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // PsiInternalPureXbase.g:5223:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // PsiInternalPureXbase.g:6113:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1742,10 +1742,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5223:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // PsiInternalPureXbase.g:6113:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // PsiInternalPureXbase.g:5223:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // PsiInternalPureXbase.g:6113:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1763,7 +1763,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // PsiInternalPureXbase.g:5223:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // PsiInternalPureXbase.g:6113:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1787,7 +1787,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // PsiInternalPureXbase.g:5223:84: ( 'l' | 'L' )
+                            // PsiInternalPureXbase.g:6113:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1826,11 +1826,11 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5225:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // PsiInternalPureXbase.g:5225:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // PsiInternalPureXbase.g:6115:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // PsiInternalPureXbase.g:6115:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // PsiInternalPureXbase.g:5225:21: ( '0' .. '9' | '_' )*
+            // PsiInternalPureXbase.g:6115:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1879,11 +1879,11 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5227:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // PsiInternalPureXbase.g:5227:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // PsiInternalPureXbase.g:6117:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // PsiInternalPureXbase.g:6117:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // PsiInternalPureXbase.g:5227:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // PsiInternalPureXbase.g:6117:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1892,7 +1892,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5227:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // PsiInternalPureXbase.g:6117:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1903,7 +1903,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // PsiInternalPureXbase.g:5227:36: ( '+' | '-' )?
+                    // PsiInternalPureXbase.g:6117:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1936,7 +1936,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
 
             }
 
-            // PsiInternalPureXbase.g:5227:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // PsiInternalPureXbase.g:6117:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1948,7 +1948,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5227:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // PsiInternalPureXbase.g:6117:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1972,7 +1972,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalPureXbase.g:5227:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // PsiInternalPureXbase.g:6117:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2005,10 +2005,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5229:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // PsiInternalPureXbase.g:5229:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // PsiInternalPureXbase.g:6119:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // PsiInternalPureXbase.g:6119:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // PsiInternalPureXbase.g:5229:11: ( '^' )?
+            // PsiInternalPureXbase.g:6119:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2017,7 +2017,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5229:11: '^'
+                    // PsiInternalPureXbase.g:6119:11: '^'
                     {
                     match('^'); 
 
@@ -2035,7 +2035,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalPureXbase.g:5229:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // PsiInternalPureXbase.g:6119:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2084,10 +2084,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5231:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // PsiInternalPureXbase.g:5231:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // PsiInternalPureXbase.g:6121:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // PsiInternalPureXbase.g:6121:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // PsiInternalPureXbase.g:5231:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // PsiInternalPureXbase.g:6121:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2105,10 +2105,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5231:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // PsiInternalPureXbase.g:6121:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // PsiInternalPureXbase.g:5231:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalPureXbase.g:6121:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2124,7 +2124,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // PsiInternalPureXbase.g:5231:21: '\\\\' .
+                    	    // PsiInternalPureXbase.g:6121:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2132,7 +2132,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalPureXbase.g:5231:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalPureXbase.g:6121:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2152,7 +2152,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                         }
                     } while (true);
 
-                    // PsiInternalPureXbase.g:5231:44: ( '\"' )?
+                    // PsiInternalPureXbase.g:6121:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2161,7 +2161,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // PsiInternalPureXbase.g:5231:44: '\"'
+                            // PsiInternalPureXbase.g:6121:44: '\"'
                             {
                             match('\"'); 
 
@@ -2174,10 +2174,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalPureXbase.g:5231:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // PsiInternalPureXbase.g:6121:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // PsiInternalPureXbase.g:5231:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalPureXbase.g:6121:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2193,7 +2193,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // PsiInternalPureXbase.g:5231:55: '\\\\' .
+                    	    // PsiInternalPureXbase.g:6121:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2201,7 +2201,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalPureXbase.g:5231:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalPureXbase.g:6121:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2221,7 +2221,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                         }
                     } while (true);
 
-                    // PsiInternalPureXbase.g:5231:79: ( '\\'' )?
+                    // PsiInternalPureXbase.g:6121:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2230,7 +2230,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // PsiInternalPureXbase.g:5231:79: '\\''
+                            // PsiInternalPureXbase.g:6121:79: '\\''
                             {
                             match('\''); 
 
@@ -2261,12 +2261,12 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5233:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalPureXbase.g:5233:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalPureXbase.g:6123:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalPureXbase.g:6123:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalPureXbase.g:5233:24: ( options {greedy=false; } : . )*
+            // PsiInternalPureXbase.g:6123:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2291,7 +2291,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // PsiInternalPureXbase.g:5233:52: .
+            	    // PsiInternalPureXbase.g:6123:52: .
             	    {
             	    matchAny(); 
 
@@ -2321,12 +2321,12 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5235:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalPureXbase.g:5235:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalPureXbase.g:6125:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalPureXbase.g:6125:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalPureXbase.g:5235:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalPureXbase.g:6125:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2339,7 +2339,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // PsiInternalPureXbase.g:5235:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalPureXbase.g:6125:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2359,7 +2359,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalPureXbase.g:5235:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalPureXbase.g:6125:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2368,9 +2368,9 @@ public class PsiInternalPureXbaseLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // PsiInternalPureXbase.g:5235:41: ( '\\r' )? '\\n'
+                    // PsiInternalPureXbase.g:6125:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalPureXbase.g:5235:41: ( '\\r' )?
+                    // PsiInternalPureXbase.g:6125:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2379,7 +2379,7 @@ public class PsiInternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // PsiInternalPureXbase.g:5235:41: '\\r'
+                            // PsiInternalPureXbase.g:6125:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2411,10 +2411,10 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5237:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalPureXbase.g:5237:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalPureXbase.g:6127:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalPureXbase.g:6127:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalPureXbase.g:5237:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalPureXbase.g:6127:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2468,8 +2468,8 @@ public class PsiInternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalPureXbase.g:5239:16: ( . )
-            // PsiInternalPureXbase.g:5239:18: .
+            // PsiInternalPureXbase.g:6129:16: ( . )
+            // PsiInternalPureXbase.g:6129:18: .
             {
             matchAny(); 
 

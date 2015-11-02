@@ -39,12 +39,6 @@ public class DummyTestLanguageParserDefinition extends AbstractXtextParserDefini
 			if (elementType == elementTypeProvider.getElementElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getElement_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getElement_DescriptionsSTRINGTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

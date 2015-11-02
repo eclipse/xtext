@@ -859,6 +859,7 @@ public class PsiInternalBug296889TestLanguageParser extends AbstractPsiAntlrPars
               					markLeaf(elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -867,7 +868,6 @@ public class PsiInternalBug296889TestLanguageParser extends AbstractPsiAntlrPars
               					}
               				
             }
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_name_1_0);

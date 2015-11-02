@@ -1,9 +1,9 @@
 org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.NoParametersTestLanguageFileImpl:a.noparameterstestlanguage(0,5)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE)(0,5)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE)('anonymous')(0,5)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ELEMENT_TYPE)(0,0)
       <empty list>
     PsiElement(ParserRuleParameters_NumberSignDigitEightKeyword_1_7_0_ELEMENT_TYPE)('#8')(0,2)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0_ELEMENT_TYPE)(2,5)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0_ELEMENT_TYPE)('anonymous')(2,5)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Scenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE)(2,5)
         PsiWhiteSpace(' ')(2,3)
         PsiElement(IdOrKeyword_False_IDTerminalRuleCall_ELEMENT_TYPE)('id')(3,5)

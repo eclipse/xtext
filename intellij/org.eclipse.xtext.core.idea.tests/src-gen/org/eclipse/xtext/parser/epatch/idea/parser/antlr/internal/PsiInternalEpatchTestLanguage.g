@@ -71,13 +71,13 @@ ruleEPatch returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEPatch_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -239,13 +239,13 @@ ruleResourceImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getResourceImport_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -263,13 +263,13 @@ ruleResourceImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getResourceImport_UriSTRINGTerminalRuleCall_3_0ElementType());
 				}
+				lv_uri_3_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_uri_3_0=RULE_STRING
 				{
 					doneLeaf(lv_uri_3_0);
 				}
@@ -301,13 +301,13 @@ ruleEPackageImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEPackageImport_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -325,13 +325,13 @@ ruleEPackageImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEPackageImport_NsURISTRINGTerminalRuleCall_3_0ElementType());
 				}
+				lv_nsURI_3_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_nsURI_3_0=RULE_STRING
 				{
 					doneLeaf(lv_nsURI_3_0);
 				}
@@ -370,13 +370,13 @@ ruleJavaImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getJavaImport_PathIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_path_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_path_2_0=RULE_ID
 				{
 					doneLeaf(lv_path_2_0);
 				}
@@ -395,13 +395,13 @@ ruleJavaImport returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getJavaImport_PathIDTerminalRuleCall_3_1_0ElementType());
 					}
+					lv_path_4_0=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_path_4_0=RULE_ID
 					{
 						doneLeaf(lv_path_4_0);
 					}
@@ -441,13 +441,13 @@ ruleExtensionImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getExtensionImport_PathIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_path_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_path_2_0=RULE_ID
 				{
 					doneLeaf(lv_path_2_0);
 				}
@@ -466,13 +466,13 @@ ruleExtensionImport returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getExtensionImport_PathIDTerminalRuleCall_3_1_0ElementType());
 					}
+					lv_path_4_0=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_path_4_0=RULE_ID
 					{
 						doneLeaf(lv_path_4_0);
 					}
@@ -505,13 +505,13 @@ ruleNamedResource returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getNamedResource_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -545,13 +545,13 @@ ruleNamedResource returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getNamedResource_LeftUriSTRINGTerminalRuleCall_4_0_1_0ElementType());
 						}
+						lv_leftUri_5_0=RULE_STRING
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_leftUri_5_0=RULE_STRING
 						{
 							doneLeaf(lv_leftUri_5_0);
 						}
@@ -603,13 +603,13 @@ ruleNamedResource returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getNamedResource_RightUriSTRINGTerminalRuleCall_7_0_1_0ElementType());
 						}
+						lv_rightUri_10_0=RULE_STRING
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_rightUri_10_0=RULE_STRING
 						{
 							doneLeaf(lv_rightUri_10_0);
 						}
@@ -673,13 +673,13 @@ ruleObjectRef returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getObjectRef_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -709,13 +709,13 @@ ruleObjectRef returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getObjectRef_LeftFragFRAGMENTTerminalRuleCall_2_0_1_0ElementType());
 						}
+						lv_leftFrag_3_0=RULE_FRAGMENT
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_leftFrag_3_0=RULE_FRAGMENT
 						{
 							doneLeaf(lv_leftFrag_3_0);
 						}
@@ -753,13 +753,13 @@ ruleObjectRef returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getObjectRef_LeftFragFRAGMENTTerminalRuleCall_2_1_2_0ElementType());
 						}
+						lv_leftFrag_6_0=RULE_FRAGMENT
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_leftFrag_6_0=RULE_FRAGMENT
 						{
 							doneLeaf(lv_leftFrag_6_0);
 						}
@@ -794,13 +794,13 @@ ruleObjectRef returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getObjectRef_RightFragFRAGMENTTerminalRuleCall_2_1_5_0ElementType());
 						}
+						lv_rightFrag_9_0=RULE_FRAGMENT
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_rightFrag_9_0=RULE_FRAGMENT
 						{
 							doneLeaf(lv_rightFrag_9_0);
 						}
@@ -924,13 +924,13 @@ ruleBiSingleAssignment returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getBiSingleAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_feature_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_feature_0_0=RULE_ID
 				{
 					doneLeaf(lv_feature_0_0);
 				}
@@ -1006,13 +1006,13 @@ ruleBiListAssignment returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getBiListAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_feature_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_feature_0_0=RULE_ID
 				{
 					doneLeaf(lv_feature_0_0);
 				}
@@ -1154,13 +1154,13 @@ ruleMonoSingleAssignment returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getMonoSingleAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_feature_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_feature_0_0=RULE_ID
 				{
 					doneLeaf(lv_feature_0_0);
 				}
@@ -1214,13 +1214,13 @@ ruleMonoListAssignment returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getMonoListAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_feature_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_feature_0_0=RULE_ID
 				{
 					doneLeaf(lv_feature_0_0);
 				}
@@ -1314,13 +1314,13 @@ ruleAssignmentValue returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getAssignmentValue_ValueSTRINGTerminalRuleCall_0_0ElementType());
 				}
+				lv_value_0_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_0_0=RULE_STRING
 				{
 					doneLeaf(lv_value_0_0);
 				}
@@ -1358,13 +1358,13 @@ ruleAssignmentValue returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getAssignmentValue_RefFeatureIDTerminalRuleCall_1_1_1_0ElementType());
 						}
+						lv_refFeature_3_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_refFeature_3_0=RULE_ID
 						{
 							doneLeaf(lv_refFeature_3_0);
 						}
@@ -1383,13 +1383,13 @@ ruleAssignmentValue returns [Boolean current=false]
 							{
 								markLeaf(elementTypeProvider.getAssignmentValue_RefIndexINTTerminalRuleCall_1_1_2_1_0ElementType());
 							}
+							lv_refIndex_5_0=RULE_INT
 							{
 								if(!$current) {
 									associateWithSemanticElement();
 									$current = true;
 								}
 							}
-							lv_refIndex_5_0=RULE_INT
 							{
 								doneLeaf(lv_refIndex_5_0);
 							}
@@ -1445,13 +1445,13 @@ ruleAssignmentValue returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_3_1_0ElementType());
 					}
+					lv_impFrag_9_0=RULE_FRAGMENT
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_impFrag_9_0=RULE_FRAGMENT
 					{
 						doneLeaf(lv_impFrag_9_0);
 					}
@@ -1477,13 +1477,13 @@ ruleListAssignmentValue returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getListAssignmentValue_IndexINTTerminalRuleCall_0_0ElementType());
 				}
+				lv_index_0_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_index_0_0=RULE_INT
 				{
 					doneLeaf(lv_index_0_0);
 				}
@@ -1510,13 +1510,13 @@ ruleListAssignmentValue returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getListAssignmentValue_RefIndexINTTerminalRuleCall_2_0_1_0ElementType());
 						}
+						lv_refIndex_3_0=RULE_INT
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_refIndex_3_0=RULE_INT
 						{
 							doneLeaf(lv_refIndex_3_0);
 						}
@@ -1536,13 +1536,13 @@ ruleListAssignmentValue returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getListAssignmentValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
 					}
+					lv_value_5_0=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_value_5_0=RULE_STRING
 					{
 						doneLeaf(lv_value_5_0);
 					}
@@ -1580,13 +1580,13 @@ ruleListAssignmentValue returns [Boolean current=false]
 							{
 								markLeaf(elementTypeProvider.getListAssignmentValue_RefFeatureIDTerminalRuleCall_2_2_1_1_0ElementType());
 							}
+							lv_refFeature_8_0=RULE_ID
 							{
 								if(!$current) {
 									associateWithSemanticElement();
 									$current = true;
 								}
 							}
-							lv_refFeature_8_0=RULE_ID
 							{
 								doneLeaf(lv_refFeature_8_0);
 							}
@@ -1605,13 +1605,13 @@ ruleListAssignmentValue returns [Boolean current=false]
 								{
 									markLeaf(elementTypeProvider.getListAssignmentValue_RefIndexINTTerminalRuleCall_2_2_1_2_1_0ElementType());
 								}
+								lv_refIndex_10_0=RULE_INT
 								{
 									if(!$current) {
 										associateWithSemanticElement();
 										$current = true;
 									}
 								}
-								lv_refIndex_10_0=RULE_INT
 								{
 									doneLeaf(lv_refIndex_10_0);
 								}
@@ -1667,13 +1667,13 @@ ruleListAssignmentValue returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getListAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_2_4_1_0ElementType());
 						}
+						lv_impFrag_14_0=RULE_FRAGMENT
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_impFrag_14_0=RULE_FRAGMENT
 						{
 							doneLeaf(lv_impFrag_14_0);
 						}
@@ -1718,13 +1718,13 @@ ruleSingleAssignmentValue returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSingleAssignmentValue_ValueSTRINGTerminalRuleCall_1_0ElementType());
 				}
+				lv_value_1_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_1_0=RULE_STRING
 				{
 					doneLeaf(lv_value_1_0);
 				}
@@ -1762,13 +1762,13 @@ ruleSingleAssignmentValue returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getSingleAssignmentValue_RefFeatureIDTerminalRuleCall_2_1_1_0ElementType());
 						}
+						lv_refFeature_4_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_refFeature_4_0=RULE_ID
 						{
 							doneLeaf(lv_refFeature_4_0);
 						}
@@ -1787,13 +1787,13 @@ ruleSingleAssignmentValue returns [Boolean current=false]
 							{
 								markLeaf(elementTypeProvider.getSingleAssignmentValue_RefIndexINTTerminalRuleCall_2_1_2_1_0ElementType());
 							}
+							lv_refIndex_6_0=RULE_INT
 							{
 								if(!$current) {
 									associateWithSemanticElement();
 									$current = true;
 								}
 							}
-							lv_refIndex_6_0=RULE_INT
 							{
 								doneLeaf(lv_refIndex_6_0);
 							}
@@ -1849,13 +1849,13 @@ ruleSingleAssignmentValue returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getSingleAssignmentValue_ImpFragFRAGMENTTerminalRuleCall_4_1_0ElementType());
 					}
+					lv_impFrag_10_0=RULE_FRAGMENT
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_impFrag_10_0=RULE_FRAGMENT
 					{
 						doneLeaf(lv_impFrag_10_0);
 					}
@@ -1900,13 +1900,13 @@ ruleCreatedObject returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getCreatedObject_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}
@@ -2019,13 +2019,13 @@ ruleObjectNew returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getObjectNew_ImpFragFRAGMENTTerminalRuleCall_2_0ElementType());
 				}
+				lv_impFrag_2_0=RULE_FRAGMENT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_impFrag_2_0=RULE_FRAGMENT
 				{
 					doneLeaf(lv_impFrag_2_0);
 				}
@@ -2074,13 +2074,13 @@ ruleObjectCopy returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getObjectCopy_FragmentFRAGMENTTerminalRuleCall_2_0ElementType());
 				}
+				lv_fragment_2_0=RULE_FRAGMENT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_fragment_2_0=RULE_FRAGMENT
 				{
 					doneLeaf(lv_fragment_2_0);
 				}
@@ -2244,13 +2244,13 @@ ruleJavaExecutable returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getJavaExecutable_MethodIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_method_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_method_1_0=RULE_ID
 				{
 					doneLeaf(lv_method_1_0);
 				}
@@ -2288,13 +2288,13 @@ ruleExpressionExecutable returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getExpressionExecutable_ExprstrSTRINGTerminalRuleCall_0ElementType());
 			}
+			lv_exprstr_0_0=RULE_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_exprstr_0_0=RULE_STRING
 			{
 				doneLeaf(lv_exprstr_0_0);
 			}

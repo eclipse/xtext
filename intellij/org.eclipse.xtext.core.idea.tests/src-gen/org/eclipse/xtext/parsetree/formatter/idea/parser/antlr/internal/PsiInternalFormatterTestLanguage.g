@@ -234,13 +234,13 @@ ruleDecl returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getDecl_TypeIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_type_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_type_0_0=RULE_ID
 				{
 					doneLeaf(lv_type_0_0);
 				}
@@ -251,13 +251,13 @@ ruleDecl returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getDecl_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -282,13 +282,13 @@ ruleAssign returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getAssign_VarIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_var_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_var_0_0=RULE_ID
 				{
 					doneLeaf(lv_var_0_0);
 				}
@@ -340,13 +340,13 @@ ruleAssign returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getAssign_ValINTTerminalRuleCall_3_0_0ElementType());
 					}
+					lv_val_3_0=RULE_INT
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_val_3_0=RULE_INT
 					{
 						doneLeaf(lv_val_3_0);
 					}
@@ -365,13 +365,13 @@ ruleAssign returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getAssign_ValINTTerminalRuleCall_3_1_1_0ElementType());
 						}
+						lv_val_5_0=RULE_INT
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_val_5_0=RULE_INT
 						{
 							doneLeaf(lv_val_5_0);
 						}
@@ -412,13 +412,13 @@ ruleMeth returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getMeth_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -498,13 +498,13 @@ ruleParam returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getParam_NameIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_name_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_0_0=RULE_ID
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -522,13 +522,13 @@ ruleParam returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getParam_TypeIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_type_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_type_2_0=RULE_ID
 				{
 					doneLeaf(lv_type_2_0);
 				}
@@ -560,13 +560,13 @@ ruleSpace returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSpace_ValIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_val_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val_1_0=RULE_ID
 				{
 					doneLeaf(lv_val_1_0);
 				}
@@ -1067,13 +1067,13 @@ ruleSuppressedHiddenSubSub returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSuppressedHiddenSubSub_IdvalIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_idval_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_idval_1_0=RULE_ID
 				{
 					doneLeaf(lv_idval_1_0);
 				}
@@ -1107,13 +1107,13 @@ ruleSuppressedHiddenSubID returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getSuppressedHiddenSubID_IdvalIDTerminalRuleCall_0ElementType());
 			}
+			lv_idval_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_idval_0_0=RULE_ID
 			{
 				doneLeaf(lv_idval_0_0);
 			}

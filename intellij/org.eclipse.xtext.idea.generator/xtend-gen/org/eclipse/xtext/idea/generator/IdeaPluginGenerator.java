@@ -2396,16 +2396,23 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      Iterable<AbstractRule> _eObjectRules = this.getEObjectRules(grammar);
-      final List<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>toList(_eObjectRules);
+      List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
       final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+        @Override
+        public Boolean apply(final AbstractRule it) {
+          return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
+        }
+      };
+      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
+      final List<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>toList(_filter);
+      final Function1<AbstractRule, Boolean> _function_1 = new Function1<AbstractRule, Boolean>() {
         @Override
         public Boolean apply(final AbstractRule it) {
           return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
         }
       };
-      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(EObjectRules, _function);
-      final List<AbstractRule> namedEObjectRules = IterableExtensions.<AbstractRule>toList(_filter);
+      Iterable<AbstractRule> _filter_1 = IterableExtensions.<AbstractRule>filter(EObjectRules, _function_1);
+      final List<AbstractRule> namedEObjectRules = IterableExtensions.<AbstractRule>toList(_filter_1);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
@@ -2599,34 +2606,39 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
                   }
                   {
                     if ((element instanceof RuleCall)) {
-                      _builder.append("\t");
-                      _builder.append("\t\t");
-                      _builder.append("if (elementType == elementTypeProvider.get");
-                      String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(element);
-                      _builder.append(_grammarElementIdentifier_2, "\t\t\t");
-                      _builder.append("ElementType()) {");
-                      _builder.newLineIfNotEmpty();
                       {
-                        AbstractRule _rule = ((RuleCall)element).getRule();
-                        boolean _contains_2 = namedEObjectRules.contains(_rule);
-                        if (_contains_2) {
+                        boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+                        if (_isEObjectRuleCall) {
                           _builder.append("\t");
                           _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("return new PsiNamedEObjectImpl(node) {};");
-                          _builder.newLine();
-                        } else {
+                          _builder.append("if (elementType == elementTypeProvider.get");
+                          String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(element);
+                          _builder.append(_grammarElementIdentifier_2, "\t\t\t");
+                          _builder.append("ElementType()) {");
+                          _builder.newLineIfNotEmpty();
+                          {
+                            AbstractRule _rule = ((RuleCall)element).getRule();
+                            boolean _contains_2 = namedEObjectRules.contains(_rule);
+                            if (_contains_2) {
+                              _builder.append("\t");
+                              _builder.append("\t\t");
+                              _builder.append("\t");
+                              _builder.append("return new PsiNamedEObjectImpl(node) {};");
+                              _builder.newLine();
+                            } else {
+                              _builder.append("\t");
+                              _builder.append("\t\t");
+                              _builder.append("\t");
+                              _builder.append("return new PsiEObjectImpl(node) {};");
+                              _builder.newLine();
+                            }
+                          }
                           _builder.append("\t");
                           _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("return new PsiEObjectImpl(node) {};");
+                          _builder.append("}");
                           _builder.newLine();
                         }
                       }
-                      _builder.append("\t");
-                      _builder.append("\t\t");
-                      _builder.append("}");
-                      _builder.newLine();
                     }
                   }
                 }
@@ -2656,49 +2668,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _xblockexpression = _builder;
     }
     return _xblockexpression;
-  }
-  
-  protected Iterable<AbstractRule> getEObjectRules(final Grammar grammar) {
-    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
-    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractRule it) {
-        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
-      }
-    };
-    return IterableExtensions.<AbstractRule>filter(_allRules, _function);
-  }
-  
-  protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
-    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
-    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractElement element) {
-        boolean _switchResult = false;
-        boolean _matched = false;
-        if (!_matched) {
-          if (element instanceof Action) {
-            _matched=true;
-          }
-          if (!_matched) {
-            if (element instanceof RuleCall) {
-              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-              if (_isEObjectRuleCall) {
-                _matched=true;
-              }
-            }
-          }
-          if (_matched) {
-            _switchResult = true;
-          }
-        }
-        if (!_matched) {
-          _switchResult = false;
-        }
-        return Boolean.valueOf(_switchResult);
-      }
-    };
-    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
   }
   
   protected boolean isNamed(final AbstractRule rule) {

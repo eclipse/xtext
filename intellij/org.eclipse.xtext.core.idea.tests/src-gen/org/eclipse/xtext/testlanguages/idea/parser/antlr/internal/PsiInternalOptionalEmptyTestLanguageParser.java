@@ -233,13 +233,13 @@ public class PsiInternalOptionalEmptyTestLanguageParser extends AbstractPsiAntlr
 
             					markLeaf(elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_name_1_0);
             				

@@ -1065,6 +1065,12 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("}");
           _builder_1.newLine();
+          String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
+          _builder_1.append(_localVar_1, "");
+          _builder_1.append("=");
+          String __assignmentEbnf_1 = super._assignmentEbnf(it, assignment, options, supportActions);
+          _builder_1.append(__assignmentEbnf_1, "");
+          _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");
@@ -1082,12 +1088,6 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.newLine();
           _builder_1.append("}");
           _builder_1.newLine();
-          String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
-          _builder_1.append(_localVar_1, "");
-          _builder_1.append("=");
-          String __assignmentEbnf_1 = super._assignmentEbnf(it, assignment, options, supportActions);
-          _builder_1.append(__assignmentEbnf_1, "");
-          _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
           _builder_1.append("\t");

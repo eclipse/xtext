@@ -108,13 +108,13 @@ ruleElement returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_2_0ElementType());
 					}
+					lv_name_3_0=SUPER_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_3_0=SUPER_ID
 					{
 						doneLeaf(lv_name_3_0);
 					}
@@ -142,13 +142,13 @@ ruleElement returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getElement_NameSTRINGTerminalRuleCall_2_2_0ElementType());
 					}
+					lv_name_6_0=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_6_0=RULE_STRING
 					{
 						doneLeaf(lv_name_6_0);
 					}
@@ -181,13 +181,13 @@ superModel returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getInheritanceTestLanguageModel_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -248,13 +248,13 @@ superElement returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getInheritanceTestLanguageElement_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}

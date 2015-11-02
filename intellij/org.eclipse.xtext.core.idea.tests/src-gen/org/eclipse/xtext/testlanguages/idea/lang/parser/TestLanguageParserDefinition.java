@@ -48,9 +48,6 @@ public class TestLanguageParserDefinition extends AbstractXtextParserDefinition 
 			if (elementType == elementTypeProvider.getChoiceRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getChoiceRule_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getReducibleRuleElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -64,9 +61,6 @@ public class TestLanguageParserDefinition extends AbstractXtextParserDefinition 
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getTerminalRuleElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

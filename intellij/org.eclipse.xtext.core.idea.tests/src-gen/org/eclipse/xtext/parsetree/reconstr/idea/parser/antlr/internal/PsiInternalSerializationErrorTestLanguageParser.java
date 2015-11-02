@@ -536,13 +536,13 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getTwoRequired_OneIDTerminalRuleCall_1_0ElementType());
             				
+            lv_one_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_one_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_one_1_0);
             				
@@ -561,13 +561,13 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getTwoRequired_TwoIDTerminalRuleCall_2_0ElementType());
             				
+            lv_two_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_two_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_two_2_0);
             				
@@ -694,13 +694,13 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
                     							markLeaf(elementTypeProvider.getTwoOptions_OneIDTerminalRuleCall_1_0_1_0ElementType());
                     						
+                    lv_one_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     							if(!current) {
                     								associateWithSemanticElement();
                     								current = true;
                     							}
                     						
-                    lv_one_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     							doneLeaf(lv_one_2_0);
                     						
@@ -738,13 +738,13 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
                     							markLeaf(elementTypeProvider.getTwoOptions_TwoIDTerminalRuleCall_1_1_1_0ElementType());
                     						
+                    lv_two_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     							if(!current) {
                     								associateWithSemanticElement();
                     								current = true;
                     							}
                     						
-                    lv_two_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     							doneLeaf(lv_two_4_0);
                     						

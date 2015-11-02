@@ -340,13 +340,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getCaseInsensitiveKeywordRule_ValINTTerminalRuleCall_1_0ElementType());
             				
+            lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_val_1_0);
             				
@@ -441,13 +441,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getPluralRule_CountINTTerminalRuleCall_1_0ElementType());
             				
+            lv_count_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_count_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_count_1_0);
             				
@@ -551,13 +551,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getMultiRule_ValINTTerminalRuleCall_1_0ElementType());
             				
+            lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_val_1_0);
             				
@@ -672,13 +672,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getDatatypeRule_ValINTTerminalRuleCall_1_0ElementType());
             				
+            lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_6); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_6); 
 
             					doneLeaf(lv_val_1_0);
             				
@@ -1009,13 +1009,13 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getCommonTerminalsRule_ValIDTerminalRuleCall_4_0ElementType());
             				
+            lv_val_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_val_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_val_4_0);
             				

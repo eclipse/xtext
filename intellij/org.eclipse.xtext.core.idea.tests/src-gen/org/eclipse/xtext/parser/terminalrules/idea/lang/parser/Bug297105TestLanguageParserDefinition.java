@@ -56,13 +56,7 @@ public class Bug297105TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getIntLiteralElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getIntLiteral_ValueIntValueParserRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getRealLiteralElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getRealLiteral_ValueRealValueParserRuleCall_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

@@ -163,13 +163,13 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             	    						markLeaf(elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
             	    					
+            	    lv_intValues_1_0=(Token)match(input,RULE_EINT,FollowSets000.FOLLOW_4); 
 
             	    						if(!current) {
             	    							associateWithSemanticElement();
             	    							current = true;
             	    						}
             	    					
-            	    lv_intValues_1_0=(Token)match(input,RULE_EINT,FollowSets000.FOLLOW_4); 
 
             	    						doneLeaf(lv_intValues_1_0);
             	    					
@@ -207,13 +207,13 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             	    						markLeaf(elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
             	    					
+            	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_4); 
 
             	    						if(!current) {
             	    							associateWithSemanticElement();
             	    							current = true;
             	    						}
             	    					
-            	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_4); 
 
             	    						doneLeaf(lv_doubleValues_3_0);
             	    					
@@ -251,13 +251,13 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             	    						markLeaf(elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
             	    					
+            	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_4); 
 
             	    						if(!current) {
             	    							associateWithSemanticElement();
             	    							current = true;
             	    						}
             	    					
-            	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_4); 
 
             	    						doneLeaf(lv_dateValues_5_0);
             	    					

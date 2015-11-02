@@ -33,17 +33,11 @@ public class MultiGenMMTestLanguageParserDefinition extends AbstractXtextParserD
 			if (elementType == elementTypeProvider.getFooElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getFoo_NameRefsNameRefParserRuleCall_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getNameRefElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getNameRef_NameSTRINGTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

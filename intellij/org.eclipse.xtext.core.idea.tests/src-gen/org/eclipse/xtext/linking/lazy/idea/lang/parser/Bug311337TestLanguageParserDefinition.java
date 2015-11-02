@@ -39,9 +39,6 @@ public class Bug311337TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getDefinitionElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getDefinition_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getDefinition_ChildChildParserRuleCall_3_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
@@ -51,22 +48,10 @@ public class Bug311337TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getChildElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getChild_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getChild_LinkDefinitionIDTerminalRuleCall_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getReferenceElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getReference_RefChildChildIDTerminalRuleCall_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getReference_NestedRefLeftAction_2_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getReference_RefChildChildIDTerminalRuleCall_2_2_0_1ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

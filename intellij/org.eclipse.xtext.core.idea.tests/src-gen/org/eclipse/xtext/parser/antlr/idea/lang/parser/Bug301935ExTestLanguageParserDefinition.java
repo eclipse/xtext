@@ -39,24 +39,6 @@ public class Bug301935ExTestLanguageParserDefinition extends AbstractXtextParser
 			if (elementType == elementTypeProvider.getModelElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_WSTerminalRuleCall_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_ValueIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_NLParserRuleCall_3ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_Value2IDTerminalRuleCall_4_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_WSTerminalRuleCall_5ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

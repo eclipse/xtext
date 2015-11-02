@@ -329,13 +329,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
                             							markLeaf(elementTypeProvider.getModel_ValueSTRINGTerminalRuleCall_0_1_0_1ElementType());
                             						
+                            lv_value_1_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
                             								current = true;
                             							}
                             						
-                            lv_value_1_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_value_1_2);
                             						
@@ -390,13 +390,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
                             							markLeaf(elementTypeProvider.getModel_ValueIDTerminalRuleCall_0_1_0_4ElementType());
                             						
+                            lv_value_1_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
                             								current = true;
                             							}
                             						
-                            lv_value_1_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_value_1_5);
                             						
@@ -510,13 +510,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
                             							markLeaf(elementTypeProvider.getModel_MultiValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
                             						
+                            lv_multiValue_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
                             								current = true;
                             							}
                             						
-                            lv_multiValue_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_multiValue_3_2);
                             						
@@ -571,13 +571,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
                             							markLeaf(elementTypeProvider.getModel_MultiValueIDTerminalRuleCall_1_1_0_4ElementType());
                             						
+                            lv_multiValue_3_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
                             								current = true;
                             							}
                             						
-                            lv_multiValue_3_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_multiValue_3_5);
                             						
@@ -621,13 +621,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
                     						markLeaf(elementTypeProvider.getModel_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
                     					
+                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_5_0);
                     					
@@ -665,13 +665,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
                     						markLeaf(elementTypeProvider.getModel_MultiValueSTRINGTerminalRuleCall_3_1_0ElementType());
                     					
+                    lv_multiValue_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_multiValue_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_multiValue_7_0);
                     					
@@ -1410,13 +1410,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
             				markLeaf(elementTypeProvider.getChild1_NameIDTerminalRuleCall_0ElementType());
             			
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			
@@ -1496,13 +1496,13 @@ public class PsiInternalBug250313Parser extends AbstractPsiAntlrParser {
 
             				markLeaf(elementTypeProvider.getChild2_NameSTRINGTerminalRuleCall_0ElementType());
             			
+            lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			

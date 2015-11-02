@@ -98,13 +98,13 @@ ruleElement returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -130,13 +130,13 @@ ruleElement returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType());
 					}
+					lv_name_4_0=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_4_0=RULE_ID
 					{
 						doneLeaf(lv_name_4_0);
 					}

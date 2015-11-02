@@ -60,23 +60,11 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			if (elementType == elementTypeProvider.getSimpleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSimple_OptionalIDTerminalRuleCall_2_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSimple_DatatypeFQNParserRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getRuleCallsElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getRuleCalls_RuleCallsSubParserRuleCall_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getRuleCalls_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getRuleCalls_Call1RuleCallsAss1ParserRuleCall_3_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -90,14 +78,8 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			if (elementType == elementTypeProvider.getRuleCallsAss1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getRuleCallsAss1_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getRuleCallsAss2ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getRuleCallsAss2_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOptionalCallsElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -106,9 +88,6 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOptionalCalls_Opt1OptionalCallsSub1ParserRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOptionalCalls_NameIDTerminalRuleCall_3_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOptionalCallsSub1ElementType()) {
@@ -126,14 +105,8 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			if (elementType == elementTypeProvider.getOptionalCallsSub2ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getOptionalCallsSub2_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getOptionalCallsSub3ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOptionalCallsSub3_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getRecursionElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -150,22 +123,7 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			if (elementType == elementTypeProvider.getRecursionSub_SubRecursionSubParserRuleCall_2_0_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getRecursionSub_ValsIDTerminalRuleCall_2_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getLoopElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLoop_NamesIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLoop_GrIDTerminalRuleCall_2_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLoop_IntsINTTerminalRuleCall_3_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLoop_StringsSTRINGTerminalRuleCall_3_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getExpressionElementType()) {
@@ -204,13 +162,7 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			if (elementType == elementTypeProvider.getPrim_ValueAction_0_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPrim_ValINTTerminalRuleCall_0_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getPrim_FunctionAction_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPrim_FuncIDTerminalRuleCall_1_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim_ParamAddParserRuleCall_1_3_0ElementType()) {
@@ -246,9 +198,6 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			if (elementType == elementTypeProvider.getFieldElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getField_IDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getField_ParameterParserRuleCall_1ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -263,9 +212,6 @@ public class ElementMatcherTestLanguageParserDefinition extends AbstractXtextPar
 			}
 			if (elementType == elementTypeProvider.getNestedStart_NestedStartSubParserRuleCall_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getNestedStart_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getNestedStartSubElementType()) {
 				return new PsiNamedEObjectImpl(node) {};

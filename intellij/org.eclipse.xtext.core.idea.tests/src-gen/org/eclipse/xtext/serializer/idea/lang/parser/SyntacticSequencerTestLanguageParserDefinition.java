@@ -81,15 +81,6 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getMandatoryKeywordsElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getExp0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -114,9 +105,6 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getPrim0_Val0Action_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getExp1ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -139,9 +127,6 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim1_Val1Action_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim1_Addition1ParserRuleCall_1_1ElementType()) {
@@ -183,32 +168,11 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getPrim2_Val2Action_0_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getPrim2_Addition2ParserRuleCall_1_1ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSingleCrossReferenceElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleCrossReference_Ref1SingleCrossReferenceTERMINAL_IDTerminalRuleCall_2_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleCrossReference_Ref2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleCrossReference_Ref3SingleCrossReferenceIDTerminalRuleCall_4_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleCrossReference_Ref4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getBooleanAlternativeElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -225,46 +189,16 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getUnassignedDatatypeElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getUnassignedDatatype_KW1ParserRuleCall_2ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getOptionalSingleTransitionElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOptionalSingleTransition_KW1ParserRuleCall_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOptionalManyTransitionElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getOptionalManyTransition_KW1ParserRuleCall_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getMandatoryManyTransitionElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMandatoryManyTransition_KW1ParserRuleCall_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getAlternativeTransitionElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getAlternativeTransition_KW1ParserRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getBooleanValuesElementType()) {
@@ -273,70 +207,22 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getBooleanValues_BooleanValuesAction_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getBooleanValues_Val3BooleanDatatypeIDParserRuleCall_4_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getLongAlternativeElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getActionOnlyElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getActionOnly_IDTerminalRuleCall_2ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getActionOnly_ActionOnlyAction_3ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getActionOnly_IDTerminalRuleCall_5ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getFragmentCallerElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getFragment1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFragment1_FragValIDTerminalRuleCall_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

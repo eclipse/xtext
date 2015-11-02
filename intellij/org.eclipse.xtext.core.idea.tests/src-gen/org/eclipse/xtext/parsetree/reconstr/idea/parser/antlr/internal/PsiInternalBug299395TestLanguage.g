@@ -79,13 +79,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_StringsSTRINGTerminalRuleCall_1_1_0ElementType());
 					}
+					lv_strings_2_0=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_strings_2_0=RULE_STRING
 					{
 						doneLeaf(lv_strings_2_0);
 					}
@@ -113,13 +113,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_KeysSTRINGTerminalRuleCall_2_1_0_0ElementType());
 						}
+						lv_keys_5_0=RULE_STRING
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_keys_5_0=RULE_STRING
 						{
 							doneLeaf(lv_keys_5_0);
 						}
@@ -130,13 +130,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_ValuesSTRINGTerminalRuleCall_2_1_1_0ElementType());
 						}
+						lv_values_6_0=RULE_STRING
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_values_6_0=RULE_STRING
 						{
 							doneLeaf(lv_values_6_0);
 						}
@@ -216,13 +216,13 @@ ruleSubModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType());
 					}
+					lv_strings_3_0=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_strings_3_0=RULE_STRING
 					{
 						doneLeaf(lv_strings_3_0);
 					}

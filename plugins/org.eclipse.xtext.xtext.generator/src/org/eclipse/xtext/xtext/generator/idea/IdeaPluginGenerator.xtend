@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.idea
 
-import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -20,11 +19,13 @@ import java.util.HashSet
 import java.util.Map
 import java.util.Set
 import org.antlr.runtime.Token
+import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
-import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.ISetup
@@ -34,6 +35,7 @@ import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.LexerBindings
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.util.Modules2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -44,9 +46,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
+import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	@Inject extension XtextGeneratorNaming
@@ -606,79 +608,73 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def compileParserDefinition(Grammar grammar) {
-		val namedGrammarElement = grammar.namedGrammarElements
+		val EObjectRules = grammar.allRules.filter[EObjectRule].toList
+		val namedEObjectRules = EObjectRules.filter[named].toList
 		return fileAccessFactory.createJavaFile(grammar.parserDefinition, '''
 			public class «grammar.parserDefinition.simpleName» extends «grammar.superParserDefinition» {
-			
+				«IF !EObjectRules.empty»
+
 				@«Inject» 
 				private «grammar.elementTypeProvider» elementTypeProvider;
+				«ENDIF»
 			
 				@Override
 				public «"com.intellij.psi.PsiFile".typeRef» createFile(«"com.intellij.psi.FileViewProvider".typeRef» viewProvider) {
 					return new «grammar.fileImpl»(viewProvider);
 				}
-			
+				«IF !EObjectRules.empty»
+				
 				@Override
 				@SuppressWarnings("rawtypes")
-				public «"com.intellij.psi.PsiElement".typeRef» createElement(«"com.intellij.lang.ASTNode".typeRef» node) {
-					«"com.intellij.psi.tree.IElementType".typeRef» elementType = node.getElementType();
-					Boolean hasSemanticElement = node.getUserData(«"org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder".typeRef».HAS_SEMANTIC_ELEMENT_KEY);
+				public «'com.intellij.psi.PsiElement'.typeRef» createElement(«'com.intellij.lang.ASTNode'.typeRef» node) {
+					Boolean hasSemanticElement = node.getUserData(«'org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder'.typeRef».HAS_SEMANTIC_ELEMENT_KEY);
 					if (hasSemanticElement != null && hasSemanticElement) {
-						«FOR namedElementType:namedGrammarElement.keySet»
-						if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
-							return new «"org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl".typeRef»(node,
-								«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
-								elementTypeProvider.get«nameType»ElementType()
-								«ENDFOR»
-							) {};
+						«'com.intellij.psi.tree.IElementType'.typeRef» elementType = node.getElementType();
+						«FOR rule : EObjectRules»
+						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {
+							«IF namedEObjectRules.contains(rule)»
+							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
+							«ELSE»
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							«ENDIF»
 						}
+						«FOR element : rule.eAllOfType(AbstractElement)»
+						«IF element instanceof Action»
+						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
+							«IF namedEObjectRules.contains(rule)»
+							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
+							«ELSE»
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							«ENDIF»
+						}
+						«ENDIF»
+						«IF element instanceof RuleCall»
+						«IF element.EObjectRuleCall»
+						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
+							«IF namedEObjectRules.contains(element.rule)»
+							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
+							«ELSE»
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							«ENDIF»
+						}
+						«ENDIF»
+						«ENDIF»
 						«ENDFOR»
+						«ENDFOR»
+						throw new «'java.lang.IllegalStateException'.typeRef»("Unexpected element type: " + elementType);
 					}
 					return super.createElement(node);
 				}
+				«ENDIF»
 			
 			}
 		''')
 	}
-
-	protected def getCrossReferences(Grammar grammar) {
-		grammar.allNonTerminalRules.map[
-			eAllContents.filter(CrossReference).filter[assigned].toIterable
-		].flatten
-	}
 	
-	protected def getNamedGrammarElements(Grammar grammar) {
-		val namedGrammarElements = LinkedHashMultimap.<String, String>create
-		for (nameRuleCall : grammar.nameRuleCalls) {
-			val nameRuleCallIdentifier = nameRuleCall.grammarElementIdentifier
-			for (ruleCall : grammar.getRuleCallsWithName(nameRuleCall)) {
-				namedGrammarElements.put(ruleCall.grammarElementIdentifier, nameRuleCallIdentifier)
-				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
-					namedGrammarElements.put(action.grammarElementIdentifier, nameRuleCallIdentifier)
-				}
-			}
-		}
-		namedGrammarElements
-	}
-	
-	protected def getRuleCallsWithName(Grammar grammar, RuleCall nameRuleCall) {
-		grammar.allNonTerminalRules.map[getRuleCallsWithName(nameRuleCall)].flatten
-	}
-	
-	protected def getRuleCallsWithName(EObject element, RuleCall nameRuleCall) {
-		element.eAllContents.filter(RuleCall).filter [
-			rule.eAllContents.exists[it == nameRuleCall]
-		].toIterable
-	}
-	
-	protected def getNameRuleCalls(Grammar grammar) {
-		grammar.allNonTerminalRules.map[nameRuleCalls].flatten
-	}
-	
-	protected def getNameRuleCalls(EObject element) {
-		element.eAllContents.filter(RuleCall).filter [
-			assigned && containingAssignment.feature == 'name'
-		].toIterable
+	protected def isNamed(AbstractRule rule) {
+		val classifier = rule.type?.classifier
+		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
+		feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass)
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) {

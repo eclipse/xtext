@@ -78,9 +78,6 @@ public class SimpleExpressionsTestLanguageParserDefinition extends AbstractXtext
 			if (elementType == elementTypeProvider.getAtomElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getParensElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}

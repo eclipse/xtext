@@ -33,12 +33,6 @@ public class EcoreFragmentTestLanguageParserDefinition extends AbstractXtextPars
 			if (elementType == elementTypeProvider.getSecondElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSecond_FirstFirstIDTerminalRuleCall_2_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

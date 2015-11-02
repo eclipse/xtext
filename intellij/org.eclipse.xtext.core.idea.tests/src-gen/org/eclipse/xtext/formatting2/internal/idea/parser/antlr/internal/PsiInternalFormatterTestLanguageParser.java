@@ -282,13 +282,13 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
 
             	    					markLeaf(elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType());
             	    				
+            	    lv_ids_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             	    					if(!current) {
             	    						associateWithSemanticElement();
             	    						current = true;
             	    					}
             	    				
-            	    lv_ids_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             	    					doneLeaf(lv_ids_2_0);
             	    				

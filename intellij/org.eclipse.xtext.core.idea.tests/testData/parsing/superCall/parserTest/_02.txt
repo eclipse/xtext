@@ -6,7 +6,7 @@ org.eclipse.xtext.grammarinheritance.idea.lang.psi.impl.InheritanceTest3Language
       PsiElement(InheritanceTestLanguageModel_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE)('id')(6,8)
       PsiWhiteSpace(' ')(8,9)
       PsiElement(InheritanceTestLanguageModel_LeftCurlyBracketKeyword_2_ELEMENT_TYPE)('{')(9,10)
-      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Element_ElementAction_1_0_ELEMENT_TYPE:)('anonymous')(10,36)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Element_ElementAction_1_0_ELEMENT_TYPE:Element_NameIDTerminalRuleCall_1_2_0_ELEMENT_TYPE)('anonymous')(10,36)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(InheritanceTestLanguageModel_ElementsElementParserRuleCall_3_0_ELEMENT_TYPE)(10,10)
           <empty list>
         PsiWhiteSpace(' ')(10,11)

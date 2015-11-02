@@ -539,13 +539,13 @@ ruleScenario1_True returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getScenario1_True_FirstIDTerminalRuleCall_0ElementType());
 			}
+			lv_first_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_first_0_0=RULE_ID
 			{
 				doneLeaf(lv_first_0_0);
 			}
@@ -568,13 +568,13 @@ ruleScenario1_False returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getScenario1_False_SecondIDTerminalRuleCall_0ElementType());
 			}
+			lv_second_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_second_0_0=RULE_ID
 			{
 				doneLeaf(lv_second_0_0);
 			}

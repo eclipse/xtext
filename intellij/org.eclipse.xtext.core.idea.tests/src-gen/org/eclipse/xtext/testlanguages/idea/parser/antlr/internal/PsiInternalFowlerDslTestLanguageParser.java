@@ -410,13 +410,13 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getEvent_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -435,13 +435,13 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getEvent_CodeIDTerminalRuleCall_2_0ElementType());
             				
+            lv_code_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_code_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_code_2_0);
             				
@@ -528,13 +528,13 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getCommand_NameIDTerminalRuleCall_0_0ElementType());
             				
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             					doneLeaf(lv_name_0_0);
             				
@@ -553,13 +553,13 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getCommand_CodeIDTerminalRuleCall_1_0ElementType());
             				
+            lv_code_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_code_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_code_1_0);
             				
@@ -660,13 +660,13 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getState_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
             					doneLeaf(lv_name_1_0);
             				

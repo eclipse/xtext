@@ -593,13 +593,13 @@ superScenario1 returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getParametersTestLanguageScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
 			}
+			lv_second_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_second_0_0=RULE_ID
 			{
 				doneLeaf(lv_second_0_0);
 			}
@@ -616,13 +616,13 @@ normSuper1_Scenario1 returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getParametersTestLanguageScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
 			}
+			lv_first_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_first_0_0=RULE_ID
 			{
 				doneLeaf(lv_first_0_0);
 			}

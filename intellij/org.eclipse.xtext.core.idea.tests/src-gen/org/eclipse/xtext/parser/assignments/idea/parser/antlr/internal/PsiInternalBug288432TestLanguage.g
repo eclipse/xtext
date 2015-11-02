@@ -190,13 +190,13 @@ ruleFoo returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getFoo_FooValueSTRINGTerminalRuleCall_0ElementType());
 			}
+			lv_fooValue_0_0=RULE_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_fooValue_0_0=RULE_STRING
 			{
 				doneLeaf(lv_fooValue_0_0);
 			}
@@ -306,13 +306,13 @@ ruleParameter returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getParameter_NameIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_name_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_0_0=RULE_ID
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -382,13 +382,13 @@ ruleMyInt returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getMyInt_IntINTTerminalRuleCall_0ElementType());
 			}
+			lv_int_0_0=RULE_INT
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_int_0_0=RULE_INT
 			{
 				doneLeaf(lv_int_0_0);
 			}

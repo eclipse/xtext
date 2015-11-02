@@ -39,21 +39,6 @@ public class LazyLinkingTestLanguageParserDefinition extends AbstractXtextParser
 			if (elementType == elementTypeProvider.getTypeElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getType_ExtendsTypeIDTerminalRuleCall_2_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getType_ParentIdPropertyIDTerminalRuleCall_2_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getType_ParentIdPropertyIDTerminalRuleCall_3_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getType_ExtendsTypeIDTerminalRuleCall_3_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getType_PropertiesPropertyParserRuleCall_5_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
@@ -63,20 +48,8 @@ public class LazyLinkingTestLanguageParserDefinition extends AbstractXtextParser
 			if (elementType == elementTypeProvider.getPropertyElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getProperty_TypeTypeIDTerminalRuleCall_0_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getUnresolvedProxyPropertyElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getUnresolvedProxyProperty_TypeTypeIDTerminalRuleCall_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

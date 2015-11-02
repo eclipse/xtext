@@ -166,13 +166,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                     					markLeaf(elementTypeProvider.getSpielplatz_GroesseINTTerminalRuleCall_1_0ElementType());
                     				
+                    lv_groesse_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
                     					if(!current) {
                     						associateWithSemanticElement();
                     						current = true;
                     					}
                     				
-                    lv_groesse_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
                     					doneLeaf(lv_groesse_1_0);
                     				
@@ -199,13 +199,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                             					markLeaf(elementTypeProvider.getSpielplatz_BeschreibungSTRINGTerminalRuleCall_2_0ElementType());
                             				
+                            lv_beschreibung_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); 
 
                             					if(!current) {
                             						associateWithSemanticElement();
                             						current = true;
                             					}
                             				
-                            lv_beschreibung_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_5); 
 
                             					doneLeaf(lv_beschreibung_2_0);
                             				
@@ -496,13 +496,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             					markLeaf(elementTypeProvider.getKind_NameIDTerminalRuleCall_2_0ElementType());
             				
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_2_0);
             				
@@ -521,13 +521,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             					markLeaf(elementTypeProvider.getKind_AgeINTTerminalRuleCall_3_0ElementType());
             				
+            lv_age_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_9); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_age_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_9); 
 
             					doneLeaf(lv_age_3_0);
             				
@@ -638,13 +638,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             					markLeaf(elementTypeProvider.getErwachsener_NameIDTerminalRuleCall_2_0ElementType());
             				
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_2_0);
             				
@@ -663,13 +663,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             					markLeaf(elementTypeProvider.getErwachsener_AgeINTTerminalRuleCall_3_0ElementType());
             				
+            lv_age_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_9); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_age_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_9); 
 
             					doneLeaf(lv_age_3_0);
             				
@@ -781,13 +781,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
             					markLeaf(elementTypeProvider.getSpielzeug_NameIDTerminalRuleCall_2_0ElementType());
             				
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
 
             					doneLeaf(lv_name_2_0);
             				
@@ -1165,13 +1165,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                     						markLeaf(elementTypeProvider.getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType());
                     					
+                    lv_name_2_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_8); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_name_2_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_8); 
 
                     						doneLeaf(lv_name_2_2);
                     					
@@ -1184,13 +1184,13 @@ public class PsiInternalReferenceGrammarTestLanguageParser extends AbstractPsiAn
 
                     						markLeaf(elementTypeProvider.getFamilie_NameIDTerminalRuleCall_2_0_2ElementType());
                     					
+                    lv_name_2_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_name_2_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                     						doneLeaf(lv_name_2_3);
                     					

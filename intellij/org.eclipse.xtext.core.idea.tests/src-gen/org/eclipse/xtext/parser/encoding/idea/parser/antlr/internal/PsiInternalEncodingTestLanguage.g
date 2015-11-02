@@ -90,13 +90,13 @@ ruleWord returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
 			}
+			lv_value_0_0=RULE_LEXEME
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_value_0_0=RULE_LEXEME
 			{
 				doneLeaf(lv_value_0_0);
 			}

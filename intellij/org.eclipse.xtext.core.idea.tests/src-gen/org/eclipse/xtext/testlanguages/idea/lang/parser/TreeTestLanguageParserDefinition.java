@@ -39,12 +39,6 @@ public class TreeTestLanguageParserDefinition extends AbstractXtextParserDefinit
 			if (elementType == elementTypeProvider.getNodeElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getNode_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getNode_AttribSTRINGTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getNode_ChildrenNodeParserRuleCall_5_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}

@@ -457,13 +457,13 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             					markLeaf(elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -928,13 +928,13 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             				markLeaf(elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType());
             			
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			
@@ -1202,13 +1202,13 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
                     						markLeaf(elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType());
                     					
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_name_1_0);
                     					
@@ -1623,13 +1623,13 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
                             							markLeaf(elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType());
                             						
+                            lv_name_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
                             								current = true;
                             							}
                             						
-                            lv_name_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                             							doneLeaf(lv_name_6_0);
                             						

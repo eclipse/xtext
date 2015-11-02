@@ -60,20 +60,8 @@ public class HiddenTokensMergerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getDatatypeBug286557ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getDatatypeBug286557_NameFQNParserRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getDatatypeBug286557_RefDatatypeBug286557FQNParserRuleCall_2_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getEnumBugElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getEnumBug_ReturnEnumBugEnumEnumRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getEnumBug_NameIDTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getCommentableElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -84,13 +72,7 @@ public class HiddenTokensMergerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getCommentableItemElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getCommentableItem_IdIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getValueListElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getValueList_IdsFQNParserRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getRefListElementType()) {
@@ -99,23 +81,14 @@ public class HiddenTokensMergerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getRefList_ObjsRefObjParserRuleCall_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getRefList_RefsRefObjFQNParserRuleCall_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getRefObjElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getRefObj_NameFQNParserRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSingleRefElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSingleRef_ObjRefObjParserRuleCall_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSingleRef_RefRefObjFQNParserRuleCall_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAppendToFileEndElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -126,17 +99,11 @@ public class HiddenTokensMergerTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getAppendToFileEndItemElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getAppendToFileEndItem_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getAction1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAction1_Action1Action_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getAction1_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAction1_Actions2Action1Sub1ParserRuleCall_3_0ElementType()) {
 				return new PsiEObjectImpl(node) {};

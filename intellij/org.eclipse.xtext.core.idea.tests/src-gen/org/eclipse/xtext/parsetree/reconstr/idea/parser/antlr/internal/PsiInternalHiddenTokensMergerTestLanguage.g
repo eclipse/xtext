@@ -284,13 +284,13 @@ ruleEnumBug returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEnumBug_NameIDTerminalRuleCall_3_0ElementType());
 				}
+				lv_name_3_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_3_0=RULE_ID
 				{
 					doneLeaf(lv_name_3_0);
 				}
@@ -358,13 +358,13 @@ ruleCommentableItem returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getCommentableItem_IdIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_id_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_id_1_0=RULE_ID
 				{
 					doneLeaf(lv_id_1_0);
 				}
@@ -615,13 +615,13 @@ ruleAppendToFileEndItem returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getAppendToFileEndItem_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -667,13 +667,13 @@ ruleAction1 returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getAction1_NameIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}

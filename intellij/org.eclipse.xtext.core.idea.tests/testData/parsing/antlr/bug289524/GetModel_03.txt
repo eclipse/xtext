@@ -1,9 +1,9 @@
 org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug289524TestLanguageFileImpl:a.bug289524testlanguage(0,17)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,17)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)('anonymous')(0,17)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,0)
       <empty list>
     PsiElement(Model_ModelKeyword_1_ELEMENT_TYPE)('Model')(0,5)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ModelElement_ModelElementAction_0_ELEMENT_TYPE)(5,17)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ModelElement_ModelElementAction_0_ELEMENT_TYPE)('anonymous')(5,17)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_RefsModelElementParserRuleCall_2_0_ELEMENT_TYPE)(5,5)
         <empty list>
       PsiWhiteSpace(' ')(5,6)

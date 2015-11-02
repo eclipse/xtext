@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug443221TestLanguageFileImpl:a.bug443221testlanguage(0,54)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,54)
+  org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE:Model_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE)('anonymous')(0,54)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,0)
       <empty list>
     PsiElement(Model_DummyKeyword_1_ELEMENT_TYPE)('dummy')(0,5)

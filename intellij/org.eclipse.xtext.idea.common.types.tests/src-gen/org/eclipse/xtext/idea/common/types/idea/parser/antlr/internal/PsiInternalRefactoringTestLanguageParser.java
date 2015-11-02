@@ -69,18 +69,24 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalRefactoringTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalRefactoringTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalRefactoringTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalRefactoringTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalRefactoringTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalRefactoringTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -92,19 +98,24 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalRefactoringTestLanguage.g:58:1: ruleModel : ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalRefactoringTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_referenceHolder_0_0 = null;
+
+
         try {
-            // PsiInternalRefactoringTestLanguage.g:58:10: ( ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* )
-            // PsiInternalRefactoringTestLanguage.g:59:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
+            // PsiInternalRefactoringTestLanguage.g:60:1: ( ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* )
+            // PsiInternalRefactoringTestLanguage.g:61:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
             {
-            // PsiInternalRefactoringTestLanguage.g:59:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
+            // PsiInternalRefactoringTestLanguage.g:61:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
             loop1:
             do {
                 int alt1=2;
@@ -117,21 +128,25 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalRefactoringTestLanguage.g:60:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
+            	    // PsiInternalRefactoringTestLanguage.g:62:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
             	    {
-            	    // PsiInternalRefactoringTestLanguage.g:60:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
-            	    // PsiInternalRefactoringTestLanguage.g:61:4: lv_referenceHolder_0_0= ruleReferenceHolder
+            	    // PsiInternalRefactoringTestLanguage.g:62:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
+            	    // PsiInternalRefactoringTestLanguage.g:63:4: lv_referenceHolder_0_0= ruleReferenceHolder
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FOLLOW_3);
-            	    ruleReferenceHolder();
+            	    lv_referenceHolder_0_0=ruleReferenceHolder();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -155,24 +170,30 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleReferenceHolder"
-    // PsiInternalRefactoringTestLanguage.g:73:1: entryRuleReferenceHolder : ruleReferenceHolder EOF ;
-    public final void entryRuleReferenceHolder() throws RecognitionException {
+    // PsiInternalRefactoringTestLanguage.g:79:1: entryRuleReferenceHolder returns [Boolean current=false] : iv_ruleReferenceHolder= ruleReferenceHolder EOF ;
+    public final Boolean entryRuleReferenceHolder() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleReferenceHolder = null;
+
+
         try {
-            // PsiInternalRefactoringTestLanguage.g:73:25: ( ruleReferenceHolder EOF )
-            // PsiInternalRefactoringTestLanguage.g:74:2: ruleReferenceHolder EOF
+            // PsiInternalRefactoringTestLanguage.g:79:57: (iv_ruleReferenceHolder= ruleReferenceHolder EOF )
+            // PsiInternalRefactoringTestLanguage.g:80:2: iv_ruleReferenceHolder= ruleReferenceHolder EOF
             {
              markComposite(elementTypeProvider.getReferenceHolderElementType()); 
             pushFollow(FOLLOW_1);
-            ruleReferenceHolder();
+            iv_ruleReferenceHolder=ruleReferenceHolder();
 
             state._fsp--;
 
+             current =iv_ruleReferenceHolder; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -184,33 +205,41 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleReferenceHolder"
 
 
     // $ANTLR start "ruleReferenceHolder"
-    // PsiInternalRefactoringTestLanguage.g:79:1: ruleReferenceHolder : ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) ;
-    public final void ruleReferenceHolder() throws RecognitionException {
+    // PsiInternalRefactoringTestLanguage.g:86:1: ruleReferenceHolder returns [Boolean current=false] : ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) ;
+    public final Boolean ruleReferenceHolder() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalRefactoringTestLanguage.g:79:20: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) )
-            // PsiInternalRefactoringTestLanguage.g:80:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
+            // PsiInternalRefactoringTestLanguage.g:87:1: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) )
+            // PsiInternalRefactoringTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
             {
-            // PsiInternalRefactoringTestLanguage.g:80:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
-            // PsiInternalRefactoringTestLanguage.g:81:3: ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) )
+            // PsiInternalRefactoringTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
+            // PsiInternalRefactoringTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) )
             {
-            // PsiInternalRefactoringTestLanguage.g:81:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalRefactoringTestLanguage.g:82:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalRefactoringTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalRefactoringTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalRefactoringTestLanguage.g:82:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalRefactoringTestLanguage.g:83:5: lv_name_0_0= RULE_ID
+            // PsiInternalRefactoringTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalRefactoringTestLanguage.g:91:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getReferenceHolder_NameIDTerminalRuleCall_0_0ElementType());
             				
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_4); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_0_0);
             				
@@ -220,12 +249,18 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // PsiInternalRefactoringTestLanguage.g:92:3: ( ( ruleFQN ) )
-            // PsiInternalRefactoringTestLanguage.g:93:4: ( ruleFQN )
+            // PsiInternalRefactoringTestLanguage.g:106:3: ( ( ruleFQN ) )
+            // PsiInternalRefactoringTestLanguage.g:107:4: ( ruleFQN )
             {
-            // PsiInternalRefactoringTestLanguage.g:93:4: ( ruleFQN )
-            // PsiInternalRefactoringTestLanguage.g:94:5: ruleFQN
+            // PsiInternalRefactoringTestLanguage.g:107:4: ( ruleFQN )
+            // PsiInternalRefactoringTestLanguage.g:108:5: ruleFQN
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markComposite(elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
             				
@@ -256,24 +291,30 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleReferenceHolder"
 
 
     // $ANTLR start "entryRuleFQN"
-    // PsiInternalRefactoringTestLanguage.g:107:1: entryRuleFQN : ruleFQN EOF ;
-    public final void entryRuleFQN() throws RecognitionException {
+    // PsiInternalRefactoringTestLanguage.g:127:1: entryRuleFQN returns [Boolean current=false] : iv_ruleFQN= ruleFQN EOF ;
+    public final Boolean entryRuleFQN() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleFQN = null;
+
+
         try {
-            // PsiInternalRefactoringTestLanguage.g:107:13: ( ruleFQN EOF )
-            // PsiInternalRefactoringTestLanguage.g:108:2: ruleFQN EOF
+            // PsiInternalRefactoringTestLanguage.g:127:45: (iv_ruleFQN= ruleFQN EOF )
+            // PsiInternalRefactoringTestLanguage.g:128:2: iv_ruleFQN= ruleFQN EOF
             {
              markComposite(elementTypeProvider.getFQNElementType()); 
             pushFollow(FOLLOW_1);
-            ruleFQN();
+            iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
+             current =iv_ruleFQN; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -285,25 +326,27 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleFQN"
 
 
     // $ANTLR start "ruleFQN"
-    // PsiInternalRefactoringTestLanguage.g:113:1: ruleFQN : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
-    public final void ruleFQN() throws RecognitionException {
+    // PsiInternalRefactoringTestLanguage.g:134:1: ruleFQN returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
+    public final Boolean ruleFQN() throws RecognitionException {
+        Boolean current = false;
+
         Token this_ID_0=null;
         Token kw=null;
         Token this_ID_2=null;
         Token this_ID_4=null;
 
         try {
-            // PsiInternalRefactoringTestLanguage.g:113:8: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
-            // PsiInternalRefactoringTestLanguage.g:114:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // PsiInternalRefactoringTestLanguage.g:135:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
+            // PsiInternalRefactoringTestLanguage.g:136:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
             {
-            // PsiInternalRefactoringTestLanguage.g:114:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
-            // PsiInternalRefactoringTestLanguage.g:115:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
+            // PsiInternalRefactoringTestLanguage.g:136:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // PsiInternalRefactoringTestLanguage.g:137:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
             {
 
             			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
@@ -312,7 +355,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
             			doneLeaf(this_ID_0);
             		
-            // PsiInternalRefactoringTestLanguage.g:122:3: (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalRefactoringTestLanguage.g:144:3: (kw= '.' this_ID_2= RULE_ID )*
             loop2:
             do {
                 int alt2=2;
@@ -325,7 +368,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalRefactoringTestLanguage.g:123:4: kw= '.' this_ID_2= RULE_ID
+            	    // PsiInternalRefactoringTestLanguage.g:145:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getFQN_FullStopKeyword_1_0ElementType());
@@ -350,7 +393,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
                 }
             } while (true);
 
-            // PsiInternalRefactoringTestLanguage.g:138:3: (kw= '$' this_ID_4= RULE_ID )*
+            // PsiInternalRefactoringTestLanguage.g:160:3: (kw= '$' this_ID_4= RULE_ID )*
             loop3:
             do {
                 int alt3=2;
@@ -363,7 +406,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalRefactoringTestLanguage.g:139:4: kw= '$' this_ID_4= RULE_ID
+            	    // PsiInternalRefactoringTestLanguage.g:161:4: kw= '$' this_ID_4= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getFQN_DollarSignKeyword_2_0ElementType());
@@ -401,7 +444,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleFQN"
 

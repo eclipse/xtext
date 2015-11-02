@@ -12,8 +12,6 @@ import com.intellij.lang.ASTNode
 import com.intellij.psi.stubs.IStubElementType
 import com.intellij.util.IncorrectOperationException
 import org.eclipse.emf.ecore.EAttribute
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.idea.nodemodel.ASTNodeExtension
 import org.eclipse.xtext.psi.PsiEObjectFactory
 import org.eclipse.xtext.psi.PsiNamedEObject
@@ -83,15 +81,7 @@ class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjec
 	}
 	
 	protected def getNameFeature() {
-		val grammarElement = node.grammarElement
-		if(grammarElement === null) return null
-
-		val rule = if (grammarElement instanceof RuleCall)
-				grammarElement.rule
-			else 
-				grammarElement.containingRule
-		val classifier = rule.type?.classifier
-		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
+		val feature = node.EClass?.getEStructuralFeature('name')
 		if (feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass))
 			return feature
 

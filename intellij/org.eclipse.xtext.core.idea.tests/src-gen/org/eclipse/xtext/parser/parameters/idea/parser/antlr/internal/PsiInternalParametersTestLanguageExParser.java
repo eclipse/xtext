@@ -1675,6 +1675,7 @@ public class PsiInternalParametersTestLanguageExParser extends AbstractPsiAntlrP
               				markLeaf(elementTypeProvider.getParametersTestLanguageScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
               			
             }
+            lv_second_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               				if(!current) {
@@ -1683,7 +1684,6 @@ public class PsiInternalParametersTestLanguageExParser extends AbstractPsiAntlrP
               				}
               			
             }
-            lv_second_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               				doneLeaf(lv_second_0_0);
@@ -1732,6 +1732,7 @@ public class PsiInternalParametersTestLanguageExParser extends AbstractPsiAntlrP
               				markLeaf(elementTypeProvider.getParametersTestLanguageScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
               			
             }
+            lv_first_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               				if(!current) {
@@ -1740,7 +1741,6 @@ public class PsiInternalParametersTestLanguageExParser extends AbstractPsiAntlrP
               				}
               			
             }
-            lv_first_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               				doneLeaf(lv_first_0_0);

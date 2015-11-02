@@ -283,13 +283,13 @@ public class PsiInternalInheritanceTest3LanguageParser extends AbstractPsiAntlrP
 
                     						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_2_0ElementType());
                     					
+                    lv_name_3_0=(Token)match(input,SUPER_ID,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_name_3_0=(Token)match(input,SUPER_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_name_3_0);
                     					
@@ -338,13 +338,13 @@ public class PsiInternalInheritanceTest3LanguageParser extends AbstractPsiAntlrP
 
                     						markLeaf(elementTypeProvider.getElement_NameSTRINGTerminalRuleCall_2_2_0ElementType());
                     					
+                    lv_name_6_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_name_6_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_name_6_0);
                     					
@@ -448,13 +448,13 @@ public class PsiInternalInheritanceTest3LanguageParser extends AbstractPsiAntlrP
 
             					markLeaf(elementTypeProvider.getInheritanceTestLanguageModel_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -607,13 +607,13 @@ public class PsiInternalInheritanceTest3LanguageParser extends AbstractPsiAntlrP
 
             					markLeaf(elementTypeProvider.getInheritanceTestLanguageElement_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_name_1_0);
             				

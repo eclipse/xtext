@@ -45,9 +45,6 @@ public class PartialSerializationTestLanguageParserDefinition extends AbstractXt
 			if (elementType == elementTypeProvider.getNodeElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getNode_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getNode_ChildrenNodeParserRuleCall_2_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}

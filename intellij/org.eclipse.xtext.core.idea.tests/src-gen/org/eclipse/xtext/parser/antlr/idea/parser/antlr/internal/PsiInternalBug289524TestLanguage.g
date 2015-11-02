@@ -223,13 +223,13 @@ ruleContained returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getContained_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}

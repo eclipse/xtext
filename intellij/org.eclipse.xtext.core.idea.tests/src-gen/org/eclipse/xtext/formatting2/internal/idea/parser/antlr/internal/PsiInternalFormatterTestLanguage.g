@@ -109,13 +109,13 @@ ruleIDList returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getIDList_IdsIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_ids_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_ids_2_0=RULE_ID
 				{
 					doneLeaf(lv_ids_2_0);
 				}

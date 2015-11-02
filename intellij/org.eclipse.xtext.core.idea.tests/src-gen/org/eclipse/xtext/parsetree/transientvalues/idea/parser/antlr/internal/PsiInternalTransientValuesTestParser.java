@@ -312,13 +312,13 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             					markLeaf(elementTypeProvider.getTestRequired_Required1INTTerminalRuleCall_2_0ElementType());
             				
+            lv_required1_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_required1_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_required1_2_0);
             				
@@ -337,13 +337,13 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             					markLeaf(elementTypeProvider.getTestRequired_Required2INTTerminalRuleCall_3_0ElementType());
             				
+            lv_required2_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_required2_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_required2_3_0);
             				
@@ -458,13 +458,13 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
                     					markLeaf(elementTypeProvider.getTestOptional_Opt1INTTerminalRuleCall_2_0ElementType());
                     				
+                    lv_opt1_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_6); 
 
                     					if(!current) {
                     						associateWithSemanticElement();
                     						current = true;
                     					}
                     				
-                    lv_opt1_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_6); 
 
                     					doneLeaf(lv_opt1_2_0);
                     				
@@ -504,13 +504,13 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
                     						markLeaf(elementTypeProvider.getTestOptional_Opt2INTTerminalRuleCall_3_1_0ElementType());
                     					
+                    lv_opt2_4_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_opt2_4_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_opt2_4_0);
                     					
@@ -633,13 +633,13 @@ public class PsiInternalTransientValuesTestParser extends AbstractPsiAntlrParser
 
             	    					markLeaf(elementTypeProvider.getTestList_ItemINTTerminalRuleCall_2_0ElementType());
             	    				
+            	    lv_item_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_7); 
 
             	    					if(!current) {
             	    						associateWithSemanticElement();
             	    						current = true;
             	    					}
             	    				
-            	    lv_item_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_7); 
 
             	    					doneLeaf(lv_item_2_0);
             	    				

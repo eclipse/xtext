@@ -45,9 +45,6 @@ public class ActionTestLanguageParserDefinition extends AbstractXtextParserDefin
 			if (elementType == elementTypeProvider.getChildElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getChild_NameIDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

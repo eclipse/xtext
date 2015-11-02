@@ -33,9 +33,6 @@ public class Bug419429ParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getEReferenceElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getEReference_ETypeEClassifierIDTerminalRuleCall_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

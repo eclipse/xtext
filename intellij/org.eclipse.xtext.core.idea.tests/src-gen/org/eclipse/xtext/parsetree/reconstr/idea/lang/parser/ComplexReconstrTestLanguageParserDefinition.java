@@ -69,9 +69,6 @@ public class ComplexReconstrTestLanguageParserDefinition extends AbstractXtextPa
 			if (elementType == elementTypeProvider.getAtomElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getParensElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -81,20 +78,8 @@ public class ComplexReconstrTestLanguageParserDefinition extends AbstractXtextPa
 			if (elementType == elementTypeProvider.getTrickyBElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getTrickyB_NameIDTerminalRuleCall_1_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyB_TypeINTTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyB_TypeINTTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getTrickyCElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyC_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getTrickyC_C1XAction_2_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -108,55 +93,10 @@ public class ComplexReconstrTestLanguageParserDefinition extends AbstractXtextPa
 			if (elementType == elementTypeProvider.getTrickyDElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getTrickyD_NameINTTerminalRuleCall_1_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyD_FooSTRINGTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyD_TypeIDTerminalRuleCall_1_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyD_NameINTTerminalRuleCall_2_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyD_TypeIDTerminalRuleCall_2_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyD_TypeIDTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getTrickyEElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getTrickyE_NameINTTerminalRuleCall_1_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyE_FooSTRINGTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyE_TypeIDTerminalRuleCall_1_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyE_NameINTTerminalRuleCall_3_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyE_TypeIDTerminalRuleCall_3_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getTrickyFElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyF_NameIDTerminalRuleCall_1_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyF_TypeINTTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyF_NameIDTerminalRuleCall_2_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyF_TypeINTTerminalRuleCall_2_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getTrickyGElementType()) {
@@ -178,9 +118,6 @@ public class ComplexReconstrTestLanguageParserDefinition extends AbstractXtextPa
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getTrickyG2_TrickyG1ParserRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTrickyG2_ValINTTerminalRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

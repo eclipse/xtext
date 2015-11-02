@@ -181,13 +181,13 @@ ruleSimple returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -341,13 +341,13 @@ ruleDelegate returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_ID
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -432,13 +432,13 @@ rulePrimary returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType());
 					}
+					lv_name_1_0=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_1_0=RULE_ID
 					{
 						doneLeaf(lv_name_1_0);
 					}
@@ -561,13 +561,13 @@ ruleMixed returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType());
 						}
+						lv_name_6_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_name_6_0=RULE_ID
 						{
 							doneLeaf(lv_name_6_0);
 						}

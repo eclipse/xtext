@@ -48,14 +48,8 @@ public class UnicodeTestLanguageParserDefinition extends AbstractXtextParserDefi
 			if (elementType == elementTypeProvider.getGStringElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getQuotedStringElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getQuotedString_NameSTRINGTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

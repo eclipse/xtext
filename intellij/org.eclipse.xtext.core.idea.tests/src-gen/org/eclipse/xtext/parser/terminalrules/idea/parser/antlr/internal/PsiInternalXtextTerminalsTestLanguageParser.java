@@ -1026,13 +1026,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getGeneratedMetamodel_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -1094,13 +1094,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
                     						markLeaf(elementTypeProvider.getGeneratedMetamodel_AliasIDTerminalRuleCall_3_1_0ElementType());
                     					
+                    lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_alias_4_0);
                     					
@@ -1245,13 +1245,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
                     						markLeaf(elementTypeProvider.getReferencedMetamodel_AliasIDTerminalRuleCall_2_1_0ElementType());
                     					
+                    lv_alias_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_alias_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_alias_3_0);
                     					
@@ -1356,13 +1356,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getParserRule_NameIDTerminalRuleCall_0_0ElementType());
             				
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
             					doneLeaf(lv_name_0_0);
             				
@@ -2606,13 +2606,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
                     						markLeaf(elementTypeProvider.getAction_FeatureIDTerminalRuleCall_2_1_0ElementType());
                     					
+                    lv_feature_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_23); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_feature_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_23); 
 
                     						doneLeaf(lv_feature_3_0);
                     					
@@ -2934,13 +2934,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
             				markLeaf(elementTypeProvider.getKeyword_ValueSTRINGTerminalRuleCall_0ElementType());
             			
+            lv_value_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_value_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_value_0_0);
             			
@@ -3114,13 +3114,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getAssignment_FeatureIDTerminalRuleCall_0_0ElementType());
             				
+            lv_feature_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_feature_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); 
 
             					doneLeaf(lv_feature_0_0);
             				
@@ -4171,13 +4171,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getTerminalRule_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_32); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_32); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -5748,13 +5748,13 @@ public class PsiInternalXtextTerminalsTestLanguageParser extends AbstractPsiAntl
 
             					markLeaf(elementTypeProvider.getEnumRule_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_32); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_32); 
 
             					doneLeaf(lv_name_1_0);
             				

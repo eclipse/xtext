@@ -42,9 +42,6 @@ public class BacktrackingBug325745TestLanguageParserDefinition extends AbstractX
 			if (elementType == elementTypeProvider.getElementElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getElement_DataTypeDataTypeParserRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -54,40 +51,16 @@ public class BacktrackingBug325745TestLanguageParserDefinition extends AbstractX
 			if (elementType == elementTypeProvider.getDataTypeElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getDataType_BaseTypeIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getDataType_DefaultValueSTRINGTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getExpressionElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getExpression_ExpressionAction_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getExpression_PrefixSTRINGTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getExpression_TermsSimpleTermParserRuleCall_2_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getExpression_PostfixSTRINGTerminalRuleCall_3_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getSimpleTermElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSimpleTerm_LineCountINTTerminalRuleCall_0_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSimpleTerm_CharCountINTTerminalRuleCall_0_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSimpleTerm_CharSetIDTerminalRuleCall_0_4_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSimpleTerm_RefCharIDTerminalRuleCall_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

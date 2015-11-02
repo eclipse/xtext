@@ -212,13 +212,13 @@ ruleAtom returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_ID
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -409,13 +409,13 @@ ruleTrickyG2 returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTrickyG2_ValINTTerminalRuleCall_1_0ElementType());
 				}
+				lv_val_1_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val_1_0=RULE_INT
 				{
 					doneLeaf(lv_val_1_0);
 				}

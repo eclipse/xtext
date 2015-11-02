@@ -451,13 +451,13 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getRule1_ValueINTTerminalRuleCall_1_0ElementType());
             				
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_value_1_0);
             				
@@ -579,13 +579,13 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getRule2_ValueINTTerminalRuleCall_1_0ElementType());
             				
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_value_1_0);
             				
@@ -689,13 +689,13 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getRule3_ValueINTTerminalRuleCall_1_0ElementType());
             				
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_value_1_0);
             				
@@ -823,13 +823,13 @@ public class PsiInternalBug378967TestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getRule4_ValueINTTerminalRuleCall_1_0ElementType());
             				
+            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_value_1_0);
             				

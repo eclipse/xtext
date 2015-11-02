@@ -42,17 +42,8 @@ public class IgnoreCaseImportsTestLanguageParserDefinition extends AbstractXtext
 			if (elementType == elementTypeProvider.getImportElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getImport_ImportURISTRINGTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getElementElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getElement_ReferenceElementIDTerminalRuleCall_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getElement_ElementsElementParserRuleCall_3_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};

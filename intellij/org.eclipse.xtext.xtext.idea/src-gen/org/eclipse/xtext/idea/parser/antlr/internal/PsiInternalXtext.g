@@ -823,13 +823,13 @@ ruleParameter returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getParameter_NameIDTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_ID
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -1426,13 +1426,13 @@ ruleKeyword returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getKeyword_ValueSTRINGTerminalRuleCall_0ElementType());
 			}
+			lv_value_0_0=RULE_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_value_0_0=RULE_STRING
 			{
 				doneLeaf(lv_value_0_0);
 			}
@@ -2060,13 +2060,13 @@ rulePredicatedKeyword returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getPredicatedKeyword_ValueSTRINGTerminalRuleCall_1_0ElementType());
 				}
+				lv_value_2_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_2_0=RULE_STRING
 				{
 					doneLeaf(lv_value_2_0);
 				}

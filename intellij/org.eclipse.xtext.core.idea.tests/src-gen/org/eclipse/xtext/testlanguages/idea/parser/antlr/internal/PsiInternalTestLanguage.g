@@ -146,13 +146,13 @@ ruleChoiceRule returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getChoiceRule_NameIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}
@@ -229,13 +229,13 @@ ruleTerminalRule returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType());
 			}
+			lv_stringFeature_0_0=RULE_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_stringFeature_0_0=RULE_STRING
 			{
 				doneLeaf(lv_stringFeature_0_0);
 			}

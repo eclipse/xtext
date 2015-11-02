@@ -13244,6 +13244,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					markLeaf(elementTypeProvider.getSimpleStringLiteral_ValueSTRINGTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -13252,7 +13253,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					}
               				
             }
-            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_value_1_0);
@@ -13648,6 +13648,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					markLeaf(elementTypeProvider.getRichStringLiteral_ValueRICH_TEXTTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_value_1_0=(Token)match(input,RULE_RICH_TEXT,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -13656,7 +13657,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					}
               				
             }
-            lv_value_1_0=(Token)match(input,RULE_RICH_TEXT,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_value_1_0);
@@ -13740,6 +13740,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					markLeaf(elementTypeProvider.getRichStringLiteralStart_ValueRICH_TEXT_STARTTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_value_1_0=(Token)match(input,RULE_RICH_TEXT_START,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -13748,7 +13749,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
               					}
               				
             }
-            lv_value_1_0=(Token)match(input,RULE_RICH_TEXT_START,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_value_1_0);
@@ -13852,6 +13852,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						markLeaf(elementTypeProvider.getRichStringLiteralInbetween_ValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0ElementType());
                       					
                     }
+                    lv_value_1_0=(Token)match(input,RULE_RICH_TEXT_INBETWEEN,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -13860,7 +13861,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						}
                       					
                     }
-                    lv_value_1_0=(Token)match(input,RULE_RICH_TEXT_INBETWEEN,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_value_1_0);
@@ -13884,6 +13884,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						markLeaf(elementTypeProvider.getRichStringLiteralInbetween_ValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0ElementType());
                       					
                     }
+                    lv_value_2_0=(Token)match(input,RULE_COMMENT_RICH_TEXT_INBETWEEN,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -13892,7 +13893,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						}
                       					
                     }
-                    lv_value_2_0=(Token)match(input,RULE_COMMENT_RICH_TEXT_INBETWEEN,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_value_2_0);
@@ -14002,6 +14002,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						markLeaf(elementTypeProvider.getRichStringLiteralEnd_ValueRICH_TEXT_ENDTerminalRuleCall_1_0_0ElementType());
                       					
                     }
+                    lv_value_1_0=(Token)match(input,RULE_RICH_TEXT_END,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -14010,7 +14011,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						}
                       					
                     }
-                    lv_value_1_0=(Token)match(input,RULE_RICH_TEXT_END,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_value_1_0);
@@ -14034,6 +14034,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						markLeaf(elementTypeProvider.getRichStringLiteralEnd_ValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0ElementType());
                       					
                     }
+                    lv_value_2_0=(Token)match(input,RULE_COMMENT_RICH_TEXT_END,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -14042,7 +14043,6 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                       						}
                       					
                     }
-                    lv_value_2_0=(Token)match(input,RULE_COMMENT_RICH_TEXT_END,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_value_2_0);
@@ -31983,7 +31983,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "272:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )";
+            return "273:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )";
         }
     }
     static final String dfa_7s = "\32\uffff";
@@ -32043,7 +32043,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_13;
         }
         public String getDescription() {
-            return "1012:3: ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) )";
+            return "1013:3: ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) )";
         }
     }
     static final String dfa_14s = "\20\uffff";
@@ -32091,7 +32091,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_19;
         }
         public String getDescription() {
-            return "1014:5: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) )";
+            return "1015:5: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) )";
         }
     }
     static final String dfa_20s = "\47\uffff";
@@ -32164,7 +32164,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "1068:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
+            return "1069:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
         }
     }
     static final String dfa_27s = "\34\uffff";
@@ -32226,7 +32226,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_33;
         }
         public String getDescription() {
-            return "1795:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) )";
+            return "1796:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) )";
         }
     }
     static final String dfa_34s = "\24\uffff";
@@ -32278,7 +32278,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_39;
         }
         public String getDescription() {
-            return "1819:5: ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) )";
+            return "1820:5: ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) )";
         }
     }
     static final String dfa_40s = "\1\uffff\6\10\2\uffff\6\7\30\uffff";
@@ -32346,7 +32346,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_44;
         }
         public String getDescription() {
-            return "1851:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
+            return "1852:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
         }
     }
     static final String dfa_45s = "\41\uffff";
@@ -32413,7 +32413,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_51;
         }
         public String getDescription() {
-            return "1949:7: ( (lv_name_12_0= ruleValidID ) )?";
+            return "1950:7: ( (lv_name_12_0= ruleValidID ) )?";
         }
     }
 
@@ -32431,7 +32431,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_51;
         }
         public String getDescription() {
-            return "2044:7: ( (lv_name_18_0= ruleValidID ) )?";
+            return "2045:7: ( (lv_name_18_0= ruleValidID ) )?";
         }
     }
     static final String dfa_52s = "\51\uffff";
@@ -32504,7 +32504,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_57;
         }
         public String getDescription() {
-            return "2255:5: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) )";
+            return "2256:5: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -32712,7 +32712,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_63;
         }
         public String getDescription() {
-            return "3480:2: ( (this_ParameterizedTypeReferenceWithTypeArgs_0= ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | (this_TypeReferenceNoTypeArgs_3= ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | this_XFunctionTypeRef_6= ruleXFunctionTypeRef )";
+            return "3481:2: ( (this_ParameterizedTypeReferenceWithTypeArgs_0= ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | (this_TypeReferenceNoTypeArgs_3= ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | this_XFunctionTypeRef_6= ruleXFunctionTypeRef )";
         }
     }
     static final String dfa_64s = "\50\uffff";
@@ -32786,7 +32786,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_70;
         }
         public String getDescription() {
-            return "3686:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+            return "3687:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -32860,7 +32860,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_77;
         }
         public String getDescription() {
-            return "3788:2: ( ruleOpMultiAssign | ruleOpOr | ruleOpAnd | ruleOpEquality | ruleOpCompare | ruleOpOther | ruleOpMulti | ruleOpUnary | ruleOpPostfix )";
+            return "3789:2: ( ruleOpMultiAssign | ruleOpOr | ruleOpAnd | ruleOpEquality | ruleOpCompare | ruleOpOther | ruleOpMulti | ruleOpUnary | ruleOpPostfix )";
         }
     }
     static final String dfa_78s = "\37\uffff";
@@ -32923,7 +32923,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_83;
         }
         public String getDescription() {
-            return "4719:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) )";
+            return "4720:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_7_0= ruleJvmTypeReference ) ) ( (lv_name_8_0= ruleInnerVarID ) ) ) ) | ( (lv_name_9_0= ruleInnerVarID ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -33195,7 +33195,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_90;
         }
         public String getDescription() {
-            return "4830:3: ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )?";
+            return "4831:3: ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -33350,7 +33350,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_91;
         }
         public String getDescription() {
-            return "4923:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
+            return "4924:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -33505,7 +33505,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_92;
         }
         public String getDescription() {
-            return "4981:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
+            return "4982:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -33624,7 +33624,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_98;
         }
         public String getDescription() {
-            return "5003:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
+            return "5004:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -34293,7 +34293,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_99;
         }
         public String getDescription() {
-            return "5095:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
+            return "5096:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -34411,7 +34411,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_105;
         }
         public String getDescription() {
-            return "5297:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) )";
+            return "5298:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -34528,7 +34528,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_111;
         }
         public String getDescription() {
-            return "5367:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
+            return "5368:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35106,7 +35106,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_117;
         }
         public String getDescription() {
-            return "5492:2: ( ( ( 'new' )=>this_XbaseConstructorCall_0= ruleXbaseConstructorCall ) | this_XExpression_1= ruleXExpression )";
+            return "5493:2: ( ( ( 'new' )=>this_XbaseConstructorCall_0= ruleXbaseConstructorCall ) | this_XExpression_1= ruleXExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35277,7 +35277,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_123;
         }
         public String getDescription() {
-            return "6330:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?";
+            return "6331:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35393,7 +35393,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_128;
         }
         public String getDescription() {
-            return "6341:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?";
+            return "6342:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35575,7 +35575,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_129;
         }
         public String getDescription() {
-            return "6505:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )";
+            return "6506:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35619,7 +35619,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_129;
         }
         public String getDescription() {
-            return "6645:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )";
+            return "6646:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35711,14 +35711,14 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_136;
         }
         public String getDescription() {
-            return "6801:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )";
+            return "6802:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )";
         }
     }
     static final String dfa_137s = "\1\10\11\uffff";
     static final String dfa_138s = "\1\4\7\0\2\uffff";
     static final String dfa_139s = "\1\167\7\0\2\uffff";
     static final String dfa_140s = "\10\uffff\1\2\1\1";
-    static final String dfa_141s = "\1\uffff\1\4\1\3\1\6\1\2\1\5\1\0\1\1\2\uffff}>";
+    static final String dfa_141s = "\1\uffff\1\1\1\4\1\0\1\6\1\3\1\5\1\2\2\uffff}>";
     static final String[] dfa_142s = {
             "\3\10\1\6\1\10\1\7\12\10\1\uffff\32\10\1\uffff\2\10\6\uffff\4\10\1\1\1\2\1\3\1\4\1\5\31\10\1\uffff\20\10\2\uffff\13\10",
             "\1\uffff",
@@ -35752,17 +35752,17 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_142;
         }
         public String getDescription() {
-            return "6860:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
+            return "6861:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA176_6 = input.LA(1);
+                        int LA176_3 = input.LA(1);
 
                          
-                        int index176_6 = input.index();
+                        int index176_3 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
@@ -35770,55 +35770,10 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index176_6);
+                        input.seek(index176_3);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA176_7 = input.LA(1);
-
-                         
-                        int index176_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index176_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA176_4 = input.LA(1);
-
-                         
-                        int index176_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index176_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA176_2 = input.LA(1);
-
-                         
-                        int index176_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index176_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
                         int LA176_1 = input.LA(1);
 
                          
@@ -35833,7 +35788,22 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index176_1);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 2 : 
+                        int LA176_7 = input.LA(1);
+
+                         
+                        int index176_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index176_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
                         int LA176_5 = input.LA(1);
 
                          
@@ -35848,11 +35818,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index176_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
-                        int LA176_3 = input.LA(1);
+                    case 4 : 
+                        int LA176_2 = input.LA(1);
 
                          
-                        int index176_3 = input.index();
+                        int index176_2 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
@@ -35860,7 +35830,37 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index176_3);
+                        input.seek(index176_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA176_6 = input.LA(1);
+
+                         
+                        int index176_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index176_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA176_4 = input.LA(1);
+
+                         
+                        int index176_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred25_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index176_4);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -35876,7 +35876,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
     static final String dfa_145s = "\1\4\1\uffff\10\0\1\uffff";
     static final String dfa_146s = "\1\167\1\uffff\10\0\1\uffff";
     static final String dfa_147s = "\1\uffff\1\2\10\uffff\1\1";
-    static final String dfa_148s = "\2\uffff\1\5\1\2\1\4\1\6\1\1\1\3\1\7\1\0\1\uffff}>";
+    static final String dfa_148s = "\2\uffff\1\0\1\3\1\2\1\5\1\7\1\4\1\1\1\6\1\uffff}>";
     static final String[] dfa_149s = {
             "\3\1\1\2\1\1\1\3\11\1\1\4\1\uffff\32\1\1\uffff\2\1\6\uffff\21\1\1\5\1\6\1\7\1\10\1\11\14\1\1\uffff\20\1\2\uffff\13\1",
             "",
@@ -35913,88 +35913,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_149;
         }
         public String getDescription() {
-            return "()* loopback of 7549:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
+            return "()* loopback of 7550:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA186_9 = input.LA(1);
-
-                         
-                        int index186_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index186_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA186_6 = input.LA(1);
-
-                         
-                        int index186_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index186_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA186_3 = input.LA(1);
-
-                         
-                        int index186_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index186_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA186_7 = input.LA(1);
-
-                         
-                        int index186_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index186_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA186_4 = input.LA(1);
-
-                         
-                        int index186_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index186_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
                         int LA186_2 = input.LA(1);
 
                          
@@ -36009,7 +35934,67 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index186_2);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 1 : 
+                        int LA186_8 = input.LA(1);
+
+                         
+                        int index186_8 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index186_8);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA186_4 = input.LA(1);
+
+                         
+                        int index186_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index186_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA186_3 = input.LA(1);
+
+                         
+                        int index186_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index186_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA186_7 = input.LA(1);
+
+                         
+                        int index186_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index186_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
                         int LA186_5 = input.LA(1);
 
                          
@@ -36024,11 +36009,11 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index186_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
-                        int LA186_8 = input.LA(1);
+                    case 6 : 
+                        int LA186_9 = input.LA(1);
 
                          
-                        int index186_8 = input.index();
+                        int index186_9 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
@@ -36036,7 +36021,22 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index186_8);
+                        input.seek(index186_9);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA186_6 = input.LA(1);
+
+                         
+                        int index186_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred31_PsiInternalXtend()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index186_6);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -36084,7 +36084,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_154;
         }
         public String getDescription() {
-            return "7617:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
+            return "7618:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
         }
     }
 
@@ -36102,7 +36102,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_92;
         }
         public String getDescription() {
-            return "8529:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
+            return "8530:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36146,7 +36146,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_98;
         }
         public String getDescription() {
-            return "8551:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
+            return "8552:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36704,7 +36704,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_99;
         }
         public String getDescription() {
-            return "8643:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
+            return "8644:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36820,7 +36820,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_160;
         }
         public String getDescription() {
-            return "8679:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
+            return "8680:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36956,7 +36956,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_166;
         }
         public String getDescription() {
-            return "9157:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
+            return "9158:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -37512,7 +37512,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_92;
         }
         public String getDescription() {
-            return "10330:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
+            return "10331:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -37556,7 +37556,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_98;
         }
         public String getDescription() {
-            return "10352:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
+            return "10353:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38114,7 +38114,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_99;
         }
         public String getDescription() {
-            return "10444:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
+            return "10445:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38279,7 +38279,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_172;
         }
         public String getDescription() {
-            return "10751:3: ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )?";
+            return "10752:3: ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39152,7 +39152,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
     static final String dfa_174s = "\1\4\1\uffff\1\4\6\0\1\uffff";
     static final String dfa_175s = "\1\167\1\uffff\1\155\6\0\1\uffff";
     static final String dfa_176s = "\1\uffff\1\2\7\uffff\1\1";
-    static final String dfa_177s = "\3\uffff\1\3\1\2\1\0\1\5\1\1\1\4\1\uffff}>";
+    static final String dfa_177s = "\3\uffff\1\2\1\4\1\3\1\1\1\5\1\0\1\uffff}>";
     static final String[] dfa_178s = {
             "\24\1\1\2\31\1\6\uffff\42\1\1\uffff\20\1\1\uffff\14\1",
             "",
@@ -39186,73 +39186,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_178;
         }
         public String getDescription() {
-            return "()* loopback of 11054:3: ( ( ( '.' )=>kw= '.' ) ruleValidID )*";
+            return "()* loopback of 11055:3: ( ( ( '.' )=>kw= '.' ) ruleValidID )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA247_5 = input.LA(1);
-
-                         
-                        int index247_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index247_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA247_7 = input.LA(1);
-
-                         
-                        int index247_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index247_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA247_4 = input.LA(1);
-
-                         
-                        int index247_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index247_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA247_3 = input.LA(1);
-
-                         
-                        int index247_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index247_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
                         int LA247_8 = input.LA(1);
 
                          
@@ -39267,7 +39207,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index247_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 1 : 
                         int LA247_6 = input.LA(1);
 
                          
@@ -39280,6 +39220,66 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                          
                         input.seek(index247_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA247_3 = input.LA(1);
+
+                         
+                        int index247_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index247_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA247_5 = input.LA(1);
+
+                         
+                        int index247_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index247_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA247_4 = input.LA(1);
+
+                         
+                        int index247_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index247_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA247_7 = input.LA(1);
+
+                         
+                        int index247_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred60_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index247_7);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -39432,7 +39432,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_185;
         }
         public String getDescription() {
-            return "11359:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
+            return "11360:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39461,7 +39461,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             throw nvae;
         }
     }
-    static final String dfa_186s = "\3\uffff\1\2\1\0\1\3\1\1\1\5\1\4\1\uffff}>";
+    static final String dfa_186s = "\3\uffff\1\1\1\3\1\5\1\0\1\4\1\2\1\uffff}>";
     static final String[] dfa_187s = {
             "\24\1\1\2\31\1\6\uffff\42\1\1\uffff\20\1\1\uffff\14\1",
             "",
@@ -39491,28 +39491,13 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_187;
         }
         public String getDescription() {
-            return "()* loopback of 11416:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*";
+            return "()* loopback of 11417:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA260_4 = input.LA(1);
-
-                         
-                        int index260_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred63_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index260_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA260_6 = input.LA(1);
 
                          
@@ -39527,7 +39512,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index260_6);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA260_3 = input.LA(1);
 
                          
@@ -39542,22 +39527,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index260_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA260_5 = input.LA(1);
-
-                         
-                        int index260_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred63_PsiInternalXtend()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index260_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
+                    case 2 : 
                         int LA260_8 = input.LA(1);
 
                          
@@ -39572,7 +39542,22 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
                         input.seek(index260_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 3 : 
+                        int LA260_4 = input.LA(1);
+
+                         
+                        int index260_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred63_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index260_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA260_7 = input.LA(1);
 
                          
@@ -39585,6 +39570,21 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
 
                          
                         input.seek(index260_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA260_5 = input.LA(1);
+
+                         
+                        int index260_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred63_PsiInternalXtend()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index260_5);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -39610,7 +39610,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_185;
         }
         public String getDescription() {
-            return "11458:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+            return "11459:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39682,7 +39682,7 @@ public class PsiInternalXtendParser extends AbstractPsiAntlrParser {
             this.transition = dfa_192;
         }
         public String getDescription() {
-            return "11932:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
+            return "11933:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
         }
     }
  

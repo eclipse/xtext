@@ -192,13 +192,13 @@ ruleTwoRequired returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTwoRequired_OneIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_one_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_one_1_0=RULE_ID
 				{
 					doneLeaf(lv_one_1_0);
 				}
@@ -209,13 +209,13 @@ ruleTwoRequired returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTwoRequired_TwoIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_two_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_two_2_0=RULE_ID
 				{
 					doneLeaf(lv_two_2_0);
 				}
@@ -256,13 +256,13 @@ ruleTwoOptions returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getTwoOptions_OneIDTerminalRuleCall_1_0_1_0ElementType());
 						}
+						lv_one_2_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_one_2_0=RULE_ID
 						{
 							doneLeaf(lv_one_2_0);
 						}
@@ -283,13 +283,13 @@ ruleTwoOptions returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getTwoOptions_TwoIDTerminalRuleCall_1_1_1_0ElementType());
 						}
+						lv_two_4_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_two_4_0=RULE_ID
 						{
 							doneLeaf(lv_two_4_0);
 						}

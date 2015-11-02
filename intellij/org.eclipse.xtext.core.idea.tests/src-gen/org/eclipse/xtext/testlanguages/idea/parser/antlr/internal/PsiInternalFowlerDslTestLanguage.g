@@ -168,13 +168,13 @@ ruleEvent returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEvent_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -185,13 +185,13 @@ ruleEvent returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getEvent_CodeIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_code_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_code_2_0=RULE_ID
 				{
 					doneLeaf(lv_code_2_0);
 				}
@@ -216,13 +216,13 @@ ruleCommand returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getCommand_NameIDTerminalRuleCall_0_0ElementType());
 				}
+				lv_name_0_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_0_0=RULE_ID
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -233,13 +233,13 @@ ruleCommand returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getCommand_CodeIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_code_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_code_1_0=RULE_ID
 				{
 					doneLeaf(lv_code_1_0);
 				}
@@ -271,13 +271,13 @@ ruleState returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getState_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}

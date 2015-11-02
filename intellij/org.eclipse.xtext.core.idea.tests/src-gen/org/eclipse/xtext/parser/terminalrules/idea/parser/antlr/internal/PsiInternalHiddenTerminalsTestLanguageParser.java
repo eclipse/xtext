@@ -343,13 +343,13 @@ public class PsiInternalHiddenTerminalsTestLanguageParser extends AbstractPsiAnt
 
             					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType());
             				
+            lv_spaces_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_4); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_spaces_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_spaces_1_0);
             				
@@ -383,13 +383,13 @@ public class PsiInternalHiddenTerminalsTestLanguageParser extends AbstractPsiAnt
 
                     					markLeaf(elementTypeProvider.getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType());
                     				
+                    lv_spaces_3_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_6); 
 
                     					if(!current) {
                     						associateWithSemanticElement();
                     						current = true;
                     					}
                     				
-                    lv_spaces_3_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_6); 
 
                     					doneLeaf(lv_spaces_3_0);
                     				
@@ -814,13 +814,13 @@ public class PsiInternalHiddenTerminalsTestLanguageParser extends AbstractPsiAnt
 
                     					markLeaf(elementTypeProvider.getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType());
                     				
+                    lv_spaces_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_6); 
 
                     					if(!current) {
                     						associateWithSemanticElement();
                     						current = true;
                     					}
                     				
-                    lv_spaces_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_6); 
 
                     					doneLeaf(lv_spaces_1_0);
                     				
@@ -1378,13 +1378,13 @@ public class PsiInternalHiddenTerminalsTestLanguageParser extends AbstractPsiAnt
 
             					markLeaf(elementTypeProvider.getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType());
             				
+            lv_space_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_8); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_space_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_8); 
 
             					doneLeaf(lv_space_1_0);
             				

@@ -33,9 +33,6 @@ public class AbstractTestLanguageParserDefinition extends AbstractXtextParserDef
 			if (elementType == elementTypeProvider.getInheritedParserRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getInheritedParserRule_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getAbstractCallOverridenParserRuleElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -45,14 +42,8 @@ public class AbstractTestLanguageParserDefinition extends AbstractXtextParserDef
 			if (elementType == elementTypeProvider.getOverridableParserRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getOverridableParserRule_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getOverridableParserRule2ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getOverridableParserRule2_NameSTRINGTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAbstractCallExtendedParserRuleElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -62,9 +53,6 @@ public class AbstractTestLanguageParserDefinition extends AbstractXtextParserDef
 			}
 			if (elementType == elementTypeProvider.getExtendableParserRuleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getExtendableParserRule_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

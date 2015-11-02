@@ -262,13 +262,13 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             					markLeaf(elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -676,13 +676,13 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             					markLeaf(elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -839,13 +839,13 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType());
             				
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
             					doneLeaf(lv_name_2_0);
             				

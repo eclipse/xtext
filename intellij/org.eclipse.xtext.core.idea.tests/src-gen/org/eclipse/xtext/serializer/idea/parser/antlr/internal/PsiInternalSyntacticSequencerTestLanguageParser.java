@@ -919,6 +919,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -927,7 +928,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val1_1_0);
@@ -961,6 +961,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType());
               				
             }
+            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -969,7 +970,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val2_3_0);
@@ -1014,6 +1014,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType());
               				
             }
+            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -1022,7 +1023,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val3_6_0);
@@ -1410,6 +1410,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -1418,7 +1419,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_name_1_0);
@@ -1820,6 +1820,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						markLeaf(elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType());
                       					
                     }
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -1828,7 +1829,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						}
                       					
                     }
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_name_1_0);
@@ -2456,6 +2456,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						markLeaf(elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType());
                       					
                     }
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -2464,7 +2465,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						}
                       					
                     }
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_name_1_0);
@@ -2731,6 +2731,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						markLeaf(elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType());
                       					
                     }
+                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_13); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -2739,7 +2740,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						}
                       					
                     }
-                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_13); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_name_1_1);
@@ -2756,6 +2756,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						markLeaf(elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType());
                       					
                     }
+                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -2764,7 +2765,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       						}
                       					
                     }
-                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_name_1_2);
@@ -3391,6 +3391,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_19); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -3399,7 +3400,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_19); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val_1_0);
@@ -3707,6 +3707,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType());
               				
             }
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -3715,7 +3716,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val_2_0);
@@ -3860,6 +3860,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType());
               				
             }
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -3868,7 +3869,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val_2_0);
@@ -4019,6 +4019,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType());
               				
             }
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -4027,7 +4028,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val_2_0);
@@ -4193,6 +4193,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType());
               				
             }
+            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -4201,7 +4202,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val_3_0);
@@ -4449,6 +4449,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       					markLeaf(elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType());
                       				
                     }
+                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_25); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					if(!current) {
@@ -4457,7 +4458,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                       					}
                       				
                     }
-                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_25); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					doneLeaf(lv_val2_3_0);
@@ -4625,6 +4625,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -4633,7 +4634,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_foo_1_0);
@@ -4730,6 +4730,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType());
             	              						
             	            }
+            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -4738,7 +4739,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val1_3_0);
@@ -4795,6 +4795,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType());
             	              						
             	            }
+            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -4803,7 +4804,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val2_5_0);
@@ -4860,6 +4860,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType());
             	              						
             	            }
+            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -4868,7 +4869,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val3_7_0);
@@ -4925,6 +4925,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType());
             	              						
             	            }
+            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -4933,7 +4934,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val4_9_0);
@@ -4990,6 +4990,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType());
             	              						
             	            }
+            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -4998,7 +4999,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val5_11_0);
@@ -5055,6 +5055,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType());
             	              						
             	            }
+            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -5063,7 +5064,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val6_13_0);
@@ -5120,6 +5120,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType());
             	              						
             	            }
+            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -5128,7 +5129,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val7_15_0);
@@ -5185,6 +5185,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							markLeaf(elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType());
             	              						
             	            }
+            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							if(!current) {
@@ -5193,7 +5194,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	              							}
             	              						
             	            }
-            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	              							doneLeaf(lv_val8_17_0);
@@ -5543,6 +5543,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType());
               				
             }
+            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -5551,7 +5552,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val1_1_0);
@@ -5594,6 +5594,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					markLeaf(elementTypeProvider.getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType());
               				
             }
+            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -5602,7 +5603,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               					}
               				
             }
-            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_val_3_0);
@@ -5654,6 +5654,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               				markLeaf(elementTypeProvider.getFragment1_FragValIDTerminalRuleCall_0ElementType());
               			
             }
+            lv_fragVal_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               				if(!current) {
@@ -5662,7 +5663,6 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
               				}
               			
             }
-            lv_fragVal_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               				doneLeaf(lv_fragVal_0_0);

@@ -33,12 +33,6 @@ public class ReferenceGrammarTestLanguageParserDefinition extends AbstractXtextP
 			if (elementType == elementTypeProvider.getSpielplatzElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getSpielplatz_GroesseINTTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSpielplatz_BeschreibungSTRINGTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getSpielplatz_KinderKindParserRuleCall_4_0_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
@@ -63,26 +57,11 @@ public class ReferenceGrammarTestLanguageParserDefinition extends AbstractXtextP
 			if (elementType == elementTypeProvider.getKindElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getKind_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getKind_AgeINTTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getErwachsenerElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getErwachsener_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getErwachsener_AgeINTTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getSpielzeugElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSpielzeug_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSpielzeug_FarbeFarbeParserRuleCall_3_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -92,24 +71,6 @@ public class ReferenceGrammarTestLanguageParserDefinition extends AbstractXtextP
 			}
 			if (elementType == elementTypeProvider.getFamilieElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFamilie_NameIDTerminalRuleCall_2_0_2ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFamilie_MutterErwachsenerIDTerminalRuleCall_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFamilie_VaterErwachsenerIDTerminalRuleCall_4_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFamilie_KinderKindIDTerminalRuleCall_5_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getFamilie_KinderKindIDTerminalRuleCall_6_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

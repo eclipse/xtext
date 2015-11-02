@@ -295,13 +295,13 @@ public class PsiInternalImportUriTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getImport_ImportURISTRINGTerminalRuleCall_1_0ElementType());
             				
+            lv_importURI_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_importURI_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_importURI_1_0);
             				
@@ -397,13 +397,13 @@ public class PsiInternalImportUriTestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             					doneLeaf(lv_name_1_0);
             				

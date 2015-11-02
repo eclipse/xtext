@@ -63,13 +63,13 @@ ruleStart returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
 			}
+			lv_featureA_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_featureA_0_0=RULE_ID
 			{
 				doneLeaf(lv_featureA_0_0);
 			}

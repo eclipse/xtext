@@ -254,13 +254,13 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
             					markLeaf(elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType());
             				
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_name_0_0);
             				

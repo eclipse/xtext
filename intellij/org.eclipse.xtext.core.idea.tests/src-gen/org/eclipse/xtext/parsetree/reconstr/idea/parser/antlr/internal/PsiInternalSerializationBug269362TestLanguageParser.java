@@ -158,13 +158,13 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                     						markLeaf(elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
                     					
+                    lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
                     						doneLeaf(lv_foo_1_0);
                     					
@@ -201,13 +201,13 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                             							markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
                             						
+                            lv_bar_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
                             								current = true;
                             							}
                             						
-                            lv_bar_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_bar_3_0);
                             						
@@ -251,13 +251,13 @@ public class PsiInternalSerializationBug269362TestLanguageParser extends Abstrac
 
                     						markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
                     					
+                    lv_bar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_bar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_bar_5_0);
                     					

@@ -48,9 +48,6 @@ public class FragmentTestLanguageExParserDefinition extends AbstractXtextParserD
 			if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedParserRuleCall_1_1_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParserRuleFragments_RefPRFNamedIDTerminalRuleCall_1_1_3_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedRefFirstParserRuleCall_1_2_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
@@ -69,17 +66,11 @@ public class FragmentTestLanguageExParserDefinition extends AbstractXtextParserD
 			if (elementType == elementTypeProvider.getPRFNamed_PRFNamedFragmentParserRuleCall_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPRFNamed_RefPRFNamedIDTerminalRuleCall_1_0_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPRFNamedRefFirstElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPRFNamedRefFirst_RefPRFNamedIDTerminalRuleCall_0_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPRFNamedRefFirst_PRFNamedFragmentParserRuleCall_2ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -93,23 +84,8 @@ public class FragmentTestLanguageExParserDefinition extends AbstractXtextParserD
 			if (elementType == elementTypeProvider.getPRFNamedWithAction_PRFNamedWithActionPrevAction_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPRFNamedWithAction_NameIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPRFNamedWithAction_RefPRFNamedIDTerminalRuleCall_3_0_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPRFNamedWithAction_Ref2PRFNamedIDTerminalRuleCall_3_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getPRFNamedWithFQNElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPRFNamedWithFQN_NameFQNParserRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPRFNamedWithFQN_RefPRFNamedFQN2ParserRuleCall_1_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPRFWithPredicateElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -123,14 +99,8 @@ public class FragmentTestLanguageExParserDefinition extends AbstractXtextParserD
 			if (elementType == elementTypeProvider.getPRFNamedFragmentElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPRFNamedFragment_NameIDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getPRFNamedRefElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getPRFNamedRef_RefPRFNamedIDTerminalRuleCall_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

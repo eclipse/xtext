@@ -122,13 +122,13 @@ ruleElement returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_3_0ElementType());
 				}
+				lv_name_3_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_3_0=RULE_ID
 				{
 					doneLeaf(lv_name_3_0);
 				}

@@ -89,13 +89,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_ValueSTRINGTerminalRuleCall_0_1_0_1ElementType());
 						}
+						lv_value_1_2=RULE_STRING
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_value_1_2=RULE_STRING
 						{
 							doneLeaf(lv_value_1_2);
 						}
@@ -127,13 +127,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_ValueIDTerminalRuleCall_0_1_0_4ElementType());
 						}
+						lv_value_1_5=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_value_1_5=RULE_ID
 						{
 							doneLeaf(lv_value_1_5);
 						}
@@ -170,13 +170,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_MultiValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
 						}
+						lv_multiValue_3_2=RULE_STRING
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_multiValue_3_2=RULE_STRING
 						{
 							doneLeaf(lv_multiValue_3_2);
 						}
@@ -208,13 +208,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_MultiValueIDTerminalRuleCall_1_1_0_4ElementType());
 						}
+						lv_multiValue_3_5=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_multiValue_3_5=RULE_ID
 						{
 							doneLeaf(lv_multiValue_3_5);
 						}
@@ -236,13 +236,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
 					}
+					lv_value_5_0=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_value_5_0=RULE_STRING
 					{
 						doneLeaf(lv_value_5_0);
 					}
@@ -263,13 +263,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_MultiValueSTRINGTerminalRuleCall_3_1_0ElementType());
 					}
+					lv_multiValue_7_0=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_multiValue_7_0=RULE_STRING
 					{
 						doneLeaf(lv_multiValue_7_0);
 					}
@@ -566,13 +566,13 @@ ruleChild1 returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getChild1_NameIDTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_ID
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_ID
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -595,13 +595,13 @@ ruleChild2 returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getChild2_NameSTRINGTerminalRuleCall_0ElementType());
 			}
+			lv_name_0_0=RULE_STRING
 			{
 				if(!$current) {
 					associateWithSemanticElement();
 					$current = true;
 				}
 			}
-			lv_name_0_0=RULE_STRING
 			{
 				doneLeaf(lv_name_0_0);
 			}

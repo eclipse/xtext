@@ -71,13 +71,13 @@ ruleSpielplatz returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSpielplatz_GroesseINTTerminalRuleCall_1_0ElementType());
 				}
+				lv_groesse_1_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_groesse_1_0=RULE_INT
 				{
 					doneLeaf(lv_groesse_1_0);
 				}
@@ -88,13 +88,13 @@ ruleSpielplatz returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSpielplatz_BeschreibungSTRINGTerminalRuleCall_2_0ElementType());
 				}
+				lv_beschreibung_2_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_beschreibung_2_0=RULE_STRING
 				{
 					doneLeaf(lv_beschreibung_2_0);
 				}
@@ -212,13 +212,13 @@ ruleKind returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getKind_NameIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}
@@ -229,13 +229,13 @@ ruleKind returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getKind_AgeINTTerminalRuleCall_3_0ElementType());
 				}
+				lv_age_3_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_age_3_0=RULE_INT
 				{
 					doneLeaf(lv_age_3_0);
 				}
@@ -281,13 +281,13 @@ ruleErwachsener returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getErwachsener_NameIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}
@@ -298,13 +298,13 @@ ruleErwachsener returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getErwachsener_AgeINTTerminalRuleCall_3_0ElementType());
 				}
+				lv_age_3_0=RULE_INT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_age_3_0=RULE_INT
 				{
 					doneLeaf(lv_age_3_0);
 				}
@@ -350,13 +350,13 @@ ruleSpielzeug returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSpielzeug_NameIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}
@@ -505,13 +505,13 @@ ruleFamilie returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType());
 					}
+					lv_name_2_2=RULE_STRING
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_2_2=RULE_STRING
 					{
 						doneLeaf(lv_name_2_2);
 					}
@@ -519,13 +519,13 @@ ruleFamilie returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getFamilie_NameIDTerminalRuleCall_2_0_2ElementType());
 					}
+					lv_name_2_3=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_2_3=RULE_ID
 					{
 						doneLeaf(lv_name_2_3);
 					}

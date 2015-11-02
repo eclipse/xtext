@@ -293,6 +293,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
               					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
               				
             }
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -301,7 +302,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
               					}
               				
             }
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_name_0_0);
@@ -485,6 +485,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
               					markLeaf(elementTypeProvider.getDataType_BaseTypeIDTerminalRuleCall_0_0ElementType());
               				
             }
+            lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					if(!current) {
@@ -493,7 +494,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
               					}
               				
             }
-            lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_baseType_0_0);
@@ -538,6 +538,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                       						markLeaf(elementTypeProvider.getDataType_DefaultValueSTRINGTerminalRuleCall_1_1_0ElementType());
                       					
                     }
+                    lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -546,7 +547,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                       						}
                       					
                     }
-                    lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_defaultValue_2_0);
@@ -795,6 +795,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
             	      										markLeaf(elementTypeProvider.getExpression_PrefixSTRINGTerminalRuleCall_1_1_0ElementType());
             	      									
             	    }
+            	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_8); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      										if(!current) {
@@ -803,7 +804,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
             	      										}
             	      									
             	    }
-            	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_8); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      										doneLeaf(lv_prefix_3_0);
@@ -1067,6 +1067,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
             	      										markLeaf(elementTypeProvider.getExpression_PostfixSTRINGTerminalRuleCall_3_1_0ElementType());
             	      									
             	    }
+            	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_10); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      										if(!current) {
@@ -1075,7 +1076,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
             	      										}
             	      									
             	    }
-            	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_10); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      										doneLeaf(lv_postfix_9_0);
@@ -1227,6 +1227,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                       						markLeaf(elementTypeProvider.getSimpleTerm_LineCountINTTerminalRuleCall_0_0_0ElementType());
                       					
                     }
+                    lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						if(!current) {
@@ -1235,7 +1236,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                       						}
                       					
                     }
-                    lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						doneLeaf(lv_lineCount_0_0);
@@ -1298,6 +1298,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                               						markLeaf(elementTypeProvider.getSimpleTerm_CharCountINTTerminalRuleCall_0_2_0ElementType());
                               					
                             }
+                            lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_13); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               						if(!current) {
@@ -1306,7 +1307,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                               						}
                               					
                             }
-                            lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_13); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               						doneLeaf(lv_charCount_2_0);
@@ -1372,6 +1372,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                               						markLeaf(elementTypeProvider.getSimpleTerm_CharSetIDTerminalRuleCall_0_4_0ElementType());
                               					
                             }
+                            lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               						if(!current) {
@@ -1380,7 +1381,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                               						}
                               					
                             }
-                            lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               						doneLeaf(lv_charSet_4_0);
@@ -1415,6 +1415,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                       					markLeaf(elementTypeProvider.getSimpleTerm_RefCharIDTerminalRuleCall_1_0ElementType());
                       				
                     }
+                    lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					if(!current) {
@@ -1423,7 +1424,6 @@ public class PsiInternalBacktrackingBug325745TestLanguageParser extends Abstract
                       					}
                       				
                     }
-                    lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					doneLeaf(lv_refChar_5_0);

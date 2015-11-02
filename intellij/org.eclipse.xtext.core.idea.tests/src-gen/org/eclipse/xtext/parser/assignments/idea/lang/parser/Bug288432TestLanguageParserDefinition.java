@@ -51,9 +51,6 @@ public class Bug288432TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getFooElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getFoo_FooValueSTRINGTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getContentElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -84,22 +81,10 @@ public class Bug288432TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getParameterElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParameter_NameIDTerminalRuleCall_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getParameter_ValueParameterObjectIDTerminalRuleCall_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getParameterRefElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getParameterRef_ParameterParameterIDTerminalRuleCall_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getMyIntElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMyInt_IntINTTerminalRuleCall_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

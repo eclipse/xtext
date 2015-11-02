@@ -744,13 +744,13 @@ public class PsiInternalHiddenTokensMergerTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getEnumBug_NameIDTerminalRuleCall_3_0ElementType());
             				
+            lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_name_3_0);
             				
@@ -965,13 +965,13 @@ public class PsiInternalHiddenTokensMergerTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getCommentableItem_IdIDTerminalRuleCall_1_0ElementType());
             				
+            lv_id_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_id_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_id_1_0);
             				
@@ -1713,13 +1713,13 @@ public class PsiInternalHiddenTokensMergerTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getAppendToFileEndItem_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_14); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_14); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -1835,13 +1835,13 @@ public class PsiInternalHiddenTokensMergerTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getAction1_NameIDTerminalRuleCall_2_0ElementType());
             				
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_15); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_15); 
 
             					doneLeaf(lv_name_2_0);
             				

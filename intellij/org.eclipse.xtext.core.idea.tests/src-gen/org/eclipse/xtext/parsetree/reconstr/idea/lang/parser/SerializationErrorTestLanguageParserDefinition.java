@@ -59,19 +59,7 @@ public class SerializationErrorTestLanguageParserDefinition extends AbstractXtex
 			if (elementType == elementTypeProvider.getTwoRequiredElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getTwoRequired_OneIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTwoRequired_TwoIDTerminalRuleCall_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getTwoOptionsElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTwoOptions_OneIDTerminalRuleCall_1_0_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getTwoOptions_TwoIDTerminalRuleCall_1_1_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getIndentElementType()) {

@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug292245TestLanguageFileImpl:a.bug292245testlanguage(0,7)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,7)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,7)
     PsiElement(Model_TICKKeyword_2_0_ELEMENT_TYPE)('TICK')(0,4)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_TickApostropheParserRuleCall_2_1_0_ELEMENT_TYPE)(4,6)
       PsiWhiteSpace(' ')(4,5)

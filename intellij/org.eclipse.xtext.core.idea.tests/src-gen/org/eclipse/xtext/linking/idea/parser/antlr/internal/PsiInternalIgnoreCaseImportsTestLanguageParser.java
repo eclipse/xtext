@@ -288,13 +288,13 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
             				markLeaf(elementTypeProvider.getImport_ImportURISTRINGTerminalRuleCall_0ElementType());
             			
+            lv_importURI_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_importURI_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_importURI_0_0);
             			
@@ -382,13 +382,13 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
             				
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_name_0_0);
             				

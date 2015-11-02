@@ -106,13 +106,13 @@ ruleElement returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getElement_ValueValueTerminalRuleCall_1_0ElementType());
 				}
+				lv_value_1_0=RULE_VALUE
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_1_0=RULE_VALUE
 				{
 					doneLeaf(lv_value_1_0);
 				}

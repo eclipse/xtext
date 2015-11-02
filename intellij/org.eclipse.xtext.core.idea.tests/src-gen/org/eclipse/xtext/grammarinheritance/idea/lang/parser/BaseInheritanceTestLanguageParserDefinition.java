@@ -33,9 +33,6 @@ public class BaseInheritanceTestLanguageParserDefinition extends AbstractXtextPa
 			if (elementType == elementTypeProvider.getModelElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getModel_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

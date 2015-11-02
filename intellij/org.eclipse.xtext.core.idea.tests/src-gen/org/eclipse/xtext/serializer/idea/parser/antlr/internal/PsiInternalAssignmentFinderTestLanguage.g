@@ -376,13 +376,13 @@ ruleTerminalVal returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTerminalVal_TermTerminal1TerminalRuleCall_0_0ElementType());
 				}
+				lv_term_0_0=RULE_TERMINAL1
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_term_0_0=RULE_TERMINAL1
 				{
 					doneLeaf(lv_term_0_0);
 				}
@@ -394,13 +394,13 @@ ruleTerminalVal returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTerminalVal_TermTerminal2TerminalRuleCall_1_0ElementType());
 				}
+				lv_term_1_0=RULE_TERMINAL2
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_term_1_0=RULE_TERMINAL2
 				{
 					doneLeaf(lv_term_1_0);
 				}
@@ -537,13 +537,13 @@ ruleTerminalBool returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTerminalBool_TermTerminal1TerminalRuleCall_0_0ElementType());
 				}
+				lv_term_0_0=RULE_TERMINAL1
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_term_0_0=RULE_TERMINAL1
 				{
 					doneLeaf(lv_term_0_0);
 				}
@@ -555,13 +555,13 @@ ruleTerminalBool returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getTerminalBool_TermTerminal2TerminalRuleCall_1_0ElementType());
 				}
+				lv_term_1_0=RULE_TERMINAL2
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_term_1_0=RULE_TERMINAL2
 				{
 					doneLeaf(lv_term_1_0);
 				}
@@ -841,13 +841,13 @@ ruleContainmentRef1 returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getContainmentRef1_Val1IDTerminalRuleCall_1_0ElementType());
 				}
+				lv_val1_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val1_1_0=RULE_ID
 				{
 					doneLeaf(lv_val1_1_0);
 				}
@@ -879,13 +879,13 @@ ruleContainmentRef2 returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getContainmentRef2_Val2IDTerminalRuleCall_1_0ElementType());
 				}
+				lv_val2_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_val2_1_0=RULE_ID
 				{
 					doneLeaf(lv_val2_1_0);
 				}
@@ -911,13 +911,13 @@ ruleCrossRef returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getCrossRef_NameTerminal1TerminalRuleCall_0_0_0ElementType());
 					}
+					lv_name_0_1=RULE_TERMINAL1
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_0_1=RULE_TERMINAL1
 					{
 						doneLeaf(lv_name_0_1);
 					}
@@ -925,13 +925,13 @@ ruleCrossRef returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getCrossRef_NameTerminal2TerminalRuleCall_0_0_1ElementType());
 					}
+					lv_name_0_2=RULE_TERMINAL2
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_name_0_2=RULE_TERMINAL2
 					{
 						doneLeaf(lv_name_0_2);
 					}

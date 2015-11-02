@@ -57,9 +57,6 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getSimpleElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getSimple_NameIDTerminalRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getDelegationElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -87,9 +84,6 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getDelegateElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getDelegate_NameIDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getExpressionElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -108,9 +102,6 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getPrimary_NamedAction_0_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getPrimary_NameIDTerminalRuleCall_0_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getPrimary_ParenthesizedParserRuleCall_1ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -123,32 +114,14 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getMixedElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMixed_IDTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMixed_DatatypeParserRuleCall_1_1_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getMixed_ActionAction_2_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMixed_MixedParserRuleCall_2_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getMixed_EobjMixedParserRuleCall_2_2_1_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMixed_DatatypeDatatypeParserRuleCall_2_2_2_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMixed_RefMixedIDTerminalRuleCall_2_2_3_1_0_1ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getMixed_LitEnumEnumRuleCall_2_2_4_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMixed_AssignedActionChildAction_4_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};

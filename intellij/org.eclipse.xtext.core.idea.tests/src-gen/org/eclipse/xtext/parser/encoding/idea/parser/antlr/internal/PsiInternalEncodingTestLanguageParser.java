@@ -224,13 +224,13 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
             				markLeaf(elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
             			
+            lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_value_0_0);
             			

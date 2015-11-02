@@ -35,15 +35,6 @@ public class Bug299395TestLanguageParserDefinition extends AbstractXtextParserDe
 			if (elementType == elementTypeProvider.getModel_ModelAction_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getModel_StringsSTRINGTerminalRuleCall_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_KeysSTRINGTerminalRuleCall_2_1_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getModel_ValuesSTRINGTerminalRuleCall_2_1_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getModel_SubModelSubModelParserRuleCall_3_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
@@ -51,9 +42,6 @@ public class Bug299395TestLanguageParserDefinition extends AbstractXtextParserDe
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSubModel_SubModelAction_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
-			if (elementType == elementTypeProvider.getSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

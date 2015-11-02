@@ -38,9 +38,6 @@ public class EncodingTestLanguageParserDefinition extends AbstractXtextParserDef
 			if (elementType == elementTypeProvider.getWordElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

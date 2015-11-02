@@ -78,13 +78,13 @@ ruleModel returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_2_0ElementType());
 				}
+				lv_name_2_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_2_0=RULE_ID
 				{
 					doneLeaf(lv_name_2_0);
 				}

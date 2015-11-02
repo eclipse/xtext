@@ -277,13 +277,13 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getModelFeatures_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_1_0);
             				

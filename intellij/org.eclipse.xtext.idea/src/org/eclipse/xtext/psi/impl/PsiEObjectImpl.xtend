@@ -49,6 +49,7 @@ class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>> exten
 		getXtextLanguage().injectMembers(this)
 	}
 
+	// TODO consider to delegate to org.eclipse.xtext.idea.nodemodel.ASTNodeExtension.getEClass(ASTNode) instead
 	override EClass getEClass() {
 		var INode node = getINode()
 		if (node.hasDirectSemanticElement()) {

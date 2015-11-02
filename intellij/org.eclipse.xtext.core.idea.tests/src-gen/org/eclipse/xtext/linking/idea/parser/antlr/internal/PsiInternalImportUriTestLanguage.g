@@ -115,13 +115,13 @@ ruleImport returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getImport_ImportURISTRINGTerminalRuleCall_1_0ElementType());
 				}
+				lv_importURI_1_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_importURI_1_0=RULE_STRING
 				{
 					doneLeaf(lv_importURI_1_0);
 				}
@@ -153,13 +153,13 @@ ruleType returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
 				}
+				lv_name_1_0=RULE_ID
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_name_1_0=RULE_ID
 				{
 					doneLeaf(lv_name_1_0);
 				}

@@ -72,13 +72,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
 					}
+					lv_intValues_1_0=RULE_EINT
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_intValues_1_0=RULE_EINT
 					{
 						doneLeaf(lv_intValues_1_0);
 					}
@@ -99,13 +99,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
 					}
+					lv_doubleValues_3_0=RULE_EDOUBLE
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_doubleValues_3_0=RULE_EDOUBLE
 					{
 						doneLeaf(lv_doubleValues_3_0);
 					}
@@ -126,13 +126,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
 					}
+					lv_dateValues_5_0=RULE_EDATE
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_dateValues_5_0=RULE_EDATE
 					{
 						doneLeaf(lv_dateValues_5_0);
 					}

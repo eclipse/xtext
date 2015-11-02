@@ -127,13 +127,13 @@ public class PsiInternalEcoreFragmentTestLanguageParser extends AbstractPsiAntlr
 
             					markLeaf(elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType());
             				
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_0_0);
             				

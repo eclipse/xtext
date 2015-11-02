@@ -32,9 +32,6 @@ public class MultiValueFeatureTestLanguageParserDefinition extends AbstractXtext
 			if (elementType == elementTypeProvider.getStartElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

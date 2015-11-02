@@ -151,13 +151,13 @@ public class PsiInternalPartialParserTestLanguageParser extends AbstractPsiAntlr
 
             					markLeaf(elementTypeProvider.getSomeContainer_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -1528,13 +1528,13 @@ public class PsiInternalPartialParserTestLanguageParser extends AbstractPsiAntlr
 
             				markLeaf(elementTypeProvider.getNamed_NameIDTerminalRuleCall_0ElementType());
             			
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				if(!current) {
             					associateWithSemanticElement();
             					current = true;
             				}
             			
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			

@@ -135,13 +135,13 @@ public class PsiInternalBug299237TestLanguageParser extends AbstractPsiAntlrPars
 
             					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_name_1_0);
             				

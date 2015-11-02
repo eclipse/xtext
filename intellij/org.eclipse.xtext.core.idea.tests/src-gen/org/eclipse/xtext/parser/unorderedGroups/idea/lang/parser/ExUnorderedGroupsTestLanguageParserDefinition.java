@@ -41,9 +41,6 @@ public class ExUnorderedGroupsTestLanguageParserDefinition extends AbstractXtext
 			if (elementType == elementTypeProvider.getModel_ModelAction_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getModel_ValueUnorderedDatatypeParserRuleCall_1_14_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getModel_SerializedUnorderedSerializationParserRuleCall_1_15_1_0ElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}

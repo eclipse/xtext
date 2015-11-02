@@ -243,13 +243,13 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType());
             				
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					if(!current) {
             						associateWithSemanticElement();
             						current = true;
             					}
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -297,13 +297,13 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
                     						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType());
                     					
+                    lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						if(!current) {
                     							associateWithSemanticElement();
                     							current = true;
                     						}
                     					
-                    lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_name_4_0);
                     					

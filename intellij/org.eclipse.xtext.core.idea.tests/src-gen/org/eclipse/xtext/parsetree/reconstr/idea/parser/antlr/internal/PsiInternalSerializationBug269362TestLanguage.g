@@ -72,13 +72,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_FooIDTerminalRuleCall_0_1_0ElementType());
 					}
+					lv_foo_1_0=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_foo_1_0=RULE_ID
 					{
 						doneLeaf(lv_foo_1_0);
 					}
@@ -97,13 +97,13 @@ ruleModel returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_0_2_1_0ElementType());
 						}
+						lv_bar_3_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
 								$current = true;
 							}
 						}
-						lv_bar_3_0=RULE_ID
 						{
 							doneLeaf(lv_bar_3_0);
 						}
@@ -125,13 +125,13 @@ ruleModel returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getModel_BarIDTerminalRuleCall_1_1_0ElementType());
 					}
+					lv_bar_5_0=RULE_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_bar_5_0=RULE_ID
 					{
 						doneLeaf(lv_bar_5_0);
 					}

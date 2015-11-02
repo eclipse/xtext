@@ -32,9 +32,6 @@ public class QualifiedNameTestLanguageParserDefinition extends AbstractXtextPars
 			if (elementType == elementTypeProvider.getElementElementType()) {
 				return new PsiEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getElement_QualifiedNameQualifiedNameParserRuleCall_1_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);

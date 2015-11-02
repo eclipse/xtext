@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.idea;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -27,8 +26,12 @@ import java.util.Set;
 import org.antlr.runtime.Token;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -36,14 +39,14 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
@@ -2050,7 +2053,23 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   }
   
   public JavaFileAccess compileParserDefinition(final Grammar grammar) {
-    final LinkedHashMultimap<String, String> namedGrammarElement = this.getNamedGrammarElements(grammar);
+    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
+    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractRule it) {
+        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
+      }
+    };
+    Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
+    final List<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>toList(_filter);
+    final Function1<AbstractRule, Boolean> _function_1 = new Function1<AbstractRule, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractRule it) {
+        return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
+      }
+    };
+    Iterable<AbstractRule> _filter_1 = IterableExtensions.<AbstractRule>filter(EObjectRules, _function_1);
+    final List<AbstractRule> namedEObjectRules = IterableExtensions.<AbstractRule>toList(_filter_1);
     TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -2064,18 +2083,24 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(_superParserDefinition, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@");
-        _builder.append(Inject.class, "\t");
-        _builder.append(" ");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("private ");
-        TypeReference _elementTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar);
-        _builder.append(_elementTypeProvider, "\t");
-        _builder.append(" elementTypeProvider;");
-        _builder.newLineIfNotEmpty();
+        {
+          boolean _isEmpty = EObjectRules.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@");
+            _builder.append(Inject.class, "\t");
+            _builder.append(" ");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("private ");
+            TypeReference _elementTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar);
+            _builder.append(_elementTypeProvider, "\t");
+            _builder.append(" elementTypeProvider;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -2098,86 +2123,183 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@SuppressWarnings(\"rawtypes\")");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public ");
-        TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.psi.PsiElement");
-        _builder.append(_typeRef_2, "\t");
-        _builder.append(" createElement(");
-        TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.ASTNode");
-        _builder.append(_typeRef_3, "\t");
-        _builder.append(" node) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
-        _builder.append(_typeRef_4, "\t\t");
-        _builder.append(" elementType = node.getElementType();");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("Boolean hasSemanticElement = node.getUserData(");
-        TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder");
-        _builder.append(_typeRef_5, "\t\t");
-        _builder.append(".HAS_SEMANTIC_ELEMENT_KEY);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
-        _builder.newLine();
         {
-          Set<String> _keySet = namedGrammarElement.keySet();
-          for(final String namedElementType : _keySet) {
-            _builder.append("\t\t\t");
-            _builder.append("if (elementType == elementTypeProvider.get");
-            _builder.append(namedElementType, "\t\t\t");
-            _builder.append("ElementType()) {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t\t");
+          boolean _isEmpty_1 = EObjectRules.isEmpty();
+          boolean _not_1 = (!_isEmpty_1);
+          if (_not_1) {
             _builder.append("\t");
-            _builder.append("return new ");
-            TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
-            _builder.append(_typeRef_6, "\t\t\t\t");
-            _builder.append("(node,");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@SuppressWarnings(\"rawtypes\")");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("public ");
+            TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.psi.PsiElement");
+            _builder.append(_typeRef_2, "\t");
+            _builder.append(" createElement(");
+            TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.ASTNode");
+            _builder.append(_typeRef_3, "\t");
+            _builder.append(" node) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("Boolean hasSemanticElement = node.getUserData(");
+            TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder");
+            _builder.append(_typeRef_4, "\t\t");
+            _builder.append(".HAS_SEMANTIC_ELEMENT_KEY);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            TypeReference _typeRef_5 = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
+            _builder.append(_typeRef_5, "\t\t\t");
+            _builder.append(" elementType = node.getElementType();");
             _builder.newLineIfNotEmpty();
             {
-              Set<String> _get = namedGrammarElement.get(namedElementType);
-              boolean _hasElements = false;
-              for(final String nameType : _get) {
-                if (!_hasElements) {
-                  _hasElements = true;
-                } else {
-                  _builder.appendImmediate(",", "\t\t\t\t\t");
-                }
-                _builder.append("\t\t\t");
+              for(final AbstractRule rule : EObjectRules) {
+                _builder.append("\t");
                 _builder.append("\t\t");
-                _builder.append("elementTypeProvider.get");
-                _builder.append(nameType, "\t\t\t\t\t");
-                _builder.append("ElementType()");
+                _builder.append("if (elementType == elementTypeProvider.get");
+                String _grammarElementIdentifier = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(rule);
+                _builder.append(_grammarElementIdentifier, "\t\t\t");
+                _builder.append("ElementType()) {");
                 _builder.newLineIfNotEmpty();
+                {
+                  boolean _contains = namedEObjectRules.contains(rule);
+                  if (_contains) {
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("\t");
+                    _builder.append("return new ");
+                    TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                    _builder.append(_typeRef_6, "\t\t\t\t");
+                    _builder.append("(node) {};");
+                    _builder.newLineIfNotEmpty();
+                  } else {
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("\t");
+                    _builder.append("return new ");
+                    _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
+                    _builder.append("(node) {};");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("}");
+                _builder.newLine();
+                {
+                  List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
+                  for(final AbstractElement element : _eAllOfType) {
+                    {
+                      if ((element instanceof Action)) {
+                        _builder.append("\t");
+                        _builder.append("\t\t");
+                        _builder.append("if (elementType == elementTypeProvider.get");
+                        String _grammarElementIdentifier_1 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(element);
+                        _builder.append(_grammarElementIdentifier_1, "\t\t\t");
+                        _builder.append("ElementType()) {");
+                        _builder.newLineIfNotEmpty();
+                        {
+                          boolean _contains_1 = namedEObjectRules.contains(rule);
+                          if (_contains_1) {
+                            _builder.append("\t");
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("return new ");
+                            TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                            _builder.append(_typeRef_7, "\t\t\t\t");
+                            _builder.append("(node) {};");
+                            _builder.newLineIfNotEmpty();
+                          } else {
+                            _builder.append("\t");
+                            _builder.append("\t\t");
+                            _builder.append("\t");
+                            _builder.append("return new ");
+                            _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
+                            _builder.append("(node) {};");
+                            _builder.newLineIfNotEmpty();
+                          }
+                        }
+                        _builder.append("\t");
+                        _builder.append("\t\t");
+                        _builder.append("}");
+                        _builder.newLine();
+                      }
+                    }
+                    {
+                      if ((element instanceof RuleCall)) {
+                        {
+                          boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+                          if (_isEObjectRuleCall) {
+                            _builder.append("\t");
+                            _builder.append("\t\t");
+                            _builder.append("if (elementType == elementTypeProvider.get");
+                            String _grammarElementIdentifier_2 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(element);
+                            _builder.append(_grammarElementIdentifier_2, "\t\t\t");
+                            _builder.append("ElementType()) {");
+                            _builder.newLineIfNotEmpty();
+                            {
+                              AbstractRule _rule = ((RuleCall)element).getRule();
+                              boolean _contains_2 = namedEObjectRules.contains(_rule);
+                              if (_contains_2) {
+                                _builder.append("\t");
+                                _builder.append("\t\t");
+                                _builder.append("\t");
+                                _builder.append("return new ");
+                                TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                                _builder.append(_typeRef_8, "\t\t\t\t");
+                                _builder.append("(node) {};");
+                                _builder.newLineIfNotEmpty();
+                              } else {
+                                _builder.append("\t");
+                                _builder.append("\t\t");
+                                _builder.append("\t");
+                                _builder.append("return new ");
+                                _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
+                                _builder.append("(node) {};");
+                                _builder.newLineIfNotEmpty();
+                              }
+                            }
+                            _builder.append("\t");
+                            _builder.append("\t\t");
+                            _builder.append("}");
+                            _builder.newLine();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-            _builder.append("\t\t\t");
             _builder.append("\t");
-            _builder.append(") {};");
+            _builder.append("\t\t");
+            _builder.append("throw new ");
+            TypeReference _typeRef_9 = TypeReference.typeRef("java.lang.IllegalStateException");
+            _builder.append(_typeRef_9, "\t\t\t");
+            _builder.append("(\"Unexpected element type: \" + elementType);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("}");
             _builder.newLine();
-            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return super.createElement(node);");
+            _builder.newLine();
+            _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
           }
         }
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("return super.createElement(node);");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -2186,123 +2308,40 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     return this.fileAccessFactory.createJavaFile(_parserDefinition, _client);
   }
   
-  protected Iterable<CrossReference> getCrossReferences(final Grammar grammar) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<CrossReference>> _function = new Function1<AbstractRule, Iterable<CrossReference>>() {
-      @Override
-      public Iterable<CrossReference> apply(final AbstractRule it) {
-        TreeIterator<EObject> _eAllContents = it.eAllContents();
-        Iterator<CrossReference> _filter = Iterators.<CrossReference>filter(_eAllContents, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
-          }
-        };
-        Iterator<CrossReference> _filter_1 = IteratorExtensions.<CrossReference>filter(_filter, _function);
-        return IteratorExtensions.<CrossReference>toIterable(_filter_1);
-      }
-    };
-    Iterable<Iterable<CrossReference>> _map = IterableExtensions.<AbstractRule, Iterable<CrossReference>>map(_allNonTerminalRules, _function);
-    return Iterables.<CrossReference>concat(_map);
-  }
-  
-  protected LinkedHashMultimap<String, String> getNamedGrammarElements(final Grammar grammar) {
-    LinkedHashMultimap<String, String> _xblockexpression = null;
+  protected boolean isNamed(final AbstractRule rule) {
+    boolean _xblockexpression = false;
     {
-      final LinkedHashMultimap<String, String> namedGrammarElements = LinkedHashMultimap.<String, String>create();
-      Iterable<RuleCall> _nameRuleCalls = this.getNameRuleCalls(grammar);
-      for (final RuleCall nameRuleCall : _nameRuleCalls) {
-        {
-          final String nameRuleCallIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-          Iterable<RuleCall> _ruleCallsWithName = this.getRuleCallsWithName(grammar, nameRuleCall);
-          for (final RuleCall ruleCall : _ruleCallsWithName) {
-            {
-              String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
-              namedGrammarElements.put(_grammarElementIdentifier, nameRuleCallIdentifier);
-              AbstractRule _rule = ruleCall.getRule();
-              TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-              Iterator<Action> _filter = Iterators.<Action>filter(_eAllContents, Action.class);
-              Iterable<Action> _iterable = IteratorExtensions.<Action>toIterable(_filter);
-              for (final Action action : _iterable) {
-                String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(action);
-                namedGrammarElements.put(_grammarElementIdentifier_1, nameRuleCallIdentifier);
-              }
-            }
-          }
-        }
+      TypeRef _type = rule.getType();
+      EClassifier _classifier = null;
+      if (_type!=null) {
+        _classifier=_type.getClassifier();
       }
-      _xblockexpression = namedGrammarElements;
+      final EClassifier classifier = _classifier;
+      EStructuralFeature _xifexpression = null;
+      if ((classifier instanceof EClass)) {
+        _xifexpression = ((EClass)classifier).getEStructuralFeature("name");
+      }
+      final EStructuralFeature feature = _xifexpression;
+      boolean _and = false;
+      boolean _and_1 = false;
+      if (!(feature instanceof EAttribute)) {
+        _and_1 = false;
+      } else {
+        boolean _isMany = feature.isMany();
+        boolean _not = (!_isMany);
+        _and_1 = _not;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        EClassifier _eType = feature.getEType();
+        Class<?> _instanceClass = _eType.getInstanceClass();
+        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+        _and = _isAssignableFrom;
+      }
+      _xblockexpression = _and;
     }
     return _xblockexpression;
-  }
-  
-  protected Iterable<RuleCall> getRuleCallsWithName(final Grammar grammar, final RuleCall nameRuleCall) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        return IdeaPluginGenerator.this.getRuleCallsWithName(it, nameRuleCall);
-      }
-    };
-    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
-    return Iterables.<RuleCall>concat(_map);
-  }
-  
-  protected Iterable<RuleCall> getRuleCallsWithName(final EObject element, final RuleCall nameRuleCall) {
-    TreeIterator<EObject> _eAllContents = element.eAllContents();
-    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        AbstractRule _rule = it.getRule();
-        TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-        final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-          @Override
-          public Boolean apply(final EObject it) {
-            return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-          }
-        };
-        return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-      }
-    };
-    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
-  }
-  
-  protected Iterable<RuleCall> getNameRuleCalls(final Grammar grammar) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        return IdeaPluginGenerator.this.getNameRuleCalls(it);
-      }
-    };
-    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
-    return Iterables.<RuleCall>concat(_map);
-  }
-  
-  protected Iterable<RuleCall> getNameRuleCalls(final EObject element) {
-    TreeIterator<EObject> _eAllContents = element.eAllContents();
-    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        boolean _and = false;
-        boolean _isAssigned = GrammarUtil.isAssigned(it);
-        if (!_isAssigned) {
-          _and = false;
-        } else {
-          Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-          String _feature = _containingAssignment.getFeature();
-          boolean _equals = Objects.equal(_feature, "name");
-          _and = _equals;
-        }
-        return Boolean.valueOf(_and);
-      }
-    };
-    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
   }
   
   public JavaFileAccess compileAbstractCompletionContributor(final Grammar grammar) {

@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 grammar PsiInternalXtend;
+
 options {
 	superClass=AbstractPsiAntlrParser;
 }
@@ -5536,13 +5537,13 @@ ruleSimpleStringLiteral returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getSimpleStringLiteral_ValueSTRINGTerminalRuleCall_1_0ElementType());
 				}
+				lv_value_1_0=RULE_STRING
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_1_0=RULE_STRING
 				{
 					doneLeaf(lv_value_1_0);
 				}
@@ -5692,13 +5693,13 @@ ruleRichStringLiteral returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getRichStringLiteral_ValueRICH_TEXTTerminalRuleCall_1_0ElementType());
 				}
+				lv_value_1_0=RULE_RICH_TEXT
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_1_0=RULE_RICH_TEXT
 				{
 					doneLeaf(lv_value_1_0);
 				}
@@ -5730,13 +5731,13 @@ ruleRichStringLiteralStart returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getRichStringLiteralStart_ValueRICH_TEXT_STARTTerminalRuleCall_1_0ElementType());
 				}
+				lv_value_1_0=RULE_RICH_TEXT_START
 				{
 					if(!$current) {
 						associateWithSemanticElement();
 						$current = true;
 					}
 				}
-				lv_value_1_0=RULE_RICH_TEXT_START
 				{
 					doneLeaf(lv_value_1_0);
 				}
@@ -5769,13 +5770,13 @@ ruleRichStringLiteralInbetween returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getRichStringLiteralInbetween_ValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0ElementType());
 					}
+					lv_value_1_0=RULE_RICH_TEXT_INBETWEEN
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_value_1_0=RULE_RICH_TEXT_INBETWEEN
 					{
 						doneLeaf(lv_value_1_0);
 					}
@@ -5787,13 +5788,13 @@ ruleRichStringLiteralInbetween returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getRichStringLiteralInbetween_ValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0ElementType());
 					}
+					lv_value_2_0=RULE_COMMENT_RICH_TEXT_INBETWEEN
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_value_2_0=RULE_COMMENT_RICH_TEXT_INBETWEEN
 					{
 						doneLeaf(lv_value_2_0);
 					}
@@ -5827,13 +5828,13 @@ ruleRichStringLiteralEnd returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getRichStringLiteralEnd_ValueRICH_TEXT_ENDTerminalRuleCall_1_0_0ElementType());
 					}
+					lv_value_1_0=RULE_RICH_TEXT_END
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_value_1_0=RULE_RICH_TEXT_END
 					{
 						doneLeaf(lv_value_1_0);
 					}
@@ -5845,13 +5846,13 @@ ruleRichStringLiteralEnd returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getRichStringLiteralEnd_ValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0ElementType());
 					}
+					lv_value_2_0=RULE_COMMENT_RICH_TEXT_END
 					{
 						if(!$current) {
 							associateWithSemanticElement();
 							$current = true;
 						}
 					}
-					lv_value_2_0=RULE_COMMENT_RICH_TEXT_END
 					{
 						doneLeaf(lv_value_2_0);
 					}

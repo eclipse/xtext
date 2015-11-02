@@ -42,9 +42,6 @@ public class Bug305397ParserDefinition extends AbstractXtextParserDefinition {
 			if (elementType == elementTypeProvider.getElement_ElementAction_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getElement_NameIDTerminalRuleCall_3_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
-			}
 			if (elementType == elementTypeProvider.getElement_ElementsElementParserRuleCall_4_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
