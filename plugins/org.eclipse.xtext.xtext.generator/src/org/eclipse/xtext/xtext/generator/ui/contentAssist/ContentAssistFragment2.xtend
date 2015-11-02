@@ -215,7 +215,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 				«IF terminalTypes.size > 1»
 					«terminals.handleAssignmentOptions»
 				«ELSE»
-					«assignment.terminal.assignmentTerminal("assignment.getTerminal()")»
+					«assignment.terminal.assignmentTerminal('''assignment.getTerminal()''')»
 				«ENDIF»
 			}
 		'''
@@ -237,27 +237,27 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		'''
 			«FOR terminal : candidates»
 				if (assignment.getTerminal() instanceof «terminal.eClass.instanceClass») {
-					«terminal.assignmentTerminal("assignment.getTerminal()")»
+					«terminal.assignmentTerminal('''assignment.getTerminal()''')»
 				}
 			«ENDFOR»		
 		'''
 	}
 
-	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, StringConcatenationClient accessor) '''
 		// subclasses may override
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, String accessor)  '''
+	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, StringConcatenationClient accessor)  '''
 		lookupCrossReference(((«CrossReference»)«accessor»), context, acceptor);
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, StringConcatenationClient accessor) '''
 		completeRuleCall(((«RuleCall»)«accessor»), context, acceptor);
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, StringConcatenationClient accessor) '''
 		«FOR pair : alternatives.elements.indexed»
-			«pair.value.assignmentTerminal("((Alternatives)" + accessor + ").getElements.get("+ pair.key +")")»
+			«pair.value.assignmentTerminal('''((«Alternatives»)«accessor»).getElements().get(«pair.key»)''')»
 		«ENDFOR»
 	'''
 
