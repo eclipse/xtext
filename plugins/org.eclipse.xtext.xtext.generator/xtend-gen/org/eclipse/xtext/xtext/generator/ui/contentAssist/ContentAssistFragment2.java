@@ -517,7 +517,13 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
             } else {
               _builder.append("\t");
               AbstractElement _terminal = assignment.getTerminal();
-              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_terminal, "assignment.getTerminal()");
+              StringConcatenationClient _client = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  _builder.append("assignment.getTerminal()");
+                }
+              };
+              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_terminal, _client);
               _builder.append(_assignmentTerminal, "\t");
               _builder.newLineIfNotEmpty();
             }
@@ -567,7 +573,13 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
               _builder.append(") {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(terminal, "assignment.getTerminal()");
+              StringConcatenationClient _client = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  _builder.append("assignment.getTerminal()");
+                }
+              };
+              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(terminal, _client);
               _builder.append(_assignmentTerminal, "\t");
               _builder.newLineIfNotEmpty();
               _builder.append("}");
@@ -581,7 +593,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _xblockexpression;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final AbstractElement element, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final AbstractElement element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -592,7 +604,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _client;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final CrossReference element, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final CrossReference element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -607,7 +619,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _client;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final RuleCall element, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final RuleCall element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -622,7 +634,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _client;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final Alternatives alternatives, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final Alternatives alternatives, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -631,10 +643,20 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
           Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements);
           for(final Pair<Integer, AbstractElement> pair : _indexed) {
             AbstractElement _value = pair.getValue();
-            Integer _key = pair.getKey();
-            String _plus = ((("((Alternatives)" + accessor) + ").getElements.get(") + _key);
-            String _plus_1 = (_plus + ")");
-            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _plus_1);
+            StringConcatenationClient _client = new StringConcatenationClient() {
+              @Override
+              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                _builder.append("((");
+                _builder.append(Alternatives.class, "");
+                _builder.append(")");
+                _builder.append(accessor, "");
+                _builder.append(").getElements().get(");
+                Integer _key = pair.getKey();
+                _builder.append(_key, "");
+                _builder.append(")");
+              }
+            };
+            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _client);
             _builder.append(_assignmentTerminal, "");
             _builder.newLineIfNotEmpty();
           }
@@ -715,7 +737,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _xifexpression;
   }
   
-  private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final String accessor) {
+  private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final StringConcatenationClient accessor) {
     if (alternatives instanceof Alternatives) {
       return _assignmentTerminal((Alternatives)alternatives, accessor);
     } else if (alternatives instanceof CrossReference) {
