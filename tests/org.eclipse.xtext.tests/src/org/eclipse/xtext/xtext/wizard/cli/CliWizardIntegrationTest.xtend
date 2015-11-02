@@ -79,7 +79,7 @@ class CliWizardIntegrationTest {
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.eclipsePlugin"
-			preferredBuildSystem = BuildSystem.ECLIPSE
+			preferredBuildSystem = BuildSystem.NONE
 			sourceLayout = SourceLayout.PLAIN
 			projectLayout = ProjectLayout.FLAT
 			runtimeProject.testProject.enabled = true
