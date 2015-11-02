@@ -199,6 +199,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	def compilePomDeclarationSearcher(Grammar it) {
 		fileAccessFactory.createJavaFile(pomDeclarationSearcher, '''
 			public class «pomDeclarationSearcher.simpleName» extends «"org.eclipse.xtext.idea.pom.AbstractXtextPomDeclarationSearcher".typeRef» {
+
 				public «pomDeclarationSearcher.simpleName»() {
 					super(«grammar.ideaLanguage».INSTANCE);
 				}
@@ -209,12 +210,13 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	def compilePsiParser(Grammar grammar) {
 		fileAccessFactory.createJavaFile(grammar.psiParser, '''
 			public class «grammar.psiParser.simpleName» extends «"org.eclipse.xtext.idea.parser.AbstractXtextPsiParser".typeRef» {
+
 				«IF !grammar.initialHiddenTokens.empty»
 				private static final «Set»<«String»> INITIAL_HIDDEN_TOKENS = new «HashSet»<«String»>(«Arrays».asList(«FOR hidden:grammar.initialHiddenTokens SEPARATOR ', '»"«hidden»"«ENDFOR»));
 				«ELSE»
 				private static final «Set»<«String»> INITIAL_HIDDEN_TOKENS = «Collections».emptySet();
 				«ENDIF»
-				
+
 				@«Inject» 
 				private «grammar.grammarAccess» grammarAccess;
 
@@ -225,6 +227,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 				protected «"org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser".typeRef» createParser(«"com.intellij.lang.PsiBuilder".typeRef» builder, «"org.antlr.runtime.TokenStream".typeRef» tokenStream) {
 					return new «grammar.psiInternalParser»(builder, tokenStream, elementTypeProvider, grammarAccess);
 				}
+
 				@«Override»
 				protected «Set»<«String»> getInitialHiddenTokens() {
 					return INITIAL_HIDDEN_TOKENS;
@@ -404,7 +407,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	
 	def compileLanguage(Grammar grammar) {
 		fileAccessFactory.createJavaFile(grammar.ideaLanguage, '''
-			public final class «grammar.ideaLanguage.simpleName» extends «"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef»{
+			public final class «grammar.ideaLanguage.simpleName» extends «"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef» {
 			
 				public static final «grammar.ideaLanguage.simpleName» INSTANCE = new «grammar.ideaLanguage.simpleName»();
 			
@@ -513,9 +516,10 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	def compileTokenTypeProvider(Grammar grammar) {
 		val tokenSet = "com.intellij.psi.tree.TokenSet".typeRef
 		val iElementType = "com.intellij.psi.tree.IElementType".typeRef
-		val indexedElementType = new TypeReference("org.eclipse.xtext.idea.parser", "TokenTypeProvider.IndexedElementType")
+		val indexedElementType = "IndexedElementType" // no typeRef is used here as 'IndexedElementType' is inner class of 'TokenTypeProvider'
 		return fileAccessFactory.createJavaFile(grammar.tokenTypeProvider, '''
-			@«Singleton» public class «grammar.tokenTypeProvider.simpleName» implements «"org.eclipse.xtext.idea.parser.TokenTypeProvider".typeRef» {
+			@«Singleton»
+			public class «grammar.tokenTypeProvider.simpleName» implements «"org.eclipse.xtext.idea.parser.TokenTypeProvider".typeRef» {
 			
 				private static final String[] TOKEN_NAMES = new «grammar.psiInternalParser»(null).getTokenNames();
 			
@@ -549,8 +553,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 			
 				@Override
 			    public int getAntlrType(«iElementType» iElementType) {
-			        return (iElementType instanceof «indexedElementType») ? ((«indexedElementType») iElementType).getLocalIndex()
-			        				: «Token».INVALID_TOKEN_TYPE;
+			        return (iElementType instanceof «indexedElementType») ? ((«indexedElementType») iElementType).getLocalIndex() : «Token».INVALID_TOKEN_TYPE;
 			    }
 			    
 			    @Override

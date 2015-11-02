@@ -16,7 +16,7 @@ Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.editor.contentassist.antlr,
  org.eclipse.xtext.ide.editor.contentassist.antlr.internal,
  org.eclipse.xtext.ide.editor.model;x-internal:=true,
- org.eclipse.xtext.ide.editor.partialEditing;x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtext.ide.editor.partialEditing,
  org.eclipse.xtext.ide.editor.syntaxcoloring;
   x-friends:="org.eclipse.xtext.xbase.ide,
    org.eclipse.xtext.ui,

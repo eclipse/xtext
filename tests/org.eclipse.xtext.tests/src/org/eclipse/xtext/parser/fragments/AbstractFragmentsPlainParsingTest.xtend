@@ -24,8 +24,7 @@ abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTests {
 	}
 	
 	override protected shouldTestSerializer(XtextResource resource) {
-		// TODO implement serializer support for fragments
-		false
+		true
 	}
 	
 	@Test

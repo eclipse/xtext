@@ -14,7 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 /**
  * @noreference
  */
-class CompositeGeneratorFragment implements IXtextGeneratorFragment {
+class CompositeGeneratorFragment2 implements IXtextGeneratorFragment {
 
 	@Accessors(PROTECTED_GETTER)
 	val List<IXtextGeneratorFragment> fragments = newArrayList

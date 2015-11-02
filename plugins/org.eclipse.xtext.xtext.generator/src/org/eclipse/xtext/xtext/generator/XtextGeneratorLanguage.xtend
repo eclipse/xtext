@@ -43,7 +43,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
  * @noextend
  */
 @Log
-class XtextGeneratorLanguage extends CompositeGeneratorFragment implements IXtextGeneratorLanguage {
+class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXtextGeneratorLanguage {
 	
 	String grammarUri
 	

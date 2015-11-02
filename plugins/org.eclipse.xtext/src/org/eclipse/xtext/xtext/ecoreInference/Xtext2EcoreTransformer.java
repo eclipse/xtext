@@ -462,7 +462,11 @@ public class Xtext2EcoreTransformer {
 			public Xtext2EcoreInterpretationContext caseRuleCall(RuleCall object) {
 				AbstractRule calledRule = object.getRule();
 				if (isWildcardFragment(calledRule)) {
-					return visitElements(object, Collections.singletonList(calledRule.getAlternatives()));
+					AbstractElement ruleBody = calledRule.getAlternatives();
+					if (ruleBody != null) {
+						return visitElements(object, Collections.singletonList(ruleBody));
+					}
+					return context;
 				}
 				if (isParserRuleFragment(calledRule)) {
 					return context;
@@ -679,7 +683,9 @@ public class Xtext2EcoreTransformer {
 						if (visiting.add(calledRule)) {
 							try {
 								AbstractElement fragment = calledRule.getAlternatives();
-								doSwitch(fragment);
+								if (fragment != null) {
+									doSwitch(fragment);
+								}
 							} finally {
 								visiting.remove(calledRule);
 							}

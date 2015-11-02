@@ -35,6 +35,11 @@
 				</configuration>
 				<dependencies>
 					<dependency>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+						<version>[2.8.2,3.0)</version>
+					</dependency>
+					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
 						<version>${xtextVersion}</version>
@@ -58,21 +63,39 @@
 					<filesets combine.children="append">
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.tests/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ide/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ui/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ui.tests/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.web/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>
