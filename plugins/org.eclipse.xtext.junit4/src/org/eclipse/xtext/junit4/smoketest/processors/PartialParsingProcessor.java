@@ -15,6 +15,7 @@ import org.eclipse.xtext.junit4.smoketest.DeltaScenarioProcessor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -60,6 +61,8 @@ public class PartialParsingProcessor extends DeltaScenarioProcessor {
 	}
 	
 	private void assertEqual(String data, String newData, ICompositeNode fromScratch, ICompositeNode reparsed) {
+		InvariantChecker checker = new InvariantChecker();
+		checker.checkInvariant(reparsed);
 		Iterator<INode> scratchIterator = fromScratch.getAsTreeIterable().iterator();
 		Iterator<INode> reparsedIterator = reparsed.getAsTreeIterable().iterator();
 		while(scratchIterator.hasNext()) {

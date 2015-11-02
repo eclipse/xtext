@@ -121,6 +121,12 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && !isBundleResolved("org.eclipse.buildship.core")) {
 			reportIssue(WARNING, 'Gradle integration for eclipse is not installed. Consider to install Buildship.')
 		}
+		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && createUiProject.selection) {
+			reportIssue(WARNING, 'Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created')
+		}
+		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && createIdeaProject.selection) {
+			reportIssue(WARNING, 'Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created')
+		}
 
 		val source = e?.source
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
@@ -132,7 +138,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			} else {
 				reportIssue(ERROR, '''
-				«SourceLayout.PLAIN» source layout is not supported by the '«createUiProject.text»' project.
+				«SourceLayout.MAVEN» source layout is not supported by the '«createUiProject.text»' project.
 				Please <a>deselect '«createUiProject.text»'</a>.''', [
 					createUiProject.selection = false
 				])
@@ -141,13 +147,13 @@ class AdvancedNewProjectPage extends WizardPage {
 
 		if (createWebProject.selection && preferredBuildSystem.isSelected(BuildSystem.ECLIPSE)) {
 			if (preferredBuildSystem === source) {
-				reportIssue(WARNING, '''
+				reportIssue(ERROR, '''
 				The '«createWebProject.text»' project can not be build using Eclipse-PDE build.
 				Please <a>deselect '«createWebProject.text»'</a>.''', [
 					createWebProject.selection = false
 				])
 			} else {
-				reportIssue(WARNING, '''
+				reportIssue(ERROR, '''
 				To build the '«createWebProject.text»' project, you need to choose maven or gradle build system.
 				Select <a>gradle</a> build.''', [
 					preferredBuildSystem.select(BuildSystem.GRADLE)

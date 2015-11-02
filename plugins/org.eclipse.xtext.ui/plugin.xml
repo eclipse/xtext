@@ -271,6 +271,8 @@
       <attribute name="CODE_KEY"/>
       <!-- see org.eclipse.xtext.validation.Issue.DATA_KEY -->
       <attribute name="DATA_KEY"/>
+      <!-- see org.eclipse.xtext.validation.Issue.COLUMN_KEY -->
+      <attribute name="COLUMN_KEY"/>
       <!-- see org.eclipse.xtext.validation.Issue.URI_KEY -->
       <attribute name="URI_KEY"/>
       <!-- see org.eclipse.xtext.ui.editor.validation.MarkerCreator.FIXABLE_KEY -->
