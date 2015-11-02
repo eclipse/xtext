@@ -78,7 +78,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setSourceLayout(advancedPage.getSourceLayout());
 		
 		projectInfo.getUiProject().setEnabled(advancedPage.isCreateUiProject());
-		if (buildSystem != BuildSystem.ECLIPSE) {
+		if (buildSystem != BuildSystem.NONE) {
 			projectInfo.setProjectLayout(ProjectLayout.HIERARCHICAL);
 		}
 		projectInfo.getIdeProject().setEnabled(advancedPage.isCreateIdeProject());
