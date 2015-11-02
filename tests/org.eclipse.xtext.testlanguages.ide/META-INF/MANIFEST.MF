@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common Xtext Testlanguages For UI and Runtime - IDE
+Bundle-SymbolicName: org.eclipse.xtext.testlanguages.ide;singleton:=true
+Bundle-Version: 2.9.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Eclipse Xtext
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr,
+ org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr
+Require-Bundle: org.eclipse.xtext.ide;visibility:=reexport,
+ org.eclipse.xtext.testlanguages

@@ -12,6 +12,7 @@ import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
+ * @since 2.9
  */
 public class XtypeGeneratorFragment extends DefaultGeneratorFragment {
 

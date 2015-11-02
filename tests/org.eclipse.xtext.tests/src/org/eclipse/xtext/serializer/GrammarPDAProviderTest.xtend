@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer
 
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch
 import org.eclipse.xtext.junit4.InjectWith
@@ -18,6 +19,8 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.serializer.analysis.IGrammarPDAProvider
 import org.eclipse.xtext.serializer.analysis.ISerState
+import org.eclipse.xtext.util.EmfFormatter
+import org.eclipse.xtext.util.formallang.NfaUtil
 import org.eclipse.xtext.util.formallang.Pda
 import org.eclipse.xtext.util.formallang.PdaListFormatter
 import org.eclipse.xtext.util.formallang.PdaToDot
@@ -25,9 +28,6 @@ import org.junit.Assert
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.util.formallang.NfaUtil
-import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.util.EmfFormatter
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -168,7 +168,7 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
-	
+
 	@Test def void testUnassignedDatatypeRule() {
 		val actual = '''
 			Rule: val=ID Called;
@@ -182,7 +182,7 @@ class GrammarPDAProviderTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
-	
+
 	@Test def void testUnassignedTerminalRule() {
 		val actual = '''
 			Rule: val=ID Called;
@@ -424,6 +424,57 @@ class GrammarPDAProviderTest {
 			S:
 				start -> v2=ID
 				v2=ID -> stop
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+
+	@Test def void testDoubleFragment() {
+		val actual = '''
+			R: F1 F2;
+			fragment F1: f1=ID;  
+			fragment F2: f2=ID;  
+		'''.toPda
+		val expected = '''
+			R:
+				start -> >>F1
+				<<F1 -> >>F2
+				<<F2 -> stop
+				>>F1 -> f1=ID
+				>>F2 -> f2=ID
+				f1=ID -> <<F1
+				f2=ID -> <<F2
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+
+	@Test def void testFragmentLoop() {
+		val actual = '''
+			R: F+;
+			fragment F: f+=ID;  
+		'''.toPda
+		val expected = '''
+			R:
+				start -> >>F
+				<<F -> >>F, stop
+				>>F -> f+=ID
+				f+=ID -> <<F
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+
+	@Test def void testParameterizedDoubleDelegation() {
+		val actual = '''
+			R: F<true> | F<false>;
+			fragment F<X>: f+=ID;
+		'''.toPda
+		val expected = '''
+			R:
+				start -> >>F, >>F
+				<<F -> stop
+				<<F -> stop
+				>>F -> f+=ID
+				>>F -> f+=ID
+				f+=ID -> <<F, <<F
 		'''
 		Assert.assertEquals(expected, actual)
 	}

@@ -9,6 +9,7 @@ configurations {
 }
 
 dependencies {
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:[2.8.2,3.0)"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 }
 
@@ -34,3 +35,4 @@ jar {
 }
 //this is an eclipse plugin project
 eclipseClasspath.enabled=false
+cleanEclipseClasspath.enabled=false

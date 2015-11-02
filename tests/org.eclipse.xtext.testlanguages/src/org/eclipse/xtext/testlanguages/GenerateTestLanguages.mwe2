@@ -1,34 +1,34 @@
 module org.eclipse.xtext.testlanguages.GenerateTestLanguages
 
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 
-var projectName = "org.eclipse.xtext.testlanguages"
-var runtimeProject = "../${projectName}"
-var lineDelimiter = '\n'
+var rootPath = ".."
 
 Workflow {
-    bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
-	}
 
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen"
-	}
+	component = XtextGenerator {
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = "org.eclipse.xtext.testlanguages"
+				rootPath = rootPath
 
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}.ui/src-gen"
-	}
-	
-	component = DirectoryCleaner {
-		directory = "../../intellij/${projectName}.idea/src-gen"
-	}
+				eclipsePlugin = {
+					enabled = true
+				}
+				ideaPlugin = {
+					enabled = true
+					root = "${rootPath}/../intellij/org.eclipse.xtext.testlanguages.idea"	
+				}
+				
+				createEclipseMetaData = true
+			}
+			code = {
+				lineDelimiter = "\n"
+				preferXtendStubs = false
+			}
+		}
 
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		projectNameRt = projectName
-		projectNameUi = "${projectName}.ui"
 		language = @backtracking.BeeLangTestLanguage {}
 		language = @backtracking.SimpleBeeLangTestLanguage {}
 		language = @backtracking.ExBeeLangTestLanguage {}
