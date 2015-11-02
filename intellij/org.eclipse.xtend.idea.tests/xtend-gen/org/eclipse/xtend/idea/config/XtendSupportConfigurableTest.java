@@ -9,9 +9,16 @@ package org.eclipse.xtend.idea.config;
 
 import com.google.common.base.Objects;
 import com.intellij.facet.Facet;
+import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeRegistry;
+import com.intellij.facet.ModifiableFacetModel;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleProvider;
+import com.intellij.framework.detection.FacetBasedFrameworkDetector;
+import com.intellij.framework.detection.FrameworkDetector;
+import com.intellij.framework.detection.impl.FrameworkDetectorRegistry;
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportConfigurable;
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportModelImpl;
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportUtil;
@@ -41,6 +48,7 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.facet.XtendFacetType;
+import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -53,18 +61,19 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class XtendSupportConfigurableTest extends PsiTestCase {
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-  }
-  
   public void testPlainJavaOutputConfiguration_01() {
-    this.addSupport(this.myModule);
+    final ModuleRootManager manager = ModuleRootManager.getInstance(this.myModule);
+    VirtualFile[] _contentRoots = manager.getContentRoots();
+    int _size = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots)).size();
+    TestCase.assertEquals(0, _size);
+    this.addFrameworkSupport(this.myModule);
+    VirtualFile[] _contentRoots_1 = manager.getContentRoots();
+    int _size_1 = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots_1)).size();
+    TestCase.assertEquals(1, _size_1);
     FacetManager _instance = FacetManager.getInstance(this.myModule);
     Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
     final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
     TestCase.assertNotNull(facet);
-    final ModuleRootManager manager = ModuleRootManager.getInstance(this.myModule);
     XtendFacetConfiguration _configuration = facet.getConfiguration();
     final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
     String _outputDirectory = xtendConfig.getOutputDirectory();
@@ -100,8 +109,8 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
       }
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
-    int _size = IterableExtensions.size(_filter);
-    TestCase.assertEquals(1, _size);
+    int _size_2 = IterableExtensions.size(_filter);
+    TestCase.assertEquals(1, _size_2);
   }
   
   public void testPlainJavaOutputConfiguration_02() {
@@ -120,7 +129,7 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
       final VirtualFile[] srcFolders = manager.getSourceRoots(true);
       int _size = ((List<VirtualFile>)Conversions.doWrapArray(srcFolders)).size();
       TestCase.assertEquals(2, _size);
-      this.addSupport(module);
+      this.addFrameworkSupport(module);
       FacetManager _instance = FacetManager.getInstance(module);
       Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
       final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
@@ -176,15 +185,114 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     }
   }
   
-  protected void addSupport(final Module module) {
+  public void testPlainJavaOutputConfiguration_03() {
+    final ModuleRootManager manager = ModuleRootManager.getInstance(this.myModule);
+    VirtualFile[] _contentRoots = manager.getContentRoots();
+    int _size = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots)).size();
+    TestCase.assertEquals(0, _size);
+    this.addFrameworkSupportUsingDetector(this.myModule);
+    VirtualFile[] _contentRoots_1 = manager.getContentRoots();
+    int _size_1 = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots_1)).size();
+    TestCase.assertEquals(1, _size_1);
+    FacetManager _instance = FacetManager.getInstance(this.myModule);
+    Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
+    final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
+    TestCase.assertNotNull(facet);
+    XtendFacetConfiguration _configuration = facet.getConfiguration();
+    final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
+    String _outputDirectory = xtendConfig.getOutputDirectory();
+    boolean _endsWith = _outputDirectory.endsWith("xtend-gen");
+    TestCase.assertTrue(_endsWith);
+    String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
+    boolean _endsWith_1 = _testOutputDirectory.endsWith("xtend-gen");
+    TestCase.assertTrue(_endsWith_1);
+    ContentEntry[] _contentEntries = manager.getContentEntries();
+    ContentEntry _head = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+    SourceFolder[] _sourceFolders = _head.getSourceFolders();
+    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+      @Override
+      public Boolean apply(final SourceFolder it) {
+        boolean _xblockexpression = false;
+        {
+          VirtualFile _file = it.getFile();
+          String _path = _file.getPath();
+          final String urlToCheck = _path.replace("file://", "");
+          boolean _and = false;
+          String _outputDirectory = xtendConfig.getOutputDirectory();
+          boolean _equals = Objects.equal(_outputDirectory, urlToCheck);
+          if (!_equals) {
+            _and = false;
+          } else {
+            boolean _isTestSource = it.isTestSource();
+            boolean _not = (!_isTestSource);
+            _and = _not;
+          }
+          _xblockexpression = _and;
+        }
+        return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
+    int _size_2 = IterableExtensions.size(_filter);
+    TestCase.assertEquals(1, _size_2);
+  }
+  
+  protected void addFrameworkSupportUsingDetector(final Module moduleToHandle) {
     Project _project = this.getProject();
     RunResult<Object> _execute = new WriteCommandAction.Simple(_project) {
       @Override
       protected void run() throws Throwable {
+        XtendSupportConfigurableTest.this.createContentRoot(moduleToHandle);
+        final IdeaModifiableModelsProvider modifiableModelsProvider = new IdeaModifiableModelsProvider();
+        final ModifiableFacetModel model = modifiableModelsProvider.getFacetModifiableModel(moduleToHandle);
+        try {
+          FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
+          String _string = XtendFacetType.TYPEID.toString();
+          final FacetType facetType = _instance.findFacetType(_string);
+          final FacetConfiguration facetConfiguration = facetType.createDefaultConfiguration();
+          FrameworkDetectorRegistry _instance_1 = FrameworkDetectorRegistry.getInstance();
+          Collection<Integer> _detectorIds = _instance_1.getDetectorIds(XtendFileType.INSTANCE);
+          final Integer detId = IterableExtensions.<Integer>head(_detectorIds);
+          FrameworkDetectorRegistry _instance_2 = FrameworkDetectorRegistry.getInstance();
+          FrameworkDetector _detectorById = _instance_2.getDetectorById((detId).intValue());
+          final FacetBasedFrameworkDetector detector = ((FacetBasedFrameworkDetector) _detectorById);
+          FacetManager _instance_3 = FacetManager.getInstance(moduleToHandle);
+          String _defaultFacetName = facetType.getDefaultFacetName();
+          final Facet facet = _instance_3.<Facet, FacetConfiguration>createFacet(facetType, _defaultFacetName, facetConfiguration, null);
+          model.addFacet(facet);
+          modifiableModelsProvider.commitFacetModifiableModel(moduleToHandle, model);
+          final ModifiableRootModel rootModel = modifiableModelsProvider.getModuleModifiableModel(moduleToHandle);
+          detector.setupFacet(facet, rootModel);
+          modifiableModelsProvider.commitModuleModifiableModel(rootModel);
+        } finally {
+          model.commit();
+        }
+      }
+    }.execute();
+    _execute.throwException();
+  }
+  
+  protected ContentEntry createContentRoot(final Module moduleToHandle) {
+    try {
+      ContentEntry _xblockexpression = null;
+      {
         File _createTempDir = PlatformTestCase.createTempDir("contentRoot");
         final VirtualFile root = PlatformTestCase.getVirtualFile(_createTempDir);
-        PsiTestUtil.addContentRoot(module, root);
-        ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+        _xblockexpression = PsiTestUtil.addContentRoot(moduleToHandle, root);
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void addFrameworkSupport(final Module moduleToHandle) {
+    Project _project = this.getProject();
+    RunResult<Object> _execute = new WriteCommandAction.Simple(_project) {
+      @Override
+      protected void run() throws Throwable {
+        XtendSupportConfigurableTest.this.createContentRoot(moduleToHandle);
+        ModuleRootManager _instance = ModuleRootManager.getInstance(moduleToHandle);
         final ModifiableRootModel model = _instance.getModifiableModel();
         String _iD = XtendLanguage.INSTANCE.getID();
         List<FrameworkSupportInModuleProvider> _allProviders = FrameworkSupportUtil.getAllProviders();
@@ -195,20 +303,24 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
         final FrameworkSupportModelImpl myFrameworkSupportModel = new FrameworkSupportModelImpl(_project, "", _createContainer);
         final FrameworkSupportInModuleConfigurable configurable = provider.createConfigurable(myFrameworkSupportModel);
         try {
-          List<FrameworkSupportConfigurable> selectedConfigurables = new ArrayList<FrameworkSupportConfigurable>();
-          final IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider();
-          configurable.addSupport(module, model, modelsProvider);
+          ArrayList<FrameworkSupportConfigurable> selectedConfigurables = new ArrayList<FrameworkSupportConfigurable>();
+          IdeaModifiableModelsProvider _ideaModifiableModelsProvider = new IdeaModifiableModelsProvider();
+          configurable.addSupport(moduleToHandle, model, _ideaModifiableModelsProvider);
           if ((configurable instanceof OldFrameworkSupportProviderWrapper.FrameworkSupportConfigurableWrapper)) {
             FrameworkSupportConfigurable _configurable = ((OldFrameworkSupportProviderWrapper.FrameworkSupportConfigurableWrapper)configurable).getConfigurable();
             selectedConfigurables.add(_configurable);
           }
           FrameworkSupportCommunicator[] _extensions = FrameworkSupportCommunicator.EP_NAME.getExtensions();
           for (final FrameworkSupportCommunicator communicator : _extensions) {
-            communicator.onFrameworkSupportAdded(module, model, selectedConfigurables, myFrameworkSupportModel);
+            communicator.onFrameworkSupportAdded(moduleToHandle, model, selectedConfigurables, myFrameworkSupportModel);
           }
         } finally {
           model.commit();
-          Disposer.dispose(configurable);
+          boolean _isDisposed = Disposer.isDisposed(configurable);
+          boolean _not = (!_isDisposed);
+          if (_not) {
+            Disposer.dispose(configurable);
+          }
         }
       }
     }.execute();

@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.xtext.wizard.RuntimeTestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -46,6 +46,8 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 
 @SuppressWarnings("all")
 public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
+  private final String MWE2_VERSION = "[2.8.2,3.0)";
+  
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
   
   private final RuntimeTestProjectDescriptor testProject;
@@ -219,10 +221,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-    Iterable<? extends TextFile> _files = super.getFiles();
-    Iterables.<TextFile>addAll(files, _files);
+  public Iterable<? extends AbstractFile> getFiles() {
+    final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+    Iterable<? extends AbstractFile> _files = super.getFiles();
+    Iterables.<AbstractFile>addAll(files, _files);
     PlainTextFile _grammarFile = this.getGrammarFile();
     files.add(_grammarFile);
     String _workflowFilePath = this.getWorkflowFilePath();
@@ -686,6 +688,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:");
+        _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
         _builder.newLine();
         _builder.append("}");
@@ -938,6 +945,28 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("\t\t");
+            _builder.append("<groupId>org.eclipse.emf</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<artifactId>org.eclipse.emf.mwe2.launch</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<version>");
+            _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t\t\t\t\t");
+            _builder.append("</version>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("</dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
             _builder.append("<groupId>org.eclipse.xtext</groupId>");
             _builder.newLine();
             _builder.append("\t\t\t");
@@ -1033,6 +1062,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                 _builder.append("/</directory>");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t\t\t");
+                _builder.append("\t");
+                _builder.append("<includes>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t\t");
+                _builder.append("<include>**/*</include>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t");
+                _builder.append("</includes>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
                 _builder.append("</fileset>");
                 _builder.newLine();
                 {
@@ -1062,6 +1103,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                         _builder.append(_sourceFolder_4, "\t\t\t\t\t\t");
                         _builder.append("/</directory>");
                         _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t");
+                        _builder.append("<includes>");
+                        _builder.newLine();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t\t");
+                        _builder.append("<include>**/*</include>");
+                        _builder.newLine();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t");
+                        _builder.append("</includes>");
+                        _builder.newLine();
                         _builder.append("\t\t\t\t\t");
                         _builder.append("</fileset>");
                         _builder.newLine();

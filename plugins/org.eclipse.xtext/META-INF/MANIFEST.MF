@@ -87,7 +87,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.validation,
  org.eclipse.xtext.validation.impl,
  org.eclipse.xtext.workspace;x-friends:="org.eclipse.xtext.xbase.ui",
- org.eclipse.xtext.xtext;x-friends:="org.eclipse.xtext.xtext.ui,org.eclipse.xtext.xtext.generator,org.eclipse.xtext.idea.generator",
+ org.eclipse.xtext.xtext;x-friends:="org.eclipse.xtext.xtext.ui,org.eclipse.xtext.xtext.generator",
  org.eclipse.xtext.xtext.ecoreInference;x-internal:=true,
  org.eclipse.xtext.xtext.parser;x-friends:="org.eclipse.xtext.tests"
 Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.10.2";visibility:=reexport,

@@ -74,7 +74,7 @@ public class TypeDeclarationAwareBatchTypeResolver extends LogicalContainerAware
 	 */
 	private void addXtendTypes(XtendTypeDeclaration declaration, List<EObject> result) {
 		for(XtendMember member: declaration.getMembers()) {
-			TreeIterator<EObject> iterator = EcoreUtil2.eAll(member);
+			TreeIterator<EObject> iterator = EcoreUtil2.getAllNonDerivedContents(member, true);
 			while(iterator.hasNext()) {
 				EObject next = iterator.next();
 				if (next instanceof XtendTypeDeclaration) {

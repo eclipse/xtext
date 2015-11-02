@@ -490,11 +490,11 @@ public abstract class AbstractTrace implements ITrace {
 
 	}
 	
-	protected abstract InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
+	protected abstract InputStream getContents(SourceRelativeURI uri) throws IOException;
 	
-	protected abstract Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
+	protected abstract Reader getContentsAsText(SourceRelativeURI uri) throws IOException;
 	
-	protected abstract Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException;
+	protected abstract Reader getLocalContentsAsText() throws IOException;
 	
 	protected LanguageInfo findLanguage(AbstractURIWrapper uri) {
 		return getService(uri, LanguageInfo.class);
@@ -522,7 +522,7 @@ public abstract class AbstractTrace implements ITrace {
 			@Override
 			protected String getRemoteText(SourceRelativeURI uri) {
 				try {
-					return CharStreams.toString(getContentsAsText(uri, getLocalProjectConfig()));
+					return CharStreams.toString(getContentsAsText(uri));
 				} catch (IOException e) {
 					Exceptions.sneakyThrow(e);
 				}
@@ -532,7 +532,7 @@ public abstract class AbstractTrace implements ITrace {
 			@Override
 			protected String getLocalText() {
 				try {
-					return CharStreams.toString(getLocalContentsAsText(getLocalProjectConfig()));
+					return CharStreams.toString(getLocalContentsAsText());
 				} catch (IOException e) {
 					Exceptions.sneakyThrow(e);
 				}

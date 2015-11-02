@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class BeeLangTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.tokens");
 	}
 }

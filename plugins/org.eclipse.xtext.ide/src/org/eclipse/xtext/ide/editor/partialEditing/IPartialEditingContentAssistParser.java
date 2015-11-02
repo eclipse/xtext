@@ -12,6 +12,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 
 /**
  * The partial content assist parser allows to set the entry rule.
+ * @since 2.9
  */
 public interface IPartialEditingContentAssistParser extends IContentAssistParser {
 

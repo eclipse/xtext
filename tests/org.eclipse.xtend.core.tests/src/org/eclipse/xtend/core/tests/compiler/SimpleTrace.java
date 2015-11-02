@@ -36,17 +36,17 @@ public class SimpleTrace extends AbstractTrace {
 
 
 	@Override
-	protected InputStream getContents(SourceRelativeURI uri, IProjectConfig project) throws IOException {
+	protected InputStream getContents(SourceRelativeURI uri) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig project)  {
+	protected Reader getContentsAsText(SourceRelativeURI uri)  {
 		return null;
 	}
 
 	@Override
-	protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+	protected Reader getLocalContentsAsText() throws IOException {
 		return null;
 	}
 

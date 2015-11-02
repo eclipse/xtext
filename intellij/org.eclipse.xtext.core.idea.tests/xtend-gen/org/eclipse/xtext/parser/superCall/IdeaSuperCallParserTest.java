@@ -9,7 +9,6 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.grammarinheritance.ParserTest;
 import org.eclipse.xtext.grammarinheritance.idea.InheritanceTest3LanguageStandaloneSetupIdea;
-import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest3LanguageFileType;
 import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest3LanguageLanguage;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
@@ -36,19 +35,13 @@ public class IdeaSuperCallParserTest extends AbstractLanguageParsingTestCase {
       String _string = CharStreams.toString(_inputStreamReader);
       return this.modelChecker.checkResource(_string, false);
     }
-    
-    public Delegate(final ModelChecker modelChecker) {
-      super();
-      this.modelChecker = modelChecker;
-    }
   }
   
   private IdeaSuperCallParserTest.Delegate delegate;
   
   public IdeaSuperCallParserTest() {
-    super(InheritanceTest3LanguageFileType.INSTANCE);
-    IdeaSuperCallParserTest.Delegate _delegate = new IdeaSuperCallParserTest.Delegate(this);
-    this.delegate = _delegate;
+    throw new Error("Unresolved compilation problems:"
+      + "\nInvalid number of arguments. The constructor Delegate() is not applicable for the arguments (IdeaSuperCallParserTest)");
   }
   
   @Override
@@ -65,21 +58,5 @@ public class IdeaSuperCallParserTest extends AbstractLanguageParsingTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     this.delegate.setUp();
-  }
-  
-  public void test_01() throws Exception {
-    delegate.test_01();
-  }
-  
-  public void test_02() throws Exception {
-    delegate.test_02();
-  }
-  
-  public void test_03() throws Exception {
-    delegate.test_03();
-  }
-  
-  public void test_04() throws Exception {
-    delegate.test_04();
   }
 }

@@ -8,8 +8,9 @@
 package org.eclipse.xtext.web.server.test
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine
 import org.eclipse.xtext.web.server.generator.GeneratorResult
@@ -20,7 +21,7 @@ class GeneratorTest extends AbstractWebServerTest {
 	
 	static Generator generatorInstance
 	
-	static class Generator implements IGenerator {
+	static class Generator extends AbstractGenerator {
 		
 		int invocationCount = 0
 		
@@ -28,18 +29,19 @@ class GeneratorTest extends AbstractWebServerTest {
 			generatorInstance = this
 		}
 		
-		override doGenerate(Resource input, IFileSystemAccess fsa) {
+		override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext ctx) {
 			invocationCount++
 			val statemachine = input.contents.filter(Statemachine).head
 			fsa.generateFile('test.txt', '''
 				«FOR state : statemachine.states SEPARATOR ','»«state.name»«ENDFOR»
 			''')
 		}
+
 	}
 	
 	override protected getRuntimeModule() {
 		new StatemachineRuntimeModule {
-			override bindIGenerator() {
+			override bindIGenerator2() {
 				Generator
 			}
 		}
@@ -55,7 +57,7 @@ class GeneratorTest extends AbstractWebServerTest {
 			GeneratorResult [
 			  documents = ArrayList (
 			    GeneratedDocument [
-			      name = "test.txt"
+			      name = "DEFAULT_OUTPUTtest.txt"
 			      contentType = "text/plain"
 			      content = "foo,bar\n"
 			    ]

@@ -1894,6 +1894,40 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   }
   
   @Test
+  public void testNoException_04() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\'");
+    _builder.newLine();
+    _builder.append("Model: WildcardFragment;");
+    _builder.newLine();
+    _builder.append("fragment WildcardFragment*:;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
+    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
+    String _message = _head.getMessage();
+    Assert.assertEquals("no viable alternative at input \';\'", _message);
+  }
+  
+  @Test
+  public void testNoException_05() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\'");
+    _builder.newLine();
+    _builder.append("Model: WildcardFragment;");
+    _builder.newLine();
+    _builder.append("fragment WildcardFragment:;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
+    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
+    String _message = _head.getMessage();
+    Assert.assertEquals("no viable alternative at input \';\'", _message);
+  }
+  
+  @Test
   public void testBug_266440() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' as ecore  generate bugreport \'http://bugreport/266440\'");

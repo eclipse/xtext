@@ -48,7 +48,7 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Xt
 	}
 
 	@Override
-	public void setupFacet(Facet<XtendFacetConfiguration> facet, final ModifiableRootModel model) {
+	public void setupFacet(Facet<XtendFacetConfiguration> facet, ModifiableRootModel model) {
 		super.setupFacet(facet, model);
 		final Module module = model.getModule();
 		VirtualFile[] roots = ModuleRootManager.getInstance(module).getContentRoots();
@@ -56,17 +56,22 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Xt
 		final String baseDirectoryForLibraries = baseDir != null ? baseDir.getPath() : "";
 
 		LibrariesContainer librariesContainer = LibrariesContainerFactory.createContainer(module.getProject());
-		FrameworkSupportModelBase frameworkModel = new FrameworkSupportModelImpl(module.getProject(), baseDirectoryForLibraries, librariesContainer);
+		FrameworkSupportModelBase frameworkModel = new FrameworkSupportModelImpl(module.getProject(), baseDirectoryForLibraries,
+				librariesContainer);
 		final FrameworkSupportInModuleConfigurable configurable = frameworkSupport.createConfigurable(frameworkModel);
-		projectUtil.executeWritableWhenProjectReady(module.getProject(), new Runnable() {
-			@Override
-			public void run() {
-				IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider();
-				configurable.addSupport(module, model, modelsProvider);
-				modelsProvider.commitModuleModifiableModel(model);
-			}
-		});
-
+		final IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider();
+		if (projectUtil.isProjectReadyForPsiAccess(module.getProject())) {
+			configurable.addSupport(module, model, modelsProvider);
+		} else {
+			projectUtil.executeWritableWhenProjectReady(module.getProject(), new Runnable() {
+				@Override
+				public void run() {
+					final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
+					configurable.addSupport(module, modifiableModel, modelsProvider);
+					modelsProvider.commitModuleModifiableModel(modifiableModel);
+				}
+			});
+		}
 	}
 
 	@Override

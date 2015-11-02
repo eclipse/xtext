@@ -62,8 +62,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__52=52;
     public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -157,7 +157,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAnnotation"
-    // InternalXbaseWithAnnotations.g:67:1: entryRuleXAnnotation returns [EObject current=null] : iv_ruleXAnnotation= ruleXAnnotation EOF ;
+    // InternalXbaseWithAnnotations.g:68:1: entryRuleXAnnotation returns [EObject current=null] : iv_ruleXAnnotation= ruleXAnnotation EOF ;
     public final EObject entryRuleXAnnotation() throws RecognitionException {
         EObject current = null;
 
@@ -165,8 +165,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:67:52: (iv_ruleXAnnotation= ruleXAnnotation EOF )
-            // InternalXbaseWithAnnotations.g:68:2: iv_ruleXAnnotation= ruleXAnnotation EOF
+            // InternalXbaseWithAnnotations.g:68:52: (iv_ruleXAnnotation= ruleXAnnotation EOF )
+            // InternalXbaseWithAnnotations.g:69:2: iv_ruleXAnnotation= ruleXAnnotation EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAnnotationRule()); 
@@ -197,7 +197,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotation"
-    // InternalXbaseWithAnnotations.g:74:1: ruleXAnnotation returns [EObject current=null] : ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? ) ;
+    // InternalXbaseWithAnnotations.g:75:1: ruleXAnnotation returns [EObject current=null] : ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? ) ;
     public final EObject ruleXAnnotation() throws RecognitionException {
         EObject current = null;
 
@@ -216,14 +216,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:80:2: ( ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? ) )
-            // InternalXbaseWithAnnotations.g:81:2: ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? )
+            // InternalXbaseWithAnnotations.g:81:2: ( ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? ) )
+            // InternalXbaseWithAnnotations.g:82:2: ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? )
             {
-            // InternalXbaseWithAnnotations.g:81:2: ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? )
-            // InternalXbaseWithAnnotations.g:82:3: () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?
+            // InternalXbaseWithAnnotations.g:82:2: ( () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )? )
+            // InternalXbaseWithAnnotations.g:83:3: () otherlv_1= '@' ( ( ruleQualifiedName ) ) ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?
             {
-            // InternalXbaseWithAnnotations.g:82:3: ()
-            // InternalXbaseWithAnnotations.g:83:4: 
+            // InternalXbaseWithAnnotations.g:83:3: ()
+            // InternalXbaseWithAnnotations.g:84:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -241,11 +241,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXAnnotationAccess().getCommercialAtKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:93:3: ( ( ruleQualifiedName ) )
-            // InternalXbaseWithAnnotations.g:94:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:94:3: ( ( ruleQualifiedName ) )
+            // InternalXbaseWithAnnotations.g:95:4: ( ruleQualifiedName )
             {
-            // InternalXbaseWithAnnotations.g:94:4: ( ruleQualifiedName )
-            // InternalXbaseWithAnnotations.g:95:5: ruleQualifiedName
+            // InternalXbaseWithAnnotations.g:95:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:96:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -275,7 +275,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:109:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?
+            // InternalXbaseWithAnnotations.g:110:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -284,10 +284,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt3) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:110:4: ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')'
+                    // InternalXbaseWithAnnotations.g:111:4: ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')'
                     {
-                    // InternalXbaseWithAnnotations.g:110:4: ( ( '(' )=>otherlv_3= '(' )
-                    // InternalXbaseWithAnnotations.g:111:5: ( '(' )=>otherlv_3= '('
+                    // InternalXbaseWithAnnotations.g:111:4: ( ( '(' )=>otherlv_3= '(' )
+                    // InternalXbaseWithAnnotations.g:112:5: ( '(' )=>otherlv_3= '('
                     {
                     otherlv_3=(Token)match(input,14,FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -298,21 +298,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:117:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?
+                    // InternalXbaseWithAnnotations.g:118:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?
                     int alt2=3;
                     alt2 = dfa2.predict(input);
                     switch (alt2) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:118:5: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* )
+                            // InternalXbaseWithAnnotations.g:119:5: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* )
                             {
-                            // InternalXbaseWithAnnotations.g:118:5: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* )
-                            // InternalXbaseWithAnnotations.g:119:6: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )*
+                            // InternalXbaseWithAnnotations.g:119:5: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* )
+                            // InternalXbaseWithAnnotations.g:120:6: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:119:6: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) )
-                            // InternalXbaseWithAnnotations.g:120:7: ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair )
+                            // InternalXbaseWithAnnotations.g:120:6: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) )
+                            // InternalXbaseWithAnnotations.g:121:7: ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair )
                             {
-                            // InternalXbaseWithAnnotations.g:129:7: (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair )
-                            // InternalXbaseWithAnnotations.g:130:8: lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair
+                            // InternalXbaseWithAnnotations.g:130:7: (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair )
+                            // InternalXbaseWithAnnotations.g:131:8: lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair
                             {
                             if ( state.backtracking==0 ) {
 
@@ -343,7 +343,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:147:6: (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )*
+                            // InternalXbaseWithAnnotations.g:148:6: (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )*
                             loop1:
                             do {
                                 int alt1=2;
@@ -356,7 +356,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt1) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:148:7: otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
+                            	    // InternalXbaseWithAnnotations.g:149:7: otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
                             	    {
                             	    otherlv_5=(Token)match(input,15,FOLLOW_3); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -364,11 +364,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      							newLeafNode(otherlv_5, grammarAccess.getXAnnotationAccess().getCommaKeyword_3_1_0_1_0());
                             	      						
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:152:7: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
-                            	    // InternalXbaseWithAnnotations.g:153:8: ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair )
+                            	    // InternalXbaseWithAnnotations.g:153:7: ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) )
+                            	    // InternalXbaseWithAnnotations.g:154:8: ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:162:8: (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair )
-                            	    // InternalXbaseWithAnnotations.g:163:9: lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair
+                            	    // InternalXbaseWithAnnotations.g:163:8: (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair )
+                            	    // InternalXbaseWithAnnotations.g:164:9: lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -415,13 +415,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:183:5: ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) )
+                            // InternalXbaseWithAnnotations.g:184:5: ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) )
                             {
-                            // InternalXbaseWithAnnotations.g:183:5: ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) )
-                            // InternalXbaseWithAnnotations.g:184:6: (lv_value_7_0= ruleXAnnotationElementValueOrCommaList )
+                            // InternalXbaseWithAnnotations.g:184:5: ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) )
+                            // InternalXbaseWithAnnotations.g:185:6: (lv_value_7_0= ruleXAnnotationElementValueOrCommaList )
                             {
-                            // InternalXbaseWithAnnotations.g:184:6: (lv_value_7_0= ruleXAnnotationElementValueOrCommaList )
-                            // InternalXbaseWithAnnotations.g:185:7: lv_value_7_0= ruleXAnnotationElementValueOrCommaList
+                            // InternalXbaseWithAnnotations.g:185:6: (lv_value_7_0= ruleXAnnotationElementValueOrCommaList )
+                            // InternalXbaseWithAnnotations.g:186:7: lv_value_7_0= ruleXAnnotationElementValueOrCommaList
                             {
                             if ( state.backtracking==0 ) {
 
@@ -495,7 +495,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAnnotationElementValuePair"
-    // InternalXbaseWithAnnotations.g:212:1: entryRuleXAnnotationElementValuePair returns [EObject current=null] : iv_ruleXAnnotationElementValuePair= ruleXAnnotationElementValuePair EOF ;
+    // InternalXbaseWithAnnotations.g:213:1: entryRuleXAnnotationElementValuePair returns [EObject current=null] : iv_ruleXAnnotationElementValuePair= ruleXAnnotationElementValuePair EOF ;
     public final EObject entryRuleXAnnotationElementValuePair() throws RecognitionException {
         EObject current = null;
 
@@ -503,8 +503,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:212:68: (iv_ruleXAnnotationElementValuePair= ruleXAnnotationElementValuePair EOF )
-            // InternalXbaseWithAnnotations.g:213:2: iv_ruleXAnnotationElementValuePair= ruleXAnnotationElementValuePair EOF
+            // InternalXbaseWithAnnotations.g:213:68: (iv_ruleXAnnotationElementValuePair= ruleXAnnotationElementValuePair EOF )
+            // InternalXbaseWithAnnotations.g:214:2: iv_ruleXAnnotationElementValuePair= ruleXAnnotationElementValuePair EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAnnotationElementValuePairRule()); 
@@ -535,7 +535,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotationElementValuePair"
-    // InternalXbaseWithAnnotations.g:219:1: ruleXAnnotationElementValuePair returns [EObject current=null] : ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) ) ;
+    // InternalXbaseWithAnnotations.g:220:1: ruleXAnnotationElementValuePair returns [EObject current=null] : ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) ) ;
     public final EObject ruleXAnnotationElementValuePair() throws RecognitionException {
         EObject current = null;
 
@@ -547,23 +547,23 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:225:2: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) ) )
-            // InternalXbaseWithAnnotations.g:226:2: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) )
+            // InternalXbaseWithAnnotations.g:226:2: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) ) )
+            // InternalXbaseWithAnnotations.g:227:2: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) )
             {
-            // InternalXbaseWithAnnotations.g:226:2: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) )
-            // InternalXbaseWithAnnotations.g:227:3: ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) )
+            // InternalXbaseWithAnnotations.g:227:2: ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) ) )
+            // InternalXbaseWithAnnotations.g:228:3: ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) ) ( (lv_value_2_0= ruleXAnnotationElementValue ) )
             {
-            // InternalXbaseWithAnnotations.g:227:3: ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) )
-            // InternalXbaseWithAnnotations.g:228:4: ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' )
+            // InternalXbaseWithAnnotations.g:228:3: ( ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' ) )
+            // InternalXbaseWithAnnotations.g:229:4: ( ( ( ( ruleValidID ) ) '=' ) )=> ( ( ( ruleValidID ) ) otherlv_1= '=' )
             {
-            // InternalXbaseWithAnnotations.g:237:4: ( ( ( ruleValidID ) ) otherlv_1= '=' )
-            // InternalXbaseWithAnnotations.g:238:5: ( ( ruleValidID ) ) otherlv_1= '='
+            // InternalXbaseWithAnnotations.g:238:4: ( ( ( ruleValidID ) ) otherlv_1= '=' )
+            // InternalXbaseWithAnnotations.g:239:5: ( ( ruleValidID ) ) otherlv_1= '='
             {
-            // InternalXbaseWithAnnotations.g:238:5: ( ( ruleValidID ) )
-            // InternalXbaseWithAnnotations.g:239:6: ( ruleValidID )
+            // InternalXbaseWithAnnotations.g:239:5: ( ( ruleValidID ) )
+            // InternalXbaseWithAnnotations.g:240:6: ( ruleValidID )
             {
-            // InternalXbaseWithAnnotations.g:239:6: ( ruleValidID )
-            // InternalXbaseWithAnnotations.g:240:7: ruleValidID
+            // InternalXbaseWithAnnotations.g:240:6: ( ruleValidID )
+            // InternalXbaseWithAnnotations.g:241:7: ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -605,11 +605,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:260:3: ( (lv_value_2_0= ruleXAnnotationElementValue ) )
-            // InternalXbaseWithAnnotations.g:261:4: (lv_value_2_0= ruleXAnnotationElementValue )
+            // InternalXbaseWithAnnotations.g:261:3: ( (lv_value_2_0= ruleXAnnotationElementValue ) )
+            // InternalXbaseWithAnnotations.g:262:4: (lv_value_2_0= ruleXAnnotationElementValue )
             {
-            // InternalXbaseWithAnnotations.g:261:4: (lv_value_2_0= ruleXAnnotationElementValue )
-            // InternalXbaseWithAnnotations.g:262:5: lv_value_2_0= ruleXAnnotationElementValue
+            // InternalXbaseWithAnnotations.g:262:4: (lv_value_2_0= ruleXAnnotationElementValue )
+            // InternalXbaseWithAnnotations.g:263:5: lv_value_2_0= ruleXAnnotationElementValue
             {
             if ( state.backtracking==0 ) {
 
@@ -665,7 +665,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAnnotationElementValueOrCommaList"
-    // InternalXbaseWithAnnotations.g:283:1: entryRuleXAnnotationElementValueOrCommaList returns [EObject current=null] : iv_ruleXAnnotationElementValueOrCommaList= ruleXAnnotationElementValueOrCommaList EOF ;
+    // InternalXbaseWithAnnotations.g:284:1: entryRuleXAnnotationElementValueOrCommaList returns [EObject current=null] : iv_ruleXAnnotationElementValueOrCommaList= ruleXAnnotationElementValueOrCommaList EOF ;
     public final EObject entryRuleXAnnotationElementValueOrCommaList() throws RecognitionException {
         EObject current = null;
 
@@ -673,8 +673,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:283:75: (iv_ruleXAnnotationElementValueOrCommaList= ruleXAnnotationElementValueOrCommaList EOF )
-            // InternalXbaseWithAnnotations.g:284:2: iv_ruleXAnnotationElementValueOrCommaList= ruleXAnnotationElementValueOrCommaList EOF
+            // InternalXbaseWithAnnotations.g:284:75: (iv_ruleXAnnotationElementValueOrCommaList= ruleXAnnotationElementValueOrCommaList EOF )
+            // InternalXbaseWithAnnotations.g:285:2: iv_ruleXAnnotationElementValueOrCommaList= ruleXAnnotationElementValueOrCommaList EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAnnotationElementValueOrCommaListRule()); 
@@ -705,7 +705,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotationElementValueOrCommaList"
-    // InternalXbaseWithAnnotations.g:290:1: ruleXAnnotationElementValueOrCommaList returns [EObject current=null] : ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) ) ;
+    // InternalXbaseWithAnnotations.g:291:1: ruleXAnnotationElementValueOrCommaList returns [EObject current=null] : ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) ) ;
     public final EObject ruleXAnnotationElementValueOrCommaList() throws RecognitionException {
         EObject current = null;
 
@@ -727,27 +727,27 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:296:2: ( ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) ) )
-            // InternalXbaseWithAnnotations.g:297:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )
+            // InternalXbaseWithAnnotations.g:297:2: ( ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) ) )
+            // InternalXbaseWithAnnotations.g:298:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )
             {
-            // InternalXbaseWithAnnotations.g:297:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )
+            // InternalXbaseWithAnnotations.g:298:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )
             int alt8=2;
             alt8 = dfa8.predict(input);
             switch (alt8) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:298:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
+                    // InternalXbaseWithAnnotations.g:299:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
                     {
-                    // InternalXbaseWithAnnotations.g:298:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
-                    // InternalXbaseWithAnnotations.g:299:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']'
+                    // InternalXbaseWithAnnotations.g:299:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
+                    // InternalXbaseWithAnnotations.g:300:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']'
                     {
-                    // InternalXbaseWithAnnotations.g:299:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) )
-                    // InternalXbaseWithAnnotations.g:300:5: ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' )
+                    // InternalXbaseWithAnnotations.g:300:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) )
+                    // InternalXbaseWithAnnotations.g:301:5: ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' )
                     {
-                    // InternalXbaseWithAnnotations.g:307:5: ( () otherlv_1= '#' otherlv_2= '[' )
-                    // InternalXbaseWithAnnotations.g:308:6: () otherlv_1= '#' otherlv_2= '['
+                    // InternalXbaseWithAnnotations.g:308:5: ( () otherlv_1= '#' otherlv_2= '[' )
+                    // InternalXbaseWithAnnotations.g:309:6: () otherlv_1= '#' otherlv_2= '['
                     {
-                    // InternalXbaseWithAnnotations.g:308:6: ()
-                    // InternalXbaseWithAnnotations.g:309:7: 
+                    // InternalXbaseWithAnnotations.g:309:6: ()
+                    // InternalXbaseWithAnnotations.g:310:7: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -777,7 +777,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:325:4: ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )?
+                    // InternalXbaseWithAnnotations.g:326:4: ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -786,13 +786,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt5) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:326:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:327:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:326:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) )
-                            // InternalXbaseWithAnnotations.g:327:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
+                            // InternalXbaseWithAnnotations.g:327:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) )
+                            // InternalXbaseWithAnnotations.g:328:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
                             {
-                            // InternalXbaseWithAnnotations.g:327:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
-                            // InternalXbaseWithAnnotations.g:328:7: lv_elements_3_0= ruleXAnnotationOrExpression
+                            // InternalXbaseWithAnnotations.g:328:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
+                            // InternalXbaseWithAnnotations.g:329:7: lv_elements_3_0= ruleXAnnotationOrExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -823,7 +823,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:345:5: (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:346:5: (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             loop4:
                             do {
                                 int alt4=2;
@@ -836,7 +836,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt4) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:346:6: otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:347:6: otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
                             	    {
                             	    otherlv_4=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -844,11 +844,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      						newLeafNode(otherlv_4, grammarAccess.getXAnnotationElementValueOrCommaListAccess().getCommaKeyword_0_1_1_0());
                             	      					
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:350:6: ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
-                            	    // InternalXbaseWithAnnotations.g:351:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
+                            	    // InternalXbaseWithAnnotations.g:351:6: ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:352:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:351:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
-                            	    // InternalXbaseWithAnnotations.g:352:8: lv_elements_5_0= ruleXAnnotationOrExpression
+                            	    // InternalXbaseWithAnnotations.g:352:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
+                            	    // InternalXbaseWithAnnotations.g:353:8: lv_elements_5_0= ruleXAnnotationOrExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -907,10 +907,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:377:3: (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? )
+                    // InternalXbaseWithAnnotations.g:378:3: (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? )
                     {
-                    // InternalXbaseWithAnnotations.g:377:3: (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? )
-                    // InternalXbaseWithAnnotations.g:378:4: this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )?
+                    // InternalXbaseWithAnnotations.g:378:3: (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? )
+                    // InternalXbaseWithAnnotations.g:379:4: this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -928,7 +928,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:386:4: ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )?
+                    // InternalXbaseWithAnnotations.g:387:4: ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -937,10 +937,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt7) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:387:5: () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+
+                            // InternalXbaseWithAnnotations.g:388:5: () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+
                             {
-                            // InternalXbaseWithAnnotations.g:387:5: ()
-                            // InternalXbaseWithAnnotations.g:388:6: 
+                            // InternalXbaseWithAnnotations.g:388:5: ()
+                            // InternalXbaseWithAnnotations.g:389:6: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -952,7 +952,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:394:5: (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+
+                            // InternalXbaseWithAnnotations.g:395:5: (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+
                             int cnt6=0;
                             loop6:
                             do {
@@ -966,7 +966,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt6) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:395:6: otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:396:6: otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) )
                             	    {
                             	    otherlv_9=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -974,11 +974,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      						newLeafNode(otherlv_9, grammarAccess.getXAnnotationElementValueOrCommaListAccess().getCommaKeyword_1_1_1_0());
                             	      					
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:399:6: ( (lv_elements_10_0= ruleXAnnotationOrExpression ) )
-                            	    // InternalXbaseWithAnnotations.g:400:7: (lv_elements_10_0= ruleXAnnotationOrExpression )
+                            	    // InternalXbaseWithAnnotations.g:400:6: ( (lv_elements_10_0= ruleXAnnotationOrExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:401:7: (lv_elements_10_0= ruleXAnnotationOrExpression )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:400:7: (lv_elements_10_0= ruleXAnnotationOrExpression )
-                            	    // InternalXbaseWithAnnotations.g:401:8: lv_elements_10_0= ruleXAnnotationOrExpression
+                            	    // InternalXbaseWithAnnotations.g:401:7: (lv_elements_10_0= ruleXAnnotationOrExpression )
+                            	    // InternalXbaseWithAnnotations.g:402:8: lv_elements_10_0= ruleXAnnotationOrExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1060,7 +1060,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAnnotationElementValue"
-    // InternalXbaseWithAnnotations.g:425:1: entryRuleXAnnotationElementValue returns [EObject current=null] : iv_ruleXAnnotationElementValue= ruleXAnnotationElementValue EOF ;
+    // InternalXbaseWithAnnotations.g:426:1: entryRuleXAnnotationElementValue returns [EObject current=null] : iv_ruleXAnnotationElementValue= ruleXAnnotationElementValue EOF ;
     public final EObject entryRuleXAnnotationElementValue() throws RecognitionException {
         EObject current = null;
 
@@ -1068,8 +1068,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:425:64: (iv_ruleXAnnotationElementValue= ruleXAnnotationElementValue EOF )
-            // InternalXbaseWithAnnotations.g:426:2: iv_ruleXAnnotationElementValue= ruleXAnnotationElementValue EOF
+            // InternalXbaseWithAnnotations.g:426:64: (iv_ruleXAnnotationElementValue= ruleXAnnotationElementValue EOF )
+            // InternalXbaseWithAnnotations.g:427:2: iv_ruleXAnnotationElementValue= ruleXAnnotationElementValue EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAnnotationElementValueRule()); 
@@ -1100,7 +1100,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotationElementValue"
-    // InternalXbaseWithAnnotations.g:432:1: ruleXAnnotationElementValue returns [EObject current=null] : ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ) ;
+    // InternalXbaseWithAnnotations.g:433:1: ruleXAnnotationElementValue returns [EObject current=null] : ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ) ;
     public final EObject ruleXAnnotationElementValue() throws RecognitionException {
         EObject current = null;
 
@@ -1119,27 +1119,27 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:438:2: ( ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ) )
-            // InternalXbaseWithAnnotations.g:439:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )
+            // InternalXbaseWithAnnotations.g:439:2: ( ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ) )
+            // InternalXbaseWithAnnotations.g:440:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )
             {
-            // InternalXbaseWithAnnotations.g:439:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )
+            // InternalXbaseWithAnnotations.g:440:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )
             int alt11=2;
             alt11 = dfa11.predict(input);
             switch (alt11) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:440:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
+                    // InternalXbaseWithAnnotations.g:441:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
                     {
-                    // InternalXbaseWithAnnotations.g:440:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
-                    // InternalXbaseWithAnnotations.g:441:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']'
+                    // InternalXbaseWithAnnotations.g:441:3: ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' )
+                    // InternalXbaseWithAnnotations.g:442:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']'
                     {
-                    // InternalXbaseWithAnnotations.g:441:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) )
-                    // InternalXbaseWithAnnotations.g:442:5: ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' )
+                    // InternalXbaseWithAnnotations.g:442:4: ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) )
+                    // InternalXbaseWithAnnotations.g:443:5: ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' )
                     {
-                    // InternalXbaseWithAnnotations.g:449:5: ( () otherlv_1= '#' otherlv_2= '[' )
-                    // InternalXbaseWithAnnotations.g:450:6: () otherlv_1= '#' otherlv_2= '['
+                    // InternalXbaseWithAnnotations.g:450:5: ( () otherlv_1= '#' otherlv_2= '[' )
+                    // InternalXbaseWithAnnotations.g:451:6: () otherlv_1= '#' otherlv_2= '['
                     {
-                    // InternalXbaseWithAnnotations.g:450:6: ()
-                    // InternalXbaseWithAnnotations.g:451:7: 
+                    // InternalXbaseWithAnnotations.g:451:6: ()
+                    // InternalXbaseWithAnnotations.g:452:7: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1169,7 +1169,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:467:4: ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )?
+                    // InternalXbaseWithAnnotations.g:468:4: ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1178,13 +1178,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt10) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:468:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:469:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:468:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) )
-                            // InternalXbaseWithAnnotations.g:469:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
+                            // InternalXbaseWithAnnotations.g:469:5: ( (lv_elements_3_0= ruleXAnnotationOrExpression ) )
+                            // InternalXbaseWithAnnotations.g:470:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
                             {
-                            // InternalXbaseWithAnnotations.g:469:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
-                            // InternalXbaseWithAnnotations.g:470:7: lv_elements_3_0= ruleXAnnotationOrExpression
+                            // InternalXbaseWithAnnotations.g:470:6: (lv_elements_3_0= ruleXAnnotationOrExpression )
+                            // InternalXbaseWithAnnotations.g:471:7: lv_elements_3_0= ruleXAnnotationOrExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1215,7 +1215,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:487:5: (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:488:5: (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )*
                             loop9:
                             do {
                                 int alt9=2;
@@ -1228,7 +1228,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt9) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:488:6: otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:489:6: otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
                             	    {
                             	    otherlv_4=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -1236,11 +1236,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      						newLeafNode(otherlv_4, grammarAccess.getXAnnotationElementValueAccess().getCommaKeyword_0_1_1_0());
                             	      					
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:492:6: ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
-                            	    // InternalXbaseWithAnnotations.g:493:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
+                            	    // InternalXbaseWithAnnotations.g:493:6: ( (lv_elements_5_0= ruleXAnnotationOrExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:494:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:493:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
-                            	    // InternalXbaseWithAnnotations.g:494:8: lv_elements_5_0= ruleXAnnotationOrExpression
+                            	    // InternalXbaseWithAnnotations.g:494:7: (lv_elements_5_0= ruleXAnnotationOrExpression )
+                            	    // InternalXbaseWithAnnotations.g:495:8: lv_elements_5_0= ruleXAnnotationOrExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -1299,7 +1299,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:519:3: this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression
+                    // InternalXbaseWithAnnotations.g:520:3: this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1345,7 +1345,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAnnotationOrExpression"
-    // InternalXbaseWithAnnotations.g:531:1: entryRuleXAnnotationOrExpression returns [EObject current=null] : iv_ruleXAnnotationOrExpression= ruleXAnnotationOrExpression EOF ;
+    // InternalXbaseWithAnnotations.g:532:1: entryRuleXAnnotationOrExpression returns [EObject current=null] : iv_ruleXAnnotationOrExpression= ruleXAnnotationOrExpression EOF ;
     public final EObject entryRuleXAnnotationOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1353,8 +1353,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:531:64: (iv_ruleXAnnotationOrExpression= ruleXAnnotationOrExpression EOF )
-            // InternalXbaseWithAnnotations.g:532:2: iv_ruleXAnnotationOrExpression= ruleXAnnotationOrExpression EOF
+            // InternalXbaseWithAnnotations.g:532:64: (iv_ruleXAnnotationOrExpression= ruleXAnnotationOrExpression EOF )
+            // InternalXbaseWithAnnotations.g:533:2: iv_ruleXAnnotationOrExpression= ruleXAnnotationOrExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAnnotationOrExpressionRule()); 
@@ -1385,7 +1385,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotationOrExpression"
-    // InternalXbaseWithAnnotations.g:538:1: ruleXAnnotationOrExpression returns [EObject current=null] : (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression ) ;
+    // InternalXbaseWithAnnotations.g:539:1: ruleXAnnotationOrExpression returns [EObject current=null] : (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression ) ;
     public final EObject ruleXAnnotationOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1398,10 +1398,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:544:2: ( (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:545:2: (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:545:2: ( (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:546:2: (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:545:2: (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:546:2: (this_XAnnotation_0= ruleXAnnotation | this_XExpression_1= ruleXExpression )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1420,7 +1420,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt12) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:546:3: this_XAnnotation_0= ruleXAnnotation
+                    // InternalXbaseWithAnnotations.g:547:3: this_XAnnotation_0= ruleXAnnotation
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1442,7 +1442,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:555:3: this_XExpression_1= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:556:3: this_XExpression_1= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1488,7 +1488,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXExpression"
-    // InternalXbaseWithAnnotations.g:567:1: entryRuleXExpression returns [EObject current=null] : iv_ruleXExpression= ruleXExpression EOF ;
+    // InternalXbaseWithAnnotations.g:568:1: entryRuleXExpression returns [EObject current=null] : iv_ruleXExpression= ruleXExpression EOF ;
     public final EObject entryRuleXExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1496,8 +1496,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:567:52: (iv_ruleXExpression= ruleXExpression EOF )
-            // InternalXbaseWithAnnotations.g:568:2: iv_ruleXExpression= ruleXExpression EOF
+            // InternalXbaseWithAnnotations.g:568:52: (iv_ruleXExpression= ruleXExpression EOF )
+            // InternalXbaseWithAnnotations.g:569:2: iv_ruleXExpression= ruleXExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExpressionRule()); 
@@ -1528,7 +1528,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXExpression"
-    // InternalXbaseWithAnnotations.g:574:1: ruleXExpression returns [EObject current=null] : this_XAssignment_0= ruleXAssignment ;
+    // InternalXbaseWithAnnotations.g:575:1: ruleXExpression returns [EObject current=null] : this_XAssignment_0= ruleXAssignment ;
     public final EObject ruleXExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1539,8 +1539,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:580:2: (this_XAssignment_0= ruleXAssignment )
-            // InternalXbaseWithAnnotations.g:581:2: this_XAssignment_0= ruleXAssignment
+            // InternalXbaseWithAnnotations.g:581:2: (this_XAssignment_0= ruleXAssignment )
+            // InternalXbaseWithAnnotations.g:582:2: this_XAssignment_0= ruleXAssignment
             {
             if ( state.backtracking==0 ) {
 
@@ -1580,7 +1580,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAssignment"
-    // InternalXbaseWithAnnotations.g:592:1: entryRuleXAssignment returns [EObject current=null] : iv_ruleXAssignment= ruleXAssignment EOF ;
+    // InternalXbaseWithAnnotations.g:593:1: entryRuleXAssignment returns [EObject current=null] : iv_ruleXAssignment= ruleXAssignment EOF ;
     public final EObject entryRuleXAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -1588,8 +1588,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:592:52: (iv_ruleXAssignment= ruleXAssignment EOF )
-            // InternalXbaseWithAnnotations.g:593:2: iv_ruleXAssignment= ruleXAssignment EOF
+            // InternalXbaseWithAnnotations.g:593:52: (iv_ruleXAssignment= ruleXAssignment EOF )
+            // InternalXbaseWithAnnotations.g:594:2: iv_ruleXAssignment= ruleXAssignment EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAssignmentRule()); 
@@ -1620,7 +1620,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAssignment"
-    // InternalXbaseWithAnnotations.g:599:1: ruleXAssignment returns [EObject current=null] : ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) ;
+    // InternalXbaseWithAnnotations.g:600:1: ruleXAssignment returns [EObject current=null] : ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) ;
     public final EObject ruleXAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -1635,10 +1635,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:605:2: ( ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) )
-            // InternalXbaseWithAnnotations.g:606:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
+            // InternalXbaseWithAnnotations.g:606:2: ( ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) )
+            // InternalXbaseWithAnnotations.g:607:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
             {
-            // InternalXbaseWithAnnotations.g:606:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
+            // InternalXbaseWithAnnotations.g:607:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
             int alt14=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -1777,13 +1777,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt14) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:607:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
+                    // InternalXbaseWithAnnotations.g:608:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:607:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
-                    // InternalXbaseWithAnnotations.g:608:4: () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) )
+                    // InternalXbaseWithAnnotations.g:608:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
+                    // InternalXbaseWithAnnotations.g:609:4: () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) )
                     {
-                    // InternalXbaseWithAnnotations.g:608:4: ()
-                    // InternalXbaseWithAnnotations.g:609:5: 
+                    // InternalXbaseWithAnnotations.g:609:4: ()
+                    // InternalXbaseWithAnnotations.g:610:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1795,11 +1795,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:615:4: ( ( ruleFeatureCallID ) )
-                    // InternalXbaseWithAnnotations.g:616:5: ( ruleFeatureCallID )
+                    // InternalXbaseWithAnnotations.g:616:4: ( ( ruleFeatureCallID ) )
+                    // InternalXbaseWithAnnotations.g:617:5: ( ruleFeatureCallID )
                     {
-                    // InternalXbaseWithAnnotations.g:616:5: ( ruleFeatureCallID )
-                    // InternalXbaseWithAnnotations.g:617:6: ruleFeatureCallID
+                    // InternalXbaseWithAnnotations.g:617:5: ( ruleFeatureCallID )
+                    // InternalXbaseWithAnnotations.g:618:6: ruleFeatureCallID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1844,11 +1844,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:638:4: ( (lv_value_3_0= ruleXAssignment ) )
-                    // InternalXbaseWithAnnotations.g:639:5: (lv_value_3_0= ruleXAssignment )
+                    // InternalXbaseWithAnnotations.g:639:4: ( (lv_value_3_0= ruleXAssignment ) )
+                    // InternalXbaseWithAnnotations.g:640:5: (lv_value_3_0= ruleXAssignment )
                     {
-                    // InternalXbaseWithAnnotations.g:639:5: (lv_value_3_0= ruleXAssignment )
-                    // InternalXbaseWithAnnotations.g:640:6: lv_value_3_0= ruleXAssignment
+                    // InternalXbaseWithAnnotations.g:640:5: (lv_value_3_0= ruleXAssignment )
+                    // InternalXbaseWithAnnotations.g:641:6: lv_value_3_0= ruleXAssignment
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1886,10 +1886,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:659:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
+                    // InternalXbaseWithAnnotations.g:660:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
                     {
-                    // InternalXbaseWithAnnotations.g:659:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
-                    // InternalXbaseWithAnnotations.g:660:4: this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
+                    // InternalXbaseWithAnnotations.g:660:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
+                    // InternalXbaseWithAnnotations.g:661:4: this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1907,21 +1907,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:668:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
+                    // InternalXbaseWithAnnotations.g:669:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
                     int alt13=2;
                     alt13 = dfa13.predict(input);
                     switch (alt13) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:669:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) )
+                            // InternalXbaseWithAnnotations.g:670:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) )
                             {
-                            // InternalXbaseWithAnnotations.g:669:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) )
-                            // InternalXbaseWithAnnotations.g:670:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) )
+                            // InternalXbaseWithAnnotations.g:670:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) )
+                            // InternalXbaseWithAnnotations.g:671:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) )
                             {
-                            // InternalXbaseWithAnnotations.g:680:6: ( () ( ( ruleOpMultiAssign ) ) )
-                            // InternalXbaseWithAnnotations.g:681:7: () ( ( ruleOpMultiAssign ) )
+                            // InternalXbaseWithAnnotations.g:681:6: ( () ( ( ruleOpMultiAssign ) ) )
+                            // InternalXbaseWithAnnotations.g:682:7: () ( ( ruleOpMultiAssign ) )
                             {
-                            // InternalXbaseWithAnnotations.g:681:7: ()
-                            // InternalXbaseWithAnnotations.g:682:8: 
+                            // InternalXbaseWithAnnotations.g:682:7: ()
+                            // InternalXbaseWithAnnotations.g:683:8: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1933,11 +1933,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:688:7: ( ( ruleOpMultiAssign ) )
-                            // InternalXbaseWithAnnotations.g:689:8: ( ruleOpMultiAssign )
+                            // InternalXbaseWithAnnotations.g:689:7: ( ( ruleOpMultiAssign ) )
+                            // InternalXbaseWithAnnotations.g:690:8: ( ruleOpMultiAssign )
                             {
-                            // InternalXbaseWithAnnotations.g:689:8: ( ruleOpMultiAssign )
-                            // InternalXbaseWithAnnotations.g:690:9: ruleOpMultiAssign
+                            // InternalXbaseWithAnnotations.g:690:8: ( ruleOpMultiAssign )
+                            // InternalXbaseWithAnnotations.g:691:9: ruleOpMultiAssign
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1973,11 +1973,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:706:5: ( (lv_rightOperand_7_0= ruleXAssignment ) )
-                            // InternalXbaseWithAnnotations.g:707:6: (lv_rightOperand_7_0= ruleXAssignment )
+                            // InternalXbaseWithAnnotations.g:707:5: ( (lv_rightOperand_7_0= ruleXAssignment ) )
+                            // InternalXbaseWithAnnotations.g:708:6: (lv_rightOperand_7_0= ruleXAssignment )
                             {
-                            // InternalXbaseWithAnnotations.g:707:6: (lv_rightOperand_7_0= ruleXAssignment )
-                            // InternalXbaseWithAnnotations.g:708:7: lv_rightOperand_7_0= ruleXAssignment
+                            // InternalXbaseWithAnnotations.g:708:6: (lv_rightOperand_7_0= ruleXAssignment )
+                            // InternalXbaseWithAnnotations.g:709:7: lv_rightOperand_7_0= ruleXAssignment
                             {
                             if ( state.backtracking==0 ) {
 
@@ -2045,7 +2045,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpSingleAssign"
-    // InternalXbaseWithAnnotations.g:731:1: entryRuleOpSingleAssign returns [String current=null] : iv_ruleOpSingleAssign= ruleOpSingleAssign EOF ;
+    // InternalXbaseWithAnnotations.g:732:1: entryRuleOpSingleAssign returns [String current=null] : iv_ruleOpSingleAssign= ruleOpSingleAssign EOF ;
     public final String entryRuleOpSingleAssign() throws RecognitionException {
         String current = null;
 
@@ -2053,8 +2053,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:731:54: (iv_ruleOpSingleAssign= ruleOpSingleAssign EOF )
-            // InternalXbaseWithAnnotations.g:732:2: iv_ruleOpSingleAssign= ruleOpSingleAssign EOF
+            // InternalXbaseWithAnnotations.g:732:54: (iv_ruleOpSingleAssign= ruleOpSingleAssign EOF )
+            // InternalXbaseWithAnnotations.g:733:2: iv_ruleOpSingleAssign= ruleOpSingleAssign EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpSingleAssignRule()); 
@@ -2085,7 +2085,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpSingleAssign"
-    // InternalXbaseWithAnnotations.g:738:1: ruleOpSingleAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '=' ;
+    // InternalXbaseWithAnnotations.g:739:1: ruleOpSingleAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '=' ;
     public final AntlrDatatypeRuleToken ruleOpSingleAssign() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2095,8 +2095,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:744:2: (kw= '=' )
-            // InternalXbaseWithAnnotations.g:745:2: kw= '='
+            // InternalXbaseWithAnnotations.g:745:2: (kw= '=' )
+            // InternalXbaseWithAnnotations.g:746:2: kw= '='
             {
             kw=(Token)match(input,17,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2127,7 +2127,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpMultiAssign"
-    // InternalXbaseWithAnnotations.g:753:1: entryRuleOpMultiAssign returns [String current=null] : iv_ruleOpMultiAssign= ruleOpMultiAssign EOF ;
+    // InternalXbaseWithAnnotations.g:754:1: entryRuleOpMultiAssign returns [String current=null] : iv_ruleOpMultiAssign= ruleOpMultiAssign EOF ;
     public final String entryRuleOpMultiAssign() throws RecognitionException {
         String current = null;
 
@@ -2135,8 +2135,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:753:53: (iv_ruleOpMultiAssign= ruleOpMultiAssign EOF )
-            // InternalXbaseWithAnnotations.g:754:2: iv_ruleOpMultiAssign= ruleOpMultiAssign EOF
+            // InternalXbaseWithAnnotations.g:754:53: (iv_ruleOpMultiAssign= ruleOpMultiAssign EOF )
+            // InternalXbaseWithAnnotations.g:755:2: iv_ruleOpMultiAssign= ruleOpMultiAssign EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpMultiAssignRule()); 
@@ -2167,7 +2167,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpMultiAssign"
-    // InternalXbaseWithAnnotations.g:760:1: ruleOpMultiAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) ;
+    // InternalXbaseWithAnnotations.g:761:1: ruleOpMultiAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) ;
     public final AntlrDatatypeRuleToken ruleOpMultiAssign() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2177,10 +2177,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:766:2: ( (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) )
-            // InternalXbaseWithAnnotations.g:767:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
+            // InternalXbaseWithAnnotations.g:767:2: ( (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) )
+            // InternalXbaseWithAnnotations.g:768:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
             {
-            // InternalXbaseWithAnnotations.g:767:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
+            // InternalXbaseWithAnnotations.g:768:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
             int alt16=7;
             switch ( input.LA(1) ) {
             case 21:
@@ -2228,7 +2228,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt16) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:768:3: kw= '+='
+                    // InternalXbaseWithAnnotations.g:769:3: kw= '+='
                     {
                     kw=(Token)match(input,21,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2241,7 +2241,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:774:3: kw= '-='
+                    // InternalXbaseWithAnnotations.g:775:3: kw= '-='
                     {
                     kw=(Token)match(input,22,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2254,7 +2254,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:780:3: kw= '*='
+                    // InternalXbaseWithAnnotations.g:781:3: kw= '*='
                     {
                     kw=(Token)match(input,23,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2267,7 +2267,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:786:3: kw= '/='
+                    // InternalXbaseWithAnnotations.g:787:3: kw= '/='
                     {
                     kw=(Token)match(input,24,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2280,7 +2280,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalXbaseWithAnnotations.g:792:3: kw= '%='
+                    // InternalXbaseWithAnnotations.g:793:3: kw= '%='
                     {
                     kw=(Token)match(input,25,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2293,10 +2293,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 6 :
-                    // InternalXbaseWithAnnotations.g:798:3: (kw= '<' kw= '<' kw= '=' )
+                    // InternalXbaseWithAnnotations.g:799:3: (kw= '<' kw= '<' kw= '=' )
                     {
-                    // InternalXbaseWithAnnotations.g:798:3: (kw= '<' kw= '<' kw= '=' )
-                    // InternalXbaseWithAnnotations.g:799:4: kw= '<' kw= '<' kw= '='
+                    // InternalXbaseWithAnnotations.g:799:3: (kw= '<' kw= '<' kw= '=' )
+                    // InternalXbaseWithAnnotations.g:800:4: kw= '<' kw= '<' kw= '='
                     {
                     kw=(Token)match(input,26,FOLLOW_15); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2326,10 +2326,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 7 :
-                    // InternalXbaseWithAnnotations.g:816:3: (kw= '>' (kw= '>' )? kw= '>=' )
+                    // InternalXbaseWithAnnotations.g:817:3: (kw= '>' (kw= '>' )? kw= '>=' )
                     {
-                    // InternalXbaseWithAnnotations.g:816:3: (kw= '>' (kw= '>' )? kw= '>=' )
-                    // InternalXbaseWithAnnotations.g:817:4: kw= '>' (kw= '>' )? kw= '>='
+                    // InternalXbaseWithAnnotations.g:817:3: (kw= '>' (kw= '>' )? kw= '>=' )
+                    // InternalXbaseWithAnnotations.g:818:4: kw= '>' (kw= '>' )? kw= '>='
                     {
                     kw=(Token)match(input,27,FOLLOW_16); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2338,7 +2338,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getGreaterThanSignKeyword_6_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:822:4: (kw= '>' )?
+                    // InternalXbaseWithAnnotations.g:823:4: (kw= '>' )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -2347,7 +2347,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt15) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:823:5: kw= '>'
+                            // InternalXbaseWithAnnotations.g:824:5: kw= '>'
                             {
                             kw=(Token)match(input,27,FOLLOW_17); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -2400,7 +2400,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXOrExpression"
-    // InternalXbaseWithAnnotations.g:839:1: entryRuleXOrExpression returns [EObject current=null] : iv_ruleXOrExpression= ruleXOrExpression EOF ;
+    // InternalXbaseWithAnnotations.g:840:1: entryRuleXOrExpression returns [EObject current=null] : iv_ruleXOrExpression= ruleXOrExpression EOF ;
     public final EObject entryRuleXOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2408,8 +2408,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:839:54: (iv_ruleXOrExpression= ruleXOrExpression EOF )
-            // InternalXbaseWithAnnotations.g:840:2: iv_ruleXOrExpression= ruleXOrExpression EOF
+            // InternalXbaseWithAnnotations.g:840:54: (iv_ruleXOrExpression= ruleXOrExpression EOF )
+            // InternalXbaseWithAnnotations.g:841:2: iv_ruleXOrExpression= ruleXOrExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXOrExpressionRule()); 
@@ -2440,7 +2440,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXOrExpression"
-    // InternalXbaseWithAnnotations.g:846:1: ruleXOrExpression returns [EObject current=null] : (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:847:1: ruleXOrExpression returns [EObject current=null] : (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) ;
     public final EObject ruleXOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2453,11 +2453,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:852:2: ( (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:853:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:853:2: ( (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:854:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:853:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
-            // InternalXbaseWithAnnotations.g:854:3: this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:854:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:855:3: this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -2475,7 +2475,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:862:3: ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:863:3: ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2494,16 +2494,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:863:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) )
+            	    // InternalXbaseWithAnnotations.g:864:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:863:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:864:5: ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) )
+            	    // InternalXbaseWithAnnotations.g:864:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:865:5: ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:874:5: ( () ( ( ruleOpOr ) ) )
-            	    // InternalXbaseWithAnnotations.g:875:6: () ( ( ruleOpOr ) )
+            	    // InternalXbaseWithAnnotations.g:875:5: ( () ( ( ruleOpOr ) ) )
+            	    // InternalXbaseWithAnnotations.g:876:6: () ( ( ruleOpOr ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:875:6: ()
-            	    // InternalXbaseWithAnnotations.g:876:7: 
+            	    // InternalXbaseWithAnnotations.g:876:6: ()
+            	    // InternalXbaseWithAnnotations.g:877:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2515,11 +2515,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:882:6: ( ( ruleOpOr ) )
-            	    // InternalXbaseWithAnnotations.g:883:7: ( ruleOpOr )
+            	    // InternalXbaseWithAnnotations.g:883:6: ( ( ruleOpOr ) )
+            	    // InternalXbaseWithAnnotations.g:884:7: ( ruleOpOr )
             	    {
-            	    // InternalXbaseWithAnnotations.g:883:7: ( ruleOpOr )
-            	    // InternalXbaseWithAnnotations.g:884:8: ruleOpOr
+            	    // InternalXbaseWithAnnotations.g:884:7: ( ruleOpOr )
+            	    // InternalXbaseWithAnnotations.g:885:8: ruleOpOr
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2555,11 +2555,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:900:4: ( (lv_rightOperand_3_0= ruleXAndExpression ) )
-            	    // InternalXbaseWithAnnotations.g:901:5: (lv_rightOperand_3_0= ruleXAndExpression )
+            	    // InternalXbaseWithAnnotations.g:901:4: ( (lv_rightOperand_3_0= ruleXAndExpression ) )
+            	    // InternalXbaseWithAnnotations.g:902:5: (lv_rightOperand_3_0= ruleXAndExpression )
             	    {
-            	    // InternalXbaseWithAnnotations.g:901:5: (lv_rightOperand_3_0= ruleXAndExpression )
-            	    // InternalXbaseWithAnnotations.g:902:6: lv_rightOperand_3_0= ruleXAndExpression
+            	    // InternalXbaseWithAnnotations.g:902:5: (lv_rightOperand_3_0= ruleXAndExpression )
+            	    // InternalXbaseWithAnnotations.g:903:6: lv_rightOperand_3_0= ruleXAndExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2624,7 +2624,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpOr"
-    // InternalXbaseWithAnnotations.g:924:1: entryRuleOpOr returns [String current=null] : iv_ruleOpOr= ruleOpOr EOF ;
+    // InternalXbaseWithAnnotations.g:925:1: entryRuleOpOr returns [String current=null] : iv_ruleOpOr= ruleOpOr EOF ;
     public final String entryRuleOpOr() throws RecognitionException {
         String current = null;
 
@@ -2632,8 +2632,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:924:44: (iv_ruleOpOr= ruleOpOr EOF )
-            // InternalXbaseWithAnnotations.g:925:2: iv_ruleOpOr= ruleOpOr EOF
+            // InternalXbaseWithAnnotations.g:925:44: (iv_ruleOpOr= ruleOpOr EOF )
+            // InternalXbaseWithAnnotations.g:926:2: iv_ruleOpOr= ruleOpOr EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpOrRule()); 
@@ -2664,7 +2664,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpOr"
-    // InternalXbaseWithAnnotations.g:931:1: ruleOpOr returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '||' ;
+    // InternalXbaseWithAnnotations.g:932:1: ruleOpOr returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '||' ;
     public final AntlrDatatypeRuleToken ruleOpOr() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2674,8 +2674,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:937:2: (kw= '||' )
-            // InternalXbaseWithAnnotations.g:938:2: kw= '||'
+            // InternalXbaseWithAnnotations.g:938:2: (kw= '||' )
+            // InternalXbaseWithAnnotations.g:939:2: kw= '||'
             {
             kw=(Token)match(input,29,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2706,7 +2706,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAndExpression"
-    // InternalXbaseWithAnnotations.g:946:1: entryRuleXAndExpression returns [EObject current=null] : iv_ruleXAndExpression= ruleXAndExpression EOF ;
+    // InternalXbaseWithAnnotations.g:947:1: entryRuleXAndExpression returns [EObject current=null] : iv_ruleXAndExpression= ruleXAndExpression EOF ;
     public final EObject entryRuleXAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2714,8 +2714,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:946:55: (iv_ruleXAndExpression= ruleXAndExpression EOF )
-            // InternalXbaseWithAnnotations.g:947:2: iv_ruleXAndExpression= ruleXAndExpression EOF
+            // InternalXbaseWithAnnotations.g:947:55: (iv_ruleXAndExpression= ruleXAndExpression EOF )
+            // InternalXbaseWithAnnotations.g:948:2: iv_ruleXAndExpression= ruleXAndExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAndExpressionRule()); 
@@ -2746,7 +2746,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAndExpression"
-    // InternalXbaseWithAnnotations.g:953:1: ruleXAndExpression returns [EObject current=null] : (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:954:1: ruleXAndExpression returns [EObject current=null] : (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) ;
     public final EObject ruleXAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2759,11 +2759,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:959:2: ( (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:960:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:960:2: ( (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:961:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:960:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
-            // InternalXbaseWithAnnotations.g:961:3: this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:961:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:962:3: this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -2781,7 +2781,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:969:3: ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:970:3: ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
             loop18:
             do {
                 int alt18=2;
@@ -2800,16 +2800,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:970:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
+            	    // InternalXbaseWithAnnotations.g:971:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:970:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:971:5: ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) )
+            	    // InternalXbaseWithAnnotations.g:971:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:972:5: ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:981:5: ( () ( ( ruleOpAnd ) ) )
-            	    // InternalXbaseWithAnnotations.g:982:6: () ( ( ruleOpAnd ) )
+            	    // InternalXbaseWithAnnotations.g:982:5: ( () ( ( ruleOpAnd ) ) )
+            	    // InternalXbaseWithAnnotations.g:983:6: () ( ( ruleOpAnd ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:982:6: ()
-            	    // InternalXbaseWithAnnotations.g:983:7: 
+            	    // InternalXbaseWithAnnotations.g:983:6: ()
+            	    // InternalXbaseWithAnnotations.g:984:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2821,11 +2821,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:989:6: ( ( ruleOpAnd ) )
-            	    // InternalXbaseWithAnnotations.g:990:7: ( ruleOpAnd )
+            	    // InternalXbaseWithAnnotations.g:990:6: ( ( ruleOpAnd ) )
+            	    // InternalXbaseWithAnnotations.g:991:7: ( ruleOpAnd )
             	    {
-            	    // InternalXbaseWithAnnotations.g:990:7: ( ruleOpAnd )
-            	    // InternalXbaseWithAnnotations.g:991:8: ruleOpAnd
+            	    // InternalXbaseWithAnnotations.g:991:7: ( ruleOpAnd )
+            	    // InternalXbaseWithAnnotations.g:992:8: ruleOpAnd
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2861,11 +2861,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1007:4: ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
-            	    // InternalXbaseWithAnnotations.g:1008:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
+            	    // InternalXbaseWithAnnotations.g:1008:4: ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1009:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1008:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
-            	    // InternalXbaseWithAnnotations.g:1009:6: lv_rightOperand_3_0= ruleXEqualityExpression
+            	    // InternalXbaseWithAnnotations.g:1009:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
+            	    // InternalXbaseWithAnnotations.g:1010:6: lv_rightOperand_3_0= ruleXEqualityExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2930,7 +2930,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpAnd"
-    // InternalXbaseWithAnnotations.g:1031:1: entryRuleOpAnd returns [String current=null] : iv_ruleOpAnd= ruleOpAnd EOF ;
+    // InternalXbaseWithAnnotations.g:1032:1: entryRuleOpAnd returns [String current=null] : iv_ruleOpAnd= ruleOpAnd EOF ;
     public final String entryRuleOpAnd() throws RecognitionException {
         String current = null;
 
@@ -2938,8 +2938,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1031:45: (iv_ruleOpAnd= ruleOpAnd EOF )
-            // InternalXbaseWithAnnotations.g:1032:2: iv_ruleOpAnd= ruleOpAnd EOF
+            // InternalXbaseWithAnnotations.g:1032:45: (iv_ruleOpAnd= ruleOpAnd EOF )
+            // InternalXbaseWithAnnotations.g:1033:2: iv_ruleOpAnd= ruleOpAnd EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpAndRule()); 
@@ -2970,7 +2970,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpAnd"
-    // InternalXbaseWithAnnotations.g:1038:1: ruleOpAnd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '&&' ;
+    // InternalXbaseWithAnnotations.g:1039:1: ruleOpAnd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '&&' ;
     public final AntlrDatatypeRuleToken ruleOpAnd() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2980,8 +2980,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1044:2: (kw= '&&' )
-            // InternalXbaseWithAnnotations.g:1045:2: kw= '&&'
+            // InternalXbaseWithAnnotations.g:1045:2: (kw= '&&' )
+            // InternalXbaseWithAnnotations.g:1046:2: kw= '&&'
             {
             kw=(Token)match(input,30,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3012,7 +3012,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXEqualityExpression"
-    // InternalXbaseWithAnnotations.g:1053:1: entryRuleXEqualityExpression returns [EObject current=null] : iv_ruleXEqualityExpression= ruleXEqualityExpression EOF ;
+    // InternalXbaseWithAnnotations.g:1054:1: entryRuleXEqualityExpression returns [EObject current=null] : iv_ruleXEqualityExpression= ruleXEqualityExpression EOF ;
     public final EObject entryRuleXEqualityExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3020,8 +3020,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1053:60: (iv_ruleXEqualityExpression= ruleXEqualityExpression EOF )
-            // InternalXbaseWithAnnotations.g:1054:2: iv_ruleXEqualityExpression= ruleXEqualityExpression EOF
+            // InternalXbaseWithAnnotations.g:1054:60: (iv_ruleXEqualityExpression= ruleXEqualityExpression EOF )
+            // InternalXbaseWithAnnotations.g:1055:2: iv_ruleXEqualityExpression= ruleXEqualityExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXEqualityExpressionRule()); 
@@ -3052,7 +3052,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXEqualityExpression"
-    // InternalXbaseWithAnnotations.g:1060:1: ruleXEqualityExpression returns [EObject current=null] : (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:1061:1: ruleXEqualityExpression returns [EObject current=null] : (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) ;
     public final EObject ruleXEqualityExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3065,11 +3065,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1066:2: ( (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:1067:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:1067:2: ( (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:1068:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:1067:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
-            // InternalXbaseWithAnnotations.g:1068:3: this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:1068:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:1069:3: this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -3087,7 +3087,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:1076:3: ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:1077:3: ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
             loop19:
             do {
                 int alt19=2;
@@ -3141,16 +3141,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt19) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:1077:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1078:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1077:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:1078:5: ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) )
+            	    // InternalXbaseWithAnnotations.g:1078:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:1079:5: ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1088:5: ( () ( ( ruleOpEquality ) ) )
-            	    // InternalXbaseWithAnnotations.g:1089:6: () ( ( ruleOpEquality ) )
+            	    // InternalXbaseWithAnnotations.g:1089:5: ( () ( ( ruleOpEquality ) ) )
+            	    // InternalXbaseWithAnnotations.g:1090:6: () ( ( ruleOpEquality ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1089:6: ()
-            	    // InternalXbaseWithAnnotations.g:1090:7: 
+            	    // InternalXbaseWithAnnotations.g:1090:6: ()
+            	    // InternalXbaseWithAnnotations.g:1091:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3162,11 +3162,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1096:6: ( ( ruleOpEquality ) )
-            	    // InternalXbaseWithAnnotations.g:1097:7: ( ruleOpEquality )
+            	    // InternalXbaseWithAnnotations.g:1097:6: ( ( ruleOpEquality ) )
+            	    // InternalXbaseWithAnnotations.g:1098:7: ( ruleOpEquality )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1097:7: ( ruleOpEquality )
-            	    // InternalXbaseWithAnnotations.g:1098:8: ruleOpEquality
+            	    // InternalXbaseWithAnnotations.g:1098:7: ( ruleOpEquality )
+            	    // InternalXbaseWithAnnotations.g:1099:8: ruleOpEquality
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3202,11 +3202,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1114:4: ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
-            	    // InternalXbaseWithAnnotations.g:1115:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
+            	    // InternalXbaseWithAnnotations.g:1115:4: ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1116:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1115:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
-            	    // InternalXbaseWithAnnotations.g:1116:6: lv_rightOperand_3_0= ruleXRelationalExpression
+            	    // InternalXbaseWithAnnotations.g:1116:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
+            	    // InternalXbaseWithAnnotations.g:1117:6: lv_rightOperand_3_0= ruleXRelationalExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3271,7 +3271,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpEquality"
-    // InternalXbaseWithAnnotations.g:1138:1: entryRuleOpEquality returns [String current=null] : iv_ruleOpEquality= ruleOpEquality EOF ;
+    // InternalXbaseWithAnnotations.g:1139:1: entryRuleOpEquality returns [String current=null] : iv_ruleOpEquality= ruleOpEquality EOF ;
     public final String entryRuleOpEquality() throws RecognitionException {
         String current = null;
 
@@ -3279,8 +3279,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1138:50: (iv_ruleOpEquality= ruleOpEquality EOF )
-            // InternalXbaseWithAnnotations.g:1139:2: iv_ruleOpEquality= ruleOpEquality EOF
+            // InternalXbaseWithAnnotations.g:1139:50: (iv_ruleOpEquality= ruleOpEquality EOF )
+            // InternalXbaseWithAnnotations.g:1140:2: iv_ruleOpEquality= ruleOpEquality EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpEqualityRule()); 
@@ -3311,7 +3311,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpEquality"
-    // InternalXbaseWithAnnotations.g:1145:1: ruleOpEquality returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) ;
+    // InternalXbaseWithAnnotations.g:1146:1: ruleOpEquality returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) ;
     public final AntlrDatatypeRuleToken ruleOpEquality() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3321,10 +3321,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1151:2: ( (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) )
-            // InternalXbaseWithAnnotations.g:1152:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
+            // InternalXbaseWithAnnotations.g:1152:2: ( (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) )
+            // InternalXbaseWithAnnotations.g:1153:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
             {
-            // InternalXbaseWithAnnotations.g:1152:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
+            // InternalXbaseWithAnnotations.g:1153:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
             int alt20=4;
             switch ( input.LA(1) ) {
             case 31:
@@ -3357,7 +3357,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt20) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1153:3: kw= '=='
+                    // InternalXbaseWithAnnotations.g:1154:3: kw= '=='
                     {
                     kw=(Token)match(input,31,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3370,7 +3370,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1159:3: kw= '!='
+                    // InternalXbaseWithAnnotations.g:1160:3: kw= '!='
                     {
                     kw=(Token)match(input,32,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3383,7 +3383,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:1165:3: kw= '==='
+                    // InternalXbaseWithAnnotations.g:1166:3: kw= '==='
                     {
                     kw=(Token)match(input,33,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3396,7 +3396,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:1171:3: kw= '!=='
+                    // InternalXbaseWithAnnotations.g:1172:3: kw= '!=='
                     {
                     kw=(Token)match(input,34,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3433,7 +3433,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXRelationalExpression"
-    // InternalXbaseWithAnnotations.g:1180:1: entryRuleXRelationalExpression returns [EObject current=null] : iv_ruleXRelationalExpression= ruleXRelationalExpression EOF ;
+    // InternalXbaseWithAnnotations.g:1181:1: entryRuleXRelationalExpression returns [EObject current=null] : iv_ruleXRelationalExpression= ruleXRelationalExpression EOF ;
     public final EObject entryRuleXRelationalExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3441,8 +3441,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1180:62: (iv_ruleXRelationalExpression= ruleXRelationalExpression EOF )
-            // InternalXbaseWithAnnotations.g:1181:2: iv_ruleXRelationalExpression= ruleXRelationalExpression EOF
+            // InternalXbaseWithAnnotations.g:1181:62: (iv_ruleXRelationalExpression= ruleXRelationalExpression EOF )
+            // InternalXbaseWithAnnotations.g:1182:2: iv_ruleXRelationalExpression= ruleXRelationalExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXRelationalExpressionRule()); 
@@ -3473,7 +3473,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXRelationalExpression"
-    // InternalXbaseWithAnnotations.g:1187:1: ruleXRelationalExpression returns [EObject current=null] : (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:1188:1: ruleXRelationalExpression returns [EObject current=null] : (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) ;
     public final EObject ruleXRelationalExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3489,11 +3489,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1193:2: ( (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:1194:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
+            // InternalXbaseWithAnnotations.g:1194:2: ( (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:1195:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:1194:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
-            // InternalXbaseWithAnnotations.g:1195:3: this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
+            // InternalXbaseWithAnnotations.g:1195:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
+            // InternalXbaseWithAnnotations.g:1196:3: this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -3511,7 +3511,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:1203:3: ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
+            // InternalXbaseWithAnnotations.g:1204:3: ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
             loop21:
             do {
                 int alt21=3;
@@ -3565,19 +3565,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt21) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:1204:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
+            	    // InternalXbaseWithAnnotations.g:1205:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1204:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
-            	    // InternalXbaseWithAnnotations.g:1205:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalXbaseWithAnnotations.g:1205:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
+            	    // InternalXbaseWithAnnotations.g:1206:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1205:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) )
-            	    // InternalXbaseWithAnnotations.g:1206:6: ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' )
+            	    // InternalXbaseWithAnnotations.g:1206:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) )
+            	    // InternalXbaseWithAnnotations.g:1207:6: ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1212:6: ( () otherlv_2= 'instanceof' )
-            	    // InternalXbaseWithAnnotations.g:1213:7: () otherlv_2= 'instanceof'
+            	    // InternalXbaseWithAnnotations.g:1213:6: ( () otherlv_2= 'instanceof' )
+            	    // InternalXbaseWithAnnotations.g:1214:7: () otherlv_2= 'instanceof'
             	    {
-            	    // InternalXbaseWithAnnotations.g:1213:7: ()
-            	    // InternalXbaseWithAnnotations.g:1214:8: 
+            	    // InternalXbaseWithAnnotations.g:1214:7: ()
+            	    // InternalXbaseWithAnnotations.g:1215:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3601,11 +3601,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1226:5: ( (lv_type_3_0= ruleJvmTypeReference ) )
-            	    // InternalXbaseWithAnnotations.g:1227:6: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalXbaseWithAnnotations.g:1227:5: ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalXbaseWithAnnotations.g:1228:6: (lv_type_3_0= ruleJvmTypeReference )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1227:6: (lv_type_3_0= ruleJvmTypeReference )
-            	    // InternalXbaseWithAnnotations.g:1228:7: lv_type_3_0= ruleJvmTypeReference
+            	    // InternalXbaseWithAnnotations.g:1228:6: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalXbaseWithAnnotations.g:1229:7: lv_type_3_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3643,19 +3643,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    }
             	    break;
             	case 2 :
-            	    // InternalXbaseWithAnnotations.g:1247:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
+            	    // InternalXbaseWithAnnotations.g:1248:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1247:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
-            	    // InternalXbaseWithAnnotations.g:1248:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1248:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
+            	    // InternalXbaseWithAnnotations.g:1249:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1248:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:1249:6: ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) )
+            	    // InternalXbaseWithAnnotations.g:1249:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:1250:6: ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1259:6: ( () ( ( ruleOpCompare ) ) )
-            	    // InternalXbaseWithAnnotations.g:1260:7: () ( ( ruleOpCompare ) )
+            	    // InternalXbaseWithAnnotations.g:1260:6: ( () ( ( ruleOpCompare ) ) )
+            	    // InternalXbaseWithAnnotations.g:1261:7: () ( ( ruleOpCompare ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1260:7: ()
-            	    // InternalXbaseWithAnnotations.g:1261:8: 
+            	    // InternalXbaseWithAnnotations.g:1261:7: ()
+            	    // InternalXbaseWithAnnotations.g:1262:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3667,11 +3667,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1267:7: ( ( ruleOpCompare ) )
-            	    // InternalXbaseWithAnnotations.g:1268:8: ( ruleOpCompare )
+            	    // InternalXbaseWithAnnotations.g:1268:7: ( ( ruleOpCompare ) )
+            	    // InternalXbaseWithAnnotations.g:1269:8: ( ruleOpCompare )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1268:8: ( ruleOpCompare )
-            	    // InternalXbaseWithAnnotations.g:1269:9: ruleOpCompare
+            	    // InternalXbaseWithAnnotations.g:1269:8: ( ruleOpCompare )
+            	    // InternalXbaseWithAnnotations.g:1270:9: ruleOpCompare
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3707,11 +3707,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1285:5: ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
-            	    // InternalXbaseWithAnnotations.g:1286:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
+            	    // InternalXbaseWithAnnotations.g:1286:5: ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1287:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1286:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
-            	    // InternalXbaseWithAnnotations.g:1287:7: lv_rightOperand_6_0= ruleXOtherOperatorExpression
+            	    // InternalXbaseWithAnnotations.g:1287:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
+            	    // InternalXbaseWithAnnotations.g:1288:7: lv_rightOperand_6_0= ruleXOtherOperatorExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3779,7 +3779,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpCompare"
-    // InternalXbaseWithAnnotations.g:1310:1: entryRuleOpCompare returns [String current=null] : iv_ruleOpCompare= ruleOpCompare EOF ;
+    // InternalXbaseWithAnnotations.g:1311:1: entryRuleOpCompare returns [String current=null] : iv_ruleOpCompare= ruleOpCompare EOF ;
     public final String entryRuleOpCompare() throws RecognitionException {
         String current = null;
 
@@ -3787,8 +3787,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1310:49: (iv_ruleOpCompare= ruleOpCompare EOF )
-            // InternalXbaseWithAnnotations.g:1311:2: iv_ruleOpCompare= ruleOpCompare EOF
+            // InternalXbaseWithAnnotations.g:1311:49: (iv_ruleOpCompare= ruleOpCompare EOF )
+            // InternalXbaseWithAnnotations.g:1312:2: iv_ruleOpCompare= ruleOpCompare EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpCompareRule()); 
@@ -3819,7 +3819,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpCompare"
-    // InternalXbaseWithAnnotations.g:1317:1: ruleOpCompare returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) ;
+    // InternalXbaseWithAnnotations.g:1318:1: ruleOpCompare returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) ;
     public final AntlrDatatypeRuleToken ruleOpCompare() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3829,10 +3829,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1323:2: ( (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) )
-            // InternalXbaseWithAnnotations.g:1324:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
+            // InternalXbaseWithAnnotations.g:1324:2: ( (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) )
+            // InternalXbaseWithAnnotations.g:1325:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
             {
-            // InternalXbaseWithAnnotations.g:1324:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
+            // InternalXbaseWithAnnotations.g:1325:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
             int alt22=4;
             switch ( input.LA(1) ) {
             case 28:
@@ -3874,7 +3874,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt22) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1325:3: kw= '>='
+                    // InternalXbaseWithAnnotations.g:1326:3: kw= '>='
                     {
                     kw=(Token)match(input,28,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3887,10 +3887,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1331:3: (kw= '<' kw= '=' )
+                    // InternalXbaseWithAnnotations.g:1332:3: (kw= '<' kw= '=' )
                     {
-                    // InternalXbaseWithAnnotations.g:1331:3: (kw= '<' kw= '=' )
-                    // InternalXbaseWithAnnotations.g:1332:4: kw= '<' kw= '='
+                    // InternalXbaseWithAnnotations.g:1332:3: (kw= '<' kw= '=' )
+                    // InternalXbaseWithAnnotations.g:1333:4: kw= '<' kw= '='
                     {
                     kw=(Token)match(input,26,FOLLOW_8); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3913,7 +3913,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:1344:3: kw= '>'
+                    // InternalXbaseWithAnnotations.g:1345:3: kw= '>'
                     {
                     kw=(Token)match(input,27,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3926,7 +3926,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:1350:3: kw= '<'
+                    // InternalXbaseWithAnnotations.g:1351:3: kw= '<'
                     {
                     kw=(Token)match(input,26,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3963,7 +3963,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXOtherOperatorExpression"
-    // InternalXbaseWithAnnotations.g:1359:1: entryRuleXOtherOperatorExpression returns [EObject current=null] : iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF ;
+    // InternalXbaseWithAnnotations.g:1360:1: entryRuleXOtherOperatorExpression returns [EObject current=null] : iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF ;
     public final EObject entryRuleXOtherOperatorExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3971,8 +3971,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1359:65: (iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF )
-            // InternalXbaseWithAnnotations.g:1360:2: iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF
+            // InternalXbaseWithAnnotations.g:1360:65: (iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF )
+            // InternalXbaseWithAnnotations.g:1361:2: iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXOtherOperatorExpressionRule()); 
@@ -4003,7 +4003,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXOtherOperatorExpression"
-    // InternalXbaseWithAnnotations.g:1366:1: ruleXOtherOperatorExpression returns [EObject current=null] : (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:1367:1: ruleXOtherOperatorExpression returns [EObject current=null] : (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) ;
     public final EObject ruleXOtherOperatorExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4016,11 +4016,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1372:2: ( (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:1373:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:1373:2: ( (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:1374:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:1373:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
-            // InternalXbaseWithAnnotations.g:1374:3: this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:1374:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:1375:3: this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -4038,23 +4038,23 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:1382:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:1383:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
             loop23:
             do {
                 int alt23=2;
                 alt23 = dfa23.predict(input);
                 switch (alt23) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:1383:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1384:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1383:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:1384:5: ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) )
+            	    // InternalXbaseWithAnnotations.g:1384:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:1385:5: ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1394:5: ( () ( ( ruleOpOther ) ) )
-            	    // InternalXbaseWithAnnotations.g:1395:6: () ( ( ruleOpOther ) )
+            	    // InternalXbaseWithAnnotations.g:1395:5: ( () ( ( ruleOpOther ) ) )
+            	    // InternalXbaseWithAnnotations.g:1396:6: () ( ( ruleOpOther ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1395:6: ()
-            	    // InternalXbaseWithAnnotations.g:1396:7: 
+            	    // InternalXbaseWithAnnotations.g:1396:6: ()
+            	    // InternalXbaseWithAnnotations.g:1397:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4066,11 +4066,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1402:6: ( ( ruleOpOther ) )
-            	    // InternalXbaseWithAnnotations.g:1403:7: ( ruleOpOther )
+            	    // InternalXbaseWithAnnotations.g:1403:6: ( ( ruleOpOther ) )
+            	    // InternalXbaseWithAnnotations.g:1404:7: ( ruleOpOther )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1403:7: ( ruleOpOther )
-            	    // InternalXbaseWithAnnotations.g:1404:8: ruleOpOther
+            	    // InternalXbaseWithAnnotations.g:1404:7: ( ruleOpOther )
+            	    // InternalXbaseWithAnnotations.g:1405:8: ruleOpOther
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4106,11 +4106,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1420:4: ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
-            	    // InternalXbaseWithAnnotations.g:1421:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
+            	    // InternalXbaseWithAnnotations.g:1421:4: ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1422:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1421:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
-            	    // InternalXbaseWithAnnotations.g:1422:6: lv_rightOperand_3_0= ruleXAdditiveExpression
+            	    // InternalXbaseWithAnnotations.g:1422:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
+            	    // InternalXbaseWithAnnotations.g:1423:6: lv_rightOperand_3_0= ruleXAdditiveExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4175,7 +4175,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpOther"
-    // InternalXbaseWithAnnotations.g:1444:1: entryRuleOpOther returns [String current=null] : iv_ruleOpOther= ruleOpOther EOF ;
+    // InternalXbaseWithAnnotations.g:1445:1: entryRuleOpOther returns [String current=null] : iv_ruleOpOther= ruleOpOther EOF ;
     public final String entryRuleOpOther() throws RecognitionException {
         String current = null;
 
@@ -4183,8 +4183,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1444:47: (iv_ruleOpOther= ruleOpOther EOF )
-            // InternalXbaseWithAnnotations.g:1445:2: iv_ruleOpOther= ruleOpOther EOF
+            // InternalXbaseWithAnnotations.g:1445:47: (iv_ruleOpOther= ruleOpOther EOF )
+            // InternalXbaseWithAnnotations.g:1446:2: iv_ruleOpOther= ruleOpOther EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpOtherRule()); 
@@ -4215,7 +4215,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpOther"
-    // InternalXbaseWithAnnotations.g:1451:1: ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) ;
+    // InternalXbaseWithAnnotations.g:1452:1: ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) ;
     public final AntlrDatatypeRuleToken ruleOpOther() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4225,15 +4225,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1457:2: ( (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) )
-            // InternalXbaseWithAnnotations.g:1458:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
+            // InternalXbaseWithAnnotations.g:1458:2: ( (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) )
+            // InternalXbaseWithAnnotations.g:1459:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
             {
-            // InternalXbaseWithAnnotations.g:1458:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
+            // InternalXbaseWithAnnotations.g:1459:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
             int alt26=9;
             alt26 = dfa26.predict(input);
             switch (alt26) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1459:3: kw= '->'
+                    // InternalXbaseWithAnnotations.g:1460:3: kw= '->'
                     {
                     kw=(Token)match(input,36,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4246,7 +4246,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1465:3: kw= '..<'
+                    // InternalXbaseWithAnnotations.g:1466:3: kw= '..<'
                     {
                     kw=(Token)match(input,37,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4259,10 +4259,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:1471:3: (kw= '>' kw= '..' )
+                    // InternalXbaseWithAnnotations.g:1472:3: (kw= '>' kw= '..' )
                     {
-                    // InternalXbaseWithAnnotations.g:1471:3: (kw= '>' kw= '..' )
-                    // InternalXbaseWithAnnotations.g:1472:4: kw= '>' kw= '..'
+                    // InternalXbaseWithAnnotations.g:1472:3: (kw= '>' kw= '..' )
+                    // InternalXbaseWithAnnotations.g:1473:4: kw= '>' kw= '..'
                     {
                     kw=(Token)match(input,27,FOLLOW_24); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4285,7 +4285,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:1484:3: kw= '..'
+                    // InternalXbaseWithAnnotations.g:1485:3: kw= '..'
                     {
                     kw=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4298,7 +4298,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalXbaseWithAnnotations.g:1490:3: kw= '=>'
+                    // InternalXbaseWithAnnotations.g:1491:3: kw= '=>'
                     {
                     kw=(Token)match(input,39,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4311,10 +4311,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 6 :
-                    // InternalXbaseWithAnnotations.g:1496:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
+                    // InternalXbaseWithAnnotations.g:1497:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
                     {
-                    // InternalXbaseWithAnnotations.g:1496:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
-                    // InternalXbaseWithAnnotations.g:1497:4: kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
+                    // InternalXbaseWithAnnotations.g:1497:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
+                    // InternalXbaseWithAnnotations.g:1498:4: kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
                     {
                     kw=(Token)match(input,27,FOLLOW_25); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4323,7 +4323,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:1502:4: ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
+                    // InternalXbaseWithAnnotations.g:1503:4: ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
                     int alt24=2;
                     int LA24_0 = input.LA(1);
 
@@ -4353,13 +4353,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt24) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:1503:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
+                            // InternalXbaseWithAnnotations.g:1504:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
                             {
-                            // InternalXbaseWithAnnotations.g:1503:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
-                            // InternalXbaseWithAnnotations.g:1504:6: ( ( '>' '>' ) )=> (kw= '>' kw= '>' )
+                            // InternalXbaseWithAnnotations.g:1504:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
+                            // InternalXbaseWithAnnotations.g:1505:6: ( ( '>' '>' ) )=> (kw= '>' kw= '>' )
                             {
-                            // InternalXbaseWithAnnotations.g:1509:6: (kw= '>' kw= '>' )
-                            // InternalXbaseWithAnnotations.g:1510:7: kw= '>' kw= '>'
+                            // InternalXbaseWithAnnotations.g:1510:6: (kw= '>' kw= '>' )
+                            // InternalXbaseWithAnnotations.g:1511:7: kw= '>' kw= '>'
                             {
                             kw=(Token)match(input,27,FOLLOW_25); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -4385,7 +4385,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:1523:5: kw= '>'
+                            // InternalXbaseWithAnnotations.g:1524:5: kw= '>'
                             {
                             kw=(Token)match(input,27,FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -4407,10 +4407,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 7 :
-                    // InternalXbaseWithAnnotations.g:1531:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
+                    // InternalXbaseWithAnnotations.g:1532:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
                     {
-                    // InternalXbaseWithAnnotations.g:1531:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
-                    // InternalXbaseWithAnnotations.g:1532:4: kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
+                    // InternalXbaseWithAnnotations.g:1532:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
+                    // InternalXbaseWithAnnotations.g:1533:4: kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
                     {
                     kw=(Token)match(input,26,FOLLOW_26); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4419,7 +4419,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:1537:4: ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
+                    // InternalXbaseWithAnnotations.g:1538:4: ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
                     int alt25=3;
                     int LA25_0 = input.LA(1);
 
@@ -4452,13 +4452,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt25) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:1538:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
+                            // InternalXbaseWithAnnotations.g:1539:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
                             {
-                            // InternalXbaseWithAnnotations.g:1538:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
-                            // InternalXbaseWithAnnotations.g:1539:6: ( ( '<' '<' ) )=> (kw= '<' kw= '<' )
+                            // InternalXbaseWithAnnotations.g:1539:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
+                            // InternalXbaseWithAnnotations.g:1540:6: ( ( '<' '<' ) )=> (kw= '<' kw= '<' )
                             {
-                            // InternalXbaseWithAnnotations.g:1544:6: (kw= '<' kw= '<' )
-                            // InternalXbaseWithAnnotations.g:1545:7: kw= '<' kw= '<'
+                            // InternalXbaseWithAnnotations.g:1545:6: (kw= '<' kw= '<' )
+                            // InternalXbaseWithAnnotations.g:1546:7: kw= '<' kw= '<'
                             {
                             kw=(Token)match(input,26,FOLLOW_15); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -4484,7 +4484,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:1558:5: kw= '<'
+                            // InternalXbaseWithAnnotations.g:1559:5: kw= '<'
                             {
                             kw=(Token)match(input,26,FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -4497,7 +4497,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 3 :
-                            // InternalXbaseWithAnnotations.g:1564:5: kw= '=>'
+                            // InternalXbaseWithAnnotations.g:1565:5: kw= '=>'
                             {
                             kw=(Token)match(input,39,FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -4519,7 +4519,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 8 :
-                    // InternalXbaseWithAnnotations.g:1572:3: kw= '<>'
+                    // InternalXbaseWithAnnotations.g:1573:3: kw= '<>'
                     {
                     kw=(Token)match(input,40,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4532,7 +4532,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 9 :
-                    // InternalXbaseWithAnnotations.g:1578:3: kw= '?:'
+                    // InternalXbaseWithAnnotations.g:1579:3: kw= '?:'
                     {
                     kw=(Token)match(input,41,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4569,7 +4569,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXAdditiveExpression"
-    // InternalXbaseWithAnnotations.g:1587:1: entryRuleXAdditiveExpression returns [EObject current=null] : iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF ;
+    // InternalXbaseWithAnnotations.g:1588:1: entryRuleXAdditiveExpression returns [EObject current=null] : iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF ;
     public final EObject entryRuleXAdditiveExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4577,8 +4577,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1587:60: (iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF )
-            // InternalXbaseWithAnnotations.g:1588:2: iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF
+            // InternalXbaseWithAnnotations.g:1588:60: (iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF )
+            // InternalXbaseWithAnnotations.g:1589:2: iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAdditiveExpressionRule()); 
@@ -4609,7 +4609,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAdditiveExpression"
-    // InternalXbaseWithAnnotations.g:1594:1: ruleXAdditiveExpression returns [EObject current=null] : (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:1595:1: ruleXAdditiveExpression returns [EObject current=null] : (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) ;
     public final EObject ruleXAdditiveExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4622,11 +4622,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1600:2: ( (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:1601:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:1601:2: ( (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:1602:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:1601:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
-            // InternalXbaseWithAnnotations.g:1602:3: this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:1602:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
+            // InternalXbaseWithAnnotations.g:1603:3: this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -4644,7 +4644,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:1610:3: ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
+            // InternalXbaseWithAnnotations.g:1611:3: ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
             loop27:
             do {
                 int alt27=2;
@@ -4672,16 +4672,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt27) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:1611:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1612:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1611:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:1612:5: ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) )
+            	    // InternalXbaseWithAnnotations.g:1612:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:1613:5: ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1622:5: ( () ( ( ruleOpAdd ) ) )
-            	    // InternalXbaseWithAnnotations.g:1623:6: () ( ( ruleOpAdd ) )
+            	    // InternalXbaseWithAnnotations.g:1623:5: ( () ( ( ruleOpAdd ) ) )
+            	    // InternalXbaseWithAnnotations.g:1624:6: () ( ( ruleOpAdd ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1623:6: ()
-            	    // InternalXbaseWithAnnotations.g:1624:7: 
+            	    // InternalXbaseWithAnnotations.g:1624:6: ()
+            	    // InternalXbaseWithAnnotations.g:1625:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4693,11 +4693,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1630:6: ( ( ruleOpAdd ) )
-            	    // InternalXbaseWithAnnotations.g:1631:7: ( ruleOpAdd )
+            	    // InternalXbaseWithAnnotations.g:1631:6: ( ( ruleOpAdd ) )
+            	    // InternalXbaseWithAnnotations.g:1632:7: ( ruleOpAdd )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1631:7: ( ruleOpAdd )
-            	    // InternalXbaseWithAnnotations.g:1632:8: ruleOpAdd
+            	    // InternalXbaseWithAnnotations.g:1632:7: ( ruleOpAdd )
+            	    // InternalXbaseWithAnnotations.g:1633:8: ruleOpAdd
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4733,11 +4733,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1648:4: ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
-            	    // InternalXbaseWithAnnotations.g:1649:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
+            	    // InternalXbaseWithAnnotations.g:1649:4: ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
+            	    // InternalXbaseWithAnnotations.g:1650:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1649:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
-            	    // InternalXbaseWithAnnotations.g:1650:6: lv_rightOperand_3_0= ruleXMultiplicativeExpression
+            	    // InternalXbaseWithAnnotations.g:1650:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
+            	    // InternalXbaseWithAnnotations.g:1651:6: lv_rightOperand_3_0= ruleXMultiplicativeExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4802,7 +4802,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpAdd"
-    // InternalXbaseWithAnnotations.g:1672:1: entryRuleOpAdd returns [String current=null] : iv_ruleOpAdd= ruleOpAdd EOF ;
+    // InternalXbaseWithAnnotations.g:1673:1: entryRuleOpAdd returns [String current=null] : iv_ruleOpAdd= ruleOpAdd EOF ;
     public final String entryRuleOpAdd() throws RecognitionException {
         String current = null;
 
@@ -4810,8 +4810,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1672:45: (iv_ruleOpAdd= ruleOpAdd EOF )
-            // InternalXbaseWithAnnotations.g:1673:2: iv_ruleOpAdd= ruleOpAdd EOF
+            // InternalXbaseWithAnnotations.g:1673:45: (iv_ruleOpAdd= ruleOpAdd EOF )
+            // InternalXbaseWithAnnotations.g:1674:2: iv_ruleOpAdd= ruleOpAdd EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpAddRule()); 
@@ -4842,7 +4842,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpAdd"
-    // InternalXbaseWithAnnotations.g:1679:1: ruleOpAdd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+' | kw= '-' ) ;
+    // InternalXbaseWithAnnotations.g:1680:1: ruleOpAdd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+' | kw= '-' ) ;
     public final AntlrDatatypeRuleToken ruleOpAdd() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4852,10 +4852,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1685:2: ( (kw= '+' | kw= '-' ) )
-            // InternalXbaseWithAnnotations.g:1686:2: (kw= '+' | kw= '-' )
+            // InternalXbaseWithAnnotations.g:1686:2: ( (kw= '+' | kw= '-' ) )
+            // InternalXbaseWithAnnotations.g:1687:2: (kw= '+' | kw= '-' )
             {
-            // InternalXbaseWithAnnotations.g:1686:2: (kw= '+' | kw= '-' )
+            // InternalXbaseWithAnnotations.g:1687:2: (kw= '+' | kw= '-' )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -4874,7 +4874,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt28) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1687:3: kw= '+'
+                    // InternalXbaseWithAnnotations.g:1688:3: kw= '+'
                     {
                     kw=(Token)match(input,42,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4887,7 +4887,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1693:3: kw= '-'
+                    // InternalXbaseWithAnnotations.g:1694:3: kw= '-'
                     {
                     kw=(Token)match(input,43,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4924,7 +4924,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXMultiplicativeExpression"
-    // InternalXbaseWithAnnotations.g:1702:1: entryRuleXMultiplicativeExpression returns [EObject current=null] : iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF ;
+    // InternalXbaseWithAnnotations.g:1703:1: entryRuleXMultiplicativeExpression returns [EObject current=null] : iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF ;
     public final EObject entryRuleXMultiplicativeExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4932,8 +4932,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1702:66: (iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF )
-            // InternalXbaseWithAnnotations.g:1703:2: iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF
+            // InternalXbaseWithAnnotations.g:1703:66: (iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF )
+            // InternalXbaseWithAnnotations.g:1704:2: iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXMultiplicativeExpressionRule()); 
@@ -4964,7 +4964,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXMultiplicativeExpression"
-    // InternalXbaseWithAnnotations.g:1709:1: ruleXMultiplicativeExpression returns [EObject current=null] : (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:1710:1: ruleXMultiplicativeExpression returns [EObject current=null] : (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) ;
     public final EObject ruleXMultiplicativeExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4977,11 +4977,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1715:2: ( (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:1716:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
+            // InternalXbaseWithAnnotations.g:1716:2: ( (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:1717:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:1716:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
-            // InternalXbaseWithAnnotations.g:1717:3: this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
+            // InternalXbaseWithAnnotations.g:1717:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
+            // InternalXbaseWithAnnotations.g:1718:3: this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -4999,7 +4999,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:1725:3: ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
+            // InternalXbaseWithAnnotations.g:1726:3: ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
             loop29:
             do {
                 int alt29=2;
@@ -5053,16 +5053,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt29) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:1726:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
+            	    // InternalXbaseWithAnnotations.g:1727:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1726:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:1727:5: ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) )
+            	    // InternalXbaseWithAnnotations.g:1727:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:1728:5: ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1737:5: ( () ( ( ruleOpMulti ) ) )
-            	    // InternalXbaseWithAnnotations.g:1738:6: () ( ( ruleOpMulti ) )
+            	    // InternalXbaseWithAnnotations.g:1738:5: ( () ( ( ruleOpMulti ) ) )
+            	    // InternalXbaseWithAnnotations.g:1739:6: () ( ( ruleOpMulti ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1738:6: ()
-            	    // InternalXbaseWithAnnotations.g:1739:7: 
+            	    // InternalXbaseWithAnnotations.g:1739:6: ()
+            	    // InternalXbaseWithAnnotations.g:1740:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5074,11 +5074,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1745:6: ( ( ruleOpMulti ) )
-            	    // InternalXbaseWithAnnotations.g:1746:7: ( ruleOpMulti )
+            	    // InternalXbaseWithAnnotations.g:1746:6: ( ( ruleOpMulti ) )
+            	    // InternalXbaseWithAnnotations.g:1747:7: ( ruleOpMulti )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1746:7: ( ruleOpMulti )
-            	    // InternalXbaseWithAnnotations.g:1747:8: ruleOpMulti
+            	    // InternalXbaseWithAnnotations.g:1747:7: ( ruleOpMulti )
+            	    // InternalXbaseWithAnnotations.g:1748:8: ruleOpMulti
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5114,11 +5114,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1763:4: ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
-            	    // InternalXbaseWithAnnotations.g:1764:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
+            	    // InternalXbaseWithAnnotations.g:1764:4: ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
+            	    // InternalXbaseWithAnnotations.g:1765:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1764:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
-            	    // InternalXbaseWithAnnotations.g:1765:6: lv_rightOperand_3_0= ruleXUnaryOperation
+            	    // InternalXbaseWithAnnotations.g:1765:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
+            	    // InternalXbaseWithAnnotations.g:1766:6: lv_rightOperand_3_0= ruleXUnaryOperation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5183,7 +5183,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpMulti"
-    // InternalXbaseWithAnnotations.g:1787:1: entryRuleOpMulti returns [String current=null] : iv_ruleOpMulti= ruleOpMulti EOF ;
+    // InternalXbaseWithAnnotations.g:1788:1: entryRuleOpMulti returns [String current=null] : iv_ruleOpMulti= ruleOpMulti EOF ;
     public final String entryRuleOpMulti() throws RecognitionException {
         String current = null;
 
@@ -5191,8 +5191,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1787:47: (iv_ruleOpMulti= ruleOpMulti EOF )
-            // InternalXbaseWithAnnotations.g:1788:2: iv_ruleOpMulti= ruleOpMulti EOF
+            // InternalXbaseWithAnnotations.g:1788:47: (iv_ruleOpMulti= ruleOpMulti EOF )
+            // InternalXbaseWithAnnotations.g:1789:2: iv_ruleOpMulti= ruleOpMulti EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpMultiRule()); 
@@ -5223,7 +5223,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpMulti"
-    // InternalXbaseWithAnnotations.g:1794:1: ruleOpMulti returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) ;
+    // InternalXbaseWithAnnotations.g:1795:1: ruleOpMulti returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) ;
     public final AntlrDatatypeRuleToken ruleOpMulti() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -5233,10 +5233,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1800:2: ( (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) )
-            // InternalXbaseWithAnnotations.g:1801:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
+            // InternalXbaseWithAnnotations.g:1801:2: ( (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) )
+            // InternalXbaseWithAnnotations.g:1802:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             {
-            // InternalXbaseWithAnnotations.g:1801:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
+            // InternalXbaseWithAnnotations.g:1802:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             int alt30=4;
             switch ( input.LA(1) ) {
             case 44:
@@ -5269,7 +5269,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt30) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1802:3: kw= '*'
+                    // InternalXbaseWithAnnotations.g:1803:3: kw= '*'
                     {
                     kw=(Token)match(input,44,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5282,7 +5282,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1808:3: kw= '**'
+                    // InternalXbaseWithAnnotations.g:1809:3: kw= '**'
                     {
                     kw=(Token)match(input,45,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5295,7 +5295,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:1814:3: kw= '/'
+                    // InternalXbaseWithAnnotations.g:1815:3: kw= '/'
                     {
                     kw=(Token)match(input,46,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5308,7 +5308,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:1820:3: kw= '%'
+                    // InternalXbaseWithAnnotations.g:1821:3: kw= '%'
                     {
                     kw=(Token)match(input,47,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5345,7 +5345,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXUnaryOperation"
-    // InternalXbaseWithAnnotations.g:1829:1: entryRuleXUnaryOperation returns [EObject current=null] : iv_ruleXUnaryOperation= ruleXUnaryOperation EOF ;
+    // InternalXbaseWithAnnotations.g:1830:1: entryRuleXUnaryOperation returns [EObject current=null] : iv_ruleXUnaryOperation= ruleXUnaryOperation EOF ;
     public final EObject entryRuleXUnaryOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5353,8 +5353,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1829:56: (iv_ruleXUnaryOperation= ruleXUnaryOperation EOF )
-            // InternalXbaseWithAnnotations.g:1830:2: iv_ruleXUnaryOperation= ruleXUnaryOperation EOF
+            // InternalXbaseWithAnnotations.g:1830:56: (iv_ruleXUnaryOperation= ruleXUnaryOperation EOF )
+            // InternalXbaseWithAnnotations.g:1831:2: iv_ruleXUnaryOperation= ruleXUnaryOperation EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXUnaryOperationRule()); 
@@ -5385,7 +5385,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXUnaryOperation"
-    // InternalXbaseWithAnnotations.g:1836:1: ruleXUnaryOperation returns [EObject current=null] : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) ;
+    // InternalXbaseWithAnnotations.g:1837:1: ruleXUnaryOperation returns [EObject current=null] : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) ;
     public final EObject ruleXUnaryOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5398,10 +5398,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1842:2: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) )
-            // InternalXbaseWithAnnotations.g:1843:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
+            // InternalXbaseWithAnnotations.g:1843:2: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) )
+            // InternalXbaseWithAnnotations.g:1844:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
             {
-            // InternalXbaseWithAnnotations.g:1843:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
+            // InternalXbaseWithAnnotations.g:1844:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -5420,13 +5420,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt31) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1844:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
+                    // InternalXbaseWithAnnotations.g:1845:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:1844:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
-                    // InternalXbaseWithAnnotations.g:1845:4: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) )
+                    // InternalXbaseWithAnnotations.g:1845:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
+                    // InternalXbaseWithAnnotations.g:1846:4: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) )
                     {
-                    // InternalXbaseWithAnnotations.g:1845:4: ()
-                    // InternalXbaseWithAnnotations.g:1846:5: 
+                    // InternalXbaseWithAnnotations.g:1846:4: ()
+                    // InternalXbaseWithAnnotations.g:1847:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5438,11 +5438,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:1852:4: ( ( ruleOpUnary ) )
-                    // InternalXbaseWithAnnotations.g:1853:5: ( ruleOpUnary )
+                    // InternalXbaseWithAnnotations.g:1853:4: ( ( ruleOpUnary ) )
+                    // InternalXbaseWithAnnotations.g:1854:5: ( ruleOpUnary )
                     {
-                    // InternalXbaseWithAnnotations.g:1853:5: ( ruleOpUnary )
-                    // InternalXbaseWithAnnotations.g:1854:6: ruleOpUnary
+                    // InternalXbaseWithAnnotations.g:1854:5: ( ruleOpUnary )
+                    // InternalXbaseWithAnnotations.g:1855:6: ruleOpUnary
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5472,11 +5472,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:1868:4: ( (lv_operand_2_0= ruleXUnaryOperation ) )
-                    // InternalXbaseWithAnnotations.g:1869:5: (lv_operand_2_0= ruleXUnaryOperation )
+                    // InternalXbaseWithAnnotations.g:1869:4: ( (lv_operand_2_0= ruleXUnaryOperation ) )
+                    // InternalXbaseWithAnnotations.g:1870:5: (lv_operand_2_0= ruleXUnaryOperation )
                     {
-                    // InternalXbaseWithAnnotations.g:1869:5: (lv_operand_2_0= ruleXUnaryOperation )
-                    // InternalXbaseWithAnnotations.g:1870:6: lv_operand_2_0= ruleXUnaryOperation
+                    // InternalXbaseWithAnnotations.g:1870:5: (lv_operand_2_0= ruleXUnaryOperation )
+                    // InternalXbaseWithAnnotations.g:1871:6: lv_operand_2_0= ruleXUnaryOperation
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5514,7 +5514,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1889:3: this_XCastedExpression_3= ruleXCastedExpression
+                    // InternalXbaseWithAnnotations.g:1890:3: this_XCastedExpression_3= ruleXCastedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5560,7 +5560,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpUnary"
-    // InternalXbaseWithAnnotations.g:1901:1: entryRuleOpUnary returns [String current=null] : iv_ruleOpUnary= ruleOpUnary EOF ;
+    // InternalXbaseWithAnnotations.g:1902:1: entryRuleOpUnary returns [String current=null] : iv_ruleOpUnary= ruleOpUnary EOF ;
     public final String entryRuleOpUnary() throws RecognitionException {
         String current = null;
 
@@ -5568,8 +5568,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1901:47: (iv_ruleOpUnary= ruleOpUnary EOF )
-            // InternalXbaseWithAnnotations.g:1902:2: iv_ruleOpUnary= ruleOpUnary EOF
+            // InternalXbaseWithAnnotations.g:1902:47: (iv_ruleOpUnary= ruleOpUnary EOF )
+            // InternalXbaseWithAnnotations.g:1903:2: iv_ruleOpUnary= ruleOpUnary EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpUnaryRule()); 
@@ -5600,7 +5600,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpUnary"
-    // InternalXbaseWithAnnotations.g:1908:1: ruleOpUnary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '!' | kw= '-' | kw= '+' ) ;
+    // InternalXbaseWithAnnotations.g:1909:1: ruleOpUnary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '!' | kw= '-' | kw= '+' ) ;
     public final AntlrDatatypeRuleToken ruleOpUnary() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -5610,10 +5610,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1914:2: ( (kw= '!' | kw= '-' | kw= '+' ) )
-            // InternalXbaseWithAnnotations.g:1915:2: (kw= '!' | kw= '-' | kw= '+' )
+            // InternalXbaseWithAnnotations.g:1915:2: ( (kw= '!' | kw= '-' | kw= '+' ) )
+            // InternalXbaseWithAnnotations.g:1916:2: (kw= '!' | kw= '-' | kw= '+' )
             {
-            // InternalXbaseWithAnnotations.g:1915:2: (kw= '!' | kw= '-' | kw= '+' )
+            // InternalXbaseWithAnnotations.g:1916:2: (kw= '!' | kw= '-' | kw= '+' )
             int alt32=3;
             switch ( input.LA(1) ) {
             case 48:
@@ -5641,7 +5641,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt32) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:1916:3: kw= '!'
+                    // InternalXbaseWithAnnotations.g:1917:3: kw= '!'
                     {
                     kw=(Token)match(input,48,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5654,7 +5654,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:1922:3: kw= '-'
+                    // InternalXbaseWithAnnotations.g:1923:3: kw= '-'
                     {
                     kw=(Token)match(input,43,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5667,7 +5667,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:1928:3: kw= '+'
+                    // InternalXbaseWithAnnotations.g:1929:3: kw= '+'
                     {
                     kw=(Token)match(input,42,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5704,7 +5704,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXCastedExpression"
-    // InternalXbaseWithAnnotations.g:1937:1: entryRuleXCastedExpression returns [EObject current=null] : iv_ruleXCastedExpression= ruleXCastedExpression EOF ;
+    // InternalXbaseWithAnnotations.g:1938:1: entryRuleXCastedExpression returns [EObject current=null] : iv_ruleXCastedExpression= ruleXCastedExpression EOF ;
     public final EObject entryRuleXCastedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -5712,8 +5712,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:1937:58: (iv_ruleXCastedExpression= ruleXCastedExpression EOF )
-            // InternalXbaseWithAnnotations.g:1938:2: iv_ruleXCastedExpression= ruleXCastedExpression EOF
+            // InternalXbaseWithAnnotations.g:1938:58: (iv_ruleXCastedExpression= ruleXCastedExpression EOF )
+            // InternalXbaseWithAnnotations.g:1939:2: iv_ruleXCastedExpression= ruleXCastedExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCastedExpressionRule()); 
@@ -5744,7 +5744,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXCastedExpression"
-    // InternalXbaseWithAnnotations.g:1944:1: ruleXCastedExpression returns [EObject current=null] : (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) ;
+    // InternalXbaseWithAnnotations.g:1945:1: ruleXCastedExpression returns [EObject current=null] : (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) ;
     public final EObject ruleXCastedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -5758,11 +5758,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:1950:2: ( (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) )
-            // InternalXbaseWithAnnotations.g:1951:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
+            // InternalXbaseWithAnnotations.g:1951:2: ( (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) )
+            // InternalXbaseWithAnnotations.g:1952:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
             {
-            // InternalXbaseWithAnnotations.g:1951:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
-            // InternalXbaseWithAnnotations.g:1952:3: this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
+            // InternalXbaseWithAnnotations.g:1952:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
+            // InternalXbaseWithAnnotations.g:1953:3: this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -5780,7 +5780,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:1960:3: ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
+            // InternalXbaseWithAnnotations.g:1961:3: ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
             loop33:
             do {
                 int alt33=2;
@@ -5799,16 +5799,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt33) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:1961:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalXbaseWithAnnotations.g:1962:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1961:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) )
-            	    // InternalXbaseWithAnnotations.g:1962:5: ( ( () 'as' ) )=> ( () otherlv_2= 'as' )
+            	    // InternalXbaseWithAnnotations.g:1962:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) )
+            	    // InternalXbaseWithAnnotations.g:1963:5: ( ( () 'as' ) )=> ( () otherlv_2= 'as' )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1968:5: ( () otherlv_2= 'as' )
-            	    // InternalXbaseWithAnnotations.g:1969:6: () otherlv_2= 'as'
+            	    // InternalXbaseWithAnnotations.g:1969:5: ( () otherlv_2= 'as' )
+            	    // InternalXbaseWithAnnotations.g:1970:6: () otherlv_2= 'as'
             	    {
-            	    // InternalXbaseWithAnnotations.g:1969:6: ()
-            	    // InternalXbaseWithAnnotations.g:1970:7: 
+            	    // InternalXbaseWithAnnotations.g:1970:6: ()
+            	    // InternalXbaseWithAnnotations.g:1971:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5832,11 +5832,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:1982:4: ( (lv_type_3_0= ruleJvmTypeReference ) )
-            	    // InternalXbaseWithAnnotations.g:1983:5: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalXbaseWithAnnotations.g:1983:4: ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalXbaseWithAnnotations.g:1984:5: (lv_type_3_0= ruleJvmTypeReference )
             	    {
-            	    // InternalXbaseWithAnnotations.g:1983:5: (lv_type_3_0= ruleJvmTypeReference )
-            	    // InternalXbaseWithAnnotations.g:1984:6: lv_type_3_0= ruleJvmTypeReference
+            	    // InternalXbaseWithAnnotations.g:1984:5: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalXbaseWithAnnotations.g:1985:6: lv_type_3_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5901,7 +5901,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXPostfixOperation"
-    // InternalXbaseWithAnnotations.g:2006:1: entryRuleXPostfixOperation returns [EObject current=null] : iv_ruleXPostfixOperation= ruleXPostfixOperation EOF ;
+    // InternalXbaseWithAnnotations.g:2007:1: entryRuleXPostfixOperation returns [EObject current=null] : iv_ruleXPostfixOperation= ruleXPostfixOperation EOF ;
     public final EObject entryRuleXPostfixOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5909,8 +5909,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2006:58: (iv_ruleXPostfixOperation= ruleXPostfixOperation EOF )
-            // InternalXbaseWithAnnotations.g:2007:2: iv_ruleXPostfixOperation= ruleXPostfixOperation EOF
+            // InternalXbaseWithAnnotations.g:2007:58: (iv_ruleXPostfixOperation= ruleXPostfixOperation EOF )
+            // InternalXbaseWithAnnotations.g:2008:2: iv_ruleXPostfixOperation= ruleXPostfixOperation EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXPostfixOperationRule()); 
@@ -5941,7 +5941,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXPostfixOperation"
-    // InternalXbaseWithAnnotations.g:2013:1: ruleXPostfixOperation returns [EObject current=null] : (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) ;
+    // InternalXbaseWithAnnotations.g:2014:1: ruleXPostfixOperation returns [EObject current=null] : (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) ;
     public final EObject ruleXPostfixOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5952,11 +5952,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2019:2: ( (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) )
-            // InternalXbaseWithAnnotations.g:2020:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
+            // InternalXbaseWithAnnotations.g:2020:2: ( (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) )
+            // InternalXbaseWithAnnotations.g:2021:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
             {
-            // InternalXbaseWithAnnotations.g:2020:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
-            // InternalXbaseWithAnnotations.g:2021:3: this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
+            // InternalXbaseWithAnnotations.g:2021:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
+            // InternalXbaseWithAnnotations.g:2022:3: this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
             {
             if ( state.backtracking==0 ) {
 
@@ -5974,7 +5974,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:2029:3: ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
+            // InternalXbaseWithAnnotations.g:2030:3: ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -5994,13 +5994,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt34) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2030:4: ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) )
+                    // InternalXbaseWithAnnotations.g:2031:4: ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:2040:4: ( () ( ( ruleOpPostfix ) ) )
-                    // InternalXbaseWithAnnotations.g:2041:5: () ( ( ruleOpPostfix ) )
+                    // InternalXbaseWithAnnotations.g:2041:4: ( () ( ( ruleOpPostfix ) ) )
+                    // InternalXbaseWithAnnotations.g:2042:5: () ( ( ruleOpPostfix ) )
                     {
-                    // InternalXbaseWithAnnotations.g:2041:5: ()
-                    // InternalXbaseWithAnnotations.g:2042:6: 
+                    // InternalXbaseWithAnnotations.g:2042:5: ()
+                    // InternalXbaseWithAnnotations.g:2043:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6012,11 +6012,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:2048:5: ( ( ruleOpPostfix ) )
-                    // InternalXbaseWithAnnotations.g:2049:6: ( ruleOpPostfix )
+                    // InternalXbaseWithAnnotations.g:2049:5: ( ( ruleOpPostfix ) )
+                    // InternalXbaseWithAnnotations.g:2050:6: ( ruleOpPostfix )
                     {
-                    // InternalXbaseWithAnnotations.g:2049:6: ( ruleOpPostfix )
-                    // InternalXbaseWithAnnotations.g:2050:7: ruleOpPostfix
+                    // InternalXbaseWithAnnotations.g:2050:6: ( ruleOpPostfix )
+                    // InternalXbaseWithAnnotations.g:2051:7: ruleOpPostfix
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6080,7 +6080,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOpPostfix"
-    // InternalXbaseWithAnnotations.g:2070:1: entryRuleOpPostfix returns [String current=null] : iv_ruleOpPostfix= ruleOpPostfix EOF ;
+    // InternalXbaseWithAnnotations.g:2071:1: entryRuleOpPostfix returns [String current=null] : iv_ruleOpPostfix= ruleOpPostfix EOF ;
     public final String entryRuleOpPostfix() throws RecognitionException {
         String current = null;
 
@@ -6088,8 +6088,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2070:49: (iv_ruleOpPostfix= ruleOpPostfix EOF )
-            // InternalXbaseWithAnnotations.g:2071:2: iv_ruleOpPostfix= ruleOpPostfix EOF
+            // InternalXbaseWithAnnotations.g:2071:49: (iv_ruleOpPostfix= ruleOpPostfix EOF )
+            // InternalXbaseWithAnnotations.g:2072:2: iv_ruleOpPostfix= ruleOpPostfix EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpPostfixRule()); 
@@ -6120,7 +6120,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOpPostfix"
-    // InternalXbaseWithAnnotations.g:2077:1: ruleOpPostfix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '++' | kw= '--' ) ;
+    // InternalXbaseWithAnnotations.g:2078:1: ruleOpPostfix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '++' | kw= '--' ) ;
     public final AntlrDatatypeRuleToken ruleOpPostfix() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6130,10 +6130,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2083:2: ( (kw= '++' | kw= '--' ) )
-            // InternalXbaseWithAnnotations.g:2084:2: (kw= '++' | kw= '--' )
+            // InternalXbaseWithAnnotations.g:2084:2: ( (kw= '++' | kw= '--' ) )
+            // InternalXbaseWithAnnotations.g:2085:2: (kw= '++' | kw= '--' )
             {
-            // InternalXbaseWithAnnotations.g:2084:2: (kw= '++' | kw= '--' )
+            // InternalXbaseWithAnnotations.g:2085:2: (kw= '++' | kw= '--' )
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -6152,7 +6152,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt35) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2085:3: kw= '++'
+                    // InternalXbaseWithAnnotations.g:2086:3: kw= '++'
                     {
                     kw=(Token)match(input,50,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -6165,7 +6165,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:2091:3: kw= '--'
+                    // InternalXbaseWithAnnotations.g:2092:3: kw= '--'
                     {
                     kw=(Token)match(input,51,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -6202,7 +6202,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXMemberFeatureCall"
-    // InternalXbaseWithAnnotations.g:2100:1: entryRuleXMemberFeatureCall returns [EObject current=null] : iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF ;
+    // InternalXbaseWithAnnotations.g:2101:1: entryRuleXMemberFeatureCall returns [EObject current=null] : iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF ;
     public final EObject entryRuleXMemberFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -6210,8 +6210,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2100:59: (iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF )
-            // InternalXbaseWithAnnotations.g:2101:2: iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF
+            // InternalXbaseWithAnnotations.g:2101:59: (iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF )
+            // InternalXbaseWithAnnotations.g:2102:2: iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXMemberFeatureCallRule()); 
@@ -6242,7 +6242,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXMemberFeatureCall"
-    // InternalXbaseWithAnnotations.g:2107:1: ruleXMemberFeatureCall returns [EObject current=null] : (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) ;
+    // InternalXbaseWithAnnotations.g:2108:1: ruleXMemberFeatureCall returns [EObject current=null] : (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) ;
     public final EObject ruleXMemberFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -6278,11 +6278,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2113:2: ( (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) )
-            // InternalXbaseWithAnnotations.g:2114:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
+            // InternalXbaseWithAnnotations.g:2114:2: ( (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) )
+            // InternalXbaseWithAnnotations.g:2115:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
             {
-            // InternalXbaseWithAnnotations.g:2114:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
-            // InternalXbaseWithAnnotations.g:2115:3: this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
+            // InternalXbaseWithAnnotations.g:2115:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
+            // InternalXbaseWithAnnotations.g:2116:3: this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -6300,7 +6300,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:2123:3: ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
+            // InternalXbaseWithAnnotations.g:2124:3: ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
             loop44:
             do {
                 int alt44=3;
@@ -6349,19 +6349,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt44) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:2124:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
+            	    // InternalXbaseWithAnnotations.g:2125:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2124:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
-            	    // InternalXbaseWithAnnotations.g:2125:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) )
+            	    // InternalXbaseWithAnnotations.g:2125:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
+            	    // InternalXbaseWithAnnotations.g:2126:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2125:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
-            	    // InternalXbaseWithAnnotations.g:2126:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+            	    // InternalXbaseWithAnnotations.g:2126:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
+            	    // InternalXbaseWithAnnotations.g:2127:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2146:6: ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
-            	    // InternalXbaseWithAnnotations.g:2147:7: () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
+            	    // InternalXbaseWithAnnotations.g:2147:6: ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+            	    // InternalXbaseWithAnnotations.g:2148:7: () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
             	    {
-            	    // InternalXbaseWithAnnotations.g:2147:7: ()
-            	    // InternalXbaseWithAnnotations.g:2148:8: 
+            	    // InternalXbaseWithAnnotations.g:2148:7: ()
+            	    // InternalXbaseWithAnnotations.g:2149:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -6373,7 +6373,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2154:7: (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) )
+            	    // InternalXbaseWithAnnotations.g:2155:7: (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) )
             	    int alt36=2;
             	    int LA36_0 = input.LA(1);
 
@@ -6392,7 +6392,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    }
             	    switch (alt36) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:2155:8: otherlv_2= '.'
+            	            // InternalXbaseWithAnnotations.g:2156:8: otherlv_2= '.'
             	            {
             	            otherlv_2=(Token)match(input,52,FOLLOW_32); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6404,13 +6404,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            }
             	            break;
             	        case 2 :
-            	            // InternalXbaseWithAnnotations.g:2160:8: ( (lv_explicitStatic_3_0= '::' ) )
+            	            // InternalXbaseWithAnnotations.g:2161:8: ( (lv_explicitStatic_3_0= '::' ) )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2160:8: ( (lv_explicitStatic_3_0= '::' ) )
-            	            // InternalXbaseWithAnnotations.g:2161:9: (lv_explicitStatic_3_0= '::' )
+            	            // InternalXbaseWithAnnotations.g:2161:8: ( (lv_explicitStatic_3_0= '::' ) )
+            	            // InternalXbaseWithAnnotations.g:2162:9: (lv_explicitStatic_3_0= '::' )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2161:9: (lv_explicitStatic_3_0= '::' )
-            	            // InternalXbaseWithAnnotations.g:2162:10: lv_explicitStatic_3_0= '::'
+            	            // InternalXbaseWithAnnotations.g:2162:9: (lv_explicitStatic_3_0= '::' )
+            	            // InternalXbaseWithAnnotations.g:2163:10: lv_explicitStatic_3_0= '::'
             	            {
             	            lv_explicitStatic_3_0=(Token)match(input,53,FOLLOW_32); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6438,11 +6438,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2175:7: ( ( ruleFeatureCallID ) )
-            	    // InternalXbaseWithAnnotations.g:2176:8: ( ruleFeatureCallID )
+            	    // InternalXbaseWithAnnotations.g:2176:7: ( ( ruleFeatureCallID ) )
+            	    // InternalXbaseWithAnnotations.g:2177:8: ( ruleFeatureCallID )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2176:8: ( ruleFeatureCallID )
-            	    // InternalXbaseWithAnnotations.g:2177:9: ruleFeatureCallID
+            	    // InternalXbaseWithAnnotations.g:2177:8: ( ruleFeatureCallID )
+            	    // InternalXbaseWithAnnotations.g:2178:9: ruleFeatureCallID
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -6493,11 +6493,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2200:5: ( (lv_value_6_0= ruleXAssignment ) )
-            	    // InternalXbaseWithAnnotations.g:2201:6: (lv_value_6_0= ruleXAssignment )
+            	    // InternalXbaseWithAnnotations.g:2201:5: ( (lv_value_6_0= ruleXAssignment ) )
+            	    // InternalXbaseWithAnnotations.g:2202:6: (lv_value_6_0= ruleXAssignment )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2201:6: (lv_value_6_0= ruleXAssignment )
-            	    // InternalXbaseWithAnnotations.g:2202:7: lv_value_6_0= ruleXAssignment
+            	    // InternalXbaseWithAnnotations.g:2202:6: (lv_value_6_0= ruleXAssignment )
+            	    // InternalXbaseWithAnnotations.g:2203:7: lv_value_6_0= ruleXAssignment
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -6535,19 +6535,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    }
             	    break;
             	case 2 :
-            	    // InternalXbaseWithAnnotations.g:2221:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
+            	    // InternalXbaseWithAnnotations.g:2222:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2221:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
-            	    // InternalXbaseWithAnnotations.g:2222:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
+            	    // InternalXbaseWithAnnotations.g:2222:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
+            	    // InternalXbaseWithAnnotations.g:2223:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
             	    {
-            	    // InternalXbaseWithAnnotations.g:2222:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:2223:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:2223:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:2224:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2243:6: ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
-            	    // InternalXbaseWithAnnotations.g:2244:7: () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
+            	    // InternalXbaseWithAnnotations.g:2244:6: ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
+            	    // InternalXbaseWithAnnotations.g:2245:7: () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2244:7: ()
-            	    // InternalXbaseWithAnnotations.g:2245:8: 
+            	    // InternalXbaseWithAnnotations.g:2245:7: ()
+            	    // InternalXbaseWithAnnotations.g:2246:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -6559,7 +6559,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2251:7: (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
+            	    // InternalXbaseWithAnnotations.g:2252:7: (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
             	    int alt37=3;
             	    switch ( input.LA(1) ) {
             	    case 52:
@@ -6587,7 +6587,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    switch (alt37) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:2252:8: otherlv_8= '.'
+            	            // InternalXbaseWithAnnotations.g:2253:8: otherlv_8= '.'
             	            {
             	            otherlv_8=(Token)match(input,52,FOLLOW_33); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6599,13 +6599,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            }
             	            break;
             	        case 2 :
-            	            // InternalXbaseWithAnnotations.g:2257:8: ( (lv_nullSafe_9_0= '?.' ) )
+            	            // InternalXbaseWithAnnotations.g:2258:8: ( (lv_nullSafe_9_0= '?.' ) )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2257:8: ( (lv_nullSafe_9_0= '?.' ) )
-            	            // InternalXbaseWithAnnotations.g:2258:9: (lv_nullSafe_9_0= '?.' )
+            	            // InternalXbaseWithAnnotations.g:2258:8: ( (lv_nullSafe_9_0= '?.' ) )
+            	            // InternalXbaseWithAnnotations.g:2259:9: (lv_nullSafe_9_0= '?.' )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2258:9: (lv_nullSafe_9_0= '?.' )
-            	            // InternalXbaseWithAnnotations.g:2259:10: lv_nullSafe_9_0= '?.'
+            	            // InternalXbaseWithAnnotations.g:2259:9: (lv_nullSafe_9_0= '?.' )
+            	            // InternalXbaseWithAnnotations.g:2260:10: lv_nullSafe_9_0= '?.'
             	            {
             	            lv_nullSafe_9_0=(Token)match(input,54,FOLLOW_33); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6631,13 +6631,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            }
             	            break;
             	        case 3 :
-            	            // InternalXbaseWithAnnotations.g:2272:8: ( (lv_explicitStatic_10_0= '::' ) )
+            	            // InternalXbaseWithAnnotations.g:2273:8: ( (lv_explicitStatic_10_0= '::' ) )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2272:8: ( (lv_explicitStatic_10_0= '::' ) )
-            	            // InternalXbaseWithAnnotations.g:2273:9: (lv_explicitStatic_10_0= '::' )
+            	            // InternalXbaseWithAnnotations.g:2273:8: ( (lv_explicitStatic_10_0= '::' ) )
+            	            // InternalXbaseWithAnnotations.g:2274:9: (lv_explicitStatic_10_0= '::' )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2273:9: (lv_explicitStatic_10_0= '::' )
-            	            // InternalXbaseWithAnnotations.g:2274:10: lv_explicitStatic_10_0= '::'
+            	            // InternalXbaseWithAnnotations.g:2274:9: (lv_explicitStatic_10_0= '::' )
+            	            // InternalXbaseWithAnnotations.g:2275:10: lv_explicitStatic_10_0= '::'
             	            {
             	            lv_explicitStatic_10_0=(Token)match(input,53,FOLLOW_33); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6671,7 +6671,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2289:5: (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )?
+            	    // InternalXbaseWithAnnotations.g:2290:5: (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )?
             	    int alt39=2;
             	    int LA39_0 = input.LA(1);
 
@@ -6680,7 +6680,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    }
             	    switch (alt39) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:2290:6: otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>'
+            	            // InternalXbaseWithAnnotations.g:2291:6: otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>'
             	            {
             	            otherlv_11=(Token)match(input,26,FOLLOW_34); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6688,11 +6688,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	              						newLeafNode(otherlv_11, grammarAccess.getXMemberFeatureCallAccess().getLessThanSignKeyword_1_1_1_0());
             	              					
             	            }
-            	            // InternalXbaseWithAnnotations.g:2294:6: ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) )
-            	            // InternalXbaseWithAnnotations.g:2295:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
+            	            // InternalXbaseWithAnnotations.g:2295:6: ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) )
+            	            // InternalXbaseWithAnnotations.g:2296:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2295:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
-            	            // InternalXbaseWithAnnotations.g:2296:8: lv_typeArguments_12_0= ruleJvmArgumentTypeReference
+            	            // InternalXbaseWithAnnotations.g:2296:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
+            	            // InternalXbaseWithAnnotations.g:2297:8: lv_typeArguments_12_0= ruleJvmArgumentTypeReference
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -6723,7 +6723,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	            }
 
-            	            // InternalXbaseWithAnnotations.g:2313:6: (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )*
+            	            // InternalXbaseWithAnnotations.g:2314:6: (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )*
             	            loop38:
             	            do {
             	                int alt38=2;
@@ -6736,7 +6736,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	                switch (alt38) {
             	            	case 1 :
-            	            	    // InternalXbaseWithAnnotations.g:2314:7: otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
+            	            	    // InternalXbaseWithAnnotations.g:2315:7: otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
             	            	    {
             	            	    otherlv_13=(Token)match(input,15,FOLLOW_34); if (state.failed) return current;
             	            	    if ( state.backtracking==0 ) {
@@ -6744,11 +6744,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	            	      							newLeafNode(otherlv_13, grammarAccess.getXMemberFeatureCallAccess().getCommaKeyword_1_1_1_2_0());
             	            	      						
             	            	    }
-            	            	    // InternalXbaseWithAnnotations.g:2318:7: ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
-            	            	    // InternalXbaseWithAnnotations.g:2319:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
+            	            	    // InternalXbaseWithAnnotations.g:2319:7: ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
+            	            	    // InternalXbaseWithAnnotations.g:2320:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
             	            	    {
-            	            	    // InternalXbaseWithAnnotations.g:2319:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
-            	            	    // InternalXbaseWithAnnotations.g:2320:9: lv_typeArguments_14_0= ruleJvmArgumentTypeReference
+            	            	    // InternalXbaseWithAnnotations.g:2320:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
+            	            	    // InternalXbaseWithAnnotations.g:2321:9: lv_typeArguments_14_0= ruleJvmArgumentTypeReference
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
@@ -6800,11 +6800,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2343:5: ( ( ruleIdOrSuper ) )
-            	    // InternalXbaseWithAnnotations.g:2344:6: ( ruleIdOrSuper )
+            	    // InternalXbaseWithAnnotations.g:2344:5: ( ( ruleIdOrSuper ) )
+            	    // InternalXbaseWithAnnotations.g:2345:6: ( ruleIdOrSuper )
             	    {
-            	    // InternalXbaseWithAnnotations.g:2344:6: ( ruleIdOrSuper )
-            	    // InternalXbaseWithAnnotations.g:2345:7: ruleIdOrSuper
+            	    // InternalXbaseWithAnnotations.g:2345:6: ( ruleIdOrSuper )
+            	    // InternalXbaseWithAnnotations.g:2346:7: ruleIdOrSuper
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -6834,18 +6834,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2359:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?
+            	    // InternalXbaseWithAnnotations.g:2360:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?
             	    int alt42=2;
             	    alt42 = dfa42.predict(input);
             	    switch (alt42) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:2360:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')'
+            	            // InternalXbaseWithAnnotations.g:2361:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')'
             	            {
-            	            // InternalXbaseWithAnnotations.g:2360:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) )
-            	            // InternalXbaseWithAnnotations.g:2361:7: ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' )
+            	            // InternalXbaseWithAnnotations.g:2361:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) )
+            	            // InternalXbaseWithAnnotations.g:2362:7: ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2365:7: (lv_explicitOperationCall_17_0= '(' )
-            	            // InternalXbaseWithAnnotations.g:2366:8: lv_explicitOperationCall_17_0= '('
+            	            // InternalXbaseWithAnnotations.g:2366:7: (lv_explicitOperationCall_17_0= '(' )
+            	            // InternalXbaseWithAnnotations.g:2367:8: lv_explicitOperationCall_17_0= '('
             	            {
             	            lv_explicitOperationCall_17_0=(Token)match(input,14,FOLLOW_37); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6867,18 +6867,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	            }
 
-            	            // InternalXbaseWithAnnotations.g:2378:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?
+            	            // InternalXbaseWithAnnotations.g:2379:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?
             	            int alt41=3;
             	            alt41 = dfa41.predict(input);
             	            switch (alt41) {
             	                case 1 :
-            	                    // InternalXbaseWithAnnotations.g:2379:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
+            	                    // InternalXbaseWithAnnotations.g:2380:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
             	                    {
-            	                    // InternalXbaseWithAnnotations.g:2379:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
-            	                    // InternalXbaseWithAnnotations.g:2380:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure )
+            	                    // InternalXbaseWithAnnotations.g:2380:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
+            	                    // InternalXbaseWithAnnotations.g:2381:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure )
             	                    {
-            	                    // InternalXbaseWithAnnotations.g:2405:8: (lv_memberCallArguments_18_0= ruleXShortClosure )
-            	                    // InternalXbaseWithAnnotations.g:2406:9: lv_memberCallArguments_18_0= ruleXShortClosure
+            	                    // InternalXbaseWithAnnotations.g:2406:8: (lv_memberCallArguments_18_0= ruleXShortClosure )
+            	                    // InternalXbaseWithAnnotations.g:2407:9: lv_memberCallArguments_18_0= ruleXShortClosure
             	                    {
             	                    if ( state.backtracking==0 ) {
 
@@ -6913,16 +6913,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	                    }
             	                    break;
             	                case 2 :
-            	                    // InternalXbaseWithAnnotations.g:2424:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
+            	                    // InternalXbaseWithAnnotations.g:2425:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
             	                    {
-            	                    // InternalXbaseWithAnnotations.g:2424:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
-            	                    // InternalXbaseWithAnnotations.g:2425:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
+            	                    // InternalXbaseWithAnnotations.g:2425:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
+            	                    // InternalXbaseWithAnnotations.g:2426:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
             	                    {
-            	                    // InternalXbaseWithAnnotations.g:2425:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) )
-            	                    // InternalXbaseWithAnnotations.g:2426:9: (lv_memberCallArguments_19_0= ruleXExpression )
+            	                    // InternalXbaseWithAnnotations.g:2426:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) )
+            	                    // InternalXbaseWithAnnotations.g:2427:9: (lv_memberCallArguments_19_0= ruleXExpression )
             	                    {
-            	                    // InternalXbaseWithAnnotations.g:2426:9: (lv_memberCallArguments_19_0= ruleXExpression )
-            	                    // InternalXbaseWithAnnotations.g:2427:10: lv_memberCallArguments_19_0= ruleXExpression
+            	                    // InternalXbaseWithAnnotations.g:2427:9: (lv_memberCallArguments_19_0= ruleXExpression )
+            	                    // InternalXbaseWithAnnotations.g:2428:10: lv_memberCallArguments_19_0= ruleXExpression
             	                    {
             	                    if ( state.backtracking==0 ) {
 
@@ -6953,7 +6953,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	                    }
 
-            	                    // InternalXbaseWithAnnotations.g:2444:8: (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
+            	                    // InternalXbaseWithAnnotations.g:2445:8: (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
             	                    loop40:
             	                    do {
             	                        int alt40=2;
@@ -6966,7 +6966,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	                        switch (alt40) {
             	                    	case 1 :
-            	                    	    // InternalXbaseWithAnnotations.g:2445:9: otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) )
+            	                    	    // InternalXbaseWithAnnotations.g:2446:9: otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) )
             	                    	    {
             	                    	    otherlv_20=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
             	                    	    if ( state.backtracking==0 ) {
@@ -6974,11 +6974,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	                    	      									newLeafNode(otherlv_20, grammarAccess.getXMemberFeatureCallAccess().getCommaKeyword_1_1_3_1_1_1_0());
             	                    	      								
             	                    	    }
-            	                    	    // InternalXbaseWithAnnotations.g:2449:9: ( (lv_memberCallArguments_21_0= ruleXExpression ) )
-            	                    	    // InternalXbaseWithAnnotations.g:2450:10: (lv_memberCallArguments_21_0= ruleXExpression )
+            	                    	    // InternalXbaseWithAnnotations.g:2450:9: ( (lv_memberCallArguments_21_0= ruleXExpression ) )
+            	                    	    // InternalXbaseWithAnnotations.g:2451:10: (lv_memberCallArguments_21_0= ruleXExpression )
             	                    	    {
-            	                    	    // InternalXbaseWithAnnotations.g:2450:10: (lv_memberCallArguments_21_0= ruleXExpression )
-            	                    	    // InternalXbaseWithAnnotations.g:2451:11: lv_memberCallArguments_21_0= ruleXExpression
+            	                    	    // InternalXbaseWithAnnotations.g:2451:10: (lv_memberCallArguments_21_0= ruleXExpression )
+            	                    	    // InternalXbaseWithAnnotations.g:2452:11: lv_memberCallArguments_21_0= ruleXExpression
             	                    	    {
             	                    	    if ( state.backtracking==0 ) {
 
@@ -7039,15 +7039,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:2476:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
+            	    // InternalXbaseWithAnnotations.g:2477:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
             	    int alt43=2;
             	    alt43 = dfa43.predict(input);
             	    switch (alt43) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:2477:6: ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure )
+            	            // InternalXbaseWithAnnotations.g:2478:6: ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure )
             	            {
-            	            // InternalXbaseWithAnnotations.g:2483:6: (lv_memberCallArguments_23_0= ruleXClosure )
-            	            // InternalXbaseWithAnnotations.g:2484:7: lv_memberCallArguments_23_0= ruleXClosure
+            	            // InternalXbaseWithAnnotations.g:2484:6: (lv_memberCallArguments_23_0= ruleXClosure )
+            	            // InternalXbaseWithAnnotations.g:2485:7: lv_memberCallArguments_23_0= ruleXClosure
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -7118,7 +7118,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXPrimaryExpression"
-    // InternalXbaseWithAnnotations.g:2507:1: entryRuleXPrimaryExpression returns [EObject current=null] : iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF ;
+    // InternalXbaseWithAnnotations.g:2508:1: entryRuleXPrimaryExpression returns [EObject current=null] : iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF ;
     public final EObject entryRuleXPrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7126,8 +7126,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2507:59: (iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF )
-            // InternalXbaseWithAnnotations.g:2508:2: iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF
+            // InternalXbaseWithAnnotations.g:2508:59: (iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF )
+            // InternalXbaseWithAnnotations.g:2509:2: iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXPrimaryExpressionRule()); 
@@ -7158,7 +7158,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXPrimaryExpression"
-    // InternalXbaseWithAnnotations.g:2514:1: ruleXPrimaryExpression returns [EObject current=null] : (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) ;
+    // InternalXbaseWithAnnotations.g:2515:1: ruleXPrimaryExpression returns [EObject current=null] : (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) ;
     public final EObject ruleXPrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7197,15 +7197,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2520:2: ( (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) )
-            // InternalXbaseWithAnnotations.g:2521:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
+            // InternalXbaseWithAnnotations.g:2521:2: ( (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) )
+            // InternalXbaseWithAnnotations.g:2522:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
             {
-            // InternalXbaseWithAnnotations.g:2521:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
+            // InternalXbaseWithAnnotations.g:2522:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
             int alt45=15;
             alt45 = dfa45.predict(input);
             switch (alt45) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2522:3: this_XConstructorCall_0= ruleXConstructorCall
+                    // InternalXbaseWithAnnotations.g:2523:3: this_XConstructorCall_0= ruleXConstructorCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7227,7 +7227,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:2531:3: this_XBlockExpression_1= ruleXBlockExpression
+                    // InternalXbaseWithAnnotations.g:2532:3: this_XBlockExpression_1= ruleXBlockExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7249,7 +7249,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:2540:3: this_XSwitchExpression_2= ruleXSwitchExpression
+                    // InternalXbaseWithAnnotations.g:2541:3: this_XSwitchExpression_2= ruleXSwitchExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7271,10 +7271,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:2549:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
+                    // InternalXbaseWithAnnotations.g:2550:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:2549:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
-                    // InternalXbaseWithAnnotations.g:2550:4: ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression
+                    // InternalXbaseWithAnnotations.g:2550:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
+                    // InternalXbaseWithAnnotations.g:2551:4: ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7299,7 +7299,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalXbaseWithAnnotations.g:2567:3: this_XFeatureCall_4= ruleXFeatureCall
+                    // InternalXbaseWithAnnotations.g:2568:3: this_XFeatureCall_4= ruleXFeatureCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7321,7 +7321,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 6 :
-                    // InternalXbaseWithAnnotations.g:2576:3: this_XLiteral_5= ruleXLiteral
+                    // InternalXbaseWithAnnotations.g:2577:3: this_XLiteral_5= ruleXLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7343,7 +7343,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 7 :
-                    // InternalXbaseWithAnnotations.g:2585:3: this_XIfExpression_6= ruleXIfExpression
+                    // InternalXbaseWithAnnotations.g:2586:3: this_XIfExpression_6= ruleXIfExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7365,10 +7365,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 8 :
-                    // InternalXbaseWithAnnotations.g:2594:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
+                    // InternalXbaseWithAnnotations.g:2595:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:2594:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
-                    // InternalXbaseWithAnnotations.g:2595:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression
+                    // InternalXbaseWithAnnotations.g:2595:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
+                    // InternalXbaseWithAnnotations.g:2596:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7393,7 +7393,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 9 :
-                    // InternalXbaseWithAnnotations.g:2618:3: this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression
+                    // InternalXbaseWithAnnotations.g:2619:3: this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7415,7 +7415,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 10 :
-                    // InternalXbaseWithAnnotations.g:2627:3: this_XWhileExpression_9= ruleXWhileExpression
+                    // InternalXbaseWithAnnotations.g:2628:3: this_XWhileExpression_9= ruleXWhileExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7437,7 +7437,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 11 :
-                    // InternalXbaseWithAnnotations.g:2636:3: this_XDoWhileExpression_10= ruleXDoWhileExpression
+                    // InternalXbaseWithAnnotations.g:2637:3: this_XDoWhileExpression_10= ruleXDoWhileExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7459,7 +7459,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 12 :
-                    // InternalXbaseWithAnnotations.g:2645:3: this_XThrowExpression_11= ruleXThrowExpression
+                    // InternalXbaseWithAnnotations.g:2646:3: this_XThrowExpression_11= ruleXThrowExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7481,7 +7481,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 13 :
-                    // InternalXbaseWithAnnotations.g:2654:3: this_XReturnExpression_12= ruleXReturnExpression
+                    // InternalXbaseWithAnnotations.g:2655:3: this_XReturnExpression_12= ruleXReturnExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7503,7 +7503,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 14 :
-                    // InternalXbaseWithAnnotations.g:2663:3: this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression
+                    // InternalXbaseWithAnnotations.g:2664:3: this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7525,7 +7525,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 15 :
-                    // InternalXbaseWithAnnotations.g:2672:3: this_XParenthesizedExpression_14= ruleXParenthesizedExpression
+                    // InternalXbaseWithAnnotations.g:2673:3: this_XParenthesizedExpression_14= ruleXParenthesizedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7571,7 +7571,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXLiteral"
-    // InternalXbaseWithAnnotations.g:2684:1: entryRuleXLiteral returns [EObject current=null] : iv_ruleXLiteral= ruleXLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:2685:1: entryRuleXLiteral returns [EObject current=null] : iv_ruleXLiteral= ruleXLiteral EOF ;
     public final EObject entryRuleXLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7579,8 +7579,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2684:49: (iv_ruleXLiteral= ruleXLiteral EOF )
-            // InternalXbaseWithAnnotations.g:2685:2: iv_ruleXLiteral= ruleXLiteral EOF
+            // InternalXbaseWithAnnotations.g:2685:49: (iv_ruleXLiteral= ruleXLiteral EOF )
+            // InternalXbaseWithAnnotations.g:2686:2: iv_ruleXLiteral= ruleXLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXLiteralRule()); 
@@ -7611,7 +7611,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXLiteral"
-    // InternalXbaseWithAnnotations.g:2691:1: ruleXLiteral returns [EObject current=null] : (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) ;
+    // InternalXbaseWithAnnotations.g:2692:1: ruleXLiteral returns [EObject current=null] : (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) ;
     public final EObject ruleXLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7634,10 +7634,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2697:2: ( (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) )
-            // InternalXbaseWithAnnotations.g:2698:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
+            // InternalXbaseWithAnnotations.g:2698:2: ( (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) )
+            // InternalXbaseWithAnnotations.g:2699:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
             {
-            // InternalXbaseWithAnnotations.g:2698:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
+            // InternalXbaseWithAnnotations.g:2699:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
             int alt46=7;
             int LA46_0 = input.LA(1);
 
@@ -7671,7 +7671,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt46) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2699:3: this_XCollectionLiteral_0= ruleXCollectionLiteral
+                    // InternalXbaseWithAnnotations.g:2700:3: this_XCollectionLiteral_0= ruleXCollectionLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7693,10 +7693,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:2708:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
+                    // InternalXbaseWithAnnotations.g:2709:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
                     {
-                    // InternalXbaseWithAnnotations.g:2708:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
-                    // InternalXbaseWithAnnotations.g:2709:4: ( ( () '[' ) )=>this_XClosure_1= ruleXClosure
+                    // InternalXbaseWithAnnotations.g:2709:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
+                    // InternalXbaseWithAnnotations.g:2710:4: ( ( () '[' ) )=>this_XClosure_1= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7721,7 +7721,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:2725:3: this_XBooleanLiteral_2= ruleXBooleanLiteral
+                    // InternalXbaseWithAnnotations.g:2726:3: this_XBooleanLiteral_2= ruleXBooleanLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7743,7 +7743,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:2734:3: this_XNumberLiteral_3= ruleXNumberLiteral
+                    // InternalXbaseWithAnnotations.g:2735:3: this_XNumberLiteral_3= ruleXNumberLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7765,7 +7765,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalXbaseWithAnnotations.g:2743:3: this_XNullLiteral_4= ruleXNullLiteral
+                    // InternalXbaseWithAnnotations.g:2744:3: this_XNullLiteral_4= ruleXNullLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7787,7 +7787,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 6 :
-                    // InternalXbaseWithAnnotations.g:2752:3: this_XStringLiteral_5= ruleXStringLiteral
+                    // InternalXbaseWithAnnotations.g:2753:3: this_XStringLiteral_5= ruleXStringLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7809,7 +7809,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 7 :
-                    // InternalXbaseWithAnnotations.g:2761:3: this_XTypeLiteral_6= ruleXTypeLiteral
+                    // InternalXbaseWithAnnotations.g:2762:3: this_XTypeLiteral_6= ruleXTypeLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7855,7 +7855,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXCollectionLiteral"
-    // InternalXbaseWithAnnotations.g:2773:1: entryRuleXCollectionLiteral returns [EObject current=null] : iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:2774:1: entryRuleXCollectionLiteral returns [EObject current=null] : iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF ;
     public final EObject entryRuleXCollectionLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7863,8 +7863,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2773:59: (iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF )
-            // InternalXbaseWithAnnotations.g:2774:2: iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF
+            // InternalXbaseWithAnnotations.g:2774:59: (iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF )
+            // InternalXbaseWithAnnotations.g:2775:2: iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCollectionLiteralRule()); 
@@ -7895,7 +7895,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXCollectionLiteral"
-    // InternalXbaseWithAnnotations.g:2780:1: ruleXCollectionLiteral returns [EObject current=null] : (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) ;
+    // InternalXbaseWithAnnotations.g:2781:1: ruleXCollectionLiteral returns [EObject current=null] : (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) ;
     public final EObject ruleXCollectionLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7908,10 +7908,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2786:2: ( (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) )
-            // InternalXbaseWithAnnotations.g:2787:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
+            // InternalXbaseWithAnnotations.g:2787:2: ( (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) )
+            // InternalXbaseWithAnnotations.g:2788:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
             {
-            // InternalXbaseWithAnnotations.g:2787:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
+            // InternalXbaseWithAnnotations.g:2788:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
             int alt47=2;
             int LA47_0 = input.LA(1);
 
@@ -7941,7 +7941,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt47) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2788:3: this_XSetLiteral_0= ruleXSetLiteral
+                    // InternalXbaseWithAnnotations.g:2789:3: this_XSetLiteral_0= ruleXSetLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7963,7 +7963,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:2797:3: this_XListLiteral_1= ruleXListLiteral
+                    // InternalXbaseWithAnnotations.g:2798:3: this_XListLiteral_1= ruleXListLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8009,7 +8009,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXSetLiteral"
-    // InternalXbaseWithAnnotations.g:2809:1: entryRuleXSetLiteral returns [EObject current=null] : iv_ruleXSetLiteral= ruleXSetLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:2810:1: entryRuleXSetLiteral returns [EObject current=null] : iv_ruleXSetLiteral= ruleXSetLiteral EOF ;
     public final EObject entryRuleXSetLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -8017,8 +8017,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2809:52: (iv_ruleXSetLiteral= ruleXSetLiteral EOF )
-            // InternalXbaseWithAnnotations.g:2810:2: iv_ruleXSetLiteral= ruleXSetLiteral EOF
+            // InternalXbaseWithAnnotations.g:2810:52: (iv_ruleXSetLiteral= ruleXSetLiteral EOF )
+            // InternalXbaseWithAnnotations.g:2811:2: iv_ruleXSetLiteral= ruleXSetLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXSetLiteralRule()); 
@@ -8049,7 +8049,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXSetLiteral"
-    // InternalXbaseWithAnnotations.g:2816:1: ruleXSetLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) ;
+    // InternalXbaseWithAnnotations.g:2817:1: ruleXSetLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) ;
     public final EObject ruleXSetLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -8066,14 +8066,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2822:2: ( ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) )
-            // InternalXbaseWithAnnotations.g:2823:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
+            // InternalXbaseWithAnnotations.g:2823:2: ( ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) )
+            // InternalXbaseWithAnnotations.g:2824:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
             {
-            // InternalXbaseWithAnnotations.g:2823:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
-            // InternalXbaseWithAnnotations.g:2824:3: () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}'
+            // InternalXbaseWithAnnotations.g:2824:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
+            // InternalXbaseWithAnnotations.g:2825:3: () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}'
             {
-            // InternalXbaseWithAnnotations.g:2824:3: ()
-            // InternalXbaseWithAnnotations.g:2825:4: 
+            // InternalXbaseWithAnnotations.g:2825:3: ()
+            // InternalXbaseWithAnnotations.g:2826:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8097,7 +8097,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getXSetLiteralAccess().getLeftCurlyBracketKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:2839:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
+            // InternalXbaseWithAnnotations.g:2840:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -8106,13 +8106,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt49) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2840:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalXbaseWithAnnotations.g:2841:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:2840:4: ( (lv_elements_3_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:2841:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:2841:4: ( (lv_elements_3_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:2842:5: (lv_elements_3_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:2841:5: (lv_elements_3_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:2842:6: lv_elements_3_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:2842:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:2843:6: lv_elements_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8143,7 +8143,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:2859:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalXbaseWithAnnotations.g:2860:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     loop48:
                     do {
                         int alt48=2;
@@ -8156,7 +8156,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt48) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:2860:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalXbaseWithAnnotations.g:2861:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
                     	    {
                     	    otherlv_4=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -8164,11 +8164,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_4, grammarAccess.getXSetLiteralAccess().getCommaKeyword_3_1_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:2864:5: ( (lv_elements_5_0= ruleXExpression ) )
-                    	    // InternalXbaseWithAnnotations.g:2865:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalXbaseWithAnnotations.g:2865:5: ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalXbaseWithAnnotations.g:2866:6: (lv_elements_5_0= ruleXExpression )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:2865:6: (lv_elements_5_0= ruleXExpression )
-                    	    // InternalXbaseWithAnnotations.g:2866:7: lv_elements_5_0= ruleXExpression
+                    	    // InternalXbaseWithAnnotations.g:2866:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalXbaseWithAnnotations.g:2867:7: lv_elements_5_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -8245,7 +8245,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXListLiteral"
-    // InternalXbaseWithAnnotations.g:2893:1: entryRuleXListLiteral returns [EObject current=null] : iv_ruleXListLiteral= ruleXListLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:2894:1: entryRuleXListLiteral returns [EObject current=null] : iv_ruleXListLiteral= ruleXListLiteral EOF ;
     public final EObject entryRuleXListLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -8253,8 +8253,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2893:53: (iv_ruleXListLiteral= ruleXListLiteral EOF )
-            // InternalXbaseWithAnnotations.g:2894:2: iv_ruleXListLiteral= ruleXListLiteral EOF
+            // InternalXbaseWithAnnotations.g:2894:53: (iv_ruleXListLiteral= ruleXListLiteral EOF )
+            // InternalXbaseWithAnnotations.g:2895:2: iv_ruleXListLiteral= ruleXListLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXListLiteralRule()); 
@@ -8285,7 +8285,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXListLiteral"
-    // InternalXbaseWithAnnotations.g:2900:1: ruleXListLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) ;
+    // InternalXbaseWithAnnotations.g:2901:1: ruleXListLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) ;
     public final EObject ruleXListLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -8302,14 +8302,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2906:2: ( ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) )
-            // InternalXbaseWithAnnotations.g:2907:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
+            // InternalXbaseWithAnnotations.g:2907:2: ( ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) )
+            // InternalXbaseWithAnnotations.g:2908:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
             {
-            // InternalXbaseWithAnnotations.g:2907:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
-            // InternalXbaseWithAnnotations.g:2908:3: () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']'
+            // InternalXbaseWithAnnotations.g:2908:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
+            // InternalXbaseWithAnnotations.g:2909:3: () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']'
             {
-            // InternalXbaseWithAnnotations.g:2908:3: ()
-            // InternalXbaseWithAnnotations.g:2909:4: 
+            // InternalXbaseWithAnnotations.g:2909:3: ()
+            // InternalXbaseWithAnnotations.g:2910:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8333,7 +8333,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getXListLiteralAccess().getLeftSquareBracketKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:2923:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
+            // InternalXbaseWithAnnotations.g:2924:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -8342,13 +8342,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt51) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:2924:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalXbaseWithAnnotations.g:2925:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:2924:4: ( (lv_elements_3_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:2925:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:2925:4: ( (lv_elements_3_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:2926:5: (lv_elements_3_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:2925:5: (lv_elements_3_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:2926:6: lv_elements_3_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:2926:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:2927:6: lv_elements_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8379,7 +8379,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:2943:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalXbaseWithAnnotations.g:2944:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     loop50:
                     do {
                         int alt50=2;
@@ -8392,7 +8392,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt50) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:2944:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalXbaseWithAnnotations.g:2945:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
                     	    {
                     	    otherlv_4=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -8400,11 +8400,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_4, grammarAccess.getXListLiteralAccess().getCommaKeyword_3_1_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:2948:5: ( (lv_elements_5_0= ruleXExpression ) )
-                    	    // InternalXbaseWithAnnotations.g:2949:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalXbaseWithAnnotations.g:2949:5: ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalXbaseWithAnnotations.g:2950:6: (lv_elements_5_0= ruleXExpression )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:2949:6: (lv_elements_5_0= ruleXExpression )
-                    	    // InternalXbaseWithAnnotations.g:2950:7: lv_elements_5_0= ruleXExpression
+                    	    // InternalXbaseWithAnnotations.g:2950:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalXbaseWithAnnotations.g:2951:7: lv_elements_5_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -8481,7 +8481,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXClosure"
-    // InternalXbaseWithAnnotations.g:2977:1: entryRuleXClosure returns [EObject current=null] : iv_ruleXClosure= ruleXClosure EOF ;
+    // InternalXbaseWithAnnotations.g:2978:1: entryRuleXClosure returns [EObject current=null] : iv_ruleXClosure= ruleXClosure EOF ;
     public final EObject entryRuleXClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8489,8 +8489,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:2977:49: (iv_ruleXClosure= ruleXClosure EOF )
-            // InternalXbaseWithAnnotations.g:2978:2: iv_ruleXClosure= ruleXClosure EOF
+            // InternalXbaseWithAnnotations.g:2978:49: (iv_ruleXClosure= ruleXClosure EOF )
+            // InternalXbaseWithAnnotations.g:2979:2: iv_ruleXClosure= ruleXClosure EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXClosureRule()); 
@@ -8521,7 +8521,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXClosure"
-    // InternalXbaseWithAnnotations.g:2984:1: ruleXClosure returns [EObject current=null] : ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) ;
+    // InternalXbaseWithAnnotations.g:2985:1: ruleXClosure returns [EObject current=null] : ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) ;
     public final EObject ruleXClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8540,20 +8540,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:2990:2: ( ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) )
-            // InternalXbaseWithAnnotations.g:2991:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
+            // InternalXbaseWithAnnotations.g:2991:2: ( ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) )
+            // InternalXbaseWithAnnotations.g:2992:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
             {
-            // InternalXbaseWithAnnotations.g:2991:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
-            // InternalXbaseWithAnnotations.g:2992:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']'
+            // InternalXbaseWithAnnotations.g:2992:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
+            // InternalXbaseWithAnnotations.g:2993:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']'
             {
-            // InternalXbaseWithAnnotations.g:2992:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) )
-            // InternalXbaseWithAnnotations.g:2993:4: ( ( () '[' ) )=> ( () otherlv_1= '[' )
+            // InternalXbaseWithAnnotations.g:2993:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) )
+            // InternalXbaseWithAnnotations.g:2994:4: ( ( () '[' ) )=> ( () otherlv_1= '[' )
             {
-            // InternalXbaseWithAnnotations.g:2999:4: ( () otherlv_1= '[' )
-            // InternalXbaseWithAnnotations.g:3000:5: () otherlv_1= '['
+            // InternalXbaseWithAnnotations.g:3000:4: ( () otherlv_1= '[' )
+            // InternalXbaseWithAnnotations.g:3001:5: () otherlv_1= '['
             {
-            // InternalXbaseWithAnnotations.g:3000:5: ()
-            // InternalXbaseWithAnnotations.g:3001:6: 
+            // InternalXbaseWithAnnotations.g:3001:5: ()
+            // InternalXbaseWithAnnotations.g:3002:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8577,17 +8577,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3013:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?
+            // InternalXbaseWithAnnotations.g:3014:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?
             int alt54=2;
             alt54 = dfa54.predict(input);
             switch (alt54) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3014:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
+                    // InternalXbaseWithAnnotations.g:3015:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3037:4: ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
-                    // InternalXbaseWithAnnotations.g:3038:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) )
+                    // InternalXbaseWithAnnotations.g:3038:4: ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
+                    // InternalXbaseWithAnnotations.g:3039:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3038:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )?
+                    // InternalXbaseWithAnnotations.g:3039:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )?
                     int alt53=2;
                     int LA53_0 = input.LA(1);
 
@@ -8596,13 +8596,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt53) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:3039:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
+                            // InternalXbaseWithAnnotations.g:3040:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:3039:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) )
-                            // InternalXbaseWithAnnotations.g:3040:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
+                            // InternalXbaseWithAnnotations.g:3040:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) )
+                            // InternalXbaseWithAnnotations.g:3041:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
                             {
-                            // InternalXbaseWithAnnotations.g:3040:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
-                            // InternalXbaseWithAnnotations.g:3041:8: lv_declaredFormalParameters_2_0= ruleJvmFormalParameter
+                            // InternalXbaseWithAnnotations.g:3041:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
+                            // InternalXbaseWithAnnotations.g:3042:8: lv_declaredFormalParameters_2_0= ruleJvmFormalParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -8633,7 +8633,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:3058:6: (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
+                            // InternalXbaseWithAnnotations.g:3059:6: (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
                             loop52:
                             do {
                                 int alt52=2;
@@ -8646,7 +8646,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt52) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:3059:7: otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
+                            	    // InternalXbaseWithAnnotations.g:3060:7: otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
                             	    {
                             	    otherlv_3=(Token)match(input,15,FOLLOW_22); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -8654,11 +8654,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      							newLeafNode(otherlv_3, grammarAccess.getXClosureAccess().getCommaKeyword_1_0_0_1_0());
                             	      						
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:3063:7: ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
-                            	    // InternalXbaseWithAnnotations.g:3064:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
+                            	    // InternalXbaseWithAnnotations.g:3064:7: ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
+                            	    // InternalXbaseWithAnnotations.g:3065:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:3064:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
-                            	    // InternalXbaseWithAnnotations.g:3065:9: lv_declaredFormalParameters_4_0= ruleJvmFormalParameter
+                            	    // InternalXbaseWithAnnotations.g:3065:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
+                            	    // InternalXbaseWithAnnotations.g:3066:9: lv_declaredFormalParameters_4_0= ruleJvmFormalParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -8704,11 +8704,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:3084:5: ( (lv_explicitSyntax_5_0= '|' ) )
-                    // InternalXbaseWithAnnotations.g:3085:6: (lv_explicitSyntax_5_0= '|' )
+                    // InternalXbaseWithAnnotations.g:3085:5: ( (lv_explicitSyntax_5_0= '|' ) )
+                    // InternalXbaseWithAnnotations.g:3086:6: (lv_explicitSyntax_5_0= '|' )
                     {
-                    // InternalXbaseWithAnnotations.g:3085:6: (lv_explicitSyntax_5_0= '|' )
-                    // InternalXbaseWithAnnotations.g:3086:7: lv_explicitSyntax_5_0= '|'
+                    // InternalXbaseWithAnnotations.g:3086:6: (lv_explicitSyntax_5_0= '|' )
+                    // InternalXbaseWithAnnotations.g:3087:7: lv_explicitSyntax_5_0= '|'
                     {
                     lv_explicitSyntax_5_0=(Token)match(input,57,FOLLOW_44); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8739,11 +8739,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3100:3: ( (lv_expression_6_0= ruleXExpressionInClosure ) )
-            // InternalXbaseWithAnnotations.g:3101:4: (lv_expression_6_0= ruleXExpressionInClosure )
+            // InternalXbaseWithAnnotations.g:3101:3: ( (lv_expression_6_0= ruleXExpressionInClosure ) )
+            // InternalXbaseWithAnnotations.g:3102:4: (lv_expression_6_0= ruleXExpressionInClosure )
             {
-            // InternalXbaseWithAnnotations.g:3101:4: (lv_expression_6_0= ruleXExpressionInClosure )
-            // InternalXbaseWithAnnotations.g:3102:5: lv_expression_6_0= ruleXExpressionInClosure
+            // InternalXbaseWithAnnotations.g:3102:4: (lv_expression_6_0= ruleXExpressionInClosure )
+            // InternalXbaseWithAnnotations.g:3103:5: lv_expression_6_0= ruleXExpressionInClosure
             {
             if ( state.backtracking==0 ) {
 
@@ -8805,7 +8805,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXExpressionInClosure"
-    // InternalXbaseWithAnnotations.g:3127:1: entryRuleXExpressionInClosure returns [EObject current=null] : iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF ;
+    // InternalXbaseWithAnnotations.g:3128:1: entryRuleXExpressionInClosure returns [EObject current=null] : iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF ;
     public final EObject entryRuleXExpressionInClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8813,8 +8813,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3127:61: (iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF )
-            // InternalXbaseWithAnnotations.g:3128:2: iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF
+            // InternalXbaseWithAnnotations.g:3128:61: (iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF )
+            // InternalXbaseWithAnnotations.g:3129:2: iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExpressionInClosureRule()); 
@@ -8845,7 +8845,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXExpressionInClosure"
-    // InternalXbaseWithAnnotations.g:3134:1: ruleXExpressionInClosure returns [EObject current=null] : ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) ;
+    // InternalXbaseWithAnnotations.g:3135:1: ruleXExpressionInClosure returns [EObject current=null] : ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) ;
     public final EObject ruleXExpressionInClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8857,14 +8857,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3140:2: ( ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) )
-            // InternalXbaseWithAnnotations.g:3141:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
+            // InternalXbaseWithAnnotations.g:3141:2: ( ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) )
+            // InternalXbaseWithAnnotations.g:3142:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
             {
-            // InternalXbaseWithAnnotations.g:3141:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
-            // InternalXbaseWithAnnotations.g:3142:3: () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
+            // InternalXbaseWithAnnotations.g:3142:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
+            // InternalXbaseWithAnnotations.g:3143:3: () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
             {
-            // InternalXbaseWithAnnotations.g:3142:3: ()
-            // InternalXbaseWithAnnotations.g:3143:4: 
+            // InternalXbaseWithAnnotations.g:3143:3: ()
+            // InternalXbaseWithAnnotations.g:3144:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8876,7 +8876,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3149:3: ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
+            // InternalXbaseWithAnnotations.g:3150:3: ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
             loop56:
             do {
                 int alt56=2;
@@ -8889,13 +8889,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt56) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:3150:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )?
+            	    // InternalXbaseWithAnnotations.g:3151:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )?
             	    {
-            	    // InternalXbaseWithAnnotations.g:3150:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) )
-            	    // InternalXbaseWithAnnotations.g:3151:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalXbaseWithAnnotations.g:3151:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) )
+            	    // InternalXbaseWithAnnotations.g:3152:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
             	    {
-            	    // InternalXbaseWithAnnotations.g:3151:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
-            	    // InternalXbaseWithAnnotations.g:3152:6: lv_expressions_1_0= ruleXExpressionOrVarDeclaration
+            	    // InternalXbaseWithAnnotations.g:3152:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalXbaseWithAnnotations.g:3153:6: lv_expressions_1_0= ruleXExpressionOrVarDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -8926,7 +8926,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:3169:4: (otherlv_2= ';' )?
+            	    // InternalXbaseWithAnnotations.g:3170:4: (otherlv_2= ';' )?
             	    int alt55=2;
             	    int LA55_0 = input.LA(1);
 
@@ -8935,7 +8935,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    }
             	    switch (alt55) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:3170:5: otherlv_2= ';'
+            	            // InternalXbaseWithAnnotations.g:3171:5: otherlv_2= ';'
             	            {
             	            otherlv_2=(Token)match(input,58,FOLLOW_47); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -8983,7 +8983,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXShortClosure"
-    // InternalXbaseWithAnnotations.g:3180:1: entryRuleXShortClosure returns [EObject current=null] : iv_ruleXShortClosure= ruleXShortClosure EOF ;
+    // InternalXbaseWithAnnotations.g:3181:1: entryRuleXShortClosure returns [EObject current=null] : iv_ruleXShortClosure= ruleXShortClosure EOF ;
     public final EObject entryRuleXShortClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8991,8 +8991,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3180:54: (iv_ruleXShortClosure= ruleXShortClosure EOF )
-            // InternalXbaseWithAnnotations.g:3181:2: iv_ruleXShortClosure= ruleXShortClosure EOF
+            // InternalXbaseWithAnnotations.g:3181:54: (iv_ruleXShortClosure= ruleXShortClosure EOF )
+            // InternalXbaseWithAnnotations.g:3182:2: iv_ruleXShortClosure= ruleXShortClosure EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXShortClosureRule()); 
@@ -9023,7 +9023,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXShortClosure"
-    // InternalXbaseWithAnnotations.g:3187:1: ruleXShortClosure returns [EObject current=null] : ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:3188:1: ruleXShortClosure returns [EObject current=null] : ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) ;
     public final EObject ruleXShortClosure() throws RecognitionException {
         EObject current = null;
 
@@ -9040,20 +9040,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3193:2: ( ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:3194:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:3194:2: ( ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:3195:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:3194:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:3195:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3195:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:3196:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:3195:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) )
-            // InternalXbaseWithAnnotations.g:3196:4: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
+            // InternalXbaseWithAnnotations.g:3196:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) )
+            // InternalXbaseWithAnnotations.g:3197:4: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
             {
-            // InternalXbaseWithAnnotations.g:3221:4: ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
-            // InternalXbaseWithAnnotations.g:3222:5: () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) )
+            // InternalXbaseWithAnnotations.g:3222:4: ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
+            // InternalXbaseWithAnnotations.g:3223:5: () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) )
             {
-            // InternalXbaseWithAnnotations.g:3222:5: ()
-            // InternalXbaseWithAnnotations.g:3223:6: 
+            // InternalXbaseWithAnnotations.g:3223:5: ()
+            // InternalXbaseWithAnnotations.g:3224:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -9065,7 +9065,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3229:5: ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )?
+            // InternalXbaseWithAnnotations.g:3230:5: ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )?
             int alt58=2;
             int LA58_0 = input.LA(1);
 
@@ -9074,13 +9074,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt58) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3230:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
+                    // InternalXbaseWithAnnotations.g:3231:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:3230:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) )
-                    // InternalXbaseWithAnnotations.g:3231:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
+                    // InternalXbaseWithAnnotations.g:3231:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) )
+                    // InternalXbaseWithAnnotations.g:3232:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
                     {
-                    // InternalXbaseWithAnnotations.g:3231:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
-                    // InternalXbaseWithAnnotations.g:3232:8: lv_declaredFormalParameters_1_0= ruleJvmFormalParameter
+                    // InternalXbaseWithAnnotations.g:3232:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
+                    // InternalXbaseWithAnnotations.g:3233:8: lv_declaredFormalParameters_1_0= ruleJvmFormalParameter
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9111,7 +9111,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:3249:6: (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
+                    // InternalXbaseWithAnnotations.g:3250:6: (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
                     loop57:
                     do {
                         int alt57=2;
@@ -9124,7 +9124,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt57) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:3250:7: otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
+                    	    // InternalXbaseWithAnnotations.g:3251:7: otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
                     	    {
                     	    otherlv_2=(Token)match(input,15,FOLLOW_22); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -9132,11 +9132,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      							newLeafNode(otherlv_2, grammarAccess.getXShortClosureAccess().getCommaKeyword_0_0_1_1_0());
                     	      						
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:3254:7: ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
-                    	    // InternalXbaseWithAnnotations.g:3255:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
+                    	    // InternalXbaseWithAnnotations.g:3255:7: ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
+                    	    // InternalXbaseWithAnnotations.g:3256:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:3255:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
-                    	    // InternalXbaseWithAnnotations.g:3256:9: lv_declaredFormalParameters_3_0= ruleJvmFormalParameter
+                    	    // InternalXbaseWithAnnotations.g:3256:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
+                    	    // InternalXbaseWithAnnotations.g:3257:9: lv_declaredFormalParameters_3_0= ruleJvmFormalParameter
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -9182,11 +9182,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3275:5: ( (lv_explicitSyntax_4_0= '|' ) )
-            // InternalXbaseWithAnnotations.g:3276:6: (lv_explicitSyntax_4_0= '|' )
+            // InternalXbaseWithAnnotations.g:3276:5: ( (lv_explicitSyntax_4_0= '|' ) )
+            // InternalXbaseWithAnnotations.g:3277:6: (lv_explicitSyntax_4_0= '|' )
             {
-            // InternalXbaseWithAnnotations.g:3276:6: (lv_explicitSyntax_4_0= '|' )
-            // InternalXbaseWithAnnotations.g:3277:7: lv_explicitSyntax_4_0= '|'
+            // InternalXbaseWithAnnotations.g:3277:6: (lv_explicitSyntax_4_0= '|' )
+            // InternalXbaseWithAnnotations.g:3278:7: lv_explicitSyntax_4_0= '|'
             {
             lv_explicitSyntax_4_0=(Token)match(input,57,FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -9214,11 +9214,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3291:3: ( (lv_expression_5_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:3292:4: (lv_expression_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3292:3: ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3293:4: (lv_expression_5_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:3292:4: (lv_expression_5_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:3293:5: lv_expression_5_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:3293:4: (lv_expression_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3294:5: lv_expression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -9274,7 +9274,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXParenthesizedExpression"
-    // InternalXbaseWithAnnotations.g:3314:1: entryRuleXParenthesizedExpression returns [EObject current=null] : iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF ;
+    // InternalXbaseWithAnnotations.g:3315:1: entryRuleXParenthesizedExpression returns [EObject current=null] : iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF ;
     public final EObject entryRuleXParenthesizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9282,8 +9282,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3314:65: (iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF )
-            // InternalXbaseWithAnnotations.g:3315:2: iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF
+            // InternalXbaseWithAnnotations.g:3315:65: (iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF )
+            // InternalXbaseWithAnnotations.g:3316:2: iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXParenthesizedExpressionRule()); 
@@ -9314,7 +9314,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXParenthesizedExpression"
-    // InternalXbaseWithAnnotations.g:3321:1: ruleXParenthesizedExpression returns [EObject current=null] : (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) ;
+    // InternalXbaseWithAnnotations.g:3322:1: ruleXParenthesizedExpression returns [EObject current=null] : (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) ;
     public final EObject ruleXParenthesizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9327,11 +9327,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3327:2: ( (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) )
-            // InternalXbaseWithAnnotations.g:3328:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
+            // InternalXbaseWithAnnotations.g:3328:2: ( (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) )
+            // InternalXbaseWithAnnotations.g:3329:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
             {
-            // InternalXbaseWithAnnotations.g:3328:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
-            // InternalXbaseWithAnnotations.g:3329:3: otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')'
+            // InternalXbaseWithAnnotations.g:3329:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
+            // InternalXbaseWithAnnotations.g:3330:3: otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')'
             {
             otherlv_0=(Token)match(input,14,FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -9386,7 +9386,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXIfExpression"
-    // InternalXbaseWithAnnotations.g:3349:1: entryRuleXIfExpression returns [EObject current=null] : iv_ruleXIfExpression= ruleXIfExpression EOF ;
+    // InternalXbaseWithAnnotations.g:3350:1: entryRuleXIfExpression returns [EObject current=null] : iv_ruleXIfExpression= ruleXIfExpression EOF ;
     public final EObject entryRuleXIfExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9394,8 +9394,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3349:54: (iv_ruleXIfExpression= ruleXIfExpression EOF )
-            // InternalXbaseWithAnnotations.g:3350:2: iv_ruleXIfExpression= ruleXIfExpression EOF
+            // InternalXbaseWithAnnotations.g:3350:54: (iv_ruleXIfExpression= ruleXIfExpression EOF )
+            // InternalXbaseWithAnnotations.g:3351:2: iv_ruleXIfExpression= ruleXIfExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXIfExpressionRule()); 
@@ -9426,7 +9426,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXIfExpression"
-    // InternalXbaseWithAnnotations.g:3356:1: ruleXIfExpression returns [EObject current=null] : ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) ;
+    // InternalXbaseWithAnnotations.g:3357:1: ruleXIfExpression returns [EObject current=null] : ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) ;
     public final EObject ruleXIfExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9445,14 +9445,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3362:2: ( ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) )
-            // InternalXbaseWithAnnotations.g:3363:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
+            // InternalXbaseWithAnnotations.g:3363:2: ( ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) )
+            // InternalXbaseWithAnnotations.g:3364:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
             {
-            // InternalXbaseWithAnnotations.g:3363:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
-            // InternalXbaseWithAnnotations.g:3364:3: () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
+            // InternalXbaseWithAnnotations.g:3364:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
+            // InternalXbaseWithAnnotations.g:3365:3: () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
             {
-            // InternalXbaseWithAnnotations.g:3364:3: ()
-            // InternalXbaseWithAnnotations.g:3365:4: 
+            // InternalXbaseWithAnnotations.g:3365:3: ()
+            // InternalXbaseWithAnnotations.g:3366:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -9476,11 +9476,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getXIfExpressionAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:3379:3: ( (lv_if_3_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:3380:4: (lv_if_3_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3380:3: ( (lv_if_3_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3381:4: (lv_if_3_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:3380:4: (lv_if_3_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:3381:5: lv_if_3_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:3381:4: (lv_if_3_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3382:5: lv_if_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -9517,11 +9517,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_4, grammarAccess.getXIfExpressionAccess().getRightParenthesisKeyword_4());
               		
             }
-            // InternalXbaseWithAnnotations.g:3402:3: ( (lv_then_5_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:3403:4: (lv_then_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3403:3: ( (lv_then_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3404:4: (lv_then_5_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:3403:4: (lv_then_5_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:3404:5: lv_then_5_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:3404:4: (lv_then_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3405:5: lv_then_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -9552,7 +9552,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3421:3: ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
+            // InternalXbaseWithAnnotations.g:3422:3: ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -9565,10 +9565,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt59) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3422:4: ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3423:4: ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3422:4: ( ( 'else' )=>otherlv_6= 'else' )
-                    // InternalXbaseWithAnnotations.g:3423:5: ( 'else' )=>otherlv_6= 'else'
+                    // InternalXbaseWithAnnotations.g:3423:4: ( ( 'else' )=>otherlv_6= 'else' )
+                    // InternalXbaseWithAnnotations.g:3424:5: ( 'else' )=>otherlv_6= 'else'
                     {
                     otherlv_6=(Token)match(input,60,FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9579,11 +9579,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:3429:4: ( (lv_else_7_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3430:5: (lv_else_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3430:4: ( (lv_else_7_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3431:5: (lv_else_7_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3430:5: (lv_else_7_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3431:6: lv_else_7_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3431:5: (lv_else_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3432:6: lv_else_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9645,7 +9645,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXSwitchExpression"
-    // InternalXbaseWithAnnotations.g:3453:1: entryRuleXSwitchExpression returns [EObject current=null] : iv_ruleXSwitchExpression= ruleXSwitchExpression EOF ;
+    // InternalXbaseWithAnnotations.g:3454:1: entryRuleXSwitchExpression returns [EObject current=null] : iv_ruleXSwitchExpression= ruleXSwitchExpression EOF ;
     public final EObject entryRuleXSwitchExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9653,8 +9653,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3453:58: (iv_ruleXSwitchExpression= ruleXSwitchExpression EOF )
-            // InternalXbaseWithAnnotations.g:3454:2: iv_ruleXSwitchExpression= ruleXSwitchExpression EOF
+            // InternalXbaseWithAnnotations.g:3454:58: (iv_ruleXSwitchExpression= ruleXSwitchExpression EOF )
+            // InternalXbaseWithAnnotations.g:3455:2: iv_ruleXSwitchExpression= ruleXSwitchExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXSwitchExpressionRule()); 
@@ -9685,7 +9685,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXSwitchExpression"
-    // InternalXbaseWithAnnotations.g:3460:1: ruleXSwitchExpression returns [EObject current=null] : ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
+    // InternalXbaseWithAnnotations.g:3461:1: ruleXSwitchExpression returns [EObject current=null] : ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
     public final EObject ruleXSwitchExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9715,14 +9715,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3466:2: ( ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
-            // InternalXbaseWithAnnotations.g:3467:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
+            // InternalXbaseWithAnnotations.g:3467:2: ( ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
+            // InternalXbaseWithAnnotations.g:3468:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
             {
-            // InternalXbaseWithAnnotations.g:3467:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
-            // InternalXbaseWithAnnotations.g:3468:3: () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
+            // InternalXbaseWithAnnotations.g:3468:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
+            // InternalXbaseWithAnnotations.g:3469:3: () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
             {
-            // InternalXbaseWithAnnotations.g:3468:3: ()
-            // InternalXbaseWithAnnotations.g:3469:4: 
+            // InternalXbaseWithAnnotations.g:3469:3: ()
+            // InternalXbaseWithAnnotations.g:3470:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -9740,21 +9740,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXSwitchExpressionAccess().getSwitchKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:3479:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:3480:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )
             int alt61=2;
             alt61 = dfa61.predict(input);
             switch (alt61) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3480:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
+                    // InternalXbaseWithAnnotations.g:3481:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
                     {
-                    // InternalXbaseWithAnnotations.g:3480:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
-                    // InternalXbaseWithAnnotations.g:3481:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')'
+                    // InternalXbaseWithAnnotations.g:3481:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
+                    // InternalXbaseWithAnnotations.g:3482:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')'
                     {
-                    // InternalXbaseWithAnnotations.g:3481:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
-                    // InternalXbaseWithAnnotations.g:3482:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+                    // InternalXbaseWithAnnotations.g:3482:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
+                    // InternalXbaseWithAnnotations.g:3483:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
                     {
-                    // InternalXbaseWithAnnotations.g:3492:6: (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
-                    // InternalXbaseWithAnnotations.g:3493:7: otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
+                    // InternalXbaseWithAnnotations.g:3493:6: (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+                    // InternalXbaseWithAnnotations.g:3494:7: otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
                     {
                     otherlv_2=(Token)match(input,14,FOLLOW_22); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9762,11 +9762,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       							newLeafNode(otherlv_2, grammarAccess.getXSwitchExpressionAccess().getLeftParenthesisKeyword_2_0_0_0_0());
                       						
                     }
-                    // InternalXbaseWithAnnotations.g:3497:7: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
-                    // InternalXbaseWithAnnotations.g:3498:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+                    // InternalXbaseWithAnnotations.g:3498:7: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
+                    // InternalXbaseWithAnnotations.g:3499:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
                     {
-                    // InternalXbaseWithAnnotations.g:3498:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
-                    // InternalXbaseWithAnnotations.g:3499:9: lv_declaredParam_3_0= ruleJvmFormalParameter
+                    // InternalXbaseWithAnnotations.g:3499:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+                    // InternalXbaseWithAnnotations.g:3500:9: lv_declaredParam_3_0= ruleJvmFormalParameter
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9809,11 +9809,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:3522:5: ( (lv_switch_5_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3523:6: (lv_switch_5_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3523:5: ( (lv_switch_5_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3524:6: (lv_switch_5_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3523:6: (lv_switch_5_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3524:7: lv_switch_5_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3524:6: (lv_switch_5_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3525:7: lv_switch_5_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9857,26 +9857,26 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:3547:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
+                    // InternalXbaseWithAnnotations.g:3548:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3547:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
-                    // InternalXbaseWithAnnotations.g:3548:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3548:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
+                    // InternalXbaseWithAnnotations.g:3549:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3548:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?
+                    // InternalXbaseWithAnnotations.g:3549:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?
                     int alt60=2;
                     alt60 = dfa60.predict(input);
                     switch (alt60) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:3549:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
+                            // InternalXbaseWithAnnotations.g:3550:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
                             {
-                            // InternalXbaseWithAnnotations.g:3558:6: ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
-                            // InternalXbaseWithAnnotations.g:3559:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':'
+                            // InternalXbaseWithAnnotations.g:3559:6: ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
+                            // InternalXbaseWithAnnotations.g:3560:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':'
                             {
-                            // InternalXbaseWithAnnotations.g:3559:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) )
-                            // InternalXbaseWithAnnotations.g:3560:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
+                            // InternalXbaseWithAnnotations.g:3560:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) )
+                            // InternalXbaseWithAnnotations.g:3561:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
                             {
-                            // InternalXbaseWithAnnotations.g:3560:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
-                            // InternalXbaseWithAnnotations.g:3561:9: lv_declaredParam_7_0= ruleJvmFormalParameter
+                            // InternalXbaseWithAnnotations.g:3561:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
+                            // InternalXbaseWithAnnotations.g:3562:9: lv_declaredParam_7_0= ruleJvmFormalParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -9922,11 +9922,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:3584:5: ( (lv_switch_9_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3585:6: (lv_switch_9_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3585:5: ( (lv_switch_9_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3586:6: (lv_switch_9_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3585:6: (lv_switch_9_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3586:7: lv_switch_9_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3586:6: (lv_switch_9_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3587:7: lv_switch_9_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9972,7 +9972,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_10, grammarAccess.getXSwitchExpressionAccess().getLeftCurlyBracketKeyword_3());
               		
             }
-            // InternalXbaseWithAnnotations.g:3609:3: ( (lv_cases_11_0= ruleXCasePart ) )*
+            // InternalXbaseWithAnnotations.g:3610:3: ( (lv_cases_11_0= ruleXCasePart ) )*
             loop62:
             do {
                 int alt62=2;
@@ -9985,10 +9985,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt62) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:3610:4: (lv_cases_11_0= ruleXCasePart )
+            	    // InternalXbaseWithAnnotations.g:3611:4: (lv_cases_11_0= ruleXCasePart )
             	    {
-            	    // InternalXbaseWithAnnotations.g:3610:4: (lv_cases_11_0= ruleXCasePart )
-            	    // InternalXbaseWithAnnotations.g:3611:5: lv_cases_11_0= ruleXCasePart
+            	    // InternalXbaseWithAnnotations.g:3611:4: (lv_cases_11_0= ruleXCasePart )
+            	    // InternalXbaseWithAnnotations.g:3612:5: lv_cases_11_0= ruleXCasePart
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -10025,7 +10025,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
             } while (true);
 
-            // InternalXbaseWithAnnotations.g:3628:3: (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )?
+            // InternalXbaseWithAnnotations.g:3629:3: (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )?
             int alt63=2;
             int LA63_0 = input.LA(1);
 
@@ -10034,7 +10034,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt63) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3629:4: otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3630:4: otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) )
                     {
                     otherlv_12=(Token)match(input,63,FOLLOW_51); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10048,11 +10048,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(otherlv_13, grammarAccess.getXSwitchExpressionAccess().getColonKeyword_5_1());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:3637:4: ( (lv_default_14_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3638:5: (lv_default_14_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3638:4: ( (lv_default_14_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3639:5: (lv_default_14_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3638:5: (lv_default_14_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3639:6: lv_default_14_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3639:5: (lv_default_14_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3640:6: lv_default_14_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10120,7 +10120,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXCasePart"
-    // InternalXbaseWithAnnotations.g:3665:1: entryRuleXCasePart returns [EObject current=null] : iv_ruleXCasePart= ruleXCasePart EOF ;
+    // InternalXbaseWithAnnotations.g:3666:1: entryRuleXCasePart returns [EObject current=null] : iv_ruleXCasePart= ruleXCasePart EOF ;
     public final EObject entryRuleXCasePart() throws RecognitionException {
         EObject current = null;
 
@@ -10128,8 +10128,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3665:50: (iv_ruleXCasePart= ruleXCasePart EOF )
-            // InternalXbaseWithAnnotations.g:3666:2: iv_ruleXCasePart= ruleXCasePart EOF
+            // InternalXbaseWithAnnotations.g:3666:50: (iv_ruleXCasePart= ruleXCasePart EOF )
+            // InternalXbaseWithAnnotations.g:3667:2: iv_ruleXCasePart= ruleXCasePart EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCasePartRule()); 
@@ -10160,7 +10160,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXCasePart"
-    // InternalXbaseWithAnnotations.g:3672:1: ruleXCasePart returns [EObject current=null] : ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) ;
+    // InternalXbaseWithAnnotations.g:3673:1: ruleXCasePart returns [EObject current=null] : ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) ;
     public final EObject ruleXCasePart() throws RecognitionException {
         EObject current = null;
 
@@ -10178,14 +10178,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3678:2: ( ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) )
-            // InternalXbaseWithAnnotations.g:3679:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
+            // InternalXbaseWithAnnotations.g:3679:2: ( ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) )
+            // InternalXbaseWithAnnotations.g:3680:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
             {
-            // InternalXbaseWithAnnotations.g:3679:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
-            // InternalXbaseWithAnnotations.g:3680:3: () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
+            // InternalXbaseWithAnnotations.g:3680:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
+            // InternalXbaseWithAnnotations.g:3681:3: () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
             {
-            // InternalXbaseWithAnnotations.g:3680:3: ()
-            // InternalXbaseWithAnnotations.g:3681:4: 
+            // InternalXbaseWithAnnotations.g:3681:3: ()
+            // InternalXbaseWithAnnotations.g:3682:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -10197,7 +10197,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3687:3: ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )?
+            // InternalXbaseWithAnnotations.g:3688:3: ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )?
             int alt64=2;
             int LA64_0 = input.LA(1);
 
@@ -10206,10 +10206,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt64) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3688:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
+                    // InternalXbaseWithAnnotations.g:3689:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
                     {
-                    // InternalXbaseWithAnnotations.g:3688:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
-                    // InternalXbaseWithAnnotations.g:3689:5: lv_typeGuard_1_0= ruleJvmTypeReference
+                    // InternalXbaseWithAnnotations.g:3689:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
+                    // InternalXbaseWithAnnotations.g:3690:5: lv_typeGuard_1_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10243,7 +10243,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3706:3: (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )?
+            // InternalXbaseWithAnnotations.g:3707:3: (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )?
             int alt65=2;
             int LA65_0 = input.LA(1);
 
@@ -10252,7 +10252,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt65) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3707:4: otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3708:4: otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) )
                     {
                     otherlv_2=(Token)match(input,64,FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10260,11 +10260,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(otherlv_2, grammarAccess.getXCasePartAccess().getCaseKeyword_2_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:3711:4: ( (lv_case_3_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3712:5: (lv_case_3_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3712:4: ( (lv_case_3_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3713:5: (lv_case_3_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3712:5: (lv_case_3_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3713:6: lv_case_3_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3713:5: (lv_case_3_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3714:6: lv_case_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10301,7 +10301,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3731:3: ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
+            // InternalXbaseWithAnnotations.g:3732:3: ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
             int alt66=2;
             int LA66_0 = input.LA(1);
 
@@ -10320,10 +10320,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt66) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3732:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
+                    // InternalXbaseWithAnnotations.g:3733:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3732:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
-                    // InternalXbaseWithAnnotations.g:3733:5: otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3733:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
+                    // InternalXbaseWithAnnotations.g:3734:5: otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) )
                     {
                     otherlv_4=(Token)match(input,62,FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10331,11 +10331,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       					newLeafNode(otherlv_4, grammarAccess.getXCasePartAccess().getColonKeyword_3_0_0());
                       				
                     }
-                    // InternalXbaseWithAnnotations.g:3737:5: ( (lv_then_5_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3738:6: (lv_then_5_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3738:5: ( (lv_then_5_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3739:6: (lv_then_5_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3738:6: (lv_then_5_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3739:7: lv_then_5_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3739:6: (lv_then_5_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3740:7: lv_then_5_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10373,13 +10373,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:3758:4: ( (lv_fallThrough_6_0= ',' ) )
+                    // InternalXbaseWithAnnotations.g:3759:4: ( (lv_fallThrough_6_0= ',' ) )
                     {
-                    // InternalXbaseWithAnnotations.g:3758:4: ( (lv_fallThrough_6_0= ',' ) )
-                    // InternalXbaseWithAnnotations.g:3759:5: (lv_fallThrough_6_0= ',' )
+                    // InternalXbaseWithAnnotations.g:3759:4: ( (lv_fallThrough_6_0= ',' ) )
+                    // InternalXbaseWithAnnotations.g:3760:5: (lv_fallThrough_6_0= ',' )
                     {
-                    // InternalXbaseWithAnnotations.g:3759:5: (lv_fallThrough_6_0= ',' )
-                    // InternalXbaseWithAnnotations.g:3760:6: lv_fallThrough_6_0= ','
+                    // InternalXbaseWithAnnotations.g:3760:5: (lv_fallThrough_6_0= ',' )
+                    // InternalXbaseWithAnnotations.g:3761:6: lv_fallThrough_6_0= ','
                     {
                     lv_fallThrough_6_0=(Token)match(input,15,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10432,7 +10432,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXForLoopExpression"
-    // InternalXbaseWithAnnotations.g:3777:1: entryRuleXForLoopExpression returns [EObject current=null] : iv_ruleXForLoopExpression= ruleXForLoopExpression EOF ;
+    // InternalXbaseWithAnnotations.g:3778:1: entryRuleXForLoopExpression returns [EObject current=null] : iv_ruleXForLoopExpression= ruleXForLoopExpression EOF ;
     public final EObject entryRuleXForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10440,8 +10440,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3777:59: (iv_ruleXForLoopExpression= ruleXForLoopExpression EOF )
-            // InternalXbaseWithAnnotations.g:3778:2: iv_ruleXForLoopExpression= ruleXForLoopExpression EOF
+            // InternalXbaseWithAnnotations.g:3778:59: (iv_ruleXForLoopExpression= ruleXForLoopExpression EOF )
+            // InternalXbaseWithAnnotations.g:3779:2: iv_ruleXForLoopExpression= ruleXForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXForLoopExpressionRule()); 
@@ -10472,7 +10472,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXForLoopExpression"
-    // InternalXbaseWithAnnotations.g:3784:1: ruleXForLoopExpression returns [EObject current=null] : ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:3785:1: ruleXForLoopExpression returns [EObject current=null] : ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) ;
     public final EObject ruleXForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10491,20 +10491,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3790:2: ( ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:3791:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:3791:2: ( ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:3792:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:3791:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:3792:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3792:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:3793:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:3792:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
-            // InternalXbaseWithAnnotations.g:3793:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+            // InternalXbaseWithAnnotations.g:3793:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
+            // InternalXbaseWithAnnotations.g:3794:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
             {
-            // InternalXbaseWithAnnotations.g:3806:4: ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
-            // InternalXbaseWithAnnotations.g:3807:5: () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
+            // InternalXbaseWithAnnotations.g:3807:4: ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+            // InternalXbaseWithAnnotations.g:3808:5: () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
             {
-            // InternalXbaseWithAnnotations.g:3807:5: ()
-            // InternalXbaseWithAnnotations.g:3808:6: 
+            // InternalXbaseWithAnnotations.g:3808:5: ()
+            // InternalXbaseWithAnnotations.g:3809:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -10528,11 +10528,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               					newLeafNode(otherlv_2, grammarAccess.getXForLoopExpressionAccess().getLeftParenthesisKeyword_0_0_2());
               				
             }
-            // InternalXbaseWithAnnotations.g:3822:5: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
-            // InternalXbaseWithAnnotations.g:3823:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+            // InternalXbaseWithAnnotations.g:3823:5: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
+            // InternalXbaseWithAnnotations.g:3824:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
             {
-            // InternalXbaseWithAnnotations.g:3823:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
-            // InternalXbaseWithAnnotations.g:3824:7: lv_declaredParam_3_0= ruleJvmFormalParameter
+            // InternalXbaseWithAnnotations.g:3824:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+            // InternalXbaseWithAnnotations.g:3825:7: lv_declaredParam_3_0= ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -10575,11 +10575,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:3847:3: ( (lv_forExpression_5_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:3848:4: (lv_forExpression_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3848:3: ( (lv_forExpression_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3849:4: (lv_forExpression_5_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:3848:4: (lv_forExpression_5_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:3849:5: lv_forExpression_5_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:3849:4: (lv_forExpression_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3850:5: lv_forExpression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10616,11 +10616,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_6, grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:3870:3: ( (lv_eachExpression_7_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:3871:4: (lv_eachExpression_7_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3871:3: ( (lv_eachExpression_7_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3872:4: (lv_eachExpression_7_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:3871:4: (lv_eachExpression_7_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:3872:5: lv_eachExpression_7_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:3872:4: (lv_eachExpression_7_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:3873:5: lv_eachExpression_7_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10676,7 +10676,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXBasicForLoopExpression"
-    // InternalXbaseWithAnnotations.g:3893:1: entryRuleXBasicForLoopExpression returns [EObject current=null] : iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF ;
+    // InternalXbaseWithAnnotations.g:3894:1: entryRuleXBasicForLoopExpression returns [EObject current=null] : iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF ;
     public final EObject entryRuleXBasicForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10684,8 +10684,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:3893:64: (iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF )
-            // InternalXbaseWithAnnotations.g:3894:2: iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF
+            // InternalXbaseWithAnnotations.g:3894:64: (iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF )
+            // InternalXbaseWithAnnotations.g:3895:2: iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXBasicForLoopExpressionRule()); 
@@ -10716,7 +10716,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXBasicForLoopExpression"
-    // InternalXbaseWithAnnotations.g:3900:1: ruleXBasicForLoopExpression returns [EObject current=null] : ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:3901:1: ruleXBasicForLoopExpression returns [EObject current=null] : ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) ;
     public final EObject ruleXBasicForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10744,14 +10744,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:3906:2: ( ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:3907:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:3907:2: ( ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:3908:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:3907:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:3908:3: () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:3908:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:3909:3: () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:3908:3: ()
-            // InternalXbaseWithAnnotations.g:3909:4: 
+            // InternalXbaseWithAnnotations.g:3909:3: ()
+            // InternalXbaseWithAnnotations.g:3910:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -10775,7 +10775,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getXBasicForLoopExpressionAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:3923:3: ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )?
+            // InternalXbaseWithAnnotations.g:3924:3: ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )?
             int alt68=2;
             int LA68_0 = input.LA(1);
 
@@ -10784,13 +10784,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt68) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3924:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
+                    // InternalXbaseWithAnnotations.g:3925:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:3924:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) )
-                    // InternalXbaseWithAnnotations.g:3925:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
+                    // InternalXbaseWithAnnotations.g:3925:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) )
+                    // InternalXbaseWithAnnotations.g:3926:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
                     {
-                    // InternalXbaseWithAnnotations.g:3925:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
-                    // InternalXbaseWithAnnotations.g:3926:6: lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration
+                    // InternalXbaseWithAnnotations.g:3926:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
+                    // InternalXbaseWithAnnotations.g:3927:6: lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10821,7 +10821,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:3943:4: (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
+                    // InternalXbaseWithAnnotations.g:3944:4: (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
                     loop67:
                     do {
                         int alt67=2;
@@ -10834,7 +10834,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt67) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:3944:5: otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
+                    	    // InternalXbaseWithAnnotations.g:3945:5: otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
                     	    {
                     	    otherlv_4=(Token)match(input,15,FOLLOW_58); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -10842,11 +10842,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_4, grammarAccess.getXBasicForLoopExpressionAccess().getCommaKeyword_3_1_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:3948:5: ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
-                    	    // InternalXbaseWithAnnotations.g:3949:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
+                    	    // InternalXbaseWithAnnotations.g:3949:5: ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
+                    	    // InternalXbaseWithAnnotations.g:3950:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:3949:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
-                    	    // InternalXbaseWithAnnotations.g:3950:7: lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration
+                    	    // InternalXbaseWithAnnotations.g:3950:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
+                    	    // InternalXbaseWithAnnotations.g:3951:7: lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -10898,7 +10898,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_6, grammarAccess.getXBasicForLoopExpressionAccess().getSemicolonKeyword_4());
               		
             }
-            // InternalXbaseWithAnnotations.g:3973:3: ( (lv_expression_7_0= ruleXExpression ) )?
+            // InternalXbaseWithAnnotations.g:3974:3: ( (lv_expression_7_0= ruleXExpression ) )?
             int alt69=2;
             int LA69_0 = input.LA(1);
 
@@ -10907,10 +10907,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt69) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3974:4: (lv_expression_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3975:4: (lv_expression_7_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3974:4: (lv_expression_7_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3975:5: lv_expression_7_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3975:4: (lv_expression_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3976:5: lv_expression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10950,7 +10950,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_8, grammarAccess.getXBasicForLoopExpressionAccess().getSemicolonKeyword_6());
               		
             }
-            // InternalXbaseWithAnnotations.g:3996:3: ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )?
+            // InternalXbaseWithAnnotations.g:3997:3: ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )?
             int alt71=2;
             int LA71_0 = input.LA(1);
 
@@ -10959,13 +10959,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt71) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:3997:4: ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
+                    // InternalXbaseWithAnnotations.g:3998:4: ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:3997:4: ( (lv_updateExpressions_9_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:3998:5: (lv_updateExpressions_9_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:3998:4: ( (lv_updateExpressions_9_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:3999:5: (lv_updateExpressions_9_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:3998:5: (lv_updateExpressions_9_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:3999:6: lv_updateExpressions_9_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:3999:5: (lv_updateExpressions_9_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:4000:6: lv_updateExpressions_9_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10996,7 +10996,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:4016:4: (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
+                    // InternalXbaseWithAnnotations.g:4017:4: (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
                     loop70:
                     do {
                         int alt70=2;
@@ -11009,7 +11009,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt70) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:4017:5: otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) )
+                    	    // InternalXbaseWithAnnotations.g:4018:5: otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) )
                     	    {
                     	    otherlv_10=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -11017,11 +11017,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_10, grammarAccess.getXBasicForLoopExpressionAccess().getCommaKeyword_7_1_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:4021:5: ( (lv_updateExpressions_11_0= ruleXExpression ) )
-                    	    // InternalXbaseWithAnnotations.g:4022:6: (lv_updateExpressions_11_0= ruleXExpression )
+                    	    // InternalXbaseWithAnnotations.g:4022:5: ( (lv_updateExpressions_11_0= ruleXExpression ) )
+                    	    // InternalXbaseWithAnnotations.g:4023:6: (lv_updateExpressions_11_0= ruleXExpression )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:4022:6: (lv_updateExpressions_11_0= ruleXExpression )
-                    	    // InternalXbaseWithAnnotations.g:4023:7: lv_updateExpressions_11_0= ruleXExpression
+                    	    // InternalXbaseWithAnnotations.g:4023:6: (lv_updateExpressions_11_0= ruleXExpression )
+                    	    // InternalXbaseWithAnnotations.g:4024:7: lv_updateExpressions_11_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -11073,11 +11073,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_12, grammarAccess.getXBasicForLoopExpressionAccess().getRightParenthesisKeyword_8());
               		
             }
-            // InternalXbaseWithAnnotations.g:4046:3: ( (lv_eachExpression_13_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:4047:4: (lv_eachExpression_13_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4047:3: ( (lv_eachExpression_13_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4048:4: (lv_eachExpression_13_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:4047:4: (lv_eachExpression_13_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:4048:5: lv_eachExpression_13_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:4048:4: (lv_eachExpression_13_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4049:5: lv_eachExpression_13_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -11133,7 +11133,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXWhileExpression"
-    // InternalXbaseWithAnnotations.g:4069:1: entryRuleXWhileExpression returns [EObject current=null] : iv_ruleXWhileExpression= ruleXWhileExpression EOF ;
+    // InternalXbaseWithAnnotations.g:4070:1: entryRuleXWhileExpression returns [EObject current=null] : iv_ruleXWhileExpression= ruleXWhileExpression EOF ;
     public final EObject entryRuleXWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11141,8 +11141,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4069:57: (iv_ruleXWhileExpression= ruleXWhileExpression EOF )
-            // InternalXbaseWithAnnotations.g:4070:2: iv_ruleXWhileExpression= ruleXWhileExpression EOF
+            // InternalXbaseWithAnnotations.g:4070:57: (iv_ruleXWhileExpression= ruleXWhileExpression EOF )
+            // InternalXbaseWithAnnotations.g:4071:2: iv_ruleXWhileExpression= ruleXWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXWhileExpressionRule()); 
@@ -11173,7 +11173,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXWhileExpression"
-    // InternalXbaseWithAnnotations.g:4076:1: ruleXWhileExpression returns [EObject current=null] : ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:4077:1: ruleXWhileExpression returns [EObject current=null] : ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) ;
     public final EObject ruleXWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11189,14 +11189,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4082:2: ( ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:4083:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:4083:2: ( ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:4084:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:4083:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:4084:3: () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4084:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:4085:3: () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:4084:3: ()
-            // InternalXbaseWithAnnotations.g:4085:4: 
+            // InternalXbaseWithAnnotations.g:4085:3: ()
+            // InternalXbaseWithAnnotations.g:4086:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -11220,11 +11220,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getXWhileExpressionAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:4099:3: ( (lv_predicate_3_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:4100:4: (lv_predicate_3_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4100:3: ( (lv_predicate_3_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4101:4: (lv_predicate_3_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:4100:4: (lv_predicate_3_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:4101:5: lv_predicate_3_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:4101:4: (lv_predicate_3_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4102:5: lv_predicate_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -11261,11 +11261,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_4, grammarAccess.getXWhileExpressionAccess().getRightParenthesisKeyword_4());
               		
             }
-            // InternalXbaseWithAnnotations.g:4122:3: ( (lv_body_5_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:4123:4: (lv_body_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4123:3: ( (lv_body_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4124:4: (lv_body_5_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:4123:4: (lv_body_5_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:4124:5: lv_body_5_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:4124:4: (lv_body_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4125:5: lv_body_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -11321,7 +11321,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXDoWhileExpression"
-    // InternalXbaseWithAnnotations.g:4145:1: entryRuleXDoWhileExpression returns [EObject current=null] : iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF ;
+    // InternalXbaseWithAnnotations.g:4146:1: entryRuleXDoWhileExpression returns [EObject current=null] : iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF ;
     public final EObject entryRuleXDoWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11329,8 +11329,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4145:59: (iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF )
-            // InternalXbaseWithAnnotations.g:4146:2: iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF
+            // InternalXbaseWithAnnotations.g:4146:59: (iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF )
+            // InternalXbaseWithAnnotations.g:4147:2: iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXDoWhileExpressionRule()); 
@@ -11361,7 +11361,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXDoWhileExpression"
-    // InternalXbaseWithAnnotations.g:4152:1: ruleXDoWhileExpression returns [EObject current=null] : ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) ;
+    // InternalXbaseWithAnnotations.g:4153:1: ruleXDoWhileExpression returns [EObject current=null] : ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) ;
     public final EObject ruleXDoWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11378,14 +11378,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4158:2: ( ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) )
-            // InternalXbaseWithAnnotations.g:4159:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
+            // InternalXbaseWithAnnotations.g:4159:2: ( ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) )
+            // InternalXbaseWithAnnotations.g:4160:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
             {
-            // InternalXbaseWithAnnotations.g:4159:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
-            // InternalXbaseWithAnnotations.g:4160:3: () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')'
+            // InternalXbaseWithAnnotations.g:4160:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
+            // InternalXbaseWithAnnotations.g:4161:3: () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')'
             {
-            // InternalXbaseWithAnnotations.g:4160:3: ()
-            // InternalXbaseWithAnnotations.g:4161:4: 
+            // InternalXbaseWithAnnotations.g:4161:3: ()
+            // InternalXbaseWithAnnotations.g:4162:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -11403,11 +11403,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXDoWhileExpressionAccess().getDoKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:4171:3: ( (lv_body_2_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:4172:4: (lv_body_2_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4172:3: ( (lv_body_2_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4173:4: (lv_body_2_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:4172:4: (lv_body_2_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:4173:5: lv_body_2_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:4173:4: (lv_body_2_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4174:5: lv_body_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -11450,11 +11450,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_4, grammarAccess.getXDoWhileExpressionAccess().getLeftParenthesisKeyword_4());
               		
             }
-            // InternalXbaseWithAnnotations.g:4198:3: ( (lv_predicate_5_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:4199:4: (lv_predicate_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4199:3: ( (lv_predicate_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4200:4: (lv_predicate_5_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:4199:4: (lv_predicate_5_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:4200:5: lv_predicate_5_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:4200:4: (lv_predicate_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4201:5: lv_predicate_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -11516,7 +11516,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXBlockExpression"
-    // InternalXbaseWithAnnotations.g:4225:1: entryRuleXBlockExpression returns [EObject current=null] : iv_ruleXBlockExpression= ruleXBlockExpression EOF ;
+    // InternalXbaseWithAnnotations.g:4226:1: entryRuleXBlockExpression returns [EObject current=null] : iv_ruleXBlockExpression= ruleXBlockExpression EOF ;
     public final EObject entryRuleXBlockExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11524,8 +11524,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4225:57: (iv_ruleXBlockExpression= ruleXBlockExpression EOF )
-            // InternalXbaseWithAnnotations.g:4226:2: iv_ruleXBlockExpression= ruleXBlockExpression EOF
+            // InternalXbaseWithAnnotations.g:4226:57: (iv_ruleXBlockExpression= ruleXBlockExpression EOF )
+            // InternalXbaseWithAnnotations.g:4227:2: iv_ruleXBlockExpression= ruleXBlockExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXBlockExpressionRule()); 
@@ -11556,7 +11556,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXBlockExpression"
-    // InternalXbaseWithAnnotations.g:4232:1: ruleXBlockExpression returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) ;
+    // InternalXbaseWithAnnotations.g:4233:1: ruleXBlockExpression returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) ;
     public final EObject ruleXBlockExpression() throws RecognitionException {
         EObject current = null;
 
@@ -11570,14 +11570,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4238:2: ( ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) )
-            // InternalXbaseWithAnnotations.g:4239:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
+            // InternalXbaseWithAnnotations.g:4239:2: ( ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) )
+            // InternalXbaseWithAnnotations.g:4240:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
             {
-            // InternalXbaseWithAnnotations.g:4239:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
-            // InternalXbaseWithAnnotations.g:4240:3: () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}'
+            // InternalXbaseWithAnnotations.g:4240:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
+            // InternalXbaseWithAnnotations.g:4241:3: () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}'
             {
-            // InternalXbaseWithAnnotations.g:4240:3: ()
-            // InternalXbaseWithAnnotations.g:4241:4: 
+            // InternalXbaseWithAnnotations.g:4241:3: ()
+            // InternalXbaseWithAnnotations.g:4242:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -11595,7 +11595,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:4251:3: ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )*
+            // InternalXbaseWithAnnotations.g:4252:3: ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )*
             loop73:
             do {
                 int alt73=2;
@@ -11608,13 +11608,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt73) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:4252:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )?
+            	    // InternalXbaseWithAnnotations.g:4253:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )?
             	    {
-            	    // InternalXbaseWithAnnotations.g:4252:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) )
-            	    // InternalXbaseWithAnnotations.g:4253:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalXbaseWithAnnotations.g:4253:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) )
+            	    // InternalXbaseWithAnnotations.g:4254:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
             	    {
-            	    // InternalXbaseWithAnnotations.g:4253:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
-            	    // InternalXbaseWithAnnotations.g:4254:6: lv_expressions_2_0= ruleXExpressionOrVarDeclaration
+            	    // InternalXbaseWithAnnotations.g:4254:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalXbaseWithAnnotations.g:4255:6: lv_expressions_2_0= ruleXExpressionOrVarDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -11645,7 +11645,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             	    }
 
-            	    // InternalXbaseWithAnnotations.g:4271:4: (otherlv_3= ';' )?
+            	    // InternalXbaseWithAnnotations.g:4272:4: (otherlv_3= ';' )?
             	    int alt72=2;
             	    int LA72_0 = input.LA(1);
 
@@ -11654,7 +11654,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             	    }
             	    switch (alt72) {
             	        case 1 :
-            	            // InternalXbaseWithAnnotations.g:4272:5: otherlv_3= ';'
+            	            // InternalXbaseWithAnnotations.g:4273:5: otherlv_3= ';'
             	            {
             	            otherlv_3=(Token)match(input,58,FOLLOW_62); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -11708,7 +11708,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXExpressionOrVarDeclaration"
-    // InternalXbaseWithAnnotations.g:4286:1: entryRuleXExpressionOrVarDeclaration returns [EObject current=null] : iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF ;
+    // InternalXbaseWithAnnotations.g:4287:1: entryRuleXExpressionOrVarDeclaration returns [EObject current=null] : iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF ;
     public final EObject entryRuleXExpressionOrVarDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -11716,8 +11716,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4286:68: (iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF )
-            // InternalXbaseWithAnnotations.g:4287:2: iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF
+            // InternalXbaseWithAnnotations.g:4287:68: (iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF )
+            // InternalXbaseWithAnnotations.g:4288:2: iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExpressionOrVarDeclarationRule()); 
@@ -11748,7 +11748,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXExpressionOrVarDeclaration"
-    // InternalXbaseWithAnnotations.g:4293:1: ruleXExpressionOrVarDeclaration returns [EObject current=null] : (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) ;
+    // InternalXbaseWithAnnotations.g:4294:1: ruleXExpressionOrVarDeclaration returns [EObject current=null] : (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) ;
     public final EObject ruleXExpressionOrVarDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -11761,10 +11761,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4299:2: ( (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:4300:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4300:2: ( (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:4301:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:4300:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:4301:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
             int alt74=2;
             int LA74_0 = input.LA(1);
 
@@ -11783,7 +11783,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt74) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4301:3: this_XVariableDeclaration_0= ruleXVariableDeclaration
+                    // InternalXbaseWithAnnotations.g:4302:3: this_XVariableDeclaration_0= ruleXVariableDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11805,7 +11805,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:4310:3: this_XExpression_1= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:4311:3: this_XExpression_1= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11851,7 +11851,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXVariableDeclaration"
-    // InternalXbaseWithAnnotations.g:4322:1: entryRuleXVariableDeclaration returns [EObject current=null] : iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF ;
+    // InternalXbaseWithAnnotations.g:4323:1: entryRuleXVariableDeclaration returns [EObject current=null] : iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF ;
     public final EObject entryRuleXVariableDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -11859,8 +11859,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4322:61: (iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF )
-            // InternalXbaseWithAnnotations.g:4323:2: iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF
+            // InternalXbaseWithAnnotations.g:4323:61: (iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF )
+            // InternalXbaseWithAnnotations.g:4324:2: iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXVariableDeclarationRule()); 
@@ -11891,7 +11891,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXVariableDeclaration"
-    // InternalXbaseWithAnnotations.g:4329:1: ruleXVariableDeclaration returns [EObject current=null] : ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) ;
+    // InternalXbaseWithAnnotations.g:4330:1: ruleXVariableDeclaration returns [EObject current=null] : ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) ;
     public final EObject ruleXVariableDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -11911,14 +11911,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4335:2: ( ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) )
-            // InternalXbaseWithAnnotations.g:4336:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
+            // InternalXbaseWithAnnotations.g:4336:2: ( ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) )
+            // InternalXbaseWithAnnotations.g:4337:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
             {
-            // InternalXbaseWithAnnotations.g:4336:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
-            // InternalXbaseWithAnnotations.g:4337:3: () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
+            // InternalXbaseWithAnnotations.g:4337:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
+            // InternalXbaseWithAnnotations.g:4338:3: () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
             {
-            // InternalXbaseWithAnnotations.g:4337:3: ()
-            // InternalXbaseWithAnnotations.g:4338:4: 
+            // InternalXbaseWithAnnotations.g:4338:3: ()
+            // InternalXbaseWithAnnotations.g:4339:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -11930,7 +11930,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4344:3: ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' )
+            // InternalXbaseWithAnnotations.g:4345:3: ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' )
             int alt75=2;
             int LA75_0 = input.LA(1);
 
@@ -11949,13 +11949,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt75) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4345:4: ( (lv_writeable_1_0= 'var' ) )
+                    // InternalXbaseWithAnnotations.g:4346:4: ( (lv_writeable_1_0= 'var' ) )
                     {
-                    // InternalXbaseWithAnnotations.g:4345:4: ( (lv_writeable_1_0= 'var' ) )
-                    // InternalXbaseWithAnnotations.g:4346:5: (lv_writeable_1_0= 'var' )
+                    // InternalXbaseWithAnnotations.g:4346:4: ( (lv_writeable_1_0= 'var' ) )
+                    // InternalXbaseWithAnnotations.g:4347:5: (lv_writeable_1_0= 'var' )
                     {
-                    // InternalXbaseWithAnnotations.g:4346:5: (lv_writeable_1_0= 'var' )
-                    // InternalXbaseWithAnnotations.g:4347:6: lv_writeable_1_0= 'var'
+                    // InternalXbaseWithAnnotations.g:4347:5: (lv_writeable_1_0= 'var' )
+                    // InternalXbaseWithAnnotations.g:4348:6: lv_writeable_1_0= 'var'
                     {
                     lv_writeable_1_0=(Token)match(input,68,FOLLOW_22); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11981,7 +11981,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:4360:4: otherlv_2= 'val'
+                    // InternalXbaseWithAnnotations.g:4361:4: otherlv_2= 'val'
                     {
                     otherlv_2=(Token)match(input,69,FOLLOW_22); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11995,7 +11995,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4365:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) )
+            // InternalXbaseWithAnnotations.g:4366:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) )
             int alt76=2;
             int LA76_0 = input.LA(1);
 
@@ -12031,19 +12031,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt76) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4366:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
+                    // InternalXbaseWithAnnotations.g:4367:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:4366:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
-                    // InternalXbaseWithAnnotations.g:4367:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
+                    // InternalXbaseWithAnnotations.g:4367:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
+                    // InternalXbaseWithAnnotations.g:4368:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:4380:5: ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
-                    // InternalXbaseWithAnnotations.g:4381:6: ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) )
+                    // InternalXbaseWithAnnotations.g:4381:5: ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
+                    // InternalXbaseWithAnnotations.g:4382:6: ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) )
                     {
-                    // InternalXbaseWithAnnotations.g:4381:6: ( (lv_type_3_0= ruleJvmTypeReference ) )
-                    // InternalXbaseWithAnnotations.g:4382:7: (lv_type_3_0= ruleJvmTypeReference )
+                    // InternalXbaseWithAnnotations.g:4382:6: ( (lv_type_3_0= ruleJvmTypeReference ) )
+                    // InternalXbaseWithAnnotations.g:4383:7: (lv_type_3_0= ruleJvmTypeReference )
                     {
-                    // InternalXbaseWithAnnotations.g:4382:7: (lv_type_3_0= ruleJvmTypeReference )
-                    // InternalXbaseWithAnnotations.g:4383:8: lv_type_3_0= ruleJvmTypeReference
+                    // InternalXbaseWithAnnotations.g:4383:7: (lv_type_3_0= ruleJvmTypeReference )
+                    // InternalXbaseWithAnnotations.g:4384:8: lv_type_3_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12074,11 +12074,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:4400:6: ( (lv_name_4_0= ruleValidID ) )
-                    // InternalXbaseWithAnnotations.g:4401:7: (lv_name_4_0= ruleValidID )
+                    // InternalXbaseWithAnnotations.g:4401:6: ( (lv_name_4_0= ruleValidID ) )
+                    // InternalXbaseWithAnnotations.g:4402:7: (lv_name_4_0= ruleValidID )
                     {
-                    // InternalXbaseWithAnnotations.g:4401:7: (lv_name_4_0= ruleValidID )
-                    // InternalXbaseWithAnnotations.g:4402:8: lv_name_4_0= ruleValidID
+                    // InternalXbaseWithAnnotations.g:4402:7: (lv_name_4_0= ruleValidID )
+                    // InternalXbaseWithAnnotations.g:4403:8: lv_name_4_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12119,13 +12119,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:4422:4: ( (lv_name_5_0= ruleValidID ) )
+                    // InternalXbaseWithAnnotations.g:4423:4: ( (lv_name_5_0= ruleValidID ) )
                     {
-                    // InternalXbaseWithAnnotations.g:4422:4: ( (lv_name_5_0= ruleValidID ) )
-                    // InternalXbaseWithAnnotations.g:4423:5: (lv_name_5_0= ruleValidID )
+                    // InternalXbaseWithAnnotations.g:4423:4: ( (lv_name_5_0= ruleValidID ) )
+                    // InternalXbaseWithAnnotations.g:4424:5: (lv_name_5_0= ruleValidID )
                     {
-                    // InternalXbaseWithAnnotations.g:4423:5: (lv_name_5_0= ruleValidID )
-                    // InternalXbaseWithAnnotations.g:4424:6: lv_name_5_0= ruleValidID
+                    // InternalXbaseWithAnnotations.g:4424:5: (lv_name_5_0= ruleValidID )
+                    // InternalXbaseWithAnnotations.g:4425:6: lv_name_5_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12162,7 +12162,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4442:3: (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
+            // InternalXbaseWithAnnotations.g:4443:3: (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
             int alt77=2;
             int LA77_0 = input.LA(1);
 
@@ -12171,7 +12171,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt77) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4443:4: otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:4444:4: otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) )
                     {
                     otherlv_6=(Token)match(input,17,FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12179,11 +12179,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(otherlv_6, grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:4447:4: ( (lv_right_7_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:4448:5: (lv_right_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:4448:4: ( (lv_right_7_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:4449:5: (lv_right_7_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:4448:5: (lv_right_7_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:4449:6: lv_right_7_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:4449:5: (lv_right_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:4450:6: lv_right_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12245,7 +12245,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmFormalParameter"
-    // InternalXbaseWithAnnotations.g:4471:1: entryRuleJvmFormalParameter returns [EObject current=null] : iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF ;
+    // InternalXbaseWithAnnotations.g:4472:1: entryRuleJvmFormalParameter returns [EObject current=null] : iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF ;
     public final EObject entryRuleJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -12253,8 +12253,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4471:59: (iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF )
-            // InternalXbaseWithAnnotations.g:4472:2: iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF
+            // InternalXbaseWithAnnotations.g:4472:59: (iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF )
+            // InternalXbaseWithAnnotations.g:4473:2: iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmFormalParameterRule()); 
@@ -12285,7 +12285,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmFormalParameter"
-    // InternalXbaseWithAnnotations.g:4478:1: ruleJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) ;
+    // InternalXbaseWithAnnotations.g:4479:1: ruleJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) ;
     public final EObject ruleJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -12298,13 +12298,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4484:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) )
-            // InternalXbaseWithAnnotations.g:4485:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalXbaseWithAnnotations.g:4485:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) )
+            // InternalXbaseWithAnnotations.g:4486:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
             {
-            // InternalXbaseWithAnnotations.g:4485:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
-            // InternalXbaseWithAnnotations.g:4486:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) )
+            // InternalXbaseWithAnnotations.g:4486:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalXbaseWithAnnotations.g:4487:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) )
             {
-            // InternalXbaseWithAnnotations.g:4486:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )?
+            // InternalXbaseWithAnnotations.g:4487:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )?
             int alt78=2;
             int LA78_0 = input.LA(1);
 
@@ -12320,10 +12320,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt78) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4487:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+                    // InternalXbaseWithAnnotations.g:4488:4: (lv_parameterType_0_0= ruleJvmTypeReference )
                     {
-                    // InternalXbaseWithAnnotations.g:4487:4: (lv_parameterType_0_0= ruleJvmTypeReference )
-                    // InternalXbaseWithAnnotations.g:4488:5: lv_parameterType_0_0= ruleJvmTypeReference
+                    // InternalXbaseWithAnnotations.g:4488:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+                    // InternalXbaseWithAnnotations.g:4489:5: lv_parameterType_0_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12357,11 +12357,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4505:3: ( (lv_name_1_0= ruleValidID ) )
-            // InternalXbaseWithAnnotations.g:4506:4: (lv_name_1_0= ruleValidID )
+            // InternalXbaseWithAnnotations.g:4506:3: ( (lv_name_1_0= ruleValidID ) )
+            // InternalXbaseWithAnnotations.g:4507:4: (lv_name_1_0= ruleValidID )
             {
-            // InternalXbaseWithAnnotations.g:4506:4: (lv_name_1_0= ruleValidID )
-            // InternalXbaseWithAnnotations.g:4507:5: lv_name_1_0= ruleValidID
+            // InternalXbaseWithAnnotations.g:4507:4: (lv_name_1_0= ruleValidID )
+            // InternalXbaseWithAnnotations.g:4508:5: lv_name_1_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -12417,7 +12417,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleFullJvmFormalParameter"
-    // InternalXbaseWithAnnotations.g:4528:1: entryRuleFullJvmFormalParameter returns [EObject current=null] : iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF ;
+    // InternalXbaseWithAnnotations.g:4529:1: entryRuleFullJvmFormalParameter returns [EObject current=null] : iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF ;
     public final EObject entryRuleFullJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -12425,8 +12425,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4528:63: (iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF )
-            // InternalXbaseWithAnnotations.g:4529:2: iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF
+            // InternalXbaseWithAnnotations.g:4529:63: (iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF )
+            // InternalXbaseWithAnnotations.g:4530:2: iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFullJvmFormalParameterRule()); 
@@ -12457,7 +12457,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleFullJvmFormalParameter"
-    // InternalXbaseWithAnnotations.g:4535:1: ruleFullJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) ;
+    // InternalXbaseWithAnnotations.g:4536:1: ruleFullJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) ;
     public final EObject ruleFullJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -12470,17 +12470,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4541:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) )
-            // InternalXbaseWithAnnotations.g:4542:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalXbaseWithAnnotations.g:4542:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) )
+            // InternalXbaseWithAnnotations.g:4543:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
             {
-            // InternalXbaseWithAnnotations.g:4542:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
-            // InternalXbaseWithAnnotations.g:4543:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) )
+            // InternalXbaseWithAnnotations.g:4543:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalXbaseWithAnnotations.g:4544:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) )
             {
-            // InternalXbaseWithAnnotations.g:4543:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )
-            // InternalXbaseWithAnnotations.g:4544:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:4544:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:4545:4: (lv_parameterType_0_0= ruleJvmTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:4544:4: (lv_parameterType_0_0= ruleJvmTypeReference )
-            // InternalXbaseWithAnnotations.g:4545:5: lv_parameterType_0_0= ruleJvmTypeReference
+            // InternalXbaseWithAnnotations.g:4545:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:4546:5: lv_parameterType_0_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -12511,11 +12511,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4562:3: ( (lv_name_1_0= ruleValidID ) )
-            // InternalXbaseWithAnnotations.g:4563:4: (lv_name_1_0= ruleValidID )
+            // InternalXbaseWithAnnotations.g:4563:3: ( (lv_name_1_0= ruleValidID ) )
+            // InternalXbaseWithAnnotations.g:4564:4: (lv_name_1_0= ruleValidID )
             {
-            // InternalXbaseWithAnnotations.g:4563:4: (lv_name_1_0= ruleValidID )
-            // InternalXbaseWithAnnotations.g:4564:5: lv_name_1_0= ruleValidID
+            // InternalXbaseWithAnnotations.g:4564:4: (lv_name_1_0= ruleValidID )
+            // InternalXbaseWithAnnotations.g:4565:5: lv_name_1_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -12571,7 +12571,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXFeatureCall"
-    // InternalXbaseWithAnnotations.g:4585:1: entryRuleXFeatureCall returns [EObject current=null] : iv_ruleXFeatureCall= ruleXFeatureCall EOF ;
+    // InternalXbaseWithAnnotations.g:4586:1: entryRuleXFeatureCall returns [EObject current=null] : iv_ruleXFeatureCall= ruleXFeatureCall EOF ;
     public final EObject entryRuleXFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -12579,8 +12579,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4585:53: (iv_ruleXFeatureCall= ruleXFeatureCall EOF )
-            // InternalXbaseWithAnnotations.g:4586:2: iv_ruleXFeatureCall= ruleXFeatureCall EOF
+            // InternalXbaseWithAnnotations.g:4586:53: (iv_ruleXFeatureCall= ruleXFeatureCall EOF )
+            // InternalXbaseWithAnnotations.g:4587:2: iv_ruleXFeatureCall= ruleXFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFeatureCallRule()); 
@@ -12611,7 +12611,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXFeatureCall"
-    // InternalXbaseWithAnnotations.g:4592:1: ruleXFeatureCall returns [EObject current=null] : ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) ;
+    // InternalXbaseWithAnnotations.g:4593:1: ruleXFeatureCall returns [EObject current=null] : ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) ;
     public final EObject ruleXFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -12638,14 +12638,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4598:2: ( ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) )
-            // InternalXbaseWithAnnotations.g:4599:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
+            // InternalXbaseWithAnnotations.g:4599:2: ( ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) )
+            // InternalXbaseWithAnnotations.g:4600:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
             {
-            // InternalXbaseWithAnnotations.g:4599:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
-            // InternalXbaseWithAnnotations.g:4600:3: () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
+            // InternalXbaseWithAnnotations.g:4600:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
+            // InternalXbaseWithAnnotations.g:4601:3: () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
             {
-            // InternalXbaseWithAnnotations.g:4600:3: ()
-            // InternalXbaseWithAnnotations.g:4601:4: 
+            // InternalXbaseWithAnnotations.g:4601:3: ()
+            // InternalXbaseWithAnnotations.g:4602:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -12657,7 +12657,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4607:3: (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            // InternalXbaseWithAnnotations.g:4608:3: (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
             int alt80=2;
             int LA80_0 = input.LA(1);
 
@@ -12666,7 +12666,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt80) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4608:4: otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
+                    // InternalXbaseWithAnnotations.g:4609:4: otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
                     {
                     otherlv_1=(Token)match(input,26,FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12674,11 +12674,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(otherlv_1, grammarAccess.getXFeatureCallAccess().getLessThanSignKeyword_1_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:4612:4: ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // InternalXbaseWithAnnotations.g:4613:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalXbaseWithAnnotations.g:4613:4: ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) )
+                    // InternalXbaseWithAnnotations.g:4614:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // InternalXbaseWithAnnotations.g:4613:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
-                    // InternalXbaseWithAnnotations.g:4614:6: lv_typeArguments_2_0= ruleJvmArgumentTypeReference
+                    // InternalXbaseWithAnnotations.g:4614:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalXbaseWithAnnotations.g:4615:6: lv_typeArguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12709,7 +12709,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:4631:4: (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )*
+                    // InternalXbaseWithAnnotations.g:4632:4: (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )*
                     loop79:
                     do {
                         int alt79=2;
@@ -12722,7 +12722,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt79) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:4632:5: otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalXbaseWithAnnotations.g:4633:5: otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    otherlv_3=(Token)match(input,15,FOLLOW_34); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -12730,11 +12730,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_3, grammarAccess.getXFeatureCallAccess().getCommaKeyword_1_2_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:4636:5: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // InternalXbaseWithAnnotations.g:4637:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalXbaseWithAnnotations.g:4637:5: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalXbaseWithAnnotations.g:4638:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:4637:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // InternalXbaseWithAnnotations.g:4638:7: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
+                    	    // InternalXbaseWithAnnotations.g:4638:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalXbaseWithAnnotations.g:4639:7: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -12786,11 +12786,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4661:3: ( ( ruleIdOrSuper ) )
-            // InternalXbaseWithAnnotations.g:4662:4: ( ruleIdOrSuper )
+            // InternalXbaseWithAnnotations.g:4662:3: ( ( ruleIdOrSuper ) )
+            // InternalXbaseWithAnnotations.g:4663:4: ( ruleIdOrSuper )
             {
-            // InternalXbaseWithAnnotations.g:4662:4: ( ruleIdOrSuper )
-            // InternalXbaseWithAnnotations.g:4663:5: ruleIdOrSuper
+            // InternalXbaseWithAnnotations.g:4663:4: ( ruleIdOrSuper )
+            // InternalXbaseWithAnnotations.g:4664:5: ruleIdOrSuper
             {
             if ( state.backtracking==0 ) {
 
@@ -12820,18 +12820,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4677:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?
+            // InternalXbaseWithAnnotations.g:4678:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?
             int alt83=2;
             alt83 = dfa83.predict(input);
             switch (alt83) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4678:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')'
+                    // InternalXbaseWithAnnotations.g:4679:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')'
                     {
-                    // InternalXbaseWithAnnotations.g:4678:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) )
-                    // InternalXbaseWithAnnotations.g:4679:5: ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' )
+                    // InternalXbaseWithAnnotations.g:4679:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) )
+                    // InternalXbaseWithAnnotations.g:4680:5: ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' )
                     {
-                    // InternalXbaseWithAnnotations.g:4683:5: (lv_explicitOperationCall_7_0= '(' )
-                    // InternalXbaseWithAnnotations.g:4684:6: lv_explicitOperationCall_7_0= '('
+                    // InternalXbaseWithAnnotations.g:4684:5: (lv_explicitOperationCall_7_0= '(' )
+                    // InternalXbaseWithAnnotations.g:4685:6: lv_explicitOperationCall_7_0= '('
                     {
                     lv_explicitOperationCall_7_0=(Token)match(input,14,FOLLOW_37); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12853,18 +12853,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:4696:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?
+                    // InternalXbaseWithAnnotations.g:4697:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?
                     int alt82=3;
                     alt82 = dfa82.predict(input);
                     switch (alt82) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:4697:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
+                            // InternalXbaseWithAnnotations.g:4698:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
                             {
-                            // InternalXbaseWithAnnotations.g:4697:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
-                            // InternalXbaseWithAnnotations.g:4698:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure )
+                            // InternalXbaseWithAnnotations.g:4698:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
+                            // InternalXbaseWithAnnotations.g:4699:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure )
                             {
-                            // InternalXbaseWithAnnotations.g:4723:6: (lv_featureCallArguments_8_0= ruleXShortClosure )
-                            // InternalXbaseWithAnnotations.g:4724:7: lv_featureCallArguments_8_0= ruleXShortClosure
+                            // InternalXbaseWithAnnotations.g:4724:6: (lv_featureCallArguments_8_0= ruleXShortClosure )
+                            // InternalXbaseWithAnnotations.g:4725:7: lv_featureCallArguments_8_0= ruleXShortClosure
                             {
                             if ( state.backtracking==0 ) {
 
@@ -12899,16 +12899,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:4742:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
+                            // InternalXbaseWithAnnotations.g:4743:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
                             {
-                            // InternalXbaseWithAnnotations.g:4742:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
-                            // InternalXbaseWithAnnotations.g:4743:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:4743:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
+                            // InternalXbaseWithAnnotations.g:4744:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:4743:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) )
-                            // InternalXbaseWithAnnotations.g:4744:7: (lv_featureCallArguments_9_0= ruleXExpression )
+                            // InternalXbaseWithAnnotations.g:4744:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) )
+                            // InternalXbaseWithAnnotations.g:4745:7: (lv_featureCallArguments_9_0= ruleXExpression )
                             {
-                            // InternalXbaseWithAnnotations.g:4744:7: (lv_featureCallArguments_9_0= ruleXExpression )
-                            // InternalXbaseWithAnnotations.g:4745:8: lv_featureCallArguments_9_0= ruleXExpression
+                            // InternalXbaseWithAnnotations.g:4745:7: (lv_featureCallArguments_9_0= ruleXExpression )
+                            // InternalXbaseWithAnnotations.g:4746:8: lv_featureCallArguments_9_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -12939,7 +12939,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:4762:6: (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:4763:6: (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
                             loop81:
                             do {
                                 int alt81=2;
@@ -12952,7 +12952,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt81) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:4763:7: otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:4764:7: otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) )
                             	    {
                             	    otherlv_10=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -12960,11 +12960,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      							newLeafNode(otherlv_10, grammarAccess.getXFeatureCallAccess().getCommaKeyword_3_1_1_1_0());
                             	      						
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:4767:7: ( (lv_featureCallArguments_11_0= ruleXExpression ) )
-                            	    // InternalXbaseWithAnnotations.g:4768:8: (lv_featureCallArguments_11_0= ruleXExpression )
+                            	    // InternalXbaseWithAnnotations.g:4768:7: ( (lv_featureCallArguments_11_0= ruleXExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:4769:8: (lv_featureCallArguments_11_0= ruleXExpression )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:4768:8: (lv_featureCallArguments_11_0= ruleXExpression )
-                            	    // InternalXbaseWithAnnotations.g:4769:9: lv_featureCallArguments_11_0= ruleXExpression
+                            	    // InternalXbaseWithAnnotations.g:4769:8: (lv_featureCallArguments_11_0= ruleXExpression )
+                            	    // InternalXbaseWithAnnotations.g:4770:9: lv_featureCallArguments_11_0= ruleXExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -13025,15 +13025,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4794:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
+            // InternalXbaseWithAnnotations.g:4795:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
             int alt84=2;
             alt84 = dfa84.predict(input);
             switch (alt84) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4795:4: ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure )
+                    // InternalXbaseWithAnnotations.g:4796:4: ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure )
                     {
-                    // InternalXbaseWithAnnotations.g:4801:4: (lv_featureCallArguments_13_0= ruleXClosure )
-                    // InternalXbaseWithAnnotations.g:4802:5: lv_featureCallArguments_13_0= ruleXClosure
+                    // InternalXbaseWithAnnotations.g:4802:4: (lv_featureCallArguments_13_0= ruleXClosure )
+                    // InternalXbaseWithAnnotations.g:4803:5: lv_featureCallArguments_13_0= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13092,7 +13092,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleFeatureCallID"
-    // InternalXbaseWithAnnotations.g:4823:1: entryRuleFeatureCallID returns [String current=null] : iv_ruleFeatureCallID= ruleFeatureCallID EOF ;
+    // InternalXbaseWithAnnotations.g:4824:1: entryRuleFeatureCallID returns [String current=null] : iv_ruleFeatureCallID= ruleFeatureCallID EOF ;
     public final String entryRuleFeatureCallID() throws RecognitionException {
         String current = null;
 
@@ -13100,8 +13100,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4823:53: (iv_ruleFeatureCallID= ruleFeatureCallID EOF )
-            // InternalXbaseWithAnnotations.g:4824:2: iv_ruleFeatureCallID= ruleFeatureCallID EOF
+            // InternalXbaseWithAnnotations.g:4824:53: (iv_ruleFeatureCallID= ruleFeatureCallID EOF )
+            // InternalXbaseWithAnnotations.g:4825:2: iv_ruleFeatureCallID= ruleFeatureCallID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFeatureCallIDRule()); 
@@ -13132,7 +13132,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleFeatureCallID"
-    // InternalXbaseWithAnnotations.g:4830:1: ruleFeatureCallID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) ;
+    // InternalXbaseWithAnnotations.g:4831:1: ruleFeatureCallID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) ;
     public final AntlrDatatypeRuleToken ruleFeatureCallID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -13144,10 +13144,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4836:2: ( (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) )
-            // InternalXbaseWithAnnotations.g:4837:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
+            // InternalXbaseWithAnnotations.g:4837:2: ( (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) )
+            // InternalXbaseWithAnnotations.g:4838:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
             {
-            // InternalXbaseWithAnnotations.g:4837:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
+            // InternalXbaseWithAnnotations.g:4838:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
             int alt85=5;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -13185,7 +13185,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             switch (alt85) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4838:3: this_ValidID_0= ruleValidID
+                    // InternalXbaseWithAnnotations.g:4839:3: this_ValidID_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13211,7 +13211,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:4849:3: kw= 'extends'
+                    // InternalXbaseWithAnnotations.g:4850:3: kw= 'extends'
                     {
                     kw=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13224,7 +13224,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:4855:3: kw= 'static'
+                    // InternalXbaseWithAnnotations.g:4856:3: kw= 'static'
                     {
                     kw=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13237,7 +13237,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalXbaseWithAnnotations.g:4861:3: kw= 'import'
+                    // InternalXbaseWithAnnotations.g:4862:3: kw= 'import'
                     {
                     kw=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13250,7 +13250,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalXbaseWithAnnotations.g:4867:3: kw= 'extension'
+                    // InternalXbaseWithAnnotations.g:4868:3: kw= 'extension'
                     {
                     kw=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13287,7 +13287,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleIdOrSuper"
-    // InternalXbaseWithAnnotations.g:4876:1: entryRuleIdOrSuper returns [String current=null] : iv_ruleIdOrSuper= ruleIdOrSuper EOF ;
+    // InternalXbaseWithAnnotations.g:4877:1: entryRuleIdOrSuper returns [String current=null] : iv_ruleIdOrSuper= ruleIdOrSuper EOF ;
     public final String entryRuleIdOrSuper() throws RecognitionException {
         String current = null;
 
@@ -13295,8 +13295,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4876:49: (iv_ruleIdOrSuper= ruleIdOrSuper EOF )
-            // InternalXbaseWithAnnotations.g:4877:2: iv_ruleIdOrSuper= ruleIdOrSuper EOF
+            // InternalXbaseWithAnnotations.g:4877:49: (iv_ruleIdOrSuper= ruleIdOrSuper EOF )
+            // InternalXbaseWithAnnotations.g:4878:2: iv_ruleIdOrSuper= ruleIdOrSuper EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdOrSuperRule()); 
@@ -13327,7 +13327,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleIdOrSuper"
-    // InternalXbaseWithAnnotations.g:4883:1: ruleIdOrSuper returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) ;
+    // InternalXbaseWithAnnotations.g:4884:1: ruleIdOrSuper returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) ;
     public final AntlrDatatypeRuleToken ruleIdOrSuper() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -13339,10 +13339,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4889:2: ( (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) )
-            // InternalXbaseWithAnnotations.g:4890:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
+            // InternalXbaseWithAnnotations.g:4890:2: ( (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) )
+            // InternalXbaseWithAnnotations.g:4891:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
             {
-            // InternalXbaseWithAnnotations.g:4890:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
+            // InternalXbaseWithAnnotations.g:4891:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
             int alt86=2;
             int LA86_0 = input.LA(1);
 
@@ -13361,7 +13361,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt86) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4891:3: this_FeatureCallID_0= ruleFeatureCallID
+                    // InternalXbaseWithAnnotations.g:4892:3: this_FeatureCallID_0= ruleFeatureCallID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13387,7 +13387,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:4902:3: kw= 'super'
+                    // InternalXbaseWithAnnotations.g:4903:3: kw= 'super'
                     {
                     kw=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13424,7 +13424,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXConstructorCall"
-    // InternalXbaseWithAnnotations.g:4911:1: entryRuleXConstructorCall returns [EObject current=null] : iv_ruleXConstructorCall= ruleXConstructorCall EOF ;
+    // InternalXbaseWithAnnotations.g:4912:1: entryRuleXConstructorCall returns [EObject current=null] : iv_ruleXConstructorCall= ruleXConstructorCall EOF ;
     public final EObject entryRuleXConstructorCall() throws RecognitionException {
         EObject current = null;
 
@@ -13432,8 +13432,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:4911:57: (iv_ruleXConstructorCall= ruleXConstructorCall EOF )
-            // InternalXbaseWithAnnotations.g:4912:2: iv_ruleXConstructorCall= ruleXConstructorCall EOF
+            // InternalXbaseWithAnnotations.g:4912:57: (iv_ruleXConstructorCall= ruleXConstructorCall EOF )
+            // InternalXbaseWithAnnotations.g:4913:2: iv_ruleXConstructorCall= ruleXConstructorCall EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXConstructorCallRule()); 
@@ -13464,7 +13464,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXConstructorCall"
-    // InternalXbaseWithAnnotations.g:4918:1: ruleXConstructorCall returns [EObject current=null] : ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) ;
+    // InternalXbaseWithAnnotations.g:4919:1: ruleXConstructorCall returns [EObject current=null] : ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) ;
     public final EObject ruleXConstructorCall() throws RecognitionException {
         EObject current = null;
 
@@ -13492,14 +13492,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:4924:2: ( ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) )
-            // InternalXbaseWithAnnotations.g:4925:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
+            // InternalXbaseWithAnnotations.g:4925:2: ( ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) )
+            // InternalXbaseWithAnnotations.g:4926:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
             {
-            // InternalXbaseWithAnnotations.g:4925:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
-            // InternalXbaseWithAnnotations.g:4926:3: () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
+            // InternalXbaseWithAnnotations.g:4926:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
+            // InternalXbaseWithAnnotations.g:4927:3: () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
             {
-            // InternalXbaseWithAnnotations.g:4926:3: ()
-            // InternalXbaseWithAnnotations.g:4927:4: 
+            // InternalXbaseWithAnnotations.g:4927:3: ()
+            // InternalXbaseWithAnnotations.g:4928:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13517,11 +13517,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXConstructorCallAccess().getNewKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:4937:3: ( ( ruleQualifiedName ) )
-            // InternalXbaseWithAnnotations.g:4938:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:4938:3: ( ( ruleQualifiedName ) )
+            // InternalXbaseWithAnnotations.g:4939:4: ( ruleQualifiedName )
             {
-            // InternalXbaseWithAnnotations.g:4938:4: ( ruleQualifiedName )
-            // InternalXbaseWithAnnotations.g:4939:5: ruleQualifiedName
+            // InternalXbaseWithAnnotations.g:4939:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:4940:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -13551,15 +13551,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:4953:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?
+            // InternalXbaseWithAnnotations.g:4954:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?
             int alt88=2;
             alt88 = dfa88.predict(input);
             switch (alt88) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:4954:4: ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>'
+                    // InternalXbaseWithAnnotations.g:4955:4: ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>'
                     {
-                    // InternalXbaseWithAnnotations.g:4954:4: ( ( '<' )=>otherlv_3= '<' )
-                    // InternalXbaseWithAnnotations.g:4955:5: ( '<' )=>otherlv_3= '<'
+                    // InternalXbaseWithAnnotations.g:4955:4: ( ( '<' )=>otherlv_3= '<' )
+                    // InternalXbaseWithAnnotations.g:4956:5: ( '<' )=>otherlv_3= '<'
                     {
                     otherlv_3=(Token)match(input,26,FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13570,11 +13570,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:4961:4: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
-                    // InternalXbaseWithAnnotations.g:4962:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    // InternalXbaseWithAnnotations.g:4962:4: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
+                    // InternalXbaseWithAnnotations.g:4963:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
                     {
-                    // InternalXbaseWithAnnotations.g:4962:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
-                    // InternalXbaseWithAnnotations.g:4963:6: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
+                    // InternalXbaseWithAnnotations.g:4963:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    // InternalXbaseWithAnnotations.g:4964:6: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13605,7 +13605,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:4980:4: (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )*
+                    // InternalXbaseWithAnnotations.g:4981:4: (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )*
                     loop87:
                     do {
                         int alt87=2;
@@ -13618,7 +13618,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt87) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:4981:5: otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalXbaseWithAnnotations.g:4982:5: otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    otherlv_5=(Token)match(input,15,FOLLOW_34); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -13626,11 +13626,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_5, grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_2_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:4985:5: ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
-                    	    // InternalXbaseWithAnnotations.g:4986:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
+                    	    // InternalXbaseWithAnnotations.g:4986:5: ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalXbaseWithAnnotations.g:4987:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:4986:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
-                    	    // InternalXbaseWithAnnotations.g:4987:7: lv_typeArguments_6_0= ruleJvmArgumentTypeReference
+                    	    // InternalXbaseWithAnnotations.g:4987:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
+                    	    // InternalXbaseWithAnnotations.g:4988:7: lv_typeArguments_6_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -13682,18 +13682,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5010:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?
+            // InternalXbaseWithAnnotations.g:5011:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?
             int alt91=2;
             alt91 = dfa91.predict(input);
             switch (alt91) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5011:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')'
+                    // InternalXbaseWithAnnotations.g:5012:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')'
                     {
-                    // InternalXbaseWithAnnotations.g:5011:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) )
-                    // InternalXbaseWithAnnotations.g:5012:5: ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' )
+                    // InternalXbaseWithAnnotations.g:5012:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) )
+                    // InternalXbaseWithAnnotations.g:5013:5: ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' )
                     {
-                    // InternalXbaseWithAnnotations.g:5016:5: (lv_explicitConstructorCall_8_0= '(' )
-                    // InternalXbaseWithAnnotations.g:5017:6: lv_explicitConstructorCall_8_0= '('
+                    // InternalXbaseWithAnnotations.g:5017:5: (lv_explicitConstructorCall_8_0= '(' )
+                    // InternalXbaseWithAnnotations.g:5018:6: lv_explicitConstructorCall_8_0= '('
                     {
                     lv_explicitConstructorCall_8_0=(Token)match(input,14,FOLLOW_37); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13715,18 +13715,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:5029:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?
+                    // InternalXbaseWithAnnotations.g:5030:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?
                     int alt90=3;
                     alt90 = dfa90.predict(input);
                     switch (alt90) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:5030:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
+                            // InternalXbaseWithAnnotations.g:5031:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
                             {
-                            // InternalXbaseWithAnnotations.g:5030:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
-                            // InternalXbaseWithAnnotations.g:5031:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure )
+                            // InternalXbaseWithAnnotations.g:5031:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
+                            // InternalXbaseWithAnnotations.g:5032:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure )
                             {
-                            // InternalXbaseWithAnnotations.g:5056:6: (lv_arguments_9_0= ruleXShortClosure )
-                            // InternalXbaseWithAnnotations.g:5057:7: lv_arguments_9_0= ruleXShortClosure
+                            // InternalXbaseWithAnnotations.g:5057:6: (lv_arguments_9_0= ruleXShortClosure )
+                            // InternalXbaseWithAnnotations.g:5058:7: lv_arguments_9_0= ruleXShortClosure
                             {
                             if ( state.backtracking==0 ) {
 
@@ -13761,16 +13761,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:5075:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
+                            // InternalXbaseWithAnnotations.g:5076:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
                             {
-                            // InternalXbaseWithAnnotations.g:5075:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
-                            // InternalXbaseWithAnnotations.g:5076:6: ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:5076:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
+                            // InternalXbaseWithAnnotations.g:5077:6: ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:5076:6: ( (lv_arguments_10_0= ruleXExpression ) )
-                            // InternalXbaseWithAnnotations.g:5077:7: (lv_arguments_10_0= ruleXExpression )
+                            // InternalXbaseWithAnnotations.g:5077:6: ( (lv_arguments_10_0= ruleXExpression ) )
+                            // InternalXbaseWithAnnotations.g:5078:7: (lv_arguments_10_0= ruleXExpression )
                             {
-                            // InternalXbaseWithAnnotations.g:5077:7: (lv_arguments_10_0= ruleXExpression )
-                            // InternalXbaseWithAnnotations.g:5078:8: lv_arguments_10_0= ruleXExpression
+                            // InternalXbaseWithAnnotations.g:5078:7: (lv_arguments_10_0= ruleXExpression )
+                            // InternalXbaseWithAnnotations.g:5079:8: lv_arguments_10_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -13801,7 +13801,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:5095:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
+                            // InternalXbaseWithAnnotations.g:5096:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
                             loop89:
                             do {
                                 int alt89=2;
@@ -13814,7 +13814,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt89) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:5096:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:5097:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) )
                             	    {
                             	    otherlv_11=(Token)match(input,15,FOLLOW_9); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -13822,11 +13822,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      							newLeafNode(otherlv_11, grammarAccess.getXConstructorCallAccess().getCommaKeyword_4_1_1_1_0());
                             	      						
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:5100:7: ( (lv_arguments_12_0= ruleXExpression ) )
-                            	    // InternalXbaseWithAnnotations.g:5101:8: (lv_arguments_12_0= ruleXExpression )
+                            	    // InternalXbaseWithAnnotations.g:5101:7: ( (lv_arguments_12_0= ruleXExpression ) )
+                            	    // InternalXbaseWithAnnotations.g:5102:8: (lv_arguments_12_0= ruleXExpression )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:5101:8: (lv_arguments_12_0= ruleXExpression )
-                            	    // InternalXbaseWithAnnotations.g:5102:9: lv_arguments_12_0= ruleXExpression
+                            	    // InternalXbaseWithAnnotations.g:5102:8: (lv_arguments_12_0= ruleXExpression )
+                            	    // InternalXbaseWithAnnotations.g:5103:9: lv_arguments_12_0= ruleXExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -13887,15 +13887,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5127:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
+            // InternalXbaseWithAnnotations.g:5128:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
             int alt92=2;
             alt92 = dfa92.predict(input);
             switch (alt92) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5128:4: ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure )
+                    // InternalXbaseWithAnnotations.g:5129:4: ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure )
                     {
-                    // InternalXbaseWithAnnotations.g:5134:4: (lv_arguments_14_0= ruleXClosure )
-                    // InternalXbaseWithAnnotations.g:5135:5: lv_arguments_14_0= ruleXClosure
+                    // InternalXbaseWithAnnotations.g:5135:4: (lv_arguments_14_0= ruleXClosure )
+                    // InternalXbaseWithAnnotations.g:5136:5: lv_arguments_14_0= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13954,7 +13954,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXBooleanLiteral"
-    // InternalXbaseWithAnnotations.g:5156:1: entryRuleXBooleanLiteral returns [EObject current=null] : iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:5157:1: entryRuleXBooleanLiteral returns [EObject current=null] : iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF ;
     public final EObject entryRuleXBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -13962,8 +13962,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5156:56: (iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF )
-            // InternalXbaseWithAnnotations.g:5157:2: iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF
+            // InternalXbaseWithAnnotations.g:5157:56: (iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF )
+            // InternalXbaseWithAnnotations.g:5158:2: iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXBooleanLiteralRule()); 
@@ -13994,7 +13994,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXBooleanLiteral"
-    // InternalXbaseWithAnnotations.g:5163:1: ruleXBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5164:1: ruleXBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
     public final EObject ruleXBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14005,14 +14005,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5169:2: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
-            // InternalXbaseWithAnnotations.g:5170:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // InternalXbaseWithAnnotations.g:5170:2: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
+            // InternalXbaseWithAnnotations.g:5171:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5170:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
-            // InternalXbaseWithAnnotations.g:5171:3: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // InternalXbaseWithAnnotations.g:5171:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // InternalXbaseWithAnnotations.g:5172:3: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5171:3: ()
-            // InternalXbaseWithAnnotations.g:5172:4: 
+            // InternalXbaseWithAnnotations.g:5172:3: ()
+            // InternalXbaseWithAnnotations.g:5173:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14024,7 +14024,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5178:3: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // InternalXbaseWithAnnotations.g:5179:3: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             int alt93=2;
             int LA93_0 = input.LA(1);
 
@@ -14043,7 +14043,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt93) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5179:4: otherlv_1= 'false'
+                    // InternalXbaseWithAnnotations.g:5180:4: otherlv_1= 'false'
                     {
                     otherlv_1=(Token)match(input,76,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14055,13 +14055,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:5184:4: ( (lv_isTrue_2_0= 'true' ) )
+                    // InternalXbaseWithAnnotations.g:5185:4: ( (lv_isTrue_2_0= 'true' ) )
                     {
-                    // InternalXbaseWithAnnotations.g:5184:4: ( (lv_isTrue_2_0= 'true' ) )
-                    // InternalXbaseWithAnnotations.g:5185:5: (lv_isTrue_2_0= 'true' )
+                    // InternalXbaseWithAnnotations.g:5185:4: ( (lv_isTrue_2_0= 'true' ) )
+                    // InternalXbaseWithAnnotations.g:5186:5: (lv_isTrue_2_0= 'true' )
                     {
-                    // InternalXbaseWithAnnotations.g:5185:5: (lv_isTrue_2_0= 'true' )
-                    // InternalXbaseWithAnnotations.g:5186:6: lv_isTrue_2_0= 'true'
+                    // InternalXbaseWithAnnotations.g:5186:5: (lv_isTrue_2_0= 'true' )
+                    // InternalXbaseWithAnnotations.g:5187:6: lv_isTrue_2_0= 'true'
                     {
                     lv_isTrue_2_0=(Token)match(input,77,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14114,7 +14114,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXNullLiteral"
-    // InternalXbaseWithAnnotations.g:5203:1: entryRuleXNullLiteral returns [EObject current=null] : iv_ruleXNullLiteral= ruleXNullLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:5204:1: entryRuleXNullLiteral returns [EObject current=null] : iv_ruleXNullLiteral= ruleXNullLiteral EOF ;
     public final EObject entryRuleXNullLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14122,8 +14122,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5203:53: (iv_ruleXNullLiteral= ruleXNullLiteral EOF )
-            // InternalXbaseWithAnnotations.g:5204:2: iv_ruleXNullLiteral= ruleXNullLiteral EOF
+            // InternalXbaseWithAnnotations.g:5204:53: (iv_ruleXNullLiteral= ruleXNullLiteral EOF )
+            // InternalXbaseWithAnnotations.g:5205:2: iv_ruleXNullLiteral= ruleXNullLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXNullLiteralRule()); 
@@ -14154,7 +14154,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXNullLiteral"
-    // InternalXbaseWithAnnotations.g:5210:1: ruleXNullLiteral returns [EObject current=null] : ( () otherlv_1= 'null' ) ;
+    // InternalXbaseWithAnnotations.g:5211:1: ruleXNullLiteral returns [EObject current=null] : ( () otherlv_1= 'null' ) ;
     public final EObject ruleXNullLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14164,14 +14164,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5216:2: ( ( () otherlv_1= 'null' ) )
-            // InternalXbaseWithAnnotations.g:5217:2: ( () otherlv_1= 'null' )
+            // InternalXbaseWithAnnotations.g:5217:2: ( ( () otherlv_1= 'null' ) )
+            // InternalXbaseWithAnnotations.g:5218:2: ( () otherlv_1= 'null' )
             {
-            // InternalXbaseWithAnnotations.g:5217:2: ( () otherlv_1= 'null' )
-            // InternalXbaseWithAnnotations.g:5218:3: () otherlv_1= 'null'
+            // InternalXbaseWithAnnotations.g:5218:2: ( () otherlv_1= 'null' )
+            // InternalXbaseWithAnnotations.g:5219:3: () otherlv_1= 'null'
             {
-            // InternalXbaseWithAnnotations.g:5218:3: ()
-            // InternalXbaseWithAnnotations.g:5219:4: 
+            // InternalXbaseWithAnnotations.g:5219:3: ()
+            // InternalXbaseWithAnnotations.g:5220:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14214,7 +14214,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXNumberLiteral"
-    // InternalXbaseWithAnnotations.g:5233:1: entryRuleXNumberLiteral returns [EObject current=null] : iv_ruleXNumberLiteral= ruleXNumberLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:5234:1: entryRuleXNumberLiteral returns [EObject current=null] : iv_ruleXNumberLiteral= ruleXNumberLiteral EOF ;
     public final EObject entryRuleXNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14222,8 +14222,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5233:55: (iv_ruleXNumberLiteral= ruleXNumberLiteral EOF )
-            // InternalXbaseWithAnnotations.g:5234:2: iv_ruleXNumberLiteral= ruleXNumberLiteral EOF
+            // InternalXbaseWithAnnotations.g:5234:55: (iv_ruleXNumberLiteral= ruleXNumberLiteral EOF )
+            // InternalXbaseWithAnnotations.g:5235:2: iv_ruleXNumberLiteral= ruleXNumberLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXNumberLiteralRule()); 
@@ -14254,7 +14254,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXNumberLiteral"
-    // InternalXbaseWithAnnotations.g:5240:1: ruleXNumberLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleNumber ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5241:1: ruleXNumberLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleNumber ) ) ) ;
     public final EObject ruleXNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14265,14 +14265,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5246:2: ( ( () ( (lv_value_1_0= ruleNumber ) ) ) )
-            // InternalXbaseWithAnnotations.g:5247:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
+            // InternalXbaseWithAnnotations.g:5247:2: ( ( () ( (lv_value_1_0= ruleNumber ) ) ) )
+            // InternalXbaseWithAnnotations.g:5248:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5247:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
-            // InternalXbaseWithAnnotations.g:5248:3: () ( (lv_value_1_0= ruleNumber ) )
+            // InternalXbaseWithAnnotations.g:5248:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
+            // InternalXbaseWithAnnotations.g:5249:3: () ( (lv_value_1_0= ruleNumber ) )
             {
-            // InternalXbaseWithAnnotations.g:5248:3: ()
-            // InternalXbaseWithAnnotations.g:5249:4: 
+            // InternalXbaseWithAnnotations.g:5249:3: ()
+            // InternalXbaseWithAnnotations.g:5250:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14284,11 +14284,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5255:3: ( (lv_value_1_0= ruleNumber ) )
-            // InternalXbaseWithAnnotations.g:5256:4: (lv_value_1_0= ruleNumber )
+            // InternalXbaseWithAnnotations.g:5256:3: ( (lv_value_1_0= ruleNumber ) )
+            // InternalXbaseWithAnnotations.g:5257:4: (lv_value_1_0= ruleNumber )
             {
-            // InternalXbaseWithAnnotations.g:5256:4: (lv_value_1_0= ruleNumber )
-            // InternalXbaseWithAnnotations.g:5257:5: lv_value_1_0= ruleNumber
+            // InternalXbaseWithAnnotations.g:5257:4: (lv_value_1_0= ruleNumber )
+            // InternalXbaseWithAnnotations.g:5258:5: lv_value_1_0= ruleNumber
             {
             if ( state.backtracking==0 ) {
 
@@ -14344,7 +14344,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXStringLiteral"
-    // InternalXbaseWithAnnotations.g:5278:1: entryRuleXStringLiteral returns [EObject current=null] : iv_ruleXStringLiteral= ruleXStringLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:5279:1: entryRuleXStringLiteral returns [EObject current=null] : iv_ruleXStringLiteral= ruleXStringLiteral EOF ;
     public final EObject entryRuleXStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14352,8 +14352,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5278:55: (iv_ruleXStringLiteral= ruleXStringLiteral EOF )
-            // InternalXbaseWithAnnotations.g:5279:2: iv_ruleXStringLiteral= ruleXStringLiteral EOF
+            // InternalXbaseWithAnnotations.g:5279:55: (iv_ruleXStringLiteral= ruleXStringLiteral EOF )
+            // InternalXbaseWithAnnotations.g:5280:2: iv_ruleXStringLiteral= ruleXStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXStringLiteralRule()); 
@@ -14384,7 +14384,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXStringLiteral"
-    // InternalXbaseWithAnnotations.g:5285:1: ruleXStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5286:1: ruleXStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleXStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14394,14 +14394,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5291:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // InternalXbaseWithAnnotations.g:5292:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalXbaseWithAnnotations.g:5292:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // InternalXbaseWithAnnotations.g:5293:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5292:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // InternalXbaseWithAnnotations.g:5293:3: () ( (lv_value_1_0= RULE_STRING ) )
+            // InternalXbaseWithAnnotations.g:5293:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalXbaseWithAnnotations.g:5294:3: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // InternalXbaseWithAnnotations.g:5293:3: ()
-            // InternalXbaseWithAnnotations.g:5294:4: 
+            // InternalXbaseWithAnnotations.g:5294:3: ()
+            // InternalXbaseWithAnnotations.g:5295:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14413,11 +14413,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5300:3: ( (lv_value_1_0= RULE_STRING ) )
-            // InternalXbaseWithAnnotations.g:5301:4: (lv_value_1_0= RULE_STRING )
+            // InternalXbaseWithAnnotations.g:5301:3: ( (lv_value_1_0= RULE_STRING ) )
+            // InternalXbaseWithAnnotations.g:5302:4: (lv_value_1_0= RULE_STRING )
             {
-            // InternalXbaseWithAnnotations.g:5301:4: (lv_value_1_0= RULE_STRING )
-            // InternalXbaseWithAnnotations.g:5302:5: lv_value_1_0= RULE_STRING
+            // InternalXbaseWithAnnotations.g:5302:4: (lv_value_1_0= RULE_STRING )
+            // InternalXbaseWithAnnotations.g:5303:5: lv_value_1_0= RULE_STRING
             {
             lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -14468,7 +14468,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXTypeLiteral"
-    // InternalXbaseWithAnnotations.g:5322:1: entryRuleXTypeLiteral returns [EObject current=null] : iv_ruleXTypeLiteral= ruleXTypeLiteral EOF ;
+    // InternalXbaseWithAnnotations.g:5323:1: entryRuleXTypeLiteral returns [EObject current=null] : iv_ruleXTypeLiteral= ruleXTypeLiteral EOF ;
     public final EObject entryRuleXTypeLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14476,8 +14476,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5322:53: (iv_ruleXTypeLiteral= ruleXTypeLiteral EOF )
-            // InternalXbaseWithAnnotations.g:5323:2: iv_ruleXTypeLiteral= ruleXTypeLiteral EOF
+            // InternalXbaseWithAnnotations.g:5323:53: (iv_ruleXTypeLiteral= ruleXTypeLiteral EOF )
+            // InternalXbaseWithAnnotations.g:5324:2: iv_ruleXTypeLiteral= ruleXTypeLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTypeLiteralRule()); 
@@ -14508,7 +14508,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXTypeLiteral"
-    // InternalXbaseWithAnnotations.g:5329:1: ruleXTypeLiteral returns [EObject current=null] : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) ;
+    // InternalXbaseWithAnnotations.g:5330:1: ruleXTypeLiteral returns [EObject current=null] : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) ;
     public final EObject ruleXTypeLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -14522,14 +14522,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5335:2: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) )
-            // InternalXbaseWithAnnotations.g:5336:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
+            // InternalXbaseWithAnnotations.g:5336:2: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) )
+            // InternalXbaseWithAnnotations.g:5337:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
             {
-            // InternalXbaseWithAnnotations.g:5336:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
-            // InternalXbaseWithAnnotations.g:5337:3: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')'
+            // InternalXbaseWithAnnotations.g:5337:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
+            // InternalXbaseWithAnnotations.g:5338:3: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')'
             {
-            // InternalXbaseWithAnnotations.g:5337:3: ()
-            // InternalXbaseWithAnnotations.g:5338:4: 
+            // InternalXbaseWithAnnotations.g:5338:3: ()
+            // InternalXbaseWithAnnotations.g:5339:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14553,11 +14553,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getXTypeLiteralAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:5352:3: ( ( ruleQualifiedName ) )
-            // InternalXbaseWithAnnotations.g:5353:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:5353:3: ( ( ruleQualifiedName ) )
+            // InternalXbaseWithAnnotations.g:5354:4: ( ruleQualifiedName )
             {
-            // InternalXbaseWithAnnotations.g:5353:4: ( ruleQualifiedName )
-            // InternalXbaseWithAnnotations.g:5354:5: ruleQualifiedName
+            // InternalXbaseWithAnnotations.g:5354:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:5355:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -14587,7 +14587,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5368:3: ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )*
+            // InternalXbaseWithAnnotations.g:5369:3: ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )*
             loop94:
             do {
                 int alt94=2;
@@ -14600,10 +14600,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt94) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:5369:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
+            	    // InternalXbaseWithAnnotations.g:5370:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
             	    {
-            	    // InternalXbaseWithAnnotations.g:5369:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
-            	    // InternalXbaseWithAnnotations.g:5370:5: lv_arrayDimensions_4_0= ruleArrayBrackets
+            	    // InternalXbaseWithAnnotations.g:5370:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
+            	    // InternalXbaseWithAnnotations.g:5371:5: lv_arrayDimensions_4_0= ruleArrayBrackets
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -14671,7 +14671,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXThrowExpression"
-    // InternalXbaseWithAnnotations.g:5395:1: entryRuleXThrowExpression returns [EObject current=null] : iv_ruleXThrowExpression= ruleXThrowExpression EOF ;
+    // InternalXbaseWithAnnotations.g:5396:1: entryRuleXThrowExpression returns [EObject current=null] : iv_ruleXThrowExpression= ruleXThrowExpression EOF ;
     public final EObject entryRuleXThrowExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14679,8 +14679,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5395:57: (iv_ruleXThrowExpression= ruleXThrowExpression EOF )
-            // InternalXbaseWithAnnotations.g:5396:2: iv_ruleXThrowExpression= ruleXThrowExpression EOF
+            // InternalXbaseWithAnnotations.g:5396:57: (iv_ruleXThrowExpression= ruleXThrowExpression EOF )
+            // InternalXbaseWithAnnotations.g:5397:2: iv_ruleXThrowExpression= ruleXThrowExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXThrowExpressionRule()); 
@@ -14711,7 +14711,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXThrowExpression"
-    // InternalXbaseWithAnnotations.g:5402:1: ruleXThrowExpression returns [EObject current=null] : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5403:1: ruleXThrowExpression returns [EObject current=null] : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
     public final EObject ruleXThrowExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14723,14 +14723,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5408:2: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:5409:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:5409:2: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:5410:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5409:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:5410:3: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5410:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:5411:3: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:5410:3: ()
-            // InternalXbaseWithAnnotations.g:5411:4: 
+            // InternalXbaseWithAnnotations.g:5411:3: ()
+            // InternalXbaseWithAnnotations.g:5412:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14748,11 +14748,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXThrowExpressionAccess().getThrowKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:5421:3: ( (lv_expression_2_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:5422:4: (lv_expression_2_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5422:3: ( (lv_expression_2_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5423:4: (lv_expression_2_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:5422:4: (lv_expression_2_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:5423:5: lv_expression_2_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:5423:4: (lv_expression_2_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5424:5: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -14808,7 +14808,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXReturnExpression"
-    // InternalXbaseWithAnnotations.g:5444:1: entryRuleXReturnExpression returns [EObject current=null] : iv_ruleXReturnExpression= ruleXReturnExpression EOF ;
+    // InternalXbaseWithAnnotations.g:5445:1: entryRuleXReturnExpression returns [EObject current=null] : iv_ruleXReturnExpression= ruleXReturnExpression EOF ;
     public final EObject entryRuleXReturnExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14816,8 +14816,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5444:58: (iv_ruleXReturnExpression= ruleXReturnExpression EOF )
-            // InternalXbaseWithAnnotations.g:5445:2: iv_ruleXReturnExpression= ruleXReturnExpression EOF
+            // InternalXbaseWithAnnotations.g:5445:58: (iv_ruleXReturnExpression= ruleXReturnExpression EOF )
+            // InternalXbaseWithAnnotations.g:5446:2: iv_ruleXReturnExpression= ruleXReturnExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXReturnExpressionRule()); 
@@ -14848,7 +14848,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXReturnExpression"
-    // InternalXbaseWithAnnotations.g:5451:1: ruleXReturnExpression returns [EObject current=null] : ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
+    // InternalXbaseWithAnnotations.g:5452:1: ruleXReturnExpression returns [EObject current=null] : ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
     public final EObject ruleXReturnExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14860,14 +14860,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5457:2: ( ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) )
-            // InternalXbaseWithAnnotations.g:5458:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
+            // InternalXbaseWithAnnotations.g:5458:2: ( ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) )
+            // InternalXbaseWithAnnotations.g:5459:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
             {
-            // InternalXbaseWithAnnotations.g:5458:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
-            // InternalXbaseWithAnnotations.g:5459:3: () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
+            // InternalXbaseWithAnnotations.g:5459:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
+            // InternalXbaseWithAnnotations.g:5460:3: () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
             {
-            // InternalXbaseWithAnnotations.g:5459:3: ()
-            // InternalXbaseWithAnnotations.g:5460:4: 
+            // InternalXbaseWithAnnotations.g:5460:3: ()
+            // InternalXbaseWithAnnotations.g:5461:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14885,15 +14885,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXReturnExpressionAccess().getReturnKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:5470:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
+            // InternalXbaseWithAnnotations.g:5471:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
             int alt95=2;
             alt95 = dfa95.predict(input);
             switch (alt95) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5471:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:5472:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:5472:4: (lv_expression_2_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:5473:5: lv_expression_2_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:5473:4: (lv_expression_2_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:5474:5: lv_expression_2_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14952,7 +14952,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXTryCatchFinallyExpression"
-    // InternalXbaseWithAnnotations.g:5494:1: entryRuleXTryCatchFinallyExpression returns [EObject current=null] : iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF ;
+    // InternalXbaseWithAnnotations.g:5495:1: entryRuleXTryCatchFinallyExpression returns [EObject current=null] : iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF ;
     public final EObject entryRuleXTryCatchFinallyExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14960,8 +14960,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5494:67: (iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF )
-            // InternalXbaseWithAnnotations.g:5495:2: iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF
+            // InternalXbaseWithAnnotations.g:5495:67: (iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF )
+            // InternalXbaseWithAnnotations.g:5496:2: iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionRule()); 
@@ -14992,7 +14992,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXTryCatchFinallyExpression"
-    // InternalXbaseWithAnnotations.g:5501:1: ruleXTryCatchFinallyExpression returns [EObject current=null] : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5502:1: ruleXTryCatchFinallyExpression returns [EObject current=null] : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
     public final EObject ruleXTryCatchFinallyExpression() throws RecognitionException {
         EObject current = null;
 
@@ -15012,14 +15012,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5507:2: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
-            // InternalXbaseWithAnnotations.g:5508:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
+            // InternalXbaseWithAnnotations.g:5508:2: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
+            // InternalXbaseWithAnnotations.g:5509:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5508:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
-            // InternalXbaseWithAnnotations.g:5509:3: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:5509:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
+            // InternalXbaseWithAnnotations.g:5510:3: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5509:3: ()
-            // InternalXbaseWithAnnotations.g:5510:4: 
+            // InternalXbaseWithAnnotations.g:5510:3: ()
+            // InternalXbaseWithAnnotations.g:5511:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -15037,11 +15037,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:5520:3: ( (lv_expression_2_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:5521:4: (lv_expression_2_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5521:3: ( (lv_expression_2_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5522:4: (lv_expression_2_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:5521:4: (lv_expression_2_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:5522:5: lv_expression_2_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:5522:4: (lv_expression_2_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5523:5: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -15072,7 +15072,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5539:3: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:5540:3: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             int alt98=2;
             int LA98_0 = input.LA(1);
 
@@ -15091,12 +15091,12 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt98) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5540:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
+                    // InternalXbaseWithAnnotations.g:5541:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
                     {
-                    // InternalXbaseWithAnnotations.g:5540:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
-                    // InternalXbaseWithAnnotations.g:5541:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
+                    // InternalXbaseWithAnnotations.g:5541:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
+                    // InternalXbaseWithAnnotations.g:5542:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     {
-                    // InternalXbaseWithAnnotations.g:5541:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
+                    // InternalXbaseWithAnnotations.g:5542:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
                     int cnt96=0;
                     loop96:
                     do {
@@ -15116,10 +15116,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt96) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:5542:6: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
+                    	    // InternalXbaseWithAnnotations.g:5543:6: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:5543:6: (lv_catchClauses_3_0= ruleXCatchClause )
-                    	    // InternalXbaseWithAnnotations.g:5544:7: lv_catchClauses_3_0= ruleXCatchClause
+                    	    // InternalXbaseWithAnnotations.g:5544:6: (lv_catchClauses_3_0= ruleXCatchClause )
+                    	    // InternalXbaseWithAnnotations.g:5545:7: lv_catchClauses_3_0= ruleXCatchClause
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -15161,7 +15161,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                         cnt96++;
                     } while (true);
 
-                    // InternalXbaseWithAnnotations.g:5561:5: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
+                    // InternalXbaseWithAnnotations.g:5562:5: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     int alt97=2;
                     int LA97_0 = input.LA(1);
 
@@ -15174,10 +15174,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt97) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:5562:6: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
+                            // InternalXbaseWithAnnotations.g:5563:6: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
                             {
-                            // InternalXbaseWithAnnotations.g:5562:6: ( ( 'finally' )=>otherlv_4= 'finally' )
-                            // InternalXbaseWithAnnotations.g:5563:7: ( 'finally' )=>otherlv_4= 'finally'
+                            // InternalXbaseWithAnnotations.g:5563:6: ( ( 'finally' )=>otherlv_4= 'finally' )
+                            // InternalXbaseWithAnnotations.g:5564:7: ( 'finally' )=>otherlv_4= 'finally'
                             {
                             otherlv_4=(Token)match(input,83,FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -15188,11 +15188,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:5569:6: ( (lv_finallyExpression_5_0= ruleXExpression ) )
-                            // InternalXbaseWithAnnotations.g:5570:7: (lv_finallyExpression_5_0= ruleXExpression )
+                            // InternalXbaseWithAnnotations.g:5570:6: ( (lv_finallyExpression_5_0= ruleXExpression ) )
+                            // InternalXbaseWithAnnotations.g:5571:7: (lv_finallyExpression_5_0= ruleXExpression )
                             {
-                            // InternalXbaseWithAnnotations.g:5570:7: (lv_finallyExpression_5_0= ruleXExpression )
-                            // InternalXbaseWithAnnotations.g:5571:8: lv_finallyExpression_5_0= ruleXExpression
+                            // InternalXbaseWithAnnotations.g:5571:7: (lv_finallyExpression_5_0= ruleXExpression )
+                            // InternalXbaseWithAnnotations.g:5572:8: lv_finallyExpression_5_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -15236,10 +15236,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:5591:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
+                    // InternalXbaseWithAnnotations.g:5592:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:5591:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
-                    // InternalXbaseWithAnnotations.g:5592:5: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:5592:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
+                    // InternalXbaseWithAnnotations.g:5593:5: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
                     {
                     otherlv_6=(Token)match(input,83,FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -15247,11 +15247,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       					newLeafNode(otherlv_6, grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_1_0());
                       				
                     }
-                    // InternalXbaseWithAnnotations.g:5596:5: ( (lv_finallyExpression_7_0= ruleXExpression ) )
-                    // InternalXbaseWithAnnotations.g:5597:6: (lv_finallyExpression_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:5597:5: ( (lv_finallyExpression_7_0= ruleXExpression ) )
+                    // InternalXbaseWithAnnotations.g:5598:6: (lv_finallyExpression_7_0= ruleXExpression )
                     {
-                    // InternalXbaseWithAnnotations.g:5597:6: (lv_finallyExpression_7_0= ruleXExpression )
-                    // InternalXbaseWithAnnotations.g:5598:7: lv_finallyExpression_7_0= ruleXExpression
+                    // InternalXbaseWithAnnotations.g:5598:6: (lv_finallyExpression_7_0= ruleXExpression )
+                    // InternalXbaseWithAnnotations.g:5599:7: lv_finallyExpression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15316,7 +15316,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXSynchronizedExpression"
-    // InternalXbaseWithAnnotations.g:5621:1: entryRuleXSynchronizedExpression returns [EObject current=null] : iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF ;
+    // InternalXbaseWithAnnotations.g:5622:1: entryRuleXSynchronizedExpression returns [EObject current=null] : iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF ;
     public final EObject entryRuleXSynchronizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -15324,8 +15324,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5621:64: (iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF )
-            // InternalXbaseWithAnnotations.g:5622:2: iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF
+            // InternalXbaseWithAnnotations.g:5622:64: (iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF )
+            // InternalXbaseWithAnnotations.g:5623:2: iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXSynchronizedExpressionRule()); 
@@ -15356,7 +15356,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXSynchronizedExpression"
-    // InternalXbaseWithAnnotations.g:5628:1: ruleXSynchronizedExpression returns [EObject current=null] : ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5629:1: ruleXSynchronizedExpression returns [EObject current=null] : ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) ;
     public final EObject ruleXSynchronizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -15372,20 +15372,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5634:2: ( ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:5635:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:5635:2: ( ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:5636:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5635:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:5636:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5636:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:5637:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:5636:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) )
-            // InternalXbaseWithAnnotations.g:5637:4: ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' )
+            // InternalXbaseWithAnnotations.g:5637:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) )
+            // InternalXbaseWithAnnotations.g:5638:4: ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' )
             {
-            // InternalXbaseWithAnnotations.g:5644:4: ( () otherlv_1= 'synchronized' otherlv_2= '(' )
-            // InternalXbaseWithAnnotations.g:5645:5: () otherlv_1= 'synchronized' otherlv_2= '('
+            // InternalXbaseWithAnnotations.g:5645:4: ( () otherlv_1= 'synchronized' otherlv_2= '(' )
+            // InternalXbaseWithAnnotations.g:5646:5: () otherlv_1= 'synchronized' otherlv_2= '('
             {
-            // InternalXbaseWithAnnotations.g:5645:5: ()
-            // InternalXbaseWithAnnotations.g:5646:6: 
+            // InternalXbaseWithAnnotations.g:5646:5: ()
+            // InternalXbaseWithAnnotations.g:5647:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -15415,11 +15415,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:5662:3: ( (lv_param_3_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:5663:4: (lv_param_3_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5663:3: ( (lv_param_3_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5664:4: (lv_param_3_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:5663:4: (lv_param_3_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:5664:5: lv_param_3_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:5664:4: (lv_param_3_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5665:5: lv_param_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -15456,11 +15456,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_4, grammarAccess.getXSynchronizedExpressionAccess().getRightParenthesisKeyword_2());
               		
             }
-            // InternalXbaseWithAnnotations.g:5685:3: ( (lv_expression_5_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:5686:4: (lv_expression_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5686:3: ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5687:4: (lv_expression_5_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:5686:4: (lv_expression_5_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:5687:5: lv_expression_5_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:5687:4: (lv_expression_5_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5688:5: lv_expression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -15516,7 +15516,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXCatchClause"
-    // InternalXbaseWithAnnotations.g:5708:1: entryRuleXCatchClause returns [EObject current=null] : iv_ruleXCatchClause= ruleXCatchClause EOF ;
+    // InternalXbaseWithAnnotations.g:5709:1: entryRuleXCatchClause returns [EObject current=null] : iv_ruleXCatchClause= ruleXCatchClause EOF ;
     public final EObject entryRuleXCatchClause() throws RecognitionException {
         EObject current = null;
 
@@ -15524,8 +15524,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5708:53: (iv_ruleXCatchClause= ruleXCatchClause EOF )
-            // InternalXbaseWithAnnotations.g:5709:2: iv_ruleXCatchClause= ruleXCatchClause EOF
+            // InternalXbaseWithAnnotations.g:5709:53: (iv_ruleXCatchClause= ruleXCatchClause EOF )
+            // InternalXbaseWithAnnotations.g:5710:2: iv_ruleXCatchClause= ruleXCatchClause EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCatchClauseRule()); 
@@ -15556,7 +15556,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXCatchClause"
-    // InternalXbaseWithAnnotations.g:5715:1: ruleXCatchClause returns [EObject current=null] : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
+    // InternalXbaseWithAnnotations.g:5716:1: ruleXCatchClause returns [EObject current=null] : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
     public final EObject ruleXCatchClause() throws RecognitionException {
         EObject current = null;
 
@@ -15572,14 +15572,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5721:2: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
-            // InternalXbaseWithAnnotations.g:5722:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:5722:2: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
+            // InternalXbaseWithAnnotations.g:5723:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
             {
-            // InternalXbaseWithAnnotations.g:5722:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
-            // InternalXbaseWithAnnotations.g:5723:3: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5723:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
+            // InternalXbaseWithAnnotations.g:5724:3: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
             {
-            // InternalXbaseWithAnnotations.g:5723:3: ( ( 'catch' )=>otherlv_0= 'catch' )
-            // InternalXbaseWithAnnotations.g:5724:4: ( 'catch' )=>otherlv_0= 'catch'
+            // InternalXbaseWithAnnotations.g:5724:3: ( ( 'catch' )=>otherlv_0= 'catch' )
+            // InternalXbaseWithAnnotations.g:5725:4: ( 'catch' )=>otherlv_0= 'catch'
             {
             otherlv_0=(Token)match(input,85,FOLLOW_48); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -15596,11 +15596,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:5734:3: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
-            // InternalXbaseWithAnnotations.g:5735:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
+            // InternalXbaseWithAnnotations.g:5735:3: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
+            // InternalXbaseWithAnnotations.g:5736:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
             {
-            // InternalXbaseWithAnnotations.g:5735:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
-            // InternalXbaseWithAnnotations.g:5736:5: lv_declaredParam_2_0= ruleFullJvmFormalParameter
+            // InternalXbaseWithAnnotations.g:5736:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
+            // InternalXbaseWithAnnotations.g:5737:5: lv_declaredParam_2_0= ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -15637,11 +15637,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_3, grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3());
               		
             }
-            // InternalXbaseWithAnnotations.g:5757:3: ( (lv_expression_4_0= ruleXExpression ) )
-            // InternalXbaseWithAnnotations.g:5758:4: (lv_expression_4_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5758:3: ( (lv_expression_4_0= ruleXExpression ) )
+            // InternalXbaseWithAnnotations.g:5759:4: (lv_expression_4_0= ruleXExpression )
             {
-            // InternalXbaseWithAnnotations.g:5758:4: (lv_expression_4_0= ruleXExpression )
-            // InternalXbaseWithAnnotations.g:5759:5: lv_expression_4_0= ruleXExpression
+            // InternalXbaseWithAnnotations.g:5759:4: (lv_expression_4_0= ruleXExpression )
+            // InternalXbaseWithAnnotations.g:5760:5: lv_expression_4_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -15697,7 +15697,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalXbaseWithAnnotations.g:5780:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // InternalXbaseWithAnnotations.g:5781:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -15705,8 +15705,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5780:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // InternalXbaseWithAnnotations.g:5781:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // InternalXbaseWithAnnotations.g:5781:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalXbaseWithAnnotations.g:5782:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
@@ -15737,7 +15737,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalXbaseWithAnnotations.g:5787:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) ;
+    // InternalXbaseWithAnnotations.g:5788:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -15751,11 +15751,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5793:2: ( (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) )
-            // InternalXbaseWithAnnotations.g:5794:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
+            // InternalXbaseWithAnnotations.g:5794:2: ( (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) )
+            // InternalXbaseWithAnnotations.g:5795:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
             {
-            // InternalXbaseWithAnnotations.g:5794:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
-            // InternalXbaseWithAnnotations.g:5795:3: this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
+            // InternalXbaseWithAnnotations.g:5795:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
+            // InternalXbaseWithAnnotations.g:5796:3: this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
             {
             if ( state.backtracking==0 ) {
 
@@ -15777,7 +15777,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalXbaseWithAnnotations.g:5805:3: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
+            // InternalXbaseWithAnnotations.g:5806:3: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
             loop99:
             do {
                 int alt99=2;
@@ -15802,10 +15802,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt99) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:5806:4: ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID
+            	    // InternalXbaseWithAnnotations.g:5807:4: ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID
             	    {
-            	    // InternalXbaseWithAnnotations.g:5806:4: ( ( '.' )=>kw= '.' )
-            	    // InternalXbaseWithAnnotations.g:5807:5: ( '.' )=>kw= '.'
+            	    // InternalXbaseWithAnnotations.g:5807:4: ( ( '.' )=>kw= '.' )
+            	    // InternalXbaseWithAnnotations.g:5808:5: ( '.' )=>kw= '.'
             	    {
             	    kw=(Token)match(input,52,FOLLOW_3); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -15871,7 +15871,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleNumber"
-    // InternalXbaseWithAnnotations.g:5829:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
+    // InternalXbaseWithAnnotations.g:5830:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
     public final String entryRuleNumber() throws RecognitionException {
         String current = null;
 
@@ -15882,8 +15882,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalXbaseWithAnnotations.g:5831:2: (iv_ruleNumber= ruleNumber EOF )
-            // InternalXbaseWithAnnotations.g:5832:2: iv_ruleNumber= ruleNumber EOF
+            // InternalXbaseWithAnnotations.g:5832:2: (iv_ruleNumber= ruleNumber EOF )
+            // InternalXbaseWithAnnotations.g:5833:2: iv_ruleNumber= ruleNumber EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNumberRule()); 
@@ -15917,7 +15917,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleNumber"
-    // InternalXbaseWithAnnotations.g:5841:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
+    // InternalXbaseWithAnnotations.g:5842:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
     public final AntlrDatatypeRuleToken ruleNumber() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -15933,10 +15933,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalXbaseWithAnnotations.g:5848:2: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
-            // InternalXbaseWithAnnotations.g:5849:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
+            // InternalXbaseWithAnnotations.g:5849:2: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
+            // InternalXbaseWithAnnotations.g:5850:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             {
-            // InternalXbaseWithAnnotations.g:5849:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
+            // InternalXbaseWithAnnotations.g:5850:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             int alt103=2;
             int LA103_0 = input.LA(1);
 
@@ -15955,7 +15955,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt103) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5850:3: this_HEX_0= RULE_HEX
+                    // InternalXbaseWithAnnotations.g:5851:3: this_HEX_0= RULE_HEX
                     {
                     this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -15972,12 +15972,12 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:5858:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
+                    // InternalXbaseWithAnnotations.g:5859:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
                     {
-                    // InternalXbaseWithAnnotations.g:5858:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
-                    // InternalXbaseWithAnnotations.g:5859:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
+                    // InternalXbaseWithAnnotations.g:5859:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
+                    // InternalXbaseWithAnnotations.g:5860:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     {
-                    // InternalXbaseWithAnnotations.g:5859:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
+                    // InternalXbaseWithAnnotations.g:5860:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
                     int alt100=2;
                     int LA100_0 = input.LA(1);
 
@@ -15996,7 +15996,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt100) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:5860:5: this_INT_1= RULE_INT
+                            // InternalXbaseWithAnnotations.g:5861:5: this_INT_1= RULE_INT
                             {
                             this_INT_1=(Token)match(input,RULE_INT,FOLLOW_72); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -16013,7 +16013,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:5868:5: this_DECIMAL_2= RULE_DECIMAL
+                            // InternalXbaseWithAnnotations.g:5869:5: this_DECIMAL_2= RULE_DECIMAL
                             {
                             this_DECIMAL_2=(Token)match(input,RULE_DECIMAL,FOLLOW_72); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -16032,7 +16032,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:5876:4: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
+                    // InternalXbaseWithAnnotations.g:5877:4: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     int alt102=2;
                     int LA102_0 = input.LA(1);
 
@@ -16045,7 +16045,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt102) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:5877:5: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
+                            // InternalXbaseWithAnnotations.g:5878:5: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             {
                             kw=(Token)match(input,52,FOLLOW_73); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -16054,7 +16054,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                               					newLeafNode(kw, grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0());
                               				
                             }
-                            // InternalXbaseWithAnnotations.g:5882:5: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
+                            // InternalXbaseWithAnnotations.g:5883:5: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             int alt101=2;
                             int LA101_0 = input.LA(1);
 
@@ -16073,7 +16073,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             switch (alt101) {
                                 case 1 :
-                                    // InternalXbaseWithAnnotations.g:5883:6: this_INT_4= RULE_INT
+                                    // InternalXbaseWithAnnotations.g:5884:6: this_INT_4= RULE_INT
                                     {
                                     this_INT_4=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
@@ -16090,7 +16090,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                                     }
                                     break;
                                 case 2 :
-                                    // InternalXbaseWithAnnotations.g:5891:6: this_DECIMAL_5= RULE_DECIMAL
+                                    // InternalXbaseWithAnnotations.g:5892:6: this_DECIMAL_5= RULE_DECIMAL
                                     {
                                     this_DECIMAL_5=(Token)match(input,RULE_DECIMAL,FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
@@ -16149,7 +16149,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmTypeReference"
-    // InternalXbaseWithAnnotations.g:5908:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
+    // InternalXbaseWithAnnotations.g:5909:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
     public final EObject entryRuleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16157,8 +16157,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5908:57: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
-            // InternalXbaseWithAnnotations.g:5909:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
+            // InternalXbaseWithAnnotations.g:5909:57: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
+            // InternalXbaseWithAnnotations.g:5910:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmTypeReferenceRule()); 
@@ -16189,7 +16189,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmTypeReference"
-    // InternalXbaseWithAnnotations.g:5915:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) ;
+    // InternalXbaseWithAnnotations.g:5916:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) ;
     public final EObject ruleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16202,10 +16202,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5921:2: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) )
-            // InternalXbaseWithAnnotations.g:5922:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
+            // InternalXbaseWithAnnotations.g:5922:2: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) )
+            // InternalXbaseWithAnnotations.g:5923:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
             {
-            // InternalXbaseWithAnnotations.g:5922:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
+            // InternalXbaseWithAnnotations.g:5923:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
             int alt105=2;
             int LA105_0 = input.LA(1);
 
@@ -16224,10 +16224,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt105) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:5923:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
+                    // InternalXbaseWithAnnotations.g:5924:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
                     {
-                    // InternalXbaseWithAnnotations.g:5923:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
-                    // InternalXbaseWithAnnotations.g:5924:4: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
+                    // InternalXbaseWithAnnotations.g:5924:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
+                    // InternalXbaseWithAnnotations.g:5925:4: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16245,7 +16245,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:5932:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
+                    // InternalXbaseWithAnnotations.g:5933:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     loop104:
                     do {
                         int alt104=2;
@@ -16270,13 +16270,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt104) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:5933:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
+                    	    // InternalXbaseWithAnnotations.g:5934:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:5939:5: ( () ruleArrayBrackets )
-                    	    // InternalXbaseWithAnnotations.g:5940:6: () ruleArrayBrackets
+                    	    // InternalXbaseWithAnnotations.g:5940:5: ( () ruleArrayBrackets )
+                    	    // InternalXbaseWithAnnotations.g:5941:6: () ruleArrayBrackets
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:5940:6: ()
-                    	    // InternalXbaseWithAnnotations.g:5941:7: 
+                    	    // InternalXbaseWithAnnotations.g:5941:6: ()
+                    	    // InternalXbaseWithAnnotations.g:5942:7: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -16322,7 +16322,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:5958:3: this_XFunctionTypeRef_3= ruleXFunctionTypeRef
+                    // InternalXbaseWithAnnotations.g:5959:3: this_XFunctionTypeRef_3= ruleXFunctionTypeRef
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16368,7 +16368,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleArrayBrackets"
-    // InternalXbaseWithAnnotations.g:5970:1: entryRuleArrayBrackets returns [String current=null] : iv_ruleArrayBrackets= ruleArrayBrackets EOF ;
+    // InternalXbaseWithAnnotations.g:5971:1: entryRuleArrayBrackets returns [String current=null] : iv_ruleArrayBrackets= ruleArrayBrackets EOF ;
     public final String entryRuleArrayBrackets() throws RecognitionException {
         String current = null;
 
@@ -16376,8 +16376,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5970:53: (iv_ruleArrayBrackets= ruleArrayBrackets EOF )
-            // InternalXbaseWithAnnotations.g:5971:2: iv_ruleArrayBrackets= ruleArrayBrackets EOF
+            // InternalXbaseWithAnnotations.g:5971:53: (iv_ruleArrayBrackets= ruleArrayBrackets EOF )
+            // InternalXbaseWithAnnotations.g:5972:2: iv_ruleArrayBrackets= ruleArrayBrackets EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getArrayBracketsRule()); 
@@ -16408,7 +16408,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleArrayBrackets"
-    // InternalXbaseWithAnnotations.g:5977:1: ruleArrayBrackets returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '[' kw= ']' ) ;
+    // InternalXbaseWithAnnotations.g:5978:1: ruleArrayBrackets returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '[' kw= ']' ) ;
     public final AntlrDatatypeRuleToken ruleArrayBrackets() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -16418,11 +16418,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:5983:2: ( (kw= '[' kw= ']' ) )
-            // InternalXbaseWithAnnotations.g:5984:2: (kw= '[' kw= ']' )
+            // InternalXbaseWithAnnotations.g:5984:2: ( (kw= '[' kw= ']' ) )
+            // InternalXbaseWithAnnotations.g:5985:2: (kw= '[' kw= ']' )
             {
-            // InternalXbaseWithAnnotations.g:5984:2: (kw= '[' kw= ']' )
-            // InternalXbaseWithAnnotations.g:5985:3: kw= '[' kw= ']'
+            // InternalXbaseWithAnnotations.g:5985:2: (kw= '[' kw= ']' )
+            // InternalXbaseWithAnnotations.g:5986:3: kw= '[' kw= ']'
             {
             kw=(Token)match(input,19,FOLLOW_45); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -16463,7 +16463,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXFunctionTypeRef"
-    // InternalXbaseWithAnnotations.g:5999:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
+    // InternalXbaseWithAnnotations.g:6000:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
     public final EObject entryRuleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -16471,8 +16471,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:5999:57: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
-            // InternalXbaseWithAnnotations.g:6000:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
+            // InternalXbaseWithAnnotations.g:6000:57: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
+            // InternalXbaseWithAnnotations.g:6001:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFunctionTypeRefRule()); 
@@ -16503,7 +16503,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXFunctionTypeRef"
-    // InternalXbaseWithAnnotations.g:6006:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
+    // InternalXbaseWithAnnotations.g:6007:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -16522,13 +16522,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6012:2: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
-            // InternalXbaseWithAnnotations.g:6013:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6013:2: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
+            // InternalXbaseWithAnnotations.g:6014:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
             {
-            // InternalXbaseWithAnnotations.g:6013:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
-            // InternalXbaseWithAnnotations.g:6014:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6014:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6015:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
             {
-            // InternalXbaseWithAnnotations.g:6014:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
+            // InternalXbaseWithAnnotations.g:6015:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
             int alt108=2;
             int LA108_0 = input.LA(1);
 
@@ -16537,7 +16537,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt108) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:6015:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
+                    // InternalXbaseWithAnnotations.g:6016:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
                     {
                     otherlv_0=(Token)match(input,14,FOLLOW_74); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -16545,7 +16545,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(otherlv_0, grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:6019:4: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
+                    // InternalXbaseWithAnnotations.g:6020:4: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
                     int alt107=2;
                     int LA107_0 = input.LA(1);
 
@@ -16554,13 +16554,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt107) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:6020:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            // InternalXbaseWithAnnotations.g:6021:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             {
-                            // InternalXbaseWithAnnotations.g:6020:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
-                            // InternalXbaseWithAnnotations.g:6021:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // InternalXbaseWithAnnotations.g:6021:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
+                            // InternalXbaseWithAnnotations.g:6022:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
                             {
-                            // InternalXbaseWithAnnotations.g:6021:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
-                            // InternalXbaseWithAnnotations.g:6022:7: lv_paramTypes_1_0= ruleJvmTypeReference
+                            // InternalXbaseWithAnnotations.g:6022:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // InternalXbaseWithAnnotations.g:6023:7: lv_paramTypes_1_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -16591,7 +16591,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                             }
 
-                            // InternalXbaseWithAnnotations.g:6039:5: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            // InternalXbaseWithAnnotations.g:6040:5: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             loop106:
                             do {
                                 int alt106=2;
@@ -16604,7 +16604,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                                 switch (alt106) {
                             	case 1 :
-                            	    // InternalXbaseWithAnnotations.g:6040:6: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // InternalXbaseWithAnnotations.g:6041:6: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
                             	    {
                             	    otherlv_2=(Token)match(input,15,FOLLOW_22); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -16612,11 +16612,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             	      						newLeafNode(otherlv_2, grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_1_1_0());
                             	      					
                             	    }
-                            	    // InternalXbaseWithAnnotations.g:6044:6: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
-                            	    // InternalXbaseWithAnnotations.g:6045:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // InternalXbaseWithAnnotations.g:6045:6: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // InternalXbaseWithAnnotations.g:6046:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
                             	    {
-                            	    // InternalXbaseWithAnnotations.g:6045:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
-                            	    // InternalXbaseWithAnnotations.g:6046:8: lv_paramTypes_3_0= ruleJvmTypeReference
+                            	    // InternalXbaseWithAnnotations.g:6046:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // InternalXbaseWithAnnotations.g:6047:8: lv_paramTypes_3_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -16680,11 +16680,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_5, grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:6074:3: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
-            // InternalXbaseWithAnnotations.g:6075:4: (lv_returnType_6_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6075:3: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6076:4: (lv_returnType_6_0= ruleJvmTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:6075:4: (lv_returnType_6_0= ruleJvmTypeReference )
-            // InternalXbaseWithAnnotations.g:6076:5: lv_returnType_6_0= ruleJvmTypeReference
+            // InternalXbaseWithAnnotations.g:6076:4: (lv_returnType_6_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6077:5: lv_returnType_6_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -16740,7 +16740,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmParameterizedTypeReference"
-    // InternalXbaseWithAnnotations.g:6097:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
+    // InternalXbaseWithAnnotations.g:6098:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
     public final EObject entryRuleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16748,8 +16748,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6097:70: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
-            // InternalXbaseWithAnnotations.g:6098:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
+            // InternalXbaseWithAnnotations.g:6098:70: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
+            // InternalXbaseWithAnnotations.g:6099:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceRule()); 
@@ -16780,7 +16780,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmParameterizedTypeReference"
-    // InternalXbaseWithAnnotations.g:6104:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) ;
+    // InternalXbaseWithAnnotations.g:6105:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) ;
     public final EObject ruleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16804,17 +16804,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6110:2: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) )
-            // InternalXbaseWithAnnotations.g:6111:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
+            // InternalXbaseWithAnnotations.g:6111:2: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) )
+            // InternalXbaseWithAnnotations.g:6112:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
             {
-            // InternalXbaseWithAnnotations.g:6111:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
-            // InternalXbaseWithAnnotations.g:6112:3: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
+            // InternalXbaseWithAnnotations.g:6112:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
+            // InternalXbaseWithAnnotations.g:6113:3: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             {
-            // InternalXbaseWithAnnotations.g:6112:3: ( ( ruleQualifiedName ) )
-            // InternalXbaseWithAnnotations.g:6113:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:6113:3: ( ( ruleQualifiedName ) )
+            // InternalXbaseWithAnnotations.g:6114:4: ( ruleQualifiedName )
             {
-            // InternalXbaseWithAnnotations.g:6113:4: ( ruleQualifiedName )
-            // InternalXbaseWithAnnotations.g:6114:5: ruleQualifiedName
+            // InternalXbaseWithAnnotations.g:6114:4: ( ruleQualifiedName )
+            // InternalXbaseWithAnnotations.g:6115:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -16844,15 +16844,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:6128:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
+            // InternalXbaseWithAnnotations.g:6129:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             int alt113=2;
             alt113 = dfa113.predict(input);
             switch (alt113) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:6129:4: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
+                    // InternalXbaseWithAnnotations.g:6130:4: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     {
-                    // InternalXbaseWithAnnotations.g:6129:4: ( ( '<' )=>otherlv_1= '<' )
-                    // InternalXbaseWithAnnotations.g:6130:5: ( '<' )=>otherlv_1= '<'
+                    // InternalXbaseWithAnnotations.g:6130:4: ( ( '<' )=>otherlv_1= '<' )
+                    // InternalXbaseWithAnnotations.g:6131:5: ( '<' )=>otherlv_1= '<'
                     {
                     otherlv_1=(Token)match(input,26,FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -16863,11 +16863,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6136:4: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // InternalXbaseWithAnnotations.g:6137:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalXbaseWithAnnotations.g:6137:4: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
+                    // InternalXbaseWithAnnotations.g:6138:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // InternalXbaseWithAnnotations.g:6137:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
-                    // InternalXbaseWithAnnotations.g:6138:6: lv_arguments_2_0= ruleJvmArgumentTypeReference
+                    // InternalXbaseWithAnnotations.g:6138:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalXbaseWithAnnotations.g:6139:6: lv_arguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16898,7 +16898,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6155:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
+                    // InternalXbaseWithAnnotations.g:6156:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
                     loop109:
                     do {
                         int alt109=2;
@@ -16911,7 +16911,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt109) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:6156:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalXbaseWithAnnotations.g:6157:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    otherlv_3=(Token)match(input,15,FOLLOW_34); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -16919,11 +16919,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      					newLeafNode(otherlv_3, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0());
                     	      				
                     	    }
-                    	    // InternalXbaseWithAnnotations.g:6160:5: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // InternalXbaseWithAnnotations.g:6161:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalXbaseWithAnnotations.g:6161:5: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalXbaseWithAnnotations.g:6162:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6161:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // InternalXbaseWithAnnotations.g:6162:7: lv_arguments_4_0= ruleJvmArgumentTypeReference
+                    	    // InternalXbaseWithAnnotations.g:6162:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalXbaseWithAnnotations.g:6163:7: lv_arguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -16969,7 +16969,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       				newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3());
                       			
                     }
-                    // InternalXbaseWithAnnotations.g:6184:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
+                    // InternalXbaseWithAnnotations.g:6185:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     loop112:
                     do {
                         int alt112=2;
@@ -16994,16 +16994,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt112) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:6185:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
+                    	    // InternalXbaseWithAnnotations.g:6186:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6185:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
-                    	    // InternalXbaseWithAnnotations.g:6186:6: ( ( () '.' ) )=> ( () otherlv_7= '.' )
+                    	    // InternalXbaseWithAnnotations.g:6186:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
+                    	    // InternalXbaseWithAnnotations.g:6187:6: ( ( () '.' ) )=> ( () otherlv_7= '.' )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6192:6: ( () otherlv_7= '.' )
-                    	    // InternalXbaseWithAnnotations.g:6193:7: () otherlv_7= '.'
+                    	    // InternalXbaseWithAnnotations.g:6193:6: ( () otherlv_7= '.' )
+                    	    // InternalXbaseWithAnnotations.g:6194:7: () otherlv_7= '.'
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6193:7: ()
-                    	    // InternalXbaseWithAnnotations.g:6194:8: 
+                    	    // InternalXbaseWithAnnotations.g:6194:7: ()
+                    	    // InternalXbaseWithAnnotations.g:6195:8: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -17027,11 +17027,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     	    }
 
-                    	    // InternalXbaseWithAnnotations.g:6206:5: ( ( ruleValidID ) )
-                    	    // InternalXbaseWithAnnotations.g:6207:6: ( ruleValidID )
+                    	    // InternalXbaseWithAnnotations.g:6207:5: ( ( ruleValidID ) )
+                    	    // InternalXbaseWithAnnotations.g:6208:6: ( ruleValidID )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6207:6: ( ruleValidID )
-                    	    // InternalXbaseWithAnnotations.g:6208:7: ruleValidID
+                    	    // InternalXbaseWithAnnotations.g:6208:6: ( ruleValidID )
+                    	    // InternalXbaseWithAnnotations.g:6209:7: ruleValidID
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -17061,15 +17061,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     	    }
 
-                    	    // InternalXbaseWithAnnotations.g:6222:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
+                    	    // InternalXbaseWithAnnotations.g:6223:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
                     	    int alt111=2;
                     	    alt111 = dfa111.predict(input);
                     	    switch (alt111) {
                     	        case 1 :
-                    	            // InternalXbaseWithAnnotations.g:6223:6: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
+                    	            // InternalXbaseWithAnnotations.g:6224:6: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
                     	            {
-                    	            // InternalXbaseWithAnnotations.g:6223:6: ( ( '<' )=>otherlv_9= '<' )
-                    	            // InternalXbaseWithAnnotations.g:6224:7: ( '<' )=>otherlv_9= '<'
+                    	            // InternalXbaseWithAnnotations.g:6224:6: ( ( '<' )=>otherlv_9= '<' )
+                    	            // InternalXbaseWithAnnotations.g:6225:7: ( '<' )=>otherlv_9= '<'
                     	            {
                     	            otherlv_9=(Token)match(input,26,FOLLOW_34); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
@@ -17080,11 +17080,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     	            }
 
-                    	            // InternalXbaseWithAnnotations.g:6230:6: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
-                    	            // InternalXbaseWithAnnotations.g:6231:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
+                    	            // InternalXbaseWithAnnotations.g:6231:6: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
+                    	            // InternalXbaseWithAnnotations.g:6232:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
                     	            {
-                    	            // InternalXbaseWithAnnotations.g:6231:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
-                    	            // InternalXbaseWithAnnotations.g:6232:8: lv_arguments_10_0= ruleJvmArgumentTypeReference
+                    	            // InternalXbaseWithAnnotations.g:6232:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
+                    	            // InternalXbaseWithAnnotations.g:6233:8: lv_arguments_10_0= ruleJvmArgumentTypeReference
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -17115,7 +17115,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     	            }
 
-                    	            // InternalXbaseWithAnnotations.g:6249:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
+                    	            // InternalXbaseWithAnnotations.g:6250:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
                     	            loop110:
                     	            do {
                     	                int alt110=2;
@@ -17128,7 +17128,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     	                switch (alt110) {
                     	            	case 1 :
-                    	            	    // InternalXbaseWithAnnotations.g:6250:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
+                    	            	    // InternalXbaseWithAnnotations.g:6251:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
                     	            	    {
                     	            	    otherlv_11=(Token)match(input,15,FOLLOW_34); if (state.failed) return current;
                     	            	    if ( state.backtracking==0 ) {
@@ -17136,11 +17136,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	            	      							newLeafNode(otherlv_11, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_4_2_2_0());
                     	            	      						
                     	            	    }
-                    	            	    // InternalXbaseWithAnnotations.g:6254:7: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
-                    	            	    // InternalXbaseWithAnnotations.g:6255:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
+                    	            	    // InternalXbaseWithAnnotations.g:6255:7: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
+                    	            	    // InternalXbaseWithAnnotations.g:6256:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
                     	            	    {
-                    	            	    // InternalXbaseWithAnnotations.g:6255:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
-                    	            	    // InternalXbaseWithAnnotations.g:6256:9: lv_arguments_12_0= ruleJvmArgumentTypeReference
+                    	            	    // InternalXbaseWithAnnotations.g:6256:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
+                    	            	    // InternalXbaseWithAnnotations.g:6257:9: lv_arguments_12_0= ruleJvmArgumentTypeReference
                     	            	    {
                     	            	    if ( state.backtracking==0 ) {
 
@@ -17232,7 +17232,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmArgumentTypeReference"
-    // InternalXbaseWithAnnotations.g:6285:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
+    // InternalXbaseWithAnnotations.g:6286:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
     public final EObject entryRuleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -17240,8 +17240,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6285:65: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
-            // InternalXbaseWithAnnotations.g:6286:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
+            // InternalXbaseWithAnnotations.g:6286:65: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
+            // InternalXbaseWithAnnotations.g:6287:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule()); 
@@ -17272,7 +17272,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmArgumentTypeReference"
-    // InternalXbaseWithAnnotations.g:6292:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
+    // InternalXbaseWithAnnotations.g:6293:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
     public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -17285,10 +17285,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6298:2: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
-            // InternalXbaseWithAnnotations.g:6299:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // InternalXbaseWithAnnotations.g:6299:2: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6300:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:6299:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // InternalXbaseWithAnnotations.g:6300:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             int alt114=2;
             int LA114_0 = input.LA(1);
 
@@ -17307,7 +17307,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt114) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:6300:3: this_JvmTypeReference_0= ruleJvmTypeReference
+                    // InternalXbaseWithAnnotations.g:6301:3: this_JvmTypeReference_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17329,7 +17329,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:6309:3: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
+                    // InternalXbaseWithAnnotations.g:6310:3: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17375,7 +17375,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmWildcardTypeReference"
-    // InternalXbaseWithAnnotations.g:6321:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
+    // InternalXbaseWithAnnotations.g:6322:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
     public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -17383,8 +17383,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6321:65: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
-            // InternalXbaseWithAnnotations.g:6322:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
+            // InternalXbaseWithAnnotations.g:6322:65: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
+            // InternalXbaseWithAnnotations.g:6323:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule()); 
@@ -17415,7 +17415,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmWildcardTypeReference"
-    // InternalXbaseWithAnnotations.g:6328:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
+    // InternalXbaseWithAnnotations.g:6329:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
     public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -17433,14 +17433,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6334:2: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
-            // InternalXbaseWithAnnotations.g:6335:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
+            // InternalXbaseWithAnnotations.g:6335:2: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
+            // InternalXbaseWithAnnotations.g:6336:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
             {
-            // InternalXbaseWithAnnotations.g:6335:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
-            // InternalXbaseWithAnnotations.g:6336:3: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
+            // InternalXbaseWithAnnotations.g:6336:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
+            // InternalXbaseWithAnnotations.g:6337:3: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             {
-            // InternalXbaseWithAnnotations.g:6336:3: ()
-            // InternalXbaseWithAnnotations.g:6337:4: 
+            // InternalXbaseWithAnnotations.g:6337:3: ()
+            // InternalXbaseWithAnnotations.g:6338:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -17458,7 +17458,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1());
               		
             }
-            // InternalXbaseWithAnnotations.g:6347:3: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
+            // InternalXbaseWithAnnotations.g:6348:3: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             int alt117=3;
             int LA117_0 = input.LA(1);
 
@@ -17470,16 +17470,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt117) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:6348:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
+                    // InternalXbaseWithAnnotations.g:6349:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
                     {
-                    // InternalXbaseWithAnnotations.g:6348:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
-                    // InternalXbaseWithAnnotations.g:6349:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
+                    // InternalXbaseWithAnnotations.g:6349:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
+                    // InternalXbaseWithAnnotations.g:6350:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:6349:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
-                    // InternalXbaseWithAnnotations.g:6350:6: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // InternalXbaseWithAnnotations.g:6350:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // InternalXbaseWithAnnotations.g:6351:6: (lv_constraints_2_0= ruleJvmUpperBound )
                     {
-                    // InternalXbaseWithAnnotations.g:6350:6: (lv_constraints_2_0= ruleJvmUpperBound )
-                    // InternalXbaseWithAnnotations.g:6351:7: lv_constraints_2_0= ruleJvmUpperBound
+                    // InternalXbaseWithAnnotations.g:6351:6: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // InternalXbaseWithAnnotations.g:6352:7: lv_constraints_2_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17510,7 +17510,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6368:5: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
+                    // InternalXbaseWithAnnotations.g:6369:5: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     loop115:
                     do {
                         int alt115=2;
@@ -17523,10 +17523,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt115) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:6369:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
+                    	    // InternalXbaseWithAnnotations.g:6370:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6369:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
-                    	    // InternalXbaseWithAnnotations.g:6370:7: lv_constraints_3_0= ruleJvmUpperBoundAnded
+                    	    // InternalXbaseWithAnnotations.g:6370:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
+                    	    // InternalXbaseWithAnnotations.g:6371:7: lv_constraints_3_0= ruleJvmUpperBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -17570,16 +17570,16 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:6389:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
+                    // InternalXbaseWithAnnotations.g:6390:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
                     {
-                    // InternalXbaseWithAnnotations.g:6389:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
-                    // InternalXbaseWithAnnotations.g:6390:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
+                    // InternalXbaseWithAnnotations.g:6390:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
+                    // InternalXbaseWithAnnotations.g:6391:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     {
-                    // InternalXbaseWithAnnotations.g:6390:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
-                    // InternalXbaseWithAnnotations.g:6391:6: (lv_constraints_4_0= ruleJvmLowerBound )
+                    // InternalXbaseWithAnnotations.g:6391:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
+                    // InternalXbaseWithAnnotations.g:6392:6: (lv_constraints_4_0= ruleJvmLowerBound )
                     {
-                    // InternalXbaseWithAnnotations.g:6391:6: (lv_constraints_4_0= ruleJvmLowerBound )
-                    // InternalXbaseWithAnnotations.g:6392:7: lv_constraints_4_0= ruleJvmLowerBound
+                    // InternalXbaseWithAnnotations.g:6392:6: (lv_constraints_4_0= ruleJvmLowerBound )
+                    // InternalXbaseWithAnnotations.g:6393:7: lv_constraints_4_0= ruleJvmLowerBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17610,7 +17610,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6409:5: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
+                    // InternalXbaseWithAnnotations.g:6410:5: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     loop116:
                     do {
                         int alt116=2;
@@ -17623,10 +17623,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt116) {
                     	case 1 :
-                    	    // InternalXbaseWithAnnotations.g:6410:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
+                    	    // InternalXbaseWithAnnotations.g:6411:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
                     	    {
-                    	    // InternalXbaseWithAnnotations.g:6410:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
-                    	    // InternalXbaseWithAnnotations.g:6411:7: lv_constraints_5_0= ruleJvmLowerBoundAnded
+                    	    // InternalXbaseWithAnnotations.g:6411:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
+                    	    // InternalXbaseWithAnnotations.g:6412:7: lv_constraints_5_0= ruleJvmLowerBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -17697,7 +17697,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
-    // InternalXbaseWithAnnotations.g:6434:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
+    // InternalXbaseWithAnnotations.g:6435:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
     public final EObject entryRuleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -17705,8 +17705,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6434:54: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
-            // InternalXbaseWithAnnotations.g:6435:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
+            // InternalXbaseWithAnnotations.g:6435:54: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
+            // InternalXbaseWithAnnotations.g:6436:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundRule()); 
@@ -17737,7 +17737,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmUpperBound"
-    // InternalXbaseWithAnnotations.g:6441:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalXbaseWithAnnotations.g:6442:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -17749,11 +17749,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6447:2: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalXbaseWithAnnotations.g:6448:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6448:2: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalXbaseWithAnnotations.g:6449:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalXbaseWithAnnotations.g:6448:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalXbaseWithAnnotations.g:6449:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6449:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6450:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,70,FOLLOW_22); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -17761,11 +17761,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0());
               		
             }
-            // InternalXbaseWithAnnotations.g:6453:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalXbaseWithAnnotations.g:6454:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6454:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6455:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:6454:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalXbaseWithAnnotations.g:6455:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalXbaseWithAnnotations.g:6455:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6456:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -17821,7 +17821,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmUpperBoundAnded"
-    // InternalXbaseWithAnnotations.g:6476:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
+    // InternalXbaseWithAnnotations.g:6477:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
     public final EObject entryRuleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -17829,8 +17829,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6476:59: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
-            // InternalXbaseWithAnnotations.g:6477:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
+            // InternalXbaseWithAnnotations.g:6477:59: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
+            // InternalXbaseWithAnnotations.g:6478:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundAndedRule()); 
@@ -17861,7 +17861,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmUpperBoundAnded"
-    // InternalXbaseWithAnnotations.g:6483:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalXbaseWithAnnotations.g:6484:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -17873,11 +17873,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6489:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalXbaseWithAnnotations.g:6490:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6490:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalXbaseWithAnnotations.g:6491:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalXbaseWithAnnotations.g:6490:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalXbaseWithAnnotations.g:6491:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6491:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6492:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,87,FOLLOW_22); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -17885,11 +17885,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0());
               		
             }
-            // InternalXbaseWithAnnotations.g:6495:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalXbaseWithAnnotations.g:6496:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6496:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6497:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:6496:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalXbaseWithAnnotations.g:6497:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalXbaseWithAnnotations.g:6497:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6498:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -17945,7 +17945,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmLowerBound"
-    // InternalXbaseWithAnnotations.g:6518:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
+    // InternalXbaseWithAnnotations.g:6519:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
     public final EObject entryRuleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -17953,8 +17953,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6518:54: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
-            // InternalXbaseWithAnnotations.g:6519:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
+            // InternalXbaseWithAnnotations.g:6519:54: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
+            // InternalXbaseWithAnnotations.g:6520:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundRule()); 
@@ -17985,7 +17985,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmLowerBound"
-    // InternalXbaseWithAnnotations.g:6525:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalXbaseWithAnnotations.g:6526:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -17997,11 +17997,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6531:2: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalXbaseWithAnnotations.g:6532:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6532:2: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalXbaseWithAnnotations.g:6533:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalXbaseWithAnnotations.g:6532:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalXbaseWithAnnotations.g:6533:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6533:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6534:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,74,FOLLOW_22); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -18009,11 +18009,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0());
               		
             }
-            // InternalXbaseWithAnnotations.g:6537:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalXbaseWithAnnotations.g:6538:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6538:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6539:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:6538:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalXbaseWithAnnotations.g:6539:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalXbaseWithAnnotations.g:6539:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6540:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -18069,7 +18069,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleJvmLowerBoundAnded"
-    // InternalXbaseWithAnnotations.g:6560:1: entryRuleJvmLowerBoundAnded returns [EObject current=null] : iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF ;
+    // InternalXbaseWithAnnotations.g:6561:1: entryRuleJvmLowerBoundAnded returns [EObject current=null] : iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF ;
     public final EObject entryRuleJvmLowerBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -18077,8 +18077,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6560:59: (iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF )
-            // InternalXbaseWithAnnotations.g:6561:2: iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF
+            // InternalXbaseWithAnnotations.g:6561:59: (iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF )
+            // InternalXbaseWithAnnotations.g:6562:2: iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundAndedRule()); 
@@ -18109,7 +18109,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleJvmLowerBoundAnded"
-    // InternalXbaseWithAnnotations.g:6567:1: ruleJvmLowerBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalXbaseWithAnnotations.g:6568:1: ruleJvmLowerBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -18121,11 +18121,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6573:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalXbaseWithAnnotations.g:6574:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6574:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalXbaseWithAnnotations.g:6575:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalXbaseWithAnnotations.g:6574:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalXbaseWithAnnotations.g:6575:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6575:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalXbaseWithAnnotations.g:6576:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,87,FOLLOW_22); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -18133,11 +18133,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAndedAccess().getAmpersandKeyword_0());
               		
             }
-            // InternalXbaseWithAnnotations.g:6579:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalXbaseWithAnnotations.g:6580:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6580:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalXbaseWithAnnotations.g:6581:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalXbaseWithAnnotations.g:6580:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalXbaseWithAnnotations.g:6581:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalXbaseWithAnnotations.g:6581:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalXbaseWithAnnotations.g:6582:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -18193,7 +18193,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildcard"
-    // InternalXbaseWithAnnotations.g:6602:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
+    // InternalXbaseWithAnnotations.g:6603:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
     public final String entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         String current = null;
 
@@ -18201,8 +18201,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6602:65: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
-            // InternalXbaseWithAnnotations.g:6603:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
+            // InternalXbaseWithAnnotations.g:6603:65: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
+            // InternalXbaseWithAnnotations.g:6604:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameWithWildcardRule()); 
@@ -18233,7 +18233,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleQualifiedNameWithWildcard"
-    // InternalXbaseWithAnnotations.g:6609:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) ;
+    // InternalXbaseWithAnnotations.g:6610:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameWithWildcard() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -18245,11 +18245,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6615:2: ( (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) )
-            // InternalXbaseWithAnnotations.g:6616:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
+            // InternalXbaseWithAnnotations.g:6616:2: ( (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) )
+            // InternalXbaseWithAnnotations.g:6617:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
             {
-            // InternalXbaseWithAnnotations.g:6616:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
-            // InternalXbaseWithAnnotations.g:6617:3: this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*'
+            // InternalXbaseWithAnnotations.g:6617:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
+            // InternalXbaseWithAnnotations.g:6618:3: this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*'
             {
             if ( state.backtracking==0 ) {
 
@@ -18310,7 +18310,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleValidID"
-    // InternalXbaseWithAnnotations.g:6641:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
+    // InternalXbaseWithAnnotations.g:6642:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
     public final String entryRuleValidID() throws RecognitionException {
         String current = null;
 
@@ -18318,8 +18318,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6641:47: (iv_ruleValidID= ruleValidID EOF )
-            // InternalXbaseWithAnnotations.g:6642:2: iv_ruleValidID= ruleValidID EOF
+            // InternalXbaseWithAnnotations.g:6642:47: (iv_ruleValidID= ruleValidID EOF )
+            // InternalXbaseWithAnnotations.g:6643:2: iv_ruleValidID= ruleValidID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getValidIDRule()); 
@@ -18350,7 +18350,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleValidID"
-    // InternalXbaseWithAnnotations.g:6648:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalXbaseWithAnnotations.g:6649:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleValidID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -18360,8 +18360,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6654:2: (this_ID_0= RULE_ID )
-            // InternalXbaseWithAnnotations.g:6655:2: this_ID_0= RULE_ID
+            // InternalXbaseWithAnnotations.g:6655:2: (this_ID_0= RULE_ID )
+            // InternalXbaseWithAnnotations.g:6656:2: this_ID_0= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -18396,7 +18396,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleXImportDeclaration"
-    // InternalXbaseWithAnnotations.g:6665:1: entryRuleXImportDeclaration returns [EObject current=null] : iv_ruleXImportDeclaration= ruleXImportDeclaration EOF ;
+    // InternalXbaseWithAnnotations.g:6666:1: entryRuleXImportDeclaration returns [EObject current=null] : iv_ruleXImportDeclaration= ruleXImportDeclaration EOF ;
     public final EObject entryRuleXImportDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -18404,8 +18404,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6665:59: (iv_ruleXImportDeclaration= ruleXImportDeclaration EOF )
-            // InternalXbaseWithAnnotations.g:6666:2: iv_ruleXImportDeclaration= ruleXImportDeclaration EOF
+            // InternalXbaseWithAnnotations.g:6666:59: (iv_ruleXImportDeclaration= ruleXImportDeclaration EOF )
+            // InternalXbaseWithAnnotations.g:6667:2: iv_ruleXImportDeclaration= ruleXImportDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXImportDeclarationRule()); 
@@ -18436,7 +18436,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXImportDeclaration"
-    // InternalXbaseWithAnnotations.g:6672:1: ruleXImportDeclaration returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
+    // InternalXbaseWithAnnotations.g:6673:1: ruleXImportDeclaration returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
     public final EObject ruleXImportDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -18454,11 +18454,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6678:2: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
-            // InternalXbaseWithAnnotations.g:6679:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
+            // InternalXbaseWithAnnotations.g:6679:2: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
+            // InternalXbaseWithAnnotations.g:6680:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
             {
-            // InternalXbaseWithAnnotations.g:6679:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
-            // InternalXbaseWithAnnotations.g:6680:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
+            // InternalXbaseWithAnnotations.g:6680:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
+            // InternalXbaseWithAnnotations.g:6681:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
             {
             otherlv_0=(Token)match(input,72,FOLLOW_82); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -18466,21 +18466,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_0, grammarAccess.getXImportDeclarationAccess().getImportKeyword_0());
               		
             }
-            // InternalXbaseWithAnnotations.g:6684:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
+            // InternalXbaseWithAnnotations.g:6685:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
             int alt120=3;
             alt120 = dfa120.predict(input);
             switch (alt120) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:6685:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
+                    // InternalXbaseWithAnnotations.g:6686:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:6685:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
-                    // InternalXbaseWithAnnotations.g:6686:5: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
+                    // InternalXbaseWithAnnotations.g:6686:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
+                    // InternalXbaseWithAnnotations.g:6687:5: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     {
-                    // InternalXbaseWithAnnotations.g:6686:5: ( (lv_static_1_0= 'static' ) )
-                    // InternalXbaseWithAnnotations.g:6687:6: (lv_static_1_0= 'static' )
+                    // InternalXbaseWithAnnotations.g:6687:5: ( (lv_static_1_0= 'static' ) )
+                    // InternalXbaseWithAnnotations.g:6688:6: (lv_static_1_0= 'static' )
                     {
-                    // InternalXbaseWithAnnotations.g:6687:6: (lv_static_1_0= 'static' )
-                    // InternalXbaseWithAnnotations.g:6688:7: lv_static_1_0= 'static'
+                    // InternalXbaseWithAnnotations.g:6688:6: (lv_static_1_0= 'static' )
+                    // InternalXbaseWithAnnotations.g:6689:7: lv_static_1_0= 'static'
                     {
                     lv_static_1_0=(Token)match(input,71,FOLLOW_83); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -18502,7 +18502,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6700:5: ( (lv_extension_2_0= 'extension' ) )?
+                    // InternalXbaseWithAnnotations.g:6701:5: ( (lv_extension_2_0= 'extension' ) )?
                     int alt118=2;
                     int LA118_0 = input.LA(1);
 
@@ -18511,10 +18511,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt118) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:6701:6: (lv_extension_2_0= 'extension' )
+                            // InternalXbaseWithAnnotations.g:6702:6: (lv_extension_2_0= 'extension' )
                             {
-                            // InternalXbaseWithAnnotations.g:6701:6: (lv_extension_2_0= 'extension' )
-                            // InternalXbaseWithAnnotations.g:6702:7: lv_extension_2_0= 'extension'
+                            // InternalXbaseWithAnnotations.g:6702:6: (lv_extension_2_0= 'extension' )
+                            // InternalXbaseWithAnnotations.g:6703:7: lv_extension_2_0= 'extension'
                             {
                             lv_extension_2_0=(Token)match(input,73,FOLLOW_83); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -18539,11 +18539,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6714:5: ( ( ruleQualifiedNameInStaticImport ) )
-                    // InternalXbaseWithAnnotations.g:6715:6: ( ruleQualifiedNameInStaticImport )
+                    // InternalXbaseWithAnnotations.g:6715:5: ( ( ruleQualifiedNameInStaticImport ) )
+                    // InternalXbaseWithAnnotations.g:6716:6: ( ruleQualifiedNameInStaticImport )
                     {
-                    // InternalXbaseWithAnnotations.g:6715:6: ( ruleQualifiedNameInStaticImport )
-                    // InternalXbaseWithAnnotations.g:6716:7: ruleQualifiedNameInStaticImport
+                    // InternalXbaseWithAnnotations.g:6716:6: ( ruleQualifiedNameInStaticImport )
+                    // InternalXbaseWithAnnotations.g:6717:7: ruleQualifiedNameInStaticImport
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18573,7 +18573,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // InternalXbaseWithAnnotations.g:6730:5: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
+                    // InternalXbaseWithAnnotations.g:6731:5: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     int alt119=2;
                     int LA119_0 = input.LA(1);
 
@@ -18592,13 +18592,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     switch (alt119) {
                         case 1 :
-                            // InternalXbaseWithAnnotations.g:6731:6: ( (lv_wildcard_4_0= '*' ) )
+                            // InternalXbaseWithAnnotations.g:6732:6: ( (lv_wildcard_4_0= '*' ) )
                             {
-                            // InternalXbaseWithAnnotations.g:6731:6: ( (lv_wildcard_4_0= '*' ) )
-                            // InternalXbaseWithAnnotations.g:6732:7: (lv_wildcard_4_0= '*' )
+                            // InternalXbaseWithAnnotations.g:6732:6: ( (lv_wildcard_4_0= '*' ) )
+                            // InternalXbaseWithAnnotations.g:6733:7: (lv_wildcard_4_0= '*' )
                             {
-                            // InternalXbaseWithAnnotations.g:6732:7: (lv_wildcard_4_0= '*' )
-                            // InternalXbaseWithAnnotations.g:6733:8: lv_wildcard_4_0= '*'
+                            // InternalXbaseWithAnnotations.g:6733:7: (lv_wildcard_4_0= '*' )
+                            // InternalXbaseWithAnnotations.g:6734:8: lv_wildcard_4_0= '*'
                             {
                             lv_wildcard_4_0=(Token)match(input,44,FOLLOW_85); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -18624,13 +18624,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                             }
                             break;
                         case 2 :
-                            // InternalXbaseWithAnnotations.g:6746:6: ( (lv_memberName_5_0= ruleValidID ) )
+                            // InternalXbaseWithAnnotations.g:6747:6: ( (lv_memberName_5_0= ruleValidID ) )
                             {
-                            // InternalXbaseWithAnnotations.g:6746:6: ( (lv_memberName_5_0= ruleValidID ) )
-                            // InternalXbaseWithAnnotations.g:6747:7: (lv_memberName_5_0= ruleValidID )
+                            // InternalXbaseWithAnnotations.g:6747:6: ( (lv_memberName_5_0= ruleValidID ) )
+                            // InternalXbaseWithAnnotations.g:6748:7: (lv_memberName_5_0= ruleValidID )
                             {
-                            // InternalXbaseWithAnnotations.g:6747:7: (lv_memberName_5_0= ruleValidID )
-                            // InternalXbaseWithAnnotations.g:6748:8: lv_memberName_5_0= ruleValidID
+                            // InternalXbaseWithAnnotations.g:6748:7: (lv_memberName_5_0= ruleValidID )
+                            // InternalXbaseWithAnnotations.g:6749:8: lv_memberName_5_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -18674,13 +18674,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalXbaseWithAnnotations.g:6768:4: ( ( ruleQualifiedName ) )
+                    // InternalXbaseWithAnnotations.g:6769:4: ( ( ruleQualifiedName ) )
                     {
-                    // InternalXbaseWithAnnotations.g:6768:4: ( ( ruleQualifiedName ) )
-                    // InternalXbaseWithAnnotations.g:6769:5: ( ruleQualifiedName )
+                    // InternalXbaseWithAnnotations.g:6769:4: ( ( ruleQualifiedName ) )
+                    // InternalXbaseWithAnnotations.g:6770:5: ( ruleQualifiedName )
                     {
-                    // InternalXbaseWithAnnotations.g:6769:5: ( ruleQualifiedName )
-                    // InternalXbaseWithAnnotations.g:6770:6: ruleQualifiedName
+                    // InternalXbaseWithAnnotations.g:6770:5: ( ruleQualifiedName )
+                    // InternalXbaseWithAnnotations.g:6771:6: ruleQualifiedName
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18714,13 +18714,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalXbaseWithAnnotations.g:6785:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
+                    // InternalXbaseWithAnnotations.g:6786:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
                     {
-                    // InternalXbaseWithAnnotations.g:6785:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
-                    // InternalXbaseWithAnnotations.g:6786:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
+                    // InternalXbaseWithAnnotations.g:6786:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
+                    // InternalXbaseWithAnnotations.g:6787:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
                     {
-                    // InternalXbaseWithAnnotations.g:6786:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
-                    // InternalXbaseWithAnnotations.g:6787:6: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
+                    // InternalXbaseWithAnnotations.g:6787:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
+                    // InternalXbaseWithAnnotations.g:6788:6: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
                     {
                     if ( state.backtracking==0 ) {
 
@@ -18757,7 +18757,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalXbaseWithAnnotations.g:6805:3: (otherlv_8= ';' )?
+            // InternalXbaseWithAnnotations.g:6806:3: (otherlv_8= ';' )?
             int alt121=2;
             int LA121_0 = input.LA(1);
 
@@ -18766,7 +18766,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt121) {
                 case 1 :
-                    // InternalXbaseWithAnnotations.g:6806:4: otherlv_8= ';'
+                    // InternalXbaseWithAnnotations.g:6807:4: otherlv_8= ';'
                     {
                     otherlv_8=(Token)match(input,58,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -18805,7 +18805,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleQualifiedNameInStaticImport"
-    // InternalXbaseWithAnnotations.g:6815:1: entryRuleQualifiedNameInStaticImport returns [String current=null] : iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF ;
+    // InternalXbaseWithAnnotations.g:6816:1: entryRuleQualifiedNameInStaticImport returns [String current=null] : iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF ;
     public final String entryRuleQualifiedNameInStaticImport() throws RecognitionException {
         String current = null;
 
@@ -18813,8 +18813,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalXbaseWithAnnotations.g:6815:67: (iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF )
-            // InternalXbaseWithAnnotations.g:6816:2: iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF
+            // InternalXbaseWithAnnotations.g:6816:67: (iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF )
+            // InternalXbaseWithAnnotations.g:6817:2: iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameInStaticImportRule()); 
@@ -18845,7 +18845,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleQualifiedNameInStaticImport"
-    // InternalXbaseWithAnnotations.g:6822:1: ruleQualifiedNameInStaticImport returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID kw= '.' )+ ;
+    // InternalXbaseWithAnnotations.g:6823:1: ruleQualifiedNameInStaticImport returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID kw= '.' )+ ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameInStaticImport() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -18857,10 +18857,10 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalXbaseWithAnnotations.g:6828:2: ( (this_ValidID_0= ruleValidID kw= '.' )+ )
-            // InternalXbaseWithAnnotations.g:6829:2: (this_ValidID_0= ruleValidID kw= '.' )+
+            // InternalXbaseWithAnnotations.g:6829:2: ( (this_ValidID_0= ruleValidID kw= '.' )+ )
+            // InternalXbaseWithAnnotations.g:6830:2: (this_ValidID_0= ruleValidID kw= '.' )+
             {
-            // InternalXbaseWithAnnotations.g:6829:2: (this_ValidID_0= ruleValidID kw= '.' )+
+            // InternalXbaseWithAnnotations.g:6830:2: (this_ValidID_0= ruleValidID kw= '.' )+
             int cnt122=0;
             loop122:
             do {
@@ -18880,7 +18880,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 switch (alt122) {
             	case 1 :
-            	    // InternalXbaseWithAnnotations.g:6830:3: this_ValidID_0= ruleValidID kw= '.'
+            	    // InternalXbaseWithAnnotations.g:6831:3: this_ValidID_0= ruleValidID kw= '.'
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -18945,8 +18945,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred1_InternalXbaseWithAnnotations
     public final void synpred1_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:111:5: ( '(' )
-        // InternalXbaseWithAnnotations.g:111:6: '('
+        // InternalXbaseWithAnnotations.g:112:5: ( '(' )
+        // InternalXbaseWithAnnotations.g:112:6: '('
         {
         match(input,14,FOLLOW_2); if (state.failed) return ;
 
@@ -18956,17 +18956,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred2_InternalXbaseWithAnnotations
     public final void synpred2_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:120:7: ( ( ( ( ruleValidID ) ) '=' ) )
-        // InternalXbaseWithAnnotations.g:120:8: ( ( ( ruleValidID ) ) '=' )
+        // InternalXbaseWithAnnotations.g:121:7: ( ( ( ( ruleValidID ) ) '=' ) )
+        // InternalXbaseWithAnnotations.g:121:8: ( ( ( ruleValidID ) ) '=' )
         {
-        // InternalXbaseWithAnnotations.g:120:8: ( ( ( ruleValidID ) ) '=' )
-        // InternalXbaseWithAnnotations.g:121:8: ( ( ruleValidID ) ) '='
+        // InternalXbaseWithAnnotations.g:121:8: ( ( ( ruleValidID ) ) '=' )
+        // InternalXbaseWithAnnotations.g:122:8: ( ( ruleValidID ) ) '='
         {
-        // InternalXbaseWithAnnotations.g:121:8: ( ( ruleValidID ) )
-        // InternalXbaseWithAnnotations.g:122:9: ( ruleValidID )
+        // InternalXbaseWithAnnotations.g:122:8: ( ( ruleValidID ) )
+        // InternalXbaseWithAnnotations.g:123:9: ( ruleValidID )
         {
-        // InternalXbaseWithAnnotations.g:122:9: ( ruleValidID )
-        // InternalXbaseWithAnnotations.g:123:10: ruleValidID
+        // InternalXbaseWithAnnotations.g:123:9: ( ruleValidID )
+        // InternalXbaseWithAnnotations.g:124:10: ruleValidID
         {
         pushFollow(FOLLOW_8);
         ruleValidID();
@@ -18990,14 +18990,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred5_InternalXbaseWithAnnotations
     public final void synpred5_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:300:5: ( ( () '#' '[' ) )
-        // InternalXbaseWithAnnotations.g:300:6: ( () '#' '[' )
+        // InternalXbaseWithAnnotations.g:301:5: ( ( () '#' '[' ) )
+        // InternalXbaseWithAnnotations.g:301:6: ( () '#' '[' )
         {
-        // InternalXbaseWithAnnotations.g:300:6: ( () '#' '[' )
-        // InternalXbaseWithAnnotations.g:301:6: () '#' '['
+        // InternalXbaseWithAnnotations.g:301:6: ( () '#' '[' )
+        // InternalXbaseWithAnnotations.g:302:6: () '#' '['
         {
-        // InternalXbaseWithAnnotations.g:301:6: ()
-        // InternalXbaseWithAnnotations.g:302:6: 
+        // InternalXbaseWithAnnotations.g:302:6: ()
+        // InternalXbaseWithAnnotations.g:303:6: 
         {
         }
 
@@ -19013,14 +19013,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred6_InternalXbaseWithAnnotations
     public final void synpred6_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:442:5: ( ( () '#' '[' ) )
-        // InternalXbaseWithAnnotations.g:442:6: ( () '#' '[' )
+        // InternalXbaseWithAnnotations.g:443:5: ( ( () '#' '[' ) )
+        // InternalXbaseWithAnnotations.g:443:6: ( () '#' '[' )
         {
-        // InternalXbaseWithAnnotations.g:442:6: ( () '#' '[' )
-        // InternalXbaseWithAnnotations.g:443:6: () '#' '['
+        // InternalXbaseWithAnnotations.g:443:6: ( () '#' '[' )
+        // InternalXbaseWithAnnotations.g:444:6: () '#' '['
         {
-        // InternalXbaseWithAnnotations.g:443:6: ()
-        // InternalXbaseWithAnnotations.g:444:6: 
+        // InternalXbaseWithAnnotations.g:444:6: ()
+        // InternalXbaseWithAnnotations.g:445:6: 
         {
         }
 
@@ -19036,22 +19036,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred7_InternalXbaseWithAnnotations
     public final void synpred7_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:670:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )
-        // InternalXbaseWithAnnotations.g:670:7: ( () ( ( ruleOpMultiAssign ) ) )
+        // InternalXbaseWithAnnotations.g:671:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )
+        // InternalXbaseWithAnnotations.g:671:7: ( () ( ( ruleOpMultiAssign ) ) )
         {
-        // InternalXbaseWithAnnotations.g:670:7: ( () ( ( ruleOpMultiAssign ) ) )
-        // InternalXbaseWithAnnotations.g:671:7: () ( ( ruleOpMultiAssign ) )
+        // InternalXbaseWithAnnotations.g:671:7: ( () ( ( ruleOpMultiAssign ) ) )
+        // InternalXbaseWithAnnotations.g:672:7: () ( ( ruleOpMultiAssign ) )
         {
-        // InternalXbaseWithAnnotations.g:671:7: ()
-        // InternalXbaseWithAnnotations.g:672:7: 
+        // InternalXbaseWithAnnotations.g:672:7: ()
+        // InternalXbaseWithAnnotations.g:673:7: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:673:7: ( ( ruleOpMultiAssign ) )
-        // InternalXbaseWithAnnotations.g:674:8: ( ruleOpMultiAssign )
+        // InternalXbaseWithAnnotations.g:674:7: ( ( ruleOpMultiAssign ) )
+        // InternalXbaseWithAnnotations.g:675:8: ( ruleOpMultiAssign )
         {
-        // InternalXbaseWithAnnotations.g:674:8: ( ruleOpMultiAssign )
-        // InternalXbaseWithAnnotations.g:675:9: ruleOpMultiAssign
+        // InternalXbaseWithAnnotations.g:675:8: ( ruleOpMultiAssign )
+        // InternalXbaseWithAnnotations.g:676:9: ruleOpMultiAssign
         {
         pushFollow(FOLLOW_2);
         ruleOpMultiAssign();
@@ -19074,22 +19074,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred8_InternalXbaseWithAnnotations
     public final void synpred8_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:864:5: ( ( () ( ( ruleOpOr ) ) ) )
-        // InternalXbaseWithAnnotations.g:864:6: ( () ( ( ruleOpOr ) ) )
+        // InternalXbaseWithAnnotations.g:865:5: ( ( () ( ( ruleOpOr ) ) ) )
+        // InternalXbaseWithAnnotations.g:865:6: ( () ( ( ruleOpOr ) ) )
         {
-        // InternalXbaseWithAnnotations.g:864:6: ( () ( ( ruleOpOr ) ) )
-        // InternalXbaseWithAnnotations.g:865:6: () ( ( ruleOpOr ) )
+        // InternalXbaseWithAnnotations.g:865:6: ( () ( ( ruleOpOr ) ) )
+        // InternalXbaseWithAnnotations.g:866:6: () ( ( ruleOpOr ) )
         {
-        // InternalXbaseWithAnnotations.g:865:6: ()
-        // InternalXbaseWithAnnotations.g:866:6: 
+        // InternalXbaseWithAnnotations.g:866:6: ()
+        // InternalXbaseWithAnnotations.g:867:6: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:867:6: ( ( ruleOpOr ) )
-        // InternalXbaseWithAnnotations.g:868:7: ( ruleOpOr )
+        // InternalXbaseWithAnnotations.g:868:6: ( ( ruleOpOr ) )
+        // InternalXbaseWithAnnotations.g:869:7: ( ruleOpOr )
         {
-        // InternalXbaseWithAnnotations.g:868:7: ( ruleOpOr )
-        // InternalXbaseWithAnnotations.g:869:8: ruleOpOr
+        // InternalXbaseWithAnnotations.g:869:7: ( ruleOpOr )
+        // InternalXbaseWithAnnotations.g:870:8: ruleOpOr
         {
         pushFollow(FOLLOW_2);
         ruleOpOr();
@@ -19112,22 +19112,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred9_InternalXbaseWithAnnotations
     public final void synpred9_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:971:5: ( ( () ( ( ruleOpAnd ) ) ) )
-        // InternalXbaseWithAnnotations.g:971:6: ( () ( ( ruleOpAnd ) ) )
+        // InternalXbaseWithAnnotations.g:972:5: ( ( () ( ( ruleOpAnd ) ) ) )
+        // InternalXbaseWithAnnotations.g:972:6: ( () ( ( ruleOpAnd ) ) )
         {
-        // InternalXbaseWithAnnotations.g:971:6: ( () ( ( ruleOpAnd ) ) )
-        // InternalXbaseWithAnnotations.g:972:6: () ( ( ruleOpAnd ) )
+        // InternalXbaseWithAnnotations.g:972:6: ( () ( ( ruleOpAnd ) ) )
+        // InternalXbaseWithAnnotations.g:973:6: () ( ( ruleOpAnd ) )
         {
-        // InternalXbaseWithAnnotations.g:972:6: ()
-        // InternalXbaseWithAnnotations.g:973:6: 
+        // InternalXbaseWithAnnotations.g:973:6: ()
+        // InternalXbaseWithAnnotations.g:974:6: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:974:6: ( ( ruleOpAnd ) )
-        // InternalXbaseWithAnnotations.g:975:7: ( ruleOpAnd )
+        // InternalXbaseWithAnnotations.g:975:6: ( ( ruleOpAnd ) )
+        // InternalXbaseWithAnnotations.g:976:7: ( ruleOpAnd )
         {
-        // InternalXbaseWithAnnotations.g:975:7: ( ruleOpAnd )
-        // InternalXbaseWithAnnotations.g:976:8: ruleOpAnd
+        // InternalXbaseWithAnnotations.g:976:7: ( ruleOpAnd )
+        // InternalXbaseWithAnnotations.g:977:8: ruleOpAnd
         {
         pushFollow(FOLLOW_2);
         ruleOpAnd();
@@ -19150,22 +19150,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred10_InternalXbaseWithAnnotations
     public final void synpred10_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1078:5: ( ( () ( ( ruleOpEquality ) ) ) )
-        // InternalXbaseWithAnnotations.g:1078:6: ( () ( ( ruleOpEquality ) ) )
+        // InternalXbaseWithAnnotations.g:1079:5: ( ( () ( ( ruleOpEquality ) ) ) )
+        // InternalXbaseWithAnnotations.g:1079:6: ( () ( ( ruleOpEquality ) ) )
         {
-        // InternalXbaseWithAnnotations.g:1078:6: ( () ( ( ruleOpEquality ) ) )
-        // InternalXbaseWithAnnotations.g:1079:6: () ( ( ruleOpEquality ) )
+        // InternalXbaseWithAnnotations.g:1079:6: ( () ( ( ruleOpEquality ) ) )
+        // InternalXbaseWithAnnotations.g:1080:6: () ( ( ruleOpEquality ) )
         {
-        // InternalXbaseWithAnnotations.g:1079:6: ()
-        // InternalXbaseWithAnnotations.g:1080:6: 
+        // InternalXbaseWithAnnotations.g:1080:6: ()
+        // InternalXbaseWithAnnotations.g:1081:6: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:1081:6: ( ( ruleOpEquality ) )
-        // InternalXbaseWithAnnotations.g:1082:7: ( ruleOpEquality )
+        // InternalXbaseWithAnnotations.g:1082:6: ( ( ruleOpEquality ) )
+        // InternalXbaseWithAnnotations.g:1083:7: ( ruleOpEquality )
         {
-        // InternalXbaseWithAnnotations.g:1082:7: ( ruleOpEquality )
-        // InternalXbaseWithAnnotations.g:1083:8: ruleOpEquality
+        // InternalXbaseWithAnnotations.g:1083:7: ( ruleOpEquality )
+        // InternalXbaseWithAnnotations.g:1084:8: ruleOpEquality
         {
         pushFollow(FOLLOW_2);
         ruleOpEquality();
@@ -19188,14 +19188,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred11_InternalXbaseWithAnnotations
     public final void synpred11_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1206:6: ( ( () 'instanceof' ) )
-        // InternalXbaseWithAnnotations.g:1206:7: ( () 'instanceof' )
+        // InternalXbaseWithAnnotations.g:1207:6: ( ( () 'instanceof' ) )
+        // InternalXbaseWithAnnotations.g:1207:7: ( () 'instanceof' )
         {
-        // InternalXbaseWithAnnotations.g:1206:7: ( () 'instanceof' )
-        // InternalXbaseWithAnnotations.g:1207:7: () 'instanceof'
+        // InternalXbaseWithAnnotations.g:1207:7: ( () 'instanceof' )
+        // InternalXbaseWithAnnotations.g:1208:7: () 'instanceof'
         {
-        // InternalXbaseWithAnnotations.g:1207:7: ()
-        // InternalXbaseWithAnnotations.g:1208:7: 
+        // InternalXbaseWithAnnotations.g:1208:7: ()
+        // InternalXbaseWithAnnotations.g:1209:7: 
         {
         }
 
@@ -19210,22 +19210,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred12_InternalXbaseWithAnnotations
     public final void synpred12_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1249:6: ( ( () ( ( ruleOpCompare ) ) ) )
-        // InternalXbaseWithAnnotations.g:1249:7: ( () ( ( ruleOpCompare ) ) )
+        // InternalXbaseWithAnnotations.g:1250:6: ( ( () ( ( ruleOpCompare ) ) ) )
+        // InternalXbaseWithAnnotations.g:1250:7: ( () ( ( ruleOpCompare ) ) )
         {
-        // InternalXbaseWithAnnotations.g:1249:7: ( () ( ( ruleOpCompare ) ) )
-        // InternalXbaseWithAnnotations.g:1250:7: () ( ( ruleOpCompare ) )
+        // InternalXbaseWithAnnotations.g:1250:7: ( () ( ( ruleOpCompare ) ) )
+        // InternalXbaseWithAnnotations.g:1251:7: () ( ( ruleOpCompare ) )
         {
-        // InternalXbaseWithAnnotations.g:1250:7: ()
-        // InternalXbaseWithAnnotations.g:1251:7: 
+        // InternalXbaseWithAnnotations.g:1251:7: ()
+        // InternalXbaseWithAnnotations.g:1252:7: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:1252:7: ( ( ruleOpCompare ) )
-        // InternalXbaseWithAnnotations.g:1253:8: ( ruleOpCompare )
+        // InternalXbaseWithAnnotations.g:1253:7: ( ( ruleOpCompare ) )
+        // InternalXbaseWithAnnotations.g:1254:8: ( ruleOpCompare )
         {
-        // InternalXbaseWithAnnotations.g:1253:8: ( ruleOpCompare )
-        // InternalXbaseWithAnnotations.g:1254:9: ruleOpCompare
+        // InternalXbaseWithAnnotations.g:1254:8: ( ruleOpCompare )
+        // InternalXbaseWithAnnotations.g:1255:9: ruleOpCompare
         {
         pushFollow(FOLLOW_2);
         ruleOpCompare();
@@ -19248,22 +19248,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred13_InternalXbaseWithAnnotations
     public final void synpred13_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1384:5: ( ( () ( ( ruleOpOther ) ) ) )
-        // InternalXbaseWithAnnotations.g:1384:6: ( () ( ( ruleOpOther ) ) )
+        // InternalXbaseWithAnnotations.g:1385:5: ( ( () ( ( ruleOpOther ) ) ) )
+        // InternalXbaseWithAnnotations.g:1385:6: ( () ( ( ruleOpOther ) ) )
         {
-        // InternalXbaseWithAnnotations.g:1384:6: ( () ( ( ruleOpOther ) ) )
-        // InternalXbaseWithAnnotations.g:1385:6: () ( ( ruleOpOther ) )
+        // InternalXbaseWithAnnotations.g:1385:6: ( () ( ( ruleOpOther ) ) )
+        // InternalXbaseWithAnnotations.g:1386:6: () ( ( ruleOpOther ) )
         {
-        // InternalXbaseWithAnnotations.g:1385:6: ()
-        // InternalXbaseWithAnnotations.g:1386:6: 
+        // InternalXbaseWithAnnotations.g:1386:6: ()
+        // InternalXbaseWithAnnotations.g:1387:6: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:1387:6: ( ( ruleOpOther ) )
-        // InternalXbaseWithAnnotations.g:1388:7: ( ruleOpOther )
+        // InternalXbaseWithAnnotations.g:1388:6: ( ( ruleOpOther ) )
+        // InternalXbaseWithAnnotations.g:1389:7: ( ruleOpOther )
         {
-        // InternalXbaseWithAnnotations.g:1388:7: ( ruleOpOther )
-        // InternalXbaseWithAnnotations.g:1389:8: ruleOpOther
+        // InternalXbaseWithAnnotations.g:1389:7: ( ruleOpOther )
+        // InternalXbaseWithAnnotations.g:1390:8: ruleOpOther
         {
         pushFollow(FOLLOW_2);
         ruleOpOther();
@@ -19286,11 +19286,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred14_InternalXbaseWithAnnotations
     public final void synpred14_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1504:6: ( ( '>' '>' ) )
-        // InternalXbaseWithAnnotations.g:1504:7: ( '>' '>' )
+        // InternalXbaseWithAnnotations.g:1505:6: ( ( '>' '>' ) )
+        // InternalXbaseWithAnnotations.g:1505:7: ( '>' '>' )
         {
-        // InternalXbaseWithAnnotations.g:1504:7: ( '>' '>' )
-        // InternalXbaseWithAnnotations.g:1505:7: '>' '>'
+        // InternalXbaseWithAnnotations.g:1505:7: ( '>' '>' )
+        // InternalXbaseWithAnnotations.g:1506:7: '>' '>'
         {
         match(input,27,FOLLOW_25); if (state.failed) return ;
         match(input,27,FOLLOW_2); if (state.failed) return ;
@@ -19304,11 +19304,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred15_InternalXbaseWithAnnotations
     public final void synpred15_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1539:6: ( ( '<' '<' ) )
-        // InternalXbaseWithAnnotations.g:1539:7: ( '<' '<' )
+        // InternalXbaseWithAnnotations.g:1540:6: ( ( '<' '<' ) )
+        // InternalXbaseWithAnnotations.g:1540:7: ( '<' '<' )
         {
-        // InternalXbaseWithAnnotations.g:1539:7: ( '<' '<' )
-        // InternalXbaseWithAnnotations.g:1540:7: '<' '<'
+        // InternalXbaseWithAnnotations.g:1540:7: ( '<' '<' )
+        // InternalXbaseWithAnnotations.g:1541:7: '<' '<'
         {
         match(input,26,FOLLOW_15); if (state.failed) return ;
         match(input,26,FOLLOW_2); if (state.failed) return ;
@@ -19322,22 +19322,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred16_InternalXbaseWithAnnotations
     public final void synpred16_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1612:5: ( ( () ( ( ruleOpAdd ) ) ) )
-        // InternalXbaseWithAnnotations.g:1612:6: ( () ( ( ruleOpAdd ) ) )
+        // InternalXbaseWithAnnotations.g:1613:5: ( ( () ( ( ruleOpAdd ) ) ) )
+        // InternalXbaseWithAnnotations.g:1613:6: ( () ( ( ruleOpAdd ) ) )
         {
-        // InternalXbaseWithAnnotations.g:1612:6: ( () ( ( ruleOpAdd ) ) )
-        // InternalXbaseWithAnnotations.g:1613:6: () ( ( ruleOpAdd ) )
+        // InternalXbaseWithAnnotations.g:1613:6: ( () ( ( ruleOpAdd ) ) )
+        // InternalXbaseWithAnnotations.g:1614:6: () ( ( ruleOpAdd ) )
         {
-        // InternalXbaseWithAnnotations.g:1613:6: ()
-        // InternalXbaseWithAnnotations.g:1614:6: 
+        // InternalXbaseWithAnnotations.g:1614:6: ()
+        // InternalXbaseWithAnnotations.g:1615:6: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:1615:6: ( ( ruleOpAdd ) )
-        // InternalXbaseWithAnnotations.g:1616:7: ( ruleOpAdd )
+        // InternalXbaseWithAnnotations.g:1616:6: ( ( ruleOpAdd ) )
+        // InternalXbaseWithAnnotations.g:1617:7: ( ruleOpAdd )
         {
-        // InternalXbaseWithAnnotations.g:1616:7: ( ruleOpAdd )
-        // InternalXbaseWithAnnotations.g:1617:8: ruleOpAdd
+        // InternalXbaseWithAnnotations.g:1617:7: ( ruleOpAdd )
+        // InternalXbaseWithAnnotations.g:1618:8: ruleOpAdd
         {
         pushFollow(FOLLOW_2);
         ruleOpAdd();
@@ -19360,22 +19360,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred17_InternalXbaseWithAnnotations
     public final void synpred17_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1727:5: ( ( () ( ( ruleOpMulti ) ) ) )
-        // InternalXbaseWithAnnotations.g:1727:6: ( () ( ( ruleOpMulti ) ) )
+        // InternalXbaseWithAnnotations.g:1728:5: ( ( () ( ( ruleOpMulti ) ) ) )
+        // InternalXbaseWithAnnotations.g:1728:6: ( () ( ( ruleOpMulti ) ) )
         {
-        // InternalXbaseWithAnnotations.g:1727:6: ( () ( ( ruleOpMulti ) ) )
-        // InternalXbaseWithAnnotations.g:1728:6: () ( ( ruleOpMulti ) )
+        // InternalXbaseWithAnnotations.g:1728:6: ( () ( ( ruleOpMulti ) ) )
+        // InternalXbaseWithAnnotations.g:1729:6: () ( ( ruleOpMulti ) )
         {
-        // InternalXbaseWithAnnotations.g:1728:6: ()
-        // InternalXbaseWithAnnotations.g:1729:6: 
+        // InternalXbaseWithAnnotations.g:1729:6: ()
+        // InternalXbaseWithAnnotations.g:1730:6: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:1730:6: ( ( ruleOpMulti ) )
-        // InternalXbaseWithAnnotations.g:1731:7: ( ruleOpMulti )
+        // InternalXbaseWithAnnotations.g:1731:6: ( ( ruleOpMulti ) )
+        // InternalXbaseWithAnnotations.g:1732:7: ( ruleOpMulti )
         {
-        // InternalXbaseWithAnnotations.g:1731:7: ( ruleOpMulti )
-        // InternalXbaseWithAnnotations.g:1732:8: ruleOpMulti
+        // InternalXbaseWithAnnotations.g:1732:7: ( ruleOpMulti )
+        // InternalXbaseWithAnnotations.g:1733:8: ruleOpMulti
         {
         pushFollow(FOLLOW_2);
         ruleOpMulti();
@@ -19398,14 +19398,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred18_InternalXbaseWithAnnotations
     public final void synpred18_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:1962:5: ( ( () 'as' ) )
-        // InternalXbaseWithAnnotations.g:1962:6: ( () 'as' )
+        // InternalXbaseWithAnnotations.g:1963:5: ( ( () 'as' ) )
+        // InternalXbaseWithAnnotations.g:1963:6: ( () 'as' )
         {
-        // InternalXbaseWithAnnotations.g:1962:6: ( () 'as' )
-        // InternalXbaseWithAnnotations.g:1963:6: () 'as'
+        // InternalXbaseWithAnnotations.g:1963:6: ( () 'as' )
+        // InternalXbaseWithAnnotations.g:1964:6: () 'as'
         {
-        // InternalXbaseWithAnnotations.g:1963:6: ()
-        // InternalXbaseWithAnnotations.g:1964:6: 
+        // InternalXbaseWithAnnotations.g:1964:6: ()
+        // InternalXbaseWithAnnotations.g:1965:6: 
         {
         }
 
@@ -19420,22 +19420,22 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred19_InternalXbaseWithAnnotations
     public final void synpred19_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2030:4: ( ( () ( ( ruleOpPostfix ) ) ) )
-        // InternalXbaseWithAnnotations.g:2030:5: ( () ( ( ruleOpPostfix ) ) )
+        // InternalXbaseWithAnnotations.g:2031:4: ( ( () ( ( ruleOpPostfix ) ) ) )
+        // InternalXbaseWithAnnotations.g:2031:5: ( () ( ( ruleOpPostfix ) ) )
         {
-        // InternalXbaseWithAnnotations.g:2030:5: ( () ( ( ruleOpPostfix ) ) )
-        // InternalXbaseWithAnnotations.g:2031:5: () ( ( ruleOpPostfix ) )
+        // InternalXbaseWithAnnotations.g:2031:5: ( () ( ( ruleOpPostfix ) ) )
+        // InternalXbaseWithAnnotations.g:2032:5: () ( ( ruleOpPostfix ) )
         {
-        // InternalXbaseWithAnnotations.g:2031:5: ()
-        // InternalXbaseWithAnnotations.g:2032:5: 
+        // InternalXbaseWithAnnotations.g:2032:5: ()
+        // InternalXbaseWithAnnotations.g:2033:5: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:2033:5: ( ( ruleOpPostfix ) )
-        // InternalXbaseWithAnnotations.g:2034:6: ( ruleOpPostfix )
+        // InternalXbaseWithAnnotations.g:2034:5: ( ( ruleOpPostfix ) )
+        // InternalXbaseWithAnnotations.g:2035:6: ( ruleOpPostfix )
         {
-        // InternalXbaseWithAnnotations.g:2034:6: ( ruleOpPostfix )
-        // InternalXbaseWithAnnotations.g:2035:7: ruleOpPostfix
+        // InternalXbaseWithAnnotations.g:2035:6: ( ruleOpPostfix )
+        // InternalXbaseWithAnnotations.g:2036:7: ruleOpPostfix
         {
         pushFollow(FOLLOW_2);
         ruleOpPostfix();
@@ -19458,18 +19458,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred20_InternalXbaseWithAnnotations
     public final void synpred20_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2126:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
-        // InternalXbaseWithAnnotations.g:2126:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+        // InternalXbaseWithAnnotations.g:2127:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
+        // InternalXbaseWithAnnotations.g:2127:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
         {
-        // InternalXbaseWithAnnotations.g:2126:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
-        // InternalXbaseWithAnnotations.g:2127:7: () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
+        // InternalXbaseWithAnnotations.g:2127:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+        // InternalXbaseWithAnnotations.g:2128:7: () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
         {
-        // InternalXbaseWithAnnotations.g:2127:7: ()
-        // InternalXbaseWithAnnotations.g:2128:7: 
+        // InternalXbaseWithAnnotations.g:2128:7: ()
+        // InternalXbaseWithAnnotations.g:2129:7: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:2129:7: ( '.' | ( ( '::' ) ) )
+        // InternalXbaseWithAnnotations.g:2130:7: ( '.' | ( ( '::' ) ) )
         int alt123=2;
         int LA123_0 = input.LA(1);
 
@@ -19488,20 +19488,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         switch (alt123) {
             case 1 :
-                // InternalXbaseWithAnnotations.g:2130:8: '.'
+                // InternalXbaseWithAnnotations.g:2131:8: '.'
                 {
                 match(input,52,FOLLOW_32); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // InternalXbaseWithAnnotations.g:2132:8: ( ( '::' ) )
+                // InternalXbaseWithAnnotations.g:2133:8: ( ( '::' ) )
                 {
-                // InternalXbaseWithAnnotations.g:2132:8: ( ( '::' ) )
-                // InternalXbaseWithAnnotations.g:2133:9: ( '::' )
+                // InternalXbaseWithAnnotations.g:2133:8: ( ( '::' ) )
+                // InternalXbaseWithAnnotations.g:2134:9: ( '::' )
                 {
-                // InternalXbaseWithAnnotations.g:2133:9: ( '::' )
-                // InternalXbaseWithAnnotations.g:2134:10: '::'
+                // InternalXbaseWithAnnotations.g:2134:9: ( '::' )
+                // InternalXbaseWithAnnotations.g:2135:10: '::'
                 {
                 match(input,53,FOLLOW_32); if (state.failed) return ;
 
@@ -19516,11 +19516,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        // InternalXbaseWithAnnotations.g:2138:7: ( ( ruleFeatureCallID ) )
-        // InternalXbaseWithAnnotations.g:2139:8: ( ruleFeatureCallID )
+        // InternalXbaseWithAnnotations.g:2139:7: ( ( ruleFeatureCallID ) )
+        // InternalXbaseWithAnnotations.g:2140:8: ( ruleFeatureCallID )
         {
-        // InternalXbaseWithAnnotations.g:2139:8: ( ruleFeatureCallID )
-        // InternalXbaseWithAnnotations.g:2140:9: ruleFeatureCallID
+        // InternalXbaseWithAnnotations.g:2140:8: ( ruleFeatureCallID )
+        // InternalXbaseWithAnnotations.g:2141:9: ruleFeatureCallID
         {
         pushFollow(FOLLOW_8);
         ruleFeatureCallID();
@@ -19548,18 +19548,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred21_InternalXbaseWithAnnotations
     public final void synpred21_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2223:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )
-        // InternalXbaseWithAnnotations.g:2223:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
+        // InternalXbaseWithAnnotations.g:2224:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )
+        // InternalXbaseWithAnnotations.g:2224:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
         {
-        // InternalXbaseWithAnnotations.g:2223:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
-        // InternalXbaseWithAnnotations.g:2224:7: () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
+        // InternalXbaseWithAnnotations.g:2224:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
+        // InternalXbaseWithAnnotations.g:2225:7: () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
         {
-        // InternalXbaseWithAnnotations.g:2224:7: ()
-        // InternalXbaseWithAnnotations.g:2225:7: 
+        // InternalXbaseWithAnnotations.g:2225:7: ()
+        // InternalXbaseWithAnnotations.g:2226:7: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:2226:7: ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
+        // InternalXbaseWithAnnotations.g:2227:7: ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
         int alt124=3;
         switch ( input.LA(1) ) {
         case 52:
@@ -19587,20 +19587,20 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         switch (alt124) {
             case 1 :
-                // InternalXbaseWithAnnotations.g:2227:8: '.'
+                // InternalXbaseWithAnnotations.g:2228:8: '.'
                 {
                 match(input,52,FOLLOW_2); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // InternalXbaseWithAnnotations.g:2229:8: ( ( '?.' ) )
+                // InternalXbaseWithAnnotations.g:2230:8: ( ( '?.' ) )
                 {
-                // InternalXbaseWithAnnotations.g:2229:8: ( ( '?.' ) )
-                // InternalXbaseWithAnnotations.g:2230:9: ( '?.' )
+                // InternalXbaseWithAnnotations.g:2230:8: ( ( '?.' ) )
+                // InternalXbaseWithAnnotations.g:2231:9: ( '?.' )
                 {
-                // InternalXbaseWithAnnotations.g:2230:9: ( '?.' )
-                // InternalXbaseWithAnnotations.g:2231:10: '?.'
+                // InternalXbaseWithAnnotations.g:2231:9: ( '?.' )
+                // InternalXbaseWithAnnotations.g:2232:10: '?.'
                 {
                 match(input,54,FOLLOW_2); if (state.failed) return ;
 
@@ -19613,13 +19613,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                 }
                 break;
             case 3 :
-                // InternalXbaseWithAnnotations.g:2235:8: ( ( '::' ) )
+                // InternalXbaseWithAnnotations.g:2236:8: ( ( '::' ) )
                 {
-                // InternalXbaseWithAnnotations.g:2235:8: ( ( '::' ) )
-                // InternalXbaseWithAnnotations.g:2236:9: ( '::' )
+                // InternalXbaseWithAnnotations.g:2236:8: ( ( '::' ) )
+                // InternalXbaseWithAnnotations.g:2237:9: ( '::' )
                 {
-                // InternalXbaseWithAnnotations.g:2236:9: ( '::' )
-                // InternalXbaseWithAnnotations.g:2237:10: '::'
+                // InternalXbaseWithAnnotations.g:2237:9: ( '::' )
+                // InternalXbaseWithAnnotations.g:2238:10: '::'
                 {
                 match(input,53,FOLLOW_2); if (state.failed) return ;
 
@@ -19644,11 +19644,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred22_InternalXbaseWithAnnotations
     public final void synpred22_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2361:7: ( ( '(' ) )
-        // InternalXbaseWithAnnotations.g:2361:8: ( '(' )
+        // InternalXbaseWithAnnotations.g:2362:7: ( ( '(' ) )
+        // InternalXbaseWithAnnotations.g:2362:8: ( '(' )
         {
-        // InternalXbaseWithAnnotations.g:2361:8: ( '(' )
-        // InternalXbaseWithAnnotations.g:2362:8: '('
+        // InternalXbaseWithAnnotations.g:2362:8: ( '(' )
+        // InternalXbaseWithAnnotations.g:2363:8: '('
         {
         match(input,14,FOLLOW_2); if (state.failed) return ;
 
@@ -19661,18 +19661,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred23_InternalXbaseWithAnnotations
     public final void synpred23_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2380:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalXbaseWithAnnotations.g:2380:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:2381:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalXbaseWithAnnotations.g:2381:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalXbaseWithAnnotations.g:2380:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalXbaseWithAnnotations.g:2381:9: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:2381:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:2382:9: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalXbaseWithAnnotations.g:2381:9: ()
-        // InternalXbaseWithAnnotations.g:2382:9: 
+        // InternalXbaseWithAnnotations.g:2382:9: ()
+        // InternalXbaseWithAnnotations.g:2383:9: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:2383:9: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalXbaseWithAnnotations.g:2384:9: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt126=2;
         int LA126_0 = input.LA(1);
 
@@ -19681,13 +19681,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         switch (alt126) {
             case 1 :
-                // InternalXbaseWithAnnotations.g:2384:10: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:2385:10: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalXbaseWithAnnotations.g:2384:10: ( ( ruleJvmFormalParameter ) )
-                // InternalXbaseWithAnnotations.g:2385:11: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:2385:10: ( ( ruleJvmFormalParameter ) )
+                // InternalXbaseWithAnnotations.g:2386:11: ( ruleJvmFormalParameter )
                 {
-                // InternalXbaseWithAnnotations.g:2385:11: ( ruleJvmFormalParameter )
-                // InternalXbaseWithAnnotations.g:2386:12: ruleJvmFormalParameter
+                // InternalXbaseWithAnnotations.g:2386:11: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:2387:12: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_43);
                 ruleJvmFormalParameter();
@@ -19700,7 +19700,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 }
 
-                // InternalXbaseWithAnnotations.g:2389:10: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:2390:10: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop125:
                 do {
                     int alt125=2;
@@ -19713,14 +19713,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     switch (alt125) {
                 	case 1 :
-                	    // InternalXbaseWithAnnotations.g:2390:11: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:2391:11: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,15,FOLLOW_22); if (state.failed) return ;
-                	    // InternalXbaseWithAnnotations.g:2391:11: ( ( ruleJvmFormalParameter ) )
-                	    // InternalXbaseWithAnnotations.g:2392:12: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:2392:11: ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:2393:12: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalXbaseWithAnnotations.g:2392:12: ( ruleJvmFormalParameter )
-                	    // InternalXbaseWithAnnotations.g:2393:13: ruleJvmFormalParameter
+                	    // InternalXbaseWithAnnotations.g:2393:12: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:2394:13: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_43);
                 	    ruleJvmFormalParameter();
@@ -19748,11 +19748,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        // InternalXbaseWithAnnotations.g:2398:9: ( ( '|' ) )
-        // InternalXbaseWithAnnotations.g:2399:10: ( '|' )
+        // InternalXbaseWithAnnotations.g:2399:9: ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:2400:10: ( '|' )
         {
-        // InternalXbaseWithAnnotations.g:2399:10: ( '|' )
-        // InternalXbaseWithAnnotations.g:2400:11: '|'
+        // InternalXbaseWithAnnotations.g:2400:10: ( '|' )
+        // InternalXbaseWithAnnotations.g:2401:11: '|'
         {
         match(input,57,FOLLOW_2); if (state.failed) return ;
 
@@ -19771,14 +19771,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred24_InternalXbaseWithAnnotations
     public final void synpred24_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2477:6: ( ( () '[' ) )
-        // InternalXbaseWithAnnotations.g:2477:7: ( () '[' )
+        // InternalXbaseWithAnnotations.g:2478:6: ( ( () '[' ) )
+        // InternalXbaseWithAnnotations.g:2478:7: ( () '[' )
         {
-        // InternalXbaseWithAnnotations.g:2477:7: ( () '[' )
-        // InternalXbaseWithAnnotations.g:2478:7: () '['
+        // InternalXbaseWithAnnotations.g:2478:7: ( () '[' )
+        // InternalXbaseWithAnnotations.g:2479:7: () '['
         {
-        // InternalXbaseWithAnnotations.g:2478:7: ()
-        // InternalXbaseWithAnnotations.g:2479:7: 
+        // InternalXbaseWithAnnotations.g:2479:7: ()
+        // InternalXbaseWithAnnotations.g:2480:7: 
         {
         }
 
@@ -19793,14 +19793,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred25_InternalXbaseWithAnnotations
     public final void synpred25_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2550:4: ( ( () 'synchronized' '(' ) )
-        // InternalXbaseWithAnnotations.g:2550:5: ( () 'synchronized' '(' )
+        // InternalXbaseWithAnnotations.g:2551:4: ( ( () 'synchronized' '(' ) )
+        // InternalXbaseWithAnnotations.g:2551:5: ( () 'synchronized' '(' )
         {
-        // InternalXbaseWithAnnotations.g:2550:5: ( () 'synchronized' '(' )
-        // InternalXbaseWithAnnotations.g:2551:5: () 'synchronized' '('
+        // InternalXbaseWithAnnotations.g:2551:5: ( () 'synchronized' '(' )
+        // InternalXbaseWithAnnotations.g:2552:5: () 'synchronized' '('
         {
-        // InternalXbaseWithAnnotations.g:2551:5: ()
-        // InternalXbaseWithAnnotations.g:2552:5: 
+        // InternalXbaseWithAnnotations.g:2552:5: ()
+        // InternalXbaseWithAnnotations.g:2553:5: 
         {
         }
 
@@ -19816,24 +19816,24 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred26_InternalXbaseWithAnnotations
     public final void synpred26_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2595:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // InternalXbaseWithAnnotations.g:2595:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalXbaseWithAnnotations.g:2596:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
+        // InternalXbaseWithAnnotations.g:2596:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // InternalXbaseWithAnnotations.g:2595:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
-        // InternalXbaseWithAnnotations.g:2596:5: () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':'
+        // InternalXbaseWithAnnotations.g:2596:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalXbaseWithAnnotations.g:2597:5: () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':'
         {
-        // InternalXbaseWithAnnotations.g:2596:5: ()
-        // InternalXbaseWithAnnotations.g:2597:5: 
+        // InternalXbaseWithAnnotations.g:2597:5: ()
+        // InternalXbaseWithAnnotations.g:2598:5: 
         {
         }
 
         match(input,65,FOLLOW_48); if (state.failed) return ;
         match(input,14,FOLLOW_22); if (state.failed) return ;
-        // InternalXbaseWithAnnotations.g:2600:5: ( ( ruleJvmFormalParameter ) )
-        // InternalXbaseWithAnnotations.g:2601:6: ( ruleJvmFormalParameter )
+        // InternalXbaseWithAnnotations.g:2601:5: ( ( ruleJvmFormalParameter ) )
+        // InternalXbaseWithAnnotations.g:2602:6: ( ruleJvmFormalParameter )
         {
-        // InternalXbaseWithAnnotations.g:2601:6: ( ruleJvmFormalParameter )
-        // InternalXbaseWithAnnotations.g:2602:7: ruleJvmFormalParameter
+        // InternalXbaseWithAnnotations.g:2602:6: ( ruleJvmFormalParameter )
+        // InternalXbaseWithAnnotations.g:2603:7: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_51);
         ruleJvmFormalParameter();
@@ -19857,14 +19857,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred27_InternalXbaseWithAnnotations
     public final void synpred27_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:2709:4: ( ( () '[' ) )
-        // InternalXbaseWithAnnotations.g:2709:5: ( () '[' )
+        // InternalXbaseWithAnnotations.g:2710:4: ( ( () '[' ) )
+        // InternalXbaseWithAnnotations.g:2710:5: ( () '[' )
         {
-        // InternalXbaseWithAnnotations.g:2709:5: ( () '[' )
-        // InternalXbaseWithAnnotations.g:2710:5: () '['
+        // InternalXbaseWithAnnotations.g:2710:5: ( () '[' )
+        // InternalXbaseWithAnnotations.g:2711:5: () '['
         {
-        // InternalXbaseWithAnnotations.g:2710:5: ()
-        // InternalXbaseWithAnnotations.g:2711:5: 
+        // InternalXbaseWithAnnotations.g:2711:5: ()
+        // InternalXbaseWithAnnotations.g:2712:5: 
         {
         }
 
@@ -19879,13 +19879,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred29_InternalXbaseWithAnnotations
     public final void synpred29_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:3014:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalXbaseWithAnnotations.g:3014:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:3015:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalXbaseWithAnnotations.g:3015:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalXbaseWithAnnotations.g:3014:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalXbaseWithAnnotations.g:3015:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:3015:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:3016:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalXbaseWithAnnotations.g:3015:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalXbaseWithAnnotations.g:3016:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt128=2;
         int LA128_0 = input.LA(1);
 
@@ -19894,13 +19894,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         switch (alt128) {
             case 1 :
-                // InternalXbaseWithAnnotations.g:3016:6: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:3017:6: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalXbaseWithAnnotations.g:3016:6: ( ( ruleJvmFormalParameter ) )
-                // InternalXbaseWithAnnotations.g:3017:7: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:3017:6: ( ( ruleJvmFormalParameter ) )
+                // InternalXbaseWithAnnotations.g:3018:7: ( ruleJvmFormalParameter )
                 {
-                // InternalXbaseWithAnnotations.g:3017:7: ( ruleJvmFormalParameter )
-                // InternalXbaseWithAnnotations.g:3018:8: ruleJvmFormalParameter
+                // InternalXbaseWithAnnotations.g:3018:7: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:3019:8: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_43);
                 ruleJvmFormalParameter();
@@ -19913,7 +19913,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 }
 
-                // InternalXbaseWithAnnotations.g:3021:6: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:3022:6: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop127:
                 do {
                     int alt127=2;
@@ -19926,14 +19926,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     switch (alt127) {
                 	case 1 :
-                	    // InternalXbaseWithAnnotations.g:3022:7: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:3023:7: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,15,FOLLOW_22); if (state.failed) return ;
-                	    // InternalXbaseWithAnnotations.g:3023:7: ( ( ruleJvmFormalParameter ) )
-                	    // InternalXbaseWithAnnotations.g:3024:8: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:3024:7: ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:3025:8: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalXbaseWithAnnotations.g:3024:8: ( ruleJvmFormalParameter )
-                	    // InternalXbaseWithAnnotations.g:3025:9: ruleJvmFormalParameter
+                	    // InternalXbaseWithAnnotations.g:3025:8: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:3026:9: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_43);
                 	    ruleJvmFormalParameter();
@@ -19961,11 +19961,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        // InternalXbaseWithAnnotations.g:3030:5: ( ( '|' ) )
-        // InternalXbaseWithAnnotations.g:3031:6: ( '|' )
+        // InternalXbaseWithAnnotations.g:3031:5: ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:3032:6: ( '|' )
         {
-        // InternalXbaseWithAnnotations.g:3031:6: ( '|' )
-        // InternalXbaseWithAnnotations.g:3032:7: '|'
+        // InternalXbaseWithAnnotations.g:3032:6: ( '|' )
+        // InternalXbaseWithAnnotations.g:3033:7: '|'
         {
         match(input,57,FOLLOW_2); if (state.failed) return ;
 
@@ -19984,8 +19984,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred31_InternalXbaseWithAnnotations
     public final void synpred31_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:3423:5: ( 'else' )
-        // InternalXbaseWithAnnotations.g:3423:6: 'else'
+        // InternalXbaseWithAnnotations.g:3424:5: ( 'else' )
+        // InternalXbaseWithAnnotations.g:3424:6: 'else'
         {
         match(input,60,FOLLOW_2); if (state.failed) return ;
 
@@ -19995,18 +19995,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred32_InternalXbaseWithAnnotations
     public final void synpred32_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:3482:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // InternalXbaseWithAnnotations.g:3482:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalXbaseWithAnnotations.g:3483:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
+        // InternalXbaseWithAnnotations.g:3483:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // InternalXbaseWithAnnotations.g:3482:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
-        // InternalXbaseWithAnnotations.g:3483:7: '(' ( ( ruleJvmFormalParameter ) ) ':'
+        // InternalXbaseWithAnnotations.g:3483:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalXbaseWithAnnotations.g:3484:7: '(' ( ( ruleJvmFormalParameter ) ) ':'
         {
         match(input,14,FOLLOW_22); if (state.failed) return ;
-        // InternalXbaseWithAnnotations.g:3484:7: ( ( ruleJvmFormalParameter ) )
-        // InternalXbaseWithAnnotations.g:3485:8: ( ruleJvmFormalParameter )
+        // InternalXbaseWithAnnotations.g:3485:7: ( ( ruleJvmFormalParameter ) )
+        // InternalXbaseWithAnnotations.g:3486:8: ( ruleJvmFormalParameter )
         {
-        // InternalXbaseWithAnnotations.g:3485:8: ( ruleJvmFormalParameter )
-        // InternalXbaseWithAnnotations.g:3486:9: ruleJvmFormalParameter
+        // InternalXbaseWithAnnotations.g:3486:8: ( ruleJvmFormalParameter )
+        // InternalXbaseWithAnnotations.g:3487:9: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_51);
         ruleJvmFormalParameter();
@@ -20030,17 +20030,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred33_InternalXbaseWithAnnotations
     public final void synpred33_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:3549:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // InternalXbaseWithAnnotations.g:3549:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalXbaseWithAnnotations.g:3550:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )
+        // InternalXbaseWithAnnotations.g:3550:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // InternalXbaseWithAnnotations.g:3549:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
-        // InternalXbaseWithAnnotations.g:3550:7: ( ( ruleJvmFormalParameter ) ) ':'
+        // InternalXbaseWithAnnotations.g:3550:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalXbaseWithAnnotations.g:3551:7: ( ( ruleJvmFormalParameter ) ) ':'
         {
-        // InternalXbaseWithAnnotations.g:3550:7: ( ( ruleJvmFormalParameter ) )
-        // InternalXbaseWithAnnotations.g:3551:8: ( ruleJvmFormalParameter )
+        // InternalXbaseWithAnnotations.g:3551:7: ( ( ruleJvmFormalParameter ) )
+        // InternalXbaseWithAnnotations.g:3552:8: ( ruleJvmFormalParameter )
         {
-        // InternalXbaseWithAnnotations.g:3551:8: ( ruleJvmFormalParameter )
-        // InternalXbaseWithAnnotations.g:3552:9: ruleJvmFormalParameter
+        // InternalXbaseWithAnnotations.g:3552:8: ( ruleJvmFormalParameter )
+        // InternalXbaseWithAnnotations.g:3553:9: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_51);
         ruleJvmFormalParameter();
@@ -20064,17 +20064,17 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred35_InternalXbaseWithAnnotations
     public final void synpred35_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:4367:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )
-        // InternalXbaseWithAnnotations.g:4367:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
+        // InternalXbaseWithAnnotations.g:4368:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )
+        // InternalXbaseWithAnnotations.g:4368:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
         {
-        // InternalXbaseWithAnnotations.g:4367:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
-        // InternalXbaseWithAnnotations.g:4368:6: ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) )
+        // InternalXbaseWithAnnotations.g:4368:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
+        // InternalXbaseWithAnnotations.g:4369:6: ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) )
         {
-        // InternalXbaseWithAnnotations.g:4368:6: ( ( ruleJvmTypeReference ) )
-        // InternalXbaseWithAnnotations.g:4369:7: ( ruleJvmTypeReference )
+        // InternalXbaseWithAnnotations.g:4369:6: ( ( ruleJvmTypeReference ) )
+        // InternalXbaseWithAnnotations.g:4370:7: ( ruleJvmTypeReference )
         {
-        // InternalXbaseWithAnnotations.g:4369:7: ( ruleJvmTypeReference )
-        // InternalXbaseWithAnnotations.g:4370:8: ruleJvmTypeReference
+        // InternalXbaseWithAnnotations.g:4370:7: ( ruleJvmTypeReference )
+        // InternalXbaseWithAnnotations.g:4371:8: ruleJvmTypeReference
         {
         pushFollow(FOLLOW_3);
         ruleJvmTypeReference();
@@ -20087,11 +20087,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        // InternalXbaseWithAnnotations.g:4373:6: ( ( ruleValidID ) )
-        // InternalXbaseWithAnnotations.g:4374:7: ( ruleValidID )
+        // InternalXbaseWithAnnotations.g:4374:6: ( ( ruleValidID ) )
+        // InternalXbaseWithAnnotations.g:4375:7: ( ruleValidID )
         {
-        // InternalXbaseWithAnnotations.g:4374:7: ( ruleValidID )
-        // InternalXbaseWithAnnotations.g:4375:8: ruleValidID
+        // InternalXbaseWithAnnotations.g:4375:7: ( ruleValidID )
+        // InternalXbaseWithAnnotations.g:4376:8: ruleValidID
         {
         pushFollow(FOLLOW_2);
         ruleValidID();
@@ -20114,11 +20114,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred36_InternalXbaseWithAnnotations
     public final void synpred36_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:4679:5: ( ( '(' ) )
-        // InternalXbaseWithAnnotations.g:4679:6: ( '(' )
+        // InternalXbaseWithAnnotations.g:4680:5: ( ( '(' ) )
+        // InternalXbaseWithAnnotations.g:4680:6: ( '(' )
         {
-        // InternalXbaseWithAnnotations.g:4679:6: ( '(' )
-        // InternalXbaseWithAnnotations.g:4680:6: '('
+        // InternalXbaseWithAnnotations.g:4680:6: ( '(' )
+        // InternalXbaseWithAnnotations.g:4681:6: '('
         {
         match(input,14,FOLLOW_2); if (state.failed) return ;
 
@@ -20131,18 +20131,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred37_InternalXbaseWithAnnotations
     public final void synpred37_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:4698:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalXbaseWithAnnotations.g:4698:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:4699:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalXbaseWithAnnotations.g:4699:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalXbaseWithAnnotations.g:4698:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalXbaseWithAnnotations.g:4699:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:4699:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:4700:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalXbaseWithAnnotations.g:4699:7: ()
-        // InternalXbaseWithAnnotations.g:4700:7: 
+        // InternalXbaseWithAnnotations.g:4700:7: ()
+        // InternalXbaseWithAnnotations.g:4701:7: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:4701:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalXbaseWithAnnotations.g:4702:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt132=2;
         int LA132_0 = input.LA(1);
 
@@ -20151,13 +20151,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         switch (alt132) {
             case 1 :
-                // InternalXbaseWithAnnotations.g:4702:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:4703:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalXbaseWithAnnotations.g:4702:8: ( ( ruleJvmFormalParameter ) )
-                // InternalXbaseWithAnnotations.g:4703:9: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:4703:8: ( ( ruleJvmFormalParameter ) )
+                // InternalXbaseWithAnnotations.g:4704:9: ( ruleJvmFormalParameter )
                 {
-                // InternalXbaseWithAnnotations.g:4703:9: ( ruleJvmFormalParameter )
-                // InternalXbaseWithAnnotations.g:4704:10: ruleJvmFormalParameter
+                // InternalXbaseWithAnnotations.g:4704:9: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:4705:10: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_43);
                 ruleJvmFormalParameter();
@@ -20170,7 +20170,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 }
 
-                // InternalXbaseWithAnnotations.g:4707:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:4708:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop131:
                 do {
                     int alt131=2;
@@ -20183,14 +20183,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     switch (alt131) {
                 	case 1 :
-                	    // InternalXbaseWithAnnotations.g:4708:9: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:4709:9: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,15,FOLLOW_22); if (state.failed) return ;
-                	    // InternalXbaseWithAnnotations.g:4709:9: ( ( ruleJvmFormalParameter ) )
-                	    // InternalXbaseWithAnnotations.g:4710:10: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:4710:9: ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:4711:10: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalXbaseWithAnnotations.g:4710:10: ( ruleJvmFormalParameter )
-                	    // InternalXbaseWithAnnotations.g:4711:11: ruleJvmFormalParameter
+                	    // InternalXbaseWithAnnotations.g:4711:10: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:4712:11: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_43);
                 	    ruleJvmFormalParameter();
@@ -20218,11 +20218,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        // InternalXbaseWithAnnotations.g:4716:7: ( ( '|' ) )
-        // InternalXbaseWithAnnotations.g:4717:8: ( '|' )
+        // InternalXbaseWithAnnotations.g:4717:7: ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:4718:8: ( '|' )
         {
-        // InternalXbaseWithAnnotations.g:4717:8: ( '|' )
-        // InternalXbaseWithAnnotations.g:4718:9: '|'
+        // InternalXbaseWithAnnotations.g:4718:8: ( '|' )
+        // InternalXbaseWithAnnotations.g:4719:9: '|'
         {
         match(input,57,FOLLOW_2); if (state.failed) return ;
 
@@ -20241,14 +20241,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred38_InternalXbaseWithAnnotations
     public final void synpred38_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:4795:4: ( ( () '[' ) )
-        // InternalXbaseWithAnnotations.g:4795:5: ( () '[' )
+        // InternalXbaseWithAnnotations.g:4796:4: ( ( () '[' ) )
+        // InternalXbaseWithAnnotations.g:4796:5: ( () '[' )
         {
-        // InternalXbaseWithAnnotations.g:4795:5: ( () '[' )
-        // InternalXbaseWithAnnotations.g:4796:5: () '['
+        // InternalXbaseWithAnnotations.g:4796:5: ( () '[' )
+        // InternalXbaseWithAnnotations.g:4797:5: () '['
         {
-        // InternalXbaseWithAnnotations.g:4796:5: ()
-        // InternalXbaseWithAnnotations.g:4797:5: 
+        // InternalXbaseWithAnnotations.g:4797:5: ()
+        // InternalXbaseWithAnnotations.g:4798:5: 
         {
         }
 
@@ -20263,8 +20263,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred39_InternalXbaseWithAnnotations
     public final void synpred39_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:4955:5: ( '<' )
-        // InternalXbaseWithAnnotations.g:4955:6: '<'
+        // InternalXbaseWithAnnotations.g:4956:5: ( '<' )
+        // InternalXbaseWithAnnotations.g:4956:6: '<'
         {
         match(input,26,FOLLOW_2); if (state.failed) return ;
 
@@ -20274,11 +20274,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred40_InternalXbaseWithAnnotations
     public final void synpred40_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5012:5: ( ( '(' ) )
-        // InternalXbaseWithAnnotations.g:5012:6: ( '(' )
+        // InternalXbaseWithAnnotations.g:5013:5: ( ( '(' ) )
+        // InternalXbaseWithAnnotations.g:5013:6: ( '(' )
         {
-        // InternalXbaseWithAnnotations.g:5012:6: ( '(' )
-        // InternalXbaseWithAnnotations.g:5013:6: '('
+        // InternalXbaseWithAnnotations.g:5013:6: ( '(' )
+        // InternalXbaseWithAnnotations.g:5014:6: '('
         {
         match(input,14,FOLLOW_2); if (state.failed) return ;
 
@@ -20291,18 +20291,18 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred41_InternalXbaseWithAnnotations
     public final void synpred41_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5031:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalXbaseWithAnnotations.g:5031:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:5032:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalXbaseWithAnnotations.g:5032:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalXbaseWithAnnotations.g:5031:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalXbaseWithAnnotations.g:5032:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:5032:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalXbaseWithAnnotations.g:5033:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalXbaseWithAnnotations.g:5032:7: ()
-        // InternalXbaseWithAnnotations.g:5033:7: 
+        // InternalXbaseWithAnnotations.g:5033:7: ()
+        // InternalXbaseWithAnnotations.g:5034:7: 
         {
         }
 
-        // InternalXbaseWithAnnotations.g:5034:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalXbaseWithAnnotations.g:5035:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt134=2;
         int LA134_0 = input.LA(1);
 
@@ -20311,13 +20311,13 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
         }
         switch (alt134) {
             case 1 :
-                // InternalXbaseWithAnnotations.g:5035:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:5036:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalXbaseWithAnnotations.g:5035:8: ( ( ruleJvmFormalParameter ) )
-                // InternalXbaseWithAnnotations.g:5036:9: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:5036:8: ( ( ruleJvmFormalParameter ) )
+                // InternalXbaseWithAnnotations.g:5037:9: ( ruleJvmFormalParameter )
                 {
-                // InternalXbaseWithAnnotations.g:5036:9: ( ruleJvmFormalParameter )
-                // InternalXbaseWithAnnotations.g:5037:10: ruleJvmFormalParameter
+                // InternalXbaseWithAnnotations.g:5037:9: ( ruleJvmFormalParameter )
+                // InternalXbaseWithAnnotations.g:5038:10: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_43);
                 ruleJvmFormalParameter();
@@ -20330,7 +20330,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                 }
 
-                // InternalXbaseWithAnnotations.g:5040:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalXbaseWithAnnotations.g:5041:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop133:
                 do {
                     int alt133=2;
@@ -20343,14 +20343,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     switch (alt133) {
                 	case 1 :
-                	    // InternalXbaseWithAnnotations.g:5041:9: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:5042:9: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,15,FOLLOW_22); if (state.failed) return ;
-                	    // InternalXbaseWithAnnotations.g:5042:9: ( ( ruleJvmFormalParameter ) )
-                	    // InternalXbaseWithAnnotations.g:5043:10: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:5043:9: ( ( ruleJvmFormalParameter ) )
+                	    // InternalXbaseWithAnnotations.g:5044:10: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalXbaseWithAnnotations.g:5043:10: ( ruleJvmFormalParameter )
-                	    // InternalXbaseWithAnnotations.g:5044:11: ruleJvmFormalParameter
+                	    // InternalXbaseWithAnnotations.g:5044:10: ( ruleJvmFormalParameter )
+                	    // InternalXbaseWithAnnotations.g:5045:11: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_43);
                 	    ruleJvmFormalParameter();
@@ -20378,11 +20378,11 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
         }
 
-        // InternalXbaseWithAnnotations.g:5049:7: ( ( '|' ) )
-        // InternalXbaseWithAnnotations.g:5050:8: ( '|' )
+        // InternalXbaseWithAnnotations.g:5050:7: ( ( '|' ) )
+        // InternalXbaseWithAnnotations.g:5051:8: ( '|' )
         {
-        // InternalXbaseWithAnnotations.g:5050:8: ( '|' )
-        // InternalXbaseWithAnnotations.g:5051:9: '|'
+        // InternalXbaseWithAnnotations.g:5051:8: ( '|' )
+        // InternalXbaseWithAnnotations.g:5052:9: '|'
         {
         match(input,57,FOLLOW_2); if (state.failed) return ;
 
@@ -20401,14 +20401,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred42_InternalXbaseWithAnnotations
     public final void synpred42_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5128:4: ( ( () '[' ) )
-        // InternalXbaseWithAnnotations.g:5128:5: ( () '[' )
+        // InternalXbaseWithAnnotations.g:5129:4: ( ( () '[' ) )
+        // InternalXbaseWithAnnotations.g:5129:5: ( () '[' )
         {
-        // InternalXbaseWithAnnotations.g:5128:5: ( () '[' )
-        // InternalXbaseWithAnnotations.g:5129:5: () '['
+        // InternalXbaseWithAnnotations.g:5129:5: ( () '[' )
+        // InternalXbaseWithAnnotations.g:5130:5: () '['
         {
-        // InternalXbaseWithAnnotations.g:5129:5: ()
-        // InternalXbaseWithAnnotations.g:5130:5: 
+        // InternalXbaseWithAnnotations.g:5130:5: ()
+        // InternalXbaseWithAnnotations.g:5131:5: 
         {
         }
 
@@ -20423,7 +20423,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred43_InternalXbaseWithAnnotations
     public final void synpred43_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5471:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )
+        // InternalXbaseWithAnnotations.g:5472:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )
         // InternalXbaseWithAnnotations.g:
         {
         if ( (input.LA(1)>=RULE_STRING && input.LA(1)<=RULE_ID)||input.LA(1)==14||(input.LA(1)>=18 && input.LA(1)<=19)||input.LA(1)==26||(input.LA(1)>=42 && input.LA(1)<=43)||input.LA(1)==48||input.LA(1)==55||input.LA(1)==59||input.LA(1)==61||(input.LA(1)>=65 && input.LA(1)<=67)||(input.LA(1)>=70 && input.LA(1)<=82)||input.LA(1)==84 ) {
@@ -20443,8 +20443,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred44_InternalXbaseWithAnnotations
     public final void synpred44_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5542:6: ( 'catch' )
-        // InternalXbaseWithAnnotations.g:5542:7: 'catch'
+        // InternalXbaseWithAnnotations.g:5543:6: ( 'catch' )
+        // InternalXbaseWithAnnotations.g:5543:7: 'catch'
         {
         match(input,85,FOLLOW_2); if (state.failed) return ;
 
@@ -20454,8 +20454,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred45_InternalXbaseWithAnnotations
     public final void synpred45_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5563:7: ( 'finally' )
-        // InternalXbaseWithAnnotations.g:5563:8: 'finally'
+        // InternalXbaseWithAnnotations.g:5564:7: ( 'finally' )
+        // InternalXbaseWithAnnotations.g:5564:8: 'finally'
         {
         match(input,83,FOLLOW_2); if (state.failed) return ;
 
@@ -20465,8 +20465,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred48_InternalXbaseWithAnnotations
     public final void synpred48_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5807:5: ( '.' )
-        // InternalXbaseWithAnnotations.g:5807:6: '.'
+        // InternalXbaseWithAnnotations.g:5808:5: ( '.' )
+        // InternalXbaseWithAnnotations.g:5808:6: '.'
         {
         match(input,52,FOLLOW_2); if (state.failed) return ;
 
@@ -20476,14 +20476,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred49_InternalXbaseWithAnnotations
     public final void synpred49_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:5933:5: ( ( () ruleArrayBrackets ) )
-        // InternalXbaseWithAnnotations.g:5933:6: ( () ruleArrayBrackets )
+        // InternalXbaseWithAnnotations.g:5934:5: ( ( () ruleArrayBrackets ) )
+        // InternalXbaseWithAnnotations.g:5934:6: ( () ruleArrayBrackets )
         {
-        // InternalXbaseWithAnnotations.g:5933:6: ( () ruleArrayBrackets )
-        // InternalXbaseWithAnnotations.g:5934:6: () ruleArrayBrackets
+        // InternalXbaseWithAnnotations.g:5934:6: ( () ruleArrayBrackets )
+        // InternalXbaseWithAnnotations.g:5935:6: () ruleArrayBrackets
         {
-        // InternalXbaseWithAnnotations.g:5934:6: ()
-        // InternalXbaseWithAnnotations.g:5935:6: 
+        // InternalXbaseWithAnnotations.g:5935:6: ()
+        // InternalXbaseWithAnnotations.g:5936:6: 
         {
         }
 
@@ -20502,8 +20502,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred50_InternalXbaseWithAnnotations
     public final void synpred50_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:6130:5: ( '<' )
-        // InternalXbaseWithAnnotations.g:6130:6: '<'
+        // InternalXbaseWithAnnotations.g:6131:5: ( '<' )
+        // InternalXbaseWithAnnotations.g:6131:6: '<'
         {
         match(input,26,FOLLOW_2); if (state.failed) return ;
 
@@ -20513,14 +20513,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred51_InternalXbaseWithAnnotations
     public final void synpred51_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:6186:6: ( ( () '.' ) )
-        // InternalXbaseWithAnnotations.g:6186:7: ( () '.' )
+        // InternalXbaseWithAnnotations.g:6187:6: ( ( () '.' ) )
+        // InternalXbaseWithAnnotations.g:6187:7: ( () '.' )
         {
-        // InternalXbaseWithAnnotations.g:6186:7: ( () '.' )
-        // InternalXbaseWithAnnotations.g:6187:7: () '.'
+        // InternalXbaseWithAnnotations.g:6187:7: ( () '.' )
+        // InternalXbaseWithAnnotations.g:6188:7: () '.'
         {
-        // InternalXbaseWithAnnotations.g:6187:7: ()
-        // InternalXbaseWithAnnotations.g:6188:7: 
+        // InternalXbaseWithAnnotations.g:6188:7: ()
+        // InternalXbaseWithAnnotations.g:6189:7: 
         {
         }
 
@@ -20535,8 +20535,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
     // $ANTLR start synpred52_InternalXbaseWithAnnotations
     public final void synpred52_InternalXbaseWithAnnotations_fragment() throws RecognitionException {   
-        // InternalXbaseWithAnnotations.g:6224:7: ( '<' )
-        // InternalXbaseWithAnnotations.g:6224:8: '<'
+        // InternalXbaseWithAnnotations.g:6225:7: ( '<' )
+        // InternalXbaseWithAnnotations.g:6225:8: '<'
         {
         match(input,26,FOLLOW_2); if (state.failed) return ;
 
@@ -21267,7 +21267,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "117:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?";
+            return "118:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21360,7 +21360,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_12;
         }
         public String getDescription() {
-            return "297:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )";
+            return "298:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21404,7 +21404,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_12;
         }
         public String getDescription() {
-            return "439:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )";
+            return "440:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21474,7 +21474,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_19;
         }
         public String getDescription() {
-            return "668:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
+            return "669:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21635,7 +21635,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "()* loopback of 1382:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
+            return "()* loopback of 1383:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21806,7 +21806,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_31;
         }
         public String getDescription() {
-            return "1458:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
+            return "1459:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
         }
     }
     static final String dfa_32s = "\116\uffff";
@@ -21918,7 +21918,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_38;
         }
         public String getDescription() {
-            return "2359:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
+            return "2360:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22009,7 +22009,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_43;
         }
         public String getDescription() {
-            return "2378:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
+            return "2379:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22172,7 +22172,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_44;
         }
         public String getDescription() {
-            return "2476:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
+            return "2477:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22262,7 +22262,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_50;
         }
         public String getDescription() {
-            return "2521:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
+            return "2522:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22397,7 +22397,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_56;
         }
         public String getDescription() {
-            return "3013:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
+            return "3014:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22515,7 +22515,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_57;
         }
         public String getDescription() {
-            return "3479:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )";
+            return "3480:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22607,7 +22607,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_63;
         }
         public String getDescription() {
-            return "3548:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
+            return "3549:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22685,7 +22685,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_38;
         }
         public String getDescription() {
-            return "4677:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
+            return "4678:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22729,7 +22729,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_43;
         }
         public String getDescription() {
-            return "4696:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
+            return "4697:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22811,7 +22811,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_44;
         }
         public String getDescription() {
-            return "4794:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
+            return "4795:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22936,7 +22936,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_64;
         }
         public String getDescription() {
-            return "4953:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
+            return "4954:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22980,7 +22980,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_38;
         }
         public String getDescription() {
-            return "5010:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
+            return "5011:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -23024,7 +23024,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_43;
         }
         public String getDescription() {
-            return "5029:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
+            return "5030:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -23106,7 +23106,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_44;
         }
         public String getDescription() {
-            return "5127:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
+            return "5128:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -23241,7 +23241,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_70;
         }
         public String getDescription() {
-            return "5470:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?";
+            return "5471:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -23845,7 +23845,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_77;
         }
         public String getDescription() {
-            return "6128:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
+            return "6129:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -23889,7 +23889,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_77;
         }
         public String getDescription() {
-            return "6222:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+            return "6223:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -23956,7 +23956,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             this.transition = dfa_84;
         }
         public String getDescription() {
-            return "6684:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
+            return "6685:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
         }
     }
  

@@ -54,6 +54,7 @@ import com.intellij.util.Function
 import com.intellij.util.graph.Graph
 import java.util.ArrayList
 import java.util.HashSet
+import java.util.LinkedHashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
@@ -456,20 +457,15 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			LOG.info("Project not yet initialized, wait some more")
 			alarm.addRequest([build], 500)
 		} else {
-			val allEvents = newArrayList
 			if(TEST_MODE) {
-				queue.drainTo(allEvents)
-				internalBuild(allEvents, null)
+				internalBuild(null)
 			} else {
 				ProgressManager.instance.run(new Task.Backgroundable(project, 'Code Generation...') {
 					override run(ProgressIndicator indicator) {
 						// we want only one thread to enter this code at any time
 						indicator.indeterminate = true
 						synchronized (BUILD_MONITOR) {
-							queue.drainTo(allEvents)
-							if (!allEvents.empty) {
-								internalBuild(allEvents, indicator)
-							}
+							internalBuild(indicator)
 						}
 					}
 				})
@@ -481,16 +477,20 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return TEST_MODE || (project.isInitialized && !DumbService.getInstance(project).isDumb)
 	}
 	
-	protected def void internalBuild(List<BuildEvent> allEvents, ProgressIndicator indicator) {
-		val unProcessedEvents = newArrayList
-		unProcessedEvents += allEvents
+	private List<BuildEvent> unProcessedEvents = newArrayList
+	
+	protected def void internalBuild(ProgressIndicator indicator) {
+		queue.drainTo(unProcessedEvents)
+		if (unProcessedEvents.isEmpty) {
+			return;
+		}
 		val app = ApplicationManager.application
 		val cancelIndicator = new MutableCancelIndicator(indicator)
 		cancelIndicators.add(cancelIndicator)
 		val moduleManager = ModuleManager.getInstance(getProject)
 		val buildProgressReporter = buildProgressReporterProvider.get
 		buildProgressReporter.project = project
-		buildProgressReporter.events = allEvents
+		buildProgressReporter.events = new ArrayList(unProcessedEvents)
 		try {
 			val moduleGraph = app.<Graph<Module>>runReadAction[moduleManager.moduleGraph]
 			// deltas are added over the whole build
@@ -542,11 +542,12 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					unProcessedEvents -= events
 				}
 			}
+			// when everything got processed successfully, we clear this to get rid of any events related to excluded files
+			unProcessedEvents.clear
 		} catch(Throwable exc) {
 			if (operationCanceledManager.isOperationCanceledException(exc)) {
 				if (LOG.isInfoEnabled)
 					LOG.info("Build canceled.")
-				queue.addAll(unProcessedEvents)
 			} else {
 				LOG.error("Error during auto build.", exc)
 			}
@@ -560,16 +561,15 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		val moduleRootManager = ModuleRootManager.getInstance(module)
 		val excludeRootUrls = moduleRootManager.excludeRootUrls
 		val sourceRootUrls = moduleRootManager.sourceRootUrls
-		events.filter [ event |
+		val result = new LinkedHashSet
+		for (event : events) {
 			val url = event.filesByURI.keySet.head.toString
-			for (excludeRootUrl : excludeRootUrls)
-				if (url.isUrlUnderRoot(excludeRootUrl))
-					return false
-			for (sourceRootUrl : sourceRootUrls)
-				if (url.isUrlUnderRoot(sourceRootUrl))
-					return true
-			return false
-		].toSet
+			if (excludeRootUrls.forall[!url.isUrlUnderRoot(it)] 
+				&& sourceRootUrls.exists[url.isUrlUnderRoot(it)]) {
+				result += event
+			}
+		} 
+		return result
 	}
 	
 	static val char SEGMENT_SEPARATOR = '/'
@@ -617,14 +617,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						val sourceUris = fileMappings?.getSource(uri)
 						if (sourceUris != null && !sourceUris.isEmpty) {
 							for (sourceUri : sourceUris) {
-								changedUris += sourceUri
+								consistentAdd(sourceUri, changedUris, deletedUris)
 							}									
 						} else if (isJavaFile(event.getFile(uri))) {
 							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
 								return getJavaDeltas(event.getFile(uri), module)
 							]
 						} else {
-							changedUris += uri
+							consistentAdd(uri, changedUris, deletedUris)
 						}
 					}
 				}
@@ -633,19 +633,24 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						val sourceUris = fileMappings?.getSource(uri)
 						if (sourceUris != null && !sourceUris.isEmpty) {
 							for (sourceUri : sourceUris) {
-								changedUris += sourceUri
+								consistentAdd(sourceUri, changedUris, deletedUris)
 							}									
 						} else if (isJavaFile(event.getFile(uri))) {
 							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
 								getJavaDeltas(event.getFile(uri), module)
 							]
 						} else {
-							deletedUris += uri
+							consistentAdd(uri, deletedUris, changedUris)
 						}
 					}
 				}
 			}
 		}
+	}
+	
+	protected def void consistentAdd(URI uri, Set<URI> toBeAdded, Set<URI> toBeRemoved) {
+		toBeAdded += uri
+		toBeRemoved -= uri
 	}
 	
 	def boolean isJavaFile(VirtualFile file) {

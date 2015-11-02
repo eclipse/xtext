@@ -14,6 +14,7 @@ import com.google.inject.Module;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
@@ -28,7 +29,7 @@ import org.osgi.framework.BundleContext;
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class XtypeActivator extends org.eclipse.ui.plugin.AbstractUIPlugin {
+public class XtypeActivator extends AbstractUIPlugin {
 
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_XTYPE = "org.eclipse.xtext.xbase.Xtype";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_XBASE = "org.eclipse.xtext.xbase.Xbase";

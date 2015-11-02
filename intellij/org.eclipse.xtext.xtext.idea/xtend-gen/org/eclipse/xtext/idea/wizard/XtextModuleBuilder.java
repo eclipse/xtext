@@ -238,8 +238,8 @@ public class XtextModuleBuilder extends ModuleBuilder {
     return (List<Module>)Conversions.doWrapArray(moduleModel.getModules());
   }
   
-  public Object setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
-    return null;
+  public void setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
+    wizardConfiguration.setNeedsGradleWrapper(false);
   }
   
   public WizardConfiguration getWizardConfiguration() {

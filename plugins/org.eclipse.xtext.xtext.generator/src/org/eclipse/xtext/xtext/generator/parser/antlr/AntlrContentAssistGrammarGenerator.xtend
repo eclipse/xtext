@@ -26,7 +26,7 @@ import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGram
 
 class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	@Inject
-	ContentAssistGrammarNaming naming
+	extension ContentAssistGrammarNaming naming
 
 	override protected getGrammarNaming() {
 		naming
@@ -246,9 +246,6 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 									{ after(grammarAccess.«element.value.originalElement.grammarElementAccess()»); }
 								«ENDIF»
 							)
-							{ 
-							  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement.gaRuleElementAccessor()»);
-							}
 						)
 					)
 				«ENDFOR»

@@ -27,7 +27,7 @@ public abstract class AbstractFragmentsPlainParsingTest extends AbstractXtextTes
   
   @Override
   protected boolean shouldTestSerializer(final XtextResource resource) {
-    return false;
+    return true;
   }
   
   @Test

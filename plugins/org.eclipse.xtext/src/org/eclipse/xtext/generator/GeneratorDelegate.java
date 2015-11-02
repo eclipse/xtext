@@ -28,46 +28,48 @@ public class GeneratorDelegate implements IGenerator, IGenerator2 {
 		return legacyGenerator;
 	}
 	
-	public void generate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	public void generate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		try {
-			beforeGenerate(input, fsa, cancelIndicator);
-			doGenerate(input, fsa, cancelIndicator);
+			beforeGenerate(input, fsa, context);
+			doGenerate(input, fsa, context);
 		} finally {
-			afterGenerate(input, fsa, cancelIndicator);
+			afterGenerate(input, fsa, context);
 		}
 	}
 
 	@Override
-	public void doGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	public void doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		if (generator != null) {
-			generator.doGenerate(input, fsa, cancelIndicator);
+			generator.doGenerate(input, fsa, context);
 		} else if (getLegacyGenerator() != null) {
 			getLegacyGenerator().doGenerate(input, fsa);
 		}
 	}
 
 	@Override
-	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		if (generator != null) {
-			generator.beforeGenerate(input, fsa, cancelIndicator);
+			generator.beforeGenerate(input, fsa, context);
 		}
 	}
 
 	@Override
-	public void afterGenerate(Resource input, IFileSystemAccess2 fsa, CancelIndicator cancelIndicator) {
+	public void afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		if (generator != null) {
-			generator.afterGenerate(input, fsa, cancelIndicator);
+			generator.afterGenerate(input, fsa, context);
 		}
 	}
 
 	@Override
 	public void doGenerate(Resource input, IFileSystemAccess fsa) {
 		IFileSystemAccess2 casted = (IFileSystemAccess2) fsa;
+		GeneratorContext context = new GeneratorContext();
+		context.setCancelIndicator(CancelIndicator.NullImpl);
 		try {
-			beforeGenerate(input, casted, CancelIndicator.NullImpl);
-			doGenerate(input, casted, CancelIndicator.NullImpl);
+			beforeGenerate(input, casted, context);
+			doGenerate(input, casted, context);
 		} finally {
-			afterGenerate(input, casted, CancelIndicator.NullImpl);
+			afterGenerate(input, casted, context);
 		}
 	}
 }

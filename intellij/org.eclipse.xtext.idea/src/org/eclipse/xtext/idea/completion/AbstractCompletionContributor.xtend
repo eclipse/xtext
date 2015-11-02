@@ -260,7 +260,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def isKeywordWorthyToPropose(Keyword keyword) {
-		keyword.value.length > 1 && Character.isLetter(keyword.value.charAt(0))
+		true
 	}
 
 	@Data

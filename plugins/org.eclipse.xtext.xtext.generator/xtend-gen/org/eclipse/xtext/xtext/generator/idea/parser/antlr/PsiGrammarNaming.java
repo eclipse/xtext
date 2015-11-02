@@ -24,6 +24,11 @@ public class PsiGrammarNaming extends GrammarNaming {
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Override
+  public boolean isCombinedGrammar(final Grammar it) {
+    return true;
+  }
+  
+  @Override
   public String getParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);

@@ -18,6 +18,8 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -45,6 +47,8 @@ import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
+import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
+import org.eclipse.xtext.xbase.parser.LookAheadPreservingNodeModelBuilder;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
@@ -207,4 +211,17 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		return UnresolvedFeatureCallTypeAwareMessageProvider.class;
 	}
+	
+	@Override
+	public Class<? extends IPartialParsingHelper> bindIPartialParserHelper() {
+		return TokenSequencePreservingPartialParsingHelper.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
+		return LookAheadPreservingNodeModelBuilder.class;
+	}
+	
 }

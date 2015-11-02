@@ -17,12 +17,12 @@ import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -60,12 +60,12 @@ public class TargetPlatformProject extends ProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    ArrayList<TextFile> _xblockexpression = null;
+  public Iterable<? extends AbstractFile> getFiles() {
+    ArrayList<AbstractFile> _xblockexpression = null;
     {
-      final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-      Iterable<? extends TextFile> _files = super.getFiles();
-      Iterables.<TextFile>addAll(files, _files);
+      final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+      Iterable<? extends AbstractFile> _files = super.getFiles();
+      Iterables.<AbstractFile>addAll(files, _files);
       String _name = this.getName();
       String _plus = (_name + ".target");
       CharSequence _target = this.target();
@@ -136,12 +136,20 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
         _builder.newLine();
       } else {
-        _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
         WizardConfiguration _config_1 = this.getConfig();
         XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
-        _builder.append(_xtextVersion_1, "");
-        _builder.append("/\"/>");
-        _builder.newLineIfNotEmpty();
+        boolean _isBeta = _xtextVersion_1.isBeta();
+        if (_isBeta) {
+          _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
+          _builder.newLine();
+        } else {
+          _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
+          WizardConfiguration _config_2 = this.getConfig();
+          XtextVersion _xtextVersion_2 = _config_2.getXtextVersion();
+          _builder.append(_xtextVersion_2, "");
+          _builder.append("/\"/>");
+          _builder.newLineIfNotEmpty();
+        }
       }
     }
     _builder.append("</location>");

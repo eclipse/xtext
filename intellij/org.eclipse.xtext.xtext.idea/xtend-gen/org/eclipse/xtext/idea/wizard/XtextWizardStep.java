@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.ProjectBuilder;
 import com.intellij.ide.util.projectWizard.WizardContext;
-import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.ui.ComboBox;
@@ -21,7 +20,6 @@ import org.eclipse.xtext.idea.wizard.XtextModuleBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
@@ -291,17 +289,7 @@ public class XtextWizardStep extends ModuleWizardStep {
   
   @Override
   public boolean validate() throws ConfigurationException {
-    InputOutput.<String>println("validate");
     final boolean superCall = super.validate();
     return superCall;
-  }
-  
-  @Override
-  public void updateStep() {
-    InputOutput.<String>println("update");
-  }
-  
-  @Override
-  public void onWizardFinished() throws CommitStepException {
   }
 }

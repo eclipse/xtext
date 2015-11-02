@@ -8,8 +8,9 @@
 package org.eclipse.xtend.idea.config
 
 import com.intellij.facet.FacetManager
-import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable
-import com.intellij.framework.addSupport.FrameworkSupportInModuleProvider
+import com.intellij.facet.FacetTypeRegistry
+import com.intellij.framework.detection.FacetBasedFrameworkDetector
+import com.intellij.framework.detection.impl.FrameworkDetectorRegistry
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportConfigurable
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportModelImpl
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportUtil
@@ -18,7 +19,6 @@ import com.intellij.ide.util.newProjectWizard.impl.FrameworkSupportCommunicator
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.IdeaModifiableModelsProvider
-import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainerFactory
 import com.intellij.openapi.util.Disposer
@@ -27,8 +27,8 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.testFramework.PsiTestCase
 import com.intellij.testFramework.PsiTestUtil
 import java.util.ArrayList
-import java.util.List
 import org.eclipse.xtend.core.idea.facet.XtendFacetType
+import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 
 /**
@@ -36,16 +36,14 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage
  */
 class XtendSupportConfigurableTest extends PsiTestCase {
 
-	override protected setUp() throws Exception {
-		super.setUp()
-	}
-
 	def testPlainJavaOutputConfiguration_01() {
-		addSupport(myModule)
+		val manager = ModuleRootManager.getInstance(myModule)
+		assertEquals(0, manager.contentRoots.size)
+		addFrameworkSupport(myModule)
+		assertEquals(1, manager.contentRoots.size)
 		val facet = FacetManager.getInstance(myModule).getFacetsByType(XtendFacetType.TYPEID).head
 		assertNotNull(facet)
 
-		val manager = ModuleRootManager.getInstance(myModule)
 		val xtendConfig = facet.configuration.state
 		assertTrue(xtendConfig.outputDirectory.endsWith("xtend-gen"))
 		assertTrue(xtendConfig.testOutputDirectory.endsWith("xtend-gen"))
@@ -69,7 +67,7 @@ class XtendSupportConfigurableTest extends PsiTestCase {
 
 		val srcFolders = manager.getSourceRoots(true)
 		assertEquals(2, srcFolders.size)
-		addSupport(module)
+		addFrameworkSupport(module)
 		val facet = FacetManager.getInstance(module).getFacetsByType(XtendFacetType.TYPEID).head
 		assertNotNull(facet)
 
@@ -90,36 +88,86 @@ class XtendSupportConfigurableTest extends PsiTestCase {
 		].size)
 	}
 
-	def protected void addSupport(Module module) {
+	def testPlainJavaOutputConfiguration_03() {
+		// Bug 479332 - [idea] Exception after applying framework support in Android project 
+		val manager = ModuleRootManager.getInstance(myModule)
+		assertEquals(0, manager.contentRoots.size)
+		addFrameworkSupportUsingDetector(myModule)
+		assertEquals(1, manager.contentRoots.size)
+
+		val facet = FacetManager.getInstance(myModule).getFacetsByType(XtendFacetType.TYPEID).head
+		assertNotNull(facet)
+
+		val xtendConfig = facet.configuration.state
+		assertTrue(xtendConfig.outputDirectory.endsWith("xtend-gen"))
+		assertTrue(xtendConfig.testOutputDirectory.endsWith("xtend-gen"))
+	
+		assertEquals(1, manager.contentEntries.head.sourceFolders.filter [
+			val urlToCheck = (it.file.path).replace("file://", '')
+			(xtendConfig.outputDirectory) == urlToCheck && !it.testSource
+		].size)
+	}
+
+	def protected void addFrameworkSupportUsingDetector(Module moduleToHandle) {
 		new WriteCommandAction.Simple(getProject()) {
 
 			override protected run() throws Throwable {
-				val VirtualFile root = getVirtualFile(createTempDir("contentRoot"))
-				PsiTestUtil.addContentRoot(module, root)
-				val ModifiableRootModel model = ModuleRootManager.getInstance(module).getModifiableModel()
-				val FrameworkSupportInModuleProvider provider = FrameworkSupportUtil.findProvider(
-					XtendLanguage.INSTANCE.ID, FrameworkSupportUtil.getAllProviders());
+				createContentRoot(moduleToHandle)
+				val modifiableModelsProvider = new IdeaModifiableModelsProvider()
+				val model = modifiableModelsProvider.getFacetModifiableModel(moduleToHandle)
+				try {
+					val facetType = FacetTypeRegistry.instance.findFacetType(XtendFacetType.TYPEID.toString)
+					val facetConfiguration = facetType.createDefaultConfiguration
+					val detId = FrameworkDetectorRegistry.instance.getDetectorIds(XtendFileType.INSTANCE).head
+					val detector = FrameworkDetectorRegistry.instance.
+						getDetectorById(detId) as FacetBasedFrameworkDetector
+					val facet = FacetManager.getInstance(moduleToHandle).createFacet(facetType,
+						facetType.getDefaultFacetName(), facetConfiguration, null)
+					model.addFacet(facet)
+					modifiableModelsProvider.commitFacetModifiableModel(moduleToHandle, model)
+					val rootModel = modifiableModelsProvider.getModuleModifiableModel(moduleToHandle)
+					detector.setupFacet(facet, rootModel)
+					modifiableModelsProvider.commitModuleModifiableModel(rootModel)
+				} finally {
+					model.commit()
+				}
+			}
+		}.execute().throwException()
+	}
+
+	protected def createContentRoot(Module moduleToHandle) {
+		val VirtualFile root = getVirtualFile(createTempDir("contentRoot"))
+		PsiTestUtil.addContentRoot(moduleToHandle, root)
+	}
+
+	def protected void addFrameworkSupport(Module moduleToHandle) {
+		new WriteCommandAction.Simple(getProject()) {
+
+			override protected run() throws Throwable {
+				createContentRoot(moduleToHandle)
+
+				val model = ModuleRootManager.getInstance(moduleToHandle).getModifiableModel()
+				val provider = FrameworkSupportUtil.findProvider(XtendLanguage.INSTANCE.ID,
+					FrameworkSupportUtil.getAllProviders());
 				val myFrameworkSupportModel = new FrameworkSupportModelImpl(project, "",
 					LibrariesContainerFactory.createContainer(project))
-				val FrameworkSupportInModuleConfigurable configurable = provider.createConfigurable(
-					myFrameworkSupportModel)
+				val configurable = provider.createConfigurable(myFrameworkSupportModel)
 				try {
-					var List<FrameworkSupportConfigurable> selectedConfigurables = new ArrayList<FrameworkSupportConfigurable>()
-					val IdeaModifiableModelsProvider modelsProvider = new IdeaModifiableModelsProvider()
-
-					configurable.addSupport(module, model,
-						modelsProvider)
+					var selectedConfigurables = new ArrayList<FrameworkSupportConfigurable>()
+					configurable.addSupport(moduleToHandle, model,
+						new IdeaModifiableModelsProvider())
 					if (configurable instanceof OldFrameworkSupportProviderWrapper.FrameworkSupportConfigurableWrapper) {
 						selectedConfigurables.add(configurable.getConfigurable())
 					}
 					for (FrameworkSupportCommunicator communicator : FrameworkSupportCommunicator.EP_NAME.
 						getExtensions()) {
-						communicator.onFrameworkSupportAdded(module, model, selectedConfigurables,
+						communicator.onFrameworkSupportAdded(moduleToHandle, model, selectedConfigurables,
 							myFrameworkSupportModel)
 					}
 				} finally {
 					model.commit()
-					Disposer.dispose(configurable)
+					if (!Disposer.isDisposed(configurable))
+						Disposer.dispose(configurable)
 				}
 			}
 		}.execute().throwException()

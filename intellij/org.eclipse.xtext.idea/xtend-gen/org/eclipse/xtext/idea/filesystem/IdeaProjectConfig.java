@@ -16,6 +16,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.SourceFolder;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.Set;
@@ -100,8 +101,17 @@ public class IdeaProjectConfig implements IProjectConfig {
     final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
+        boolean _or = false;
         VirtualFile _file = it.getFile();
-        return Boolean.valueOf(Objects.equal(_file, IdeaProjectConfig.this.contentRoot));
+        boolean _equals = Objects.equal(_file, IdeaProjectConfig.this.contentRoot);
+        if (_equals) {
+          _or = true;
+        } else {
+          VirtualFile _file_1 = it.getFile();
+          boolean _isAncestor = VfsUtil.isAncestor(IdeaProjectConfig.this.contentRoot, _file_1, false);
+          _or = _isAncestor;
+        }
+        return Boolean.valueOf(_or);
       }
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(_existingSourceFolders, _function);

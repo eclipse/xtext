@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 grammar InternalXtend;
+
 options {
 	superClass=AbstractInternalContentAssistParser;
 	backtrack=true;

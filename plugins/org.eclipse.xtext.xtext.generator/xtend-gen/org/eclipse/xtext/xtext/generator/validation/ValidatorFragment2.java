@@ -75,7 +75,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     this.composedChecks.add(composedCheckValidator);
   }
   
-  protected TypeReference getValidatorSuperClass(final Grammar grammar) {
+  protected TypeReference getGenValidatorSuperClass(final Grammar grammar) {
     TypeReference _xblockexpression = null;
     {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
@@ -103,26 +103,17 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   
   @Override
   public void generate() {
-    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      Grammar _grammar = this.getGrammar();
-      TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
-      Grammar _grammar_1 = this.getGrammar();
-      TypeReference _validatorClass_1 = this._validatorNaming.getValidatorClass(_grammar_1);
-      bindingFactory.addTypeToTypeEagerSingleton(_validatorClass, _validatorClass_1);
-    } else {
-      Grammar _grammar_2 = this.getGrammar();
-      TypeReference _abstractValidatorClass = this._validatorNaming.getAbstractValidatorClass(_grammar_2);
-      Grammar _grammar_3 = this.getGrammar();
-      TypeReference _abstractValidatorClass_1 = this._validatorNaming.getAbstractValidatorClass(_grammar_3);
-      bindingFactory.addTypeToTypeEagerSingleton(_abstractValidatorClass, _abstractValidatorClass_1);
-    }
+    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+    Grammar _grammar = this.getGrammar();
+    TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
+    Grammar _grammar_1 = this.getGrammar();
+    TypeReference _validatorClass_1 = this._validatorNaming.getValidatorClass(_grammar_1);
+    GuiceModuleAccess.BindingFactory _addTypeToTypeEagerSingleton = _bindingFactory.addTypeToTypeEagerSingleton(_validatorClass, _validatorClass_1);
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
-    bindingFactory.contributeTo(_runtimeGenModule);
-    boolean _isGenerateStub_1 = this.isGenerateStub();
-    if (_isGenerateStub_1) {
+    _addTypeToTypeEagerSingleton.contributeTo(_runtimeGenModule);
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
       boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
       if (_isPreferXtendStubs) {
         this.generateXtendValidatorStub();
@@ -130,7 +121,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         this.generateJavaValidatorStub();
       }
     }
-    this.generateAbstractValidator();
+    this.generateGenValidator();
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
@@ -140,8 +131,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
       Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-      Grammar _grammar_4 = this.getGrammar();
-      TypeReference _validatorClass_2 = this._validatorNaming.getValidatorClass(_grammar_4);
+      Grammar _grammar_2 = this.getGrammar();
+      TypeReference _validatorClass_2 = this._validatorNaming.getValidatorClass(_grammar_2);
       String _packageName = _validatorClass_2.getPackageName();
       _exportedPackages.add(_packageName);
     }
@@ -199,8 +190,12 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.newLine();
         _builder.append("//\t\t\twarning(\'Name should start with a capital\', ");
         _builder.newLine();
-        _builder.append("//\t\t\t\t\tMyDslPackage.Literals.GREETING__NAME,");
-        _builder.newLine();
+        _builder.append("//\t\t\t\t\t");
+        Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
+        String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_2);
+        _builder.append(_simpleName_1, "");
+        _builder.append("Package.Literals.GREETING__NAME,");
+        _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\tINVALID_NAME)");
         _builder.newLine();
         _builder.append("//\t\t}");
@@ -253,13 +248,25 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
+        _builder.append("//  public static final INVALID_NAME = \'invalidName\'");
+        _builder.newLine();
+        _builder.append("//");
+        _builder.newLine();
         _builder.append("//\t@Check");
         _builder.newLine();
         _builder.append("//\tpublic void checkGreetingStartsWithCapital(Greeting greeting) {");
         _builder.newLine();
         _builder.append("//\t\tif (!Character.isUpperCase(greeting.getName().charAt(0))) {");
         _builder.newLine();
-        _builder.append("//\t\t\twarning(\"Name should start with a capital\", MyDslPackage.Literals.GREETING__NAME);");
+        _builder.append("//\t\t\twarning(\"Name should start with a capital\",");
+        _builder.newLine();
+        _builder.append("//\t\t\t\t\t");
+        Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
+        String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_2);
+        _builder.append(_simpleName_1, "");
+        _builder.append("Package.Literals.GREETING__NAME,");
+        _builder.newLineIfNotEmpty();
+        _builder.append("//\t\t\t\t\tINVALID_NAME);");
         _builder.newLine();
         _builder.append("//\t\t}");
         _builder.newLine();
@@ -278,10 +285,18 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     _createJavaFile.writeTo(_src);
   }
   
-  protected void generateAbstractValidator() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _abstractValidatorClass = this._validatorNaming.getAbstractValidatorClass(_grammar);
-    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(_abstractValidatorClass);
+  protected void generateGenValidator() {
+    TypeReference _xifexpression = null;
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      Grammar _grammar = this.getGrammar();
+      _xifexpression = this._validatorNaming.getAbstractValidatorClass(_grammar);
+    } else {
+      Grammar _grammar_1 = this.getGrammar();
+      _xifexpression = this._validatorNaming.getValidatorClass(_grammar_1);
+    }
+    final TypeReference genClass = _xifexpression;
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -317,14 +332,12 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           }
         }
         _builder.append("class ");
-        Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar);
-        String _simpleName = _abstractValidatorClass.getSimpleName();
+        String _simpleName = genClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
-        Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-        TypeReference _validatorSuperClass = ValidatorFragment2.this.getValidatorSuperClass(_grammar_1);
-        _builder.append(_validatorSuperClass, "");
+        Grammar _grammar = ValidatorFragment2.this.getGrammar();
+        TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(_grammar);
+        _builder.append(_genValidatorSuperClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -354,8 +367,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           if (!_isInheritImplementation) {
             _and = false;
           } else {
-            Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
-            Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar_2);
+            Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
+            Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar_1);
             boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
             _and = _tripleNotEquals;
           }

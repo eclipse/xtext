@@ -82,8 +82,12 @@ public class XtextVersion {
     return this.version.endsWith("-SNAPSHOT");
   }
   
+  public boolean isBeta() {
+    return this.version.matches(".*beta(\\d)*");
+  }
+  
   public String getXtendGradlePluginVersion() {
-    return "0.4.8";
+    return "0.4.12";
   }
   
   public String getXtextGradlePluginVersion() {

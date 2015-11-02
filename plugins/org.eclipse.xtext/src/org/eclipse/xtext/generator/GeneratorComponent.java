@@ -128,7 +128,9 @@ public class GeneratorComponent implements IWorkflowComponent {
 					if (!(object2 instanceof Resource)) {
 						throw new IllegalStateException("Slot contents was not a Resource but a '"+object.getClass().getSimpleName()+"'!");
 					}
-					instance.generate((Resource) object2, fileSystemAccess, CancelIndicator.NullImpl);
+					GeneratorContext context = new GeneratorContext();
+					context.setCancelIndicator(CancelIndicator.NullImpl);
+					instance.generate((Resource) object2, fileSystemAccess, context);
 				}
 			} else if (object instanceof Resource) {
 				instance.doGenerate((Resource) object, fileSystemAccess);

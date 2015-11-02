@@ -70,17 +70,18 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	}
 	
 	def TypeReference getDelegateScopeProvider() {
-		if (language.grammar.usesXImportSection)
+		if (language.grammar.inheritsXbase)
 			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
 		else
-			ImportedNamespaceAwareLocalScopeProvider.typeRef 
+			ImportedNamespaceAwareLocalScopeProvider.typeRef
 	}
 	
 	override generate() {
 		contributeRuntimeGuiceBindings()
 		
+		generateGenScopeProvider()
+
 		if (generateStub) {
-			generateAbstractScopeProvider()
 			
 			if (codeConfig.preferXtendStubs)
 				generateXtendScopeProvider()
@@ -98,10 +99,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
-		if (generateStub)
-			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
-		else
-			bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderSuperClass)
+		bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
 		
 		bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', 
 				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«getDelegateScopeProvider».class);''')
@@ -111,10 +109,12 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		bindingFactory.contributeTo(language.runtimeGenModule)
 	}
 	
-	def generateAbstractScopeProvider() {
-		val file = fileAccessFactory.createGeneratedJavaFile(grammar.abstractScopeProviderClass)
+	def generateGenScopeProvider() {
+		val genClass = if (generateStub) grammar.abstractScopeProviderClass else grammar.scopeProviderClass		
+		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
+		
 		file.content = '''
-			public class «grammar.abstractScopeProviderClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.scopeProviderSuperClass» {
 			}
 		'''
 		file.writeTo(projectConfig.runtime.srcGen)

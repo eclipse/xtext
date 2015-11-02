@@ -47,12 +47,10 @@ class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	}
 
 	override generate() {
-		if (projectConfig.eclipsePlugin?.manifest != null) {
-			projectConfig.eclipsePlugin?.manifest.requiredBundles += #[
-				"org.eclipse.xtext.ui", "org.eclipse.xtext.ui.codetemplates.ui"
-			]
-		}
-		
+		projectConfig.eclipsePlugin?.manifest?.requiredBundles?.addAll(#[
+			"org.eclipse.xtext.ui", "org.eclipse.xtext.ui.codetemplates.ui"
+		])
+
 		new GuiceModuleAccess.BindingFactory()
 				.addTypeToProviderInstance(
 					"org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration".typeRef,

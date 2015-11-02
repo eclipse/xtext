@@ -98,10 +98,11 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 		<example wizardID="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" pageImage="icons/genproject.gif">
 			<projectDescriptor name="org.eclipse.xtext.example.arithmetics" contentURI="contents/org.eclipse.xtext.example.arithmetics.zip" description="Contains the parser, serializer, linker, etc."/>
-			<projectDescriptor name="org.eclipse.xtext.example.arithmetics.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.tests.zip" description="The test bundle for the language"/>
-			<projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui.zip"  description="Contains Eclipse IDE integration (i.e. editor)"/>
+			<projectDescriptor name="org.eclipse.xtext.example.arithmetics.ide" contentURI="contents/org.eclipse.xtext.example.arithmetics.ide.zip" description="IDE independent tool services."/>
+			<projectDescriptor name="org.eclipse.xtext.example.arithmetics.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.tests.zip" description="Runtime tests for the language."/>
+			<projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui.zip"  description="Contains Eclipse IDE integration (i.e. editor)."/>
+			<projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui.tests.zip"  description="Eclipse IDE specific tests."/>
 			<fileToOpen location="org.eclipse.xtext.example.arithmetics/src/org/eclipse/xtext/example/arithmetics/Arithmetics.xtext"/>
-			<fileToOpen location="org.eclipse.xtext.example.arithmetics/src/org/eclipse/xtext/example/arithmetics/interpreter/Calculator.java"/>
 		</example>
 	</extension>
 

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.ui.templates;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
@@ -71,16 +70,13 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
     if (_eclipsePlugin!=null) {
       _manifest=_eclipsePlugin.getManifest();
     }
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
-      ManifestAccess _manifest_1 = null;
-      if (_eclipsePlugin_1!=null) {
-        _manifest_1=_eclipsePlugin_1.getManifest();
-      }
-      Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
-      Iterables.<String>addAll(_requiredBundles, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.codetemplates.ui")));
+    Set<String> _requiredBundles = null;
+    if (_manifest!=null) {
+      _requiredBundles=_manifest.getRequiredBundles();
+    }
+    if (_requiredBundles!=null) {
+      _requiredBundles.addAll(
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.codetemplates.ui")));
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration");
@@ -119,14 +115,14 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
-    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    IBundleProjectConfig _genericIde = _projectConfig_2.getGenericIde();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IBundleProjectConfig _genericIde = _projectConfig_1.getGenericIde();
     IXtextGeneratorFileSystemAccess _srcGen = null;
     if (_genericIde!=null) {
       _srcGen=_genericIde.getSrcGen();
     }
-    boolean _notEquals_1 = (!Objects.equal(_srcGen, null));
-    if (_notEquals_1) {
+    boolean _notEquals = (!Objects.equal(_srcGen, null));
+    if (_notEquals) {
       Grammar _grammar_1 = this.getGrammar();
       TypeReference _partialContentAssistParserClass_1 = this.getPartialContentAssistParserClass(_grammar_1);
       GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(_partialContentAssistParserClass_1);

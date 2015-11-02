@@ -389,8 +389,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     JarFileSystem _instance = JarFileSystem.getInstance();
     VirtualFile _file = file.getFile();
     final VirtualFile jarRoot = _instance.getRootByEntry(_file);
-    boolean _notEquals = (!Objects.equal(jarRoot, null));
-    if (_notEquals) {
+    if ((jarRoot != null)) {
       result.setJarRoot(jarRoot);
     } else {
       IdeaProjectConfig _projectConfig = this.getProjectConfig(file);

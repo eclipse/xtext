@@ -37,6 +37,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IGeneratorContext
+import org.eclipse.xtext.generator.GeneratorContext
 
 class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	
@@ -95,7 +98,12 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 				.contributeTo(language.runtimeGenModule)
 			if (projectConfig.runtime.manifest !== null)
 				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
-			doGenerateStubFile
+
+			if (codeConfig.preferXtendStubs) {
+				doGenerateXtendStubFile
+			} else {
+				doGenerateJavaStubFile
+			}
 		}
 		if (isGenerateStub || isGenerateJavaMain) {
 			if (projectConfig.runtime.manifest !== null)
@@ -132,26 +140,47 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			.contributeTo(language.eclipsePluginGenModule)
 	}
 
-	protected def void doGenerateStubFile() {
+	protected def void doGenerateXtendStubFile() {
 		fileAccessFactory.createXtendFile(grammar.generatorStub, '''
 			/**
 			 * Generates code from your model files on save.
 			 * 
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
 			 */
-			class «language.grammar.generatorStub.simpleName» implements «IGenerator2» {
+			class «language.grammar.generatorStub.simpleName» extends «AbstractGenerator» {
 			
-				override void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «CancelIndicator» cancelIndicator) {
+				override void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
 			//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 			//			resource.allContents
 			//				.filter(typeof(Greeting))
 			//				.map[name]
 			//				.join(', '))
 				}
-				
-				override void beforeGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «CancelIndicator» cancelIndicator) {}
-				
-				override void afterGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «CancelIndicator» cancelIndicator) {}
+			}
+		''').writeTo(projectConfig.runtime.src)
+	}
+
+	protected def void doGenerateJavaStubFile() {
+		fileAccessFactory.createJavaFile(grammar.generatorStub, '''
+			/**
+			 * Generates code from your model files on save.
+			 * 
+			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
+			 */
+			public class «language.grammar.generatorStub.simpleName» extends «AbstractGenerator» {
+
+				@«Override»
+				public void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
+			//		Iterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);
+			//		Iterator<String> names = Iterators.transform(filtered, new Function<Greeting, String>() {
+			//
+			//			@«Override»
+			//			public String apply(Greeting greeting) {
+			//				return greeting.getName();
+			//			}
+			//		});
+			//		fsa.generateFile("greetings.txt", "People to greet: " + IteratorExtensions.join(names, ", "));
+				}
 			}
 		''').writeTo(projectConfig.runtime.src)
 	}
@@ -198,7 +227,9 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			
 					// Configure and start the generator
 					fileAccess.setOutputPath("src-gen/");
-					generator.generate(resource, fileAccess, «CancelIndicator».NullImpl);
+					«GeneratorContext» context = new «GeneratorContext»();
+					context.setCancelIndicator(«CancelIndicator».NullImpl);
+					generator.generate(resource, fileAccess, context);
 			
 					System.out.println("Code generation finished.");
 				}
@@ -242,7 +273,10 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			
 					// Configure and start the generator
 					fileAccess.outputPath = 'src-gen/'
-					generator.generate(resource, fileAccess, «CancelIndicator».NullImpl)
+					val context = new «GeneratorContext» => [
+						cancelIndicator = «CancelIndicator».NullImpl
+					]
+					generator.generate(resource, fileAccess, context)
 					System.out.println('Code generation finished.')
 				}
 			}
@@ -293,8 +327,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			<extension point="org.eclipse.xtext.builder.participant">
 				<participant
 					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-					fileExtensions="«language.fileExtensions.join(',')»">
-				</participant>
+					fileExtensions="«language.fileExtensions.join(',')»"/>
 			</extension>
 			<extension point="org.eclipse.ui.preferencePages">
 				<page

@@ -74,7 +74,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	public static class PackageFragmentRootData {
 		public URI uriPrefix;
 		public final Object modificationStamp;
-		public final Map<String, IPackageFragmentRoot> associatedRoots;
+		public Map<String, IPackageFragmentRoot> associatedRoots;
 		public Map<URI, IStorage> uri2Storage = newLinkedHashMap();
 
 		public PackageFragmentRootData(Object modificationStamp) {
@@ -88,22 +88,30 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 
 		public boolean exists() {
-			if (associatedRoots.isEmpty()) {
+			Map<String, IPackageFragmentRoot> roots = associatedRoots;
+			if (roots.isEmpty()) {
 				return false;
 			}
-			return IterableExtensions.head(associatedRoots.values()).exists();
+			return IterableExtensions.head(roots.values()).exists();
 		}
 
 		public IPath getPath() {
-			if (associatedRoots.isEmpty()) {
+			Map<String, IPackageFragmentRoot> roots = associatedRoots;
+			if (roots.isEmpty()) {
 				return null;
 			}
-			return IterableExtensions.head(associatedRoots.values()).getPath();
+			return IterableExtensions.head(roots.values()).getPath();
 		}
 
 		public void addRoot(IPackageFragmentRoot root) {
 			if (root != null) {
-				associatedRoots.put(root.getHandleIdentifier(), root);
+				String handleIdentifier = root.getHandleIdentifier();
+				Map<String, IPackageFragmentRoot> roots = associatedRoots;
+				if (!root.equals(roots.get(handleIdentifier))) {
+					Map<String,IPackageFragmentRoot> copy = newLinkedHashMap(roots);
+					copy.put(handleIdentifier, root);
+					associatedRoots = copy;
+				}
 			}
 		}
 
@@ -467,7 +475,10 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			if (toBeKept.contains(data)) {
 				continue;
 			}
-			Iterator<IPackageFragmentRoot> i = data.associatedRoots.values().iterator();
+			// create a copy of the known associated roots to avoid concurrent modification
+			// and conflicts with other readers
+			Map<String, IPackageFragmentRoot> copy = newLinkedHashMap(data.associatedRoots);
+			Iterator<IPackageFragmentRoot> i = copy.values().iterator();
 			IPackageFragmentRoot someRoot = null;
 			boolean didChange = false;
 			while (i.hasNext()) {
@@ -479,11 +490,12 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 					someRoot = root;
 				}
 			}
-			if (data.associatedRoots.size() == 0) {
+			if (copy.size() == 0) {
 				toBeRemoved.add(data);
 			} else if (didChange) {
 				// get rid of cached storages that still point to roots / projects that are no longer available
 				// and recompute them lazily on demand
+				data.associatedRoots = copy;
 				final IPackageFragmentRoot rootToProcess = someRoot;
 				data.uri2Storage = new ForwardingMap<URI, IStorage>() {
 					Map<URI, IStorage> delegate;

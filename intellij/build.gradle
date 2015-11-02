@@ -18,6 +18,10 @@ if (version.endsWith("-SNAPSHOT")) {
 }
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**', '**/*common.types.tests*/**'
 
+runIdea {
+	jvmArgs '-ea'
+}
+
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
@@ -40,6 +44,7 @@ configure(subprojects - eclipsePluginProjects) {
 
 	dependencies {
 		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
+		ideaProvided (project(":plugins:org.eclipse.xtend.lib")) { transitive = false }
 	}
 
 	if (!isBuildServer) {

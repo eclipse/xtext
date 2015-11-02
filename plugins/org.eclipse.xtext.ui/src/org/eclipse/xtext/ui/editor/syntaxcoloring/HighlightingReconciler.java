@@ -329,19 +329,24 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			new Job("calculating highlighting") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					((XtextDocument) sourceViewer.getDocument()).readOnly(new CancelableUnitOfWork<Void,XtextResource>() {
-						@Override
-						public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator)
-								throws Exception {
-							beforeRefresh(state, cancelIndicator);
-							modelChanged(state, cancelIndicator);
-							return null;
+					XtextSourceViewer mySourceViewer = sourceViewer;
+					if (mySourceViewer != null) {
+						IXtextDocument document = (IXtextDocument) mySourceViewer.getDocument();
+						if (document != null) {
+							document.readOnly(new CancelableUnitOfWork<Void,XtextResource>() {
+								@Override
+								public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator)
+										throws Exception {
+									beforeRefresh(state, cancelIndicator);
+									modelChanged(state, cancelIndicator);
+									return null;
+								}
+							});
 						}
-					});
+					}
 					return Status.OK_STATUS;
 				}
 			}.schedule();
-			
 		} else {
 			Display display = getDisplay();
 			display.asyncExec(presenter.createSimpleUpdateRunnable());

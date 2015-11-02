@@ -3,6 +3,9 @@
 	<Match>
 		<Class name="~.*\.antlr\.internal.*" />
 	</Match>
+		<Match>
+		<Class name="~org\.gradle\..*" />
+	</Match>
 	<Match>
 		<Class name="~.*Lexer(\$.*)?" />
 	</Match>

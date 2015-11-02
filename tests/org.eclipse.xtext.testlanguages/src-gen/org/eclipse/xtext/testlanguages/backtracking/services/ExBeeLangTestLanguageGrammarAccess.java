@@ -3,20 +3,19 @@
  */
 package org.eclipse.xtext.testlanguages.backtracking.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
 
 @Singleton
 public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class DelegateModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage.DelegateModel");
@@ -25,7 +24,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//DelegateModel Model:
 		//	Model
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
 	}
@@ -34,12 +33,12 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
-
+	
 	private final BeeLangTestLanguageGrammarAccess gaBeeLangTestLanguage;
 
 	@Inject
 	public ExBeeLangTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		BeeLangTestLanguageGrammarAccess gaBeeLangTestLanguage) {
+			BeeLangTestLanguageGrammarAccess gaBeeLangTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBeeLangTestLanguage = gaBeeLangTestLanguage;
 		this.pDelegateModel = new DelegateModelElements();
@@ -66,7 +65,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public BeeLangTestLanguageGrammarAccess getBeeLangTestLanguageGrammarAccess() {
 		return gaBeeLangTestLanguage;
 	}
@@ -81,7 +80,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getDelegateModelRule() {
 		return getDelegateModelAccess().getRule();
 	}
-
+	
 	//// Initially copied from BeeLang.xtext rev 1029
 	//Model:
 	//	units+=Unit*
@@ -93,7 +92,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Unit:
 	//	{Unit} documentation=DOCUMENTATION?
 	//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
@@ -111,7 +110,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getUnitRule() {
 		return getUnitAccess().getRule();
 	}
-
+	
 	//ProvidedCapability:
 	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' (('when' ':' condExpr=Expression ';')?
 	//	& "name" ':' name=ID ';' & ("version" ':' version=ID ';')?)
@@ -123,7 +122,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getProvidedCapabilityRule() {
 		return getProvidedCapabilityAccess().getRule();
 	}
-
+	
 	//AliasedRequiredCapability:
 	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' (('when' ':' condExpr=Expression ';')?
 	//	& (greedy?="greedy" ';')?
@@ -138,7 +137,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getAliasedRequiredCapabilityRule() {
 		return getAliasedRequiredCapabilityAccess().getRule();
 	}
-
+	
 	//RequiredCapability:
 	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' (('when' ':' condExpr=Expression ';')?
 	//	& (greedy?="greedy" ';')?
@@ -153,7 +152,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getRequiredCapabilityRule() {
 		return getRequiredCapabilityAccess().getRule();
 	}
-
+	
 	//Path hidden():
 	//	STRING
 	//	| '/'? QID ('/' QID)* '/'?;
@@ -164,7 +163,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPathRule() {
 		return getPathAccess().getRule();
 	}
-
+	
 	//ParameterList:
 	//	parameters+=FirstParameter ("," parameters+=FirstParameter)*;
 	public BeeLangTestLanguageGrammarAccess.ParameterListElements getParameterListAccess() {
@@ -174,7 +173,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterListRule() {
 		return getParameterListAccess().getRule();
 	}
-
+	
 	//FirstParameter Parameter:
 	//	ClosureParameter
 	//	| Parameter
@@ -185,7 +184,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFirstParameterRule() {
 		return getFirstParameterAccess().getRule();
 	}
-
+	
 	//Parameter:
 	//	expr=Expression;
 	public BeeLangTestLanguageGrammarAccess.ParameterElements getParameterAccess() {
@@ -195,7 +194,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterRule() {
 		return getParameterAccess().getRule();
 	}
-
+	
 	//ClosureParameter:
 	//	expr=ClosureExpression;
 	public BeeLangTestLanguageGrammarAccess.ClosureParameterElements getClosureParameterAccess() {
@@ -205,7 +204,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getClosureParameterRule() {
 		return getClosureParameterAccess().getRule();
 	}
-
+	
 	//ParameterDeclaration:
 	//	type=TypeRef? name=ID;
 	public BeeLangTestLanguageGrammarAccess.ParameterDeclarationElements getParameterDeclarationAccess() {
@@ -215,7 +214,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterDeclarationRule() {
 		return getParameterDeclarationAccess().getRule();
 	}
-
+	
 	//Function:
 	//	documentation=DOCUMENTATION?
 	//	visibility=ID?
@@ -232,7 +231,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFunctionRule() {
 		return getFunctionAccess().getRule();
 	}
-
+	
 	//GuardExpression:
 	//	':' guardExpr=Expression ';' | guardExpr=BlockExpression;
 	public BeeLangTestLanguageGrammarAccess.GuardExpressionElements getGuardExpressionAccess() {
@@ -242,7 +241,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getGuardExpressionRule() {
 		return getGuardExpressionAccess().getRule();
 	}
-
+	
 	//AssignmentOperator:
 	//	'=' | '+=' | '-=' | '*=' | '/=' | "%=";
 	public BeeLangTestLanguageGrammarAccess.AssignmentOperatorElements getAssignmentOperatorAccess() {
@@ -252,7 +251,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getAssignmentOperatorRule() {
 		return getAssignmentOperatorAccess().getRule();
 	}
-
+	
 	//RelationalOperator:
 	//	"~=" | "==" | "===" | "!=" | "!=="
 	//	| ">=" | "<=" | ">" | "<";
@@ -263,7 +262,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getRelationalOperatorRule() {
 		return getRelationalOperatorAccess().getRule();
 	}
-
+	
 	//TopLevelExpression Expression:
 	//	VarDeclaration
 	//	| ValDeclaration
@@ -275,7 +274,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getTopLevelExpressionRule() {
 		return getTopLevelExpressionAccess().getRule();
 	}
-
+	
 	//Expression:
 	//	AssignmentExpression;
 	public BeeLangTestLanguageGrammarAccess.ExpressionElements getExpressionAccess() {
@@ -285,7 +284,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getExpressionRule() {
 		return getExpressionAccess().getRule();
 	}
-
+	
 	//AssignmentExpression Expression:
 	//	CachedExpression ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator
 	//	rightExpr=AssignmentExpression)?
@@ -296,7 +295,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getAssignmentExpressionRule() {
 		return getAssignmentExpressionAccess().getRule();
 	}
-
+	
 	//VarDeclaration Expression:
 	//	{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ('=' valueExpr=Expression)?
 	public BeeLangTestLanguageGrammarAccess.VarDeclarationElements getVarDeclarationAccess() {
@@ -306,7 +305,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getVarDeclarationRule() {
 		return getVarDeclarationAccess().getRule();
 	}
-
+	
 	//ValDeclaration Expression:
 	//	{DefValue} final?="final"?
 	//	immutable?="val" type=TypeRef? name=ID
@@ -318,7 +317,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getValDeclarationRule() {
 		return getValDeclarationAccess().getRule();
 	}
-
+	
 	//TypeRef:
 	//	ClosureTypeRef
 	//	| SimpleTypeRef;
@@ -329,7 +328,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getTypeRefRule() {
 		return getTypeRefAccess().getRule();
 	}
-
+	
 	//SimpleTypeRef:
 	//	rawType=ID ('<' actualArgumentsList+=ID (',' actualArgumentsList+=ID)* '>')?;
 	public BeeLangTestLanguageGrammarAccess.SimpleTypeRefElements getSimpleTypeRefAccess() {
@@ -339,7 +338,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getSimpleTypeRefRule() {
 		return getSimpleTypeRefAccess().getRule();
 	}
-
+	
 	//ClosureTypeRef:
 	//	'(' (parameterTypes+=ID (',' parameterTypes+=ID)* (',' varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
 	//	parameterTypes+=ID)?
@@ -351,7 +350,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getClosureTypeRefRule() {
 		return getClosureTypeRefAccess().getRule();
 	}
-
+	
 	//CachedExpression Expression:
 	//	{CachedExpression} "cached" expr=OrExpression | OrExpression
 	public BeeLangTestLanguageGrammarAccess.CachedExpressionElements getCachedExpressionAccess() {
@@ -361,7 +360,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCachedExpressionRule() {
 		return getCachedExpressionAccess().getRule();
 	}
-
+	
 	//OrExpression Expression:
 	//	AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*
 	public BeeLangTestLanguageGrammarAccess.OrExpressionElements getOrExpressionAccess() {
@@ -371,7 +370,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getOrExpressionRule() {
 		return getOrExpressionAccess().getRule();
 	}
-
+	
 	//AndExpression Expression:
 	//	RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*
 	public BeeLangTestLanguageGrammarAccess.AndExpressionElements getAndExpressionAccess() {
@@ -381,7 +380,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getAndExpressionRule() {
 		return getAndExpressionAccess().getRule();
 	}
-
+	
 	//RelationalExpression Expression:
 	//	AdditiveExpression ({BinaryOpExpression.leftExpr=current} functionName=RelationalOperator
 	//	rightExpr=AdditiveExpression)*
@@ -392,7 +391,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getRelationalExpressionRule() {
 		return getRelationalExpressionAccess().getRule();
 	}
-
+	
 	//AdditiveExpression Expression:
 	//	MultiplicativeExpression ({BinaryOpExpression.leftExpr=current} functionName=("+" | "-")
 	//	rightExpr=MultiplicativeExpression)*
@@ -403,7 +402,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getAdditiveExpressionRule() {
 		return getAdditiveExpressionAccess().getRule();
 	}
-
+	
 	//MultiplicativeExpression Expression:
 	//	SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*
 	public BeeLangTestLanguageGrammarAccess.MultiplicativeExpressionElements getMultiplicativeExpressionAccess() {
@@ -413,7 +412,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getMultiplicativeExpressionRule() {
 		return getMultiplicativeExpressionAccess().getRule();
 	}
-
+	
 	//SetExpression Expression:
 	//	UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*
 	public BeeLangTestLanguageGrammarAccess.SetExpressionElements getSetExpressionAccess() {
@@ -423,7 +422,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getSetExpressionRule() {
 		return getSetExpressionAccess().getRule();
 	}
-
+	
 	//UnaryOrInfixExpression Expression:
 	//	PostopExpression
 	//	| UnaryExpression
@@ -435,7 +434,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getUnaryOrInfixExpressionRule() {
 		return getUnaryOrInfixExpressionAccess().getRule();
 	}
-
+	
 	//UnaryExpression Expression:
 	//	{UnaryOpExpression} functionName=("!" | "-") expr=InfixExpression
 	public BeeLangTestLanguageGrammarAccess.UnaryExpressionElements getUnaryExpressionAccess() {
@@ -445,7 +444,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getUnaryExpressionRule() {
 		return getUnaryExpressionAccess().getRule();
 	}
-
+	
 	//PreopExpression Expression:
 	//	{UnaryPreOpExpression} functionName=("++" | "--") expr=InfixExpression
 	public BeeLangTestLanguageGrammarAccess.PreopExpressionElements getPreopExpressionAccess() {
@@ -455,7 +454,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPreopExpressionRule() {
 		return getPreopExpressionAccess().getRule();
 	}
-
+	
 	//PostopExpression Expression:
 	//	InfixExpression ({UnaryPostOpExpression.expr=current} functionName=("--" | "++"))?
 	public BeeLangTestLanguageGrammarAccess.PostopExpressionElements getPostopExpressionAccess() {
@@ -465,7 +464,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPostopExpressionRule() {
 		return getPostopExpressionAccess().getRule();
 	}
-
+	
 	//InfixExpression Expression:
 	//	CallExpression ({CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")" |
 	//	{AtExpression.objExpr=current} '[' indexExpr=Expression ']' | {FeatureExpression.objExpr=current} "." featureName=ID)*
@@ -476,7 +475,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getInfixExpressionRule() {
 		return getInfixExpressionAccess().getRule();
 	}
-
+	
 	//CallExpression Expression:
 	//	PrimaryExpression ({CallFunction.funcExpr=current} "(" parameterList=ParameterList? ")")*
 	public BeeLangTestLanguageGrammarAccess.CallExpressionElements getCallExpressionAccess() {
@@ -486,7 +485,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCallExpressionRule() {
 		return getCallExpressionAccess().getRule();
 	}
-
+	
 	//PrimaryExpression Expression:
 	//	FeatureCall
 	//	| ConstructorCallExpression
@@ -504,7 +503,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPrimaryExpressionRule() {
 		return getPrimaryExpressionAccess().getRule();
 	}
-
+	
 	//WithExpression:
 	//	'with' (referencedAdvice+=ID (',' referencedAdvice+=ID)*)? (':' funcExpr=Expression | '{'
 	//	funcExpr=BlockExpressionWithoutBrackets '}');
@@ -515,7 +514,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getWithExpressionRule() {
 		return getWithExpressionAccess().getRule();
 	}
-
+	
 	//WithContextExpression:
 	//	"with" "context" expr=Expression ("as" alias=ID)? contextBlock=BlockExpression;
 	public BeeLangTestLanguageGrammarAccess.WithContextExpressionElements getWithContextExpressionAccess() {
@@ -525,7 +524,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getWithContextExpressionRule() {
 		return getWithContextExpressionAccess().getRule();
 	}
-
+	
 	//BlockExpression Expression:
 	//	{ChainedExpression}
 	//	'{' (expressions+=TopLevelExpression ';')* '}'
@@ -536,7 +535,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getBlockExpressionRule() {
 		return getBlockExpressionAccess().getRule();
 	}
-
+	
 	//Value Expression:
 	//	{VariableExpression} name=ID
 	public BeeLangTestLanguageGrammarAccess.ValueElements getValueAccess() {
@@ -546,7 +545,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getValueRule() {
 		return getValueAccess().getRule();
 	}
-
+	
 	//KeywordVariables Expression:
 	//	{VariableExpression} name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this")
 	public BeeLangTestLanguageGrammarAccess.KeywordVariablesElements getKeywordVariablesAccess() {
@@ -556,7 +555,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getKeywordVariablesRule() {
 		return getKeywordVariablesAccess().getRule();
 	}
-
+	
 	//FeatureCall Expression:
 	//	OperationCall
 	public BeeLangTestLanguageGrammarAccess.FeatureCallElements getFeatureCallAccess() {
@@ -566,7 +565,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFeatureCallRule() {
 		return getFeatureCallAccess().getRule();
 	}
-
+	
 	//OperationCall CallExpression:
 	//	{CallNamedFunction} name=ID
 	//	'(' parameterList=ParameterList? ')'
@@ -577,7 +576,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getOperationCallRule() {
 		return getOperationCallAccess().getRule();
 	}
-
+	
 	//ConstructorCallExpression Expression:
 	//	{CreateExpression}
 	//	"new" typeExpr=ID ('(' parameterList=ParameterList? ')')? ("as" alias=ID)?
@@ -589,7 +588,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getConstructorCallExpressionRule() {
 		return getConstructorCallExpressionAccess().getRule();
 	}
-
+	
 	//InitializationBlockExpression Expression:
 	//	{ChainedExpression}
 	//	'{' expressions+=InitializationExpression ';' '}'
@@ -600,7 +599,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getInitializationBlockExpressionRule() {
 		return getInitializationBlockExpressionAccess().getRule();
 	}
-
+	
 	//InitializationExpression Expression:
 	//	{AssignmentExpression} leftExpr=FeatureOfThis functionName=":" rightExpr=Expression
 	public BeeLangTestLanguageGrammarAccess.InitializationExpressionElements getInitializationExpressionAccess() {
@@ -610,7 +609,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getInitializationExpressionRule() {
 		return getInitializationExpressionAccess().getRule();
 	}
-
+	
 	//FeatureOfThis Expression:
 	//	{FeatureExpression} featureName=ID
 	public BeeLangTestLanguageGrammarAccess.FeatureOfThisElements getFeatureOfThisAccess() {
@@ -620,7 +619,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFeatureOfThisRule() {
 		return getFeatureOfThisAccess().getRule();
 	}
-
+	
 	//Literal Expression:
 	//	ValueLiteral
 	//	| LiteralFunction
@@ -631,7 +630,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLiteralRule() {
 		return getLiteralAccess().getRule();
 	}
-
+	
 	//LiteralFunction Expression:
 	//	'{' ClosureExpression '}'
 	public BeeLangTestLanguageGrammarAccess.LiteralFunctionElements getLiteralFunctionAccess() {
@@ -641,7 +640,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLiteralFunctionRule() {
 		return getLiteralFunctionAccess().getRule();
 	}
-
+	
 	//ClosureExpression Expression:
 	//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (','
 	//	parameters+=ParameterDeclaration)* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
@@ -654,7 +653,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getClosureExpressionRule() {
 		return getClosureExpressionAccess().getRule();
 	}
-
+	
 	//OneOrManyExpressions Expression:
 	//	BlockExpressionWithoutBrackets
 	//	| Expression
@@ -665,7 +664,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getOneOrManyExpressionsRule() {
 		return getOneOrManyExpressionsAccess().getRule();
 	}
-
+	
 	//BlockExpressionWithoutBrackets Expression:
 	//	{ChainedExpression} (expressions+=TopLevelExpression ';')+
 	public BeeLangTestLanguageGrammarAccess.BlockExpressionWithoutBracketsElements getBlockExpressionWithoutBracketsAccess() {
@@ -675,7 +674,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getBlockExpressionWithoutBracketsRule() {
 		return getBlockExpressionWithoutBracketsAccess().getRule();
 	}
-
+	
 	//ValueLiteral:
 	//	value=STRING;
 	public BeeLangTestLanguageGrammarAccess.ValueLiteralElements getValueLiteralAccess() {
@@ -685,7 +684,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getValueLiteralRule() {
 		return getValueLiteralAccess().getRule();
 	}
-
+	
 	//ParanthesizedExpression Expression:
 	//	'(' Expression ')'
 	public BeeLangTestLanguageGrammarAccess.ParanthesizedExpressionElements getParanthesizedExpressionAccess() {
@@ -695,7 +694,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParanthesizedExpressionRule() {
 		return getParanthesizedExpressionAccess().getRule();
 	}
-
+	
 	//// Qualified name
 	//QID hidden():
 	//	ID (INT | HEX | ID)* ('.' ID (INT | HEX | ID)*)*;
@@ -706,59 +705,59 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getQIDRule() {
 		return getQIDAccess().getRule();
 	}
-
+	
 	//terminal DOCUMENTATION:
 	//	'/ **'->'* /';
 	public TerminalRule getDOCUMENTATIONRule() {
 		return gaBeeLangTestLanguage.getDOCUMENTATIONRule();
-	} 
-
+	}
+	
 	//terminal HEX:
 	//	'0' ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBeeLangTestLanguage.getHEXRule();
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaBeeLangTestLanguage.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaBeeLangTestLanguage.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaBeeLangTestLanguage.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaBeeLangTestLanguage.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaBeeLangTestLanguage.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaBeeLangTestLanguage.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaBeeLangTestLanguage.getANY_OTHERRule();
-	} 
+	}
 }

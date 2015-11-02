@@ -12,6 +12,9 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
 class RuntimeProjectDescriptor extends TestedProjectDescriptor {
+	
+	val String MWE2_VERSION = "[2.8.2,3.0)"
+	
 	val grammarCreator = new Ecore2XtextGrammarCreator
 	val RuntimeTestProjectDescriptor testProject
 	
@@ -28,6 +31,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	String nameQualifier = ''
+	
 	
 	override getNameQualifier() {
 		nameQualifier
@@ -252,6 +256,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 
 				dependencies {
+					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«MWE2_VERSION»"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 				}
 				
@@ -324,6 +329,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							«IF config.needsTychoBuild»
 								<dependencies>
 									<dependency>
+										<groupId>org.eclipse.emf</groupId>
+										<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+										<version>«MWE2_VERSION»</version>
+									</dependency>
+									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
 										<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
 										<version>${xtextVersion}</version>
@@ -350,11 +360,17 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 										«IF p.enabled»
 											<fileset>
 												<directory>${basedir}/../«p.name»/«Outlet.MAIN_SRC_GEN.sourceFolder»/</directory>
+												<includes>
+													<include>**/*</include>
+												</includes>
 											</fileset>
 											«IF p instanceof TestedProjectDescriptor»
 												«IF p.testProject.enabled»
 													<fileset>
 														<directory>${basedir}/../«if(p.testProject.isInlined) p.name else p.testProject.name»/«Outlet.TEST_SRC_GEN.sourceFolder»/</directory>
+														<includes>
+															<include>**/*</include>
+														</includes>
 													</fileset>
 												«ENDIF»
 											«ENDIF»

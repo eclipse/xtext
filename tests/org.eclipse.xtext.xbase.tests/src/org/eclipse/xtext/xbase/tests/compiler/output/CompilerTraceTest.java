@@ -67,17 +67,17 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 
 		@Override
 		/* @NonNull */
-		protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
+		protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri) throws IOException {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
+		protected Reader getContentsAsText(SourceRelativeURI uri) throws IOException {
 			return null;
 		}
 
 		@Override
-		protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+		protected Reader getLocalContentsAsText() throws IOException {
 			return null;
 		}
 		

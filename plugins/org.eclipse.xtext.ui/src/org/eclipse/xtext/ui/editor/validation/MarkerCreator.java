@@ -46,6 +46,7 @@ public class MarkerCreator {
 		if(issue.getOffset() != null && issue.getLength() != null)
 			marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
 		marker.setAttribute(IMarker.LINE_NUMBER, issue.getLineNumber());
+		marker.setAttribute(Issue.COLUMN_KEY, issue.getColumn());
 		marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
 
 		if (issue.getUriToProblem()!=null) 

@@ -14,7 +14,6 @@ import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
 import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.parser.antlr.Bug378967Test;
 import org.eclipse.xtext.parser.antlr.idea.Bug378967TestLanguageStandaloneSetupIdea;
-import org.eclipse.xtext.parser.antlr.idea.lang.Bug378967TestLanguageFileType;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug378967TestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -43,19 +42,13 @@ public class IdeaBug378967Test extends AbstractLanguageParsingTestCase {
     protected boolean shouldTestSerializer(final XtextResource resource) {
       return false;
     }
-    
-    public Delegate(final ModelChecker modelChecker) {
-      super();
-      this.modelChecker = modelChecker;
-    }
   }
   
   private IdeaBug378967Test.Delegate delegate;
   
   public IdeaBug378967Test() {
-    super(Bug378967TestLanguageFileType.INSTANCE);
-    IdeaBug378967Test.Delegate _delegate = new IdeaBug378967Test.Delegate(this);
-    this.delegate = _delegate;
+    throw new Error("Unresolved compilation problems:"
+      + "\nInvalid number of arguments. The constructor Delegate() is not applicable for the arguments (IdeaBug378967Test)");
   }
   
   @Override
@@ -75,21 +68,5 @@ public class IdeaBug378967Test extends AbstractLanguageParsingTestCase {
     NodeModelPrinter _nodeModelPrinter = _xtextResourceAsserts.getNodeModelPrinter();
     _nodeModelPrinter.setIgnoreSyntaxErrors(true);
     this.delegate.setUp();
-  }
-  
-  public void test1() throws Exception {
-    delegate.test1();
-  }
-  
-  public void test2() throws Exception {
-    delegate.test2();
-  }
-  
-  public void test3() throws Exception {
-    delegate.test3();
-  }
-  
-  public void test4() throws Exception {
-    delegate.test4();
   }
 }
