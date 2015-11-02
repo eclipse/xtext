@@ -42,7 +42,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override isEclipsePluginProject() {
-		config.preferredBuildSystem == BuildSystem.ECLIPSE || config.uiProject.enabled
+		config.preferredBuildSystem == BuildSystem.NONE || config.uiProject.enabled
 	}
 	
 	override isPartOfGradleBuild() {
