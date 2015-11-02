@@ -269,21 +269,32 @@ public class AdvancedNewProjectPage extends WizardPage {
       if (_and_3) {
         this.<Control>reportIssue(IMessageProvider.WARNING, "Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created");
       }
+      boolean _and_4 = false;
+      boolean _isSelected_4 = this.isSelected(this.preferredBuildSystem, BuildSystem.NONE);
+      if (!_isSelected_4) {
+        _and_4 = false;
+      } else {
+        boolean _selection_2 = this.createIdeaProject.getSelection();
+        _and_4 = _selection_2;
+      }
+      if (_and_4) {
+        this.<Control>reportIssue(IMessageProvider.INFORMATION, "IntelliJ Plugin requires Gradle build. An additional Gradle build will be created");
+      }
       Object _source = null;
       if (e!=null) {
         _source=e.getSource();
       }
       final Object source = _source;
-      boolean _and_4 = false;
-      boolean _selection_2 = this.createUiProject.getSelection();
-      if (!_selection_2) {
-        _and_4 = false;
+      boolean _and_5 = false;
+      boolean _selection_3 = this.createUiProject.getSelection();
+      if (!_selection_3) {
+        _and_5 = false;
       } else {
-        boolean _isSelected_4 = this.isSelected(this.sourceLayout, SourceLayout.PLAIN);
-        boolean _not_2 = (!_isSelected_4);
-        _and_4 = _not_2;
+        boolean _isSelected_5 = this.isSelected(this.sourceLayout, SourceLayout.PLAIN);
+        boolean _not_2 = (!_isSelected_5);
+        _and_5 = _not_2;
       }
-      if (_and_4) {
+      if (_and_5) {
         if ((this.createUiProject == source)) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("\'");
@@ -324,21 +335,21 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder_1.toString(), _function_1);
         }
       }
-      boolean _and_5 = false;
-      boolean _selection_3 = this.createWebProject.getSelection();
-      if (!_selection_3) {
-        _and_5 = false;
+      boolean _and_6 = false;
+      boolean _selection_4 = this.createWebProject.getSelection();
+      if (!_selection_4) {
+        _and_6 = false;
       } else {
-        boolean _isSelected_5 = this.isSelected(this.preferredBuildSystem, BuildSystem.ECLIPSE);
-        _and_5 = _isSelected_5;
+        boolean _isSelected_6 = this.isSelected(this.preferredBuildSystem, BuildSystem.NONE);
+        _and_6 = _isSelected_6;
       }
-      if (_and_5) {
+      if (_and_6) {
         if ((this.preferredBuildSystem == source)) {
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("The \'");
           String _text_3 = this.createWebProject.getText();
           _builder_2.append(_text_3, "");
-          _builder_2.append("\' project can not be build using Eclipse-PDE build.");
+          _builder_2.append("\' project can not be build without a build system.");
           _builder_2.newLineIfNotEmpty();
           _builder_2.append("Please <a>deselect \'");
           String _text_4 = this.createWebProject.getText();
@@ -370,11 +381,11 @@ public class AdvancedNewProjectPage extends WizardPage {
       }
       final List<Button> dependend = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
       Procedure0 _xifexpression = null;
-      boolean _and_6 = false;
-      boolean _selection_4 = this.createIdeProject.getSelection();
-      boolean _not_3 = (!_selection_4);
+      boolean _and_7 = false;
+      boolean _selection_5 = this.createIdeProject.getSelection();
+      boolean _not_3 = (!_selection_5);
       if (!_not_3) {
-        _and_6 = false;
+        _and_7 = false;
       } else {
         final Function1<Button, Boolean> _function_4 = new Function1<Button, Boolean>() {
           @Override
@@ -383,9 +394,9 @@ public class AdvancedNewProjectPage extends WizardPage {
           }
         };
         boolean _exists = IterableExtensions.<Button>exists(dependend, _function_4);
-        _and_6 = _exists;
+        _and_7 = _exists;
       }
-      if (_and_6) {
+      if (_and_7) {
         Procedure0 _xblockexpression_1 = null;
         {
           final Function1<Button, Boolean> _function_5 = new Function1<Button, Boolean>() {

@@ -127,6 +127,9 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && createIdeaProject.selection) {
 			reportIssue(WARNING, 'Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created')
 		}
+		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && createIdeaProject.selection) {
+			reportIssue(INFORMATION, 'IntelliJ Plugin requires Gradle build. An additional Gradle build will be created')
+		}
 
 		val source = e?.source
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
@@ -145,10 +148,10 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		}
 
-		if (createWebProject.selection && preferredBuildSystem.isSelected(BuildSystem.ECLIPSE)) {
+		if (createWebProject.selection && preferredBuildSystem.isSelected(BuildSystem.NONE)) {
 			if (preferredBuildSystem === source) {
 				reportIssue(ERROR, '''
-				The '«createWebProject.text»' project can not be build using Eclipse-PDE build.
+				The '«createWebProject.text»' project can not be build without a build system.
 				Please <a>deselect '«createWebProject.text»'</a>.''', [
 					createWebProject.selection = false
 				])

@@ -48,7 +48,7 @@ public class WizardConfiguration {
   
   private Charset encoding = Charset.defaultCharset();
   
-  private BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE;
+  private BuildSystem preferredBuildSystem = BuildSystem.NONE;
   
   private SourceLayout sourceLayout = SourceLayout.PLAIN;
   

@@ -83,7 +83,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     boolean _or = false;
     WizardConfiguration _config = this.getConfig();
     BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
-    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.ECLIPSE);
+    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.NONE);
     if (_equals) {
       _or = true;
     } else {
