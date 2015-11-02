@@ -795,7 +795,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileParserDefinition(Grammar grammar) {
-		val EObjectRules = grammar.EObjectRules.toList
+		val EObjectRules = grammar.allRules.filter[EObjectRule].toList
 		val namedEObjectRules = EObjectRules.filter[named].toList
 		'''
 			package «grammar.parserDefinitionName.toPackageName»;
@@ -856,6 +856,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 						}
 						«ENDIF»
 						«IF element instanceof RuleCall»
+						«IF element.EObjectRuleCall»
 						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
 							«IF namedEObjectRules.contains(element.rule)»
 							return new PsiNamedEObjectImpl(node) {};
@@ -863,6 +864,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 							return new PsiEObjectImpl(node) {};
 							«ENDIF»
 						}
+						«ENDIF»
 						«ENDIF»
 						«ENDFOR»
 						«ENDFOR»
@@ -874,22 +876,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			
 			}
 		'''
-	}
-	
-	protected def getEObjectRules(Grammar grammar) {
-		grammar.allRules.filter[EObjectRule]
-	}
-	
-	protected def getEObjectElements(AbstractRule rule) {
-		rule.eAllOfType(AbstractElement).filter [ element |
-			switch element {
-				Action,
-				RuleCall case element.EObjectRuleCall:
-					true
-				default:
-					false
-			}
-		]
 	}
 	
 	protected def isNamed(AbstractRule rule) {

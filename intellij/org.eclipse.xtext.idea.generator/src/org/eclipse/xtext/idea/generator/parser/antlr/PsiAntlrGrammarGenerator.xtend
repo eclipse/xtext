@@ -378,13 +378,13 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 					{
 						«markLeaf»
 					}
+					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
 						if(!$current) {
 							«associateWithSemanticElement»
 							$current = true;
 						}
 					}
-					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
 						«doneLeaf(assignment.localVar(it))»
 					}
