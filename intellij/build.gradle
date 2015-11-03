@@ -44,7 +44,6 @@ configure(subprojects - eclipsePluginProjects) {
 
 	dependencies {
 		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
-		ideaProvided (project(":plugins:org.eclipse.xtend.lib")) { transitive = false }
 	}
 
 	if (!isBuildServer) {
