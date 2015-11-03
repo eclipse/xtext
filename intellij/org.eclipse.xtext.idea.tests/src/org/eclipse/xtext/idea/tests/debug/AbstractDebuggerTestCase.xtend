@@ -2,7 +2,7 @@ package org.eclipse.xtext.idea.tests.debug
 
 import com.google.common.base.Objects
 import com.intellij.debugger.DebuggerManagerEx
-import com.intellij.debugger.DebuggerTestCase.MockConfiguration
+import com.intellij.debugger.DebuggerTestCase
 import com.intellij.debugger.DefaultDebugEnvironment
 import com.intellij.debugger.engine.DebugProcessImpl
 import com.intellij.debugger.engine.JavaDebugProcess
@@ -76,7 +76,7 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 		assertTrue(myDebugProcess.getProcessHandler.processTerminated)
 	}
 
-	protected def LineBreakpoint addLineBreakpoint(VirtualFile file, int line) {
+	protected def LineBreakpoint<?> addLineBreakpoint(VirtualFile file, int line) {
 		val breakpointManager = DebuggerManagerImpl.getInstanceEx(myProject).getBreakpointManager();
 		val psiFile = PsiManager.getInstance(myProject).findFile(file)
 		val document = PsiDocumentManager.getInstance(myProject).getDocument(psiFile);
@@ -195,9 +195,21 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 		var GenericDebuggerRunnerSettings debuggerRunnerSettings = new GenericDebuggerRunnerSettings()
 		debuggerRunnerSettings.LOCAL = true
 		debuggerRunnerSettings.setDebugPort("3456")
+		val profile = new DebuggerTestCase() {
+
+			override protected getTestAppPath() {
+			}
+
+			override protected initOutputChecker() {
+			}
+
+			def createMockConf() {
+				return new MockConfiguration()
+			}
+		}.createMockConf
 		var ExecutionEnvironment environment = new ExecutionEnvironmentBuilder(myProject,
 			DefaultDebugExecutor.getDebugExecutorInstance()).runnerSettings(debuggerRunnerSettings).runProfile(
-			new MockConfiguration()).build()
+			profile).build()
 		val JavaCommandLineState javaCommandLineState = new JavaCommandLineState(environment) {
 			override protected JavaParameters createJavaParameters() {
 				return myJavaParameters
