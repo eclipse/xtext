@@ -608,8 +608,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def compileParserDefinition(Grammar grammar) {
-		val EObjectRules = grammar.allRules.filter[EObjectRule].toList
-		val namedEObjectRules = EObjectRules.filter[named].toList
+		val EObjectRules = grammar.allRules.filter[EObjectRule]
 		return fileAccessFactory.createJavaFile(grammar.parserDefinition, '''
 			public class «grammar.parserDefinition.simpleName» extends «grammar.superParserDefinition» {
 				«IF !EObjectRules.empty»
@@ -632,33 +631,20 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 						«'com.intellij.psi.tree.IElementType'.typeRef» elementType = node.getElementType();
 						«FOR rule : EObjectRules»
 						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {
-							«IF namedEObjectRules.contains(rule)»
+							«IF rule.named»
 							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
 							«ELSE»
 							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
 							«ENDIF»
 						}
-						«FOR element : rule.eAllOfType(AbstractElement)»
-						«IF element instanceof Action»
+						«FOR element : rule.EObjectElements»
 						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
-							«IF namedEObjectRules.contains(rule)»
+							«IF element.named»
 							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
 							«ELSE»
 							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
 							«ENDIF»
 						}
-						«ENDIF»
-						«IF element instanceof RuleCall»
-						«IF element.EObjectRuleCall»
-						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
-							«IF namedEObjectRules.contains(element.rule)»
-							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
-							«ELSE»
-							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
-							«ENDIF»
-						}
-						«ENDIF»
-						«ENDIF»
 						«ENDFOR»
 						«ENDFOR»
 						throw new «'java.lang.IllegalStateException'.typeRef»("Unexpected element type: " + elementType);
@@ -671,8 +657,23 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 		''')
 	}
 	
-	protected def isNamed(AbstractRule rule) {
-		val classifier = rule.type?.classifier
+	protected def getEObjectElements(AbstractRule rule) {
+		rule.eAllOfType(AbstractElement).filter[ element |
+			switch element {
+				Action,
+				RuleCall case element.EObjectRuleCall: true
+				default: false
+			}
+		]
+	}
+	
+	protected def isNamed(EObject element) {
+		val type = switch element {
+			AbstractRule: element.type
+			RuleCall: element.rule?.type
+			Action: element.type
+		}
+		val classifier = type?.classifier
 		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
 		feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass)
 	}
