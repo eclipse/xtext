@@ -69,8 +69,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createRuntimeSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _generateXtendSetups = this.codeConfig.generateXtendSetups();
+    if (_generateXtendSetups) {
       TypeReference _runtimeSetup = this.naming.getRuntimeSetup(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -606,8 +606,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createRuntimeModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _generateXtendModules = this.codeConfig.generateXtendModules();
+    if (_generateXtendModules) {
       TypeReference _runtimeModule = this.naming.getRuntimeModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -810,8 +810,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createEclipsePluginModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _generateXtendModules = this.codeConfig.generateXtendModules();
+    if (_generateXtendModules) {
       TypeReference _eclipsePluginModule = this.naming.getEclipsePluginModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -977,8 +977,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createIdeaModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _generateXtendModules = this.codeConfig.generateXtendModules();
+    if (_generateXtendModules) {
       TypeReference _ideaModule = this.naming.getIdeaModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -1106,8 +1106,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createWebModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _generateXtendModules = this.codeConfig.generateXtendModules();
+    if (_generateXtendModules) {
       TypeReference _webModule = this.naming.getWebModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -1275,8 +1275,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createWebSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _generateXtendSetups = this.codeConfig.generateXtendSetups();
+    if (_generateXtendSetups) {
       TypeReference _webSetup = this.naming.getWebSetup(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override

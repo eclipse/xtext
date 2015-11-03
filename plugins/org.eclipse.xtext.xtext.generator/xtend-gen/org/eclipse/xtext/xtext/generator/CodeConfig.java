@@ -56,6 +56,12 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Accessors
   private boolean preferXtendStubs = true;
   
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private Boolean generateXtendModules = null;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private Boolean generateXtendSetups = null;
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private XtextVersion xtextVersion;
   
@@ -170,6 +176,28 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
     return stringBuilder.toString();
   }
   
+  public boolean generateXtendModules() {
+    boolean _xifexpression = false;
+    boolean _notEquals = (!Objects.equal(this.generateXtendModules, null));
+    if (_notEquals) {
+      _xifexpression = this.generateXtendModules.booleanValue();
+    } else {
+      _xifexpression = this.preferXtendStubs;
+    }
+    return _xifexpression;
+  }
+  
+  public boolean generateXtendSetups() {
+    boolean _xifexpression = false;
+    boolean _notEquals = (!Objects.equal(this.generateXtendSetups, null));
+    if (_notEquals) {
+      _xifexpression = this.generateXtendSetups.booleanValue();
+    } else {
+      _xifexpression = this.preferXtendStubs;
+    }
+    return _xifexpression;
+  }
+  
   @Pure
   public String getEncoding() {
     return this.encoding;
@@ -205,6 +233,14 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   
   public void setPreferXtendStubs(final boolean preferXtendStubs) {
     this.preferXtendStubs = preferXtendStubs;
+  }
+  
+  public void setGenerateXtendModules(final Boolean generateXtendModules) {
+    this.generateXtendModules = generateXtendModules;
+  }
+  
+  public void setGenerateXtendSetups(final Boolean generateXtendSetups) {
+    this.generateXtendSetups = generateXtendSetups;
   }
   
   @Pure
