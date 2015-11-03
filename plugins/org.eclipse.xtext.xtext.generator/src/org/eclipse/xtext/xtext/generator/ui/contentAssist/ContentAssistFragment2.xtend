@@ -19,7 +19,6 @@ import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -38,9 +37,6 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
-	
-	@Inject
-	extension CodeConfig
 	
 	@Inject
 	FileAccessFactory fileAccessFactory
@@ -89,7 +85,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		}
 
 		if (generateStub && projectConfig.eclipsePlugin.src != null) {
-			if (preferXtendStubs) {
+			if (generateXtendStub) {
 				generateXtendProposalProviderStub
 
 				if (projectConfig.eclipsePlugin.manifest != null) {
