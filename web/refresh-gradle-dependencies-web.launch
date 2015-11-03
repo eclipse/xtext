@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.springsource.ide.eclipse.gradle.launch">
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+<stringAttribute key="org.springsource.ide.eclipse.gradle.launch.PROJECT" value="web"/>
+<stringAttribute key="org.springsource.ide.eclipse.gradle.launch.TASKTEXT" value="cleanEclipseClasspath eclipseClasspath"/>
+</launchConfiguration>
